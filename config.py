@@ -8,9 +8,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-CFBD_API_KEY = os.environ.get("CFBD_API_KEY")
-ODDS_API_KEY = os.environ.get("ODDS_API_KEY")
-ODDSPAPI_API_KEY = os.environ.get("ODDSPAPI_API_KEY")
+def _clean_key(value):
+    """Strip whitespace/newlines that sometimes sneak in when a key is pasted
+    into a GitHub secret or .env file — a trailing '\\n' breaks HTTP headers
+    with a cryptic 'Invalid leading whitespace' error otherwise."""
+    return value.strip() if value else value
+
+
+CFBD_API_KEY = _clean_key(os.environ.get("CFBD_API_KEY"))
+ODDS_API_KEY = _clean_key(os.environ.get("ODDS_API_KEY"))
+ODDSPAPI_API_KEY = _clean_key(os.environ.get("ODDSPAPI_API_KEY"))
 
 CFBD_BASE_URL = "https://api.collegefootballdata.com"
 ODDS_API_BASE_URL = "https://api.the-odds-api.com/v4"
