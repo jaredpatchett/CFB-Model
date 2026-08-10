@@ -14,9 +14,9 @@ jobs:
   run:
     runs-on: ubuntu-latest
     env:
-      CFBD_API_KEY: ${{ secrets.CFBD_API_KEY }}
-      ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
-      ODDSPAPI_API_KEY: ${{ secrets.ODDSPAPI_API_KEY }}
+      CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
+      ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+      ODDSPAPI_API_KEY: ${{ secrets.PRIZEPICKS_API }}
     steps:
       - uses: actions/checkout@v4
 
