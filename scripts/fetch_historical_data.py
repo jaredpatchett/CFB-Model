@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+"""
+Pull historical CFBD data (games, team stats, SP+ ratings, player game stats,
+historical betting lines) for one or more seasons, needed for training and
+backtesting. Saves raw CSVs to data/raw/.
+
+Usage:
+  python scripts/fetch_historical_data.py --years 2022 2023 2024
+"""
+import argparse
+import os
+import sys
+import pandas as pd
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+import config
+from src.data import cfbd_client as cfbd
+
+
+def fetch_year(year: int):
+    print(f"\n--- Fetching {year} ---")
+    games = cfbd.get_games(year)
+    games.to_csv(f"{config.DATA_RAW_DIR}/games_{year}.csv", index=False)
+    print(f"  games: {len(games)} rows")
+
+    sp = cfbd.get_sp_ratings(year)
+    sp.to_csv(f"{config.DATA_RAW_DIR}/sp_ratings_{year}.csv", index=False)
+    print(f"  sp_ratings: {len(sp)} rows")
+
+    team_stats = cfbd.get_team_season_stats(year)
+    team_stats.to_csv(f"{config.DATA_RAW_DIR}/team_season_stats_{year}.csv", index=False)
+    print(f"  team_season_stats: {len(team_stats)} rows")
+
+    lines = cfbd.get_historical_lines(year)
+    lines.to_csv(f"{config.DATA_RAW_DIR}/lines_{year}.csv", index=False)
+    print(f"  historical lines: {len(lines)} rows")
+
+    # Player game stats: fetched week by week (CFBD requires a week param here)
+    max_week = int(games["week"].max()) if "week" in games.columns and len(games) else 15
+    all_player_stats = []
+    for week in range(1, max_week + 1):
+        try:
+            wk = cfbd.get_player_game_stats(year, week)
+            if not wk.empty:
+                all_player_stats.append(wk)
+        except Exception as e:
+            print(f"  [warn] week {week} player stats failed: {e}")
+    if all_player_stats:
+        player_stats = pd.concat(all_player_stats, ignore_index=True)
+        player_stats.to_csv(f"{config.DATA_RAW_DIR}/player_game_stats_{year}.csv", index=False)
+        print(f"  player_game_stats: {len(player_stats)} rows")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--years", type=int, nargs="+", required=True,
+                         help="Season(s) to fetch, e.g. --years 2022 2023 2024")
+    args = parser.parse_args()
+
+    os.makedirs(config.DATA_RAW_DIR, exist_ok=True)
+    for year in args.years:
+        fetch_year(year)
+    print("\nDone.")
