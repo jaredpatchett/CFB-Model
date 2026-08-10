@@ -17,6 +17,7 @@ import json
 import os
 import re
 import sys
+import unicodedata
 from datetime import datetime, timezone
 
 import pandas as pd
@@ -28,11 +29,11 @@ from src.data import cfbd_client as cfbd
 
 def _normalize_team_name(name: str) -> str:
     """Best-effort normalization so 'Ohio State Buckeyes' (Odds API style)
-    can match 'Ohio State' (CFBD 'school' field). Strips common mascot-style
-    trailing words is too error-prone (mascots vary wildly), so instead this
-    strips punctuation/case only and relies on substring/alias matching in
-    build_team_lookup below."""
-    return re.sub(r"[^a-z0-9 ]", "", name.lower()).strip()
+    can match 'Ohio State' (CFBD 'school' field). Strips accents (e.g. CFBD's
+    'San José State' -> 'san jose state') before stripping punctuation/case,
+    then relies on substring/alias matching in build_team_lookup below."""
+    ascii_name = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9 ]", "", ascii_name.lower()).strip()
 
 
 # Hand-maintained aliases for cases where Odds API and CFBD naming diverge
@@ -47,6 +48,7 @@ TEAM_ALIASES = {
     "byu cougars": "byu",
     "tcu horned frogs": "tcu",
     "unlv rebels": "unlv",
+    "umass minutemen": "massachusetts",
 }
 
 
