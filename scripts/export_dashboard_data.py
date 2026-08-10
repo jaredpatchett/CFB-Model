@@ -25,6 +25,7 @@ import pandas as pd
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import config
 from src.data import cfbd_client as cfbd
+from src.data import prizepicks_client
 
 
 def _normalize_team_name(name: str) -> str:
@@ -133,11 +134,19 @@ def main(year: int):
     else:
         print(f"  [warn] {props_path} not found, skipping props")
 
+    print("Fetching real player-prop market catalog (for placeholder tab)...")
+    try:
+        prop_market_catalog = prizepicks_client.get_prop_market_catalog()
+    except Exception as e:
+        print(f"  [warn] could not fetch prop market catalog: {e}")
+        prop_market_catalog = []
+
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "team_metadata_year": year,
         "games": games_out,
         "props": props_out,
+        "prop_market_catalog": prop_market_catalog,
     }
 
     os.makedirs("docs/data", exist_ok=True)
@@ -146,7 +155,8 @@ def main(year: int):
 
     n_unmatched = sum(1 for g in games_out if g["home_unmatched"] or g["away_unmatched"])
     print(f"Wrote docs/data/latest.json: {len(games_out)} games ({n_unmatched} with an "
-          f"unmatched team logo), {len(props_out)} prop rows.")
+          f"unmatched team logo), {len(props_out)} prop rows, "
+          f"{len(prop_market_catalog)} prop market types in catalog.")
 
 
 if __name__ == "__main__":

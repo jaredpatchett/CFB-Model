@@ -2,17 +2,21 @@
 """
 Render docs/data/latest.json into a single self-contained HTML dashboard
 (docs/dashboard.html) — real games, real team logos/colors, real
-moneyline/spread/total lines.
+moneyline/spread/total lines, plus a Props tab listing the real player-prop
+market catalog (populated with real lines once PrizePicks posts them).
 
-IMPORTANT design choice: every game card is rendered directly into the HTML
-by THIS PYTHON SCRIPT, not built at page-load time by JavaScript from an
-embedded JSON blob. Some environments preview/open HTML in a way that
-doesn't run inline <script> tags (sandboxed previews, some in-app viewers) —
-if all the content depends on JS running first, that shows up as a "blank,
-plain page where nothing works." Pre-rendering means every game, logo, and
-line is visible even with JavaScript completely disabled. The only thing JS
-is used for here is the search filter, which is a pure enhancement on top of
-content that already exists in the page.
+Design choices worth knowing about:
+  - Every game/prop card is rendered directly into the HTML by THIS PYTHON
+    SCRIPT, not built at page-load time by JavaScript. That way all content
+    is visible even in environments that don't execute inline <script>
+    (some sandboxed previews). JS is only used for the search filter — a
+    pure enhancement, nothing depends on it to be visible.
+  - Tabs (Games / Prop Markets) use the CSS-only radio-input technique, not
+    JS, for the same reason: tab switching works even with JavaScript fully
+    disabled.
+  - Aesthetic: vintage varsity/game-program theme (cream parchment, maroon,
+    aged brass) — deliberately different from a typical dark-mode sportsbook
+    palette.
 
 Regenerate whenever docs/data/latest.json is refreshed:
 
@@ -22,7 +26,7 @@ import html
 import json
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import datetime
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -51,11 +55,7 @@ def fmt_odds(v):
 
 
 def fmt_spread(v):
-    if v is None or v == "" or (isinstance(v, float) and v != v):
-        return "&mdash;"
-    n = float(v)
-    n = int(n) if n == int(n) else n
-    return f"+{n}" if n > 0 else f"{n}"
+    return fmt_odds(v)
 
 
 def fmt_total(v):
@@ -82,8 +82,8 @@ def day_label(iso):
         return "TBD"
 
 
-def team_badge_html(name, logo, color, side_class):
-    ring = f"box-shadow: 0 4px 14px rgba(0,0,0,0.4), 0 0 0 3px {esc(color)}88 inset;" if color else ""
+def team_badge_html(name, logo, color):
+    ring = f"box-shadow: 0 0 0 3px {esc(color)}, 0 0 0 4px var(--ink) inset, 0 3px 8px rgba(43,24,16,0.35);" if color else ""
     if logo:
         return (
             f'<div class="badge" style="{ring}">'
@@ -100,8 +100,8 @@ def team_badge_html(name, logo, color, side_class):
 
 
 def card_html(g):
-    home_color = g.get("home_color") or "#163a26"
-    away_color = g.get("away_color") or "#163a26"
+    home_color = g.get("home_color") or "#7c1f2e"
+    away_color = g.get("away_color") or "#7c1f2e"
     home_ml = g.get("moneyline_home")
     away_ml = g.get("moneyline_away")
 
@@ -111,41 +111,44 @@ def card_html(g):
     teams_search_key = esc(f"{str(g.get('home_team',''))} {str(g.get('away_team',''))}".lower())
 
     return f"""
-      <div class="card" data-teams="{teams_search_key}">
-        <div class="split-bar"><span style="background:{esc(away_color)}"></span><span style="background:{esc(home_color)}"></span></div>
-        <div class="kickoff">{fmt_time(g.get('commence_time',''))} &middot; {esc((g.get('book_used') or 'market').upper())}</div>
+      <div class="card game-card" data-teams="{teams_search_key}">
+        <div class="stub-notch"></div>
+        <div class="ticket-row">
+          <span class="ticket-no">GATE {esc((g.get('book_used') or 'MKT').upper()[:3])}</span>
+          <span class="ticket-time">{fmt_time(g.get('commence_time',''))}</span>
+        </div>
         <div class="matchup">
           <div class="team">
-            {team_badge_html(g.get('away_team'), g.get('away_logo'), g.get('away_color'), 'away')}
+            {team_badge_html(g.get('away_team'), g.get('away_logo'), g.get('away_color'))}
             <div class="name">{esc(g.get('away_team'))}</div>
-            <div class="tag">{'Favorite' if away_is_fav else 'Away'}</div>
+            <div class="tag{' fav' if away_is_fav else ''}">{'&#9733; Favorite' if away_is_fav else 'Visitor'}</div>
           </div>
-          <div class="at">@</div>
+          <div class="at">vs</div>
           <div class="team">
-            {team_badge_html(g.get('home_team'), g.get('home_logo'), g.get('home_color'), 'home')}
+            {team_badge_html(g.get('home_team'), g.get('home_logo'), g.get('home_color'))}
             <div class="name">{esc(g.get('home_team'))}</div>
-            <div class="tag">{'Favorite' if home_is_fav else 'Home'}</div>
+            <div class="tag{' fav' if home_is_fav else ''}">{'&#9733; Favorite' if home_is_fav else 'Home'}</div>
           </div>
         </div>
         <div class="lines">
           <div class="stat">
             <div class="label">Spread</div>
-            <div class="value">{fmt_spread(g.get('spread_home'))}<br><small>{fmt_spread(g.get('spread_away'))}</small></div>
+            <div class="value">{fmt_spread(g.get('spread_away'))}<span class="slash">/</span>{fmt_spread(g.get('spread_home'))}</div>
           </div>
           <div class="stat">
             <div class="label">Moneyline</div>
+            <div class="value{' fav' if away_is_fav else ''}">{fmt_odds(away_ml)}</div>
             <div class="value{' fav' if home_is_fav else ''}">{fmt_odds(home_ml)}</div>
-            <div class="value{' fav' if away_is_fav else ''}"><small>{fmt_odds(away_ml)}</small></div>
           </div>
           <div class="stat">
             <div class="label">Total</div>
-            <div class="value">O/U<br><small>{fmt_total(g.get('total_over'))}</small></div>
+            <div class="value">{fmt_total(g.get('total_over'))}</div>
           </div>
         </div>
       </div>"""
 
 
-def build_sections(games):
+def build_game_sections(games):
     by_day = {}
     for g in sorted(games, key=lambda x: x.get("commence_time") or ""):
         day = (g.get("commence_time") or "")[:10]
@@ -167,166 +170,264 @@ def build_sections(games):
     return "\n".join(sections)
 
 
+def prop_card_html(market_name, rows):
+    if rows:
+        row_html = "\n".join(f"""
+            <div class="prop-row">
+              <span class="prop-player">{esc(r.get('player_name'))}</span>
+              <span class="prop-line">{esc(r.get('line'))}</span>
+              <span class="prop-price">O {esc(r.get('over_price', '&mdash;'))} / U {esc(r.get('under_price', '&mdash;'))}</span>
+            </div>""" for r in rows)
+        return f"""
+        <div class="card prop-card is-live">
+          <div class="stub-notch"></div>
+          <div class="prop-header">
+            <span class="prop-market">{esc(market_name)}</span>
+            <span class="prop-status live">LIVE</span>
+          </div>
+          {row_html}
+        </div>"""
+    return f"""
+        <div class="card prop-card is-pending">
+          <div class="stub-notch"></div>
+          <div class="prop-header">
+            <span class="prop-market">{esc(market_name)}</span>
+            <span class="prop-status">COMING SOON</span>
+          </div>
+          <p class="prop-note">Market confirmed available on PrizePicks &mdash; lines open closer to kickoff week.</p>
+        </div>"""
+
+
+def build_props_section(prop_catalog, props):
+    if not prop_catalog:
+        return """
+        <div class="empty-state">
+          <div class="icon">NO CATALOG YET</div>
+          <p>Couldn't load the player-prop market catalog on the last data pull. Re-run the data pull to populate this list.</p>
+        </div>"""
+
+    by_market = {}
+    for p in props:
+        by_market.setdefault(p.get("market_name"), []).append(p)
+
+    cards = "\n".join(prop_card_html(m, by_market.get(m, [])) for m in prop_catalog)
+    live_count = sum(1 for m in prop_catalog if by_market.get(m))
+    note = "" if live_count else """
+        <p class="props-intro">These are the real player-prop markets PrizePicks offers for college football.
+        None are priced yet for this slate &mdash; that's normal this far from kickoff. Re-run the data pull
+        closer to game week and any market with posted lines will switch from "Coming Soon" to live odds automatically.</p>"""
+    return f"{note}<div class=\"grid\">{cards}</div>"
+
+
 PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CFB Model — Live Slate</title>
+<title>The Slate — CFB Model</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Semi+Condensed:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Special+Elite&family=PT+Serif:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {{
-    --turf-black: #071309;
-    --turf-dark: #0e2418;
-    --turf-mid: #17402a;
-    --chalk: #f4f1e6;
-    --chalk-dim: #b8c4b9;
-    --gold: #ffb81c;
-    --gold-dim: #d9a422;
-    --card-shadow: 0 18px 40px -12px rgba(0,0,0,0.6);
+    --paper: #f2e6c9;
+    --paper-dark: #e6d5a8;
+    --paper-line: rgba(43,24,16,0.12);
+    --ink: #2b1810;
+    --ink-soft: #5b4636;
+    --maroon: #7c1f2e;
+    --maroon-dark: #551420;
+    --brass: #a9793b;
+    --brass-light: #c99a53;
   }}
   * {{ box-sizing: border-box; }}
   html {{ scroll-behavior: smooth; }}
   body {{
-    margin: 0;
-    background: var(--turf-black);
-    color: var(--chalk);
-    font-family: 'Barlow Semi Condensed', sans-serif;
-    min-height: 100vh;
-    position: relative;
-    overflow-x: hidden;
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: 'PT Serif', serif; min-height: 100vh; position: relative;
   }}
   body::before {{
-    content: ""; position: fixed; inset: 0; z-index: -2;
-    background: repeating-linear-gradient(100deg,
-      var(--turf-dark) 0px, var(--turf-dark) 130px,
-      var(--turf-mid) 130px, var(--turf-mid) 134px,
-      var(--turf-dark) 134px, var(--turf-dark) 260px);
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.5;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(169,121,59,0.10), transparent 45%),
+      radial-gradient(circle at 85% 75%, rgba(124,31,46,0.08), transparent 40%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
   }}
-  body::after {{
-    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background: radial-gradient(ellipse at 50% -10%, rgba(255,184,28,0.12), transparent 45%),
-                radial-gradient(ellipse at 100% 110%, rgba(0,0,0,0.6), transparent 60%);
+
+  /* --- CSS-only tabs: no JS required --- */
+  #tab-games, #tab-props {{ position: absolute; opacity: 0; pointer-events: none; }}
+  .games-panel {{ display: block; }}
+  .props-panel {{ display: none; }}
+  #tab-props:checked ~ main .games-panel {{ display: none; }}
+  #tab-props:checked ~ main .props-panel {{ display: block; }}
+  .tab-label {{
+    font-family: 'Special Elite', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-soft); padding: 12px 26px; border: 2px solid var(--ink); border-bottom: none;
+    background: var(--paper-dark); cursor: pointer; border-radius: 8px 8px 0 0; position: relative; top: 2px;
+    transition: color 0.15s, background 0.15s;
   }}
-  header {{ padding: 56px 6vw 30px; text-align: center; }}
-  .hashmark-row {{ display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; opacity: 0.6; }}
-  .hashmark-row span {{ width: 3px; height: 18px; background: var(--gold-dim); }}
+  #tab-games:checked ~ header .tab-label[for="tab-games"],
+  #tab-props:checked ~ header .tab-label[for="tab-props"] {{
+    background: var(--maroon); color: var(--paper); border-color: var(--maroon-dark); top: 0;
+  }}
+
+  header {{ padding: 50px 6vw 0; text-align: center; }}
+  .frame-rule {{ border-top: 3px double var(--ink); max-width: 720px; margin: 0 auto 22px; }}
   .kicker {{
-    font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.35em; text-transform: uppercase;
-    font-size: 13px; color: var(--gold); font-weight: 600;
+    font-family: 'Special Elite', monospace; letter-spacing: 0.3em; text-transform: uppercase;
+    font-size: 12px; color: var(--maroon); font-weight: 400;
   }}
   h1 {{
-    font-family: 'Anton', sans-serif; font-size: clamp(44px, 9vw, 100px); letter-spacing: 0.02em;
-    text-transform: uppercase; margin: 10px 0 6px; line-height: 0.92; color: var(--chalk);
-    text-shadow: 0 0 50px rgba(255,184,28,0.18);
+    font-family: 'Rye', serif; font-size: clamp(42px, 8.5vw, 96px); letter-spacing: 0.01em;
+    margin: 10px 0 4px; line-height: 0.95; color: var(--ink);
   }}
-  h1 .accent {{ color: var(--gold); }}
-  .subhead {{ color: var(--chalk-dim); font-size: 17px; max-width: 640px; margin: 10px auto 0; line-height: 1.55; }}
+  h1 .accent {{ color: var(--maroon); }}
+  .subhead {{ color: var(--ink-soft); font-size: 16.5px; max-width: 620px; margin: 8px auto 0; line-height: 1.6; font-style: italic; }}
   .meta-strip {{
-    display: flex; justify-content: center; gap: 30px; margin-top: 22px; flex-wrap: wrap;
-    font-family: 'Barlow Condensed', sans-serif; font-size: 13px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--chalk-dim);
+    display: flex; justify-content: center; gap: 28px; margin-top: 20px; flex-wrap: wrap;
+    font-family: 'Special Elite', monospace; font-size: 12px; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--ink-soft);
   }}
-  .meta-strip b {{ color: var(--gold); font-weight: 700; }}
-  .controls {{ max-width: 720px; margin: 34px auto 0; padding: 0 6vw; display: flex; justify-content: center; }}
+  .meta-strip b {{ color: var(--maroon); }}
+  .controls {{ max-width: 720px; margin: 26px auto 0; padding: 0 6vw; display: flex; justify-content: center; }}
   #search {{
-    width: 100%; max-width: 460px;
-    background: rgba(23,64,42,0.75); border: 1px solid rgba(255,184,28,0.3); color: var(--chalk);
-    padding: 14px 22px; border-radius: 999px; font-family: 'Barlow Semi Condensed', sans-serif;
-    font-size: 16px; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%; max-width: 440px; background: var(--paper-dark); border: 2px solid var(--ink);
+    color: var(--ink); padding: 12px 20px; border-radius: 6px; font-family: 'PT Serif', serif;
+    font-size: 15px; outline: none;
   }}
-  #search::placeholder {{ color: var(--chalk-dim); }}
-  #search:focus {{ border-color: var(--gold); box-shadow: 0 0 0 5px rgba(255,184,28,0.15); }}
-  main {{ max-width: 1180px; margin: 0 auto; padding: 10px 6vw 100px; }}
-  .day-header {{ display: flex; align-items: baseline; gap: 16px; margin: 48px 0 20px; }}
-  section:first-of-type .day-header {{ margin-top: 10px; }}
+  #search::placeholder {{ color: var(--ink-soft); opacity: 0.7; }}
+  #search:focus {{ border-color: var(--maroon); }}
+  .tab-bar {{ margin-top: 30px; display: flex; justify-content: center; gap: 6px; }}
+
+  main {{ max-width: 1180px; margin: 0 auto; padding: 30px 6vw 100px; border-top: 2px solid var(--ink); }}
+  .day-header {{ display: flex; align-items: baseline; gap: 14px; margin: 40px 0 18px; }}
+  section:first-of-type .day-header {{ margin-top: 6px; }}
   .day-title {{
-    font-family: 'Anton', sans-serif; font-size: 27px; text-transform: uppercase;
-    letter-spacing: 0.03em; color: var(--gold); white-space: nowrap;
+    font-family: 'Rye', serif; font-size: 24px; color: var(--maroon); white-space: nowrap;
   }}
-  .day-line {{ flex: 1; height: 2px; background: linear-gradient(90deg, rgba(255,184,28,0.55), transparent); }}
+  .day-line {{ flex: 1; height: 2px; background: repeating-linear-gradient(90deg, var(--brass) 0 6px, transparent 6px 10px); }}
   .day-count {{
-    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--chalk-dim); white-space: nowrap;
+    font-family: 'Special Elite', monospace; font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-soft); white-space: nowrap;
   }}
-  .grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }}
+  .grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }}
+
   .card {{
-    background: linear-gradient(165deg, rgba(23,64,42,0.85), rgba(9,22,14,0.95));
-    border: 1px solid rgba(244,241,230,0.1); border-radius: 16px; padding: 18px 20px 18px;
-    box-shadow: var(--card-shadow); position: relative; overflow: hidden;
-    transition: transform 0.18s ease, border-color 0.18s ease;
+    background: var(--paper-dark); border: 2px solid var(--ink); border-radius: 4px;
+    padding: 16px 18px 16px; position: relative; box-shadow: 4px 4px 0 rgba(43,24,16,0.18);
   }}
-  .card:hover {{ transform: translateY(-3px); border-color: rgba(255,184,28,0.4); }}
-  .card.hidden {{ display: none; }}
-  .split-bar {{ position: absolute; top: 0; left: 0; right: 0; height: 5px; display: flex; }}
-  .split-bar span {{ flex: 1; }}
-  .kickoff {{
-    text-align: center; font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
-    letter-spacing: 0.08em; text-transform: uppercase; color: var(--chalk-dim); margin: 6px 0 14px;
+  .stub-notch {{
+    position: absolute; top: -2px; left: 50%; transform: translateX(-50%);
+    width: 22px; height: 11px; background: var(--paper); border: 2px solid var(--ink);
+    border-top: none; border-radius: 0 0 11px 11px;
   }}
-  .matchup {{ display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 8px; }}
-  .team {{ display: flex; flex-direction: column; align-items: center; gap: 8px; width: 40%; text-align: center; }}
+  .ticket-row {{
+    display: flex; justify-content: space-between; font-family: 'Special Elite', monospace;
+    font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brass);
+    margin: 6px 0 12px; border-bottom: 1px dashed var(--paper-line); padding-bottom: 8px;
+  }}
+  .matchup {{ display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 6px; }}
+  .team {{ display: flex; flex-direction: column; align-items: center; gap: 8px; width: 42%; text-align: center; }}
   .badge {{
-    width: 60px; height: 60px; border-radius: 50%; background: var(--chalk);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.45), 0 0 0 3px rgba(0,0,0,0.15) inset; overflow: hidden;
+    width: 56px; height: 56px; border-radius: 50%; background: var(--paper);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
   }}
-  .badge img {{ width: 42px; height: 42px; object-fit: contain; }}
-  .badge .initials {{ font-family: 'Anton', sans-serif; font-size: 18px; color: var(--turf-dark); }}
-  .name {{ font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 13.5px; line-height: 1.15; color: var(--chalk); }}
-  .tag {{ font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dim); }}
-  .at {{ font-family: 'Anton', sans-serif; color: var(--gold-dim); font-size: 20px; }}
-  .lines {{ display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px dashed rgba(244,241,230,0.18); padding-top: 14px; }}
+  .badge img {{ width: 38px; height: 38px; object-fit: contain; }}
+  .badge .initials {{ font-family: 'Rye', serif; font-size: 17px; color: var(--maroon); }}
+  .name {{ font-family: 'PT Serif', serif; font-weight: 700; font-size: 13px; line-height: 1.2; color: var(--ink); }}
+  .tag {{ font-family: 'Special Elite', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }}
+  .tag.fav {{ color: var(--maroon); }}
+  .at {{ font-family: 'Rye', serif; color: var(--brass); font-size: 16px; }}
+
+  .lines {{ display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 2px solid var(--ink); padding-top: 12px; }}
   .lines .stat {{ text-align: center; }}
   .lines .label {{
-    font-family: 'Barlow Condensed', sans-serif; font-size: 10px; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--gold-dim); margin-bottom: 6px;
+    font-family: 'Special Elite', monospace; font-size: 9.5px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--brass); margin-bottom: 5px;
   }}
-  .lines .value {{ font-family: 'Anton', sans-serif; font-size: 19px; color: var(--chalk); line-height: 1.5; }}
-  .lines .value.fav {{ color: var(--gold); }}
-  .lines .value small {{ font-size: 12px; color: var(--chalk-dim); font-family: 'Barlow Semi Condensed', sans-serif; font-weight: 600; }}
-  .lines .value.fav small {{ color: var(--gold); }}
+  .lines .value {{ font-family: 'Special Elite', monospace; font-size: 15px; color: var(--ink); line-height: 1.6; }}
+  .lines .value .slash {{ color: var(--brass); margin: 0 3px; }}
+  .lines .value.fav {{ color: var(--maroon); font-weight: 700; }}
+
+  /* Props tab */
+  .props-intro {{
+    max-width: 720px; margin: 0 auto 26px; text-align: center; color: var(--ink-soft);
+    font-size: 15px; line-height: 1.65; font-style: italic;
+  }}
+  .prop-card {{ padding: 16px 18px 18px; }}
+  .prop-header {{
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 10px;
+  }}
+  .prop-market {{ font-family: 'Rye', serif; font-size: 17px; color: var(--ink); }}
+  .prop-status {{
+    font-family: 'Special Elite', monospace; font-size: 9.5px; letter-spacing: 0.08em;
+    padding: 3px 9px; border: 1.5px solid var(--brass); border-radius: 3px; color: var(--brass);
+    transform: rotate(-3deg); white-space: nowrap;
+  }}
+  .prop-status.live {{ color: var(--paper); background: var(--maroon); border-color: var(--maroon-dark); }}
+  .prop-note {{ color: var(--ink-soft); font-size: 13px; line-height: 1.55; margin: 0; font-style: italic; }}
+  .prop-row {{
+    display: flex; justify-content: space-between; gap: 8px; font-size: 13px;
+    padding: 6px 0; border-bottom: 1px dashed var(--paper-line);
+  }}
+  .prop-row:last-child {{ border-bottom: none; }}
+  .prop-player {{ font-weight: 700; }}
+  .prop-line {{ color: var(--maroon); font-family: 'Special Elite', monospace; }}
+  .prop-price {{ color: var(--ink-soft); font-family: 'Special Elite', monospace; font-size: 11.5px; }}
+
   .empty-state {{
-    margin: 50px auto 0; max-width: 580px; text-align: center; background: rgba(23,64,42,0.45);
-    border: 1px dashed rgba(255,184,28,0.35); border-radius: 16px; padding: 34px 30px;
+    margin: 40px auto 0; max-width: 580px; text-align: center; background: var(--paper-dark);
+    border: 2px dashed var(--brass); border-radius: 8px; padding: 32px 28px;
   }}
-  .empty-state .icon {{ font-family: 'Anton', sans-serif; font-size: 30px; letter-spacing: 0.08em; color: var(--gold); margin-bottom: 10px; }}
-  .empty-state p {{ color: var(--chalk-dim); line-height: 1.65; font-size: 15px; margin: 0; }}
+  .empty-state .icon {{ font-family: 'Special Elite', monospace; font-size: 13px; letter-spacing: 0.15em; color: var(--maroon); margin-bottom: 10px; }}
+  .empty-state p {{ color: var(--ink-soft); line-height: 1.65; font-size: 15px; margin: 0; }}
   #no-results {{
-    display: none; text-align: center; color: var(--chalk-dim); padding: 70px 0;
-    font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; font-size: 15px;
+    display: none; text-align: center; color: var(--ink-soft); padding: 70px 0;
+    font-family: 'Special Elite', monospace; letter-spacing: 0.05em; text-transform: uppercase; font-size: 14px;
   }}
+
   footer {{
-    text-align: center; padding: 40px 6vw 60px; color: var(--chalk-dim); font-size: 12.5px; line-height: 1.85;
-    border-top: 1px solid rgba(244,241,230,0.1); max-width: 800px; margin: 0 auto;
+    text-align: center; padding: 34px 6vw 60px; color: var(--ink-soft); font-size: 12.5px; line-height: 1.85;
+    border-top: 2px solid var(--ink); max-width: 800px; margin: 0 auto; font-family: 'PT Serif', serif;
   }}
-  footer b {{ color: var(--gold-dim); }}
-  noscript .search-note {{ display: block; text-align: center; color: var(--chalk-dim); font-size: 12px; margin-top: 8px; }}
+  footer b {{ color: var(--maroon); }}
 </style>
 </head>
 <body>
 
+<input type="radio" name="tabs" id="tab-games" checked>
+<input type="radio" name="tabs" id="tab-props">
+
 <header>
-  <div class="hashmark-row"><span></span><span></span><span></span><span></span><span></span></div>
-  <div class="kicker">College Football &middot; Model Output</div>
+  <div class="frame-rule"></div>
+  <div class="kicker">College Football &middot; Official Model Program</div>
   <h1>THE <span class="accent">SLATE</span></h1>
-  <p class="subhead">Live market lines pulled from real sportsbooks, matched with real team data. Research/decision-support only &mdash; see the disclaimer below before acting on anything here.</p>
+  <p class="subhead">Real market lines matched with real team data &mdash; research/decision-support only.
+  See the disclaimer at the bottom before acting on anything here.</p>
   <div class="meta-strip">
     <div>Games tracked: <b>{game_count}</b></div>
+    <div>Prop markets tracked: <b>{market_count}</b></div>
     <div>Snapshot: <b>{generated_at}</b></div>
   </div>
   <div class="controls">
     <input id="search" type="text" placeholder="Search a team, e.g. &quot;Michigan&quot; or &quot;Alabama&quot;&hellip;" autocomplete="off" oninput="filterCards(this.value)">
   </div>
-  <noscript><span class="search-note">(Search needs JavaScript enabled &mdash; all games below are visible either way.)</span></noscript>
+  <noscript><span style="display:block;text-align:center;color:var(--ink-soft);font-size:12px;margin-top:8px;">(Search needs JavaScript &mdash; everything else on this page works without it.)</span></noscript>
+  <div class="tab-bar">
+    <label class="tab-label" for="tab-games">Games</label>
+    <label class="tab-label" for="tab-props">Prop Markets</label>
+  </div>
 </header>
 
 <main>
-{sections}
-{empty_state}
-<p id="no-results">No games match that search.</p>
+  <div class="games-panel">
+{game_sections}
+    <p id="no-results">No games match that search.</p>
+  </div>
+  <div class="props-panel">
+{props_section}
+  </div>
 </main>
 
 <footer>
@@ -339,16 +440,17 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <script>
   function filterCards(term) {{
     term = (term || '').trim().toLowerCase();
-    var cards = document.querySelectorAll('.card');
+    var cards = document.querySelectorAll('.game-card');
     var visibleCount = 0;
     cards.forEach(function(card) {{
       var match = !term || card.getAttribute('data-teams').indexOf(term) !== -1;
-      card.classList.toggle('hidden', !match);
+      card.style.display = match ? '' : 'none';
       if (match) visibleCount++;
     }});
-    document.querySelectorAll('main > section').forEach(function(section) {{
-      var visibleInSection = section.querySelectorAll('.card:not(.hidden)').length;
-      section.style.display = visibleInSection ? '' : 'none';
+    document.querySelectorAll('.games-panel section').forEach(function(section) {{
+      var visible = 0;
+      section.querySelectorAll('.game-card').forEach(function(c) {{ if (c.style.display !== 'none') visible++; }});
+      section.style.display = visible ? '' : 'none';
     }});
     document.getElementById('no-results').style.display = visibleCount ? 'none' : 'block';
   }}
@@ -364,6 +466,7 @@ def main():
 
     games = data.get("games", [])
     props = data.get("props", [])
+    prop_catalog = data.get("prop_market_catalog", [])
     generated_at = data.get("generated_at")
     try:
         gen_dt = datetime.fromisoformat(generated_at.replace("Z", "+00:00")) if generated_at else None
@@ -371,30 +474,22 @@ def main():
     except Exception:
         gen_label = generated_at or "unknown"
 
-    sections_html = build_sections(games)
-
-    if not props:
-        empty_state = """
-        <div class="empty-state">
-          <div class="icon">NO PROPS YET</div>
-          <p>No PrizePicks player props are posted for this slate yet. Prop lines for college football typically
-          open closer to kickoff week &mdash; re-run the data pull nearer game day to populate this section.</p>
-        </div>"""
-    else:
-        empty_state = ""  # TODO: render real prop cards once props are populated
+    game_sections_html = build_game_sections(games)
+    props_section_html = build_props_section(prop_catalog, props)
 
     html_out = PAGE_TEMPLATE.format(
         game_count=len(games),
+        market_count=len(prop_catalog),
         generated_at=esc(gen_label),
-        sections=sections_html,
-        empty_state=empty_state,
+        game_sections=game_sections_html,
+        props_section=props_section_html,
     )
 
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
     with open(OUT_PATH, "w") as f:
         f.write(html_out)
 
-    print(f"Wrote {OUT_PATH} ({len(games)} games, {len(props)} props)")
+    print(f"Wrote {OUT_PATH} ({len(games)} games, {len(prop_catalog)} prop markets, {len(props)} live prop rows)")
 
 
 if __name__ == "__main__":

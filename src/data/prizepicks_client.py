@@ -85,6 +85,20 @@ def get_player_prop_markets(sport_id: int) -> pd.DataFrame:
     return df[df["playerProp"] == True] if "playerProp" in df.columns else df
 
 
+def get_prop_market_catalog() -> list:
+    """Real list of player-prop market names OddsPapi/PrizePicks support for
+    football (e.g. 'Passing Yards', 'Receptions'), independent of whether any
+    fixture currently has odds posted for them. Used to show 'coming soon'
+    placeholders for markets that exist but aren't priced yet this far out
+    from kickoff, instead of guessing at market names."""
+    sport_id = resolve_football_sport_id()
+    markets_df = get_player_prop_markets(sport_id)
+    if markets_df.empty or "marketName" not in markets_df.columns:
+        return []
+    names = sorted(set(markets_df["marketName"].dropna().tolist()))
+    return names
+
+
 def _build_outcome_name_lookup(markets_raw: list) -> dict:
     """Map (marketId, outcomeId) -> outcomeName (e.g. 'Over'/'Under'), since
     outcome names live nested inside each market's own 'outcomes' list in the
