@@ -73,10 +73,11 @@ def resolve_ncaaf_tournament_id(sport_id: int) -> int:
     return tournament_id
 
 
-def get_player_prop_market_ids(sport_id: int) -> pd.DataFrame:
-    """List all markets flagged playerProp=True for this sport, so we know
-    which marketIds in the odds response correspond to player props (vs
-    team-level markets like moneyline/spread)."""
+def get_player_prop_markets(sport_id: int) -> pd.DataFrame:
+    """List all markets flagged playerProp=True for this sport, keeping the
+    full metadata (marketName, handicap i.e. the O/U line, marketType,
+    outcomes) — not just the IDs — so prop rows can carry a human-readable
+    stat name and line instead of opaque numeric IDs."""
     markets = _get("/markets", {"sportId": sport_id})
     df = pd.json_normalize(markets)
     if df.empty:
@@ -84,13 +85,43 @@ def get_player_prop_market_ids(sport_id: int) -> pd.DataFrame:
     return df[df["playerProp"] == True] if "playerProp" in df.columns else df
 
 
+def _build_outcome_name_lookup(markets_raw: list) -> dict:
+    """Map (marketId, outcomeId) -> outcomeName (e.g. 'Over'/'Under'), since
+    outcome names live nested inside each market's own 'outcomes' list in the
+    /v4/markets response, not in the /odds-by-tournaments response."""
+    lookup = {}
+    for m in markets_raw:
+        for o in m.get("outcomes", []):
+            lookup[(m.get("marketId"), o.get("outcomeId"))] = o.get("outcomeName")
+    return lookup
+
+
 def get_prizepicks_props(bookmaker: str = "prizepicks") -> pd.DataFrame:
     """Fetch current PrizePicks player prop lines for NCAAF, flattened to one
-    row per player/market/outcome."""
+    row per player/market/outcome, WITH the stat name and line (handicap)
+    attached — e.g. market_name='Receiving Yards', line=64.5, outcome='Over'.
+    Without this join, rows would just be opaque numeric IDs and unusable for
+    a dashboard or any human-facing output."""
     sport_id = resolve_football_sport_id()
     tournament_id = resolve_ncaaf_tournament_id(sport_id)
-    prop_markets = get_player_prop_market_ids(sport_id)
-    prop_market_ids = set(prop_markets["marketId"]) if not prop_markets.empty else set()
+
+    markets_raw = _get("/markets", {"sportId": sport_id})
+    prop_markets_df = pd.json_normalize(markets_raw)
+    prop_market_ids = set()
+    market_meta = {}
+    if not prop_markets_df.empty and "playerProp" in prop_markets_df.columns:
+        prop_rows = prop_markets_df[prop_markets_df["playerProp"] == True]
+        prop_market_ids = set(prop_rows["marketId"])
+        for _, row in prop_rows.iterrows():
+            market_meta[row["marketId"]] = {
+                "market_name": row.get("marketName"),
+                "line": row.get("handicap"),
+                "market_type": row.get("marketType"),
+                "period": row.get("period"),
+            }
+    outcome_name_lookup = _build_outcome_name_lookup(
+        [m for m in markets_raw if m.get("marketId") in prop_market_ids]
+    )
 
     fixtures = _get("/odds-by-tournaments", {
         "bookmaker": bookmaker,
@@ -101,18 +132,34 @@ def get_prizepicks_props(bookmaker: str = "prizepicks") -> pd.DataFrame:
     for fixture in fixtures:
         book_data = fixture.get("bookmakerOdds", {}).get(bookmaker, {})
         markets = book_data.get("markets", {})
-        for market_id, market in markets.items():
-            if prop_market_ids and int(market_id) not in prop_market_ids:
+        for market_id_str, market in markets.items():
+            market_id = int(market_id_str)
+            if prop_market_ids and market_id not in prop_market_ids:
                 continue  # skip non-player-prop markets (moneyline, spread, etc.)
-            for outcome_id, outcome in market.get("outcomes", {}).items():
+            meta = market_meta.get(market_id, {})
+            for outcome_id_str, outcome in market.get("outcomes", {}).items():
+                outcome_id = int(outcome_id_str)
+                outcome_name = outcome_name_lookup.get((market_id, outcome_id))
                 for _, player_line in outcome.get("players", {}).items():
                     rows.append({
                         "fixture_id": fixture.get("fixtureId"),
                         "start_time": fixture.get("startTime"),
-                        "market_id": market_id,
-                        "outcome_id": outcome_id,
                         "player_name": player_line.get("playerName"),
+                        "market_name": meta.get("market_name"),
+                        "line": meta.get("line"),
+                        "outcome": outcome_name,
                         "price": player_line.get("price"),
-                        "bookmaker_outcome_id": player_line.get("bookmakerOutcomeId"),
                     })
-    return pd.DataFrame(rows)
+    df = pd.DataFrame(rows)
+    if df.empty:
+        return df
+    # One row per (player, market) with Over and Under side by side is far
+    # more useful than one row per outcome — pivot so callers get
+    # over_price/under_price directly instead of having to self-join.
+    pivoted = df.pivot_table(
+        index=["fixture_id", "start_time", "player_name", "market_name", "line"],
+        columns="outcome", values="price", aggfunc="first"
+    ).reset_index()
+    pivoted.columns = [c if isinstance(c, str) and c not in ("Over", "Under")
+                        else f"{c.lower()}_price" for c in pivoted.columns]
+    return pivoted
