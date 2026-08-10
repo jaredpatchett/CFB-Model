@@ -37,9 +37,13 @@ def _rolling_team_form(games: pd.DataFrame) -> pd.DataFrame:
     long_df["margin"] = long_df["points_for"] - long_df["points_against"]
     grp = long_df.groupby(["team", "season"])
     # shift(1) before the expanding mean so the current game is excluded
-    long_df["roll_ppg_for"] = grp["points_for"].apply(lambda s: s.shift(1).expanding().mean())
-    long_df["roll_ppg_against"] = grp["points_against"].apply(lambda s: s.shift(1).expanding().mean())
-    long_df["roll_margin"] = grp["margin"].apply(lambda s: s.shift(1).expanding().mean())
+    # .transform() (not .apply()) is required here: apply() with a lambda that
+    # returns a same-length Series can come back with a MultiIndex on some
+    # pandas versions and fail to align back into long_df. transform() is
+    # the correct API for "same shape in, same shape out, per group."
+    long_df["roll_ppg_for"] = grp["points_for"].transform(lambda s: s.shift(1).expanding().mean())
+    long_df["roll_ppg_against"] = grp["points_against"].transform(lambda s: s.shift(1).expanding().mean())
+    long_df["roll_margin"] = grp["margin"].transform(lambda s: s.shift(1).expanding().mean())
     long_df["games_played_prior"] = grp.cumcount()
     return long_df[["team", "season", "week", "roll_ppg_for", "roll_ppg_against",
                      "roll_margin", "games_played_prior"]]

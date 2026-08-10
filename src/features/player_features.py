@@ -58,8 +58,9 @@ def build_rolling_player_features(wide_stats: pd.DataFrame) -> pd.DataFrame:
     """Add leakage-safe rolling per-game averages for each tracked stat."""
     df = wide_stats.copy()
     grp = df.groupby(["athleteId", "season"])
+    # transform(), not apply() — see team_features.py for why.
     for col in STAT_MAP.values():
-        df[f"roll_{col}"] = grp[col].apply(lambda s: s.shift(1).expanding().mean())
+        df[f"roll_{col}"] = grp[col].transform(lambda s: s.shift(1).expanding().mean())
     df["games_played_prior"] = grp.cumcount()
     return df
 
