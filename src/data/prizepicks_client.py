@@ -77,11 +77,22 @@ def get_player_prop_markets(sport_id: int) -> pd.DataFrame:
     """List all markets flagged playerProp=True for this sport, keeping the
     full metadata (marketName, handicap i.e. the O/U line, marketType,
     outcomes) — not just the IDs — so prop rows can carry a human-readable
-    stat name and line instead of opaque numeric IDs."""
+    stat name and line instead of opaque numeric IDs.
+
+    NOTE: passing sportId as a query param does NOT filter server-side —
+    verified in practice that /v4/markets returns the full cross-sport
+    catalog (hockey, soccer, cricket, etc. all mixed in) regardless of this
+    param. Every market object does carry its own 'sportId' field though, so
+    filtering has to happen client-side here. Without this, marketId values
+    from OTHER sports (which are small sequential ints, likely reused across
+    sports) could collide with football's marketIds and silently attach the
+    wrong stat name/line to a real prop."""
     markets = _get("/markets", {"sportId": sport_id})
     df = pd.json_normalize(markets)
     if df.empty:
         return df
+    if "sportId" in df.columns:
+        df = df[df["sportId"] == sport_id]
     return df[df["playerProp"] == True] if "playerProp" in df.columns else df
 
 
@@ -119,7 +130,12 @@ def get_prizepicks_props(bookmaker: str = "prizepicks") -> pd.DataFrame:
     sport_id = resolve_football_sport_id()
     tournament_id = resolve_ncaaf_tournament_id(sport_id)
 
-    markets_raw = _get("/markets", {"sportId": sport_id})
+    # /v4/markets doesn't actually filter by the sportId query param (returns
+    # the full cross-sport catalog) — filter client-side, or football
+    # marketIds could collide with numerically-identical IDs from other
+    # sports. See get_player_prop_markets() docstring for details.
+    markets_raw = [m for m in _get("/markets", {"sportId": sport_id})
+                   if m.get("sportId") == sport_id]
     prop_markets_df = pd.json_normalize(markets_raw)
     prop_market_ids = set()
     market_meta = {}
