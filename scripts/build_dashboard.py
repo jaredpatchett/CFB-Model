@@ -42,8 +42,14 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 DATA_PATH = "docs/data/latest.json"
 OUT_PATH = "docs/dashboard.html"
 
-BET_THRESHOLD = 5.0   # EV% >= this -> "BET"
-EDGE_THRESHOLD = 0.0  # 0 < EV% < BET_THRESHOLD -> "EDGE"; EV% <= 0 -> "FADE"
+BET_THRESHOLD = 5.0   # edge_pp (model prob - book implied prob, in points) >= this -> "BET"
+EDGE_THRESHOLD = 0.0  # 0 < edge_pp < BET_THRESHOLD -> "EDGE"; edge_pp <= 0 -> "FADE"
+# Classification runs on probability-edge-points, NOT raw EV%. Raw EV% is
+# mathematically correct but gets amplified by payout multipliers on
+# long-shot lines (e.g. a tiny prob edge on a +3000 dog can show +1600% EV),
+# which would badly mislead as a "BET" tag. edge_pp = (model_prob -
+# book_implied_prob) * 100 doesn't have that distortion, so it drives the
+# signal; raw EV% is still shown in the EV Builder table for reference.
 
 
 def esc(s):
@@ -112,8 +118,11 @@ def day_label(iso):
         return "TBD"
 
 
-def signal_for(ev):
-    n = fmt_num(ev)
+def signal_for(edge_pp):
+    """edge_pp = (model_prob - book_implied_prob) * 100, in percentage
+    points. Use this, not raw EV%, to decide BET/EDGE/FADE — see note above
+    BET_THRESHOLD for why."""
+    n = fmt_num(edge_pp)
     if n is None:
         return None
     if n >= BET_THRESHOLD:
@@ -123,11 +132,21 @@ def signal_for(ev):
     return "FADE"
 
 
-def signal_tag(ev):
-    sig = signal_for(ev)
+def signal_tag(edge_pp):
+    sig = signal_for(edge_pp)
     if sig is None:
         return '<span class="tag tag-flat">&mdash;</span>'
     return f'<span class="tag tag-{sig.lower()}">{sig}</span>'
+
+
+def side_edge_pp(g, side):
+    """(model_prob - book_implied_prob) * 100 for one side of a game, using
+    fields already present in latest.json — no new fetch required."""
+    model_prob = g.get(f"model_{side}_win_prob")
+    implied = g.get(f"book_implied_prob_{side}")
+    if model_prob is None or implied is None:
+        return None
+    return (model_prob - implied) * 100
 
 
 def logo_html(name, logo):
@@ -169,8 +188,8 @@ def game_block_html(g):
     has_model = g.get("has_model_line")
 
     if has_model:
-        away_model = f'<span class="fair">{fmt_signed(g.get("model_fair_ml_away"))}</span>{signal_tag(g.get("ev_away_pct"))}'
-        home_model = f'<span class="fair">{fmt_signed(g.get("model_fair_ml_home"))}</span>{signal_tag(g.get("ev_home_pct"))}'
+        away_model = f'<span class="fair">{fmt_signed(g.get("model_fair_ml_away"))}</span>{signal_tag(side_edge_pp(g, "away"))}'
+        home_model = f'<span class="fair">{fmt_signed(g.get("model_fair_ml_home"))}</span>{signal_tag(side_edge_pp(g, "home"))}'
     else:
         reason = {
             "missing_sp_rating": "opp. outside FBS DB",
@@ -227,8 +246,10 @@ def build_game_sections(games):
 # ---------------------------------------------------------------------------
 
 def ev_builder_rows(games):
-    """One row per priced side (2 per game with a model line), sorted best
-    EV first, so the plays the model actually likes surface at the top."""
+    """One row per priced side (2 per game with a model line), sorted by
+    probability-edge (edge_pp) first, so the plays the model actually likes
+    surface at the top. Raw EV% is shown for reference but not used for
+    sorting/classification — see note above BET_THRESHOLD."""
     rows = []
     for g in games:
         if not g.get("has_model_line"):
@@ -260,9 +281,9 @@ def ev_builder_rows(games):
                 "implied": implied,
                 "edge_pp": edge_pp,
                 "ev": ev,
-                "signal": signal_for(ev),
+                "signal": signal_for(edge_pp),
             })
-    rows.sort(key=lambda r: (r["ev"] if r["ev"] is not None else -999), reverse=True)
+    rows.sort(key=lambda r: (r["edge_pp"] if r["edge_pp"] is not None else -999), reverse=True)
     return rows
 
 
@@ -304,7 +325,7 @@ def build_ev_builder_section(games):
         <div class="ev-summary">
           <span><span class="tag tag-bet">BET</span> {n_bet} plays</span>
           <span><span class="tag tag-edge">EDGE</span> {n_edge} plays</span>
-          <span class="dim">Sorted by EV, best first</span>
+          <span class="dim">Sorted by edge, best first</span>
         </div>
         <div class="ev-col-labels">
           <span>PICK</span><span>MODEL%</span><span>FAIR</span><span>BOOK</span><span>IMPLIED%</span><span>EDGE</span><span>EV/$100</span><span>SIGNAL</span><span></span>
@@ -513,9 +534,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <div class="controls-row">
     <input id="search" type="text" placeholder="search a team..." autocomplete="off" oninput="filterCards(this.value)">
     <div class="legend">
-      <span><span class="tag tag-bet">BET</span> EV &ge; {bet_threshold}%</span>
-      <span><span class="tag tag-edge">EDGE</span> 0&ndash;{bet_threshold}%</span>
-      <span><span class="tag tag-fade">FADE</span> EV &le; 0%</span>
+      <span><span class="tag tag-bet">BET</span> edge &ge; {bet_threshold}pp</span>
+      <span><span class="tag tag-edge">EDGE</span> 0&ndash;{bet_threshold}pp</span>
+      <span><span class="tag tag-fade">FADE</span> edge &le; 0pp</span>
     </div>
   </div>
   <noscript><span style="display:block;color:var(--text-dim);font-size:11px;padding:0 4vw 8px;">(Search + Tracker need JavaScript. Games, EV Builder, and Prop Markets all work without it.)</span></noscript>
@@ -553,6 +574,11 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   each team's most recent SP+ rating (calibrated to approximate point spread) plus a home-field edge and uncertainty band
   both fit empirically from real 2021&ndash;2025 games. Games where either team is outside the FBS database (mostly FCS
   opponents) show "no line" rather than a fabricated number. EV Builder currently prices moneyline only.
+  <br><br>
+  <b>BET/EDGE/FADE</b> is decided by probability-edge (model win% minus the book's de-vigged implied win%, in points),
+  not raw EV%. Raw EV% is still shown as a column for reference, but on lopsided long-shot lines a tiny probability
+  difference gets amplified by the payout multiplier into a huge-looking EV% &mdash; probability-edge doesn't have
+  that distortion, so it drives the tag.
   <br><br>
   <b>Tracker</b> is stored only in this browser (localStorage) &mdash; it does not sync anywhere or place real bets.
   <br><br>

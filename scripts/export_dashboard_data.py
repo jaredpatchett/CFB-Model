@@ -56,7 +56,11 @@ TEAM_ALIASES = {
 
 def build_team_lookup(teams_df: pd.DataFrame) -> dict:
     """normalized CFBD school name -> {logo, color, alt_color, conference,
-    mascot}."""
+    mascot}. Indexed under BOTH the school-only form ('ohio state') and the
+    school+mascot form ('ohio state buckeyes'), since the Odds API sends
+    team names with the mascot attached but CFBD's 'school' field doesn't
+    include it. See the note on match_team/match_sp_rating below for why
+    this replaced substring matching."""
     lookup = {}
     for _, row in teams_df.iterrows():
         school = row.get("school")
@@ -66,34 +70,44 @@ def build_team_lookup(teams_df: pd.DataFrame) -> dict:
         logo_url = None
         if isinstance(logos, list) and logos:
             logo_url = logos[0]
-        lookup[_normalize_team_name(school)] = {
+        mascot = row.get("mascot")
+        record = {
             "school": school,
             "logo": logo_url,
             "color": row.get("color"),
             "alt_color": row.get("alt_color"),
             "conference": row.get("conference"),
-            "mascot": row.get("mascot"),
+            "mascot": mascot,
         }
+        lookup[_normalize_team_name(school)] = record
+        if mascot:
+            lookup[_normalize_team_name(f"{school} {mascot}")] = record
     return lookup
 
 
-def _best_substring_match(norm: str, lookup: dict):
-    """Return the LOOKUP KEY with the longest substring match against norm,
-    or None. Longest match, not first match, matters here: dict iteration
-    order is arbitrary (CFBD's own row order), and picking the first
-    substring hit is a real bug — e.g. 'new mexico' (a separate real FBS
-    team, the New Mexico Lobos) is a substring of 'new mexico state aggies'
-    (New Mexico State), so 'first match wins' silently attaches the WRONG
-    team's data. Preferring the longest matching key picks 'new mexico
-    state' correctly instead."""
-    best_key, best_len = None, 0
-    for key in lookup.keys():
-        if (key in norm or norm in key) and len(key) > best_len:
-            best_key, best_len = key, len(key)
-    return best_key
-
-
 def match_team(name: str, lookup: dict) -> dict:
+    """EXACT match only (after normalizing + applying TEAM_ALIASES) against
+    a lookup already indexed under both 'school' and 'school mascot' forms.
+
+    History: an earlier version fell back to substring matching ('key in
+    norm or norm in key') when an exact match failed, on the theory that it
+    would only ever catch legitimate mascot-suffix mismatches (e.g. 'Ohio
+    State Buckeyes' vs CFBD's 'Ohio State'). In real data it did much worse
+    than that: 'houston' (Houston Cougars, FBS) is a substring of 'houston
+    baptist huskies' (a different, non-FBS school); 'georgia' is a substring
+    of 'west georgia wolves' (D-II, not FBS); 'north carolina' is a
+    substring of 'north carolina at aggies' (NC A&T, FCS). Substring
+    matching silently attached the wrong (unrelated) school's real data to
+    each of these, which for the SP+ rating case (see match_sp_rating)
+    produced wildly wrong model probabilities on exactly the long-shot lines
+    where it's easiest to not notice. There is no reliable way to
+    distinguish a legitimate mascot suffix from an unrelated school that
+    happens to share a leading word using string heuristics alone — so
+    instead of guessing, this only trusts an exact match against the known
+    school/mascot forms (or a hand-verified TEAM_ALIASES entry). A team not
+    found under either form is reported as unmatched, which is correct: if
+    it's not FBS or CFBD spells it differently, we don't actually know its
+    data and shouldn't fabricate a match."""
     if not name:
         return {}
     norm = _normalize_team_name(name)
@@ -101,18 +115,17 @@ def match_team(name: str, lookup: dict) -> dict:
         norm = TEAM_ALIASES[norm]
     if norm in lookup:
         return lookup[norm]
-    best_key = _best_substring_match(norm, lookup)
-    if best_key is not None:
-        return lookup[best_key]
     return {"school": name, "logo": None, "color": None, "alt_color": None,
             "conference": None, "mascot": None, "unmatched": True}
 
 
-def build_sp_lookup(sp_df: pd.DataFrame) -> dict:
+def build_sp_lookup(sp_df: pd.DataFrame, team_lookup: dict = None) -> dict:
     """normalized team name -> SP+ rating, for the fair-odds/EV preseason
-    estimate. Same name-matching approach as build_team_lookup, since SP+
-    ratings and CFBD team logos come from the same 'school' naming
-    convention."""
+    estimate. Indexed under both 'school' and 'school mascot' forms (using
+    team_lookup's mascot data, since CFBD's SP+ endpoint returns bare school
+    names with no mascot) so exact matching works the same way as
+    build_team_lookup — see match_team's docstring for why this replaced
+    substring matching."""
     lookup = {}
     if sp_df is None or sp_df.empty or "team" not in sp_df.columns:
         return lookup
@@ -121,20 +134,24 @@ def build_sp_lookup(sp_df: pd.DataFrame) -> dict:
         rating = row.get("rating")
         if not team or pd.isna(rating):
             continue
-        lookup[_normalize_team_name(team)] = float(rating)
+        norm_school = _normalize_team_name(team)
+        lookup[norm_school] = float(rating)
+        if team_lookup is not None:
+            meta = team_lookup.get(norm_school)
+            mascot = meta.get("mascot") if meta else None
+            if mascot:
+                lookup[_normalize_team_name(f"{team} {mascot}")] = float(rating)
     return lookup
 
 
 def match_sp_rating(name: str, lookup: dict):
+    """EXACT match only — see match_team's docstring for why."""
     if not name:
         return None
     norm = _normalize_team_name(name)
     if norm in TEAM_ALIASES:
         norm = TEAM_ALIASES[norm]
-    if norm in lookup:
-        return lookup[norm]
-    best_key = _best_substring_match(norm, lookup)
-    return lookup[best_key] if best_key is not None else None
+    return lookup.get(norm)
 
 
 def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline_away, prior):
@@ -181,7 +198,7 @@ def main(year: int):
     sp_path = f"{config.DATA_RAW_DIR}/sp_ratings_{year}.csv"
     sp_lookup = {}
     if os.path.exists(sp_path):
-        sp_lookup = build_sp_lookup(pd.read_csv(sp_path))
+        sp_lookup = build_sp_lookup(pd.read_csv(sp_path), team_lookup=team_lookup)
     else:
         print(f"  [warn] {sp_path} not found — model fair odds/EV will be skipped for all games")
 
