@@ -77,6 +77,22 @@ def build_team_lookup(teams_df: pd.DataFrame) -> dict:
     return lookup
 
 
+def _best_substring_match(norm: str, lookup: dict):
+    """Return the LOOKUP KEY with the longest substring match against norm,
+    or None. Longest match, not first match, matters here: dict iteration
+    order is arbitrary (CFBD's own row order), and picking the first
+    substring hit is a real bug — e.g. 'new mexico' (a separate real FBS
+    team, the New Mexico Lobos) is a substring of 'new mexico state aggies'
+    (New Mexico State), so 'first match wins' silently attaches the WRONG
+    team's data. Preferring the longest matching key picks 'new mexico
+    state' correctly instead."""
+    best_key, best_len = None, 0
+    for key in lookup.keys():
+        if (key in norm or norm in key) and len(key) > best_len:
+            best_key, best_len = key, len(key)
+    return best_key
+
+
 def match_team(name: str, lookup: dict) -> dict:
     if not name:
         return {}
@@ -85,10 +101,9 @@ def match_team(name: str, lookup: dict) -> dict:
         norm = TEAM_ALIASES[norm]
     if norm in lookup:
         return lookup[norm]
-    # fallback: substring match (e.g. "ohio state buckeyes" contains "ohio state")
-    for key, meta in lookup.items():
-        if key in norm or norm in key:
-            return meta
+    best_key = _best_substring_match(norm, lookup)
+    if best_key is not None:
+        return lookup[best_key]
     return {"school": name, "logo": None, "color": None, "alt_color": None,
             "conference": None, "mascot": None, "unmatched": True}
 
@@ -118,10 +133,8 @@ def match_sp_rating(name: str, lookup: dict):
         norm = TEAM_ALIASES[norm]
     if norm in lookup:
         return lookup[norm]
-    for key, rating in lookup.items():
-        if key in norm or norm in key:
-            return rating
-    return None
+    best_key = _best_substring_match(norm, lookup)
+    return lookup[best_key] if best_key is not None else None
 
 
 def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline_away, prior):
@@ -144,6 +157,8 @@ def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline
 
     return {
         "has_model_line": True,
+        "home_sp_rating": round(home_rating, 2),
+        "away_sp_rating": round(away_rating, 2),
         "sp_rating_diff": round(sp_diff, 2),
         "model_predicted_margin": round(model_margin, 2),
         "model_home_win_prob": round(model_home_win_prob, 4),
