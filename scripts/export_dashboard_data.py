@@ -185,14 +185,18 @@ def main(year: int):
     else:
         print(f"  [warn] {sp_path} not found — model fair odds/EV will be skipped for all games")
 
-    print("Fitting preseason prior (home-field edge, residual std) from real historical games...")
+    print("Fitting preseason prior (slope, intercept, residual std) from real historical games...")
     prior = None
     features_path = f"{config.DATA_PROCESSED_DIR}/team_game_features.csv"
     if os.path.exists(features_path) and sp_lookup:
         try:
             prior = fo.fit_preseason_prior(pd.read_csv(features_path))
-            print(f"  home_field_adv={prior['home_field_adv']:.2f} pts, "
+            print(f"  margin ~= {prior['slope']:.3f} * sp_rating_diff + {prior['intercept']:.2f}, "
                   f"residual_std={prior['residual_std']:.2f} pts, n={prior['n_games']} historical games")
+            if abs(prior["slope"] - 1.0) > 0.15:
+                print(f"  [note] fitted slope ({prior['slope']:.3f}) is meaningfully off from 1.0 — "
+                      f"SP+ rating diff does not translate 1:1 to point margin in this data, "
+                      f"which is exactly why this is fit rather than assumed.")
         except ValueError as e:
             print(f"  [warn] {e}")
     elif not os.path.exists(features_path):

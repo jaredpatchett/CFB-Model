@@ -28,11 +28,20 @@ from scipy.stats import norm
 
 
 def fit_preseason_prior(team_game_features: pd.DataFrame) -> dict:
-    """Empirically derive the home-field edge and residual std of
-    (actual margin - sp_rating_diff) from real historical games, restricted
-    to non-neutral-site games (home_field == 1) since that's what we'll
-    assume for the current slate (The Odds API doesn't expose a neutral-site
-    flag, so this is a known simplification)."""
+    """Empirically fit predicted_margin = slope * sp_rating_diff + intercept
+    from real historical games (home_field == 1 only, since The Odds API
+    doesn't expose a neutral-site flag for the current slate — a known
+    simplification).
+
+    IMPORTANT: this fits the slope rather than assuming it's 1.0. SP+ is
+    *designed* to approximate point margin at roughly a 1:1 scale, but
+    "roughly" isn't good enough when the output feeds real EV math — an
+    early version of this function assumed slope=1 and residual_std came out
+    unrealistically tight, which silently inflated EV%. A cheap way to catch
+    this class of bug going forward: if a large fraction of games come back
+    "BET" (very high EV), or the fitted slope isn't close to 1.0, something
+    is off — recheck before trusting the numbers.
+    """
     df = team_game_features.dropna(subset=["sp_rating_diff", "margin"])
     df = df[df["home_field"] == 1]
     if len(df) < 30:
@@ -40,18 +49,20 @@ def fit_preseason_prior(team_game_features: pd.DataFrame) -> dict:
             f"Only {len(df)} historical games with SP+ data available to fit "
             f"the preseason prior — need more historical seasons pulled."
         )
-    residual = df["margin"] - df["sp_rating_diff"]
-    home_field_adv = float(residual.mean())
-    residual_std = float((residual - home_field_adv).std())
+    x = df["sp_rating_diff"].to_numpy(dtype=float)
+    y = df["margin"].to_numpy(dtype=float)
+    slope, intercept = np.polyfit(x, y, 1)
+    residual_std = float(np.std(y - (slope * x + intercept)))
     return {
-        "home_field_adv": home_field_adv,
+        "slope": float(slope),
+        "intercept": float(intercept),
         "residual_std": residual_std,
         "n_games": len(df),
     }
 
 
 def preseason_predicted_margin(sp_rating_diff: float, prior: dict) -> float:
-    return sp_rating_diff + prior["home_field_adv"]
+    return prior["slope"] * sp_rating_diff + prior["intercept"]
 
 
 def margin_to_win_prob(margin: float, residual_std: float) -> float:
