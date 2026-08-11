@@ -56,11 +56,11 @@ TEAM_ALIASES = {
 
 def build_team_lookup(teams_df: pd.DataFrame) -> dict:
     """normalized CFBD school name -> {logo, color, alt_color, conference,
-    mascot}. Indexed under BOTH the school-only form ('ohio state') and the
-    school+mascot form ('ohio state buckeyes'), since the Odds API sends
-    team names with the mascot attached but CFBD's 'school' field doesn't
-    include it. See the note on match_team/match_sp_rating below for why
-    this replaced substring matching."""
+    mascot, abbreviation}. Indexed under BOTH the school-only form ('ohio
+    state') and the school+mascot form ('ohio state buckeyes'), since the
+    Odds API sends team names with the mascot attached but CFBD's 'school'
+    field doesn't include it. See the note on match_team/match_sp_rating
+    below for why this replaced substring matching."""
     lookup = {}
     for _, row in teams_df.iterrows():
         school = row.get("school")
@@ -78,6 +78,7 @@ def build_team_lookup(teams_df: pd.DataFrame) -> dict:
             "alt_color": row.get("alt_color"),
             "conference": row.get("conference"),
             "mascot": mascot,
+            "abbreviation": row.get("abbreviation"),
         }
         lookup[_normalize_team_name(school)] = record
         if mascot:
@@ -154,6 +155,96 @@ def match_sp_rating(name: str, lookup: dict):
     return lookup.get(norm)
 
 
+def build_sp_splits_lookup(sp_df: pd.DataFrame, team_lookup: dict = None) -> dict:
+    """normalized team name -> {off, def} SP+ sub-ratings, for the Power
+    Ratings table's offense/defense diverging bar. CFBD's /ratings/sp
+    endpoint returns these as nested 'offense.rating'/'defense.rating'
+    fields (flattened by pd.json_normalize when fetch_historical_data.py
+    saved the raw CSV) — no new API call needed, just reading columns that
+    were already being fetched and ignored. Same school/mascot dual-keying
+    as build_sp_lookup, for the same reason."""
+    lookup = {}
+    if sp_df is None or sp_df.empty or "team" not in sp_df.columns:
+        return lookup
+    has_off = "offense.rating" in sp_df.columns
+    has_def = "defense.rating" in sp_df.columns
+    if not (has_off and has_def):
+        return lookup
+    for _, row in sp_df.iterrows():
+        team = row.get("team")
+        off_r, def_r = row.get("offense.rating"), row.get("defense.rating")
+        if not team or pd.isna(off_r) or pd.isna(def_r):
+            continue
+        norm_school = _normalize_team_name(team)
+        splits = {"off": float(off_r), "def": float(def_r)}
+        lookup[norm_school] = splits
+        if team_lookup is not None:
+            meta = team_lookup.get(norm_school)
+            mascot = meta.get("mascot") if meta else None
+            if mascot:
+                lookup[_normalize_team_name(f"{team} {mascot}")] = splits
+    return lookup
+
+
+def match_sp_splits(name: str, lookup: dict):
+    """EXACT match only — see match_team's docstring for why."""
+    if not name:
+        return None
+    norm = _normalize_team_name(name)
+    if norm in TEAM_ALIASES:
+        norm = TEAM_ALIASES[norm]
+    return lookup.get(norm)
+
+
+def derive_abbr(name: str, cfbd_abbr: str = None) -> str:
+    """Short team tag for the helmet/power-ratings UI. Prefers CFBD's own
+    'abbreviation' field (e.g. 'OSU'); falls back to a simple
+    first-letters-of-each-word heuristic if CFBD didn't provide one, rather
+    than leaving the UI with nothing to show."""
+    if cfbd_abbr:
+        return str(cfbd_abbr).upper()
+    if not name:
+        return "?"
+    words = [w for w in re.sub(r"[^A-Za-z0-9 ]", "", name).split() if w]
+    if len(words) == 1:
+        return words[0][:4].upper()
+    return "".join(w[0] for w in words[:4]).upper()
+
+
+def build_teams_export(games_out: list, team_lookup: dict, sp_lookup: dict, sp_splits_lookup: dict) -> list:
+    """One entry per distinct team that appears in games_out AND has a real
+    matched SP+ rating (i.e. is actually in the FBS SP+ database — the same
+    scope as the Power Ratings table). Keyed by the EXACT team-name string
+    used in games_out's home_team/away_team fields (the Odds API's
+    'School Mascot' form), so the dashboard's own team lookup can match by
+    plain string equality with no extra normalization step on the JS side.
+    Teams without a real rating are deliberately left out rather than
+    padded with fabricated numbers — the dashboard's own fallback (generic
+    gray helmet, full name as the tag) handles that case."""
+    seen = {}
+    for g in games_out:
+        for side in ("home", "away"):
+            name = g.get(f"{side}_team")
+            if not name or name in seen:
+                continue
+            rating = match_sp_rating(name, sp_lookup)
+            if rating is None:
+                continue  # not in the FBS SP+ database — excluded, not faked
+            meta = match_team(name, team_lookup)
+            splits = match_sp_splits(name, sp_splits_lookup) or {}
+            seen[name] = {
+                "name": name,
+                "abbr": derive_abbr(meta.get("school") or name, meta.get("abbreviation")),
+                "conf": meta.get("conference"),
+                "primary": meta.get("color"),
+                "secondary": meta.get("alt_color"),
+                "net": round(rating, 2),
+                "off_sp_rating": round(splits["off"], 2) if "off" in splits else None,
+                "def_sp_rating": round(splits["def"], 2) if "def" in splits else None,
+            }
+    return list(seen.values())
+
+
 def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline_away, prior):
     """Returns a dict of model/EV fields, or a dict with has_model_line=False
     and a reason if either team's SP+ rating (or the book's moneyline) is
@@ -197,8 +288,14 @@ def main(year: int):
     print(f"Loading {year} SP+ ratings for the preseason fair-odds estimate...")
     sp_path = f"{config.DATA_RAW_DIR}/sp_ratings_{year}.csv"
     sp_lookup = {}
+    sp_splits_lookup = {}
     if os.path.exists(sp_path):
-        sp_lookup = build_sp_lookup(pd.read_csv(sp_path), team_lookup=team_lookup)
+        sp_df = pd.read_csv(sp_path)
+        sp_lookup = build_sp_lookup(sp_df, team_lookup=team_lookup)
+        sp_splits_lookup = build_sp_splits_lookup(sp_df, team_lookup=team_lookup)
+        if not sp_splits_lookup:
+            print(f"  [warn] {sp_path} has no offense.rating/defense.rating columns — "
+                  f"power-ratings off/def split will be omitted")
     else:
         print(f"  [warn] {sp_path} not found — model fair odds/EV will be skipped for all games")
 
@@ -282,10 +379,13 @@ def main(year: int):
         print(f"  [warn] could not fetch prop market catalog: {e}")
         prop_market_catalog = []
 
+    teams_out = build_teams_export(games_out, team_lookup, sp_lookup, sp_splits_lookup)
+
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "team_metadata_year": year,
         "preseason_prior": prior,
+        "teams": teams_out,
         "games": games_out,
         "props": props_out,
         "prop_market_catalog": prop_market_catalog,
@@ -299,7 +399,8 @@ def main(year: int):
     n_no_model = len(games_out) - n_with_model_line
     print(f"Wrote docs/data/latest.json: {len(games_out)} games ({n_unmatched} with an "
           f"unmatched team logo), {n_with_model_line} with a model fair-odds/EV line, "
-          f"{n_no_model} without (insufficient data), {len(props_out)} prop rows, "
+          f"{n_no_model} without (insufficient data), {len(teams_out)} teams with a real "
+          f"SP+ rating exported, {len(props_out)} prop rows, "
           f"{len(prop_market_catalog)} prop market types in catalog.")
 
 
