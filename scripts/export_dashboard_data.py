@@ -209,6 +209,8 @@ def main(year: int):
                 "moneyline_away": ml_away,
                 "spread_home": g.get(f"spread_{str(g.get('home_team')).replace(' ', '_')}"),
                 "spread_away": g.get(f"spread_{str(g.get('away_team')).replace(' ', '_')}"),
+                "spread_price_home": g.get(f"spread_price_{str(g.get('home_team')).replace(' ', '_')}"),
+                "spread_price_away": g.get(f"spread_price_{str(g.get('away_team')).replace(' ', '_')}"),
                 "total_over": g.get("total_over"),
                 "total_under": g.get("total_under"),
                 "home_unmatched": home_meta.get("unmatched", False),
