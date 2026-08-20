@@ -27,8 +27,12 @@ drops them with a disclosure in the footer:
     don't have.
   - sigma: our model has ONE league-wide residual std, not a true per-game
     sigma. Every game uses the same value. Disclosed in the footer.
-  - Weather/venue/travel/pace/returning-production/situational flags: not
-    fetched anywhere in this pipeline. Omitted rather than invented.
+  - Weather/venue/travel/pace/returning-production: not fetched anywhere in
+    this pipeline. Omitted rather than invented.
+  - Situational flags: mostly not fetched, EXCEPT neutral site, which CFBD's
+    /games schedule does expose. When a game is neutral-site, the fitted
+    home-field constant is zeroed out (it was fit only from real home games)
+    and a real "Neutral site" chip shows in the Matchup Projector.
   - Futures markets: not fetched. Section removed entirely.
   - Closing Line Value / bankroll history: the reference's version assumes
     3 seasons of real settled bets, which we don't have (no real money has
@@ -103,15 +107,19 @@ def build_model_data(data: dict) -> dict:
         ip_home = g.get("book_implied_prob_home")
         edge_pp_home = round((mp_home - ip_home) * 100, 2) if (mp_home is not None and ip_home is not None) else None
 
+        is_neutral = bool(g.get("neutral_site"))
+
         comp_rating = round(-(slope * sp_diff), 2) if (slope is not None and sp_diff is not None) else 0.0
-        comp_hfa = round(-intercept, 2) if intercept is not None else 0.0
+        comp_hfa = 0.0 if is_neutral else (round(-intercept, 2) if intercept is not None else 0.0)
 
         book = (g.get("book_used") or "market").replace("_", " ").title()
 
         note_parts = []
         if slope is not None and sp_diff is not None:
             note_parts.append(f"SP+ diff {sp_diff:+.1f} pts x fitted slope {slope:.2f}")
-        if intercept is not None:
+        if is_neutral:
+            note_parts.append("neutral site: home-field constant not applied")
+        elif intercept is not None:
             note_parts.append(f"home-field constant {intercept:+.1f} pts (fit from {n_games_hist} 2021-2025 games)")
         if edge_pp_home is not None:
             note_parts.append(f"moneyline edge vs. book: {edge_pp_home:+.1f}pp on {esc_plain(g['home_team'])}")
@@ -130,9 +138,13 @@ def build_model_data(data: dict) -> dict:
             "sigma": residual_std,
             "components": [
                 {"label": "SP+ rating differential x fitted slope", "points": comp_rating},
-                {"label": "Home-field constant (fit, 2021-2025)", "points": comp_hfa},
+                {
+                    "label": "Home-field constant (neutral site — not applied)" if is_neutral
+                    else "Home-field constant (fit, 2021-2025)",
+                    "points": comp_hfa,
+                },
             ],
-            "flags": [],
+            "flags": [{"text": "Neutral site", "level": 0}] if is_neutral else [],
             "note": note,
             "evHomePct": g.get("ev_home_pct"),
             "evAwayPct": g.get("ev_away_pct"),
@@ -412,6 +424,8 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .pchip.is-live { background: rgba(23,194,107,0.16); color: var(--green); }
 .pchip.is-pending { background: var(--chip); color: var(--muted-4); }
 
+.flag-chip { display: inline-block; font-family: var(--font-display); font-weight: 800; font-size: 9px; letter-spacing: 0.07em; padding: 2px 7px; border-radius: 3px; background: rgba(230,168,45,0.16); color: var(--gold, #E6A82D); margin-left: 6px; vertical-align: middle; }
+
 .trk-summary { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--rule); margin-bottom: 1px; }
 .trk-box { background: var(--panel); padding: 12px 14px; }
 .trk-label { font-family: var(--font-display); font-weight: 700; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 6px; }
@@ -675,8 +689,10 @@ TAIL_HTML = """</body>
 # Part 3 — renderer. Builds the DOM from window.MODEL_DATA + window.ModelMath.
 # Adapted from the reference design: Spread+Moneyline only (our only 2 real
 # markets), no week tabs (not functionally wired even in the source design),
-# no situational-flags chip (no real flags), no futures (no data fetched),
-# real props "coming soon" catalog cards instead of fabricated projections,
+# a real neutral-site flag chip in the projector header (the only situational
+# flag we actually have data for; no other situational flags/futures — not
+# fetched by this pipeline), real props "coming soon" catalog cards instead
+# of fabricated projections,
 # and a real localStorage Tracker in place of the fabricated CLV/bankroll
 # history chart.
 # =============================================================================
@@ -869,7 +885,11 @@ RENDERER_JS = """<script>
             '<div class="proj-bar" style="background:' + esc(aC) + '"></div></div>' +
           '<div style="text-align:center;flex:1">' +
             '<div class="proj-title">' + esc(a.abbr) + ' <span class="at-lg">AT</span> ' + esc(h.abbr) + '</div>' +
-            '<div class="proj-meta">' + esc(g.kickoff) + ' \\u00b7 line: ' + esc(g.book) + '</div>' +
+            '<div class="proj-meta">' + esc(g.kickoff) + ' \\u00b7 line: ' + esc(g.book) +
+              (g.flags && g.flags.length ? g.flags.map(function (f) {
+                return '<span class="flag-chip">' + esc(f.text) + '</span>';
+              }).join('') : '') +
+            '</div>' +
           '</div>' +
           '<div class="proj-side">' + helmet(g.home, 86, 51, true) +
             '<div class="proj-bar" style="background:' + esc(hC) + '"></div></div>' +

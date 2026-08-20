@@ -61,8 +61,18 @@ def fit_preseason_prior(team_game_features: pd.DataFrame) -> dict:
     }
 
 
-def preseason_predicted_margin(sp_rating_diff: float, prior: dict) -> float:
-    return prior["slope"] * sp_rating_diff + prior["intercept"]
+def preseason_predicted_margin(sp_rating_diff: float, prior: dict, neutral_site: bool = False) -> float:
+    """neutral_site=True zeroes out the fitted home-field constant, since
+    that constant specifically represents home-field advantage (it was fit
+    ONLY from real home games in fit_preseason_prior — neutral-site games
+    are excluded from the fit itself). Applying it to a neutral-site game
+    would misattribute a home-field edge to a team that doesn't have one.
+    Defaults to False (i.e. assume a normal home game) because the current
+    live game feed (The Odds API) doesn't expose a neutral-site flag itself
+    — callers that have it from elsewhere (CFBD's /games endpoint does)
+    should pass it through explicitly."""
+    intercept = 0.0 if neutral_site else prior["intercept"]
+    return prior["slope"] * sp_rating_diff + intercept
 
 
 def margin_to_win_prob(margin: float, residual_std: float) -> float:

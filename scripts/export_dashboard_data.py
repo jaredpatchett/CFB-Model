@@ -232,12 +232,15 @@ def build_teams_export(games_out: list, team_lookup: dict, sp_lookup: dict, sp_s
                 continue  # not in the FBS SP+ database — excluded, not faked
             meta = match_team(name, team_lookup)
             splits = match_sp_splits(name, sp_splits_lookup) or {}
+            # Default to a neutral gray if CFBD didn't have a color on file —
+            # keeps the helmet SVG from breaking on a null hex rather than
+            # fabricating a team color.
             seen[name] = {
                 "name": name,
                 "abbr": derive_abbr(meta.get("school") or name, meta.get("abbreviation")),
                 "conf": meta.get("conference"),
-                "primary": meta.get("color"),
-                "secondary": meta.get("alt_color"),
+                "primary": meta.get("color") or "#8A94A3",
+                "secondary": meta.get("alt_color") or "#E7EDF5",
                 "net": round(rating, 2),
                 "off_sp_rating": round(splits["off"], 2) if "off" in splits else None,
                 "def_sp_rating": round(splits["def"], 2) if "def" in splits else None,
@@ -245,7 +248,45 @@ def build_teams_export(games_out: list, team_lookup: dict, sp_lookup: dict, sp_s
     return list(seen.values())
 
 
-def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline_away, prior):
+def build_neutral_site_lookup(games_df: pd.DataFrame) -> dict:
+    """frozenset({normalized_home_school, normalized_away_school}) -> bool
+    neutralSite, from CFBD's OWN /games endpoint (which knows the full
+    season's schedule, including neutral-site openers, well before kickoff
+    — this isn't derived from results). Keyed by an unordered pair (not
+    home/away-specific) since we're only matching THIS pipeline's home/away
+    labeling (from The Odds API) against CFBD's schedule to ask 'is this
+    matchup on a neutral field', not trying to reconcile which provider's
+    home/away designation is authoritative.
+
+    The Odds API itself doesn't expose a neutral-site flag at all — that's
+    the actual gap this closes. Without it, the preseason model was
+    applying a home-field edge to every game uniformly, including true
+    neutral-site openers (e.g. season-opening 'showcase' games), which
+    misattributes an advantage to a team that doesn't have one there."""
+    lookup = {}
+    if games_df is None or games_df.empty:
+        return lookup
+    for _, row in games_df.iterrows():
+        home, away = row.get("homeTeam"), row.get("awayTeam")
+        neutral = row.get("neutralSite")
+        if not home or not away or pd.isna(neutral):
+            continue
+        key = frozenset({_normalize_team_name(str(home)), _normalize_team_name(str(away))})
+        lookup[key] = bool(neutral)
+    return lookup
+
+
+def match_neutral_site(home_school: str, away_school: str, lookup: dict):
+    """Returns True/False if this matchup is found in CFBD's schedule,
+    None if unknown (falls back to 'assume normal home game' at the call
+    site — the pre-existing, documented behavior — rather than guessing)."""
+    if not home_school or not away_school:
+        return None
+    key = frozenset({_normalize_team_name(home_school), _normalize_team_name(away_school)})
+    return lookup.get(key)
+
+
+def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline_away, prior, neutral_site=False):
     """Returns a dict of model/EV fields, or a dict with has_model_line=False
     and a reason if either team's SP+ rating (or the book's moneyline) is
     missing — never fabricates a number when the inputs aren't there."""
@@ -255,7 +296,7 @@ def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline
         return {"has_model_line": False, "no_line_reason": "missing_book_moneyline"}
 
     sp_diff = home_rating - away_rating
-    model_margin = fo.preseason_predicted_margin(sp_diff, prior)
+    model_margin = fo.preseason_predicted_margin(sp_diff, prior, neutral_site=neutral_site)
     model_home_win_prob = fo.margin_to_win_prob(model_margin, prior["residual_std"])
     model_away_win_prob = 1 - model_home_win_prob
 
@@ -265,6 +306,7 @@ def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline
 
     return {
         "has_model_line": True,
+        "neutral_site": bool(neutral_site),
         "home_sp_rating": round(home_rating, 2),
         "away_sp_rating": round(away_rating, 2),
         "sp_rating_diff": round(sp_diff, 2),
@@ -284,6 +326,15 @@ def main(year: int):
     print(f"Fetching {year} team metadata (logos, colors)...")
     teams_df = cfbd.get_fbs_teams(year)
     team_lookup = build_team_lookup(teams_df)
+
+    print(f"Fetching {year} schedule for neutral-site flags (The Odds API doesn't expose this)...")
+    try:
+        schedule_df = cfbd.get_games(year)
+        neutral_site_lookup = build_neutral_site_lookup(schedule_df)
+        print(f"  {len(neutral_site_lookup)} scheduled matchups with a known neutral-site flag")
+    except Exception as e:
+        print(f"  [warn] could not fetch {year} schedule for neutral-site flags: {e}")
+        neutral_site_lookup = {}
 
     print(f"Loading {year} SP+ ratings for the preseason fair-odds estimate...")
     sp_path = f"{config.DATA_RAW_DIR}/sp_ratings_{year}.csv"
@@ -321,6 +372,7 @@ def main(year: int):
 
     games_out = []
     n_with_model_line = 0
+    n_neutral_unknown = 0
     if os.path.exists(game_lines_path):
         lines = pd.read_csv(game_lines_path)
         for _, g in lines.iterrows():
@@ -353,8 +405,14 @@ def main(year: int):
             if prior is not None:
                 home_rating = match_sp_rating(g.get("home_team"), sp_lookup)
                 away_rating = match_sp_rating(g.get("away_team"), sp_lookup)
-                fair_fields = compute_fair_odds_fields(home_rating, away_rating, ml_home, ml_away, prior)
+                neutral = match_neutral_site(home_meta.get("school"), away_meta.get("school"), neutral_site_lookup)
+                fair_fields = compute_fair_odds_fields(
+                    home_rating, away_rating, ml_home, ml_away, prior,
+                    neutral_site=bool(neutral),  # None (unknown) -> False, same as pre-existing default
+                )
                 game_out.update(fair_fields)
+                if neutral is None:
+                    n_neutral_unknown += 1
                 if fair_fields.get("has_model_line"):
                     n_with_model_line += 1
             else:
@@ -397,9 +455,12 @@ def main(year: int):
 
     n_unmatched = sum(1 for g in games_out if g["home_unmatched"] or g["away_unmatched"])
     n_no_model = len(games_out) - n_with_model_line
+    n_neutral = sum(1 for g in games_out if g.get("neutral_site"))
     print(f"Wrote docs/data/latest.json: {len(games_out)} games ({n_unmatched} with an "
           f"unmatched team logo), {n_with_model_line} with a model fair-odds/EV line, "
-          f"{n_no_model} without (insufficient data), {len(teams_out)} teams with a real "
+          f"{n_no_model} without (insufficient data), {n_neutral} flagged neutral-site "
+          f"({n_neutral_unknown} had no neutral-site match in CFBD's schedule, "
+          f"assumed a normal home game), {len(teams_out)} teams with a real "
           f"SP+ rating exported, {len(props_out)} prop rows, "
           f"{len(prop_market_catalog)} prop market types in catalog.")
 
