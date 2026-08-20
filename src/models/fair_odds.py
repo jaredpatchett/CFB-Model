@@ -21,6 +21,14 @@ data in team_game_features.csv, not assumed. Once actual 2026 games are
 played and rolling in-season features exist, the full GameMarginModel is the
 better tool and this preseason estimator should stop being used for that
 team/game.
+
+That switchover is now automatic — see src/features/live_features.py
+(build_current_season_form + score_with_trained_model, called from
+scripts/export_dashboard_data.py) and its MIN_GAMES_FOR_TRAINED_MODEL
+constant. Once BOTH teams in a matchup have that many real completed games
+this season, export_dashboard_data.py scores that specific game with the
+trained model instead of this file's preseason_predicted_margin — no manual
+step required once the season is a few weeks in.
 """
 import numpy as np
 import pandas as pd

@@ -115,15 +115,18 @@ excluded from the backtest the same way they'd be low-confidence live.
   sharp-adjusted; this kind of baseline model is more likely to find real
   edges in thinner markets — mid-tier games for spreads, and non-star-player
   props specifically — than in a ranked-vs-ranked Saturday night game.
-- **The trained game/props models never actually reach the live dashboard.**
-  `train_game_model.py` and `train_props_model.py` run and print a holdout
-  MAE on every pipeline run, but `models/*.joblib` is gitignored, so those
-  trained models are never committed or read back — the live dashboard runs
-  entirely on the separate, simpler `src/models/fair_odds.py` SP+ linear
-  estimator instead (built as a stand-in for the preseason window, before
-  any in-season rolling features exist for the trained model to use). Worth
-  a deliberate decision once in-season data exists: wire the trained model
-  into the dashboard then, or stop training it every run.
+- **The trained game model now reaches the live dashboard, per game, once
+  it has enough to work with.** Every game starts priced by the preseason
+  `src/models/fair_odds.py` SP+ estimator. `export_dashboard_data.py` also
+  loads `models/game_model.joblib` (regenerated each run — still gitignored,
+  read back within the same job rather than committed) and, for any specific
+  matchup where BOTH teams have played `MIN_GAMES_FOR_TRAINED_MODEL` (3) or
+  more real games this season, scores that game with the trained
+  `GameMarginModel` instead (see `src/features/live_features.py`). This
+  switches over automatically and independently per game — no manual step,
+  and a real "In-season model" chip on the dashboard shows which games have
+  switched. The **props model is the one still not wired** — see the next
+  bullet and the opponent-defense-adjustment item in Next steps.
 - **`predict_week.py` still has an explicit wiring gap** (`run_backtest.py`'s
   is now fixed — see above): it needs this week's live team-feature rows
   built the same way `build_features.py` builds them for historical

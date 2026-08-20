@@ -27,7 +27,9 @@ import config
 from src.data import cfbd_client as cfbd
 from src.data import prizepicks_client
 from src.data.injury_overrides import load_injury_overrides, get_team_override
+from src.features.live_features import build_current_season_form, score_with_trained_model, MIN_GAMES_FOR_TRAINED_MODEL
 from src.models import fair_odds as fo
+from src.models.game_model import GameMarginModel
 
 
 def _normalize_team_name(name: str) -> str:
@@ -288,16 +290,29 @@ def match_neutral_site(home_school: str, away_school: str, lookup: dict):
 
 
 def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline_away, prior,
-                              neutral_site=False, home_injury_adj=0.0, away_injury_adj=0.0):
+                              neutral_site=False, home_injury_adj=0.0, away_injury_adj=0.0,
+                              trained_margin=None, trained_residual_std=None):
     """Returns a dict of model/EV fields, or a dict with has_model_line=False
     and a reason if either team's SP+ rating (or the book's moneyline) is
     missing — never fabricates a number when the inputs aren't there.
 
     home_injury_adj/away_injury_adj: manual points added directly to that
     team's own expected margin (see src/data/injury_overrides.py) — applied
-    on top of the SP+-diff-and-home-field base margin, since neither of
-    those inputs has any awareness of who's actually available to play.
-    Defaults to 0.0 (no override), so existing callers are unaffected."""
+    on top of the base margin regardless of source, since neither the
+    preseason prior nor the trained model has any awareness of who's
+    actually available to play. Defaults to 0.0 (no override).
+
+    trained_margin/trained_residual_std: when provided (see
+    src/features/live_features.py's score_with_trained_model — only
+    non-None once both teams have enough real in-season games), this
+    OVERRIDES the SP+-diff-plus-home-field preseason estimate as the base
+    margin, since the trained GameMarginModel is the better tool once
+    real in-season form exists (see fair_odds.py's module docstring).
+    trained_residual_std should be the trained model's own residual_std
+    (its calibration is different from the preseason prior's); falls back
+    to prior['residual_std'] if not given. SP+ rating is STILL required
+    either way — it's one of the trained model's own feature columns, not
+    just a preseason-only input."""
     if home_rating is None or away_rating is None:
         return {"has_model_line": False, "no_line_reason": "missing_sp_rating"}
     if moneyline_home is None or moneyline_away is None or pd.isna(moneyline_home) or pd.isna(moneyline_away):
@@ -307,9 +322,16 @@ def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline
     away_injury_adj = away_injury_adj or 0.0
 
     sp_diff = home_rating - away_rating
-    base_margin = fo.preseason_predicted_margin(sp_diff, prior, neutral_site=neutral_site)
+    if trained_margin is not None:
+        base_margin = trained_margin
+        residual_std = trained_residual_std if trained_residual_std else prior["residual_std"]
+        model_source = "trained_model"
+    else:
+        base_margin = fo.preseason_predicted_margin(sp_diff, prior, neutral_site=neutral_site)
+        residual_std = prior["residual_std"]
+        model_source = "preseason_prior"
     model_margin = base_margin + home_injury_adj - away_injury_adj
-    model_home_win_prob = fo.margin_to_win_prob(model_margin, prior["residual_std"])
+    model_home_win_prob = fo.margin_to_win_prob(model_margin, residual_std)
     model_away_win_prob = 1 - model_home_win_prob
 
     book_home_raw = fo.american_to_implied_prob(float(moneyline_home))
@@ -319,6 +341,7 @@ def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline
     return {
         "has_model_line": True,
         "neutral_site": bool(neutral_site),
+        "model_source": model_source,
         "injury_adjustment_home": round(home_injury_adj, 2),
         "injury_adjustment_away": round(away_injury_adj, 2),
         "home_sp_rating": round(home_rating, 2),
@@ -394,6 +417,26 @@ def main(year: int):
     elif not os.path.exists(features_path):
         print(f"  [warn] {features_path} not found — run build_features.py first. Skipping fair odds/EV.")
 
+    print(f"Checking for a trained in-season GameMarginModel (auto-switches over from the "
+          f"preseason prior once a matchup's teams both have {MIN_GAMES_FOR_TRAINED_MODEL}+ "
+          f"real {year} games)...")
+    trained_model = None
+    current_season_form = {}
+    model_path = f"{config.MODELS_DIR}/game_model.joblib"
+    if os.path.exists(model_path):
+        try:
+            trained_model = GameMarginModel.load(model_path)
+            current_season_form = build_current_season_form(schedule_df)
+            n_ready = sum(1 for f in current_season_form.values() if f["games_played_prior"] >= MIN_GAMES_FOR_TRAINED_MODEL)
+            print(f"  loaded; {len(current_season_form)} team(s) have played a {year} game so far, "
+                  f"{n_ready} of them already clear the {MIN_GAMES_FOR_TRAINED_MODEL}-game threshold")
+        except Exception as e:
+            print(f"  [warn] could not load {model_path}: {e} — staying on the preseason prior for all games")
+            trained_model = None
+    else:
+        print(f"  [warn] {model_path} not found — staying on the preseason prior for all games "
+              f"(expected before scripts/train_game_model.py has run in this pipeline)")
+
     game_lines_path = f"{config.DATA_CURRENT_DIR}/game_lines.csv"
     props_path = f"{config.DATA_CURRENT_DIR}/player_props.csv"
 
@@ -401,6 +444,7 @@ def main(year: int):
     n_with_model_line = 0
     n_neutral_unknown = 0
     n_injury_applications = 0
+    n_trained_model_games = 0
     if os.path.exists(game_lines_path):
         lines = pd.read_csv(game_lines_path)
         for _, g in lines.iterrows():
@@ -436,11 +480,17 @@ def main(year: int):
                 neutral = match_neutral_site(home_meta.get("school"), away_meta.get("school"), neutral_site_lookup)
                 home_ov = get_team_override(home_meta.get("school"), injury_overrides)
                 away_ov = get_team_override(away_meta.get("school"), injury_overrides)
+                trained_margin = score_with_trained_model(
+                    home_meta.get("school"), away_meta.get("school"), home_rating, away_rating,
+                    bool(neutral), current_season_form, trained_model,
+                )
                 fair_fields = compute_fair_odds_fields(
                     home_rating, away_rating, ml_home, ml_away, prior,
                     neutral_site=bool(neutral),  # None (unknown) -> False, same as pre-existing default
                     home_injury_adj=(home_ov["points"] if home_ov else 0.0),
                     away_injury_adj=(away_ov["points"] if away_ov else 0.0),
+                    trained_margin=trained_margin,
+                    trained_residual_std=(trained_model.residual_std if trained_model else None),
                 )
                 game_out.update(fair_fields)
                 if home_ov:
@@ -449,6 +499,8 @@ def main(year: int):
                 if away_ov:
                     game_out["injury_notes_away"] = away_ov["notes"]
                     n_injury_applications += 1
+                if trained_margin is not None:
+                    n_trained_model_games += 1
                 if neutral is None:
                     n_neutral_unknown += 1
                 if fair_fields.get("has_model_line"):
@@ -500,7 +552,10 @@ def main(year: int):
           f"({n_neutral_unknown} had no neutral-site match in CFBD's schedule, "
           f"assumed a normal home game), {n_injury_applications} manual injury-override "
           f"adjustment(s) applied (of {len(injury_overrides)} teams flagged in "
-          f"config/injury_overrides.csv), {len(teams_out)} teams with a real "
+          f"config/injury_overrides.csv), {n_trained_model_games} game(s) scored with the "
+          f"trained in-season GameMarginModel instead of the preseason prior "
+          f"(both teams had {MIN_GAMES_FOR_TRAINED_MODEL}+ real {year} games), "
+          f"{len(teams_out)} teams with a real "
           f"SP+ rating exported, {len(props_out)} prop rows, "
           f"{len(prop_market_catalog)} prop market types in catalog.")
 

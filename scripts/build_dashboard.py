@@ -20,13 +20,26 @@ drops them with a disclosure in the footer:
   - modelSpread: DERIVED, not fabricated — it's just -model_predicted_margin
     from src/models/fair_odds.py, expressed in the reference's sign
     convention (negative = home favored, matching the book's spread_home).
-  - Line decomposition: real, 2-3 components depending on the game (our
-    model only HAS 2 automatic inputs, plus an optional 3rd) — SP+ rating
-    differential x fitted slope, the fitted home-field/intercept constant,
-    and (only when config/injury_overrides.csv has an active entry for
-    either team) a manual injury/availability adjustment. The reference's
-    7-component breakdown (EPA, travel, pace, QB posterior, etc.) assumed
-    model internals we don't have.
+  - Line decomposition: real, 1-3 components depending on the game and which
+    of our two model paths priced it (see below) — either SP+ rating
+    differential x fitted slope + the fitted home-field/intercept constant
+    (preseason), or a single trained-GameMarginModel line (in-season, once
+    both teams have real current-season games), plus (only when
+    config/injury_overrides.csv has an active entry for either team) a
+    manual injury/availability adjustment. The reference's 7-component
+    breakdown (EPA, travel, pace, QB posterior, etc.) assumed model
+    internals we don't have.
+  - Two model paths, auto-switched per game: every game starts on the
+    preseason SP+ prior (src/models/fair_odds.py). Once BOTH teams in a
+    specific matchup have played enough real games this season (see
+    src/features/live_features.py's MIN_GAMES_FOR_TRAINED_MODEL), THAT game
+    switches to the trained GameMarginModel (rolling scoring margin/PPG +
+    SP+ + home field, actually fit on real historical results) instead —
+    automatically, no manual step, and independently per game (an early
+    non-conference game between two 3-0 teams can be on the trained model
+    while a same-week game involving a team on a bye is still on the
+    preseason prior). A real "In-season model" chip shows when a specific
+    game has switched over.
   - sigma: our model has ONE league-wide residual std, not a true per-game
     sigma. Every game uses the same value. Disclosed in the footer.
   - Weather/venue/travel/pace/returning-production: not fetched anywhere in
@@ -113,6 +126,7 @@ def build_model_data(data: dict) -> dict:
         edge_pp_home = round((mp_home - ip_home) * 100, 2) if (mp_home is not None and ip_home is not None) else None
 
         is_neutral = bool(g.get("neutral_site"))
+        is_trained = g.get("model_source") == "trained_model"
 
         home_inj_pts = g.get("injury_adjustment_home") or 0.0
         away_inj_pts = g.get("injury_adjustment_away") or 0.0
@@ -122,16 +136,29 @@ def build_model_data(data: dict) -> dict:
 
         comp_rating = round(-(slope * sp_diff), 2) if (slope is not None and sp_diff is not None) else 0.0
         comp_hfa = 0.0 if is_neutral else (round(-intercept, 2) if intercept is not None else 0.0)
+        # Trained-model games: back out the model's OWN base margin (before
+        # the injury adjustment, which is applied on top either way) to show
+        # as a single decomposition line -- the trained GBM has no simple
+        # additive SP+/home-field breakdown the way the preseason prior does,
+        # so showing comp_rating/comp_hfa here would misrepresent what
+        # actually produced this number.
+        base_margin_trained = (model_margin - home_inj_pts + away_inj_pts) if (is_trained and model_margin is not None) else None
+        comp_trained = round(-base_margin_trained, 2) if base_margin_trained is not None else 0.0
 
         book = (g.get("book_used") or "market").replace("_", " ").title()
 
         note_parts = []
-        if slope is not None and sp_diff is not None:
+        if is_trained:
+            note_parts.append("trained in-season GameMarginModel (rolling scoring margin/PPG, "
+                               "SP+ diff, home field) -- both teams have enough real games played "
+                               "this season; preseason SP+ prior no longer used for this matchup")
+        elif slope is not None and sp_diff is not None:
             note_parts.append(f"SP+ diff {sp_diff:+.1f} pts x fitted slope {slope:.2f}")
-        if is_neutral:
-            note_parts.append("neutral site: home-field constant not applied")
-        elif intercept is not None:
-            note_parts.append(f"home-field constant {intercept:+.1f} pts (fit from {n_games_hist} 2021-2025 games)")
+        if not is_trained:
+            if is_neutral:
+                note_parts.append("neutral site: home-field constant not applied")
+            elif intercept is not None:
+                note_parts.append(f"home-field constant {intercept:+.1f} pts (fit from {n_games_hist} 2021-2025 games)")
         if has_injury_override:
             inj_bits = []
             if home_inj_pts:
@@ -143,14 +170,19 @@ def build_model_data(data: dict) -> dict:
             note_parts.append(f"moneyline edge vs. book: {edge_pp_home:+.1f}pp on {esc_plain(g['home_team'])}")
         note = "Model: " + "; ".join(note_parts) + "." if note_parts else "Insufficient history to explain this line."
 
-        components = [
-            {"label": "SP+ rating differential x fitted slope", "points": comp_rating},
-            {
-                "label": "Home-field constant (neutral site — not applied)" if is_neutral
-                else "Home-field constant (fit, 2021-2025)",
-                "points": comp_hfa,
-            },
-        ]
+        if is_trained:
+            components = [
+                {"label": "Trained GameMarginModel (in-season form + SP+ + home field)", "points": comp_trained},
+            ]
+        else:
+            components = [
+                {"label": "SP+ rating differential x fitted slope", "points": comp_rating},
+                {
+                    "label": "Home-field constant (neutral site — not applied)" if is_neutral
+                    else "Home-field constant (fit, 2021-2025)",
+                    "points": comp_hfa,
+                },
+            ]
         if has_injury_override:
             # Sign convention: comp_rating/comp_hfa above are in SPREAD terms
             # (negative = home favored), but home_inj_pts/away_inj_pts are in
@@ -166,6 +198,8 @@ def build_model_data(data: dict) -> dict:
             })
 
         flags = []
+        if is_trained:
+            flags.append({"text": "In-season model", "level": 2})
         if is_neutral:
             flags.append({"text": "Neutral site", "level": 0})
         if home_inj_pts:
