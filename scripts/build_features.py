@@ -15,7 +15,7 @@ import pandas as pd
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import config
 from src.features.team_features import build_game_team_features, build_pace_returning_features
-from src.features.player_features import pivot_player_game_stats, build_rolling_player_features
+from src.features.player_features import pivot_player_game_stats, build_rolling_player_features, attach_opponent_defense
 
 
 def load_years(pattern: str, years: list) -> pd.DataFrame:
@@ -58,6 +58,13 @@ if __name__ == "__main__":
     if not player_stats_long.empty:
         print("Building player features...")
         wide = pivot_player_game_stats(player_stats_long, games)
+        wide = attach_opponent_defense(wide, adv_stats)
+        if "opp_pass_def_success_rate" in wide.columns and wide["opp_pass_def_success_rate"].notna().any():
+            print(f"  opponent-defense adjustment attached ({wide['opp_pass_def_success_rate'].notna().sum()} "
+                  f"of {len(wide)} player-game rows matched to a real opponent-defense value)")
+        else:
+            print("  [warn] no opponent-defense data attached — opp_pass_def_success_rate/"
+                  "opp_rush_def_success_rate will be all-null for this build")
         player_features = build_rolling_player_features(wide)
         player_features.to_csv(f"{config.DATA_PROCESSED_DIR}/player_game_features.csv", index=False)
         print(f"  wrote {len(player_features)} rows")

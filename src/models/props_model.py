@@ -35,6 +35,28 @@ class PlayerStatModel:
         self.feature_columns = ROLLING_FEATURE_COLUMNS
 
     def fit(self, player_features_df: pd.DataFrame, min_games_played: int = 1, verbose: bool = True):
+        # Same robustness fix as GameMarginModel.fit() (src/models/game_model.py)
+        # and for the same reason: opp_pass_def_success_rate/
+        # opp_rush_def_success_rate depend on CFBD's /stats/season/advanced
+        # coverage, unverified from this dev sandbox, and older cached
+        # player_game_features.csv files predate these columns entirely.
+        # Drop a column that's missing outright or 100% null from what THIS
+        # model actually uses, rather than crash with a KeyError or train on
+        # 0 rows -- self.feature_columns is reassigned so predict()/
+        # predict_and_compare() automatically stay consistent.
+        usable, skipped = [], []
+        for c in self.feature_columns:
+            if c not in player_features_df.columns:
+                skipped.append((c, "column not present in this data"))
+            elif player_features_df[c].notna().sum() == 0:
+                skipped.append((c, "100% null in this data"))
+            else:
+                usable.append(c)
+        if skipped:
+            if verbose:
+                print(f"[props_model:{self.stat_name}] dropping unusable feature column(s): {skipped}")
+            self.feature_columns = usable
+
         data = player_features_df[player_features_df["games_played_prior"] >= min_games_played]
         data = data.dropna(subset=self.feature_columns + [self.stat_name])
         X = data[self.feature_columns]
