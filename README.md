@@ -75,8 +75,12 @@ for that team.
 
 **Player props**: one model per stat (receiving yards, rushing yards, passing
 yards, receptions, etc.), predicting expected value from that player's own
-leakage-safe rolling usage. Compared against the PrizePicks line for an
-over/under lean. No opponent-defense adjustment yet (see Next steps).
+leakage-safe rolling usage AND the upcoming opponent's real pass/rush
+defense efficiency (CFBD's advanced season stats — see
+`src/features/player_features.py`'s `attach_opponent_defense`). Compared
+against the PrizePicks line for an over/under lean, live on the dashboard
+whenever a real player/opponent match succeeds (see the switchover note
+above).
 
 **Backtesting**: historical CFBD closing lines (free, unlike The Odds API's
 paid historical tier) are used to check whether the model would have beaten
@@ -130,8 +134,19 @@ excluded from the backtest the same way they'd be low-confidence live.
   `GameMarginModel` instead (see `src/features/live_features.py`). This
   switches over automatically and independently per game — no manual step,
   and a real "In-season model" chip on the dashboard shows which games have
-  switched. The **props model is the one still not wired** — see the next
-  bullet and the opponent-defense-adjustment item in Next steps.
+  switched. The **props model now reaches the dashboard too** (previously
+  the standing gap here) — `export_dashboard_data.py` matches each posted
+  PrizePicks line to a real player + opponent via
+  `src/features/live_player_features.py`, and where that match succeeds
+  (player has real in-season stats, a trained model exists for that stat,
+  and the upcoming opponent's defensive numbers are available) shows a real
+  model prediction/edge line under the posted price. **Read the matching
+  caveat in that file's module docstring before trusting it**: PrizePicks
+  player names have no shared ID with CFBD's athlete data, so matching is
+  exact-normalized-string-only and drops any ambiguous name rather than
+  guessing — spot-check the first live week's output against real
+  PrizePicks lines once games start, since a silent name-format mismatch
+  would just look like "no overlay" for real players, not an error.
 - **`predict_week.py` still has an explicit wiring gap** (`run_backtest.py`'s
   is now fixed — see above): it needs this week's live team-feature rows
   built the same way `build_features.py` builds them for historical
@@ -147,12 +162,15 @@ excluded from the backtest the same way they'd be low-confidence live.
 1. Wire `predict_week.py` the same way `run_backtest.py` was just wired, so
    it scores this week's live lines against the trained model, not just
    historical ones.
-2. Add opponent-adjusted matchup features for props (e.g., a WR's yards
-   prediction should account for the opposing pass defense's efficiency, not
-   just the WR's own volume).
-3. Track closing-line value (CLV) over time, not just win/loss — CLV is a
+2. Track closing-line value (CLV) over time, not just win/loss — CLV is a
    better early signal of whether a model has real edge than a small sample
    of bet outcomes.
+3. Once real games are played, spot-check the props player-name matching
+   (`src/features/live_player_features.py`) against actual PrizePicks
+   output — it's untested against real name-format differences between
+   PrizePicks and CFBD, by necessity (this dev environment can't reach
+   either API directly). Add a hand-verified alias table if real mismatches
+   turn up, the same way `TEAM_ALIASES` was added for team names.
 
 ## Disclaimer
 

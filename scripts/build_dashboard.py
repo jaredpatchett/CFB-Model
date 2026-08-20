@@ -789,7 +789,11 @@ TAIL_HTML = """</body>
 # actually have — neutral site (from CFBD's schedule) and manual injury/
 # availability overrides (from config/injury_overrides.csv) — no other
 # situational flags/futures (not fetched by this pipeline), real props
-# "coming soon" catalog cards instead of fabricated projections,
+# "coming soon" catalog cards instead of fabricated projections (now with a
+# real trained-model prediction/edge line under any LIVE prop the pipeline
+# could actually match a player + opponent-defense number for — see
+# src/features/live_player_features.py; most/all rows show no overlay
+# before the season has real in-season player data, by design, not a bug),
 # and a real localStorage Tracker in place of the fabricated CLV/bankroll
 # history chart.
 # =============================================================================
@@ -1107,8 +1111,25 @@ RENDERER_JS = """<script>
       if (rows.length) {
         return '<div class="pcard"><div class="pcard-head"><span>' + esc(m) + '</span><span class="pchip is-live">LIVE</span></div>' +
           rows.map(function (r) {
+            // model_predicted_value etc. only exist once export_dashboard_data.py
+            // (src/features/live_player_features.py) actually matched this
+            // player to real in-season stats + a trained model AND found a
+            // real opponent-defense number -- normal to be absent for most/
+            // all rows before the season has real in-season data. No
+            // fabricated overlay when it's missing.
+            var hasModel = r.model_predicted_value != null && r.model_lean;
+            var modelLine = hasModel
+              ? '<div class="pcard-line-row" style="border-top:none;padding-top:0">' +
+                  '<span style="color:var(--muted-3);font-size:9.5px;letter-spacing:.04em">' +
+                    'Model: ' + r.model_predicted_value.toFixed(1) + ' (' + r.model_lean.toUpperCase() + (r.model_confidence === 'low' ? ', low confidence' : '') + ')' +
+                  '</span>' +
+                  '<span style="color:' + (r.model_edge >= 0 ? 'var(--green)' : 'var(--red)') + ';font-weight:700;font-size:10.5px">' +
+                    (r.model_edge >= 0 ? '+' : '') + r.model_edge.toFixed(1) + ' edge' +
+                  '</span>' +
+                '</div>'
+              : '';
             return '<div class="pcard-line-row"><span>' + esc(r.player_name) + ' \\u00b7 ' + esc(r.line) + '</span>' +
-              '<span>O ' + esc(r.over_price) + ' / U ' + esc(r.under_price) + '</span></div>';
+              '<span>O ' + esc(r.over_price) + ' / U ' + esc(r.under_price) + '</span></div>' + modelLine;
           }).join('') + '</div>';
       }
       return '<div class="pcard"><div class="pcard-head"><span>' + esc(m) + '</span><span class="pchip is-pending">NOT POSTED</span></div>' +

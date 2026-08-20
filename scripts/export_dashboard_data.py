@@ -31,8 +31,13 @@ from src.features.live_features import (
     build_current_season_form, score_with_trained_model, build_current_pace_returning,
     MIN_GAMES_FOR_TRAINED_MODEL,
 )
+from src.features.live_player_features import (
+    build_current_player_form, score_prop, MIN_GAMES_FOR_PROP_MODEL,
+)
+from src.features.player_features import STAT_MAP
 from src.models import fair_odds as fo
 from src.models.game_model import GameMarginModel
+from src.models.props_model import PlayerStatModel
 
 
 def _normalize_team_name(name: str) -> str:
@@ -455,6 +460,7 @@ def main(year: int):
     print(f"Fetching {year} pace (plays/drive) and returning-production for Power Ratings "
           f"and the trained model's pace_diff/returning_production_diff features...")
     pace_returning_lookup = {}
+    adv_stats_df = pd.DataFrame()  # also reused below for prop opponent-defense lookups
     try:
         adv_stats_df = cfbd.get_advanced_team_stats(year)
         returning_df = cfbd.get_returning_production(year)
@@ -550,6 +556,71 @@ def main(year: int):
         props_out = props.to_dict(orient="records")
     else:
         print(f"  [warn] {props_path} not found, skipping props")
+
+    n_props_scored = 0
+    if props_out:
+        print(f"Checking for trained props models + real in-season player data (auto-scores a posted "
+              f"prop line once a player has {MIN_GAMES_FOR_PROP_MODEL}+ real {year} games)...")
+        prop_models = {}
+        for stat in sorted(set(STAT_MAP.values())):
+            p = f"{config.MODELS_DIR}/props/{stat}.joblib"
+            if os.path.exists(p):
+                try:
+                    prop_models[stat] = PlayerStatModel.load(p)
+                except Exception as e:
+                    print(f"  [warn] could not load {p}: {e}")
+        if not prop_models:
+            print(f"  [warn] no trained props models found in {config.MODELS_DIR}/props/ — "
+                  f"props will show the posted line only (expected before "
+                  f"scripts/train_props_model.py has run in this pipeline)")
+
+        max_completed_week = 0
+        if not schedule_df.empty and "completed" in schedule_df.columns and "week" in schedule_df.columns:
+            completed_weeks = schedule_df.loc[schedule_df["completed"] == True, "week"]
+            max_completed_week = int(completed_weeks.max()) if not completed_weeks.empty else 0
+
+        player_form = {}
+        if prop_models and max_completed_week > 0:
+            print(f"  pulling {year} player game stats through week {max_completed_week}...")
+            all_player_stats = []
+            for wk in range(1, max_completed_week + 1):
+                try:
+                    wk_stats = cfbd.get_player_game_stats(year, wk)
+                    if not wk_stats.empty:
+                        all_player_stats.append(wk_stats)
+                except Exception as e:
+                    print(f"  [warn] week {wk} player stats fetch failed: {e}")
+            if all_player_stats:
+                player_stats_long_current = pd.concat(all_player_stats, ignore_index=True)
+                player_form = build_current_player_form(player_stats_long_current, schedule_df)
+                n_ready = sum(1 for v in player_form.values() if v["games_played_prior"] >= MIN_GAMES_FOR_PROP_MODEL)
+                print(f"  {len(player_form)} player(s) matched to real {year} stats, "
+                      f"{n_ready} of them already clear the {MIN_GAMES_FOR_PROP_MODEL}-game threshold")
+        elif prop_models:
+            print(f"  0 completed {year} games yet — nothing to score (normal before kickoff)")
+
+        opp_defense_lookup = {}
+        if (not adv_stats_df.empty and "team" in adv_stats_df.columns
+                and "defense.passingPlays.successRate" in adv_stats_df.columns
+                and "defense.rushingPlays.successRate" in adv_stats_df.columns):
+            for _, r in adv_stats_df.iterrows():
+                opp_defense_lookup[r["team"]] = {
+                    "opp_pass_def_success_rate": r.get("defense.passingPlays.successRate"),
+                    "opp_rush_def_success_rate": r.get("defense.rushingPlays.successRate"),
+                }
+
+        if prop_models and player_form:
+            for p in props_out:
+                result = score_prop(
+                    p.get("player_name"), p.get("market_name"), p.get("line"),
+                    player_form, schedule_df, opp_defense_lookup, prop_models,
+                )
+                if result:
+                    p.update(result)
+                    n_props_scored += 1
+        print(f"  {n_props_scored} of {len(props_out)} posted prop line(s) scored with a real model prediction "
+              f"(the rest show the posted line only — see live_player_features.py's matching-limitations note "
+              f"if this count looks lower than expected once real games are underway)")
 
     print("Fetching real player-prop market catalog (for placeholder tab)...")
     try:
