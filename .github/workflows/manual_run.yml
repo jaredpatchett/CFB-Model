@@ -30,6 +30,29 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      # 2022-2025 (or whatever --years covers) are completed seasons that
+      # never change once fetched. Without this, every single manual run
+      # re-pulls all of them from scratch (~20+ CFBD calls per year) against
+      # CFBD's free-tier budget of 1,000 calls/month -- confirmed for real:
+      # a run hit "429 Too Many Requests" mid-fetch after two earlier runs
+      # had already burned through most of the month's quota re-fetching the
+      # same historical seasons. Restoring data/raw/ here lets
+      # fetch_historical_data.py's own already-cached check (see that file)
+      # skip any year it already has on disk, so quota only gets spent on
+      # years that are actually new. restore-keys falls back to the most
+      # recent cache available even if this run's --years differs from the
+      # last one, and the unique run_id in the primary key means this run's
+      # progress (even if it fails partway through, e.g. from hitting quota
+      # again) still gets saved for the next run to build on.
+      - name: Restore cached historical CFBD data
+        uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: cfbd-raw-${{ github.event.inputs.years }}-${{ github.run_id }}
+          restore-keys: |
+            cfbd-raw-${{ github.event.inputs.years }}-
+            cfbd-raw-
+
       - name: Fetch historical data
         run: python scripts/fetch_historical_data.py --years ${{ github.event.inputs.years }}
 

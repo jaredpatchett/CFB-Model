@@ -18,6 +18,25 @@ import config
 from src.data import cfbd_client as cfbd
 
 
+def year_already_cached(year: int) -> bool:
+    """True if this year's core historical data was already pulled by an
+    earlier run (data/raw/ restored from the workflow's actions/cache step,
+    or just re-running this script locally). A past, completed CFB season
+    doesn't change, so once it's been fetched there's no reason to spend
+    CFBD's scarce free-tier budget (1,000 calls/month — confirmed hit
+    mid-run on a real Action run, a training pull across 4 years is ~80-90
+    calls on its own) re-pulling the same season every single run.
+
+    Checks the two priciest files as a proxy for 'this year fully
+    completed': games (1 call) and player_game_stats (~15 calls, the bulk
+    of a year's cost). adv_stats/returning_production are already
+    best-effort/non-fatal elsewhere so aren't required here — a year missing
+    only those will still be treated as cached; re-run with --force to
+    retry them specifically if needed."""
+    return (os.path.exists(f"{config.DATA_RAW_DIR}/games_{year}.csv")
+            and os.path.exists(f"{config.DATA_RAW_DIR}/player_game_stats_{year}.csv"))
+
+
 def fetch_year(year: int):
     print(f"\n--- Fetching {year} ---")
     games = cfbd.get_games(year)
@@ -76,9 +95,17 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--years", type=int, nargs="+", required=True,
                          help="Season(s) to fetch, e.g. --years 2022 2023 2024")
+    parser.add_argument("--force", action="store_true",
+                         help="Re-fetch every requested year even if already cached in data/raw/ "
+                              "(normally a completed season already on disk is skipped to save "
+                              "CFBD's limited free-tier call budget).")
     args = parser.parse_args()
 
     os.makedirs(config.DATA_RAW_DIR, exist_ok=True)
     for year in args.years:
+        if not args.force and year_already_cached(year):
+            print(f"\n--- {year}: already cached in {config.DATA_RAW_DIR}/, skipping "
+                  f"(~20+ CFBD calls saved — use --force to re-fetch anyway) ---")
+            continue
         fetch_year(year)
     print("\nDone.")
