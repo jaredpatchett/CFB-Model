@@ -10,6 +10,7 @@ Usage:
 import argparse
 import os
 import sys
+import time
 import pandas as pd
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -51,7 +52,10 @@ def fetch_year(year: int):
     print(f"  historical lines: {len(lines)} games with a usable market line "
           f"(of {len(raw_lines)} games returned; the rest had no sportsbook coverage)")
 
-    # Player game stats: fetched week by week (CFBD requires a week param here)
+    # Player game stats: fetched week by week (CFBD requires a week param here).
+    # A small proactive delay between these ~15 calls/year keeps this well
+    # under CFBD's free-tier rate limit in the first place (cfbd_client._get
+    # still retries with backoff if a 429 slips through anyway).
     max_week = int(games["week"].max()) if "week" in games.columns and len(games) else 15
     all_player_stats = []
     for week in range(1, max_week + 1):
@@ -61,6 +65,7 @@ def fetch_year(year: int):
                 all_player_stats.append(wk)
         except Exception as e:
             print(f"  [warn] week {week} player stats failed: {e}")
+        time.sleep(0.5)
     if all_player_stats:
         player_stats = pd.concat(all_player_stats, ignore_index=True)
         player_stats.to_csv(f"{config.DATA_RAW_DIR}/player_game_stats_{year}.csv", index=False)

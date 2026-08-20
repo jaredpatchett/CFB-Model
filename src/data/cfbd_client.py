@@ -12,18 +12,48 @@ import requests
 import pandas as pd
 import sys
 import os
+import time
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 import config
+
+# CFBD's free tier rate-limits (429 Too Many Requests) once a script makes
+# many calls back-to-back -- e.g. fetch_historical_data.py's per-week player
+# stats loop is ~15 calls/year, and across 4 training years plus the
+# per-year games/sp/adv/returning/team-stats/lines calls that's ~90+ calls
+# with zero delay between them. Confirmed for real: a live Action run threw
+# "429 Client Error: Too Many Requests" partway through 2024 after 2022/2023
+# had already succeeded (so it's a rate limit, not an auth/key problem).
+# Retries with exponential backoff, honoring the server's Retry-After header
+# when present (CFBD sends one), so a transient rate-limit or hiccup doesn't
+# kill an otherwise-good run.
+MAX_RETRIES = 6
+BASE_BACKOFF_SECONDS = 5
 
 
 def _get(endpoint: str, params: dict = None) -> list:
     config.require_keys("CFBD_API_KEY")
     headers = {"Authorization": f"Bearer {config.CFBD_API_KEY}"}
     url = f"{config.CFBD_BASE_URL}{endpoint}"
-    resp = requests.get(url, headers=headers, params=params or {}, timeout=30)
-    resp.raise_for_status()
-    return resp.json()
+    for attempt in range(MAX_RETRIES + 1):
+        resp = requests.get(url, headers=headers, params=params or {}, timeout=30)
+        if resp.status_code == 429 or resp.status_code >= 500:
+            if attempt == MAX_RETRIES:
+                resp.raise_for_status()
+            retry_after = resp.headers.get("Retry-After")
+            if retry_after is not None:
+                try:
+                    wait = float(retry_after)
+                except ValueError:
+                    wait = BASE_BACKOFF_SECONDS * (2 ** attempt)
+            else:
+                wait = BASE_BACKOFF_SECONDS * (2 ** attempt)
+            print(f"  [warn] {resp.status_code} from {endpoint} (attempt {attempt + 1}/"
+                  f"{MAX_RETRIES + 1}) — waiting {wait:.0f}s before retrying...")
+            time.sleep(wait)
+            continue
+        resp.raise_for_status()
+        return resp.json()
 
 
 def get_fbs_teams(year: int) -> pd.DataFrame:
