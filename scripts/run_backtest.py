@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Backtest the trained game model against historical CFBD closing lines and
-actual results.
+Backtest the trained game model against REAL historical CFBD closing lines
+and actual results — this is the real bar (beating the market), not just
+whether the model's predicted margin is close to the actual final score.
 
 Usage:
   python scripts/run_backtest.py
@@ -15,40 +16,90 @@ import config
 from src.models.game_model import GameMarginModel
 from src.backtest import backtester
 
+
+def load_historical_lines() -> pd.DataFrame:
+    """Load every lines_{year}.csv found in data/raw/, already flattened to
+    one row per game by cfbd_client.historical_lines_to_dataframe (see
+    fetch_historical_data.py). Older cached CSVs fetched before that fix
+    will be missing the market_spread_home/market_moneyline_* columns this
+    script needs — caught explicitly below rather than failing on a
+    confusing KeyError."""
+    files = [f for f in os.listdir(config.DATA_RAW_DIR) if f.startswith("lines_") and f.endswith(".csv")]
+    if not files:
+        return pd.DataFrame()
+    frames = [pd.read_csv(f"{config.DATA_RAW_DIR}/{f}") for f in files]
+    return pd.concat(frames, ignore_index=True)
+
+
+def join_features_to_lines(features: pd.DataFrame, lines: pd.DataFrame) -> tuple:
+    """Join on CFBD's own numeric game id when both sides have it. /games
+    and /lines are both CFBD's own data sharing the same internal id
+    scheme, so this is an exact join — no fuzzy team-name matching needed
+    here (that's only required when matching CFBD to a DIFFERENT provider,
+    like The Odds API, which is what export_dashboard_data.py's team
+    matching handles for current/live lines).
+
+    Falls back to a (season, week, homeTeam, awayTeam) join if 'id' is
+    missing from either side, so this doesn't silently produce zero
+    matches against an older cached features/lines CSV that predates this
+    fix. Returns (joined_df, strategy_used) so the caller can report which
+    path was actually taken.
+    """
+    if "id" in features.columns and "id" in lines.columns:
+        merged = features.merge(lines, on="id", how="inner", suffixes=("", "_line"))
+        return merged, "id"
+    merged = features.merge(
+        lines, on=["season", "week", "homeTeam", "awayTeam"], how="inner", suffixes=("", "_line")
+    )
+    return merged, "season+week+homeTeam+awayTeam (fallback — no shared 'id' column found)"
+
+
 if __name__ == "__main__":
     features_path = f"{config.DATA_PROCESSED_DIR}/team_game_features.csv"
     model_path = f"{config.MODELS_DIR}/game_model.joblib"
-    lines_glob_years = [f for f in os.listdir(config.DATA_RAW_DIR) if f.startswith("lines_")]
 
     if not os.path.exists(features_path):
         raise SystemExit("Run scripts/build_features.py first.")
     if not os.path.exists(model_path):
         raise SystemExit("Run scripts/train_game_model.py first.")
-    if not lines_glob_years:
-        raise SystemExit("No historical lines found in data/raw/ — run scripts/fetch_historical_data.py first.")
 
     features = pd.read_csv(features_path)
-    lines = pd.concat(
-        [pd.read_csv(f"{config.DATA_RAW_DIR}/{f}") for f in lines_glob_years],
-        ignore_index=True
-    )
+    lines = load_historical_lines()
+    if lines.empty:
+        raise SystemExit("No historical lines found in data/raw/ — run scripts/fetch_historical_data.py first.")
+    if "market_spread_home" not in lines.columns:
+        raise SystemExit(
+            "data/raw/lines_*.csv is missing market_spread_home — it was fetched before the "
+            "historical_lines_to_dataframe fix. Re-run scripts/fetch_historical_data.py to refresh it."
+        )
+
+    print(f"Loaded {len(features)} historical feature rows and {len(lines)} historical lines with a real market number.")
+    joined, strategy = join_features_to_lines(features, lines)
+    print(f"  joined {len(joined)} of {len(features)} feature rows to a market line (join strategy: {strategy})")
+    if joined.empty:
+        raise SystemExit("Joined 0 games to a market line — nothing to backtest. Check that features and "
+                          "lines cover the same season(s)/years.")
 
     model = GameMarginModel().load(model_path)
-    predicted_margin = model.predict_margin(features.dropna(subset=model.feature_columns))
-    valid = features.dropna(subset=model.feature_columns).copy()
-    valid["predicted_margin"] = predicted_margin
-    valid["predicted_home_win_prob"] = model.predict_home_win_prob(valid)
+    scoreable = joined.dropna(subset=model.feature_columns).copy()
+    print(f"  {len(scoreable)} of {len(joined)} joined games have complete model features "
+          f"(early-season games with no rolling in-season history are excluded here, same as live use)")
+    if scoreable.empty:
+        raise SystemExit("0 games have complete features after the join — nothing to backtest.")
 
-    # NOTE: lines_{year}.csv from CFBD needs matching to games by gameId + book
-    # to get a market spread per game. This wiring is left explicit here
-    # rather than hidden, since CFBD's /lines schema varies by sportsbook
-    # coverage per game and deserves a manual check before trusting it.
-    print(f"Scored {len(valid)} historical games.")
-    print("To finish the backtest: merge `valid` with the lines_*.csv files on "
-          "gameId, pick a consistent sportsbook column, then call "
-          "backtester.evaluate_spread() and evaluate_moneyline().")
+    scoreable["predicted_margin"] = model.predict_margin(scoreable)
+    scoreable["predicted_home_win_prob"] = model.predict_home_win_prob(scoreable)
 
-    results = backtester.evaluate_moneyline(
-        valid["predicted_home_win_prob"], valid["home_win"]
+    spread_results = backtester.evaluate_spread(
+        scoreable["predicted_margin"], scoreable["margin"], scoreable["market_spread_home"]
     )
-    backtester.summarize(results, "Moneyline (model self-consistency, no market comparison yet)")
+    backtester.summarize(spread_results, "Spread (ATS vs. real CFBD closing line)")
+
+    ml_results = backtester.evaluate_moneyline(
+        scoreable["predicted_home_win_prob"], scoreable["home_win"]
+    )
+    backtester.summarize(ml_results, "Moneyline (calibration: model win-prob vs. actual outcome)")
+
+    print("\nReminder: breakeven ATS win rate against standard -110 pricing is ~52.4%. "
+          "Treat any result on a small early sample (well under ~200 graded games) as noisy, "
+          "not a verdict — re-run this after more historical seasons/weeks are pulled.")

@@ -39,6 +39,14 @@ jobs:
       - name: Train game model
         run: python scripts/train_game_model.py
 
+      - name: Backtest game model against real closing lines
+        # Diagnostic only — prints real ATS win rate / moneyline calibration
+        # to this log. continue-on-error since a too-short --years range can
+        # legitimately have too few scoreable games (should never block the
+        # dashboard export/commit below over a backtest reporting issue).
+        continue-on-error: true
+        run: python scripts/run_backtest.py
+
       - name: Train props models
         run: python scripts/train_props_model.py
 

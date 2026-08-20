@@ -78,7 +78,14 @@ paid historical tier) are used to check whether the model would have beaten
 the market, not just whether it predicted the final score accurately. Two
 different things — a model can have great point-prediction accuracy and
 still lose against the spread if the market is already pricing that
-accurately.
+accurately. `run_backtest.py` joins the trained model's predictions to real
+CFBD closing lines by CFBD's own game id (both `/games` and `/lines` are
+CFBD's own data, so this join is exact — no fuzzy team-name matching needed,
+unlike matching CFBD to a different provider like The Odds API) and prints
+real ATS win rate, margin MAE, and moneyline log loss/accuracy against the
+52.4% break-even threshold. This only scores games where the trained model
+has complete rolling in-season features, so very early-season games are
+excluded from the backtest the same way they'd be low-confidence live.
 
 ## Honest limitations
 
@@ -100,16 +107,30 @@ accurately.
   sharp-adjusted; this kind of baseline model is more likely to find real
   edges in thinner markets — mid-tier games for spreads, and non-star-player
   props specifically — than in a ranked-vs-ranked Saturday night game.
-- **`predict_week.py` and `run_backtest.py` have an explicit wiring gap**:
-  matching current/historical games to market lines by game ID, and building
-  this week's live feature rows, are left as clearly-marked next steps rather
-  than silently guessed at. Check the inline comments before assuming full
-  automation.
+- **The trained game/props models never actually reach the live dashboard.**
+  `train_game_model.py` and `train_props_model.py` run and print a holdout
+  MAE on every pipeline run, but `models/*.joblib` is gitignored, so those
+  trained models are never committed or read back — the live dashboard runs
+  entirely on the separate, simpler `src/models/fair_odds.py` SP+ linear
+  estimator instead (built as a stand-in for the preseason window, before
+  any in-season rolling features exist for the trained model to use). Worth
+  a deliberate decision once in-season data exists: wire the trained model
+  into the dashboard then, or stop training it every run.
+- **`predict_week.py` still has an explicit wiring gap** (`run_backtest.py`'s
+  is now fixed — see above): it needs this week's live team-feature rows
+  built the same way `build_features.py` builds them for historical
+  training, then joined to the current lines pulled by
+  `fetch_current_lines.py`, by team name (The Odds API and CFBD use
+  different naming conventions, so this needs the same kind of matching
+  `export_dashboard_data.py` already does for the dashboard, not a
+  shared ID). Left as a clearly-marked next step rather than silently
+  guessed at.
 
 ## Next steps worth prioritizing
 
-1. Wire up the game-ID matching between predictions and market lines (both
-   current and historical) so `run_backtest.py` reports real ATS/CLV numbers.
+1. Wire `predict_week.py` the same way `run_backtest.py` was just wired, so
+   it scores this week's live lines against the trained model, not just
+   historical ones.
 2. Add opponent-adjusted matchup features for props (e.g., a WR's yards
    prediction should account for the opposing pass defense's efficiency, not
    just the WR's own volume).

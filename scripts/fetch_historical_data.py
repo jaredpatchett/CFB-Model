@@ -31,9 +31,11 @@ def fetch_year(year: int):
     team_stats.to_csv(f"{config.DATA_RAW_DIR}/team_season_stats_{year}.csv", index=False)
     print(f"  team_season_stats: {len(team_stats)} rows")
 
-    lines = cfbd.get_historical_lines(year)
+    raw_lines = cfbd.get_historical_lines(year)
+    lines = cfbd.historical_lines_to_dataframe(raw_lines)
     lines.to_csv(f"{config.DATA_RAW_DIR}/lines_{year}.csv", index=False)
-    print(f"  historical lines: {len(lines)} rows")
+    print(f"  historical lines: {len(lines)} games with a usable market line "
+          f"(of {len(raw_lines)} games returned; the rest had no sportsbook coverage)")
 
     # Player game stats: fetched week by week (CFBD requires a week param here)
     max_week = int(games["week"].max()) if "week" in games.columns and len(games) else 15
