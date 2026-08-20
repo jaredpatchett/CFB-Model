@@ -48,11 +48,28 @@ def get_team_season_stats(year: int) -> pd.DataFrame:
 
 
 def get_advanced_team_stats(year: int, week: int = None) -> pd.DataFrame:
-    """Advanced efficiency stats (success rate, PPA, explosiveness) by team."""
+    """Advanced efficiency stats (success rate, PPA, explosiveness) by team.
+    week=None (the default) returns SEASON-level aggregates (AdvancedSeasonStat
+    per CFBD's schema) — nested 'offense'/'defense' objects, flattened by
+    json_normalize into dotted columns like 'offense.plays', 'offense.drives'.
+    This is also where our pace proxy comes from — see
+    team_features.build_pace_returning_features's docstring for why it's
+    plays-per-drive, not a true seconds-per-play tempo stat."""
     params = {"year": year}
     if week is not None:
         params["week"] = week
     data = _get("/stats/season/advanced", params)
+    return pd.json_normalize(data)
+
+
+def get_returning_production(year: int) -> pd.DataFrame:
+    """Percent of last season's total production (PPA-based) that's back on
+    the roster this season, per team — CFBD's own computed metric (GET
+    /player/returning, despite living under the 'player' API group, this is
+    team-level aggregated data), not derived here. Real signal for "is this
+    team the same team as last year's SP+ rating implies," which the
+    preseason SP+ prior has no way to know on its own."""
+    data = _get("/player/returning", {"year": year})
     return pd.json_normalize(data)
 
 

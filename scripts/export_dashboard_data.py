@@ -27,7 +27,10 @@ import config
 from src.data import cfbd_client as cfbd
 from src.data import prizepicks_client
 from src.data.injury_overrides import load_injury_overrides, get_team_override
-from src.features.live_features import build_current_season_form, score_with_trained_model, MIN_GAMES_FOR_TRAINED_MODEL
+from src.features.live_features import (
+    build_current_season_form, score_with_trained_model, build_current_pace_returning,
+    MIN_GAMES_FOR_TRAINED_MODEL,
+)
 from src.models import fair_odds as fo
 from src.models.game_model import GameMarginModel
 
@@ -214,7 +217,8 @@ def derive_abbr(name: str, cfbd_abbr: str = None) -> str:
     return "".join(w[0] for w in words[:4]).upper()
 
 
-def build_teams_export(games_out: list, team_lookup: dict, sp_lookup: dict, sp_splits_lookup: dict) -> list:
+def build_teams_export(games_out: list, team_lookup: dict, sp_lookup: dict, sp_splits_lookup: dict,
+                        pace_returning_lookup: dict = None) -> list:
     """One entry per distinct team that appears in games_out AND has a real
     matched SP+ rating (i.e. is actually in the FBS SP+ database — the same
     scope as the Power Ratings table). Keyed by the EXACT team-name string
@@ -223,7 +227,13 @@ def build_teams_export(games_out: list, team_lookup: dict, sp_lookup: dict, sp_s
     plain string equality with no extra normalization step on the JS side.
     Teams without a real rating are deliberately left out rather than
     padded with fabricated numbers — the dashboard's own fallback (generic
-    gray helmet, full name as the tag) handles that case."""
+    gray helmet, full name as the tag) handles that case.
+
+    pace_returning_lookup: output of live_features.build_current_pace_returning
+    (optional) — pace (plays/drive) and returning_production (0-1) are added
+    when available for that team; simply omitted (None) otherwise, same
+    "don't fabricate" policy as everything else here."""
+    pace_returning_lookup = pace_returning_lookup or {}
     seen = {}
     for g in games_out:
         for side in ("home", "away"):
@@ -235,6 +245,9 @@ def build_teams_export(games_out: list, team_lookup: dict, sp_lookup: dict, sp_s
                 continue  # not in the FBS SP+ database — excluded, not faked
             meta = match_team(name, team_lookup)
             splits = match_sp_splits(name, sp_splits_lookup) or {}
+            pr = pace_returning_lookup.get(meta.get("school")) or {}
+            pace_val = pr.get("pace")
+            ret_val = pr.get("returning_production")
             # Default to a neutral gray if CFBD didn't have a color on file —
             # keeps the helmet SVG from breaking on a null hex rather than
             # fabricating a team color.
@@ -247,6 +260,8 @@ def build_teams_export(games_out: list, team_lookup: dict, sp_lookup: dict, sp_s
                 "net": round(rating, 2),
                 "off_sp_rating": round(splits["off"], 2) if "off" in splits else None,
                 "def_sp_rating": round(splits["def"], 2) if "def" in splits else None,
+                "pace": round(pace_val, 2) if pd.notna(pace_val) else None,
+                "returning_production": round(ret_val, 4) if pd.notna(ret_val) else None,
             }
     return list(seen.values())
 
@@ -437,6 +452,21 @@ def main(year: int):
         print(f"  [warn] {model_path} not found — staying on the preseason prior for all games "
               f"(expected before scripts/train_game_model.py has run in this pipeline)")
 
+    print(f"Fetching {year} pace (plays/drive) and returning-production for Power Ratings "
+          f"and the trained model's pace_diff/returning_production_diff features...")
+    pace_returning_lookup = {}
+    try:
+        adv_stats_df = cfbd.get_advanced_team_stats(year)
+        returning_df = cfbd.get_returning_production(year)
+        pace_returning_lookup = build_current_pace_returning(adv_stats_df, returning_df)
+        n_pace = sum(1 for v in pace_returning_lookup.values() if pd.notna(v.get("pace")))
+        n_ret = sum(1 for v in pace_returning_lookup.values() if pd.notna(v.get("returning_production")))
+        print(f"  {n_pace} team(s) with a pace value, {n_ret} with a returning-production value")
+    except Exception as e:
+        print(f"  [warn] pace/returning-production fetch failed: {e} — Power Ratings will omit these, "
+              f"and the trained-model switchover (see above) will stay on the preseason prior for every "
+              f"game (pace_diff/returning_production_diff are required trained-model features)")
+
     game_lines_path = f"{config.DATA_CURRENT_DIR}/game_lines.csv"
     props_path = f"{config.DATA_CURRENT_DIR}/player_props.csv"
 
@@ -483,6 +513,7 @@ def main(year: int):
                 trained_margin = score_with_trained_model(
                     home_meta.get("school"), away_meta.get("school"), home_rating, away_rating,
                     bool(neutral), current_season_form, trained_model,
+                    pace_returning=pace_returning_lookup,
                 )
                 fair_fields = compute_fair_odds_fields(
                     home_rating, away_rating, ml_home, ml_away, prior,
@@ -527,7 +558,7 @@ def main(year: int):
         print(f"  [warn] could not fetch prop market catalog: {e}")
         prop_market_catalog = []
 
-    teams_out = build_teams_export(games_out, team_lookup, sp_lookup, sp_splits_lookup)
+    teams_out = build_teams_export(games_out, team_lookup, sp_lookup, sp_splits_lookup, pace_returning_lookup)
 
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),

@@ -34,7 +34,49 @@ class GameMarginModel:
         self.feature_columns = FEATURE_COLUMNS
 
     def fit(self, features_df: pd.DataFrame, verbose: bool = True):
+        # Some FEATURE_COLUMNS (pace_diff, returning_production_diff) depend
+        # on CFBD endpoints whose real-world coverage hasn't been verified
+        # from this dev sandbox, and older cached team_game_features.csv
+        # files predate these columns entirely. Two failure modes to guard
+        # against, not just one: a column MISSING from features_df entirely
+        # (dropna(subset=...) raises KeyError, a hard crash) and a column
+        # present but ALL-NULL (dropna would silently drop every row, then
+        # train_test_split on an empty frame crashes too). Both get the same
+        # fix: drop that specific column from what THIS model actually uses,
+        # loudly, rather than let either failure mode take down training
+        # (and with it run_backtest.py and the in-season switchover, which
+        # both depend on a trained model existing at all). self.feature_columns
+        # is reassigned to the usable subset and persisted by save()/load(),
+        # so predict_margin/score_with_trained_model automatically stay
+        # consistent with whatever this specific model was actually trained on.
+        usable, skipped = [], []
+        for c in self.feature_columns:
+            if c not in features_df.columns:
+                skipped.append((c, "column not present in this data"))
+            elif features_df[c].notna().sum() == 0:
+                skipped.append((c, "100% null in this data"))
+            else:
+                usable.append(c)
+        if skipped:
+            if verbose:
+                print(f"[game_model] dropping unusable feature column(s) for this training run: {skipped}")
+            self.feature_columns = usable
+
         data = features_df.dropna(subset=self.feature_columns + [TARGET_MARGIN])
+        if verbose and len(data) < len(features_df):
+            # Which remaining feature(s) are still causing PARTIAL row drops
+            # (as opposed to the all-or-nothing case handled above) — a
+            # silently-shrunk training set is exactly the kind of thing this
+            # project has tried hard not to let happen unnoticed.
+            null_counts = {c: int(features_df[c].isna().sum()) for c in self.feature_columns + [TARGET_MARGIN]
+                           if c in features_df.columns and features_df[c].isna().any()}
+            print(f"[game_model] {len(features_df) - len(data)} of {len(features_df)} rows dropped "
+                  f"(missing a required feature): {null_counts}")
+        if data.empty:
+            raise ValueError(
+                "0 rows usable for training after dropping nulls — check that "
+                "team_game_features.csv actually has real values, not just present columns."
+            )
         X = data[self.feature_columns]
         y = data[TARGET_MARGIN]
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)

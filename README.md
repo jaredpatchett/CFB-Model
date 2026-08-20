@@ -62,11 +62,16 @@ burn API quota automatically — this repo has no scheduled/cron run set up.
 ## How the models work
 
 **Spreads/moneylines**: gradient-boosted regression predicts point margin
-(home minus away) from team form (leakage-safe rolling scoring margin) and,
-where available, SP+ rating differential. Margin is converted to a moneyline
-win probability by assuming roughly normal residuals and using the model's
-own training residual spread. The predicted margin is compared to the
-market's spread to get an edge in points.
+(home minus away) from team form (leakage-safe rolling scoring margin),
+SP+ rating differential, pace (plays/drive, from CFBD's advanced season
+stats — see `src/features/team_features.py`), and returning production
+(CFBD's own percentPPA — share of last season's production back this year).
+Margin is converted to a moneyline win probability by assuming roughly
+normal residuals and using the model's own training residual spread. The
+predicted margin is compared to the market's spread to get an edge in
+points. Pace and returning production also show on the Power Ratings table
+(hover a team, or look for the "RP xx%" badge) whenever CFBD has coverage
+for that team.
 
 **Player props**: one model per stat (receiving yards, rushing yards, passing
 yards, receptions, etc.), predicting expected value from that player's own

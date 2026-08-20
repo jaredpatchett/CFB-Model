@@ -21,6 +21,8 @@ it learned from).
 """
 import pandas as pd
 
+from src.features.team_features import build_pace_returning_features
+
 # Matches the reasoning in fair_odds.py's module docstring: below this many
 # real games, a team's rolling form is too thin to trust over the SP+ prior.
 # Both teams in a matchup need to clear this before the trained model takes
@@ -66,14 +68,42 @@ def build_current_season_form(games_df: pd.DataFrame) -> dict:
     return form
 
 
+def build_current_pace_returning(adv_stats_df: pd.DataFrame, returning_df: pd.DataFrame) -> dict:
+    """CFBD school name -> {'pace', 'returning_production'} for the CURRENT
+    season — reuses team_features.build_pace_returning_features (same
+    math/caveats documented there), just reshaped into a flat team -> dict
+    lookup since live scoring only ever looks at one season at a time (that
+    function's output is keyed by (team, year) since it's shared with the
+    multi-season historical/training path)."""
+    df = build_pace_returning_features(adv_stats_df, returning_df)
+    out = {}
+    for _, row in df.iterrows():
+        out[row["team"]] = {"pace": row.get("pace"), "returning_production": row.get("returning_production")}
+    return out
+
+
 def score_with_trained_model(home_school: str, away_school: str, home_rating, away_rating,
-                              neutral_site: bool, current_season_form: dict, model) -> float:
+                              neutral_site: bool, current_season_form: dict, model,
+                              pace_returning: dict = None) -> float:
     """Returns the trained GameMarginModel's predicted home margin for this
     matchup, or None if it shouldn't be trusted yet — either team missing
     from current_season_form (hasn't played this season), either team under
-    MIN_GAMES_FOR_TRAINED_MODEL, no SP+ rating for either team (still one of
-    the model's own feature columns), or no model loaded at all. None means
-    "fall back to the preseason prior," not an error."""
+    MIN_GAMES_FOR_TRAINED_MODEL, no SP+ rating for either team, missing
+    pace/returning-production data for either team (see caveat below), or no
+    model loaded at all. None means "fall back to the preseason prior," not
+    an error.
+
+    IMPORTANT COUPLING: since pace_diff/returning_production_diff are now
+    part of GameMarginModel.feature_columns (see team_features.py), the
+    trained model literally cannot score a game without them — there's no
+    "impute a default and hope" option here without risking a biased,
+    unvalidated prediction. So if CFBD's /player/returning coverage turns
+    out sparse for some team, this now ALSO blocks the in-season switchover
+    for that team's games, not just the pace/returning display — a real
+    trade-off, not an oversight. Building the feature row generically off
+    whatever model.feature_columns actually asks for (rather than
+    hardcoding a fixed dict) so this stays correct if FEATURE_COLUMNS
+    changes again later."""
     if model is None or not home_school or not away_school:
         return None
     home_form = current_season_form.get(home_school)
@@ -86,7 +116,13 @@ def score_with_trained_model(home_school: str, away_school: str, home_rating, aw
     if home_rating is None or away_rating is None:
         return None
 
-    row = pd.DataFrame([{
+    pace_returning = pace_returning or {}
+    home_pr = pace_returning.get(home_school) or {}
+    away_pr = pace_returning.get(away_school) or {}
+    home_pace, away_pace = home_pr.get("pace"), away_pr.get("pace")
+    home_rp, away_rp = home_pr.get("returning_production"), away_pr.get("returning_production")
+
+    available = {
         "home_field": 0 if neutral_site else 1,
         "roll_margin_diff": home_form["roll_margin"] - away_form["roll_margin"],
         "roll_ppg_for_diff": home_form["roll_ppg_for"] - away_form["roll_ppg_for"],
@@ -94,5 +130,12 @@ def score_with_trained_model(home_school: str, away_school: str, home_rating, aw
         "sp_rating_diff": home_rating - away_rating,
         "home_games_played_prior": home_form["games_played_prior"],
         "away_games_played_prior": away_form["games_played_prior"],
-    }])
+        "pace_diff": (home_pace - away_pace) if (pd.notna(home_pace) and pd.notna(away_pace)) else None,
+        "returning_production_diff": (home_rp - away_rp) if (pd.notna(home_rp) and pd.notna(away_rp)) else None,
+    }
+    missing = [c for c in model.feature_columns if c not in available or available[c] is None]
+    if missing:
+        return None
+
+    row = pd.DataFrame([{c: available[c] for c in model.feature_columns}])
     return float(model.predict_margin(row)[0])

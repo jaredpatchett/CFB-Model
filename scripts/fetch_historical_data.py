@@ -27,6 +27,20 @@ def fetch_year(year: int):
     sp.to_csv(f"{config.DATA_RAW_DIR}/sp_ratings_{year}.csv", index=False)
     print(f"  sp_ratings: {len(sp)} rows")
 
+    try:
+        adv_stats = cfbd.get_advanced_team_stats(year)
+        adv_stats.to_csv(f"{config.DATA_RAW_DIR}/adv_stats_{year}.csv", index=False)
+        print(f"  adv_stats (pace source): {len(adv_stats)} rows")
+    except Exception as e:
+        print(f"  [warn] adv_stats fetch failed: {e} — pace_diff will be unavailable for {year}")
+
+    try:
+        returning = cfbd.get_returning_production(year)
+        returning.to_csv(f"{config.DATA_RAW_DIR}/returning_production_{year}.csv", index=False)
+        print(f"  returning_production: {len(returning)} rows")
+    except Exception as e:
+        print(f"  [warn] returning_production fetch failed: {e} — returning_production_diff will be unavailable for {year}")
+
     team_stats = cfbd.get_team_season_stats(year)
     team_stats.to_csv(f"{config.DATA_RAW_DIR}/team_season_stats_{year}.csv", index=False)
     print(f"  team_season_stats: {len(team_stats)} rows")

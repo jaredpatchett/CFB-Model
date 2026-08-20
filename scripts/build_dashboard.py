@@ -42,8 +42,19 @@ drops them with a disclosure in the footer:
     game has switched over.
   - sigma: our model has ONE league-wide residual std, not a true per-game
     sigma. Every game uses the same value. Disclosed in the footer.
-  - Weather/venue/travel/pace/returning-production: not fetched anywhere in
-    this pipeline. Omitted rather than invented.
+  - Weather/venue/travel: not fetched anywhere in this pipeline. Omitted
+    rather than invented.
+  - Pace and returning production: NOW fetched (CFBD's /stats/season/advanced
+    and /player/returning — see src/features/team_features.py's
+    build_pace_returning_features). Pace is plays-per-drive (a real,
+    self-contained tempo-ADJACENT proxy — CFBD has no direct seconds-per-play
+    field at this granularity, so it's labeled "plays/drive" everywhere, not
+    unqualified "pace"). Returning production is CFBD's own percentPPA. Both
+    feed the trained GameMarginModel's features (pace_diff/
+    returning_production_diff) and show on Power Ratings (hover a team row
+    for the real numbers; a "RP xx%" badge shows inline when available).
+    Teams CFBD doesn't have coverage for simply show nothing here — no
+    fabricated placeholder.
   - Situational flags: mostly not fetched, EXCEPT neutral site (CFBD's
     /games schedule exposes it — zeroes the home-field constant, since that
     constant was fit only from real home games) and manual injury/
@@ -105,6 +116,8 @@ def build_model_data(data: dict) -> dict:
             "net": t["net"],
             "offSp": t.get("off_sp_rating"),
             "defSp": t.get("def_sp_rating"),
+            "pace": t.get("pace"),
+            "returningProduction": t.get("returning_production"),
         })
 
     off_vals = [abs(t["offSp"]) for t in teams if t["offSp"] is not None]
@@ -927,13 +940,26 @@ RENDERER_JS = """<script>
       var offW = hasSplit ? Math.min(50, Math.abs(t.offSp) / D.meta.offScale * 50).toFixed(1) : 0;
       var defW = hasSplit ? Math.min(50, Math.abs(t.defSp) / D.meta.defScale * 50).toFixed(1) : 0;
       var i = D.teams.indexOf(t);
+      // pace/returningProduction are real CFBD data (see export_dashboard_data.py)
+      // but only shown when present -- no fabricated placeholder for teams
+      // CFBD didn't have coverage for. Kept as a tooltip + compact inline
+      // badge rather than new grid columns, to avoid reworking rate-grid's
+      // fixed column widths for two optional stats.
+      var tipBits = [];
+      if (t.pace != null) tipBits.push('Pace: ' + t.pace.toFixed(1) + ' plays/drive');
+      if (t.returningProduction != null) tipBits.push('Returning production: ' + (t.returningProduction * 100).toFixed(0) + '%');
+      var tip = tipBits.join(' \\u00b7 ');
+      var rpBadge = t.returningProduction != null
+        ? '<span style="color:var(--muted-3);font-size:9px;letter-spacing:.04em;margin-left:6px" title="' + esc(tip) + '">RP ' + (t.returningProduction * 100).toFixed(0) + '%</span>'
+        : '';
       return '' +
         '<div class="row"><div class="row-body rate-grid" style="padding:8px 14px;font-size:12px">' +
           '<div style="color:var(--muted-4)">' + (i + 1) + '</div>' +
-          '<div class="matchup" style="overflow:hidden;white-space:nowrap">' +
+          '<div class="matchup" style="overflow:hidden;white-space:nowrap" title="' + esc(tip) + '">' +
             '<span class="team-chip" style="background:' + esc(c) + '"></span>' +
             '<span class="team-abbr" style="font-size:15px">' + esc(t.abbr) + '</span>' +
             '<span style="color:var(--muted-4);font-size:9.5px;letter-spacing:.08em">' + esc(t.conf) + '</span>' +
+            rpBadge +
           '</div>' +
           '<div class="num" style="font-weight:700">' + M.signed(t.net) + '</div>' +
           (hasSplit ?
