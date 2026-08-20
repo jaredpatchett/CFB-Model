@@ -152,9 +152,17 @@ def build_model_data(data: dict) -> dict:
             },
         ]
         if has_injury_override:
+            # Sign convention: comp_rating/comp_hfa above are in SPREAD terms
+            # (negative = home favored), but home_inj_pts/away_inj_pts are in
+            # MARGIN terms (positive = that team's own margin goes up). A
+            # margin hit to the home team (negative home_inj_pts) should push
+            # the SPREAD toward the away side (positive) -- i.e. this needs
+            # the opposite sign of (home_inj_pts - away_inj_pts), not the same
+            # sign, or the decomposition bar points the wrong direction and
+            # the components stop summing to modelSpread.
             components.append({
                 "label": "Manual injury/availability override",
-                "points": round(home_inj_pts - away_inj_pts, 2),
+                "points": round(away_inj_pts - home_inj_pts, 2),
             })
 
         flags = []
