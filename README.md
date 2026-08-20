@@ -134,8 +134,18 @@ excluded from the backtest the same way they'd be low-confidence live.
   `GameMarginModel` instead (see `src/features/live_features.py`). This
   switches over automatically and independently per game — no manual step,
   and a real "In-season model" chip on the dashboard shows which games have
-  switched. The **props model now reaches the dashboard too** (previously
-  the standing gap here) — `export_dashboard_data.py` matches each posted
+  switched. **This "current season" gating is computed from real wall-clock
+  time** (`current_cfb_season_year()` in `export_dashboard_data.py`), not
+  from the `--year` CLI flag — `--year` is set from the workflow's training
+  `years` input and can legitimately be a fully-completed past season (e.g.
+  used for team metadata/logos and the SP+ preseason prior), so using it to
+  gate "has this team played games yet this season" would make every team
+  falsely look fully in-season. Caught from a real run where the actual
+  season opener showed the trained model active before a single 2026 game
+  had been played, because `--year` was 2025.
+
+  The **props model now reaches the dashboard too** (previously the standing
+  gap here) — `export_dashboard_data.py` matches each posted
   PrizePicks line to a real player + opponent via
   `src/features/live_player_features.py`, and where that match succeeds
   (player has real in-season stats, a trained model exists for that stat,

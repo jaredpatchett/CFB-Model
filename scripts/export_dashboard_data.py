@@ -379,18 +379,52 @@ def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline
     }
 
 
+def current_cfb_season_year(now: datetime = None) -> int:
+    """The CFB season actually in progress right now, computed from real
+    wall-clock time -- deliberately decoupled from the --year CLI argument.
+
+    --year is about which historical season(s) fetch_historical_data.py /
+    build_features.py trained on (e.g. the workflow's `years` input might
+    include a fully-completed season like 2025 for training data), and this
+    script re-uses that same --year for team metadata/logos and the SP+
+    preseason prior, which is a legitimate, already-documented design choice
+    (see fair_odds.py). But it is NOT a safe stand-in for "the season these
+    live lines belong to": if --year is 2025 and it's used to gate the
+    in-season trained-model switchover (see below), CFBD's 2025 schedule is
+    a FULLY COMPLETED season, so every team looks like it already has a full
+    season of games -- trivially clearing MIN_GAMES_FOR_TRAINED_MODEL even
+    on the actual 2026 season opener, before a single real 2026 game has
+    been played. Caught from a real run's output (docs/data/latest.json
+    showed the Aug 29 2026 opener priced with model_source: trained_model).
+
+    Season year N runs ~August of year N through the January bowls/playoff
+    of year N+1. So Jan-June still belongs to the PREVIOUS season year
+    (e.g. a January 2027 CFP game is part of the "2026 season"), and July
+    onward belongs to the current calendar year's season -- July has no
+    real games yet either, but this only needs to be correct by kickoff in
+    late August, and erring toward "new season, no games yet" in the
+    offseason is the safe direction (keeps everything on the preseason
+    prior, never fabricates in-season form)."""
+    now = now or datetime.now(timezone.utc)
+    return now.year if now.month >= 7 else now.year - 1
+
+
 def main(year: int):
+    season_year = current_cfb_season_year()
     print(f"Fetching {year} team metadata (logos, colors)...")
     teams_df = cfbd.get_fbs_teams(year)
     team_lookup = build_team_lookup(teams_df)
 
-    print(f"Fetching {year} schedule for neutral-site flags (The Odds API doesn't expose this)...")
+    print(f"Real current CFB season (wall-clock, independent of --year {year}): {season_year}")
+    print(f"Fetching {season_year} schedule for neutral-site flags (The Odds API doesn't expose this) "
+          f"and for the in-season trained-model gating below...")
     try:
-        schedule_df = cfbd.get_games(year)
+        schedule_df = cfbd.get_games(season_year)
         neutral_site_lookup = build_neutral_site_lookup(schedule_df)
         print(f"  {len(neutral_site_lookup)} scheduled matchups with a known neutral-site flag")
     except Exception as e:
-        print(f"  [warn] could not fetch {year} schedule for neutral-site flags: {e}")
+        print(f"  [warn] could not fetch {season_year} schedule for neutral-site flags: {e}")
+        schedule_df = pd.DataFrame()
         neutral_site_lookup = {}
 
     print("Loading manual injury/starter-availability overrides (config/injury_overrides.csv)...")
@@ -439,7 +473,7 @@ def main(year: int):
 
     print(f"Checking for a trained in-season GameMarginModel (auto-switches over from the "
           f"preseason prior once a matchup's teams both have {MIN_GAMES_FOR_TRAINED_MODEL}+ "
-          f"real {year} games)...")
+          f"real {season_year} games)...")
     trained_model = None
     current_season_form = {}
     model_path = f"{config.MODELS_DIR}/game_model.joblib"
@@ -448,7 +482,7 @@ def main(year: int):
             trained_model = GameMarginModel.load(model_path)
             current_season_form = build_current_season_form(schedule_df)
             n_ready = sum(1 for f in current_season_form.values() if f["games_played_prior"] >= MIN_GAMES_FOR_TRAINED_MODEL)
-            print(f"  loaded; {len(current_season_form)} team(s) have played a {year} game so far, "
+            print(f"  loaded; {len(current_season_form)} team(s) have played a {season_year} game so far, "
                   f"{n_ready} of them already clear the {MIN_GAMES_FOR_TRAINED_MODEL}-game threshold")
         except Exception as e:
             print(f"  [warn] could not load {model_path}: {e} — staying on the preseason prior for all games")
@@ -457,13 +491,13 @@ def main(year: int):
         print(f"  [warn] {model_path} not found — staying on the preseason prior for all games "
               f"(expected before scripts/train_game_model.py has run in this pipeline)")
 
-    print(f"Fetching {year} pace (plays/drive) and returning-production for Power Ratings "
+    print(f"Fetching {season_year} pace (plays/drive) and returning-production for Power Ratings "
           f"and the trained model's pace_diff/returning_production_diff features...")
     pace_returning_lookup = {}
     adv_stats_df = pd.DataFrame()  # also reused below for prop opponent-defense lookups
     try:
-        adv_stats_df = cfbd.get_advanced_team_stats(year)
-        returning_df = cfbd.get_returning_production(year)
+        adv_stats_df = cfbd.get_advanced_team_stats(season_year)
+        returning_df = cfbd.get_returning_production(season_year)
         pace_returning_lookup = build_current_pace_returning(adv_stats_df, returning_df)
         n_pace = sum(1 for v in pace_returning_lookup.values() if pd.notna(v.get("pace")))
         n_ret = sum(1 for v in pace_returning_lookup.values() if pd.notna(v.get("returning_production")))
@@ -560,7 +594,7 @@ def main(year: int):
     n_props_scored = 0
     if props_out:
         print(f"Checking for trained props models + real in-season player data (auto-scores a posted "
-              f"prop line once a player has {MIN_GAMES_FOR_PROP_MODEL}+ real {year} games)...")
+              f"prop line once a player has {MIN_GAMES_FOR_PROP_MODEL}+ real {season_year} games)...")
         prop_models = {}
         for stat in sorted(set(STAT_MAP.values())):
             p = f"{config.MODELS_DIR}/props/{stat}.joblib"
@@ -581,11 +615,11 @@ def main(year: int):
 
         player_form = {}
         if prop_models and max_completed_week > 0:
-            print(f"  pulling {year} player game stats through week {max_completed_week}...")
+            print(f"  pulling {season_year} player game stats through week {max_completed_week}...")
             all_player_stats = []
             for wk in range(1, max_completed_week + 1):
                 try:
-                    wk_stats = cfbd.get_player_game_stats(year, wk)
+                    wk_stats = cfbd.get_player_game_stats(season_year, wk)
                     if not wk_stats.empty:
                         all_player_stats.append(wk_stats)
                 except Exception as e:
@@ -594,10 +628,10 @@ def main(year: int):
                 player_stats_long_current = pd.concat(all_player_stats, ignore_index=True)
                 player_form = build_current_player_form(player_stats_long_current, schedule_df)
                 n_ready = sum(1 for v in player_form.values() if v["games_played_prior"] >= MIN_GAMES_FOR_PROP_MODEL)
-                print(f"  {len(player_form)} player(s) matched to real {year} stats, "
+                print(f"  {len(player_form)} player(s) matched to real {season_year} stats, "
                       f"{n_ready} of them already clear the {MIN_GAMES_FOR_PROP_MODEL}-game threshold")
         elif prop_models:
-            print(f"  0 completed {year} games yet — nothing to score (normal before kickoff)")
+            print(f"  0 completed {season_year} games yet — nothing to score (normal before kickoff)")
 
         opp_defense_lookup = {}
         if (not adv_stats_df.empty and "team" in adv_stats_df.columns
@@ -634,6 +668,7 @@ def main(year: int):
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "team_metadata_year": year,
+        "current_season_year": season_year,
         "preseason_prior": prior,
         "teams": teams_out,
         "games": games_out,
@@ -656,7 +691,7 @@ def main(year: int):
           f"adjustment(s) applied (of {len(injury_overrides)} teams flagged in "
           f"config/injury_overrides.csv), {n_trained_model_games} game(s) scored with the "
           f"trained in-season GameMarginModel instead of the preseason prior "
-          f"(both teams had {MIN_GAMES_FOR_TRAINED_MODEL}+ real {year} games), "
+          f"(both teams had {MIN_GAMES_FOR_TRAINED_MODEL}+ real {season_year} games), "
           f"{len(teams_out)} teams with a real "
           f"SP+ rating exported, {len(props_out)} prop rows, "
           f"{len(prop_market_catalog)} prop market types in catalog.")
