@@ -94,8 +94,16 @@ excluded from the backtest the same way they'd be low-confidence live.
   team or player lean hard on limited current-season data plus a prior
   (SP+ or last-season stats) — treat Week 1-3 output as lower-confidence
   than Week 8+.
-- **No injury/availability data.** A starting QB being out isn't reflected
-  anywhere in this pipeline yet. This is probably the single biggest gap.
+- **No automated injury/availability data** — no free, comprehensive,
+  real-time CFB injury API exists (checked directly; CFBD/Odds
+  API/OddsPapi don't have one). What exists instead: a hand-maintained,
+  version-controlled override file, `config/injury_overrides.csv`
+  (see `src/data/injury_overrides.py` for the format). Add a row for a
+  team with a known key absence/return and a signed point adjustment, and
+  it flows into the model's predicted margin, shows as a labeled
+  decomposition line, and shows as a flag chip on the dashboard — nothing
+  is silently baked in. Empty by default; someone has to actually notice
+  the news and edit the file before kickoff for this to do anything.
 - **No weather.** Wind and rain meaningfully move total and passing-prop
   lines; not modeled here.
 - **SP+ leakage risk in backtesting**, not live use. See the docstring in
@@ -134,8 +142,7 @@ excluded from the backtest the same way they'd be low-confidence live.
 2. Add opponent-adjusted matchup features for props (e.g., a WR's yards
    prediction should account for the opposing pass defense's efficiency, not
    just the WR's own volume).
-3. Add injury/starter-status as a feature or manual override.
-4. Track closing-line value (CLV) over time, not just win/loss — CLV is a
+3. Track closing-line value (CLV) over time, not just win/loss — CLV is a
    better early signal of whether a model has real edge than a small sample
    of bet outcomes.
 

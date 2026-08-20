@@ -20,19 +20,24 @@ drops them with a disclosure in the footer:
   - modelSpread: DERIVED, not fabricated — it's just -model_predicted_margin
     from src/models/fair_odds.py, expressed in the reference's sign
     convention (negative = home favored, matching the book's spread_home).
-  - Line decomposition: real, but only 2 components (our model only HAS 2
-    inputs) — SP+ rating differential x fitted slope, and the fitted
-    home-field/intercept constant. The reference's 7-component breakdown
-    (EPA, travel, pace, QB posterior, etc.) assumed model internals we
-    don't have.
+  - Line decomposition: real, 2-3 components depending on the game (our
+    model only HAS 2 automatic inputs, plus an optional 3rd) — SP+ rating
+    differential x fitted slope, the fitted home-field/intercept constant,
+    and (only when config/injury_overrides.csv has an active entry for
+    either team) a manual injury/availability adjustment. The reference's
+    7-component breakdown (EPA, travel, pace, QB posterior, etc.) assumed
+    model internals we don't have.
   - sigma: our model has ONE league-wide residual std, not a true per-game
     sigma. Every game uses the same value. Disclosed in the footer.
   - Weather/venue/travel/pace/returning-production: not fetched anywhere in
     this pipeline. Omitted rather than invented.
-  - Situational flags: mostly not fetched, EXCEPT neutral site, which CFBD's
-    /games schedule does expose. When a game is neutral-site, the fitted
-    home-field constant is zeroed out (it was fit only from real home games)
-    and a real "Neutral site" chip shows in the Matchup Projector.
+  - Situational flags: mostly not fetched, EXCEPT neutral site (CFBD's
+    /games schedule exposes it — zeroes the home-field constant, since that
+    constant was fit only from real home games) and manual injury/
+    availability overrides (see src/data/injury_overrides.py — no free CFB
+    injury API exists, so this is a hand-maintained, version-controlled CSV
+    a person edits, not scraped data). Both show a real chip in the Matchup
+    Projector when active; neither is silently baked in with no trace.
   - Futures markets: not fetched. Section removed entirely.
   - Closing Line Value / bankroll history: the reference's version assumes
     3 seasons of real settled bets, which we don't have (no real money has
@@ -109,6 +114,12 @@ def build_model_data(data: dict) -> dict:
 
         is_neutral = bool(g.get("neutral_site"))
 
+        home_inj_pts = g.get("injury_adjustment_home") or 0.0
+        away_inj_pts = g.get("injury_adjustment_away") or 0.0
+        home_inj_notes = g.get("injury_notes_home") or []
+        away_inj_notes = g.get("injury_notes_away") or []
+        has_injury_override = bool(home_inj_pts or away_inj_pts)
+
         comp_rating = round(-(slope * sp_diff), 2) if (slope is not None and sp_diff is not None) else 0.0
         comp_hfa = 0.0 if is_neutral else (round(-intercept, 2) if intercept is not None else 0.0)
 
@@ -121,9 +132,44 @@ def build_model_data(data: dict) -> dict:
             note_parts.append("neutral site: home-field constant not applied")
         elif intercept is not None:
             note_parts.append(f"home-field constant {intercept:+.1f} pts (fit from {n_games_hist} 2021-2025 games)")
+        if has_injury_override:
+            inj_bits = []
+            if home_inj_pts:
+                inj_bits.append(f"{esc_plain(g['home_team'])} {home_inj_pts:+.1f} pts ({'; '.join(home_inj_notes) or 'manual override'})")
+            if away_inj_pts:
+                inj_bits.append(f"{esc_plain(g['away_team'])} {away_inj_pts:+.1f} pts ({'; '.join(away_inj_notes) or 'manual override'})")
+            note_parts.append("manual injury/availability override: " + "; ".join(inj_bits))
         if edge_pp_home is not None:
             note_parts.append(f"moneyline edge vs. book: {edge_pp_home:+.1f}pp on {esc_plain(g['home_team'])}")
         note = "Model: " + "; ".join(note_parts) + "." if note_parts else "Insufficient history to explain this line."
+
+        components = [
+            {"label": "SP+ rating differential x fitted slope", "points": comp_rating},
+            {
+                "label": "Home-field constant (neutral site — not applied)" if is_neutral
+                else "Home-field constant (fit, 2021-2025)",
+                "points": comp_hfa,
+            },
+        ]
+        if has_injury_override:
+            components.append({
+                "label": "Manual injury/availability override",
+                "points": round(home_inj_pts - away_inj_pts, 2),
+            })
+
+        flags = []
+        if is_neutral:
+            flags.append({"text": "Neutral site", "level": 0})
+        if home_inj_pts:
+            flags.append({
+                "text": f"{esc_plain(g['home_team'])} {home_inj_pts:+.1f} pts: {'; '.join(home_inj_notes) or 'manual override'}",
+                "level": 1 if home_inj_pts < 0 else 2,
+            })
+        if away_inj_pts:
+            flags.append({
+                "text": f"{esc_plain(g['away_team'])} {away_inj_pts:+.1f} pts: {'; '.join(away_inj_notes) or 'manual override'}",
+                "level": 1 if away_inj_pts < 0 else 2,
+            })
 
         games.append({
             "away": g["away_team"],
@@ -136,15 +182,8 @@ def build_model_data(data: dict) -> dict:
             "marketMoneyline": g.get("moneyline_home"),
             "awayMoneyline": g.get("moneyline_away"),
             "sigma": residual_std,
-            "components": [
-                {"label": "SP+ rating differential x fitted slope", "points": comp_rating},
-                {
-                    "label": "Home-field constant (neutral site — not applied)" if is_neutral
-                    else "Home-field constant (fit, 2021-2025)",
-                    "points": comp_hfa,
-                },
-            ],
-            "flags": [{"text": "Neutral site", "level": 0}] if is_neutral else [],
+            "components": components,
+            "flags": flags,
             "note": note,
             "evHomePct": g.get("ev_home_pct"),
             "evAwayPct": g.get("ev_away_pct"),
@@ -425,6 +464,8 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .pchip.is-pending { background: var(--chip); color: var(--muted-4); }
 
 .flag-chip { display: inline-block; font-family: var(--font-display); font-weight: 800; font-size: 9px; letter-spacing: 0.07em; padding: 2px 7px; border-radius: 3px; background: rgba(230,168,45,0.16); color: var(--gold, #E6A82D); margin-left: 6px; vertical-align: middle; }
+.flag-chip.is-warn { background: rgba(255,82,82,0.16); color: var(--red); }
+.flag-chip.is-good { background: rgba(23,194,107,0.16); color: var(--green); }
 
 .trk-summary { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--rule); margin-bottom: 1px; }
 .trk-box { background: var(--panel); padding: 12px 14px; }
@@ -689,10 +730,11 @@ TAIL_HTML = """</body>
 # Part 3 — renderer. Builds the DOM from window.MODEL_DATA + window.ModelMath.
 # Adapted from the reference design: Spread+Moneyline only (our only 2 real
 # markets), no week tabs (not functionally wired even in the source design),
-# a real neutral-site flag chip in the projector header (the only situational
-# flag we actually have data for; no other situational flags/futures — not
-# fetched by this pipeline), real props "coming soon" catalog cards instead
-# of fabricated projections,
+# real flag chips in the projector header for the situational data we
+# actually have — neutral site (from CFBD's schedule) and manual injury/
+# availability overrides (from config/injury_overrides.csv) — no other
+# situational flags/futures (not fetched by this pipeline), real props
+# "coming soon" catalog cards instead of fabricated projections,
 # and a real localStorage Tracker in place of the fabricated CLV/bankroll
 # history chart.
 # =============================================================================
@@ -887,7 +929,8 @@ RENDERER_JS = """<script>
             '<div class="proj-title">' + esc(a.abbr) + ' <span class="at-lg">AT</span> ' + esc(h.abbr) + '</div>' +
             '<div class="proj-meta">' + esc(g.kickoff) + ' \\u00b7 line: ' + esc(g.book) +
               (g.flags && g.flags.length ? g.flags.map(function (f) {
-                return '<span class="flag-chip">' + esc(f.text) + '</span>';
+                var cls = f.level === 1 ? ' is-warn' : (f.level === 2 ? ' is-good' : '');
+                return '<span class="flag-chip' + cls + '">' + esc(f.text) + '</span>';
               }).join('') : '') +
             '</div>' +
           '</div>' +
@@ -1127,9 +1170,10 @@ RENDERER_JS = """<script>
         '<div class="split"><div>' + renderProps() + '</div><div>' + renderTracker() + '</div></div>' +
         '<div class="footer">' +
           '<span>Team marks are generic color-accurate helmets, not school logos. Preseason: no in-season form exists yet for 2026, ' +
-          'so every model number here comes from SP+ rating differential plus a fitted home-field constant (2 real inputs, not a full ' +
-          'drive-level sim). No Total/Team-total market, weather, travel, pace, returning-production, situational flags, or futures data ' +
-          'is fetched by this pipeline \\u2014 those are simply not shown rather than estimated. Sigma is one league-wide value, not per-game. ' +
+          'so every model number here comes from SP+ rating differential plus a fitted home-field constant, adjusted by any active ' +
+          'manual injury/availability override (config/injury_overrides.csv \\u2014 hand-maintained, not scraped; no free CFB injury API ' +
+          'exists). No Total/Team-total market, weather, travel, pace, returning-production, or futures data is fetched by this pipeline ' +
+          '\\u2014 those are simply not shown rather than estimated. Sigma is one league-wide value, not per-game. ' +
           'Tracker is local to this browser only \\u2014 no sync, no real money moved. No model reliably beats a well-priced line on every game.</span>' +
         '</div>' +
       '</div>';

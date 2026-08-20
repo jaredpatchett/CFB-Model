@@ -26,6 +26,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 import config
 from src.data import cfbd_client as cfbd
 from src.data import prizepicks_client
+from src.data.injury_overrides import load_injury_overrides, get_team_override
 from src.models import fair_odds as fo
 
 
@@ -286,17 +287,28 @@ def match_neutral_site(home_school: str, away_school: str, lookup: dict):
     return lookup.get(key)
 
 
-def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline_away, prior, neutral_site=False):
+def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline_away, prior,
+                              neutral_site=False, home_injury_adj=0.0, away_injury_adj=0.0):
     """Returns a dict of model/EV fields, or a dict with has_model_line=False
     and a reason if either team's SP+ rating (or the book's moneyline) is
-    missing — never fabricates a number when the inputs aren't there."""
+    missing — never fabricates a number when the inputs aren't there.
+
+    home_injury_adj/away_injury_adj: manual points added directly to that
+    team's own expected margin (see src/data/injury_overrides.py) — applied
+    on top of the SP+-diff-and-home-field base margin, since neither of
+    those inputs has any awareness of who's actually available to play.
+    Defaults to 0.0 (no override), so existing callers are unaffected."""
     if home_rating is None or away_rating is None:
         return {"has_model_line": False, "no_line_reason": "missing_sp_rating"}
     if moneyline_home is None or moneyline_away is None or pd.isna(moneyline_home) or pd.isna(moneyline_away):
         return {"has_model_line": False, "no_line_reason": "missing_book_moneyline"}
 
+    home_injury_adj = home_injury_adj or 0.0
+    away_injury_adj = away_injury_adj or 0.0
+
     sp_diff = home_rating - away_rating
-    model_margin = fo.preseason_predicted_margin(sp_diff, prior, neutral_site=neutral_site)
+    base_margin = fo.preseason_predicted_margin(sp_diff, prior, neutral_site=neutral_site)
+    model_margin = base_margin + home_injury_adj - away_injury_adj
     model_home_win_prob = fo.margin_to_win_prob(model_margin, prior["residual_std"])
     model_away_win_prob = 1 - model_home_win_prob
 
@@ -307,6 +319,8 @@ def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline
     return {
         "has_model_line": True,
         "neutral_site": bool(neutral_site),
+        "injury_adjustment_home": round(home_injury_adj, 2),
+        "injury_adjustment_away": round(away_injury_adj, 2),
         "home_sp_rating": round(home_rating, 2),
         "away_sp_rating": round(away_rating, 2),
         "sp_rating_diff": round(sp_diff, 2),
@@ -335,6 +349,19 @@ def main(year: int):
     except Exception as e:
         print(f"  [warn] could not fetch {year} schedule for neutral-site flags: {e}")
         neutral_site_lookup = {}
+
+    print("Loading manual injury/starter-availability overrides (config/injury_overrides.csv)...")
+    injury_overrides = load_injury_overrides()
+    if injury_overrides:
+        unknown_teams = [ov["school"] for ov in injury_overrides.values()
+                          if _normalize_team_name(ov["school"]) not in team_lookup]
+        print(f"  {len(injury_overrides)} team(s) flagged")
+        if unknown_teams:
+            print(f"  [warn] these override team names don't match any known FBS school "
+                  f"(check spelling against CFBD's 'school' field, e.g. 'Ohio State' not "
+                  f"'Ohio State Buckeyes'): {unknown_teams}")
+    else:
+        print("  none active (config/injury_overrides.csv empty or not found — normal/default)")
 
     print(f"Loading {year} SP+ ratings for the preseason fair-odds estimate...")
     sp_path = f"{config.DATA_RAW_DIR}/sp_ratings_{year}.csv"
@@ -373,6 +400,7 @@ def main(year: int):
     games_out = []
     n_with_model_line = 0
     n_neutral_unknown = 0
+    n_injury_applications = 0
     if os.path.exists(game_lines_path):
         lines = pd.read_csv(game_lines_path)
         for _, g in lines.iterrows():
@@ -406,11 +434,21 @@ def main(year: int):
                 home_rating = match_sp_rating(g.get("home_team"), sp_lookup)
                 away_rating = match_sp_rating(g.get("away_team"), sp_lookup)
                 neutral = match_neutral_site(home_meta.get("school"), away_meta.get("school"), neutral_site_lookup)
+                home_ov = get_team_override(home_meta.get("school"), injury_overrides)
+                away_ov = get_team_override(away_meta.get("school"), injury_overrides)
                 fair_fields = compute_fair_odds_fields(
                     home_rating, away_rating, ml_home, ml_away, prior,
                     neutral_site=bool(neutral),  # None (unknown) -> False, same as pre-existing default
+                    home_injury_adj=(home_ov["points"] if home_ov else 0.0),
+                    away_injury_adj=(away_ov["points"] if away_ov else 0.0),
                 )
                 game_out.update(fair_fields)
+                if home_ov:
+                    game_out["injury_notes_home"] = home_ov["notes"]
+                    n_injury_applications += 1
+                if away_ov:
+                    game_out["injury_notes_away"] = away_ov["notes"]
+                    n_injury_applications += 1
                 if neutral is None:
                     n_neutral_unknown += 1
                 if fair_fields.get("has_model_line"):
@@ -460,7 +498,9 @@ def main(year: int):
           f"unmatched team logo), {n_with_model_line} with a model fair-odds/EV line, "
           f"{n_no_model} without (insufficient data), {n_neutral} flagged neutral-site "
           f"({n_neutral_unknown} had no neutral-site match in CFBD's schedule, "
-          f"assumed a normal home game), {len(teams_out)} teams with a real "
+          f"assumed a normal home game), {n_injury_applications} manual injury-override "
+          f"adjustment(s) applied (of {len(injury_overrides)} teams flagged in "
+          f"config/injury_overrides.csv), {len(teams_out)} teams with a real "
           f"SP+ rating exported, {len(props_out)} prop rows, "
           f"{len(prop_market_catalog)} prop market types in catalog.")
 
