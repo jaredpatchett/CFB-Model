@@ -7,8 +7,10 @@ whether the model's predicted margin is close to the actual final score.
 Usage:
   python scripts/run_backtest.py
 """
+import json
 import os
 import sys
+from datetime import datetime, timezone
 import pandas as pd
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -103,3 +105,32 @@ if __name__ == "__main__":
     print("\nReminder: breakeven ATS win rate against standard -110 pricing is ~52.4%. "
           "Treat any result on a small early sample (well under ~200 graded games) as noisy, "
           "not a verdict — re-run this after more historical seasons/weeks are pulled.")
+
+    # Persist results to the repo (rather than leaving them stranded in this
+    # Action run's console log, which isn't fetchable outside the GitHub UI)
+    # so build_dashboard.py can surface a real "Backtest Track Record" panel
+    # and so results are diffable/trackable across runs as the model changes.
+    seasons_covered = sorted(int(s) for s in scoreable["season"].dropna().unique()) if "season" in scoreable.columns else []
+    backtest_output = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "seasons_covered": seasons_covered,
+        "join_strategy": strategy,
+        "spread": {
+            "n_games": spread_results["n_games"],
+            "n_pushes": spread_results["n_pushes"],
+            "ats_win_rate": (None if pd.isna(spread_results["ats_win_rate"]) else round(float(spread_results["ats_win_rate"]), 4)),
+            "margin_mae": round(float(spread_results["margin_mae"]), 3),
+            "breakeven_ats_rate": spread_results["breakeven_ats_rate"],
+            "beat_market": (None if spread_results["beat_market"] is None else bool(spread_results["beat_market"])),
+        },
+        "moneyline": {
+            "n_games": ml_results["n_games"],
+            "accuracy": round(float(ml_results["accuracy"]), 4),
+            "log_loss": round(float(ml_results["log_loss"]), 4),
+        },
+    }
+    os.makedirs("docs/data", exist_ok=True)
+    with open("docs/data/backtest_results.json", "w") as f:
+        json.dump(backtest_output, f, indent=2)
+    print(f"\nWrote docs/data/backtest_results.json ({spread_results['n_games']} graded spread games, "
+          f"seasons {seasons_covered}).")
