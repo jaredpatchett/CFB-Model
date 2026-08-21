@@ -68,6 +68,30 @@ def build_current_season_form(games_df: pd.DataFrame) -> dict:
     return form
 
 
+def build_current_core_ratings(core_df: pd.DataFrame) -> dict:
+    """CFBD school name -> {'core_overall'} for the CURRENT season, using
+    each team's MOST RECENT through_week on file -- i.e. their real,
+    opponent-adjusted rating as of right now. Unlike SP+/pace (which this
+    pipeline deliberately shifts to the PRIOR season for training to avoid
+    leakage -- see team_features.py's module docstring), CORE ratings are
+    genuinely safe to use live at their current value: 'as of right now' is
+    exactly what a live prediction is allowed to know. No entry for a team
+    means CORE hasn't published a rating for them yet this season (normal
+    before their first game), not an error."""
+    if core_df is None or core_df.empty or "team" not in core_df.columns:
+        return {}
+    df = core_df.copy()
+    if "throughWeek" in df.columns and "through_week" not in df.columns:
+        df = df.rename(columns={"throughWeek": "through_week"})
+    if "overall" not in df.columns or "through_week" not in df.columns:
+        return {}
+    latest = df.sort_values("through_week").groupby("team").tail(1)
+    out = {}
+    for _, row in latest.iterrows():
+        out[row["team"]] = {"core_overall": row.get("overall")}
+    return out
+
+
 def build_current_pace_returning(adv_stats_df: pd.DataFrame, returning_df: pd.DataFrame) -> dict:
     """CFBD school name -> {'pace', 'returning_production'} for the CURRENT
     season — reuses team_features.build_pace_returning_features (same
@@ -84,22 +108,33 @@ def build_current_pace_returning(adv_stats_df: pd.DataFrame, returning_df: pd.Da
 
 def score_with_trained_model(home_school: str, away_school: str, home_rating, away_rating,
                               neutral_site: bool, current_season_form: dict, model,
-                              pace_returning: dict = None) -> float:
+                              pace_returning: dict = None, core_ratings: dict = None,
+                              weather: dict = None) -> float:
     """Returns the trained GameMarginModel's predicted home margin for this
     matchup, or None if it shouldn't be trusted yet — either team missing
     from current_season_form (hasn't played this season), either team under
     MIN_GAMES_FOR_TRAINED_MODEL, no SP+ rating for either team, missing
-    pace/returning-production data for either team (see caveat below), or no
-    model loaded at all. None means "fall back to the preseason prior," not
-    an error.
+    pace/returning-production/CORE/weather data the model needs (see caveat
+    below), or no model loaded at all. None means "fall back to the
+    preseason prior," not an error.
 
-    IMPORTANT COUPLING: since pace_diff/returning_production_diff are now
-    part of GameMarginModel.feature_columns (see team_features.py), the
-    trained model literally cannot score a game without them — there's no
-    "impute a default and hope" option here without risking a biased,
-    unvalidated prediction. So if CFBD's /player/returning coverage turns
-    out sparse for some team, this now ALSO blocks the in-season switchover
-    for that team's games, not just the pace/returning display — a real
+    core_ratings: output of build_current_core_ratings() -- team -> {'core_overall'}.
+    weather: this SPECIFIC upcoming game's own weather dict (temperature/
+    wind_speed/precipitation/game_indoors), looked up by the CALLER (weather
+    is per-game, not per-team, so it can't be threaded through the same
+    team-keyed dict shape as pace_returning/core_ratings). None if no
+    forecast is available yet (CFBD's forecast window doesn't reach a game
+    this far out) -- same "don't fabricate" handling as everything else.
+
+    IMPORTANT COUPLING: since pace_diff/returning_production_diff/
+    core_overall_diff/temperature/wind_speed/precipitation/game_indoors are
+    now part of GameMarginModel.feature_columns (see team_features.py), the
+    trained model literally cannot score a game without ALL of them
+    present — there's no "impute a default and hope" option here without
+    risking a biased, unvalidated prediction. So if CFBD's /player/returning
+    coverage turns out sparse for some team, or no weather forecast has
+    posted yet for a game, this now ALSO blocks the in-season switchover
+    for that game, not just the corresponding display badge — a real
     trade-off, not an oversight. Building the feature row generically off
     whatever model.feature_columns actually asks for (rather than
     hardcoding a fixed dict) so this stays correct if FEATURE_COLUMNS
@@ -122,6 +157,12 @@ def score_with_trained_model(home_school: str, away_school: str, home_rating, aw
     home_pace, away_pace = home_pr.get("pace"), away_pr.get("pace")
     home_rp, away_rp = home_pr.get("returning_production"), away_pr.get("returning_production")
 
+    core_ratings = core_ratings or {}
+    home_core = (core_ratings.get(home_school) or {}).get("core_overall")
+    away_core = (core_ratings.get(away_school) or {}).get("core_overall")
+
+    weather = weather or {}
+
     available = {
         "home_field": 0 if neutral_site else 1,
         "roll_margin_diff": home_form["roll_margin"] - away_form["roll_margin"],
@@ -132,6 +173,11 @@ def score_with_trained_model(home_school: str, away_school: str, home_rating, aw
         "away_games_played_prior": away_form["games_played_prior"],
         "pace_diff": (home_pace - away_pace) if (pd.notna(home_pace) and pd.notna(away_pace)) else None,
         "returning_production_diff": (home_rp - away_rp) if (pd.notna(home_rp) and pd.notna(away_rp)) else None,
+        "core_overall_diff": (home_core - away_core) if (pd.notna(home_core) and pd.notna(away_core)) else None,
+        "temperature": weather.get("temperature"),
+        "wind_speed": weather.get("wind_speed"),
+        "precipitation": weather.get("precipitation"),
+        "game_indoors": weather.get("game_indoors"),
     }
     missing = [c for c in model.feature_columns if c not in available or available[c] is None]
     if missing:
