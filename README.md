@@ -158,22 +158,27 @@ excluded from the backtest the same way they'd be low-confidence live.
   docstring). A cold/windy Week 1 game still prices off SP+ alone until
   the trained model activates for that matchup.
 - **SP+ and CORE both had leakage risk in backtesting, not live use — and
-  both already caught and fixed.** See the docstring in
-  `src/features/team_features.py`: using a season-end SP+ snapshot to
-  "predict" Week 1 of that same season is leakage, and a real backtest run
-  came back at an implausible 71% ATS before training was switched to the
-  PRIOR season's SP+/pace. Re-ran after the fix: 60.2% ATS over 2,045 real
-  graded games (2023-2025) — still worth real skepticism (a sustained edge
-  that size would be unusually large for a baseline model like this), but
-  no longer an obviously broken number. CORE was believed safe at the time
-  (see "How the models work" above for the full story) via a per-week
-  as-of join, until a feature-importance diagnostic caught it at 80%
-  importance after wiring it in — another real backtest run had jumped to
-  69.6% ATS, itself a red flag in hindsight. CORE now gets the same
-  prior-season-shift fix as SP+; re-verify the new ATS number and the new
-  `docs/data/model_diagnostics.json` feature importances after the next
-  workflow run (expecting `core_overall_diff` to drop to a plausible range
-  near SP+'s, and the ATS rate to move back down toward or below 60.2%).
+  both already caught and fixed, twice confirmed by real re-runs.** See the
+  docstring in `src/features/team_features.py`: using a season-end SP+
+  snapshot to "predict" Week 1 of that same season is leakage, and a real
+  backtest run came back at an implausible 71% ATS before training was
+  switched to the PRIOR season's SP+/pace. Re-ran after that fix: 60.2%
+  ATS. CORE was believed safe at the time (see "How the models work" above
+  for the full story) via a per-week as-of join, until a feature-importance
+  diagnostic caught it at 80% importance after wiring it in — a real
+  backtest run had jumped right back up to 69.6% ATS, the same shape of red
+  flag as the SP+ leak. CORE was switched to the same prior-season-shift
+  fix as SP+, and a real re-run confirms it worked the same way: importance
+  dropped from 80% to 6.4% (now below sp_rating_diff's 22.3% and
+  roll_margin_diff's 34.7%, a normal-looking spread across features instead
+  of one feature dominating), and ATS win rate dropped from 69.6% to
+  **61.25% over 2,013 real graded games (2023-2025)** — landing right next
+  to the 60.2% SP+-only number, which is exactly what you'd expect once
+  both leaks are gone and what's left is closer to the model's real signal.
+  Still worth real skepticism (a sustained edge over 60% would be
+  unusually large for a baseline model like this against closing lines),
+  but this number now has two independent leak-removal events pointing at
+  roughly the same place rather than one suspicious outlier.
 - **Efficient markets.** Major/marquee matchups are heavily bet and
   sharp-adjusted; this kind of baseline model is more likely to find real
   edges in thinner markets — mid-tier games for spreads, and non-star-player
@@ -225,7 +230,7 @@ excluded from the backtest the same way they'd be low-confidence live.
 
 1. Track closing-line value (CLV) over time, not just win/loss — CLV is a
    better early signal of whether a model has real edge than a small sample
-   of bet outcomes, and would help sanity-check whether the 60.2% ATS
+   of bet outcomes, and would help sanity-check whether the ~61% ATS
    backtest number is real skill or still something to be suspicious of.
 2. Once real games are played, spot-check the props player-name matching
    (`src/features/live_player_features.py`) against actual PrizePicks
