@@ -64,14 +64,39 @@ burn API quota automatically — this repo has no scheduled/cron run set up.
 **Spreads/moneylines**: gradient-boosted regression predicts point margin
 (home minus away) from team form (leakage-safe rolling scoring margin),
 SP+ rating differential, pace (plays/drive, from CFBD's advanced season
-stats — see `src/features/team_features.py`), and returning production
-(CFBD's own percentPPA — share of last season's production back this year).
-Margin is converted to a moneyline win probability by assuming roughly
-normal residuals and using the model's own training residual spread. The
-predicted margin is compared to the market's spread to get an edge in
-points. Pace and returning production also show on the Power Ratings table
-(hover a team, or look for the "RP xx%" badge) whenever CFBD has coverage
-for that team.
+stats — see `src/features/team_features.py`), returning production
+(CFBD's own percentPPA — share of last season's production back this year),
+opponent-adjusted CORE rating differential (CFBD Tier 1+ — genuinely
+leakage-safe, see below), and per-game weather (temperature, wind speed,
+precipitation, indoor flag — CFBD Tier 1+). Margin is converted to a
+moneyline win probability by assuming roughly normal residuals and using
+the model's own training residual spread. The predicted margin is compared
+to the market's spread to get an edge in points. Pace and returning
+production also show on the Power Ratings table (hover a team, or look for
+the "RP xx%" badge) whenever CFBD has coverage for that team.
+
+**SP+ vs. CORE — two different leakage stories.** SP+ (`get_sp_ratings`) is
+one number per team per SEASON with no week granularity at all — CFBD's own
+docs confirm there's no way to ask for "SP+ as of week N." Using season S's
+own final SP+ to featurize season S's Week 1 games is leakage (the rating
+already knows how the season turned out), so training joins each season to
+the PRIOR season's SP+ instead — see `src/features/team_features.py`'s
+module docstring for how a real backtest at 71% ATS caught this. CORE
+ratings (`get_core_ratings`, CFBD's "Opponent Adjusted Metrics") are
+different: CFBD actually publishes these as a real time series
+(`throughWeek` per row), so `attach_core_ratings` joins each game to the
+most recent PRIOR week's rating within that SAME season via `merge_asof` —
+genuinely leakage-safe, no season-shift workaround needed. Live scoring
+uses each team's latest available CORE rating (`build_current_core_ratings`
+in `src/features/live_features.py`), which is correct there too — "as of
+right now" is exactly what a live prediction is allowed to know. Weather is
+per-game (CFBD's own game id or, live, matched by team-name pair the same
+way this pipeline matches every other cross-provider game), so there's no
+leakage question there at all — a game's own weather was always knowable
+at or shortly before that kickoff. All three (pace/returning, CORE,
+weather) are Tier 1+ CFBD features; on a free-tier key they're skipped and
+the model trains/scores on whatever the remaining features are, not
+faked.
 
 **Player props**: one model per stat (receiving yards, rushing yards, passing
 yards, receptions, etc.), predicting expected value from that player's own
@@ -113,13 +138,24 @@ excluded from the backtest the same way they'd be low-confidence live.
   decomposition line, and shows as a flag chip on the dashboard — nothing
   is silently baked in. Empty by default; someone has to actually notice
   the news and edit the file before kickoff for this to do anything.
-- **No weather.** Wind and rain meaningfully move total and passing-prop
-  lines; not modeled here.
-- **SP+ leakage risk in backtesting**, not live use. See the docstring in
-  `src/features/team_features.py` — using a season-end SP+ snapshot to
-  "predict" Week 1 of that same season is leakage. For live weekly
-  predictions this isn't an issue (today's rating only reflects games
-  already played).
+- **Weather is now modeled** (temperature/wind/precipitation/indoor flag,
+  CFBD Tier 1+) but only for the trained in-season `GameMarginModel` path —
+  the preseason `fair_odds.py` estimator is still a pure SP+-diff-plus-
+  home-field formula and doesn't take weather into account, since it has no
+  in-season game-level features at all by design (see that file's
+  docstring). A cold/windy Week 1 game still prices off SP+ alone until
+  the trained model activates for that matchup.
+- **SP+ leakage risk in backtesting**, not live use — and already caught
+  and fixed once. See the docstring in `src/features/team_features.py`:
+  using a season-end SP+ snapshot to "predict" Week 1 of that same season
+  is leakage, and a real backtest run came back at an implausible 71% ATS
+  before training was switched to the PRIOR season's SP+/pace (matching
+  what live scoring already effectively did). Re-ran after the fix: 60.2%
+  ATS over 2,045 real graded games (2023-2025) — still worth real
+  skepticism (a sustained edge that size would be unusually large for a
+  baseline model like this), but no longer an obviously broken number.
+  CORE ratings don't have this problem — see "How the models work" above
+  for why they can be joined leakage-safe per-week instead.
 - **Efficient markets.** Major/marquee matchups are heavily bet and
   sharp-adjusted; this kind of baseline model is more likely to find real
   edges in thinner markets — mid-tier games for spreads, and non-star-player
@@ -169,18 +205,25 @@ excluded from the backtest the same way they'd be low-confidence live.
 
 ## Next steps worth prioritizing
 
-1. Wire `predict_week.py` the same way `run_backtest.py` was just wired, so
-   it scores this week's live lines against the trained model, not just
-   historical ones.
-2. Track closing-line value (CLV) over time, not just win/loss — CLV is a
+1. Track closing-line value (CLV) over time, not just win/loss — CLV is a
    better early signal of whether a model has real edge than a small sample
-   of bet outcomes.
-3. Once real games are played, spot-check the props player-name matching
+   of bet outcomes, and would help sanity-check whether the 60.2% ATS
+   backtest number is real skill or still something to be suspicious of.
+2. Once real games are played, spot-check the props player-name matching
    (`src/features/live_player_features.py`) against actual PrizePicks
    output — it's untested against real name-format differences between
    PrizePicks and CFBD, by necessity (this dev environment can't reach
    either API directly). Add a hand-verified alias table if real mismatches
    turn up, the same way `TEAM_ALIASES` was added for team names.
+3. Weather/CORE ratings are wired into the trained in-season model but not
+   the preseason estimator (`fair_odds.py`) or the props model — worth
+   revisiting once there's a full season of props data to see whether
+   opponent-adjusted defense (already used for props via
+   `attach_opponent_defense`) should also switch to CORE's opponent
+   adjustment instead of raw success-rate stats.
+4. Wire `predict_week.py` the same way `run_backtest.py` was just wired, so
+   it scores this week's live lines against the trained model, not just
+   historical ones.
 
 ## Disclaimer
 
