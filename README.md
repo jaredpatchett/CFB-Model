@@ -66,8 +66,9 @@ burn API quota automatically — this repo has no scheduled/cron run set up.
 SP+ rating differential, pace (plays/drive, from CFBD's advanced season
 stats — see `src/features/team_features.py`), returning production
 (CFBD's own percentPPA — share of last season's production back this year),
-opponent-adjusted CORE rating differential (CFBD Tier 1+ — genuinely
-leakage-safe, see below), and per-game weather (temperature, wind speed,
+opponent-adjusted CORE rating differential (CFBD Tier 1+ — joined to the
+PRIOR season's final rating, same treatment as SP+; see below), and
+per-game weather (temperature, wind speed,
 precipitation, indoor flag — CFBD Tier 1+). Margin is converted to a
 moneyline win probability by assuming roughly normal residuals and using
 the model's own training residual spread. The predicted margin is compared
@@ -75,28 +76,39 @@ to the market's spread to get an edge in points. Pace and returning
 production also show on the Power Ratings table (hover a team, or look for
 the "RP xx%" badge) whenever CFBD has coverage for that team.
 
-**SP+ vs. CORE — two different leakage stories.** SP+ (`get_sp_ratings`) is
-one number per team per SEASON with no week granularity at all — CFBD's own
-docs confirm there's no way to ask for "SP+ as of week N." Using season S's
-own final SP+ to featurize season S's Week 1 games is leakage (the rating
-already knows how the season turned out), so training joins each season to
-the PRIOR season's SP+ instead — see `src/features/team_features.py`'s
-module docstring for how a real backtest at 71% ATS caught this. CORE
-ratings (`get_core_ratings`, CFBD's "Opponent Adjusted Metrics") are
-different: CFBD actually publishes these as a real time series
-(`throughWeek` per row), so `attach_core_ratings` joins each game to the
-most recent PRIOR week's rating within that SAME season via `merge_asof` —
-genuinely leakage-safe, no season-shift workaround needed. Live scoring
-uses each team's latest available CORE rating (`build_current_core_ratings`
-in `src/features/live_features.py`), which is correct there too — "as of
-right now" is exactly what a live prediction is allowed to know. Weather is
-per-game (CFBD's own game id or, live, matched by team-name pair the same
-way this pipeline matches every other cross-provider game), so there's no
-leakage question there at all — a game's own weather was always knowable
-at or shortly before that kickoff. All three (pace/returning, CORE,
-weather) are Tier 1+ CFBD features; on a free-tier key they're skipped and
-the model trains/scores on whatever the remaining features are, not
-faked.
+**SP+ and CORE both use the same prior-season-shift treatment.** SP+
+(`get_sp_ratings`) is one number per team per SEASON with no week
+granularity at all — CFBD's own docs confirm there's no way to ask for
+"SP+ as of week N." Using season S's own final SP+ to featurize season S's
+Week 1 games is leakage (the rating already knows how the season turned
+out), so training joins each season to the PRIOR season's SP+ instead —
+see `src/features/team_features.py`'s module docstring for how a real
+backtest at 71% ATS caught this. CORE ratings (`get_core_ratings`, CFBD's
+"Opponent Adjusted Metrics") were originally treated differently, on the
+theory that CFBD's real per-week time series (`throughWeek` per row) let
+`attach_core_ratings` join each game to the most recent PRIOR week's rating
+within that SAME season via `merge_asof`, verified correct in isolation —
+and that theory turned out to be wrong. A real feature-importance
+diagnostic (`docs/data/model_diagnostics.json`) caught `core_overall_diff`
+at 80% importance vs. SP+'s 4.3%, the same shape of red flag the SP+ leak
+produced. CFBD doesn't publish enough methodology detail to confirm why (a
+plausible mechanism: CORE's opponent-adjustment may use full-season
+opponent strength internally even at an early `through_week`), and it
+doesn't need to be confirmed — CORE now gets the exact same fix as SP+:
+`attach_core_ratings` joins each game to the PRIOR season's fully-completed
+final CORE rating, provably leakage-free regardless of CORE's internal
+methodology. Live scoring (`build_current_core_ratings` in
+`src/features/live_features.py`, called from `export_dashboard_data.py`)
+was switched to match — it's now fed the PRIOR completed season's CORE
+data, not the in-progress season's, both to stay train/serve-consistent
+and because the same unverifiable leak concern could contaminate an
+in-progress season's snapshot too. Weather is per-game (CFBD's own game id
+or, live, matched by team-name pair the same way this pipeline matches
+every other cross-provider game), so there's no leakage question there at
+all — a game's own weather was always knowable at or shortly before that
+kickoff. All three (pace/returning, CORE, weather) are Tier 1+ CFBD
+features; on a free-tier key they're skipped and the model trains/scores
+on whatever the remaining features are, not faked.
 
 **Player props**: one model per stat (receiving yards, rushing yards, passing
 yards, receptions, etc.), predicting expected value from that player's own
@@ -145,17 +157,23 @@ excluded from the backtest the same way they'd be low-confidence live.
   in-season game-level features at all by design (see that file's
   docstring). A cold/windy Week 1 game still prices off SP+ alone until
   the trained model activates for that matchup.
-- **SP+ leakage risk in backtesting**, not live use — and already caught
-  and fixed once. See the docstring in `src/features/team_features.py`:
-  using a season-end SP+ snapshot to "predict" Week 1 of that same season
-  is leakage, and a real backtest run came back at an implausible 71% ATS
-  before training was switched to the PRIOR season's SP+/pace (matching
-  what live scoring already effectively did). Re-ran after the fix: 60.2%
-  ATS over 2,045 real graded games (2023-2025) — still worth real
-  skepticism (a sustained edge that size would be unusually large for a
-  baseline model like this), but no longer an obviously broken number.
-  CORE ratings don't have this problem — see "How the models work" above
-  for why they can be joined leakage-safe per-week instead.
+- **SP+ and CORE both had leakage risk in backtesting, not live use — and
+  both already caught and fixed.** See the docstring in
+  `src/features/team_features.py`: using a season-end SP+ snapshot to
+  "predict" Week 1 of that same season is leakage, and a real backtest run
+  came back at an implausible 71% ATS before training was switched to the
+  PRIOR season's SP+/pace. Re-ran after the fix: 60.2% ATS over 2,045 real
+  graded games (2023-2025) — still worth real skepticism (a sustained edge
+  that size would be unusually large for a baseline model like this), but
+  no longer an obviously broken number. CORE was believed safe at the time
+  (see "How the models work" above for the full story) via a per-week
+  as-of join, until a feature-importance diagnostic caught it at 80%
+  importance after wiring it in — another real backtest run had jumped to
+  69.6% ATS, itself a red flag in hindsight. CORE now gets the same
+  prior-season-shift fix as SP+; re-verify the new ATS number and the new
+  `docs/data/model_diagnostics.json` feature importances after the next
+  workflow run (expecting `core_overall_diff` to drop to a plausible range
+  near SP+'s, and the ATS rate to move back down toward or below 60.2%).
 - **Efficient markets.** Major/marquee matchups are heavily bet and
   sharp-adjusted; this kind of baseline model is more likely to find real
   edges in thinner markets — mid-tier games for spreads, and non-star-player
