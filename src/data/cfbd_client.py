@@ -142,6 +142,49 @@ def get_player_game_stats(year: int, week: int, season_type: str = "regular") ->
     return pd.DataFrame(rows)
 
 
+def get_core_ratings(year: int) -> pd.DataFrame:
+    """Context & Opponent-Relative Efficiency (CORE) ratings -- CFBD's own
+    opponent-ADJUSTED offense/defense efficiency metric (GET /ratings/core),
+    unlocked by the CFBD Tier 1+ 'Opponent Adjusted Metrics' feature. Unlike
+    the raw /stats/season/advanced success-rate numbers already used
+    elsewhere in this pipeline (which don't account for schedule strength),
+    this actually adjusts for who each team played.
+
+    Also unlike SP+ (get_sp_ratings -- one rating per team per SEASON, no
+    week granularity at all per CFBD's own API docs), CORE is a genuine time
+    series: each row carries its own 'throughWeek', i.e. "this team's
+    opponent-adjusted rating using only games through week N." That's the
+    ingredient a leakage-safe in-season feature actually needs -- see
+    team_features.attach_core_ratings, which uses this to join each game to
+    the most recent PRIOR week's rating instead of a season-end snapshot
+    (the mistake already made once with SP+ -- see that module's docstring
+    for what a real 71% ATS backtest looked like before that got fixed)."""
+    data = _get("/ratings/core", {"year": year})
+    return pd.json_normalize(data)
+
+
+def get_weather(year: int, week: int = None) -> pd.DataFrame:
+    """Per-GAME weather (temperature, wind speed, precipitation, snowfall,
+    indoor flag, etc.) via GET /games/weather -- CFBD Tier 1+ only. CFBD
+    documents this as covering both historical AND upcoming/forecast games.
+    Keyed by CFBD's own game id and carries home_team/away_team directly, so
+    it joins the same way historical_lines_to_dataframe's output does for
+    training (by id) -- no team-name matching needed there. For LIVE
+    scoring, matching against a different provider's (The Odds API) game
+    list still needs the same team-name matching this pipeline already does
+    everywhere else (see export_dashboard_data.match_team).
+
+    No leakage concern here the way there is for SP+/pace/CORE: this is a
+    real per-game measurement (or a near-term forecast), not a season-level
+    aggregate -- a game's own weather was always knowable at or shortly
+    before that specific kickoff, historical or not."""
+    params = {"year": year}
+    if week is not None:
+        params["week"] = week
+    data = _get("/games/weather", params)
+    return pd.json_normalize(data)
+
+
 def get_roster(year: int, team: str = None) -> pd.DataFrame:
     """Roster with position, so we can filter player features to relevant positions
     (QB/RB/WR/TE) for props modeling."""
