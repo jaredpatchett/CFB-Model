@@ -87,10 +87,23 @@ class GameMarginModel:
         residuals = y_train - self.model.predict(X_train)
         self.residual_std = float(np.std(residuals))
 
+        # Impurity-based feature importances (sklearn's standard, cheap
+        # diagnostic for a GBM) -- not a substitute for a real permutation/
+        # ablation study, but enough to answer "which feature is actually
+        # driving this" the next time a backtest number moves by a lot after
+        # adding new features (see train_game_model.py, which persists this
+        # to docs/data/model_diagnostics.json specifically so that question
+        # doesn't have to be guessed at from the outside).
+        importances = dict(zip(self.feature_columns, self.model.feature_importances_.tolist()))
+        importances = dict(sorted(importances.items(), key=lambda kv: kv[1], reverse=True))
+
         if verbose:
             print(f"[game_model] holdout MAE: {mae:.2f} points | "
                   f"train residual std: {self.residual_std:.2f}")
-        return {"holdout_mae": mae, "residual_std": self.residual_std, "n_train": len(X_train)}
+            print(f"[game_model] feature importances: "
+                  + ", ".join(f"{k}={v:.3f}" for k, v in importances.items()))
+        return {"holdout_mae": mae, "residual_std": self.residual_std, "n_train": len(X_train),
+                "feature_importances": importances}
 
     def predict_margin(self, features_df: pd.DataFrame) -> np.ndarray:
         return self.model.predict(features_df[self.feature_columns])
