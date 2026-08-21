@@ -82,10 +82,15 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 DATA_PATH = "docs/data/latest.json"
 BACKTEST_PATH = "docs/data/backtest_results.json"
+CLV_PATH = "docs/data/clv_results.json"
 OUT_PATH = "docs/dashboard.html"
 
 MIN_EDGE_POINTS = 1.9  # unified board/card threshold; ~= our 5pp moneyline edge threshold
                         # via the /2.6 rescale in ModelMath.priceGame (5 / 2.6 = 1.92)
+                        # COUPLING: src/analysis/clv.py's SPREAD_EDGE_THRESHOLD_POINTS must match
+                        # this number, or the CLV tracker will snapshot a different set of games
+                        # than what actually shows as a flagged spread play here -- see that
+                        # module's comment on its own constant.
 
 
 def fmt_kickoff(iso):
@@ -98,7 +103,7 @@ def fmt_kickoff(iso):
         return "TBD"
 
 
-def build_model_data(data: dict, backtest: dict = None) -> dict:
+def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dict:
     prior = data.get("preseason_prior") or {}
     slope = prior.get("slope")
     intercept = prior.get("intercept")
@@ -277,6 +282,22 @@ def build_model_data(data: dict, backtest: dict = None) -> dict:
             },
         }
 
+    # CLV (closing-line value) track record for the model's own flagged spread
+    # picks -- see src/analysis/clv.py and scripts/compute_clv.py. Read from a
+    # separate file for the same reason as backtest_results.json above: a
+    # different cadence than latest.json, and None here just means no game
+    # has been graded yet (normal before the season's first kickoff), not a
+    # broken pipeline.
+    clv_out = None
+    if clv and clv.get("n_games"):
+        clv_out = {
+            "generatedAt": _fmt_generated_at(clv.get("generated_at")),
+            "nGames": clv.get("n_games"),
+            "avgClvPoints": clv.get("avg_clv_points"),
+            "medianClvPoints": clv.get("median_clv_points"),
+            "pctPositiveClv": clv.get("pct_positive_clv"),
+        }
+
     meta = {
         "modelName": "CFB",
         "sport": "EDGE",
@@ -298,6 +319,7 @@ def build_model_data(data: dict, backtest: dict = None) -> dict:
         "meta": meta,
         "teams": teams,
         "games": games,
+        "clv": clv_out,
         "propCatalog": props_catalog,
         "propsLive": props_live,
         "backtest": backtest_out,
@@ -1272,6 +1294,36 @@ RENDERER_JS = """<script>
       rows;
   }
 
+  function renderClv() {
+    var c = D.clv;
+    if (!c) return '';
+    var avgCls = c.avgClvPoints > 0 ? 'is-pos' : (c.avgClvPoints < 0 ? 'is-neg' : '');
+    var avgStr = c.avgClvPoints != null ? (c.avgClvPoints > 0 ? '+' : '') + c.avgClvPoints.toFixed(2) + ' pts' : '\u2014';
+    var medStr = c.medianClvPoints != null ? (c.medianClvPoints > 0 ? '+' : '') + c.medianClvPoints.toFixed(2) + ' pts' : '\u2014';
+    var pctStr = c.pctPositiveClv != null ? (c.pctPositiveClv * 100).toFixed(1) + '%' : '\u2014';
+    var smallSample = c.nGames != null && c.nGames < 20;
+
+    var head = '<div class="section-head mt-lg" id="clv-section"><div class="section-title">' +
+      '<div class="section-flag"></div><h2>CLV Track Record</h2></div></div>';
+
+    var summary = '<div class="trk-summary">' +
+      '<div class="trk-box"><div class="trk-label">Graded Picks</div><div class="trk-value">' + (c.nGames != null ? c.nGames : '\u2014') + '</div></div>' +
+      '<div class="trk-box"><div class="trk-label">Avg CLV</div><div class="trk-value ' + avgCls + '">' + avgStr + '</div></div>' +
+      '<div class="trk-box"><div class="trk-label">Median CLV</div><div class="trk-value">' + medStr + '</div></div>' +
+      '<div class="trk-box"><div class="trk-label">% Positive CLV</div><div class="trk-value">' + pctStr + '</div></div>' +
+    '</div>';
+
+    var foot = '<div class="table-foot"><span>' +
+      'CLV compares the line captured when a game was first flagged as a play to the real ' +
+      'closing line. Positive means you\u2019d have gotten a better price than the market\u2019s ' +
+      'final number \u2014 the standard forward-looking edge signal, independent of whether any ' +
+      'single pick actually won. ' +
+      (smallSample ? 'Under 20 graded picks \u2014 too small to read much into yet.' : '') +
+      '</span><span>as of ' + esc(c.generatedAt || '') + '</span></div>';
+
+    return head + summary + foot;
+  }
+
   function renderBacktest() {
     var bt = D.backtest;
     if (!bt) return '';
@@ -1316,7 +1368,7 @@ RENDERER_JS = """<script>
       '<div class="wrap">' +
         renderKpis(card) +
         '<div class="main">' +
-          '<div>' + renderEdgeBoard(priced, card) + renderRatings() + renderBacktest() + '</div>' +
+          '<div>' + renderEdgeBoard(priced, card) + renderRatings() + renderBacktest() + renderClv() + '</div>' +
           '<div>' + renderProjector(sel) + renderBetCard(card) + '</div>' +
         '</div>' +
         '<div class="split"><div>' + renderProps() + '</div><div>' + renderTracker() + '</div></div>' +
@@ -1358,7 +1410,15 @@ def main():
         print(f"  [note] {BACKTEST_PATH} not found — Backtest Track Record panel will be omitted "
               f"(expected before scripts/run_backtest.py has run in this pipeline)")
 
-    model_data = build_model_data(data, backtest=backtest)
+    clv = None
+    if os.path.exists(CLV_PATH):
+        with open(CLV_PATH) as f:
+            clv = json.load(f)
+    else:
+        print(f"  [note] {CLV_PATH} not found — CLV Track Record panel will be omitted "
+              f"(expected before scripts/compute_clv.py has run in this pipeline)")
+
+    model_data = build_model_data(data, backtest=backtest, clv=clv)
     data_script = "<script>\nwindow.MODEL_DATA = " + json.dumps(model_data) + ";\n</script>\n"
 
     html_out = HEAD_HTML + data_script + MATH_JS + RENDERER_JS + TAIL_HTML
