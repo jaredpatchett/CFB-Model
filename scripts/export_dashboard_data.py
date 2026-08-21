@@ -552,15 +552,21 @@ def main(year: int):
               f"and the trained-model switchover (see above) will stay on the preseason prior for every "
               f"game (pace_diff/returning_production_diff are required trained-model features)")
 
-    print(f"Fetching {season_year} opponent-adjusted CORE ratings and weather for the trained model's "
-          f"core_overall_diff/temperature/wind_speed/precipitation/game_indoors features "
-          f"(CFBD Tier 1+ only — skipped gracefully on a free-tier key)...")
+    print(f"Fetching {year} (prior completed season) opponent-adjusted CORE ratings, and {season_year} "
+          f"weather, for the trained model's core_overall_diff/temperature/wind_speed/precipitation/"
+          f"game_indoors features (CFBD Tier 1+ only — skipped gracefully on a free-tier key). CORE uses "
+          f"{year}, not the in-progress {season_year} season, on purpose: see build_current_core_ratings' "
+          f"docstring and team_features.py's module docstring — a real feature-importance diagnostic caught "
+          f"same-season CORE snapshots dominating the trained model's predictions (80% importance), which "
+          f"training fixed by switching to the prior season's final rating. Live scoring now matches that "
+          f"same choice, both to stay train/serve-consistent and because the same unverifiable leak concern "
+          f"could just as easily contaminate an in-progress season's snapshot.")
     core_ratings_lookup = {}
     weather_lookup = {}
     try:
-        core_ratings_df = cfbd.get_core_ratings(season_year)
+        core_ratings_df = cfbd.get_core_ratings(year)
         core_ratings_lookup = build_current_core_ratings(core_ratings_df)
-        print(f"  {len(core_ratings_lookup)} team(s) with a CORE rating so far this season")
+        print(f"  {len(core_ratings_lookup)} team(s) with a {year} CORE rating on file")
     except Exception as e:
         print(f"  [warn] CORE ratings fetch failed: {e} — the trained-model switchover will stay on the "
               f"preseason prior for every game until this is available (needs CFBD Tier 1+)")
