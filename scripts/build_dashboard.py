@@ -81,6 +81,7 @@ from datetime import datetime
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 DATA_PATH = "docs/data/latest.json"
+BACKTEST_PATH = "docs/data/backtest_results.json"
 OUT_PATH = "docs/dashboard.html"
 
 MIN_EDGE_POINTS = 1.9  # unified board/card threshold; ~= our 5pp moneyline edge threshold
@@ -97,7 +98,7 @@ def fmt_kickoff(iso):
         return "TBD"
 
 
-def build_model_data(data: dict) -> dict:
+def build_model_data(data: dict, backtest: dict = None) -> dict:
     prior = data.get("preseason_prior") or {}
     slope = prior.get("slope")
     intercept = prior.get("intercept")
@@ -247,6 +248,35 @@ def build_model_data(data: dict) -> dict:
     props_catalog = data.get("prop_market_catalog", [])
     props_live = data.get("props", [])
 
+    # backtest: real ATS win rate / margin MAE / moneyline accuracy against
+    # historical CFBD closing lines (see run_backtest.py + src/backtest/
+    # backtester.py). Read from a SEPARATE file (docs/data/backtest_results.json)
+    # rather than latest.json, since it's produced by a different script on a
+    # different cadence (only changes when the model itself is retrained,
+    # not every dashboard refresh) -- None here just means that file hasn't
+    # been generated yet (e.g. before scripts/run_backtest.py has ever run),
+    # and the dashboard panel is simply omitted, not faked.
+    backtest_out = None
+    if backtest:
+        sp = backtest.get("spread") or {}
+        ml = backtest.get("moneyline") or {}
+        backtest_out = {
+            "generatedAt": _fmt_generated_at(backtest.get("generated_at")),
+            "seasonsCovered": backtest.get("seasons_covered") or [],
+            "spread": {
+                "nGames": sp.get("n_games"),
+                "atsWinRate": sp.get("ats_win_rate"),
+                "marginMae": sp.get("margin_mae"),
+                "breakevenAtsRate": sp.get("breakeven_ats_rate"),
+                "beatMarket": sp.get("beat_market"),
+            },
+            "moneyline": {
+                "nGames": ml.get("n_games"),
+                "accuracy": ml.get("accuracy"),
+                "logLoss": ml.get("log_loss"),
+            },
+        }
+
     meta = {
         "modelName": "CFB",
         "sport": "EDGE",
@@ -270,6 +300,7 @@ def build_model_data(data: dict) -> dict:
         "games": games,
         "propCatalog": props_catalog,
         "propsLive": props_live,
+        "backtest": backtest_out,
     }
 
 
@@ -1241,6 +1272,38 @@ RENDERER_JS = """<script>
       rows;
   }
 
+  function renderBacktest() {
+    var bt = D.backtest;
+    if (!bt) return '';
+    var sp = bt.spread || {};
+    var ml = bt.moneyline || {};
+    var atsPct = (sp.atsWinRate != null) ? (sp.atsWinRate * 100).toFixed(1) + '%' : '\\u2014';
+    var beatCls = sp.beatMarket === true ? 'is-pos' : (sp.beatMarket === false ? 'is-neg' : '');
+    var mlPct = (ml.accuracy != null) ? (ml.accuracy * 100).toFixed(1) + '%' : '\\u2014';
+    var smallSample = (sp.nGames != null && sp.nGames < 200);
+
+    var head = '<div class="section-head mt-lg" id="bt-section"><div class="section-title">' +
+      '<div class="section-flag"></div><h2>Backtest Track Record</h2></div></div>';
+
+    var summary = '<div class="trk-summary">' +
+      '<div class="trk-box"><div class="trk-label">Graded Games</div><div class="trk-value">' + (sp.nGames != null ? sp.nGames : '\\u2014') + '</div></div>' +
+      '<div class="trk-box"><div class="trk-label">ATS Win Rate</div><div class="trk-value ' + beatCls + '">' + atsPct + '</div></div>' +
+      '<div class="trk-box"><div class="trk-label">Breakeven</div><div class="trk-value">' + (sp.breakevenAtsRate != null ? (sp.breakevenAtsRate * 100).toFixed(1) + '%' : '52.4%') + '</div></div>' +
+      '<div class="trk-box"><div class="trk-label">Margin MAE</div><div class="trk-value">' + (sp.marginMae != null ? sp.marginMae.toFixed(2) + ' pts' : '\\u2014') + '</div></div>' +
+      '<div class="trk-box"><div class="trk-label">ML Accuracy</div><div class="trk-value">' + mlPct + '</div></div>' +
+      '<div class="trk-box"><div class="trk-label">ML Log Loss</div><div class="trk-value">' + (ml.logLoss != null ? ml.logLoss.toFixed(3) : '\\u2014') + '</div></div>' +
+    '</div>';
+
+    var foot = '<div class="table-foot"><span>' +
+      (sp.beatMarket === true ? 'Model beat the market\\u2019s closing spread over this sample. '
+        : sp.beatMarket === false ? 'Model has NOT beaten the market\\u2019s closing spread over this sample \\u2014 not yet an edge. '
+        : '') +
+      (smallSample ? 'Under 200 graded games \\u2014 treat as noisy, not a verdict.' : '') +
+      '</span><span>Seasons ' + esc((bt.seasonsCovered || []).join(', ')) + ' \\u00b7 as of ' + esc(bt.generatedAt || '') + '</span></div>';
+
+    return head + summary + foot;
+  }
+
   /* ---- mount ------------------------------------------------------------- */
 
   function render() {
@@ -1253,7 +1316,7 @@ RENDERER_JS = """<script>
       '<div class="wrap">' +
         renderKpis(card) +
         '<div class="main">' +
-          '<div>' + renderEdgeBoard(priced, card) + renderRatings() + '</div>' +
+          '<div>' + renderEdgeBoard(priced, card) + renderRatings() + renderBacktest() + '</div>' +
           '<div>' + renderProjector(sel) + renderBetCard(card) + '</div>' +
         '</div>' +
         '<div class="split"><div>' + renderProps() + '</div><div>' + renderTracker() + '</div></div>' +
@@ -1287,7 +1350,15 @@ def main():
     with open(DATA_PATH) as f:
         data = json.load(f)
 
-    model_data = build_model_data(data)
+    backtest = None
+    if os.path.exists(BACKTEST_PATH):
+        with open(BACKTEST_PATH) as f:
+            backtest = json.load(f)
+    else:
+        print(f"  [note] {BACKTEST_PATH} not found — Backtest Track Record panel will be omitted "
+              f"(expected before scripts/run_backtest.py has run in this pipeline)")
+
+    model_data = build_model_data(data, backtest=backtest)
     data_script = "<script>\nwindow.MODEL_DATA = " + json.dumps(model_data) + ";\n</script>\n"
 
     html_out = HEAD_HTML + data_script + MATH_JS + RENDERER_JS + TAIL_HTML
