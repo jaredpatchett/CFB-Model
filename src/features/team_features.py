@@ -2,17 +2,50 @@
 Team-level feature engineering for the spread/moneyline model.
 
 Design choice on leakage:
-- SP+ ratings (from CFBD /ratings/sp) are a season-level signal. When used for
-  LIVE weekly predictions this is safe (today's rating only reflects games
-  already played). When used for BACKTESTING past seasons, pulling one
-  end-of-season SP+ snapshot and applying it to Week 1 games is leakage —
-  the rating "knows" about games that hadn't happened yet. The backtester
-  (src/backtest/backtester.py) flags this; for rigorous backtesting, prefer
-  the rolling in-season features below over SP+, or re-pull SP+ per week if
-  your CFBD plan/endpoint supports it.
+- SP+ ratings (CFBD /ratings/sp) and the pace component of
+  build_pace_returning_features (CFBD /stats/season/advanced) are season-
+  level signals. CFBD's /ratings/sp has no week granularity at all (checked
+  against their own API docs: get_sp takes only year/team, no week/
+  start_week/end_week) -- it is always that season's FINAL rating. Using
+  season S's own end-of-season SP+ to featurize season S's games -- Week 1
+  included -- is leakage: the "prediction" already encodes how that season
+  turned out. This isn't a theoretical concern -- a real backtest run on
+  four real historical seasons came back at 71% ATS against the market's
+  actual closing lines, an implausible number (a legitimate, durable edge
+  of even 3-5 points over the 52.4% breakeven would be a big deal; 71% means
+  something is leaking, not that this is a great model).
+
+  Fix: build_game_team_features shifts SP+ and pace by one year before
+  joining, so season S's games are matched to season (S-1)'s rating/pace --
+  the actual last-known numbers a bettor (or this model, in live use) would
+  have going into that season. This also happens to fix a pre-existing
+  train/serve mismatch: export_dashboard_data.py's LIVE scoring already used
+  last-completed-season SP+ (via the --year CLI arg) rather than the
+  in-progress season's, since CFBD has nothing better to offer mid-season
+  either -- training was the one place still using the leaked same-season
+  number. The first training season on file has no prior year to match
+  against and is correctly dropped (null features -> excluded by
+  GameMarginModel.fit's dropna), not a bug.
+
+  returning_production is NOT part of this leak -- it's CFBD's own
+  percentPPA, computed from last season's departing production vs. this
+  year's roster, so it's genuinely known before Week 1 of the season it's
+  labeled with; shifting it doesn't change its meaning, just keeps its
+  join consistent with pace/SP+.
+
+  Known follow-up gap, not fixed here: once the in-season trained model
+  activates for a real matchup (live_features.py, after both teams have
+  MIN_GAMES_FOR_TRAINED_MODEL real games), its pace_diff is still built from
+  the CURRENT season's own in-season-so-far advanced stats (correct, not
+  leakage, live use only ever sees games already played) -- but that's a
+  different definition of "pace" than what training now uses (prior
+  season's final pace). Pace is a much smaller-magnitude feature than SP+
+  here; left as a known inconsistency rather than risk a rushed second
+  change to the live path.
 - Rolling scoring margin/PPG features are computed with an expanding window
   shifted by one game, so a team's Week 5 features only use Weeks 1-4. This
-  part is leakage-safe regardless of season stage.
+  part is leakage-safe regardless of season stage and was NOT the source of
+  the inflated backtest number.
 """
 import pandas as pd
 import numpy as np
@@ -129,6 +162,9 @@ def build_game_team_features(games: pd.DataFrame, sp_ratings: pd.DataFrame = Non
         if "defense.rating" in sp.columns:
             sp_cols["defense.rating"] = "sp_def_rating"
         sp = sp[list(sp_cols.keys()) + ["year"]].rename(columns=sp_cols)
+        # Leakage fix -- see module docstring. Season S's games join to
+        # season (S-1)'s SP+, not season S's own (only) rating.
+        sp["year"] = sp["year"] + 1
 
         df = df.merge(sp.add_prefix("home_"), left_on=["homeTeam", "season"],
                        right_on=["home_team", "home_year"], how="left")
@@ -138,6 +174,11 @@ def build_game_team_features(games: pd.DataFrame, sp_ratings: pd.DataFrame = Non
 
     if pace_returning is not None and not pace_returning.empty:
         pr = pace_returning.copy()
+        # Same leakage fix, same reasoning, applied to pace (see module
+        # docstring). returning_production isn't actually leaky on its own
+        # (preseason-known), but shares this join so it stays aligned with
+        # pace under one consistent "prior season's numbers" join.
+        pr["year"] = pr["year"] + 1
         df = df.merge(pr.add_prefix("home_"), left_on=["homeTeam", "season"],
                        right_on=["home_team", "home_year"], how="left")
         df = df.merge(pr.add_prefix("away_"), left_on=["awayTeam", "season"],
