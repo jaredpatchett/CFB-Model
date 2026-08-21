@@ -23,6 +23,8 @@ src/models/
   props_model.py                  # predicts stat value -> over/under lean
 src/backtest/
   backtester.py                   # ATS win rate, log loss, hit rate vs. market
+src/analysis/
+  clv.py                           # CLV tracking for the model's own flagged spread picks
 scripts/                           # CLI entry points, run in this order:
   1. fetch_historical_data.py     # pull past seasons for training/backtesting
   2. build_features.py            # raw data -> model-ready features
@@ -31,6 +33,7 @@ scripts/                           # CLI entry points, run in this order:
   5. fetch_current_lines.py       # pulls today's live lines + props
   6. predict_week.py              # scores current lines against the model
   7. run_backtest.py               # evaluates the model against history
+  8. compute_clv.py                # grades flagged picks against real closing lines (CLV)
 ```
 
 ## Setup
@@ -133,6 +136,26 @@ real ATS win rate, margin MAE, and moneyline log loss/accuracy against the
 has complete rolling in-season features, so very early-season games are
 excluded from the backtest the same way they'd be low-confidence live.
 
+**CLV tracking**: a forward-looking companion to backtesting, for once the
+model starts making REAL live picks instead of only historical ones — see
+`src/analysis/clv.py`. Every workflow run, `export_dashboard_data.py`
+snapshots the current market line for any game that currently qualifies as
+a flagged spread play on the dashboard (same 1.9-point edge threshold as
+the dashboard's own filter — see that module's `SPREAD_EDGE_THRESHOLD_POINTS`),
+appending it to `data/clv/line_snapshots.csv`, which is committed to the
+repo so it accumulates across the whole season, not just one run.
+`compute_clv.py` then takes each game's EARLIEST snapshot (the real price a
+follower would have gotten by acting the moment the pick first appeared)
+and, for any of those games that have since been played, fetches the real
+closing line from CFBD (the same free, already-trusted source `run_backtest.py`
+uses) and computes CLV — how much better or worse the captured price was
+than the market's final number. Positive CLV is the standard forward-looking
+signal that a betting approach has real edge, and it's informative on a much
+smaller sample than ATS win rate is, which matters early in a season before
+enough real bets have graded to trust win/loss alone. Scope is spread picks
+only for now (see that module's docstring for why); results land in
+`docs/data/clv_results.json` and the dashboard's "CLV Track Record" panel.
+
 ## Honest limitations
 
 - **Small sample, high variance.** CFB teams play ~12-13 games/year with
@@ -225,28 +248,40 @@ excluded from the backtest the same way they'd be low-confidence live.
   `export_dashboard_data.py` already does for the dashboard, not a
   shared ID). Left as a clearly-marked next step rather than silently
   guessed at.
+- **CLV tracking is brand new and unvalidated against real data** (see "How
+  the models work" above) — it's been tested against synthetic snapshots
+  and a mocked closing-line fetch, confirming the join/sign-convention math
+  is correct, but it hasn't graded a single REAL pick yet, since the season
+  hasn't started. The `docs/data/clv_results.json` note field and the
+  dashboard panel are both designed to say nothing (rather than show
+  placeholder zeros) until at least one tracked game has actually been
+  played — treat the first few weeks' numbers as "does this look
+  sane" checks, not a verdict, the same "under N graded samples, don't
+  read into it" caution as the ATS backtest above, just with a much
+  smaller N needed before CLV starts being informative.
 
 ## Next steps worth prioritizing
 
-1. Track closing-line value (CLV) over time, not just win/loss — CLV is a
-   better early signal of whether a model has real edge than a small sample
-   of bet outcomes, and would help sanity-check whether the ~61% ATS
-   backtest number is real skill or still something to be suspicious of.
-2. Once real games are played, spot-check the props player-name matching
+1. Once real games are played, spot-check the props player-name matching
    (`src/features/live_player_features.py`) against actual PrizePicks
    output — it's untested against real name-format differences between
    PrizePicks and CFBD, by necessity (this dev environment can't reach
    either API directly). Add a hand-verified alias table if real mismatches
    turn up, the same way `TEAM_ALIASES` was added for team names.
-3. Weather/CORE ratings are wired into the trained in-season model but not
+2. Weather/CORE ratings are wired into the trained in-season model but not
    the preseason estimator (`fair_odds.py`) or the props model — worth
    revisiting once there's a full season of props data to see whether
    opponent-adjusted defense (already used for props via
    `attach_opponent_defense`) should also switch to CORE's opponent
    adjustment instead of raw success-rate stats.
-4. Wire `predict_week.py` the same way `run_backtest.py` was just wired, so
+3. Wire `predict_week.py` the same way `run_backtest.py` was just wired, so
    it scores this week's live lines against the trained model, not just
    historical ones.
+4. Once real picks start grading in `docs/data/clv_results.json`, watch
+   whether CLV and ATS backtest performance point the same direction —
+   if they diverge (e.g. good ATS record but negative CLV, or vice versa),
+   that itself is a useful signal worth digging into rather than trusting
+   either number alone.
 
 ## Disclaimer
 
