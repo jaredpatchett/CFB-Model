@@ -69,15 +69,25 @@ def build_current_season_form(games_df: pd.DataFrame) -> dict:
 
 
 def build_current_core_ratings(core_df: pd.DataFrame) -> dict:
-    """CFBD school name -> {'core_overall'} for the CURRENT season, using
-    each team's MOST RECENT through_week on file -- i.e. their real,
-    opponent-adjusted rating as of right now. Unlike SP+/pace (which this
-    pipeline deliberately shifts to the PRIOR season for training to avoid
-    leakage -- see team_features.py's module docstring), CORE ratings are
-    genuinely safe to use live at their current value: 'as of right now' is
-    exactly what a live prediction is allowed to know. No entry for a team
-    means CORE hasn't published a rating for them yet this season (normal
-    before their first game), not an error."""
+    """CFBD school name -> {'core_overall'}, using each team's MOST RECENT
+    through_week on file in `core_df`. CALLER is responsible for passing in
+    the PRIOR completed season's core_df here, not the current in-progress
+    season's -- same treatment as SP+/pace (see export_dashboard_data.py,
+    which builds this from `year`, not `season_year`) and for the same
+    reason: team_features.py's training-time fix (see that module's
+    docstring) switched CORE to the prior-season snapshot after a real
+    feature-importance diagnostic showed core_overall_diff at 80%
+    importance, an implausible dominance suggesting CFBD's same-season
+    CORE numbers may encode more than they should. This function doesn't
+    know or care which season's data it's handed -- it just takes the
+    latest through_week in whatever df it's given -- so keeping training
+    and live scoring consistent is entirely on the caller passing the same
+    kind of season. An earlier version of this docstring called live use of
+    the CURRENT season 'genuinely safe' on the theory that CORE's per-week
+    values were strictly causal; that theory is what the training-time diagnostic
+    disproved, so it no longer applies here either. No entry for a team
+    means CORE has no rating on file for that prior season (e.g. a team
+    that wasn't in a CFBD-tracked conference yet), not an error."""
     if core_df is None or core_df.empty or "team" not in core_df.columns:
         return {}
     df = core_df.copy()
