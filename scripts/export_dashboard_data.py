@@ -29,7 +29,7 @@ from src.data import prizepicks_client
 from src.data.injury_overrides import load_injury_overrides, get_team_override
 from src.features.live_features import (
     build_current_season_form, score_with_trained_model, build_current_pace_returning,
-    MIN_GAMES_FOR_TRAINED_MODEL,
+    build_current_core_ratings, MIN_GAMES_FOR_TRAINED_MODEL,
 )
 from src.features.live_player_features import (
     build_current_player_form, score_prop, MIN_GAMES_FOR_PROP_MODEL,
@@ -299,6 +299,51 @@ def build_neutral_site_lookup(games_df: pd.DataFrame) -> dict:
     return lookup
 
 
+def build_weather_lookup(weather_df: pd.DataFrame) -> dict:
+    """frozenset({normalized_home_school, normalized_away_school}) ->
+    {temperature, wind_speed, precipitation, game_indoors}, from CFBD's own
+    GET /games/weather (Tier 1+). Same unordered-pair keying as
+    build_neutral_site_lookup and for the same reason -- this pipeline's
+    home/away labeling comes from The Odds API, a different provider than
+    CFBD, so there's no shared game id to join on for LIVE games the way
+    run_backtest.py can for historical ones; matching by team-name pair is
+    the same approach already used everywhere else this pipeline crosses
+    providers.
+
+    CFBD's weather endpoint covers forecasts for upcoming games too, but
+    only within its own forecast window -- a game more than a handful of
+    days out will simply have no entry yet, which the caller treats as
+    'not available yet,' not an error, same as every other live feature
+    here."""
+    lookup = {}
+    if weather_df is None or weather_df.empty:
+        return lookup
+    w = weather_df.rename(columns={"windSpeed": "wind_speed", "gameIndoors": "game_indoors"})
+    for _, row in w.iterrows():
+        home, away = row.get("home_team") or row.get("homeTeam"), row.get("away_team") or row.get("awayTeam")
+        if not home or not away:
+            continue
+        key = frozenset({_normalize_team_name(str(home)), _normalize_team_name(str(away))})
+        entry = {}
+        for field in ("temperature", "wind_speed", "precipitation", "game_indoors"):
+            if field in row and pd.notna(row[field]):
+                entry[field] = bool(row[field]) if field == "game_indoors" else float(row[field])
+        if entry:
+            lookup[key] = entry
+    return lookup
+
+
+def match_weather(home_school: str, away_school: str, lookup: dict) -> dict:
+    """Returns this matchup's weather dict if CFBD has one on file yet
+    (historical or forecast), or {} if not -- callers already treat missing
+    weather fields as 'don't score with the trained model yet,' matching
+    every other required-but-sometimes-unavailable live feature here."""
+    if not home_school or not away_school:
+        return {}
+    key = frozenset({_normalize_team_name(home_school), _normalize_team_name(away_school)})
+    return lookup.get(key) or {}
+
+
 def match_neutral_site(home_school: str, away_school: str, lookup: dict):
     """Returns True/False if this matchup is found in CFBD's schedule,
     None if unknown (falls back to 'assume normal home game' at the call
@@ -507,6 +552,26 @@ def main(year: int):
               f"and the trained-model switchover (see above) will stay on the preseason prior for every "
               f"game (pace_diff/returning_production_diff are required trained-model features)")
 
+    print(f"Fetching {season_year} opponent-adjusted CORE ratings and weather for the trained model's "
+          f"core_overall_diff/temperature/wind_speed/precipitation/game_indoors features "
+          f"(CFBD Tier 1+ only — skipped gracefully on a free-tier key)...")
+    core_ratings_lookup = {}
+    weather_lookup = {}
+    try:
+        core_ratings_df = cfbd.get_core_ratings(season_year)
+        core_ratings_lookup = build_current_core_ratings(core_ratings_df)
+        print(f"  {len(core_ratings_lookup)} team(s) with a CORE rating so far this season")
+    except Exception as e:
+        print(f"  [warn] CORE ratings fetch failed: {e} — the trained-model switchover will stay on the "
+              f"preseason prior for every game until this is available (needs CFBD Tier 1+)")
+    try:
+        weather_df = cfbd.get_weather(season_year)
+        weather_lookup = build_weather_lookup(weather_df)
+        print(f"  {len(weather_lookup)} scheduled matchup(s) with a weather forecast/reading on file")
+    except Exception as e:
+        print(f"  [warn] weather fetch failed: {e} — the trained-model switchover will stay on the "
+              f"preseason prior for every game until this is available (needs CFBD Tier 1+)")
+
     game_lines_path = f"{config.DATA_CURRENT_DIR}/game_lines.csv"
     props_path = f"{config.DATA_CURRENT_DIR}/player_props.csv"
 
@@ -550,10 +615,13 @@ def main(year: int):
                 neutral = match_neutral_site(home_meta.get("school"), away_meta.get("school"), neutral_site_lookup)
                 home_ov = get_team_override(home_meta.get("school"), injury_overrides)
                 away_ov = get_team_override(away_meta.get("school"), injury_overrides)
+                game_weather = match_weather(home_meta.get("school"), away_meta.get("school"), weather_lookup)
                 trained_margin = score_with_trained_model(
                     home_meta.get("school"), away_meta.get("school"), home_rating, away_rating,
                     bool(neutral), current_season_form, trained_model,
                     pace_returning=pace_returning_lookup,
+                    core_ratings=core_ratings_lookup,
+                    weather=game_weather,
                 )
                 fair_fields = compute_fair_odds_fields(
                     home_rating, away_rating, ml_home, ml_away, prior,
