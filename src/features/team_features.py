@@ -46,6 +46,16 @@ Design choice on leakage:
   shifted by one game, so a team's Week 5 features only use Weeks 1-4. This
   part is leakage-safe regardless of season stage and was NOT the source of
   the inflated backtest number.
+- CORE ratings (CFBD's opponent-adjusted metrics) got the SAME prior-season-
+  shift fix as SP+/pace above, after a real feature-importance diagnostic
+  caught core_overall_diff at 80% importance (vs. SP+'s 4.3%) despite an
+  earlier merge_asof-based within-season as-of-week join that was verified
+  correct in isolation. See build_core_season_features/attach_core_ratings
+  below for the full story -- short version: CFBD's per-week CORE snapshots
+  likely encode some full-season information internally in a way that can't
+  be verified or ruled out from their public docs, so this now uses only a
+  fully-completed prior season's rating, which is leakage-proof regardless
+  of CORE's internal methodology.
 """
 import pandas as pd
 import numpy as np
@@ -127,24 +137,44 @@ def build_pace_returning_features(adv_stats: pd.DataFrame = None, returning: pd.
     return out
 
 
-def build_core_asof(core_df: pd.DataFrame) -> pd.DataFrame:
-    """Tidy (team, season, through_week) -> core_overall/core_offense/
-    core_defense, from cfbd_client.get_core_ratings(). Just a column
-    rename/select -- the actual leakage-safe AS-OF join happens in
-    attach_core_ratings below, which is the whole reason CORE (unlike SP+)
-    can be joined correctly per-week instead of via the season-shift
-    workaround.
+def build_core_season_features(core_df: pd.DataFrame) -> pd.DataFrame:
+    """Tidy (team, year) -> core_overall/core_offense/core_defense, using
+    each team's LATEST through_week snapshot in a season as that season's
+    final rating. One row per team per year -- same shape as SP+/pace, and
+    (as of this version) joined the SAME leakage-conservative way: see
+    attach_core_ratings below.
+
+    REVISED FROM AN EARLIER, MORE OPTIMISTIC VERSION OF THIS FUNCTION: CORE
+    genuinely publishes a real per-week time series (throughWeek per row,
+    confirmed against CFBD's own API docs), which looked like it should
+    support a truly leakage-safe WITHIN-season as-of-week join -- each game
+    matched only to a STRICTLY PRIOR week's snapshot via merge_asof,
+    verified correct with a standalone test before shipping. It was wired
+    in on that basis.
+
+    A real backtest run then showed core_overall_diff commanding 80% of the
+    trained model's total feature importance (vs. 4.3% for sp_rating_diff)
+    -- see docs/data/model_diagnostics.json from that run. That's not a
+    plausible "this feature just happens to be great" result; it's the same
+    shape of red flag the SP+ leak produced (71% ATS) before that got
+    fixed. The likely mechanism: CFBD's opponent-adjustment for CORE may
+    use each opponent's FULL-SEASON strength to adjust a rating, even at an
+    early through_week -- which the per-week join can't detect or prevent,
+    since the leak would be baked into the snapshot itself, not in how it
+    was joined. This isn't confirmed (CFBD doesn't publish enough
+    methodology detail to verify it from here), and it doesn't need to be:
+    switching to a fully-completed PRIOR season's final rating removes any
+    possible leakage regardless of the reason, the same way it already did
+    for SP+ and pace -- an entire prior season is fully resolved by
+    definition, no matter how CORE computed anything during it.
 
     CFBD's raw JSON uses camelCase ('throughWeek'), not the snake_case the
     official Python client docs show (that's the generated client's own
-    naming, not the wire format) -- normalized here the same way this
-    pipeline already handles it for live_features.build_current_core_ratings,
-    so both stay in sync if CFBD's field naming is ever double-checked
-    against a real response."""
-    cols = ["team", "season", "through_week", "core_overall", "core_offense", "core_defense"]
+    naming, not the wire format)."""
+    cols = ["team", "year", "core_overall", "core_offense", "core_defense"]
     if core_df is None or core_df.empty:
         return pd.DataFrame(columns=cols)
-    df = core_df.rename(columns={"year": "season"})
+    df = core_df.rename(columns={"year": "season"}) if "year" in core_df.columns else core_df.copy()
     if "throughWeek" in df.columns and "through_week" not in df.columns:
         df = df.rename(columns={"throughWeek": "through_week"})
     rename = {"overall": "core_overall", "offense": "core_offense", "defense": "core_defense"}
@@ -152,54 +182,33 @@ def build_core_asof(core_df: pd.DataFrame) -> pd.DataFrame:
     if not {"team", "season", "through_week"}.issubset(have):
         return pd.DataFrame(columns=cols)
     df = df[have].rename(columns=rename)
-    return df.sort_values(["team", "season", "through_week"])
+    latest = df.sort_values("through_week").groupby(["team", "season"]).tail(1)
+    return latest.rename(columns={"season": "year"})[cols]
 
 
 def attach_core_ratings(games: pd.DataFrame, core_df: pd.DataFrame) -> pd.DataFrame:
-    """Adds home_core_*/away_core_*/core_*_diff columns to `games` (needs
-    homeTeam/awayTeam/season/week) via an AS-OF join: each game gets that
-    team's CORE rating from the most recent through_week STRICTLY BEFORE
-    the game's own week -- direction='backward', allow_exact_matches=False,
-    so a game can never see a rating that includes its own or a future
-    week's results. Verified with a standalone test before wiring this in
-    (a Week 3 game must match through_week=2, never through_week=3+).
-
-    Early-season games (before CORE has any prior-week data to report for
-    a team) correctly get NaN here -- same 'don't fabricate, let the model's
-    own null-handling exclude the row' pattern as every other feature in
-    this pipeline, not a bug."""
+    """Adds home_core_*/away_core_*/core_*_diff columns to `games` by
+    joining each game's season to the PRIOR season's final CORE rating --
+    same treatment, same reasoning, and same join shape as SP+ (see this
+    module's docstring and build_core_season_features above for why this
+    replaced an earlier within-season as-of-week join). The first season on
+    file correctly has no prior year to match (NaN, excluded downstream by
+    the model's own null-handling), same as SP+."""
     out_cols = ["home_core_overall", "away_core_overall", "core_overall_diff",
                 "home_core_offense", "away_core_offense", "core_offense_diff",
                 "home_core_defense", "away_core_defense", "core_defense_diff"]
-    core_asof = build_core_asof(core_df)
+    core_season = build_core_season_features(core_df)
     out = games.copy()
-    if core_asof.empty or "week" not in out.columns:
+    if core_season.empty:
         for c in out_cols:
             out[c] = np.nan
         return out
 
-    # Explicit row-number key (not pandas' index) to reassemble merge_asof's
-    # output back into the original row order -- merge_asof requires its
-    # input sorted by the 'on' key and returns rows in THAT sorted order, so
-    # relying on the pandas index surviving the round-trip untouched would
-    # be fragile. A plain integer column merged back by equality has no such
-    # ambiguity.
-    out = out.reset_index(drop=True)
-    out["_rownum"] = np.arange(len(out))
+    shifted = core_season.copy()
+    shifted["year"] = shifted["year"] + 1
     for side in ("home", "away"):
-        team_col = f"{side}Team"
-        left = out[["_rownum", team_col, "season", "week"]].rename(columns={team_col: "team"})
-        left = left.sort_values("week")
-        right = core_asof.sort_values("through_week")
-        merged = pd.merge_asof(
-            left, right, left_on="week", right_on="through_week",
-            by=["team", "season"], direction="backward", allow_exact_matches=False,
-        )
-        merged = merged.sort_values("_rownum")
-        out[f"{side}_core_overall"] = merged["core_overall"].values
-        out[f"{side}_core_offense"] = merged["core_offense"].values
-        out[f"{side}_core_defense"] = merged["core_defense"].values
-    out = out.drop(columns=["_rownum"])
+        out = out.merge(shifted.add_prefix(f"{side}_"), left_on=[f"{side}Team", "season"],
+                         right_on=[f"{side}_team", f"{side}_year"], how="left")
 
     out["core_overall_diff"] = out["home_core_overall"] - out["away_core_overall"]
     out["core_offense_diff"] = out["home_core_offense"] - out["away_core_offense"]
@@ -254,8 +263,9 @@ def build_game_team_features(games: pd.DataFrame, sp_ratings: pd.DataFrame = Non
       adds pace_diff/returning_production_diff — see that function's
       docstring for what these actually measure and their caveats).
     core_ratings: output of cfbd_client.get_core_ratings() (optional, adds
-      core_overall_diff/core_offense_diff/core_defense_diff — genuinely
-      leakage-safe, see attach_core_ratings).
+      core_overall_diff/core_offense_diff/core_defense_diff — joined to the
+      PRIOR season's final rating, same treatment as SP+/pace; see
+      attach_core_ratings and this module's docstring for why).
     weather: output of cfbd_client.get_weather() (optional, adds
       temperature/wind_speed/precipitation/game_indoors — see attach_weather).
 
@@ -341,9 +351,10 @@ def build_game_team_features(games: pd.DataFrame, sp_ratings: pd.DataFrame = Non
 # shrink the training set more than expected — its fit() now prints a
 # per-column null-count breakdown specifically so that's visible in the
 # training log rather than silently degrading the model.
-# core_overall_diff: opponent-adjusted CORE rating, joined leakage-safe
-# per-week (see attach_core_ratings) -- CFBD Tier 1+ ('Opponent Adjusted
-# Metrics'). temperature/wind_speed/precipitation/game_indoors: per-game
+# core_overall_diff: opponent-adjusted CORE rating, joined to the PRIOR
+# season's final rating (see attach_core_ratings and the module docstring
+# for why) -- CFBD Tier 1+ ('Opponent Adjusted Metrics'). temperature/
+# wind_speed/precipitation/game_indoors: per-game
 # weather (see attach_weather) -- CFBD Tier 1+ ('Weather Data'). Both added
 # once the project moved off the CFBD free tier; GameMarginModel.fit()
 # drops any of these that turn out unavailable/all-null rather than crash,
