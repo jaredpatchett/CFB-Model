@@ -42,6 +42,8 @@ if __name__ == "__main__":
     adv_stats = load_years(config.DATA_RAW_DIR + "/adv_stats_{year}.csv", args.years)
     returning = load_years(config.DATA_RAW_DIR + "/returning_production_{year}.csv", args.years)
     player_stats_long = load_years(config.DATA_RAW_DIR + "/player_game_stats_{year}.csv", args.years)
+    core_ratings = load_years(config.DATA_RAW_DIR + "/core_ratings_{year}.csv", args.years)
+    weather = load_years(config.DATA_RAW_DIR + "/weather_{year}.csv", args.years)
 
     pace_returning = build_pace_returning_features(adv_stats, returning)
     if not pace_returning.empty:
@@ -49,9 +51,15 @@ if __name__ == "__main__":
     else:
         print("  [warn] no pace/returning-production data found — pace_diff/returning_production_diff "
               "will be all-null for this build (run fetch_historical_data.py to get it)")
+    if core_ratings.empty:
+        print("  [warn] no CORE ratings data found — core_overall_diff will be all-null for this build "
+              "(needs a CFBD Tier 1+ key; run fetch_historical_data.py to get it)")
+    if weather.empty:
+        print("  [warn] no weather data found — temperature/wind_speed/precipitation/game_indoors will be "
+              "all-null for this build (needs a CFBD Tier 1+ key; run fetch_historical_data.py to get it)")
 
     print("Building team features...")
-    team_features = build_game_team_features(games, sp, pace_returning)
+    team_features = build_game_team_features(games, sp, pace_returning, core_ratings=core_ratings, weather=weather)
     team_features.to_csv(f"{config.DATA_PROCESSED_DIR}/team_game_features.csv", index=False)
     print(f"  wrote {len(team_features)} rows")
 
