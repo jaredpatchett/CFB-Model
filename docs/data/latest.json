@@ -1,9 +1,10 @@
 {
-  "generated_at": "2026-08-20T21:18:11.587694+00:00",
+  "generated_at": "2026-08-21T15:59:35.343870+00:00",
   "team_metadata_year": 2025,
+  "current_season_year": 2026,
   "preseason_prior": {
-    "slope": 0.9330480041223184,
-    "intercept": 2.8118167634582356,
+    "slope": 0.9330480041223193,
+    "intercept": 2.8118167634582387,
     "residual_std": 13.564943249105635,
     "n_games": 2969
   },
@@ -17,8 +18,8 @@
       "net": 8.3,
       "off_sp_rating": 32.9,
       "def_sp_rating": 23.9,
-      "pace": 6.03,
-      "returning_production": 0.574
+      "pace": null,
+      "returning_production": 0.224
     },
     {
       "name": "North Carolina Tar Heels",
@@ -29,8 +30,8 @@
       "net": -6.6,
       "off_sp_rating": 17.2,
       "def_sp_rating": 25.0,
-      "pace": 5.5,
-      "returning_production": 0.159
+      "pace": null,
+      "returning_production": 0.278
     },
     {
       "name": "USC Trojans",
@@ -41,8 +42,8 @@
       "net": 16.9,
       "off_sp_rating": 38.9,
       "def_sp_rating": 21.0,
-      "pace": 6.19,
-      "returning_production": 0.368
+      "pace": null,
+      "returning_production": 0.592
     },
     {
       "name": "San Jose State Spartans",
@@ -53,8 +54,8 @@
       "net": -14.3,
       "off_sp_rating": 21.6,
       "def_sp_rating": 34.4,
-      "pace": 5.61,
-      "returning_production": 0.33
+      "pace": null,
+      "returning_production": 0.038
     },
     {
       "name": "Virginia Cavaliers",
@@ -65,8 +66,8 @@
       "net": 11.1,
       "off_sp_rating": 28.8,
       "def_sp_rating": 18.1,
-      "pace": 6.24,
-      "returning_production": 0.28
+      "pace": null,
+      "returning_production": 0.095
     },
     {
       "name": "NC State Wolfpack",
@@ -77,8 +78,8 @@
       "net": 4.8,
       "off_sp_rating": 31.4,
       "def_sp_rating": 25.5,
-      "pace": 5.6,
-      "returning_production": 0.726
+      "pace": null,
+      "returning_production": 0.599
     },
     {
       "name": "Jacksonville State Gamecocks",
@@ -89,8 +90,8 @@
       "net": -6.7,
       "off_sp_rating": 27.2,
       "def_sp_rating": 32.4,
-      "pace": 5.88,
-      "returning_production": 0.12
+      "pace": null,
+      "returning_production": 0.495
     },
     {
       "name": "Eastern Michigan Eagles",
@@ -101,8 +102,8 @@
       "net": -14.7,
       "off_sp_rating": 19.4,
       "def_sp_rating": 34.1,
-      "pace": 6.07,
-      "returning_production": 0.249
+      "pace": null,
+      "returning_production": 0.721
     },
     {
       "name": "Florida State Seminoles",
@@ -113,8 +114,8 @@
       "net": 7.2,
       "off_sp_rating": 29.3,
       "def_sp_rating": 21.2,
-      "pace": 6.44,
-      "returning_production": 0.131
+      "pace": null,
+      "returning_production": 0.401
     },
     {
       "name": "New Mexico State Aggies",
@@ -125,8 +126,8 @@
       "net": -15.5,
       "off_sp_rating": 19.7,
       "def_sp_rating": 34.9,
-      "pace": 5.56,
-      "returning_production": 0.555
+      "pace": null,
+      "returning_production": 0.244
     },
     {
       "name": "Stanford Cardinal",
@@ -137,8 +138,8 @@
       "net": -11.8,
       "off_sp_rating": 18.4,
       "def_sp_rating": 28.6,
-      "pace": 5.76,
-      "returning_production": 0.189
+      "pace": null,
+      "returning_production": 0.213
     },
     {
       "name": "Hawaii Rainbow Warriors",
@@ -149,8 +150,8 @@
       "net": 1.7,
       "off_sp_rating": 27.3,
       "def_sp_rating": 27.3,
-      "pace": 6.07,
-      "returning_production": 0.459
+      "pace": null,
+      "returning_production": 0.645
     },
     {
       "name": "UNLV Rebels",
@@ -161,8 +162,8 @@
       "net": 4.3,
       "off_sp_rating": 33.8,
       "def_sp_rating": 29.8,
-      "pace": 5.79,
-      "returning_production": 0.152
+      "pace": null,
+      "returning_production": 0.154
     },
     {
       "name": "Memphis Tigers",
@@ -173,8 +174,8 @@
       "net": 7.6,
       "off_sp_rating": 34.3,
       "def_sp_rating": 28.3,
-      "pace": 5.91,
-      "returning_production": 0.119
+      "pace": null,
+      "returning_production": 0.056
     },
     {
       "name": "Rutgers Scarlet Knights",
@@ -185,8 +186,8 @@
       "net": 1.0,
       "off_sp_rating": 31.6,
       "def_sp_rating": 30.7,
-      "pace": 6.98,
-      "returning_production": 0.672
+      "pace": null,
+      "returning_production": 0.444
     },
     {
       "name": "UMass Minutemen",
@@ -197,8 +198,8 @@
       "net": -36.6,
       "off_sp_rating": 7.8,
       "def_sp_rating": 42.8,
-      "pace": 5.68,
-      "returning_production": 0.234
+      "pace": null,
+      "returning_production": -0.567
     },
     {
       "name": "Wake Forest Demon Deacons",
@@ -209,8 +210,8 @@
       "net": 5.7,
       "off_sp_rating": 26.6,
       "def_sp_rating": 20.9,
-      "pace": 5.12,
-      "returning_production": 0.262
+      "pace": null,
+      "returning_production": 0.142
     },
     {
       "name": "Akron Zips",
@@ -221,8 +222,8 @@
       "net": -13.9,
       "off_sp_rating": 17.2,
       "def_sp_rating": 29.3,
-      "pace": 5.47,
-      "returning_production": 0.371
+      "pace": null,
+      "returning_production": 0.918
     },
     {
       "name": "Buffalo Bulls",
@@ -233,8 +234,8 @@
       "net": -7.5,
       "off_sp_rating": 18.2,
       "def_sp_rating": 27.4,
-      "pace": 5.28,
-      "returning_production": 0.659
+      "pace": null,
+      "returning_production": -0.008
     },
     {
       "name": "UCF Knights",
@@ -245,8 +246,8 @@
       "net": -1.2,
       "off_sp_rating": 23.2,
       "def_sp_rating": 24.0,
-      "pace": 5.8,
-      "returning_production": 0.101
+      "pace": null,
+      "returning_production": 0.248
     },
     {
       "name": "Delaware Blue Hens",
@@ -257,8 +258,8 @@
       "net": -10.9,
       "off_sp_rating": 26.2,
       "def_sp_rating": 36.2,
-      "pace": 6.25,
-      "returning_production": null
+      "pace": null,
+      "returning_production": 0.849
     },
     {
       "name": "Kennesaw State Owls",
@@ -269,8 +270,8 @@
       "net": -5.4,
       "off_sp_rating": 26.4,
       "def_sp_rating": 30.2,
-      "pace": 5.83,
-      "returning_production": 0.458
+      "pace": null,
+      "returning_production": 0.061
     },
     {
       "name": "Missouri Tigers",
@@ -281,8 +282,8 @@
       "net": 14.4,
       "off_sp_rating": 31.2,
       "def_sp_rating": 15.4,
-      "pace": 6.16,
-      "returning_production": 0.201
+      "pace": null,
+      "returning_production": 0.42
     },
     {
       "name": "Georgia Tech Yellow Jackets",
@@ -293,8 +294,8 @@
       "net": 9.3,
       "off_sp_rating": 32.5,
       "def_sp_rating": 24.9,
-      "pace": 6.11,
-      "returning_production": 0.669
+      "pace": null,
+      "returning_production": 0.126
     },
     {
       "name": "Colorado Buffaloes",
@@ -305,8 +306,8 @@
       "net": -8.3,
       "off_sp_rating": 22.6,
       "def_sp_rating": 29.5,
-      "pace": 5.49,
-      "returning_production": 0.075
+      "pace": null,
+      "returning_production": 0.137
     },
     {
       "name": "Minnesota Golden Gophers",
@@ -317,8 +318,8 @@
       "net": 1.5,
       "off_sp_rating": 23.8,
       "def_sp_rating": 20.8,
-      "pace": 5.56,
-      "returning_production": 0.276
+      "pace": null,
+      "returning_production": 0.649
     },
     {
       "name": "Utah Utes",
@@ -329,8 +330,8 @@
       "net": 22.2,
       "off_sp_rating": 39.7,
       "def_sp_rating": 17.5,
-      "pace": 6.47,
-      "returning_production": 0.14
+      "pace": null,
+      "returning_production": 0.679
     },
     {
       "name": "Illinois Fighting Illini",
@@ -341,8 +342,8 @@
       "net": 12.9,
       "off_sp_rating": 33.3,
       "def_sp_rating": 21.7,
-      "pace": 6.19,
-      "returning_production": 0.525
+      "pace": null,
+      "returning_production": 0.211
     },
     {
       "name": "UAB Blazers",
@@ -353,8 +354,8 @@
       "net": -15.8,
       "off_sp_rating": 25.5,
       "def_sp_rating": 39.8,
-      "pace": 6.4,
-      "returning_production": 0.332
+      "pace": null,
+      "returning_production": 0.796
     },
     {
       "name": "Georgia State Panthers",
@@ -365,8 +366,8 @@
       "net": -24.5,
       "off_sp_rating": 18.6,
       "def_sp_rating": 41.1,
-      "pace": 6.04,
-      "returning_production": 0.449
+      "pace": null,
+      "returning_production": 0.465
     },
     {
       "name": "Purdue Boilermakers",
@@ -377,8 +378,8 @@
       "net": -6.1,
       "off_sp_rating": 21.9,
       "def_sp_rating": 29.9,
-      "pace": 6.13,
-      "returning_production": 0.199
+      "pace": null,
+      "returning_production": 0.475
     },
     {
       "name": "Kansas Jayhawks",
@@ -389,8 +390,8 @@
       "net": 4.1,
       "off_sp_rating": 30.9,
       "def_sp_rating": 28.5,
-      "pace": 5.92,
-      "returning_production": 0.41
+      "pace": null,
+      "returning_production": 0.181
     },
     {
       "name": "Michigan State Spartans",
@@ -401,8 +402,8 @@
       "net": -3.4,
       "off_sp_rating": 26.6,
       "def_sp_rating": 28.7,
-      "pace": 5.63,
-      "returning_production": 0.662
+      "pace": null,
+      "returning_production": 0.209
     },
     {
       "name": "Toledo Rockets",
@@ -413,8 +414,8 @@
       "net": 6.0,
       "off_sp_rating": 25.8,
       "def_sp_rating": 18.5,
-      "pace": 5.4,
-      "returning_production": 0.685
+      "pace": null,
+      "returning_production": 0.663
     },
     {
       "name": "Oklahoma Sooners",
@@ -425,8 +426,8 @@
       "net": 18.3,
       "off_sp_rating": 30.1,
       "def_sp_rating": 12.9,
-      "pace": 5.45,
-      "returning_production": 0.528
+      "pace": null,
+      "returning_production": 0.632
     },
     {
       "name": "UTEP Miners",
@@ -437,8 +438,8 @@
       "net": -17.5,
       "off_sp_rating": 20.2,
       "def_sp_rating": 36.3,
-      "pace": 4.99,
-      "returning_production": 0.715
+      "pace": null,
+      "returning_production": -0.011
     },
     {
       "name": "Fresno State Bulldogs",
@@ -449,8 +450,8 @@
       "net": 1.8,
       "off_sp_rating": 23.0,
       "def_sp_rating": 21.1,
-      "pace": 5.37,
-      "returning_production": 0.172
+      "pace": null,
+      "returning_production": 0.383
     },
     {
       "name": "Miami Hurricanes",
@@ -461,8 +462,8 @@
       "net": 20.7,
       "off_sp_rating": 34.2,
       "def_sp_rating": 14.3,
-      "pace": 6.08,
-      "returning_production": 0.125
+      "pace": null,
+      "returning_production": 0.369
     },
     {
       "name": "Alabama Crimson Tide",
@@ -473,8 +474,8 @@
       "net": 14.8,
       "off_sp_rating": 32.2,
       "def_sp_rating": 16.1,
-      "pace": 6.26,
-      "returning_production": 0.433
+      "pace": null,
+      "returning_production": 0.264
     },
     {
       "name": "East Carolina Pirates",
@@ -485,8 +486,8 @@
       "net": 8.0,
       "off_sp_rating": 32.6,
       "def_sp_rating": 24.0,
-      "pace": 6.08,
-      "returning_production": 0.506
+      "pace": null,
+      "returning_production": 0.136
     },
     {
       "name": "Army Black Knights",
@@ -497,8 +498,8 @@
       "net": 0.8,
       "off_sp_rating": 24.7,
       "def_sp_rating": 24.1,
-      "pace": 7.07,
-      "returning_production": 0.252
+      "pace": null,
+      "returning_production": 0.802
     },
     {
       "name": "Bowling Green Falcons",
@@ -509,8 +510,8 @@
       "net": -12.6,
       "off_sp_rating": 15.4,
       "def_sp_rating": 28.8,
-      "pace": 5.35,
-      "returning_production": 0.079
+      "pace": null,
+      "returning_production": -0.062
     },
     {
       "name": "West Virginia Mountaineers",
@@ -521,8 +522,8 @@
       "net": -6.8,
       "off_sp_rating": 22.8,
       "def_sp_rating": 30.0,
-      "pace": 5.41,
-      "returning_production": 0.176
+      "pace": null,
+      "returning_production": 0.14
     },
     {
       "name": "Coastal Carolina Chanticleers",
@@ -533,8 +534,8 @@
       "net": -15.1,
       "off_sp_rating": 23.4,
       "def_sp_rating": 37.0,
-      "pace": 4.94,
-      "returning_production": 0.364
+      "pace": null,
+      "returning_production": 0.154
     },
     {
       "name": "Houston Cougars",
@@ -545,8 +546,8 @@
       "net": 7.4,
       "off_sp_rating": 31.5,
       "def_sp_rating": 23.0,
-      "pace": 6.04,
-      "returning_production": 0.68
+      "pace": null,
+      "returning_production": 0.812
     },
     {
       "name": "Oregon State Beavers",
@@ -557,8 +558,8 @@
       "net": -15.9,
       "off_sp_rating": 17.0,
       "def_sp_rating": 30.8,
-      "pace": 5.69,
-      "returning_production": 0.522
+      "pace": null,
+      "returning_production": 0.579
     },
     {
       "name": "Indiana Hoosiers",
@@ -569,8 +570,8 @@
       "net": 32.4,
       "off_sp_rating": 40.8,
       "def_sp_rating": 9.9,
-      "pace": 6.15,
-      "returning_production": 0.251
+      "pace": null,
+      "returning_production": 0.166
     },
     {
       "name": "North Texas Mean Green",
@@ -581,8 +582,8 @@
       "net": 13.8,
       "off_sp_rating": 43.1,
       "def_sp_rating": 28.6,
-      "pace": 6.08,
-      "returning_production": 0.237
+      "pace": null,
+      "returning_production": 0.025
     },
     {
       "name": "James Madison Dukes",
@@ -593,8 +594,8 @@
       "net": 12.3,
       "off_sp_rating": 34.9,
       "def_sp_rating": 21.4,
-      "pace": 5.75,
-      "returning_production": 0.5
+      "pace": null,
+      "returning_production": 0.08
     },
     {
       "name": "Liberty Flames",
@@ -605,8 +606,8 @@
       "net": -9.0,
       "off_sp_rating": 24.6,
       "def_sp_rating": 32.8,
-      "pace": 5.95,
-      "returning_production": 0.301
+      "pace": null,
+      "returning_production": 0.383
     },
     {
       "name": "UConn Huskies",
@@ -617,8 +618,8 @@
       "net": 5.1,
       "off_sp_rating": 32.0,
       "def_sp_rating": 28.5,
-      "pace": 5.63,
-      "returning_production": 0.68
+      "pace": null,
+      "returning_production": 0.023
     },
     {
       "name": "Pittsburgh Panthers",
@@ -629,8 +630,8 @@
       "net": 8.4,
       "off_sp_rating": 31.6,
       "def_sp_rating": 23.5,
-      "pace": 5.39,
-      "returning_production": 0.592
+      "pace": null,
+      "returning_production": 0.397
     },
     {
       "name": "Miami (OH) RedHawks",
@@ -641,8 +642,8 @@
       "net": -3.4,
       "off_sp_rating": 19.3,
       "def_sp_rating": 24.2,
-      "pace": 5.36,
-      "returning_production": 0.079
+      "pace": null,
+      "returning_production": 0.139
     },
     {
       "name": "Nebraska Cornhuskers",
@@ -653,8 +654,8 @@
       "net": 6.2,
       "off_sp_rating": 28.8,
       "def_sp_rating": 22.7,
-      "pace": 5.93,
-      "returning_production": 0.472
+      "pace": null,
+      "returning_production": 0.463
     },
     {
       "name": "Ohio Bobcats",
@@ -665,8 +666,8 @@
       "net": -4.0,
       "off_sp_rating": 23.2,
       "def_sp_rating": 25.2,
-      "pace": 6.14,
-      "returning_production": 0.648
+      "pace": null,
+      "returning_production": 0.625
     },
     {
       "name": "Syracuse Orange",
@@ -677,8 +678,8 @@
       "net": -13.1,
       "off_sp_rating": 18.8,
       "def_sp_rating": 33.0,
-      "pace": 5.62,
-      "returning_production": 0.131
+      "pace": null,
+      "returning_production": 0.35
     },
     {
       "name": "Ohio State Buckeyes",
@@ -689,8 +690,8 @@
       "net": 30.1,
       "off_sp_rating": 37.6,
       "def_sp_rating": 7.7,
-      "pace": 6.47,
-      "returning_production": 0.308
+      "pace": null,
+      "returning_production": 0.683
     },
     {
       "name": "Ball State Cardinals",
@@ -701,8 +702,8 @@
       "net": -23.0,
       "off_sp_rating": 13.4,
       "def_sp_rating": 34.4,
-      "pace": 5.26,
-      "returning_production": 0.082
+      "pace": null,
+      "returning_production": 0.057
     },
     {
       "name": "South Carolina Gamecocks",
@@ -713,8 +714,8 @@
       "net": 5.9,
       "off_sp_rating": 24.6,
       "def_sp_rating": 20.2,
-      "pace": 5.5,
-      "returning_production": 0.625
+      "pace": null,
+      "returning_production": 0.69
     },
     {
       "name": "Kent State Golden Flashes",
@@ -725,8 +726,8 @@
       "net": -19.3,
       "off_sp_rating": 17.0,
       "def_sp_rating": 34.9,
-      "pace": 4.81,
-      "returning_production": 0.113
+      "pace": null,
+      "returning_production": 0.641
     },
     {
       "name": "Air Force Falcons",
@@ -737,8 +738,8 @@
       "net": -3.2,
       "off_sp_rating": 28.3,
       "def_sp_rating": 31.7,
-      "pace": 7.03,
-      "returning_production": 0.63
+      "pace": null,
+      "returning_production": 0.574
     },
     {
       "name": "Iowa State Cyclones",
@@ -749,8 +750,8 @@
       "net": 9.9,
       "off_sp_rating": 28.1,
       "def_sp_rating": 19.5,
-      "pace": 6.19,
-      "returning_production": 0.6
+      "pace": null,
+      "returning_production": 0.017
     },
     {
       "name": "Kentucky Wildcats",
@@ -761,8 +762,8 @@
       "net": 1.8,
       "off_sp_rating": 25.5,
       "def_sp_rating": 23.7,
-      "pace": 5.76,
-      "returning_production": 0.27
+      "pace": null,
+      "returning_production": 0.193
     },
     {
       "name": "Temple Owls",
@@ -773,8 +774,8 @@
       "net": -5.1,
       "off_sp_rating": 27.1,
       "def_sp_rating": 33.2,
-      "pace": 5.7,
-      "returning_production": 0.409
+      "pace": null,
+      "returning_production": 0.37
     },
     {
       "name": "Georgia Bulldogs",
@@ -785,8 +786,8 @@
       "net": 24.1,
       "off_sp_rating": 37.0,
       "def_sp_rating": 14.8,
-      "pace": 6.5,
-      "returning_production": 0.372
+      "pace": null,
+      "returning_production": 0.687
     },
     {
       "name": "Auburn Tigers",
@@ -797,8 +798,8 @@
       "net": 11.6,
       "off_sp_rating": 28.3,
       "def_sp_rating": 17.4,
-      "pace": 6.13,
-      "returning_production": 0.218
+      "pace": null,
+      "returning_production": 0.144
     },
     {
       "name": "Baylor Bears",
@@ -809,8 +810,8 @@
       "net": 1.4,
       "off_sp_rating": 32.8,
       "def_sp_rating": 33.3,
-      "pace": 6.41,
-      "returning_production": 0.825
+      "pace": null,
+      "returning_production": 0.602
     },
     {
       "name": "Oregon Ducks",
@@ -821,8 +822,8 @@
       "net": 25.9,
       "off_sp_rating": 38.7,
       "def_sp_rating": 13.5,
-      "pace": 5.96,
-      "returning_production": 0.187
+      "pace": null,
+      "returning_production": 0.753
     },
     {
       "name": "Boise State Broncos",
@@ -833,8 +834,8 @@
       "net": 3.1,
       "off_sp_rating": 29.1,
       "def_sp_rating": 25.1,
-      "pace": 5.93,
-      "returning_production": 0.579
+      "pace": null,
+      "returning_production": 0.663
     },
     {
       "name": "Cincinnati Bearcats",
@@ -845,8 +846,8 @@
       "net": 4.5,
       "off_sp_rating": 30.2,
       "def_sp_rating": 26.4,
-      "pace": 5.6,
-      "returning_production": 0.497
+      "pace": null,
+      "returning_production": 0.083
     },
     {
       "name": "Boston College Eagles",
@@ -857,8 +858,8 @@
       "net": -8.5,
       "off_sp_rating": 23.3,
       "def_sp_rating": 33.1,
-      "pace": 5.9,
-      "returning_production": 0.62
+      "pace": null,
+      "returning_production": 0.156
     },
     {
       "name": "Charlotte 49ers",
@@ -869,8 +870,8 @@
       "net": -26.7,
       "off_sp_rating": 14.5,
       "def_sp_rating": 39.8,
-      "pace": 5.06,
-      "returning_production": 0.238
+      "pace": null,
+      "returning_production": 0.409
     },
     {
       "name": "Duke Blue Devils",
@@ -881,8 +882,8 @@
       "net": 6.6,
       "off_sp_rating": 34.8,
       "def_sp_rating": 29.2,
-      "pace": 6.19,
-      "returning_production": 0.179
+      "pace": null,
+      "returning_production": 0.171
     },
     {
       "name": "Tulane Green Wave",
@@ -893,8 +894,8 @@
       "net": 6.3,
       "off_sp_rating": 32.4,
       "def_sp_rating": 27.6,
-      "pace": 5.85,
-      "returning_production": 0.146
+      "pace": null,
+      "returning_production": 0.21
     },
     {
       "name": "Tennessee Volunteers",
@@ -905,8 +906,8 @@
       "net": 15.0,
       "off_sp_rating": 39.3,
       "def_sp_rating": 25.4,
-      "pace": 6.23,
-      "returning_production": 0.221
+      "pace": null,
+      "returning_production": 0.353
     },
     {
       "name": "Penn State Nittany Lions",
@@ -917,8 +918,8 @@
       "net": 18.1,
       "off_sp_rating": 35.1,
       "def_sp_rating": 18.8,
-      "pace": 6.24,
-      "returning_production": 0.564
+      "pace": null,
+      "returning_production": 0.076
     },
     {
       "name": "Marshall Thundering Herd",
@@ -929,8 +930,8 @@
       "net": -4.5,
       "off_sp_rating": 29.6,
       "def_sp_rating": 34.8,
-      "pace": 5.6,
-      "returning_production": 0.069
+      "pace": null,
+      "returning_production": 0.988
     },
     {
       "name": "Navy Midshipmen",
@@ -941,8 +942,8 @@
       "net": 6.2,
       "off_sp_rating": 33.6,
       "def_sp_rating": 27.9,
-      "pace": 6.27,
-      "returning_production": 0.973
+      "pace": null,
+      "returning_production": 0.138
     },
     {
       "name": "Texas Longhorns",
@@ -953,8 +954,8 @@
       "net": 16.2,
       "off_sp_rating": 32.9,
       "def_sp_rating": 17.9,
-      "pace": 5.4,
-      "returning_production": 0.283
+      "pace": null,
+      "returning_production": 0.721
     },
     {
       "name": "Texas State Bobcats",
@@ -965,8 +966,8 @@
       "net": 2.3,
       "off_sp_rating": 36.6,
       "def_sp_rating": 34.6,
-      "pace": 6.24,
-      "returning_production": 0.22
+      "pace": null,
+      "returning_production": 0.76
     },
     {
       "name": "UTSA Roadrunners",
@@ -977,8 +978,8 @@
       "net": 3.7,
       "off_sp_rating": 33.3,
       "def_sp_rating": 30.0,
-      "pace": 5.49,
-      "returning_production": 0.842
+      "pace": null,
+      "returning_production": 0.669
     },
     {
       "name": "Tulsa Golden Hurricane",
@@ -989,8 +990,8 @@
       "net": -10.0,
       "off_sp_rating": 21.7,
       "def_sp_rating": 33.1,
-      "pace": 6.25,
-      "returning_production": 0.235
+      "pace": null,
+      "returning_production": 0.413
     },
     {
       "name": "Oklahoma State Cowboys",
@@ -1001,8 +1002,8 @@
       "net": -15.1,
       "off_sp_rating": 15.2,
       "def_sp_rating": 31.6,
-      "pace": 5.54,
-      "returning_production": 0.132
+      "pace": null,
+      "returning_production": 0.0
     },
     {
       "name": "Arkansas Razorbacks",
@@ -1013,8 +1014,8 @@
       "net": 5.1,
       "off_sp_rating": 35.8,
       "def_sp_rating": 31.4,
-      "pace": 6.02,
-      "returning_production": 0.361
+      "pace": null,
+      "returning_production": 0.145
     },
     {
       "name": "Iowa Hawkeyes",
@@ -1025,8 +1026,8 @@
       "net": 19.7,
       "off_sp_rating": 32.1,
       "def_sp_rating": 14.2,
-      "pace": 5.92,
-      "returning_production": 0.488
+      "pace": null,
+      "returning_production": 0.342
     },
     {
       "name": "Northern Illinois Huskies",
@@ -1037,8 +1038,8 @@
       "net": -16.7,
       "off_sp_rating": 12.0,
       "def_sp_rating": 28.1,
-      "pace": 5.61,
-      "returning_production": 0.18
+      "pace": null,
+      "returning_production": 0.437
     },
     {
       "name": "Colorado State Rams",
@@ -1049,8 +1050,8 @@
       "net": -15.6,
       "off_sp_rating": 17.6,
       "def_sp_rating": 32.9,
-      "pace": 5.72,
-      "returning_production": 0.504
+      "pace": null,
+      "returning_production": 0.396
     },
     {
       "name": "Wyoming Cowboys",
@@ -1061,8 +1062,8 @@
       "net": -11.3,
       "off_sp_rating": 15.3,
       "def_sp_rating": 24.7,
-      "pace": 5.63,
-      "returning_production": 0.749
+      "pace": null,
+      "returning_production": 0.23
     },
     {
       "name": "Old Dominion Monarchs",
@@ -1073,8 +1074,8 @@
       "net": 5.9,
       "off_sp_rating": 31.6,
       "def_sp_rating": 23.7,
-      "pace": 5.3,
-      "returning_production": 0.412
+      "pace": null,
+      "returning_production": 0.092
     },
     {
       "name": "Texas Tech Red Raiders",
@@ -1085,8 +1086,8 @@
       "net": 27.6,
       "off_sp_rating": 39.3,
       "def_sp_rating": 12.3,
-      "pace": 5.63,
-      "returning_production": 0.589
+      "pace": null,
+      "returning_production": 0.534
     },
     {
       "name": "Arkansas State Red Wolves",
@@ -1097,8 +1098,8 @@
       "net": -8.8,
       "off_sp_rating": 24.4,
       "def_sp_rating": 33.5,
-      "pace": 6.25,
-      "returning_production": 0.586
+      "pace": null,
+      "returning_production": 0.3
     },
     {
       "name": "Vanderbilt Commodores",
@@ -1109,8 +1110,8 @@
       "net": 20.3,
       "off_sp_rating": 39.9,
       "def_sp_rating": 21.4,
-      "pace": 5.83,
-      "returning_production": 0.859
+      "pace": null,
+      "returning_production": 0.354
     },
     {
       "name": "Georgia Southern Eagles",
@@ -1121,8 +1122,8 @@
       "net": -9.4,
       "off_sp_rating": 28.3,
       "def_sp_rating": 37.7,
-      "pace": 5.92,
-      "returning_production": 0.656
+      "pace": null,
+      "returning_production": 0.058
     },
     {
       "name": "South Florida Bulls",
@@ -1133,8 +1134,8 @@
       "net": 11.6,
       "off_sp_rating": 37.7,
       "def_sp_rating": 25.3,
-      "pace": 5.63,
-      "returning_production": 0.296
+      "pace": null,
+      "returning_production": 0.126
     },
     {
       "name": "Florida International Panthers",
@@ -1145,8 +1146,8 @@
       "net": -10.5,
       "off_sp_rating": 26.1,
       "def_sp_rating": 35.8,
-      "pace": 5.52,
-      "returning_production": 0.42
+      "pace": null,
+      "returning_production": 0.316
     },
     {
       "name": "Rice Owls",
@@ -1157,8 +1158,8 @@
       "net": -14.8,
       "off_sp_rating": 17.7,
       "def_sp_rating": 33.9,
-      "pace": 5.88,
-      "returning_production": 0.107
+      "pace": null,
+      "returning_production": 0.394
     },
     {
       "name": "Utah State Aggies",
@@ -1169,8 +1170,8 @@
       "net": -3.1,
       "off_sp_rating": 29.5,
       "def_sp_rating": 31.2,
-      "pace": 5.28,
-      "returning_production": 0.246
+      "pace": null,
+      "returning_production": 0.652
     },
     {
       "name": "Kansas State Wildcats",
@@ -1181,8 +1182,8 @@
       "net": 7.0,
       "off_sp_rating": 31.3,
       "def_sp_rating": 25.0,
-      "pace": 5.49,
-      "returning_production": 0.69
+      "pace": null,
+      "returning_production": 0.714
     },
     {
       "name": "Michigan Wolverines",
@@ -1193,8 +1194,8 @@
       "net": 12.4,
       "off_sp_rating": 30.9,
       "def_sp_rating": 17.0,
-      "pace": 5.82,
-      "returning_production": 0.41
+      "pace": null,
+      "returning_production": 0.692
     },
     {
       "name": "Western Michigan Broncos",
@@ -1205,8 +1206,8 @@
       "net": -1.4,
       "off_sp_rating": 21.7,
       "def_sp_rating": 21.8,
-      "pace": 5.99,
-      "returning_production": 0.319
+      "pace": null,
+      "returning_production": 0.997
     },
     {
       "name": "Middle Tennessee Blue Raiders",
@@ -1217,8 +1218,8 @@
       "net": -16.0,
       "off_sp_rating": 20.4,
       "def_sp_rating": 37.0,
-      "pace": 5.74,
-      "returning_production": 0.505
+      "pace": null,
+      "returning_production": 0.325
     },
     {
       "name": "Texas A&M Aggies",
@@ -1229,8 +1230,8 @@
       "net": 20.7,
       "off_sp_rating": 38.0,
       "def_sp_rating": 16.4,
-      "pace": 5.56,
-      "returning_production": 0.532
+      "pace": null,
+      "returning_production": 0.728
     },
     {
       "name": "Missouri State Bears",
@@ -1241,8 +1242,8 @@
       "net": -10.7,
       "off_sp_rating": 25.6,
       "def_sp_rating": 34.8,
-      "pace": 5.51,
-      "returning_production": null
+      "pace": null,
+      "returning_production": 0.313
     },
     {
       "name": "Troy Trojans",
@@ -1253,8 +1254,8 @@
       "net": -4.8,
       "off_sp_rating": 23.6,
       "def_sp_rating": 29.0,
-      "pace": 5.56,
-      "returning_production": 0.239
+      "pace": null,
+      "returning_production": 0.353
     },
     {
       "name": "South Alabama Jaguars",
@@ -1265,8 +1266,8 @@
       "net": -12.7,
       "off_sp_rating": 25.4,
       "def_sp_rating": 36.0,
-      "pace": 6.3,
-      "returning_production": 0.254
+      "pace": null,
+      "returning_production": 0.786
     },
     {
       "name": "LSU Tigers",
@@ -1277,8 +1278,8 @@
       "net": 10.3,
       "off_sp_rating": 25.8,
       "def_sp_rating": 16.1,
-      "pace": 5.58,
-      "returning_production": 0.66
+      "pace": null,
+      "returning_production": 0.212
     },
     {
       "name": "Clemson Tigers",
@@ -1289,8 +1290,8 @@
       "net": 9.5,
       "off_sp_rating": 27.5,
       "def_sp_rating": 18.9,
-      "pace": 5.92,
-      "returning_production": 0.826
+      "pace": null,
+      "returning_production": 0.414
     },
     {
       "name": "Louisiana Tech Bulldogs",
@@ -1301,8 +1302,8 @@
       "net": -1.3,
       "off_sp_rating": 25.6,
       "def_sp_rating": 27.0,
-      "pace": 5.49,
-      "returning_production": 0.434
+      "pace": null,
+      "returning_production": 0.639
     },
     {
       "name": "Mississippi State Bulldogs",
@@ -1313,8 +1314,8 @@
       "net": 4.1,
       "off_sp_rating": 31.6,
       "def_sp_rating": 29.0,
-      "pace": 5.7,
-      "returning_production": 0.416
+      "pace": null,
+      "returning_production": 0.339
     },
     {
       "name": "UL Monroe Warhawks",
@@ -1325,8 +1326,8 @@
       "net": -21.6,
       "off_sp_rating": 16.1,
       "def_sp_rating": 35.7,
-      "pace": 5.2,
-      "returning_production": 0.594
+      "pace": null,
+      "returning_production": 0.387
     },
     {
       "name": "Virginia Tech Hokies",
@@ -1337,8 +1338,8 @@
       "net": -10.1,
       "off_sp_rating": 21.4,
       "def_sp_rating": 30.8,
-      "pace": 5.77,
-      "returning_production": 0.403
+      "pace": null,
+      "returning_production": 0.367
     },
     {
       "name": "Florida Gators",
@@ -1349,8 +1350,8 @@
       "net": 3.5,
       "off_sp_rating": 24.5,
       "def_sp_rating": 22.6,
-      "pace": 5.72,
-      "returning_production": 0.537
+      "pace": null,
+      "returning_production": 0.691
     },
     {
       "name": "Florida Atlantic Owls",
@@ -1361,8 +1362,8 @@
       "net": -8.7,
       "off_sp_rating": 27.8,
       "def_sp_rating": 38.1,
-      "pace": 6.36,
-      "returning_production": 0.208
+      "pace": null,
+      "returning_production": 0.684
     },
     {
       "name": "BYU Cougars",
@@ -1373,8 +1374,8 @@
       "net": 15.9,
       "off_sp_rating": 33.9,
       "def_sp_rating": 18.8,
-      "pace": 6.22,
-      "returning_production": 0.375
+      "pace": null,
+      "returning_production": 0.785
     },
     {
       "name": "Louisiana Ragin Cajuns",
@@ -1385,8 +1386,8 @@
       "net": -10.1,
       "off_sp_rating": 25.3,
       "def_sp_rating": 34.0,
-      "pace": 5.75,
-      "returning_production": 0.145
+      "pace": null,
+      "returning_production": 0.919
     },
     {
       "name": "Northwestern Wildcats",
@@ -1397,8 +1398,8 @@
       "net": 5.8,
       "off_sp_rating": 24.4,
       "def_sp_rating": 20.0,
-      "pace": 6.46,
-      "returning_production": 0.202
+      "pace": null,
+      "returning_production": 0.885
     },
     {
       "name": "Arizona Wildcats",
@@ -1409,8 +1410,8 @@
       "net": 12.0,
       "off_sp_rating": 33.0,
       "def_sp_rating": 19.5,
-      "pace": 5.87,
-      "returning_production": 0.561
+      "pace": null,
+      "returning_production": 0.649
     },
     {
       "name": "San Diego State Aztecs",
@@ -1421,8 +1422,8 @@
       "net": 6.7,
       "off_sp_rating": 24.4,
       "def_sp_rating": 19.6,
-      "pace": 5.54,
-      "returning_production": 0.109
+      "pace": null,
+      "returning_production": 0.987
     },
     {
       "name": "Arizona State Sun Devils",
@@ -1433,8 +1434,8 @@
       "net": 3.9,
       "off_sp_rating": 28.3,
       "def_sp_rating": 22.7,
-      "pace": 5.85,
-      "returning_production": 0.646
+      "pace": null,
+      "returning_production": 0.155
     },
     {
       "name": "New Mexico Lobos",
@@ -1445,8 +1446,8 @@
       "net": 0.9,
       "off_sp_rating": 25.4,
       "def_sp_rating": 26.1,
-      "pace": 5.9,
-      "returning_production": 0.028
+      "pace": null,
+      "returning_production": 0.582
     },
     {
       "name": "Central Michigan Chippewas",
@@ -1457,8 +1458,8 @@
       "net": -8.8,
       "off_sp_rating": 17.6,
       "def_sp_rating": 25.7,
-      "pace": 5.49,
-      "returning_production": 0.103
+      "pace": null,
+      "returning_production": 0.54
     },
     {
       "name": "California Golden Bears",
@@ -1469,8 +1470,8 @@
       "net": -3.2,
       "off_sp_rating": 25.6,
       "def_sp_rating": 27.9,
-      "pace": 5.92,
-      "returning_production": 0.063
+      "pace": null,
+      "returning_production": 0.583
     },
     {
       "name": "UCLA Bruins",
@@ -1481,8 +1482,8 @@
       "net": -8.7,
       "off_sp_rating": 21.7,
       "def_sp_rating": 30.4,
-      "pace": 6.09,
-      "returning_production": 0.219
+      "pace": null,
+      "returning_production": 0.57
     },
     {
       "name": "Nevada Wolf Pack",
@@ -1493,8 +1494,8 @@
       "net": -13.4,
       "off_sp_rating": 14.2,
       "def_sp_rating": 28.7,
-      "pace": 5.39,
-      "returning_production": 0.218
+      "pace": null,
+      "returning_production": 0.355
     },
     {
       "name": "Western Kentucky Hilltoppers",
@@ -1505,8 +1506,8 @@
       "net": 1.6,
       "off_sp_rating": 28.8,
       "def_sp_rating": 28.6,
-      "pace": 5.62,
-      "returning_production": 0.13
+      "pace": null,
+      "returning_production": 0.837
     },
     {
       "name": "Washington Huskies",
@@ -1517,8 +1518,8 @@
       "net": 18.4,
       "off_sp_rating": 34.5,
       "def_sp_rating": 15.3,
-      "pace": 6.07,
-      "returning_production": 0.424
+      "pace": null,
+      "returning_production": 0.544
     },
     {
       "name": "Washington State Cougars",
@@ -1529,8 +1530,8 @@
       "net": 3.8,
       "off_sp_rating": 24.6,
       "def_sp_rating": 20.5,
-      "pace": 5.81,
-      "returning_production": 0.182
+      "pace": null,
+      "returning_production": 0.913
     },
     {
       "name": "Ole Miss Rebels",
@@ -1541,8 +1542,8 @@
       "net": 24.0,
       "off_sp_rating": 40.4,
       "def_sp_rating": 18.3,
-      "pace": 6.27,
-      "returning_production": 0.175
+      "pace": null,
+      "returning_production": 0.503
     },
     {
       "name": "Louisville Cardinals",
@@ -1553,8 +1554,8 @@
       "net": 12.4,
       "off_sp_rating": 31.6,
       "def_sp_rating": 19.8,
-      "pace": 5.27,
-      "returning_production": 0.349
+      "pace": null,
+      "returning_production": 0.348
     },
     {
       "name": "Notre Dame Fighting Irish",
@@ -1565,8 +1566,8 @@
       "net": 24.4,
       "off_sp_rating": 40.0,
       "def_sp_rating": 16.3,
-      "pace": 5.6,
-      "returning_production": 0.367
+      "pace": null,
+      "returning_production": 0.512
     },
     {
       "name": "Wisconsin Badgers",
@@ -1577,8 +1578,8 @@
       "net": -4.4,
       "off_sp_rating": 17.4,
       "def_sp_rating": 20.9,
-      "pace": 5.53,
-      "returning_production": 0.402
+      "pace": null,
+      "returning_production": 0.31
     },
     {
       "name": "SMU Mustangs",
@@ -1589,8 +1590,8 @@
       "net": 13.4,
       "off_sp_rating": 34.2,
       "def_sp_rating": 19.5,
-      "pace": 5.25,
-      "returning_production": 0.501
+      "pace": null,
+      "returning_production": 0.569
     }
   ],
   "games": [
@@ -1614,22 +1615,22 @@
       "home_unmatched": false,
       "away_unmatched": false,
       "has_model_line": true,
-      "neutral_site": false,
-      "model_source": "trained_model",
+      "neutral_site": true,
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 8.3,
       "away_sp_rating": -6.6,
       "sp_rating_diff": 14.9,
-      "model_predicted_margin": 16.23,
-      "model_home_win_prob": 0.9162,
-      "model_away_win_prob": 0.0838,
-      "model_fair_ml_home": -1093.5,
-      "model_fair_ml_away": 1093.5,
+      "model_predicted_margin": 13.9,
+      "model_home_win_prob": 0.8473,
+      "model_away_win_prob": 0.1527,
+      "model_fair_ml_home": -554.8,
+      "model_fair_ml_away": 554.8,
       "book_implied_prob_home": 0.7335,
       "book_implied_prob_away": 0.2665,
-      "ev_home_pct": 19.81,
-      "ev_away_pct": -69.84
+      "ev_home_pct": 10.8,
+      "ev_away_pct": -45.02
     },
     {
       "commence_time": "2026-08-29T19:00:00Z",
@@ -1674,21 +1675,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 11.1,
       "away_sp_rating": 4.8,
       "sp_rating_diff": 6.3,
-      "model_predicted_margin": 7.22,
-      "model_home_win_prob": 0.7302,
-      "model_away_win_prob": 0.2698,
-      "model_fair_ml_home": -270.7,
-      "model_fair_ml_away": 270.7,
+      "model_predicted_margin": 8.69,
+      "model_home_win_prob": 0.7391,
+      "model_away_win_prob": 0.2609,
+      "model_fair_ml_home": -283.3,
+      "model_fair_ml_away": 283.3,
       "book_implied_prob_home": 0.6575,
       "book_implied_prob_away": 0.3425,
-      "ev_home_pct": 6.52,
-      "ev_away_pct": -24.47
+      "ev_home_pct": 7.82,
+      "ev_away_pct": -26.95
     },
     {
       "commence_time": "2026-08-29T21:30:00Z",
@@ -1755,21 +1756,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 7.2,
       "away_sp_rating": -15.5,
       "sp_rating_diff": 22.7,
-      "model_predicted_margin": 22.55,
-      "model_home_win_prob": 0.9724,
-      "model_away_win_prob": 0.0276,
-      "model_fair_ml_home": -3523.0,
-      "model_fair_ml_away": 3523.0,
+      "model_predicted_margin": 23.99,
+      "model_home_win_prob": 0.9615,
+      "model_away_win_prob": 0.0385,
+      "model_fair_ml_home": -2499.2,
+      "model_fair_ml_away": 2499.2,
       "book_implied_prob_home": 0.9539,
       "book_implied_prob_away": 0.0461,
-      "ev_home_pct": -1.26,
-      "ev_away_pct": -42.04
+      "ev_home_pct": -2.37,
+      "ev_away_pct": -19.2
     },
     {
       "commence_time": "2026-08-29T23:00:00Z",
@@ -1780,33 +1781,33 @@
       "home_color": "#8c1515",
       "away_color": "#024731",
       "book_used": "draftkings",
-      "moneyline_home": -225.0,
-      "moneyline_away": 185.0,
+      "moneyline_home": -218.0,
+      "moneyline_away": 180.0,
       "spread_home": -5.5,
       "spread_away": 5.5,
-      "spread_price_home": -115.0,
-      "spread_price_away": -105.0,
+      "spread_price_home": -108.0,
+      "spread_price_away": -112.0,
       "total_over": 49.5,
       "total_under": 49.5,
       "home_unmatched": false,
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": -11.8,
       "away_sp_rating": 1.7,
       "sp_rating_diff": -13.5,
-      "model_predicted_margin": -10.68,
-      "model_home_win_prob": 0.182,
-      "model_away_win_prob": 0.818,
-      "model_fair_ml_home": 449.4,
-      "model_fair_ml_away": -449.4,
-      "book_implied_prob_home": 0.6636,
-      "book_implied_prob_away": 0.3364,
-      "ev_home_pct": -73.71,
-      "ev_away_pct": 133.12
+      "model_predicted_margin": -9.78,
+      "model_home_win_prob": 0.2354,
+      "model_away_win_prob": 0.7646,
+      "model_fair_ml_home": 324.9,
+      "model_fair_ml_away": -324.9,
+      "book_implied_prob_home": 0.6575,
+      "book_implied_prob_away": 0.3425,
+      "ev_home_pct": -65.67,
+      "ev_away_pct": 114.1
     },
     {
       "commence_time": "2026-08-30T02:00:00Z",
@@ -1819,31 +1820,31 @@
       "book_used": "draftkings",
       "moneyline_home": -218.0,
       "moneyline_away": 180.0,
-      "spread_home": -6.0,
-      "spread_away": 6.0,
-      "spread_price_home": -105.0,
-      "spread_price_away": -115.0,
+      "spread_home": -5.5,
+      "spread_away": 5.5,
+      "spread_price_home": -110.0,
+      "spread_price_away": -110.0,
       "total_over": 56.5,
       "total_under": 56.5,
       "home_unmatched": false,
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 4.3,
       "away_sp_rating": 7.6,
       "sp_rating_diff": -3.3,
-      "model_predicted_margin": -1.29,
-      "model_home_win_prob": 0.4565,
-      "model_away_win_prob": 0.5435,
-      "model_fair_ml_home": 119.1,
-      "model_fair_ml_away": -119.1,
+      "model_predicted_margin": -0.27,
+      "model_home_win_prob": 0.4921,
+      "model_away_win_prob": 0.5079,
+      "model_fair_ml_home": 103.2,
+      "model_fair_ml_away": -103.2,
       "book_implied_prob_home": 0.6575,
       "book_implied_prob_away": 0.3425,
-      "ev_home_pct": -33.41,
-      "ev_away_pct": 52.19
+      "ev_home_pct": -28.21,
+      "ev_away_pct": 42.2
     },
     {
       "commence_time": "2026-09-03T22:00:00Z",
@@ -1858,29 +1859,29 @@
       "moneyline_away": 2000.0,
       "spread_home": -30.5,
       "spread_away": 30.5,
-      "spread_price_home": -112.0,
-      "spread_price_away": -108.0,
+      "spread_price_home": -120.0,
+      "spread_price_away": 100.0,
       "total_over": 53.5,
       "total_under": 53.5,
       "home_unmatched": false,
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 1.0,
       "away_sp_rating": -36.6,
       "sp_rating_diff": 37.6,
-      "model_predicted_margin": 39.61,
-      "model_home_win_prob": 0.9996,
-      "model_away_win_prob": 0.0004,
-      "model_fair_ml_home": -263066.0,
-      "model_fair_ml_away": 263066.0,
+      "model_predicted_margin": 37.89,
+      "model_home_win_prob": 0.9974,
+      "model_away_win_prob": 0.0026,
+      "model_fair_ml_home": -38264.1,
+      "model_fair_ml_away": 38264.1,
       "book_implied_prob_home": 0.9539,
       "book_implied_prob_away": 0.0461,
-      "ev_home_pct": 1.5,
-      "ev_away_pct": -99.2
+      "ev_home_pct": 1.27,
+      "ev_away_pct": -94.53
     },
     {
       "commence_time": "2026-09-03T23:00:00Z",
@@ -1903,21 +1904,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 5.7,
       "away_sp_rating": -13.9,
       "sp_rating_diff": 19.6,
-      "model_predicted_margin": 21.99,
-      "model_home_win_prob": 0.9692,
-      "model_away_win_prob": 0.0308,
-      "model_fair_ml_home": -3145.7,
-      "model_fair_ml_away": 3145.7,
+      "model_predicted_margin": 21.1,
+      "model_home_win_prob": 0.9401,
+      "model_away_win_prob": 0.0599,
+      "model_fair_ml_home": -1568.9,
+      "model_fair_ml_away": 1568.9,
       "book_implied_prob_home": 0.9311,
       "book_implied_prob_away": 0.0689,
-      "ev_home_pct": 0.38,
-      "ev_away_pct": -56.87
+      "ev_home_pct": -2.63,
+      "ev_away_pct": -16.11
     },
     {
       "commence_time": "2026-09-03T23:00:00Z",
@@ -2050,21 +2051,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 9.3,
       "away_sp_rating": -8.3,
       "sp_rating_diff": 17.6,
-      "model_predicted_margin": 18.27,
-      "model_home_win_prob": 0.9398,
-      "model_away_win_prob": 0.0602,
-      "model_fair_ml_home": -1561.6,
-      "model_fair_ml_away": 1561.6,
+      "model_predicted_margin": 19.23,
+      "model_home_win_prob": 0.9219,
+      "model_away_win_prob": 0.0781,
+      "model_fair_ml_home": -1180.2,
+      "model_fair_ml_away": 1180.2,
       "book_implied_prob_home": 0.6854,
       "book_implied_prob_away": 0.3146,
-      "ev_home_pct": 31.57,
-      "ev_away_pct": -81.64
+      "ev_home_pct": 29.06,
+      "ev_away_pct": -76.18
     },
     {
       "commence_time": "2026-09-04T00:00:00Z",
@@ -2131,21 +2132,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 12.9,
       "away_sp_rating": -15.8,
       "sp_rating_diff": 28.7,
-      "model_predicted_margin": 24.09,
-      "model_home_win_prob": 0.9797,
-      "model_away_win_prob": 0.0203,
-      "model_fair_ml_home": -4829.4,
-      "model_fair_ml_away": 4829.4,
+      "model_predicted_margin": 29.59,
+      "model_home_win_prob": 0.9854,
+      "model_away_win_prob": 0.0146,
+      "model_fair_ml_home": -6759.8,
+      "model_fair_ml_away": 6759.8,
       "book_implied_prob_home": 0.9684,
       "book_implied_prob_away": 0.0316,
-      "ev_home_pct": -1.05,
-      "ev_away_pct": -37.11
+      "ev_home_pct": -0.47,
+      "ev_away_pct": -54.81
     },
     {
       "commence_time": "2026-09-04T22:30:00Z",
@@ -2168,21 +2169,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": -14.7,
       "away_sp_rating": -14.3,
       "sp_rating_diff": -0.4,
-      "model_predicted_margin": -1.99,
-      "model_home_win_prob": 0.4328,
-      "model_away_win_prob": 0.5672,
-      "model_fair_ml_home": 131.1,
-      "model_fair_ml_away": -131.1,
+      "model_predicted_margin": 2.44,
+      "model_home_win_prob": 0.5713,
+      "model_away_win_prob": 0.4287,
+      "model_fair_ml_home": -133.3,
+      "model_fair_ml_away": 133.3,
       "book_implied_prob_home": 0.6447,
       "book_implied_prob_away": 0.3553,
-      "ev_home_pct": -35.61,
-      "ev_away_pct": 53.15
+      "ev_home_pct": -15.0,
+      "ev_away_pct": 15.74
     },
     {
       "commence_time": "2026-09-04T23:00:00Z",
@@ -2271,21 +2272,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": -3.4,
       "away_sp_rating": 6.0,
       "sp_rating_diff": -9.4,
-      "model_predicted_margin": -8.39,
-      "model_home_win_prob": 0.2377,
-      "model_away_win_prob": 0.7623,
-      "model_fair_ml_home": 320.6,
-      "model_fair_ml_away": -320.6,
+      "model_predicted_margin": -5.96,
+      "model_home_win_prob": 0.3302,
+      "model_away_win_prob": 0.6698,
+      "model_fair_ml_home": 202.8,
+      "model_fair_ml_away": -202.8,
       "book_implied_prob_home": 0.7715,
       "book_implied_prob_away": 0.2285,
-      "ev_home_pct": -70.43,
-      "ev_away_pct": 220.15
+      "ev_home_pct": -58.92,
+      "ev_away_pct": 181.3
     },
     {
       "commence_time": "2026-09-05T00:00:00Z",
@@ -2330,21 +2331,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 16.9,
       "away_sp_rating": 1.8,
       "sp_rating_diff": 15.1,
-      "model_predicted_margin": 16.82,
-      "model_home_win_prob": 0.9236,
-      "model_away_win_prob": 0.0764,
-      "model_fair_ml_home": -1208.7,
-      "model_fair_ml_away": 1208.7,
+      "model_predicted_margin": 16.9,
+      "model_home_win_prob": 0.8936,
+      "model_away_win_prob": 0.1064,
+      "model_fair_ml_home": -839.9,
+      "model_fair_ml_away": 839.9,
       "book_implied_prob_home": 0.9357,
       "book_implied_prob_away": 0.0643,
-      "ev_home_pct": -4.76,
-      "ev_away_pct": 14.62
+      "ev_home_pct": -7.85,
+      "ev_away_pct": 59.6
     },
     {
       "commence_time": "2026-09-05T01:00:00Z",
@@ -2367,21 +2368,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": -11.8,
       "away_sp_rating": 20.7,
       "sp_rating_diff": -32.5,
-      "model_predicted_margin": -32.7,
-      "model_home_win_prob": 0.0027,
-      "model_away_win_prob": 0.9973,
-      "model_fair_ml_home": 36667.5,
-      "model_fair_ml_away": -36667.5,
+      "model_predicted_margin": -27.51,
+      "model_home_win_prob": 0.0213,
+      "model_away_win_prob": 0.9787,
+      "model_fair_ml_home": 4601.3,
+      "model_fair_ml_away": -4601.3,
       "book_implied_prob_home": 0.0643,
       "book_implied_prob_away": 0.9357,
-      "ev_home_pct": -95.92,
-      "ev_away_pct": 2.84
+      "ev_home_pct": -68.09,
+      "ev_away_pct": 0.93
     },
     {
       "commence_time": "2026-09-05T16:00:00Z",
@@ -2404,21 +2405,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 14.8,
       "away_sp_rating": 8.0,
       "sp_rating_diff": 6.8,
-      "model_predicted_margin": 8.92,
-      "model_home_win_prob": 0.776,
-      "model_away_win_prob": 0.224,
-      "model_fair_ml_home": -346.3,
-      "model_fair_ml_away": 346.3,
+      "model_predicted_margin": 9.16,
+      "model_home_win_prob": 0.7502,
+      "model_away_win_prob": 0.2498,
+      "model_fair_ml_home": -300.3,
+      "model_fair_ml_away": 300.3,
       "book_implied_prob_home": 0.9539,
       "book_implied_prob_away": 0.0461,
-      "ev_home_pct": -21.21,
-      "ev_away_pct": 370.5
+      "ev_home_pct": -23.83,
+      "ev_away_pct": 424.65
     },
     {
       "commence_time": "2026-09-05T16:00:00Z",
@@ -2485,21 +2486,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": -6.8,
       "away_sp_rating": -15.1,
       "sp_rating_diff": 8.3,
-      "model_predicted_margin": 12.13,
-      "model_home_win_prob": 0.8487,
-      "model_away_win_prob": 0.1513,
-      "model_fair_ml_home": -560.9,
-      "model_fair_ml_away": 560.9,
+      "model_predicted_margin": 10.56,
+      "model_home_win_prob": 0.7818,
+      "model_away_win_prob": 0.2182,
+      "model_fair_ml_home": -358.2,
+      "model_fair_ml_away": 358.2,
       "book_implied_prob_home": 0.8989,
       "book_implied_prob_away": 0.1011,
-      "ev_home_pct": -9.28,
-      "ev_away_pct": 43.73
+      "ev_home_pct": -16.43,
+      "ev_away_pct": 107.32
     },
     {
       "commence_time": "2026-09-05T16:00:00Z",
@@ -2522,21 +2523,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 7.4,
       "away_sp_rating": -15.9,
       "sp_rating_diff": 23.3,
-      "model_predicted_margin": 21.58,
-      "model_home_win_prob": 0.9667,
-      "model_away_win_prob": 0.0333,
-      "model_fair_ml_home": -2903.5,
-      "model_fair_ml_away": 2903.5,
+      "model_predicted_margin": 24.55,
+      "model_home_win_prob": 0.9648,
+      "model_away_win_prob": 0.0352,
+      "model_fair_ml_home": -2744.8,
+      "model_fair_ml_away": 2744.8,
       "book_implied_prob_home": 0.904,
       "book_implied_prob_away": 0.096,
-      "ev_home_pct": 2.71,
-      "ev_away_pct": -66.71
+      "ev_home_pct": 2.52,
+      "ev_away_pct": -64.85
     },
     {
       "commence_time": "2026-09-05T16:00:00Z",
@@ -2581,21 +2582,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 12.3,
       "away_sp_rating": -9.0,
       "sp_rating_diff": 21.3,
-      "model_predicted_margin": 19.9,
-      "model_home_win_prob": 0.9547,
-      "model_away_win_prob": 0.0453,
-      "model_fair_ml_home": -2106.5,
-      "model_fair_ml_away": 2106.5,
+      "model_predicted_margin": 22.69,
+      "model_home_win_prob": 0.9528,
+      "model_away_win_prob": 0.0472,
+      "model_fair_ml_home": -2017.5,
+      "model_fair_ml_away": 2017.5,
       "book_implied_prob_home": 0.6806,
       "book_implied_prob_away": 0.3194,
-      "ev_home_pct": 34.43,
-      "ev_away_pct": -86.4
+      "ev_home_pct": 34.17,
+      "ev_away_pct": -85.83
     },
     {
       "commence_time": "2026-09-05T16:00:00Z",
@@ -2606,12 +2607,12 @@
       "home_color": "#000e2f",
       "away_color": null,
       "book_used": "draftkings",
-      "moneyline_home": -1050.0,
-      "moneyline_away": 675.0,
-      "spread_home": -18.5,
-      "spread_away": 18.5,
-      "spread_price_home": -112.0,
-      "spread_price_away": -108.0,
+      "moneyline_home": -1200.0,
+      "moneyline_away": 750.0,
+      "spread_home": -19.5,
+      "spread_away": 19.5,
+      "spread_price_home": -108.0,
+      "spread_price_away": -112.0,
       "total_over": 58.5,
       "total_under": 58.5,
       "home_unmatched": false,
@@ -2640,21 +2641,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 8.4,
       "away_sp_rating": -3.4,
       "sp_rating_diff": 11.8,
-      "model_predicted_margin": 14.55,
-      "model_home_win_prob": 0.892,
-      "model_away_win_prob": 0.108,
-      "model_fair_ml_home": -825.6,
-      "model_fair_ml_away": 825.6,
+      "model_predicted_margin": 13.82,
+      "model_home_win_prob": 0.8459,
+      "model_away_win_prob": 0.1541,
+      "model_fair_ml_home": -548.9,
+      "model_fair_ml_away": 548.9,
       "book_implied_prob_home": 0.8525,
       "book_implied_prob_away": 0.1475,
-      "ev_home_pct": 0.35,
-      "ev_away_pct": -29.77
+      "ev_home_pct": -4.84,
+      "ev_away_pct": 0.18
     },
     {
       "commence_time": "2026-09-05T16:00:00Z",
@@ -2677,21 +2678,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 6.2,
       "away_sp_rating": -4.0,
       "sp_rating_diff": 10.2,
-      "model_predicted_margin": 14.85,
-      "model_home_win_prob": 0.8965,
-      "model_away_win_prob": 0.1035,
-      "model_fair_ml_home": -866.6,
-      "model_fair_ml_away": 866.6,
+      "model_predicted_margin": 12.33,
+      "model_home_win_prob": 0.8183,
+      "model_away_win_prob": 0.1817,
+      "model_fair_ml_home": -450.3,
+      "model_fair_ml_away": 450.3,
       "book_implied_prob_home": 0.9357,
       "book_implied_prob_away": 0.0643,
-      "ev_home_pct": -7.54,
-      "ev_away_pct": 55.18
+      "ev_home_pct": -15.61,
+      "ev_away_pct": 172.56
     },
     {
       "commence_time": "2026-09-05T16:00:00Z",
@@ -2758,21 +2759,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 5.9,
       "away_sp_rating": -19.3,
       "sp_rating_diff": 25.2,
-      "model_predicted_margin": 25.1,
-      "model_home_win_prob": 0.9836,
-      "model_away_win_prob": 0.0164,
-      "model_fair_ml_home": -5987.7,
-      "model_fair_ml_away": 5987.7,
+      "model_predicted_margin": 26.32,
+      "model_home_win_prob": 0.9738,
+      "model_away_win_prob": 0.0262,
+      "model_fair_ml_home": -3723.9,
+      "model_fair_ml_away": 3723.9,
       "book_implied_prob_home": 0.9808,
       "book_implied_prob_away": 0.0192,
-      "ev_home_pct": -1.54,
-      "ev_away_pct": -16.22
+      "ev_home_pct": -2.52,
+      "ev_away_pct": 33.37
     },
     {
       "commence_time": "2026-09-05T17:00:00Z",
@@ -2783,10 +2784,10 @@
       "home_color": "#003594",
       "away_color": null,
       "book_used": "draftkings",
-      "moneyline_home": -9000.0,
-      "moneyline_away": 2500.0,
-      "spread_home": -29.5,
-      "spread_away": 29.5,
+      "moneyline_home": -10000.0,
+      "moneyline_away": 3000.0,
+      "spread_home": -30.5,
+      "spread_away": 30.5,
       "spread_price_home": -108.0,
       "spread_price_away": -112.0,
       "total_over": 58.5,
@@ -2873,10 +2874,10 @@
       "book_used": "draftkings",
       "moneyline_home": NaN,
       "moneyline_away": null,
-      "spread_home": -45.5,
-      "spread_away": 45.5,
-      "spread_price_home": -102.0,
-      "spread_price_away": -118.0,
+      "spread_home": -46.5,
+      "spread_away": 46.5,
+      "spread_price_home": -110.0,
+      "spread_price_away": -110.0,
       "total_over": 56.5,
       "total_under": 56.5,
       "home_unmatched": false,
@@ -2926,22 +2927,22 @@
       "home_unmatched": false,
       "away_unmatched": false,
       "has_model_line": true,
-      "neutral_site": false,
-      "model_source": "trained_model",
+      "neutral_site": true,
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 11.6,
       "away_sp_rating": 1.4,
       "sp_rating_diff": 10.2,
-      "model_predicted_margin": 11.31,
-      "model_home_win_prob": 0.8318,
-      "model_away_win_prob": 0.1682,
-      "model_fair_ml_home": -494.6,
-      "model_fair_ml_away": 494.6,
+      "model_predicted_margin": 9.52,
+      "model_home_win_prob": 0.7585,
+      "model_away_win_prob": 0.2415,
+      "model_fair_ml_home": -314.1,
+      "model_fair_ml_away": 314.1,
       "book_implied_prob_home": 0.7095,
       "book_implied_prob_away": 0.2905,
-      "ev_home_pct": 12.37,
-      "ev_away_pct": -44.5
+      "ev_home_pct": 2.47,
+      "ev_away_pct": -20.32
     },
     {
       "commence_time": "2026-09-05T19:30:00Z",
@@ -2964,21 +2965,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 25.9,
       "away_sp_rating": 3.1,
       "sp_rating_diff": 22.8,
-      "model_predicted_margin": 20.25,
-      "model_home_win_prob": 0.9574,
-      "model_away_win_prob": 0.0426,
-      "model_fair_ml_home": -2250.0,
-      "model_fair_ml_away": 2250.0,
+      "model_predicted_margin": 24.09,
+      "model_home_win_prob": 0.9621,
+      "model_away_win_prob": 0.0379,
+      "model_fair_ml_home": -2538.3,
+      "model_fair_ml_away": 2538.3,
       "book_implied_prob_home": 0.9396,
       "book_implied_prob_away": 0.0604,
-      "ev_home_pct": -1.6,
-      "ev_away_pct": -31.92
+      "ev_home_pct": -1.12,
+      "ev_away_pct": -39.36
     },
     {
       "commence_time": "2026-09-05T19:30:00Z",
@@ -3001,21 +3002,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 4.5,
       "away_sp_rating": -8.5,
       "sp_rating_diff": 13.0,
-      "model_predicted_margin": 5.45,
-      "model_home_win_prob": 0.6786,
-      "model_away_win_prob": 0.3214,
-      "model_fair_ml_home": -211.1,
-      "model_fair_ml_away": 211.1,
+      "model_predicted_margin": 14.94,
+      "model_home_win_prob": 0.8647,
+      "model_away_win_prob": 0.1353,
+      "model_fair_ml_home": -638.9,
+      "model_fair_ml_away": 638.9,
       "book_implied_prob_home": 0.7258,
       "book_implied_prob_away": 0.2742,
-      "ev_home_pct": -10.25,
-      "ev_away_pct": 12.5
+      "ev_home_pct": 14.36,
+      "ev_away_pct": -52.63
     },
     {
       "commence_time": "2026-09-05T19:30:00Z",
@@ -3060,21 +3061,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 6.6,
       "away_sp_rating": 6.3,
       "sp_rating_diff": 0.3,
-      "model_predicted_margin": 7.98,
-      "model_home_win_prob": 0.7513,
-      "model_away_win_prob": 0.2487,
-      "model_fair_ml_home": -302.2,
-      "model_fair_ml_away": 302.2,
+      "model_predicted_margin": 3.09,
+      "model_home_win_prob": 0.5901,
+      "model_away_win_prob": 0.4099,
+      "model_fair_ml_home": -144.0,
+      "model_fair_ml_away": 144.0,
       "book_implied_prob_home": 0.7441,
       "book_implied_prob_away": 0.2559,
-      "ev_home_pct": -3.09,
-      "ev_away_pct": -6.75
+      "ev_home_pct": -23.88,
+      "ev_away_pct": 53.7
     },
     {
       "commence_time": "2026-09-05T19:30:00Z",
@@ -3141,21 +3142,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 18.1,
       "away_sp_rating": -4.5,
       "sp_rating_diff": 22.6,
-      "model_predicted_margin": 23.26,
-      "model_home_win_prob": 0.976,
-      "model_away_win_prob": 0.024,
-      "model_fair_ml_home": -4062.5,
-      "model_fair_ml_away": 4062.5,
+      "model_predicted_margin": 23.9,
+      "model_home_win_prob": 0.9609,
+      "model_away_win_prob": 0.0391,
+      "model_fair_ml_home": -2460.7,
+      "model_fair_ml_away": 2460.7,
       "book_implied_prob_home": 0.9396,
       "book_implied_prob_away": 0.0604,
-      "ev_home_pct": 0.31,
-      "ev_away_pct": -61.56
+      "ev_home_pct": -1.24,
+      "ev_away_pct": -37.52
     },
     {
       "commence_time": "2026-09-05T19:30:00Z",
@@ -3200,21 +3201,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 16.2,
       "away_sp_rating": 2.3,
       "sp_rating_diff": 13.9,
-      "model_predicted_margin": 13.08,
-      "model_home_win_prob": 0.8668,
-      "model_away_win_prob": 0.1332,
-      "model_fair_ml_home": -651.0,
-      "model_fair_ml_away": 651.0,
+      "model_predicted_margin": 15.78,
+      "model_home_win_prob": 0.8777,
+      "model_away_win_prob": 0.1223,
+      "model_fair_ml_home": -717.4,
+      "model_fair_ml_away": 717.4,
       "book_implied_prob_home": 0.9684,
       "book_implied_prob_away": 0.0316,
-      "ev_home_pct": -12.45,
-      "ev_away_pct": 312.79
+      "ev_home_pct": -11.36,
+      "ev_away_pct": 279.25
     },
     {
       "commence_time": "2026-09-05T19:30:00Z",
@@ -3259,21 +3260,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": -10.0,
       "away_sp_rating": -15.1,
       "sp_rating_diff": 5.1,
-      "model_predicted_margin": 3.72,
-      "model_home_win_prob": 0.6241,
-      "model_away_win_prob": 0.3759,
-      "model_fair_ml_home": -166.0,
-      "model_fair_ml_away": 166.0,
+      "model_predicted_margin": 7.57,
+      "model_home_win_prob": 0.7116,
+      "model_away_win_prob": 0.2884,
+      "model_fair_ml_home": -246.7,
+      "model_fair_ml_away": 246.7,
       "book_implied_prob_home": 0.1729,
       "book_implied_prob_away": 0.8271,
-      "ev_home_pct": 246.39,
-      "ev_away_pct": -56.4
+      "ev_home_pct": 294.94,
+      "ev_away_pct": -66.55
     },
     {
       "commence_time": "2026-09-05T20:15:00Z",
@@ -3318,21 +3319,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 19.7,
       "away_sp_rating": -16.7,
       "sp_rating_diff": 36.4,
-      "model_predicted_margin": 35.44,
-      "model_home_win_prob": 0.9987,
-      "model_away_win_prob": 0.0013,
-      "model_fair_ml_home": -77136.6,
-      "model_fair_ml_away": 77136.6,
+      "model_predicted_margin": 36.77,
+      "model_home_win_prob": 0.9966,
+      "model_away_win_prob": 0.0034,
+      "model_fair_ml_home": -29716.2,
+      "model_fair_ml_away": 29716.2,
       "book_implied_prob_home": 0.9761,
       "book_implied_prob_away": 0.0239,
-      "ev_home_pct": 0.07,
-      "ev_away_pct": -94.69
+      "ev_home_pct": -0.14,
+      "ev_away_pct": -86.25
     },
     {
       "commence_time": "2026-09-05T21:00:00Z",
@@ -3377,21 +3378,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": -15.6,
       "away_sp_rating": -11.3,
       "sp_rating_diff": -4.3,
-      "model_predicted_margin": -2.97,
-      "model_home_win_prob": 0.4004,
-      "model_away_win_prob": 0.5996,
-      "model_fair_ml_home": 149.8,
-      "model_fair_ml_away": -149.8,
+      "model_predicted_margin": -1.2,
+      "model_home_win_prob": 0.4647,
+      "model_away_win_prob": 0.5353,
+      "model_fair_ml_home": 115.2,
+      "model_fair_ml_away": -115.2,
       "book_implied_prob_home": 0.6092,
       "book_implied_prob_away": 0.3908,
-      "ev_home_pct": -37.08,
-      "ev_away_pct": 46.91
+      "ev_home_pct": -26.97,
+      "ev_away_pct": 31.14
     },
     {
       "commence_time": "2026-09-05T22:00:00Z",
@@ -3458,21 +3459,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 7.6,
       "away_sp_rating": -8.8,
       "sp_rating_diff": 16.4,
-      "model_predicted_margin": 14.04,
-      "model_home_win_prob": 0.8837,
-      "model_away_win_prob": 0.1163,
-      "model_fair_ml_home": -760.0,
-      "model_fair_ml_away": 760.0,
+      "model_predicted_margin": 18.11,
+      "model_home_win_prob": 0.9091,
+      "model_away_win_prob": 0.0909,
+      "model_fair_ml_home": -1000.3,
+      "model_fair_ml_away": 1000.3,
       "book_implied_prob_home": 0.7572,
       "book_implied_prob_away": 0.2428,
-      "ev_home_pct": 11.94,
-      "ev_away_pct": -54.07
+      "ev_home_pct": 15.15,
+      "ev_away_pct": -64.1
     },
     {
       "commence_time": "2026-09-05T23:00:00Z",
@@ -3561,21 +3562,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 11.6,
       "away_sp_rating": -10.5,
       "sp_rating_diff": 22.1,
-      "model_predicted_margin": 20.47,
-      "model_home_win_prob": 0.9591,
-      "model_away_win_prob": 0.0409,
-      "model_fair_ml_home": -2342.6,
-      "model_fair_ml_away": 2342.6,
+      "model_predicted_margin": 23.43,
+      "model_home_win_prob": 0.958,
+      "model_away_win_prob": 0.042,
+      "model_fair_ml_home": -2278.3,
+      "model_fair_ml_away": 2278.3,
       "book_implied_prob_home": 0.8043,
       "book_implied_prob_away": 0.1957,
-      "ev_home_pct": 14.35,
-      "ev_away_pct": -79.94
+      "ev_home_pct": 14.22,
+      "ev_away_pct": -79.4
     },
     {
       "commence_time": "2026-09-05T23:00:00Z",
@@ -3664,21 +3665,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 12.4,
       "away_sp_rating": -1.4,
       "sp_rating_diff": 13.8,
-      "model_predicted_margin": 15.05,
-      "model_home_win_prob": 0.8997,
-      "model_away_win_prob": 0.1003,
-      "model_fair_ml_home": -896.7,
-      "model_fair_ml_away": 896.7,
+      "model_predicted_margin": 15.69,
+      "model_home_win_prob": 0.8763,
+      "model_away_win_prob": 0.1237,
+      "model_fair_ml_home": -708.2,
+      "model_fair_ml_away": 708.2,
       "book_implied_prob_home": 0.9418,
       "book_implied_prob_away": 0.0582,
-      "ev_home_pct": -8.23,
-      "ev_away_pct": 65.55
+      "ev_home_pct": -10.62,
+      "ev_away_pct": 104.17
     },
     {
       "commence_time": "2026-09-05T23:00:00Z",
@@ -3789,21 +3790,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 10.3,
       "away_sp_rating": 9.5,
       "sp_rating_diff": 0.8,
-      "model_predicted_margin": 4.63,
-      "model_home_win_prob": 0.6529,
-      "model_away_win_prob": 0.3471,
-      "model_fair_ml_home": -188.1,
-      "model_fair_ml_away": 188.1,
+      "model_predicted_margin": 3.56,
+      "model_home_win_prob": 0.6035,
+      "model_away_win_prob": 0.3965,
+      "model_fair_ml_home": -152.2,
+      "model_fair_ml_away": 152.2,
       "book_implied_prob_home": 0.7772,
       "book_implied_prob_away": 0.2228,
-      "ev_home_pct": -19.52,
-      "ev_away_pct": 49.25
+      "ev_home_pct": -25.62,
+      "ev_away_pct": 70.51
     },
     {
       "commence_time": "2026-09-05T23:30:00Z",
@@ -3892,21 +3893,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 3.5,
       "away_sp_rating": -8.7,
       "sp_rating_diff": 12.2,
-      "model_predicted_margin": 14.12,
-      "model_home_win_prob": 0.8849,
-      "model_away_win_prob": 0.1151,
-      "model_fair_ml_home": -769.1,
-      "model_fair_ml_away": 769.1,
+      "model_predicted_margin": 14.2,
+      "model_home_win_prob": 0.8523,
+      "model_away_win_prob": 0.1477,
+      "model_fair_ml_home": -577.2,
+      "model_fair_ml_away": 577.2,
       "book_implied_prob_home": 0.9399,
       "book_implied_prob_away": 0.0601,
-      "ev_home_pct": -9.54,
-      "ev_away_pct": 84.09
+      "ev_home_pct": -12.87,
+      "ev_away_pct": 136.28
     },
     {
       "commence_time": "2026-09-06T00:00:00Z",
@@ -4083,21 +4084,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 0.9,
       "away_sp_rating": -8.8,
       "sp_rating_diff": 9.7,
-      "model_predicted_margin": 11.23,
-      "model_home_win_prob": 0.8301,
-      "model_away_win_prob": 0.1699,
-      "model_fair_ml_home": -488.4,
-      "model_fair_ml_away": 488.4,
+      "model_predicted_margin": 11.86,
+      "model_home_win_prob": 0.8091,
+      "model_away_win_prob": 0.1909,
+      "model_fair_ml_home": -423.8,
+      "model_fair_ml_away": 423.8,
       "book_implied_prob_home": 0.801,
       "book_implied_prob_away": 0.199,
-      "ev_home_pct": -0.39,
-      "ev_away_pct": -17.92
+      "ev_home_pct": -2.91,
+      "ev_away_pct": -7.78
     },
     {
       "commence_time": "2026-09-06T02:00:00Z",
@@ -4120,21 +4121,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 1.7,
       "away_sp_rating": 4.3,
       "sp_rating_diff": -2.6,
-      "model_predicted_margin": -0.44,
-      "model_home_win_prob": 0.4849,
-      "model_away_win_prob": 0.5151,
-      "model_fair_ml_home": 106.2,
-      "model_fair_ml_away": -106.2,
+      "model_predicted_margin": 0.39,
+      "model_home_win_prob": 0.5113,
+      "model_away_win_prob": 0.4887,
+      "model_fair_ml_home": -104.6,
+      "model_fair_ml_away": 104.6,
       "book_implied_prob_home": 0.4289,
       "book_implied_prob_away": 0.5711,
-      "ev_home_pct": 9.11,
-      "ev_away_pct": -12.97
+      "ev_home_pct": 15.05,
+      "ev_away_pct": -17.43
     },
     {
       "commence_time": "2026-09-06T02:00:00Z",
@@ -4179,21 +4180,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": -3.2,
       "away_sp_rating": -8.7,
       "sp_rating_diff": 5.5,
-      "model_predicted_margin": 9.83,
-      "model_home_win_prob": 0.7983,
-      "model_away_win_prob": 0.2017,
-      "model_fair_ml_home": -395.8,
-      "model_fair_ml_away": 395.8,
+      "model_predicted_margin": 7.94,
+      "model_home_win_prob": 0.7209,
+      "model_away_win_prob": 0.2791,
+      "model_fair_ml_home": -258.3,
+      "model_fair_ml_away": 258.3,
       "book_implied_prob_home": 0.488,
       "book_implied_prob_away": 0.512,
-      "ev_home_pct": 56.59,
-      "ev_away_pct": -62.29
+      "ev_home_pct": 41.41,
+      "ev_away_pct": -47.83
     },
     {
       "commence_time": "2026-09-06T02:30:00Z",
@@ -4216,21 +4217,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": -13.4,
       "away_sp_rating": 1.6,
       "sp_rating_diff": -15.0,
-      "model_predicted_margin": -10.64,
-      "model_home_win_prob": 0.1829,
-      "model_away_win_prob": 0.8171,
-      "model_fair_ml_home": 446.7,
-      "model_fair_ml_away": -446.7,
+      "model_predicted_margin": -11.18,
+      "model_home_win_prob": 0.2048,
+      "model_away_win_prob": 0.7952,
+      "model_fair_ml_home": 388.2,
+      "model_fair_ml_away": -388.2,
       "book_implied_prob_home": 0.438,
       "book_implied_prob_away": 0.562,
-      "ev_home_pct": -59.76,
-      "ev_away_pct": 40.07
+      "ev_home_pct": -54.94,
+      "ev_away_pct": 36.31
     },
     {
       "commence_time": "2026-09-06T20:00:00Z",
@@ -4253,21 +4254,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 18.4,
       "away_sp_rating": 3.8,
       "sp_rating_diff": 14.6,
-      "model_predicted_margin": 15.88,
-      "model_home_win_prob": 0.9115,
-      "model_away_win_prob": 0.0885,
-      "model_fair_ml_home": -1029.3,
-      "model_fair_ml_away": 1029.3,
+      "model_predicted_margin": 16.43,
+      "model_home_win_prob": 0.8872,
+      "model_away_win_prob": 0.1128,
+      "model_fair_ml_home": -786.2,
+      "model_fair_ml_away": 786.2,
       "book_implied_prob_home": 0.9229,
       "book_implied_prob_away": 0.0771,
-      "ev_home_pct": -4.8,
-      "ev_away_pct": 10.68
+      "ev_home_pct": -7.34,
+      "ev_away_pct": 41.06
     },
     {
       "commence_time": "2026-09-06T23:30:00Z",
@@ -4289,22 +4290,22 @@
       "home_unmatched": false,
       "away_unmatched": false,
       "has_model_line": true,
-      "neutral_site": false,
-      "model_source": "trained_model",
+      "neutral_site": true,
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 24.0,
       "away_sp_rating": 12.4,
       "sp_rating_diff": 11.6,
-      "model_predicted_margin": 15.5,
-      "model_home_win_prob": 0.9061,
-      "model_away_win_prob": 0.0939,
-      "model_fair_ml_home": -965.3,
-      "model_fair_ml_away": 965.3,
+      "model_predicted_margin": 10.82,
+      "model_home_win_prob": 0.7875,
+      "model_away_win_prob": 0.2125,
+      "model_fair_ml_home": -370.7,
+      "model_fair_ml_away": 370.7,
       "book_implied_prob_home": 0.6817,
       "book_implied_prob_away": 0.3183,
-      "ev_home_pct": 24.81,
-      "ev_away_pct": -72.31
+      "ev_home_pct": 8.47,
+      "ev_away_pct": -37.32
     },
     {
       "commence_time": "2026-09-06T23:30:00Z",
@@ -4315,33 +4316,33 @@
       "home_color": "#0c2340",
       "away_color": "#a00000",
       "book_used": "fanduel",
-      "moneyline_home": -2300.0,
-      "moneyline_away": 1060.0,
+      "moneyline_home": -2500.0,
+      "moneyline_away": 1100.0,
       "spread_home": -20.5,
       "spread_away": 20.5,
-      "spread_price_home": -115.0,
-      "spread_price_away": -105.0,
+      "spread_price_home": -120.0,
+      "spread_price_away": -102.0,
       "total_over": 47.5,
       "total_under": 47.5,
       "home_unmatched": false,
       "away_unmatched": false,
       "has_model_line": true,
-      "neutral_site": false,
-      "model_source": "trained_model",
+      "neutral_site": true,
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 24.4,
       "away_sp_rating": -4.4,
       "sp_rating_diff": 28.8,
-      "model_predicted_margin": 29.46,
-      "model_home_win_prob": 0.9939,
-      "model_away_win_prob": 0.0061,
-      "model_fair_ml_home": -16199.0,
-      "model_fair_ml_away": 16199.0,
-      "book_implied_prob_home": 0.9175,
-      "book_implied_prob_away": 0.0825,
-      "ev_home_pct": 3.71,
-      "ev_away_pct": -92.88
+      "model_predicted_margin": 26.87,
+      "model_home_win_prob": 0.9762,
+      "model_away_win_prob": 0.0238,
+      "model_fair_ml_home": -4102.2,
+      "model_fair_ml_away": 4102.2,
+      "book_implied_prob_home": 0.9202,
+      "book_implied_prob_away": 0.0798,
+      "ev_home_pct": 1.53,
+      "ev_away_pct": -71.44
     },
     {
       "commence_time": "2026-09-07T23:30:00Z",
@@ -4364,21 +4365,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 7.2,
       "away_sp_rating": 13.4,
       "sp_rating_diff": -6.2,
-      "model_predicted_margin": -6.07,
-      "model_home_win_prob": 0.3028,
-      "model_away_win_prob": 0.6972,
-      "model_fair_ml_home": 230.2,
-      "model_fair_ml_away": -230.2,
+      "model_predicted_margin": -2.97,
+      "model_home_win_prob": 0.4133,
+      "model_away_win_prob": 0.5867,
+      "model_fair_ml_home": 142.0,
+      "model_fair_ml_away": -142.0,
       "book_implied_prob_home": 0.4541,
       "book_implied_prob_away": 0.5459,
-      "ev_home_pct": -37.01,
-      "ev_away_pct": 20.6
+      "ev_home_pct": -14.04,
+      "ev_away_pct": 1.5
     },
     {
       "commence_time": "2026-09-12T00:00:00Z",
@@ -4401,21 +4402,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 4.1,
       "away_sp_rating": 14.4,
       "sp_rating_diff": -10.3,
-      "model_predicted_margin": -14.04,
-      "model_home_win_prob": 0.1163,
-      "model_away_win_prob": 0.8837,
-      "model_fair_ml_home": 759.7,
-      "model_fair_ml_away": -759.7,
+      "model_predicted_margin": -6.8,
+      "model_home_win_prob": 0.3081,
+      "model_away_win_prob": 0.6919,
+      "model_fair_ml_home": 224.5,
+      "model_fair_ml_away": -224.5,
       "book_implied_prob_home": 0.3296,
       "book_implied_prob_away": 0.6704,
-      "ev_home_pct": -66.27,
-      "ev_away_pct": 25.97
+      "ev_home_pct": -10.65,
+      "ev_away_pct": -1.37
     },
     {
       "commence_time": "2026-09-12T16:00:00Z",
@@ -4438,21 +4439,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 22.2,
       "away_sp_rating": 5.1,
       "sp_rating_diff": 17.1,
-      "model_predicted_margin": 18.76,
-      "model_home_win_prob": 0.9446,
-      "model_away_win_prob": 0.0554,
-      "model_fair_ml_home": -1705.2,
-      "model_fair_ml_away": 1705.2,
+      "model_predicted_margin": 18.77,
+      "model_home_win_prob": 0.9167,
+      "model_away_win_prob": 0.0833,
+      "model_fair_ml_home": -1101.1,
+      "model_fair_ml_away": 1101.1,
       "book_implied_prob_home": 0.7301,
       "book_implied_prob_away": 0.2699,
-      "ev_home_pct": 23.98,
-      "ev_away_pct": -80.33
+      "ev_home_pct": 20.32,
+      "ev_away_pct": -70.44
     },
     {
       "commence_time": "2026-09-12T16:00:00Z",
@@ -4475,21 +4476,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 12.4,
       "away_sp_rating": 18.3,
       "sp_rating_diff": -5.9,
-      "model_predicted_margin": -4.89,
-      "model_home_win_prob": 0.3387,
-      "model_away_win_prob": 0.6613,
-      "model_fair_ml_home": 195.2,
-      "model_fair_ml_away": -195.2,
+      "model_predicted_margin": -2.69,
+      "model_home_win_prob": 0.4213,
+      "model_away_win_prob": 0.5787,
+      "model_fair_ml_home": 137.4,
+      "model_fair_ml_away": -137.4,
       "book_implied_prob_home": 0.5076,
       "book_implied_prob_away": 0.4924,
-      "ev_home_pct": -36.16,
-      "ev_away_pct": 28.52
+      "ev_home_pct": -20.58,
+      "ev_away_pct": 12.46
     },
     {
       "commence_time": "2026-09-12T16:00:00Z",
@@ -4500,33 +4501,33 @@
       "home_color": "#fe5c00",
       "away_color": "#007030",
       "book_used": "fanduel",
-      "moneyline_home": 580.0,
-      "moneyline_away": -880.0,
+      "moneyline_home": 640.0,
+      "moneyline_away": -1000.0,
       "spread_home": 17.5,
       "spread_away": -17.5,
-      "spread_price_home": -115.0,
-      "spread_price_away": -105.0,
+      "spread_price_home": -110.0,
+      "spread_price_away": -110.0,
       "total_over": 60.5,
       "total_under": 60.5,
       "home_unmatched": false,
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": -15.1,
       "away_sp_rating": 25.9,
       "sp_rating_diff": -41.0,
-      "model_predicted_margin": -39.27,
-      "model_home_win_prob": 0.0004,
-      "model_away_win_prob": 0.9996,
-      "model_fair_ml_home": 237053.6,
-      "model_fair_ml_away": -237053.6,
-      "book_implied_prob_home": 0.1407,
-      "book_implied_prob_away": 0.8593,
-      "ev_home_pct": -99.71,
-      "ev_away_pct": 11.32
+      "model_predicted_margin": -35.44,
+      "model_home_win_prob": 0.0045,
+      "model_away_win_prob": 0.9955,
+      "model_fair_ml_home": 22174.0,
+      "model_fair_ml_away": -22174.0,
+      "book_implied_prob_home": 0.1294,
+      "book_implied_prob_away": 0.8706,
+      "ev_home_pct": -96.68,
+      "ev_away_pct": 9.51
     },
     {
       "commence_time": "2026-09-12T23:30:00Z",
@@ -4537,33 +4538,33 @@
       "home_color": "#000000",
       "away_color": "#c8102e",
       "book_used": "fanduel",
-      "moneyline_home": -550.0,
-      "moneyline_away": 400.0,
+      "moneyline_home": -650.0,
+      "moneyline_away": 460.0,
       "spread_home": -12.5,
       "spread_away": 12.5,
-      "spread_price_home": -122.0,
-      "spread_price_away": 100.0,
-      "total_over": 41.5,
-      "total_under": 41.5,
+      "spread_price_home": -124.0,
+      "spread_price_away": 102.0,
+      "total_over": 42.5,
+      "total_under": 42.5,
       "home_unmatched": false,
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 19.7,
       "away_sp_rating": 9.9,
       "sp_rating_diff": 9.8,
-      "model_predicted_margin": 9.35,
-      "model_home_win_prob": 0.7866,
-      "model_away_win_prob": 0.2134,
-      "model_fair_ml_home": -368.5,
-      "model_fair_ml_away": 368.5,
-      "book_implied_prob_home": 0.8088,
-      "book_implied_prob_away": 0.1912,
-      "ev_home_pct": -7.04,
-      "ev_away_pct": 6.71
+      "model_predicted_margin": 11.96,
+      "model_home_win_prob": 0.8109,
+      "model_away_win_prob": 0.1891,
+      "model_fair_ml_home": -428.9,
+      "model_fair_ml_away": 428.9,
+      "book_implied_prob_home": 0.8292,
+      "book_implied_prob_away": 0.1708,
+      "ev_home_pct": -6.43,
+      "ev_away_pct": 5.87
     },
     {
       "commence_time": "2026-09-12T23:30:00Z",
@@ -4586,21 +4587,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 16.2,
       "away_sp_rating": 30.1,
       "sp_rating_diff": -13.9,
-      "model_predicted_margin": -15.87,
-      "model_home_win_prob": 0.0887,
-      "model_away_win_prob": 0.9113,
-      "model_fair_ml_home": 1027.2,
-      "model_fair_ml_away": -1027.2,
+      "model_predicted_margin": -10.16,
+      "model_home_win_prob": 0.227,
+      "model_away_win_prob": 0.773,
+      "model_fair_ml_home": 340.6,
+      "model_fair_ml_away": -340.6,
       "book_implied_prob_home": 0.512,
       "book_implied_prob_away": 0.488,
-      "ev_home_pct": -83.41,
-      "ev_away_pct": 78.75
+      "ev_home_pct": -57.56,
+      "ev_away_pct": 51.63
     },
     {
       "commence_time": "2026-09-19T16:00:00Z",
@@ -4623,21 +4624,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 5.1,
       "away_sp_rating": 24.1,
       "sp_rating_diff": -19.0,
-      "model_predicted_margin": -18.78,
-      "model_home_win_prob": 0.0552,
-      "model_away_win_prob": 0.9448,
-      "model_fair_ml_home": 1711.3,
-      "model_fair_ml_away": -1711.3,
+      "model_predicted_margin": -14.92,
+      "model_home_win_prob": 0.1358,
+      "model_away_win_prob": 0.8642,
+      "model_fair_ml_home": 636.6,
+      "model_fair_ml_away": -636.6,
       "book_implied_prob_home": 0.1407,
       "book_implied_prob_away": 0.8593,
-      "ev_home_pct": -62.46,
-      "ev_away_pct": 5.22
+      "ev_home_pct": -7.69,
+      "ev_away_pct": -3.75
     },
     {
       "commence_time": "2026-09-19T23:30:00Z",
@@ -4660,21 +4661,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 24.0,
       "away_sp_rating": 10.3,
       "sp_rating_diff": 13.7,
-      "model_predicted_margin": 13.44,
-      "model_home_win_prob": 0.8734,
-      "model_away_win_prob": 0.1266,
-      "model_fair_ml_home": -689.9,
-      "model_fair_ml_away": 689.9,
+      "model_predicted_margin": 15.59,
+      "model_home_win_prob": 0.8749,
+      "model_away_win_prob": 0.1251,
+      "model_fair_ml_home": -699.0,
+      "model_fair_ml_away": 699.0,
       "book_implied_prob_home": 0.5404,
       "book_implied_prob_away": 0.4596,
-      "ev_home_pct": 54.52,
-      "ev_away_pct": -73.67
+      "ev_home_pct": 54.78,
+      "ev_away_pct": -73.97
     },
     {
       "commence_time": "2026-10-10T16:00:00Z",
@@ -4697,21 +4698,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": true,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 18.3,
       "away_sp_rating": 16.2,
       "sp_rating_diff": 2.1,
-      "model_predicted_margin": 2.75,
-      "model_home_win_prob": 0.5924,
-      "model_away_win_prob": 0.4076,
-      "model_fair_ml_home": -145.3,
-      "model_fair_ml_away": 145.3,
+      "model_predicted_margin": 1.96,
+      "model_home_win_prob": 0.5574,
+      "model_away_win_prob": 0.4426,
+      "model_fair_ml_home": -126.0,
+      "model_fair_ml_away": 126.0,
       "book_implied_prob_home": 0.3325,
       "book_implied_prob_away": 0.6675,
-      "ev_home_pct": 70.6,
-      "ev_away_pct": -41.51
+      "ev_home_pct": 60.54,
+      "ev_away_pct": -36.5
     },
     {
       "commence_time": "2026-10-11T00:00:00Z",
@@ -4733,22 +4734,22 @@
       "home_unmatched": false,
       "away_unmatched": false,
       "has_model_line": true,
-      "neutral_site": true,
-      "model_source": "trained_model",
+      "neutral_site": false,
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 14.8,
       "away_sp_rating": 24.1,
       "sp_rating_diff": -9.3,
-      "model_predicted_margin": -10.5,
-      "model_home_win_prob": 0.1861,
-      "model_away_win_prob": 0.8139,
-      "model_fair_ml_home": 437.3,
-      "model_fair_ml_away": -437.3,
+      "model_predicted_margin": -5.87,
+      "model_home_win_prob": 0.3327,
+      "model_away_win_prob": 0.6673,
+      "model_fair_ml_home": 200.5,
+      "model_fair_ml_away": -200.5,
       "book_implied_prob_home": 0.4315,
       "book_implied_prob_away": 0.5685,
-      "ev_home_pct": -58.68,
-      "ev_away_pct": 37.13
+      "ev_home_pct": -26.14,
+      "ev_away_pct": 12.43
     },
     {
       "commence_time": "2026-10-17T16:00:00Z",
@@ -4770,22 +4771,22 @@
       "home_unmatched": false,
       "away_unmatched": false,
       "has_model_line": true,
-      "neutral_site": true,
-      "model_source": "trained_model",
+      "neutral_site": false,
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 32.4,
       "away_sp_rating": 30.1,
       "sp_rating_diff": 2.3,
-      "model_predicted_margin": 2.48,
-      "model_home_win_prob": 0.5835,
-      "model_away_win_prob": 0.4165,
-      "model_fair_ml_home": -140.1,
-      "model_fair_ml_away": 140.1,
+      "model_predicted_margin": 4.96,
+      "model_home_win_prob": 0.6426,
+      "model_away_win_prob": 0.3574,
+      "model_fair_ml_home": -179.8,
+      "model_fair_ml_away": 179.8,
       "book_implied_prob_home": 0.4826,
       "book_implied_prob_away": 0.5174,
-      "ev_home_pct": 15.56,
-      "ev_away_pct": -23.06
+      "ev_home_pct": 27.27,
+      "ev_away_pct": -33.98
     },
     {
       "commence_time": "2026-11-08T00:30:00Z",
@@ -4796,33 +4797,33 @@
       "home_color": "#0c2340",
       "away_color": "#f47321",
       "book_used": "fanduel",
-      "moneyline_home": -220.0,
-      "moneyline_away": 180.0,
-      "spread_home": -5.5,
-      "spread_away": 5.5,
-      "spread_price_home": -115.0,
-      "spread_price_away": -105.0,
+      "moneyline_home": -230.0,
+      "moneyline_away": 188.0,
+      "spread_home": -6.5,
+      "spread_away": 6.5,
+      "spread_price_home": -106.0,
+      "spread_price_away": -114.0,
       "total_over": 55.5,
       "total_under": 55.5,
       "home_unmatched": false,
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 24.4,
       "away_sp_rating": 20.7,
       "sp_rating_diff": 3.7,
-      "model_predicted_margin": 0.36,
-      "model_home_win_prob": 0.5122,
-      "model_away_win_prob": 0.4878,
-      "model_fair_ml_home": -105.0,
-      "model_fair_ml_away": 105.0,
-      "book_implied_prob_home": 0.6581,
-      "book_implied_prob_away": 0.3419,
-      "ev_home_pct": -25.49,
-      "ev_away_pct": 36.57
+      "model_predicted_margin": 6.26,
+      "model_home_win_prob": 0.6779,
+      "model_away_win_prob": 0.3221,
+      "model_fair_ml_home": -210.4,
+      "model_fair_ml_away": 210.4,
+      "book_implied_prob_home": 0.6675,
+      "book_implied_prob_away": 0.3325,
+      "ev_home_pct": -2.74,
+      "ev_away_pct": -7.23
     },
     {
       "commence_time": "2026-11-28T17:00:00Z",
@@ -4845,21 +4846,21 @@
       "away_unmatched": false,
       "has_model_line": true,
       "neutral_site": false,
-      "model_source": "trained_model",
+      "model_source": "preseason_prior",
       "injury_adjustment_home": 0.0,
       "injury_adjustment_away": 0.0,
       "home_sp_rating": 30.1,
       "away_sp_rating": 12.4,
       "sp_rating_diff": 17.7,
-      "model_predicted_margin": 17.75,
-      "model_home_win_prob": 0.9343,
-      "model_away_win_prob": 0.0657,
-      "model_fair_ml_home": -1421.8,
-      "model_fair_ml_away": 1421.8,
+      "model_predicted_margin": 19.33,
+      "model_home_win_prob": 0.9229,
+      "model_away_win_prob": 0.0771,
+      "model_fair_ml_home": -1196.8,
+      "model_fair_ml_away": 1196.8,
       "book_implied_prob_home": 0.8048,
       "book_implied_prob_away": 0.1952,
-      "ev_home_pct": 11.06,
-      "ev_away_pct": -67.8
+      "ev_home_pct": 9.7,
+      "ev_away_pct": -62.21
     }
   ],
   "props": [],
