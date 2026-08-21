@@ -38,6 +38,7 @@ from src.features.player_features import STAT_MAP
 from src.models import fair_odds as fo
 from src.models.game_model import GameMarginModel
 from src.models.props_model import PlayerStatModel
+from src.analysis import clv as clv_tracking
 
 
 def _normalize_team_name(name: str) -> str:
@@ -736,6 +737,17 @@ def main(year: int):
     except Exception as e:
         print(f"  [warn] could not fetch prop market catalog: {e}")
         prop_market_catalog = []
+
+    print("Snapshotting today's line for any game that qualifies as a flagged spread play "
+          "(CLV tracking — see src/analysis/clv.py)...")
+    try:
+        n_snapshotted = clv_tracking.append_line_snapshots(games_out, schedule_df, config.CLV_SNAPSHOTS_PATH)
+        print(f"  {n_snapshotted} qualifying game(s) snapshotted to {config.CLV_SNAPSHOTS_PATH} "
+              f"(threshold: {clv_tracking.SPREAD_EDGE_THRESHOLD_POINTS}+ point edge, same as the "
+              f"dashboard's own flagged-play filter). Run scripts/compute_clv.py separately to grade "
+              f"any of these against real closing lines once their games are complete.")
+    except Exception as e:
+        print(f"  [warn] CLV snapshot step failed: {e} — dashboard export continues unaffected")
 
     teams_out = build_teams_export(games_out, team_lookup, sp_lookup, sp_splits_lookup, pace_returning_lookup)
 
