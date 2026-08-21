@@ -91,6 +91,37 @@ def fetch_year(year: int):
         print(f"  player_game_stats: {len(player_stats)} rows")
 
 
+def fetch_weather_and_core_if_missing(year: int, force: bool = False):
+    """Weather (GET /games/weather) and CORE opponent-adjusted ratings
+    (GET /ratings/core) are both CFBD Tier 1+ features, added to this
+    pipeline after 2022-2025's core historical data had already been
+    fetched and cached once (see year_already_cached). Deliberately run
+    OUTSIDE that skip check, unconditionally for every requested year, so
+    an already-cached year still picks up these two new files on its next
+    run without paying to re-fetch everything else in that year again --
+    each is exactly one more CFBD call per year, not the ~20+ a full
+    fetch_year() costs."""
+    weather_path = f"{config.DATA_RAW_DIR}/weather_{year}.csv"
+    if force or not os.path.exists(weather_path):
+        try:
+            weather = cfbd.get_weather(year)
+            weather.to_csv(weather_path, index=False)
+            print(f"  weather: {len(weather)} rows")
+        except Exception as e:
+            print(f"  [warn] weather fetch failed for {year}: {e} — weather features unavailable for this year "
+                  f"(needs a CFBD Tier 1+ key; free tier doesn't include this endpoint)")
+
+    core_path = f"{config.DATA_RAW_DIR}/core_ratings_{year}.csv"
+    if force or not os.path.exists(core_path):
+        try:
+            core = cfbd.get_core_ratings(year)
+            core.to_csv(core_path, index=False)
+            print(f"  core_ratings: {len(core)} rows")
+        except Exception as e:
+            print(f"  [warn] core ratings fetch failed for {year}: {e} — opponent-adjusted features unavailable "
+                  f"for this year (needs a CFBD Tier 1+ key; free tier doesn't include this endpoint)")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--years", type=int, nargs="+", required=True,
@@ -106,6 +137,7 @@ if __name__ == "__main__":
         if not args.force and year_already_cached(year):
             print(f"\n--- {year}: already cached in {config.DATA_RAW_DIR}/, skipping "
                   f"(~20+ CFBD calls saved — use --force to re-fetch anyway) ---")
-            continue
-        fetch_year(year)
+        else:
+            fetch_year(year)
+        fetch_weather_and_core_if_missing(year, force=args.force)
     print("\nDone.")
