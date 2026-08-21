@@ -127,14 +127,137 @@ def build_pace_returning_features(adv_stats: pd.DataFrame = None, returning: pd.
     return out
 
 
+def build_core_asof(core_df: pd.DataFrame) -> pd.DataFrame:
+    """Tidy (team, season, through_week) -> core_overall/core_offense/
+    core_defense, from cfbd_client.get_core_ratings(). Just a column
+    rename/select -- the actual leakage-safe AS-OF join happens in
+    attach_core_ratings below, which is the whole reason CORE (unlike SP+)
+    can be joined correctly per-week instead of via the season-shift
+    workaround.
+
+    CFBD's raw JSON uses camelCase ('throughWeek'), not the snake_case the
+    official Python client docs show (that's the generated client's own
+    naming, not the wire format) -- normalized here the same way this
+    pipeline already handles it for live_features.build_current_core_ratings,
+    so both stay in sync if CFBD's field naming is ever double-checked
+    against a real response."""
+    cols = ["team", "season", "through_week", "core_overall", "core_offense", "core_defense"]
+    if core_df is None or core_df.empty:
+        return pd.DataFrame(columns=cols)
+    df = core_df.rename(columns={"year": "season"})
+    if "throughWeek" in df.columns and "through_week" not in df.columns:
+        df = df.rename(columns={"throughWeek": "through_week"})
+    rename = {"overall": "core_overall", "offense": "core_offense", "defense": "core_defense"}
+    have = [c for c in ("team", "season", "through_week", "overall", "offense", "defense") if c in df.columns]
+    if not {"team", "season", "through_week"}.issubset(have):
+        return pd.DataFrame(columns=cols)
+    df = df[have].rename(columns=rename)
+    return df.sort_values(["team", "season", "through_week"])
+
+
+def attach_core_ratings(games: pd.DataFrame, core_df: pd.DataFrame) -> pd.DataFrame:
+    """Adds home_core_*/away_core_*/core_*_diff columns to `games` (needs
+    homeTeam/awayTeam/season/week) via an AS-OF join: each game gets that
+    team's CORE rating from the most recent through_week STRICTLY BEFORE
+    the game's own week -- direction='backward', allow_exact_matches=False,
+    so a game can never see a rating that includes its own or a future
+    week's results. Verified with a standalone test before wiring this in
+    (a Week 3 game must match through_week=2, never through_week=3+).
+
+    Early-season games (before CORE has any prior-week data to report for
+    a team) correctly get NaN here -- same 'don't fabricate, let the model's
+    own null-handling exclude the row' pattern as every other feature in
+    this pipeline, not a bug."""
+    out_cols = ["home_core_overall", "away_core_overall", "core_overall_diff",
+                "home_core_offense", "away_core_offense", "core_offense_diff",
+                "home_core_defense", "away_core_defense", "core_defense_diff"]
+    core_asof = build_core_asof(core_df)
+    out = games.copy()
+    if core_asof.empty or "week" not in out.columns:
+        for c in out_cols:
+            out[c] = np.nan
+        return out
+
+    # Explicit row-number key (not pandas' index) to reassemble merge_asof's
+    # output back into the original row order -- merge_asof requires its
+    # input sorted by the 'on' key and returns rows in THAT sorted order, so
+    # relying on the pandas index surviving the round-trip untouched would
+    # be fragile. A plain integer column merged back by equality has no such
+    # ambiguity.
+    out = out.reset_index(drop=True)
+    out["_rownum"] = np.arange(len(out))
+    for side in ("home", "away"):
+        team_col = f"{side}Team"
+        left = out[["_rownum", team_col, "season", "week"]].rename(columns={team_col: "team"})
+        left = left.sort_values("week")
+        right = core_asof.sort_values("through_week")
+        merged = pd.merge_asof(
+            left, right, left_on="week", right_on="through_week",
+            by=["team", "season"], direction="backward", allow_exact_matches=False,
+        )
+        merged = merged.sort_values("_rownum")
+        out[f"{side}_core_overall"] = merged["core_overall"].values
+        out[f"{side}_core_offense"] = merged["core_offense"].values
+        out[f"{side}_core_defense"] = merged["core_defense"].values
+    out = out.drop(columns=["_rownum"])
+
+    out["core_overall_diff"] = out["home_core_overall"] - out["away_core_overall"]
+    out["core_offense_diff"] = out["home_core_offense"] - out["away_core_offense"]
+    out["core_defense_diff"] = out["home_core_defense"] - out["away_core_defense"]
+    return out
+
+
+def attach_weather(games: pd.DataFrame, weather_df: pd.DataFrame) -> pd.DataFrame:
+    """Adds temperature/wind_speed/precipitation/game_indoors to `games` by
+    CFBD's own game id (games and weather are both CFBD's own data, so this
+    is an exact join -- same reasoning as run_backtest.py's lines join, no
+    team-name matching needed here). No leakage risk: a game's own weather
+    (actual or forecast) was always knowable at or shortly before that
+    specific kickoff, unlike a season-level aggregate.
+
+    Indoor games get their weather fields zeroed to a neutral value rather
+    than left null or fed a stray outdoor reading some providers attach to
+    dome games -- wind/precip/cold have no real effect under a roof, and a
+    GBM given a nonsense/null value for a dome game would otherwise have to
+    learn that association on very few dome-game rows."""
+    out_cols = ["temperature", "wind_speed", "precipitation", "game_indoors"]
+    out = games.copy()
+    if (weather_df is None or weather_df.empty or "id" not in games.columns
+            or "id" not in weather_df.columns):
+        for c in out_cols:
+            out[c] = np.nan
+        return out
+
+    # Same raw-JSON-is-camelCase situation as CORE ratings (see
+    # build_core_asof) -- windSpeed/gameIndoors, not wind_speed/game_indoors.
+    w = weather_df.rename(columns={"windSpeed": "wind_speed", "gameIndoors": "game_indoors"})
+    w = w[["id"] + [c for c in
+        ("temperature", "wind_speed", "precipitation", "game_indoors") if c in w.columns]].copy()
+    out = out.merge(w, on="id", how="left")
+    for c in out_cols:
+        if c not in out.columns:
+            out[c] = np.nan
+    indoor = out["game_indoors"] == True
+    out.loc[indoor, "wind_speed"] = 0.0
+    out.loc[indoor, "precipitation"] = 0.0
+    out["game_indoors"] = out["game_indoors"].map({True: 1, False: 0}).astype("float")
+    return out
+
+
 def build_game_team_features(games: pd.DataFrame, sp_ratings: pd.DataFrame = None,
-                              pace_returning: pd.DataFrame = None) -> pd.DataFrame:
+                              pace_returning: pd.DataFrame = None, core_ratings: pd.DataFrame = None,
+                              weather: pd.DataFrame = None) -> pd.DataFrame:
     """
     games: output of cfbd_client.get_games() for one or more seasons.
     sp_ratings: output of cfbd_client.get_sp_ratings() (optional, adds SP+ prior).
     pace_returning: output of build_pace_returning_features() (optional,
       adds pace_diff/returning_production_diff — see that function's
       docstring for what these actually measure and their caveats).
+    core_ratings: output of cfbd_client.get_core_ratings() (optional, adds
+      core_overall_diff/core_offense_diff/core_defense_diff — genuinely
+      leakage-safe, see attach_core_ratings).
+    weather: output of cfbd_client.get_weather() (optional, adds
+      temperature/wind_speed/precipitation/game_indoors — see attach_weather).
 
     Returns one row per completed game with home/away features and targets
     (margin, home_win) ready for modeling.
@@ -197,6 +320,9 @@ def build_game_team_features(games: pd.DataFrame, sp_ratings: pd.DataFrame = Non
         df["pace_diff"] = np.nan
         df["returning_production_diff"] = np.nan
 
+    df = attach_core_ratings(df, core_ratings)
+    df = attach_weather(df, weather)
+
     df["home_field"] = np.where(df.get("neutralSite", False) == True, 0, 1)
     df["margin"] = df["homePoints"] - df["awayPoints"]
     df["home_win"] = (df["margin"] > 0).astype(int)
@@ -215,10 +341,18 @@ def build_game_team_features(games: pd.DataFrame, sp_ratings: pd.DataFrame = Non
 # shrink the training set more than expected — its fit() now prints a
 # per-column null-count breakdown specifically so that's visible in the
 # training log rather than silently degrading the model.
+# core_overall_diff: opponent-adjusted CORE rating, joined leakage-safe
+# per-week (see attach_core_ratings) -- CFBD Tier 1+ ('Opponent Adjusted
+# Metrics'). temperature/wind_speed/precipitation/game_indoors: per-game
+# weather (see attach_weather) -- CFBD Tier 1+ ('Weather Data'). Both added
+# once the project moved off the CFBD free tier; GameMarginModel.fit()
+# drops any of these that turn out unavailable/all-null rather than crash,
+# same as every other optional feature here.
 FEATURE_COLUMNS = [
     "home_field", "roll_margin_diff", "roll_ppg_for_diff", "roll_ppg_against_diff",
     "sp_rating_diff", "home_games_played_prior", "away_games_played_prior",
     "pace_diff", "returning_production_diff",
+    "core_overall_diff", "temperature", "wind_speed", "precipitation", "game_indoors",
 ]
 TARGET_MARGIN = "margin"
 TARGET_WIN = "home_win"
