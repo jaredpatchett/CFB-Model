@@ -81,6 +81,17 @@ jobs:
           LATEST_YEAR=$(echo "${{ github.event.inputs.years }}" | tr ' ' '\n' | sort -n | tail -1)
           python scripts/export_dashboard_data.py --year "$LATEST_YEAR"
 
+      - name: Compute CLV (closing-line value) for flagged spread picks
+        # Diagnostic only, same as the backtest step — grades any previously
+        # snapshotted picks (data/clv/line_snapshots.csv, appended to by the
+        # export step above on every run) against real CFBD closing lines
+        # for games that have since been played. continue-on-error since an
+        # empty/missing snapshot log (normal before the model's first flagged
+        # pick) or a CFBD hiccup should never block the dashboard commit
+        # below. See src/analysis/clv.py and scripts/compute_clv.py.
+        continue-on-error: true
+        run: python scripts/compute_clv.py
+
       - name: Build dashboard HTML
         run: python scripts/build_dashboard.py
 
@@ -88,7 +99,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/data/latest.json docs/dashboard.html docs/data/backtest_results.json docs/data/model_diagnostics.json
+          git add docs/data/latest.json docs/dashboard.html docs/data/backtest_results.json docs/data/model_diagnostics.json docs/data/clv_results.json
+          # data/clv/line_snapshots.csv doesn't exist until the model's first flagged spread
+          # play ever gets snapshotted (see src/analysis/clv.py's append_line_snapshots) --
+          # `git add` on a not-yet-existing path fails the whole step, so guard it rather
+          # than assuming the file is already there this early in the season.
+          [ -f data/clv/line_snapshots.csv ] && git add data/clv/line_snapshots.csv
           git diff --cached --quiet && echo "No changes to commit" || git commit -m "Update dashboard data + HTML [skip ci]"
           git push
 
