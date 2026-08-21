@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T16:36:07.360549+00:00",
+  "generated_at": "2026-08-21T17:06:29.785376+00:00",
   "seasons_covered": [
     2023,
     2024,
@@ -7,16 +7,16 @@
   ],
   "join_strategy": "id",
   "spread": {
-    "n_games": 2045,
+    "n_games": 2002,
     "n_pushes": 44,
-    "ats_win_rate": 0.6017,
-    "margin_mae": 11.369,
+    "ats_win_rate": 0.6961,
+    "margin_mae": 9.787,
     "breakeven_ats_rate": 0.524,
     "beat_market": true
   },
   "moneyline": {
-    "n_games": 2045,
-    "accuracy": 0.7511,
-    "log_loss": 0.5024
+    "n_games": 2002,
+    "accuracy": 0.7947,
+    "log_loss": 0.4317
   }
 }
