@@ -688,6 +688,29 @@ MATH_JS = """<script>
     var marketLabel, modelLabel, edge, coverProb, playLabel, side = null;
 
     if (market === 'Moneyline') {
+      // NOTE on home vs. picked-side numbers: marketLabel/modelLabel/edge/
+      // coverProb below are all deliberately kept in HOME-TEAM terms (same
+      // convention Spread uses for its own marketLabel/modelLabel/edge) --
+      // this is what the Edge Board grid's Market/Model/Edge/Win% columns
+      // are built from, and changing that would flip its is-pos/is-neg
+      // color convention and Win% meaning out from under it. Fine for a
+      // grid that's always read in "home team's number" terms.
+      //
+      // sideMoneyline/sideProb ADDITIONALLY compute the same two things in
+      // PICKED-SIDE terms (i.e. actually correct for whichever team
+      // playLabel names) -- moneyline's home and away prices are two
+      // genuinely independent numbers (unlike a spread, where home/away are
+      // just a sign flip of the same number), so anything that names a
+      // specific team -- like the Bet Card -- MUST use these, not the
+      // home-only fields above, or it silently shows the wrong team's price
+      // and an EV computed from the wrong team's probability entirely. This
+      // was a real bug: the Bet Card was showing e.g. 'TOL ML' next to
+      // Michigan State's own -410 price and using Michigan State's win
+      // probability to compute Toledo's supposed EV, producing a
+      // meaningless number that also happened to look enormous whenever
+      // the recommended side was a big underdog (large payout multiplier
+      // amplifying an already-wrong probability into a triple-digit "EV%").
+      // See renderBetCard, which is the only consumer of these two fields.
       var p    = 1 - normalCdf(0, hm, sd);
       var fair = removeVig(game.marketMoneyline, game.awayMoneyline);
       var vig  = fair[0];
@@ -697,6 +720,9 @@ MATH_JS = """<script>
       coverProb   = p;
       side        = p > vig ? game.home : game.away;
       playLabel   = abbrOf(side) + ' ML';
+      var isHomeSide  = side === game.home;
+      var sideMoneyline = isHomeSide ? game.marketMoneyline : game.awayMoneyline;
+      var sideProb      = isHomeSide ? p : (1 - p);
     } else {
       marketLabel = signed(game.marketSpread);
       modelLabel  = signed(game.modelSpread);
@@ -716,6 +742,8 @@ MATH_JS = """<script>
       edge: edge, edgeForTier: edgeForTier,
       edgeLabel: market === 'Moneyline' ? signed(edge) + '%' : signed(edge),
       coverProb: coverProb, playLabel: playLabel, side: side,
+      sideMoneyline: market === 'Moneyline' ? sideMoneyline : null,
+      sideProb: market === 'Moneyline' ? sideProb : coverProb,
       qualifies: Math.abs(edgeForTier) >= minEdge,
       tier: tierFor(edgeForTier, { minEdge: minEdge, confident: confident })
     };
@@ -929,11 +957,22 @@ RENDERER_JS = """<script>
 
   function trackPayload(p) {
     var g = p.game;
+    // Same fix as renderBetCard: g.marketMoneyline is always the HOME
+    // team's price, but p.playLabel names whichever team (home or away)
+    // the model actually recommends -- using g.marketMoneyline here logs
+    // the wrong team's price into the user's own Tracker for any away-side
+    // pick (e.g. a tracked "TOL ML" bet would silently log Michigan
+    // State's -410 instead of Toledo's real +320). p.sideMoneyline is the
+    // side-correct price. edge is reported as a plain positive magnitude
+    // for the same reason: p.edge is signed in HOME-team terms (negative
+    // whenever the away side is picked), which would show a tracked pick
+    // as having "negative edge" even though it was tracked specifically
+    // because the recommended side clears the edge threshold.
     return esc(JSON.stringify({
       description: p.playLabel + ' \\u2014 ' + abbrOf(g.away) + ' at ' + abbrOf(g.home),
       date: g.kickoff, type: p.market,
-      price: p.market === 'Moneyline' ? g.marketMoneyline : -110,
-      edge: Math.round(p.edge * 10) / 10
+      price: p.market === 'Moneyline' ? p.sideMoneyline : -110,
+      edge: Math.round(Math.abs(p.edge) * 10) / 10
     }));
   }
 
@@ -1130,15 +1169,48 @@ RENDERER_JS = """<script>
       '<div class="projector">' +
         (card.length ? card.map(function (c) {
           var col = c.side ? M.displayColor(team(c.side).primary) : 'var(--blue)';
-          var ev = M.expectedValue(c.coverProb, c.market === 'Moneyline' ? c.game.marketMoneyline : -110) * 100;
+          // Bug fix: this used to always read c.coverProb / c.game.marketMoneyline
+          // here, which are HOME-team numbers regardless of which side c.playLabel
+          // actually names (see priceGame's Moneyline branch comment) -- for any
+          // row recommending the AWAY side, that silently showed the home team's
+          // price next to the away team's name and computed "EV" from the home
+          // team's win probability against the home team's price, producing a
+          // real number that had nothing to do with the labeled bet (this is what
+          // produced things like a 4-figure "-6500" price next to a 20+ point
+          // underdog, and absurd +200%/+300% "edges" on the other end). c.sideProb
+          // and c.sideMoneyline are the picked-side-correct versions; c.coverProb
+          // stays correct as-is for Spread, where home/away are just a sign flip
+          // of the same number.
+          var sidePrice = c.market === 'Moneyline' ? c.sideMoneyline : -110;
+          var sideProb  = c.market === 'Moneyline' ? c.sideProb : c.coverProb;
+          var ev = M.expectedValue(sideProb, sidePrice) * 100;
+          var sidePriceLabel = c.market === 'Moneyline' ? ((sidePrice > 0 ? '+' : '') + sidePrice) : '-110';
+          // Fixing the price/EV attribution bug above (see priceGame's
+          // Moneyline branch) revealed a SEPARATE, real issue underneath:
+          // several preseason-only picks still show implausibly large EV
+          // (100%+) once the price is correctly attributed. That's not a
+          // display bug -- it's the preseason estimator (last season's SP+
+          // diff run through one fixed, league-wide sigma, no in-season
+          // data yet) disagreeing wildly with a much better-informed
+          // market. A real, durable edge that size doesn't exist in CFB
+          // betting, so this is far more likely the crude preseason
+          // estimate being wrong than a hidden opportunity -- flagged
+          // in-place (per user decision) rather than hidden, since it's
+          // still possible, just something to treat with real skepticism
+          // until the in-season trained model (real rolling data, already
+          // validated via backtest) takes over for that specific game.
+          var isTrainedGame = (c.game.flags || []).some(function (f) { return f.text === 'In-season model'; });
+          var showCaveat = c.market === 'Moneyline' && !isTrainedGame && Math.abs(ev) >= 50;
           return '<div class="row"><div class="row-accent" style="background:' + esc(col) + '"></div>' +
             '<div class="row-body card-row">' +
               '<div><div class="card-play">' + esc(c.playLabel) + '</div>' +
                 '<div class="card-note">' + esc(abbrOf(c.game.away) + ' at ' + abbrOf(c.game.home) + ' \\u00b7 ' + c.game.kickoff) + '</div></div>' +
-              '<div class="card-price">' + (c.market === 'Moneyline' ? esc(c.marketLabel) : '-110') + '</div>' +
+              '<div class="card-price">' + esc(sidePriceLabel) + '</div>' +
               '<div class="card-ev">' + (ev >= 0 ? '+' : '') + ev.toFixed(1) + '%</div>' +
               '<div class="num"><span class="tier"><span>' + esc(c.tier) + '</span></span></div>' +
               '<div class="num"><button class="track-btn" onclick="window.__cfbTrack(' + trackPayload(c) + ')">+TRK</button></div>' +
+              (showCaveat ? '<div style="grid-column:1/-1;font-size:11px;color:var(--amber);padding-top:6px;line-height:1.4">' +
+                '\u26a0 Large model/market gap on a preseason-only estimate (no in-season data yet for this game) \u2014 likely reflects the model\u2019s limits, not a confirmed edge. Extra caution advised.</div>' : '') +
             '</div></div>';
         }).join('') : '<div class="empty-state">No plays clear the ' + D.meta.minEdge.toFixed(1) + '-pt threshold on ' + state.market + ' right now.</div>') +
       '</div>';
