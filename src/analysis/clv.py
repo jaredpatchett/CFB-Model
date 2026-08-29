@@ -39,6 +39,26 @@ for where these get called):
      backtesting -- see cfbd_client.get_historical_lines), and computes CLV
      for each. Games that haven't kicked off yet are simply not in CFBD's
      completed-game data and get skipped for now, not faked.
+
+REAL BUG, FOUND AND FIXED ON THE SEASON OPENER ITSELF: append_line_snapshots
+originally matched games_out entries to CFBD's schedule using
+game['home_team']/game['away_team'] directly. Those fields are The Odds
+API's own team-name style (e.g. "TCU Horned Frogs"), but CFBD's /games
+schedule (what build_game_id_lookup is built from) only ever uses the bare
+school name (e.g. "TCU") -- so the match NEVER succeeded, on any game,
+ever. This wasn't caught by this module's own unit tests because those
+used simple, single-word team names on both sides (e.g. "Ohio State"),
+which happened to match either way and never exercised the real
+mascot-suffix mismatch. It surfaced for real on 2026-08-29 (season opener):
+4 real games qualified for a snapshot per qualifying_spread_play, and 0
+were ever captured. Fixed by having export_dashboard_data.py additionally
+store home_school/away_school (CFBD's own resolved name, already computed
+there via match_team() for other purposes like neutral-site/weather
+matching) on each game_out dict, and having append_line_snapshots key off
+THOSE instead of home_team/away_team. Falls back to home_team/away_team if
+home_school/away_school are missing (e.g. a stale caller), which preserves
+the ORIGINAL bug rather than crashing -- intentional, so a caller that
+hasn't been updated fails the same obvious way instead of a new one.
 """
 import numpy as np
 import pandas as pd
@@ -178,7 +198,23 @@ def append_line_snapshots(games_out: list, schedule_df: pd.DataFrame, path: str)
         play = qualifying_spread_play(g)
         if not play:
             continue
-        match = match_game_id(g.get("home_team"), g.get("away_team"), game_id_lookup)
+        # IMPORTANT: match on home_school/away_school (CFBD's own resolved
+        # school name, e.g. "TCU"), NOT home_team/away_team (The Odds API's
+        # own style, e.g. "TCU Horned Frogs") -- build_game_id_lookup below
+        # is built from CFBD's /games schedule, which only ever uses the
+        # bare school name. Matching against home_team/away_team directly
+        # silently matched 0 games, ever, on real data (caught on the
+        # season opener itself: 4 real games qualified for a snapshot and 0
+        # were captured). See export_dashboard_data.py's game_out dict for
+        # where home_school/away_school come from. Falls back to
+        # home_team/away_team only if home_school/away_school are missing
+        # (e.g. an older games_out dict from before this fix), so this
+        # degrades to the previous, still-broken behavior rather than
+        # crashing -- better to keep investigating than to silently swallow
+        # every game from a caller that hasn't been updated yet.
+        home_key = g.get("home_school") or g.get("home_team")
+        away_key = g.get("away_school") or g.get("away_team")
+        match = match_game_id(home_key, away_key, game_id_lookup)
         if match is None:
             continue
         rows.append({
