@@ -599,6 +599,20 @@ def main(year: int):
                 "commence_time": g.get("commence_time"),
                 "home_team": g.get("home_team"),
                 "away_team": g.get("away_team"),
+                # CFBD's own resolved school name (e.g. "TCU"), as opposed to
+                # home_team/away_team above which stay in The Odds API's own
+                # style (e.g. "TCU Horned Frogs") since that's what the
+                # dashboard displays. clv.py's game-id lookup is built from
+                # CFBD's /games schedule, which uses the bare school name --
+                # matching against home_team/away_team directly silently
+                # matched nothing, ever (0 snapshots captured on the actual
+                # season-opener slate despite real qualifying picks), because
+                # CFBD's schedule was never going to contain "TCU Horned
+                # Frogs" as a team name. These two fields are what
+                # append_line_snapshots actually keys off of now -- see
+                # src/analysis/clv.py's build_game_id_lookup/match_game_id.
+                "home_school": home_meta.get("school"),
+                "away_school": away_meta.get("school"),
                 "home_logo": home_meta.get("logo"),
                 "away_logo": away_meta.get("logo"),
                 "home_color": home_meta.get("color"),
