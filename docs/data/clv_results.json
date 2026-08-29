@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-08-29T14:50:30.061648+00:00",
+  "generated_at": "2026-08-29T15:09:39.505343+00:00",
   "n_games": 0,
   "avg_clv_points": null,
   "median_clv_points": null,
   "pct_positive_clv": null,
-  "note": "No line snapshots captured yet \u2014 expected before the model has flagged its first qualifying spread play (see src/analysis/clv.py).",
+  "note": "None of the tracked flagged games have a completed closing line yet \u2014 normal before any of them have kicked off.",
   "games": []
 }
