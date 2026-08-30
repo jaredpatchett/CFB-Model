@@ -124,6 +124,7 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .team-abbr { font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: 0.03em; text-transform: uppercase; }
 .at { font-size: 9.5px; color: var(--muted-4); letter-spacing: 0.1em; }
 .meta { font-size: 9.5px; color: var(--muted-3); margin-top: 5px; display: flex; gap: 10px; white-space: nowrap; overflow: hidden; }
+.edge-play-pill { display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 4px; font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.02em; }
 
 .cell-market { font-size: 12.5px; color: var(--muted); }
 .cell-model  { font-size: 13px; font-weight: 700; }
@@ -383,6 +384,25 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     var confident = market === 'Spread';
     var edgeForTier = market === 'Moneyline' ? edge / 2.6 : edge;
 
+    // Sanity bound, Moneyline only: with ONE fixed league-wide sigma (see
+    // game.sigma / the residual_std footer note), the model structurally
+    // cannot express a win probability much above the low-to-mid 90s no
+    // matter how lopsided a matchup actually is -- getting normalCdf(...)
+    // near 95%+ needs a 30+ point predicted margin, which basically never
+    // happens even in real blowouts. So against any market price that
+    // implies a near-lock (a big favorite well past -450, or the
+    // complementary big dog past +450), the model will ALWAYS look like it
+    // disagrees with the market and flag the other side as a play -- not
+    // because it found real value, but because it's mechanically unable to
+    // match that level of market confidence. That's a structural blind
+    // spot, not a discovered edge, so these are excluded from qualifying
+    // as a play at all here (not just flagged) -- confirmed with the user
+    // after real Week 1 examples (e.g. ECU +3000 vs Alabama) made this
+    // visible on the Edge Board's play labels.
+    var MONEYLINE_PRICE_QUALIFY_MAX = 450;
+    var priceInRange = market !== 'Moneyline' || Math.abs(sideMoneyline) <= MONEYLINE_PRICE_QUALIFY_MAX;
+    var qualifies = Math.abs(edgeForTier) >= minEdge && priceInRange;
+
     return {
       game: game, market: market, sd: sd,
       marketLabel: marketLabel, modelLabel: modelLabel,
@@ -391,8 +411,8 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       coverProb: coverProb, playLabel: playLabel, side: side,
       sideMoneyline: market === 'Moneyline' ? sideMoneyline : null,
       sideProb: market === 'Moneyline' ? sideProb : coverProb,
-      qualifies: Math.abs(edgeForTier) >= minEdge,
-      tier: tierFor(edgeForTier, { minEdge: minEdge, confident: confident })
+      qualifies: qualifies,
+      tier: qualifies ? tierFor(edgeForTier, { minEdge: minEdge, confident: confident }) : '\u2014'
     };
   }
 
@@ -615,6 +635,13 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       var g = p.game, a = team(g.away), h = team(g.home);
       var i = priced.indexOf(p);
       var cls = Math.abs(p.edgeForTier) < D.meta.minEdge ? 'is-off' : (p.edge > 0 ? 'is-pos' : 'is-neg');
+      var qualifies = p.qualifies;
+      var playPillLabel = qualifies
+        ? (p.market === 'Moneyline'
+            ? p.playLabel + ' ' + (p.sideMoneyline > 0 ? '+' : '') + p.sideMoneyline
+            : p.playLabel)
+        : null;
+      var playPillColor = qualifies ? M.displayColor(team(p.side).primary) : null;
       return '' +
         '<div class="row row--click' + (i === state.selected ? ' is-selected' : '') + '" data-game="' + i + '">' +
           '<div class="row-accent" style="background:linear-gradient(' + esc(M.displayColor(a.primary)) + ',' + esc(M.displayColor(h.primary)) + ')"></div>' +
@@ -626,7 +653,9 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
               helmet(g.home, 32, 19, true) +
               '<span class="team-abbr">' + esc(h.abbr) + '</span>' +
             '</div>' +
-            '<div class="meta"><span>' + esc(g.kickoff) + '</span><span>' + esc(g.book) + '</span></div></div>' +
+            '<div class="meta"><span>' + esc(g.kickoff) + '</span><span>' + esc(g.book) + '</span></div>' +
+            (qualifies ? '<div class="edge-play-pill" style="background:' + esc(playPillColor) + '26;border:1px solid ' + esc(playPillColor) + ';color:' + esc(playPillColor) + '">PLAY: ' + esc(playPillLabel) + '</div>' : '') +
+            '</div>' +
             '<div class="num cell-market">' + esc(p.marketLabel) + '</div>' +
             '<div class="num cell-model">' + esc(p.modelLabel) + '</div>' +
             '<div class="num cell-edge ' + cls + '">' + esc(p.edgeLabel) + '</div>' +
