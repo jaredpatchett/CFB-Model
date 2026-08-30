@@ -469,6 +469,7 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .at { font-size: 9.5px; color: var(--muted-4); letter-spacing: 0.1em; }
 .meta { font-size: 9.5px; color: var(--muted-3); margin-top: 5px; display: flex; gap: 10px; white-space: nowrap; overflow: hidden; }
 .edge-play-pill { display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 4px; font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.02em; }
+.edge-fade-pill { display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 4px; font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.02em; background: rgba(255,255,255,0.05); border: 1px solid var(--muted-3); color: var(--muted-3); }
 
 .cell-market { font-size: 12.5px; color: var(--muted); }
 .cell-model  { font-size: 13px; font-weight: 700; }
@@ -724,6 +725,16 @@ MATH_JS = """<script>
       var isHomeSide  = side === game.home;
       var sideMoneyline = isHomeSide ? game.marketMoneyline : game.awayMoneyline;
       var sideProb      = isHomeSide ? p : (1 - p);
+      // Real dollar EV on the picked side, at the price actually being
+      // offered for that side (vig and all) -- NOT the same thing as
+      // `edge` above, which only measures the model's probability against
+      // the market's de-vigged fair line. A side can clear that
+      // probability-edge bar and still be a losing bet once you account
+      // for the vig actually baked into ITS specific price (vig isn't
+      // always split evenly across both sides). Real EV is the honest bar
+      // for "is this actually worth betting" -- see priceInRange/isFade
+      // below for how it's used.
+      var sideEV = expectedValue(sideProb, sideMoneyline);
     } else {
       marketLabel = signed(game.marketSpread);
       modelLabel  = signed(game.modelSpread);
@@ -753,8 +764,20 @@ MATH_JS = """<script>
     // after real Week 1 examples (e.g. ECU +3000 vs Alabama) made this
     // visible on the Edge Board's play labels.
     var MONEYLINE_PRICE_QUALIFY_MAX = 450;
-    var priceInRange = market !== 'Moneyline' || Math.abs(sideMoneyline) <= MONEYLINE_PRICE_QUALIFY_MAX;
-    var qualifies = Math.abs(edgeForTier) >= minEdge && priceInRange;
+    var priceInRange  = market !== 'Moneyline' || Math.abs(sideMoneyline) <= MONEYLINE_PRICE_QUALIFY_MAX;
+    var edgeClears    = Math.abs(edgeForTier) >= minEdge;
+    var isPositiveEV  = market !== 'Moneyline' || sideEV > 0;
+    var qualifies = edgeClears && priceInRange && isPositiveEV;
+    // A moneyline pick that clears the probability-edge bar and passes the
+    // price sanity check, but comes out negative on real dollar EV, isn't
+    // a play -- it just means the model disagrees with the market on that
+    // side without that disagreement being worth betting. Label it a FADE
+    // instead of silently dropping it, so it's visibly "not a play" rather
+    // than looking like the model has no opinion at all. Confirmed with
+    // the user: negative-EV sides should never be flagged as plays, and a
+    // negative-EV read on one side never automatically makes the other
+    // side a play either (see MONEYLINE_PRICE_QUALIFY_MAX above for that).
+    var isFade = market === 'Moneyline' && edgeClears && priceInRange && !isPositiveEV;
 
     return {
       game: game, market: market, sd: sd,
@@ -764,7 +787,9 @@ MATH_JS = """<script>
       coverProb: coverProb, playLabel: playLabel, side: side,
       sideMoneyline: market === 'Moneyline' ? sideMoneyline : null,
       sideProb: market === 'Moneyline' ? sideProb : coverProb,
+      sideEV: market === 'Moneyline' ? sideEV : null,
       qualifies: qualifies,
+      isFade: isFade,
       tier: qualifies ? tierFor(edgeForTier, { minEdge: minEdge, confident: confident }) : '\\u2014'
     };
   }
@@ -1019,6 +1044,13 @@ RENDERER_JS = """<script>
             : p.playLabel)
         : null;
       var playPillColor = qualifies ? M.displayColor(team(p.side).primary) : null;
+      // FADE: the model disagreed with the market on this side but it
+      // isn't actually positive EV at the price offered -- shown so it's
+      // visibly "not a play," not silently dropped. Never implies the
+      // OTHER side is a play (see isFade in priceGame()).
+      var fadePillLabel = p.isFade
+        ? p.playLabel + ' ' + (p.sideMoneyline > 0 ? '+' : '') + p.sideMoneyline
+        : null;
       return '' +
         '<div class="row row--click' + (i === state.selected ? ' is-selected' : '') + '" data-game="' + i + '">' +
           '<div class="row-accent" style="background:linear-gradient(' + esc(M.displayColor(a.primary)) + ',' + esc(M.displayColor(h.primary)) + ')"></div>' +
@@ -1032,6 +1064,7 @@ RENDERER_JS = """<script>
             '</div>' +
             '<div class="meta"><span>' + esc(g.kickoff) + '</span><span>' + esc(g.book) + '</span></div>' +
             (qualifies ? '<div class="edge-play-pill" style="background:' + esc(playPillColor) + '26;border:1px solid ' + esc(playPillColor) + ';color:' + esc(playPillColor) + '">PLAY: ' + esc(playPillLabel) + '</div>' : '') +
+            (p.isFade ? '<div class="edge-fade-pill">FADE: ' + esc(fadePillLabel) + '</div>' : '') +
             '</div>' +
             '<div class="num cell-market">' + esc(p.marketLabel) + '</div>' +
             '<div class="num cell-model">' + esc(p.modelLabel) + '</div>' +
