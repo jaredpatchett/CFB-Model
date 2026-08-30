@@ -1,9 +1,75 @@
 {
-  "generated_at": "2026-08-29T15:09:39.505343+00:00",
-  "n_games": 0,
-  "avg_clv_points": null,
-  "median_clv_points": null,
-  "pct_positive_clv": null,
-  "note": "None of the tracked flagged games have a completed closing line yet \u2014 normal before any of them have kicked off.",
-  "games": []
+  "generated_at": "2026-08-30T18:39:15.660399+00:00",
+  "n_games": 5,
+  "avg_clv_points": -0.1,
+  "median_clv_points": 0.0,
+  "pct_positive_clv": 0.0,
+  "note": null,
+  "games": [
+    {
+      "game_id": 401856766,
+      "season": 2026,
+      "week": 1,
+      "home_team": "TCU Horned Frogs",
+      "away_team": "North Carolina Tar Heels",
+      "side": "home",
+      "recommended_spread_home": -7.5,
+      "closing_spread_home": -7.5,
+      "clv_points": 0.0,
+      "captured_at": "2026-08-29T15:09:37.583225+00:00",
+      "commence_time": "2026-08-29T16:00:00Z"
+    },
+    {
+      "game_id": 401858202,
+      "season": 2026,
+      "week": 1,
+      "home_team": "Virginia Cavaliers",
+      "away_team": "NC State Wolfpack",
+      "side": "home",
+      "recommended_spread_home": -4.0,
+      "closing_spread_home": -4.0,
+      "clv_points": 0.0,
+      "captured_at": "2026-08-29T15:09:37.583225+00:00",
+      "commence_time": "2026-08-29T19:30:00Z"
+    },
+    {
+      "game_id": 401858201,
+      "season": 2026,
+      "week": 1,
+      "home_team": "Stanford Cardinal",
+      "away_team": "Hawaii Rainbow Warriors",
+      "side": "away",
+      "recommended_spread_home": -4.0,
+      "closing_spread_home": -4.5,
+      "clv_points": -0.5,
+      "captured_at": "2026-08-29T15:09:37.583225+00:00",
+      "commence_time": "2026-08-29T23:00:00Z"
+    },
+    {
+      "game_id": 401864570,
+      "season": 2026,
+      "week": 1,
+      "home_team": "Florida State Seminoles",
+      "away_team": "New Mexico State Aggies",
+      "side": "away",
+      "recommended_spread_home": -31.5,
+      "closing_spread_home": -31.5,
+      "clv_points": 0.0,
+      "captured_at": "2026-08-29T15:09:37.583225+00:00",
+      "commence_time": "2026-08-29T23:00:00Z"
+    },
+    {
+      "game_id": 401862693,
+      "season": 2026,
+      "week": 1,
+      "home_team": "UNLV Rebels",
+      "away_team": "Memphis Tigers",
+      "side": "away",
+      "recommended_spread_home": -4.0,
+      "closing_spread_home": -4.0,
+      "clv_points": 0.0,
+      "captured_at": "2026-08-29T15:09:37.583225+00:00",
+      "commence_time": "2026-08-30T02:00:00Z"
+    }
+  ]
 }
