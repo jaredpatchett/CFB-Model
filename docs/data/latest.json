@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T19:04:30.660358+00:00",
+  "generated_at": "2026-08-30T19:22:12.794544+00:00",
   "team_metadata_year": 2025,
   "current_season_year": 2026,
   "preseason_prior": {
@@ -3747,10 +3747,10 @@
       "book_used": "draftkings",
       "moneyline_home": null,
       "moneyline_away": null,
-      "spread_home": -50.5,
-      "spread_away": 50.5,
-      "spread_price_home": -115.0,
-      "spread_price_away": -105.0,
+      "spread_home": -51.5,
+      "spread_away": 51.5,
+      "spread_price_home": -110.0,
+      "spread_price_away": -110.0,
       "total_over": 57.5,
       "total_under": 57.5,
       "home_unmatched": false,
