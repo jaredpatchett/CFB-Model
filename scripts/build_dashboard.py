@@ -779,11 +779,22 @@ MATH_JS = """<script>
     // side a play either (see MONEYLINE_PRICE_QUALIFY_MAX above for that).
     var isFade = market === 'Moneyline' && edgeClears && priceInRange && !isPositiveEV;
 
+    // sideEdge/sideEdgeLabel: `edge` above is signed in HOME-team terms
+    // (same convention as marketLabel/modelLabel) -- but `side` is always
+    // chosen as whichever team edge's sign favors, so the recommended
+    // side's OWN edge is always just Math.abs(edge), regardless of market.
+    // Without this, the Edge Board's Edge column read backwards any time
+    // the play was on the away side (e.g. showing '-20.4' right next to a
+    // 'PLAY: ECU +28.5' pill) -- caught by the user looking at real rows.
+    var sideEdge = Math.abs(edge);
+    var sideEdgeLabel = market === 'Moneyline' ? signed(sideEdge) + '%' : signed(sideEdge);
+
     return {
       game: game, market: market, sd: sd,
       marketLabel: marketLabel, modelLabel: modelLabel,
       edge: edge, edgeForTier: edgeForTier,
       edgeLabel: market === 'Moneyline' ? signed(edge) + '%' : signed(edge),
+      sideEdge: sideEdge, sideEdgeLabel: sideEdgeLabel,
       coverProb: coverProb, playLabel: playLabel, side: side,
       sideMoneyline: market === 'Moneyline' ? sideMoneyline : null,
       sideProb: market === 'Moneyline' ? sideProb : coverProb,
@@ -1036,7 +1047,15 @@ RENDERER_JS = """<script>
     var rows = visible.map(function (p) {
       var g = p.game, a = team(g.away), h = team(g.home);
       var i = priced.indexOf(p);
-      var cls = Math.abs(p.edgeForTier) < D.meta.minEdge ? 'is-off' : (p.edge > 0 ? 'is-pos' : 'is-neg');
+      // cls now reflects "is this row actually good/bad," not raw
+      // home-team sign: is-off below the edge threshold or price-cap-
+      // excluded, is-neg for a confirmed-negative-EV FADE, is-pos for an
+      // actual qualifying play. (See sideEdge/sideEdgeLabel in priceGame
+      // for why the Edge column text itself also switched off raw p.edge.)
+      var cls = Math.abs(p.edgeForTier) < D.meta.minEdge ? 'is-off'
+        : p.isFade ? 'is-neg'
+        : p.qualifies ? 'is-pos'
+        : 'is-off';
       var qualifies = p.qualifies;
       var playPillLabel = qualifies
         ? (p.market === 'Moneyline'
@@ -1068,8 +1087,8 @@ RENDERER_JS = """<script>
             '</div>' +
             '<div class="num cell-market">' + esc(p.marketLabel) + '</div>' +
             '<div class="num cell-model">' + esc(p.modelLabel) + '</div>' +
-            '<div class="num cell-edge ' + cls + '">' + esc(p.edgeLabel) + '</div>' +
-            '<div class="num cell-prob">' + (p.coverProb * 100).toFixed(1) + '%</div>' +
+            '<div class="num cell-edge ' + cls + '">' + esc(p.sideEdgeLabel) + '</div>' +
+            '<div class="num cell-prob">' + (p.sideProb * 100).toFixed(1) + '%</div>' +
             '<div class="num"><span class="tier' + (p.tier === '\\u2014' ? ' is-off' : '') + '"><span>' + esc(p.tier) + '</span></span></div>' +
             '<div class="num"><button class="track-btn" onclick="event.stopPropagation();window.__cfbTrack(' + trackPayload(p) + ')">+TRK</button></div>' +
           '</div>' +
@@ -1195,7 +1214,7 @@ RENDERER_JS = """<script>
             return '<span style="left:' + t.pct.toFixed(2) + '%">' + esc(t.label) + '</span>';
           }).join('') + '</div>' +
           '<div class="chart-foot"><span>' + esc(dist.axisLabel) + '</span>' +
-            '<span class="cover">shaded: normal-model probability, ' + (p.coverProb * 100).toFixed(1) + '%</span></div>' +
+            '<span class="cover">shaded: normal-model probability, ' + (p.sideProb * 100).toFixed(1) + '%</span></div>' +
           '<div class="chart-note">' + esc(g.note) + '</div>' +
         '</div>' +
 
