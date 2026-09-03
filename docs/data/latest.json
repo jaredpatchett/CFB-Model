@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T13:24:18.632216+00:00",
+  "generated_at": "2026-09-03T13:39:19.585124+00:00",
   "team_metadata_year": 2025,
   "current_season_year": 2026,
   "preseason_prior": {
@@ -2506,8 +2506,8 @@
       "spread_away": 50.5,
       "spread_price_home": -105.0,
       "spread_price_away": -115.0,
-      "total_over": 55.5,
-      "total_under": 55.5,
+      "total_over": 56.5,
+      "total_under": 56.5,
       "home_unmatched": false,
       "away_unmatched": false,
       "has_model_line": false,
