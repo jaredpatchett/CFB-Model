@@ -766,17 +766,41 @@ MATH_JS = """<script>
     var MONEYLINE_PRICE_QUALIFY_MAX = 450;
     var priceInRange  = market !== 'Moneyline' || Math.abs(sideMoneyline) <= MONEYLINE_PRICE_QUALIFY_MAX;
     var edgeClears    = Math.abs(edgeForTier) >= minEdge;
-    var isPositiveEV  = market !== 'Moneyline' || sideEV > 0;
+    // Underdog moneyline picks additionally require the TRAINED in-season
+    // model, not just the preseason-only prior, to count as real signal.
+    // The preseason model uses one fixed sigma and structurally can't
+    // express strong confidence in a good favorite (see
+    // MONEYLINE_PRICE_QUALIFY_MAX's note above for the extreme version of
+    // this), so a preseason-only 'the market's favorite isn't as good as
+    // it thinks' read is much more often the model's own resolution limit
+    // than a real mispriced dog -- even at moderate, plausible-looking
+    // prices where the price cap above doesn't trigger. Confirmed with
+    // the user from real Week 1 examples where the preseason model's fair
+    // line for the FAVORITE was well off market (Duke -142 fair vs -340
+    // market; Auburn -184 fair vs -298 market) purely because neither
+    // team had real season data yet, not because the favorite was
+    // actually overpriced. Only applies to the underdog side -- the
+    // model favoring the FAVORITE even more than market isn't subject to
+    // the same bias (the fixed sigma makes the model UNDER-confident on
+    // strong teams if anything, so that read fights its own conservatism
+    // rather than being produced by it).
+    var isUnderdog = market === 'Moneyline' && sideMoneyline > 0;
+    var isTrainedGame = (game.flags || []).some(function (f) { return f.text === 'In-season model'; });
+    var untrustedUnderdog = isUnderdog && !isTrainedGame;
+    var isPositiveEV  = market !== 'Moneyline' || (sideEV > 0 && !untrustedUnderdog);
     var qualifies = edgeClears && priceInRange && isPositiveEV;
     // A moneyline pick that clears the probability-edge bar and passes the
-    // price sanity check, but comes out negative on real dollar EV, isn't
-    // a play -- it just means the model disagrees with the market on that
-    // side without that disagreement being worth betting. Label it a FADE
-    // instead of silently dropping it, so it's visibly "not a play" rather
-    // than looking like the model has no opinion at all. Confirmed with
-    // the user: negative-EV sides should never be flagged as plays, and a
-    // negative-EV read on one side never automatically makes the other
-    // side a play either (see MONEYLINE_PRICE_QUALIFY_MAX above for that).
+    // price sanity check, but comes out negative on real dollar EV (or is
+    // an underdog read the preseason-only model hasn't earned trust for
+    // yet, per untrustedUnderdog above), isn't a play -- it just means the
+    // model disagrees with the market on that side without that
+    // disagreement being worth betting. Label it a FADE instead of
+    // silently dropping it, so it's visibly "not a play" rather than
+    // looking like the model has no opinion at all. Confirmed with the
+    // user: negative-EV (or untrusted-preseason-underdog) sides should
+    // never be flagged as plays, and a negative read on one side never
+    // automatically makes the other side a play either (see
+    // MONEYLINE_PRICE_QUALIFY_MAX above for that).
     var isFade = market === 'Moneyline' && edgeClears && priceInRange && !isPositiveEV;
 
     // sideEdge/sideEdgeLabel: `edge` above is signed in HOME-team terms
