@@ -1,7 +1,11 @@
 name: Manual CFB model run
 
-# Manual trigger only (no auto-schedule) so it doesn't burn API quota or
-# retrain unexpectedly. Run it from the Actions tab when you want fresh data.
+# Runs on manual trigger (Actions tab) OR automatically once a day at
+# 12:00 UTC (~8am ET -- shifts to ~7am ET during EST since GitHub Actions
+# cron is always UTC and doesn't follow daylight saving). Once-daily was
+# chosen specifically to stay well under the free-tier CFBD/Odds API
+# quotas (see the cache step below) while still keeping lines from going
+# stale between manual runs.
 on:
   workflow_dispatch:
     inputs:
@@ -9,6 +13,8 @@ on:
         description: "Season(s) to fetch/train on, space-separated"
         required: false
         default: "2024"
+  schedule:
+    - cron: "0 12 * * *"
 
 permissions:
   contents: write
@@ -20,6 +26,11 @@ jobs:
       CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
       ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
       ODDSPAPI_API_KEY: ${{ secrets.PRIZEPICKS_API }}
+      # schedule-triggered runs have no github.event.inputs at all (that
+      # only exists for workflow_dispatch), so every step below that used
+      # to read github.event.inputs.years directly now reads env.YEARS,
+      # which falls back to the same default manual runs already use.
+      YEARS: ${{ github.event.inputs.years || '2024' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -48,16 +59,16 @@ jobs:
         uses: actions/cache@v4
         with:
           path: data/raw
-          key: cfbd-raw-${{ github.event.inputs.years }}-${{ github.run_id }}
+          key: cfbd-raw-${{ env.YEARS }}-${{ github.run_id }}
           restore-keys: |
-            cfbd-raw-${{ github.event.inputs.years }}-
+            cfbd-raw-${{ env.YEARS }}-
             cfbd-raw-
 
       - name: Fetch historical data
-        run: python scripts/fetch_historical_data.py --years ${{ github.event.inputs.years }}
+        run: python scripts/fetch_historical_data.py --years ${{ env.YEARS }}
 
       - name: Build features
-        run: python scripts/build_features.py --years ${{ github.event.inputs.years }}
+        run: python scripts/build_features.py --years ${{ env.YEARS }}
 
       - name: Train game model
         run: python scripts/train_game_model.py
@@ -78,7 +89,7 @@ jobs:
 
       - name: Export dashboard data
         run: |
-          LATEST_YEAR=$(echo "${{ github.event.inputs.years }}" | tr ' ' '\n' | sort -n | tail -1)
+          LATEST_YEAR=$(echo "${{ env.YEARS }}" | tr ' ' '\n' | sort -n | tail -1)
           python scripts/export_dashboard_data.py --year "$LATEST_YEAR"
 
       - name: Compute CLV (closing-line value) for flagged spread picks
