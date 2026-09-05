@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-04T13:24:49.852524+00:00",
-  "n_games": 8,
-  "avg_clv_points": -0.062,
+  "generated_at": "2026-09-05T13:41:23.691772+00:00",
+  "n_games": 11,
+  "avg_clv_points": 0.045,
   "median_clv_points": 0.0,
-  "pct_positive_clv": 0.125,
+  "pct_positive_clv": 0.1818,
   "note": null,
   "games": [
     {
@@ -109,6 +109,45 @@
       "clv_points": 3.0,
       "captured_at": "2026-08-29T15:09:37.583225+00:00",
       "commence_time": "2026-09-04T01:00:00Z"
+    },
+    {
+      "game_id": 401858429,
+      "season": 2026,
+      "week": 1,
+      "home_team": "Michigan State Spartans",
+      "away_team": "Toledo Rockets",
+      "side": "away",
+      "recommended_spread_home": -10.0,
+      "closing_spread_home": -10.0,
+      "clv_points": 0.0,
+      "captured_at": "2026-08-29T15:09:37.583225+00:00",
+      "commence_time": "2026-09-05T00:00:00Z"
+    },
+    {
+      "game_id": 401858436,
+      "season": 2026,
+      "week": 1,
+      "home_team": "USC Trojans",
+      "away_team": "Fresno State Bulldogs",
+      "side": "away",
+      "recommended_spread_home": -23.5,
+      "closing_spread_home": -21.5,
+      "clv_points": 2.0,
+      "captured_at": "2026-08-29T15:09:37.583225+00:00",
+      "commence_time": "2026-09-05T01:00:00Z"
+    },
+    {
+      "game_id": 401858206,
+      "season": 2026,
+      "week": 1,
+      "home_team": "Stanford Cardinal",
+      "away_team": "Miami Hurricanes",
+      "side": "home",
+      "recommended_spread_home": 23.5,
+      "closing_spread_home": 24.5,
+      "clv_points": -1.0,
+      "captured_at": "2026-08-29T15:09:37.583225+00:00",
+      "commence_time": "2026-09-05T01:00:00Z"
     }
   ]
 }
