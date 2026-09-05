@@ -33,6 +33,7 @@ from src.features.live_features import (
 )
 from src.features.live_player_features import (
     build_current_player_form, score_prop, MIN_GAMES_FOR_PROP_MODEL,
+    project_player_fantasy, MIN_GAMES_FOR_FANTASY,
 )
 from src.features.player_features import STAT_MAP
 from src.models import fair_odds as fo
@@ -745,6 +746,41 @@ def main(year: int):
               f"(the rest show the posted line only — see live_player_features.py's matching-limitations note "
               f"if this count looks lower than expected once real games are underway)")
 
+    # Fantasy point projections (PPR) -- unlike props, these don't need a
+    # posted PrizePicks line to exist at all: every player in player_form
+    # who clears MIN_GAMES_FOR_FANTASY gets a projection for their next
+    # upcoming game, straight from the same trained per-stat models used
+    # for props. See src/features/live_player_features.py's
+    # project_player_fantasy() for the scoring weights and the "why every
+    # stat category, not just the player's likely position" reasoning.
+    #
+    # NOTE: this uses MIN_GAMES_FOR_FANTASY (1 game), not the props
+    # threshold MIN_GAMES_FOR_PROP_MODEL (2 games) -- per explicit user
+    # request, to get real projections off Week 1 data immediately rather
+    # than waiting for a second game. A 1-game "rolling average" is just
+    # that player's real Week 1 stat line, so it's still real data, just
+    # noisier than a 2+ game average would be -- worth knowing before
+    # trusting a single huge or tiny game too much this early.
+    fantasy_out = []
+    if prop_models and player_form:
+        print(f"Projecting PPR fantasy points for every player with {MIN_GAMES_FOR_FANTASY}+ real "
+              f"{season_year} game(s) (independent of whether PrizePicks has posted a prop for them)...")
+        for name_key, entry in player_form.items():
+            if entry["games_played_prior"] < MIN_GAMES_FOR_FANTASY:
+                continue
+            result = project_player_fantasy(entry, schedule_df, opp_defense_lookup, prop_models)
+            if result:
+                fantasy_out.append({
+                    "player_name": entry["display_name"],
+                    "team": entry.get("team"),
+                    "games_played_prior": entry["games_played_prior"],
+                    **result,
+                })
+        fantasy_out.sort(key=lambda r: r["projected_points"], reverse=True)
+        print(f"  {len(fantasy_out)} player(s) projected (of {sum(1 for v in player_form.values() if v['games_played_prior'] >= MIN_GAMES_FOR_FANTASY)} "
+              f"eligible by games played -- the gap is players with no upcoming-opponent match or missing "
+              f"opponent-defense data)")
+
     print("Fetching real player-prop market catalog (for placeholder tab)...")
     try:
         prop_market_catalog = prizepicks_client.get_prop_market_catalog()
@@ -774,6 +810,7 @@ def main(year: int):
         "games": games_out,
         "props": props_out,
         "prop_market_catalog": prop_market_catalog,
+        "fantasy": fantasy_out,
     }
 
     os.makedirs("docs/data", exist_ok=True)
