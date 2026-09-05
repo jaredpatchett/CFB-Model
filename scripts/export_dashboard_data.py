@@ -681,67 +681,79 @@ def main(year: int):
     else:
         print(f"  [warn] {props_path} not found, skipping props")
 
+    # Load trained per-stat models + build real in-season player-form data
+    # UNCONDITIONALLY (not nested under `if props_out:`). Both posted-prop
+    # scoring AND fantasy projections need these, and fantasy projections
+    # specifically must NOT depend on props_out being non-empty -- a
+    # player doesn't need a posted PrizePicks line to get a fantasy
+    # projection. This used to be nested under `if props_out:`, which was
+    # a real bug caught from an actual workflow run: whenever the
+    # PrizePicks fetch came back empty (e.g. the 403/OddsPapi issue),
+    # prop_models/player_form were never even assigned, and the fantasy
+    # block below crashed with `UnboundLocalError: cannot access local
+    # variable 'prop_models'` trying to reference them.
+    print(f"Checking for trained props models + real in-season player data (powers both posted-prop "
+          f"scoring and fantasy projections once a player has {MIN_GAMES_FOR_PROP_MODEL}+ real "
+          f"{season_year} games)...")
+    prop_models = {}
+    for stat in sorted(set(STAT_MAP.values())):
+        p = f"{config.MODELS_DIR}/props/{stat}.joblib"
+        if os.path.exists(p):
+            try:
+                prop_models[stat] = PlayerStatModel.load(p)
+            except Exception as e:
+                print(f"  [warn] could not load {p}: {e}")
+    if not prop_models:
+        print(f"  [warn] no trained props models found in {config.MODELS_DIR}/props/ — "
+              f"props/fantasy will be unavailable (expected before "
+              f"scripts/train_props_model.py has run in this pipeline)")
+
+    max_completed_week = 0
+    if not schedule_df.empty and "completed" in schedule_df.columns and "week" in schedule_df.columns:
+        completed_weeks = schedule_df.loc[schedule_df["completed"] == True, "week"]
+        max_completed_week = int(completed_weeks.max()) if not completed_weeks.empty else 0
+
+    player_form = {}
+    if prop_models and max_completed_week > 0:
+        print(f"  pulling {season_year} player game stats through week {max_completed_week}...")
+        all_player_stats = []
+        for wk in range(1, max_completed_week + 1):
+            try:
+                wk_stats = cfbd.get_player_game_stats(season_year, wk)
+                if not wk_stats.empty:
+                    all_player_stats.append(wk_stats)
+            except Exception as e:
+                print(f"  [warn] week {wk} player stats fetch failed: {e}")
+        if all_player_stats:
+            player_stats_long_current = pd.concat(all_player_stats, ignore_index=True)
+            player_form = build_current_player_form(player_stats_long_current, schedule_df)
+            n_ready = sum(1 for v in player_form.values() if v["games_played_prior"] >= MIN_GAMES_FOR_PROP_MODEL)
+            print(f"  {len(player_form)} player(s) matched to real {season_year} stats, "
+                  f"{n_ready} of them already clear the {MIN_GAMES_FOR_PROP_MODEL}-game threshold")
+    elif prop_models:
+        print(f"  0 completed {season_year} games yet — nothing to score (normal before kickoff)")
+
+    opp_defense_lookup = {}
+    if (not adv_stats_df.empty and "team" in adv_stats_df.columns
+            and "defense.passingPlays.successRate" in adv_stats_df.columns
+            and "defense.rushingPlays.successRate" in adv_stats_df.columns):
+        for _, r in adv_stats_df.iterrows():
+            opp_defense_lookup[r["team"]] = {
+                "opp_pass_def_success_rate": r.get("defense.passingPlays.successRate"),
+                "opp_rush_def_success_rate": r.get("defense.rushingPlays.successRate"),
+            }
+
     n_props_scored = 0
+    if props_out and prop_models and player_form:
+        for p in props_out:
+            result = score_prop(
+                p.get("player_name"), p.get("market_name"), p.get("line"),
+                player_form, schedule_df, opp_defense_lookup, prop_models,
+            )
+            if result:
+                p.update(result)
+                n_props_scored += 1
     if props_out:
-        print(f"Checking for trained props models + real in-season player data (auto-scores a posted "
-              f"prop line once a player has {MIN_GAMES_FOR_PROP_MODEL}+ real {season_year} games)...")
-        prop_models = {}
-        for stat in sorted(set(STAT_MAP.values())):
-            p = f"{config.MODELS_DIR}/props/{stat}.joblib"
-            if os.path.exists(p):
-                try:
-                    prop_models[stat] = PlayerStatModel.load(p)
-                except Exception as e:
-                    print(f"  [warn] could not load {p}: {e}")
-        if not prop_models:
-            print(f"  [warn] no trained props models found in {config.MODELS_DIR}/props/ — "
-                  f"props will show the posted line only (expected before "
-                  f"scripts/train_props_model.py has run in this pipeline)")
-
-        max_completed_week = 0
-        if not schedule_df.empty and "completed" in schedule_df.columns and "week" in schedule_df.columns:
-            completed_weeks = schedule_df.loc[schedule_df["completed"] == True, "week"]
-            max_completed_week = int(completed_weeks.max()) if not completed_weeks.empty else 0
-
-        player_form = {}
-        if prop_models and max_completed_week > 0:
-            print(f"  pulling {season_year} player game stats through week {max_completed_week}...")
-            all_player_stats = []
-            for wk in range(1, max_completed_week + 1):
-                try:
-                    wk_stats = cfbd.get_player_game_stats(season_year, wk)
-                    if not wk_stats.empty:
-                        all_player_stats.append(wk_stats)
-                except Exception as e:
-                    print(f"  [warn] week {wk} player stats fetch failed: {e}")
-            if all_player_stats:
-                player_stats_long_current = pd.concat(all_player_stats, ignore_index=True)
-                player_form = build_current_player_form(player_stats_long_current, schedule_df)
-                n_ready = sum(1 for v in player_form.values() if v["games_played_prior"] >= MIN_GAMES_FOR_PROP_MODEL)
-                print(f"  {len(player_form)} player(s) matched to real {season_year} stats, "
-                      f"{n_ready} of them already clear the {MIN_GAMES_FOR_PROP_MODEL}-game threshold")
-        elif prop_models:
-            print(f"  0 completed {season_year} games yet — nothing to score (normal before kickoff)")
-
-        opp_defense_lookup = {}
-        if (not adv_stats_df.empty and "team" in adv_stats_df.columns
-                and "defense.passingPlays.successRate" in adv_stats_df.columns
-                and "defense.rushingPlays.successRate" in adv_stats_df.columns):
-            for _, r in adv_stats_df.iterrows():
-                opp_defense_lookup[r["team"]] = {
-                    "opp_pass_def_success_rate": r.get("defense.passingPlays.successRate"),
-                    "opp_rush_def_success_rate": r.get("defense.rushingPlays.successRate"),
-                }
-
-        if prop_models and player_form:
-            for p in props_out:
-                result = score_prop(
-                    p.get("player_name"), p.get("market_name"), p.get("line"),
-                    player_form, schedule_df, opp_defense_lookup, prop_models,
-                )
-                if result:
-                    p.update(result)
-                    n_props_scored += 1
         print(f"  {n_props_scored} of {len(props_out)} posted prop line(s) scored with a real model prediction "
               f"(the rest show the posted line only — see live_player_features.py's matching-limitations note "
               f"if this count looks lower than expected once real games are underway)")
