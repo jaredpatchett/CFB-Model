@@ -39,6 +39,17 @@ from src.features.player_features import STAT_MAP, pivot_player_game_stats
 # Still a real, chosen threshold, not zero.
 MIN_GAMES_FOR_PROP_MODEL = 2
 
+# Fantasy projections use a separate, lower bar than props (1 game instead
+# of 2) -- per explicit user request, to get projections showing right
+# away off Week 1 data instead of waiting for a second game. A single
+# game's "rolling" average is just that game's real stat line (still real
+# data, not fabricated), so this is a real tradeoff, not a hack: less
+# sample to smooth out a fluke performance, in exchange for not waiting an
+# extra week. Props keeps its own MIN_GAMES_FOR_PROP_MODEL untouched --
+# this only affects project_player_fantasy()'s caller in
+# export_dashboard_data.py.
+MIN_GAMES_FOR_FANTASY = 1
+
 # PrizePicks/OddsPapi market-name keywords -> this pipeline's stat column
 # names. Keyword-based (not exact string match) because the precise market
 # name strings haven't been verified against a live fetch from this
@@ -113,6 +124,14 @@ def build_current_player_form(player_stats_long_current: pd.DataFrame, games_cur
             continue
         entry = {
             "athlete_id": athlete_id,
+            # Real display name (e.g. "Bo Nix"), distinct from the
+            # lowercased/punctuation-stripped name_key this dict is keyed
+            # by. score_prop() never needed this -- a scored prop's
+            # displayed name always comes straight from the real posted
+            # PrizePicks line, untouched -- but fantasy projections have
+            # no posted line to source a name from, so they read this
+            # field directly (see export_dashboard_data.py).
+            "display_name": grp["player"].iloc[-1],
             "team": grp["team"].iloc[-1],
             "games_played_prior": int(len(grp)),
         }
@@ -123,6 +142,104 @@ def build_current_player_form(player_stats_long_current: pd.DataFrame, games_cur
     for name_key in ambiguous:
         by_name.pop(name_key, None)
     return by_name
+
+
+# Standard PPR fantasy scoring weights, applied to each stat's MODEL-
+# PREDICTED value (not a posted line -- there's no sportsbook fantasy
+# line to compare against, this is a pure projection). Deliberately
+# excludes pass_att/pass_comp/rush_att -- those are usage inputs the
+# per-stat models consume as FEATURES, not events PPR scoring itself
+# awards points for.
+PPR_SCORING = {
+    "pass_yds": 0.04,   # 1 pt / 25 yards
+    "pass_tds": 4.0,
+    "pass_int": -2.0,
+    "rush_yds": 0.1,    # 1 pt / 10 yards
+    "rush_tds": 6.0,
+    "rec_yds": 0.1,     # 1 pt / 10 yards
+    "rec_tds": 6.0,
+    "receptions": 1.0,  # full PPR
+}
+
+
+def infer_position(entry: dict) -> str:
+    """Soft, display-only position guess from real usage -- this pipeline
+    has no actual position field (CFBD's player-game stats are keyed by
+    stat category, not roster position), so this is a heuristic, not a
+    verified label. QB if real pass-attempt volume is meaningful; RB if
+    carries outweigh catches; otherwise WR/TE (can't distinguish the two
+    from usage alone). Never affects the point projection itself, which
+    sums whatever the player's own stat-category models actually predict
+    for them regardless of this label."""
+    pass_att = entry.get("roll_pass_att") or 0
+    rush_att = entry.get("roll_rush_att") or 0
+    receptions = entry.get("roll_receptions") or 0
+    if pass_att >= 5:
+        return "QB"
+    if rush_att >= receptions:
+        return "RB"
+    return "WR/TE"
+
+
+def project_player_fantasy(entry: dict, schedule_df: pd.DataFrame,
+                            opp_defense_lookup: dict, models: dict):
+    """Returns {'opponent', 'position', 'projected_points', 'stat_breakdown'}
+    for this player's NEXT upcoming game, or None if it shouldn't be
+    projected yet -- no upcoming opponent found, or a required feature
+    (same feature set every stat model shares, see ROLLING_FEATURE_COLUMNS)
+    is unavailable. Same 'never guess' failure mode as score_prop(): a
+    missing input means no projection at all, not a fabricated one.
+
+    Deliberately projects EVERY stat category this player has a trained
+    model for (not just ones matching their inferred position) and sums
+    them all into one PPR total -- a true pass-catching back or a
+    rushing QB SHOULD get credit across categories, and a player with
+    near-zero real volume in an irrelevant category (e.g. a WR's rushing
+    attempts) will simply get a near-zero predicted value there, not a
+    fabricated one, since the model is trained on that player's own real
+    usage pattern."""
+    team = entry.get("team")
+    opponent = find_upcoming_opponent(team, schedule_df)
+    if not opponent:
+        return None
+    opp_def = opp_defense_lookup.get(opponent) or {}
+
+    stat_predictions = {}
+    for stat, model in models.items():
+        row = {}
+        ok = True
+        for c in model.feature_columns:
+            if c in ("opp_pass_def_success_rate", "opp_rush_def_success_rate"):
+                val = opp_def.get(c)
+            else:
+                val = entry.get(c)
+            if val is None or (isinstance(val, float) and pd.isna(val)):
+                ok = False
+                break
+            row[c] = val
+        if not ok:
+            continue
+        pred = float(model.predict(pd.DataFrame([row]))[0])
+        # A regressor can output a small negative number for a low-usage
+        # player/stat (e.g. -1.3 predicted INTs) -- not a meaningful
+        # real-world outcome, and NEGATIVE * PPR_SCORING's own negative
+        # weight (pass_int) would perversely ADD points instead of
+        # subtracting them if left unclipped.
+        stat_predictions[stat] = max(pred, 0.0)
+
+    if not stat_predictions:
+        return None
+
+    projected_points = sum(
+        stat_predictions.get(stat, 0.0) * weight
+        for stat, weight in PPR_SCORING.items()
+    )
+    return {
+        "opponent": opponent,
+        "position": infer_position(entry),
+        "projected_points": round(projected_points, 1),
+        "stat_breakdown": {k: round(v, 1) for k, v in stat_predictions.items()},
+    }
 
 
 def find_upcoming_opponent(team: str, schedule_df: pd.DataFrame):
