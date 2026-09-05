@@ -252,6 +252,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
 
     props_catalog = data.get("prop_market_catalog", [])
     props_live = data.get("props", [])
+    fantasy_out = data.get("fantasy", [])
 
     # backtest: real ATS win rate / margin MAE / moneyline accuracy against
     # historical CFBD closing lines (see run_backtest.py + src/backtest/
@@ -322,6 +323,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
         "clv": clv_out,
         "propCatalog": props_catalog,
         "propsLive": props_live,
+        "fantasy": fantasy_out,
         "backtest": backtest_out,
     }
 
@@ -455,6 +457,7 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 
 .edge-grid { grid-template-columns: 1fr 72px 72px 62px 54px 46px 54px; }
 .rate-grid { grid-template-columns: 26px 1fr 56px 1fr 100px; }
+.fantasy-grid { grid-template-columns: 26px 1fr 120px 90px; }
 .card-row  { grid-template-columns: 1fr 58px 58px 46px 58px; }
 
 .row { display: flex; align-items: stretch; border-bottom: 1px solid var(--rule-row); }
@@ -1177,6 +1180,68 @@ RENDERER_JS = """<script>
     return head + (rows || '<div class="empty-state">No teams match that search.</div>');
   }
 
+  var FANTASY_STAT_LABELS = {
+    pass_yds: 'pass yds', pass_tds: 'pass TD', pass_int: 'INT',
+    rush_yds: 'rush yds', rush_tds: 'rush TD',
+    rec_yds: 'rec yds', rec_tds: 'rec TD', receptions: 'rec',
+  };
+
+  function renderFantasy() {
+    var rows = D.fantasy || [];
+    if (!rows.length) {
+      return '<div class="section-head mt-lg"><div class="section-title"><div class="section-flag"></div>' +
+        '<h2>Fantasy Projections (PPR)</h2></div></div>' +
+        '<p class="pcard-note">No players clear the real-in-season-games threshold yet \u2014 ' +
+        'this fills in automatically as the season\u2019s games get played (same trained per-stat ' +
+        'models used for Player Props, just summed into PPR points instead of compared to a posted line).</p>';
+    }
+    var head = '' +
+      '<div class="section-head mt-lg"><div class="section-title"><div class="section-flag"></div>' +
+      '<h2>Fantasy Projections (PPR)</h2></div></div>' +
+      '<div class="thead fantasy-grid"><div>#</div><div>Player</div><div>Next Opponent</div><div class="num">Proj. Pts</div></div>';
+
+    var visible = rows.filter(function (r) {
+      if (!state.search) return true;
+      var q = state.search.toLowerCase();
+      return r.player_name.toLowerCase().indexOf(q) !== -1 || (r.team || '').toLowerCase().indexOf(q) !== -1;
+    });
+
+    var body = visible.map(function (r, i) {
+      var t = team(r.team);
+      var c = M.displayColor(t.primary);
+      var breakdown = Object.keys(r.stat_breakdown || {})
+        .filter(function (k) { return r.stat_breakdown[k]; })
+        .map(function (k) { return r.stat_breakdown[k] + ' ' + (FANTASY_STAT_LABELS[k] || k); })
+        .join(', ');
+      // A 1-game "rolling average" is just that player's real Week 1 stat
+      // line -- still real data, but a single fluke huge/tiny game hasn't
+      // been smoothed by anything yet. Flag it rather than show a 1-game
+      // outlier with the same visual confidence as a multi-game average.
+      var lowSample = r.games_played_prior < 2;
+      var sampleBadge = lowSample
+        ? '<span style="color:var(--amber);font-size:9px;letter-spacing:.04em;margin-left:6px" title="Projection based on a single game so far this season -- treat as noisier than a multi-game average">1 GM</span>'
+        : '';
+      return '' +
+        '<div class="row"><div class="row-body fantasy-grid" style="padding:8px 14px;font-size:12px">' +
+          '<div style="color:var(--muted-4)">' + (i + 1) + '</div>' +
+          '<div class="matchup" style="overflow:hidden;white-space:nowrap" title="' + esc(breakdown) + '">' +
+            '<span class="team-chip" style="background:' + esc(c) + '"></span>' +
+            '<span style="font-weight:700">' + esc(r.player_name) + '</span>' +
+            '<span style="color:var(--muted-4);font-size:9.5px;letter-spacing:.08em">' + esc(r.position) + '</span>' +
+            sampleBadge +
+          '</div>' +
+          '<div style="overflow:hidden;white-space:nowrap;color:var(--muted-3);font-size:11px">at ' + esc(abbrOf(r.opponent)) + '</div>' +
+          '<div class="num" style="font-weight:700">' + r.projected_points.toFixed(1) + '</div>' +
+        '</div></div>';
+    }).join('');
+
+    return head + (body || '<div class="empty-state">No players match that search.</div>') +
+      '<div class="table-foot"><span>PPR scoring (1 pt/reception, 1 pt/10 rush or rec yards, 1 pt/25 pass yards, ' +
+      '6 pt rush/rec TD, 4 pt pass TD, -2 INT), projected from each player\u2019s own trained stat model against ' +
+      'their next scheduled opponent. Hover a player for their full stat-line breakdown. Position is inferred from ' +
+      'usage, not a verified roster field \u2014 treat it as a label, not a guarantee.</span></div>';
+  }
+
   function renderProjector(p) {
     if (!p) return '<div class="empty-state">No priced games to project.</div>';
     var g = p.game, a = team(g.away), h = team(g.home);
@@ -1545,7 +1610,7 @@ RENDERER_JS = """<script>
       '<div class="wrap">' +
         renderKpis(card) +
         '<div class="main">' +
-          '<div>' + renderEdgeBoard(priced, card) + renderRatings() + renderBacktest() + renderClv() + '</div>' +
+          '<div>' + renderEdgeBoard(priced, card) + renderRatings() + renderFantasy() + renderBacktest() + renderClv() + '</div>' +
           '<div>' + renderProjector(sel) + renderBetCard(card) + '</div>' +
         '</div>' +
         '<div class="split"><div>' + renderProps() + '</div><div>' + renderTracker() + '</div></div>' +
@@ -1606,7 +1671,8 @@ def main():
 
     print(f"Wrote {OUT_PATH} ({model_data['meta']['gamesPriced']} priced of "
           f"{model_data['meta']['totalGames']} total games, {len(model_data['teams'])} "
-          f"teams with real ratings, {len(model_data['propCatalog'])} prop markets in catalog)")
+          f"teams with real ratings, {len(model_data['propCatalog'])} prop markets in catalog, "
+          f"{len(model_data['fantasy'])} fantasy projections)")
 
 
 if __name__ == "__main__":
