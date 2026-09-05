@@ -1,38 +1,30 @@
 {
-  "generated_at": "2026-09-05T14:21:54.356232+00:00",
+  "generated_at": "2026-09-05T14:32:04.444253+00:00",
   "feature_columns_used": [
     "home_field",
     "roll_margin_diff",
     "roll_ppg_for_diff",
     "roll_ppg_against_diff",
-    "sp_rating_diff",
     "home_games_played_prior",
     "away_games_played_prior",
-    "pace_diff",
-    "returning_production_diff",
-    "core_overall_diff",
     "temperature",
     "wind_speed",
     "precipitation",
     "game_indoors"
   ],
   "feature_importances": {
-    "roll_margin_diff": 0.34748160198638506,
-    "sp_rating_diff": 0.2227858565487041,
-    "roll_ppg_for_diff": 0.1435112143404349,
-    "core_overall_diff": 0.06360519268800299,
-    "roll_ppg_against_diff": 0.05793175777706829,
-    "pace_diff": 0.0381491260076277,
-    "returning_production_diff": 0.03622948332787928,
-    "temperature": 0.032930589895471395,
-    "home_games_played_prior": 0.024926155029415534,
-    "wind_speed": 0.016377181108507385,
-    "away_games_played_prior": 0.01152462354155552,
-    "precipitation": 0.003182693323315742,
-    "home_field": 0.0011900311177506047,
-    "game_indoors": 0.00017449330788141975
+    "roll_margin_diff": 0.6712476738819487,
+    "roll_ppg_for_diff": 0.08884114315287558,
+    "temperature": 0.0686044997091207,
+    "home_games_played_prior": 0.059507640555601225,
+    "away_games_played_prior": 0.04906880733016464,
+    "roll_ppg_against_diff": 0.04050548781528452,
+    "wind_speed": 0.014231853718922343,
+    "precipitation": 0.0048418459355227105,
+    "game_indoors": 0.0027032547002082707,
+    "home_field": 0.00044779320035124426
   },
-  "holdout_mae": 13.513934904998568,
-  "residual_std": 13.618994196375496,
-  "n_train": 1610
+  "holdout_mae": 16.32753115541806,
+  "residual_std": 17.56449253649766,
+  "n_train": 2279
 }
