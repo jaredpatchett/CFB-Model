@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-07T17:12:23.016445+00:00",
-  "n_games": 36,
-  "avg_clv_points": 0.25,
+  "generated_at": "2026-09-08T15:58:13.592343+00:00",
+  "n_games": 37,
+  "avg_clv_points": 0.23,
   "median_clv_points": 0.0,
-  "pct_positive_clv": 0.3889,
+  "pct_positive_clv": 0.3784,
   "note": null,
   "games": [
     {
@@ -241,14 +241,27 @@
       "commence_time": "2026-09-05T16:45:00Z"
     },
     {
-      "game_id": 401858209,
+      "game_id": 401858434,
       "season": 2026,
       "week": 1,
-      "home_team": "Duke Blue Devils",
-      "away_team": "Tulane Green Wave",
+      "home_team": "Penn State Nittany Lions",
+      "away_team": "Marshall Thundering Herd",
       "side": "away",
-      "recommended_spread_home": -9.5,
-      "closing_spread_home": -9.5,
+      "recommended_spread_home": -24.5,
+      "closing_spread_home": -23.5,
+      "clv_points": 1.0,
+      "captured_at": "2026-08-29T15:09:37.583225+00:00",
+      "commence_time": "2026-09-05T19:30:00Z"
+    },
+    {
+      "game_id": 401858433,
+      "season": 2026,
+      "week": 1,
+      "home_team": "Oregon Ducks",
+      "away_team": "Boise State Broncos",
+      "side": "away",
+      "recommended_spread_home": -24.5,
+      "closing_spread_home": -24.5,
       "clv_points": 0.0,
       "captured_at": "2026-08-29T15:09:37.583225+00:00",
       "commence_time": "2026-09-05T19:30:00Z"
@@ -267,19 +280,6 @@
       "commence_time": "2026-09-05T19:30:00Z"
     },
     {
-      "game_id": 401858434,
-      "season": 2026,
-      "week": 1,
-      "home_team": "Penn State Nittany Lions",
-      "away_team": "Marshall Thundering Herd",
-      "side": "away",
-      "recommended_spread_home": -24.5,
-      "closing_spread_home": -23.5,
-      "clv_points": 1.0,
-      "captured_at": "2026-08-29T15:09:37.583225+00:00",
-      "commence_time": "2026-09-05T19:30:00Z"
-    },
-    {
       "game_id": 401856777,
       "season": 2026,
       "week": 1,
@@ -293,14 +293,14 @@
       "commence_time": "2026-09-05T19:30:00Z"
     },
     {
-      "game_id": 401858433,
+      "game_id": 401858209,
       "season": 2026,
       "week": 1,
-      "home_team": "Oregon Ducks",
-      "away_team": "Boise State Broncos",
+      "home_team": "Duke Blue Devils",
+      "away_team": "Tulane Green Wave",
       "side": "away",
-      "recommended_spread_home": -24.5,
-      "closing_spread_home": -24.5,
+      "recommended_spread_home": -9.5,
+      "closing_spread_home": -9.5,
       "clv_points": 0.0,
       "captured_at": "2026-08-29T15:09:37.583225+00:00",
       "commence_time": "2026-09-05T19:30:00Z"
@@ -345,14 +345,14 @@
       "commence_time": "2026-09-05T22:00:00Z"
     },
     {
-      "game_id": 401858428,
+      "game_id": 401862699,
       "season": 2026,
       "week": 1,
-      "home_team": "Michigan Wolverines",
-      "away_team": "Western Michigan Broncos",
-      "side": "away",
-      "recommended_spread_home": -28.5,
-      "closing_spread_home": -27.5,
+      "home_team": "South Florida Bulls",
+      "away_team": "Florida International Panthers",
+      "side": "home",
+      "recommended_spread_home": -13.5,
+      "closing_spread_home": -14.5,
       "clv_points": 1.0,
       "captured_at": "2026-08-29T15:09:37.583225+00:00",
       "commence_time": "2026-09-05T23:00:00Z"
@@ -371,30 +371,17 @@
       "commence_time": "2026-09-05T23:00:00Z"
     },
     {
-      "game_id": 401862699,
+      "game_id": 401858428,
       "season": 2026,
       "week": 1,
-      "home_team": "South Florida Bulls",
-      "away_team": "Florida International Panthers",
-      "side": "home",
-      "recommended_spread_home": -13.5,
-      "closing_spread_home": -14.5,
+      "home_team": "Michigan Wolverines",
+      "away_team": "Western Michigan Broncos",
+      "side": "away",
+      "recommended_spread_home": -28.5,
+      "closing_spread_home": -27.5,
       "clv_points": 1.0,
       "captured_at": "2026-08-29T15:09:37.583225+00:00",
       "commence_time": "2026-09-05T23:00:00Z"
-    },
-    {
-      "game_id": 401856662,
-      "season": 2026,
-      "week": 1,
-      "home_team": "Mississippi State Bulldogs",
-      "away_team": "UL Monroe Warhawks",
-      "side": "away",
-      "recommended_spread_home": -28.5,
-      "closing_spread_home": -28.5,
-      "clv_points": 0.0,
-      "captured_at": "2026-08-30T18:39:14.143103+00:00",
-      "commence_time": "2026-09-05T23:30:00Z"
     },
     {
       "game_id": 401856660,
@@ -407,6 +394,19 @@
       "closing_spread_home": -10.0,
       "clv_points": 0.5,
       "captured_at": "2026-08-29T15:09:37.583225+00:00",
+      "commence_time": "2026-09-05T23:30:00Z"
+    },
+    {
+      "game_id": 401856662,
+      "season": 2026,
+      "week": 1,
+      "home_team": "Mississippi State Bulldogs",
+      "away_team": "UL Monroe Warhawks",
+      "side": "away",
+      "recommended_spread_home": -28.5,
+      "closing_spread_home": -28.5,
+      "clv_points": 0.0,
+      "captured_at": "2026-08-30T18:39:14.143103+00:00",
       "commence_time": "2026-09-05T23:30:00Z"
     },
     {
@@ -436,19 +436,6 @@
       "commence_time": "2026-09-06T02:00:00Z"
     },
     {
-      "game_id": 401858210,
-      "season": 2026,
-      "week": 1,
-      "home_team": "California Golden Bears",
-      "away_team": "UCLA Bruins",
-      "side": "home",
-      "recommended_spread_home": 1.5,
-      "closing_spread_home": 2.5,
-      "clv_points": -1.0,
-      "captured_at": "2026-08-29T15:09:37.583225+00:00",
-      "commence_time": "2026-09-06T02:30:00Z"
-    },
-    {
       "game_id": 401864432,
       "season": 2026,
       "week": 1,
@@ -457,6 +444,19 @@
       "side": "away",
       "recommended_spread_home": 2.5,
       "closing_spread_home": 1.5,
+      "clv_points": -1.0,
+      "captured_at": "2026-08-29T15:09:37.583225+00:00",
+      "commence_time": "2026-09-06T02:30:00Z"
+    },
+    {
+      "game_id": 401858210,
+      "season": 2026,
+      "week": 1,
+      "home_team": "California Golden Bears",
+      "away_team": "UCLA Bruins",
+      "side": "home",
+      "recommended_spread_home": 1.5,
+      "closing_spread_home": 2.5,
       "clv_points": -1.0,
       "captured_at": "2026-08-29T15:09:37.583225+00:00",
       "commence_time": "2026-09-06T02:30:00Z"
@@ -473,6 +473,19 @@
       "clv_points": 0.0,
       "captured_at": "2026-08-29T15:09:37.583225+00:00",
       "commence_time": "2026-09-06T20:00:00Z"
+    },
+    {
+      "game_id": 401858212,
+      "season": 2026,
+      "week": 1,
+      "home_team": "Florida State Seminoles",
+      "away_team": "SMU Mustangs",
+      "side": "home",
+      "recommended_spread_home": 2.5,
+      "closing_spread_home": 3.0,
+      "clv_points": -0.5,
+      "captured_at": "2026-08-29T15:09:37.583225+00:00",
+      "commence_time": "2026-09-07T23:30:00Z"
     }
   ]
 }
