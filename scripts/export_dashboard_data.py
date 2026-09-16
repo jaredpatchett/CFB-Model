@@ -743,7 +743,21 @@ def main(year: int):
                 "opp_rush_def_success_rate": r.get("defense.rushingPlays.successRate"),
             }
 
+    # A prop only clears the "official play" bar with BOTH a real (not
+    # low-sample) model read AND a real dollar edge against the actual
+    # posted price -- same philosophy as the Edge Board's sideEV for
+    # moneylines (src/models/fair_odds.py:ev_percent), just expressed as
+    # EV% instead of points, since prop stat units (yards vs receptions vs
+    # TDs) aren't comparable to each other the way point margins are.
+    # Anything scored but short of this bar is still shown, just labeled a
+    # LEAN instead of OFFICIAL -- never hidden, never silently upgraded.
+    MIN_EV_PERCENT_FOR_OFFICIAL_PROP = 3.0
+
+    def _valid_price(x):
+        return x is not None and not (isinstance(x, float) and pd.isna(x))
+
     n_props_scored = 0
+    n_props_official = 0
     if props_out and prop_models and player_form:
         for p in props_out:
             result = score_prop(
@@ -753,10 +767,31 @@ def main(year: int):
             if result:
                 p.update(result)
                 n_props_scored += 1
+
+                lean = p.get("model_lean")
+                lean_price = p.get("over_price") if lean == "over" else p.get("under_price")
+                over_prob = p.get("model_over_probability")
+                lean_prob = (
+                    over_prob if lean == "over"
+                    else (1 - over_prob) if over_prob is not None else None
+                )
+
+                model_ev = None
+                is_official = False
+                if (p.get("model_confidence") == "normal" and lean_prob is not None
+                        and _valid_price(lean_price)):
+                    model_ev = round(fo.ev_percent(lean_prob, float(lean_price)), 1)
+                    is_official = model_ev >= MIN_EV_PERCENT_FOR_OFFICIAL_PROP
+                p["model_ev"] = model_ev
+                p["is_official_play"] = is_official
+                if is_official:
+                    n_props_official += 1
     if props_out:
         print(f"  {n_props_scored} of {len(props_out)} posted prop line(s) scored with a real model prediction "
-              f"(the rest show the posted line only — see live_player_features.py's matching-limitations note "
-              f"if this count looks lower than expected once real games are underway)")
+              f"({n_props_official} clearing the {MIN_EV_PERCENT_FOR_OFFICIAL_PROP:.0f}%-EV official-play bar "
+              f"at normal confidence -- the rest show a LEAN or the posted line only. See "
+              f"live_player_features.py's matching-limitations note if the scored count looks lower than "
+              f"expected once real games are underway)")
 
     # Fantasy point projections (PPR) -- unlike props, these don't need a
     # posted PrizePicks line to exist at all: every player in player_form
