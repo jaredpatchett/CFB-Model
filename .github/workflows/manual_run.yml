@@ -117,7 +117,36 @@ jobs:
           # than assuming the file is already there this early in the season.
           [ -f data/clv/line_snapshots.csv ] && git add data/clv/line_snapshots.csv
           git diff --cached --quiet && echo "No changes to commit" || git commit -m "Update dashboard data + HTML [skip ci]"
-          git push
+
+          # The full pipeline above (historical fetch, feature build, model
+          # train, live odds fetch, export, build) can run long enough for
+          # something else to land on main before this step -- a patch
+          # pasted by hand into the GitHub UI, or the daily 12:00 UTC
+          # schedule firing while a manual run is still in flight. A plain
+          # `git push` fails outright the moment that happens ("fetch
+          # first" / non-fast-forward) and silently throws away this run's
+          # entire output. Instead: fetch + merge whatever's new on main,
+          # preferring THIS run's freshly-generated files on any conflict
+          # (-X ours) -- they're the most current data by construction,
+          # there's never a reason to keep a stale generated file over what
+          # this run just produced. Unrelated files changed on main (e.g. a
+          # hand-pasted script update that this run's commit never touched)
+          # merge in cleanly with no conflict at all and are unaffected.
+          # Retries a few times in case main keeps moving underneath it.
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git merge -X ours --no-edit origin/main -m "Merge remote-tracking branch origin/main [skip ci]" \
+                && git push origin main; then
+              echo "Pushed on attempt $i"
+              break
+            fi
+            if [ "$i" -eq 5 ]; then
+              echo "::error::Could not push after 5 attempts -- main kept moving faster than this run could catch up. Re-run the workflow once things settle."
+              exit 1
+            fi
+            echo "Push attempt $i failed, retrying..."
+            sleep $((RANDOM % 10 + 5))
+          done
 
       - name: Upload results as artifact
         uses: actions/upload-artifact@v4
