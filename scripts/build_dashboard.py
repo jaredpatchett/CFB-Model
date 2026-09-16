@@ -577,6 +577,25 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .pcard-head { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; margin-bottom: 8px; }
 .pcard-note { font-size: 10.5px; color: var(--muted-3); margin: 0; line-height: 1.5; }
 .pcard-line-row { display: flex; justify-content: space-between; align-items: center; gap: 5px; font-size: 11px; padding: 5px 0; border-top: 1px solid var(--rule-faint); }
+
+.prop-best-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; margin-bottom: 22px; }
+.prop-best-card { background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+.prop-best-top { height: 3px; background: var(--rule); }
+.prop-best-top.is-over { background: var(--green); }
+.prop-best-top.is-under { background: var(--red); }
+.prop-best-body { padding: 12px 14px; }
+.prop-best-name { font-weight: 700; font-size: 12.5px; margin-bottom: 2px; }
+.prop-best-meta { font-size: 10px; color: var(--muted-2); margin-bottom: 10px; letter-spacing: 0.02em; }
+.prop-best-edge { font-family: var(--font-led); font-weight: 900; font-size: 22px; line-height: 1; }
+.prop-best-edge.is-pos { color: var(--green); }
+.prop-best-edge.is-neg { color: var(--red); }
+.prop-best-sub { font-size: 9.5px; color: var(--muted-3); margin-top: 5px; }
+.prop-best-price { font-size: 10px; color: var(--muted-2); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--rule-faint); }
+.prop-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 4px 0 16px; }
+.tab--prop { padding: 6px 13px; font-size: 11px; letter-spacing: 0.03em; display: inline-flex; align-items: center; gap: 6px; }
+.tab--prop.is-active { background: var(--blue); color: #fff; }
+.prop-tab-count { font-size: 9px; opacity: 0.8; background: rgba(255,255,255,0.14); border-radius: 8px; padding: 1px 5px; transform: skewX(11deg); display: inline-block; }
+.pcard-line-row.is-scored { border-top: 1px solid var(--rule); }
 .pchip { font-family: var(--font-display); font-weight: 800; font-size: 9.5px; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 3px; }
 .pchip.is-live { background: rgba(23,194,107,0.16); color: var(--green); }
 .pchip.is-pending { background: var(--chip); color: var(--muted-4); }
@@ -975,7 +994,7 @@ RENDERER_JS = """<script>
   var M = window.ModelMath;
   var MARKETS = ['Spread', 'Moneyline'];
 
-  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge' };
+  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL' };
 
   var byName = {};
   D.teams.forEach(function (t) { byName[t.name] = t; });
@@ -1410,6 +1429,15 @@ RENDERER_JS = """<script>
       '</div>';
   }
 
+  var PROP_BOOK_LABELS = {
+    draftkings: 'DraftKings', fanduel: 'FanDuel', betmgm: 'BetMGM',
+    williamhill_us: 'Caesars', espnbet: 'ESPN Bet', betrivers: 'BetRivers',
+    fanatics: 'Fanatics', bovada: 'Bovada', betonlineag: 'BetOnline',
+    mybookieag: 'MyBookie', ballybet: 'Bally Bet', betparx: 'betPARX',
+    fliff: 'Fliff', hardrockbet: 'Hard Rock Bet',
+  };
+  function bookLabel(key) { return PROP_BOOK_LABELS[key] || key; }
+
   function renderProps() {
     var catalog = D.propCatalog || [];
     var live = D.propsLive || [];
@@ -1418,27 +1446,64 @@ RENDERER_JS = """<script>
     var liveCount = catalog.filter(function (m) { return byMarket[m] && byMarket[m].length; }).length;
 
     var intro = liveCount ? '' : '<p class="pcard-note" style="margin-bottom:14px">Player props are sourced from real sportsbooks (DraftKings, FanDuel, BetMGM, Caesars, etc) via The Odds API, not a DFS site. ' +
-      'Real books don\u2019t post props on every game \\u2014 coverage is normal for ranked/primetime matchups and thin or empty elsewhere. Any market with posted lines switches to LIVE automatically on the next data refresh.</p>';
+      'Real books don’t post props on every game \\u2014 coverage is normal for ranked/primetime matchups and thin or empty elsewhere. Any market with posted lines switches to LIVE automatically on the next data refresh.</p>';
 
     if (!catalog.length) {
       return '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Player Props</h2></div></div>' +
         '<div class="empty-state">No prop market catalog loaded.</div>';
     }
 
-    var cards = catalog.map(function (m) {
-      var rows = byMarket[m] || [];
+    // model_predicted_value/model_edge/model_lean only exist once
+    // export_dashboard_data.py (src/features/live_player_features.py)
+    // actually matched this player to real in-season stats + a trained
+    // model AND found a real opponent-defense number -- normal to be
+    // absent for most/all rows before the season has real in-season data.
+    // No fabricated overlay when it's missing.
+    function hasModel(r) { return r.model_predicted_value != null && r.model_lean && r.model_edge != null; }
+    function absEdge(r) { return hasModel(r) ? Math.abs(r.model_edge) : -1; }
+
+    // ---- Best Plays: every scored row across ALL markets, ranked by edge,
+    // so the plays worth looking at surface immediately instead of being
+    // buried inside whichever market card they happen to fall in. ----
+    var scored = live.filter(hasModel).slice().sort(function (a, b) { return absEdge(b) - absEdge(a); });
+    var best = scored.slice(0, 6);
+    var bestHtml = '';
+    if (best.length) {
+      bestHtml = '<div class="section-head"><div class="section-title"><div class="section-flag is-green"></div><h2>Best Plays</h2></div></div>' +
+        '<div class="prop-best-row">' + best.map(function (r) {
+          var isOver = r.model_lean === 'over';
+          var price = isOver ? r.over_price : r.under_price;
+          return '<div class="prop-best-card">' +
+            '<div class="prop-best-top ' + (isOver ? 'is-over' : 'is-under') + '"></div>' +
+            '<div class="prop-best-body">' +
+              '<div class="prop-best-name">' + esc(r.player_name) + '</div>' +
+              '<div class="prop-best-meta">' + esc(r.market_name) + ' · ' + (isOver ? 'O' : 'U') + ' ' + esc(r.line) + '</div>' +
+              '<div class="prop-best-edge ' + (r.model_edge >= 0 ? 'is-pos' : 'is-neg') + '">' + (r.model_edge >= 0 ? '+' : '') + r.model_edge.toFixed(1) + ' edge</div>' +
+              '<div class="prop-best-sub">model ' + r.model_predicted_value.toFixed(1) + (r.model_confidence === 'low' ? ' · low confidence' : '') + '</div>' +
+              '<div class="prop-best-price">' + (price != null ? esc(price) : 'no live price yet') + (r.book_used ? ' · ' + esc(bookLabel(r.book_used)) : '') + '</div>' +
+            '</div></div>';
+        }).join('') + '</div>';
+    }
+
+    // ---- By-market tabs: browse one prop type at a time instead of every
+    // market's card stacked on one page. ----
+    var tabs = ['ALL'].concat(catalog);
+    var activeMarket = tabs.indexOf(state.propMarket) === -1 ? 'ALL' : state.propMarket;
+    var tabsHtml = '<div class="prop-tabs">' + tabs.map(function (m) {
+      var n = m === 'ALL' ? live.length : (byMarket[m] || []).length;
+      return '<button class="tab tab--prop' + (m === activeMarket ? ' is-active' : '') + '" data-prop-market="' + esc(m) + '">' +
+        '<span>' + esc(m) + (n ? ' <span class="prop-tab-count">' + n + '</span>' : '') + '</span></button>';
+    }).join('') + '</div>';
+
+    var visibleMarkets = activeMarket === 'ALL' ? catalog : [activeMarket];
+
+    var cards = visibleMarkets.map(function (m) {
+      var rows = (byMarket[m] || []).slice().sort(function (a, b) { return absEdge(b) - absEdge(a); });
       if (rows.length) {
         return '<div class="pcard"><div class="pcard-head"><span>' + esc(m) + '</span><span class="pchip is-live">LIVE</span></div>' +
           rows.map(function (r) {
-            // model_predicted_value etc. only exist once export_dashboard_data.py
-            // (src/features/live_player_features.py) actually matched this
-            // player to real in-season stats + a trained model AND found a
-            // real opponent-defense number -- normal to be absent for most/
-            // all rows before the season has real in-season data. No
-            // fabricated overlay when it's missing.
-            var hasModel = r.model_predicted_value != null && r.model_lean;
-            var modelLine = hasModel
-              ? '<div class="pcard-line-row" style="border-top:none;padding-top:0">' +
+            var modelLine = hasModel(r)
+              ? '<div class="pcard-line-row is-scored" style="border-top:none;padding-top:0">' +
                   '<span style="color:var(--muted-3);font-size:9.5px;letter-spacing:.04em">' +
                     'Model: ' + r.model_predicted_value.toFixed(1) + ' (' + r.model_lean.toUpperCase() + (r.model_confidence === 'low' ? ', low confidence' : '') + ')' +
                   '</span>' +
@@ -1447,8 +1512,9 @@ RENDERER_JS = """<script>
                   '</span>' +
                 '</div>'
               : '';
-            return '<div class="pcard-line-row"><span>' + esc(r.player_name) + ' \\u00b7 ' + esc(r.line) + '</span>' +
-              '<span>O ' + esc(r.over_price) + ' / U ' + esc(r.under_price) + '</span></div>' + modelLine;
+            var bookTag = r.book_used ? ' <span style="color:var(--muted-3);font-size:9px">(' + esc(bookLabel(r.book_used)) + ')</span>' : '';
+            return '<div class="pcard-line-row"><span>' + esc(r.player_name) + ' · ' + esc(r.line) + '</span>' +
+              '<span>O ' + esc(r.over_price) + ' / U ' + esc(r.under_price) + bookTag + '</span></div>' + modelLine;
           }).join('') + '</div>';
       }
       return '<div class="pcard"><div class="pcard-head"><span>' + esc(m) + '</span><span class="pchip is-pending">NOT POSTED</span></div>' +
@@ -1456,7 +1522,9 @@ RENDERER_JS = """<script>
     }).join('');
 
     return '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Player Props</h2></div></div>' +
-      intro + '<div class="pcard-grid">' + cards + '</div>';
+      intro + bestHtml +
+      '<div class="section-head mt-lg"><div class="section-title"><div class="section-flag"></div><h2>By Market</h2></div></div>' +
+      tabsHtml + '<div class="pcard-grid">' + cards + '</div>';
   }
 
   /* ---- Tracker (localStorage, this browser only, real bets you log) ---- */
@@ -1681,6 +1749,8 @@ RENDERER_JS = """<script>
     if (g) { state.selected = +g.dataset.game; return render(); }
     var m = e.target.closest('[data-market]');
     if (m) { state.market = m.dataset.market; return render(); }
+    var pm = e.target.closest('[data-prop-market]');
+    if (pm) { state.propMarket = pm.dataset.propMarket; return render(); }
   });
 
   render();
