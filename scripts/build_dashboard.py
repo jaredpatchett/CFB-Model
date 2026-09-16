@@ -436,6 +436,11 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .tab--market { padding: 6px 13px; font-size: 12.5px; letter-spacing: 0.08em; }
 .tab--market.is-active { background: var(--blue); color: #fff; }
 
+.page-nav { border-bottom: 1px solid var(--rule); background: var(--panel); }
+.page-nav-inner { max-width: var(--max-width); margin: 0 auto; padding: 10px var(--gutter); display: flex; gap: 6px; flex-wrap: wrap; }
+.tab--page { padding: 7px 18px; font-size: 12.5px; letter-spacing: 0.08em; }
+.tab--page.is-active { background: var(--blue); color: #fff; }
+
 .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border-bottom: 1px solid var(--rule); }
 .kpi { background: var(--panel); padding-bottom: 15px; }
 .kpi-bar { height: 3px; background: var(--blue); }
@@ -970,7 +975,7 @@ RENDERER_JS = """<script>
   var M = window.ModelMath;
   var MARKETS = ['Spread', 'Moneyline'];
 
-  var state = { selected: 0, market: 'Moneyline', search: '' };
+  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge' };
 
   var byName = {};
   D.teams.forEach(function (t) { byName[t.name] = t; });
@@ -1004,7 +1009,23 @@ RENDERER_JS = """<script>
       '</svg>';
   }
 
+  var PAGES = [
+    { id: 'edge', label: 'Edge Board' },
+    { id: 'ratings', label: 'Power Ratings' },
+    { id: 'props', label: 'Player Props' },
+    { id: 'fantasy', label: 'Fantasy' },
+    { id: 'tracker', label: 'My Tracker' },
+    { id: 'performance', label: 'Model Performance' },
+  ];
+
   function renderTopbar() {
+    // Search only makes sense (and only has a visible box) on the Edge
+    // Board tab -- see renderPageNav for the tab switcher itself. Brand
+    // and the data-freshness indicator stay visible everywhere since
+    // they're not tab-specific.
+    var searchHtml = state.page === 'edge'
+      ? '<input id="search" type="text" placeholder="search a team..." autocomplete="off" value="' + esc(state.search) + '" oninput="window.__cfbSearch(this.value)"><div class="divider-v"></div>'
+      : '';
     return '' +
       '<div class="topbar"><div class="topbar-inner">' +
         '<div class="brand">' +
@@ -1013,10 +1034,17 @@ RENDERER_JS = """<script>
           '<div class="brand-sub">' + esc(D.meta.subtitle) + '<br>' + esc(D.meta.version) + '</div>' +
         '</div>' +
         '<div class="topbar-right">' +
-          '<input id="search" type="text" placeholder="search a team..." autocomplete="off" oninput="window.__cfbSearch(this.value)">' +
-          '<div class="divider-v"></div>' +
+          searchHtml +
           '<div class="sync"><span class="sync-dot"></span><span>' + esc(D.meta.dataAsOf) + '</span></div>' +
         '</div>' +
+      '</div></div>';
+  }
+
+  function renderPageNav() {
+    return '<div class="page-nav"><div class="page-nav-inner">' +
+      PAGES.map(function (p) {
+        return '<button class="tab tab--page' + (p.id === state.page ? ' is-active' : '') + '" data-page="' + esc(p.id) + '"><span>' + esc(p.label) + '</span></button>';
+      }).join('') +
       '</div></div>';
   }
 
@@ -1136,7 +1164,7 @@ RENDERER_JS = """<script>
       '<div class="thead rate-grid"><div>#</div><div>Team</div><div class="num">Net</div>' +
       '<div style="text-align:center">Off \\u2190 \\u2192 Def</div><div class="num">Scale</div></div>';
 
-    var visible = D.teams.filter(function (t) { return !state.search || t.name.toLowerCase().indexOf(state.search.toLowerCase()) !== -1; });
+    var visible = D.teams; // no search box on this tab (search lives on Edge Board only)
 
     var rows = visible.slice().sort(function (a, b) { return b.net - a.net; }).map(function (t) {
       var c = M.displayColor(t.primary);
@@ -1177,7 +1205,7 @@ RENDERER_JS = """<script>
         '</div></div>';
     }).join('');
 
-    return head + (rows || '<div class="empty-state">No teams match that search.</div>');
+    return head + (rows || '<div class="empty-state">No teams to show.</div>');
   }
 
   var FANTASY_STAT_LABELS = {
@@ -1200,11 +1228,7 @@ RENDERER_JS = """<script>
       '<h2>Fantasy Projections (PPR)</h2></div></div>' +
       '<div class="thead fantasy-grid"><div>#</div><div>Player</div><div>Next Opponent</div><div class="num">Proj. Pts</div></div>';
 
-    var visible = rows.filter(function (r) {
-      if (!state.search) return true;
-      var q = state.search.toLowerCase();
-      return r.player_name.toLowerCase().indexOf(q) !== -1 || (r.team || '').toLowerCase().indexOf(q) !== -1;
-    });
+    var visible = rows; // no search box on this tab (search lives on Edge Board only)
 
     var body = visible.map(function (r, i) {
       var t = team(r.team);
@@ -1235,7 +1259,7 @@ RENDERER_JS = """<script>
         '</div></div>';
     }).join('');
 
-    return head + (body || '<div class="empty-state">No players match that search.</div>') +
+    return head + (body || '<div class="empty-state">No players to show.</div>') +
       '<div class="table-foot"><span>PPR scoring (1 pt/reception, 1 pt/10 rush or rec yards, 1 pt/25 pass yards, ' +
       '6 pt rush/rec TD, 4 pt pass TD, -2 INT), projected from each player\u2019s own trained stat model against ' +
       'their next scheduled opponent. Hover a player for their full stat-line breakdown. Position is inferred from ' +
@@ -1600,6 +1624,33 @@ RENDERER_JS = """<script>
 
   /* ---- mount ------------------------------------------------------------- */
 
+  function renderPage(priced, card, sel) {
+    // Each tab shows just its own section(s) now, instead of one long
+    // stacked page -- grouped by what the user actually does together:
+    // Edge Board keeps the grid + the curated Bet Card + the matchup
+    // detail view side by side, since picking a row there is what drives
+    // the Projector and the Bet Card is just the qualifying subset of
+    // the same data. Model Performance combines Backtest + CLV since
+    // both are "how good has this model actually been" history, not
+    // something you'd act on day-to-day. Ratings/Props/Fantasy/Tracker
+    // each get a page to themselves since they're independent, standalone
+    // things to check.
+    switch (state.page) {
+      case 'ratings': return renderRatings();
+      case 'props': return renderProps();
+      case 'fantasy': return renderFantasy();
+      case 'tracker': return renderTracker();
+      case 'performance': return renderBacktest() + renderClv();
+      case 'edge':
+      default:
+        return renderKpis(card) +
+          '<div class="main">' +
+            '<div>' + renderEdgeBoard(priced, card) + '</div>' +
+            '<div>' + renderProjector(sel) + renderBetCard(card) + '</div>' +
+          '</div>';
+    }
+  }
+
   function render() {
     var priced = D.games.map(function (g) { return M.priceGame(g, opts()); });
     var card = M.buildBetCard(D.games, opts());
@@ -1607,13 +1658,9 @@ RENDERER_JS = """<script>
 
     document.getElementById('app').innerHTML =
       renderTopbar() +
+      renderPageNav() +
       '<div class="wrap">' +
-        renderKpis(card) +
-        '<div class="main">' +
-          '<div>' + renderEdgeBoard(priced, card) + renderRatings() + renderFantasy() + renderBacktest() + renderClv() + '</div>' +
-          '<div>' + renderProjector(sel) + renderBetCard(card) + '</div>' +
-        '</div>' +
-        '<div class="split"><div>' + renderProps() + '</div><div>' + renderTracker() + '</div></div>' +
+        renderPage(priced, card, sel) +
         '<div class="footer">' +
           '<span>Team marks are generic color-accurate helmets, not school logos. Preseason: no in-season form exists yet for 2026, ' +
           'so every model number here comes from SP+ rating differential plus a fitted home-field constant, adjusted by any active ' +
@@ -1628,6 +1675,8 @@ RENDERER_JS = """<script>
   window.__cfbSearch = function (v) { state.search = v; render(); };
 
   document.addEventListener('click', function (e) {
+    var p = e.target.closest('[data-page]');
+    if (p) { state.page = p.dataset.page; return render(); }
     var g = e.target.closest('[data-game]');
     if (g) { state.selected = +g.dataset.game; return render(); }
     var m = e.target.closest('[data-market]');
