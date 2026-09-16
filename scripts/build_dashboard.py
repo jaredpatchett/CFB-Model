@@ -596,6 +596,11 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .tab--prop.is-active { background: var(--blue); color: #fff; }
 .prop-tab-count { font-size: 9px; opacity: 0.8; background: rgba(255,255,255,0.14); border-radius: 8px; padding: 1px 5px; transform: skewX(11deg); display: inline-block; }
 .pcard-line-row.is-scored { border-top: 1px solid var(--rule); }
+.pchip.is-official { background: rgba(23,194,107,0.16); color: var(--green); }
+.pchip.is-lean { background: rgba(224,180,74,0.16); color: var(--amber); }
+.prop-lean-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; margin-bottom: 22px; }
+.prop-lean-card { background: var(--panel); border: 1px solid var(--rule-faint); border-radius: 4px; padding: 11px 13px; opacity: 0.88; }
+.trk-auto-tag { font-family: var(--font-display); font-weight: 800; font-size: 8.5px; letter-spacing: 0.06em; padding: 1px 5px; border-radius: 3px; background: rgba(46,123,255,0.16); color: var(--blue); vertical-align: middle; margin-left: 6px; }
 .pchip { font-family: var(--font-display); font-weight: 800; font-size: 9.5px; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 3px; }
 .pchip.is-live { background: rgba(23,194,107,0.16); color: var(--green); }
 .pchip.is-pending { background: var(--chip); color: var(--muted-4); }
@@ -1458,32 +1463,68 @@ RENDERER_JS = """<script>
     // actually matched this player to real in-season stats + a trained
     // model AND found a real opponent-defense number -- normal to be
     // absent for most/all rows before the season has real in-season data.
-    // No fabricated overlay when it's missing.
+    // No fabricated overlay when it's missing. is_official_play/model_ev
+    // only exist alongside that (see export_dashboard_data.py) -- a real
+    // dollar-EV bar (>=3%, normal confidence, real price) against the
+    // actual posted price on the model's leaned side, same philosophy as
+    // the Edge Board's sideEV for moneylines. Anything scored but short of
+    // that bar is a LEAN, never silently upgraded to OFFICIAL.
     function hasModel(r) { return r.model_predicted_value != null && r.model_lean && r.model_edge != null; }
     function absEdge(r) { return hasModel(r) ? Math.abs(r.model_edge) : -1; }
+    function rankVal(r) { return r.model_ev != null ? r.model_ev : absEdge(r); }
+    function tagHtml(r) {
+      return r.is_official_play
+        ? '<span class="pchip is-official">OFFICIAL</span>'
+        : '<span class="pchip is-lean">LEAN</span>';
+    }
 
-    // ---- Best Plays: every scored row across ALL markets, ranked by edge,
-    // so the plays worth looking at surface immediately instead of being
-    // buried inside whichever market card they happen to fall in. ----
-    var scored = live.filter(hasModel).slice().sort(function (a, b) { return absEdge(b) - absEdge(a); });
-    var best = scored.slice(0, 6);
-    var bestHtml = '';
-    if (best.length) {
-      bestHtml = '<div class="section-head"><div class="section-title"><div class="section-flag is-green"></div><h2>Best Plays</h2></div></div>' +
-        '<div class="prop-best-row">' + best.map(function (r) {
+    // ---- Official Plays: every row that clears the real-EV bar, ranked by
+    // EV, so the plays actually worth acting on surface immediately
+    // instead of being buried inside whichever market card they fall in.
+    var official = live.filter(function (r) { return r.is_official_play; })
+      .slice().sort(function (a, b) { return rankVal(b) - rankVal(a); });
+    // ---- Leans: scored but short of the official bar -- still shown, just
+    // clearly labeled, so a near-miss isn't confused with a real play.
+    var leans = live.filter(function (r) { return hasModel(r) && !r.is_official_play; })
+      .slice().sort(function (a, b) { return rankVal(b) - rankVal(a); });
+
+    function bestCard(r) {
+      var isOver = r.model_lean === 'over';
+      var price = isOver ? r.over_price : r.under_price;
+      return '<div class="prop-best-card">' +
+        '<div class="prop-best-top ' + (isOver ? 'is-over' : 'is-under') + '"></div>' +
+        '<div class="prop-best-body">' +
+          '<div class="prop-best-name">' + esc(r.player_name) + ' ' + tagHtml(r) + '</div>' +
+          '<div class="prop-best-meta">' + esc(r.market_name) + ' · ' + (isOver ? 'O' : 'U') + ' ' + esc(r.line) + '</div>' +
+          '<div class="prop-best-edge ' + (r.model_edge >= 0 ? 'is-pos' : 'is-neg') + '">' +
+            (r.model_ev != null ? ((r.model_ev >= 0 ? '+' : '') + r.model_ev.toFixed(1) + '% EV') : ((r.model_edge >= 0 ? '+' : '') + r.model_edge.toFixed(1) + ' edge')) +
+          '</div>' +
+          '<div class="prop-best-sub">model ' + r.model_predicted_value.toFixed(1) + (r.model_confidence === 'low' ? ' · low confidence' : '') + '</div>' +
+          '<div class="prop-best-price">' + (price != null ? esc(price) : 'no live price yet') + (r.book_used ? ' · ' + esc(bookLabel(r.book_used)) : '') + '</div>' +
+        '</div></div>';
+    }
+
+    var officialHtml = '<div class="section-head"><div class="section-title"><div class="section-flag is-green"></div><h2>Official Plays</h2></div></div>' +
+      (official.length
+        ? '<div class="prop-best-row">' + official.slice(0, 8).map(bestCard).join('') + '</div>'
+        : '<p class="pcard-note" style="margin-bottom:18px">No player props clear the official-play bar this run (≥ 3% modeled EV at a real posted price, normal confidence only — see the low-confidence note above). Check Leans below or browse By Market.</p>');
+
+    var leansHtml = leans.length
+      ? '<div class="section-head mt-lg"><div class="section-title"><div class="section-flag"></div><h2>Leans</h2></div></div>' +
+        '<p class="pcard-note" style="margin-bottom:12px">Scored, but short of the official-play bar — worth a look, not a recommended play.</p>' +
+        '<div class="prop-lean-row">' + leans.slice(0, 8).map(function (r) {
           var isOver = r.model_lean === 'over';
           var price = isOver ? r.over_price : r.under_price;
-          return '<div class="prop-best-card">' +
-            '<div class="prop-best-top ' + (isOver ? 'is-over' : 'is-under') + '"></div>' +
-            '<div class="prop-best-body">' +
-              '<div class="prop-best-name">' + esc(r.player_name) + '</div>' +
-              '<div class="prop-best-meta">' + esc(r.market_name) + ' · ' + (isOver ? 'O' : 'U') + ' ' + esc(r.line) + '</div>' +
-              '<div class="prop-best-edge ' + (r.model_edge >= 0 ? 'is-pos' : 'is-neg') + '">' + (r.model_edge >= 0 ? '+' : '') + r.model_edge.toFixed(1) + ' edge</div>' +
-              '<div class="prop-best-sub">model ' + r.model_predicted_value.toFixed(1) + (r.model_confidence === 'low' ? ' · low confidence' : '') + '</div>' +
-              '<div class="prop-best-price">' + (price != null ? esc(price) : 'no live price yet') + (r.book_used ? ' · ' + esc(bookLabel(r.book_used)) : '') + '</div>' +
-            '</div></div>';
-        }).join('') + '</div>';
-    }
+          return '<div class="prop-lean-card">' +
+            '<div class="prop-best-name">' + esc(r.player_name) + ' ' + tagHtml(r) + '</div>' +
+            '<div class="prop-best-meta">' + esc(r.market_name) + ' · ' + (isOver ? 'O' : 'U') + ' ' + esc(r.line) +
+              (price != null ? ' · ' + esc(price) : '') + '</div>' +
+            '<div class="prop-best-sub">model ' + r.model_predicted_value.toFixed(1) +
+              (r.model_ev != null ? ' · ' + (r.model_ev >= 0 ? '+' : '') + r.model_ev.toFixed(1) + '% EV' : '') +
+              (r.model_confidence === 'low' ? ' · low confidence' : '') + '</div>' +
+          '</div>';
+        }).join('') + '</div>'
+      : '';
 
     // ---- By-market tabs: browse one prop type at a time instead of every
     // market's card stacked on one page. ----
@@ -1498,17 +1539,17 @@ RENDERER_JS = """<script>
     var visibleMarkets = activeMarket === 'ALL' ? catalog : [activeMarket];
 
     var cards = visibleMarkets.map(function (m) {
-      var rows = (byMarket[m] || []).slice().sort(function (a, b) { return absEdge(b) - absEdge(a); });
+      var rows = (byMarket[m] || []).slice().sort(function (a, b) { return rankVal(b) - rankVal(a); });
       if (rows.length) {
         return '<div class="pcard"><div class="pcard-head"><span>' + esc(m) + '</span><span class="pchip is-live">LIVE</span></div>' +
           rows.map(function (r) {
             var modelLine = hasModel(r)
               ? '<div class="pcard-line-row is-scored" style="border-top:none;padding-top:0">' +
                   '<span style="color:var(--muted-3);font-size:9.5px;letter-spacing:.04em">' +
-                    'Model: ' + r.model_predicted_value.toFixed(1) + ' (' + r.model_lean.toUpperCase() + (r.model_confidence === 'low' ? ', low confidence' : '') + ')' +
+                    tagHtml(r) + ' Model: ' + r.model_predicted_value.toFixed(1) + ' (' + r.model_lean.toUpperCase() + (r.model_confidence === 'low' ? ', low confidence' : '') + ')' +
                   '</span>' +
                   '<span style="color:' + (r.model_edge >= 0 ? 'var(--green)' : 'var(--red)') + ';font-weight:700;font-size:10.5px">' +
-                    (r.model_edge >= 0 ? '+' : '') + r.model_edge.toFixed(1) + ' edge' +
+                    (r.model_ev != null ? ((r.model_ev >= 0 ? '+' : '') + r.model_ev.toFixed(1) + '% EV') : ((r.model_edge >= 0 ? '+' : '') + r.model_edge.toFixed(1) + ' edge')) +
                   '</span>' +
                 '</div>'
               : '';
@@ -1522,7 +1563,7 @@ RENDERER_JS = """<script>
     }).join('');
 
     return '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Player Props</h2></div></div>' +
-      intro + bestHtml +
+      intro + officialHtml + leansHtml +
       '<div class="section-head mt-lg"><div class="section-title"><div class="section-flag"></div><h2>By Market</h2></div></div>' +
       tabsHtml + '<div class="pcard-grid">' + cards + '</div>';
   }
@@ -1545,6 +1586,47 @@ RENDERER_JS = """<script>
     var el = document.getElementById('trk-section');
     if (el && typeof el.scrollIntoView === 'function') el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+
+  // ---- Auto-track official player props -----------------------------
+  // Every prop the pipeline itself flags as an "official play" (see
+  // export_dashboard_data.py -- normal confidence + real EV against the
+  // actual posted price) gets logged into this browser's Tracker
+  // automatically, no +TRK click needed. Runs once per page load, keyed by
+  // a stable sourceId (game + player + market + line + lean) so re-opening
+  // the dashboard after a later pipeline run only adds genuinely NEW
+  // official plays, never duplicates one already logged. Manually-tracked
+  // rows (via +TRK) have no sourceId and are never touched by this.
+  function propSourceId(r) {
+    return ['autoprop', r.fixture_id, r.player_name, r.market_name, r.line, r.model_lean].join('|');
+  }
+
+  function autoTrackOfficialProps() {
+    var official = (D.propsLive || []).filter(function (r) { return r.is_official_play; });
+    if (!official.length) return;
+    var items = loadTrk();
+    var known = {};
+    items.forEach(function (it) { if (it.sourceId) known[it.sourceId] = true; });
+    var added = false;
+    official.forEach(function (r) {
+      var sid = propSourceId(r);
+      if (known[sid]) return;
+      var isOver = r.model_lean === 'over';
+      var price = isOver ? r.over_price : r.under_price;
+      items.unshift({
+        id: 't' + Date.now() + Math.random().toString(36).slice(2, 7),
+        sourceId: sid,
+        description: r.player_name + ' ' + r.market_name + ' ' + (isOver ? 'O' : 'U') + ' ' + r.line,
+        date: (r.start_time || '').slice(0, 10),
+        type: 'Prop',
+        price: price != null ? price : null,
+        edge: r.model_ev,
+        stake: 50, status: null, auto: true,
+      });
+      known[sid] = true;
+      added = true;
+    });
+    if (added) saveTrk(items);
+  }
 
   function americanToDecimal(odds) {
     odds = Number(odds);
@@ -1605,12 +1687,13 @@ RENDERER_JS = """<script>
 
     var rows = items.map(function (it) {
       var p = computeProfit(it);
+      var edgeUnit = it.type === 'Moneyline' ? 'pp' : (it.type === 'Prop' ? '%' : 'pt');
       return '<div class="trk-row">' +
-        '<div>' + esc(it.description) + '</div>' +
+        '<div>' + esc(it.description) + (it.auto ? ' <span class="trk-auto-tag">AUTO</span>' : '') + '</div>' +
         '<div>' + esc(it.date) + '</div>' +
         '<div>' + esc(it.type) + '</div>' +
-        '<div>' + (it.price > 0 ? '+' : '') + esc(it.price) + '</div>' +
-        '<div>' + (it.edge > 0 ? '+' : '') + esc(it.edge) + (it.type === 'Moneyline' ? 'pp' : 'pt') + '</div>' +
+        '<div>' + (it.price > 0 ? '+' : '') + (it.price != null ? esc(it.price) : '\u2014') + '</div>' +
+        '<div>' + (it.edge != null ? ((it.edge > 0 ? '+' : '') + esc(it.edge) + edgeUnit) : '\u2014') + '</div>' +
         '<div class="trk-status-btns">' +
           '<input type="number" value="' + it.stake + '" min="0" step="5" onchange="window.__cfbTrkStake(\\'' + it.id + '\\', this.value)">' +
           '<button class="trk-status-btn' + (it.status === 'win' ? ' is-win' : '') + '" onclick="window.__cfbTrkStatus(\\'' + it.id + '\\',\\'win\\')">W</button>' +
@@ -1753,6 +1836,7 @@ RENDERER_JS = """<script>
     if (pm) { state.propMarket = pm.dataset.propMarket; return render(); }
   });
 
+  autoTrackOfficialProps();
   render();
 })();
 </script>
