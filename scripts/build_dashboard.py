@@ -1417,8 +1417,8 @@ RENDERER_JS = """<script>
     live.forEach(function (p) { (byMarket[p.market_name] = byMarket[p.market_name] || []).push(p); });
     var liveCount = catalog.filter(function (m) { return byMarket[m] && byMarket[m].length; }).length;
 
-    var intro = liveCount ? '' : '<p class="pcard-note" style="margin-bottom:14px">Real player-prop markets confirmed available on PrizePicks for college football. ' +
-      'None are priced for this slate yet (normal this far from kickoff) \\u2014 any market with posted lines switches to LIVE automatically on the next data refresh.</p>';
+    var intro = liveCount ? '' : '<p class="pcard-note" style="margin-bottom:14px">Player props are sourced from real sportsbooks (DraftKings, FanDuel, BetMGM, Caesars, etc) via The Odds API, not a DFS site. ' +
+      'Real books don\u2019t post props on every game \\u2014 coverage is normal for ranked/primetime matchups and thin or empty elsewhere. Any market with posted lines switches to LIVE automatically on the next data refresh.</p>';
 
     if (!catalog.length) {
       return '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Player Props</h2></div></div>' +
@@ -1452,7 +1452,7 @@ RENDERER_JS = """<script>
           }).join('') + '</div>';
       }
       return '<div class="pcard"><div class="pcard-head"><span>' + esc(m) + '</span><span class="pchip is-pending">NOT POSTED</span></div>' +
-        '<p class="pcard-note">Confirmed market on PrizePicks. Opens closer to kickoff week.</p></div>';
+        '<p class="pcard-note">A market real sportsbooks offer for CFB, but no book has posted a line for this game yet.</p></div>';
     }).join('');
 
     return '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Player Props</h2></div></div>' +
