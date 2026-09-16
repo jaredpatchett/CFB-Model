@@ -264,7 +264,7 @@ def find_upcoming_opponent(team: str, schedule_df: pd.DataFrame):
 def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
                schedule_df: pd.DataFrame, opp_defense_lookup: dict, models: dict):
     """Returns {'model_predicted_value', 'model_edge', 'model_lean',
-    'model_confidence'} for this prop, or None if it shouldn't be scored
+    'model_confidence', 'model_over_probability'} for this prop, or None if it shouldn't be scored
     yet — unrecognized market, no trained model for that stat, player not
     matched (or matched ambiguously), not enough games this season, no
     upcoming-opponent found, or any required feature still missing. None
@@ -304,4 +304,13 @@ def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
         "model_edge": round(result["edge"], 1),
         "model_lean": result["lean"],
         "model_confidence": result["confidence"],
+        # Over-probability from the model's own residual std -- needed
+        # downstream (export_dashboard_data.py) to compute real EV against
+        # the actual posted price and decide "official play" vs "lean",
+        # the same way the game model's sideEV already works for
+        # moneylines. None whenever residual_std isn't available yet
+        # (matches predict_and_compare's own None case).
+        "model_over_probability": (
+            round(result["over_probability"], 4) if result["over_probability"] is not None else None
+        ),
     }
