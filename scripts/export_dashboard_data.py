@@ -25,7 +25,7 @@ import pandas as pd
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import config
 from src.data import cfbd_client as cfbd
-from src.data import prizepicks_client
+from src.data import odds_api_client
 from src.data.injury_overrides import load_injury_overrides, get_team_override
 from src.features.live_features import (
     build_current_season_form, score_with_trained_model, build_current_pace_returning,
@@ -793,11 +793,11 @@ def main(year: int):
               f"eligible by games played -- the gap is players with no upcoming-opponent match or missing "
               f"opponent-defense data)")
 
-    print("Fetching real player-prop market catalog (for placeholder tab)...")
+    print("Loading real-sportsbook player-prop market catalog (for placeholder tab)...")
     try:
-        prop_market_catalog = prizepicks_client.get_prop_market_catalog()
+        prop_market_catalog = odds_api_client.get_prop_market_catalog()
     except Exception as e:
-        print(f"  [warn] could not fetch prop market catalog: {e}")
+        print(f"  [warn] could not load prop market catalog: {e}")
         prop_market_catalog = []
 
     print("Snapshotting today's line for any game that qualifies as a flagged spread play "
