@@ -1,0 +1,64 @@
+name: Quick totals backtest (one-off, no site changes)
+
+# Standalone, manual-only diagnostic -- does NOT touch main.yml/manual_run.yml,
+# the live dashboard, or anything committed to the repo. It fits a quick
+# total-points (Over/Under) estimate and grades it against real CFBD closing
+# lines + actual scores for the most recently completed weeks of the current
+# season, then prints the results to this run's log. See
+# scripts/backtest_totals_quick.py for the full explanation of why this
+# exists and what it deliberately does NOT do (no trained/persisted model,
+# no live market, no commit).
+on:
+  workflow_dispatch:
+    inputs:
+      years:
+        description: "Seasons to fetch for fitting + grading, space-separated (must include the current season)"
+        required: false
+        default: "2022 2023 2024 2025 2026"
+      season:
+        description: "Season to grade recent weeks of"
+        required: false
+        default: "2026"
+      weeks:
+        description: "How many of the most recently completed weeks to grade"
+        required: false
+        default: "2"
+
+permissions:
+  contents: read
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    env:
+      CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
+      YEARS: ${{ github.event.inputs.years || '2022 2023 2024 2025 2026' }}
+      SEASON: ${{ github.event.inputs.season || '2026' }}
+      WEEKS: ${{ github.event.inputs.weeks || '2' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore cached historical CFBD data
+        uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: cfbd-raw-${{ env.YEARS }}-${{ github.run_id }}
+          restore-keys: |
+            cfbd-raw-${{ env.YEARS }}-
+            cfbd-raw-
+
+      - name: Fetch historical data
+        run: python scripts/fetch_historical_data.py --years ${{ env.YEARS }}
+
+      - name: Build features
+        run: python scripts/build_features.py --years ${{ env.YEARS }}
+
+      - name: Run quick totals backtest
+        run: python scripts/backtest_totals_quick.py --season ${{ env.SEASON }} --weeks ${{ env.WEEKS }}
