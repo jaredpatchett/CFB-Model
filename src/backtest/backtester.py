@@ -65,6 +65,38 @@ def evaluate_moneyline(predicted_home_win_prob: pd.Series, actual_home_win: pd.S
     }
 
 
+def evaluate_totals(predicted_total: pd.Series, actual_total: pd.Series,
+                     market_total: pd.Series) -> dict:
+    """Over/Under grading -- same shape as evaluate_spread, just against the
+    game TOTAL (home + away points) instead of the margin. Added for the
+    one-off scripts/backtest_totals_quick.py diagnostic (see that file for
+    why this doesn't otherwise exist yet: the trained GameMarginModel only
+    ever predicts margin, never total)."""
+    df = pd.DataFrame({
+        "predicted_total": predicted_total,
+        "actual_total": actual_total,
+        "market_total": market_total,
+    }).dropna()
+
+    df["model_lean_over"] = df["predicted_total"] > df["market_total"]
+    df["actual_over"] = df["actual_total"] > df["market_total"]
+    df["push"] = df["actual_total"] == df["market_total"]
+    graded = df[~df["push"]]
+    df["ou_correct"] = graded["model_lean_over"] == graded["actual_over"]
+
+    hit_rate = df["ou_correct"].mean() if len(graded) else float("nan")
+    mae = mean_absolute_error(df["actual_total"], df["predicted_total"])
+
+    return {
+        "n_games": len(df),
+        "n_pushes": int(df["push"].sum()),
+        "ou_hit_rate": hit_rate,
+        "total_mae": mae,
+        "breakeven_hit_rate": 0.524,
+        "beat_market": (hit_rate > 0.524) if not np.isnan(hit_rate) else None,
+    }
+
+
 def evaluate_props(predicted_value: pd.Series, actual_value: pd.Series,
                     prop_line: pd.Series) -> dict:
     df = pd.DataFrame({
