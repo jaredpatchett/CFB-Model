@@ -1576,6 +1576,23 @@ RENDERER_JS = """<script>
   function loadTrk() { try { return JSON.parse(localStorage.getItem(TRK_KEY)) || []; } catch (e) { return []; } }
   function saveTrk(items) { localStorage.setItem(TRK_KEY, JSON.stringify(items)); }
 
+  // ---- Seed data baked into the repo (survives a cleared browser --
+  // this is the recovered 9/3-9/19 manual spread/moneyline log, restored
+  // 9/17/2026 after a browser-storage loss). Merges by id on every load,
+  // so it's a no-op once a browser already has these, and self-heals any
+  // browser/laptop that doesn't. ----
+  var SEED_TRACKER = [{"id": "t1789600000000seed00", "description": "MD +3.0 \u2014 VT at MD", "date": "Sat 9/19, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 13.6, "stake": 50, "status": null}, {"id": "t1789600000137seed01", "description": "LT +19.5 \u2014 LT at BAY", "date": "Sat 9/19, 8:00PM UTC", "type": "Spread", "price": -110, "edge": 14.1, "stake": 50, "status": null}, {"id": "t1789600000274seed02", "description": "MISS +2.5 \u2014 LSU at MISS", "date": "Sat 9/19, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 15.1, "stake": 50, "status": null}, {"id": "t1789600000411seed03", "description": "UNT +3.0 \u2014 UNLV at UNT", "date": "Sat 9/12, 7:45PM UTC", "type": "Spread", "price": -110, "edge": 12.9, "stake": 50, "status": "win"}, {"id": "t1789600000548seed04", "description": "CONN +11.5 \u2014 MD at CONN", "date": "Sat 9/12, 7:30PM UTC", "type": "Spread", "price": -110, "edge": 18.1, "stake": 50, "status": "loss"}, {"id": "t1789600000685seed05", "description": "SDSU +12.5 \u2014 SDSU at UCLA", "date": "Sat 9/12, 11:15PM UTC", "type": "Spread", "price": -110, "edge": 19, "stake": 50, "status": "loss"}, {"id": "t1789600000822seed06", "description": "LT +35.5 \u2014 LT at LSU", "date": "Sat 9/12, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 24.3, "stake": 50, "status": "win"}, {"id": "t1789600000959seed07", "description": "ODU +19.5 \u2014 ODU at VT", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 26.4, "stake": 50, "status": "loss"}, {"id": "t1789600001096seed08", "description": "MICH +5.5 \u2014 OU at MICH", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 5.3, "stake": 50, "status": "win"}, {"id": "t1789600001233seed09", "description": "WSU +17.5 \u2014 WSU at KSU", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 11.8, "stake": 50, "status": "loss"}, {"id": "t1789600001370seed10", "description": "USF +3.0 \u2014 USF at ARMY", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 6.5, "stake": 50, "status": "win"}, {"id": "t1789600001507seed11", "description": "RUTG +3.0 \u2014 RUTG at BC", "date": "Fri 9/11, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 5.6, "stake": 50, "status": "loss"}, {"id": "t1789600001644seed12", "description": "BOIS +24.5 \u2014 BOIS at ORE", "date": "Sat 9/5, 7:30PM UTC", "type": "Spread", "price": -110, "edge": 5.9, "stake": 50, "status": "win"}, {"id": "t1789600001781seed13", "description": "ORST +21.0 \u2014 ORST at HOU", "date": "Sat 9/5, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 2.1, "stake": 50, "status": "win"}, {"id": "t1789600001918seed14", "description": "CCU +21.0 \u2014 CCU at WVU", "date": "Sat 9/5, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 11.9, "stake": 50, "status": "win"}, {"id": "t1789600002055seed15", "description": "WMU +27.5 \u2014 WMU at MICH", "date": "Sat 9/5, 11:00PM UTC", "type": "Spread", "price": -110, "edge": 14.8, "stake": 50, "status": "win"}, {"id": "t1789600002192seed16", "description": "JMU ML \u2014 LIB at JMU", "date": "Sat 9/5, 4:00PM UTC", "type": "Moneyline", "price": -225, "edge": 17.7, "stake": 50, "status": "win"}, {"id": "t1789600002329seed17", "description": "TLSA +13.5 \u2014 OKST at TLSA", "date": "Sat 9/5, 7:45PM UTC", "type": "Spread", "price": -110, "edge": 20.5, "stake": 50, "status": "win"}, {"id": "t1789600002466seed18", "description": "TOL +10.0 \u2014 TOL at MSU", "date": "Sat 9/5, 12:00AM UTC", "type": "Spread", "price": -110, "edge": 12.5, "stake": 50, "status": "win"}, {"id": "t1789600002603seed19", "description": "UAB +27.5 \u2014 UAB at ILL", "date": "Fri 9/4, 1:00AM UTC", "type": "Spread", "price": -110, "edge": 5.1, "stake": 50, "status": "win"}, {"id": "t1789600002740seed20", "description": "GT -6.5 \u2014 COLO at GT", "date": "Fri 9/4, 12:00AM UTC", "type": "Spread", "price": -110, "edge": 8.7, "stake": 50, "status": "loss"}, {"id": "t1789600002877seed21", "description": "AKR +25.5 \u2014 AKR at WAKE", "date": "Thu 9/3, 11:00PM UTC", "type": "Spread", "price": -110, "edge": 9, "stake": 50, "status": "win"}, {"id": "t1789600003014seed22", "description": "NMSU +31.5 \u2014 NMSU at FSU", "date": "Sat 8/29, 11:00PM UTC", "type": "Spread", "price": -110, "edge": 13, "stake": 50, "status": "win"}, {"id": "t1789600003151seed23", "description": "UVA -4.0 \u2014 NCSU at UVA", "date": "Sat 8/29, 7:30PM UTC", "type": "Spread", "price": -110, "edge": 3.8, "stake": 50, "status": "win"}];
+  function seedTrackerIfMissing() {
+    var items = loadTrk();
+    var known = {};
+    items.forEach(function (it) { known[it.id] = true; });
+    var added = false;
+    SEED_TRACKER.forEach(function (it) {
+      if (!known[it.id]) { items.push(it); known[it.id] = true; added = true; }
+    });
+    if (added) saveTrk(items);
+  }
+
   // ---- Export / import (moves the tracker between browsers/laptops --
   // localStorage never syncs on its own, this is the manual bridge) ----
   window.__cfbTrkExport = function () {
@@ -1961,6 +1978,7 @@ RENDERER_JS = """<script>
     if (us) { state.unitSize = Number(us.dataset.unitSize); return render(); }
   });
 
+  seedTrackerIfMissing();
   autoTrackOfficialProps();
   render();
 })();
