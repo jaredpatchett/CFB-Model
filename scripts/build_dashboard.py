@@ -625,6 +625,8 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .trk-status-btn.is-push { background: rgba(224,180,74,0.16); color: var(--amber); border-color: var(--amber); }
 .trk-remove { background: none; border: none; color: var(--muted-4); cursor: pointer; font-size: 15px; }
 .trk-empty { color: var(--muted-3); font-size: 12px; padding: 26px; text-align: center; border: 1px dashed var(--rule); }
+.trk-summary-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); margin-bottom: 1px; }
+.unit-size-input { width: 108px; background: var(--chip); border: 1px solid var(--rule); color: var(--text); border-radius: 3px; padding: 6px 9px; font-family: var(--font-data); font-size: 11px; }
 
 .note-block { font-size: 10.5px; color: var(--muted-3); margin-top: 14px; line-height: 1.7; border-top: 1px solid var(--rule-faint); padding-top: 12px; }
 .empty-state { background: var(--panel); border: 1px dashed var(--rule); border-radius: 4px; padding: 20px; text-align: center; color: var(--muted-3); font-size: 12px; }
@@ -999,7 +1001,7 @@ RENDERER_JS = """<script>
   var M = window.ModelMath;
   var MARKETS = ['Spread', 'Moneyline'];
 
-  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL' };
+  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL', unitSize: 50 };
 
   var byName = {};
   D.teams.forEach(function (t) { byName[t.name] = t; });
@@ -1655,6 +1657,11 @@ RENDERER_JS = """<script>
     render();
   };
 
+  window.__cfbUnitSize = function (value) {
+    var n = Number(value);
+    if (n > 0) { state.unitSize = n; render(); }
+  };
+
   function fmtMoney(n) {
     var sign = n < 0 ? '-' : '';
     return sign + '$' + Math.abs(n).toFixed(2).replace(/\\.00$/, '');
@@ -1663,6 +1670,12 @@ RENDERER_JS = """<script>
   function renderTracker() {
     var items = loadTrk();
     var wins = 0, losses = 0, pushes = 0, staked = 0, profit = 0;
+    // Units record is independent of whatever real $ stake was logged per
+    // bet -- it grades every bet as a flat 1 unit won/lost/pushed (the
+    // standard way bettors describe a record independent of bet-sizing:
+    // "+4.3u"), then scales that unit total by a user-chosen $/unit so it's
+    // meaningful at whatever bankroll they actually apply this record to.
+    var unitWins = 0, unitLosses = 0, unitPushes = 0, unitsGraded = 0, totalUnits = 0;
     items.forEach(function (it) {
       var p = computeProfit(it);
       if (it.status === 'win') wins++;
@@ -1670,6 +1683,13 @@ RENDERER_JS = """<script>
       if (it.status === 'push') pushes++;
       if (it.status) staked += Number(it.stake) || 0;
       if (p !== null) profit += p;
+
+      if (it.status && it.price != null) {
+        unitsGraded++;
+        if (it.status === 'win') { unitWins++; totalUnits += americanToDecimal(it.price) - 1; }
+        else if (it.status === 'loss') { unitLosses++; totalUnits -= 1; }
+        else if (it.status === 'push') { unitPushes++; }
+      }
     });
 
     var summary = '<div class="trk-summary">' +
@@ -1679,6 +1699,26 @@ RENDERER_JS = """<script>
       '<div class="trk-box"><div class="trk-label">Profit</div><div class="trk-value ' + (profit >= 0 ? 'is-pos' : 'is-neg') + '">' + fmtMoney(profit) + '</div></div>' +
       '<div class="trk-box"><div class="trk-label">ROI</div><div class="trk-value">' + (staked > 0 ? ((profit / staked) * 100).toFixed(1) + '%' : '0%') + '</div></div>' +
     '</div>';
+
+    var unitPresets = [10, 50, 100];
+    var unitSizeBar = '<div class="prop-tabs" style="margin:14px 0 10px">' +
+      unitPresets.map(function (v) {
+        return '<button class="tab tab--prop' + (state.unitSize === v ? ' is-active' : '') + '" data-unit-size="' + v + '"><span>$' + v + '/unit</span></button>';
+      }).join('') +
+      '<input class="unit-size-input" type="number" min="1" step="5" value="' + state.unitSize + '" ' +
+        'onchange="window.__cfbUnitSize(this.value)" placeholder="custom $/unit">' +
+    '</div>';
+
+    var unitsSummary = '<div class="trk-summary-3">' +
+      '<div class="trk-box"><div class="trk-label">Units Record</div><div class="trk-value">' + unitWins + '-' + unitLosses + '-' + unitPushes + '</div></div>' +
+      '<div class="trk-box"><div class="trk-label">Total Units</div><div class="trk-value ' + (totalUnits >= 0 ? 'is-pos' : 'is-neg') + '">' + (totalUnits >= 0 ? '+' : '') + totalUnits.toFixed(2) + 'u</div></div>' +
+      '<div class="trk-box"><div class="trk-label">Est. $ at $' + state.unitSize + '/unit</div><div class="trk-value ' + (totalUnits >= 0 ? 'is-pos' : 'is-neg') + '">' + fmtMoney(totalUnits * state.unitSize) + '</div></div>' +
+    '</div>';
+
+    var unitsHtml = '<div class="section-head mt-lg"><div class="section-title"><div class="section-flag"></div><h2>Units</h2></div></div>' +
+      '<p class="pcard-note" style="margin-bottom:2px">Every graded play counted as a flat 1 unit, independent of whatever real $ stake you logged for it above \u2014 the standard way to read a record across plays of different sizes. Pick a unit size to see it in dollars.</p>' +
+      unitSizeBar +
+      (unitsGraded ? unitsSummary : '<div class="trk-empty">No graded plays yet \u2014 mark a play W/L/P below to start building a units record.</div>');
 
     if (!items.length) {
       return '<div class="section-head" id="trk-section"><div class="section-title"><div class="section-flag is-green"></div><h2>Tracker</h2></div></div>' +
@@ -1707,6 +1747,8 @@ RENDERER_JS = """<script>
 
     return '<div class="section-head" id="trk-section"><div class="section-title"><div class="section-flag is-green"></div><h2>Tracker</h2></div></div>' +
       summary +
+      unitsHtml +
+      '<div class="section-head mt-lg"><div class="section-title"><div class="section-flag"></div><h2>Play Log</h2></div></div>' +
       '<div class="thead trk-grid"><div>Description</div><div>Date</div><div>Type</div><div>Price</div><div>Edge</div><div>Stake / Grade</div><div>Profit</div><div></div></div>' +
       rows;
   }
@@ -1834,6 +1876,8 @@ RENDERER_JS = """<script>
     if (m) { state.market = m.dataset.market; return render(); }
     var pm = e.target.closest('[data-prop-market]');
     if (pm) { state.propMarket = pm.dataset.propMarket; return render(); }
+    var us = e.target.closest('[data-unit-size]');
+    if (us) { state.unitSize = Number(us.dataset.unitSize); return render(); }
   });
 
   autoTrackOfficialProps();
