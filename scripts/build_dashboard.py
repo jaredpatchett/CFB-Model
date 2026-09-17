@@ -1853,7 +1853,7 @@ RENDERER_JS = """<script>
       var p = computeProfit(it);
       var edgeUnit = it.type === 'Moneyline' ? 'pp' : (it.type === 'Prop' ? '%' : 'pt');
       return '<div class="trk-row">' +
-        '<div>' + esc(it.description) + (it.auto ? ' <span class="trk-auto-tag">AUTO</span>' : '') + (it.unofficial ? ' <span class="trk-auto-tag" style="background:rgba(255,255,255,0.12);color:var(--muted-4,#888)">UNOFFICIAL</span>' : '') + '</div>' +
+        '<div>' + esc(it.description) + (it.auto ? ' <span class="trk-auto-tag">AUTO</span>' : '') + (it.unofficial ? ' <span class="trk-auto-tag" style="background:#ff0000;color:#fff;font-weight:700">UNOFFICIAL</span>' : '') + '</div>' +
         '<div>' + esc(it.date) + '</div>' +
         '<div>' + esc(it.type) + '</div>' +
         '<div>' + (it.price > 0 ? '+' : '') + (it.price != null ? esc(it.price) : '—') + '</div>' +
