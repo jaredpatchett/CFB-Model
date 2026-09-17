@@ -1206,7 +1206,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     });
     saveTrk(items);
     render();
-    var el = document.getElementById('trk-section');
+    var el = document.getElementById('trk-gamelines-section') || document.getElementById('trk-section');
     if (el && typeof el.scrollIntoView === 'function') el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
@@ -1288,8 +1288,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     return sign + '$' + Math.abs(n).toFixed(2).replace(/\.00$/, '');
   }
 
-  function renderTracker() {
-    var items = loadTrk();
+  function renderTrackerSection(items, opts) {
     var wins = 0, losses = 0, pushes = 0, staked = 0, profit = 0;
     // Units record is independent of whatever real $ stake was logged per
     // bet -- it grades every bet as a flat 1 unit won/lost/pushed (the
@@ -1313,6 +1312,12 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       }
     });
 
+    var head = '<div class="section-head mt-lg" id="' + opts.sectionId + '"><div class="section-title"><div class="section-flag is-green"></div><h2>' + esc(opts.title) + '</h2></div></div>';
+
+    if (!items.length) {
+      return head + '<div class="trk-empty">' + esc(opts.emptyMsg) + '</div>';
+    }
+
     var summary = '<div class="trk-summary">' +
       '<div class="trk-box"><div class="trk-label">Tracked</div><div class="trk-value">' + items.length + '</div></div>' +
       '<div class="trk-box"><div class="trk-label">Record</div><div class="trk-value">' + wins + '-' + losses + '-' + pushes + '</div></div>' +
@@ -1321,6 +1326,10 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       '<div class="trk-box"><div class="trk-label">ROI</div><div class="trk-value">' + (staked > 0 ? ((profit / staked) * 100).toFixed(1) + '%' : '0%') + '</div></div>' +
     '</div>';
 
+    // Unit size is one shared preference across both sections (state.unitSize)
+    // -- switching it in one section updates the other too, which is the
+    // right default for "what's my overall unit size" rather than tracking
+    // two independent sizes.
     var unitPresets = [10, 50, 100];
     var unitSizeBar = '<div class="prop-tabs" style="margin:14px 0 10px">' +
       unitPresets.map(function (v) {
@@ -1336,15 +1345,9 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       '<div class="trk-box"><div class="trk-label">Est. $ at $' + state.unitSize + '/unit</div><div class="trk-value ' + (totalUnits >= 0 ? 'is-pos' : 'is-neg') + '">' + fmtMoney(totalUnits * state.unitSize) + '</div></div>' +
     '</div>';
 
-    var unitsHtml = '<div class="section-head mt-lg"><div class="section-title"><div class="section-flag"></div><h2>Units</h2></div></div>' +
-      '<p class="pcard-note" style="margin-bottom:2px">Every graded play counted as a flat 1 unit, independent of whatever real $ stake you logged for it above — the standard way to read a record across plays of different sizes. Pick a unit size to see it in dollars.</p>' +
+    var unitsHtml = '<div class="section-head" style="border-bottom:none;margin-top:14px"><div class="section-title"><div class="section-flag"></div><h2 style="font-size:15px">Units</h2></div></div>' +
       unitSizeBar +
       (unitsGraded ? unitsSummary : '<div class="trk-empty">No graded plays yet — mark a play W/L/P below to start building a units record.</div>');
-
-    if (!items.length) {
-      return '<div class="section-head" id="trk-section"><div class="section-title"><div class="section-flag is-green"></div><h2>Tracker</h2></div></div>' +
-        summary + '<div class="trk-empty">No plays tracked yet. Click +TRK on any Edge Board row or Bet Card play.</div>';
-    }
 
     var rows = items.map(function (it) {
       var p = computeProfit(it);
@@ -1366,12 +1369,34 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       '</div>';
     }).join('');
 
-    return '<div class="section-head" id="trk-section"><div class="section-title"><div class="section-flag is-green"></div><h2>Tracker</h2></div></div>' +
-      summary +
-      unitsHtml +
-      '<div class="section-head mt-lg"><div class="section-title"><div class="section-flag"></div><h2>Play Log</h2></div></div>' +
+    return head + summary + unitsHtml +
       '<div class="thead trk-grid"><div>Description</div><div>Date</div><div>Type</div><div>Price</div><div>Edge</div><div>Stake / Grade</div><div>Profit</div><div></div></div>' +
       rows;
+  }
+
+  function renderTracker() {
+    var items = loadTrk();
+    // Two separate trackers sharing one localStorage log: Game Lines
+    // (Moneyline/Spread/Total -- manually tracked via +TRK on the Edge
+    // Board or Bet Card) and Player Props (auto-tracked -- see
+    // autoTrackOfficialProps). Splitting the STORAGE would risk losing
+    // history on a schema change; splitting the DISPLAY gets the same
+    // separation the user actually wants without that risk.
+    var gameLineItems = items.filter(function (it) { return it.type === 'Moneyline' || it.type === 'Spread' || it.type === 'Total'; });
+    var propItems = items.filter(function (it) { return it.type === 'Prop'; });
+
+    return '<div class="section-head" id="trk-section"><div class="section-title"><div class="section-flag is-green"></div><h2>Tracker</h2></div></div>' +
+      (items.length ? '' : '<div class="trk-empty">No plays tracked yet. Click +TRK on any Edge Board row or Bet Card play, or check back after the next run — official player props get added here automatically.</div>') +
+      renderTrackerSection(gameLineItems, {
+        title: 'Game Lines (Moneyline / Spread / Total)',
+        emptyMsg: 'No game-line plays tracked yet. Click +TRK on any Edge Board row or Bet Card play.',
+        sectionId: 'trk-gamelines-section',
+      }) +
+      renderTrackerSection(propItems, {
+        title: 'Player Props',
+        emptyMsg: 'No player-prop plays tracked yet — official props (see the Props tab) get added here automatically after each pipeline run.',
+        sectionId: 'trk-props-section',
+      });
   }
 
   function renderClv() {
