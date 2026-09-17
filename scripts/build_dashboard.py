@@ -1105,11 +1105,23 @@ RENDERER_JS = """<script>
     // whenever the away side is picked), which would show a tracked pick
     // as having "negative edge" even though it was tracked specifically
     // because the recommended side clears the edge threshold.
+    // Auto-flag 20+ point underdog spreads as unofficial -- the linear
+    // SP+ slope fit appears to systematically favor big dogs it shouldn't
+    // (confirmed 9/17/2026: cutting these took the wk1-2 spread record from
+    // 16-12/54% to 15-6/71%). Parsed straight from the pick's own line
+    // (e.g. "LT +35.5") rather than a separate field, so it can't drift out
+    // of sync with what's actually being tracked. User can always override
+    // via the row's unofficial toggle.
+    var lineMatch = /([+-]?\\d+(?:\\.\\d+)?)\\s*$/.exec(p.playLabel);
+    var lineSize = lineMatch ? Math.abs(parseFloat(lineMatch[1])) : 0;
+    var autoUnofficial = p.market === 'Spread' && lineSize >= 20;
+
     return esc(JSON.stringify({
       description: p.playLabel + ' \\u2014 ' + abbrOf(g.away) + ' at ' + abbrOf(g.home),
       date: g.kickoff, type: p.market,
       price: p.market === 'Moneyline' ? p.sideMoneyline : -110,
-      edge: Math.round(Math.abs(p.edge) * 10) / 10
+      edge: Math.round(Math.abs(p.edge) * 10) / 10,
+      unofficial: autoUnofficial
     }));
   }
 
@@ -1645,12 +1657,55 @@ RENDERER_JS = """<script>
     items.unshift({
       id: 't' + Date.now() + Math.random().toString(36).slice(2, 7),
       description: play.description, date: play.date, type: play.type,
-      price: play.price, edge: play.edge, stake: 50, status: null
+      price: play.price, edge: play.edge, stake: 50, status: null,
+      unofficial: !!play.unofficial
     });
     saveTrk(items);
     render();
     var el = document.getElementById('trk-gamelines-section') || document.getElementById('trk-section');
     if (el && typeof el.scrollIntoView === 'function') el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // Manual flip for any tracked play -- overrides the auto-detection above
+  // in either direction, and is the only way to mark/unmark a manually-
+  // added or auto-tracked-prop play as unofficial.
+  window.__cfbTrkToggleUnofficial = function (id) {
+    var items = loadTrk();
+    var it = items.find(function (x) { return x.id === id; });
+    if (it) { it.unofficial = !it.unofficial; saveTrk(items); render(); }
+  };
+
+  // Manual add -- for plays with no model behind them yet (e.g. Totals,
+  // which the live pipeline doesn't project -- see backtest_totals_quick.py,
+  // whose naive average lost to market in the 2026 wk1-2 check and was
+  // deliberately NOT wired into the Edge Board). Same item schema as
+  // window.__cfbTrack, just filled in by hand instead of from a model row.
+  window.__cfbTrkManualAdd = function () {
+    var typeEl = document.getElementById('trk-manual-type');
+    var descEl = document.getElementById('trk-manual-desc');
+    var dateEl = document.getElementById('trk-manual-date');
+    var priceEl = document.getElementById('trk-manual-price');
+    var edgeEl = document.getElementById('trk-manual-edge');
+    var stakeEl = document.getElementById('trk-manual-stake');
+    var unofficialEl = document.getElementById('trk-manual-unofficial');
+    var description = (descEl.value || '').trim();
+    if (!description) { descEl.focus(); return; }
+    var items = loadTrk();
+    items.unshift({
+      id: 't' + Date.now() + Math.random().toString(36).slice(2, 7),
+      description: description,
+      date: (dateEl.value || '').trim(),
+      type: typeEl.value,
+      price: priceEl.value !== '' ? Number(priceEl.value) : -110,
+      edge: edgeEl.value !== '' ? Number(edgeEl.value) : null,
+      stake: stakeEl.value !== '' ? Number(stakeEl.value) : 50,
+      status: null,
+      unofficial: !!(unofficialEl && unofficialEl.checked),
+    });
+    saveTrk(items);
+    descEl.value = ''; dateEl.value = ''; edgeEl.value = '';
+    if (unofficialEl) unofficialEl.checked = false;
+    render();
   };
 
   // ---- Auto-track official player props -----------------------------
@@ -1739,8 +1794,10 @@ RENDERER_JS = """<script>
     // "+4.3u"), then scales that unit total by a user-chosen $/unit so it's
     // meaningful at whatever bankroll they actually apply this record to.
     var unitWins = 0, unitLosses = 0, unitPushes = 0, unitsGraded = 0, totalUnits = 0;
+    var unofficialCount = 0;
     items.forEach(function (it) {
       var p = computeProfit(it);
+      if (it.unofficial) { unofficialCount++; return; } // excluded from every record/profit/units stat below, shown in the row list only
       if (it.status === 'win') wins++;
       if (it.status === 'loss') losses++;
       if (it.status === 'push') pushes++;
@@ -1762,7 +1819,7 @@ RENDERER_JS = """<script>
     }
 
     var summary = '<div class="trk-summary">' +
-      '<div class="trk-box"><div class="trk-label">Tracked</div><div class="trk-value">' + items.length + '</div></div>' +
+      '<div class="trk-box"><div class="trk-label">Tracked</div><div class="trk-value">' + items.length + (unofficialCount ? ' <span style="font-size:11px;font-weight:400;color:var(--muted-4,#888)">(' + unofficialCount + ' unofficial)</span>' : '') + '</div></div>' +
       '<div class="trk-box"><div class="trk-label">Record</div><div class="trk-value">' + wins + '-' + losses + '-' + pushes + '</div></div>' +
       '<div class="trk-box"><div class="trk-label">Staked</div><div class="trk-value">' + fmtMoney(staked) + '</div></div>' +
       '<div class="trk-box"><div class="trk-label">Profit</div><div class="trk-value ' + (profit >= 0 ? 'is-pos' : 'is-neg') + '">' + fmtMoney(profit) + '</div></div>' +
@@ -1796,7 +1853,7 @@ RENDERER_JS = """<script>
       var p = computeProfit(it);
       var edgeUnit = it.type === 'Moneyline' ? 'pp' : (it.type === 'Prop' ? '%' : 'pt');
       return '<div class="trk-row">' +
-        '<div>' + esc(it.description) + (it.auto ? ' <span class="trk-auto-tag">AUTO</span>' : '') + '</div>' +
+        '<div>' + esc(it.description) + (it.auto ? ' <span class="trk-auto-tag">AUTO</span>' : '') + (it.unofficial ? ' <span class="trk-auto-tag" style="background:rgba(255,255,255,0.12);color:var(--muted-4,#888)">UNOFFICIAL</span>' : '') + '</div>' +
         '<div>' + esc(it.date) + '</div>' +
         '<div>' + esc(it.type) + '</div>' +
         '<div>' + (it.price > 0 ? '+' : '') + (it.price != null ? esc(it.price) : '—') + '</div>' +
@@ -1808,7 +1865,7 @@ RENDERER_JS = """<script>
           '<button class="trk-status-btn' + (it.status === 'push' ? ' is-push' : '') + '" onclick="window.__cfbTrkStatus(\\'' + it.id + '\\',\\'push\\')">P</button>' +
         '</div>' +
         '<div style="color:' + (p === null ? 'var(--muted-4)' : (p >= 0 ? 'var(--green)' : 'var(--red)')) + ';font-weight:700">' + (p === null ? '\\u2014' : fmtMoney(p)) + '</div>' +
-        '<div><button class="trk-remove" onclick="window.__cfbTrkRemove(\\'' + it.id + '\\')">\\u00d7</button></div>' +
+        '<div><button class="trk-remove" style="font-size:9px;padding:2px 5px;margin-right:4px" title="Toggle whether this play counts in the record" onclick="window.__cfbTrkToggleUnofficial(\\'' + it.id + '\\')">' + (it.unofficial ? 'MAKE OFFICIAL' : 'MAKE UNOFFICIAL') + '</button><button class="trk-remove" onclick="window.__cfbTrkRemove(\\'' + it.id + '\\')">\\u00d7</button></div>' +
       '</div>';
     }).join('');
 
@@ -1828,6 +1885,27 @@ RENDERER_JS = """<script>
     var gameLineItems = items.filter(function (it) { return it.type === 'Moneyline' || it.type === 'Spread' || it.type === 'Total'; });
     var propItems = items.filter(function (it) { return it.type === 'Prop'; });
 
+    // Manual add-a-play form -- for anything not driven by a live model
+    // signal (right now: Totals). Free text date so it can match the
+    // "Sat 9/19, 11:30PM UTC" style the rest of the Tracker uses, but any
+    // format you want works since it's just displayed, never parsed.
+    var manualAddForm = '<div class="trk-manual-add" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 4px;padding:10px;border:1px solid var(--border-1, #2a2f3a);border-radius:8px">' +
+      '<select id="trk-manual-type" style="min-width:110px">' +
+        '<option value="Spread">Spread</option>' +
+        '<option value="Moneyline">Moneyline</option>' +
+        '<option value="Total" selected>Total</option>' +
+      '</select>' +
+      '<input id="trk-manual-desc" type="text" placeholder="Description, e.g. O 55.5 -- VT at MD" style="flex:2;min-width:220px">' +
+      '<input id="trk-manual-date" type="text" placeholder="Date, e.g. Sat 9/19, 11:30PM UTC" style="flex:1;min-width:170px">' +
+      '<input id="trk-manual-price" type="number" placeholder="Price" value="-110" style="width:90px">' +
+      '<input id="trk-manual-edge" type="number" step="0.1" placeholder="Edge (pts)" style="width:100px">' +
+      '<input id="trk-manual-stake" type="number" placeholder="Stake" value="50" style="width:80px">' +
+      '<label style="display:flex;align-items:center;gap:4px;font-size:12px;color:var(--muted-4,#888)">' +
+        '<input id="trk-manual-unofficial" type="checkbox"> Unofficial' +
+      '</label>' +
+      '<button class="tab tab--prop" onclick="window.__cfbTrkManualAdd()"><span>+ Add Play</span></button>' +
+    '</div>';
+
     var exportImportBar = '<div class="prop-tabs" style="margin:10px 0 4px">' +
       '<button class="tab tab--prop" onclick="window.__cfbTrkExport()"><span>Export JSON</span></button>' +
       '<label class="tab tab--prop" style="cursor:pointer">' +
@@ -1837,6 +1915,7 @@ RENDERER_JS = """<script>
     '</div>';
 
     return '<div class="section-head" id="trk-section"><div class="section-title"><div class="section-flag is-green"></div><h2>Tracker</h2></div></div>' +
+      manualAddForm +
       exportImportBar +
       (items.length ? '' : '<div class="trk-empty">No plays tracked yet. Click +TRK on any Edge Board row or Bet Card play, or check back after the next run — official player props get added here automatically.</div>') +
       renderTrackerSection(gameLineItems, {
