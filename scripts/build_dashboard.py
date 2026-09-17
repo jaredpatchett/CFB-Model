@@ -1576,6 +1576,53 @@ RENDERER_JS = """<script>
   function loadTrk() { try { return JSON.parse(localStorage.getItem(TRK_KEY)) || []; } catch (e) { return []; } }
   function saveTrk(items) { localStorage.setItem(TRK_KEY, JSON.stringify(items)); }
 
+  // ---- Export / import (moves the tracker between browsers/laptops --
+  // localStorage never syncs on its own, this is the manual bridge) ----
+  window.__cfbTrkExport = function () {
+    var blob = new Blob([JSON.stringify(loadTrk(), null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'cfb_tracker_export_' + new Date().toISOString().slice(0, 10) + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  window.__cfbTrkImportFile = function (input) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var imported;
+      try { imported = JSON.parse(e.target.result); } catch (err) {
+        alert('That file is not valid tracker JSON.');
+        return;
+      }
+      if (!Array.isArray(imported)) {
+        alert('That file is not a valid tracker export.');
+        return;
+      }
+      // Merge by id so re-importing the same file twice (or importing on
+      // a laptop that already has some overlapping plays) never duplicates
+      // a row -- only genuinely new ids get added.
+      var existing = loadTrk();
+      var known = {};
+      existing.forEach(function (it) { known[it.id] = true; });
+      var merged = existing.slice();
+      var added = 0;
+      imported.forEach(function (it) {
+        if (it && it.id && !known[it.id]) { merged.push(it); known[it.id] = true; added++; }
+      });
+      saveTrk(merged);
+      input.value = '';
+      render();
+      alert(added + ' play(s) imported (' + (imported.length - added) + ' already present, skipped).');
+    };
+    reader.readAsText(file);
+  };
+
   window.__cfbTrack = function (play) {
     var items = loadTrk();
     items.unshift({
@@ -1764,7 +1811,16 @@ RENDERER_JS = """<script>
     var gameLineItems = items.filter(function (it) { return it.type === 'Moneyline' || it.type === 'Spread' || it.type === 'Total'; });
     var propItems = items.filter(function (it) { return it.type === 'Prop'; });
 
+    var exportImportBar = '<div class="prop-tabs" style="margin:10px 0 4px">' +
+      '<button class="tab tab--prop" onclick="window.__cfbTrkExport()"><span>Export JSON</span></button>' +
+      '<label class="tab tab--prop" style="cursor:pointer">' +
+        '<span>Import JSON</span>' +
+        '<input type="file" accept="application/json,.json" style="display:none" onchange="window.__cfbTrkImportFile(this)">' +
+      '</label>' +
+    '</div>';
+
     return '<div class="section-head" id="trk-section"><div class="section-title"><div class="section-flag is-green"></div><h2>Tracker</h2></div></div>' +
+      exportImportBar +
       (items.length ? '' : '<div class="trk-empty">No plays tracked yet. Click +TRK on any Edge Board row or Bet Card play, or check back after the next run — official player props get added here automatically.</div>') +
       renderTrackerSection(gameLineItems, {
         title: 'Game Lines (Moneyline / Spread / Total)',
