@@ -430,6 +430,19 @@ def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline
         "book_implied_prob_away": round(book_away_fair, 4) if book_away_fair is not None else None,
         "ev_home_pct": round(fo.ev_percent(model_home_win_prob, float(moneyline_home)), 2),
         "ev_away_pct": round(fo.ev_percent(model_away_win_prob, float(moneyline_away)), 2),
+        # The per-game residual_std actually used two lines up (trained
+        # model's own value for a trained game, preseason prior's for
+        # everything else) -- exposed here so the dashboard can use the
+        # SAME number for its own client-side win-probability math instead
+        # of silently falling back to one global preseason value for every
+        # game. Bug found 9/19/2026: build_dashboard.py was setting every
+        # game's "sigma" field from prior['residual_std'] alone, so the
+        # trained model's own uncertainty (including the holdout-residual
+        # fix made earlier the same day) never actually reached the Edge
+        # Board/Bet Card/Projector's displayed win probabilities -- the
+        # fix computed the right number and then nothing downstream ever
+        # read it.
+        "residual_std": round(residual_std, 3),
     }
 
 
