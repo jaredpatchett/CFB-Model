@@ -962,7 +962,17 @@ MATH_JS = """<script>
     return games
       .map(function (g) { return priceGame(g, opts); })
       .filter(function (p) { return p.qualifies; })
-      .sort(function (a, b) { return Math.abs(b.edgeForTier) - Math.abs(a.edgeForTier); })
+      // Sort by win probability (sideProb), not raw edge points -- fixed
+      // 9/19/2026. This was the last place still ranking by |edgeForTier|
+      // after the 20+pt spread fade already established that raw point-
+      // edge scales with spread SIZE, not confidence (a 19pt edge on a
+      // blowout-line game isn't more trustworthy than a 3pt edge on a
+      // pick'em -- it's just a bigger disagreement in points). Win
+      // probability is the actual confidence number -- it's what tierFor
+      // and both the Edge Board's/Bet Card's Win% columns already use --
+      // so the curated top-10 should surface by that too, not silently
+      // rank by the same flawed metric the fade logic was built to fight.
+      .sort(function (a, b) { return b.sideProb - a.sideProb; })
       .slice(0, limit);
   }
 
