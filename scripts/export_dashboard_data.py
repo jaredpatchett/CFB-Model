@@ -894,7 +894,14 @@ def main(year: int):
         print("\nWhy games stayed on the preseason prior instead of switching to the trained model "
               "(one game can hit more than one reason if fixing one still leaves another missing):")
         for reason, count in sorted(trained_model_diagnostics.items(), key=lambda kv: -kv[1]):
+            if reason == '_team_detail':
+                continue
             print(f"  {count:>3}  {reason}")
+        team_detail = trained_model_diagnostics.get('_team_detail', [])
+        if team_detail:
+            print(f"\n  Matchups behind those two reasons ({len(team_detail)} total):")
+            for line in team_detail:
+                print(f"    {line}")
 
 
 if __name__ == "__main__":
