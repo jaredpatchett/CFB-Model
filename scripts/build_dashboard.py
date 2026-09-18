@@ -1400,10 +1400,10 @@ RENDERER_JS = """<script>
         '</div></div>' +
 
         '<div class="scoreboard">' +
-          '<div class="score-cell"><div class="score-label">' + esc(a.abbr) + ' margin</div>' +
+          '<div class="score-cell"><div class="score-label">' + esc(h.abbr) + ' margin</div>' +
             '<div class="score-value">' + M.signed(-g.modelSpread) + '</div></div>' +
           '<div class="divider-v" style="height:auto"></div>' +
-          '<div class="score-cell score-cell--wide"><div class="score-label">Win prob</div>' +
+          '<div class="score-cell score-cell--wide"><div class="score-label">' + esc(h.abbr) + ' win prob</div>' +
             '<div class="score-value is-blue">' + (pWin * 100).toFixed(0) + '%</div></div>' +
         '</div>' +
 
