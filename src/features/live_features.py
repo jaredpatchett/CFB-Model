@@ -29,7 +29,20 @@ from src.features.team_features import build_pace_returning_features
 # over for that specific game — mixed-experience matchups (e.g. a team's
 # Week 1 opponent who already has 3+ games from a Week 0 opener) still fall
 # back to the preseason prior until BOTH sides qualify.
-MIN_GAMES_FOR_TRAINED_MODEL = 3
+#
+# Lowered 3 -> 2 on 9/19/2026 (confirmed with the user): the rolling
+# features use an expanding window (shift(1).expanding().mean() in
+# team_features._rolling_team_form), valid starting at 1 prior game, and
+# home/away_games_played_prior are themselves trained-model FEATURE_COLUMNS
+# -- so the model has genuinely seen games_played_prior=1/2 situations in
+# training (only games_played_prior=0 is truly out-of-distribution, since
+# shift(1) on a team's first game of a season is NaN and gets dropped by
+# GameMarginModel.fit()'s dropna). run_backtest.py's own inclusion
+# criterion is "features non-null," not "3+ games either" -- so the
+# validated 61.25% ATS backtest already included 1-2-game situations, this
+# just makes live scoring match what was actually backtested instead of
+# being more conservative than the validation itself.
+MIN_GAMES_FOR_TRAINED_MODEL = 2
 
 
 def build_current_season_form(games_df: pd.DataFrame) -> dict:
