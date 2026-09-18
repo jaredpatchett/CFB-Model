@@ -389,12 +389,18 @@ def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline
     away_injury_adj = away_injury_adj or 0.0
 
     sp_diff = home_rating - away_rating
+    # Always compute the preseason-only estimate, even when the trained
+    # model is what actually drives model_predicted_margin below -- added
+    # 9/19/2026 so both formulas are visible side by side this weekend
+    # (the user's first live look at the trained model, rather than a
+    # blind cutover with no way to compare against what it's replacing).
+    preseason_margin = fo.preseason_predicted_margin(sp_diff, prior, neutral_site=neutral_site)
     if trained_margin is not None:
         base_margin = trained_margin
         residual_std = trained_residual_std if trained_residual_std else prior["residual_std"]
         model_source = "trained_model"
     else:
-        base_margin = fo.preseason_predicted_margin(sp_diff, prior, neutral_site=neutral_site)
+        base_margin = preseason_margin
         residual_std = prior["residual_std"]
         model_source = "preseason_prior"
     model_margin = base_margin + home_injury_adj - away_injury_adj
@@ -415,6 +421,7 @@ def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline
         "away_sp_rating": round(away_rating, 2),
         "sp_rating_diff": round(sp_diff, 2),
         "model_predicted_margin": round(model_margin, 2),
+        "preseason_comparison_margin": round(preseason_margin + home_injury_adj - away_injury_adj, 2),
         "model_home_win_prob": round(model_home_win_prob, 4),
         "model_away_win_prob": round(model_away_win_prob, 4),
         "model_fair_ml_home": round(fo.prob_to_american(model_home_win_prob), 1),
