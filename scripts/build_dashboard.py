@@ -251,7 +251,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
             "marketTotal": g.get("total_over"),
             "marketMoneyline": g.get("moneyline_home"),
             "awayMoneyline": g.get("moneyline_away"),
-            "sigma": residual_std,
+            "sigma": g.get("residual_std") or residual_std,
             "components": components,
             "flags": flags,
             "note": note,
