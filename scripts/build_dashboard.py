@@ -1207,6 +1207,16 @@ RENDERER_JS = """<script>
       // that's the whole problem), but it's not a play, so say so instead
       // of the row just looking like nothing happened.
       var bigSpreadPillLabel = p.bigSpread ? p.playLabel : null;
+      // Which model priced this game -- shown on EVERY row (not just
+      // PLAY/FADE ones), since it's a property of the game itself, not the
+      // pick. Same flag the tracker badge/priceGame's untrustedUnderdog
+      // check already use elsewhere, so this can never drift out of sync
+      // with what actually generated the line. Added 9/19/2026 -- the user
+      // wanted this visible on the Edge Board directly, not just after
+      // tracking a play.
+      var isTrainedGame = (g.flags || []).some(function (f) { return f.text === 'In-season model'; });
+      var modelSrcLabel = isTrainedGame ? 'TRAINED' : 'UNTRAINED';
+      var modelSrcColor = isTrainedGame ? '#2ecc71' : '#8A94A3';
       return '' +
         '<div class="row row--click' + (i === state.selected ? ' is-selected' : '') + '" data-game="' + i + '">' +
           '<div class="row-accent" style="background:linear-gradient(' + esc(M.displayColor(a.primary)) + ',' + esc(M.displayColor(h.primary)) + ')"></div>' +
@@ -1218,7 +1228,8 @@ RENDERER_JS = """<script>
               helmet(g.home, 32, 19, true) +
               '<span class="team-abbr">' + esc(h.abbr) + '</span>' +
             '</div>' +
-            '<div class="meta"><span>' + esc(g.kickoff) + '</span><span>' + esc(g.book) + '</span></div>' +
+            '<div class="meta"><span>' + esc(g.kickoff) + '</span><span>' + esc(g.book) + '</span>' +
+              '<span style="font-family:var(--font-display);font-weight:700;letter-spacing:.05em;color:' + modelSrcColor + '">' + modelSrcLabel + '</span></div>' +
             (qualifies ? '<div class="edge-play-pill" style="background:' + esc(playPillColor) + '26;border:1px solid ' + esc(playPillColor) + ';color:' + esc(playPillColor) + '">PLAY: ' + esc(playPillLabel) + '</div>' : '') +
             (p.isFade ? '<div class="edge-fade-pill">FADE: ' + esc(fadePillLabel) + '</div>' : '') +
             (p.bigSpread ? '<div class="edge-fade-pill">FADE: 20+PT SPREAD</div>' : '') +
@@ -1481,7 +1492,8 @@ RENDERER_JS = """<script>
           return '<div class="row"><div class="row-accent" style="background:' + esc(col) + '"></div>' +
             '<div class="row-body card-row">' +
               '<div><div class="card-play">' + esc(c.playLabel) + '</div>' +
-                '<div class="card-note">' + esc(abbrOf(c.game.away) + ' at ' + abbrOf(c.game.home) + ' \\u00b7 ' + c.game.kickoff) + '</div></div>' +
+                '<div class="card-note">' + esc(abbrOf(c.game.away) + ' at ' + abbrOf(c.game.home) + ' \\u00b7 ' + c.game.kickoff) +
+                  ' \\u00b7 <span style="font-weight:700;color:' + (isTrainedGame ? '#2ecc71' : '#8A94A3') + '">' + (isTrainedGame ? 'TRAINED' : 'UNTRAINED') + '</span></div></div>' +
               '<div class="card-price">' + esc(sidePriceLabel) + '</div>' +
               '<div class="card-conf">' + (sideProb * 100).toFixed(1) + '%</div>' +
               '<div class="card-ev">' + (ev >= 0 ? '+' : '') + ev.toFixed(1) + '%</div>' +
