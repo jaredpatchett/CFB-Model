@@ -472,7 +472,7 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .edge-grid { grid-template-columns: 1fr 72px 72px 62px 54px 46px 54px; }
 .rate-grid { grid-template-columns: 26px 1fr 56px 1fr 100px; }
 .fantasy-grid { grid-template-columns: 26px 1fr 120px 90px; }
-.card-row  { grid-template-columns: 1fr 58px 50px 58px 46px 58px; }
+.card-row  { grid-template-columns: 1fr 58px 68px 46px 58px; }
 
 .row { display: flex; align-items: stretch; border-bottom: 1px solid var(--rule-row); }
 .row--click { cursor: pointer; }
@@ -577,8 +577,7 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .card-play { font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: 0.02em; }
 .card-note { font-size: 9.5px; color: var(--muted-3); margin-top: 4px; }
 .card-price { font-size: 11px; text-align: right; color: var(--muted); }
-.card-conf { font-size: 11px; text-align: right; color: var(--muted); font-family: var(--font-led); }
-.card-ev { font-family: var(--font-led); font-weight: 900; font-size: 16px; text-align: right; color: var(--green); }
+.card-conf { font-size: 17px; font-weight: 900; text-align: right; color: var(--green); font-family: var(--font-led); }
 .card-total { display: flex; justify-content: space-between; padding: 13px 22px; font-size: 11px; background: var(--panel-deep); }
 .card-total-label { color: var(--muted-2); font-family: var(--font-display); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 11px; }
 
@@ -1506,7 +1505,6 @@ RENDERER_JS = """<script>
                   ' \\u00b7 <span style="font-weight:700;color:' + (isTrainedGame ? '#2ecc71' : '#8A94A3') + '">' + (isTrainedGame ? 'TRAINED' : 'UNTRAINED') + '</span></div></div>' +
               '<div class="card-price">' + esc(sidePriceLabel) + '</div>' +
               '<div class="card-conf">' + (sideProb * 100).toFixed(1) + '%</div>' +
-              '<div class="card-ev">' + (ev >= 0 ? '+' : '') + ev.toFixed(1) + '%</div>' +
               '<div class="num"><span class="tier"><span>' + esc(c.tier) + '</span></span></div>' +
               '<div class="num"><button class="track-btn" onclick="window.__cfbTrack(' + trackPayload(c) + ')">+TRK</button></div>' +
               (showCaveat ? '<div style="grid-column:1/-1;font-size:11px;color:var(--amber);padding-top:6px;line-height:1.4">' +
