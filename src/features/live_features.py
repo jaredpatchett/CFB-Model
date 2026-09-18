@@ -167,6 +167,18 @@ def score_with_trained_model(home_school: str, away_school: str, home_rating, aw
         if diagnostics is not None:
             diagnostics[key] = diagnostics.get(key, 0) + 1
 
+    def _detail(entry):
+        # Sample of the actual matchup + team-level games-played counts
+        # behind the two most common block reasons, added right after the
+        # first diagnostics pass (9/19/2026) showed 69 under_min_games_
+        # threshold + 21 team_not_in_current_season_form but gave no way to
+        # tell "that's genuinely how this week's slate looks" (bye weeks,
+        # FCS/small-conference opponents on a different schedule) apart
+        # from "there's a real name-mismatch bug" without eyeballing the
+        # actual teams involved.
+        if diagnostics is not None:
+            diagnostics.setdefault('_team_detail', []).append(entry)
+
     if model is None or not home_school or not away_school:
         _bump('no_model_or_missing_team_name')
         return None
@@ -174,10 +186,14 @@ def score_with_trained_model(home_school: str, away_school: str, home_rating, aw
     away_form = current_season_form.get(away_school)
     if not home_form or not away_form:
         _bump('team_not_in_current_season_form')
+        _detail(f"{home_school} (games={home_form['games_played_prior'] if home_form else 'NOT FOUND'}) "
+                f"vs {away_school} (games={away_form['games_played_prior'] if away_form else 'NOT FOUND'})")
         return None
     if (home_form["games_played_prior"] < MIN_GAMES_FOR_TRAINED_MODEL
             or away_form["games_played_prior"] < MIN_GAMES_FOR_TRAINED_MODEL):
         _bump('under_min_games_threshold')
+        _detail(f"{home_school} (games={home_form['games_played_prior']}) "
+                f"vs {away_school} (games={away_form['games_played_prior']})")
         return None
     if home_rating is None or away_rating is None:
         _bump('missing_sp_rating')
