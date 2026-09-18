@@ -119,7 +119,7 @@ def build_current_pace_returning(adv_stats_df: pd.DataFrame, returning_df: pd.Da
 def score_with_trained_model(home_school: str, away_school: str, home_rating, away_rating,
                               neutral_site: bool, current_season_form: dict, model,
                               pace_returning: dict = None, core_ratings: dict = None,
-                              weather: dict = None) -> float:
+                              weather: dict = None, diagnostics: dict = None) -> float:
     """Returns the trained GameMarginModel's predicted home margin for this
     matchup, or None if it shouldn't be trusted yet — either team missing
     from current_season_form (hasn't played this season), either team under
@@ -127,6 +127,20 @@ def score_with_trained_model(home_school: str, away_school: str, home_rating, aw
     pace/returning-production/CORE/weather data the model needs (see caveat
     below), or no model loaded at all. None means "fall back to the
     preseason prior," not an error.
+
+    diagnostics: optional dict the CALLER owns and passes in blank ({}) --
+    when given, every early-return path below increments a counter in it
+    (e.g. diagnostics['missing_feature:temperature'] += 1) instead of just
+    silently returning None, so a caller running this across a whole slate
+    can print which specific reason is actually blocking games at the end,
+    rather than only knowing the aggregate "N games didn't switch over."
+    Added 9/19/2026 after the live dashboard showed 0 of 90 games on the
+    trained model despite 198 teams clearing the games-played threshold --
+    with 4 independent feed-coverage requirements (pace, returning
+    production, CORE, weather) all gating the SAME switchover with zero
+    partial credit, "which one" needed an actual answer, not a guess.
+    Purely additive: default None means zero behavior change for any
+    existing caller.
 
     core_ratings: output of build_current_core_ratings() -- team -> {'core_overall'}.
     weather: this SPECIFIC upcoming game's own weather dict (temperature/
@@ -149,16 +163,24 @@ def score_with_trained_model(home_school: str, away_school: str, home_rating, aw
     whatever model.feature_columns actually asks for (rather than
     hardcoding a fixed dict) so this stays correct if FEATURE_COLUMNS
     changes again later."""
+    def _bump(key):
+        if diagnostics is not None:
+            diagnostics[key] = diagnostics.get(key, 0) + 1
+
     if model is None or not home_school or not away_school:
+        _bump('no_model_or_missing_team_name')
         return None
     home_form = current_season_form.get(home_school)
     away_form = current_season_form.get(away_school)
     if not home_form or not away_form:
+        _bump('team_not_in_current_season_form')
         return None
     if (home_form["games_played_prior"] < MIN_GAMES_FOR_TRAINED_MODEL
             or away_form["games_played_prior"] < MIN_GAMES_FOR_TRAINED_MODEL):
+        _bump('under_min_games_threshold')
         return None
     if home_rating is None or away_rating is None:
+        _bump('missing_sp_rating')
         return None
 
     pace_returning = pace_returning or {}
@@ -191,6 +213,8 @@ def score_with_trained_model(home_school: str, away_school: str, home_rating, aw
     }
     missing = [c for c in model.feature_columns if c not in available or available[c] is None]
     if missing:
+        for m in missing:
+            _bump('missing_feature:' + m)
         return None
 
     row = pd.DataFrame([{c: available[c] for c in model.feature_columns}])
