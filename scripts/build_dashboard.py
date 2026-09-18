@@ -167,10 +167,19 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
         book = (g.get("book_used") or "market").replace("_", " ").title()
 
         note_parts = []
+        preseason_cmp = g.get("preseason_comparison_margin")
         if is_trained:
             note_parts.append("trained in-season GameMarginModel (rolling scoring margin/PPG, "
                                "SP+ diff, home field) -- both teams have enough real games played "
                                "this season; preseason SP+ prior no longer used for this matchup")
+            if preseason_cmp is not None:
+                # Side-by-side comparison, added 9/19/2026 for this weekend's
+                # first live look at the trained model taking over mid-season
+                # -- lets the user actually see what the preseason-only prior
+                # would have said instead of a blind cutover with nothing to
+                # check it against.
+                note_parts.append(f"for comparison, the preseason-only SP+ prior alone would have "
+                                   f"said {preseason_cmp:+.1f} pts (spread {-preseason_cmp:+.1f})")
         elif slope is not None and sp_diff is not None:
             note_parts.append(f"SP+ diff {sp_diff:+.1f} pts x fitted slope {slope:.2f}")
         if not is_trained:
@@ -463,7 +472,7 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .edge-grid { grid-template-columns: 1fr 72px 72px 62px 54px 46px 54px; }
 .rate-grid { grid-template-columns: 26px 1fr 56px 1fr 100px; }
 .fantasy-grid { grid-template-columns: 26px 1fr 120px 90px; }
-.card-row  { grid-template-columns: 1fr 58px 58px 46px 58px; }
+.card-row  { grid-template-columns: 1fr 58px 50px 58px 46px 58px; }
 
 .row { display: flex; align-items: stretch; border-bottom: 1px solid var(--rule-row); }
 .row--click { cursor: pointer; }
@@ -568,6 +577,7 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .card-play { font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: 0.02em; }
 .card-note { font-size: 9.5px; color: var(--muted-3); margin-top: 4px; }
 .card-price { font-size: 11px; text-align: right; color: var(--muted); }
+.card-conf { font-size: 11px; text-align: right; color: var(--muted); font-family: var(--font-led); }
 .card-ev { font-family: var(--font-led); font-weight: 900; font-size: 16px; text-align: right; color: var(--green); }
 .card-total { display: flex; justify-content: space-between; padding: 13px 22px; font-size: 11px; background: var(--panel-deep); }
 .card-total-label { color: var(--muted-2); font-family: var(--font-display); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 11px; }
@@ -703,13 +713,19 @@ MATH_JS = """<script>
   function signed(v, dp) { return (v > 0 ? '+' : '') + v.toFixed(dp === undefined ? 1 : dp); }
   function homeMargin(game) { return -game.modelSpread; }
 
-  function tierFor(edge, opts) {
-    var minEdge = opts && opts.minEdge != null ? opts.minEdge : 1.9;
-    var e = Math.abs(edge);
-    if (e < minEdge) return '\\u2014';
-    if (e >= 3.2 && opts && opts.confident) return '3u';
-    if (e >= 2.2) return '2u';
-    return '1u';
+  function tierFor(winProb) {
+    // Flat 1u across every qualifying play, on purpose -- confirmed with
+    // the user 9/19/2026. Win probability (coverProb/sideProb) is real and
+    // now shown directly (Edge Board's Win% column, Bet Card's new
+    // confidence column), but it comes from ONE FIXED league-wide sigma
+    // (see game.sigma / homeMargin above), not a per-game or validated-
+    // per-bucket calibration -- so while it's directionally right, it
+    // hasn't earned the right to size real money yet. Revisit tiered
+    // sizing (58%/65% bands, or whatever bands the data supports) once
+    // there's a real in-season sample to check win-prob calibration
+    // against actual results, the same way the 20+pt spread call got made
+    // off real tracked data rather than a theory.
+    return winProb == null ? '\\u2014' : '1u';
   }
 
   function priceGame(game, opts) {
@@ -779,7 +795,6 @@ MATH_JS = """<script>
       playLabel   = abbrOf(side) + ' ' + signed(edge > 0 ? game.marketSpread : -game.marketSpread);
     }
 
-    var confident = market === 'Spread';
     var edgeForTier = market === 'Moneyline' ? edge / 2.6 : edge;
 
     // Sanity bound, Moneyline only: with ONE fixed league-wide sigma (see
@@ -822,7 +837,19 @@ MATH_JS = """<script>
     var isTrainedGame = (game.flags || []).some(function (f) { return f.text === 'In-season model'; });
     var untrustedUnderdog = isUnderdog && !isTrainedGame;
     var isPositiveEV  = market !== 'Moneyline' || (sideEV > 0 && !untrustedUnderdog);
-    var qualifies = edgeClears && priceInRange && isPositiveEV;
+    // Fade spreads of 20+ points outright -- confirmed 9/17-9/19/2026 across
+    // two independent looks at the data (week 1-2 spread record improved
+    // 16-12/54% -> 15-6/71% once these were cut; the tracker's own recovered
+    // seed log, reconciled 9/19, showed 7-6/54% official vs 15-6/71% raw once
+    // the 20pt line was actually applied). The user decided these don't just
+    // get excluded from the record after the fact (see autoUnofficial below,
+    // which still exists for anything hand-tracked) -- the model shouldn't
+    // recommend them as a PLAY at all going forward. Uses the market spread's
+    // own size, not just the picked side, since the pattern showed up as a
+    // property of the linear SP+ slope fit diverging at large differentials
+    // in general, not specifically an underdog-side bias.
+    var bigSpread = market === 'Spread' && Math.abs(game.marketSpread) >= 20;
+    var qualifies = edgeClears && priceInRange && isPositiveEV && !bigSpread;
     // A moneyline pick that clears the probability-edge bar and passes the
     // price sanity check, but comes out negative on real dollar EV (or is
     // an underdog read the preseason-only model hasn't earned trust for
@@ -859,7 +886,8 @@ MATH_JS = """<script>
       sideEV: market === 'Moneyline' ? sideEV : null,
       qualifies: qualifies,
       isFade: isFade,
-      tier: qualifies ? tierFor(edgeForTier, { minEdge: minEdge, confident: confident }) : '\\u2014'
+      bigSpread: bigSpread,
+      tier: qualifies ? tierFor(market === 'Moneyline' ? sideProb : coverProb) : '\\u2014'
     };
   }
 
@@ -1001,7 +1029,7 @@ RENDERER_JS = """<script>
   var M = window.ModelMath;
   var MARKETS = ['Spread', 'Moneyline'];
 
-  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL', unitSize: 50 };
+  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all' };
 
   var byName = {};
   D.teams.forEach(function (t) { byName[t.name] = t; });
@@ -1115,13 +1143,24 @@ RENDERER_JS = """<script>
     var lineMatch = /([+-]?\\d+(?:\\.\\d+)?)\\s*$/.exec(p.playLabel);
     var lineSize = lineMatch ? Math.abs(parseFloat(lineMatch[1])) : 0;
     var autoUnofficial = p.market === 'Spread' && lineSize >= 20;
+    // Which model actually priced this game, captured at track time so it
+    // travels with the pick permanently -- a game can switch from
+    // preseason_prior to trained_model on a LATER run (more games played),
+    // but the tracked play should keep recording whichever model's number
+    // it was actually taken at, not whatever the game shows today. Same
+    // "In-season model" flag the Edge Board/Bet Card already use elsewhere
+    // (see isTrainedGame in priceGame/renderBetCard) -- single source of
+    // truth, not a second parallel check that could drift out of sync.
+    var modelSource = (g.flags || []).some(function (f) { return f.text === 'In-season model'; })
+      ? 'trained_model' : 'preseason_prior';
 
     return esc(JSON.stringify({
       description: p.playLabel + ' \\u2014 ' + abbrOf(g.away) + ' at ' + abbrOf(g.home),
       date: g.kickoff, type: p.market,
       price: p.market === 'Moneyline' ? p.sideMoneyline : -110,
       edge: Math.round(Math.abs(p.edge) * 10) / 10,
-      unofficial: autoUnofficial
+      unofficial: autoUnofficial,
+      modelSource: modelSource
     }));
   }
 
@@ -1163,6 +1202,11 @@ RENDERER_JS = """<script>
       var fadePillLabel = p.isFade
         ? p.playLabel + ' ' + (p.sideMoneyline > 0 ? '+' : '') + p.sideMoneyline
         : null;
+      // Same idea as the Moneyline FADE pill above, for the 20+pt spread
+      // exclusion: the model still has an opinion here (often a big one --
+      // that's the whole problem), but it's not a play, so say so instead
+      // of the row just looking like nothing happened.
+      var bigSpreadPillLabel = p.bigSpread ? p.playLabel : null;
       return '' +
         '<div class="row row--click' + (i === state.selected ? ' is-selected' : '') + '" data-game="' + i + '">' +
           '<div class="row-accent" style="background:linear-gradient(' + esc(M.displayColor(a.primary)) + ',' + esc(M.displayColor(h.primary)) + ')"></div>' +
@@ -1177,6 +1221,7 @@ RENDERER_JS = """<script>
             '<div class="meta"><span>' + esc(g.kickoff) + '</span><span>' + esc(g.book) + '</span></div>' +
             (qualifies ? '<div class="edge-play-pill" style="background:' + esc(playPillColor) + '26;border:1px solid ' + esc(playPillColor) + ';color:' + esc(playPillColor) + '">PLAY: ' + esc(playPillLabel) + '</div>' : '') +
             (p.isFade ? '<div class="edge-fade-pill">FADE: ' + esc(fadePillLabel) + '</div>' : '') +
+            (p.bigSpread ? '<div class="edge-fade-pill">FADE: 20+PT SPREAD</div>' : '') +
             '</div>' +
             '<div class="num cell-market">' + esc(p.marketLabel) + '</div>' +
             '<div class="num cell-model">' + esc(p.modelLabel) + '</div>' +
@@ -1438,6 +1483,7 @@ RENDERER_JS = """<script>
               '<div><div class="card-play">' + esc(c.playLabel) + '</div>' +
                 '<div class="card-note">' + esc(abbrOf(c.game.away) + ' at ' + abbrOf(c.game.home) + ' \\u00b7 ' + c.game.kickoff) + '</div></div>' +
               '<div class="card-price">' + esc(sidePriceLabel) + '</div>' +
+              '<div class="card-conf">' + (sideProb * 100).toFixed(1) + '%</div>' +
               '<div class="card-ev">' + (ev >= 0 ? '+' : '') + ev.toFixed(1) + '%</div>' +
               '<div class="num"><span class="tier"><span>' + esc(c.tier) + '</span></span></div>' +
               '<div class="num"><button class="track-btn" onclick="window.__cfbTrack(' + trackPayload(c) + ')">+TRK</button></div>' +
@@ -1593,7 +1639,7 @@ RENDERER_JS = """<script>
   // 9/17/2026 after a browser-storage loss). Merges by id on every load,
   // so it's a no-op once a browser already has these, and self-heals any
   // browser/laptop that doesn't. ----
-  var SEED_TRACKER = [{"id": "t1789600000000seed00", "description": "MD +3.0 \u2014 VT at MD", "date": "Sat 9/19, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 13.6, "stake": 50, "status": null}, {"id": "t1789600000137seed01", "description": "LT +19.5 \u2014 LT at BAY", "date": "Sat 9/19, 8:00PM UTC", "type": "Spread", "price": -110, "edge": 14.1, "stake": 50, "status": null}, {"id": "t1789600000274seed02", "description": "MISS +2.5 \u2014 LSU at MISS", "date": "Sat 9/19, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 15.1, "stake": 50, "status": null}, {"id": "t1789600000411seed03", "description": "UNT +3.0 \u2014 UNLV at UNT", "date": "Sat 9/12, 7:45PM UTC", "type": "Spread", "price": -110, "edge": 12.9, "stake": 50, "status": "win"}, {"id": "t1789600000548seed04", "description": "CONN +11.5 \u2014 MD at CONN", "date": "Sat 9/12, 7:30PM UTC", "type": "Spread", "price": -110, "edge": 18.1, "stake": 50, "status": "loss"}, {"id": "t1789600000685seed05", "description": "SDSU +12.5 \u2014 SDSU at UCLA", "date": "Sat 9/12, 11:15PM UTC", "type": "Spread", "price": -110, "edge": 19, "stake": 50, "status": "loss"}, {"id": "t1789600000822seed06", "description": "LT +35.5 \u2014 LT at LSU", "date": "Sat 9/12, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 24.3, "stake": 50, "status": "win"}, {"id": "t1789600000959seed07", "description": "ODU +19.5 \u2014 ODU at VT", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 26.4, "stake": 50, "status": "loss"}, {"id": "t1789600001096seed08", "description": "MICH +5.5 \u2014 OU at MICH", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 5.3, "stake": 50, "status": "win"}, {"id": "t1789600001233seed09", "description": "WSU +17.5 \u2014 WSU at KSU", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 11.8, "stake": 50, "status": "loss"}, {"id": "t1789600001370seed10", "description": "USF +3.0 \u2014 USF at ARMY", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 6.5, "stake": 50, "status": "win"}, {"id": "t1789600001507seed11", "description": "RUTG +3.0 \u2014 RUTG at BC", "date": "Fri 9/11, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 5.6, "stake": 50, "status": "loss"}, {"id": "t1789600001644seed12", "description": "BOIS +24.5 \u2014 BOIS at ORE", "date": "Sat 9/5, 7:30PM UTC", "type": "Spread", "price": -110, "edge": 5.9, "stake": 50, "status": "win"}, {"id": "t1789600001781seed13", "description": "ORST +21.0 \u2014 ORST at HOU", "date": "Sat 9/5, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 2.1, "stake": 50, "status": "win"}, {"id": "t1789600001918seed14", "description": "CCU +21.0 \u2014 CCU at WVU", "date": "Sat 9/5, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 11.9, "stake": 50, "status": "win"}, {"id": "t1789600002055seed15", "description": "WMU +27.5 \u2014 WMU at MICH", "date": "Sat 9/5, 11:00PM UTC", "type": "Spread", "price": -110, "edge": 14.8, "stake": 50, "status": "win"}, {"id": "t1789600002192seed16", "description": "JMU ML \u2014 LIB at JMU", "date": "Sat 9/5, 4:00PM UTC", "type": "Moneyline", "price": -225, "edge": 17.7, "stake": 50, "status": "win"}, {"id": "t1789600002329seed17", "description": "TLSA +13.5 \u2014 OKST at TLSA", "date": "Sat 9/5, 7:45PM UTC", "type": "Spread", "price": -110, "edge": 20.5, "stake": 50, "status": "win"}, {"id": "t1789600002466seed18", "description": "TOL +10.0 \u2014 TOL at MSU", "date": "Sat 9/5, 12:00AM UTC", "type": "Spread", "price": -110, "edge": 12.5, "stake": 50, "status": "win"}, {"id": "t1789600002603seed19", "description": "UAB +27.5 \u2014 UAB at ILL", "date": "Fri 9/4, 1:00AM UTC", "type": "Spread", "price": -110, "edge": 5.1, "stake": 50, "status": "win"}, {"id": "t1789600002740seed20", "description": "GT -6.5 \u2014 COLO at GT", "date": "Fri 9/4, 12:00AM UTC", "type": "Spread", "price": -110, "edge": 8.7, "stake": 50, "status": "loss"}, {"id": "t1789600002877seed21", "description": "AKR +25.5 \u2014 AKR at WAKE", "date": "Thu 9/3, 11:00PM UTC", "type": "Spread", "price": -110, "edge": 9, "stake": 50, "status": "win"}, {"id": "t1789600003014seed22", "description": "NMSU +31.5 \u2014 NMSU at FSU", "date": "Sat 8/29, 11:00PM UTC", "type": "Spread", "price": -110, "edge": 13, "stake": 50, "status": "win"}, {"id": "t1789600003151seed23", "description": "UVA -4.0 \u2014 NCSU at UVA", "date": "Sat 8/29, 7:30PM UTC", "type": "Spread", "price": -110, "edge": 3.8, "stake": 50, "status": "win"}];
+  var SEED_TRACKER = [{"id": "t1789600000000seed00", "description": "MD +3.0 \u2014 VT at MD", "date": "Sat 9/19, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 13.6, "stake": 50, "status": null, "modelSource": "preseason_prior"}, {"id": "t1789600000137seed01", "description": "LT +19.5 \u2014 LT at BAY", "date": "Sat 9/19, 8:00PM UTC", "type": "Spread", "price": -110, "edge": 14.1, "stake": 50, "status": null, "modelSource": "preseason_prior"}, {"id": "t1789600000274seed02", "description": "MISS +2.5 \u2014 LSU at MISS", "date": "Sat 9/19, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 15.1, "stake": 50, "status": null, "modelSource": "preseason_prior"}, {"id": "t1789600000411seed03", "description": "UNT +3.0 \u2014 UNLV at UNT", "date": "Sat 9/12, 7:45PM UTC", "type": "Spread", "price": -110, "edge": 12.9, "stake": 50, "status": "win", "modelSource": "preseason_prior"}, {"id": "t1789600000548seed04", "description": "CONN +11.5 \u2014 MD at CONN", "date": "Sat 9/12, 7:30PM UTC", "type": "Spread", "price": -110, "edge": 18.1, "stake": 50, "status": "loss", "modelSource": "preseason_prior"}, {"id": "t1789600000685seed05", "description": "SDSU +12.5 \u2014 SDSU at UCLA", "date": "Sat 9/12, 11:15PM UTC", "type": "Spread", "price": -110, "edge": 19, "stake": 50, "status": "loss", "modelSource": "preseason_prior"}, {"id": "t1789600000822seed06", "description": "LT +35.5 \u2014 LT at LSU", "date": "Sat 9/12, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 24.3, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600000959seed07", "description": "ODU +19.5 \u2014 ODU at VT", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 26.4, "stake": 50, "status": "loss", "modelSource": "preseason_prior"}, {"id": "t1789600001096seed08", "description": "MICH +5.5 \u2014 OU at MICH", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 5.3, "stake": 50, "status": "win", "modelSource": "preseason_prior"}, {"id": "t1789600001233seed09", "description": "WSU +17.5 \u2014 WSU at KSU", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 11.8, "stake": 50, "status": "loss", "modelSource": "preseason_prior"}, {"id": "t1789600001370seed10", "description": "USF +3.0 \u2014 USF at ARMY", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 6.5, "stake": 50, "status": "win", "modelSource": "preseason_prior"}, {"id": "t1789600001507seed11", "description": "RUTG +3.0 \u2014 RUTG at BC", "date": "Fri 9/11, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 5.6, "stake": 50, "status": "loss", "modelSource": "preseason_prior"}, {"id": "t1789600001644seed12", "description": "BOIS +24.5 \u2014 BOIS at ORE", "date": "Sat 9/5, 7:30PM UTC", "type": "Spread", "price": -110, "edge": 5.9, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600001781seed13", "description": "ORST +21.0 \u2014 ORST at HOU", "date": "Sat 9/5, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 2.1, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600001918seed14", "description": "CCU +21.0 \u2014 CCU at WVU", "date": "Sat 9/5, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 11.9, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600002055seed15", "description": "WMU +27.5 \u2014 WMU at MICH", "date": "Sat 9/5, 11:00PM UTC", "type": "Spread", "price": -110, "edge": 14.8, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600002192seed16", "description": "JMU ML \u2014 LIB at JMU", "date": "Sat 9/5, 4:00PM UTC", "type": "Moneyline", "price": -225, "edge": 17.7, "stake": 50, "status": "win", "modelSource": "preseason_prior"}, {"id": "t1789600002329seed17", "description": "TLSA +13.5 \u2014 OKST at TLSA", "date": "Sat 9/5, 7:45PM UTC", "type": "Spread", "price": -110, "edge": 20.5, "stake": 50, "status": "win", "modelSource": "preseason_prior"}, {"id": "t1789600002466seed18", "description": "TOL +10.0 \u2014 TOL at MSU", "date": "Sat 9/5, 12:00AM UTC", "type": "Spread", "price": -110, "edge": 12.5, "stake": 50, "status": "win", "modelSource": "preseason_prior"}, {"id": "t1789600002603seed19", "description": "UAB +27.5 \u2014 UAB at ILL", "date": "Fri 9/4, 1:00AM UTC", "type": "Spread", "price": -110, "edge": 5.1, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600002740seed20", "description": "GT -6.5 \u2014 COLO at GT", "date": "Fri 9/4, 12:00AM UTC", "type": "Spread", "price": -110, "edge": 8.7, "stake": 50, "status": "loss", "modelSource": "preseason_prior"}, {"id": "t1789600002877seed21", "description": "AKR +25.5 \u2014 AKR at WAKE", "date": "Thu 9/3, 11:00PM UTC", "type": "Spread", "price": -110, "edge": 9, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600003014seed22", "description": "NMSU +31.5 \u2014 NMSU at FSU", "date": "Sat 8/29, 11:00PM UTC", "type": "Spread", "price": -110, "edge": 13, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600003151seed23", "description": "UVA -4.0 \u2014 NCSU at UVA", "date": "Sat 8/29, 7:30PM UTC", "type": "Spread", "price": -110, "edge": 3.8, "stake": 50, "status": "win", "modelSource": "preseason_prior"}];
   function seedTrackerIfMissing() {
     var items = loadTrk();
     var known = {};
@@ -1658,7 +1704,8 @@ RENDERER_JS = """<script>
       id: 't' + Date.now() + Math.random().toString(36).slice(2, 7),
       description: play.description, date: play.date, type: play.type,
       price: play.price, edge: play.edge, stake: 50, status: null,
-      unofficial: !!play.unofficial
+      unofficial: !!play.unofficial,
+      modelSource: play.modelSource || null
     });
     saveTrk(items);
     render();
@@ -1701,6 +1748,7 @@ RENDERER_JS = """<script>
       stake: stakeEl.value !== '' ? Number(stakeEl.value) : 50,
       status: null,
       unofficial: !!(unofficialEl && unofficialEl.checked),
+      modelSource: 'manual',
     });
     saveTrk(items);
     descEl.value = ''; dateEl.value = ''; edgeEl.value = '';
@@ -1812,7 +1860,8 @@ RENDERER_JS = """<script>
       }
     });
 
-    var head = '<div class="section-head mt-lg" id="' + opts.sectionId + '"><div class="section-title"><div class="section-flag is-green"></div><h2>' + esc(opts.title) + '</h2></div></div>';
+    var head = '<div class="section-head mt-lg" id="' + opts.sectionId + '"><div class="section-title"><div class="section-flag is-green"></div><h2>' + esc(opts.title) + '</h2></div></div>' +
+      (opts.extraHtml || '');
 
     if (!items.length) {
       return head + '<div class="trk-empty">' + esc(opts.emptyMsg) + '</div>';
@@ -1852,8 +1901,12 @@ RENDERER_JS = """<script>
     var rows = items.map(function (it) {
       var p = computeProfit(it);
       var edgeUnit = it.type === 'Moneyline' ? 'pp' : (it.type === 'Prop' ? '%' : 'pt');
+      var modelTagText = it.modelSource === 'trained_model' ? 'TRAINED'
+        : it.modelSource === 'preseason_prior' ? 'UNTRAINED'
+        : it.modelSource === 'manual' ? 'MANUAL' : null;
+      var modelTagColor = it.modelSource === 'trained_model' ? '#2ecc71' : '#8A94A3';
       return '<div class="trk-row">' +
-        '<div>' + esc(it.description) + (it.auto ? ' <span class="trk-auto-tag">AUTO</span>' : '') + (it.unofficial ? ' <span class="trk-auto-tag" style="background:#ff0000;color:#fff;font-weight:700">UNOFFICIAL</span>' : '') + '</div>' +
+        '<div>' + esc(it.description) + (it.auto ? ' <span class="trk-auto-tag">AUTO</span>' : '') + (it.unofficial ? ' <span class="trk-auto-tag" style="background:#ff0000;color:#fff;font-weight:700">UNOFFICIAL</span>' : '') + (modelTagText ? ' <span class="trk-auto-tag" style="background:' + modelTagColor + '26;color:' + modelTagColor + ';border:1px solid ' + modelTagColor + '">' + modelTagText + '</span>' : '') + '</div>' +
         '<div>' + esc(it.date) + '</div>' +
         '<div>' + esc(it.type) + '</div>' +
         '<div>' + (it.price > 0 ? '+' : '') + (it.price != null ? esc(it.price) : '—') + '</div>' +
@@ -1884,6 +1937,26 @@ RENDERER_JS = """<script>
     // separation the user actually wants without that risk.
     var gameLineItems = items.filter(function (it) { return it.type === 'Moneyline' || it.type === 'Spread' || it.type === 'Total'; });
     var propItems = items.filter(function (it) { return it.type === 'Prop'; });
+
+    // Trained vs. preseason-prior tabs -- added 9/19/2026 so the user can
+    // see how each formula actually performs once tracked separately,
+    // rather than one blended record hiding whether the mid-season
+    // switchover is worth trusting. 'manual' (Totals added by hand, no
+    // model behind them) and anything untagged (tracked before this field
+    // existed) fall under All but not under either specific tab, rather
+    // than being miscounted as one or the other.
+    var modelTabs = [
+      { id: 'all', label: 'All' },
+      { id: 'trained_model', label: 'Trained Model' },
+      { id: 'preseason_prior', label: 'Untrained Model' },
+    ];
+    var modelTabBar = '<div class="prop-tabs" style="margin:10px 0 4px">' +
+      modelTabs.map(function (t) {
+        return '<button class="tab tab--prop' + (state.trackerModelTab === t.id ? ' is-active' : '') + '" data-model-tab="' + t.id + '"><span>' + esc(t.label) + '</span></button>';
+      }).join('') +
+    '</div>';
+    var gameLineItemsShown = state.trackerModelTab === 'all' ? gameLineItems
+      : gameLineItems.filter(function (it) { return it.modelSource === state.trackerModelTab; });
 
     // Manual add-a-play form -- for anything not driven by a live model
     // signal (right now: Totals). Free text date so it can match the
@@ -1918,10 +1991,13 @@ RENDERER_JS = """<script>
       manualAddForm +
       exportImportBar +
       (items.length ? '' : '<div class="trk-empty">No plays tracked yet. Click +TRK on any Edge Board row or Bet Card play, or check back after the next run — official player props get added here automatically.</div>') +
-      renderTrackerSection(gameLineItems, {
+      renderTrackerSection(gameLineItemsShown, {
         title: 'Game Lines (Moneyline / Spread / Total)',
-        emptyMsg: 'No game-line plays tracked yet. Click +TRK on any Edge Board row or Bet Card play.',
+        emptyMsg: state.trackerModelTab === 'all'
+          ? 'No game-line plays tracked yet. Click +TRK on any Edge Board row or Bet Card play.'
+          : 'No ' + (state.trackerModelTab === 'trained_model' ? 'trained-model' : 'untrained-model') + ' plays tracked yet under this tab.',
         sectionId: 'trk-gamelines-section',
+        extraHtml: modelTabBar,
       }) +
       renderTrackerSection(propItems, {
         title: 'Player Props',
@@ -2055,6 +2131,8 @@ RENDERER_JS = """<script>
     if (pm) { state.propMarket = pm.dataset.propMarket; return render(); }
     var us = e.target.closest('[data-unit-size]');
     if (us) { state.unitSize = Number(us.dataset.unitSize); return render(); }
+    var mt = e.target.closest('[data-model-tab]');
+    if (mt) { state.trackerModelTab = mt.dataset.modelTab; return render(); }
   });
 
   seedTrackerIfMissing();
