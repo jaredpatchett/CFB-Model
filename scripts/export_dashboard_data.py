@@ -588,6 +588,7 @@ def main(year: int):
     n_neutral_unknown = 0
     n_injury_applications = 0
     n_trained_model_games = 0
+    trained_model_diagnostics = {}
     if os.path.exists(game_lines_path):
         lines = pd.read_csv(game_lines_path)
         for _, g in lines.iterrows():
@@ -644,6 +645,7 @@ def main(year: int):
                     pace_returning=pace_returning_lookup,
                     core_ratings=core_ratings_lookup,
                     weather=game_weather,
+                    diagnostics=trained_model_diagnostics,
                 )
                 fair_fields = compute_fair_odds_fields(
                     home_rating, away_rating, ml_home, ml_away, prior,
@@ -879,6 +881,20 @@ def main(year: int):
           f"{len(teams_out)} teams with a real "
           f"SP+ rating exported, {len(props_out)} prop rows, "
           f"{len(prop_market_catalog)} prop market types in catalog.")
+
+    # Diagnostic added 9/19/2026: the summary line above only ever reported
+    # HOW MANY games switched to the trained model, never WHY the rest
+    # didn't -- and score_with_trained_model requires all 14 feature
+    # columns simultaneously (games-played, SP+, pace, returning
+    # production, CORE, and full weather), so "0 games switched over"
+    # could mean any one of several different real causes. This breaks
+    # down every block reason score_with_trained_model actually hit this
+    # run, so the bottleneck is a number in this log, not a guess.
+    if trained_model_diagnostics:
+        print("\nWhy games stayed on the preseason prior instead of switching to the trained model "
+              "(one game can hit more than one reason if fixing one still leaves another missing):")
+        for reason, count in sorted(trained_model_diagnostics.items(), key=lambda kv: -kv[1]):
+            print(f"  {count:>3}  {reason}")
 
 
 if __name__ == "__main__":
