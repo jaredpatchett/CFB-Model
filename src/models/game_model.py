@@ -84,7 +84,22 @@ class GameMarginModel:
         self.model.fit(X_train, y_train)
         preds = self.model.predict(X_test)
         mae = mean_absolute_error(y_test, preds)
-        residuals = y_train - self.model.predict(X_train)
+        # residual_std drives every win-probability/EV number downstream
+        # (compute_fair_odds_fields -> model_home_win_prob -> the Edge
+        # Board's Win% column, the Bet Card's ranking and EV%, tierFor).
+        # It MUST come from holdout residuals (y_test - preds), not
+        # training residuals -- fixed 9/19/2026 after the Bet Card started
+        # showing suspiciously high confidence (77-89%+) on ordinary
+        # single-digit-point spread picks, which a well-calibrated CFB
+        # model shouldn't be claiming routinely. The bug: this used to
+        # compute `y_train - self.model.predict(X_train)` right below the
+        # correctly-holdout-measured mae above -- a 200-tree/depth-3 GBM
+        # fits its OWN training data much more tightly than genuinely new
+        # games, so in-sample residuals are artificially small, which
+        # mechanically pushes every win probability toward the extremes via
+        # norm.cdf(margin / residual_std) -- a real, systematic overconfidence
+        # bug, not an artifact of the games themselves.
+        residuals = y_test - preds
         self.residual_std = float(np.std(residuals))
 
         # Impurity-based feature importances (sklearn's standard, cheap
