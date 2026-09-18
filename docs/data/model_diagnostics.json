@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T19:20:19.508845+00:00",
+  "generated_at": "2026-09-18T20:11:51.042093+00:00",
   "feature_columns_used": [
     "home_field",
     "roll_margin_diff",
@@ -33,6 +33,6 @@
     "game_indoors": 0.00017449330788141975
   },
   "holdout_mae": 13.513934904998568,
-  "residual_std": 13.618994196375496,
+  "residual_std": 17.133411199623662,
   "n_train": 1610
 }
