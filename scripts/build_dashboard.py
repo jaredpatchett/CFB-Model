@@ -1786,7 +1786,17 @@ RENDERER_JS = """<script>
   // official plays, never duplicates one already logged. Manually-tracked
   // rows (via +TRK) have no sourceId and are never touched by this.
   function propSourceId(r) {
-    return ['autoprop', r.fixture_id, r.player_name, r.market_name, r.line, r.model_lean].join('|');
+    // Deliberately excludes r.line and r.model_lean -- a player's posted
+    // line drifts a little between workflow runs (e.g. Noah Kim's Pass
+    // Yards moving 131.5 -> 130.5 -> 136.5 across several runs), and
+    // including the line here meant every drift got auto-tracked as a
+    // "new" prop, producing 10 rows for what's really one ongoing read on
+    // one player in one market. Fixed 9/19/2026 -- the identity of an
+    // auto-tracked prop is the player+market+game, full stop; whichever
+    // line/lean it had the FIRST time it cleared the official bar is what
+    // gets kept (see dedupeAutoProps for the one-time cleanup of rows
+    // already duplicated under the old key).
+    return ['autoprop', r.fixture_id, r.player_name, r.market_name].join('|');
   }
 
   function autoTrackOfficialProps() {
@@ -1815,6 +1825,45 @@ RENDERER_JS = """<script>
       added = true;
     });
     if (added) saveTrk(items);
+  }
+
+  // One-time cleanup for rows already duplicated under the OLD sourceId
+  // (which included the line, so every line drift re-tracked the same
+  // player+market as "new" -- see propSourceId's comment). Groups every
+  // auto-tracked Prop by player+market (parsed back out of its
+  // description, since older rows never stored those as separate fields),
+  // and where a group has more than one row, keeps only the EARLIEST one
+  // (by the timestamp embedded in its own id) and removes the rest --
+  // preserving "when the model first flagged this player in this market"
+  // rather than picking arbitrarily. Safe to run on every load: a clean
+  // tracker (no duplicate groups) is a no-op, and the new propSourceId
+  // means fresh auto-tracks won't create new duplicates for this to
+  // clean up going forward.
+  function dedupeAutoProps() {
+    var items = loadTrk();
+    var groups = {};
+    items.forEach(function (it) {
+      if (it.type !== 'Prop' || !it.auto) return;
+      var m = /^(.*?)\\s+[OU]\\s+[\\d.]+$/.exec(it.description || '');
+      var key = m ? m[1] : it.description;
+      (groups[key] = groups[key] || []).push(it);
+    });
+    var dropIds = {};
+    Object.keys(groups).forEach(function (key) {
+      var g = groups[key];
+      if (g.length <= 1) return;
+      g.sort(function (a, b) {
+        var ta = parseInt(String(a.id || '').slice(1), 10) || 0;
+        var tb = parseInt(String(b.id || '').slice(1), 10) || 0;
+        return ta - tb;
+      });
+      for (var i = 1; i < g.length; i++) dropIds[g[i].id] = true;
+    });
+    var dropCount = Object.keys(dropIds).length;
+    if (dropCount) {
+      saveTrk(items.filter(function (it) { return !dropIds[it.id]; }));
+    }
+    return dropCount;
   }
 
   function americanToDecimal(odds) {
@@ -2157,6 +2206,7 @@ RENDERER_JS = """<script>
 
   seedTrackerIfMissing();
   autoTrackOfficialProps();
+  dedupeAutoProps();
   render();
 })();
 </script>
