@@ -1,0 +1,65 @@
+name: Audit Week 3 predictions (old vs. new formula)
+
+# One-off diagnostic, manual-trigger only -- no daily schedule, no commit/
+# push back to the repo. Mirrors manual_run.yml's setup exactly (same
+# secrets, same historical-data caching) up through "Train game model",
+# since scripts/audit_predictions.py needs data/raw/sp_ratings_<year>.csv
+# and models/game_model.joblib to exist, and a fresh GitHub Actions runner
+# has neither until those steps actually run. Everything after that point
+# in manual_run.yml (props training, live odds fetch, dashboard export/
+# build/commit) is skipped entirely -- this workflow only prints a
+# comparison table to its own log, it doesn't touch the live dashboard.
+on:
+  workflow_dispatch:
+    inputs:
+      years:
+        description: "Season(s) to fetch/train on, space-separated"
+        required: false
+        default: "2024"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    env:
+      CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
+      ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+      ODDSPAPI_API_KEY: ${{ secrets.PRIZEPICKS_API }}
+      YEARS: ${{ github.event.inputs.years || '2024' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Same cache as manual_run.yml -- avoids re-burning CFBD's free-tier
+      # quota re-fetching completed historical seasons this run doesn't
+      # need to re-pull if a recent manual_run.yml run already cached them.
+      - name: Restore cached historical CFBD data
+        uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: cfbd-raw-${{ env.YEARS }}-${{ github.run_id }}
+          restore-keys: |
+            cfbd-raw-${{ env.YEARS }}-
+            cfbd-raw-
+
+      - name: Fetch historical data
+        run: python scripts/fetch_historical_data.py --years ${{ env.YEARS }}
+
+      - name: Build features
+        run: python scripts/build_features.py --years ${{ env.YEARS }}
+
+      - name: Train game model
+        run: python scripts/train_game_model.py
+
+      - name: Audit Week 3 predictions (old formula vs. new opponent-adjusted formula)
+        run: |
+          LATEST_YEAR=$(echo "${{ env.YEARS }}" | tr ' ' '\n' | sort -n | tail -1)
+          python scripts/audit_predictions.py --year "$LATEST_YEAR"
