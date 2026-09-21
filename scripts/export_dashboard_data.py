@@ -547,7 +547,7 @@ def main(year: int):
     if os.path.exists(model_path):
         try:
             trained_model = GameMarginModel.load(model_path)
-            current_season_form = build_current_season_form(schedule_df)
+            current_season_form = build_current_season_form(schedule_df, sp_lookup=sp_lookup)
             n_ready = sum(1 for f in current_season_form.values() if f["games_played_prior"] >= MIN_GAMES_FOR_TRAINED_MODEL)
             print(f"  loaded; {len(current_season_form)} team(s) have played a {season_year} game so far, "
                   f"{n_ready} of them already clear the {MIN_GAMES_FOR_TRAINED_MODEL}-game threshold")
