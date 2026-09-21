@@ -19,9 +19,25 @@ why that switch matters (feeding the trained model rolling features that
 are still blanked to 0 this early would be extrapolating outside anything
 it learned from).
 """
+import re
+import unicodedata
+
 import pandas as pd
 
 from src.features.team_features import build_pace_returning_features
+
+
+def _normalize_school(name: str) -> str:
+    """Same normalization export_dashboard_data.py's _normalize_team_name
+    uses (strip accents, lowercase, drop punctuation) -- duplicated here
+    rather than imported to avoid a circular import (export_dashboard_data.py
+    already imports FROM this module). Used only to match a game's
+    home/away team name against an sp_lookup dict built the same way, for
+    the opponent-strength adjustment in build_current_season_form below."""
+    if not name:
+        return ""
+    ascii_name = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9 ]", "", ascii_name.lower()).strip()
 
 # Matches the reasoning in fair_odds.py's module docstring: below this many
 # real games, a team's rolling form is too thin to trust over the SP+ prior.
@@ -45,13 +61,35 @@ from src.features.team_features import build_pace_returning_features
 MIN_GAMES_FOR_TRAINED_MODEL = 2
 
 
-def build_current_season_form(games_df: pd.DataFrame) -> dict:
+def build_current_season_form(games_df: pd.DataFrame, sp_lookup: dict = None) -> dict:
     """CFBD school name -> {'roll_ppg_for', 'roll_ppg_against', 'roll_margin',
     'games_played_prior'}, computed from ONLY this team's own COMPLETED games
     in games_df (future/unplayed games are correctly excluded since they
     have no scores). A team that hasn't played yet this season simply has no
     entry — callers should treat that as "not enough in-season data," not
-    guess at zero."""
+    guess at zero.
+
+    sp_lookup: optional {normalized school name -> SP+ rating} (see
+    export_dashboard_data.py's build_sp_lookup). When given, each game's
+    contribution to roll_margin is OPPONENT-ADJUSTED -- the opponent's own
+    SP+ rating (already scaled as points-above-average) gets added to the
+    raw margin before averaging, so a 50-point win over a heavily
+    overmatched opponent doesn't inflate a team's "current form" by
+    anywhere near as much as it does unadjusted, and a close game against
+    a strong opponent gets real credit instead of looking mediocre.
+    Without this, roll_margin was just a flat average with zero
+    opponent-quality awareness -- confirmed as a real driver of live
+    misses 9/2026 (Texas A&M: 50-0 over an overmatched Missouri State +
+    48-20 over Arizona State produced a flat +39ppg "current form" that
+    had nothing to do with how A&M would actually fare against a real
+    opponent; Kentucky then won outright as a 16.5-point underdog).
+    roll_ppg_for/roll_ppg_against stay raw/unadjusted on purpose -- they're
+    directly-observed scoring stats, not a proxy for team strength, so
+    there's nothing to adjust there. Any single game whose opponent isn't
+    in sp_lookup (unmatched or a non-FBS opponent with no rating) falls
+    back to that one game's raw, unadjusted margin rather than dropping
+    the game or guessing a rating -- same "never fabricate" policy as
+    everywhere else in this file."""
     if games_df is None or games_df.empty:
         return {}
     df = games_df.copy()
@@ -63,19 +101,30 @@ def build_current_season_form(games_df: pd.DataFrame) -> dict:
     if df.empty:
         return {}
 
+    sp_lookup = sp_lookup or {}
+
     long_rows = []
     for _, g in df.iterrows():
-        long_rows.append({"team": g["homeTeam"], "points_for": g["homePoints"], "points_against": g["awayPoints"]})
-        long_rows.append({"team": g["awayTeam"], "points_for": g["awayPoints"], "points_against": g["homePoints"]})
+        home, away = g["homeTeam"], g["awayTeam"]
+        home_margin = g["homePoints"] - g["awayPoints"]
+        away_rating = sp_lookup.get(_normalize_school(away))
+        home_rating = sp_lookup.get(_normalize_school(home))
+        long_rows.append({
+            "team": home, "points_for": g["homePoints"], "points_against": g["awayPoints"],
+            "adj_margin": (home_margin + away_rating) if away_rating is not None else home_margin,
+        })
+        long_rows.append({
+            "team": away, "points_for": g["awayPoints"], "points_against": g["homePoints"],
+            "adj_margin": (-home_margin + home_rating) if home_rating is not None else -home_margin,
+        })
     long_df = pd.DataFrame(long_rows)
-    long_df["margin"] = long_df["points_for"] - long_df["points_against"]
 
     form = {}
     for team, grp in long_df.groupby("team"):
         form[team] = {
             "roll_ppg_for": float(grp["points_for"].mean()),
             "roll_ppg_against": float(grp["points_against"].mean()),
-            "roll_margin": float(grp["margin"].mean()),
+            "roll_margin": float(grp["adj_margin"].mean()),
             "games_played_prior": int(len(grp)),
         }
     return form
