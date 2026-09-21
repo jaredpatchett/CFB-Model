@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T16:00:29.357285+00:00",
+  "generated_at": "2026-09-21T17:38:53.521346+00:00",
   "n_games": 123,
   "avg_clv_points": 0.171,
   "median_clv_points": 0.0,
@@ -1138,15 +1138,15 @@
       "commence_time": "2026-09-19T19:00:00Z"
     },
     {
-      "game_id": 401856694,
+      "game_id": 401858230,
       "season": 2026,
       "week": 3,
-      "home_team": "Texas A&M Aggies",
-      "away_team": "Kentucky Wildcats",
+      "home_team": "Louisville Cardinals",
+      "away_team": "SMU Mustangs",
       "side": "home",
-      "recommended_spread_home": -16.5,
-      "closing_spread_home": -16.5,
-      "clv_points": 0.0,
+      "recommended_spread_home": -1.5,
+      "closing_spread_home": -3.0,
+      "clv_points": 1.5,
       "captured_at": "2026-09-18T16:00:28.339575+00:00",
       "commence_time": "2026-09-19T19:30:00Z"
     },
@@ -1203,15 +1203,15 @@
       "commence_time": "2026-09-19T19:30:00Z"
     },
     {
-      "game_id": 401858230,
+      "game_id": 401856694,
       "season": 2026,
       "week": 3,
-      "home_team": "Louisville Cardinals",
-      "away_team": "SMU Mustangs",
+      "home_team": "Texas A&M Aggies",
+      "away_team": "Kentucky Wildcats",
       "side": "home",
-      "recommended_spread_home": -1.5,
-      "closing_spread_home": -3.0,
-      "clv_points": 1.5,
+      "recommended_spread_home": -16.5,
+      "closing_spread_home": -16.5,
+      "clv_points": 0.0,
       "captured_at": "2026-09-18T16:00:28.339575+00:00",
       "commence_time": "2026-09-19T19:30:00Z"
     },
@@ -1398,19 +1398,6 @@
       "commence_time": "2026-09-19T23:00:00Z"
     },
     {
-      "game_id": 401858453,
-      "season": 2026,
-      "week": 3,
-      "home_team": "Notre Dame Fighting Irish",
-      "away_team": "Michigan State Spartans",
-      "side": "away",
-      "recommended_spread_home": -29.5,
-      "closing_spread_home": -28.5,
-      "clv_points": 1.0,
-      "captured_at": "2026-09-11T19:10:24.473277+00:00",
-      "commence_time": "2026-09-19T23:30:00Z"
-    },
-    {
       "game_id": 401858232,
       "season": 2026,
       "week": 3,
@@ -1463,6 +1450,19 @@
       "commence_time": "2026-09-19T23:30:00Z"
     },
     {
+      "game_id": 401858453,
+      "season": 2026,
+      "week": 3,
+      "home_team": "Notre Dame Fighting Irish",
+      "away_team": "Michigan State Spartans",
+      "side": "away",
+      "recommended_spread_home": -29.5,
+      "closing_spread_home": -28.5,
+      "clv_points": 1.0,
+      "captured_at": "2026-09-11T19:10:24.473277+00:00",
+      "commence_time": "2026-09-19T23:30:00Z"
+    },
+    {
       "game_id": 401856795,
       "season": 2026,
       "week": 3,
@@ -1502,6 +1502,19 @@
       "commence_time": "2026-09-19T23:45:00Z"
     },
     {
+      "game_id": 401856693,
+      "season": 2026,
+      "week": 3,
+      "home_team": "Texas Longhorns",
+      "away_team": "UTSA Roadrunners",
+      "side": "away",
+      "recommended_spread_home": -30.5,
+      "closing_spread_home": -29.5,
+      "clv_points": 1.0,
+      "captured_at": "2026-09-16T14:49:42.500529+00:00",
+      "commence_time": "2026-09-20T00:00:00Z"
+    },
+    {
       "game_id": 401856811,
       "season": 2026,
       "week": 3,
@@ -1515,14 +1528,14 @@
       "commence_time": "2026-09-20T00:00:00Z"
     },
     {
-      "game_id": 401856693,
+      "game_id": 401856799,
       "season": 2026,
       "week": 3,
-      "home_team": "Texas Longhorns",
-      "away_team": "UTSA Roadrunners",
+      "home_team": "TCU Horned Frogs",
+      "away_team": "Arkansas State Red Wolves",
       "side": "away",
-      "recommended_spread_home": -30.5,
-      "closing_spread_home": -29.5,
+      "recommended_spread_home": -19.5,
+      "closing_spread_home": -18.5,
       "clv_points": 1.0,
       "captured_at": "2026-09-16T14:49:42.500529+00:00",
       "commence_time": "2026-09-20T00:00:00Z"
@@ -1538,19 +1551,6 @@
       "closing_spread_home": -7.0,
       "clv_points": -0.5,
       "captured_at": "2026-09-18T16:00:28.339575+00:00",
-      "commence_time": "2026-09-20T00:00:00Z"
-    },
-    {
-      "game_id": 401856799,
-      "season": 2026,
-      "week": 3,
-      "home_team": "TCU Horned Frogs",
-      "away_team": "Arkansas State Red Wolves",
-      "side": "away",
-      "recommended_spread_home": -19.5,
-      "closing_spread_home": -18.5,
-      "clv_points": 1.0,
-      "captured_at": "2026-09-16T14:49:42.500529+00:00",
       "commence_time": "2026-09-20T00:00:00Z"
     },
     {
