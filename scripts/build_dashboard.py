@@ -1044,6 +1044,13 @@ RENDERER_JS = """<script>
   D.teams.forEach(function (t) { byName[t.name] = t; });
   function team(name) { return byName[name] || { name: name, abbr: name, primary: '#8A94A3', secondary: '#E7EDF5' }; }
   function abbrOf(name) { return team(name).abbr; }
+  // Player-prop rows carry a 'team' field now (see live_player_features.py's
+  // score_prop) so the dashboard/tracker can show which team a player is on
+  // without the user having to look it up by hand. Falls back to just the
+  // name for anything unscored (score_prop never ran, so there's no team to
+  // attach -- e.g. a posted line with no model read yet), same "don't
+  // fabricate what we don't know" policy as everywhere else here.
+  function playerLabel(r) { return (r.team ? abbrOf(r.team) + ' ' : '') + r.player_name; }
 
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -1574,7 +1581,7 @@ RENDERER_JS = """<script>
       return '<div class="prop-best-card">' +
         '<div class="prop-best-top ' + (isOver ? 'is-over' : 'is-under') + '"></div>' +
         '<div class="prop-best-body">' +
-          '<div class="prop-best-name">' + esc(r.player_name) + ' ' + tagHtml(r) + '</div>' +
+          '<div class="prop-best-name">' + esc(playerLabel(r)) + ' ' + tagHtml(r) + '</div>' +
           '<div class="prop-best-meta">' + esc(r.market_name) + ' · ' + (isOver ? 'O' : 'U') + ' ' + esc(r.line) + '</div>' +
           '<div class="prop-best-edge ' + (r.model_edge >= 0 ? 'is-pos' : 'is-neg') + '">' +
             (r.model_ev != null ? ((r.model_ev >= 0 ? '+' : '') + r.model_ev.toFixed(1) + '% EV') : ((r.model_edge >= 0 ? '+' : '') + r.model_edge.toFixed(1) + ' edge')) +
@@ -1596,7 +1603,7 @@ RENDERER_JS = """<script>
           var isOver = r.model_lean === 'over';
           var price = isOver ? r.over_price : r.under_price;
           return '<div class="prop-lean-card">' +
-            '<div class="prop-best-name">' + esc(r.player_name) + ' ' + tagHtml(r) + '</div>' +
+            '<div class="prop-best-name">' + esc(playerLabel(r)) + ' ' + tagHtml(r) + '</div>' +
             '<div class="prop-best-meta">' + esc(r.market_name) + ' · ' + (isOver ? 'O' : 'U') + ' ' + esc(r.line) +
               (price != null ? ' · ' + esc(price) : '') + '</div>' +
             '<div class="prop-best-sub">model ' + r.model_predicted_value.toFixed(1) +
@@ -1634,7 +1641,7 @@ RENDERER_JS = """<script>
                 '</div>'
               : '';
             var bookTag = r.book_used ? ' <span style="color:var(--muted-3);font-size:9px">(' + esc(bookLabel(r.book_used)) + ')</span>' : '';
-            return '<div class="pcard-line-row"><span>' + esc(r.player_name) + ' · ' + esc(r.line) + '</span>' +
+            return '<div class="pcard-line-row"><span>' + esc(playerLabel(r)) + ' · ' + esc(r.line) + '</span>' +
               '<span>O ' + esc(r.over_price) + ' / U ' + esc(r.under_price) + bookTag + '</span></div>' + modelLine;
           }).join('') + '</div>';
       }
@@ -1693,6 +1700,40 @@ RENDERER_JS = """<script>
       var imported;
       try { imported = JSON.parse(e.target.result); } catch (err) {
         alert('That file is not valid tracker JSON.');
+        return;
+      }
+      // Grades file (added 9/2026): {"grades": [...]} -- sets W/L/P on rows
+      // ALREADY in the tracker instead of adding new ones, so a batch of
+      // results graded from real box scores can be applied in one click
+      // rather than row by row. Two match styles:
+      //   game lines: {"play": "PITT ML", "status": "win"} -- matches the
+      //     text before " \u2014 " in the row's description exactly.
+      //   props: {"player": "Noah Kim", "market": "Pass Yards", "status": ...}
+      //     -- matches any Prop row whose description contains
+      //     "<player> <market>" (works with or without the newer team-
+      //     abbreviation prefix, and regardless of which drifted line the
+      //     row was tracked at -- the grades file only lists a player+market
+      //     when the result is the same at every line that was tracked).
+      // Only rows with no grade yet are touched, so a manual grade you've
+      // already entered is never overwritten.
+      if (imported && !Array.isArray(imported) && Array.isArray(imported.grades)) {
+        var trk = loadTrk();
+        var applied = 0;
+        imported.grades.forEach(function (g) {
+          if (!g || ['win', 'loss', 'push'].indexOf(g.status) === -1) return;
+          trk.forEach(function (it) {
+            if (it.status) return;
+            var desc = it.description || '';
+            var hit = g.play
+              ? desc.split(' \\u2014 ')[0] === g.play
+              : (g.player && g.market && it.type === 'Prop' && desc.indexOf(g.player + ' ' + g.market) !== -1);
+            if (hit) { it.status = g.status; applied++; }
+          });
+        });
+        saveTrk(trk);
+        input.value = '';
+        render();
+        alert(applied + ' tracked play(s) graded from the file.');
         return;
       }
       if (!Array.isArray(imported)) {
@@ -1814,7 +1855,7 @@ RENDERER_JS = """<script>
       items.unshift({
         id: 't' + Date.now() + Math.random().toString(36).slice(2, 7),
         sourceId: sid,
-        description: r.player_name + ' ' + r.market_name + ' ' + (isOver ? 'O' : 'U') + ' ' + r.line,
+        description: playerLabel(r) + ' ' + r.market_name + ' ' + (isOver ? 'O' : 'U') + ' ' + r.line,
         date: (r.start_time || '').slice(0, 10),
         type: 'Prop',
         price: price != null ? price : null,
