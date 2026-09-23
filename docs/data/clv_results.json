@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T16:04:44.752006+00:00",
+  "generated_at": "2026-09-23T21:34:03.576038+00:00",
   "n_games": 123,
   "avg_clv_points": 0.171,
   "median_clv_points": 0.0,
@@ -1164,15 +1164,15 @@
       "commence_time": "2026-09-19T19:30:00Z"
     },
     {
-      "game_id": 401856694,
+      "game_id": 401858230,
       "season": 2026,
       "week": 3,
-      "home_team": "Texas A&M Aggies",
-      "away_team": "Kentucky Wildcats",
+      "home_team": "Louisville Cardinals",
+      "away_team": "SMU Mustangs",
       "side": "home",
-      "recommended_spread_home": -16.5,
-      "closing_spread_home": -16.5,
-      "clv_points": 0.0,
+      "recommended_spread_home": -1.5,
+      "closing_spread_home": -3.0,
+      "clv_points": 1.5,
       "captured_at": "2026-09-18T16:00:28.339575+00:00",
       "commence_time": "2026-09-19T19:30:00Z"
     },
@@ -1190,15 +1190,15 @@
       "commence_time": "2026-09-19T19:30:00Z"
     },
     {
-      "game_id": 401858230,
+      "game_id": 401856694,
       "season": 2026,
       "week": 3,
-      "home_team": "Louisville Cardinals",
-      "away_team": "SMU Mustangs",
+      "home_team": "Texas A&M Aggies",
+      "away_team": "Kentucky Wildcats",
       "side": "home",
-      "recommended_spread_home": -1.5,
-      "closing_spread_home": -3.0,
-      "clv_points": 1.5,
+      "recommended_spread_home": -16.5,
+      "closing_spread_home": -16.5,
+      "clv_points": 0.0,
       "captured_at": "2026-09-18T16:00:28.339575+00:00",
       "commence_time": "2026-09-19T19:30:00Z"
     },
@@ -1268,19 +1268,6 @@
       "commence_time": "2026-09-19T20:15:00Z"
     },
     {
-      "game_id": 401862710,
-      "season": 2026,
-      "week": 3,
-      "home_team": "Old Dominion Monarchs",
-      "away_team": "East Carolina Pirates",
-      "side": "home",
-      "recommended_spread_home": -3.0,
-      "closing_spread_home": -2.5,
-      "clv_points": -0.5,
-      "captured_at": "2026-09-18T16:00:28.339575+00:00",
-      "commence_time": "2026-09-19T22:00:00Z"
-    },
-    {
       "game_id": 401862771,
       "season": 2026,
       "week": 3,
@@ -1291,6 +1278,19 @@
       "closing_spread_home": -4.5,
       "clv_points": 2.5,
       "captured_at": "2026-09-16T14:49:42.500529+00:00",
+      "commence_time": "2026-09-19T22:00:00Z"
+    },
+    {
+      "game_id": 401862710,
+      "season": 2026,
+      "week": 3,
+      "home_team": "Old Dominion Monarchs",
+      "away_team": "East Carolina Pirates",
+      "side": "home",
+      "recommended_spread_home": -3.0,
+      "closing_spread_home": -2.5,
+      "clv_points": -0.5,
+      "captured_at": "2026-09-18T16:00:28.339575+00:00",
       "commence_time": "2026-09-19T22:00:00Z"
     },
     {
@@ -1333,6 +1333,19 @@
       "commence_time": "2026-09-19T23:00:00Z"
     },
     {
+      "game_id": 401856800,
+      "season": 2026,
+      "week": 3,
+      "home_team": "UCF Knights",
+      "away_team": "Georgia State Panthers",
+      "side": "home",
+      "recommended_spread_home": -17.5,
+      "closing_spread_home": -17.5,
+      "clv_points": 0.0,
+      "captured_at": "2026-09-18T16:00:28.339575+00:00",
+      "commence_time": "2026-09-19T23:00:00Z"
+    },
+    {
       "game_id": 401862773,
       "season": 2026,
       "week": 3,
@@ -1356,19 +1369,6 @@
       "closing_spread_home": -7.0,
       "clv_points": 0.0,
       "captured_at": "2026-09-16T14:49:42.500529+00:00",
-      "commence_time": "2026-09-19T23:00:00Z"
-    },
-    {
-      "game_id": 401856800,
-      "season": 2026,
-      "week": 3,
-      "home_team": "UCF Knights",
-      "away_team": "Georgia State Panthers",
-      "side": "home",
-      "recommended_spread_home": -17.5,
-      "closing_spread_home": -17.5,
-      "clv_points": 0.0,
-      "captured_at": "2026-09-18T16:00:28.339575+00:00",
       "commence_time": "2026-09-19T23:00:00Z"
     },
     {
