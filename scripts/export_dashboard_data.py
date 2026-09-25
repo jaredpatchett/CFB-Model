@@ -774,6 +774,9 @@ def main(year: int):
     # Anything scored but short of this bar is still shown, just labeled a
     # LEAN instead of OFFICIAL -- never hidden, never silently upgraded.
     MIN_EV_PERCENT_FOR_OFFICIAL_PROP = 3.0
+    OFFICIAL_PROP_MARKETS = {"Pass Yards", "Rush Yards", "Reception Yards"}
+    MAX_PLAUSIBLE_PROP_EV = 25.0
+    MAX_OFFICIAL_PROPS = 5
 
     def _valid_price(x):
         return x is not None and not (isinstance(x, float) and pd.isna(x))
@@ -805,13 +808,49 @@ def main(year: int):
                     model_ev = round(fo.ev_percent(lean_prob, float(lean_price)), 1)
                     is_official = model_ev >= MIN_EV_PERCENT_FOR_OFFICIAL_PROP
                 p["model_ev"] = model_ev
+                p["model_lean_probability"] = round(lean_prob, 4) if lean_prob is not None else None
                 p["is_official_play"] = is_official
-                if is_official:
-                    n_props_official += 1
+
+        # ---- Narrow "official" down to the few best plays per slate ----
+        # Added 9/2026 after the tracker auto-logged 88 props in one week
+        # (11-13-2 once graded). Every candidate above still shows on the
+        # Props page as a LEAN; only the survivors of these filters stay
+        # OFFICIAL (and therefore auto-tracked):
+        #   1. Yardage markets only. The model scores every stat with a
+        #      normal (bell-curve) approximation, which is reasonable for
+        #      yards but wrong for small whole-number stats (TDs, INTs,
+        #      receptions) -- those produced the most absurd "EV" numbers
+        #      (e.g. +126% on a Pass TD O 0.5).
+        #   2. Drop implausible EV. A real prop edge above ~25% essentially
+        #      doesn't exist; a number that big means the model is miscalibrated
+        #      or missing information (injury, role change), not a free bet.
+        #   3. One play per player -- his single highest-probability line --
+        #      so one player can't flood the tracker with near-duplicates.
+        #   4. Rank by the model's probability on the leaned side (not raw
+        #      EV, which scales with price) and keep the top MAX_OFFICIAL_PROPS.
+
+        candidates = [p for p in props_out if p.get("is_official_play")
+                      and p.get("market_name") in OFFICIAL_PROP_MARKETS
+                      and p.get("model_ev") is not None
+                      and p["model_ev"] <= MAX_PLAUSIBLE_PROP_EV]
+        best_per_player = {}
+        for p in candidates:
+            key = (p.get("player_name"), p.get("fixture_id"))
+            cur = best_per_player.get(key)
+            if cur is None or (p.get("model_lean_probability") or 0) > (cur.get("model_lean_probability") or 0):
+                best_per_player[key] = p
+        finalists = sorted(best_per_player.values(),
+                           key=lambda r: r.get("model_lean_probability") or 0, reverse=True)[:MAX_OFFICIAL_PROPS]
+        keep_ids = {id(p) for p in finalists}
+        for p in props_out:
+            if p.get("is_official_play") and id(p) not in keep_ids:
+                p["is_official_play"] = False
+        n_props_official = len(finalists)
     if props_out:
         print(f"  {n_props_scored} of {len(props_out)} posted prop line(s) scored with a real model prediction "
-              f"({n_props_official} clearing the {MIN_EV_PERCENT_FOR_OFFICIAL_PROP:.0f}%-EV official-play bar "
-              f"at normal confidence -- the rest show a LEAN or the posted line only. See "
+              f"({n_props_official} kept as OFFICIAL: yardage markets only, {MIN_EV_PERCENT_FOR_OFFICIAL_PROP:.0f}-"
+              f"{MAX_PLAUSIBLE_PROP_EV:.0f}% EV, normal confidence, one per player, top {MAX_OFFICIAL_PROPS} by "
+              f"model probability -- the rest show a LEAN or the posted line only. See "
               f"live_player_features.py's matching-limitations note if the scored count looks lower than "
               f"expected once real games are underway)")
 
