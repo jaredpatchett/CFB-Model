@@ -69,8 +69,16 @@ class PlayerStatModel:
 
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
         self.model.fit(X_train, y_train)
-        mae = mean_absolute_error(y_test, self.model.predict(X_test))
-        residuals = y_train - self.model.predict(X_train)
+        test_preds = self.model.predict(X_test)
+        mae = mean_absolute_error(y_test, test_preds)
+        # Holdout residuals, not training residuals -- same fix as
+        # GameMarginModel (src/models/game_model.py), same reason. Measuring
+        # spread on rows the GBM already fit made residual_std artificially
+        # small, which pushed every over/under probability toward 0 or 1 and
+        # produced the absurd +80-126% "EV" props seen in the live tracker
+        # (9/2026). residual_std drives over_probability -> model_ev -> the
+        # official-play bar, so this inflated how many props qualified too.
+        residuals = y_test - test_preds
         self.residual_std = float(np.std(residuals))
 
         if verbose:
