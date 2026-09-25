@@ -1929,6 +1929,21 @@ RENDERER_JS = """<script>
     var it = items.find(function (x) { return x.id === id; });
     if (it) { it.status = (it.status === status ? null : status); saveTrk(items); render(); }
   };
+  // One-click cleanup for the auto-tracked prop backlog (added 9/2026).
+  // Before the top-5 official-prop filter, every pipeline run auto-logged
+  // every prop that cleared a miscalibrated 3%-EV bar, leaving hundreds of
+  // pending rows in localStorage. Removes ONLY auto-tracked Prop rows that
+  // have no grade yet -- graded props (the real record) and anything added
+  // manually via +TRK or the add-a-play form are never touched.
+  window.__cfbTrkClearPendingAutoProps = function () {
+    var items = loadTrk();
+    var drop = items.filter(function (it) { return it.type === 'Prop' && it.auto && !it.status; });
+    if (!drop.length) { alert('No ungraded auto-tracked props to remove.'); return; }
+    if (!confirm('Remove ' + drop.length + ' ungraded auto-tracked prop(s)? Graded props and manually tracked plays stay.')) return;
+    saveTrk(items.filter(function (it) { return !(it.type === 'Prop' && it.auto && !it.status); }));
+    render();
+  };
+
   window.__cfbTrkRemove = function (id) {
     saveTrk(loadTrk().filter(function (x) { return x.id !== id; }));
     render();
@@ -2113,6 +2128,9 @@ RENDERER_JS = """<script>
         title: 'Player Props',
         emptyMsg: 'No player-prop plays tracked yet — official props (see the Props tab) get added here automatically after each pipeline run.',
         sectionId: 'trk-props-section',
+        extraHtml: '<div class="prop-tabs" style="margin:10px 0 4px">' +
+          '<button class="tab tab--prop" onclick="window.__cfbTrkClearPendingAutoProps()"><span>Clear ungraded auto-props</span></button>' +
+        '</div>',
       });
   }
 
