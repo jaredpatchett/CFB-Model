@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-09-28T13:43:44.284915+00:00",
+  "generated_at": "2026-09-28T14:11:38.354804+00:00",
   "seasons_covered": [
-    2023,
     2024,
     2025
   ],
   "join_strategy": "id",
+  "method": "walk-forward: each season graded by a model trained only on earlier seasons",
   "spread": {
-    "n_games": 2013,
-    "n_pushes": 44,
-    "ats_win_rate": 0.6125,
-    "margin_mae": 11.335,
+    "n_games": 1347,
+    "n_pushes": 28,
+    "ats_win_rate": 0.508,
+    "margin_mae": 13.667,
     "breakeven_ats_rate": 0.524,
-    "beat_market": true
+    "beat_market": false
   },
   "moneyline": {
-    "n_games": 2013,
-    "accuracy": 0.7452,
-    "log_loss": 0.5103
+    "n_games": 1347,
+    "accuracy": 0.6927,
+    "log_loss": 0.5894
   }
 }
