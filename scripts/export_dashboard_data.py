@@ -610,7 +610,11 @@ def main(year: int):
     n_trained_model_games = 0
     trained_model_diagnostics = {}
     if os.path.exists(game_lines_path):
-        lines = pd.read_csv(game_lines_path)
+        try:
+            lines = pd.read_csv(game_lines_path)
+        except pd.errors.EmptyDataError:
+            print(f"  [note] {game_lines_path} is empty -- no posted game lines right now")
+            lines = pd.DataFrame()
         for _, g in lines.iterrows():
             home_meta = match_team(g.get("home_team"), team_lookup)
             away_meta = match_team(g.get("away_team"), team_lookup)
@@ -698,8 +702,14 @@ def main(year: int):
 
     props_out = []
     if os.path.exists(props_path):
-        props = pd.read_csv(props_path)
-        props_out = props.to_dict(orient="records")
+        # An empty file is normal late in a slate (books have stopped posting
+        # props for the few games left) -- treat it as "no props," not a crash.
+        try:
+            props = pd.read_csv(props_path)
+            props_out = props.to_dict(orient="records")
+        except pd.errors.EmptyDataError:
+            print(f"  [note] {props_path} is empty -- no posted props right now")
+            props_out = []
     else:
         print(f"  [warn] {props_path} not found, skipping props")
 
@@ -777,6 +787,10 @@ def main(year: int):
     OFFICIAL_PROP_MARKETS = {"Pass Yards", "Rush Yards", "Reception Yards"}
     MAX_PLAUSIBLE_PROP_EV = 25.0
     MAX_OFFICIAL_PROPS = 5
+    # Lines this small mean a low-usage player who often finishes at 0 --
+    # a bell curve can't represent that, so the over probability is badly
+    # overstated (live example 9/2026: Nolan James Jr. O 5.5 rec yds).
+    MIN_OFFICIAL_PROP_LINE = 15.0
 
     def _valid_price(x):
         return x is not None and not (isinstance(x, float) and pd.isna(x))
@@ -832,7 +846,8 @@ def main(year: int):
         candidates = [p for p in props_out if p.get("is_official_play")
                       and p.get("market_name") in OFFICIAL_PROP_MARKETS
                       and p.get("model_ev") is not None
-                      and p["model_ev"] <= MAX_PLAUSIBLE_PROP_EV]
+                      and p["model_ev"] <= MAX_PLAUSIBLE_PROP_EV
+                      and float(p.get("line") or 0) >= MIN_OFFICIAL_PROP_LINE]
         best_per_player = {}
         for p in candidates:
             key = (p.get("player_name"), p.get("fixture_id"))
