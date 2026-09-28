@@ -62,8 +62,6 @@ if __name__ == "__main__":
 
     if not os.path.exists(features_path):
         raise SystemExit("Run scripts/build_features.py first.")
-    if not os.path.exists(model_path):
-        raise SystemExit("Run scripts/train_game_model.py first.")
 
     features = pd.read_csv(features_path)
     lines = load_historical_lines()
@@ -82,20 +80,59 @@ if __name__ == "__main__":
         raise SystemExit("Joined 0 games to a market line — nothing to backtest. Check that features and "
                           "lines cover the same season(s)/years.")
 
-    model = GameMarginModel().load(model_path)
-    scoreable = joined.dropna(subset=model.feature_columns).copy()
-    print(f"  {len(scoreable)} of {len(joined)} joined games have complete model features "
-          f"(early-season games with no rolling in-season history are excluded here, same as live use)")
-    if scoreable.empty:
-        raise SystemExit("0 games have complete features after the join — nothing to backtest.")
+    # ---- Walk-forward (out-of-sample) backtest -- rebuilt 9/2026 ----
+    # The old version loaded the production model (trained on a random 80%
+    # of ALL historical games) and graded it on 100% of those same games, so
+    # roughly 4 of every 5 "backtest" games were ones the model had already
+    # trained on, answers included. That in-sample overlap is what produced
+    # the 61.25% ATS number, which live results never came close to.
+    #
+    # Now each season is graded by a model trained ONLY on earlier seasons
+    # -- exactly the situation live betting is in. The first season on file
+    # has nothing earlier to train on, so it's used for training only, never
+    # graded. The production model (models/game_model.joblib) is untouched;
+    # this script only trains temporary per-season models for grading.
+    if "season" not in joined.columns:
+        raise SystemExit("Joined data has no 'season' column -- can't run a walk-forward backtest.")
+    # Only seasons with prior-year SP+ on file count -- the earliest season
+    # has none (ratings are joined from the year before), so a model trained
+    # on it alone would be missing its main inputs.
+    has_sp = features["sp_rating_diff"].notna() if "sp_rating_diff" in features.columns else features["season"].notna()
+    seasons = sorted(int(x) for x in features.loc[has_sp, "season"].dropna().unique())
+    features = features[features["season"].isin(seasons)]
+    print(f"\nWalk-forward backtest over seasons {seasons}: each season is predicted by a model "
+          f"trained only on the seasons before it.")
 
-    scoreable["predicted_margin"] = model.predict_margin(scoreable)
-    scoreable["predicted_home_win_prob"] = model.predict_home_win_prob(scoreable)
+    graded_parts = []
+    for test_season in seasons[1:]:
+        train_rows = features[features["season"] < test_season]
+        fold_model = GameMarginModel()
+        try:
+            fold_model.fit(train_rows, verbose=False)
+        except Exception as e:
+            print(f"  {test_season}: skipped -- could not train on earlier seasons ({e})")
+            continue
+        test_rows = joined[joined["season"] == test_season].dropna(subset=fold_model.feature_columns).copy()
+        if test_rows.empty:
+            print(f"  {test_season}: skipped -- no games with complete features and a market line")
+            continue
+        test_rows["predicted_margin"] = fold_model.predict_margin(test_rows)
+        test_rows["predicted_home_win_prob"] = fold_model.predict_home_win_prob(test_rows)
+        fold = backtester.evaluate_spread(
+            test_rows["predicted_margin"], test_rows["margin"], test_rows["market_spread_home"]
+        )
+        print(f"  {test_season}: trained on {len(train_rows)} earlier-season rows, graded "
+              f"{fold['n_games']} games -> {fold['ats_win_rate']:.1%} ATS")
+        graded_parts.append(test_rows)
+
+    if not graded_parts:
+        raise SystemExit("No season could be graded out-of-sample -- need at least two seasons of data.")
+    scoreable = pd.concat(graded_parts, ignore_index=True)
 
     spread_results = backtester.evaluate_spread(
         scoreable["predicted_margin"], scoreable["margin"], scoreable["market_spread_home"]
     )
-    backtester.summarize(spread_results, "Spread (ATS vs. real CFBD closing line)")
+    backtester.summarize(spread_results, "Spread (ATS vs. real CFBD closing line, out-of-sample)")
 
     ml_results = backtester.evaluate_moneyline(
         scoreable["predicted_home_win_prob"], scoreable["home_win"]
@@ -115,6 +152,7 @@ if __name__ == "__main__":
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "seasons_covered": seasons_covered,
         "join_strategy": strategy,
+        "method": "walk-forward: each season graded by a model trained only on earlier seasons",
         "spread": {
             "n_games": spread_results["n_games"],
             "n_pushes": spread_results["n_pushes"],
