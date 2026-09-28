@@ -709,7 +709,13 @@ MATH_JS = """<script>
     return p * payout - (1 - p);
   }
 
-  function signed(v, dp) { return (v > 0 ? '+' : '') + v.toFixed(dp === undefined ? 1 : dp); }
+  // Null-safe: a game can have a moneyline posted before its spread is up
+  // (9/2026) -- formatting a missing number used to throw and blank the
+  // entire page, not just that one row.
+  function signed(v, dp) {
+    if (v == null || isNaN(v)) return '\\u2014';
+    return (v > 0 ? '+' : '') + v.toFixed(dp === undefined ? 1 : dp);
+  }
   function homeMargin(game) { return -game.modelSpread; }
 
   function tierFor(winProb) {
@@ -784,6 +790,15 @@ MATH_JS = """<script>
       // for "is this actually worth betting" -- see priceInRange/isFade
       // below for how it's used.
       var sideEV = expectedValue(sideProb, sideMoneyline);
+    } else if (game.marketSpread == null || isNaN(game.marketSpread)) {
+      // No spread posted yet -- show the model's number, but there's no
+      // market line to have an edge against, so this can't qualify.
+      marketLabel = '\\u2014';
+      modelLabel  = signed(game.modelSpread);
+      edge        = 0;
+      coverProb   = 0.5;
+      side        = null;
+      playLabel   = 'No spread posted';
     } else {
       marketLabel = signed(game.marketSpread);
       modelLabel  = signed(game.modelSpread);
@@ -1583,7 +1598,7 @@ RENDERER_JS = """<script>
         '<div class="prop-best-body">' +
           '<div class="prop-best-name">' + esc(playerLabel(r)) + ' ' + tagHtml(r) + '</div>' +
           '<div class="prop-best-meta">' + esc(r.market_name) + ' · ' + (isOver ? 'O' : 'U') + ' ' + esc(r.line) + '</div>' +
-          '<div class="prop-best-edge ' + (r.model_edge >= 0 ? 'is-pos' : 'is-neg') + '">' +
+          '<div class="prop-best-edge ' + ((r.model_ev != null ? r.model_ev : r.model_edge) >= 0 ? 'is-pos' : 'is-neg') + '">' +
             (r.model_ev != null ? ((r.model_ev >= 0 ? '+' : '') + r.model_ev.toFixed(1) + '% EV') : ((r.model_edge >= 0 ? '+' : '') + r.model_edge.toFixed(1) + ' edge')) +
           '</div>' +
           '<div class="prop-best-sub">model ' + r.model_predicted_value.toFixed(1) + (r.model_confidence === 'low' ? ' · low confidence' : '') + '</div>' +
