@@ -12,7 +12,7 @@ on:
       years:
         description: "Season(s) to fetch/train on, space-separated"
         required: false
-        default: "2024"
+        default: "2022 2023 2024 2025"
   schedule:
     - cron: "0 12 * * *"
 
@@ -30,7 +30,11 @@ jobs:
       # only exists for workflow_dispatch), so every step below that used
       # to read github.event.inputs.years directly now reads env.YEARS,
       # which falls back to the same default manual runs already use.
-      YEARS: ${{ github.event.inputs.years || '2024' }}
+      # Must match what manual runs use. The daily scheduled run gets no
+      # inputs, so it always used this fallback -- when it was just '2024',
+      # the model had no prior-season ratings to fit and every scheduled run
+      # published an empty board (found 9/2026).
+      YEARS: ${{ github.event.inputs.years || '2022 2023 2024 2025' }}
     steps:
       - uses: actions/checkout@v4
 
