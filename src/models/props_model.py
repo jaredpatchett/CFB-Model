@@ -32,6 +32,8 @@ class PlayerStatModel:
             n_estimators=150, max_depth=3, learning_rate=0.05, random_state=42
         )
         self.residual_std = None
+        self.residual_bin_edges = []
+        self.residual_bin_stds = []
         self.feature_columns = ROLLING_FEATURE_COLUMNS
 
     def fit(self, player_features_df: pd.DataFrame, min_games_played: int = 1, verbose: bool = True):
@@ -80,11 +82,66 @@ class PlayerStatModel:
         # official-play bar, so this inflated how many props qualified too.
         residuals = y_test - test_preds
         self.residual_std = float(np.std(residuals))
+        self._fit_residual_bins(test_preds, residuals)
 
         if verbose:
+            bins_txt = ", ".join(f"<={hi:.0f}: sd {sd:.1f}" for hi, sd in
+                                 zip(self.residual_bin_edges, self.residual_bin_stds)) \
+                if self.residual_bin_edges else "n/a"
             print(f"[props_model:{self.stat_name}] holdout MAE: {mae:.2f} | "
-                  f"residual std: {self.residual_std:.2f} | n={len(data)}")
+                  f"pooled residual std: {self.residual_std:.2f} | by projection size: {bins_txt} | n={len(data)}")
         return {"holdout_mae": mae, "residual_std": self.residual_std, "n_train": len(X_train)}
+
+    # Minimum holdout rows per projection bucket; buckets smaller than this
+    # are merged into their neighbor rather than trusted on a tiny sample.
+    MIN_ROWS_PER_BIN = 30
+    N_BINS = 5
+
+    def _fit_residual_bins(self, preds: np.ndarray, residuals: np.ndarray):
+        """Uncertainty that scales with the size of the projection (added
+        9/2026). A single pooled residual_std is dominated by backups whose
+        stats are ~0 and easy to predict, so starters inherited a range far
+        too narrow -- live examples: a QB projected 267 pass yards was
+        treated as ~30 yds of spread (real-world is ~60-70), which put every
+        official prop at ~23-25% EV. Here holdout predictions are split into
+        quantile buckets and residual spread is measured within each, then
+        forced non-decreasing (bigger projection -> at least as much spread),
+        which also smooths out noisy buckets."""
+        self.residual_bin_edges, self.residual_bin_stds = [], []
+        preds = np.asarray(preds, dtype=float)
+        residuals = np.asarray(residuals, dtype=float)
+        if len(preds) < self.MIN_ROWS_PER_BIN * 2:
+            return
+        qs = np.quantile(preds, np.linspace(0, 1, self.N_BINS + 1)[1:-1])
+        uppers = list(np.unique(qs)) + [np.inf]
+        edges, stds, lo, pending = [], [], -np.inf, None
+        for hi in uppers:
+            mask = (preds > lo) & (preds <= hi)
+            if pending is not None:
+                mask = mask | pending
+            if mask.sum() < self.MIN_ROWS_PER_BIN and hi != np.inf:
+                pending, lo = mask, hi
+                continue
+            if mask.sum() < self.MIN_ROWS_PER_BIN and edges:
+                # trailing sliver: fold into the previous bucket
+                edges[-1] = hi
+                continue
+            edges.append(hi)
+            stds.append(float(np.std(residuals[mask])))
+            pending, lo = None, hi
+        stds = list(np.maximum.accumulate(stds))
+        self.residual_bin_edges = [float(e) for e in edges]
+        self.residual_bin_stds = [float(x) for x in stds]
+
+    def std_for_prediction(self, pred: float) -> float:
+        """Residual spread to use for a projection of this size; falls back
+        to the pooled residual_std for models trained before bins existed."""
+        edges = getattr(self, "residual_bin_edges", None) or []
+        stds = getattr(self, "residual_bin_stds", None) or []
+        for hi, sd in zip(edges, stds):
+            if pred <= hi:
+                return sd
+        return stds[-1] if stds else self.residual_std
 
     def predict(self, features_df: pd.DataFrame) -> np.ndarray:
         return self.model.predict(features_df[self.feature_columns])
@@ -93,8 +150,9 @@ class PlayerStatModel:
         pred = float(self.model.predict(features_row[self.feature_columns].to_frame().T)[0])
         confidence = "low" if features_row.get("games_played_prior", 0) < 3 else "normal"
         over_prob = None
-        if self.residual_std and self.residual_std > 0:
-            over_prob = float(1 - norm.cdf(prop_line, loc=pred, scale=self.residual_std))
+        sd = self.std_for_prediction(pred)
+        if sd and sd > 0:
+            over_prob = float(1 - norm.cdf(prop_line, loc=pred, scale=sd))
         return {
             "stat": self.stat_name,
             "predicted_value": pred,
@@ -108,6 +166,8 @@ class PlayerStatModel:
     def save(self, path: str):
         os.makedirs(os.path.dirname(path), exist_ok=True)
         joblib.dump({"model": self.model, "residual_std": self.residual_std,
+                     "residual_bin_edges": getattr(self, "residual_bin_edges", []),
+                     "residual_bin_stds": getattr(self, "residual_bin_stds", []),
                      "feature_columns": self.feature_columns, "stat_name": self.stat_name}, path)
 
     @classmethod
@@ -116,5 +176,7 @@ class PlayerStatModel:
         instance = cls(payload["stat_name"])
         instance.model = payload["model"]
         instance.residual_std = payload["residual_std"]
+        instance.residual_bin_edges = payload.get("residual_bin_edges", [])
+        instance.residual_bin_stds = payload.get("residual_bin_stds", [])
         instance.feature_columns = payload["feature_columns"]
         return instance
