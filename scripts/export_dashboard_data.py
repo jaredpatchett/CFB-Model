@@ -27,6 +27,10 @@ import config
 from src.data import cfbd_client as cfbd
 from src.data import odds_api_client
 from src.data.injury_overrides import load_injury_overrides, get_team_override
+from src.data.injury_report import (
+    fetch_injuries, build_injury_index, match_player, team_injury_summary,
+    BLOCKING_STATUSES, WARNING_STATUSES, fetched_at as injuries_fetched_at,
+)
 from src.features.live_features import (
     build_current_season_form, score_with_trained_model, build_current_pace_returning,
     build_current_core_ratings, MIN_GAMES_FOR_TRAINED_MODEL,
@@ -507,6 +511,20 @@ def main(year: int):
     else:
         print("  none active (config/injury_overrides.csv empty or not found — normal/default)")
 
+    print("Fetching the free college football injury report (Covers.com)...")
+    injuries, injuries_asof = [], None
+    try:
+        injuries = fetch_injuries(team_lookup)
+        injuries_asof = injuries_fetched_at()
+        n_teams = len({i["school"] for i in injuries})
+        print(f"  {len(injuries)} injured player(s) across {n_teams} team(s)")
+        if not injuries:
+            print("  [warn] 0 injuries parsed -- the page may have changed layout or blocked the request; "
+                  "props/games are NOT filtered for injuries this run")
+    except Exception as e:
+        print(f"  [warn] injury report fetch failed: {e} -- props/games are NOT filtered for injuries this run")
+    injury_index = build_injury_index(injuries)
+
     print(f"Loading {year} SP+ ratings for the preseason fair-odds estimate...")
     sp_path = f"{config.DATA_RAW_DIR}/sp_ratings_{year}.csv"
     sp_lookup = {}
@@ -655,6 +673,8 @@ def main(year: int):
                 "home_unmatched": home_meta.get("unmatched", False),
                 "away_unmatched": away_meta.get("unmatched", False),
             }
+            game_out["injuries_home"] = team_injury_summary(injuries, home_meta.get("school"))
+            game_out["injuries_away"] = team_injury_summary(injuries, away_meta.get("school"))
 
             if prior is not None:
                 home_rating = match_sp_rating(g.get("home_team"), sp_lookup)
@@ -825,6 +845,23 @@ def main(year: int):
                 p["model_lean_probability"] = round(lean_prob, 4) if lean_prob is not None else None
                 p["is_official_play"] = is_official
 
+        # ---- Injury filter (added 9/2026) ----
+        # A player listed Out or Doubtful can't be an official play (Trent
+        # Mosley was flagged as a play the week USC ruled him out);
+        # Questionable players stay eligible but carry a visible flag.
+        n_injury_blocked = 0
+        for p in props_out:
+            inj = match_player(injury_index, p.get("team"), p.get("player_name"))
+            if not inj:
+                continue
+            p["injury_status"] = inj["status"]
+            p["injury_detail"] = inj.get("injury")
+            if inj["status"] in BLOCKING_STATUSES and p.get("is_official_play"):
+                p["is_official_play"] = False
+                n_injury_blocked += 1
+        if n_injury_blocked:
+            print(f"  {n_injury_blocked} prop(s) removed from official plays -- player listed Out/Doubtful")
+
         # ---- Narrow "official" down to the few best plays per slate ----
         # Added 9/2026 after the tracker auto-logged 88 props in one week
         # (11-13-2 once graded). Every candidate above still shows on the
@@ -934,6 +971,8 @@ def main(year: int):
         "props": props_out,
         "prop_market_catalog": prop_market_catalog,
         "fantasy": fantasy_out,
+        "injuries": injuries,
+        "injuries_as_of": injuries_asof,
     }
 
     os.makedirs("docs/data", exist_ok=True)
