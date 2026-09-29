@@ -226,6 +226,14 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
             })
 
         flags = []
+        inj_home = g.get("injuries_home") or []
+        inj_away = g.get("injuries_away") or []
+        # QB injuries are the ones that move a line most, so they get a
+        # visible warning chip; the full list is on the Injury Report page.
+        for team_name, lst in ((g["home_team"], inj_home), (g["away_team"], inj_away)):
+            for i in lst:
+                if i.get("pos") == "QB" and i.get("status") in ("Out", "Out For Season", "Doubtful", "Questionable", "Game-Time Decision"):
+                    flags.append({"text": f"QB {i['player']} ({i['status']})", "level": 1, "qb": True, "team": team_name})
         if is_trained:
             flags.append({"text": "In-season model", "level": 2})
         if is_neutral:
@@ -257,6 +265,8 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
             "note": note,
             "evHomePct": g.get("ev_home_pct"),
             "evAwayPct": g.get("ev_away_pct"),
+            "injHome": inj_home,
+            "injAway": inj_away,
         })
 
     props_catalog = data.get("prop_market_catalog", [])
@@ -323,6 +333,8 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
         "spN": n_games_hist,
         "offScale": off_scale,
         "defScale": def_scale,
+        "injuriesAsOf": _fmt_generated_at(data.get("injuries_as_of")) if data.get("injuries_as_of") else None,
+        "slateSchools": sorted({x for g in games_all for x in (g.get("home_school"), g.get("away_school")) if x}),
     }
 
     return {
@@ -334,6 +346,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
         "propsLive": props_live,
         "fantasy": fantasy_out,
         "backtest": backtest_out,
+        "injuries": data.get("injuries") or [],
     }
 
 
@@ -1053,7 +1066,7 @@ RENDERER_JS = """<script>
   var M = window.ModelMath;
   var MARKETS = ['Spread', 'Moneyline'];
 
-  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all' };
+  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate' };
 
   var byName = {};
   D.teams.forEach(function (t) { byName[t.name] = t; });
@@ -1099,6 +1112,7 @@ RENDERER_JS = """<script>
     { id: 'ratings', label: 'Power Ratings' },
     { id: 'props', label: 'Player Props' },
     { id: 'fantasy', label: 'Fantasy' },
+    { id: 'injuries', label: 'Injury Report' },
     { id: 'tracker', label: 'My Tracker' },
     { id: 'performance', label: 'Model Performance' },
   ];
@@ -1264,6 +1278,9 @@ RENDERER_JS = """<script>
             (qualifies ? '<div class="edge-play-pill" style="background:' + esc(playPillColor) + '26;border:1px solid ' + esc(playPillColor) + ';color:' + esc(playPillColor) + '">PLAY: ' + esc(playPillLabel) + '</div>' : '') +
             (p.isFade ? '<div class="edge-fade-pill">FADE: ' + esc(fadePillLabel) + '</div>' : '') +
             (p.bigSpread ? '<div class="edge-fade-pill">FADE: 20+PT SPREAD</div>' : '') +
+            (g.flags || []).filter(function (f) { return f.qb; }).map(function (f) {
+              return '<div class="edge-fade-pill" style="border-color:var(--amber);color:var(--amber);margin-left:6px">\u26a0 ' + esc(abbrOf(f.team)) + ' ' + esc(f.text) + '</div>';
+            }).join('') +
             '</div>' +
             '<div class="num cell-market">' + esc(p.marketLabel) + '</div>' +
             '<div class="num cell-model">' + esc(p.modelLabel) + '</div>' +
@@ -1338,6 +1355,57 @@ RENDERER_JS = """<script>
     rush_yds: 'rush yds', rush_tds: 'rush TD',
     rec_yds: 'rec yds', rec_tds: 'rec TD', receptions: 'rec',
   };
+
+  // ---- Injury Report page (added 9/2026) ----
+  // Source: Covers.com's free NCAAF injury page, pulled on every pipeline
+  // run (src/data/injury_report.py). Entries come from team and media
+  // reports, not official conference filings.
+  var INJ_ORDER = { 'Out For Season': 0, 'Out': 1, 'Doubtful': 2, 'Questionable': 3, 'Game-Time Decision': 3, 'Day-To-Day': 4, 'Probable': 5 };
+  function injColor(st) {
+    if (st === 'Out' || st === 'Out For Season' || st === 'Doubtful') return 'var(--red)';
+    if (st === 'Probable') return 'var(--green)';
+    return 'var(--amber)';
+  }
+  function renderInjuries() {
+    var all = D.injuries || [];
+    var head = '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Injury Report</h2></div>' +
+      '<div style="font-size:10px;color:var(--muted-3)">Source: Covers.com (team &amp; media reports, not official filings)' +
+      (D.meta.injuriesAsOf ? ' \\u00b7 as of ' + esc(D.meta.injuriesAsOf) : '') + '</div></div>';
+    if (!all.length) {
+      return head + '<div class="empty-state">No injury data this run \\u2014 the injury page couldn\\u2019t be read. ' +
+        'Picks are not being filtered for injuries until the next successful run.</div>';
+    }
+    var slate = {};
+    (D.meta.slateSchools || []).forEach(function (x) { slate[x] = true; });
+    var scope = state.injScope || 'slate';
+    var rows = scope === 'slate' ? all.filter(function (i) { return slate[i.school]; }) : all;
+    var tabs = '<div class="prop-tabs" style="margin:12px 0 14px">' +
+      [['slate', "This week's teams"], ['all', 'All teams']].map(function (t) {
+        return '<button class="tab tab--prop' + (scope === t[0] ? ' is-active' : '') + '" data-inj-scope="' + t[0] + '"><span>' + t[1] + '</span></button>';
+      }).join('') + '</div>';
+    var byTeam = {};
+    rows.forEach(function (i) { (byTeam[i.school] = byTeam[i.school] || []).push(i); });
+    var teams = Object.keys(byTeam).sort();
+    if (!teams.length) return head + tabs + '<div class="empty-state">No injuries listed for teams on this week\\u2019s slate.</div>';
+    var body = teams.map(function (school) {
+      var list = byTeam[school].slice().sort(function (a, b) {
+        return ((a.pos === 'QB') ? 0 : 1) - ((b.pos === 'QB') ? 0 : 1) || (INJ_ORDER[a.status] || 9) - (INJ_ORDER[b.status] || 9);
+      });
+      return '<div class="pcard" style="margin-bottom:8px"><div class="pcard-head"><span>' + esc(school) + '</span>' +
+        '<span style="color:var(--muted-3);font-size:10px">' + list.length + ' listed</span></div>' +
+        list.map(function (i) {
+          return '<div class="pcard-line-row" title="' + esc(i.note || '') + '">' +
+            '<span><b>' + esc(i.player) + '</b> <span style="color:var(--muted-3)">' + esc(i.pos || '') + '</span>' +
+              (i.injury ? ' \\u00b7 <span style="color:var(--muted-3)">' + esc(i.injury) + '</span>' : '') + '</span>' +
+            '<span><span style="color:' + injColor(i.status) + ';font-weight:700">' + esc(i.status) + '</span>' +
+              (i.reported ? ' <span style="color:var(--muted-4);font-size:9.5px">(' + esc(i.reported) + ')</span>' : '') + '</span>' +
+          '</div>';
+        }).join('') + '</div>';
+    }).join('');
+    return head + tabs + '<div class="pcard-grid">' + body + '</div>' +
+      '<div class="table-foot"><span>Hover a player for the latest note. Players listed Out or Doubtful are automatically kept off official ' +
+      'prop plays; QB injuries show as warnings on the Edge Board and Bet Card. The model itself does not adjust its numbers for injuries.</span></div>';
+  }
 
   function renderFantasy() {
     var rows = D.fantasy || [];
@@ -1520,6 +1588,7 @@ RENDERER_JS = """<script>
           // validated via backtest) takes over for that specific game.
           var isTrainedGame = (c.game.flags || []).some(function (f) { return f.text === 'In-season model'; });
           var showCaveat = c.market === 'Moneyline' && !isTrainedGame && Math.abs(ev) >= 50;
+          var qbFlags = (c.game.flags || []).filter(function (f) { return f.qb; });
           return '<div class="row"><div class="row-accent" style="background:' + esc(col) + '"></div>' +
             '<div class="row-body card-row">' +
               '<div><div class="card-play">' + esc(c.playLabel) + '</div>' +
@@ -1529,6 +1598,9 @@ RENDERER_JS = """<script>
               '<div class="card-conf">' + (sideProb * 100).toFixed(1) + '%</div>' +
               '<div class="num"><span class="tier"><span>' + esc(c.tier) + '</span></span></div>' +
               '<div class="num"><button class="track-btn" onclick="window.__cfbTrack(' + trackPayload(c) + ')">+TRK</button></div>' +
+              (qbFlags.length ? '<div style="grid-column:1/-1;font-size:11px;color:var(--amber);padding-top:6px;line-height:1.4">\u26a0 Injury: ' +
+                qbFlags.map(function (f) { return esc(abbrOf(f.team)) + ' ' + esc(f.text); }).join(' \u00b7 ') +
+                ' \u2014 the model doesn\u2019t account for this. Check the latest status before betting.</div>' : '') +
               (showCaveat ? '<div style="grid-column:1/-1;font-size:11px;color:var(--amber);padding-top:6px;line-height:1.4">' +
                 '\u26a0 Large model/market gap on a preseason-only estimate (no in-season data yet for this game) \u2014 likely reflects the model\u2019s limits, not a confirmed edge. Extra caution advised.</div>' : '') +
             '</div></div>';
@@ -1575,6 +1647,12 @@ RENDERER_JS = """<script>
     function absEdge(r) { return hasModel(r) ? Math.abs(r.model_edge) : -1; }
     function rankVal(r) { return r.model_ev != null ? r.model_ev : absEdge(r); }
     function tagHtml(r) {
+      var inj = r.injury_status
+        ? ' <span class="pchip" style="background:rgba(224,180,74,0.16);color:var(--amber)">' + esc(r.injury_status.toUpperCase()) + '</span>'
+        : '';
+      return tagHtmlBase(r) + inj;
+    }
+    function tagHtmlBase(r) {
       return r.is_official_play
         ? '<span class="pchip is-official">OFFICIAL</span>'
         : '<span class="pchip is-lean">LEAN</span>';
@@ -2228,6 +2306,7 @@ RENDERER_JS = """<script>
       case 'ratings': return renderRatings();
       case 'props': return renderProps();
       case 'fantasy': return renderFantasy();
+      case 'injuries': return renderInjuries();
       case 'tracker': return renderTracker();
       case 'performance': return renderBacktest() + renderClv();
       case 'edge':
@@ -2276,6 +2355,8 @@ RENDERER_JS = """<script>
     if (us) { state.unitSize = Number(us.dataset.unitSize); return render(); }
     var mt = e.target.closest('[data-model-tab]');
     if (mt) { state.trackerModelTab = mt.dataset.modelTab; return render(); }
+    var is = e.target.closest('[data-inj-scope]');
+    if (is) { state.injScope = is.dataset.injScope; return render(); }
   });
 
   seedTrackerIfMissing();
