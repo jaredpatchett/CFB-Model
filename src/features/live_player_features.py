@@ -304,6 +304,15 @@ def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
         "model_edge": round(result["edge"], 1),
         "model_lean": result["lean"],
         "model_confidence": result["confidence"],
+        # Added 9/19/2026 so the dashboard/tracker can show which team a
+        # player is on without a separate lookup -- player_form already
+        # carries this (see build_current_player_form; project_player_
+        # fantasy already exposes it the same way), it just wasn't being
+        # passed through here. Saves the user from manually looking up
+        # each player's team, especially for the auto-tracked official
+        # props, which had no team info anywhere in their tracked
+        # description before this.
+        "team": entry.get("team"),
         # Over-probability from the model's own residual std -- needed
         # downstream (export_dashboard_data.py) to compute real EV against
         # the actual posted price and decide "official play" vs "lean",
