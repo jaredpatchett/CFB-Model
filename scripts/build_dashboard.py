@@ -1459,6 +1459,57 @@ RENDERER_JS = """<script>
       'usage, not a verified roster field \u2014 treat it as a label, not a guarantee.</span></div>';
   }
 
+  // ---- "Model's play" panel for the selected game (added 10/2026) ----
+  // Spells out, for BOTH markets, what the model's play is and how to treat
+  // it under the betting rules: Bet Card + official = wager; official but
+  // off the card = track only; underdog moneylines and 20+ pt spreads =
+  // unofficial; otherwise no play.
+  function modelPlaysPanel(g) {
+    var trained = (g.flags || []).some(function (f) { return f.text === 'In-season model'; });
+    function row(market) {
+      var o = { market: market, minEdge: D.meta.minEdge, abbrOf: abbrOf };
+      var p = M.priceGame(g, o);
+      var onCard = M.buildBetCard(D.games, o).some(function (c) { return c.game === g; });
+      var label, color, note = '';
+      var playText = market === 'Moneyline' && p.sideMoneyline != null
+        ? p.playLabel + ' ' + (p.sideMoneyline > 0 ? '+' : '') + p.sideMoneyline
+        : p.playLabel;
+      var dogML = market === 'Moneyline' && p.sideMoneyline > 0;
+      if (market === 'Spread' && p.playLabel === 'No spread posted') {
+        label = 'NO SPREAD POSTED'; color = 'var(--muted-3)'; playText = '\\u2014';
+      } else if (p.qualifies && dogML) {
+        label = 'UNOFFICIAL \\u00b7 UNDERDOG ML'; color = 'var(--amber)'; note = 'track only \\u2014 underdog moneylines aren\\u2019t wagered';
+      } else if (p.qualifies && onCard) {
+        label = 'OFFICIAL \\u00b7 BET CARD'; color = 'var(--green)'; note = 'wager';
+      } else if (p.qualifies) {
+        label = 'OFFICIAL PLAY'; color = 'var(--blue-light)'; note = 'not on the Bet Card \\u2014 track only';
+      } else if (p.bigSpread) {
+        label = 'UNOFFICIAL \\u00b7 20+ PT SPREAD'; color = 'var(--amber)'; note = 'faded by rule';
+      } else if (p.isFade) {
+        label = 'FADE'; color = 'var(--amber)'; note = 'model disagrees, but not +EV at this price';
+      } else {
+        label = 'NO PLAY'; color = 'var(--muted-3)';
+        note = market === 'Spread' ? 'edge under the ' + D.meta.minEdge.toFixed(1) + '-pt threshold' : 'edge under the play threshold';
+      }
+      var showLean = label !== 'NO SPREAD POSTED';
+      return '<div style="display:grid;grid-template-columns:96px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--rule-faint)">' +
+        '<div class="proj-stat-label" style="margin:0">' + esc(market) + '</div>' +
+        '<div><div style="font-family:var(--font-display);font-weight:700;font-size:17px">' + esc(playText) + '</div>' +
+          '<div style="font-size:10px;color:var(--muted-3);margin-top:3px">' +
+            (showLean ? (market === 'Spread' ? 'cover' : 'win') + ' prob ' + (p.sideProb * 100).toFixed(1) + '% \\u00b7 edge ' + esc(p.sideEdgeLabel) : '') +
+            (note ? (showLean ? ' \\u00b7 ' : '') + esc(note) : '') + '</div></div>' +
+        '<div style="font-family:var(--font-display);font-weight:800;font-size:11px;letter-spacing:.06em;padding:4px 9px;border-radius:3px;' +
+          'border:1px solid ' + color + ';color:' + color + ';white-space:nowrap">' + label + '</div>' +
+      '</div>';
+    }
+    return '<div class="panel-pad" style="padding-top:14px;padding-bottom:10px;border-bottom:1px solid var(--rule)">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">' +
+        '<div class="chart-head" style="margin:0">Model\\u2019s play</div>' +
+        '<span class="pchip" style="background:' + (trained ? 'rgba(23,194,107,0.16);color:var(--green)' : 'rgba(255,255,255,0.06);color:var(--muted-3)') + '">' +
+          (trained ? 'TRAINED MODEL' : 'UNTRAINED (PRESEASON) MODEL') + '</span>' +
+      '</div>' + row('Spread') + row('Moneyline') + '</div>';
+  }
+
   function renderProjector(p) {
     if (!p) return '<div class="empty-state">No priced games to project.</div>';
     var g = p.game, a = team(g.away), h = team(g.home);
@@ -1489,6 +1540,7 @@ RENDERER_JS = """<script>
             '<div class="proj-bar" style="background:' + esc(hC) + '"></div></div>' +
         '</div></div>' +
 
+        modelPlaysPanel(g) +
         '<div class="scoreboard">' +
           '<div class="score-cell"><div class="score-label">' + esc(h.abbr) + ' margin</div>' +
             '<div class="score-value">' + M.signed(-g.modelSpread) + '</div></div>' +
