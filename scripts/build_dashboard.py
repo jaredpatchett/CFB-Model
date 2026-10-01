@@ -1516,6 +1516,19 @@ RENDERER_JS = """<script>
     var dist = M.distribution(g, p, { abbrOf: abbrOf });
     var dec = M.decomposition(g);
     var pWin = 1 - M.normalCdf(0, M.homeMargin(g), p.sd);
+    // Everything in the scoreboard below is shown from the side of the team
+    // the MODEL favors (10/2026) -- previously it was always home-team terms
+    // ("TLSA margin -10.0", "TLSA win prob 28%") even when every play was on
+    // the away team, which read as a contradiction.
+    var favHome = M.homeMargin(g) >= 0;
+    var fav = favHome ? h : a;
+    var favLine = -Math.abs(M.homeMargin(g));
+    var favProb = favHome ? pWin : 1 - pWin;
+    var favMkt = g.marketSpread == null ? null : (favHome ? g.marketSpread : -g.marketSpread);
+    var favPosted = favHome ? g.marketMoneyline : g.awayMoneyline;
+    var favFair = M.fairAmerican(favProb);
+    var gap = favMkt == null ? null : Math.abs(favLine - favMkt);
+    function amer(v) { return v == null ? '\\u2014' : (v > 0 ? '+' : '') + v; }
     var aC = M.displayColor(a.primary), hC = M.displayColor(h.primary);
     var split = 'linear-gradient(100deg,' + aC + '55 0%,' + aC + '18 33%,' +
       'var(--panel-deep) 46%,var(--panel-deep) 54%,' + hC + '18 67%,' + hC + '55 100%)';
@@ -1542,20 +1555,21 @@ RENDERER_JS = """<script>
 
         modelPlaysPanel(g) +
         '<div class="scoreboard">' +
-          '<div class="score-cell"><div class="score-label">' + esc(h.abbr) + ' margin</div>' +
-            '<div class="score-value">' + M.signed(-g.modelSpread) + '</div></div>' +
+          '<div class="score-cell"><div class="score-label">Model line</div>' +
+            '<div class="score-value">' + esc(fav.abbr) + ' ' + M.signed(favLine) + '</div></div>' +
           '<div class="divider-v" style="height:auto"></div>' +
-          '<div class="score-cell score-cell--wide"><div class="score-label">' + esc(h.abbr) + ' win prob</div>' +
-            '<div class="score-value is-blue">' + (pWin * 100).toFixed(0) + '%</div></div>' +
+          '<div class="score-cell score-cell--wide"><div class="score-label">' + esc(fav.abbr) + ' win prob</div>' +
+            '<div class="score-value is-blue">' + (favProb * 100).toFixed(0) + '%</div></div>' +
         '</div>' +
 
         '<div class="proj-pair">' +
-          '<div class="proj-stat"><div class="proj-stat-label">Model spread</div>' +
-            '<div class="proj-stat-value">' + M.signed(g.modelSpread) + '</div>' +
-            '<div class="proj-stat-sub">market ' + M.signed(g.marketSpread) + '</div></div>' +
-          '<div class="proj-stat"><div class="proj-stat-label">Fair moneyline</div>' +
-            '<div class="proj-stat-value">' + (M.fairAmerican(pWin) > 0 ? '+' : '') + M.fairAmerican(pWin) + '</div>' +
-            '<div class="proj-stat-sub">posted ' + (g.marketMoneyline > 0 ? '+' : '') + g.marketMoneyline + '</div></div>' +
+          '<div class="proj-stat"><div class="proj-stat-label">Market line</div>' +
+            '<div class="proj-stat-value">' + (favMkt == null ? '\u2014' : esc(fav.abbr) + ' ' + M.signed(favMkt)) + '</div>' +
+            '<div class="proj-stat-sub">' + (gap == null ? 'no spread posted yet' : 'model is ' + gap.toFixed(1) + ' pts ' +
+              (favLine < favMkt ? 'more on ' : 'less on ') + esc(fav.abbr)) + '</div></div>' +
+          '<div class="proj-stat"><div class="proj-stat-label">' + esc(fav.abbr) + ' moneyline</div>' +
+            '<div class="proj-stat-value">fair ' + amer(favFair) + '</div>' +
+            '<div class="proj-stat-sub">posted ' + amer(favPosted) + '</div></div>' +
         '</div>' +
 
         '<div class="panel-pad">' +
