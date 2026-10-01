@@ -232,7 +232,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
         # visible warning chip; the full list is on the Injury Report page.
         for team_name, lst in ((g["home_team"], inj_home), (g["away_team"], inj_away)):
             for i in lst:
-                if i.get("pos") == "QB" and i.get("status") in ("Out", "Out For Season", "Doubtful", "Questionable", "Game-Time Decision"):
+                if i.get("pos") == "QB" and i.get("status") in ("Out", "Out For Season", "IR", "Doubtful", "Questionable", "Game-Time Decision"):
                     flags.append({"text": f"QB {i['player']} ({i['status']})", "level": 1, "qb": True, "team": team_name})
         if is_trained:
             flags.append({"text": "In-season model", "level": 2})
@@ -1360,9 +1360,9 @@ RENDERER_JS = """<script>
   // Source: Covers.com's free NCAAF injury page, pulled on every pipeline
   // run (src/data/injury_report.py). Entries come from team and media
   // reports, not official conference filings.
-  var INJ_ORDER = { 'Out For Season': 0, 'Out': 1, 'Doubtful': 2, 'Questionable': 3, 'Game-Time Decision': 3, 'Day-To-Day': 4, 'Probable': 5 };
+  var INJ_ORDER = { 'Out For Season': 0, 'IR': 0, 'Out': 1, 'Doubtful': 2, 'Questionable': 3, 'Game-Time Decision': 3, 'Day-To-Day': 4, 'Probable': 5 };
   function injColor(st) {
-    if (st === 'Out' || st === 'Out For Season' || st === 'Doubtful') return 'var(--red)';
+    if (st === 'Out' || st === 'Out For Season' || st === 'IR' || st === 'Doubtful') return 'var(--red)';
     if (st === 'Probable') return 'var(--green)';
     return 'var(--amber)';
   }
