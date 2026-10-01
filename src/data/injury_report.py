@@ -35,8 +35,8 @@ COVERS_URL = "https://www.covers.com/sport/football/ncaaf/injuries"
 
 # Status words as they appear at the start of Covers' status cell,
 # e.g. "Out - Undisclosed ( Thu, Sep 17)".
-KNOWN_STATUSES = ["Out For Season", "Out", "Doubtful", "Questionable", "Probable", "Day-To-Day", "Game-Time Decision"]
-BLOCKING_STATUSES = {"Out", "Out For Season", "Doubtful"}
+KNOWN_STATUSES = ["Out For Season", "Out", "IR", "Doubtful", "Questionable", "Probable", "Day-To-Day", "Game-Time Decision"]
+BLOCKING_STATUSES = {"Out", "Out For Season", "IR", "Doubtful"}
 WARNING_STATUSES = {"Questionable", "Game-Time Decision", "Day-To-Day"}
 
 
@@ -58,6 +58,15 @@ class _PageWalker(HTMLParser):
         self._skip = 0  # inside <script>/<style>
 
     def handle_starttag(self, tag, attrs):
+        if tag == "a":
+            # Each team section links to the team's page, e.g.
+            # /sport/football/ncaaf/teams/main/air-force-falcons -- the slug is
+            # the full "school mascot" name, which identifies the team no
+            # matter how the page nests its tables.
+            href = dict(attrs).get("href") or ""
+            m = re.search(r"/ncaaf/teams/main/([a-z0-9-]+)", href)
+            if m:
+                self.tokens.append(("team", m.group(1).replace("-", " ")))
         if tag in ("script", "style"):
             self._skip += 1
         elif tag == "table":
@@ -115,7 +124,7 @@ def parse_covers_html(html: str, team_full_names: dict) -> list:
     walker.feed(html)
     injuries, team = [], None
     for kind, val in walker.tokens:
-        if kind == "text":
+        if kind in ("text", "team"):
             school = team_full_names.get(_norm(val))
             if school:
                 team = school
@@ -124,6 +133,9 @@ def parse_covers_html(html: str, team_full_names: dict) -> list:
             continue
         cells = [c for c in val if c]
         if not cells:
+            continue
+        if len(cells) == 1 and team_full_names.get(_norm(cells[0])):
+            team = team_full_names[_norm(cells[0])]
             continue
         if len(cells) >= 3 and cells[0].lower() == "player":
             continue  # header row
@@ -152,11 +164,21 @@ def fetch_injuries(team_lookup: dict) -> list:
         if school and mascot:
             full_names[_norm(f"{school} {mascot}")] = school
     resp = requests.get(COVERS_URL, timeout=30, headers={
-        "User-Agent": "Mozilla/5.0 (compatible; CFB-Model injury report)",
+        "User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+                       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"),
+        "Accept-Language": "en-US,en;q=0.9",
         "Accept": "text/html",
     })
     resp.raise_for_status()
-    return parse_covers_html(resp.text, full_names)
+    injuries = parse_covers_html(resp.text, full_names)
+    if not injuries:
+        title = re.search(r"<title[^>]*>(.*?)</title>", resp.text, re.S | re.I)
+        print(f"  [diag] injury page: HTTP {resp.status_code}, {len(resp.text):,} chars, "
+              f"title={title.group(1).strip()[:80]!r}, "
+              f"team links={len(re.findall(r'/ncaaf/teams/main/', resp.text))}, "
+              f"table rows={resp.text.lower().count('<tr')}, "
+              f"known team names loaded={len(full_names)}")
+    return injuries
 
 
 def _initial_last(name: str):
