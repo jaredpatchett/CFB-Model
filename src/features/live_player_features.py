@@ -313,6 +313,11 @@ def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
         # props, which had no team info anywhere in their tracked
         # description before this.
         "team": entry.get("team"),
+        # Opponent and sample size (added 10/2026) for the props table's
+        # game context and confidence rating -- a projection built on 2
+        # games deserves less trust than one built on 5.
+        "opponent": opponent,
+        "games_played": int(entry["games_played_prior"]),
         # Over-probability from the model's own residual std -- needed
         # downstream (export_dashboard_data.py) to compute real EV against
         # the actual posted price and decide "official play" vs "lean",
