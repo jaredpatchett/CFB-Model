@@ -15,7 +15,10 @@ import pandas as pd
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import config
 from src.features.team_features import build_game_team_features, build_pace_returning_features
-from src.features.player_features import pivot_player_game_stats, build_rolling_player_features, attach_opponent_defense
+from src.features.player_features import (
+    pivot_player_game_stats, build_rolling_player_features, attach_opponent_defense,
+    add_usage_features, attach_game_environment,
+)
 
 
 def load_years(pattern: str, years: list) -> pd.DataFrame:
@@ -44,6 +47,7 @@ if __name__ == "__main__":
     player_stats_long = load_years(config.DATA_RAW_DIR + "/player_game_stats_{year}.csv", args.years)
     core_ratings = load_years(config.DATA_RAW_DIR + "/core_ratings_{year}.csv", args.years)
     weather = load_years(config.DATA_RAW_DIR + "/weather_{year}.csv", args.years)
+    lines = load_years(config.DATA_RAW_DIR + "/lines_{year}.csv", args.years)
 
     pace_returning = build_pace_returning_features(adv_stats, returning)
     if not pace_returning.empty:
@@ -73,6 +77,10 @@ if __name__ == "__main__":
         else:
             print("  [warn] no opponent-defense data attached — opp_pass_def_success_rate/"
                   "opp_rush_def_success_rate will be all-null for this build")
+        wide = add_usage_features(wide)
+        wide = attach_game_environment(wide, lines)
+        print(f"  usage shares + opponent yards allowed attached; game spread/total matched for "
+              f"{wide['team_spread'].notna().sum()} of {len(wide)} player-game rows")
         player_features = build_rolling_player_features(wide)
         player_features.to_csv(f"{config.DATA_PROCESSED_DIR}/player_game_features.csv", index=False)
         print(f"  wrote {len(player_features)} rows")
