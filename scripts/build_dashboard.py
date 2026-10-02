@@ -132,6 +132,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
     def_scale = round(max(def_vals) * 1.1, 1) if def_vals else 1.0
 
     games_all = data.get("games", [])
+    name_abbr = {t["name"]: t["abbr"] for t in teams}
     priced = [g for g in games_all if g.get("has_model_line")]
 
     games = []
@@ -333,6 +334,9 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
         "spN": n_games_hist,
         "offScale": off_scale,
         "defScale": def_scale,
+        "schoolAbbr": {sch: abbr for sch, abbr in (
+            [(g.get("home_school"), name_abbr.get(g.get("home_team"))) for g in games_all] +
+            [(g.get("away_school"), name_abbr.get(g.get("away_team"))) for g in games_all]) if sch and abbr},
         "injuriesAsOf": _fmt_generated_at(data.get("injuries_as_of")) if data.get("injuries_as_of") else None,
         "slateSchools": sorted({x for g in games_all for x in (g.get("home_school"), g.get("away_school")) if x}),
     }
@@ -1066,7 +1070,7 @@ RENDERER_JS = """<script>
   var M = window.ModelMath;
   var MARKETS = ['Spread', 'Moneyline'];
 
-  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate' };
+  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate', propGame: 'ALL', propOfficialOnly: false, propShowPass: false };
 
   var byName = {};
   D.teams.forEach(function (t) { byName[t.name] = t; });
@@ -1078,7 +1082,8 @@ RENDERER_JS = """<script>
   // name for anything unscored (score_prop never ran, so there's no team to
   // attach -- e.g. a posted line with no model read yet), same "don't
   // fabricate what we don't know" policy as everywhere else here.
-  function playerLabel(r) { return (r.team ? abbrOf(r.team) + ' ' : '') + r.player_name; }
+  function schoolAbbr(s) { return s ? ((D.meta.schoolAbbr || {})[s] || s) : ''; }
+  function playerLabel(r) { return (r.team ? schoolAbbr(r.team) + ' ' : '') + r.player_name; }
 
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -1683,135 +1688,143 @@ RENDERER_JS = """<script>
   };
   function bookLabel(key) { return PROP_BOOK_LABELS[key] || key; }
 
+  // ---- Player Props (rebuilt 10/2026) ----
+  // One sortable table instead of stacked cards. Each row shows the model's
+  // projection against the line, its hit chance against what the price
+  // needs to break even, and a confidence rating that combines:
+  //   * hit chance on the model's side,
+  //   * how far that clears the price's breakeven,
+  //   * games of data behind the projection,
+  //   * injury status.
+  // Only one row per player + market + game (the model's best line);
+  // other books/lines for the same prop are counted, not listed.
+  function propKickoff(iso) {
+    if (!iso) return '';
+    var d = new Date(iso);
+    if (isNaN(d)) return '';
+    var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var h = d.getUTCHours(), m = d.getUTCMinutes();
+    return days[d.getUTCDay()] + ' ' + (d.getUTCMonth() + 1) + '/' + d.getUTCDate() + ', ' +
+      ((h % 12) || 12) + ':' + (m < 10 ? '0' : '') + m + (h < 12 ? 'AM' : 'PM') + ' UTC';
+  }
+  function propConfidence(r) {
+    var lp = r._lp, be = r._be, gp = r.games_played, inj = r.injury_status;
+    if (lp == null) return { tier: 'NONE', rank: 9, color: 'var(--muted-4)' };
+    var gap = be != null ? lp - be : 0;
+    var injBlock = inj === 'Out' || inj === 'Out For Season' || inj === 'IR' || inj === 'Doubtful';
+    if (injBlock || gap <= 0) return { tier: 'PASS', rank: 5, color: 'var(--red)' };
+    // A projection wildly off the market (85%+ claimed, or 50%+ away from
+    // the line) almost always means the model is missing information --
+    // injury, depth-chart change, bad data match -- not a 40-yard mispricing.
+    var far = r.line > 0 && Math.abs(r.model_predicted_value - r.line) >= Math.max(0.25 * r.line, 12);
+    if (lp >= 0.80 || far) return { tier: 'CHECK', rank: 4, color: 'var(--amber)' };
+    var t;
+    if (lp >= 0.60 && gap >= 0.05 && (gp == null || gp >= 3) && !inj) t = { tier: 'HIGH', rank: 1, color: 'var(--green)' };
+    else if (lp >= 0.55 && gap >= 0.02 && (gp == null || gp >= 2)) t = { tier: 'MEDIUM', rank: 2, color: 'var(--blue-light)' };
+    else t = { tier: 'LOW', rank: 3, color: 'var(--muted-3)' };
+    // Small whole-number stats (TDs, INTs, receptions) don't fit the model's
+    // bell-curve math well, so they can't rate above Low.
+    if (/touchdown|interception|^receptions$/i.test(r.market_name || '') && t.rank < 3) t = { tier: 'LOW', rank: 3, color: 'var(--muted-3)' };
+    return t;
+  }
   function renderProps() {
-    var catalog = D.propCatalog || [];
     var live = D.propsLive || [];
-    var byMarket = {};
-    live.forEach(function (p) { (byMarket[p.market_name] = byMarket[p.market_name] || []).push(p); });
-    var liveCount = catalog.filter(function (m) { return byMarket[m] && byMarket[m].length; }).length;
-
-    var intro = liveCount ? '' : '<p class="pcard-note" style="margin-bottom:14px">Player props are sourced from real sportsbooks (DraftKings, FanDuel, BetMGM, Caesars, etc) via The Odds API, not a DFS site. ' +
-      'Real books don’t post props on every game \\u2014 coverage is normal for ranked/primetime matchups and thin or empty elsewhere. Any market with posted lines switches to LIVE automatically on the next data refresh.</p>';
-
-    if (!catalog.length) {
-      return '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Player Props</h2></div></div>' +
-        '<div class="empty-state">No prop market catalog loaded.</div>';
+    var head = '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Player Props</h2></div></div>';
+    var scored = live.filter(function (r) { return r.model_predicted_value != null && r.model_lean; });
+    if (!scored.length) {
+      return head + '<div class="empty-state">' + (live.length
+        ? live.length + ' prop lines are posted, but none have a model read yet (usually players without enough games this season).'
+        : 'No player props posted right now. Books usually post most of the slate by Thursday or Friday.') + '</div>';
     }
-
-    // model_predicted_value/model_edge/model_lean only exist once
-    // export_dashboard_data.py (src/features/live_player_features.py)
-    // actually matched this player to real in-season stats + a trained
-    // model AND found a real opponent-defense number -- normal to be
-    // absent for most/all rows before the season has real in-season data.
-    // No fabricated overlay when it's missing. is_official_play/model_ev
-    // only exist alongside that (see export_dashboard_data.py) -- a real
-    // dollar-EV bar (>=3%, normal confidence, real price) against the
-    // actual posted price on the model's leaned side, same philosophy as
-    // the Edge Board's sideEV for moneylines. Anything scored but short of
-    // that bar is a LEAN, never silently upgraded to OFFICIAL.
-    function hasModel(r) { return r.model_predicted_value != null && r.model_lean && r.model_edge != null; }
-    function absEdge(r) { return hasModel(r) ? Math.abs(r.model_edge) : -1; }
-    function rankVal(r) { return r.model_ev != null ? r.model_ev : absEdge(r); }
-    function tagHtml(r) {
-      var inj = r.injury_status
-        ? ' <span class="pchip" style="background:rgba(224,180,74,0.16);color:var(--amber)">' + esc(r.injury_status.toUpperCase()) + '</span>'
-        : '';
-      return tagHtmlBase(r) + inj;
-    }
-    function tagHtmlBase(r) {
-      return r.is_official_play
-        ? '<span class="pchip is-official">OFFICIAL</span>'
-        : '<span class="pchip is-lean">LEAN</span>';
-    }
-
-    // ---- Official Plays: every row that clears the real-EV bar, ranked by
-    // EV, so the plays actually worth acting on surface immediately
-    // instead of being buried inside whichever market card they fall in.
-    var official = live.filter(function (r) { return r.is_official_play; })
-      .slice().sort(function (a, b) { return rankVal(b) - rankVal(a); });
-    // ---- Leans: scored but short of the official bar -- still shown, just
-    // clearly labeled, so a near-miss isn't confused with a real play.
-    var leans = live.filter(function (r) { return hasModel(r) && !r.is_official_play; })
-      .slice().sort(function (a, b) { return rankVal(b) - rankVal(a); });
-
-    function bestCard(r) {
+    // Best line per player + market + game, by the model's hit chance on its side.
+    var best = {}, counts = {};
+    scored.forEach(function (r) {
       var isOver = r.model_lean === 'over';
       var price = isOver ? r.over_price : r.under_price;
-      return '<div class="prop-best-card">' +
-        '<div class="prop-best-top ' + (isOver ? 'is-over' : 'is-under') + '"></div>' +
-        '<div class="prop-best-body">' +
-          '<div class="prop-best-name">' + esc(playerLabel(r)) + ' ' + tagHtml(r) + '</div>' +
-          '<div class="prop-best-meta">' + esc(r.market_name) + ' · ' + (isOver ? 'O' : 'U') + ' ' + esc(r.line) + '</div>' +
-          '<div class="prop-best-edge ' + ((r.model_ev != null ? r.model_ev : r.model_edge) >= 0 ? 'is-pos' : 'is-neg') + '">' +
-            (r.model_ev != null ? ((r.model_ev >= 0 ? '+' : '') + r.model_ev.toFixed(1) + '% EV') : ((r.model_edge >= 0 ? '+' : '') + r.model_edge.toFixed(1) + ' edge')) +
-          '</div>' +
-          '<div class="prop-best-sub">model ' + r.model_predicted_value.toFixed(1) + (r.model_confidence === 'low' ? ' · low confidence' : '') + '</div>' +
-          '<div class="prop-best-price">' + (price != null ? esc(price) : 'no live price yet') + (r.book_used ? ' · ' + esc(bookLabel(r.book_used)) : '') + '</div>' +
-        '</div></div>';
-    }
+      r._price = (price == null || isNaN(price)) ? null : Number(price);
+      r._be = r._price != null ? M.impliedProb(r._price) : null;
+      r._lp = r.model_lean_probability != null ? r.model_lean_probability
+        : (r.model_over_probability != null ? (isOver ? r.model_over_probability : 1 - r.model_over_probability) : null);
+      var key = [r.fixture_id, r.player_name, r.market_name].join('|');
+      counts[key] = (counts[key] || 0) + 1;
+      var cur = best[key];
+      if (!cur || (r.is_official_play && !cur.is_official_play) ||
+          (!cur.is_official_play && (r._lp || 0) > (cur._lp || 0))) best[key] = r;
+    });
+    var rows = Object.keys(best).map(function (k) { var r = best[k]; r._others = counts[k] - 1; r._conf = propConfidence(r); return r; });
 
-    var officialHtml = '<div class="section-head"><div class="section-title"><div class="section-flag is-green"></div><h2>Official Plays</h2></div></div>' +
-      (official.length
-        ? '<div class="prop-best-row">' + official.slice(0, 8).map(bestCard).join('') + '</div>'
-        : '<p class="pcard-note" style="margin-bottom:18px">No player props clear the official-play bar this run (≥ 3% modeled EV at a real posted price, normal confidence only — see the low-confidence note above). Check Leans below or browse By Market.</p>');
+    // Filters
+    var markets = ['ALL'].concat(Array.from(new Set(rows.map(function (r) { return r.market_name; }))).sort());
+    var mkt = markets.indexOf(state.propMarket) === -1 ? 'ALL' : state.propMarket;
+    var games = {};
+    rows.forEach(function (r) {
+      if (!games[r.fixture_id]) {
+        var a = schoolAbbr(r.team), b = schoolAbbr(r.opponent);
+        games[r.fixture_id] = { label: [a, b].filter(Boolean).sort().join(' / ') || r.fixture_id, t: r.start_time || '' };
+      }
+    });
+    var gameIds = Object.keys(games).sort(function (x, y) { return games[x].t < games[y].t ? -1 : 1; });
+    var gameSel = state.propGame && games[state.propGame] ? state.propGame : 'ALL';
+    var shown = rows.filter(function (r) {
+      return (mkt === 'ALL' || r.market_name === mkt) &&
+        (gameSel === 'ALL' || r.fixture_id === gameSel) &&
+        (!state.propOfficialOnly || r.is_official_play) &&
+        (state.propShowPass || r._conf.tier !== 'PASS');
+    }).sort(function (x, y) { return x._conf.rank - y._conf.rank || (y._lp || 0) - (x._lp || 0); });
 
-    var leansHtml = leans.length
-      ? '<div class="section-head mt-lg"><div class="section-title"><div class="section-flag"></div><h2>Leans</h2></div></div>' +
-        '<p class="pcard-note" style="margin-bottom:12px">Scored, but short of the official-play bar — worth a look, not a recommended play.</p>' +
-        '<div class="prop-lean-row">' + leans.slice(0, 8).map(function (r) {
-          var isOver = r.model_lean === 'over';
-          var price = isOver ? r.over_price : r.under_price;
-          return '<div class="prop-lean-card">' +
-            '<div class="prop-best-name">' + esc(playerLabel(r)) + ' ' + tagHtml(r) + '</div>' +
-            '<div class="prop-best-meta">' + esc(r.market_name) + ' · ' + (isOver ? 'O' : 'U') + ' ' + esc(r.line) +
-              (price != null ? ' · ' + esc(price) : '') + '</div>' +
-            '<div class="prop-best-sub">model ' + r.model_predicted_value.toFixed(1) +
-              (r.model_ev != null ? ' · ' + (r.model_ev >= 0 ? '+' : '') + r.model_ev.toFixed(1) + '% EV' : '') +
-              (r.model_confidence === 'low' ? ' · low confidence' : '') + '</div>' +
-          '</div>';
-        }).join('') + '</div>'
-      : '';
+    var tally = { HIGH: 0, MEDIUM: 0, LOW: 0, CHECK: 0, PASS: 0 };
+    rows.forEach(function (r) { if (tally[r._conf.tier] != null) tally[r._conf.tier]++; });
 
-    // ---- By-market tabs: browse one prop type at a time instead of every
-    // market's card stacked on one page. ----
-    var tabs = ['ALL'].concat(catalog);
-    var activeMarket = tabs.indexOf(state.propMarket) === -1 ? 'ALL' : state.propMarket;
-    var tabsHtml = '<div class="prop-tabs">' + tabs.map(function (m) {
-      var n = m === 'ALL' ? live.length : (byMarket[m] || []).length;
-      return '<button class="tab tab--prop' + (m === activeMarket ? ' is-active' : '') + '" data-prop-market="' + esc(m) + '">' +
-        '<span>' + esc(m) + (n ? ' <span class="prop-tab-count">' + n + '</span>' : '') + '</span></button>';
+    var filters = '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0 6px">' +
+      '<select class="unit-size-input" style="width:auto" onchange="window.__cfbPropGame(this.value)">' +
+        '<option value="ALL"' + (gameSel === 'ALL' ? ' selected' : '') + '>All games (' + gameIds.length + ')</option>' +
+        gameIds.map(function (id) { return '<option value="' + esc(id) + '"' + (gameSel === id ? ' selected' : '') + '>' + esc(games[id].label) + ' \\u00b7 ' + esc(propKickoff(games[id].t)) + '</option>'; }).join('') +
+      '</select>' +
+      '<button class="tab tab--prop' + (state.propOfficialOnly ? ' is-active' : '') + '" onclick="window.__cfbPropOfficial()"><span>Official only</span></button>' +
+      '<button class="tab tab--prop' + (state.propShowPass ? ' is-active' : '') + '" onclick="window.__cfbPropShowPass()"><span>Show passes (' + tally.PASS + ')</span></button>' +
+      '<span style="font-size:10.5px;color:var(--muted-3);margin-left:6px">' +
+        '<b style="color:var(--green)">' + tally.HIGH + ' high</b> \\u00b7 <b style="color:var(--blue-light)">' + tally.MEDIUM + ' medium</b> \\u00b7 ' +
+        tally.LOW + ' low \\u00b7 <b style="color:var(--amber)">' + tally.CHECK + ' check</b></span>' +
+    '</div>' +
+    '<div class="prop-tabs">' + markets.map(function (m) {
+      return '<button class="tab tab--prop' + (m === mkt ? ' is-active' : '') + '" data-prop-market="' + esc(m) + '"><span>' + esc(m) + '</span></button>';
     }).join('') + '</div>';
 
-    var visibleMarkets = activeMarket === 'ALL' ? catalog : [activeMarket];
-
-    var cards = visibleMarkets.map(function (m) {
-      var rows = (byMarket[m] || []).slice().sort(function (a, b) { return rankVal(b) - rankVal(a); });
-      if (rows.length) {
-        return '<div class="pcard"><div class="pcard-head"><span>' + esc(m) + '</span><span class="pchip is-live">LIVE</span></div>' +
-          rows.map(function (r) {
-            var modelLine = hasModel(r)
-              ? '<div class="pcard-line-row is-scored" style="border-top:none;padding-top:0">' +
-                  '<span style="color:var(--muted-3);font-size:9.5px;letter-spacing:.04em">' +
-                    tagHtml(r) + ' Model: ' + r.model_predicted_value.toFixed(1) + ' (' + r.model_lean.toUpperCase() + (r.model_confidence === 'low' ? ', low confidence' : '') + ')' +
-                  '</span>' +
-                  '<span style="color:' + (r.model_edge >= 0 ? 'var(--green)' : 'var(--red)') + ';font-weight:700;font-size:10.5px">' +
-                    (r.model_ev != null ? ((r.model_ev >= 0 ? '+' : '') + r.model_ev.toFixed(1) + '% EV') : ((r.model_edge >= 0 ? '+' : '') + r.model_edge.toFixed(1) + ' edge')) +
-                  '</span>' +
-                '</div>'
-              : '';
-            var bookTag = r.book_used ? ' <span style="color:var(--muted-3);font-size:9px">(' + esc(bookLabel(r.book_used)) + ')</span>' : '';
-            return '<div class="pcard-line-row"><span>' + esc(playerLabel(r)) + ' · ' + esc(r.line) + '</span>' +
-              '<span>O ' + esc(r.over_price) + ' / U ' + esc(r.under_price) + bookTag + '</span></div>' + modelLine;
-          }).join('') + '</div>';
-      }
-      return '<div class="pcard"><div class="pcard-head"><span>' + esc(m) + '</span><span class="pchip is-pending">NOT POSTED</span></div>' +
-        '<p class="pcard-note">A market real sportsbooks offer for CFB, but no book has posted a line for this game yet.</p></div>';
+    var cols = 'grid-template-columns:86px 1.5fr 1.2fr 0.8fr 1fr 0.9fr;';
+    var thead = '<div class="thead" style="display:grid;' + cols + '">' +
+      '<div>Confidence</div><div>Player</div><div>Pick</div><div class="num">Model</div><div class="num">Hit % / needs</div><div class="num">Status</div></div>';
+    var body = shown.map(function (r) {
+      var isOver = r.model_lean === 'over';
+      var diff = r.model_predicted_value - r.line;
+      var tag = r.is_official_play
+        ? '<span class="pchip is-official">OFFICIAL</span>'
+        : '<span class="pchip is-lean">LEAN</span>';
+      var inj = r.injury_status ? ' <span class="pchip" style="background:rgba(224,180,74,0.16);color:var(--amber)">' + esc(r.injury_status.toUpperCase()) + '</span>' : '';
+      var gp = r.games_played != null ? '<span style="color:var(--muted-4);font-size:9.5px;margin-left:6px">' + r.games_played + ' GP</span>' : '';
+      return '<div class="row"><div class="row-accent" style="background:' + r._conf.color + '"></div>' +
+        '<div class="row-body" style="' + cols + 'padding:9px 14px;font-size:11.5px">' +
+          '<div style="font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:.06em;color:' + r._conf.color + '">' + r._conf.tier + '</div>' +
+          '<div><div style="font-weight:700;font-size:12.5px">' + esc(r.player_name) + gp + '</div>' +
+            '<div style="font-size:9.5px;color:var(--muted-3);margin-top:3px">' + esc(schoolAbbr(r.team) || '') +
+              (r.opponent ? ' vs ' + esc(schoolAbbr(r.opponent)) : '') + ' \\u00b7 ' + esc(propKickoff(r.start_time)) + '</div></div>' +
+          '<div><div style="font-weight:700">' + esc(r.market_name) + ' ' + (isOver ? 'O' : 'U') + ' ' + esc(r.line) + '</div>' +
+            '<div style="font-size:9.5px;color:var(--muted-3);margin-top:3px">' + (r._price != null ? (r._price > 0 ? '+' : '') + r._price : 'no price') +
+              (r.book_used ? ' \\u00b7 ' + esc(bookLabel(r.book_used)) : '') + (r._others ? ' \\u00b7 +' + r._others + ' other line' + (r._others > 1 ? 's' : '') : '') + '</div></div>' +
+          '<div class="num"><div style="font-weight:700">' + r.model_predicted_value.toFixed(1) + '</div>' +
+            '<div style="font-size:9.5px;color:' + ((isOver ? diff : -diff) >= 0 ? 'var(--green)' : 'var(--red)') + ';margin-top:3px">' + (diff >= 0 ? '+' : '') + diff.toFixed(1) + ' vs line</div></div>' +
+          '<div class="num"><div style="font-weight:700;font-size:13px">' + (r._lp != null ? (r._lp * 100).toFixed(0) + '%' : '\\u2014') + '</div>' +
+            '<div style="font-size:9.5px;color:var(--muted-3);margin-top:3px">needs ' + (r._be != null ? (r._be * 100).toFixed(0) + '%' : '\\u2014') + '</div></div>' +
+          '<div class="num">' + tag + inj + '</div>' +
+        '</div></div>';
     }).join('');
 
-    return '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Player Props</h2></div></div>' +
-      intro + officialHtml + leansHtml +
-      '<div class="section-head mt-lg"><div class="section-title"><div class="section-flag"></div><h2>By Market</h2></div></div>' +
-      tabsHtml + '<div class="pcard-grid">' + cards + '</div>';
+    var foot = '<div class="table-foot"><span>Confidence: <b>High</b> = 60%+ hit chance, at least 5 points above what the price needs, 3+ games of data, ' +
+      'no injury flag. <b>Medium</b> = 55%+ and at least 2 points above breakeven. <b>Pass</b> = the price already needs more than the model gives, or the ' +
+      'player is listed out. <b>Check</b> = the model is far from the market (80%+ claimed, or 25%+ and 12+ off the line) \\u2014 usually missing info like an injury or role change, ' +
+      'so verify before betting. TDs, interceptions and receptions max out at Low. The props model is still unproven \\u2014 High means "the model\\u2019s strongest reads," not a lock. ' +
+      'Official plays (max 5, yardage markets only) are the ones auto-added to your tracker.</span></div>';
+
+    return head + filters + thead + (body || '<div class="empty-state">No props match these filters.</div>') + foot;
   }
 
   /* ---- Tracker (localStorage, this browser only, real bets you log) ---- */
@@ -2407,6 +2420,9 @@ RENDERER_JS = """<script>
   }
 
   window.__cfbSearch = function (v) { state.search = v; render(); };
+  window.__cfbPropGame = function (v) { state.propGame = v; render(); };
+  window.__cfbPropOfficial = function () { state.propOfficialOnly = !state.propOfficialOnly; render(); };
+  window.__cfbPropShowPass = function () { state.propShowPass = !state.propShowPass; render(); };
 
   document.addEventListener('click', function (e) {
     var p = e.target.closest('[data-page]');
