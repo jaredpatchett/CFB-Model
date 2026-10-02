@@ -34,6 +34,7 @@ class PlayerStatModel:
         self.residual_std = None
         self.residual_bin_edges = []
         self.residual_bin_stds = []
+        self.residual_bin_samples = []
         self.feature_columns = ROLLING_FEATURE_COLUMNS
 
     def fit(self, player_features_df: pd.DataFrame, min_games_played: int = 1, verbose: bool = True):
@@ -107,7 +108,7 @@ class PlayerStatModel:
         quantile buckets and residual spread is measured within each, then
         forced non-decreasing (bigger projection -> at least as much spread),
         which also smooths out noisy buckets."""
-        self.residual_bin_edges, self.residual_bin_stds = [], []
+        self.residual_bin_edges, self.residual_bin_stds, self.residual_bin_samples = [], [], []
         preds = np.asarray(preds, dtype=float)
         residuals = np.asarray(residuals, dtype=float)
         if len(preds) < self.MIN_ROWS_PER_BIN * 2:
@@ -132,6 +133,20 @@ class PlayerStatModel:
         stds = list(np.maximum.accumulate(stds))
         self.residual_bin_edges = [float(e) for e in edges]
         self.residual_bin_stds = [float(x) for x in stds]
+        # Keep each bucket's actual holdout misses (up to 2,000) so over/under
+        # chances come from the model's real track record instead of a bell
+        # curve (10/2026). Prop stats are lumpy and lopsided -- lots of 0-catch
+        # games, a few huge ones -- which a bell curve misrepresents; the live
+        # props backtest showed the bell-curve hit chances didn't track reality.
+        idx = np.searchsorted(np.array(self.residual_bin_edges), preds, side="left")
+        rng = np.random.default_rng(0)
+        samples = []
+        for i in range(len(self.residual_bin_edges)):
+            r = residuals[idx == i]
+            if len(r) > 2000:
+                r = rng.choice(r, 2000, replace=False)
+            samples.append([float(x) for x in np.sort(r)])
+        self.residual_bin_samples = samples
 
     def std_for_prediction(self, pred: float) -> float:
         """Residual spread to use for a projection of this size; falls back
@@ -146,13 +161,34 @@ class PlayerStatModel:
     def predict(self, features_df: pd.DataFrame) -> np.ndarray:
         return self.model.predict(features_df[self.feature_columns])
 
+    # Stats that can't go below zero (everything except rushing yards, where
+    # sacks and losses can make a game total negative).
+    NONNEGATIVE = {"pass_yds", "pass_tds", "pass_att", "pass_comp", "pass_int", "rush_tds", "rush_att",
+                   "rec_yds", "rec_tds", "receptions"}
+
+    def over_probability(self, pred: float, prop_line: float):
+        """Chance the real stat lands over the line: the model's projection
+        plus its actual holdout misses for projections this size. Falls back
+        to a bell curve for models saved before misses were stored."""
+        edges = getattr(self, "residual_bin_edges", None) or []
+        samples = getattr(self, "residual_bin_samples", None) or []
+        if edges and samples and len(samples) == len(edges):
+            i = next((k for k, hi in enumerate(edges) if pred <= hi), len(edges) - 1)
+            r = np.asarray(samples[i], dtype=float)
+            if len(r) >= 30:
+                outcomes = pred + r
+                if self.stat_name in self.NONNEGATIVE:
+                    outcomes = np.clip(outcomes, 0, None)
+                return float(np.mean(outcomes > prop_line))
+        sd = self.std_for_prediction(pred)
+        return float(1 - norm.cdf(prop_line, loc=pred, scale=sd)) if sd and sd > 0 else None
+
     def predict_and_compare(self, features_row: pd.Series, prop_line: float) -> dict:
         pred = float(self.model.predict(features_row[self.feature_columns].to_frame().T)[0])
+        if self.stat_name in self.NONNEGATIVE:
+            pred = max(pred, 0.0)
         confidence = "low" if features_row.get("games_played_prior", 0) < 3 else "normal"
-        over_prob = None
-        sd = self.std_for_prediction(pred)
-        if sd and sd > 0:
-            over_prob = float(1 - norm.cdf(prop_line, loc=pred, scale=sd))
+        over_prob = self.over_probability(pred, prop_line)
         return {
             "stat": self.stat_name,
             "predicted_value": pred,
@@ -168,6 +204,7 @@ class PlayerStatModel:
         joblib.dump({"model": self.model, "residual_std": self.residual_std,
                      "residual_bin_edges": getattr(self, "residual_bin_edges", []),
                      "residual_bin_stds": getattr(self, "residual_bin_stds", []),
+                     "residual_bin_samples": getattr(self, "residual_bin_samples", []),
                      "feature_columns": self.feature_columns, "stat_name": self.stat_name}, path)
 
     @classmethod
@@ -178,5 +215,6 @@ class PlayerStatModel:
         instance.residual_std = payload["residual_std"]
         instance.residual_bin_edges = payload.get("residual_bin_edges", [])
         instance.residual_bin_stds = payload.get("residual_bin_stds", [])
+        instance.residual_bin_samples = payload.get("residual_bin_samples", [])
         instance.feature_columns = payload["feature_columns"]
         return instance
