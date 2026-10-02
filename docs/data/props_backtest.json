@@ -1,79 +1,69 @@
 {
-  "generated_at": "2026-10-02T15:25:33.799906+00:00",
+  "generated_at": "2026-10-02T16:04:12.898146+00:00",
   "season": 2026,
-  "n_graded": 1958,
+  "n_graded": 1769,
   "overall": [
     {
       "group": "All props",
-      "n": 1958,
-      "record": "1143-815-0",
-      "hit_rate": 0.584,
-      "avg_model_prob": 0.649,
+      "n": 1769,
+      "record": "954-815-0",
+      "hit_rate": 0.539,
+      "avg_model_prob": 0.66,
       "avg_breakeven": 0.553,
-      "units": 113.36,
-      "roi": 0.058
+      "units": -40.27,
+      "roi": -0.023
     }
   ],
   "by_tier": [
     {
       "group": "HIGH",
-      "n": 167,
-      "record": "89-78-0",
-      "hit_rate": 0.533,
-      "avg_model_prob": 0.661,
-      "avg_breakeven": 0.547,
-      "units": -4.55,
-      "roi": -0.027
+      "n": 222,
+      "record": "119-103-0",
+      "hit_rate": 0.536,
+      "avg_model_prob": 0.695,
+      "avg_breakeven": 0.546,
+      "units": -4.25,
+      "roi": -0.019
     },
     {
       "group": "MEDIUM",
-      "n": 366,
-      "record": "186-180-0",
-      "hit_rate": 0.508,
-      "avg_model_prob": 0.616,
-      "avg_breakeven": 0.542,
-      "units": -22.23,
-      "roi": -0.061
+      "n": 229,
+      "record": "114-115-0",
+      "hit_rate": 0.498,
+      "avg_model_prob": 0.674,
+      "avg_breakeven": 0.545,
+      "units": -18.93,
+      "roi": -0.083
     },
     {
       "group": "LOW",
-      "n": 553,
-      "record": "288-265-0",
-      "hit_rate": 0.521,
-      "avg_model_prob": 0.632,
-      "avg_breakeven": 0.537,
-      "units": -11.33,
-      "roi": -0.02
+      "n": 432,
+      "record": "234-198-0",
+      "hit_rate": 0.542,
+      "avg_model_prob": 0.682,
+      "avg_breakeven": 0.552,
+      "units": -5.16,
+      "roi": -0.012
     },
     {
       "group": "CHECK",
-      "n": 363,
-      "record": "203-160-0",
-      "hit_rate": 0.559,
-      "avg_model_prob": 0.789,
-      "avg_breakeven": 0.557,
-      "units": -0.87,
-      "roi": -0.002
+      "n": 448,
+      "record": "247-201-0",
+      "hit_rate": 0.551,
+      "avg_model_prob": 0.816,
+      "avg_breakeven": 0.56,
+      "units": -8.94,
+      "roi": -0.02
     },
     {
       "group": "PASS",
-      "n": 320,
-      "record": "188-132-0",
-      "hit_rate": 0.588,
-      "avg_model_prob": 0.551,
-      "avg_breakeven": 0.592,
-      "units": -1.27,
-      "roi": -0.004
-    },
-    {
-      "group": "NONE",
-      "n": 189,
-      "record": "189-0-0",
-      "hit_rate": 1.0,
-      "avg_model_prob": NaN,
-      "avg_breakeven": 0.553,
-      "units": 153.63,
-      "roi": 0.813
+      "n": 438,
+      "record": "240-198-0",
+      "hit_rate": 0.548,
+      "avg_model_prob": 0.453,
+      "avg_breakeven": 0.555,
+      "units": -2.97,
+      "roi": -0.007
     }
   ],
   "by_side": [
@@ -82,102 +72,102 @@
       "n": 852,
       "record": "466-386-0",
       "hit_rate": 0.547,
-      "avg_model_prob": 0.63,
+      "avg_model_prob": 0.577,
       "avg_breakeven": 0.547,
       "units": 4.9,
       "roi": 0.006
     },
     {
       "group": "under",
-      "n": 1106,
-      "record": "677-429-0",
-      "hit_rate": 0.612,
-      "avg_model_prob": 0.667,
-      "avg_breakeven": 0.558,
-      "units": 108.46,
-      "roi": 0.098
+      "n": 917,
+      "record": "488-429-0",
+      "hit_rate": 0.532,
+      "avg_model_prob": 0.737,
+      "avg_breakeven": 0.559,
+      "units": -45.17,
+      "roi": -0.049
     }
   ],
   "by_tier_and_side": [
     {
       "group": "CHECK / over",
-      "n": 137,
-      "record": "74-63-0",
-      "hit_rate": 0.54,
-      "avg_model_prob": 0.767,
-      "avg_breakeven": 0.554,
-      "units": -4.86,
-      "roi": -0.035
+      "n": 157,
+      "record": "82-75-0",
+      "hit_rate": 0.522,
+      "avg_model_prob": 0.783,
+      "avg_breakeven": 0.556,
+      "units": -11.79,
+      "roi": -0.075
     },
     {
       "group": "CHECK / under",
-      "n": 226,
-      "record": "129-97-0",
-      "hit_rate": 0.571,
-      "avg_model_prob": 0.803,
-      "avg_breakeven": 0.56,
-      "units": 3.99,
-      "roi": 0.018
+      "n": 291,
+      "record": "165-126-0",
+      "hit_rate": 0.567,
+      "avg_model_prob": 0.835,
+      "avg_breakeven": 0.562,
+      "units": 2.85,
+      "roi": 0.01
     },
     {
       "group": "HIGH / over",
-      "n": 55,
-      "record": "31-24-0",
-      "hit_rate": 0.564,
-      "avg_model_prob": 0.648,
-      "avg_breakeven": 0.55,
-      "units": 1.41,
-      "roi": 0.026
+      "n": 33,
+      "record": "19-14-0",
+      "hit_rate": 0.576,
+      "avg_model_prob": 0.682,
+      "avg_breakeven": 0.553,
+      "units": 1.35,
+      "roi": 0.041
     },
     {
       "group": "HIGH / under",
-      "n": 112,
-      "record": "58-54-0",
-      "hit_rate": 0.518,
-      "avg_model_prob": 0.667,
-      "avg_breakeven": 0.546,
-      "units": -5.96,
-      "roi": -0.053
+      "n": 189,
+      "record": "100-89-0",
+      "hit_rate": 0.529,
+      "avg_model_prob": 0.697,
+      "avg_breakeven": 0.545,
+      "units": -5.6,
+      "roi": -0.03
     },
     {
       "group": "LOW / over",
-      "n": 305,
-      "record": "160-145-0",
-      "hit_rate": 0.525,
-      "avg_model_prob": 0.624,
-      "avg_breakeven": 0.519,
-      "units": 7.5,
-      "roi": 0.025
+      "n": 184,
+      "record": "99-85-0",
+      "hit_rate": 0.538,
+      "avg_model_prob": 0.657,
+      "avg_breakeven": 0.521,
+      "units": 9.43,
+      "roi": 0.051
     },
     {
       "group": "LOW / under",
       "n": 248,
-      "record": "128-120-0",
-      "hit_rate": 0.516,
-      "avg_model_prob": 0.642,
-      "avg_breakeven": 0.559,
-      "units": -18.83,
-      "roi": -0.076
+      "record": "135-113-0",
+      "hit_rate": 0.544,
+      "avg_model_prob": 0.7,
+      "avg_breakeven": 0.575,
+      "units": -14.59,
+      "roi": -0.059
     },
     {
       "group": "MEDIUM / over",
-      "n": 179,
-      "record": "96-83-0",
-      "hit_rate": 0.536,
-      "avg_model_prob": 0.606,
-      "avg_breakeven": 0.54,
-      "units": -0.85,
-      "roi": -0.005
+      "n": 49,
+      "record": "30-19-0",
+      "hit_rate": 0.612,
+      "avg_model_prob": 0.66,
+      "avg_breakeven": 0.545,
+      "units": 6.34,
+      "roi": 0.129
     },
     {
       "group": "MEDIUM / under",
-      "n": 187,
-      "record": "90-97-0",
-      "hit_rate": 0.481,
-      "avg_model_prob": 0.625,
+      "n": 180,
+      "record": "84-96-0",
+      "hit_rate": 0.467,
+      "avg_model_prob": 0.678,
       "avg_breakeven": 0.545,
-      "units": -21.38,
-      "roi": -0.114
+      "units": -25.27,
+      "roi": -0.14
     }
   ],
   "by_market": [
@@ -186,7 +176,7 @@
       "n": 447,
       "record": "235-212-0",
       "hit_rate": 0.526,
-      "avg_model_prob": 0.617,
+      "avg_model_prob": 0.599,
       "avg_breakeven": 0.543,
       "units": -14.19,
       "roi": -0.032
@@ -196,7 +186,7 @@
       "n": 366,
       "record": "214-152-0",
       "hit_rate": 0.585,
-      "avg_model_prob": 0.644,
+      "avg_model_prob": 0.65,
       "avg_breakeven": 0.574,
       "units": 7.14,
       "roi": 0.019
@@ -206,7 +196,7 @@
       "n": 288,
       "record": "156-132-0",
       "hit_rate": 0.542,
-      "avg_model_prob": 0.659,
+      "avg_model_prob": 0.682,
       "avg_breakeven": 0.542,
       "units": -0.12,
       "roi": -0.0
@@ -216,7 +206,7 @@
       "n": 167,
       "record": "90-77-0",
       "hit_rate": 0.539,
-      "avg_model_prob": 0.639,
+      "avg_model_prob": 0.659,
       "avg_breakeven": 0.558,
       "units": -4.62,
       "roi": -0.028
@@ -226,7 +216,7 @@
       "n": 142,
       "record": "77-65-0",
       "hit_rate": 0.542,
-      "avg_model_prob": 0.696,
+      "avg_model_prob": 0.776,
       "avg_breakeven": 0.573,
       "units": -8.31,
       "roi": -0.059
@@ -236,7 +226,7 @@
       "n": 141,
       "record": "65-76-0",
       "hit_rate": 0.461,
-      "avg_model_prob": 0.684,
+      "avg_model_prob": 0.768,
       "avg_breakeven": 0.541,
       "units": -21.21,
       "roi": -0.15
@@ -246,37 +236,17 @@
       "n": 126,
       "record": "69-57-0",
       "hit_rate": 0.548,
-      "avg_model_prob": 0.716,
+      "avg_model_prob": 0.777,
       "avg_breakeven": 0.553,
       "units": -3.74,
       "roi": -0.03
-    },
-    {
-      "group": "Pass Attempts",
-      "n": 95,
-      "record": "95-0-0",
-      "hit_rate": 1.0,
-      "avg_model_prob": NaN,
-      "avg_breakeven": 0.553,
-      "units": 77.12,
-      "roi": 0.812
-    },
-    {
-      "group": "Pass Completions",
-      "n": 94,
-      "record": "94-0-0",
-      "hit_rate": 1.0,
-      "avg_model_prob": NaN,
-      "avg_breakeven": 0.553,
-      "units": 76.51,
-      "roi": 0.814
     },
     {
       "group": "Rush Touchdowns",
       "n": 75,
       "record": "35-40-0",
       "hit_rate": 0.467,
-      "avg_model_prob": 0.603,
+      "avg_model_prob": 0.439,
       "avg_breakeven": 0.544,
       "units": -8.55,
       "roi": -0.114
@@ -286,7 +256,7 @@
       "n": 17,
       "record": "13-4-0",
       "hit_rate": 0.765,
-      "avg_model_prob": 0.567,
+      "avg_model_prob": 0.34,
       "avg_breakeven": 0.489,
       "units": 13.35,
       "roi": 0.785
@@ -298,7 +268,7 @@
       "n": 400,
       "record": "209-191-0",
       "hit_rate": 0.522,
-      "avg_model_prob": 0.598,
+      "avg_model_prob": 0.611,
       "avg_breakeven": 0.544,
       "units": -14.42,
       "roi": -0.036
@@ -308,27 +278,27 @@
       "n": 445,
       "record": "227-218-0",
       "hit_rate": 0.51,
-      "avg_model_prob": 0.668,
+      "avg_model_prob": 0.685,
       "avg_breakeven": 0.558,
       "units": -38.55,
       "roi": -0.087
     },
     {
       "group": "35%+ off line",
-      "n": 772,
-      "record": "523-249-0",
-      "hit_rate": 0.677,
-      "avg_model_prob": 0.736,
-      "avg_breakeven": 0.559,
-      "units": 165.02,
-      "roi": 0.214
+      "n": 583,
+      "record": "334-249-0",
+      "hit_rate": 0.573,
+      "avg_model_prob": 0.734,
+      "avg_breakeven": 0.561,
+      "units": 11.39,
+      "roi": 0.02
     },
     {
       "group": "<10% off line",
       "n": 341,
       "record": "184-157-0",
       "hit_rate": 0.54,
-      "avg_model_prob": 0.536,
+      "avg_model_prob": 0.557,
       "avg_breakeven": 0.545,
       "units": 1.32,
       "roi": 0.004
@@ -337,85 +307,348 @@
   "by_model_probability": [
     {
       "group": "55-60%",
-      "n": 379,
-      "record": "188-191-0",
-      "hit_rate": 0.496,
-      "avg_model_prob": 0.573,
-      "avg_breakeven": 0.539,
-      "units": -29.01,
-      "roi": -0.077
+      "n": 120,
+      "record": "68-52-0",
+      "hit_rate": 0.567,
+      "avg_model_prob": 0.575,
+      "avg_breakeven": 0.553,
+      "units": 2.78,
+      "roi": 0.023
     },
     {
       "group": "60-65%",
-      "n": 361,
-      "record": "190-171-0",
-      "hit_rate": 0.526,
-      "avg_model_prob": 0.622,
-      "avg_breakeven": 0.556,
-      "units": -21.46,
-      "roi": -0.059
+      "n": 200,
+      "record": "105-95-0",
+      "hit_rate": 0.525,
+      "avg_model_prob": 0.623,
+      "avg_breakeven": 0.548,
+      "units": -8.12,
+      "roi": -0.041
     },
     {
       "group": "65-70%",
-      "n": 241,
-      "record": "138-103-0",
-      "hit_rate": 0.573,
-      "avg_model_prob": 0.673,
-      "avg_breakeven": 0.555,
-      "units": 12.66,
-      "roi": 0.053
+      "n": 203,
+      "record": "105-98-0",
+      "hit_rate": 0.517,
+      "avg_model_prob": 0.674,
+      "avg_breakeven": 0.549,
+      "units": -13.57,
+      "roi": -0.067
     },
     {
       "group": "70-80%",
-      "n": 310,
-      "record": "170-140-0",
-      "hit_rate": 0.548,
-      "avg_model_prob": 0.741,
-      "avg_breakeven": 0.565,
-      "units": -11.0,
-      "roi": -0.035
+      "n": 505,
+      "record": "275-230-0",
+      "hit_rate": 0.545,
+      "avg_model_prob": 0.748,
+      "avg_breakeven": 0.559,
+      "units": -13.39,
+      "roi": -0.027
     },
     {
       "group": "80%+",
-      "n": 183,
-      "record": "100-83-0",
-      "hit_rate": 0.546,
-      "avg_model_prob": 0.871,
-      "avg_breakeven": 0.572,
-      "units": -10.03,
-      "roi": -0.055
+      "n": 303,
+      "record": "164-139-0",
+      "hit_rate": 0.541,
+      "avg_model_prob": 0.872,
+      "avg_breakeven": 0.569,
+      "units": -16.39,
+      "roi": -0.054
     },
     {
       "group": "<55%",
-      "n": 484,
-      "record": "357-127-0",
-      "hit_rate": 0.738,
-      "avg_model_prob": 0.526,
-      "avg_breakeven": 0.546,
-      "units": 172.2,
-      "roi": 0.356
+      "n": 438,
+      "record": "237-201-0",
+      "hit_rate": 0.541,
+      "avg_model_prob": 0.444,
+      "avg_breakeven": 0.54,
+      "units": 8.42,
+      "roi": 0.019
     }
   ],
   "official_at_the_time": [
     {
       "group": "Not official",
-      "n": 1906,
-      "record": "1119-787-0",
-      "hit_rate": 0.587,
-      "avg_model_prob": 0.65,
+      "n": 1717,
+      "record": "930-787-0",
+      "hit_rate": 0.542,
+      "avg_model_prob": 0.66,
       "avg_breakeven": 0.554,
-      "units": 119.64,
-      "roi": 0.063
+      "units": -33.99,
+      "roi": -0.02
     },
     {
       "group": "Official",
       "n": 52,
       "record": "24-28-0",
       "hit_rate": 0.462,
-      "avg_model_prob": 0.63,
+      "avg_model_prob": 0.652,
       "avg_breakeven": 0.532,
       "units": -6.28,
       "roi": -0.121
     }
-  ]
+  ],
+  "rebuilt": {
+    "n_graded": 1933,
+    "overall": [
+      {
+        "group": "All props",
+        "n": 1933,
+        "record": "1054-879-0",
+        "hit_rate": 0.545,
+        "avg_model_prob": 0.636,
+        "avg_breakeven": 0.559,
+        "units": -45.64,
+        "roi": -0.024
+      }
+    ],
+    "by_tier": [
+      {
+        "group": "HIGH",
+        "n": 294,
+        "record": "161-133-0",
+        "hit_rate": 0.548,
+        "avg_model_prob": 0.698,
+        "avg_breakeven": 0.547,
+        "units": 0.15,
+        "roi": 0.001
+      },
+      {
+        "group": "MEDIUM",
+        "n": 360,
+        "record": "181-179-0",
+        "hit_rate": 0.503,
+        "avg_model_prob": 0.666,
+        "avg_breakeven": 0.547,
+        "units": -27.22,
+        "roi": -0.076
+      },
+      {
+        "group": "LOW",
+        "n": 436,
+        "record": "244-192-0",
+        "hit_rate": 0.56,
+        "avg_model_prob": 0.671,
+        "avg_breakeven": 0.564,
+        "units": -3.32,
+        "roi": -0.008
+      },
+      {
+        "group": "CHECK",
+        "n": 306,
+        "record": "176-130-0",
+        "hit_rate": 0.575,
+        "avg_model_prob": 0.781,
+        "avg_breakeven": 0.573,
+        "units": 1.34,
+        "roi": 0.004
+      },
+      {
+        "group": "PASS",
+        "n": 537,
+        "record": "292-245-0",
+        "hit_rate": 0.544,
+        "avg_model_prob": 0.471,
+        "avg_breakeven": 0.561,
+        "units": -16.59,
+        "roi": -0.031
+      }
+    ],
+    "by_side": [
+      {
+        "group": "over",
+        "n": 997,
+        "record": "551-446-0",
+        "hit_rate": 0.553,
+        "avg_model_prob": 0.562,
+        "avg_breakeven": 0.554,
+        "units": -4.43,
+        "roi": -0.004
+      },
+      {
+        "group": "under",
+        "n": 936,
+        "record": "503-433-0",
+        "hit_rate": 0.537,
+        "avg_model_prob": 0.716,
+        "avg_breakeven": 0.564,
+        "units": -41.21,
+        "roi": -0.044
+      }
+    ],
+    "by_market": [
+      {
+        "group": "Reception Yards",
+        "n": 447,
+        "record": "246-201-0",
+        "hit_rate": 0.55,
+        "avg_model_prob": 0.569,
+        "avg_breakeven": 0.541,
+        "units": 6.88,
+        "roi": 0.015
+      },
+      {
+        "group": "Receptions",
+        "n": 366,
+        "record": "217-149-0",
+        "hit_rate": 0.593,
+        "avg_model_prob": 0.62,
+        "avg_breakeven": 0.573,
+        "units": 13.83,
+        "roi": 0.038
+      },
+      {
+        "group": "Rush Yards",
+        "n": 288,
+        "record": "156-132-0",
+        "hit_rate": 0.542,
+        "avg_model_prob": 0.627,
+        "avg_breakeven": 0.541,
+        "units": 0.18,
+        "roi": 0.001
+      },
+      {
+        "group": "Rush Attempts",
+        "n": 167,
+        "record": "91-76-0",
+        "hit_rate": 0.545,
+        "avg_model_prob": 0.652,
+        "avg_breakeven": 0.56,
+        "units": -3.29,
+        "roi": -0.02
+      },
+      {
+        "group": "Pass Touchdowns",
+        "n": 142,
+        "record": "82-60-0",
+        "hit_rate": 0.577,
+        "avg_model_prob": 0.74,
+        "avg_breakeven": 0.6,
+        "units": -5.0,
+        "roi": -0.035
+      },
+      {
+        "group": "Pass Yards",
+        "n": 141,
+        "record": "66-75-0",
+        "hit_rate": 0.468,
+        "avg_model_prob": 0.714,
+        "avg_breakeven": 0.541,
+        "units": -18.96,
+        "roi": -0.134
+      },
+      {
+        "group": "Pass Interceptions",
+        "n": 126,
+        "record": "68-58-0",
+        "hit_rate": 0.54,
+        "avg_model_prob": 0.702,
+        "avg_breakeven": 0.577,
+        "units": -10.62,
+        "roi": -0.084
+      },
+      {
+        "group": "Pass Attempts",
+        "n": 95,
+        "record": "47-48-0",
+        "hit_rate": 0.495,
+        "avg_model_prob": 0.71,
+        "avg_breakeven": 0.555,
+        "units": -9.83,
+        "roi": -0.103
+      },
+      {
+        "group": "Pass Completions",
+        "n": 94,
+        "record": "47-47-0",
+        "hit_rate": 0.5,
+        "avg_model_prob": 0.716,
+        "avg_breakeven": 0.558,
+        "units": -9.65,
+        "roi": -0.103
+      },
+      {
+        "group": "Rush Touchdowns",
+        "n": 58,
+        "record": "28-30-0",
+        "hit_rate": 0.483,
+        "avg_model_prob": 0.472,
+        "avg_breakeven": 0.592,
+        "units": -10.24,
+        "roi": -0.177
+      },
+      {
+        "group": "Reception Touchdowns",
+        "n": 9,
+        "record": "6-3-0",
+        "hit_rate": 0.667,
+        "avg_model_prob": 0.34,
+        "avg_breakeven": 0.581,
+        "units": 1.05,
+        "roi": 0.117
+      }
+    ],
+    "by_model_probability": [
+      {
+        "group": "55-60%",
+        "n": 216,
+        "record": "118-98-0",
+        "hit_rate": 0.546,
+        "avg_model_prob": 0.579,
+        "avg_breakeven": 0.547,
+        "units": -0.59,
+        "roi": -0.003
+      },
+      {
+        "group": "60-65%",
+        "n": 242,
+        "record": "135-107-0",
+        "hit_rate": 0.558,
+        "avg_model_prob": 0.623,
+        "avg_breakeven": 0.554,
+        "units": 1.69,
+        "roi": 0.007
+      },
+      {
+        "group": "65-70%",
+        "n": 274,
+        "record": "141-133-0",
+        "hit_rate": 0.515,
+        "avg_model_prob": 0.674,
+        "avg_breakeven": 0.553,
+        "units": -17.86,
+        "roi": -0.065
+      },
+      {
+        "group": "70-80%",
+        "n": 506,
+        "record": "282-224-0",
+        "hit_rate": 0.557,
+        "avg_model_prob": 0.746,
+        "avg_breakeven": 0.572,
+        "units": -13.21,
+        "roi": -0.026
+      },
+      {
+        "group": "80%+",
+        "n": 192,
+        "record": "111-81-0",
+        "hit_rate": 0.578,
+        "avg_model_prob": 0.853,
+        "avg_breakeven": 0.591,
+        "units": -4.11,
+        "roi": -0.021
+      },
+      {
+        "group": "<55%",
+        "n": 503,
+        "record": "267-236-0",
+        "hit_rate": 0.531,
+        "avg_model_prob": 0.454,
+        "avg_breakeven": 0.543,
+        "units": -11.56,
+        "roi": -0.023
+      }
+    ]
+  }
 }
