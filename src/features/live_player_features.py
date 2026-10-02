@@ -32,6 +32,9 @@ import unicodedata
 import pandas as pd
 
 from src.features.player_features import STAT_MAP, pivot_player_game_stats
+from src.features.player_features import (
+    add_usage_features, current_feature_snapshot, current_defense_allowed, OPP_ALLOWED_COLS, GAME_ENV_COLS,
+)
 
 # Lower bar than the team model's 3-game threshold (live_features.py) —
 # player usage stabilizes faster than a team's full-game outcome variance
@@ -113,6 +116,10 @@ def build_current_player_form(player_stats_long_current: pd.DataFrame, games_cur
     wide = pivot_player_game_stats(player_stats_long_current, games_current)
     if wide.empty or "athleteId" not in wide.columns:
         return {}
+    # Same usage/role features the props models now train on (10/2026) --
+    # computed by the same shared code, so live and training can't drift.
+    wide = add_usage_features(wide)
+    snapshot = current_feature_snapshot(wide)
 
     by_name = {}
     ambiguous = set()
@@ -137,11 +144,34 @@ def build_current_player_form(player_stats_long_current: pd.DataFrame, games_cur
         }
         for col in STAT_MAP.values():
             entry[f"roll_{col}"] = float(grp[col].mean())
+        entry.update(snapshot.get(athlete_id, {}))
         by_name[name_key] = entry
 
     for name_key in ambiguous:
         by_name.pop(name_key, None)
     return by_name
+
+
+def build_current_defense_allowed(player_stats_long_current: pd.DataFrame, games_current: pd.DataFrame) -> dict:
+    """team -> {opp_pass_yds_allowed_prior, opp_rush_yds_allowed_prior}: yards
+    that team's defense has allowed per game so far this season. Used as the
+    upcoming opponent's numbers when scoring a prop."""
+    if player_stats_long_current is None or player_stats_long_current.empty or games_current is None or games_current.empty:
+        return {}
+    wide = pivot_player_game_stats(player_stats_long_current, games_current)
+    if wide.empty:
+        return {}
+    return current_defense_allowed(add_usage_features(wide))
+
+
+def _feature_value(c, entry, opponent, opp_def, env_lookup, opp_allowed_lookup):
+    if c in OPP_ALLOWED_COLS:
+        return ((opp_allowed_lookup or {}).get(opponent) or {}).get(c)
+    if c in GAME_ENV_COLS:
+        return ((env_lookup or {}).get(entry.get("team")) or {}).get(c)
+    if c in ("opp_pass_def_success_rate", "opp_rush_def_success_rate"):
+        return opp_def.get(c)
+    return entry.get(c)
 
 
 # Standard PPR fantasy scoring weights, applied to each stat's MODEL-
@@ -182,7 +212,8 @@ def infer_position(entry: dict) -> str:
 
 
 def project_player_fantasy(entry: dict, schedule_df: pd.DataFrame,
-                            opp_defense_lookup: dict, models: dict):
+                            opp_defense_lookup: dict, models: dict,
+                            env_lookup: dict = None, opp_allowed_lookup: dict = None):
     """Returns {'opponent', 'position', 'projected_points', 'stat_breakdown'}
     for this player's NEXT upcoming game, or None if it shouldn't be
     projected yet -- no upcoming opponent found, or a required feature
@@ -209,10 +240,7 @@ def project_player_fantasy(entry: dict, schedule_df: pd.DataFrame,
         row = {}
         ok = True
         for c in model.feature_columns:
-            if c in ("opp_pass_def_success_rate", "opp_rush_def_success_rate"):
-                val = opp_def.get(c)
-            else:
-                val = entry.get(c)
+            val = _feature_value(c, entry, opponent, opp_def, env_lookup, opp_allowed_lookup)
             if val is None or (isinstance(val, float) and pd.isna(val)):
                 ok = False
                 break
@@ -262,7 +290,8 @@ def find_upcoming_opponent(team: str, schedule_df: pd.DataFrame):
 
 
 def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
-               schedule_df: pd.DataFrame, opp_defense_lookup: dict, models: dict):
+               schedule_df: pd.DataFrame, opp_defense_lookup: dict, models: dict,
+               env_lookup: dict = None, opp_allowed_lookup: dict = None):
     """Returns {'model_predicted_value', 'model_edge', 'model_lean',
     'model_confidence', 'model_over_probability'} for this prop, or None if it shouldn't be scored
     yet — unrecognized market, no trained model for that stat, player not
@@ -290,10 +319,7 @@ def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
 
     row = {}
     for c in model.feature_columns:
-        if c in ("opp_pass_def_success_rate", "opp_rush_def_success_rate"):
-            val = opp_def.get(c)
-        else:
-            val = entry.get(c)
+        val = _feature_value(c, entry, opponent, opp_def, env_lookup, opp_allowed_lookup)
         if val is None or (isinstance(val, float) and pd.isna(val)):
             return None  # a required feature is unavailable -- don't guess
         row[c] = val
