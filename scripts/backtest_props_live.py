@@ -35,7 +35,9 @@ from scipy.stats import norm
 
 import config
 from src.data import cfbd_client as cfbd
-from src.features.player_features import pivot_player_game_stats
+from src.features.player_features import (
+    pivot_player_game_stats, add_usage_features, attach_game_environment, build_rolling_player_features,
+)
 from src.features.live_player_features import market_name_to_stat, _normalize_name
 from src.models.props_model import PlayerStatModel
 
@@ -101,6 +103,7 @@ def collect_reads(season_start):
             rec = {
                 "fixture_id": p.get("fixture_id"), "player": p["player_name"], "market": p["market_name"],
                 "line": float(p["line"]), "lean": lean, "price": float(price), "book": p.get("book_used"),
+                "over_price": p.get("over_price"), "under_price": p.get("under_price"),
                 "pred": float(p["model_predicted_value"]), "lp_then": lp_then,
                 "official_then": bool(p.get("is_official_play")), "team": p.get("team"),
                 "games_played": p.get("games_played"), "model_confidence": p.get("model_confidence"),
@@ -134,7 +137,17 @@ def load_actuals(season):
     wide["start"] = wide["gameId"].map(starts)
     wide["norm"] = wide["player"].map(_normalize_name)
     print(f"Loaded box scores: {len(wide)} player-games across weeks {weeks[0]}-{weeks[-1]}")
-    return wide, schedule
+    # Pre-game feature rows for every player-game, built by the SAME code the
+    # rebuilt model trains on -- each row only uses games before it, and the
+    # game's own betting spread/total.
+    try:
+        lines = cfbd.historical_lines_to_dataframe(cfbd.get_historical_lines(season))
+    except Exception as e:
+        print(f"  [warn] {season} betting lines unavailable ({e}) -- game-environment features will be missing")
+        lines = pd.DataFrame()
+    feats = build_rolling_player_features(attach_game_environment(add_usage_features(wide), lines))
+    feats = feats.set_index(["gameId", "athleteId"])
+    return wide, feats
 
 
 def match_actual(rec, by_name):
@@ -144,6 +157,30 @@ def match_actual(rec, by_name):
     if rec.get("team"):
         near = [c for c in near if c["team"] == rec["team"]] or near
     return near[0] if len(near) == 1 else None
+
+
+def grade(actual, line, side, over_price, under_price):
+    price = over_price if side == "over" else under_price
+    if price is None or (isinstance(price, float) and math.isnan(price)):
+        return None
+    if actual == line:
+        res = "P"
+    else:
+        res = "W" if (actual > line) == (side == "over") else "L"
+    return res, float(price), (payout(price) if res == "W" else (-1.0 if res == "L" else 0.0))
+
+
+def buckets(rec):
+    gap_pct = abs(rec["pred"] - rec["line"]) / rec["line"] if rec["line"] else None
+    lp = rec["lp_now"]
+    rec["edge_bucket"] = ("<10% off line" if gap_pct is None or gap_pct < 0.10 else
+                          "10-20% off line" if gap_pct < 0.20 else
+                          "20-35% off line" if gap_pct < 0.35 else "35%+ off line")
+    rec["prob_bucket"] = ("<55%" if lp is None or lp < 0.55 else "55-60%" if lp < 0.60 else
+                          "60-65%" if lp < 0.65 else "65-70%" if lp < 0.70 else
+                          "70-80%" if lp < 0.80 else "80%+")
+    rec["tier"] = tier(rec)
+    return rec
 
 
 def tier(r):
@@ -207,7 +244,7 @@ def main(season):
                 print(f"  [warn] could not load {f}: {e}")
     print(f"Loaded {len(models)} trained props models for today's uncertainty math")
 
-    wide, _ = load_actuals(season)
+    wide, feats = load_actuals(season)
     if wide.empty:
         raise SystemExit("No box scores available to grade against.")
     by_name = {}
@@ -218,7 +255,7 @@ def main(season):
             st = None
         by_name.setdefault(row["norm"], []).append({"team": row["team"], "start": st, "row": row})
 
-    graded, unmatched, no_stat = [], 0, 0
+    graded, rebuilt, unmatched, no_stat = [], [], 0, 0
     for r in reads:
         stat = market_name_to_stat(r["market"])
         if not stat or stat not in wide.columns:
@@ -229,36 +266,42 @@ def main(season):
             unmatched += 1
             continue
         actual = float(m["row"][stat])
-        if actual == r["line"]:
-            res = "P"
-        else:
-            res = "W" if (actual > r["line"]) == (r["lean"] == "over") else "L"
         model = models.get(stat)
-        sd = model.std_for_prediction(r["pred"]) if model and hasattr(model, "std_for_prediction") else (model.residual_std if model else None)
-        if sd:
-            p_over = float(1 - norm.cdf(r["line"], loc=r["pred"], scale=sd))
-            lp_now = p_over if r["lean"] == "over" else 1 - p_over
-        else:
-            lp_now = r["lp_then"]
-        gp = r["games_played"]
-        if gp is None and r.get("model_confidence") == "low":
-            gp = 2
-        rec = dict(r, actual=actual, result=res, lp_now=lp_now, breakeven=implied_prob(r["price"]), gp=gp,
-                   units=(payout(r["price"]) if res == "W" else (-1.0 if res == "L" else 0.0)))
-        rec["tier"] = tier(rec)
-        gap_pct = abs(r["pred"] - r["line"]) / r["line"] if r["line"] else None
-        rec["edge_bucket"] = ("<10% off line" if gap_pct is None or gap_pct < 0.10 else
-                              "10-20% off line" if gap_pct < 0.20 else
-                              "20-35% off line" if gap_pct < 0.35 else "35%+ off line")
-        rec["prob_bucket"] = ("<55%" if lp_now is None or lp_now < 0.55 else "55-60%" if lp_now < 0.60 else
-                              "60-65%" if lp_now < 0.65 else "65-70%" if lp_now < 0.70 else
-                              "70-80%" if lp_now < 0.80 else "80%+")
-        graded.append(rec)
+
+        # 1) The model as it actually was at the time (saved projection),
+        #    re-rated with today's probability math. Pass attempts/completions
+        #    are excluded: the old model was trained on all-zero values for them.
+        if stat not in ("pass_att", "pass_comp"):
+            g = grade(actual, r["line"], r["lean"], r.get("over_price"), r.get("under_price"))
+            if g:
+                p_over = model.over_probability(r["pred"], r["line"]) if model and hasattr(model, "over_probability") else None
+                lp = None if p_over is None else (p_over if r["lean"] == "over" else 1 - p_over)
+                gp = r["games_played"] if r["games_played"] is not None else (2 if r.get("model_confidence") == "low" else None)
+                graded.append(buckets(dict(r, actual=actual, result=g[0], units=g[2], lp_now=lp,
+                                           breakeven=implied_prob(g[1]), gp=gp)))
+
+        # 2) The rebuilt model: fresh projection from pre-game features.
+        key = (m["row"]["gameId"], m["row"]["athleteId"])
+        if model is not None and key in feats.index:
+            frow = feats.loc[key]
+            if isinstance(frow, pd.DataFrame):
+                frow = frow.iloc[0]
+            cols = getattr(model, "feature_columns", [])
+            if cols and frow[cols].notna().all() and frow.get("games_played_prior", 0) >= 1:
+                out = model.predict_and_compare(frow, r["line"])
+                side = out["lean"]
+                g = grade(actual, r["line"], side, r.get("over_price"), r.get("under_price"))
+                if g and out["over_probability"] is not None:
+                    lp = out["over_probability"] if side == "over" else 1 - out["over_probability"]
+                    rebuilt.append(buckets(dict(r, lean=side, pred=out["predicted_value"], actual=actual,
+                                                result=g[0], units=g[2], lp_now=lp, breakeven=implied_prob(g[1]),
+                                                gp=int(frow.get("games_played_prior", 0)), injury_status=r.get("injury_status"))))
 
     df = pd.DataFrame(graded)
-    print(f"Graded {len(df)} props ({unmatched} couldn't be matched to a box score -- usually the player "
-          f"didn't play or a name mismatch; {no_stat} were markets with no box-score stat)")
-    if df.empty:
+    nb = pd.DataFrame(rebuilt)
+    print(f"Graded {len(df)} props with the model as it was at the time, and {len(nb)} with the rebuilt model "
+          f"({unmatched} couldn't be matched to a box score -- usually the player didn't play or a name mismatch)")
+    if df.empty and nb.empty:
         raise SystemExit("Nothing graded.")
 
     order = {"HIGH": 0, "MEDIUM": 1, "LOW": 2, "CHECK": 3, "PASS": 4, "NONE": 5}
@@ -284,10 +327,28 @@ def main(season):
     print_table("CALIBRATION: model's hit chance vs actual hit rate", results["by_model_probability"])
     print_table("OFFICIAL PLAYS (as flagged at the time)", results["official_at_the_time"])
 
+    if not nb.empty:
+        results["rebuilt"] = {
+            "n_graded": int(len(nb)),
+            "overall": summarize(nb.assign(all="All props"), "all"),
+            "by_tier": sorted(summarize(nb, "tier"), key=lambda r: order.get(r["group"], 9)),
+            "by_side": summarize(nb, "lean"),
+            "by_market": sorted(summarize(nb, "market"), key=lambda r: -r["n"]),
+            "by_model_probability": summarize(nb, "prob_bucket"),
+        }
+        print("\n" + "=" * 80 + "\nREBUILT MODEL (volume + game environment + real-miss probabilities), same props\n" + "=" * 80)
+        print_table("OVERALL", results["rebuilt"]["overall"])
+        print_table("BY CONFIDENCE TIER", results["rebuilt"]["by_tier"])
+        print_table("OVERS vs UNDERS", results["rebuilt"]["by_side"])
+        print_table("BY MARKET", results["rebuilt"]["by_market"])
+        print_table("CALIBRATION: model's hit chance vs actual hit rate", results["rebuilt"]["by_model_probability"])
+
     os.makedirs("docs/data", exist_ok=True)
     with open("docs/data/props_backtest.json", "w") as f:
         json.dump(results, f, indent=2, default=str)
-    df.drop(columns=["lp_then"], errors="ignore").to_csv("docs/data/props_backtest_detail.csv", index=False)
+    df.drop(columns=["lp_then"], errors="ignore").assign(model="as_it_was").pipe(
+        lambda d: pd.concat([d, nb.drop(columns=["lp_then"], errors="ignore").assign(model="rebuilt")], ignore_index=True)
+    ).to_csv("docs/data/props_backtest_detail.csv", index=False)
     print("\nWrote docs/data/props_backtest.json and docs/data/props_backtest_detail.csv")
 
 
