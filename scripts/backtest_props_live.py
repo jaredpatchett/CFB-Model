@@ -1,307 +1,355 @@
 #!/usr/bin/env python3
 """
-Props edge finder (added 10/2026).
+Props backtest against REAL posted lines (added 10/2026).
 
-The rebuilt props model roughly MATCHES the sportsbooks (54.5% hit vs ~56%
-needed at the posted prices), so a projection edge alone won't beat the
-juice. This script tests where an edge could still come from, using only
-data already saved in the repo's docs/data/latest.json history:
+No historical prop lines exist for past seasons, but every pipeline run this
+season committed docs/data/latest.json -- including every posted prop line,
+its price, and the model's projection, all captured BEFORE kickoff. This
+script walks that git history, takes each prop's last pre-kickoff read, and
+grades it against the player's actual box score from CFBD. The model could
+not have seen any of these results, so this is a genuine out-of-sample test
+of exactly what the dashboard showed.
 
-  1. Line shopping   -- best line/price across all books vs. a single book.
-  2. Bet timing      -- the FIRST line posted vs. the LAST line before
-                        kickoff, and whether lines move toward the model's
-                        side after they open (closing-line value).
-  3. Edge threshold  -- only bet when the model's expected value clears
-                        0%, 3%, 5% or 10%.
-  4. Pockets         -- every measurable slice (stat, over/under, team
-                        favored or not, game total, player role, sample
-                        size, day of week, book).
+Each prop is re-rated with TODAY'S confidence rules (same as the dashboard's
+Player Props table) and today's projection-sized uncertainty, so a "High"
+from three weeks ago means the same thing as a "High" today. The model's
+projections themselves are the ones it actually made at the time.
 
-Guarding against luck: testing many slices on two weekends WILL turn up some
-that look profitable by chance. A slice is only listed as a CANDIDATE if it
-made money in every graded weekend separately, has at least MIN_BETS bets,
-and its overall result is at least ~1.5 standard errors above break-even.
-Candidates still need confirming on future weekends before real money.
+Output: a summary in the run log, docs/data/props_backtest.json, and
+docs/data/props_backtest_detail.csv (one row per graded prop).
 
-All projections come from the CURRENT (rebuilt) props models using only
-pre-game information (same feature rows the models train on).
-
-Usage (needs full git history; run from the props backtest workflow):
-  python scripts/props_edge_finder.py --season 2026
+Usage (needs full git history -- the workflow checks out with fetch-depth 0):
+  python scripts/backtest_props_live.py --season 2026
 """
 import argparse
 import json
 import math
 import os
+import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..")))
-sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import pandas as pd
+from scipy.stats import norm
 
 import config
-import backtest_props_live as bpl
+from src.data import cfbd_client as cfbd
+from src.features.player_features import (
+    pivot_player_game_stats, add_usage_features, attach_game_environment, build_rolling_player_features,
+)
 from src.features.live_player_features import market_name_to_stat, _normalize_name
 from src.models.props_model import PlayerStatModel
 
-SINGLE_BOOK_ORDER = ["draftkings", "fanduel", "betmgm", "williamhill_us", "espnbet", "betrivers", "fanatics"]
-EV_THRESHOLDS = [None, 0.0, 0.03, 0.05, 0.10]
-MIN_BETS = 40
+DATA_FILE = "docs/data/latest.json"
+COUNT_MARKET_WORDS = ("touchdown", "interception")
+BLOCKING_INJ = {"Out", "Out For Season", "IR", "Doubtful"}
 
 
-def _num(x):
-    try:
-        x = float(x)
-        return None if math.isnan(x) else x
-    except (TypeError, ValueError):
-        return None
+def _ts(s):
+    s = str(s).replace("Z", "+00:00")
+    d = datetime.fromisoformat(s)
+    return d if d.tzinfo else d.replace(tzinfo=timezone.utc)
 
 
-def collect_markets(season_start):
-    """(fixture, player, market) -> {'first': rows, 'last': rows, meta}, where
-    rows are every book/line posted in the first and last pre-kickoff runs
-    that carried this prop."""
-    out = {}
-    n = 0
-    for when, d in bpl.snapshots(season_start):
-        n += 1
-        per = {}
+def implied_prob(price):
+    price = float(price)
+    return (-price) / ((-price) + 100) if price < 0 else 100 / (price + 100)
+
+
+def payout(price):
+    price = float(price)
+    return price / 100 if price > 0 else 100 / (-price)
+
+
+def snapshots(since):
+    out = subprocess.run(["git", "log", "--format=%H %cI", f"--since={since}", "--", DATA_FILE],
+                         capture_output=True, text=True, check=True).stdout
+    rows = [l.split() for l in out.splitlines() if l.strip()]
+    rows.reverse()  # oldest first, so later snapshots overwrite earlier reads
+    for sha, when in rows:
+        try:
+            blob = subprocess.run(["git", "show", f"{sha}:{DATA_FILE}"], capture_output=True, text=True, check=True).stdout
+            yield _ts(when), json.loads(blob)
+        except Exception:
+            continue
+
+
+def collect_reads(season_start):
+    """(fixture, player, market) -> the last pre-kickoff read of that prop,
+    using the model's best line within each snapshot (as the dashboard does)."""
+    reads, n_snaps = {}, 0
+    for when, d in snapshots(season_start):
+        n_snaps += 1
+        per_snap = {}
         for p in d.get("props") or []:
-            if not p.get("start_time") or p.get("line") is None:
+            if p.get("model_predicted_value") is None or not p.get("model_lean") or not p.get("start_time"):
                 continue
             try:
-                kick = bpl._ts(p["start_time"])
+                kick = _ts(p["start_time"])
             except Exception:
                 continue
             if kick <= when:
+                continue  # read taken after kickoff -- not something you could have bet
+            lean = p["model_lean"]
+            price = p.get("over_price") if lean == "over" else p.get("under_price")
+            if price is None or (isinstance(price, float) and math.isnan(price)):
                 continue
+            op = p.get("model_over_probability")
+            lp_then = p.get("model_lean_probability")
+            if lp_then is None and op is not None:
+                lp_then = op if lean == "over" else 1 - op
             key = (p.get("fixture_id"), _normalize_name(p["player_name"]), p["market_name"])
-            row = {"line": _num(p["line"]), "over": _num(p.get("over_price")), "under": _num(p.get("under_price")),
-                   "book": p.get("book_used") or "unknown", "at": when.isoformat()}
-            if row["line"] is None:
-                continue
-            per.setdefault(key, {"rows": [], "meta": {"player": p["player_name"], "market": p["market_name"],
-                                                      "start_time": p["start_time"], "team": p.get("team")}})["rows"].append(row)
-        for key, v in per.items():
-            rec = out.setdefault(key, {"meta": v["meta"], "first": v["rows"], "last": v["rows"]})
-            rec["last"] = v["rows"]
-            if v["meta"].get("team"):
-                rec["meta"]["team"] = v["meta"]["team"]
-    print(f"Scanned {n} saved runs -> {len(out)} distinct props with posted lines")
-    return out
+            rec = {
+                "fixture_id": p.get("fixture_id"), "player": p["player_name"], "market": p["market_name"],
+                "line": float(p["line"]), "lean": lean, "price": float(price), "book": p.get("book_used"),
+                "over_price": p.get("over_price"), "under_price": p.get("under_price"),
+                "pred": float(p["model_predicted_value"]), "lp_then": lp_then,
+                "official_then": bool(p.get("is_official_play")), "team": p.get("team"),
+                "games_played": p.get("games_played"), "model_confidence": p.get("model_confidence"),
+                "injury_status": p.get("injury_status"), "start_time": p["start_time"], "read_at": when.isoformat(),
+            }
+            cur = per_snap.get(key)
+            if cur is None or rec["official_then"] and not cur["official_then"] or \
+                    (not cur["official_then"] and (rec["lp_then"] or 0) > (cur["lp_then"] or 0)):
+                per_snap[key] = rec
+        reads.update(per_snap)  # later snapshot = closer to kickoff
+    print(f"Scanned {n_snaps} saved runs -> {len(reads)} distinct pre-kickoff prop reads")
+    return list(reads.values())
 
 
-def choose(rows, model, pred, shop):
-    """The bet you'd make from these posted rows: with shopping, the row and
-    side with the best expected value across every book; without, the first
-    available book in SINGLE_BOOK_ORDER."""
-    if not rows:
+def load_actuals(season):
+    schedule = cfbd.get_games(season)
+    done = schedule[schedule.get("completed") == True] if "completed" in schedule.columns else schedule
+    weeks = sorted(int(w) for w in done["week"].dropna().unique())
+    parts = []
+    for wk in weeks:
+        try:
+            df = cfbd.get_player_game_stats(season, wk)
+            if not df.empty:
+                parts.append(df)
+        except Exception as e:
+            print(f"  [warn] week {wk} player stats failed: {e}")
+    if not parts:
+        return pd.DataFrame(), schedule
+    wide = pivot_player_game_stats(pd.concat(parts, ignore_index=True), schedule)
+    starts = schedule.set_index("id")["startDate"] if "startDate" in schedule.columns else pd.Series(dtype=str)
+    wide["start"] = wide["gameId"].map(starts)
+    wide["norm"] = wide["player"].map(_normalize_name)
+    print(f"Loaded box scores: {len(wide)} player-games across weeks {weeks[0]}-{weeks[-1]}")
+    # Pre-game feature rows for every player-game, built by the SAME code the
+    # rebuilt model trains on -- each row only uses games before it, and the
+    # game's own betting spread/total.
+    try:
+        lines = cfbd.historical_lines_to_dataframe(cfbd.get_historical_lines(season))
+    except Exception as e:
+        print(f"  [warn] {season} betting lines unavailable ({e}) -- game-environment features will be missing")
+        lines = pd.DataFrame()
+    feats = build_rolling_player_features(attach_game_environment(add_usage_features(wide), lines))
+    feats = feats.set_index(["gameId", "athleteId"])
+    return wide, feats
+
+
+def match_actual(rec, by_name):
+    cands = by_name.get(_normalize_name(rec["player"]), [])
+    kick = _ts(rec["start_time"])
+    near = [c for c in cands if c["start"] is not None and abs(c["start"] - kick) <= timedelta(hours=36)]
+    if rec.get("team"):
+        near = [c for c in near if c["team"] == rec["team"]] or near
+    return near[0] if len(near) == 1 else None
+
+
+def grade(actual, line, side, over_price, under_price):
+    price = over_price if side == "over" else under_price
+    if price is None or (isinstance(price, float) and math.isnan(price)):
         return None
-    if not shop:
-        by_book = {r["book"]: r for r in rows}
-        pick = next((by_book[b] for b in SINGLE_BOOK_ORDER if b in by_book), rows[0])
-        rows = [pick]
-    best = None
-    for r in rows:
-        p_over = model.over_probability(pred, r["line"])
-        if p_over is None:
-            continue
-        side = "over" if pred > r["line"] else "under"
-        price = r["over"] if side == "over" else r["under"]
-        if price is None:
-            continue
-        lp = p_over if side == "over" else 1 - p_over
-        ev = lp * bpl.payout(price) - (1 - lp)
-        if best is None or ev > best["ev"]:
-            best = {"line": r["line"], "side": side, "price": price, "lp": lp, "ev": ev, "book": r["book"]}
-    return best
+    if actual == line:
+        res = "P"
+    else:
+        res = "W" if (actual > line) == (side == "over") else "L"
+    return res, float(price), (payout(price) if res == "W" else (-1.0 if res == "L" else 0.0))
 
 
-def summarize(df, label):
-    if df.empty:
-        return {"group": label, "n": 0}
-    w, l = int((df.result == "W").sum()), int((df.result == "L").sum())
-    pu = int((df.result == "P").sum())
-    n = len(df)
-    units = float(df.units.sum())
-    roi = units / n
-    # z: how many standard errors the per-bet return sits above zero
-    sd = df.units.std(ddof=1) if n > 1 else float("nan")
-    z = roi / (sd / math.sqrt(n)) if n > 1 and sd and sd > 0 else 0.0
-    out = {"group": label, "n": n, "record": f"{w}-{l}-{pu}", "hit_rate": round(w / (w + l), 3) if w + l else None,
-           "needs": round(df.breakeven.mean(), 3), "units": round(units, 2), "roi": round(roi, 3), "z": round(z, 2)}
-    by_wk = {}
-    for wk, g in df.groupby("weekend"):
-        by_wk[wk] = round(float(g.units.sum()) / len(g), 3)
-    out["roi_by_weekend"] = by_wk
+def buckets(rec):
+    gap_pct = abs(rec["pred"] - rec["line"]) / rec["line"] if rec["line"] else None
+    lp = rec["lp_now"]
+    rec["edge_bucket"] = ("<10% off line" if gap_pct is None or gap_pct < 0.10 else
+                          "10-20% off line" if gap_pct < 0.20 else
+                          "20-35% off line" if gap_pct < 0.35 else "35%+ off line")
+    rec["prob_bucket"] = ("<55%" if lp is None or lp < 0.55 else "55-60%" if lp < 0.60 else
+                          "60-65%" if lp < 0.65 else "65-70%" if lp < 0.70 else
+                          "70-80%" if lp < 0.80 else "80%+")
+    rec["tier"] = tier(rec)
+    return rec
+
+
+def tier(r):
+    lp, be, gp, inj = r["lp_now"], r["breakeven"], r["gp"], r.get("injury_status")
+    if lp is None:
+        return "NONE"
+    gap = lp - be
+    if inj in BLOCKING_INJ or gap <= 0:
+        return "PASS"
+    if lp >= 0.80 or (r["line"] > 0 and abs(r["pred"] - r["line"]) >= max(0.25 * r["line"], 12)):
+        return "CHECK"
+    if lp >= 0.60 and gap >= 0.05 and (gp is None or gp >= 3) and not inj:
+        t = "HIGH"
+    elif lp >= 0.55 and gap >= 0.02 and (gp is None or gp >= 2):
+        t = "MEDIUM"
+    else:
+        t = "LOW"
+    m = r["market"].lower()
+    if t in ("HIGH", "MEDIUM") and (any(w in m for w in COUNT_MARKET_WORDS) or m == "receptions"):
+        t = "LOW"
+    return t
+
+
+def summarize(df, by):
+    out = []
+    for key, g in df.groupby(by, dropna=False):
+        w, l, pu = (g.result == "W").sum(), (g.result == "L").sum(), (g.result == "P").sum()
+        dec = w + l
+        out.append({
+            "group": key if not isinstance(key, tuple) else " / ".join(map(str, key)),
+            "n": int(len(g)), "record": f"{w}-{l}-{pu}",
+            "hit_rate": round(w / dec, 3) if dec else None,
+            "avg_model_prob": round(g.lp_now.mean(), 3),
+            "avg_breakeven": round(g.breakeven.mean(), 3),
+            "units": round(g.units.sum(), 2),
+            "roi": round(g.units.sum() / len(g), 3) if len(g) else None,
+        })
     return out
 
 
-def fmt(r):
-    if not r.get("n"):
-        return f"  {str(r['group']):<34}{'0':>6}"
-    wk = " ".join(f"{v*100:+5.1f}%" for _, v in sorted(r["roi_by_weekend"].items()))
-    return (f"  {str(r['group']):<34}{r['n']:>6}{r['record']:>12}{(r['hit_rate'] or 0)*100:>7.1f}{r['needs']*100:>7.1f}"
-            f"{r['units']:>+9.2f}{r['roi']*100:>+7.1f}%{r['z']:>6.2f}   {wk}")
-
-
-def header(title):
+def print_table(title, rows):
     print(f"\n{title}")
-    print(f"  {'group':<34}{'n':>6}{'record':>12}{'hit%':>7}{'needs':>7}{'units':>9}{'ROI':>8}{'z':>6}   ROI by weekend")
+    print(f"  {'group':<28}{'n':>6}{'record':>14}{'hit%':>8}{'model%':>8}{'needs%':>8}{'units':>9}{'ROI':>8}")
+    for r in rows:
+        hr = f"{r['hit_rate']*100:.1f}" if r["hit_rate"] is not None else "-"
+        print(f"  {str(r['group']):<28}{r['n']:>6}{r['record']:>14}{hr:>8}{r['avg_model_prob']*100:>8.1f}"
+              f"{r['avg_breakeven']*100:>8.1f}{r['units']:>+9.2f}{(r['roi'] or 0)*100:>+7.1f}%")
 
 
 def main(season):
-    markets = collect_markets(f"{season}-08-01")
+    reads = collect_reads(f"{season}-08-01")
+    if not reads:
+        raise SystemExit("No pre-kickoff prop reads found in the repo history.")
+
     models = {}
-    pdir = f"{config.MODELS_DIR}/props"
-    for f in (os.listdir(pdir) if os.path.isdir(pdir) else []):
+    for f in os.listdir(f"{config.MODELS_DIR}/props") if os.path.isdir(f"{config.MODELS_DIR}/props") else []:
         if f.endswith(".joblib"):
-            models[f[:-7]] = PlayerStatModel.load(f"{pdir}/{f}")
-    wide, feats = bpl.load_actuals(season)
+            try:
+                models[f[:-7]] = PlayerStatModel.load(f"{config.MODELS_DIR}/props/{f}")
+            except Exception as e:
+                print(f"  [warn] could not load {f}: {e}")
+    print(f"Loaded {len(models)} trained props models for today's uncertainty math")
+
+    wide, feats = load_actuals(season)
+    if wide.empty:
+        raise SystemExit("No box scores available to grade against.")
     by_name = {}
     for _, row in wide.iterrows():
         try:
-            st = bpl._ts(row["start"]) if pd.notna(row["start"]) else None
+            st = _ts(row["start"]) if pd.notna(row["start"]) else None
         except Exception:
             st = None
         by_name.setdefault(row["norm"], []).append({"team": row["team"], "start": st, "row": row})
 
-    bets = []
-    for key, rec in markets.items():
-        meta = rec["meta"]
-        stat = market_name_to_stat(meta["market"])
-        model = models.get(stat)
-        if not stat or model is None or stat not in wide.columns:
+    graded, rebuilt, unmatched, no_stat = [], [], 0, 0
+    for r in reads:
+        stat = market_name_to_stat(r["market"])
+        if not stat or stat not in wide.columns:
+            no_stat += 1
             continue
-        m = bpl.match_actual(meta, by_name)
+        m = match_actual(r, by_name)
         if m is None:
+            unmatched += 1
             continue
-        fkey = (m["row"]["gameId"], m["row"]["athleteId"])
-        if fkey not in feats.index:
-            continue
-        frow = feats.loc[fkey]
-        if isinstance(frow, pd.DataFrame):
-            frow = frow.iloc[0]
-        cols = model.feature_columns
-        if not cols or not frow[cols].notna().all() or frow.get("games_played_prior", 0) < 1:
-            continue
-        pred = float(model.model.predict(frow[cols].to_frame().T)[0])
-        if stat in model.NONNEGATIVE:
-            pred = max(pred, 0.0)
         actual = float(m["row"][stat])
-        # Label by US Eastern day (a late Saturday-night kickoff is Sunday in
-        # UTC), and group Thu-Mon games under that week's Saturday.
-        kick = pd.Timestamp(bpl._ts(meta["start_time"])) - pd.Timedelta(hours=5)
-        sat = (kick + pd.Timedelta(days={0: -2, 1: -3, 2: 3, 3: 2, 4: 1, 5: 0, 6: -1}[kick.weekday()])).date()
-        base = {
-            "player": meta["player"], "market": meta["market"], "stat": stat, "pred": pred, "actual": actual,
-            "weekend": str(sat), "kick_day": "Thu/Fri" if kick.weekday() in (3, 4) else "Sat/Sun",
-            "team_spread": frow.get("team_spread"), "implied": frow.get("team_implied_total"),
-            "gp": int(frow.get("games_played_prior", 0)),
-            "rec_share": frow.get("roll_rec_share"), "carry_share": frow.get("roll_carry_share"),
+        model = models.get(stat)
+
+        # 1) The model as it actually was at the time (saved projection),
+        #    re-rated with today's probability math. Pass attempts/completions
+        #    are excluded: the old model was trained on all-zero values for them.
+        if stat not in ("pass_att", "pass_comp"):
+            g = grade(actual, r["line"], r["lean"], r.get("over_price"), r.get("under_price"))
+            if g:
+                p_over = model.over_probability(r["pred"], r["line"]) if model and hasattr(model, "over_probability") else None
+                lp = None if p_over is None else (p_over if r["lean"] == "over" else 1 - p_over)
+                gp = r["games_played"] if r["games_played"] is not None else (2 if r.get("model_confidence") == "low" else None)
+                graded.append(buckets(dict(r, actual=actual, result=g[0], units=g[2], lp_now=lp,
+                                           breakeven=implied_prob(g[1]), gp=gp)))
+
+        # 2) The rebuilt model: fresh projection from pre-game features.
+        key = (m["row"]["gameId"], m["row"]["athleteId"])
+        if model is not None and key in feats.index:
+            frow = feats.loc[key]
+            if isinstance(frow, pd.DataFrame):
+                frow = frow.iloc[0]
+            cols = getattr(model, "feature_columns", [])
+            if cols and frow[cols].notna().all() and frow.get("games_played_prior", 0) >= 1:
+                out = model.predict_and_compare(frow, r["line"])
+                side = out["lean"]
+                g = grade(actual, r["line"], side, r.get("over_price"), r.get("under_price"))
+                if g and out["over_probability"] is not None:
+                    lp = out["over_probability"] if side == "over" else 1 - out["over_probability"]
+                    rebuilt.append(buckets(dict(r, lean=side, pred=out["predicted_value"], actual=actual,
+                                                result=g[0], units=g[2], lp_now=lp, breakeven=implied_prob(g[1]),
+                                                gp=int(frow.get("games_played_prior", 0)), injury_status=r.get("injury_status"))))
+
+    df = pd.DataFrame(graded)
+    nb = pd.DataFrame(rebuilt)
+    print(f"Graded {len(df)} props with the model as it was at the time, and {len(nb)} with the rebuilt model "
+          f"({unmatched} couldn't be matched to a box score -- usually the player didn't play or a name mismatch)")
+    if df.empty and nb.empty:
+        raise SystemExit("Nothing graded.")
+
+    order = {"HIGH": 0, "MEDIUM": 1, "LOW": 2, "CHECK": 3, "PASS": 4, "NONE": 5}
+    tiers = sorted(summarize(df, "tier"), key=lambda r: order.get(r["group"], 9))
+    results = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "season": season, "n_graded": int(len(df)),
+        "overall": summarize(df.assign(all="All props"), "all"),
+        "by_tier": tiers,
+        "by_side": summarize(df, "lean"),
+        "by_tier_and_side": summarize(df[df.tier.isin(["HIGH", "MEDIUM", "LOW", "CHECK"])], ["tier", "lean"]),
+        "by_market": sorted(summarize(df, "market"), key=lambda r: -r["n"]),
+        "by_distance_from_line": summarize(df, "edge_bucket"),
+        "by_model_probability": summarize(df, "prob_bucket"),
+        "official_at_the_time": summarize(df.assign(o=df.official_then.map({True: "Official", False: "Not official"})), "o"),
+    }
+    print_table("OVERALL", results["overall"])
+    print_table("BY CONFIDENCE TIER (today's rules)", results["by_tier"])
+    print_table("OVERS vs UNDERS", results["by_side"])
+    print_table("TIER x SIDE", results["by_tier_and_side"])
+    print_table("BY MARKET", results["by_market"])
+    print_table("BY HOW FAR THE MODEL WAS FROM THE LINE", results["by_distance_from_line"])
+    print_table("CALIBRATION: model's hit chance vs actual hit rate", results["by_model_probability"])
+    print_table("OFFICIAL PLAYS (as flagged at the time)", results["official_at_the_time"])
+
+    if not nb.empty:
+        results["rebuilt"] = {
+            "n_graded": int(len(nb)),
+            "overall": summarize(nb.assign(all="All props"), "all"),
+            "by_tier": sorted(summarize(nb, "tier"), key=lambda r: order.get(r["group"], 9)),
+            "by_side": summarize(nb, "lean"),
+            "by_market": sorted(summarize(nb, "market"), key=lambda r: -r["n"]),
+            "by_model_probability": summarize(nb, "prob_bucket"),
         }
-        for variant, rows, shop in (("last line, one book", rec["last"], False), ("last line, best book", rec["last"], True),
-                                    ("first line, one book", rec["first"], False), ("first line, best book", rec["first"], True)):
-            pick = choose(rows, model, pred, shop)
-            if not pick:
-                continue
-            g = bpl.grade(actual, pick["line"], pick["side"], pick["price"] if pick["side"] == "over" else None,
-                          pick["price"] if pick["side"] == "under" else None)
-            if not g:
-                continue
-            bets.append(dict(base, variant=variant, line=pick["line"], side=pick["side"], price=pick["price"],
-                             book=pick["book"], lp=pick["lp"], ev=pick["ev"], result=g[0], units=g[2],
-                             breakeven=bpl.implied_prob(pick["price"])))
-        # Closing-line value: did the single-book line move toward the model's side?
-        o, c = choose(rec["first"], model, pred, False), choose(rec["last"], model, pred, False)
-        if o and c:
-            move = (c["line"] - o["line"]) if o["side"] == "over" else (o["line"] - c["line"])
-            bets.append(dict(base, variant="_clv", side=o["side"], line=o["line"], move=move, ev=o["ev"],
-                             result="-", units=0.0, breakeven=0.0, price=o["price"], book=o["book"], lp=o["lp"]))
-
-    df = pd.DataFrame(bets)
-    if df.empty:
-        raise SystemExit("Nothing to evaluate.")
-    clv = df[df.variant == "_clv"]
-    df = df[df.variant != "_clv"]
-    print(f"Evaluated {df[df.variant == 'last line, one book'].shape[0]} props across weekends "
-          f"{sorted(df.weekend.unique())}")
-    results = {"generated_at": datetime.now(timezone.utc).isoformat(), "season": season}
-
-    # 1-3. Variant x edge threshold
-    header("1-3. LINE SHOPPING x BET TIMING x MINIMUM EDGE")
-    grid = []
-    for variant in ("last line, one book", "last line, best book", "first line, one book", "first line, best book"):
-        v = df[df.variant == variant]
-        for t in EV_THRESHOLDS:
-            sub = v if t is None else v[v.ev >= t]
-            r = summarize(sub, f"{variant} | " + ("every prop" if t is None else f"EV>={int(t*100)}%"))
-            grid.append(r)
-            print(fmt(r))
-    results["grid"] = grid
-
-    # Closing-line value
-    if not clv.empty:
-        moved = clv[clv.move != 0]
-        toward = int((moved.move > 0).sum())
-        print(f"\nCLOSING-LINE VALUE: of {len(moved)} props whose line moved between first post and kickoff, "
-              f"it moved TOWARD the model's side {toward} times ({toward / max(len(moved), 1):.1%}). "
-              f"Above 50% means the market tends to agree with the model after the fact.")
-        for t in (0.0, 0.05, 0.10):
-            mv = moved[moved.ev >= t]
-            if len(mv):
-                print(f"  model EV>={int(t*100)}% at open: line moved toward the model {(mv.move > 0).mean():.1%} of {len(mv)}")
-        results["clv"] = {"moved": int(len(moved)), "toward_model": toward,
-                          "share_toward": round(toward / max(len(moved), 1), 3)}
-
-    # Pick the best-performing betting setup as the base for the pocket scan.
-    scored = [g for g in grid if g.get("n", 0) >= 150]
-    base_label = max(scored, key=lambda g: g["roi"])["group"] if scored else "last line, best book | EV>=3%"
-    variant, rule = base_label.split(" | ")
-    base = df[df.variant == variant]
-    if rule.startswith("EV>="):
-        base = base[base.ev >= int(rule[4:-1]) / 100]
-    print(f"\n4. POCKETS -- scanned on the strongest setup above: {base_label}")
-
-    def bucket(series, edges, labels):
-        return pd.cut(pd.to_numeric(series, errors="coerce"), edges, labels=labels)
-    base = base.assign(
-        fav=bucket(base.team_spread, [-99, -7, -0.01, 7, 99], ["big favorite (7+)", "small favorite", "small underdog", "big underdog (7+)"]),
-        total=bucket(base.implied, [0, 24, 31, 99], ["team total <24", "team total 24-31", "team total 31+"]),
-        role=pd.Series([("featured" if (s or 0) >= 0.22 or (c or 0) >= 0.55 else
-                         "secondary" if (s or 0) >= 0.12 or (c or 0) >= 0.30 else "depth")
-                        for s, c in zip(base.rec_share, base.carry_share)], index=base.index),
-        sample=pd.cut(base.gp, [0, 2, 3, 99], labels=["1-2 games", "3 games", "4+ games"]),
-    )
-    pockets = []
-    for dim in ("market", "side", "fav", "total", "role", "sample", "kick_day", "book"):
-        for val, g in base.groupby(dim, observed=True):
-            pockets.append(dict(summarize(g, f"{dim}: {val}"), dim=dim))
-    for (mk, sd), g in base.groupby(["market", "side"]):
-        pockets.append(dict(summarize(g, f"market x side: {mk} {sd}"), dim="market x side"))
-    weekends = sorted(df.weekend.unique())
-    def is_candidate(p):
-        return (p["n"] >= MIN_BETS and p["roi"] > 0 and p["z"] >= 1.5
-                and len(p["roi_by_weekend"]) == len(weekends) and all(v > 0 for v in p["roi_by_weekend"].values()))
-    for p in pockets:
-        p["candidate"] = is_candidate(p)
-    header("POCKETS (sorted by ROI; * = candidate: profitable every weekend, 40+ bets, z>=1.5)")
-    for p in sorted(pockets, key=lambda p: -p["roi"]):
-        print(("* " if p["candidate"] else "  ") + fmt(p)[2:])
-    cands = [p for p in pockets if p["candidate"]]
-    print(f"\n{len(cands)} candidate pocket(s). Tested {len(pockets)} slices -- at this many, a few false "
-          f"positives are expected, so confirm any candidate on future weekends before betting it.")
-    results["base_setup"] = base_label
-    results["pockets"] = pockets
-    results["candidates"] = cands
+        print("\n" + "=" * 80 + "\nREBUILT MODEL (volume + game environment + real-miss probabilities), same props\n" + "=" * 80)
+        print_table("OVERALL", results["rebuilt"]["overall"])
+        print_table("BY CONFIDENCE TIER", results["rebuilt"]["by_tier"])
+        print_table("OVERS vs UNDERS", results["rebuilt"]["by_side"])
+        print_table("BY MARKET", results["rebuilt"]["by_market"])
+        print_table("CALIBRATION: model's hit chance vs actual hit rate", results["rebuilt"]["by_model_probability"])
 
     os.makedirs("docs/data", exist_ok=True)
-    with open("docs/data/props_edge_finder.json", "w") as f:
+    with open("docs/data/props_backtest.json", "w") as f:
         json.dump(results, f, indent=2, default=str)
-    df.to_csv("docs/data/props_edge_finder_detail.csv", index=False)
-    print("Wrote docs/data/props_edge_finder.json and docs/data/props_edge_finder_detail.csv")
+    df.drop(columns=["lp_then"], errors="ignore").assign(model="as_it_was").pipe(
+        lambda d: pd.concat([d, nb.drop(columns=["lp_then"], errors="ignore").assign(model="rebuilt")], ignore_index=True)
+    ).to_csv("docs/data/props_backtest_detail.csv", index=False)
+    print("\nWrote docs/data/props_backtest.json and docs/data/props_backtest_detail.csv")
 
 
 if __name__ == "__main__":
