@@ -37,7 +37,7 @@ from src.features.live_features import (
 )
 from src.features.live_player_features import (
     build_current_player_form, score_prop, MIN_GAMES_FOR_PROP_MODEL,
-    project_player_fantasy, MIN_GAMES_FOR_FANTASY,
+    project_player_fantasy, MIN_GAMES_FOR_FANTASY, build_current_defense_allowed,
 )
 from src.features.player_features import STAT_MAP
 from src.models import fair_odds as fo
@@ -766,6 +766,7 @@ def main(year: int):
         max_completed_week = int(completed_weeks.max()) if not completed_weeks.empty else 0
 
     player_form = {}
+    opp_allowed_lookup = {}
     if prop_models and max_completed_week > 0:
         print(f"  pulling {season_year} player game stats through week {max_completed_week}...")
         all_player_stats = []
@@ -779,11 +780,29 @@ def main(year: int):
         if all_player_stats:
             player_stats_long_current = pd.concat(all_player_stats, ignore_index=True)
             player_form = build_current_player_form(player_stats_long_current, schedule_df)
+            opp_allowed_lookup = build_current_defense_allowed(player_stats_long_current, schedule_df)
             n_ready = sum(1 for v in player_form.values() if v["games_played_prior"] >= MIN_GAMES_FOR_PROP_MODEL)
             print(f"  {len(player_form)} player(s) matched to real {season_year} stats, "
                   f"{n_ready} of them already clear the {MIN_GAMES_FOR_PROP_MODEL}-game threshold")
     elif prop_models:
         print(f"  0 completed {season_year} games yet — nothing to score (normal before kickoff)")
+
+    # Game environment for each team's upcoming game, from its posted spread
+    # and total (10/2026 props rebuild): team_spread (negative = favored) and
+    # the points the market expects that team to score.
+    env_lookup = {}
+    for g in games_out:
+        sp, tot = g.get("spread_home"), g.get("total_over")
+        try:
+            sp, tot = float(sp), float(tot)
+        except (TypeError, ValueError):
+            continue
+        if pd.isna(sp) or pd.isna(tot):
+            continue
+        if g.get("home_school"):
+            env_lookup[g["home_school"]] = {"team_spread": sp, "team_implied_total": tot / 2 - sp / 2}
+        if g.get("away_school"):
+            env_lookup[g["away_school"]] = {"team_spread": -sp, "team_implied_total": tot / 2 + sp / 2}
 
     opp_defense_lookup = {}
     if (not adv_stats_df.empty and "team" in adv_stats_df.columns
@@ -822,6 +841,7 @@ def main(year: int):
             result = score_prop(
                 p.get("player_name"), p.get("market_name"), p.get("line"),
                 player_form, schedule_df, opp_defense_lookup, prop_models,
+                env_lookup=env_lookup, opp_allowed_lookup=opp_allowed_lookup,
             )
             if result:
                 p.update(result)
@@ -928,7 +948,8 @@ def main(year: int):
         for name_key, entry in player_form.items():
             if entry["games_played_prior"] < MIN_GAMES_FOR_FANTASY:
                 continue
-            result = project_player_fantasy(entry, schedule_df, opp_defense_lookup, prop_models)
+            result = project_player_fantasy(entry, schedule_df, opp_defense_lookup, prop_models,
+                                            env_lookup=env_lookup, opp_allowed_lookup=opp_allowed_lookup)
             if result:
                 fantasy_out.append({
                     "player_name": entry["display_name"],
