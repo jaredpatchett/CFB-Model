@@ -56,11 +56,14 @@ jobs:
       - name: Grade every saved pre-kickoff prop read
         run: python scripts/backtest_props_live.py --season ${{ github.event.inputs.season || '2026' }}
 
+      - name: Search for a props edge (line shopping, timing, minimum edge, pockets)
+        run: python scripts/props_edge_finder.py --season ${{ github.event.inputs.season || '2026' }}
+
       - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/data/props_backtest.json docs/data/props_backtest_detail.csv
+          git add docs/data/props_backtest.json docs/data/props_backtest_detail.csv docs/data/props_edge_finder.json docs/data/props_edge_finder_detail.csv
           git diff --cached --quiet && echo "No changes to commit" && exit 0
           git commit -m "Props backtest results [skip ci]"
           for i in 1 2 3 4 5; do
