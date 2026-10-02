@@ -1,0 +1,1258 @@
+{
+  "generated_at": "2026-10-02T23:36:17.105845+00:00",
+  "season": 2026,
+  "grid": [
+    {
+      "group": "last line, one book | every prop",
+      "n": 2088,
+      "record": "1128-960-0",
+      "hit_rate": 0.54,
+      "needs": 0.552,
+      "units": -39.33,
+      "roi": -0.019,
+      "z": -0.94,
+      "roi_by_weekend": {
+        "2026-09-19": -0.041,
+        "2026-09-26": 0.002,
+        "2026-10-03": -0.027
+      }
+    },
+    {
+      "group": "last line, one book | EV>=0%",
+      "n": 1445,
+      "record": "784-661-0",
+      "hit_rate": 0.543,
+      "needs": 0.552,
+      "units": -18.75,
+      "roi": -0.013,
+      "z": -0.54,
+      "roi_by_weekend": {
+        "2026-09-19": -0.052,
+        "2026-09-26": 0.024,
+        "2026-10-03": -0.079
+      }
+    },
+    {
+      "group": "last line, one book | EV>=3%",
+      "n": 1375,
+      "record": "743-632-0",
+      "hit_rate": 0.54,
+      "needs": 0.551,
+      "units": -21.27,
+      "roi": -0.015,
+      "z": -0.62,
+      "roi_by_weekend": {
+        "2026-09-19": -0.058,
+        "2026-09-26": 0.027,
+        "2026-10-03": -0.183
+      }
+    },
+    {
+      "group": "last line, one book | EV>=5%",
+      "n": 1324,
+      "record": "708-616-0",
+      "hit_rate": 0.535,
+      "needs": 0.55,
+      "units": -33.77,
+      "roi": -0.026,
+      "z": -1.01,
+      "roi_by_weekend": {
+        "2026-09-19": -0.071,
+        "2026-09-26": 0.019,
+        "2026-10-03": -0.129
+      }
+    },
+    {
+      "group": "last line, one book | EV>=10%",
+      "n": 1161,
+      "record": "614-547-0",
+      "hit_rate": 0.529,
+      "needs": 0.548,
+      "units": -37.52,
+      "roi": -0.032,
+      "z": -1.19,
+      "roi_by_weekend": {
+        "2026-09-19": -0.076,
+        "2026-09-26": 0.014,
+        "2026-10-03": -0.2
+      }
+    },
+    {
+      "group": "last line, best book | every prop",
+      "n": 2089,
+      "record": "1134-955-0",
+      "hit_rate": 0.543,
+      "needs": 0.553,
+      "units": -28.36,
+      "roi": -0.014,
+      "z": -0.68,
+      "roi_by_weekend": {
+        "2026-09-19": -0.047,
+        "2026-09-26": 0.013,
+        "2026-10-03": 0.094
+      }
+    },
+    {
+      "group": "last line, best book | EV>=0%",
+      "n": 1532,
+      "record": "832-700-0",
+      "hit_rate": 0.543,
+      "needs": 0.551,
+      "units": -16.98,
+      "roi": -0.011,
+      "z": -0.47,
+      "roi_by_weekend": {
+        "2026-09-19": -0.06,
+        "2026-09-26": 0.032,
+        "2026-10-03": 0.049
+      }
+    },
+    {
+      "group": "last line, best book | EV>=3%",
+      "n": 1461,
+      "record": "791-670-0",
+      "hit_rate": 0.541,
+      "needs": 0.551,
+      "units": -18.69,
+      "roi": -0.013,
+      "z": -0.53,
+      "roi_by_weekend": {
+        "2026-09-19": -0.066,
+        "2026-09-26": 0.036,
+        "2026-10-03": -0.013
+      }
+    },
+    {
+      "group": "last line, best book | EV>=5%",
+      "n": 1403,
+      "record": "755-648-0",
+      "hit_rate": 0.538,
+      "needs": 0.55,
+      "units": -25.53,
+      "roi": -0.018,
+      "z": -0.74,
+      "roi_by_weekend": {
+        "2026-09-19": -0.076,
+        "2026-09-26": 0.032,
+        "2026-10-03": 0.103
+      }
+    },
+    {
+      "group": "last line, best book | EV>=10%",
+      "n": 1236,
+      "record": "661-575-0",
+      "hit_rate": 0.535,
+      "needs": 0.548,
+      "units": -25.02,
+      "roi": -0.02,
+      "z": -0.77,
+      "roi_by_weekend": {
+        "2026-09-19": -0.085,
+        "2026-09-26": 0.039,
+        "2026-10-03": 0.055
+      }
+    },
+    {
+      "group": "first line, one book | every prop",
+      "n": 2090,
+      "record": "1143-947-0",
+      "hit_rate": 0.547,
+      "needs": 0.551,
+      "units": -8.75,
+      "roi": -0.004,
+      "z": -0.21,
+      "roi_by_weekend": {
+        "2026-09-19": -0.029,
+        "2026-09-26": 0.019,
+        "2026-10-03": -0.036
+      }
+    },
+    {
+      "group": "first line, one book | EV>=0%",
+      "n": 1470,
+      "record": "802-668-0",
+      "hit_rate": 0.546,
+      "needs": 0.551,
+      "units": -10.78,
+      "roi": -0.007,
+      "z": -0.31,
+      "roi_by_weekend": {
+        "2026-09-19": -0.051,
+        "2026-09-26": 0.034,
+        "2026-10-03": -0.088
+      }
+    },
+    {
+      "group": "first line, one book | EV>=3%",
+      "n": 1412,
+      "record": "772-640-0",
+      "hit_rate": 0.547,
+      "needs": 0.55,
+      "units": -6.26,
+      "roi": -0.004,
+      "z": -0.18,
+      "roi_by_weekend": {
+        "2026-09-19": -0.057,
+        "2026-09-26": 0.048,
+        "2026-10-03": -0.205
+      }
+    },
+    {
+      "group": "first line, one book | EV>=5%",
+      "n": 1361,
+      "record": "742-619-0",
+      "hit_rate": 0.545,
+      "needs": 0.549,
+      "units": -6.95,
+      "roi": -0.005,
+      "z": -0.2,
+      "roi_by_weekend": {
+        "2026-09-19": -0.057,
+        "2026-09-26": 0.045,
+        "2026-10-03": -0.144
+      }
+    },
+    {
+      "group": "first line, one book | EV>=10%",
+      "n": 1204,
+      "record": "654-550-0",
+      "hit_rate": 0.543,
+      "needs": 0.547,
+      "units": -6.91,
+      "roi": -0.006,
+      "z": -0.22,
+      "roi_by_weekend": {
+        "2026-09-19": -0.058,
+        "2026-09-26": 0.048,
+        "2026-10-03": -0.144
+      }
+    },
+    {
+      "group": "first line, best book | every prop",
+      "n": 2090,
+      "record": "1150-940-0",
+      "hit_rate": 0.55,
+      "needs": 0.55,
+      "units": 5.81,
+      "roi": 0.003,
+      "z": 0.14,
+      "roi_by_weekend": {
+        "2026-09-19": -0.028,
+        "2026-09-26": 0.028,
+        "2026-10-03": 0.086
+      }
+    },
+    {
+      "group": "first line, best book | EV>=0%",
+      "n": 1498,
+      "record": "823-675-0",
+      "hit_rate": 0.549,
+      "needs": 0.55,
+      "units": 1.33,
+      "roi": 0.001,
+      "z": 0.04,
+      "roi_by_weekend": {
+        "2026-09-19": -0.047,
+        "2026-09-26": 0.043,
+        "2026-10-03": 0.052
+      }
+    },
+    {
+      "group": "first line, best book | EV>=3%",
+      "n": 1439,
+      "record": "791-648-0",
+      "hit_rate": 0.55,
+      "needs": 0.549,
+      "units": 3.14,
+      "roi": 0.002,
+      "z": 0.09,
+      "roi_by_weekend": {
+        "2026-09-19": -0.054,
+        "2026-09-26": 0.054,
+        "2026-10-03": -0.016
+      }
+    },
+    {
+      "group": "first line, best book | EV>=5%",
+      "n": 1391,
+      "record": "763-628-0",
+      "hit_rate": 0.549,
+      "needs": 0.548,
+      "units": 3.3,
+      "roi": 0.002,
+      "z": 0.1,
+      "roi_by_weekend": {
+        "2026-09-19": -0.055,
+        "2026-09-26": 0.054,
+        "2026-10-03": 0.045
+      }
+    },
+    {
+      "group": "first line, best book | EV>=10%",
+      "n": 1224,
+      "record": "670-554-0",
+      "hit_rate": 0.547,
+      "needs": 0.546,
+      "units": 4.01,
+      "roi": 0.003,
+      "z": 0.12,
+      "roi_by_weekend": {
+        "2026-09-19": -0.058,
+        "2026-09-26": 0.059,
+        "2026-10-03": 0.115
+      }
+    }
+  ],
+  "clv": {
+    "moved": 891,
+    "toward_model": 570,
+    "share_toward": 0.64
+  },
+  "base_setup": "first line, best book | every prop",
+  "pockets": [
+    {
+      "group": "market: Pass Attempts",
+      "n": 98,
+      "record": "51-47-0",
+      "hit_rate": 0.52,
+      "needs": 0.543,
+      "units": -4.76,
+      "roi": -0.049,
+      "z": -0.52,
+      "roi_by_weekend": {
+        "2026-09-19": -0.174,
+        "2026-09-26": 0.054
+      },
+      "dim": "market",
+      "candidate": false
+    },
+    {
+      "group": "market: Pass Completions",
+      "n": 97,
+      "record": "49-48-0",
+      "hit_rate": 0.505,
+      "needs": 0.547,
+      "units": -7.78,
+      "roi": -0.08,
+      "z": -0.86,
+      "roi_by_weekend": {
+        "2026-09-19": -0.195,
+        "2026-09-26": 0.011
+      },
+      "dim": "market",
+      "candidate": false
+    },
+    {
+      "group": "market: Pass Interceptions",
+      "n": 129,
+      "record": "66-63-0",
+      "hit_rate": 0.512,
+      "needs": 0.564,
+      "units": -13.5,
+      "roi": -0.105,
+      "z": -1.31,
+      "roi_by_weekend": {
+        "2026-09-19": -0.199,
+        "2026-09-26": -0.018
+      },
+      "dim": "market",
+      "candidate": false
+    },
+    {
+      "group": "market: Pass Touchdowns",
+      "n": 150,
+      "record": "85-65-0",
+      "hit_rate": 0.567,
+      "needs": 0.602,
+      "units": -7.12,
+      "roi": -0.047,
+      "z": -0.68,
+      "roi_by_weekend": {
+        "2026-09-19": -0.057,
+        "2026-09-26": -0.052,
+        "2026-10-03": 0.292
+      },
+      "dim": "market",
+      "candidate": false
+    },
+    {
+      "group": "market: Pass Yards",
+      "n": 149,
+      "record": "68-81-0",
+      "hit_rate": 0.456,
+      "needs": 0.534,
+      "units": -21.5,
+      "roi": -0.144,
+      "z": -1.88,
+      "roi_by_weekend": {
+        "2026-09-19": -0.282,
+        "2026-09-26": -0.024,
+        "2026-10-03": 0.26
+      },
+      "dim": "market",
+      "candidate": false
+    },
+    {
+      "group": "market: Reception Touchdowns",
+      "n": 32,
+      "record": "18-14-0",
+      "hit_rate": 0.562,
+      "needs": 0.517,
+      "units": 5.74,
+      "roi": 0.179,
+      "z": 0.82,
+      "roi_by_weekend": {
+        "2026-09-19": 0.152,
+        "2026-09-26": 0.203
+      },
+      "dim": "market",
+      "candidate": false
+    },
+    {
+      "group": "market: Reception Yards",
+      "n": 478,
+      "record": "267-211-0",
+      "hit_rate": 0.559,
+      "needs": 0.534,
+      "units": 22.38,
+      "roi": 0.047,
+      "z": 1.1,
+      "roi_by_weekend": {
+        "2026-09-19": 0.099,
+        "2026-09-26": 0.005,
+        "2026-10-03": -0.072
+      },
+      "dim": "market",
+      "candidate": "False"
+    },
+    {
+      "group": "market: Receptions",
+      "n": 392,
+      "record": "238-154-0",
+      "hit_rate": 0.607,
+      "needs": 0.56,
+      "units": 33.39,
+      "roi": 0.085,
+      "z": 1.9,
+      "roi_by_weekend": {
+        "2026-09-19": 0.105,
+        "2026-09-26": 0.071,
+        "2026-10-03": -0.016
+      },
+      "dim": "market",
+      "candidate": false
+    },
+    {
+      "group": "market: Rush Attempts",
+      "n": 171,
+      "record": "99-72-0",
+      "hit_rate": 0.579,
+      "needs": 0.559,
+      "units": 6.73,
+      "roi": 0.039,
+      "z": 0.58,
+      "roi_by_weekend": {
+        "2026-09-19": 0.039,
+        "2026-09-26": 0.039
+      },
+      "dim": "market",
+      "candidate": "False"
+    },
+    {
+      "group": "market: Rush Touchdowns",
+      "n": 97,
+      "record": "47-50-0",
+      "hit_rate": 0.485,
+      "needs": 0.575,
+      "units": -13.8,
+      "roi": -0.142,
+      "z": -1.52,
+      "roi_by_weekend": {
+        "2026-09-19": -0.055,
+        "2026-09-26": -0.243
+      },
+      "dim": "market",
+      "candidate": false
+    },
+    {
+      "group": "market: Rush Yards",
+      "n": 297,
+      "record": "162-135-0",
+      "hit_rate": 0.545,
+      "needs": 0.533,
+      "units": 6.02,
+      "roi": 0.02,
+      "z": 0.37,
+      "roi_by_weekend": {
+        "2026-09-19": -0.125,
+        "2026-09-26": 0.138,
+        "2026-10-03": 0.297
+      },
+      "dim": "market",
+      "candidate": "False"
+    },
+    {
+      "group": "side: over",
+      "n": 1106,
+      "record": "610-496-0",
+      "hit_rate": 0.552,
+      "needs": 0.546,
+      "units": 17.52,
+      "roi": 0.016,
+      "z": 0.56,
+      "roi_by_weekend": {
+        "2026-09-19": 0.019,
+        "2026-09-26": 0.008,
+        "2026-10-03": 0.182
+      },
+      "dim": "side",
+      "candidate": "False"
+    },
+    {
+      "group": "side: under",
+      "n": 984,
+      "record": "540-444-0",
+      "hit_rate": 0.549,
+      "needs": 0.555,
+      "units": -11.71,
+      "roi": -0.012,
+      "z": -0.41,
+      "roi_by_weekend": {
+        "2026-09-19": -0.08,
+        "2026-09-26": 0.05,
+        "2026-10-03": -0.023
+      },
+      "dim": "side",
+      "candidate": false
+    },
+    {
+      "group": "fav: big favorite (7+)",
+      "n": 798,
+      "record": "419-379-0",
+      "hit_rate": 0.525,
+      "needs": 0.548,
+      "units": -34.61,
+      "roi": -0.043,
+      "z": -1.33,
+      "roi_by_weekend": {
+        "2026-09-19": -0.076,
+        "2026-09-26": -0.002
+      },
+      "dim": "fav",
+      "candidate": false
+    },
+    {
+      "group": "fav: small favorite",
+      "n": 412,
+      "record": "238-174-0",
+      "hit_rate": 0.578,
+      "needs": 0.548,
+      "units": 23.09,
+      "roi": 0.056,
+      "z": 1.25,
+      "roi_by_weekend": {
+        "2026-09-19": -0.08,
+        "2026-09-26": 0.119,
+        "2026-10-03": 0.32
+      },
+      "dim": "fav",
+      "candidate": "False"
+    },
+    {
+      "group": "fav: small underdog",
+      "n": 397,
+      "record": "219-178-0",
+      "hit_rate": 0.552,
+      "needs": 0.551,
+      "units": 1.7,
+      "roi": 0.004,
+      "z": 0.09,
+      "roi_by_weekend": {
+        "2026-09-19": 0.061,
+        "2026-09-26": -0.025,
+        "2026-10-03": -0.12
+      },
+      "dim": "fav",
+      "candidate": "False"
+    },
+    {
+      "group": "fav: big underdog (7+)",
+      "n": 483,
+      "record": "274-209-0",
+      "hit_rate": 0.567,
+      "needs": 0.555,
+      "units": 15.63,
+      "roi": 0.032,
+      "z": 0.77,
+      "roi_by_weekend": {
+        "2026-09-19": 0.039,
+        "2026-09-26": 0.026
+      },
+      "dim": "fav",
+      "candidate": "False"
+    },
+    {
+      "group": "total: team total <24",
+      "n": 674,
+      "record": "375-299-0",
+      "hit_rate": 0.556,
+      "needs": 0.555,
+      "units": 6.94,
+      "roi": 0.01,
+      "z": 0.29,
+      "roi_by_weekend": {
+        "2026-09-19": 0.013,
+        "2026-09-26": 0.008
+      },
+      "dim": "total",
+      "candidate": "False"
+    },
+    {
+      "group": "total: team total 24-31",
+      "n": 745,
+      "record": "419-326-0",
+      "hit_rate": 0.562,
+      "needs": 0.547,
+      "units": 23.79,
+      "roi": 0.032,
+      "z": 0.95,
+      "roi_by_weekend": {
+        "2026-09-19": -0.008,
+        "2026-09-26": 0.052,
+        "2026-10-03": 0.086
+      },
+      "dim": "total",
+      "candidate": "False"
+    },
+    {
+      "group": "total: team total 31+",
+      "n": 671,
+      "record": "356-315-0",
+      "hit_rate": 0.531,
+      "needs": 0.549,
+      "units": -24.92,
+      "roi": -0.037,
+      "z": -1.05,
+      "roi_by_weekend": {
+        "2026-09-19": -0.073,
+        "2026-09-26": 0.015
+      },
+      "dim": "total",
+      "candidate": false
+    },
+    {
+      "group": "role: depth",
+      "n": 1093,
+      "record": "589-504-0",
+      "hit_rate": 0.539,
+      "needs": 0.551,
+      "units": -22.3,
+      "roi": -0.02,
+      "z": -0.74,
+      "roi_by_weekend": {
+        "2026-09-19": -0.095,
+        "2026-09-26": 0.039,
+        "2026-10-03": 0.388
+      },
+      "dim": "role",
+      "candidate": false
+    },
+    {
+      "group": "role: featured",
+      "n": 271,
+      "record": "137-134-0",
+      "hit_rate": 0.506,
+      "needs": 0.54,
+      "units": -14.05,
+      "roi": -0.052,
+      "z": -0.88,
+      "roi_by_weekend": {
+        "2026-09-19": -0.037,
+        "2026-09-26": -0.052,
+        "2026-10-03": -1.0
+      },
+      "dim": "role",
+      "candidate": false
+    },
+    {
+      "group": "role: secondary",
+      "n": 726,
+      "record": "424-302-0",
+      "hit_rate": 0.584,
+      "needs": 0.552,
+      "units": 42.16,
+      "roi": 0.058,
+      "z": 1.73,
+      "roi_by_weekend": {
+        "2026-09-19": 0.081,
+        "2026-09-26": 0.04,
+        "2026-10-03": 0.006
+      },
+      "dim": "role",
+      "candidate": true
+    },
+    {
+      "group": "sample: 1-2 games",
+      "n": 1069,
+      "record": "579-490-0",
+      "hit_rate": 0.542,
+      "needs": 0.548,
+      "units": -8.13,
+      "roi": -0.008,
+      "z": -0.27,
+      "roi_by_weekend": {
+        "2026-09-19": -0.031,
+        "2026-09-26": 0.143,
+        "2026-10-03": 0.483
+      },
+      "dim": "sample",
+      "candidate": false
+    },
+    {
+      "group": "sample: 3 games",
+      "n": 979,
+      "record": "545-434-0",
+      "hit_rate": 0.557,
+      "needs": 0.552,
+      "units": 9.56,
+      "roi": 0.01,
+      "z": 0.34,
+      "roi_by_weekend": {
+        "2026-09-19": 0.049,
+        "2026-09-26": 0.008,
+        "2026-10-03": 0.05
+      },
+      "dim": "sample",
+      "candidate": "False"
+    },
+    {
+      "group": "sample: 4+ games",
+      "n": 42,
+      "record": "26-16-0",
+      "hit_rate": 0.619,
+      "needs": 0.561,
+      "units": 4.37,
+      "roi": 0.104,
+      "z": 0.76,
+      "roi_by_weekend": {
+        "2026-09-26": 0.243,
+        "2026-10-03": 0.01
+      },
+      "dim": "sample",
+      "candidate": "False"
+    },
+    {
+      "group": "kick_day: Sat/Sun",
+      "n": 1869,
+      "record": "1028-841-0",
+      "hit_rate": 0.55,
+      "needs": 0.55,
+      "units": 6.23,
+      "roi": 0.003,
+      "z": 0.16,
+      "roi_by_weekend": {
+        "2026-09-19": -0.023,
+        "2026-09-26": 0.028
+      },
+      "dim": "kick_day",
+      "candidate": "False"
+    },
+    {
+      "group": "kick_day: Thu/Fri",
+      "n": 221,
+      "record": "122-99-0",
+      "hit_rate": 0.552,
+      "needs": 0.55,
+      "units": -0.42,
+      "roi": -0.002,
+      "z": -0.03,
+      "roi_by_weekend": {
+        "2026-09-19": -0.084,
+        "2026-09-26": 0.027,
+        "2026-10-03": 0.086
+      },
+      "dim": "kick_day",
+      "candidate": false
+    },
+    {
+      "group": "book: betonlineag",
+      "n": 575,
+      "record": "324-251-0",
+      "hit_rate": 0.563,
+      "needs": 0.542,
+      "units": 26.54,
+      "roi": 0.046,
+      "z": 1.19,
+      "roi_by_weekend": {
+        "2026-09-19": 0.04,
+        "2026-09-26": 0.045,
+        "2026-10-03": 0.139
+      },
+      "dim": "book",
+      "candidate": "False"
+    },
+    {
+      "group": "book: betrivers",
+      "n": 3,
+      "record": "1-2-0",
+      "hit_rate": 0.333,
+      "needs": 0.552,
+      "units": -1.17,
+      "roi": -0.389,
+      "z": -0.64,
+      "roi_by_weekend": {
+        "2026-09-19": -0.389
+      },
+      "dim": "book",
+      "candidate": false
+    },
+    {
+      "group": "book: espnbet",
+      "n": 37,
+      "record": "21-16-0",
+      "hit_rate": 0.568,
+      "needs": 0.544,
+      "units": 1.49,
+      "roi": 0.04,
+      "z": 0.26,
+      "roi_by_weekend": {
+        "2026-09-19": -0.384,
+        "2026-09-26": 0.155,
+        "2026-10-03": 0.55
+      },
+      "dim": "book",
+      "candidate": false
+    },
+    {
+      "group": "book: fanduel",
+      "n": 511,
+      "record": "277-234-0",
+      "hit_rate": 0.542,
+      "needs": 0.549,
+      "units": -7.55,
+      "roi": -0.015,
+      "z": -0.37,
+      "roi_by_weekend": {
+        "2026-09-19": -0.037,
+        "2026-09-26": 0.009
+      },
+      "dim": "book",
+      "candidate": false
+    },
+    {
+      "group": "book: fliff",
+      "n": 499,
+      "record": "281-218-0",
+      "hit_rate": 0.563,
+      "needs": 0.563,
+      "units": 5.63,
+      "roi": 0.011,
+      "z": 0.27,
+      "roi_by_weekend": {
+        "2026-09-19": 0.014,
+        "2026-09-26": 0.009
+      },
+      "dim": "book",
+      "candidate": "False"
+    },
+    {
+      "group": "book: hardrockbet",
+      "n": 454,
+      "record": "242-212-0",
+      "hit_rate": 0.533,
+      "needs": 0.549,
+      "units": -15.63,
+      "roi": -0.034,
+      "z": -0.8,
+      "roi_by_weekend": {
+        "2026-09-19": -0.111,
+        "2026-09-26": 0.052,
+        "2026-10-03": -1.0
+      },
+      "dim": "book",
+      "candidate": false
+    },
+    {
+      "group": "book: williamhill_us",
+      "n": 11,
+      "record": "4-7-0",
+      "hit_rate": 0.364,
+      "needs": 0.535,
+      "units": -3.5,
+      "roi": -0.318,
+      "z": -1.12,
+      "roi_by_weekend": {
+        "2026-09-19": -0.062,
+        "2026-09-26": -1.0
+      },
+      "dim": "book",
+      "candidate": false
+    },
+    {
+      "group": "market x side: Pass Attempts over",
+      "n": 43,
+      "record": "24-19-0",
+      "hit_rate": 0.558,
+      "needs": 0.541,
+      "units": 1.23,
+      "roi": 0.029,
+      "z": 0.2,
+      "roi_by_weekend": {
+        "2026-09-19": -0.035,
+        "2026-09-26": 0.07
+      },
+      "dim": "market x side",
+      "candidate": "False"
+    },
+    {
+      "group": "market x side: Pass Attempts under",
+      "n": 55,
+      "record": "27-28-0",
+      "hit_rate": 0.491,
+      "needs": 0.545,
+      "units": -5.99,
+      "roi": -0.109,
+      "z": -0.88,
+      "roi_by_weekend": {
+        "2026-09-19": -0.261,
+        "2026-09-26": 0.038
+      },
+      "dim": "market x side",
+      "candidate": false
+    },
+    {
+      "group": "market x side: Pass Completions over",
+      "n": 38,
+      "record": "21-17-0",
+      "hit_rate": 0.553,
+      "needs": 0.547,
+      "units": 0.82,
+      "roi": 0.022,
+      "z": 0.14,
+      "roi_by_weekend": {
+        "2026-09-19": -0.18,
+        "2026-09-26": 0.203
+      },
+      "dim": "market x side",
+      "candidate": false
+    },
+    {
+      "group": "market x side: Pass Completions under",
+      "n": 59,
+      "record": "28-31-0",
+      "hit_rate": 0.475,
+      "needs": 0.546,
+      "units": -8.59,
+      "roi": -0.146,
+      "z": -1.23,
+      "roi_by_weekend": {
+        "2026-09-19": -0.205,
+        "2026-09-26": -0.102
+      },
+      "dim": "market x side",
+      "candidate": false
+    },
+    {
+      "group": "market x side: Pass Interceptions over",
+      "n": 101,
+      "record": "50-51-0",
+      "hit_rate": 0.495,
+      "needs": 0.538,
+      "units": -9.6,
+      "roi": -0.095,
+      "z": -1.01,
+      "roi_by_weekend": {
+        "2026-09-19": -0.163,
+        "2026-09-26": -0.036
+      },
+      "dim": "market x side",
+      "candidate": false
+    },
+    {
+      "group": "market x side: Pass Interceptions under",
+      "n": 28,
+      "record": "16-12-0",
+      "hit_rate": 0.571,
+      "needs": 0.657,
+      "units": -3.9,
+      "roi": -0.139,
+      "z": -0.96,
+      "roi_by_weekend": {
+        "2026-09-19": -0.311,
+        "2026-09-26": 0.058
+      },
+      "dim": "market x side",
+      "candidate": false
+    },
+    {
+      "group": "market x side: Pass Touchdowns over",
+      "n": 88,
+      "record": "52-36-0",
+      "hit_rate": 0.591,
+      "needs": 0.595,
+      "units": 0.2,
+      "roi": 0.002,
+      "z": 0.03,
+      "roi_by_weekend": {
+        "2026-09-19": 0.007,
+        "2026-09-26": -0.018,
+        "2026-10-03": 0.775
+      },
+      "dim": "market x side",
+      "candidate": "False"
+    },
+    {
+      "group": "market x side: Pass Touchdowns under",
+      "n": 62,
+      "record": "33-29-0",
+      "hit_rate": 0.532,
+      "needs": 0.611,
+      "units": -7.32,
+      "roi": -0.118,
+      "z": -1.09,
+      "roi_by_weekend": {
+        "2026-09-19": -0.139,
+        "2026-09-26": -0.107,
+        "2026-10-03": 0.05
+      },
+      "dim": "market x side",
+      "candidate": false
+    },
+    {
+      "group": "market x side: Pass Yards over",
+      "n": 49,
+      "record": "26-23-0",
+      "hit_rate": 0.531,
+      "needs": 0.532,
+      "units": -0.05,
+      "roi": -0.001,
+      "z": -0.01,
+      "roi_by_weekend": {
+        "2026-09-19": -0.095,
+        "2026-09-26": 0.095,
+        "2026-10-03": 0.909
+      },
+      "dim": "market x side",
+      "candidate": false
+    },
+    {
+      "group": "market x side: Pass Yards under",
+      "n": 100,
+      "record": "42-58-0",
+      "hit_rate": 0.42,
+      "needs": 0.534,
+      "units": -21.44,
+      "roi": -0.214,
+      "z": -2.31,
+      "roi_by_weekend": {
+        "2026-09-19": -0.404,
+        "2026-09-26": -0.065,
+        "2026-10-03": -0.065
+      },
+      "dim": "market x side",
+      "candidate": false
+    },
+    {
+      "group": "market x side: Reception Touchdowns over",
+      "n": 32,
+      "record": "18-14-0",
+      "hit_rate": 0.562,
+      "needs": 0.517,
+      "units": 5.74,
+      "roi": 0.179,
+      "z": 0.82,
+      "roi_by_weekend": {
+        "2026-09-19": 0.152,
+        "2026-09-26": 0.203
+      },
+      "dim": "market x side",
+      "candidate": false
+    },
+    {
+      "group": "market x side: Reception Yards over",
+      "n": 305,
+      "record": "172-133-0",
+      "hit_rate": 0.564,
+      "needs": 0.533,
+      "units": 17.61,
+      "roi": 0.058,
+      "z": 1.08,
+      "roi_by_weekend": {
+        "2026-09-19": 0.123,
+        "2026-09-26": 0.009,
+        "2026-10-03": -0.089
+      },
+      "dim": "market x side",
+      "candidate": "False"
+    },
+    {
+      "group": "market x side: Reception Yards under",
+      "n": 173,
+      "record": "95-78-0",
+      "hit_rate": 0.549,
+      "needs": 0.536,
+      "units": 4.77,
+      "roi": 0.028,
+      "z": 0.39,
+      "roi_by_weekend": {
+        "2026-09-19": 0.06,
+        "2026-09-26": -0.002,
+        "2026-10-03": -0.038
+      },
+      "dim": "market x side",
+      "candidate": "False"
+    },
+    {
+      "group": "market x side: Receptions over",
+      "n": 184,
+      "record": "112-72-0",
+      "hit_rate": 0.609,
+      "needs": 0.546,
+      "units": 21.77,
+      "roi": 0.118,
+      "z": 1.75,
+      "roi_by_weekend": {
+        "2026-09-19": 0.123,
+        "2026-09-26": 0.111,
+        "2026-10-03": 0.181
+      },
+      "dim": "market x side",
+      "candidate": true
+    },
+    {
+      "group": "market x side: Receptions under",
+      "n": 208,
+      "record": "126-82-0",
+      "hit_rate": 0.606,
+      "needs": 0.571,
+      "units": 11.63,
+      "roi": 0.056,
+      "z": 0.93,
+      "roi_by_weekend": {
+        "2026-09-19": 0.085,
+        "2026-09-26": 0.041,
+        "2026-10-03": -0.163
+      },
+      "dim": "market x side",
+      "candidate": "False"
+    },
+    {
+      "group": "market x side: Rush Attempts over",
+      "n": 48,
+      "record": "29-19-0",
+      "hit_rate": 0.604,
+      "needs": 0.569,
+      "units": 3.63,
+      "roi": 0.076,
+      "z": 0.59,
+      "roi_by_weekend": {
+        "2026-09-19": 0.15,
+        "2026-09-26": 0.048
+      },
+      "dim": "market x side",
+      "candidate": "False"
+    },
+    {
+      "group": "market x side: Rush Attempts under",
+      "n": 123,
+      "record": "70-53-0",
+      "hit_rate": 0.569,
+      "needs": 0.556,
+      "units": 3.1,
+      "roi": 0.025,
+      "z": 0.31,
+      "roi_by_weekend": {
+        "2026-09-19": 0.015,
+        "2026-09-26": 0.035
+      },
+      "dim": "market x side",
+      "candidate": "False"
+    },
+    {
+      "group": "market x side: Rush Touchdowns over",
+      "n": 97,
+      "record": "47-50-0",
+      "hit_rate": 0.485,
+      "needs": 0.575,
+      "units": -13.8,
+      "roi": -0.142,
+      "z": -1.52,
+      "roi_by_weekend": {
+        "2026-09-19": -0.055,
+        "2026-09-26": -0.243
+      },
+      "dim": "market x side",
+      "candidate": false
+    },
+    {
+      "group": "market x side: Rush Yards over",
+      "n": 121,
+      "record": "59-62-0",
+      "hit_rate": 0.488,
+      "needs": 0.53,
+      "units": -10.02,
+      "roi": -0.083,
+      "z": -0.96,
+      "roi_by_weekend": {
+        "2026-09-19": -0.113,
+        "2026-09-26": -0.088,
+        "2026-10-03": 0.397
+      },
+      "dim": "market x side",
+      "candidate": false
+    },
+    {
+      "group": "market x side: Rush Yards under",
+      "n": 176,
+      "record": "103-73-0",
+      "hit_rate": 0.585,
+      "needs": 0.535,
+      "units": 16.04,
+      "roi": 0.091,
+      "z": 1.31,
+      "roi_by_weekend": {
+        "2026-09-19": -0.133,
+        "2026-09-26": 0.3,
+        "2026-10-03": 0.165
+      },
+      "dim": "market x side",
+      "candidate": "False"
+    }
+  ],
+  "candidates": [
+    {
+      "group": "role: secondary",
+      "n": 726,
+      "record": "424-302-0",
+      "hit_rate": 0.584,
+      "needs": 0.552,
+      "units": 42.16,
+      "roi": 0.058,
+      "z": 1.73,
+      "roi_by_weekend": {
+        "2026-09-19": 0.081,
+        "2026-09-26": 0.04,
+        "2026-10-03": 0.006
+      },
+      "dim": "role",
+      "candidate": true
+    },
+    {
+      "group": "market x side: Receptions over",
+      "n": 184,
+      "record": "112-72-0",
+      "hit_rate": 0.609,
+      "needs": 0.546,
+      "units": 21.77,
+      "roi": 0.118,
+      "z": 1.75,
+      "roi_by_weekend": {
+        "2026-09-19": 0.123,
+        "2026-09-26": 0.111,
+        "2026-10-03": 0.181
+      },
+      "dim": "market x side",
+      "candidate": true
+    }
+  ]
+}
