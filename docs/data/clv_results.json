@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T14:28:11.523824+00:00",
+  "generated_at": "2026-10-02T15:00:34.648723+00:00",
   "n_games": 178,
   "avg_clv_points": 0.126,
   "median_clv_points": 0.0,
@@ -1528,19 +1528,6 @@
       "commence_time": "2026-09-20T00:00:00Z"
     },
     {
-      "game_id": 401856693,
-      "season": 2026,
-      "week": 3,
-      "home_team": "Texas Longhorns",
-      "away_team": "UTSA Roadrunners",
-      "side": "away",
-      "recommended_spread_home": -30.5,
-      "closing_spread_home": -29.5,
-      "clv_points": 1.0,
-      "captured_at": "2026-09-16T14:49:42.500529+00:00",
-      "commence_time": "2026-09-20T00:00:00Z"
-    },
-    {
       "game_id": 401856799,
       "season": 2026,
       "week": 3,
@@ -1549,6 +1536,19 @@
       "side": "away",
       "recommended_spread_home": -19.5,
       "closing_spread_home": -18.5,
+      "clv_points": 1.0,
+      "captured_at": "2026-09-16T14:49:42.500529+00:00",
+      "commence_time": "2026-09-20T00:00:00Z"
+    },
+    {
+      "game_id": 401856693,
+      "season": 2026,
+      "week": 3,
+      "home_team": "Texas Longhorns",
+      "away_team": "UTSA Roadrunners",
+      "side": "away",
+      "recommended_spread_home": -30.5,
+      "closing_spread_home": -29.5,
       "clv_points": 1.0,
       "captured_at": "2026-09-16T14:49:42.500529+00:00",
       "commence_time": "2026-09-20T00:00:00Z"
@@ -1580,19 +1580,6 @@
       "commence_time": "2026-09-20T02:30:00Z"
     },
     {
-      "game_id": 401858458,
-      "season": 2026,
-      "week": 3,
-      "home_team": "UCLA Bruins",
-      "away_team": "Purdue Boilermakers",
-      "side": "away",
-      "recommended_spread_home": -14.0,
-      "closing_spread_home": -13.5,
-      "clv_points": 0.5,
-      "captured_at": "2026-09-16T14:49:42.500529+00:00",
-      "commence_time": "2026-09-20T03:00:00Z"
-    },
-    {
       "game_id": 401860888,
       "season": 2026,
       "week": 3,
@@ -1603,6 +1590,19 @@
       "closing_spread_home": 4.0,
       "clv_points": 2.5,
       "captured_at": "2026-09-18T16:00:28.339575+00:00",
+      "commence_time": "2026-09-20T03:00:00Z"
+    },
+    {
+      "game_id": 401858458,
+      "season": 2026,
+      "week": 3,
+      "home_team": "UCLA Bruins",
+      "away_team": "Purdue Boilermakers",
+      "side": "away",
+      "recommended_spread_home": -14.0,
+      "closing_spread_home": -13.5,
+      "clv_points": 0.5,
+      "captured_at": "2026-09-16T14:49:42.500529+00:00",
       "commence_time": "2026-09-20T03:00:00Z"
     },
     {
@@ -1671,32 +1671,6 @@
       "commence_time": "2026-09-26T02:30:00Z"
     },
     {
-      "game_id": 401864512,
-      "season": 2026,
-      "week": 4,
-      "home_team": "Akron Zips",
-      "away_team": "UNLV Rebels",
-      "side": "home",
-      "recommended_spread_home": 13.5,
-      "closing_spread_home": 13.5,
-      "clv_points": 0.0,
-      "captured_at": "2026-09-21T16:00:15.108504+00:00",
-      "commence_time": "2026-09-26T16:00:00Z"
-    },
-    {
-      "game_id": 401866425,
-      "season": 2026,
-      "week": 4,
-      "home_team": "Kent State Golden Flashes",
-      "away_team": "Ball State Cardinals",
-      "side": "away",
-      "recommended_spread_home": -3.0,
-      "closing_spread_home": -2.5,
-      "clv_points": 0.5,
-      "captured_at": "2026-09-21T16:00:15.108504+00:00",
-      "commence_time": "2026-09-26T16:00:00Z"
-    },
-    {
       "game_id": 401856813,
       "season": 2026,
       "week": 4,
@@ -1723,45 +1697,6 @@
       "commence_time": "2026-09-26T16:00:00Z"
     },
     {
-      "game_id": 401858242,
-      "season": 2026,
-      "week": 4,
-      "home_team": "Boston College Eagles",
-      "away_team": "Virginia Tech Hokies",
-      "side": "home",
-      "recommended_spread_home": 14.0,
-      "closing_spread_home": 14.5,
-      "clv_points": -0.5,
-      "captured_at": "2026-09-21T16:00:15.108504+00:00",
-      "commence_time": "2026-09-26T16:00:00Z"
-    },
-    {
-      "game_id": 401858465,
-      "season": 2026,
-      "week": 4,
-      "home_team": "Ohio State Buckeyes",
-      "away_team": "Illinois Fighting Illini",
-      "side": "away",
-      "recommended_spread_home": -26.5,
-      "closing_spread_home": -25.5,
-      "clv_points": 1.0,
-      "captured_at": "2026-09-17T19:06:47.325671+00:00",
-      "commence_time": "2026-09-26T16:00:00Z"
-    },
-    {
-      "game_id": 401860893,
-      "season": 2026,
-      "week": 4,
-      "home_team": "Toledo Rockets",
-      "away_team": "San Diego State Aztecs",
-      "side": "home",
-      "recommended_spread_home": -2.5,
-      "closing_spread_home": -2.5,
-      "clv_points": 0.0,
-      "captured_at": "2026-09-21T16:00:15.108504+00:00",
-      "commence_time": "2026-09-26T16:00:00Z"
-    },
-    {
       "game_id": 401858243,
       "season": 2026,
       "week": 4,
@@ -1775,16 +1710,42 @@
       "commence_time": "2026-09-26T16:00:00Z"
     },
     {
-      "game_id": 401860897,
+      "game_id": 401856700,
       "season": 2026,
       "week": 4,
-      "home_team": "Western Michigan Broncos",
-      "away_team": "Boise State Broncos",
+      "home_team": "Georgia Bulldogs",
+      "away_team": "Oklahoma Sooners",
+      "side": "away",
+      "recommended_spread_home": -10.0,
+      "closing_spread_home": -11.5,
+      "clv_points": -1.5,
+      "captured_at": "2026-09-02T16:06:18.929477+00:00",
+      "commence_time": "2026-09-26T16:00:00Z"
+    },
+    {
+      "game_id": 401864512,
+      "season": 2026,
+      "week": 4,
+      "home_team": "Akron Zips",
+      "away_team": "UNLV Rebels",
       "side": "home",
-      "recommended_spread_home": 7.5,
-      "closing_spread_home": 8.5,
-      "clv_points": -1.0,
-      "captured_at": "2026-09-17T01:57:12.504086+00:00",
+      "recommended_spread_home": 13.5,
+      "closing_spread_home": 13.5,
+      "clv_points": 0.0,
+      "captured_at": "2026-09-21T16:00:15.108504+00:00",
+      "commence_time": "2026-09-26T16:00:00Z"
+    },
+    {
+      "game_id": 401866425,
+      "season": 2026,
+      "week": 4,
+      "home_team": "Kent State Golden Flashes",
+      "away_team": "Ball State Cardinals",
+      "side": "away",
+      "recommended_spread_home": -3.0,
+      "closing_spread_home": -2.5,
+      "clv_points": 0.5,
+      "captured_at": "2026-09-21T16:00:15.108504+00:00",
       "commence_time": "2026-09-26T16:00:00Z"
     },
     {
@@ -1801,6 +1762,32 @@
       "commence_time": "2026-09-26T16:00:00Z"
     },
     {
+      "game_id": 401860893,
+      "season": 2026,
+      "week": 4,
+      "home_team": "Toledo Rockets",
+      "away_team": "San Diego State Aztecs",
+      "side": "home",
+      "recommended_spread_home": -2.5,
+      "closing_spread_home": -2.5,
+      "clv_points": 0.0,
+      "captured_at": "2026-09-21T16:00:15.108504+00:00",
+      "commence_time": "2026-09-26T16:00:00Z"
+    },
+    {
+      "game_id": 401858242,
+      "season": 2026,
+      "week": 4,
+      "home_team": "Boston College Eagles",
+      "away_team": "Virginia Tech Hokies",
+      "side": "home",
+      "recommended_spread_home": 14.0,
+      "closing_spread_home": 14.5,
+      "clv_points": -0.5,
+      "captured_at": "2026-09-21T16:00:15.108504+00:00",
+      "commence_time": "2026-09-26T16:00:00Z"
+    },
+    {
       "game_id": 401856704,
       "season": 2026,
       "week": 4,
@@ -1814,16 +1801,29 @@
       "commence_time": "2026-09-26T16:00:00Z"
     },
     {
-      "game_id": 401856700,
+      "game_id": 401860897,
       "season": 2026,
       "week": 4,
-      "home_team": "Georgia Bulldogs",
-      "away_team": "Oklahoma Sooners",
+      "home_team": "Western Michigan Broncos",
+      "away_team": "Boise State Broncos",
+      "side": "home",
+      "recommended_spread_home": 7.5,
+      "closing_spread_home": 8.5,
+      "clv_points": -1.0,
+      "captured_at": "2026-09-17T01:57:12.504086+00:00",
+      "commence_time": "2026-09-26T16:00:00Z"
+    },
+    {
+      "game_id": 401858465,
+      "season": 2026,
+      "week": 4,
+      "home_team": "Ohio State Buckeyes",
+      "away_team": "Illinois Fighting Illini",
       "side": "away",
-      "recommended_spread_home": -10.0,
-      "closing_spread_home": -11.5,
-      "clv_points": -1.5,
-      "captured_at": "2026-09-02T16:06:18.929477+00:00",
+      "recommended_spread_home": -26.5,
+      "closing_spread_home": -25.5,
+      "clv_points": 1.0,
+      "captured_at": "2026-09-17T19:06:47.325671+00:00",
       "commence_time": "2026-09-26T16:00:00Z"
     },
     {
@@ -1853,19 +1853,6 @@
       "commence_time": "2026-09-26T17:30:00Z"
     },
     {
-      "game_id": 401864511,
-      "season": 2026,
-      "week": 4,
-      "home_team": "Georgia State Panthers",
-      "away_team": "Northern Illinois Huskies",
-      "side": "away",
-      "recommended_spread_home": -10.0,
-      "closing_spread_home": -8.5,
-      "clv_points": 1.5,
-      "captured_at": "2026-09-21T18:20:34.438576+00:00",
-      "commence_time": "2026-09-26T18:00:00Z"
-    },
-    {
       "game_id": 401858467,
       "season": 2026,
       "week": 4,
@@ -1876,6 +1863,19 @@
       "closing_spread_home": 27.5,
       "clv_points": 0.0,
       "captured_at": "2026-09-21T16:00:15.108504+00:00",
+      "commence_time": "2026-09-26T18:00:00Z"
+    },
+    {
+      "game_id": 401864511,
+      "season": 2026,
+      "week": 4,
+      "home_team": "Georgia State Panthers",
+      "away_team": "Northern Illinois Huskies",
+      "side": "away",
+      "recommended_spread_home": -10.0,
+      "closing_spread_home": -8.5,
+      "clv_points": 1.5,
+      "captured_at": "2026-09-21T18:20:34.438576+00:00",
       "commence_time": "2026-09-26T18:00:00Z"
     },
     {
@@ -1890,6 +1890,19 @@
       "clv_points": -0.5,
       "captured_at": "2026-09-21T16:00:15.108504+00:00",
       "commence_time": "2026-09-26T19:00:00Z"
+    },
+    {
+      "game_id": 401861970,
+      "season": 2026,
+      "week": 4,
+      "home_team": "Miami (OH) RedHawks",
+      "away_team": "UConn Huskies",
+      "side": "away",
+      "recommended_spread_home": -4.5,
+      "closing_spread_home": -2.5,
+      "clv_points": 2.0,
+      "captured_at": "2026-09-21T16:00:15.108504+00:00",
+      "commence_time": "2026-09-26T19:30:00Z"
     },
     {
       "game_id": 401856815,
@@ -1918,19 +1931,6 @@
       "commence_time": "2026-09-26T19:30:00Z"
     },
     {
-      "game_id": 401861970,
-      "season": 2026,
-      "week": 4,
-      "home_team": "Miami (OH) RedHawks",
-      "away_team": "UConn Huskies",
-      "side": "away",
-      "recommended_spread_home": -4.5,
-      "closing_spread_home": -2.5,
-      "clv_points": 2.0,
-      "captured_at": "2026-09-21T16:00:15.108504+00:00",
-      "commence_time": "2026-09-26T19:30:00Z"
-    },
-    {
       "game_id": 401864579,
       "season": 2026,
       "week": 4,
@@ -1944,16 +1944,16 @@
       "commence_time": "2026-09-26T19:30:00Z"
     },
     {
-      "game_id": 401858470,
+      "game_id": 401858463,
       "season": 2026,
       "week": 4,
-      "home_team": "Washington Huskies",
-      "away_team": "Minnesota Golden Gophers",
-      "side": "home",
-      "recommended_spread_home": -8.5,
-      "closing_spread_home": -12.5,
-      "clv_points": 4.0,
-      "captured_at": "2026-09-17T19:06:47.325671+00:00",
+      "home_team": "Michigan Wolverines",
+      "away_team": "Iowa Hawkeyes",
+      "side": "away",
+      "recommended_spread_home": -4.5,
+      "closing_spread_home": -4.5,
+      "clv_points": 0.0,
+      "captured_at": "2026-09-17T01:57:12.504086+00:00",
       "commence_time": "2026-09-26T19:30:00Z"
     },
     {
@@ -1970,16 +1970,16 @@
       "commence_time": "2026-09-26T19:30:00Z"
     },
     {
-      "game_id": 401858463,
+      "game_id": 401858470,
       "season": 2026,
       "week": 4,
-      "home_team": "Michigan Wolverines",
-      "away_team": "Iowa Hawkeyes",
-      "side": "away",
-      "recommended_spread_home": -4.5,
-      "closing_spread_home": -4.5,
-      "clv_points": 0.0,
-      "captured_at": "2026-09-17T01:57:12.504086+00:00",
+      "home_team": "Washington Huskies",
+      "away_team": "Minnesota Golden Gophers",
+      "side": "home",
+      "recommended_spread_home": -8.5,
+      "closing_spread_home": -12.5,
+      "clv_points": 4.0,
+      "captured_at": "2026-09-17T19:06:47.325671+00:00",
       "commence_time": "2026-09-26T19:30:00Z"
     },
     {
@@ -2048,19 +2048,6 @@
       "commence_time": "2026-09-26T21:00:00Z"
     },
     {
-      "game_id": 401869961,
-      "season": 2026,
-      "week": 4,
-      "home_team": "Old Dominion Monarchs",
-      "away_team": "James Madison Dukes",
-      "side": "away",
-      "recommended_spread_home": 6.0,
-      "closing_spread_home": 7.0,
-      "clv_points": 1.0,
-      "captured_at": "2026-09-21T16:00:15.108504+00:00",
-      "commence_time": "2026-09-26T22:00:00Z"
-    },
-    {
       "game_id": 401858239,
       "season": 2026,
       "week": 4,
@@ -2071,6 +2058,19 @@
       "closing_spread_home": -19.5,
       "clv_points": 0.0,
       "captured_at": "2026-09-25T14:25:58.427596+00:00",
+      "commence_time": "2026-09-26T22:00:00Z"
+    },
+    {
+      "game_id": 401869961,
+      "season": 2026,
+      "week": 4,
+      "home_team": "Old Dominion Monarchs",
+      "away_team": "James Madison Dukes",
+      "side": "away",
+      "recommended_spread_home": 6.0,
+      "closing_spread_home": 7.0,
+      "clv_points": 1.0,
+      "captured_at": "2026-09-21T16:00:15.108504+00:00",
       "commence_time": "2026-09-26T22:00:00Z"
     },
     {
@@ -2087,19 +2087,6 @@
       "commence_time": "2026-09-26T22:30:00Z"
     },
     {
-      "game_id": 401869931,
-      "season": 2026,
-      "week": 4,
-      "home_team": "Arkansas State Red Wolves",
-      "away_team": "Kennesaw State Owls",
-      "side": "away",
-      "recommended_spread_home": -5.5,
-      "closing_spread_home": -6.5,
-      "clv_points": -1.0,
-      "captured_at": "2026-09-21T18:20:34.438576+00:00",
-      "commence_time": "2026-09-26T23:00:00Z"
-    },
-    {
       "game_id": 401856814,
       "season": 2026,
       "week": 4,
@@ -2113,16 +2100,29 @@
       "commence_time": "2026-09-26T23:00:00Z"
     },
     {
-      "game_id": 401856881,
+      "game_id": 401869931,
       "season": 2026,
       "week": 4,
-      "home_team": "West Virginia Mountaineers",
-      "away_team": "Oklahoma State Cowboys",
-      "side": "home",
-      "recommended_spread_home": 2.5,
-      "closing_spread_home": -1.5,
-      "clv_points": 4.0,
-      "captured_at": "2026-09-17T01:57:12.504086+00:00",
+      "home_team": "Arkansas State Red Wolves",
+      "away_team": "Kennesaw State Owls",
+      "side": "away",
+      "recommended_spread_home": -5.5,
+      "closing_spread_home": -6.5,
+      "clv_points": -1.0,
+      "captured_at": "2026-09-21T18:20:34.438576+00:00",
+      "commence_time": "2026-09-26T23:00:00Z"
+    },
+    {
+      "game_id": 401871048,
+      "season": 2026,
+      "week": 4,
+      "home_team": "Jacksonville State Gamecocks",
+      "away_team": "Middle Tennessee Blue Raiders",
+      "side": "away",
+      "recommended_spread_home": -7.5,
+      "closing_spread_home": -7.0,
+      "clv_points": 0.5,
+      "captured_at": "2026-09-21T16:00:15.108504+00:00",
       "commence_time": "2026-09-26T23:00:00Z"
     },
     {
@@ -2152,16 +2152,16 @@
       "commence_time": "2026-09-26T23:00:00Z"
     },
     {
-      "game_id": 401871048,
+      "game_id": 401856881,
       "season": 2026,
       "week": 4,
-      "home_team": "Jacksonville State Gamecocks",
-      "away_team": "Middle Tennessee Blue Raiders",
-      "side": "away",
-      "recommended_spread_home": -7.5,
-      "closing_spread_home": -7.0,
-      "clv_points": 0.5,
-      "captured_at": "2026-09-21T16:00:15.108504+00:00",
+      "home_team": "West Virginia Mountaineers",
+      "away_team": "Oklahoma State Cowboys",
+      "side": "home",
+      "recommended_spread_home": 2.5,
+      "closing_spread_home": -1.5,
+      "clv_points": 4.0,
+      "captured_at": "2026-09-17T01:57:12.504086+00:00",
       "commence_time": "2026-09-26T23:00:00Z"
     },
     {
@@ -2230,19 +2230,6 @@
       "commence_time": "2026-09-27T00:00:00Z"
     },
     {
-      "game_id": 401860895,
-      "season": 2026,
-      "week": 4,
-      "home_team": "UTEP Miners",
-      "away_team": "Oregon State Beavers",
-      "side": "home",
-      "recommended_spread_home": 10.5,
-      "closing_spread_home": 11.5,
-      "clv_points": -1.0,
-      "captured_at": "2026-09-21T18:20:34.438576+00:00",
-      "commence_time": "2026-09-27T01:00:00Z"
-    },
-    {
       "game_id": 401858241,
       "season": 2026,
       "week": 4,
@@ -2253,6 +2240,19 @@
       "closing_spread_home": -30.5,
       "clv_points": 4.0,
       "captured_at": "2026-09-21T16:00:15.108504+00:00",
+      "commence_time": "2026-09-27T01:00:00Z"
+    },
+    {
+      "game_id": 401860895,
+      "season": 2026,
+      "week": 4,
+      "home_team": "UTEP Miners",
+      "away_team": "Oregon State Beavers",
+      "side": "home",
+      "recommended_spread_home": 10.5,
+      "closing_spread_home": 11.5,
+      "clv_points": -1.0,
+      "captured_at": "2026-09-21T18:20:34.438576+00:00",
       "commence_time": "2026-09-27T01:00:00Z"
     },
     {
@@ -2269,19 +2269,6 @@
       "commence_time": "2026-09-27T02:00:00Z"
     },
     {
-      "game_id": 401864509,
-      "season": 2026,
-      "week": 4,
-      "home_team": "Nevada Wolf Pack",
-      "away_team": "Air Force Falcons",
-      "side": "home",
-      "recommended_spread_home": 5.5,
-      "closing_spread_home": 4.5,
-      "clv_points": 1.0,
-      "captured_at": "2026-09-21T16:00:15.108504+00:00",
-      "commence_time": "2026-09-27T02:30:00Z"
-    },
-    {
       "game_id": 401858240,
       "season": 2026,
       "week": 4,
@@ -2291,6 +2278,19 @@
       "recommended_spread_home": 3.5,
       "closing_spread_home": 3.0,
       "clv_points": -0.5,
+      "captured_at": "2026-09-21T16:00:15.108504+00:00",
+      "commence_time": "2026-09-27T02:30:00Z"
+    },
+    {
+      "game_id": 401864509,
+      "season": 2026,
+      "week": 4,
+      "home_team": "Nevada Wolf Pack",
+      "away_team": "Air Force Falcons",
+      "side": "home",
+      "recommended_spread_home": 5.5,
+      "closing_spread_home": 4.5,
+      "clv_points": 1.0,
       "captured_at": "2026-09-21T16:00:15.108504+00:00",
       "commence_time": "2026-09-27T02:30:00Z"
     },
