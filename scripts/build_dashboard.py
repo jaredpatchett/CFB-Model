@@ -1082,6 +1082,15 @@ RENDERER_JS = """<script>
   // name for anything unscored (score_prop never ran, so there's no team to
   // attach -- e.g. a posted line with no model read yet), same "don't
   // fabricate what we don't know" policy as everywhere else here.
+  // Near-even moneyline target (added 10/2026): a qualifying moneyline at
+  // +100 to +150 where the model gives that team 65%+ to win. Across the
+  // first three trained-model weekends these went 5-2 (+4.1u) while
+  // lower-confidence near-even plays went 2-5 -- promising but a small
+  // sample, so it's tagged for small stakes and tracking, not a core bet.
+  function isNearEvenTarget(p) {
+    return p && p.market === 'Moneyline' && p.qualifies && p.sideMoneyline != null &&
+      p.sideMoneyline >= 100 && p.sideMoneyline <= 150 && p.sideProb >= 0.65;
+  }
   function schoolAbbr(s) { return s ? ((D.meta.schoolAbbr || {})[s] || s) : ''; }
   function playerLabel(r) { return (r.team ? schoolAbbr(r.team) + ' ' : '') + r.player_name; }
 
@@ -1283,6 +1292,7 @@ RENDERER_JS = """<script>
             (qualifies ? '<div class="edge-play-pill" style="background:' + esc(playPillColor) + '26;border:1px solid ' + esc(playPillColor) + ';color:' + esc(playPillColor) + '">PLAY: ' + esc(playPillLabel) + '</div>' : '') +
             (p.isFade ? '<div class="edge-fade-pill">FADE: ' + esc(fadePillLabel) + '</div>' : '') +
             (p.bigSpread ? '<div class="edge-fade-pill">FADE: 20+PT SPREAD</div>' : '') +
+            (isNearEvenTarget(p) ? '<div class="edge-play-pill" style="background:rgba(23,194,107,0.16);border:1px solid var(--green);color:var(--green);margin-left:6px">TARGET: NEAR-EVEN ML</div>' : '') +
             (g.flags || []).filter(function (f) { return f.qb; }).map(function (f) {
               return '<div class="edge-fade-pill" style="border-color:var(--amber);color:var(--amber);margin-left:6px">\u26a0 ' + esc(abbrOf(f.team)) + ' ' + esc(f.text) + '</div>';
             }).join('') +
@@ -1479,11 +1489,13 @@ RENDERER_JS = """<script>
       var playText = market === 'Moneyline' && p.sideMoneyline != null
         ? p.playLabel + ' ' + (p.sideMoneyline > 0 ? '+' : '') + p.sideMoneyline
         : p.playLabel;
-      var dogML = market === 'Moneyline' && p.sideMoneyline > 0;
+      var bigDogML = market === 'Moneyline' && p.sideMoneyline > 150;
       if (market === 'Spread' && p.playLabel === 'No spread posted') {
         label = 'NO SPREAD POSTED'; color = 'var(--muted-3)'; playText = '\\u2014';
-      } else if (p.qualifies && dogML) {
-        label = 'UNOFFICIAL \\u00b7 UNDERDOG ML'; color = 'var(--amber)'; note = 'track only \\u2014 underdog moneylines aren\\u2019t wagered';
+      } else if (isNearEvenTarget(p)) {
+        label = 'TARGET \\u00b7 NEAR-EVEN ML'; color = 'var(--green)'; note = 'model 65%+ at +100 to +150 \\u2014 small stake';
+      } else if (p.qualifies && bigDogML) {
+        label = 'UNOFFICIAL \\u00b7 BIG UNDERDOG ML'; color = 'var(--amber)'; note = 'track only \\u2014 longer than +150';
       } else if (p.qualifies && onCard) {
         label = 'OFFICIAL \\u00b7 BET CARD'; color = 'var(--green)'; note = 'wager';
       } else if (p.qualifies) {
@@ -1669,6 +1681,7 @@ RENDERER_JS = """<script>
               '<div class="card-conf">' + (sideProb * 100).toFixed(1) + '%</div>' +
               '<div class="num"><span class="tier"><span>' + esc(c.tier) + '</span></span></div>' +
               '<div class="num"><button class="track-btn" onclick="window.__cfbTrack(' + trackPayload(c) + ')">+TRK</button></div>' +
+              (isNearEvenTarget(c) ? '<div style="grid-column:1/-1;font-size:11px;color:var(--green);padding-top:6px;line-height:1.4">\u2605 Near-even target: +100 to +150 with the model at 65%+ \u2014 small stake</div>' : '') +
               (qbFlags.length ? '<div style="grid-column:1/-1;font-size:11px;color:var(--amber);padding-top:6px;line-height:1.4">\u26a0 Injury: ' +
                 qbFlags.map(function (f) { return esc(abbrOf(f.team)) + ' ' + esc(f.text); }).join(' \u00b7 ') +
                 ' \u2014 the model doesn\u2019t account for this. Check the latest status before betting.</div>' : '') +
