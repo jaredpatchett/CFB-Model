@@ -137,6 +137,21 @@ def fetch_game_advanced_if_missing(year: int, force: bool = False):
                   f"efficiency features unavailable for this year")
 
 
+def refetch_lines_if_no_opener(year: int):
+    """Saved line files from before 10/2026 kept only the closing spread. The
+    opening-line test in run_backtest.py needs the opener too, so re-pull a
+    season's lines once (one CFBD call) if its file lacks that column."""
+    path = f"{config.DATA_RAW_DIR}/lines_{year}.csv"
+    try:
+        if os.path.exists(path) and "market_spread_open_home" in pd.read_csv(path, nrows=1).columns:
+            return
+        lines = cfbd.historical_lines_to_dataframe(cfbd.get_historical_lines(year))
+        lines.to_csv(path, index=False)
+        print(f"  lines re-pulled with opening spreads: {lines['market_spread_open_home'].notna().sum()} of {len(lines)} games")
+    except Exception as e:
+        print(f"  [warn] could not re-pull {year} lines with openers: {e}")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--years", type=int, nargs="+", required=True,
@@ -156,4 +171,5 @@ if __name__ == "__main__":
             fetch_year(year)
         fetch_weather_and_core_if_missing(year, force=args.force)
         fetch_game_advanced_if_missing(year, force=args.force)
+        refetch_lines_if_no_opener(year)
     print("\nDone.")
