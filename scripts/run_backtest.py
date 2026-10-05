@@ -69,6 +69,54 @@ def run_splits(scoreable: pd.DataFrame) -> dict:
     return out
 
 
+def run_challenger(scoreable: pd.DataFrame) -> dict:
+    """Current vs upgraded model on exactly the same games (added 10/2026):
+    every graded game where both models have a prediction and the spread is
+    under 20. Each model gets its own Bet Card (top 10 per week by its own
+    cover probability)."""
+    import numpy as np
+    from scipy.stats import norm
+    from src.analysis import game_profile as gp
+    if "predicted_margin_v2" not in scoreable.columns:
+        print("  [warn] no upgraded-model predictions -- challenger comparison skipped")
+        return {}
+    base = scoreable.dropna(subset=["predicted_margin_v2"]).copy()
+    base = base[base["market_spread_home"].abs() < 20]
+    out, rows = {"n_games": int(len(base))}, []
+    for label, mcol, sdcol, pcol in (("current", "predicted_margin", "fold_sd", "predicted_home_win_prob"),
+                                     ("upgraded", "predicted_margin_v2", "fold_sd_v2", "predicted_home_win_prob_v2")):
+        d = base.copy()
+        d["edge"] = d[mcol] + d["market_spread_home"]
+        d = d[d["edge"] != 0]
+        cover = d["margin"] + d["market_spread_home"]
+        d["result"] = ["P" if c == 0 else ("W" if (c > 0) == (e > 0) else "L") for c, e in zip(cover, d["edge"])]
+        d["units"] = d["result"].map({"W": 100 / 110, "L": -1.0, "P": 0.0})
+        d["cover_prob"] = norm.cdf(d["edge"].abs() / d[sdcol])
+        d["rank"] = d.groupby(["season", "week"])["cover_prob"].rank(ascending=False, method="first")
+        card = d[d["rank"] <= 10]
+        p = base[pcol].clip(0.01, 0.99)
+        res = {
+            "model": label,
+            "every game": gp.summarize(d, "every game"),
+            "bet card": gp.summarize(card, "bet card"),
+            "bet card weeks 4+": gp.summarize(card[card.week >= 4], "bet card weeks 4+"),
+            "big disagreements (14+ pts)": gp.summarize(d[d.edge.abs() >= 14], "14+ pts off market"),
+            "margin_mae": round(float((base[mcol] - base["margin"]).abs().mean()), 2),
+            "win_prob_log_loss": round(float(-np.mean(base["home_win"] * np.log(p) + (1 - base["home_win"]) * np.log(1 - p))), 4),
+        }
+        out[label] = res
+    print(f"\nCURRENT vs UPGRADED MODEL -- same {out['n_games']} games (spreads under 20), out of sample")
+    print(f"  {'':<30}{'current':>26}{'upgraded':>26}")
+    for k in ("every game", "bet card", "bet card weeks 4+", "big disagreements (14+ pts)"):
+        def cell(r):
+            return f"{r['record']} {r['roi']*100:+.1f}%" if r.get("n") else "-"
+        print(f"  {k:<30}{cell(out['current'][k]):>26}{cell(out['upgraded'][k]):>26}")
+    print(f"  {'avg miss vs final margin':<30}{out['current']['margin_mae']:>23.2f} pts{out['upgraded']['margin_mae']:>23.2f} pts")
+    print(f"  {'win-probability log loss':<30}{out['current']['win_prob_log_loss']:>26.4f}{out['upgraded']['win_prob_log_loss']:>26.4f}")
+    print("  (log loss: lower is better)")
+    return out
+
+
 def run_moneyline_tests(scoreable: pd.DataFrame) -> dict:
     """Where (if anywhere) the model has a MONEYLINE edge, graded at real
     closing moneyline prices, out of sample (added 10/2026):
@@ -303,6 +351,24 @@ if __name__ == "__main__":
         )
         print(f"  {test_season}: trained on {len(train_rows)} earlier-season rows, graded "
               f"{fold['n_games']} games -> {fold['ats_win_rate']:.1%} ATS")
+        # Challenger (upgraded) model, trained on the SAME earlier seasons
+        # (added 10/2026) -- see src/features/team_features_v2.py.
+        try:
+            from src.features.team_features_v2 import FEATURE_COLUMNS_V2, V2_EXTRA
+            if all(c in features.columns for c in V2_EXTRA):
+                ch = GameMarginModel()
+                ch.feature_columns = list(FEATURE_COLUMNS_V2)
+                ch.fit(train_rows, verbose=False)
+                ok = test_rows[ch.feature_columns].notna().all(axis=1)
+                test_rows["predicted_margin_v2"] = float("nan")
+                test_rows["predicted_home_win_prob_v2"] = float("nan")
+                if ok.any():
+                    test_rows.loc[ok, "predicted_margin_v2"] = ch.predict_margin(test_rows[ok])
+                    test_rows.loc[ok, "predicted_home_win_prob_v2"] = ch.predict_home_win_prob(test_rows[ok])
+                test_rows["fold_sd_v2"] = ch.residual_std
+                print(f"        upgraded model: graded {int(ok.sum())} of those games")
+        except Exception as e:
+            print(f"        [warn] upgraded model not trained for {test_season}: {e}")
         graded_parts.append(test_rows)
 
     if not graded_parts:
@@ -324,6 +390,10 @@ if __name__ == "__main__":
           "not a verdict — re-run this after more historical seasons/weeks are pulled.")
 
     splits = run_splits(scoreable)
+    try:
+        splits["challenger"] = run_challenger(scoreable)
+    except Exception as e:
+        print(f"  [warn] challenger comparison failed: {e}")
     try:
         splits["moneyline"] = run_moneyline_tests(scoreable)
     except Exception as e:
