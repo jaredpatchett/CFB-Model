@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T19:02:33.651370+00:00",
+  "generated_at": "2026-10-05T15:32:27.801830+00:00",
   "seasons_covered": [
     2024,
     2025
@@ -18,5 +18,265 @@
     "n_games": 1347,
     "accuracy": 0.6927,
     "log_loss": 0.5894
+  },
+  "splits": {
+    "note": "every graded game, standard -110 pricing; 'bet card' = each week's top 10 by model cover probability with spreads of 20+ faded",
+    "overall": [
+      {
+        "group": "every game",
+        "n": 1347,
+        "record": "670-649-28",
+        "hit_rate": 0.508,
+        "units": -39.91,
+        "roi": -0.03,
+        "z": -1.15,
+        "roi_by_period": {
+          "2024": -0.042,
+          "2025": -0.018
+        }
+      },
+      {
+        "group": "spreads under 20",
+        "n": 1144,
+        "record": "572-546-26",
+        "hit_rate": 0.512,
+        "units": -26.0,
+        "roi": -0.023,
+        "z": -0.81,
+        "roi_by_period": {
+          "2024": -0.041,
+          "2025": -0.004
+        }
+      },
+      {
+        "group": "bet card (top 10/week)",
+        "n": 282,
+        "record": "129-149-4",
+        "hit_rate": 0.464,
+        "units": -31.73,
+        "roi": -0.113,
+        "z": -1.99,
+        "roi_by_period": {
+          "2024": -0.093,
+          "2025": -0.132
+        }
+      },
+      {
+        "group": "not on bet card",
+        "n": 862,
+        "record": "443-397-22",
+        "hit_rate": 0.527,
+        "units": 5.73,
+        "roi": 0.007,
+        "z": 0.21,
+        "roi_by_period": {
+          "2024": -0.024,
+          "2025": 0.038
+        }
+      }
+    ],
+    "game_type": [
+      {
+        "group": "Group of 5 vs Group of 5",
+        "n": 514,
+        "record": "256-246-12",
+        "hit_rate": 0.51,
+        "units": -13.27,
+        "roi": -0.026,
+        "z": -0.62,
+        "roi_by_period": {
+          "2024": -0.059,
+          "2025": 0.006
+        }
+      },
+      {
+        "group": "Power 4 vs Group of 5",
+        "n": 64,
+        "record": "34-28-2",
+        "hit_rate": 0.548,
+        "units": 2.91,
+        "roi": 0.045,
+        "z": 0.39,
+        "roi_by_period": {
+          "2024": -0.199,
+          "2025": 0.38
+        }
+      },
+      {
+        "group": "Power 4 vs Power 4",
+        "n": 566,
+        "record": "282-272-12",
+        "hit_rate": 0.509,
+        "units": -15.64,
+        "roi": -0.028,
+        "z": -0.7,
+        "roi_by_period": {
+          "2024": -0.004,
+          "2025": -0.051
+        }
+      }
+    ],
+    "game_type_bet_card": [
+      {
+        "group": "Group of 5 vs Group of 5 | bet card",
+        "n": 127,
+        "record": "53-72-2",
+        "hit_rate": 0.424,
+        "units": -23.82,
+        "roi": -0.188,
+        "z": -2.25,
+        "roi_by_period": {
+          "2024": -0.193,
+          "2025": -0.183
+        }
+      },
+      {
+        "group": "Power 4 vs Group of 5 | bet card",
+        "n": 22,
+        "record": "14-8-0",
+        "hit_rate": 0.636,
+        "units": 4.73,
+        "roi": 0.215,
+        "z": 1.07,
+        "roi_by_period": {
+          "2024": 0.028,
+          "2025": 0.485
+        }
+      },
+      {
+        "group": "Power 4 vs Power 4 | bet card",
+        "n": 133,
+        "record": "62-69-2",
+        "hit_rate": 0.473,
+        "units": -12.64,
+        "roi": -0.095,
+        "z": -1.15,
+        "roi_by_period": {
+          "2024": -0.032,
+          "2025": -0.163
+        }
+      }
+    ],
+    "spread_size": [
+      {
+        "group": "spread 0-3",
+        "n": 300,
+        "record": "150-140-10",
+        "hit_rate": 0.517,
+        "units": -3.64,
+        "roi": -0.012,
+        "z": -0.22,
+        "roi_by_period": {
+          "2024": -0.062,
+          "2025": 0.045
+        }
+      },
+      {
+        "group": "spread 3.5-7",
+        "n": 352,
+        "record": "175-166-11",
+        "hit_rate": 0.513,
+        "units": -6.91,
+        "roi": -0.02,
+        "z": -0.39,
+        "roi_by_period": {
+          "2024": -0.085,
+          "2025": 0.037
+        }
+      },
+      {
+        "group": "spread 7.5-14",
+        "n": 344,
+        "record": "174-165-5",
+        "hit_rate": 0.513,
+        "units": -6.82,
+        "roi": -0.02,
+        "z": -0.39,
+        "roi_by_period": {
+          "2024": -0.039,
+          "2025": -0.001
+        }
+      },
+      {
+        "group": "spread 14.5-20",
+        "n": 153,
+        "record": "74-79-0",
+        "hit_rate": 0.484,
+        "units": -11.73,
+        "roi": -0.077,
+        "z": -0.99,
+        "roi_by_period": {
+          "2024": 0.05,
+          "2025": -0.215
+        }
+      },
+      {
+        "group": "spread 20+",
+        "n": 198,
+        "record": "97-99-2",
+        "hit_rate": 0.495,
+        "units": -10.82,
+        "roi": -0.055,
+        "z": -0.81,
+        "roi_by_period": {
+          "2024": -0.015,
+          "2025": -0.092
+        }
+      }
+    ],
+    "edge_size": [
+      {
+        "group": "model off market 0-3 pts",
+        "n": 382,
+        "record": "200-175-7",
+        "hit_rate": 0.533,
+        "units": 6.82,
+        "roi": 0.018,
+        "z": 0.37,
+        "roi_by_period": {
+          "2024": -0.012,
+          "2025": 0.044
+        }
+      },
+      {
+        "group": "3-7 pts",
+        "n": 397,
+        "record": "189-197-11",
+        "hit_rate": 0.49,
+        "units": -25.18,
+        "roi": -0.063,
+        "z": -1.34,
+        "roi_by_period": {
+          "2024": -0.125,
+          "2025": -0.008
+        }
+      },
+      {
+        "group": "7-14 pts",
+        "n": 282,
+        "record": "146-128-8",
+        "hit_rate": 0.533,
+        "units": 4.73,
+        "roi": 0.017,
+        "z": 0.3,
+        "roi_by_period": {
+          "2024": 0.036,
+          "2025": -0.006
+        }
+      },
+      {
+        "group": "14+ pts",
+        "n": 83,
+        "record": "37-46-0",
+        "hit_rate": 0.446,
+        "units": -12.36,
+        "roi": -0.149,
+        "z": -1.42,
+        "roi_by_period": {
+          "2024": -0.064,
+          "2025": -0.284
+        }
+      }
+    ]
   }
 }

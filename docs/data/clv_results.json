@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T19:11:08.009952+00:00",
+  "generated_at": "2026-10-05T15:40:27.350583+00:00",
   "n_games": 227,
   "avg_clv_points": 0.048,
   "median_clv_points": 0.0,
@@ -2360,6 +2360,19 @@
       "commence_time": "2026-10-03T00:00:00Z"
     },
     {
+      "game_id": 401856822,
+      "season": 2026,
+      "week": 5,
+      "home_team": "Iowa State Cyclones",
+      "away_team": "West Virginia Mountaineers",
+      "side": "home",
+      "recommended_spread_home": -3.5,
+      "closing_spread_home": -3.0,
+      "clv_points": -0.5,
+      "captured_at": "2026-09-28T13:46:04.464071+00:00",
+      "commence_time": "2026-10-03T16:00:00Z"
+    },
+    {
       "game_id": 401856707,
       "season": 2026,
       "week": 5,
@@ -2369,19 +2382,6 @@
       "recommended_spread_home": 6.0,
       "closing_spread_home": 5.5,
       "clv_points": 0.5,
-      "captured_at": "2026-09-28T13:46:04.464071+00:00",
-      "commence_time": "2026-10-03T16:00:00Z"
-    },
-    {
-      "game_id": 401856819,
-      "season": 2026,
-      "week": 5,
-      "home_team": "Houston Cougars",
-      "away_team": "UCF Knights",
-      "side": "away",
-      "recommended_spread_home": -11.5,
-      "closing_spread_home": -10.5,
-      "clv_points": 1.0,
       "captured_at": "2026-09-28T13:46:04.464071+00:00",
       "commence_time": "2026-10-03T16:00:00Z"
     },
@@ -2412,15 +2412,15 @@
       "commence_time": "2026-10-03T16:00:00Z"
     },
     {
-      "game_id": 401856822,
+      "game_id": 401856819,
       "season": 2026,
       "week": 5,
-      "home_team": "Iowa State Cyclones",
-      "away_team": "West Virginia Mountaineers",
-      "side": "home",
-      "recommended_spread_home": -3.5,
-      "closing_spread_home": -3.0,
-      "clv_points": -0.5,
+      "home_team": "Houston Cougars",
+      "away_team": "UCF Knights",
+      "side": "away",
+      "recommended_spread_home": -11.5,
+      "closing_spread_home": -10.5,
+      "clv_points": 1.0,
       "captured_at": "2026-09-28T13:46:04.464071+00:00",
       "commence_time": "2026-10-03T16:00:00Z"
     },
@@ -2750,19 +2750,6 @@
       "commence_time": "2026-10-03T22:00:00Z"
     },
     {
-      "game_id": 401871089,
-      "season": 2026,
-      "week": 5,
-      "home_team": "South Alabama Jaguars",
-      "away_team": "UL Monroe Warhawks",
-      "side": "home",
-      "recommended_spread_home": -14.0,
-      "closing_spread_home": -12.5,
-      "clv_points": -1.5,
-      "captured_at": "2026-09-28T13:46:04.464071+00:00",
-      "commence_time": "2026-10-03T23:00:00Z"
-    },
-    {
       "game_id": 401856711,
       "season": 2026,
       "week": 5,
@@ -2789,19 +2776,6 @@
       "commence_time": "2026-10-03T23:00:00Z"
     },
     {
-      "game_id": 401856818,
-      "season": 2026,
-      "week": 5,
-      "home_team": "TCU Horned Frogs",
-      "away_team": "BYU Cougars",
-      "side": "home",
-      "recommended_spread_home": 5.5,
-      "closing_spread_home": 5.5,
-      "clv_points": 0.0,
-      "captured_at": "2026-09-24T19:14:15.051160+00:00",
-      "commence_time": "2026-10-03T23:00:00Z"
-    },
-    {
       "game_id": 401862788,
       "season": 2026,
       "week": 5,
@@ -2815,17 +2789,30 @@
       "commence_time": "2026-10-03T23:00:00Z"
     },
     {
-      "game_id": 401869842,
+      "game_id": 401871089,
       "season": 2026,
       "week": 5,
-      "home_team": "Louisiana Tech Bulldogs",
-      "away_team": "Army Black Knights",
+      "home_team": "South Alabama Jaguars",
+      "away_team": "UL Monroe Warhawks",
       "side": "home",
-      "recommended_spread_home": 3.0,
-      "closing_spread_home": -1.5,
-      "clv_points": 4.5,
+      "recommended_spread_home": -14.0,
+      "closing_spread_home": -12.5,
+      "clv_points": -1.5,
       "captured_at": "2026-09-28T13:46:04.464071+00:00",
-      "commence_time": "2026-10-03T23:30:00Z"
+      "commence_time": "2026-10-03T23:00:00Z"
+    },
+    {
+      "game_id": 401856818,
+      "season": 2026,
+      "week": 5,
+      "home_team": "TCU Horned Frogs",
+      "away_team": "BYU Cougars",
+      "side": "home",
+      "recommended_spread_home": 5.5,
+      "closing_spread_home": 5.5,
+      "clv_points": 0.0,
+      "captured_at": "2026-09-24T19:14:15.051160+00:00",
+      "commence_time": "2026-10-03T23:00:00Z"
     },
     {
       "game_id": 401860898,
@@ -2837,6 +2824,19 @@
       "recommended_spread_home": -20.5,
       "closing_spread_home": -19.5,
       "clv_points": 1.0,
+      "captured_at": "2026-09-28T13:46:04.464071+00:00",
+      "commence_time": "2026-10-03T23:30:00Z"
+    },
+    {
+      "game_id": 401869842,
+      "season": 2026,
+      "week": 5,
+      "home_team": "Louisiana Tech Bulldogs",
+      "away_team": "Army Black Knights",
+      "side": "home",
+      "recommended_spread_home": 3.0,
+      "closing_spread_home": -1.5,
+      "clv_points": 4.5,
       "captured_at": "2026-09-28T13:46:04.464071+00:00",
       "commence_time": "2026-10-03T23:30:00Z"
     },
