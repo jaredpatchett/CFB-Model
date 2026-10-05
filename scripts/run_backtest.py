@@ -19,6 +19,47 @@ from src.models.game_model import GameMarginModel
 from src.backtest import backtester
 
 
+def run_splits(scoreable: pd.DataFrame) -> dict:
+    """Where (if anywhere) the model beats the closing spread, out of sample
+    (added 10/2026): by game type (Power 4 / Group of 5), spread size, model
+    edge size, and a historical re-creation of the Bet Card -- each week's top
+    10 plays by model cover probability, with spreads of 20+ faded."""
+    from scipy.stats import norm
+    from src.analysis import game_profile as gp
+
+    df = scoreable.copy()
+    df["edge"] = df["predicted_margin"] + df["market_spread_home"]   # model margin minus market's expected margin
+    df = df[df["edge"] != 0]
+    pick_home = df["edge"] > 0
+    cover = df["margin"] + df["market_spread_home"]
+    df["result"] = ["P" if c == 0 else ("W" if (c > 0) == ph else "L") for c, ph in zip(cover, pick_home)]
+    df["units"] = df["result"].map({"W": 100 / 110, "L": -1.0, "P": 0.0})
+    df["cover_prob"] = norm.cdf(df["edge"].abs() / df["fold_sd"])
+    confs = gp.conference_map(df["season"].unique())
+    df["game_type"] = [gp.game_type(s, h, a, confs) for s, h, a in zip(df["season"], df["homeTeam"], df["awayTeam"])]
+    big = df["market_spread_home"].abs() >= 20
+    play = df[~big].copy()
+    play["rank"] = play.groupby(["season", "week"])["cover_prob"].rank(ascending=False, method="first")
+    play["bet_card"] = play["rank"] <= 10
+
+    out = {"note": "every graded game, standard -110 pricing; 'bet card' = each week's top 10 by model cover "
+                   "probability with spreads of 20+ faded"}
+    out["overall"] = [gp.summarize(df, "every game"), gp.summarize(play, "spreads under 20"),
+                      gp.summarize(play[play.bet_card], "bet card (top 10/week)"), gp.summarize(play[~play.bet_card], "not on bet card")]
+    out["game_type"] = [gp.summarize(g, k) for k, g in play.groupby("game_type")]
+    out["game_type_bet_card"] = [gp.summarize(g, f"{k} | bet card") for k, g in play[play.bet_card].groupby("game_type")]
+    out["spread_size"] = [gp.summarize(g, str(k)) for k, g in df.groupby(pd.cut(df["market_spread_home"].abs(), [-0.1, 3, 7, 14, 20, 99],
+                          labels=["spread 0-3", "spread 3.5-7", "spread 7.5-14", "spread 14.5-20", "spread 20+"]), observed=True)]
+    out["edge_size"] = [gp.summarize(g, str(k)) for k, g in play.groupby(pd.cut(play["edge"].abs(), [0, 3, 7, 14, 99],
+                        labels=["model off market 0-3 pts", "3-7 pts", "7-14 pts", "14+ pts"]), observed=True)]
+    gp.print_rows("WHERE DOES THE MODEL BEAT THE SPREAD? (out of sample)", out["overall"])
+    gp.print_rows("By game type (spreads under 20)", out["game_type"])
+    gp.print_rows("Bet Card plays by game type", out["game_type_bet_card"])
+    gp.print_rows("By spread size (all games)", out["spread_size"])
+    gp.print_rows("By how far the model is from the market (spreads under 20)", out["edge_size"])
+    return out
+
+
 def load_historical_lines() -> pd.DataFrame:
     """Load every lines_{year}.csv found in data/raw/, already flattened to
     one row per game by cfbd_client.historical_lines_to_dataframe (see
@@ -118,6 +159,7 @@ if __name__ == "__main__":
             continue
         test_rows["predicted_margin"] = fold_model.predict_margin(test_rows)
         test_rows["predicted_home_win_prob"] = fold_model.predict_home_win_prob(test_rows)
+        test_rows["fold_sd"] = fold_model.residual_std
         fold = backtester.evaluate_spread(
             test_rows["predicted_margin"], test_rows["margin"], test_rows["market_spread_home"]
         )
@@ -143,6 +185,8 @@ if __name__ == "__main__":
           "Treat any result on a small early sample (well under ~200 graded games) as noisy, "
           "not a verdict — re-run this after more historical seasons/weeks are pulled.")
 
+    splits = run_splits(scoreable)
+
     # Persist results to the repo (rather than leaving them stranded in this
     # Action run's console log, which isn't fetchable outside the GitHub UI)
     # so build_dashboard.py can surface a real "Backtest Track Record" panel
@@ -166,6 +210,7 @@ if __name__ == "__main__":
             "accuracy": round(float(ml_results["accuracy"]), 4),
             "log_loss": round(float(ml_results["log_loss"]), 4),
         },
+        "splits": splits,
     }
     os.makedirs("docs/data", exist_ok=True)
     with open("docs/data/backtest_results.json", "w") as f:
