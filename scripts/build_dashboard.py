@@ -1722,6 +1722,9 @@ RENDERER_JS = """<script>
   }
   function propConfidence(r) {
     var lp = r._lp, be = r._be, gp = r.games_played, inj = r.injury_status;
+    // Official = receptions overs at 10%+ EV (the one prop group that held
+    // up in the live backtest) -- always listed first, as TARGET.
+    if (r.is_official_play) return { tier: 'TARGET', rank: 0, color: 'var(--green)' };
     if (lp == null) return { tier: 'NONE', rank: 9, color: 'var(--muted-4)' };
     var gap = be != null ? lp - be : 0;
     var injBlock = inj === 'Out' || inj === 'Out For Season' || inj === 'IR' || inj === 'Doubtful';
@@ -1737,7 +1740,7 @@ RENDERER_JS = """<script>
     else t = { tier: 'LOW', rank: 3, color: 'var(--muted-3)' };
     // Small whole-number stats (TDs, INTs, receptions) don't fit the model's
     // bell-curve math well, so they can't rate above Low.
-    if (/touchdown|interception|^receptions$/i.test(r.market_name || '') && t.rank < 3) t = { tier: 'LOW', rank: 3, color: 'var(--muted-3)' };
+    if (/touchdown|interception/i.test(r.market_name || '') && t.rank < 3) t = { tier: 'LOW', rank: 3, color: 'var(--muted-3)' };
     return t;
   }
   function renderProps() {
@@ -1761,8 +1764,8 @@ RENDERER_JS = """<script>
       var key = [r.fixture_id, r.player_name, r.market_name].join('|');
       counts[key] = (counts[key] || 0) + 1;
       var cur = best[key];
-      if (!cur || (r.is_official_play && !cur.is_official_play) ||
-          (!cur.is_official_play && (r._lp || 0) > (cur._lp || 0))) best[key] = r;
+      var pri = function (x) { return x.is_official_play ? 2 : (x.is_watch_play ? 1 : 0); };
+      if (!cur || pri(r) > pri(cur) || (pri(r) === pri(cur) && (r._lp || 0) > (cur._lp || 0))) best[key] = r;
     });
     var rows = Object.keys(best).map(function (k) { var r = best[k]; r._others = counts[k] - 1; r._conf = propConfidence(r); return r; });
 
@@ -1781,9 +1784,12 @@ RENDERER_JS = """<script>
     var shown = rows.filter(function (r) {
       return (mkt === 'ALL' || r.market_name === mkt) &&
         (gameSel === 'ALL' || r.fixture_id === gameSel) &&
-        (!state.propOfficialOnly || r.is_official_play) &&
+        (!state.propOfficialOnly || r.is_official_play || r.is_watch_play) &&
         (state.propShowPass || r._conf.tier !== 'PASS');
-    }).sort(function (x, y) { return x._conf.rank - y._conf.rank || (y._lp || 0) - (x._lp || 0); });
+    }).sort(function (x, y) {
+      var pw = function (r) { return r.is_official_play ? 0 : (r.is_watch_play ? 1 : 2); };
+      return pw(x) - pw(y) || x._conf.rank - y._conf.rank || (y._lp || 0) - (x._lp || 0);
+    });
 
     var tally = { HIGH: 0, MEDIUM: 0, LOW: 0, CHECK: 0, PASS: 0 };
     rows.forEach(function (r) { if (tally[r._conf.tier] != null) tally[r._conf.tier]++; });
@@ -1793,7 +1799,7 @@ RENDERER_JS = """<script>
         '<option value="ALL"' + (gameSel === 'ALL' ? ' selected' : '') + '>All games (' + gameIds.length + ')</option>' +
         gameIds.map(function (id) { return '<option value="' + esc(id) + '"' + (gameSel === id ? ' selected' : '') + '>' + esc(games[id].label) + ' \\u00b7 ' + esc(propKickoff(games[id].t)) + '</option>'; }).join('') +
       '</select>' +
-      '<button class="tab tab--prop' + (state.propOfficialOnly ? ' is-active' : '') + '" onclick="window.__cfbPropOfficial()"><span>Official only</span></button>' +
+      '<button class="tab tab--prop' + (state.propOfficialOnly ? ' is-active' : '') + '" onclick="window.__cfbPropOfficial()"><span>Official &amp; watch only</span></button>' +
       '<button class="tab tab--prop' + (state.propShowPass ? ' is-active' : '') + '" onclick="window.__cfbPropShowPass()"><span>Show passes (' + tally.PASS + ')</span></button>' +
       '<span style="font-size:10.5px;color:var(--muted-3);margin-left:6px">' +
         '<b style="color:var(--green)">' + tally.HIGH + ' high</b> \\u00b7 <b style="color:var(--blue-light)">' + tally.MEDIUM + ' medium</b> \\u00b7 ' +
@@ -1811,7 +1817,9 @@ RENDERER_JS = """<script>
       var diff = r.model_predicted_value - r.line;
       var tag = r.is_official_play
         ? '<span class="pchip is-official">OFFICIAL</span>'
-        : '<span class="pchip is-lean">LEAN</span>';
+        : r.is_watch_play
+          ? '<span class="pchip" style="background:rgba(91,164,255,0.16);color:var(--blue-light)">WATCH</span>'
+          : '<span class="pchip is-lean">LEAN</span>';
       var inj = r.injury_status ? ' <span class="pchip" style="background:rgba(224,180,74,0.16);color:var(--amber)">' + esc(r.injury_status.toUpperCase()) + '</span>' : '';
       var gp = r.games_played != null ? '<span style="color:var(--muted-4);font-size:9.5px;margin-left:6px">' + r.games_played + ' GP</span>' : '';
       return '<div class="row"><div class="row-accent" style="background:' + r._conf.color + '"></div>' +
@@ -1834,8 +1842,9 @@ RENDERER_JS = """<script>
     var foot = '<div class="table-foot"><span>Confidence: <b>High</b> = 60%+ hit chance, at least 5 points above what the price needs, 3+ games of data, ' +
       'no injury flag. <b>Medium</b> = 55%+ and at least 2 points above breakeven. <b>Pass</b> = the price already needs more than the model gives, or the ' +
       'player is listed out. <b>Check</b> = the model is far from the market (80%+ claimed, or 25%+ and 12+ off the line) \\u2014 usually missing info like an injury or role change, ' +
-      'so verify before betting. TDs, interceptions and receptions max out at Low. The props model is still unproven \\u2014 High means "the model\\u2019s strongest reads," not a lock. ' +
-      'Official plays (max 5, yardage markets only) are the ones auto-added to your tracker.</span></div>';
+      'so verify before betting. TDs and interceptions max out at Low. <b>Official</b> (TARGET) = receptions overs where the model\\u2019s edge is 10%+, ' +
+      'at the best price across books \\u2014 the one prop group that held up in the live backtest; these are auto-added to your tracker. ' +
+      '<b>Watch</b> = other props with a 10%+ edge on secondary-role players \\u2014 promising in the backtest, tracked but not bet. Everything else is a lean.</span></div>';
 
     return head + filters + thead + (body || '<div class="empty-state">No props match these filters.</div>') + foot;
   }
