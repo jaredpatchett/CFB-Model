@@ -266,6 +266,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
             "note": note,
             "evHomePct": g.get("ev_home_pct"),
             "evAwayPct": g.get("ev_away_pct"),
+            "modelVersion": g.get("model_version"),
             "injHome": inj_home,
             "injAway": inj_away,
         })
@@ -1523,7 +1524,7 @@ RENDERER_JS = """<script>
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">' +
         '<div class="chart-head" style="margin:0">Model\\u2019s play</div>' +
         '<span class="pchip" style="background:' + (trained ? 'rgba(23,194,107,0.16);color:var(--green)' : 'rgba(255,255,255,0.06);color:var(--muted-3)') + '">' +
-          (trained ? 'TRAINED MODEL' : 'UNTRAINED (PRESEASON) MODEL') + '</span>' +
+          (trained ? (g.modelVersion === 'upgraded' ? 'UPGRADED MODEL' : 'TRAINED MODEL') : 'UNTRAINED (PRESEASON) MODEL') + '</span>' +
       '</div>' + row('Spread') + row('Moneyline') + '</div>';
   }
 
