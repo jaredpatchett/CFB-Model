@@ -290,6 +290,7 @@ def historical_lines_to_dataframe(raw_games: list, provider_preference: list = N
             "awayScore": g.get("awayScore"),
             "line_provider": chosen.get("provider"),
             "market_spread_home": chosen.get("spread"),
+            "market_spread_open_home": chosen.get("spreadOpen"),
             "market_over_under": chosen.get("overUnder"),
             "market_moneyline_home": chosen.get("homeMoneyline"),
             "market_moneyline_away": chosen.get("awayMoneyline"),
