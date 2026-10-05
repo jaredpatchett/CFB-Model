@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T18:22:22.023250+00:00",
+  "generated_at": "2026-10-05T18:50:00.981804+00:00",
   "seasons_covered": [
     2024,
     2025
@@ -514,6 +514,203 @@
         "win_prob_log_loss": 0.644
       }
     },
+    "opening_line": {
+      "n_games": 1078,
+      "current": {
+        "every game vs opener": {
+          "group": "every game vs opener",
+          "n": 1078,
+          "record": "547-520-11",
+          "hit_rate": 0.513,
+          "units": -22.73,
+          "roi": -0.021,
+          "z": -0.73,
+          "roi_by_period": {
+            "2024": 0.007,
+            "2025": -0.049
+          }
+        },
+        "bet card vs opener": {
+          "group": "bet card vs opener",
+          "n": 256,
+          "record": "129-124-3",
+          "hit_rate": 0.51,
+          "units": -6.73,
+          "roi": -0.026,
+          "z": -0.44,
+          "roi_by_period": {
+            "2024": 0.015,
+            "2025": -0.067
+          }
+        },
+        "bet card weeks 4+ vs opener": {
+          "group": "bet card weeks 4+ vs opener",
+          "n": 218,
+          "record": "110-105-3",
+          "hit_rate": 0.512,
+          "units": -5.0,
+          "roi": -0.023,
+          "z": -0.36,
+          "roi_by_period": {
+            "2024": 0.026,
+            "2025": -0.07
+          }
+        },
+        "edge 0-3": {
+          "group": "edge 0-3 pts",
+          "n": 377,
+          "record": "184-191-2",
+          "hit_rate": 0.491,
+          "units": -23.73,
+          "roi": -0.063,
+          "z": -1.28,
+          "roi_by_period": {
+            "2024": 0.008,
+            "2025": -0.127
+          }
+        },
+        "edge 3-7": {
+          "group": "edge 3-7 pts",
+          "n": 378,
+          "record": "199-175-4",
+          "hit_rate": 0.532,
+          "units": 5.91,
+          "roi": 0.016,
+          "z": 0.32,
+          "roi_by_period": {
+            "2024": -0.006,
+            "2025": 0.034
+          }
+        },
+        "edge 7-14": {
+          "group": "edge 7-14 pts",
+          "n": 243,
+          "record": "123-117-3",
+          "hit_rate": 0.512,
+          "units": -5.18,
+          "roi": -0.021,
+          "z": -0.35,
+          "roi_by_period": {
+            "2024": 0.013,
+            "2025": -0.062
+          }
+        },
+        "edge 14+": {
+          "group": "edge 14+ pts",
+          "n": 80,
+          "record": "41-37-2",
+          "hit_rate": 0.526,
+          "units": 0.27,
+          "roi": 0.003,
+          "z": 0.03,
+          "roi_by_period": {
+            "2024": 0.037,
+            "2025": -0.044
+          }
+        },
+        "lines_moved": 933,
+        "share_moved_toward_model": 0.553,
+        "avg_move_toward_model_pts": 0.51,
+        "card_share_moved_toward_model": 0.599
+      },
+      "upgraded": {
+        "every game vs opener": {
+          "group": "every game vs opener",
+          "n": 1078,
+          "record": "586-481-11",
+          "hit_rate": 0.549,
+          "units": 51.73,
+          "roi": 0.048,
+          "z": 1.67,
+          "roi_by_period": {
+            "2024": 0.111,
+            "2025": -0.014
+          }
+        },
+        "bet card vs opener": {
+          "group": "bet card vs opener",
+          "n": 256,
+          "record": "138-114-4",
+          "hit_rate": 0.548,
+          "units": 11.45,
+          "roi": 0.045,
+          "z": 0.76,
+          "roi_by_period": {
+            "2024": 0.135,
+            "2025": -0.044
+          }
+        },
+        "bet card weeks 4+ vs opener": {
+          "group": "bet card weeks 4+ vs opener",
+          "n": 218,
+          "record": "120-94-4",
+          "hit_rate": 0.561,
+          "units": 15.09,
+          "roi": 0.069,
+          "z": 1.09,
+          "roi_by_period": {
+            "2024": 0.187,
+            "2025": -0.044
+          }
+        },
+        "edge 0-3": {
+          "group": "edge 0-3 pts",
+          "n": 395,
+          "record": "218-175-2",
+          "hit_rate": 0.555,
+          "units": 23.18,
+          "roi": 0.059,
+          "z": 1.23,
+          "roi_by_period": {
+            "2024": 0.101,
+            "2025": 0.025
+          }
+        },
+        "edge 3-7": {
+          "group": "edge 3-7 pts",
+          "n": 361,
+          "record": "190-165-6",
+          "hit_rate": 0.535,
+          "units": 7.73,
+          "roi": 0.021,
+          "z": 0.43,
+          "roi_by_period": {
+            "2024": 0.127,
+            "2025": -0.075
+          }
+        },
+        "edge 7-14": {
+          "group": "edge 7-14 pts",
+          "n": 250,
+          "record": "137-112-1",
+          "hit_rate": 0.55,
+          "units": 12.55,
+          "roi": 0.05,
+          "z": 0.84,
+          "roi_by_period": {
+            "2024": 0.105,
+            "2025": -0.019
+          }
+        },
+        "edge 14+": {
+          "group": "edge 14+ pts",
+          "n": 72,
+          "record": "41-29-2",
+          "hit_rate": 0.586,
+          "units": 8.27,
+          "roi": 0.115,
+          "z": 1.04,
+          "roi_by_period": {
+            "2024": 0.115,
+            "2025": 0.115
+          }
+        },
+        "lines_moved": 933,
+        "share_moved_toward_model": 0.571,
+        "avg_move_toward_model_pts": 0.61,
+        "card_share_moved_toward_model": 0.662
+      }
+    },
     "moneyline": {
       "model_picks": [
         {
@@ -806,15 +1003,15 @@
       "spread_vs_moneyline": [
         {
           "group": "moneyline cheaper than its spread by 3+ pts",
-          "n": 128,
-          "record": "44-84-0",
-          "hit_rate": 0.344,
-          "units": -4.87,
-          "roi": -0.038,
-          "z": -0.3,
+          "n": 129,
+          "record": "44-85-0",
+          "hit_rate": 0.341,
+          "units": -5.87,
+          "roi": -0.045,
+          "z": -0.37,
           "roi_by_period": {
             "2024": 0.029,
-            "2025": -0.072
+            "2025": -0.083
           }
         },
         {
