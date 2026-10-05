@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T17:32:41.117161+00:00",
+  "generated_at": "2026-10-05T18:22:22.023250+00:00",
   "seasons_covered": [
     2024,
     2025
@@ -397,6 +397,123 @@
         }
       }
     ],
+    "challenger": {
+      "n_games": 1140,
+      "current": {
+        "model": "current",
+        "every game": {
+          "group": "every game",
+          "n": 1140,
+          "record": "568-546-26",
+          "hit_rate": 0.51,
+          "units": -29.64,
+          "roi": -0.026,
+          "z": -0.93,
+          "roi_by_period": {
+            "2024": -0.043,
+            "2025": -0.009
+          }
+        },
+        "bet card": {
+          "group": "bet card",
+          "n": 278,
+          "record": "125-149-4",
+          "hit_rate": 0.456,
+          "units": -35.36,
+          "roi": -0.127,
+          "z": -2.24,
+          "roi_by_period": {
+            "2024": -0.1,
+            "2025": -0.154
+          }
+        },
+        "bet card weeks 4+": {
+          "group": "bet card weeks 4+",
+          "n": 237,
+          "record": "107-126-4",
+          "hit_rate": 0.459,
+          "units": -28.73,
+          "roi": -0.121,
+          "z": -1.97,
+          "roi_by_period": {
+            "2024": -0.077,
+            "2025": -0.166
+          }
+        },
+        "big disagreements (14+ pts)": {
+          "group": "14+ pts off market",
+          "n": 83,
+          "record": "37-46-0",
+          "hit_rate": 0.446,
+          "units": -12.36,
+          "roi": -0.149,
+          "z": -1.42,
+          "roi_by_period": {
+            "2024": -0.064,
+            "2025": -0.284
+          }
+        },
+        "margin_mae": 13.44,
+        "win_prob_log_loss": 0.6461
+      },
+      "upgraded": {
+        "model": "upgraded",
+        "every game": {
+          "group": "every game",
+          "n": 1140,
+          "record": "588-526-26",
+          "hit_rate": 0.528,
+          "units": 8.55,
+          "roi": 0.007,
+          "z": 0.27,
+          "roi_by_period": {
+            "2024": 0.031,
+            "2025": -0.016
+          }
+        },
+        "bet card": {
+          "group": "bet card",
+          "n": 278,
+          "record": "133-140-5",
+          "hit_rate": 0.487,
+          "units": -19.09,
+          "roi": -0.069,
+          "z": -1.21,
+          "roi_by_period": {
+            "2024": -0.065,
+            "2025": -0.072
+          }
+        },
+        "bet card weeks 4+": {
+          "group": "bet card weeks 4+",
+          "n": 237,
+          "record": "116-116-5",
+          "hit_rate": 0.5,
+          "units": -10.55,
+          "roi": -0.044,
+          "z": -0.72,
+          "roi_by_period": {
+            "2024": -0.021,
+            "2025": -0.069
+          }
+        },
+        "big disagreements (14+ pts)": {
+          "group": "14+ pts off market",
+          "n": 70,
+          "record": "29-39-2",
+          "hit_rate": 0.426,
+          "units": -12.64,
+          "roi": -0.181,
+          "z": -1.61,
+          "roi_by_period": {
+            "2024": -0.176,
+            "2025": -0.189
+          }
+        },
+        "margin_mae": 13.14,
+        "win_prob_log_loss": 0.644
+      }
+    },
     "moneyline": {
       "model_picks": [
         {
