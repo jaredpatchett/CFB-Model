@@ -60,6 +60,135 @@ def run_splits(scoreable: pd.DataFrame) -> dict:
     return out
 
 
+def run_moneyline_tests(scoreable: pd.DataFrame) -> dict:
+    """Where (if anywhere) the model has a MONEYLINE edge, graded at real
+    closing moneyline prices, out of sample (added 10/2026):
+      1. the model's picks as the dashboard makes them, by price range and
+         model confidence (incl. the near-even target: +100..+150, model 65%+);
+      2. calibration -- when the model says X%, how often does that team win?
+      3. corrected + market-blended probabilities: a correction and blend
+         weight learned on 2024 only, applied to 2025 (so 2025 stays honest);
+      4. spread/moneyline mismatches: a book's moneyline that disagrees with
+         its own spread, independent of the model.
+    """
+    import numpy as np
+    from scipy.stats import norm
+    from sklearn.isotonic import IsotonicRegression
+    from src.analysis import game_profile as gp
+
+    def implied(a):
+        a = np.asarray(a, dtype=float)
+        return np.where(a < 0, -a / (-a + 100), 100 / (a + 100))
+
+    def payout(a):
+        a = np.asarray(a, dtype=float)
+        return np.where(a > 0, a / 100, 100 / -a)
+
+    need = ["market_moneyline_home", "market_moneyline_away", "predicted_home_win_prob", "home_win"]
+    df = scoreable.dropna(subset=[c for c in need if c in scoreable.columns]).copy()
+    if not set(need).issubset(df.columns) or df.empty:
+        print("  [warn] no historical moneyline prices -- skipping moneyline tests")
+        return {}
+    df = df[(df.market_moneyline_home.abs() >= 100) & (df.market_moneyline_away.abs() >= 100)]
+    ih, ia = implied(df.market_moneyline_home), implied(df.market_moneyline_away)
+    df["mkt_home"] = ih / (ih + ia)                          # market win chance, vig removed
+    df["p_model"] = df["predicted_home_win_prob"].clip(0.01, 0.99)
+
+    def bets(frame, pcol, min_edge_pp=4.94):
+        """The dashboard's moneyline rule on probability column pcol: bet the
+        side the model rates above the market by 4.94+ pts (the 1.9 'edge'
+        threshold rescaled), price within +/-450, positive EV at that price."""
+        f = frame.copy()
+        home_side = f[pcol] > f["mkt_home"]
+        f["side_prob"] = np.where(home_side, f[pcol], 1 - f[pcol])
+        f["price"] = np.where(home_side, f.market_moneyline_home, f.market_moneyline_away)
+        f["won"] = np.where(home_side, f.home_win == 1, f.home_win == 0)
+        f["ev"] = f.side_prob * payout(f.price) - (1 - f.side_prob)
+        edge = (f[pcol] - f["mkt_home"]).abs() * 100
+        f = f[(edge >= min_edge_pp) & (f.price.abs() <= 450) & (f.ev > 0)].copy()
+        f["result"] = np.where(f.won, "W", "L")
+        f["units"] = np.where(f.won, payout(f.price), -1.0)
+        return f
+
+    out = {}
+    raw = bets(df, "p_model")
+    price_b = pd.cut(raw.price, [-1000, -250, -150, -100, 150, 300, 1000],
+                     labels=["favorite -250 or more", "favorite -150 to -249", "favorite -101 to -149",
+                             "near even +100 to +150", "underdog +151 to +300", "underdog +301 or more"])
+    conf_b = pd.cut(raw.side_prob, [0, 0.55, 0.65, 0.75, 1], labels=["model <55%", "model 55-65%", "model 65-75%", "model 75%+"])
+    target = raw[(raw.price >= 100) & (raw.price <= 150) & (raw.side_prob >= 0.65)]
+    out["model_picks"] = [gp.summarize(raw, "every model moneyline pick"), gp.summarize(target, "near-even target (+100..+150, model 65%+)")]
+    out["by_price"] = [gp.summarize(g, str(k)) for k, g in raw.groupby(price_b, observed=True)]
+    out["by_confidence"] = [gp.summarize(g, str(k)) for k, g in raw.groupby(conf_b, observed=True)]
+    gp.print_rows("MONEYLINES: the model's picks at real closing prices (out of sample)", out["model_picks"])
+    gp.print_rows("Moneylines by price", out["by_price"])
+    gp.print_rows("Moneylines by model confidence", out["by_confidence"])
+
+    # 2. Calibration (favorite's perspective so every bucket has games)
+    fav_p = np.maximum(df.p_model, 1 - df.p_model)
+    fav_won = np.where(df.p_model >= 0.5, df.home_win == 1, df.home_win == 0)
+    mkt_fav = np.where(df.p_model >= 0.5, df.mkt_home, 1 - df.mkt_home)
+    cal = pd.DataFrame({"p": fav_p, "won": fav_won, "mkt": mkt_fav})
+    cal["bucket"] = pd.cut(cal.p, [0.5, 0.6, 0.7, 0.8, 0.9, 1.0], labels=["50-60%", "60-70%", "70-80%", "80-90%", "90%+"])
+    calib = []
+    print("\nCALIBRATION: when the model says a team wins X%, how often did it?")
+    print(f"  {'model says':<12}{'games':>7}{'model avg':>11}{'actually won':>14}{'market said':>13}")
+    for k, g in cal.groupby("bucket", observed=True):
+        row = {"bucket": str(k), "n": int(len(g)), "model_avg": round(float(g.p.mean()), 3),
+               "actual": round(float(g.won.mean()), 3), "market_avg": round(float(g.mkt.mean()), 3)}
+        calib.append(row)
+        print(f"  {row['bucket']:<12}{row['n']:>7}{row['model_avg']*100:>10.1f}%{row['actual']*100:>13.1f}%{row['market_avg']*100:>12.1f}%")
+    out["calibration"] = calib
+
+    # 3. Corrected + blended probabilities: learn on 2024, apply to 2025
+    seasons = sorted(df.season.unique())
+    if len(seasons) >= 2:
+        train, test = df[df.season < seasons[-1]].copy(), df[df.season == seasons[-1]].copy()
+        iso = IsotonicRegression(y_min=0.01, y_max=0.99, out_of_bounds="clip").fit(train.p_model, train.home_win)
+        train["p_cal"], test["p_cal"] = iso.predict(train.p_model), iso.predict(test.p_model)
+        best_w, best_ll = 0.0, 9e9
+        for w in np.linspace(0, 1, 21):
+            pb = np.clip(w * train.p_cal + (1 - w) * train.mkt_home, 0.01, 0.99)
+            ll = -np.mean(train.home_win * np.log(pb) + (1 - train.home_win) * np.log(1 - pb))
+            if ll < best_ll:
+                best_w, best_ll = w, ll
+        test["p_blend"] = np.clip(best_w * test.p_cal + (1 - best_w) * test.mkt_home, 0.01, 0.99)
+        raw_t = raw[raw.season == seasons[-1]]
+        cal_b, blend_b = bets(test, "p_cal"), bets(test, "p_blend", min_edge_pp=2.0)
+        out["blend_weight_on_model"] = round(float(best_w), 2)
+        out["corrected"] = [gp.summarize(raw_t, f"{seasons[-1]}: model as-is"),
+                            gp.summarize(cal_b, f"{seasons[-1]}: corrected model"),
+                            gp.summarize(blend_b, f"{seasons[-1]}: corrected + blended ({best_w:.0%} model)")]
+        gp.print_rows(f"CORRECTED / BLENDED probabilities (learned on {seasons[:-1]}, graded on {seasons[-1]})", out["corrected"])
+        if not blend_b.empty:
+            bp = pd.cut(blend_b.price, [-1000, -150, -100, 150, 1000], labels=["favorite -150+", "favorite -101..-149", "near even +100..+150", "underdog +151+"])
+            out["blended_by_price"] = [gp.summarize(g, f"blended | {k}") for k, g in blend_b.groupby(bp, observed=True)]
+            gp.print_rows("Blended picks by price", out["blended_by_price"])
+
+    # 4. Moneyline vs the book's own spread (model-independent)
+    if "market_spread_home" in df.columns:
+        sp = df.dropna(subset=["market_spread_home"]).copy()
+        sp["resid"] = sp["margin"] + sp["market_spread_home"]
+        sigma = {}
+        for s_ in sp.season.unique():
+            other = sp[sp.season != s_]
+            sigma[s_] = float(other.resid.std()) if len(other) > 100 else float(sp.resid.std())
+        sp["spread_home_p"] = [norm.cdf(-m / sigma[s_]) for m, s_ in zip(sp.market_spread_home, sp.season)]
+        rows = []
+        for gap in (3, 5, 8):
+            home_cheap = sp.spread_home_p - sp.mkt_home >= gap / 100
+            away_cheap = sp.mkt_home - sp.spread_home_p >= gap / 100
+            f = pd.concat([sp[home_cheap].assign(price=lambda d: d.market_moneyline_home, won=lambda d: d.home_win == 1),
+                           sp[away_cheap].assign(price=lambda d: d.market_moneyline_away, won=lambda d: d.home_win == 0)])
+            f = f[f.price.abs() <= 450]
+            f["result"] = np.where(f.won, "W", "L")
+            f["units"] = np.where(f.won, payout(f.price), -1.0)
+            rows.append(gp.summarize(f, f"moneyline cheaper than its spread by {gap}+ pts"))
+        out["spread_vs_moneyline"] = rows
+        gp.print_rows("SPREAD vs MONEYLINE mismatches (no model involved)", rows)
+    return out
+
+
 def load_historical_lines() -> pd.DataFrame:
     """Load every lines_{year}.csv found in data/raw/, already flattened to
     one row per game by cfbd_client.historical_lines_to_dataframe (see
@@ -186,6 +315,10 @@ if __name__ == "__main__":
           "not a verdict — re-run this after more historical seasons/weeks are pulled.")
 
     splits = run_splits(scoreable)
+    try:
+        splits["moneyline"] = run_moneyline_tests(scoreable)
+    except Exception as e:
+        print(f"  [warn] moneyline tests failed: {e}")
 
     # Persist results to the repo (rather than leaving them stranded in this
     # Action run's console log, which isn't fetchable outside the GitHub UI)
