@@ -823,9 +823,20 @@ def main(year: int):
     # Anything scored but short of this bar is still shown, just labeled a
     # LEAN instead of OFFICIAL -- never hidden, never silently upgraded.
     MIN_EV_PERCENT_FOR_OFFICIAL_PROP = 3.0
-    OFFICIAL_PROP_MARKETS = {"Pass Yards", "Rush Yards", "Reception Yards"}
-    MAX_PLAUSIBLE_PROP_EV = 25.0
-    MAX_OFFICIAL_PROPS = 5
+    # Props rules, set 10/2026 from the live props backtest (3 weekends, real
+    # posted lines, graded against box scores):
+    #   OFFICIAL = receptions OVERS where the model's EV is 10%+, at the best
+    #     price across books. 46-23 (+29.5% ROI), profitable all three
+    #     weekends including one it wasn't selected on.
+    #   WATCH = other props with 10%+ EV on secondary-role players
+    #     (second/third options in an offense) -- 301-205 (+9.4%) in the
+    #     backtest; tracked, not bet. Passing-yard and TD markets are never
+    #     watch plays (consistent losers).
+    OFFICIAL_PROP_MARKET = "Receptions"
+    OFFICIAL_PROP_SIDE = "over"
+    MIN_PROP_EV_FOR_TARGETS = 10.0
+    NEVER_WATCH_MARKETS = {"Pass Yards", "Pass Touchdowns", "Rush Touchdowns", "Reception Touchdowns",
+                           "Pass Interceptions"}
     # Lines this small mean a low-usage player who often finishes at 0 --
     # a bell curve can't represent that, so the over probability is badly
     # overstated (live example 9/2026: Nolan James Jr. O 5.5 rec yds).
@@ -836,6 +847,7 @@ def main(year: int):
 
     n_props_scored = 0
     n_props_official = 0
+    n_props_watch = 0
     if props_out and prop_models and player_form:
         for p in props_out:
             result = score_prop(
@@ -856,14 +868,12 @@ def main(year: int):
                 )
 
                 model_ev = None
-                is_official = False
-                if (p.get("model_confidence") == "normal" and lean_prob is not None
-                        and _valid_price(lean_price)):
+                if lean_prob is not None and _valid_price(lean_price):
                     model_ev = round(fo.ev_percent(lean_prob, float(lean_price)), 1)
-                    is_official = model_ev >= MIN_EV_PERCENT_FOR_OFFICIAL_PROP
                 p["model_ev"] = model_ev
                 p["model_lean_probability"] = round(lean_prob, 4) if lean_prob is not None else None
-                p["is_official_play"] = is_official
+                p["is_official_play"] = False
+                p["is_watch_play"] = False
 
         # ---- Injury filter (added 9/2026) ----
         # A player listed Out or Doubtful can't be an official play (Trent
@@ -876,53 +886,50 @@ def main(year: int):
                 continue
             p["injury_status"] = inj["status"]
             p["injury_detail"] = inj.get("injury")
-            if inj["status"] in BLOCKING_STATUSES and p.get("is_official_play"):
-                p["is_official_play"] = False
+            if inj["status"] in BLOCKING_STATUSES:
                 n_injury_blocked += 1
         if n_injury_blocked:
-            print(f"  {n_injury_blocked} prop(s) removed from official plays -- player listed Out/Doubtful")
+            print(f"  {n_injury_blocked} prop(s) on players listed Out/Doubtful -- never official or watch")
 
-        # ---- Narrow "official" down to the few best plays per slate ----
-        # Added 9/2026 after the tracker auto-logged 88 props in one week
-        # (11-13-2 once graded). Every candidate above still shows on the
-        # Props page as a LEAN; only the survivors of these filters stay
-        # OFFICIAL (and therefore auto-tracked):
-        #   1. Yardage markets only. The model scores every stat with a
-        #      normal (bell-curve) approximation, which is reasonable for
-        #      yards but wrong for small whole-number stats (TDs, INTs,
-        #      receptions) -- those produced the most absurd "EV" numbers
-        #      (e.g. +126% on a Pass TD O 0.5).
-        #   2. Drop implausible EV. A real prop edge above ~25% essentially
-        #      doesn't exist; a number that big means the model is miscalibrated
-        #      or missing information (injury, role change), not a free bet.
-        #   3. One play per player -- his single highest-probability line --
-        #      so one player can't flood the tracker with near-duplicates.
-        #   4. Rank by the model's probability on the leaned side (not raw
-        #      EV, which scales with price) and keep the top MAX_OFFICIAL_PROPS.
+        # ---- Official and watch props (10/2026 rules above) ----
+        def _eligible(p):
+            return (p.get("model_ev") is not None and p["model_ev"] >= MIN_PROP_EV_FOR_TARGETS
+                    and p.get("injury_status") not in BLOCKING_STATUSES)
 
-        candidates = [p for p in props_out if p.get("is_official_play")
-                      and p.get("market_name") in OFFICIAL_PROP_MARKETS
-                      and p.get("model_ev") is not None
-                      and p["model_ev"] <= MAX_PLAUSIBLE_PROP_EV
-                      and float(p.get("line") or 0) >= MIN_OFFICIAL_PROP_LINE]
-        best_per_player = {}
-        for p in candidates:
-            key = (p.get("player_name"), p.get("fixture_id"))
-            cur = best_per_player.get(key)
-            if cur is None or (p.get("model_lean_probability") or 0) > (cur.get("model_lean_probability") or 0):
-                best_per_player[key] = p
-        finalists = sorted(best_per_player.values(),
-                           key=lambda r: r.get("model_lean_probability") or 0, reverse=True)[:MAX_OFFICIAL_PROPS]
-        keep_ids = {id(p) for p in finalists}
-        for p in props_out:
-            if p.get("is_official_play") and id(p) not in keep_ids:
-                p["is_official_play"] = False
-        n_props_official = len(finalists)
+        def _role(p):
+            rs, cs = p.get("rec_share") or 0, p.get("carry_share") or 0
+            return "featured" if rs >= 0.22 or cs >= 0.55 else ("secondary" if rs >= 0.12 or cs >= 0.30 else "depth")
+
+        def _best_per(group_rows, keyfn):
+            # Line shopping: one row per player/market/game -- the book and
+            # line with the best EV for the model's side.
+            best = {}
+            for p in group_rows:
+                k = keyfn(p)
+                if k not in best or p["model_ev"] > best[k]["model_ev"]:
+                    best[k] = p
+            return list(best.values())
+
+        official = _best_per([p for p in props_out if _eligible(p)
+                              and p.get("market_name") == OFFICIAL_PROP_MARKET
+                              and p.get("model_lean") == OFFICIAL_PROP_SIDE],
+                             lambda p: (p.get("fixture_id"), p.get("player_name")))
+        for p in official:
+            p["is_official_play"] = True
+        watch = _best_per([p for p in props_out if _eligible(p) and not p.get("is_official_play")
+                           and p.get("market_name") not in NEVER_WATCH_MARKETS
+                           and p.get("market_name") != OFFICIAL_PROP_MARKET
+                           and _role(p) == "secondary"],
+                          lambda p: (p.get("fixture_id"), p.get("player_name"), p.get("market_name")))
+        for p in watch:
+            p["is_watch_play"] = True
+        n_props_official = len(official)
+        n_props_watch = len(watch)
     if props_out:
         print(f"  {n_props_scored} of {len(props_out)} posted prop line(s) scored with a real model prediction "
-              f"({n_props_official} kept as OFFICIAL: yardage markets only, {MIN_EV_PERCENT_FOR_OFFICIAL_PROP:.0f}-"
-              f"{MAX_PLAUSIBLE_PROP_EV:.0f}% EV, normal confidence, one per player, top {MAX_OFFICIAL_PROPS} by "
-              f"model probability -- the rest show a LEAN or the posted line only. See "
+              f"({n_props_official} OFFICIAL: receptions overs at {MIN_PROP_EV_FOR_TARGETS:.0f}%+ EV, best price; "
+              f"{n_props_watch} WATCH: secondary-role props at {MIN_PROP_EV_FOR_TARGETS:.0f}%+ EV -- "
+              f"the rest show a LEAN or the posted line only. See "
               f"live_player_features.py's matching-limitations note if the scored count looks lower than "
               f"expected once real games are underway)")
 
