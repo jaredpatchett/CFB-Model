@@ -45,6 +45,7 @@ import config
 import backtest_props_live as bpl
 from src.features.live_player_features import market_name_to_stat, _normalize_name
 from src.models.props_model import PlayerStatModel
+from src.analysis import game_profile as gp
 
 SINGLE_BOOK_ORDER = ["draftkings", "fanduel", "betmgm", "williamhill_us", "espnbet", "betrivers", "fanatics"]
 EV_THRESHOLDS = [None, 0.0, 0.03, 0.05, 0.10]
@@ -197,6 +198,7 @@ def main(season):
         sat = (kick + pd.Timedelta(days={0: -2, 1: -3, 2: 3, 3: 2, 4: 1, 5: 0, 6: -1}[kick.weekday()])).date()
         base = {
             "player": meta["player"], "market": meta["market"], "stat": stat, "pred": pred, "actual": actual,
+            "team": m["row"].get("team"), "opponent": m["row"].get("opponent"),
             "weekend": str(sat), "kick_day": "Thu/Fri" if kick.weekday() in (3, 4) else "Sat/Sun",
             "team_spread": frow.get("team_spread"), "implied": frow.get("team_implied_total"),
             "gp": int(frow.get("games_played_prior", 0)),
@@ -224,6 +226,8 @@ def main(season):
     df = pd.DataFrame(bets)
     if df.empty:
         raise SystemExit("Nothing to evaluate.")
+    confs = gp.conference_map([season])
+    df["game_type"] = [gp.game_type(season, t, o, confs) if t and o else "unknown" for t, o in zip(df.team, df.opponent)]
     clv = df[df.variant == "_clv"]
     df = df[df.variant != "_clv"]
     print(f"Evaluated {df[df.variant == 'last line, one book'].shape[0]} props across weekends "
@@ -276,7 +280,7 @@ def main(season):
         sample=pd.cut(base.gp, [0, 2, 3, 99], labels=["1-2 games", "3 games", "4+ games"]),
     )
     pockets = []
-    for dim in ("market", "side", "fav", "total", "role", "sample", "kick_day", "book"):
+    for dim in ("market", "side", "fav", "total", "role", "sample", "kick_day", "book", "game_type"):
         for val, g in base.groupby(dim, observed=True):
             pockets.append(dict(summarize(g, f"{dim}: {val}"), dim=dim))
     for (mk, sd), g in base.groupby(["market", "side"]):
@@ -286,13 +290,28 @@ def main(season):
         return (p["n"] >= MIN_BETS and p["roi"] > 0 and p["z"] >= 1.5
                 and len(p["roi_by_weekend"]) == len(weekends) and all(v > 0 for v in p["roi_by_weekend"].values()))
     for p in pockets:
-        p["candidate"] = is_candidate(p)
+        p["candidate"] = bool(is_candidate(p))
     header("POCKETS (sorted by ROI; * = candidate: profitable every weekend, 40+ bets, z>=1.5)")
     for p in sorted(pockets, key=lambda p: -p["roi"]):
         print(("* " if p["candidate"] else "  ") + fmt(p)[2:])
     cands = [p for p in pockets if p["candidate"]]
     print(f"\n{len(cands)} candidate pocket(s). Tested {len(pockets)} slices -- at this many, a few false "
           f"positives are expected, so confirm any candidate on future weekends before betting it.")
+    # The role-player rule found in the first edge search: overs on low lines
+    # for non-featured players, in the markets where it held up.
+    RULE_CAPS = {"Receptions": 2.5, "Reception Yards": 23.5, "Rush Attempts": 8.5}
+    fb = df[df.variant == "first line, best book"].copy()
+    fb["role"] = [("featured" if (s or 0) >= 0.22 or (c or 0) >= 0.55 else
+                   "secondary" if (s or 0) >= 0.12 or (c or 0) >= 0.30 else "depth")
+                  for s, c in zip(fb.rec_share.fillna(0), fb.carry_share.fillna(0))]
+    rule = fb[(fb.side == "over") & (fb.role != "featured") &
+              (fb.apply(lambda r: r["market"] in RULE_CAPS and r["line"] <= RULE_CAPS[r["market"]], axis=1))]
+    gp_rows = [gp.summarize(rule, "role-player rule, all games")] + \
+              [gp.summarize(g, f"role-player rule | {k}") for k, g in rule.groupby("game_type")] + \
+              [gp.summarize(g, f"all props | {k}") for k, g in fb.groupby("game_type")]
+    gp.print_rows("SMALLER GAMES? Role-player rule and all props, by game type (first line, best book)", gp_rows)
+    results["by_game_type"] = gp_rows
+
     results["base_setup"] = base_label
     results["pockets"] = pockets
     results["candidates"] = cands
