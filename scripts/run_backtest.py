@@ -69,6 +69,63 @@ def run_splits(scoreable: pd.DataFrame) -> dict:
     return out
 
 
+def run_opening_line_test(scoreable: pd.DataFrame) -> dict:
+    """Both models graded against the OPENING spread instead of the closing
+    one (added 10/2026). Openers are softer than closers, and bets are placed
+    early in the week, so this is the realistic test. Also measures how often
+    the line moved toward the model's side between open and close -- the
+    standard sign that a model sees value before the market does."""
+    import numpy as np
+    from scipy.stats import norm
+    from src.analysis import game_profile as gp
+    if "market_spread_open_home" not in scoreable.columns:
+        print("  [warn] no opening spreads in the line data -- opening-line test skipped")
+        return {}
+    base = scoreable.dropna(subset=["market_spread_open_home", "market_spread_home"]).copy()
+    base = base[base["market_spread_open_home"].abs() < 20]
+    models = [("current", "predicted_margin", "fold_sd")]
+    if "predicted_margin_v2" in base.columns:
+        base = base.dropna(subset=["predicted_margin_v2"])
+        models.append(("upgraded", "predicted_margin_v2", "fold_sd_v2"))
+    out = {"n_games": int(len(base))}
+    print(f"\nOPENING-LINE TEST -- {len(base)} games with an opening spread under 20, out of sample")
+    for label, mcol, sdcol in models:
+        d = base.copy()
+        d["edge"] = d[mcol] + d["market_spread_open_home"]          # model vs the OPENING line
+        d = d[d["edge"] != 0]
+        cover = d["margin"] + d["market_spread_open_home"]
+        d["result"] = ["P" if c == 0 else ("W" if (c > 0) == (e > 0) else "L") for c, e in zip(cover, d["edge"])]
+        d["units"] = d["result"].map({"W": 100 / 110, "L": -1.0, "P": 0.0})
+        # Line movement in the model's direction: positive = closing line moved toward the model.
+        d["move_toward"] = (d["market_spread_open_home"] - d["market_spread_home"]) * np.sign(d["edge"])
+        d["cover_prob"] = norm.cdf(d["edge"].abs() / d[sdcol])
+        d["rank"] = d.groupby(["season", "week"])["cover_prob"].rank(ascending=False, method="first")
+        card = d[d["rank"] <= 10]
+        moved = d[d["move_toward"] != 0]
+        res = {
+            "every game vs opener": gp.summarize(d, "every game vs opener"),
+            "bet card vs opener": gp.summarize(card, "bet card vs opener"),
+            "bet card weeks 4+ vs opener": gp.summarize(card[card.week >= 4], "bet card weeks 4+ vs opener"),
+            "edge 0-3": gp.summarize(d[d.edge.abs() < 3], "edge 0-3 pts"),
+            "edge 3-7": gp.summarize(d[(d.edge.abs() >= 3) & (d.edge.abs() < 7)], "edge 3-7 pts"),
+            "edge 7-14": gp.summarize(d[(d.edge.abs() >= 7) & (d.edge.abs() < 14)], "edge 7-14 pts"),
+            "edge 14+": gp.summarize(d[d.edge.abs() >= 14], "edge 14+ pts"),
+            "lines_moved": int(len(moved)),
+            "share_moved_toward_model": round(float((moved["move_toward"] > 0).mean()), 3) if len(moved) else None,
+            "avg_move_toward_model_pts": round(float(d["move_toward"].mean()), 2),
+            "card_share_moved_toward_model": round(float((card[card.move_toward != 0]["move_toward"] > 0).mean()), 3)
+                                              if (card.move_toward != 0).any() else None,
+        }
+        out[label] = res
+        gp.print_rows(f"{label.upper()} model vs OPENING spreads",
+                      [res[k] for k in ("every game vs opener", "bet card vs opener", "bet card weeks 4+ vs opener",
+                                        "edge 0-3", "edge 3-7", "edge 7-14", "edge 14+")])
+        print(f"  line moved toward the {label} model's side in {res['share_moved_toward_model']:.1%} of {res['lines_moved']} "
+              f"games that moved (Bet Card: {res['card_share_moved_toward_model'] if res['card_share_moved_toward_model'] is None else format(res['card_share_moved_toward_model'], '.1%')}); "
+              f"average move {res['avg_move_toward_model_pts']:+.2f} pts in the model's direction")
+    return out
+
+
 def run_challenger(scoreable: pd.DataFrame) -> dict:
     """Current vs upgraded model on exactly the same games (added 10/2026):
     every graded game where both models have a prediction and the spread is
@@ -394,6 +451,10 @@ if __name__ == "__main__":
         splits["challenger"] = run_challenger(scoreable)
     except Exception as e:
         print(f"  [warn] challenger comparison failed: {e}")
+    try:
+        splits["opening_line"] = run_opening_line_test(scoreable)
+    except Exception as e:
+        print(f"  [warn] opening-line test failed: {e}")
     try:
         splits["moneyline"] = run_moneyline_tests(scoreable)
     except Exception as e:
