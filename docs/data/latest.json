@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T15:40:25.511544+00:00",
+  "generated_at": "2026-10-05T16:15:29.923737+00:00",
   "team_metadata_year": 2025,
   "current_season_year": 2026,
   "preseason_prior": {
@@ -1923,12 +1923,12 @@
       "home_color": "#33006f",
       "away_color": "#000000",
       "book_used": "draftkings",
-      "moneyline_home": -148.0,
-      "moneyline_away": 124.0,
-      "spread_home": -2.5,
-      "spread_away": 2.5,
-      "spread_price_home": -115.0,
-      "spread_price_away": -105.0,
+      "moneyline_home": -162.0,
+      "moneyline_away": 136.0,
+      "spread_home": -3.0,
+      "spread_away": 3.0,
+      "spread_price_home": -105.0,
+      "spread_price_away": -115.0,
       "total_over": 41.5,
       "total_under": 41.5,
       "home_unmatched": false,
@@ -1974,10 +1974,10 @@
       "model_away_win_prob": 0.489,
       "model_fair_ml_home": -104.5,
       "model_fair_ml_away": 104.5,
-      "book_implied_prob_home": 0.5721,
-      "book_implied_prob_away": 0.4279,
-      "ev_home_pct": -14.38,
-      "ev_away_pct": 9.54,
+      "book_implied_prob_home": 0.5934,
+      "book_implied_prob_away": 0.4066,
+      "ev_home_pct": -17.36,
+      "ev_away_pct": 15.41,
       "residual_std": 17.133
     },
     {
@@ -2269,8 +2269,8 @@
       "spread_away": -3.5,
       "spread_price_home": -115.0,
       "spread_price_away": -105.0,
-      "total_over": 60.5,
-      "total_under": 60.5,
+      "total_over": 59.5,
+      "total_under": 59.5,
       "home_unmatched": false,
       "away_unmatched": false,
       "injuries_home": [
@@ -2455,8 +2455,8 @@
       "spread_away": 7.5,
       "spread_price_home": -110.0,
       "spread_price_away": -110.0,
-      "total_over": 42.5,
-      "total_under": 42.5,
+      "total_over": 43.5,
+      "total_under": 43.5,
       "home_unmatched": false,
       "away_unmatched": true,
       "injuries_home": [
@@ -2812,12 +2812,12 @@
       "book_used": "draftkings",
       "moneyline_home": -380.0,
       "moneyline_away": 300.0,
-      "spread_home": -10.0,
-      "spread_away": 10.0,
-      "spread_price_home": -105.0,
-      "spread_price_away": -115.0,
-      "total_over": 54.5,
-      "total_under": 54.5,
+      "spread_home": -9.5,
+      "spread_away": 9.5,
+      "spread_price_home": -110.0,
+      "spread_price_away": -110.0,
+      "total_over": 53.5,
+      "total_under": 53.5,
       "home_unmatched": false,
       "away_unmatched": false,
       "injuries_home": [
@@ -3230,8 +3230,8 @@
       "moneyline_away": -278.0,
       "spread_home": 7.0,
       "spread_away": -7.0,
-      "spread_price_home": -108.0,
-      "spread_price_away": -112.0,
+      "spread_price_home": -110.0,
+      "spread_price_away": -110.0,
       "total_over": 50.5,
       "total_under": 50.5,
       "home_unmatched": false,
@@ -3763,8 +3763,8 @@
       "home_color": "#b3a369",
       "away_color": "#00539b",
       "book_used": "draftkings",
-      "moneyline_home": 235.0,
-      "moneyline_away": -290.0,
+      "moneyline_home": 220.0,
+      "moneyline_away": -270.0,
       "spread_home": 7.0,
       "spread_away": -7.0,
       "spread_price_home": -108.0,
@@ -3899,10 +3899,10 @@
       "model_away_win_prob": 0.6325,
       "model_fair_ml_home": 172.1,
       "model_fair_ml_away": -172.1,
-      "book_implied_prob_home": 0.2864,
-      "book_implied_prob_away": 0.7136,
-      "ev_home_pct": 23.11,
-      "ev_away_pct": -14.94,
+      "book_implied_prob_home": 0.2998,
+      "book_implied_prob_away": 0.7002,
+      "ev_home_pct": 17.6,
+      "ev_away_pct": -13.32,
       "residual_std": 17.133
     },
     {
@@ -5107,7 +5107,7 @@
       "home_color": "#ba0c2f",
       "away_color": "#ce1126",
       "book_used": "draftkings",
-      "moneyline_home": null,
+      "moneyline_home": NaN,
       "moneyline_away": null,
       "spread_home": -34.5,
       "spread_away": 34.5,
@@ -5343,8 +5343,8 @@
       "moneyline_away": -380.0,
       "spread_home": 10.0,
       "spread_away": -10.0,
-      "spread_price_home": -110.0,
-      "spread_price_away": -110.0,
+      "spread_price_home": -108.0,
+      "spread_price_away": -112.0,
       "total_over": 54.5,
       "total_under": 54.5,
       "home_unmatched": false,
@@ -5575,12 +5575,12 @@
       "home_color": "#cf0a2c",
       "away_color": null,
       "book_used": "draftkings",
-      "moneyline_home": 130.0,
-      "moneyline_away": -155.0,
+      "moneyline_home": 136.0,
+      "moneyline_away": -162.0,
       "spread_home": 3.0,
       "spread_away": -3.0,
-      "spread_price_home": -105.0,
-      "spread_price_away": -115.0,
+      "spread_price_home": -102.0,
+      "spread_price_away": -118.0,
       "total_over": 49.5,
       "total_under": 49.5,
       "home_unmatched": false,
@@ -6383,12 +6383,12 @@
       "home_color": "#c41230",
       "away_color": "#0033a0",
       "book_used": "draftkings",
-      "moneyline_home": 180.0,
-      "moneyline_away": -218.0,
+      "moneyline_home": 195.0,
+      "moneyline_away": -238.0,
       "spread_home": 6.0,
       "spread_away": -6.0,
-      "spread_price_home": -112.0,
-      "spread_price_away": -108.0,
+      "spread_price_home": -108.0,
+      "spread_price_away": -112.0,
       "total_over": 48.5,
       "total_under": 48.5,
       "home_unmatched": false,
@@ -6429,24 +6429,101 @@
       "model_away_win_prob": 0.5251,
       "model_fair_ml_home": 110.6,
       "model_fair_ml_away": -110.6,
-      "book_implied_prob_home": 0.3425,
-      "book_implied_prob_away": 0.6575,
-      "ev_home_pct": 32.98,
-      "ev_away_pct": -23.41,
+      "book_implied_prob_home": 0.325,
+      "book_implied_prob_away": 0.675,
+      "ev_home_pct": 40.1,
+      "ev_away_pct": -25.43,
       "residual_std": 17.133
+    },
+    {
+      "commence_time": "2026-10-17T23:30:00Z",
+      "home_team": "Indiana Hoosiers",
+      "away_team": "Ohio State Buckeyes",
+      "home_school": "Indiana",
+      "away_school": "Ohio State",
+      "home_logo": "https://cdn.collegefootballdata.com/logos/500/84.png",
+      "away_logo": "https://cdn.collegefootballdata.com/logos/500/194.png",
+      "home_color": "#990000",
+      "away_color": "#ba0c2f",
+      "book_used": "fanduel",
+      "moneyline_home": 126.0,
+      "moneyline_away": -152.0,
+      "spread_home": 3.5,
+      "spread_away": -3.5,
+      "spread_price_home": -120.0,
+      "spread_price_away": -102.0,
+      "total_over": 49.5,
+      "total_under": 49.5,
+      "home_unmatched": false,
+      "away_unmatched": false,
+      "injuries_home": [
+        {
+          "player": "L. Bond",
+          "pos": "WR",
+          "status": "Out",
+          "injury": "Undisclosed"
+        },
+        {
+          "player": "L. Beebe Jr.",
+          "pos": "RB",
+          "status": "Questionable",
+          "injury": "Undisclosed"
+        }
+      ],
+      "injuries_away": [
+        {
+          "player": "T. Rogers",
+          "pos": "RB",
+          "status": "Out",
+          "injury": "Undisclosed"
+        },
+        {
+          "player": "L. Bey",
+          "pos": "RB",
+          "status": "Questionable",
+          "injury": "Undisclosed"
+        },
+        {
+          "player": "A. Valerio-Hudson",
+          "pos": "WR",
+          "status": "Questionable",
+          "injury": "Undisclosed"
+        },
+        {
+          "player": "B. Christian",
+          "pos": "TE",
+          "status": "Questionable",
+          "injury": "Undisclosed"
+        },
+        {
+          "player": "K. Parker",
+          "pos": "WR",
+          "status": "Questionable",
+          "injury": "Undisclosed"
+        }
+      ],
+      "has_model_line": true,
+      "neutral_site": false,
+      "model_source": "preseason_prior",
+      "injury_adjustment_home": 0.0,
+      "injury_adjustment_away": 0.0,
+      "home_sp_rating": 32.4,
+      "away_sp_rating": 30.1,
+      "sp_rating_diff": 2.3,
+      "model_predicted_margin": 5.14,
+      "preseason_comparison_margin": 5.14,
+      "model_home_win_prob": 0.6147,
+      "model_away_win_prob": 0.3853,
+      "model_fair_ml_home": -159.5,
+      "model_fair_ml_away": 159.5,
+      "book_implied_prob_home": 0.4232,
+      "book_implied_prob_away": 0.5768,
+      "ev_home_pct": 38.92,
+      "ev_away_pct": -36.12,
+      "residual_std": 17.618
     }
   ],
   "props": [
-    {
-      "fixture_id": "57ad14afc7db1843fd56f5971dadb058",
-      "start_time": "2026-10-07T00:00:00Z",
-      "player_name": "Landry Lyddy",
-      "market_name": "Pass Touchdowns",
-      "line": 1.5,
-      "over_price": 182,
-      "under_price": -250,
-      "book_used": "fanduel"
-    },
     {
       "fixture_id": "57ad14afc7db1843fd56f5971dadb058",
       "start_time": "2026-10-07T00:00:00Z",
@@ -6455,6 +6532,16 @@
       "line": 1.5,
       "over_price": -174,
       "under_price": 130,
+      "book_used": "fanduel"
+    },
+    {
+      "fixture_id": "57ad14afc7db1843fd56f5971dadb058",
+      "start_time": "2026-10-07T00:00:00Z",
+      "player_name": "Landry Lyddy",
+      "market_name": "Pass Touchdowns",
+      "line": 1.5,
+      "over_price": 182,
+      "under_price": -250,
       "book_used": "fanduel"
     },
     {
@@ -6503,10 +6590,13 @@
       "team": "Troy",
       "opponent": "Southern Miss",
       "games_played": 4,
+      "rec_share": 0.18873015873015872,
+      "carry_share": 0.0,
       "model_over_probability": 0.4905,
       "model_ev": -7.9,
       "model_lean_probability": 0.4905,
-      "is_official_play": false
+      "is_official_play": false,
+      "is_watch_play": false
     },
     {
       "fixture_id": "57ad14afc7db1843fd56f5971dadb058",
@@ -6534,10 +6624,13 @@
       "team": "Troy",
       "opponent": "Southern Miss",
       "games_played": 2,
+      "rec_share": 0.2588888888888889,
+      "carry_share": 0.0,
       "model_over_probability": 0.538,
-      "model_ev": null,
+      "model_ev": 1.0,
       "model_lean_probability": 0.538,
-      "is_official_play": false
+      "is_official_play": false,
+      "is_watch_play": false
     },
     {
       "fixture_id": "57ad14afc7db1843fd56f5971dadb058",
@@ -6565,10 +6658,13 @@
       "team": "Troy",
       "opponent": "Southern Miss",
       "games_played": 4,
+      "rec_share": 0.02,
+      "carry_share": 0.35430033676001416,
       "model_over_probability": 0.5955,
       "model_ev": 11.8,
       "model_lean_probability": 0.5955,
-      "is_official_play": true
+      "is_official_play": false,
+      "is_watch_play": true
     },
     {
       "fixture_id": "57ad14afc7db1843fd56f5971dadb058",
@@ -6616,10 +6712,13 @@
       "team": "Louisville",
       "opponent": "Florida State",
       "games_played": 5,
+      "rec_share": 0.0,
+      "carry_share": 0.29265973665973666,
       "model_over_probability": 0.714,
       "model_ev": 41.4,
       "model_lean_probability": 0.714,
       "is_official_play": false,
+      "is_watch_play": false,
       "injury_status": "Questionable",
       "injury_detail": "Lower Body"
     },
@@ -6639,33 +6738,13 @@
       "team": "Florida State",
       "opponent": "Louisville",
       "games_played": 5,
+      "rec_share": 0.0,
+      "carry_share": 0.28176408132929875,
       "model_over_probability": 0.22,
       "model_ev": 25.0,
       "model_lean_probability": 0.78,
-      "is_official_play": false
-    },
-    {
-      "fixture_id": "7556739cc30a38511b7f631581a416e4",
-      "start_time": "2026-10-09T23:00:00Z",
-      "player_name": "Lincoln Kienholz",
-      "market_name": "Pass Yards",
-      "line": 242.5,
-      "over_price": -114,
-      "under_price": -114,
-      "book_used": "fanduel",
-      "model_predicted_value": 245.4,
-      "model_edge": 2.9,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "Louisville",
-      "opponent": "Florida State",
-      "games_played": 5,
-      "model_over_probability": 0.593,
-      "model_ev": 11.3,
-      "model_lean_probability": 0.593,
-      "is_official_play": true,
-      "injury_status": "Questionable",
-      "injury_detail": "Lower Body"
+      "is_official_play": false,
+      "is_watch_play": false
     },
     {
       "fixture_id": "7556739cc30a38511b7f631581a416e4",
@@ -6683,10 +6762,39 @@
       "team": "Florida State",
       "opponent": "Louisville",
       "games_played": 5,
+      "rec_share": 0.0,
+      "carry_share": 0.28176408132929875,
       "model_over_probability": 0.2995,
       "model_ev": 31.5,
       "model_lean_probability": 0.7005,
-      "is_official_play": false
+      "is_official_play": false,
+      "is_watch_play": false
+    },
+    {
+      "fixture_id": "7556739cc30a38511b7f631581a416e4",
+      "start_time": "2026-10-09T23:00:00Z",
+      "player_name": "Lincoln Kienholz",
+      "market_name": "Pass Yards",
+      "line": 242.5,
+      "over_price": -114,
+      "under_price": -114,
+      "book_used": "fanduel",
+      "model_predicted_value": 245.4,
+      "model_edge": 2.9,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Louisville",
+      "opponent": "Florida State",
+      "games_played": 5,
+      "rec_share": 0.0,
+      "carry_share": 0.29265973665973666,
+      "model_over_probability": 0.593,
+      "model_ev": 11.3,
+      "model_lean_probability": 0.593,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "injury_status": "Questionable",
+      "injury_detail": "Lower Body"
     },
     {
       "fixture_id": "7556739cc30a38511b7f631581a416e4",
@@ -6704,10 +6812,13 @@
       "team": "Florida State",
       "opponent": "Louisville",
       "games_played": 5,
+      "rec_share": 0.21092436974789916,
+      "carry_share": 0.01661888835801879,
       "model_over_probability": 0.4715,
       "model_ev": -11.5,
       "model_lean_probability": 0.4715,
-      "is_official_play": false
+      "is_official_play": false,
+      "is_watch_play": false
     },
     {
       "fixture_id": "7556739cc30a38511b7f631581a416e4",
@@ -6725,10 +6836,13 @@
       "team": "Louisville",
       "opponent": "Florida State",
       "games_played": 5,
+      "rec_share": 0.17142857142857143,
+      "carry_share": 0.0,
       "model_over_probability": 0.5145,
       "model_ev": -3.4,
       "model_lean_probability": 0.5145,
       "is_official_play": false,
+      "is_watch_play": false,
       "injury_status": "Questionable",
       "injury_detail": "Undisclosed"
     },
@@ -6748,10 +6862,13 @@
       "team": "Louisville",
       "opponent": "Florida State",
       "games_played": 5,
+      "rec_share": 0.1439153439153439,
+      "carry_share": 0.0,
       "model_over_probability": 0.6015,
       "model_ev": 12.9,
       "model_lean_probability": 0.6015,
-      "is_official_play": true
+      "is_official_play": false,
+      "is_watch_play": true
     },
     {
       "fixture_id": "7556739cc30a38511b7f631581a416e4",
@@ -6769,10 +6886,13 @@
       "team": "Florida State",
       "opponent": "Louisville",
       "games_played": 5,
+      "rec_share": 0.20112044817927172,
+      "carry_share": 0.0,
       "model_over_probability": 0.3755,
       "model_ev": 17.2,
       "model_lean_probability": 0.6245,
-      "is_official_play": true
+      "is_official_play": false,
+      "is_watch_play": true
     },
     {
       "fixture_id": "7556739cc30a38511b7f631581a416e4",
@@ -6790,10 +6910,13 @@
       "team": "Louisville",
       "opponent": "Florida State",
       "games_played": 5,
+      "rec_share": 0.2814814814814815,
+      "carry_share": 0.026323084217821056,
       "model_over_probability": 0.6165,
       "model_ev": 15.7,
       "model_lean_probability": 0.6165,
-      "is_official_play": true,
+      "is_official_play": false,
+      "is_watch_play": false,
       "injury_status": "Probable",
       "injury_detail": "Undisclosed"
     },
@@ -6813,10 +6936,13 @@
       "team": "Louisville",
       "opponent": "Florida State",
       "games_played": 5,
+      "rec_share": 0.1751322751322751,
+      "carry_share": 0.0,
       "model_over_probability": 0.4345,
       "model_ev": -18.4,
       "model_lean_probability": 0.4345,
-      "is_official_play": false
+      "is_official_play": false,
+      "is_watch_play": false
     },
     {
       "fixture_id": "7556739cc30a38511b7f631581a416e4",
@@ -6834,10 +6960,13 @@
       "team": "Florida State",
       "opponent": "Louisville",
       "games_played": 5,
+      "rec_share": 0.18767507002801123,
+      "carry_share": 0.0,
       "model_over_probability": 0.502,
       "model_ev": -5.8,
       "model_lean_probability": 0.502,
-      "is_official_play": false
+      "is_official_play": false,
+      "is_watch_play": false
     },
     {
       "fixture_id": "7556739cc30a38511b7f631581a416e4",
@@ -6855,10 +6984,13 @@
       "team": "Louisville",
       "opponent": "Florida State",
       "games_played": 5,
+      "rec_share": 0.08677248677248676,
+      "carry_share": 0.32389480978954666,
       "model_over_probability": 0.465,
       "model_ev": -12.7,
       "model_lean_probability": 0.465,
-      "is_official_play": false
+      "is_official_play": false,
+      "is_watch_play": false
     },
     {
       "fixture_id": "7556739cc30a38511b7f631581a416e4",
@@ -6876,10 +7008,13 @@
       "team": "Florida State",
       "opponent": "Louisville",
       "games_played": 5,
+      "rec_share": 0.0,
+      "carry_share": 0.28176408132929875,
       "model_over_probability": 0.4455,
       "model_ev": -16.4,
       "model_lean_probability": 0.4455,
-      "is_official_play": false
+      "is_official_play": false,
+      "is_watch_play": false
     },
     {
       "fixture_id": "7556739cc30a38511b7f631581a416e4",
@@ -6897,10 +7032,13 @@
       "team": "Florida State",
       "opponent": "Louisville",
       "games_played": 5,
+      "rec_share": 0.09957983193277309,
+      "carry_share": 0.41919997876519616,
       "model_over_probability": 0.4765,
       "model_ev": -10.6,
       "model_lean_probability": 0.4765,
-      "is_official_play": false
+      "is_official_play": false,
+      "is_watch_play": false
     },
     {
       "fixture_id": "7556739cc30a38511b7f631581a416e4",
@@ -6918,10 +7056,13 @@
       "team": "Louisville",
       "opponent": "Florida State",
       "games_played": 5,
+      "rec_share": 0.0,
+      "carry_share": 0.29265973665973666,
       "model_over_probability": 0.411,
       "model_ev": 11.5,
       "model_lean_probability": 0.589,
       "is_official_play": false,
+      "is_watch_play": false,
       "injury_status": "Questionable",
       "injury_detail": "Lower Body"
     }
@@ -6967,7 +7108,7 @@
       "games_played_prior": 5,
       "opponent": "Arizona",
       "position": "QB",
-      "projected_points": 26.0,
+      "projected_points": 25.9,
       "stat_breakdown": {
         "pass_att": 22.8,
         "pass_comp": 13.0,
@@ -6975,7 +7116,7 @@
         "pass_tds": 1.3,
         "pass_yds": 175.2,
         "rec_tds": 0.0,
-        "rec_yds": 2.2,
+        "rec_yds": 2.1,
         "receptions": 0.3,
         "rush_att": 19.5,
         "rush_tds": 1.0,
@@ -7046,27 +7187,6 @@
       }
     },
     {
-      "player_name": "Noah Fifita",
-      "team": "Arizona",
-      "games_played_prior": 5,
-      "opponent": "West Virginia",
-      "position": "QB",
-      "projected_points": 23.9,
-      "stat_breakdown": {
-        "pass_att": 35.7,
-        "pass_comp": 22.4,
-        "pass_int": 0.7,
-        "pass_tds": 2.1,
-        "pass_yds": 280.0,
-        "rec_tds": 0.0,
-        "rec_yds": 0.9,
-        "receptions": 0.1,
-        "rush_att": 8.5,
-        "rush_tds": 0.5,
-        "rush_yds": 26.1
-      }
-    },
-    {
       "player_name": "Aidan Chiles",
       "team": "Northwestern",
       "games_played_prior": 4,
@@ -7085,6 +7205,27 @@
         "rush_att": 6.8,
         "rush_tds": 0.8,
         "rush_yds": 24.4
+      }
+    },
+    {
+      "player_name": "Noah Fifita",
+      "team": "Arizona",
+      "games_played_prior": 5,
+      "opponent": "West Virginia",
+      "position": "QB",
+      "projected_points": 23.8,
+      "stat_breakdown": {
+        "pass_att": 35.7,
+        "pass_comp": 22.4,
+        "pass_int": 0.7,
+        "pass_tds": 2.1,
+        "pass_yds": 280.0,
+        "rec_tds": 0.0,
+        "rec_yds": 0.9,
+        "receptions": 0.1,
+        "rush_att": 8.5,
+        "rush_tds": 0.5,
+        "rush_yds": 25.6
       }
     },
     {
@@ -7211,27 +7352,6 @@
         "rush_att": 11.8,
         "rush_tds": 0.6,
         "rush_yds": 44.0
-      }
-    },
-    {
-      "player_name": "Julian Sayin",
-      "team": "Ohio State",
-      "games_played_prior": 5,
-      "opponent": "Maryland",
-      "position": "QB",
-      "projected_points": 22.8,
-      "stat_breakdown": {
-        "pass_att": 27.4,
-        "pass_comp": 19.8,
-        "pass_int": 0.5,
-        "pass_tds": 2.5,
-        "pass_yds": 261.3,
-        "rec_tds": 0.0,
-        "rec_yds": 0.7,
-        "receptions": 0.0,
-        "rush_att": 5.3,
-        "rush_tds": 0.4,
-        "rush_yds": 7.6
       }
     },
     {
@@ -7592,6 +7712,27 @@
       }
     },
     {
+      "player_name": "Demond Williams Jr.",
+      "team": "Washington",
+      "games_played_prior": 5,
+      "opponent": "Iowa",
+      "position": "QB",
+      "projected_points": 20.4,
+      "stat_breakdown": {
+        "pass_att": 31.5,
+        "pass_comp": 20.1,
+        "pass_int": 0.7,
+        "pass_tds": 1.4,
+        "pass_yds": 218.7,
+        "rec_tds": 0.0,
+        "rec_yds": 1.3,
+        "receptions": 0.2,
+        "rush_att": 12.3,
+        "rush_tds": 0.5,
+        "rush_yds": 39.4
+      }
+    },
+    {
       "player_name": "DeSean Bishop",
       "team": "Tennessee",
       "games_played_prior": 5,
@@ -7613,27 +7754,6 @@
       }
     },
     {
-      "player_name": "Demond Williams Jr.",
-      "team": "Washington",
-      "games_played_prior": 5,
-      "opponent": "Iowa",
-      "position": "QB",
-      "projected_points": 20.1,
-      "stat_breakdown": {
-        "pass_att": 31.5,
-        "pass_comp": 20.1,
-        "pass_int": 0.7,
-        "pass_tds": 1.3,
-        "pass_yds": 217.7,
-        "rec_tds": 0.0,
-        "rec_yds": 1.3,
-        "receptions": 0.2,
-        "rush_att": 12.3,
-        "rush_tds": 0.5,
-        "rush_yds": 39.2
-      }
-    },
-    {
       "player_name": "Jared Curtis",
       "team": "Vanderbilt",
       "games_played_prior": 4,
@@ -7652,27 +7772,6 @@
         "rush_att": 11.8,
         "rush_tds": 0.6,
         "rush_yds": 39.4
-      }
-    },
-    {
-      "player_name": "Drew Mestemaker",
-      "team": "Oklahoma State",
-      "games_played_prior": 4,
-      "opponent": "UCF",
-      "position": "QB",
-      "projected_points": 19.9,
-      "stat_breakdown": {
-        "pass_att": 32.0,
-        "pass_comp": 20.8,
-        "pass_int": 0.9,
-        "pass_tds": 2.1,
-        "pass_yds": 259.6,
-        "rec_tds": 0.0,
-        "rec_yds": 0.5,
-        "receptions": 0.0,
-        "rush_att": 4.3,
-        "rush_tds": 0.2,
-        "rush_yds": 14.0
       }
     },
     {
@@ -7820,6 +7919,27 @@
         "rush_att": 8.9,
         "rush_tds": 0.5,
         "rush_yds": 29.5
+      }
+    },
+    {
+      "player_name": "Drew Mestemaker",
+      "team": "Oklahoma State",
+      "games_played_prior": 4,
+      "opponent": "UCF",
+      "position": "QB",
+      "projected_points": 19.5,
+      "stat_breakdown": {
+        "pass_att": 32.0,
+        "pass_comp": 20.8,
+        "pass_int": 0.9,
+        "pass_tds": 2.0,
+        "pass_yds": 259.6,
+        "rec_tds": 0.0,
+        "rec_yds": 0.5,
+        "receptions": 0.0,
+        "rush_att": 4.3,
+        "rush_tds": 0.2,
+        "rush_yds": 13.8
       }
     },
     {
@@ -8432,27 +8552,6 @@
       }
     },
     {
-      "player_name": "Cam Cook",
-      "team": "West Virginia",
-      "games_played_prior": 5,
-      "opponent": "Arizona",
-      "position": "RB",
-      "projected_points": 17.4,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 13.2,
-        "receptions": 1.5,
-        "rush_att": 20.2,
-        "rush_tds": 0.7,
-        "rush_yds": 99.1
-      }
-    },
-    {
       "player_name": "Tre Richardson",
       "team": "Louisville",
       "games_played_prior": 5,
@@ -8492,6 +8591,27 @@
         "rush_att": 12.1,
         "rush_tds": 0.6,
         "rush_yds": 66.1
+      }
+    },
+    {
+      "player_name": "Cam Cook",
+      "team": "West Virginia",
+      "games_played_prior": 5,
+      "opponent": "Arizona",
+      "position": "RB",
+      "projected_points": 17.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 13.0,
+        "receptions": 1.5,
+        "rush_att": 20.2,
+        "rush_tds": 0.7,
+        "rush_yds": 99.1
       }
     },
     {
@@ -8639,6 +8759,27 @@
         "rush_att": 11.5,
         "rush_tds": 0.5,
         "rush_yds": 39.8
+      }
+    },
+    {
+      "player_name": "Julian Sayin",
+      "team": "Ohio State",
+      "games_played_prior": 5,
+      "opponent": "Maryland",
+      "position": "QB",
+      "projected_points": 17.0,
+      "stat_breakdown": {
+        "pass_att": 31.6,
+        "pass_comp": 20.4,
+        "pass_int": 0.8,
+        "pass_tds": 1.6,
+        "pass_yds": 247.3,
+        "rec_tds": 0.0,
+        "rec_yds": 0.5,
+        "receptions": 0.0,
+        "rush_att": 6.6,
+        "rush_tds": 0.3,
+        "rush_yds": 4.5
       }
     },
     {
@@ -8828,27 +8969,6 @@
         "rush_att": 12.8,
         "rush_tds": 0.9,
         "rush_yds": 74.0
-      }
-    },
-    {
-      "player_name": "Charlie Becker",
-      "team": "Indiana",
-      "games_played_prior": 5,
-      "opponent": "Nebraska",
-      "position": "WR/TE",
-      "projected_points": 16.5,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.5,
-        "rec_yds": 79.5,
-        "receptions": 5.3,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.1
       }
     },
     {
@@ -9125,27 +9245,6 @@
       }
     },
     {
-      "player_name": "Josh Hoover",
-      "team": "Indiana",
-      "games_played_prior": 5,
-      "opponent": "Nebraska",
-      "position": "QB",
-      "projected_points": 15.9,
-      "stat_breakdown": {
-        "pass_att": 28.6,
-        "pass_comp": 16.4,
-        "pass_int": 0.8,
-        "pass_tds": 1.6,
-        "pass_yds": 232.2,
-        "rec_tds": 0.0,
-        "rec_yds": 0.4,
-        "receptions": 0.0,
-        "rush_att": 5.1,
-        "rush_tds": 0.2,
-        "rush_yds": 3.9
-      }
-    },
-    {
       "player_name": "Marcel Reed",
       "team": "Texas A&M",
       "games_played_prior": 5,
@@ -9164,27 +9263,6 @@
         "rush_att": 8.7,
         "rush_tds": 0.4,
         "rush_yds": 24.3
-      }
-    },
-    {
-      "player_name": "Jeremiah Smith",
-      "team": "Ohio State",
-      "games_played_prior": 5,
-      "opponent": "Maryland",
-      "position": "WR/TE",
-      "projected_points": 15.9,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.5,
-        "rec_yds": 72.4,
-        "receptions": 5.1,
-        "rush_att": 0.2,
-        "rush_tds": 0.0,
-        "rush_yds": 2.0
       }
     },
     {
@@ -9482,27 +9560,6 @@
       }
     },
     {
-      "player_name": "Lee Beebe",
-      "team": "Indiana",
-      "games_played_prior": 5,
-      "opponent": "Nebraska",
-      "position": "RB",
-      "projected_points": 15.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.0,
-        "rec_yds": 5.3,
-        "receptions": 0.8,
-        "rush_att": 18.6,
-        "rush_tds": 0.9,
-        "rush_yds": 89.7
-      }
-    },
-    {
       "player_name": "Austin Simmons",
       "team": "Missouri",
       "games_played_prior": 5,
@@ -9521,6 +9578,27 @@
         "rush_att": 4.1,
         "rush_tds": 0.1,
         "rush_yds": 3.6
+      }
+    },
+    {
+      "player_name": "Charlie Becker",
+      "team": "Indiana",
+      "games_played_prior": 5,
+      "opponent": "Nebraska",
+      "position": "WR/TE",
+      "projected_points": 15.6,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.5,
+        "rec_yds": 76.0,
+        "receptions": 5.3,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.0
       }
     },
     {
@@ -9692,27 +9770,6 @@
       }
     },
     {
-      "player_name": "Bo Jackson",
-      "team": "Ohio State",
-      "games_played_prior": 5,
-      "opponent": "Maryland",
-      "position": "RB",
-      "projected_points": 15.4,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 12.2,
-        "receptions": 1.6,
-        "rush_att": 11.4,
-        "rush_tds": 0.8,
-        "rush_yds": 69.8
-      }
-    },
-    {
       "player_name": "Aiden Flora",
       "team": "Iowa State",
       "games_played_prior": 5,
@@ -9755,27 +9812,6 @@
       }
     },
     {
-      "player_name": "Alonza Barnett",
-      "team": "UCF",
-      "games_played_prior": 2,
-      "opponent": "Oklahoma State",
-      "position": "QB",
-      "projected_points": 15.3,
-      "stat_breakdown": {
-        "pass_att": 25.7,
-        "pass_comp": 15.1,
-        "pass_int": 0.6,
-        "pass_tds": 1.2,
-        "pass_yds": 173.8,
-        "rec_tds": 0.0,
-        "rec_yds": 0.5,
-        "receptions": 0.1,
-        "rush_att": 9.1,
-        "rush_tds": 0.4,
-        "rush_yds": 22.7
-      }
-    },
-    {
       "player_name": "Donovan Olugbode",
       "team": "Missouri",
       "games_played_prior": 5,
@@ -9815,6 +9851,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.3
+      }
+    },
+    {
+      "player_name": "Jeremiah Smith",
+      "team": "Ohio State",
+      "games_played_prior": 5,
+      "opponent": "Maryland",
+      "position": "WR/TE",
+      "projected_points": 15.1,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 73.1,
+        "receptions": 6.2,
+        "rush_att": 0.2,
+        "rush_tds": 0.0,
+        "rush_yds": 1.4
       }
     },
     {
@@ -9878,6 +9935,27 @@
         "rush_att": 14.5,
         "rush_tds": 0.5,
         "rush_yds": 68.4
+      }
+    },
+    {
+      "player_name": "Jay Kastantin",
+      "team": "Bowling Green",
+      "games_played_prior": 5,
+      "opponent": "Sacramento State",
+      "position": "QB",
+      "projected_points": 15.0,
+      "stat_breakdown": {
+        "pass_att": 26.8,
+        "pass_comp": 16.6,
+        "pass_int": 0.6,
+        "pass_tds": 1.4,
+        "pass_yds": 189.8,
+        "rec_tds": 0.0,
+        "rec_yds": 0.5,
+        "receptions": 0.0,
+        "rush_att": 6.4,
+        "rush_tds": 0.3,
+        "rush_yds": 14.7
       }
     },
     {
@@ -9965,6 +10043,27 @@
       }
     },
     {
+      "player_name": "Alonza Barnett",
+      "team": "UCF",
+      "games_played_prior": 2,
+      "opponent": "Oklahoma State",
+      "position": "QB",
+      "projected_points": 14.8,
+      "stat_breakdown": {
+        "pass_att": 25.7,
+        "pass_comp": 15.1,
+        "pass_int": 0.6,
+        "pass_tds": 1.1,
+        "pass_yds": 165.3,
+        "rec_tds": 0.0,
+        "rec_yds": 0.5,
+        "receptions": 0.1,
+        "rush_att": 9.1,
+        "rush_tds": 0.4,
+        "rush_yds": 23.0
+      }
+    },
+    {
       "player_name": "Jayden Mandal",
       "team": "Fresno State",
       "games_played_prior": 5,
@@ -9983,27 +10082,6 @@
         "rush_att": 7.5,
         "rush_tds": 0.2,
         "rush_yds": 19.4
-      }
-    },
-    {
-      "player_name": "Jay Kastantin",
-      "team": "Bowling Green",
-      "games_played_prior": 5,
-      "opponent": "Sacramento State",
-      "position": "QB",
-      "projected_points": 14.8,
-      "stat_breakdown": {
-        "pass_att": 26.8,
-        "pass_comp": 16.6,
-        "pass_int": 0.6,
-        "pass_tds": 1.4,
-        "pass_yds": 189.8,
-        "rec_tds": 0.0,
-        "rec_yds": 0.5,
-        "receptions": 0.0,
-        "rush_att": 6.4,
-        "rush_tds": 0.3,
-        "rush_yds": 13.9
       }
     },
     {
@@ -10062,7 +10140,7 @@
         "pass_tds": 0.0,
         "pass_yds": 2.3,
         "rec_tds": 0.4,
-        "rec_yds": 61.9,
+        "rec_yds": 62.5,
         "receptions": 6.0,
         "rush_att": 0.2,
         "rush_tds": 0.0,
@@ -10151,27 +10229,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.3
-      }
-    },
-    {
-      "player_name": "Turbo Richard",
-      "team": "Indiana",
-      "games_played_prior": 5,
-      "opponent": "Nebraska",
-      "position": "RB",
-      "projected_points": 14.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.0,
-        "rec_yds": 6.7,
-        "receptions": 0.8,
-        "rush_att": 13.9,
-        "rush_tds": 0.7,
-        "rush_yds": 87.9
       }
     },
     {
@@ -10889,6 +10946,27 @@
       }
     },
     {
+      "player_name": "Lee Beebe",
+      "team": "Indiana",
+      "games_played_prior": 5,
+      "opponent": "Nebraska",
+      "position": "RB",
+      "projected_points": 13.5,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.0,
+        "rec_yds": 5.3,
+        "receptions": 0.9,
+        "rush_att": 18.5,
+        "rush_tds": 0.7,
+        "rush_yds": 79.8
+      }
+    },
+    {
       "player_name": "Nick Poulos",
       "team": "Ohio",
       "games_played_prior": 2,
@@ -10928,6 +11006,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 1.0
+      }
+    },
+    {
+      "player_name": "Josh Hoover",
+      "team": "Indiana",
+      "games_played_prior": 5,
+      "opponent": "Nebraska",
+      "position": "QB",
+      "projected_points": 13.4,
+      "stat_breakdown": {
+        "pass_att": 29.3,
+        "pass_comp": 16.4,
+        "pass_int": 1.0,
+        "pass_tds": 1.4,
+        "pass_yds": 216.1,
+        "rec_tds": 0.0,
+        "rec_yds": 0.4,
+        "receptions": 0.0,
+        "rush_att": 5.3,
+        "rush_tds": 0.2,
+        "rush_yds": 3.1
       }
     },
     {
@@ -11012,27 +11111,6 @@
         "rush_att": 13.6,
         "rush_tds": 0.5,
         "rush_yds": 57.5
-      }
-    },
-    {
-      "player_name": "Nick Marsh",
-      "team": "Indiana",
-      "games_played_prior": 5,
-      "opponent": "Nebraska",
-      "position": "WR/TE",
-      "projected_points": 13.3,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.4,
-        "rec_yds": 62.3,
-        "receptions": 4.5,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.1
       }
     },
     {
@@ -11348,6 +11426,27 @@
         "rush_att": 11.9,
         "rush_tds": 0.6,
         "rush_yds": 63.8
+      }
+    },
+    {
+      "player_name": "Nick Marsh",
+      "team": "Indiana",
+      "games_played_prior": 5,
+      "opponent": "Nebraska",
+      "position": "WR/TE",
+      "projected_points": 12.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.4,
+        "rec_yds": 59.7,
+        "receptions": 4.5,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.0
       }
     },
     {
@@ -11708,6 +11807,27 @@
       }
     },
     {
+      "player_name": "Bo Jackson",
+      "team": "Ohio State",
+      "games_played_prior": 5,
+      "opponent": "Maryland",
+      "position": "RB",
+      "projected_points": 12.7,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 11.9,
+        "receptions": 1.7,
+        "rush_att": 12.8,
+        "rush_tds": 0.5,
+        "rush_yds": 63.9
+      }
+    },
+    {
       "player_name": "Matt Vezza",
       "team": "Ohio",
       "games_played_prior": 5,
@@ -11834,27 +11954,6 @@
       }
     },
     {
-      "player_name": "DJ Epps",
-      "team": "West Virginia",
-      "games_played_prior": 5,
-      "opponent": "Arizona",
-      "position": "WR/TE",
-      "projected_points": 12.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.5,
-        "rec_yds": 58.9,
-        "receptions": 3.5,
-        "rush_att": 0.5,
-        "rush_tds": 0.0,
-        "rush_yds": 3.2
-      }
-    },
-    {
       "player_name": "Duncan Brune",
       "team": "Ohio",
       "games_played_prior": 3,
@@ -11915,6 +12014,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.7
+      }
+    },
+    {
+      "player_name": "DJ Epps",
+      "team": "West Virginia",
+      "games_played_prior": 5,
+      "opponent": "Arizona",
+      "position": "WR/TE",
+      "projected_points": 12.5,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.5,
+        "rec_yds": 58.1,
+        "receptions": 3.5,
+        "rush_att": 0.5,
+        "rush_tds": 0.0,
+        "rush_yds": 3.2
       }
     },
     {
@@ -12167,6 +12287,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.2
+      }
+    },
+    {
+      "player_name": "Turbo Richard",
+      "team": "Indiana",
+      "games_played_prior": 5,
+      "opponent": "Nebraska",
+      "position": "RB",
+      "projected_points": 12.2,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.0,
+        "rec_yds": 6.7,
+        "receptions": 0.9,
+        "rush_att": 13.8,
+        "rush_tds": 0.5,
+        "rush_yds": 73.7
       }
     },
     {
@@ -12524,27 +12665,6 @@
         "rush_att": 11.1,
         "rush_tds": 0.4,
         "rush_yds": 28.6
-      }
-    },
-    {
-      "player_name": "Ja'Kobi Jackson",
-      "team": "Ohio State",
-      "games_played_prior": 5,
-      "opponent": "Maryland",
-      "position": "RB",
-      "projected_points": 11.9,
-      "stat_breakdown": {
-        "pass_att": 0.1,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.3,
-        "rec_tds": 0.0,
-        "rec_yds": 3.2,
-        "receptions": 0.4,
-        "rush_att": 9.1,
-        "rush_tds": 0.9,
-        "rush_yds": 58.9
       }
     },
     {
@@ -13468,7 +13588,7 @@
         "receptions": 1.2,
         "rush_att": 12.0,
         "rush_tds": 0.5,
-        "rush_yds": 58.8
+        "rush_yds": 59.1
       }
     },
     {
@@ -13787,27 +13907,6 @@
       }
     },
     {
-      "player_name": "Devin Mccuin",
-      "team": "Ohio State",
-      "games_played_prior": 5,
-      "opponent": "Maryland",
-      "position": "WR/TE",
-      "projected_points": 10.9,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.4,
-        "rec_yds": 47.1,
-        "receptions": 3.3,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.9
-      }
-    },
-    {
       "player_name": "Jayden Scott",
       "team": "NC State",
       "games_played_prior": 5,
@@ -13826,6 +13925,27 @@
         "rush_att": 12.8,
         "rush_tds": 0.5,
         "rush_yds": 59.5
+      }
+    },
+    {
+      "player_name": "Chris Lawson",
+      "team": "Washington",
+      "games_played_prior": 5,
+      "opponent": "Iowa",
+      "position": "WR/TE",
+      "projected_points": 10.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.3,
+        "rec_yds": 51.4,
+        "receptions": 3.8,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.4
       }
     },
     {
@@ -14060,27 +14180,6 @@
       }
     },
     {
-      "player_name": "Chris Lawson",
-      "team": "Washington",
-      "games_played_prior": 5,
-      "opponent": "Iowa",
-      "position": "WR/TE",
-      "projected_points": 10.7,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 49.6,
-        "receptions": 3.8,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
-      }
-    },
-    {
       "player_name": "Jeremiah Jones-Thomas",
       "team": "South Alabama",
       "games_played_prior": 5,
@@ -14204,27 +14303,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.0
-      }
-    },
-    {
-      "player_name": "Keyone Jenkins",
-      "team": "UCF",
-      "games_played_prior": 5,
-      "opponent": "Oklahoma State",
-      "position": "QB",
-      "projected_points": 10.6,
-      "stat_breakdown": {
-        "pass_att": 24.0,
-        "pass_comp": 13.3,
-        "pass_int": 0.9,
-        "pass_tds": 1.0,
-        "pass_yds": 150.6,
-        "rec_tds": 0.0,
-        "rec_yds": 0.5,
-        "receptions": 0.1,
-        "rush_att": 5.7,
-        "rush_tds": 0.2,
-        "rush_yds": 10.0
       }
     },
     {
@@ -14771,6 +14849,27 @@
         "rush_att": 10.4,
         "rush_tds": 0.4,
         "rush_yds": 54.1
+      }
+    },
+    {
+      "player_name": "Keyone Jenkins",
+      "team": "UCF",
+      "games_played_prior": 5,
+      "opponent": "Oklahoma State",
+      "position": "QB",
+      "projected_points": 10.1,
+      "stat_breakdown": {
+        "pass_att": 24.0,
+        "pass_comp": 13.3,
+        "pass_int": 0.9,
+        "pass_tds": 0.9,
+        "pass_yds": 143.8,
+        "rec_tds": 0.0,
+        "rec_yds": 0.5,
+        "receptions": 0.1,
+        "rush_att": 5.7,
+        "rush_tds": 0.2,
+        "rush_yds": 10.0
       }
     },
     {
@@ -15341,27 +15440,6 @@
       }
     },
     {
-      "player_name": "Waden Charles",
-      "team": "UCF",
-      "games_played_prior": 4,
-      "opponent": "Oklahoma State",
-      "position": "WR/TE",
-      "projected_points": 9.9,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 45.0,
-        "receptions": 3.4,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
-      }
-    },
-    {
       "player_name": "Javon Robinson",
       "team": "Utah State",
       "games_played_prior": 4,
@@ -15485,6 +15563,27 @@
         "rush_att": 11.9,
         "rush_tds": 0.4,
         "rush_yds": 48.2
+      }
+    },
+    {
+      "player_name": "Devin Mccuin",
+      "team": "Ohio State",
+      "games_played_prior": 5,
+      "opponent": "Maryland",
+      "position": "WR/TE",
+      "projected_points": 9.8,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.3,
+        "rec_yds": 44.5,
+        "receptions": 3.4,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
       }
     },
     {
@@ -15631,7 +15730,7 @@
         "receptions": 0.8,
         "rush_att": 11.2,
         "rush_tds": 0.5,
-        "rush_yds": 54.8
+        "rush_yds": 55.2
       }
     },
     {
@@ -15821,6 +15920,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.3
+      }
+    },
+    {
+      "player_name": "Waden Charles",
+      "team": "UCF",
+      "games_played_prior": 4,
+      "opponent": "Oklahoma State",
+      "position": "WR/TE",
+      "projected_points": 9.7,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.3,
+        "rec_yds": 43.3,
+        "receptions": 3.4,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.4
       }
     },
     {
@@ -16202,10 +16322,10 @@
       }
     },
     {
-      "player_name": "Joshua Derry",
-      "team": "UCF",
+      "player_name": "Baron Naone",
+      "team": "Washington",
       "games_played_prior": 5,
-      "opponent": "Oklahoma State",
+      "opponent": "Iowa",
       "position": "WR/TE",
       "projected_points": 9.5,
       "stat_breakdown": {
@@ -16215,8 +16335,8 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.3,
-        "rec_yds": 44.1,
-        "receptions": 3.5,
+        "rec_yds": 43.6,
+        "receptions": 3.3,
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.4
@@ -16388,27 +16508,6 @@
         "rush_att": 10.0,
         "rush_tds": 0.4,
         "rush_yds": 52.3
-      }
-    },
-    {
-      "player_name": "Baron Naone",
-      "team": "Washington",
-      "games_played_prior": 5,
-      "opponent": "Iowa",
-      "position": "WR/TE",
-      "projected_points": 9.4,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 42.3,
-        "receptions": 3.3,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
       }
     },
     {
@@ -16643,6 +16742,27 @@
       }
     },
     {
+      "player_name": "Ja'Kobi Jackson",
+      "team": "Ohio State",
+      "games_played_prior": 5,
+      "opponent": "Maryland",
+      "position": "RB",
+      "projected_points": 9.3,
+      "stat_breakdown": {
+        "pass_att": 0.2,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.4,
+        "rec_tds": 0.0,
+        "rec_yds": 2.9,
+        "receptions": 0.4,
+        "rush_att": 10.0,
+        "rush_tds": 0.5,
+        "rush_yds": 52.8
+      }
+    },
+    {
       "player_name": "Amari Odom",
       "team": "Syracuse",
       "games_played_prior": 3,
@@ -16661,6 +16781,48 @@
         "rush_att": 4.1,
         "rush_tds": 0.1,
         "rush_yds": 1.7
+      }
+    },
+    {
+      "player_name": "Joshua Derry",
+      "team": "UCF",
+      "games_played_prior": 5,
+      "opponent": "Oklahoma State",
+      "position": "WR/TE",
+      "projected_points": 9.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.3,
+        "rec_yds": 42.2,
+        "receptions": 3.5,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.4
+      }
+    },
+    {
+      "player_name": "Nakai Amachree",
+      "team": "Bowling Green",
+      "games_played_prior": 5,
+      "opponent": "Sacramento State",
+      "position": "RB",
+      "projected_points": 9.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 21.2,
+        "receptions": 2.2,
+        "rush_att": 6.5,
+        "rush_tds": 0.2,
+        "rush_yds": 28.4
       }
     },
     {
@@ -16808,27 +16970,6 @@
         "rush_att": 8.0,
         "rush_tds": 0.3,
         "rush_yds": 40.3
-      }
-    },
-    {
-      "player_name": "Nakai Amachree",
-      "team": "Bowling Green",
-      "games_played_prior": 5,
-      "opponent": "Sacramento State",
-      "position": "RB",
-      "projected_points": 9.2,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 21.2,
-        "receptions": 2.2,
-        "rush_att": 6.5,
-        "rush_tds": 0.2,
-        "rush_yds": 27.6
       }
     },
     {
@@ -17059,7 +17200,7 @@
         "receptions": 3.4,
         "rush_att": 0.5,
         "rush_tds": 0.0,
-        "rush_yds": 2.1
+        "rush_yds": 2.3
       }
     },
     {
@@ -17945,27 +18086,6 @@
       }
     },
     {
-      "player_name": "Chris Barnes",
-      "team": "Oklahoma State",
-      "games_played_prior": 3,
-      "opponent": "UCF",
-      "position": "WR/TE",
-      "projected_points": 8.7,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 40.7,
-        "receptions": 2.8,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.3
-      }
-    },
-    {
       "player_name": "Adam Damante",
       "team": "New Mexico State",
       "games_played_prior": 3,
@@ -18194,6 +18314,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.1,
         "rush_yds": 1.2
+      }
+    },
+    {
+      "player_name": "Chris Barnes",
+      "team": "Oklahoma State",
+      "games_played_prior": 3,
+      "opponent": "UCF",
+      "position": "WR/TE",
+      "projected_points": 8.6,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.3,
+        "rec_yds": 40.7,
+        "receptions": 2.8,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
       }
     },
     {
@@ -18428,27 +18569,6 @@
       }
     },
     {
-      "player_name": "Brandon Inniss",
-      "team": "Ohio State",
-      "games_played_prior": 4,
-      "opponent": "Maryland",
-      "position": "WR/TE",
-      "projected_points": 8.5,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.4,
-        "rec_yds": 35.4,
-        "receptions": 2.5,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.9
-      }
-    },
-    {
       "player_name": "Jared Richardson",
       "team": "Duke",
       "games_played_prior": 2,
@@ -18635,27 +18755,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.2
-      }
-    },
-    {
-      "player_name": "Sawyer Anderson",
-      "team": "Arizona",
-      "games_played_prior": 2,
-      "opponent": "West Virginia",
-      "position": "QB",
-      "projected_points": 8.4,
-      "stat_breakdown": {
-        "pass_att": 10.5,
-        "pass_comp": 6.5,
-        "pass_int": 0.2,
-        "pass_tds": 0.5,
-        "pass_yds": 74.3,
-        "rec_tds": 0.0,
-        "rec_yds": 0.9,
-        "receptions": 0.1,
-        "rush_att": 4.8,
-        "rush_tds": 0.2,
-        "rush_yds": 22.0
       }
     },
     {
@@ -18995,6 +19094,27 @@
       }
     },
     {
+      "player_name": "Sawyer Anderson",
+      "team": "Arizona",
+      "games_played_prior": 2,
+      "opponent": "West Virginia",
+      "position": "QB",
+      "projected_points": 8.3,
+      "stat_breakdown": {
+        "pass_att": 10.5,
+        "pass_comp": 6.5,
+        "pass_int": 0.2,
+        "pass_tds": 0.5,
+        "pass_yds": 74.3,
+        "rec_tds": 0.0,
+        "rec_yds": 0.9,
+        "receptions": 0.1,
+        "rush_att": 4.8,
+        "rush_tds": 0.2,
+        "rush_yds": 21.7
+      }
+    },
+    {
       "player_name": "Darius Cannon",
       "team": "Jacksonville State",
       "games_played_prior": 5,
@@ -19034,27 +19154,6 @@
         "rush_att": 0.6,
         "rush_tds": 0.1,
         "rush_yds": 2.6
-      }
-    },
-    {
-      "player_name": "Luke Fahey",
-      "team": "Ohio State",
-      "games_played_prior": 2,
-      "opponent": "Maryland",
-      "position": "QB",
-      "projected_points": 8.3,
-      "stat_breakdown": {
-        "pass_att": 8.3,
-        "pass_comp": 6.6,
-        "pass_int": 0.3,
-        "pass_tds": 0.9,
-        "pass_yds": 82.7,
-        "rec_tds": 0.1,
-        "rec_yds": 5.4,
-        "receptions": 0.1,
-        "rush_att": 1.8,
-        "rush_tds": 0.1,
-        "rush_yds": 3.9
       }
     },
     {
@@ -19415,6 +19514,27 @@
       }
     },
     {
+      "player_name": "Rashid Williams",
+      "team": "Washington",
+      "games_played_prior": 4,
+      "opponent": "Iowa",
+      "position": "WR/TE",
+      "projected_points": 8.1,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 37.3,
+        "receptions": 2.9,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.4
+      }
+    },
+    {
       "player_name": "Jaylin Lucas",
       "team": "Tulane",
       "games_played_prior": 4,
@@ -19667,27 +19787,6 @@
       }
     },
     {
-      "player_name": "Rashid Williams",
-      "team": "Washington",
-      "games_played_prior": 4,
-      "opponent": "Iowa",
-      "position": "WR/TE",
-      "projected_points": 8.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 36.3,
-        "receptions": 2.9,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
-      }
-    },
-    {
       "player_name": "CJ Campbell",
       "team": "Duke",
       "games_played_prior": 4,
@@ -19790,27 +19889,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 1.0
-      }
-    },
-    {
-      "player_name": "Miles Coleman",
-      "team": "Oklahoma State",
-      "games_played_prior": 4,
-      "opponent": "UCF",
-      "position": "WR/TE",
-      "projected_points": 8.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 35.5,
-        "receptions": 2.7,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.3
       }
     },
     {
@@ -20108,6 +20186,27 @@
       }
     },
     {
+      "player_name": "Miles Coleman",
+      "team": "Oklahoma State",
+      "games_played_prior": 4,
+      "opponent": "UCF",
+      "position": "WR/TE",
+      "projected_points": 7.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.3,
+        "rec_yds": 35.5,
+        "receptions": 2.7,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
+      }
+    },
+    {
       "player_name": "Kayden McGee",
       "team": "UNLV",
       "games_played_prior": 4,
@@ -20231,27 +20330,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.0
-      }
-    },
-    {
-      "player_name": "KD Jones",
-      "team": "Oklahoma State",
-      "games_played_prior": 1,
-      "opponent": "UCF",
-      "position": "RB",
-      "projected_points": 7.9,
-      "stat_breakdown": {
-        "pass_att": 0.1,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.3,
-        "rec_tds": 0.0,
-        "rec_yds": 2.9,
-        "receptions": 0.3,
-        "rush_att": 7.1,
-        "rush_tds": 0.4,
-        "rush_yds": 44.8
       }
     },
     {
@@ -20499,7 +20577,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 35.2,
+        "rec_yds": 35.0,
         "receptions": 2.9,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -20567,6 +20645,27 @@
         "rush_att": 0.2,
         "rush_tds": 0.0,
         "rush_yds": 3.0
+      }
+    },
+    {
+      "player_name": "KD Jones",
+      "team": "Oklahoma State",
+      "games_played_prior": 1,
+      "opponent": "UCF",
+      "position": "RB",
+      "projected_points": 7.8,
+      "stat_breakdown": {
+        "pass_att": 0.1,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.3,
+        "rec_tds": 0.0,
+        "rec_yds": 2.9,
+        "receptions": 0.3,
+        "rush_att": 7.1,
+        "rush_tds": 0.4,
+        "rush_yds": 44.2
       }
     },
     {
@@ -20969,27 +21068,6 @@
       }
     },
     {
-      "player_name": "Nathan Mcneil",
-      "team": "Iowa",
-      "games_played_prior": 3,
-      "opponent": "Washington",
-      "position": "RB",
-      "projected_points": 7.7,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 10.3,
-        "receptions": 1.2,
-        "rush_att": 8.3,
-        "rush_tds": 0.3,
-        "rush_yds": 35.6
-      }
-    },
-    {
       "player_name": "Ty Robinson",
       "team": "Illinois",
       "games_played_prior": 5,
@@ -21389,6 +21467,27 @@
       }
     },
     {
+      "player_name": "Nathan Mcneil",
+      "team": "Iowa",
+      "games_played_prior": 3,
+      "opponent": "Washington",
+      "position": "RB",
+      "projected_points": 7.6,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 10.1,
+        "receptions": 1.2,
+        "rush_att": 8.3,
+        "rush_tds": 0.3,
+        "rush_yds": 35.6
+      }
+    },
+    {
       "player_name": "Jayvian Tanelus",
       "team": "Duke",
       "games_played_prior": 2,
@@ -21470,27 +21569,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.3
-      }
-    },
-    {
-      "player_name": "Ayo Adeyi",
-      "team": "Oklahoma State",
-      "games_played_prior": 4,
-      "opponent": "UCF",
-      "position": "RB",
-      "projected_points": 7.5,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.0,
-        "rec_yds": 6.5,
-        "receptions": 0.8,
-        "rush_att": 6.4,
-        "rush_tds": 0.3,
-        "rush_yds": 37.8
       }
     },
     {
@@ -21620,27 +21698,6 @@
       }
     },
     {
-      "player_name": "Brock Boyd",
-      "team": "Ohio State",
-      "games_played_prior": 3,
-      "opponent": "Maryland",
-      "position": "WR/TE",
-      "projected_points": 7.5,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 31.4,
-        "receptions": 2.1,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 1.0
-      }
-    },
-    {
       "player_name": "Tyreek Robinson",
       "team": "Pittsburgh",
       "games_played_prior": 2,
@@ -21704,6 +21761,27 @@
       }
     },
     {
+      "player_name": "Ayo Adeyi",
+      "team": "Oklahoma State",
+      "games_played_prior": 4,
+      "opponent": "UCF",
+      "position": "RB",
+      "projected_points": 7.4,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.0,
+        "rec_yds": 6.5,
+        "receptions": 0.8,
+        "rush_att": 6.4,
+        "rush_tds": 0.3,
+        "rush_yds": 37.3
+      }
+    },
+    {
       "player_name": "Taeshaun Lyons",
       "team": "UNLV",
       "games_played_prior": 4,
@@ -21764,27 +21842,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.3
-      }
-    },
-    {
-      "player_name": "Ismail Mahdi",
-      "team": "Arizona",
-      "games_played_prior": 2,
-      "opponent": "West Virginia",
-      "position": "RB",
-      "projected_points": 7.4,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.0,
-        "rec_yds": 6.3,
-        "receptions": 0.7,
-        "rush_att": 6.6,
-        "rush_tds": 0.3,
-        "rush_yds": 40.0
       }
     },
     {
@@ -21893,6 +21950,27 @@
       }
     },
     {
+      "player_name": "Luke Fahey",
+      "team": "Ohio State",
+      "games_played_prior": 2,
+      "opponent": "Maryland",
+      "position": "QB",
+      "projected_points": 7.4,
+      "stat_breakdown": {
+        "pass_att": 12.4,
+        "pass_comp": 7.3,
+        "pass_int": 0.4,
+        "pass_tds": 0.8,
+        "pass_yds": 83.3,
+        "rec_tds": 0.0,
+        "rec_yds": 3.3,
+        "receptions": 0.2,
+        "rush_att": 2.4,
+        "rush_tds": 0.1,
+        "rush_yds": 3.2
+      }
+    },
+    {
       "player_name": "Daryl Barnett Jr.",
       "team": "Toledo",
       "games_played_prior": 5,
@@ -21925,13 +22003,13 @@
         "pass_comp": 5.6,
         "pass_int": 0.2,
         "pass_tds": 0.6,
-        "pass_yds": 69.6,
+        "pass_yds": 70.7,
         "rec_tds": 0.0,
         "rec_yds": 0.5,
         "receptions": 0.0,
-        "rush_att": 4.4,
+        "rush_att": 4.5,
         "rush_tds": 0.2,
-        "rush_yds": 14.6
+        "rush_yds": 14.3
       }
     },
     {
@@ -22019,6 +22097,27 @@
       }
     },
     {
+      "player_name": "Brandon Inniss",
+      "team": "Ohio State",
+      "games_played_prior": 4,
+      "opponent": "Maryland",
+      "position": "WR/TE",
+      "projected_points": 7.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 32.9,
+        "receptions": 2.5,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
+      }
+    },
+    {
       "player_name": "Ty Lockwood",
       "team": "Arkansas",
       "games_played_prior": 3,
@@ -22100,6 +22199,27 @@
         "rush_att": 6.0,
         "rush_tds": 0.4,
         "rush_yds": 39.1
+      }
+    },
+    {
+      "player_name": "Ismail Mahdi",
+      "team": "Arizona",
+      "games_played_prior": 2,
+      "opponent": "West Virginia",
+      "position": "RB",
+      "projected_points": 7.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.0,
+        "rec_yds": 6.3,
+        "receptions": 0.7,
+        "rush_att": 6.6,
+        "rush_tds": 0.3,
+        "rush_yds": 39.4
       }
     },
     {
@@ -22502,6 +22622,27 @@
       }
     },
     {
+      "player_name": "Jordan Clay",
+      "team": "Washington",
+      "games_played_prior": 2,
+      "opponent": "Iowa",
+      "position": "WR/TE",
+      "projected_points": 7.2,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 30.5,
+        "receptions": 2.8,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.4
+      }
+    },
+    {
       "player_name": "Ronnel Johnson",
       "team": "Jacksonville State",
       "games_played_prior": 4,
@@ -22583,27 +22724,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.4
-      }
-    },
-    {
-      "player_name": "Favour Akih",
-      "team": "Ohio State",
-      "games_played_prior": 1,
-      "opponent": "Maryland",
-      "position": "RB",
-      "projected_points": 7.2,
-      "stat_breakdown": {
-        "pass_att": 0.1,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.3,
-        "rec_tds": 0.0,
-        "rec_yds": 2.7,
-        "receptions": 0.3,
-        "rush_att": 6.9,
-        "rush_tds": 0.5,
-        "rush_yds": 35.8
       }
     },
     {
@@ -22733,27 +22853,6 @@
       }
     },
     {
-      "player_name": "Jordan Clay",
-      "team": "Washington",
-      "games_played_prior": 2,
-      "opponent": "Iowa",
-      "position": "WR/TE",
-      "projected_points": 7.1,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 29.5,
-        "receptions": 2.8,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
-      }
-    },
-    {
       "player_name": "Noah Grubbs",
       "team": "Notre Dame",
       "games_played_prior": 2,
@@ -22880,27 +22979,6 @@
       }
     },
     {
-      "player_name": "Quincy Craig",
-      "team": "Arizona",
-      "games_played_prior": 5,
-      "opponent": "West Virginia",
-      "position": "RB",
-      "projected_points": 7.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 9.1,
-        "receptions": 1.1,
-        "rush_att": 5.6,
-        "rush_tds": 0.2,
-        "rush_yds": 31.3
-      }
-    },
-    {
       "player_name": "Audric Harris",
       "team": "Hawai'i",
       "games_played_prior": 4,
@@ -22922,27 +23000,6 @@
       }
     },
     {
-      "player_name": "Caleb Flagg",
-      "team": "UCF",
-      "games_played_prior": 1,
-      "opponent": "Oklahoma State",
-      "position": "WR/TE",
-      "projected_points": 7.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 29.2,
-        "receptions": 2.9,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.5
-      }
-    },
-    {
       "player_name": "Bryce Baker",
       "team": "Virginia Tech",
       "games_played_prior": 2,
@@ -22961,27 +23018,6 @@
         "rush_att": 3.9,
         "rush_tds": 0.1,
         "rush_yds": 12.2
-      }
-    },
-    {
-      "player_name": "Chris Henry Jr.",
-      "team": "Ohio State",
-      "games_played_prior": 3,
-      "opponent": "Maryland",
-      "position": "WR/TE",
-      "projected_points": 7.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 29.7,
-        "receptions": 1.8,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 1.0
       }
     },
     {
@@ -23111,27 +23147,6 @@
       }
     },
     {
-      "player_name": "Jaden Bray",
-      "team": "West Virginia",
-      "games_played_prior": 5,
-      "opponent": "Arizona",
-      "position": "WR/TE",
-      "projected_points": 6.9,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 32.2,
-        "receptions": 2.4,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.1
-      }
-    },
-    {
       "player_name": "Nic Anderson",
       "team": "Kentucky",
       "games_played_prior": 4,
@@ -23150,6 +23165,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.0
+      }
+    },
+    {
+      "player_name": "Quincy Craig",
+      "team": "Arizona",
+      "games_played_prior": 5,
+      "opponent": "West Virginia",
+      "position": "RB",
+      "projected_points": 6.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 9.1,
+        "receptions": 1.1,
+        "rush_att": 5.6,
+        "rush_tds": 0.2,
+        "rush_yds": 30.7
       }
     },
     {
@@ -23213,6 +23249,27 @@
         "rush_att": 1.3,
         "rush_tds": 0.1,
         "rush_yds": 6.4
+      }
+    },
+    {
+      "player_name": "Caleb Flagg",
+      "team": "UCF",
+      "games_played_prior": 1,
+      "opponent": "Oklahoma State",
+      "position": "WR/TE",
+      "projected_points": 6.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 28.6,
+        "receptions": 2.9,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.5
       }
     },
     {
@@ -23486,6 +23543,27 @@
         "rush_att": 0.3,
         "rush_tds": 0.0,
         "rush_yds": 3.6
+      }
+    },
+    {
+      "player_name": "Jaden Bray",
+      "team": "West Virginia",
+      "games_played_prior": 5,
+      "opponent": "Arizona",
+      "position": "WR/TE",
+      "projected_points": 6.8,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 31.8,
+        "receptions": 2.4,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.1
       }
     },
     {
@@ -24077,27 +24155,6 @@
       }
     },
     {
-      "player_name": "Antwan Roberts",
-      "team": "Arizona",
-      "games_played_prior": 4,
-      "opponent": "West Virginia",
-      "position": "RB",
-      "projected_points": 6.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.0,
-        "rec_yds": 3.7,
-        "receptions": 0.5,
-        "rush_att": 5.7,
-        "rush_tds": 0.3,
-        "rush_yds": 39.6
-      }
-    },
-    {
       "player_name": "Leon Haughton Jr.",
       "team": "Old Dominion",
       "games_played_prior": 5,
@@ -24455,6 +24512,27 @@
       }
     },
     {
+      "player_name": "Antwan Roberts",
+      "team": "Arizona",
+      "games_played_prior": 4,
+      "opponent": "West Virginia",
+      "position": "RB",
+      "projected_points": 6.5,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.0,
+        "rec_yds": 3.7,
+        "receptions": 0.5,
+        "rush_att": 5.7,
+        "rush_tds": 0.3,
+        "rush_yds": 39.1
+      }
+    },
+    {
       "player_name": "Cam Barfield",
       "team": "Hawai'i",
       "games_played_prior": 3,
@@ -24573,7 +24651,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 29.1,
+        "rec_yds": 29.7,
         "receptions": 2.4,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -24683,27 +24761,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.5
-      }
-    },
-    {
-      "player_name": "Nate Roberts",
-      "team": "Ohio State",
-      "games_played_prior": 5,
-      "opponent": "Maryland",
-      "position": "WR/TE",
-      "projected_points": 6.5,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 25.8,
-        "receptions": 2.0,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.9
       }
     },
     {
@@ -25127,27 +25184,6 @@
       }
     },
     {
-      "player_name": "Phillip Bell",
-      "team": "Ohio State",
-      "games_played_prior": 3,
-      "opponent": "Maryland",
-      "position": "WR/TE",
-      "projected_points": 6.4,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 26.0,
-        "receptions": 2.0,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 1.0
-      }
-    },
-    {
       "player_name": "Marquise Davis",
       "team": "Louisville",
       "games_played_prior": 2,
@@ -25166,27 +25202,6 @@
         "rush_att": 4.9,
         "rush_tds": 0.3,
         "rush_yds": 34.7
-      }
-    },
-    {
-      "player_name": "Isaiah West",
-      "team": "Ohio State",
-      "games_played_prior": 5,
-      "opponent": "Maryland",
-      "position": "RB",
-      "projected_points": 6.4,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.0,
-        "rec_yds": 6.3,
-        "receptions": 0.8,
-        "rush_att": 4.4,
-        "rush_tds": 0.3,
-        "rush_yds": 27.4
       }
     },
     {
@@ -25245,7 +25260,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 29.5,
+        "rec_yds": 29.0,
         "receptions": 2.2,
         "rush_att": 0.0,
         "rush_tds": 0.0,
@@ -25778,6 +25793,27 @@
       }
     },
     {
+      "player_name": "Brock Boyd",
+      "team": "Ohio State",
+      "games_played_prior": 3,
+      "opponent": "Maryland",
+      "position": "WR/TE",
+      "projected_points": 6.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 29.2,
+        "receptions": 2.2,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
+      }
+    },
+    {
       "player_name": "Ashten Emory",
       "team": "California",
       "games_played_prior": 5,
@@ -25946,27 +25982,6 @@
       }
     },
     {
-      "player_name": "Kedrick Triplett",
-      "team": "West Virginia",
-      "games_played_prior": 1,
-      "opponent": "Arizona",
-      "position": "WR/TE",
-      "projected_points": 6.3,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 28.9,
-        "receptions": 1.9,
-        "rush_att": 0.3,
-        "rush_tds": 0.0,
-        "rush_yds": 1.1
-      }
-    },
-    {
       "player_name": "Kaleb Brown",
       "team": "UAB",
       "games_played_prior": 1,
@@ -26048,27 +26063,6 @@
         "rush_att": 3.1,
         "rush_tds": 0.1,
         "rush_yds": 6.5
-      }
-    },
-    {
-      "player_name": "Dylan Wade",
-      "team": "UCF",
-      "games_played_prior": 3,
-      "opponent": "Oklahoma State",
-      "position": "WR/TE",
-      "projected_points": 6.2,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 27.5,
-        "receptions": 2.3,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
       }
     },
     {
@@ -26324,6 +26318,27 @@
       }
     },
     {
+      "player_name": "Trez Davis",
+      "team": "Washington",
+      "games_played_prior": 2,
+      "opponent": "Iowa",
+      "position": "WR/TE",
+      "projected_points": 6.2,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 26.7,
+        "receptions": 2.4,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.4
+      }
+    },
+    {
       "player_name": "Ja'Cory Thomas",
       "team": "Vanderbilt",
       "games_played_prior": 3,
@@ -26363,6 +26378,27 @@
         "rush_att": 0.4,
         "rush_tds": 0.0,
         "rush_yds": 3.7
+      }
+    },
+    {
+      "player_name": "Kedrick Triplett",
+      "team": "West Virginia",
+      "games_played_prior": 1,
+      "opponent": "Arizona",
+      "position": "WR/TE",
+      "projected_points": 6.2,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 28.3,
+        "receptions": 1.9,
+        "rush_att": 0.3,
+        "rush_tds": 0.0,
+        "rush_yds": 1.1
       }
     },
     {
@@ -26618,6 +26654,27 @@
       }
     },
     {
+      "player_name": "Dylan Wade",
+      "team": "UCF",
+      "games_played_prior": 3,
+      "opponent": "Oklahoma State",
+      "position": "WR/TE",
+      "projected_points": 6.1,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 26.7,
+        "receptions": 2.3,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.4
+      }
+    },
+    {
       "player_name": "Trey Cornist",
       "team": "UConn",
       "games_played_prior": 5,
@@ -26657,27 +26714,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.9
-      }
-    },
-    {
-      "player_name": "Mason Williams",
-      "team": "Ohio State",
-      "games_played_prior": 2,
-      "opponent": "Maryland",
-      "position": "WR/TE",
-      "projected_points": 6.1,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 23.8,
-        "receptions": 1.8,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 1.2
       }
     },
     {
@@ -26933,27 +26969,6 @@
       }
     },
     {
-      "player_name": "Trez Davis",
-      "team": "Washington",
-      "games_played_prior": 2,
-      "opponent": "Iowa",
-      "position": "WR/TE",
-      "projected_points": 6.1,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 26.0,
-        "receptions": 2.4,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
-      }
-    },
-    {
       "player_name": "Chris Gacayan II",
       "team": "Tulsa",
       "games_played_prior": 2,
@@ -27072,7 +27087,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 25.5,
+        "rec_yds": 25.3,
         "receptions": 2.4,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -27332,27 +27347,6 @@
       }
     },
     {
-      "player_name": "John Neider",
-      "team": "West Virginia",
-      "games_played_prior": 4,
-      "opponent": "Arizona",
-      "position": "WR/TE",
-      "projected_points": 6.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 26.5,
-        "receptions": 2.0,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 1.0
-      }
-    },
-    {
       "player_name": "Jalen Butler",
       "team": "Kansas",
       "games_played_prior": 1,
@@ -27413,6 +27407,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.6
+      }
+    },
+    {
+      "player_name": "Chris Henry Jr.",
+      "team": "Ohio State",
+      "games_played_prior": 3,
+      "opponent": "Maryland",
+      "position": "WR/TE",
+      "projected_points": 6.0,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 27.5,
+        "receptions": 1.9,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
       }
     },
     {
@@ -27647,27 +27662,6 @@
       }
     },
     {
-      "player_name": "William Mason",
-      "team": "Oklahoma State",
-      "games_played_prior": 1,
-      "opponent": "UCF",
-      "position": "RB",
-      "projected_points": 6.0,
-      "stat_breakdown": {
-        "pass_att": 0.1,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.3,
-        "rec_tds": 0.0,
-        "rec_yds": 2.5,
-        "receptions": 0.3,
-        "rush_att": 5.3,
-        "rush_tds": 0.2,
-        "rush_yds": 37.8
-      }
-    },
-    {
       "player_name": "Brady Hunt",
       "team": "South Carolina",
       "games_played_prior": 5,
@@ -27728,27 +27722,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.3
-      }
-    },
-    {
-      "player_name": "Shazz Preston",
-      "team": "Indiana",
-      "games_played_prior": 5,
-      "opponent": "Nebraska",
-      "position": "WR/TE",
-      "projected_points": 5.9,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 25.7,
-        "receptions": 2.1,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.1
       }
     },
     {
@@ -27983,6 +27956,27 @@
       }
     },
     {
+      "player_name": "John Neider",
+      "team": "West Virginia",
+      "games_played_prior": 4,
+      "opponent": "Arizona",
+      "position": "WR/TE",
+      "projected_points": 5.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 26.0,
+        "receptions": 2.0,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 1.0
+      }
+    },
+    {
       "player_name": "Tron Baker",
       "team": "USC",
       "games_played_prior": 4,
@@ -28042,7 +28036,7 @@
         "receptions": 1.0,
         "rush_att": 6.1,
         "rush_tds": 0.2,
-        "rush_yds": 28.3
+        "rush_yds": 28.4
       }
     },
     {
@@ -28127,6 +28121,27 @@
         "rush_att": 6.3,
         "rush_tds": 0.3,
         "rush_yds": 33.2
+      }
+    },
+    {
+      "player_name": "William Mason",
+      "team": "Oklahoma State",
+      "games_played_prior": 1,
+      "opponent": "UCF",
+      "position": "RB",
+      "projected_points": 5.9,
+      "stat_breakdown": {
+        "pass_att": 0.1,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.3,
+        "rec_tds": 0.0,
+        "rec_yds": 2.5,
+        "receptions": 0.3,
+        "rush_att": 5.3,
+        "rush_tds": 0.2,
+        "rush_yds": 37.3
       }
     },
     {
@@ -28358,27 +28373,6 @@
         "rush_att": 4.0,
         "rush_tds": 0.2,
         "rush_yds": 15.3
-      }
-    },
-    {
-      "player_name": "Caden Piening",
-      "team": "UCF",
-      "games_played_prior": 3,
-      "opponent": "Oklahoma State",
-      "position": "WR/TE",
-      "projected_points": 5.8,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 25.4,
-        "receptions": 2.0,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
       }
     },
     {
@@ -28655,6 +28649,27 @@
       }
     },
     {
+      "player_name": "Shazz Preston",
+      "team": "Indiana",
+      "games_played_prior": 5,
+      "opponent": "Nebraska",
+      "position": "WR/TE",
+      "projected_points": 5.7,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 24.8,
+        "receptions": 2.1,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.0
+      }
+    },
+    {
       "player_name": "Jaiven Plummer",
       "team": "Georgia Tech",
       "games_played_prior": 2,
@@ -28781,6 +28796,27 @@
       }
     },
     {
+      "player_name": "Caden Piening",
+      "team": "UCF",
+      "games_played_prior": 3,
+      "opponent": "Oklahoma State",
+      "position": "WR/TE",
+      "projected_points": 5.7,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 24.8,
+        "receptions": 2.0,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.4
+      }
+    },
+    {
       "player_name": "Tavian Mcnair",
       "team": "UNLV",
       "games_played_prior": 2,
@@ -28883,27 +28919,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.5
-      }
-    },
-    {
-      "player_name": "Davion Chandler",
-      "team": "Indiana",
-      "games_played_prior": 5,
-      "opponent": "Nebraska",
-      "position": "WR/TE",
-      "projected_points": 5.7,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 24.7,
-        "receptions": 1.9,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.1
       }
     },
     {
@@ -29306,69 +29321,6 @@
       }
     },
     {
-      "player_name": "Armoni Weaver",
-      "team": "West Virginia",
-      "games_played_prior": 3,
-      "opponent": "Arizona",
-      "position": "RB",
-      "projected_points": 5.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 21.5,
-        "receptions": 1.7,
-        "rush_att": 0.9,
-        "rush_tds": 0.0,
-        "rush_yds": 5.8
-      }
-    },
-    {
-      "player_name": "Ryan Ward",
-      "team": "West Virginia",
-      "games_played_prior": 2,
-      "opponent": "Arizona",
-      "position": "WR/TE",
-      "projected_points": 5.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 24.7,
-        "receptions": 1.9,
-        "rush_att": 0.0,
-        "rush_tds": 0.0,
-        "rush_yds": 0.1
-      }
-    },
-    {
-      "player_name": "Brock Schott",
-      "team": "Indiana",
-      "games_played_prior": 1,
-      "opponent": "Nebraska",
-      "position": "WR/TE",
-      "projected_points": 5.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 24.9,
-        "receptions": 1.9,
-        "rush_att": 0.2,
-        "rush_tds": 0.0,
-        "rush_yds": 1.1
-      }
-    },
-    {
       "player_name": "Carson Bruhn",
       "team": "Kansas",
       "games_played_prior": 2,
@@ -29387,27 +29339,6 @@
         "rush_att": 0.0,
         "rush_tds": 0.0,
         "rush_yds": 0.0
-      }
-    },
-    {
-      "player_name": "Cyrus Traugh",
-      "team": "West Virginia",
-      "games_played_prior": 2,
-      "opponent": "Arizona",
-      "position": "WR/TE",
-      "projected_points": 5.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 25.0,
-        "receptions": 1.8,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.1
       }
     },
     {
@@ -29492,27 +29423,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.9
-      }
-    },
-    {
-      "player_name": "Jonathan Bibbs",
-      "team": "UCF",
-      "games_played_prior": 3,
-      "opponent": "Oklahoma State",
-      "position": "WR/TE",
-      "projected_points": 5.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 24.5,
-        "receptions": 2.0,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
       }
     },
     {
@@ -29873,6 +29783,27 @@
       }
     },
     {
+      "player_name": "Nate Roberts",
+      "team": "Ohio State",
+      "games_played_prior": 5,
+      "opponent": "Maryland",
+      "position": "WR/TE",
+      "projected_points": 5.5,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 23.6,
+        "receptions": 2.1,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
+      }
+    },
+    {
       "player_name": "Akili Smith Jr.",
       "team": "Oregon",
       "games_played_prior": 1,
@@ -29891,6 +29822,27 @@
         "rush_att": 2.9,
         "rush_tds": 0.1,
         "rush_yds": 9.9
+      }
+    },
+    {
+      "player_name": "Armoni Weaver",
+      "team": "West Virginia",
+      "games_played_prior": 3,
+      "opponent": "Arizona",
+      "position": "RB",
+      "projected_points": 5.5,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 21.0,
+        "receptions": 1.7,
+        "rush_att": 0.9,
+        "rush_tds": 0.0,
+        "rush_yds": 5.8
       }
     },
     {
@@ -29933,6 +29885,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.2
+      }
+    },
+    {
+      "player_name": "Ryan Ward",
+      "team": "West Virginia",
+      "games_played_prior": 2,
+      "opponent": "Arizona",
+      "position": "WR/TE",
+      "projected_points": 5.5,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 24.1,
+        "receptions": 1.9,
+        "rush_att": 0.0,
+        "rush_tds": 0.0,
+        "rush_yds": 0.1
       }
     },
     {
@@ -30020,6 +29993,27 @@
       }
     },
     {
+      "player_name": "Cyrus Traugh",
+      "team": "West Virginia",
+      "games_played_prior": 2,
+      "opponent": "Arizona",
+      "position": "WR/TE",
+      "projected_points": 5.5,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 24.4,
+        "receptions": 1.8,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.1
+      }
+    },
+    {
       "player_name": "Kade Caton",
       "team": "South Florida",
       "games_played_prior": 1,
@@ -30083,6 +30077,27 @@
       }
     },
     {
+      "player_name": "Jonathan Bibbs",
+      "team": "UCF",
+      "games_played_prior": 3,
+      "opponent": "Oklahoma State",
+      "position": "WR/TE",
+      "projected_points": 5.5,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 23.9,
+        "receptions": 2.0,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.4
+      }
+    },
+    {
       "player_name": "Marcus Torres",
       "team": "UTEP",
       "games_played_prior": 1,
@@ -30101,6 +30116,27 @@
         "rush_att": 0.2,
         "rush_tds": 0.0,
         "rush_yds": 1.9
+      }
+    },
+    {
+      "player_name": "Davion Chandler",
+      "team": "Indiana",
+      "games_played_prior": 5,
+      "opponent": "Nebraska",
+      "position": "WR/TE",
+      "projected_points": 5.5,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 23.9,
+        "receptions": 1.9,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.0
       }
     },
     {
@@ -30209,6 +30245,27 @@
       }
     },
     {
+      "player_name": "Favour Akih",
+      "team": "Ohio State",
+      "games_played_prior": 1,
+      "opponent": "Maryland",
+      "position": "RB",
+      "projected_points": 5.5,
+      "stat_breakdown": {
+        "pass_att": 0.3,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.4,
+        "rec_tds": 0.0,
+        "rec_yds": 2.5,
+        "receptions": 0.3,
+        "rush_att": 6.9,
+        "rush_tds": 0.3,
+        "rush_yds": 29.3
+      }
+    },
+    {
       "player_name": "JJ Garner",
       "team": "Louisiana",
       "games_played_prior": 5,
@@ -30306,7 +30363,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 24.4,
+        "rec_yds": 23.9,
         "receptions": 2.1,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -30650,6 +30707,27 @@
       }
     },
     {
+      "player_name": "Phillip Bell",
+      "team": "Ohio State",
+      "games_played_prior": 3,
+      "opponent": "Maryland",
+      "position": "WR/TE",
+      "projected_points": 5.4,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 23.8,
+        "receptions": 2.0,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
+      }
+    },
+    {
       "player_name": "Byron Louis",
       "team": "Florida",
       "games_played_prior": 2,
@@ -30668,6 +30746,48 @@
         "rush_att": 3.9,
         "rush_tds": 0.2,
         "rush_yds": 20.9
+      }
+    },
+    {
+      "player_name": "Taevion Swint",
+      "team": "UCF",
+      "games_played_prior": 5,
+      "opponent": "Oklahoma State",
+      "position": "RB",
+      "projected_points": 5.4,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.0,
+        "rec_yds": 5.7,
+        "receptions": 0.7,
+        "rush_att": 6.0,
+        "rush_tds": 0.2,
+        "rush_yds": 28.5
+      }
+    },
+    {
+      "player_name": "Brock Schott",
+      "team": "Indiana",
+      "games_played_prior": 1,
+      "opponent": "Nebraska",
+      "position": "WR/TE",
+      "projected_points": 5.4,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 24.2,
+        "receptions": 1.9,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 1.0
       }
     },
     {
@@ -30794,6 +30914,27 @@
         "rush_att": 8.0,
         "rush_tds": 0.2,
         "rush_yds": 34.3
+      }
+    },
+    {
+      "player_name": "Mason James",
+      "team": "Washington",
+      "games_played_prior": 2,
+      "opponent": "Iowa",
+      "position": "WR/TE",
+      "projected_points": 5.4,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 21.9,
+        "receptions": 2.0,
+        "rush_att": 0.4,
+        "rush_tds": 0.0,
+        "rush_yds": 3.2
       }
     },
     {
@@ -31020,7 +31161,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 23.7,
+        "rec_yds": 23.5,
         "receptions": 2.0,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -31041,7 +31182,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 22.7,
+        "rec_yds": 22.3,
         "receptions": 2.0,
         "rush_att": 0.2,
         "rush_tds": 0.0,
@@ -31119,7 +31260,7 @@
       "position": "QB",
       "projected_points": 5.3,
       "stat_breakdown": {
-        "pass_att": 13.7,
+        "pass_att": 13.8,
         "pass_comp": 8.0,
         "pass_int": 0.6,
         "pass_tds": 0.5,
@@ -31193,27 +31334,6 @@
         "rush_att": 3.1,
         "rush_tds": 0.1,
         "rush_yds": 6.3
-      }
-    },
-    {
-      "player_name": "Taevion Swint",
-      "team": "UCF",
-      "games_played_prior": 5,
-      "opponent": "Oklahoma State",
-      "position": "RB",
-      "projected_points": 5.3,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.0,
-        "rec_yds": 5.7,
-        "receptions": 0.7,
-        "rush_att": 6.0,
-        "rush_tds": 0.2,
-        "rush_yds": 28.2
       }
     },
     {
@@ -31406,27 +31526,6 @@
       }
     },
     {
-      "player_name": "Mason James",
-      "team": "Washington",
-      "games_played_prior": 2,
-      "opponent": "Iowa",
-      "position": "WR/TE",
-      "projected_points": 5.3,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 21.4,
-        "receptions": 2.0,
-        "rush_att": 0.4,
-        "rush_tds": 0.0,
-        "rush_yds": 3.0
-      }
-    },
-    {
       "player_name": "Javari Barnett",
       "team": "Illinois",
       "games_played_prior": 2,
@@ -31482,7 +31581,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 23.9,
+        "rec_yds": 23.7,
         "receptions": 2.1,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -32259,7 +32358,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 22.9,
+        "rec_yds": 22.7,
         "receptions": 2.0,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -32792,27 +32891,6 @@
       }
     },
     {
-      "player_name": "Jerquaden Guilford",
-      "team": "Ohio State",
-      "games_played_prior": 1,
-      "opponent": "Maryland",
-      "position": "WR/TE",
-      "projected_points": 5.1,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 21.4,
-        "receptions": 1.5,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.9
-      }
-    },
-    {
       "player_name": "Lekhy Thompkins",
       "team": "Louisville",
       "games_played_prior": 1,
@@ -32978,27 +33056,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.0
-      }
-    },
-    {
-      "player_name": "Tre Page III",
-      "team": "Oklahoma State",
-      "games_played_prior": 3,
-      "opponent": "UCF",
-      "position": "RB",
-      "projected_points": 5.1,
-      "stat_breakdown": {
-        "pass_att": 0.1,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.3,
-        "rec_tds": 0.0,
-        "rec_yds": 2.5,
-        "receptions": 0.3,
-        "rush_att": 5.5,
-        "rush_tds": 0.3,
-        "rush_yds": 27.5
       }
     },
     {
@@ -33380,6 +33437,27 @@
       }
     },
     {
+      "player_name": "Mason Williams",
+      "team": "Ohio State",
+      "games_played_prior": 2,
+      "opponent": "Maryland",
+      "position": "WR/TE",
+      "projected_points": 5.0,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 21.7,
+        "receptions": 1.8,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.5
+      }
+    },
+    {
       "player_name": "Rahkeem Smith",
       "team": "Georgia Tech",
       "games_played_prior": 1,
@@ -33548,27 +33626,6 @@
       }
     },
     {
-      "player_name": "Legend Bey",
-      "team": "Ohio State",
-      "games_played_prior": 3,
-      "opponent": "Maryland",
-      "position": "RB",
-      "projected_points": 5.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 8.0,
-        "receptions": 0.8,
-        "rush_att": 3.2,
-        "rush_tds": 0.2,
-        "rush_yds": 18.6
-      }
-    },
-    {
       "player_name": "Brady Davidson",
       "team": "Northern Illinois",
       "games_played_prior": 1,
@@ -33666,11 +33723,32 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 21.4,
+        "rec_yds": 21.2,
         "receptions": 1.8,
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.4
+      }
+    },
+    {
+      "player_name": "Tre Page III",
+      "team": "Oklahoma State",
+      "games_played_prior": 3,
+      "opponent": "UCF",
+      "position": "RB",
+      "projected_points": 5.0,
+      "stat_breakdown": {
+        "pass_att": 0.1,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.3,
+        "rec_tds": 0.0,
+        "rec_yds": 2.5,
+        "receptions": 0.3,
+        "rush_att": 5.5,
+        "rush_tds": 0.3,
+        "rush_yds": 27.3
       }
     },
     {
@@ -33922,7 +34000,7 @@
         "receptions": 0.7,
         "rush_att": 6.4,
         "rush_tds": 0.2,
-        "rush_yds": 23.8
+        "rush_yds": 24.0
       }
     },
     {
@@ -34787,27 +34865,6 @@
       }
     },
     {
-      "player_name": "Tyler Morris",
-      "team": "Indiana",
-      "games_played_prior": 4,
-      "opponent": "Nebraska",
-      "position": "WR/TE",
-      "projected_points": 4.8,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 20.2,
-        "receptions": 1.8,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.1
-      }
-    },
-    {
       "player_name": "De'Nylon Morrissette",
       "team": "Purdue",
       "games_played_prior": 3,
@@ -35123,24 +35180,24 @@
       }
     },
     {
-      "player_name": "Tavien St. Clair",
+      "player_name": "Isaiah West",
       "team": "Ohio State",
-      "games_played_prior": 2,
+      "games_played_prior": 5,
       "opponent": "Maryland",
       "position": "RB",
       "projected_points": 4.8,
       "stat_breakdown": {
-        "pass_att": 5.2,
-        "pass_comp": 3.6,
-        "pass_int": 0.1,
-        "pass_tds": 0.3,
-        "pass_yds": 46.2,
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
         "rec_tds": 0.0,
-        "rec_yds": 2.1,
-        "receptions": 0.1,
-        "rush_att": 2.4,
-        "rush_tds": 0.1,
-        "rush_yds": 7.4
+        "rec_yds": 6.0,
+        "receptions": 0.8,
+        "rush_att": 4.4,
+        "rush_tds": 0.2,
+        "rush_yds": 21.2
       }
     },
     {
@@ -35624,27 +35681,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.4
-      }
-    },
-    {
-      "player_name": "Hunter Welcing",
-      "team": "Ohio State",
-      "games_played_prior": 1,
-      "opponent": "Maryland",
-      "position": "WR/TE",
-      "projected_points": 4.7,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 18.1,
-        "receptions": 1.5,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 1.2
       }
     },
     {
@@ -36173,27 +36209,6 @@
       }
     },
     {
-      "player_name": "Jimmy Sullivan",
-      "team": "Iowa",
-      "games_played_prior": 1,
-      "opponent": "Washington",
-      "position": "RB",
-      "projected_points": 4.7,
-      "stat_breakdown": {
-        "pass_att": 7.6,
-        "pass_comp": 4.1,
-        "pass_int": 0.2,
-        "pass_tds": 0.4,
-        "pass_yds": 45.6,
-        "rec_tds": 0.0,
-        "rec_yds": 1.0,
-        "receptions": 0.1,
-        "rush_att": 2.5,
-        "rush_tds": 0.1,
-        "rush_yds": 7.8
-      }
-    },
-    {
       "player_name": "Dalin Wilkins",
       "team": "Eastern Michigan",
       "games_played_prior": 1,
@@ -36572,6 +36587,27 @@
       }
     },
     {
+      "player_name": "Tyler Morris",
+      "team": "Indiana",
+      "games_played_prior": 4,
+      "opponent": "Nebraska",
+      "position": "WR/TE",
+      "projected_points": 4.6,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 19.9,
+        "receptions": 1.8,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.0
+      }
+    },
+    {
       "player_name": "Kahleil Jackson",
       "team": "Florida",
       "games_played_prior": 3,
@@ -36719,48 +36755,6 @@
       }
     },
     {
-      "player_name": "Jackson Wasserstrom",
-      "team": "Indiana",
-      "games_played_prior": 1,
-      "opponent": "Nebraska",
-      "position": "WR/TE",
-      "projected_points": 4.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 19.5,
-        "receptions": 1.6,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 1.1
-      }
-    },
-    {
-      "player_name": "Max LeBlanc",
-      "team": "Ohio State",
-      "games_played_prior": 2,
-      "opponent": "Maryland",
-      "position": "WR/TE",
-      "projected_points": 4.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 18.0,
-        "receptions": 1.4,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.9
-      }
-    },
-    {
       "player_name": "Lakota Dippre",
       "team": "Florida",
       "games_played_prior": 1,
@@ -36824,6 +36818,27 @@
       }
     },
     {
+      "player_name": "Jimmy Sullivan",
+      "team": "Iowa",
+      "games_played_prior": 1,
+      "opponent": "Washington",
+      "position": "RB",
+      "projected_points": 4.6,
+      "stat_breakdown": {
+        "pass_att": 7.6,
+        "pass_comp": 4.1,
+        "pass_int": 0.3,
+        "pass_tds": 0.4,
+        "pass_yds": 45.6,
+        "rec_tds": 0.0,
+        "rec_yds": 1.0,
+        "receptions": 0.1,
+        "rush_att": 2.5,
+        "rush_tds": 0.1,
+        "rush_yds": 7.8
+      }
+    },
+    {
       "player_name": "Franklin Baret Jr.",
       "team": "Jacksonville State",
       "games_played_prior": 1,
@@ -36842,27 +36857,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.7
-      }
-    },
-    {
-      "player_name": "Brody Lennon",
-      "team": "Ohio State",
-      "games_played_prior": 1,
-      "opponent": "Maryland",
-      "position": "WR/TE",
-      "projected_points": 4.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 18.1,
-        "receptions": 1.4,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.9
       }
     },
     {
@@ -37723,7 +37717,7 @@
         "receptions": 0.3,
         "rush_att": 5.8,
         "rush_tds": 0.2,
-        "rush_yds": 26.9
+        "rush_yds": 27.2
       }
     },
     {
@@ -38273,6 +38267,27 @@
       }
     },
     {
+      "player_name": "Jackson Wasserstrom",
+      "team": "Indiana",
+      "games_played_prior": 1,
+      "opponent": "Nebraska",
+      "position": "WR/TE",
+      "projected_points": 4.4,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 19.1,
+        "receptions": 1.6,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 1.0
+      }
+    },
+    {
       "player_name": "Brycen Coleman",
       "team": "Vanderbilt",
       "games_played_prior": 3,
@@ -38819,27 +38834,6 @@
       }
     },
     {
-      "player_name": "Josh Sapp",
-      "team": "West Virginia",
-      "games_played_prior": 1,
-      "opponent": "Arizona",
-      "position": "WR/TE",
-      "projected_points": 4.3,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 18.3,
-        "receptions": 1.6,
-        "rush_att": 0.0,
-        "rush_tds": 0.0,
-        "rush_yds": 0.1
-      }
-    },
-    {
       "player_name": "Connor Cox",
       "team": "Virginia",
       "games_played_prior": 1,
@@ -39029,6 +39023,27 @@
       }
     },
     {
+      "player_name": "Tavien St. Clair",
+      "team": "Ohio State",
+      "games_played_prior": 2,
+      "opponent": "Maryland",
+      "position": "RB",
+      "projected_points": 4.3,
+      "stat_breakdown": {
+        "pass_att": 7.3,
+        "pass_comp": 4.2,
+        "pass_int": 0.2,
+        "pass_tds": 0.3,
+        "pass_yds": 46.4,
+        "rec_tds": 0.0,
+        "rec_yds": 1.1,
+        "receptions": 0.1,
+        "rush_att": 2.4,
+        "rush_tds": 0.1,
+        "rush_yds": 6.3
+      }
+    },
+    {
       "player_name": "Tre Benson III",
       "team": "Army",
       "games_played_prior": 1,
@@ -39194,6 +39209,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.4
+      }
+    },
+    {
+      "player_name": "Jerquaden Guilford",
+      "team": "Ohio State",
+      "games_played_prior": 1,
+      "opponent": "Maryland",
+      "position": "WR/TE",
+      "projected_points": 4.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 19.3,
+        "receptions": 1.6,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
       }
     },
     {
@@ -39512,6 +39548,27 @@
       }
     },
     {
+      "player_name": "Josh Sapp",
+      "team": "West Virginia",
+      "games_played_prior": 1,
+      "opponent": "Arizona",
+      "position": "WR/TE",
+      "projected_points": 4.2,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 17.9,
+        "receptions": 1.6,
+        "rush_att": 0.0,
+        "rush_tds": 0.0,
+        "rush_yds": 0.1
+      }
+    },
+    {
       "player_name": "Iverson Hooks",
       "team": "Oregon",
       "games_played_prior": 1,
@@ -39651,7 +39708,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 18.1,
+        "rec_yds": 17.9,
         "receptions": 1.6,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -39677,6 +39734,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.4
+      }
+    },
+    {
+      "player_name": "Kade Eldridge",
+      "team": "Washington",
+      "games_played_prior": 2,
+      "opponent": "Iowa",
+      "position": "RB",
+      "projected_points": 4.2,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.0,
+        "rec_yds": 11.6,
+        "receptions": 1.1,
+        "rush_att": 2.1,
+        "rush_tds": 0.1,
+        "rush_yds": 7.0
       }
     },
     {
@@ -39756,7 +39834,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 18.8,
+        "rec_yds": 18.7,
         "receptions": 1.6,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -40016,27 +40094,6 @@
       }
     },
     {
-      "player_name": "Wesley Yarbrough",
-      "team": "Arizona",
-      "games_played_prior": 2,
-      "opponent": "West Virginia",
-      "position": "RB",
-      "projected_points": 4.2,
-      "stat_breakdown": {
-        "pass_att": 0.3,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.4,
-        "rec_tds": 0.0,
-        "rec_yds": 2.9,
-        "receptions": 0.4,
-        "rush_att": 4.0,
-        "rush_tds": 0.2,
-        "rush_yds": 22.0
-      }
-    },
-    {
       "player_name": "Luke Carney",
       "team": "Houston",
       "games_played_prior": 1,
@@ -40118,27 +40175,6 @@
         "rush_att": 5.1,
         "rush_tds": 0.2,
         "rush_yds": 22.9
-      }
-    },
-    {
-      "player_name": "Andrew Barker",
-      "team": "Indiana",
-      "games_played_prior": 1,
-      "opponent": "Nebraska",
-      "position": "WR/TE",
-      "projected_points": 4.2,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 17.5,
-        "receptions": 1.6,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.1
       }
     },
     {
@@ -40520,27 +40556,6 @@
       }
     },
     {
-      "player_name": "Kade Eldridge",
-      "team": "Washington",
-      "games_played_prior": 2,
-      "opponent": "Iowa",
-      "position": "RB",
-      "projected_points": 4.1,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.0,
-        "rec_yds": 11.6,
-        "receptions": 1.1,
-        "rush_att": 2.1,
-        "rush_tds": 0.1,
-        "rush_yds": 6.8
-      }
-    },
-    {
       "player_name": "Carmelo Taylor",
       "team": "UTEP",
       "games_played_prior": 1,
@@ -40684,7 +40699,7 @@
         "receptions": 0.3,
         "rush_att": 4.9,
         "rush_tds": 0.2,
-        "rush_yds": 23.3
+        "rush_yds": 23.4
       }
     },
     {
@@ -40979,6 +40994,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.3
+      }
+    },
+    {
+      "player_name": "Wesley Yarbrough",
+      "team": "Arizona",
+      "games_played_prior": 2,
+      "opponent": "West Virginia",
+      "position": "RB",
+      "projected_points": 4.1,
+      "stat_breakdown": {
+        "pass_att": 0.3,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.4,
+        "rec_tds": 0.0,
+        "rec_yds": 2.9,
+        "receptions": 0.4,
+        "rush_att": 4.0,
+        "rush_tds": 0.2,
+        "rush_yds": 21.7
       }
     },
     {
@@ -41801,6 +41837,27 @@
       }
     },
     {
+      "player_name": "Legend Bey",
+      "team": "Ohio State",
+      "games_played_prior": 3,
+      "opponent": "Maryland",
+      "position": "RB",
+      "projected_points": 4.0,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.0,
+        "rec_yds": 7.8,
+        "receptions": 0.8,
+        "rush_att": 3.2,
+        "rush_tds": 0.1,
+        "rush_yds": 15.1
+      }
+    },
+    {
       "player_name": "D'Shawntae Jones",
       "team": "Miami (OH)",
       "games_played_prior": 5,
@@ -41861,6 +41918,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.3
+      }
+    },
+    {
+      "player_name": "Andrew Barker",
+      "team": "Indiana",
+      "games_played_prior": 1,
+      "opponent": "Nebraska",
+      "position": "WR/TE",
+      "projected_points": 4.0,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 17.2,
+        "receptions": 1.6,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.0
       }
     },
     {
@@ -42095,6 +42173,27 @@
       }
     },
     {
+      "player_name": "Hunter Welcing",
+      "team": "Ohio State",
+      "games_played_prior": 1,
+      "opponent": "Maryland",
+      "position": "WR/TE",
+      "projected_points": 3.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 16.0,
+        "receptions": 1.5,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.5
+      }
+    },
+    {
       "player_name": "Janiran Bonner",
       "team": "Nebraska",
       "games_played_prior": 3,
@@ -42326,27 +42425,6 @@
       }
     },
     {
-      "player_name": "Tyler Cherry",
-      "team": "Indiana",
-      "games_played_prior": 1,
-      "opponent": "Nebraska",
-      "position": "RB",
-      "projected_points": 3.9,
-      "stat_breakdown": {
-        "pass_att": 5.5,
-        "pass_comp": 3.4,
-        "pass_int": 0.1,
-        "pass_tds": 0.3,
-        "pass_yds": 38.9,
-        "rec_tds": 0.1,
-        "rec_yds": 3.4,
-        "receptions": 0.1,
-        "rush_att": 2.0,
-        "rush_tds": 0.1,
-        "rush_yds": 1.1
-      }
-    },
-    {
       "player_name": "Tre Griffiths",
       "team": "Hawai'i",
       "games_played_prior": 1,
@@ -42469,7 +42547,7 @@
         "receptions": 0.6,
         "rush_att": 3.2,
         "rush_tds": 0.1,
-        "rush_yds": 16.1
+        "rush_yds": 16.2
       }
     },
     {
@@ -42977,6 +43055,27 @@
       }
     },
     {
+      "player_name": "Max LeBlanc",
+      "team": "Ohio State",
+      "games_played_prior": 2,
+      "opponent": "Maryland",
+      "position": "WR/TE",
+      "projected_points": 3.8,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 15.8,
+        "receptions": 1.5,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
+      }
+    },
+    {
       "player_name": "KJ Daniels",
       "team": "UAB",
       "games_played_prior": 3,
@@ -43208,6 +43307,27 @@
       }
     },
     {
+      "player_name": "Brody Lennon",
+      "team": "Ohio State",
+      "games_played_prior": 1,
+      "opponent": "Maryland",
+      "position": "WR/TE",
+      "projected_points": 3.8,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 16.0,
+        "receptions": 1.5,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
+      }
+    },
+    {
       "player_name": "Elijah Washington-Baker",
       "team": "Syracuse",
       "games_played_prior": 1,
@@ -43330,7 +43450,7 @@
         "receptions": 1.4,
         "rush_att": 0.2,
         "rush_tds": 0.0,
-        "rush_yds": 0.6
+        "rush_yds": 0.7
       }
     },
     {
@@ -44027,6 +44147,27 @@
       }
     },
     {
+      "player_name": "Tyler Cherry",
+      "team": "Indiana",
+      "games_played_prior": 1,
+      "opponent": "Nebraska",
+      "position": "RB",
+      "projected_points": 3.5,
+      "stat_breakdown": {
+        "pass_att": 7.2,
+        "pass_comp": 3.6,
+        "pass_int": 0.2,
+        "pass_tds": 0.3,
+        "pass_yds": 39.0,
+        "rec_tds": 0.1,
+        "rec_yds": 3.0,
+        "receptions": 0.1,
+        "rush_att": 2.0,
+        "rush_tds": 0.1,
+        "rush_yds": 1.0
+      }
+    },
+    {
       "player_name": "L.J. Phillips Jr.",
       "team": "Iowa",
       "games_played_prior": 2,
@@ -44045,27 +44186,6 @@
         "rush_att": 4.9,
         "rush_tds": 0.1,
         "rush_yds": 19.0
-      }
-    },
-    {
-      "player_name": "Sean Cuono",
-      "team": "Indiana",
-      "games_played_prior": 3,
-      "opponent": "Nebraska",
-      "position": "RB",
-      "projected_points": 3.5,
-      "stat_breakdown": {
-        "pass_att": 0.1,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.3,
-        "rec_tds": 0.0,
-        "rec_yds": 2.4,
-        "receptions": 0.3,
-        "rush_att": 4.2,
-        "rush_tds": 0.2,
-        "rush_yds": 17.3
       }
     },
     {
@@ -44192,27 +44312,6 @@
         "rush_att": 4.7,
         "rush_tds": 0.1,
         "rush_yds": 20.0
-      }
-    },
-    {
-      "player_name": "Grant Wilson",
-      "team": "Indiana",
-      "games_played_prior": 4,
-      "opponent": "Nebraska",
-      "position": "RB",
-      "projected_points": 3.4,
-      "stat_breakdown": {
-        "pass_att": 3.4,
-        "pass_comp": 2.2,
-        "pass_int": 0.1,
-        "pass_tds": 0.2,
-        "pass_yds": 24.0,
-        "rec_tds": 0.0,
-        "rec_yds": 1.5,
-        "receptions": 0.1,
-        "rush_att": 2.2,
-        "rush_tds": 0.1,
-        "rush_yds": 5.9
       }
     },
     {
@@ -44486,6 +44585,27 @@
         "rush_att": 2.5,
         "rush_tds": 0.1,
         "rush_yds": 8.4
+      }
+    },
+    {
+      "player_name": "Grant Wilson",
+      "team": "Indiana",
+      "games_played_prior": 4,
+      "opponent": "Nebraska",
+      "position": "RB",
+      "projected_points": 3.2,
+      "stat_breakdown": {
+        "pass_att": 4.3,
+        "pass_comp": 2.3,
+        "pass_int": 0.1,
+        "pass_tds": 0.2,
+        "pass_yds": 24.2,
+        "rec_tds": 0.0,
+        "rec_yds": 1.3,
+        "receptions": 0.1,
+        "rush_att": 2.2,
+        "rush_tds": 0.1,
+        "rush_yds": 5.5
       }
     },
     {
@@ -44821,7 +44941,7 @@
         "receptions": 0.3,
         "rush_att": 4.4,
         "rush_tds": 0.2,
-        "rush_yds": 11.2
+        "rush_yds": 11.3
       }
     },
     {
@@ -44867,27 +44987,6 @@
       }
     },
     {
-      "player_name": "Stanley Jackson",
-      "team": "Ohio State",
-      "games_played_prior": 1,
-      "opponent": "Maryland",
-      "position": "RB",
-      "projected_points": 3.1,
-      "stat_breakdown": {
-        "pass_att": 0.2,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.3,
-        "rec_tds": 0.0,
-        "rec_yds": 2.7,
-        "receptions": 0.3,
-        "rush_att": 2.9,
-        "rush_tds": 0.2,
-        "rush_yds": 14.0
-      }
-    },
-    {
       "player_name": "Kyler Pearson",
       "team": "East Carolina",
       "games_played_prior": 2,
@@ -44906,6 +45005,27 @@
         "rush_att": 1.0,
         "rush_tds": 0.0,
         "rush_yds": 0.6
+      }
+    },
+    {
+      "player_name": "Trey Johnson",
+      "team": "Bowling Green",
+      "games_played_prior": 2,
+      "opponent": "Sacramento State",
+      "position": "RB",
+      "projected_points": 3.0,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 10.7,
+        "receptions": 1.0,
+        "rush_att": 1.1,
+        "rush_tds": 0.0,
+        "rush_yds": 2.2
       }
     },
     {
@@ -44990,6 +45110,27 @@
         "rush_att": 1.6,
         "rush_tds": 0.1,
         "rush_yds": 3.5
+      }
+    },
+    {
+      "player_name": "Sean Cuono",
+      "team": "Indiana",
+      "games_played_prior": 3,
+      "opponent": "Nebraska",
+      "position": "RB",
+      "projected_points": 3.0,
+      "stat_breakdown": {
+        "pass_att": 0.3,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.4,
+        "rec_tds": 0.0,
+        "rec_yds": 2.4,
+        "receptions": 0.3,
+        "rush_att": 4.1,
+        "rush_tds": 0.1,
+        "rush_yds": 15.9
       }
     },
     {
@@ -45137,27 +45278,6 @@
         "rush_att": 3.9,
         "rush_tds": 0.1,
         "rush_yds": 14.2
-      }
-    },
-    {
-      "player_name": "Trey Johnson",
-      "team": "Bowling Green",
-      "games_played_prior": 2,
-      "opponent": "Sacramento State",
-      "position": "RB",
-      "projected_points": 2.9,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 10.7,
-        "receptions": 1.0,
-        "rush_att": 1.1,
-        "rush_tds": 0.0,
-        "rush_yds": 2.0
       }
     },
     {
@@ -45770,27 +45890,6 @@
       }
     },
     {
-      "player_name": "Jayreon Campbell",
-      "team": "Indiana",
-      "games_played_prior": 3,
-      "opponent": "Nebraska",
-      "position": "RB",
-      "projected_points": 2.7,
-      "stat_breakdown": {
-        "pass_att": 0.1,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.3,
-        "rec_tds": 0.0,
-        "rec_yds": 2.4,
-        "receptions": 0.3,
-        "rush_att": 3.1,
-        "rush_tds": 0.1,
-        "rush_yds": 13.7
-      }
-    },
-    {
       "player_name": "Hezekiah Millender",
       "team": "Georgia",
       "games_played_prior": 2,
@@ -45913,7 +46012,7 @@
         "receptions": 0.3,
         "rush_att": 3.4,
         "rush_tds": 0.1,
-        "rush_yds": 14.4
+        "rush_yds": 14.5
       }
     },
     {
@@ -46442,6 +46541,27 @@
       }
     },
     {
+      "player_name": "Jayreon Campbell",
+      "team": "Indiana",
+      "games_played_prior": 3,
+      "opponent": "Nebraska",
+      "position": "RB",
+      "projected_points": 2.4,
+      "stat_breakdown": {
+        "pass_att": 0.3,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.4,
+        "rec_tds": 0.0,
+        "rec_yds": 2.4,
+        "receptions": 0.3,
+        "rush_att": 3.1,
+        "rush_tds": 0.1,
+        "rush_yds": 12.3
+      }
+    },
+    {
       "player_name": "Bart Edmiston Jr.",
       "team": "Wyoming",
       "games_played_prior": 1,
@@ -46481,6 +46601,27 @@
         "rush_att": 3.0,
         "rush_tds": 0.1,
         "rush_yds": 11.4
+      }
+    },
+    {
+      "player_name": "Stanley Jackson",
+      "team": "Ohio State",
+      "games_played_prior": 1,
+      "opponent": "Maryland",
+      "position": "RB",
+      "projected_points": 2.4,
+      "stat_breakdown": {
+        "pass_att": 0.3,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.4,
+        "rec_tds": 0.0,
+        "rec_yds": 2.5,
+        "receptions": 0.3,
+        "rush_att": 2.9,
+        "rush_tds": 0.1,
+        "rush_yds": 11.1
       }
     },
     {
@@ -47131,7 +47272,7 @@
         "receptions": 0.3,
         "rush_att": 2.2,
         "rush_tds": 0.1,
-        "rush_yds": 7.5
+        "rush_yds": 7.6
       }
     },
     {
@@ -47471,27 +47612,6 @@
       }
     },
     {
-      "player_name": "Max Anderson",
-      "team": "West Virginia",
-      "games_played_prior": 1,
-      "opponent": "Arizona",
-      "position": "RB",
-      "projected_points": 2.0,
-      "stat_breakdown": {
-        "pass_att": 0.3,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.4,
-        "rec_tds": 0.0,
-        "rec_yds": 3.2,
-        "receptions": 0.4,
-        "rush_att": 2.1,
-        "rush_tds": 0.1,
-        "rush_yds": 6.2
-      }
-    },
-    {
       "player_name": "Jimmy Gregg",
       "team": "Syracuse",
       "games_played_prior": 1,
@@ -47786,6 +47906,27 @@
       }
     },
     {
+      "player_name": "Max Anderson",
+      "team": "West Virginia",
+      "games_played_prior": 1,
+      "opponent": "Arizona",
+      "position": "RB",
+      "projected_points": 1.9,
+      "stat_breakdown": {
+        "pass_att": 0.3,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.4,
+        "rec_tds": 0.0,
+        "rec_yds": 3.1,
+        "receptions": 0.4,
+        "rush_att": 2.1,
+        "rush_tds": 0.1,
+        "rush_yds": 6.2
+      }
+    },
+    {
       "player_name": "Omari Elias",
       "team": "Air Force",
       "games_played_prior": 1,
@@ -47883,7 +48024,7 @@
         "pass_tds": 0.0,
         "pass_yds": 1.4,
         "rec_tds": 0.0,
-        "rec_yds": 3.0,
+        "rec_yds": 2.9,
         "receptions": 0.4,
         "rush_att": 2.1,
         "rush_tds": 0.1,
@@ -48391,7 +48532,7 @@
         "receptions": 0.4,
         "rush_att": 2.1,
         "rush_tds": 0.0,
-        "rush_yds": 4.6
+        "rush_yds": 4.8
       }
     },
     {
@@ -48958,7 +49099,7 @@
         "receptions": 0.2,
         "rush_att": 2.2,
         "rush_tds": 0.0,
-        "rush_yds": 0.7
+        "rush_yds": 0.9
       }
     },
     {
@@ -54049,5 +54190,5 @@
       "note": "Hasselbeck has been out of commission due to knee injury, and he is likely to miss the remainder of the season."
     }
   ],
-  "injuries_as_of": "2026-10-05T15:39:18.268140+00:00"
+  "injuries_as_of": "2026-10-05T16:13:58.786807+00:00"
 }
