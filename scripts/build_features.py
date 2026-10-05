@@ -64,6 +64,19 @@ if __name__ == "__main__":
 
     print("Building team features...")
     team_features = build_game_team_features(games, sp, pace_returning, core_ratings=core_ratings, weather=weather)
+    # Challenger (v2) features, added alongside the current ones (10/2026) --
+    # see src/features/team_features_v2.py. Best-effort: a failure here leaves
+    # the current model's features untouched.
+    try:
+        from src.features.team_features_v2 import build_v2_features
+        from src.features.player_features import pivot_player_game_stats
+        game_adv = load_years(config.DATA_RAW_DIR + "/game_advanced_{year}.csv", args.years)
+        pw = pivot_player_game_stats(player_stats_long, games) if not player_stats_long.empty else None
+        team_features = build_v2_features(team_features, games, game_adv, sp, pw)
+        print(f"  challenger features: per-play efficiency on {team_features['ewm_net_ppa_diff'].notna().sum()} games, "
+              f"starting QB out in {int((team_features[['home_qb_out', 'away_qb_out']] == 1).any(axis=1).sum())} games")
+    except Exception as e:
+        print(f"  [warn] challenger features not built: {e}")
     team_features.to_csv(f"{config.DATA_PROCESSED_DIR}/team_game_features.csv", index=False)
     print(f"  wrote {len(team_features)} rows")
 
