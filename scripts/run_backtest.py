@@ -52,7 +52,16 @@ def run_splits(scoreable: pd.DataFrame) -> dict:
                           labels=["spread 0-3", "spread 3.5-7", "spread 7.5-14", "spread 14.5-20", "spread 20+"]), observed=True)]
     out["edge_size"] = [gp.summarize(g, str(k)) for k, g in play.groupby(pd.cut(play["edge"].abs(), [0, 3, 7, 14, 99],
                         labels=["model off market 0-3 pts", "3-7 pts", "7-14 pts", "14+ pts"]), observed=True)]
+    # Season phase (added 10/2026): the live Bet Card has only run on the
+    # trained model from mid-September on, while the full backtest also
+    # includes the thin-data early weeks. This checks whether the card does
+    # better once teams have several games of current-season data.
+    play["phase"] = pd.cut(play["week"], [0, 3, 8, 13, 99], labels=["weeks 1-3", "weeks 4-8", "weeks 9-13", "weeks 14+"])
+    out["by_phase"] = ([gp.summarize(g, f"bet card | {k}") for k, g in play[play.bet_card].groupby("phase", observed=True)]
+                       + [gp.summarize(play[play.bet_card & (play.week >= 4)], "bet card | weeks 4+ combined")]
+                       + [gp.summarize(g, f"not on card | {k}") for k, g in play[~play.bet_card].groupby("phase", observed=True)])
     gp.print_rows("WHERE DOES THE MODEL BEAT THE SPREAD? (out of sample)", out["overall"])
+    gp.print_rows("Bet Card vs. the rest by point in the season", out["by_phase"])
     gp.print_rows("By game type (spreads under 20)", out["game_type"])
     gp.print_rows("Bet Card plays by game type", out["game_type_bet_card"])
     gp.print_rows("By spread size (all games)", out["spread_size"])
