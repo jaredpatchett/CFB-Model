@@ -344,6 +344,10 @@ def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
         # games deserves less trust than one built on 5.
         "opponent": opponent,
         "games_played": int(entry["games_played_prior"]),
+        # Role shares (10/2026) -- used to tag secondary-role players as
+        # "watch" props, the group that held up in the props backtest.
+        "rec_share": entry.get("roll_rec_share"),
+        "carry_share": entry.get("roll_carry_share"),
         # Over-probability from the model's own residual std -- needed
         # downstream (export_dashboard_data.py) to compute real EV against
         # the actual posted price and decide "official play" vs "lean",
