@@ -130,6 +130,40 @@ def build_current_season_form(games_df: pd.DataFrame, sp_lookup: dict = None) ->
     return form
 
 
+def build_current_v2(games_df: pd.DataFrame, game_adv: pd.DataFrame, sp_lookup: dict = None) -> dict:
+    """school -> the upgraded model's per-team inputs as of the team's NEXT
+    game (added 10/2026): recent-game-weighted, opponent-adjusted margin and
+    per-play efficiency (PPA, success rate), plus the date of its last game
+    (for rest days). Same math as src/features/team_features_v2.py -- an
+    exponentially weighted average over every completed game so far equals
+    that module's 'prior games only' value for the next game."""
+    from src.features.team_features_v2 import _team_games, HALF_LIFE_GAMES
+    if games_df is None or games_df.empty:
+        return {}
+    tg = _team_games(games_df)
+    if tg.empty:
+        return {}
+    sp_lookup = sp_lookup or {}
+    opp = tg["opponent"].map(lambda o: sp_lookup.get(_normalize_school(o)))
+    tg["adj_margin"] = tg["margin"] + pd.to_numeric(opp, errors="coerce").fillna(0.0)
+    if game_adv is not None and not game_adv.empty:
+        cols = {"offense.ppa": "off_ppa", "offense.successRate": "off_sr",
+                "defense.ppa": "def_ppa", "defense.successRate": "def_sr"}
+        have = [c for c in cols if c in game_adv.columns]
+        adv = game_adv[["gameId", "team"] + have].rename(columns=cols).drop_duplicates(["gameId", "team"])
+        tg = tg.merge(adv, on=["gameId", "team"], how="left")
+    out = {}
+    for team, g in tg.sort_values(["start", "week"]).groupby("team"):
+        e = {"last_start": g["start"].max()}
+        for c in ("adj_margin", "off_ppa", "def_ppa", "off_sr", "def_sr"):
+            vals = g[c] if c in g.columns else pd.Series(dtype=float)
+            vals = pd.to_numeric(vals, errors="coerce").dropna()
+            e[f"ewm_{c}"] = float(vals.ewm(halflife=HALF_LIFE_GAMES).mean().iloc[-1]) if len(vals) else None
+        e["ewm_net_ppa"] = (e["ewm_off_ppa"] - e["ewm_def_ppa"]) if e["ewm_off_ppa"] is not None and e["ewm_def_ppa"] is not None else None
+        out[team] = e
+    return out
+
+
 def build_current_core_ratings(core_df: pd.DataFrame) -> dict:
     """CFBD school name -> {'core_overall'}, using each team's MOST RECENT
     through_week on file in `core_df`. CALLER is responsible for passing in
@@ -181,7 +215,8 @@ def build_current_pace_returning(adv_stats_df: pd.DataFrame, returning_df: pd.Da
 def score_with_trained_model(home_school: str, away_school: str, home_rating, away_rating,
                               neutral_site: bool, current_season_form: dict, model,
                               pace_returning: dict = None, core_ratings: dict = None,
-                              weather: dict = None, diagnostics: dict = None) -> float:
+                              weather: dict = None, diagnostics: dict = None,
+                              v2_lookup: dict = None, qb_out: dict = None, kickoff=None) -> float:
     """Returns the trained GameMarginModel's predicted home margin for this
     matchup, or None if it shouldn't be trusted yet — either team missing
     from current_season_form (hasn't played this season), either team under
@@ -289,6 +324,24 @@ def score_with_trained_model(home_school: str, away_school: str, home_rating, aw
         "precipitation": weather.get("precipitation"),
         "game_indoors": weather.get("game_indoors"),
     }
+    # Upgraded-model inputs (10/2026) -- only needed when the loaded model
+    # uses them; the generic missing-feature check below handles the rest.
+    v2_lookup = v2_lookup or {}
+    hv, av = v2_lookup.get(home_school) or {}, v2_lookup.get(away_school) or {}
+    for c in ("adj_margin", "off_ppa", "def_ppa", "net_ppa", "off_sr", "def_sr"):
+        h, a = hv.get(f"ewm_{c}"), av.get(f"ewm_{c}")
+        available[f"ewm_{c}_diff"] = (h - a) if h is not None and a is not None else None
+    def _rest(v):
+        try:
+            k = pd.Timestamp(kickoff)
+            k = k.tz_localize("UTC") if k.tzinfo is None else k
+            return float(min(max((k - v["last_start"]).days, 0), 21)) if v.get("last_start") is not None else 14.0
+        except Exception:
+            return 14.0
+    available["rest_diff"] = _rest(hv) - _rest(av) if kickoff is not None else None
+    qb_out = qb_out or {}
+    available["home_qb_out"] = float(qb_out.get(home_school, 0))
+    available["away_qb_out"] = float(qb_out.get(away_school, 0))
     missing = [c for c in model.feature_columns if c not in available or available[c] is None]
     if missing:
         for m in missing:
