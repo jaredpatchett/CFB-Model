@@ -1220,7 +1220,8 @@ RENDERER_JS = """<script>
       price: p.market === 'Moneyline' ? p.sideMoneyline : -110,
       edge: Math.round(Math.abs(p.edge) * 10) / 10,
       unofficial: autoUnofficial,
-      modelSource: modelSource
+      modelSource: modelSource,
+      modelVersion: g.modelVersion || null
     }));
   }
 
@@ -1275,7 +1276,7 @@ RENDERER_JS = """<script>
       // wanted this visible on the Edge Board directly, not just after
       // tracking a play.
       var isTrainedGame = (g.flags || []).some(function (f) { return f.text === 'In-season model'; });
-      var modelSrcLabel = isTrainedGame ? 'TRAINED' : 'UNTRAINED';
+      var modelSrcLabel = isTrainedGame ? (g.modelVersion === 'upgraded' ? 'UPGRADED' : 'TRAINED') : 'UNTRAINED';
       var modelSrcColor = isTrainedGame ? '#2ecc71' : '#8A94A3';
       return '' +
         '<div class="row row--click' + (i === state.selected ? ' is-selected' : '') + '" data-game="' + i + '">' +
@@ -1677,7 +1678,7 @@ RENDERER_JS = """<script>
             '<div class="row-body card-row">' +
               '<div><div class="card-play">' + esc(c.playLabel) + '</div>' +
                 '<div class="card-note">' + esc(abbrOf(c.game.away) + ' at ' + abbrOf(c.game.home) + ' \\u00b7 ' + c.game.kickoff) +
-                  ' \\u00b7 <span style="font-weight:700;color:' + (isTrainedGame ? '#2ecc71' : '#8A94A3') + '">' + (isTrainedGame ? 'TRAINED' : 'UNTRAINED') + '</span></div></div>' +
+                  ' \\u00b7 <span style="font-weight:700;color:' + (isTrainedGame ? '#2ecc71' : '#8A94A3') + '">' + (isTrainedGame ? (c.game.modelVersion === 'upgraded' ? 'UPGRADED' : 'TRAINED') : 'UNTRAINED') + '</span></div></div>' +
               '<div class="card-price">' + esc(sidePriceLabel) + '</div>' +
               '<div class="card-conf">' + (sideProb * 100).toFixed(1) + '%</div>' +
               '<div class="num"><span class="tier"><span>' + esc(c.tier) + '</span></span></div>' +
@@ -1961,7 +1962,8 @@ RENDERER_JS = """<script>
       description: play.description, date: play.date, type: play.type,
       price: play.price, edge: play.edge, stake: 50, status: null,
       unofficial: !!play.unofficial,
-      modelSource: play.modelSource || null
+      modelSource: play.modelSource || null,
+      modelVersion: play.modelVersion || null
     });
     saveTrk(items);
     render();
@@ -2221,7 +2223,7 @@ RENDERER_JS = """<script>
     var rows = items.map(function (it) {
       var p = computeProfit(it);
       var edgeUnit = it.type === 'Moneyline' ? 'pp' : (it.type === 'Prop' ? '%' : 'pt');
-      var modelTagText = it.modelSource === 'trained_model' ? 'TRAINED'
+      var modelTagText = it.modelSource === 'trained_model' ? (it.modelVersion === 'upgraded' ? 'UPGRADED' : 'TRAINED')
         : it.modelSource === 'preseason_prior' ? 'UNTRAINED'
         : it.modelSource === 'manual' ? 'MANUAL' : null;
       var modelTagColor = it.modelSource === 'trained_model' ? '#2ecc71' : '#8A94A3';
