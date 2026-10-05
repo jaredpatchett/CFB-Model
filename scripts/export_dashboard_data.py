@@ -33,7 +33,7 @@ from src.data.injury_report import (
 )
 from src.features.live_features import (
     build_current_season_form, score_with_trained_model, build_current_pace_returning,
-    build_current_core_ratings, MIN_GAMES_FOR_TRAINED_MODEL,
+    build_current_core_ratings, MIN_GAMES_FOR_TRAINED_MODEL, build_current_v2,
 )
 from src.features.live_player_features import (
     build_current_player_form, score_prop, MIN_GAMES_FOR_PROP_MODEL,
@@ -576,6 +576,44 @@ def main(year: int):
         print(f"  [warn] {model_path} not found — staying on the preseason prior for all games "
               f"(expected before scripts/train_game_model.py has run in this pipeline)")
 
+    # ---- Upgraded model inputs (10/2026) ----
+    # The main model is now the upgraded one (see train_game_model.py); the
+    # current-feature model is kept as a backup for any game where an
+    # upgraded input is missing, and the preseason prior after that.
+    trained_model_v1 = None
+    v1_path = f"{config.MODELS_DIR}/game_model_v1.joblib"
+    if os.path.exists(v1_path):
+        try:
+            trained_model_v1 = GameMarginModel.load(v1_path)
+        except Exception as e:
+            print(f"  [warn] could not load backup model {v1_path}: {e}")
+    v2_lookup, qb_out = {}, {}
+    if trained_model is not None and any(c.startswith("ewm_") for c in trained_model.feature_columns):
+        print(f"Fetching {season_year} per-game efficiency stats and passing leaders for the upgraded model...")
+        try:
+            game_adv_current = cfbd.get_game_advanced_stats(season_year)
+        except Exception as e:
+            print(f"  [warn] per-game efficiency fetch failed: {e} -- games will use the backup model")
+            game_adv_current = pd.DataFrame()
+        v2_lookup = build_current_v2(schedule_df, game_adv_current, sp_lookup)
+        n_eff = sum(1 for v in v2_lookup.values() if v.get("ewm_net_ppa") is not None)
+        print(f"  {len(v2_lookup)} team(s) with recent form, {n_eff} with per-play efficiency")
+        # Starting QB out: a QB listed Out/Doubtful/IR on the injury report who
+        # is also his team's leader in pass attempts this season.
+        try:
+            from src.data.injury_report import _initial_last
+            passing = cfbd.get_player_season_stats(season_year, "passing")
+            att = passing[passing["statType"].astype(str).str.upper() == "ATT"].copy()
+            att["stat"] = pd.to_numeric(att["stat"], errors="coerce")
+            leaders = att.sort_values("stat", ascending=False).drop_duplicates("team").set_index("team")["player"].to_dict()
+            for inj in injuries:
+                if inj.get("pos") == "QB" and inj.get("status") in BLOCKING_STATUSES and inj.get("school") in leaders:
+                    if _initial_last(inj["player"]) == _initial_last(leaders[inj["school"]]):
+                        qb_out[inj["school"]] = 1
+            print(f"  starting QB listed out for: {', '.join(sorted(qb_out)) or 'none'}")
+        except Exception as e:
+            print(f"  [warn] passing leaders unavailable ({e}) -- no starting-QB-out flags this run")
+
     print(f"Fetching {season_year} pace (plays/drive) and returning-production for Power Ratings "
           f"and the trained model's pace_diff/returning_production_diff features...")
     pace_returning_lookup = {}
@@ -626,6 +664,7 @@ def main(year: int):
     n_neutral_unknown = 0
     n_injury_applications = 0
     n_trained_model_games = 0
+    n_backup_model_games = 0
     trained_model_diagnostics = {}
     if os.path.exists(game_lines_path):
         try:
@@ -683,23 +722,38 @@ def main(year: int):
                 home_ov = get_team_override(home_meta.get("school"), injury_overrides)
                 away_ov = get_team_override(away_meta.get("school"), injury_overrides)
                 game_weather = match_weather(home_meta.get("school"), away_meta.get("school"), weather_lookup)
+                score_args = dict(pace_returning=pace_returning_lookup, core_ratings=core_ratings_lookup,
+                                  weather=game_weather, v2_lookup=v2_lookup, qb_out=qb_out,
+                                  kickoff=g.get("commence_time"))
                 trained_margin = score_with_trained_model(
                     home_meta.get("school"), away_meta.get("school"), home_rating, away_rating,
                     bool(neutral), current_season_form, trained_model,
-                    pace_returning=pace_returning_lookup,
-                    core_ratings=core_ratings_lookup,
-                    weather=game_weather,
-                    diagnostics=trained_model_diagnostics,
+                    diagnostics=trained_model_diagnostics, **score_args,
                 )
+                used_model = trained_model if trained_margin is not None else None
+                if trained_margin is None and trained_model_v1 is not None:
+                    trained_margin = score_with_trained_model(
+                        home_meta.get("school"), away_meta.get("school"), home_rating, away_rating,
+                        bool(neutral), current_season_form, trained_model_v1, **score_args,
+                    )
+                    used_model = trained_model_v1 if trained_margin is not None else None
+                    if trained_margin is not None:
+                        n_backup_model_games += 1
                 fair_fields = compute_fair_odds_fields(
                     home_rating, away_rating, ml_home, ml_away, prior,
                     neutral_site=bool(neutral),  # None (unknown) -> False, same as pre-existing default
                     home_injury_adj=(home_ov["points"] if home_ov else 0.0),
                     away_injury_adj=(away_ov["points"] if away_ov else 0.0),
                     trained_margin=trained_margin,
-                    trained_residual_std=(trained_model.residual_std if trained_model else None),
+                    trained_residual_std=(used_model.residual_std if used_model else None),
                 )
                 game_out.update(fair_fields)
+                if used_model is not None:
+                    game_out["model_version"] = ("upgraded" if used_model is trained_model
+                                                 and any(c.startswith("ewm_") for c in trained_model.feature_columns)
+                                                 else "current")
+                game_out["qb_out_home"] = int(qb_out.get(home_meta.get("school"), 0))
+                game_out["qb_out_away"] = int(qb_out.get(away_meta.get("school"), 0))
                 if home_ov:
                     game_out["injury_notes_home"] = home_ov["notes"]
                     n_injury_applications += 1
@@ -1016,7 +1070,8 @@ def main(year: int):
           f"({n_neutral_unknown} had no neutral-site match in CFBD's schedule, "
           f"assumed a normal home game), {n_injury_applications} manual injury-override "
           f"adjustment(s) applied (of {len(injury_overrides)} teams flagged in "
-          f"config/injury_overrides.csv), {n_trained_model_games} game(s) scored with the "
+          f"config/injury_overrides.csv), {n_trained_model_games} game(s) scored with a trained model ({n_backup_model_games} of them on the backup "
+          f"current-feature model because an upgraded input was missing) -- the "
           f"trained in-season GameMarginModel instead of the preseason prior "
           f"(both teams had {MIN_GAMES_FOR_TRAINED_MODEL}+ real {season_year} games), "
           f"{len(teams_out)} teams with a real "
