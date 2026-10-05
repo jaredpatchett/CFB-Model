@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T16:15:29.923737+00:00",
+  "generated_at": "2026-10-05T16:58:07.608991+00:00",
   "team_metadata_year": 2025,
   "current_season_year": 2026,
   "preseason_prior": {
@@ -1760,8 +1760,8 @@
       "moneyline_away": 225.0,
       "spread_home": -7.0,
       "spread_away": 7.0,
-      "spread_price_home": -110.0,
-      "spread_price_away": -110.0,
+      "spread_price_home": -112.0,
+      "spread_price_away": -108.0,
       "total_over": 51.5,
       "total_under": 51.5,
       "home_unmatched": false,
@@ -1923,12 +1923,12 @@
       "home_color": "#33006f",
       "away_color": "#000000",
       "book_used": "draftkings",
-      "moneyline_home": -162.0,
-      "moneyline_away": 136.0,
+      "moneyline_home": -166.0,
+      "moneyline_away": 140.0,
       "spread_home": -3.0,
       "spread_away": 3.0,
-      "spread_price_home": -105.0,
-      "spread_price_away": -115.0,
+      "spread_price_home": -112.0,
+      "spread_price_away": -108.0,
       "total_over": 41.5,
       "total_under": 41.5,
       "home_unmatched": false,
@@ -1974,10 +1974,10 @@
       "model_away_win_prob": 0.489,
       "model_fair_ml_home": -104.5,
       "model_fair_ml_away": 104.5,
-      "book_implied_prob_home": 0.5934,
-      "book_implied_prob_away": 0.4066,
-      "ev_home_pct": -17.36,
-      "ev_away_pct": 15.41,
+      "book_implied_prob_home": 0.5996,
+      "book_implied_prob_away": 0.4004,
+      "ev_home_pct": -18.12,
+      "ev_away_pct": 17.37,
       "residual_std": 17.133
     },
     {
@@ -2500,8 +2500,8 @@
       "spread_away": -7.5,
       "spread_price_home": -115.0,
       "spread_price_away": -105.0,
-      "total_over": 52.5,
-      "total_under": 52.5,
+      "total_over": 51.5,
+      "total_under": 51.5,
       "home_unmatched": false,
       "away_unmatched": false,
       "injuries_home": [
@@ -4033,12 +4033,12 @@
       "home_color": "#173f35",
       "away_color": "#ff5f05",
       "book_used": "draftkings",
-      "moneyline_home": 120.0,
-      "moneyline_away": -142.0,
+      "moneyline_home": 114.0,
+      "moneyline_away": -135.0,
       "spread_home": 2.5,
       "spread_away": -2.5,
-      "spread_price_home": -105.0,
-      "spread_price_away": -115.0,
+      "spread_price_home": -112.0,
+      "spread_price_away": -108.0,
       "total_over": 49.5,
       "total_under": 49.5,
       "home_unmatched": false,
@@ -4151,10 +4151,10 @@
       "model_away_win_prob": 0.7034,
       "model_fair_ml_home": 237.1,
       "model_fair_ml_away": -237.1,
-      "book_implied_prob_home": 0.4365,
-      "book_implied_prob_away": 0.5635,
-      "ev_home_pct": -34.74,
-      "ev_away_pct": 19.87,
+      "book_implied_prob_home": 0.4486,
+      "book_implied_prob_away": 0.5514,
+      "ev_home_pct": -36.52,
+      "ev_away_pct": 22.44,
       "residual_std": 17.133
     },
     {
@@ -4168,8 +4168,8 @@
       "home_color": "#532e1f",
       "away_color": "#002664",
       "book_used": "draftkings",
-      "moneyline_home": -600.0,
-      "moneyline_away": 440.0,
+      "moneyline_home": -575.0,
+      "moneyline_away": 425.0,
       "spread_home": -13.5,
       "spread_away": 13.5,
       "spread_price_home": -112.0,
@@ -4232,10 +4232,10 @@
       "model_away_win_prob": 0.1144,
       "model_fair_ml_home": -774.0,
       "model_fair_ml_away": 774.0,
-      "book_implied_prob_home": 0.8223,
-      "book_implied_prob_away": 0.1777,
-      "ev_home_pct": 3.32,
-      "ev_away_pct": -38.21,
+      "book_implied_prob_home": 0.8173,
+      "book_implied_prob_away": 0.1827,
+      "ev_home_pct": 3.96,
+      "ev_away_pct": -39.93,
       "residual_std": 17.133
     },
     {
@@ -4436,8 +4436,8 @@
       "moneyline_away": null,
       "spread_home": -37.5,
       "spread_away": 37.5,
-      "spread_price_home": -115.0,
-      "spread_price_away": -105.0,
+      "spread_price_home": -118.0,
+      "spread_price_away": -102.0,
       "total_over": 53.5,
       "total_under": 53.5,
       "home_unmatched": false,
@@ -4933,8 +4933,8 @@
       "home_color": "#592a8a",
       "away_color": "#00205b",
       "book_used": "draftkings",
-      "moneyline_home": -395.0,
-      "moneyline_away": 310.0,
+      "moneyline_home": -380.0,
+      "moneyline_away": 300.0,
       "spread_home": -10.0,
       "spread_away": 10.0,
       "spread_price_home": -108.0,
@@ -5009,10 +5009,10 @@
       "model_away_win_prob": 0.1275,
       "model_fair_ml_home": -684.1,
       "model_fair_ml_away": 684.1,
-      "book_implied_prob_home": 0.7659,
-      "book_implied_prob_away": 0.2341,
-      "ev_home_pct": 9.33,
-      "ev_away_pct": -47.71,
+      "book_implied_prob_home": 0.76,
+      "book_implied_prob_away": 0.24,
+      "ev_home_pct": 10.21,
+      "ev_away_pct": -48.98,
       "residual_std": 17.133
     },
     {
@@ -5735,10 +5735,10 @@
       "book_used": "draftkings",
       "moneyline_home": 275.0,
       "moneyline_away": -345.0,
-      "spread_home": 8.5,
-      "spread_away": -8.5,
-      "spread_price_home": -115.0,
-      "spread_price_away": -105.0,
+      "spread_home": 7.5,
+      "spread_away": -7.5,
+      "spread_price_home": -105.0,
+      "spread_price_away": -115.0,
       "total_over": 54.5,
       "total_under": 54.5,
       "home_unmatched": false,
@@ -5808,12 +5808,12 @@
       "home_color": "#003087",
       "away_color": "#ce181e",
       "book_used": "draftkings",
-      "moneyline_home": -148.0,
-      "moneyline_away": 124.0,
+      "moneyline_home": -155.0,
+      "moneyline_away": 130.0,
       "spread_home": -3.0,
       "spread_away": 3.0,
-      "spread_price_home": -105.0,
-      "spread_price_away": -115.0,
+      "spread_price_home": -108.0,
+      "spread_price_away": -112.0,
       "total_over": 48.5,
       "total_under": 48.5,
       "home_unmatched": false,
@@ -5878,10 +5878,10 @@
       "model_away_win_prob": 0.2635,
       "model_fair_ml_home": -279.5,
       "model_fair_ml_away": 279.5,
-      "book_implied_prob_home": 0.5721,
-      "book_implied_prob_away": 0.4279,
-      "ev_home_pct": 23.42,
-      "ev_away_pct": -40.98,
+      "book_implied_prob_home": 0.583,
+      "book_implied_prob_away": 0.417,
+      "ev_home_pct": 21.17,
+      "ev_away_pct": -39.4,
       "residual_std": 17.133
     },
     {
@@ -6446,12 +6446,12 @@
       "home_color": "#990000",
       "away_color": "#ba0c2f",
       "book_used": "fanduel",
-      "moneyline_home": 126.0,
-      "moneyline_away": -152.0,
+      "moneyline_home": 128.0,
+      "moneyline_away": -154.0,
       "spread_home": 3.5,
       "spread_away": -3.5,
-      "spread_price_home": -120.0,
-      "spread_price_away": -102.0,
+      "spread_price_home": -118.0,
+      "spread_price_away": -104.0,
       "total_over": 49.5,
       "total_under": 49.5,
       "home_unmatched": false,
@@ -6516,24 +6516,14 @@
       "model_away_win_prob": 0.3853,
       "model_fair_ml_home": -159.5,
       "model_fair_ml_away": 159.5,
-      "book_implied_prob_home": 0.4232,
-      "book_implied_prob_away": 0.5768,
-      "ev_home_pct": 38.92,
-      "ev_away_pct": -36.12,
+      "book_implied_prob_home": 0.4198,
+      "book_implied_prob_away": 0.5802,
+      "ev_home_pct": 40.15,
+      "ev_away_pct": -36.45,
       "residual_std": 17.618
     }
   ],
   "props": [
-    {
-      "fixture_id": "57ad14afc7db1843fd56f5971dadb058",
-      "start_time": "2026-10-07T00:00:00Z",
-      "player_name": "Goose Crowder",
-      "market_name": "Pass Touchdowns",
-      "line": 1.5,
-      "over_price": -174,
-      "under_price": 130,
-      "book_used": "fanduel"
-    },
     {
       "fixture_id": "57ad14afc7db1843fd56f5971dadb058",
       "start_time": "2026-10-07T00:00:00Z",
@@ -6542,6 +6532,16 @@
       "line": 1.5,
       "over_price": 182,
       "under_price": -250,
+      "book_used": "fanduel"
+    },
+    {
+      "fixture_id": "57ad14afc7db1843fd56f5971dadb058",
+      "start_time": "2026-10-07T00:00:00Z",
+      "player_name": "Goose Crowder",
+      "market_name": "Pass Touchdowns",
+      "line": 1.5,
+      "over_price": -174,
+      "under_price": 130,
       "book_used": "fanduel"
     },
     {
@@ -6749,30 +6749,6 @@
     {
       "fixture_id": "7556739cc30a38511b7f631581a416e4",
       "start_time": "2026-10-09T23:00:00Z",
-      "player_name": "Ashton Daniels",
-      "market_name": "Pass Yards",
-      "line": 204.5,
-      "over_price": -114,
-      "under_price": -114,
-      "book_used": "fanduel",
-      "model_predicted_value": 197.9,
-      "model_edge": -6.6,
-      "model_lean": "under",
-      "model_confidence": "normal",
-      "team": "Florida State",
-      "opponent": "Louisville",
-      "games_played": 5,
-      "rec_share": 0.0,
-      "carry_share": 0.28176408132929875,
-      "model_over_probability": 0.2995,
-      "model_ev": 31.5,
-      "model_lean_probability": 0.7005,
-      "is_official_play": false,
-      "is_watch_play": false
-    },
-    {
-      "fixture_id": "7556739cc30a38511b7f631581a416e4",
-      "start_time": "2026-10-09T23:00:00Z",
       "player_name": "Lincoln Kienholz",
       "market_name": "Pass Yards",
       "line": 242.5,
@@ -6795,6 +6771,30 @@
       "is_watch_play": false,
       "injury_status": "Questionable",
       "injury_detail": "Lower Body"
+    },
+    {
+      "fixture_id": "7556739cc30a38511b7f631581a416e4",
+      "start_time": "2026-10-09T23:00:00Z",
+      "player_name": "Ashton Daniels",
+      "market_name": "Pass Yards",
+      "line": 204.5,
+      "over_price": -114,
+      "under_price": -114,
+      "book_used": "fanduel",
+      "model_predicted_value": 197.9,
+      "model_edge": -6.6,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Florida State",
+      "opponent": "Louisville",
+      "games_played": 5,
+      "rec_share": 0.0,
+      "carry_share": 0.28176408132929875,
+      "model_over_probability": 0.2995,
+      "model_ev": 31.5,
+      "model_lean_probability": 0.7005,
+      "is_official_play": false,
+      "is_watch_play": false
     },
     {
       "fixture_id": "7556739cc30a38511b7f631581a416e4",
@@ -8048,27 +8048,6 @@
       }
     },
     {
-      "player_name": "Camden Coleman",
-      "team": "James Madison",
-      "games_played_prior": 5,
-      "opponent": "Georgia Southern",
-      "position": "QB",
-      "projected_points": 18.8,
-      "stat_breakdown": {
-        "pass_att": 27.7,
-        "pass_comp": 17.5,
-        "pass_int": 0.6,
-        "pass_tds": 1.8,
-        "pass_yds": 218.7,
-        "rec_tds": 0.0,
-        "rec_yds": 0.5,
-        "receptions": 0.0,
-        "rush_att": 6.5,
-        "rush_tds": 0.3,
-        "rush_yds": 20.9
-      }
-    },
-    {
       "player_name": "John Alan Richter",
       "team": "Toledo",
       "games_played_prior": 5,
@@ -8129,27 +8108,6 @@
         "rush_att": 18.1,
         "rush_tds": 0.9,
         "rush_yds": 92.7
-      }
-    },
-    {
-      "player_name": "Anthony Colandrea",
-      "team": "Nebraska",
-      "games_played_prior": 5,
-      "opponent": "Indiana",
-      "position": "QB",
-      "projected_points": 18.6,
-      "stat_breakdown": {
-        "pass_att": 28.8,
-        "pass_comp": 17.8,
-        "pass_int": 0.8,
-        "pass_tds": 1.4,
-        "pass_yds": 210.0,
-        "rec_tds": 0.0,
-        "rec_yds": 1.2,
-        "receptions": 0.2,
-        "rush_att": 10.3,
-        "rush_tds": 0.5,
-        "rush_yds": 33.3
       }
     },
     {
@@ -8234,6 +8192,27 @@
         "rush_att": 16.6,
         "rush_tds": 0.6,
         "rush_yds": 68.1
+      }
+    },
+    {
+      "player_name": "Camden Coleman",
+      "team": "James Madison",
+      "games_played_prior": 5,
+      "opponent": "Georgia Southern",
+      "position": "QB",
+      "projected_points": 18.5,
+      "stat_breakdown": {
+        "pass_att": 28.7,
+        "pass_comp": 17.7,
+        "pass_int": 0.7,
+        "pass_tds": 1.8,
+        "pass_yds": 218.7,
+        "rec_tds": 0.0,
+        "rec_yds": 0.5,
+        "receptions": 0.0,
+        "rush_att": 6.5,
+        "rush_tds": 0.3,
+        "rush_yds": 18.9
       }
     },
     {
@@ -8447,6 +8426,27 @@
       }
     },
     {
+      "player_name": "Anthony Colandrea",
+      "team": "Nebraska",
+      "games_played_prior": 5,
+      "opponent": "Indiana",
+      "position": "QB",
+      "projected_points": 17.7,
+      "stat_breakdown": {
+        "pass_att": 28.8,
+        "pass_comp": 17.5,
+        "pass_int": 0.8,
+        "pass_tds": 1.3,
+        "pass_yds": 194.7,
+        "rec_tds": 0.0,
+        "rec_yds": 1.2,
+        "receptions": 0.2,
+        "rush_att": 10.3,
+        "rush_tds": 0.5,
+        "rush_yds": 33.3
+      }
+    },
+    {
       "player_name": "Trey Owens",
       "team": "Arkansas State",
       "games_played_prior": 5,
@@ -8486,27 +8486,6 @@
         "rush_att": 6.6,
         "rush_tds": 0.3,
         "rush_yds": 15.3
-      }
-    },
-    {
-      "player_name": "George Pettaway",
-      "team": "James Madison",
-      "games_played_prior": 5,
-      "opponent": "Georgia Southern",
-      "position": "RB",
-      "projected_points": 17.5,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 7.8,
-        "receptions": 1.1,
-        "rush_att": 16.2,
-        "rush_tds": 1.0,
-        "rush_yds": 91.5
       }
     },
     {
@@ -8633,6 +8612,27 @@
         "rush_att": 8.0,
         "rush_tds": 0.3,
         "rush_yds": 19.3
+      }
+    },
+    {
+      "player_name": "George Pettaway",
+      "team": "James Madison",
+      "games_played_prior": 5,
+      "opponent": "Georgia Southern",
+      "position": "RB",
+      "projected_points": 17.2,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 7.8,
+        "receptions": 1.1,
+        "rush_att": 16.2,
+        "rush_tds": 1.0,
+        "rush_yds": 90.5
       }
     },
     {
@@ -9728,27 +9728,6 @@
       }
     },
     {
-      "player_name": "Kwazi Gilmer",
-      "team": "Nebraska",
-      "games_played_prior": 5,
-      "opponent": "Indiana",
-      "position": "WR/TE",
-      "projected_points": 15.4,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.5,
-        "rec_yds": 72.2,
-        "receptions": 5.4,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.0
-      }
-    },
-    {
       "player_name": "Deshawn Purdie",
       "team": "Liberty",
       "games_played_prior": 5,
@@ -9808,7 +9787,28 @@
         "receptions": 0.1,
         "rush_att": 5.7,
         "rush_tds": 0.2,
-        "rush_yds": 1.0
+        "rush_yds": 1.5
+      }
+    },
+    {
+      "player_name": "Kwazi Gilmer",
+      "team": "Nebraska",
+      "games_played_prior": 5,
+      "opponent": "Indiana",
+      "position": "WR/TE",
+      "projected_points": 15.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.5,
+        "rec_yds": 71.2,
+        "receptions": 5.4,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.0
       }
     },
     {
@@ -10148,27 +10148,6 @@
       }
     },
     {
-      "player_name": "JC Evans",
-      "team": "James Madison",
-      "games_played_prior": 1,
-      "opponent": "Georgia Southern",
-      "position": "QB",
-      "projected_points": 14.7,
-      "stat_breakdown": {
-        "pass_att": 10.8,
-        "pass_comp": 6.7,
-        "pass_int": 0.2,
-        "pass_tds": 0.6,
-        "pass_yds": 80.0,
-        "rec_tds": 0.0,
-        "rec_yds": 1.0,
-        "receptions": 0.1,
-        "rush_att": 10.0,
-        "rush_tds": 0.7,
-        "rush_yds": 53.9
-      }
-    },
-    {
       "player_name": "Fame Ijeboi",
       "team": "Purdue",
       "games_played_prior": 5,
@@ -10271,6 +10250,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.9
+      }
+    },
+    {
+      "player_name": "JC Evans",
+      "team": "James Madison",
+      "games_played_prior": 1,
+      "opponent": "Georgia Southern",
+      "position": "QB",
+      "projected_points": 14.5,
+      "stat_breakdown": {
+        "pass_att": 11.8,
+        "pass_comp": 7.5,
+        "pass_int": 0.3,
+        "pass_tds": 0.6,
+        "pass_yds": 80.0,
+        "rec_tds": 0.0,
+        "rec_yds": 1.0,
+        "receptions": 0.1,
+        "rush_att": 10.0,
+        "rush_tds": 0.6,
+        "rush_yds": 52.8
       }
     },
     {
@@ -11614,7 +11614,7 @@
         "receptions": 4.2,
         "rush_att": 0.1,
         "rush_tds": 0.0,
-        "rush_yds": 0.4
+        "rush_yds": 0.2
       }
     },
     {
@@ -12185,27 +12185,6 @@
       }
     },
     {
-      "player_name": "Arrington Maiden",
-      "team": "James Madison",
-      "games_played_prior": 1,
-      "opponent": "Georgia Southern",
-      "position": "QB",
-      "projected_points": 12.3,
-      "stat_breakdown": {
-        "pass_att": 13.6,
-        "pass_comp": 9.2,
-        "pass_int": 0.5,
-        "pass_tds": 1.1,
-        "pass_yds": 117.6,
-        "rec_tds": 0.0,
-        "rec_yds": 0.5,
-        "receptions": 0.0,
-        "rush_att": 5.5,
-        "rush_tds": 0.3,
-        "rush_yds": 25.9
-      }
-    },
-    {
       "player_name": "CJ Baxter Jr.",
       "team": "Kentucky",
       "games_played_prior": 5,
@@ -12602,6 +12581,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.9
+      }
+    },
+    {
+      "player_name": "Arrington Maiden",
+      "team": "James Madison",
+      "games_played_prior": 1,
+      "opponent": "Georgia Southern",
+      "position": "QB",
+      "projected_points": 12.0,
+      "stat_breakdown": {
+        "pass_att": 15.0,
+        "pass_comp": 9.6,
+        "pass_int": 0.5,
+        "pass_tds": 1.1,
+        "pass_yds": 117.6,
+        "rec_tds": 0.0,
+        "rec_yds": 0.5,
+        "receptions": 0.1,
+        "rush_att": 5.5,
+        "rush_tds": 0.3,
+        "rush_yds": 23.7
       }
     },
     {
@@ -14151,7 +14151,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 11.5,
+        "rec_yds": 11.3,
         "receptions": 1.5,
         "rush_att": 11.6,
         "rush_tds": 0.4,
@@ -14676,7 +14676,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 12.7,
+        "rec_yds": 12.5,
         "receptions": 1.5,
         "rush_att": 11.5,
         "rush_tds": 0.4,
@@ -15352,7 +15352,7 @@
         "receptions": 3.4,
         "rush_att": 0.4,
         "rush_tds": 0.0,
-        "rush_yds": 3.9
+        "rush_yds": 3.8
       }
     },
     {
@@ -16091,27 +16091,6 @@
       }
     },
     {
-      "player_name": "Jacory Barney Jr.",
-      "team": "Nebraska",
-      "games_played_prior": 5,
-      "opponent": "Indiana",
-      "position": "WR/TE",
-      "projected_points": 9.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 42.0,
-        "receptions": 3.4,
-        "rush_att": 0.2,
-        "rush_tds": 0.0,
-        "rush_yds": 1.8
-      }
-    },
-    {
       "player_name": "Eric Nelson",
       "team": "Florida International",
       "games_played_prior": 2,
@@ -16298,6 +16277,27 @@
         "rush_att": 0.3,
         "rush_tds": 0.0,
         "rush_yds": 2.2
+      }
+    },
+    {
+      "player_name": "Jacory Barney Jr.",
+      "team": "Nebraska",
+      "games_played_prior": 5,
+      "opponent": "Indiana",
+      "position": "WR/TE",
+      "projected_points": 9.5,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.3,
+        "rec_yds": 41.0,
+        "receptions": 3.4,
+        "rush_att": 0.2,
+        "rush_tds": 0.0,
+        "rush_yds": 1.8
       }
     },
     {
@@ -17473,7 +17473,7 @@
         "receptions": 3.1,
         "rush_att": 0.1,
         "rush_tds": 0.0,
-        "rush_yds": 0.3
+        "rush_yds": 0.2
       }
     },
     {
@@ -17642,27 +17642,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.6
-      }
-    },
-    {
-      "player_name": "Nick Herman",
-      "team": "James Madison",
-      "games_played_prior": 5,
-      "opponent": "Georgia Southern",
-      "position": "RB",
-      "projected_points": 8.9,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.0,
-        "rec_yds": 8.2,
-        "receptions": 1.0,
-        "rush_att": 7.6,
-        "rush_tds": 0.4,
-        "rush_yds": 42.7
       }
     },
     {
@@ -18338,6 +18317,27 @@
       }
     },
     {
+      "player_name": "David Mbadinga",
+      "team": "Georgia Southern",
+      "games_played_prior": 5,
+      "opponent": "James Madison",
+      "position": "RB",
+      "projected_points": 8.6,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 12.2,
+        "receptions": 1.6,
+        "rush_att": 8.3,
+        "rush_tds": 0.2,
+        "rush_yds": 38.2
+      }
+    },
+    {
       "player_name": "Rodney Nelson",
       "team": "Miami (OH)",
       "games_played_prior": 5,
@@ -18611,27 +18611,6 @@
       }
     },
     {
-      "player_name": "David Mbadinga",
-      "team": "Georgia Southern",
-      "games_played_prior": 5,
-      "opponent": "James Madison",
-      "position": "RB",
-      "projected_points": 8.5,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 12.2,
-        "receptions": 1.6,
-        "rush_att": 8.3,
-        "rush_tds": 0.2,
-        "rush_yds": 37.7
-      }
-    },
-    {
       "player_name": "Carver Cheeks",
       "team": "UTEP",
       "games_played_prior": 5,
@@ -18716,6 +18695,27 @@
       }
     },
     {
+      "player_name": "Nick Herman",
+      "team": "James Madison",
+      "games_played_prior": 5,
+      "opponent": "Georgia Southern",
+      "position": "RB",
+      "projected_points": 8.5,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.0,
+        "rec_yds": 8.2,
+        "receptions": 1.0,
+        "rush_att": 7.6,
+        "rush_tds": 0.4,
+        "rush_yds": 40.2
+      }
+    },
+    {
       "player_name": "Terrell Crosby Jr.",
       "team": "Toledo",
       "games_played_prior": 3,
@@ -18796,7 +18796,7 @@
         "receptions": 2.7,
         "rush_att": 0.4,
         "rush_tds": 0.0,
-        "rush_yds": 3.9
+        "rush_yds": 3.8
       }
     },
     {
@@ -20791,7 +20791,7 @@
         "receptions": 2.7,
         "rush_att": 0.1,
         "rush_tds": 0.0,
-        "rush_yds": 0.4
+        "rush_yds": 0.2
       }
     },
     {
@@ -21064,7 +21064,7 @@
         "receptions": 2.7,
         "rush_att": 0.1,
         "rush_tds": 0.0,
-        "rush_yds": 0.4
+        "rush_yds": 0.2
       }
     },
     {
@@ -22572,7 +22572,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 10.6,
+        "rec_yds": 10.5,
         "receptions": 1.4,
         "rush_att": 7.4,
         "rush_tds": 0.2,
@@ -24239,27 +24239,6 @@
       }
     },
     {
-      "player_name": "Luke Lindenmeyer",
-      "team": "Nebraska",
-      "games_played_prior": 5,
-      "opponent": "Indiana",
-      "position": "WR/TE",
-      "projected_points": 6.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 28.6,
-        "receptions": 2.7,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.0
-      }
-    },
-    {
       "player_name": "DeAngelo Irvin Jr.",
       "team": "UNLV",
       "games_played_prior": 1,
@@ -24659,6 +24638,27 @@
       }
     },
     {
+      "player_name": "Luke Lindenmeyer",
+      "team": "Nebraska",
+      "games_played_prior": 5,
+      "opponent": "Indiana",
+      "position": "WR/TE",
+      "projected_points": 6.5,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 27.6,
+        "receptions": 2.7,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.0
+      }
+    },
+    {
       "player_name": "Kedren Young",
       "team": "Notre Dame",
       "games_played_prior": 2,
@@ -25054,7 +25054,28 @@
         "receptions": 1.9,
         "rush_att": 0.1,
         "rush_tds": 0.0,
-        "rush_yds": 0.4
+        "rush_yds": 0.3
+      }
+    },
+    {
+      "player_name": "Terrance Gibbs",
+      "team": "Georgia Southern",
+      "games_played_prior": 1,
+      "opponent": "James Madison",
+      "position": "RB",
+      "projected_points": 6.4,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 11.5,
+        "receptions": 1.8,
+        "rush_att": 5.6,
+        "rush_tds": 0.1,
+        "rush_yds": 22.3
       }
     },
     {
@@ -25432,7 +25453,7 @@
         "receptions": 0.2,
         "rush_att": 7.4,
         "rush_tds": 0.3,
-        "rush_yds": 31.4
+        "rush_yds": 31.9
       }
     },
     {
@@ -25664,27 +25685,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.1
-      }
-    },
-    {
-      "player_name": "Terrance Gibbs",
-      "team": "Georgia Southern",
-      "games_played_prior": 1,
-      "opponent": "James Madison",
-      "position": "RB",
-      "projected_points": 6.3,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 11.5,
-        "receptions": 1.8,
-        "rush_att": 5.6,
-        "rush_tds": 0.1,
-        "rush_yds": 21.8
       }
     },
     {
@@ -29762,27 +29762,6 @@
       }
     },
     {
-      "player_name": "Cortez Mills Jr.",
-      "team": "Nebraska",
-      "games_played_prior": 1,
-      "opponent": "Indiana",
-      "position": "WR/TE",
-      "projected_points": 5.5,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 24.7,
-        "receptions": 2.1,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.0
-      }
-    },
-    {
       "player_name": "Nate Roberts",
       "team": "Ohio State",
       "games_played_prior": 5,
@@ -30220,7 +30199,7 @@
         "receptions": 1.9,
         "rush_att": 0.1,
         "rush_tds": 0.0,
-        "rush_yds": 0.4
+        "rush_yds": 0.2
       }
     },
     {
@@ -30746,6 +30725,27 @@
         "rush_att": 3.9,
         "rush_tds": 0.2,
         "rush_yds": 20.9
+      }
+    },
+    {
+      "player_name": "Cortez Mills Jr.",
+      "team": "Nebraska",
+      "games_played_prior": 1,
+      "opponent": "Indiana",
+      "position": "WR/TE",
+      "projected_points": 5.4,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 24.2,
+        "receptions": 2.1,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.0
       }
     },
     {
@@ -31358,27 +31358,6 @@
       }
     },
     {
-      "player_name": "Quinn Clark",
-      "team": "Nebraska",
-      "games_played_prior": 4,
-      "opponent": "Indiana",
-      "position": "WR/TE",
-      "projected_points": 5.3,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 22.7,
-        "receptions": 2.0,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.0
-      }
-    },
-    {
       "player_name": "Antonio Floyd",
       "team": "Eastern Michigan",
       "games_played_prior": 3,
@@ -31501,7 +31480,7 @@
         "receptions": 1.8,
         "rush_att": 0.1,
         "rush_tds": 0.0,
-        "rush_yds": 0.4
+        "rush_yds": 0.3
       }
     },
     {
@@ -31670,27 +31649,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.7
-      }
-    },
-    {
-      "player_name": "Jackson Mccarter",
-      "team": "James Madison",
-      "games_played_prior": 1,
-      "opponent": "Georgia Southern",
-      "position": "RB",
-      "projected_points": 5.3,
-      "stat_breakdown": {
-        "pass_att": 0.1,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.3,
-        "rec_tds": 0.0,
-        "rec_yds": 2.5,
-        "receptions": 0.3,
-        "rush_att": 5.7,
-        "rush_tds": 0.3,
-        "rush_yds": 30.8
       }
     },
     {
@@ -31985,6 +31943,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.9
+      }
+    },
+    {
+      "player_name": "Quinn Clark",
+      "team": "Nebraska",
+      "games_played_prior": 4,
+      "opponent": "Indiana",
+      "position": "WR/TE",
+      "projected_points": 5.2,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 22.4,
+        "receptions": 2.0,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.0
       }
     },
     {
@@ -32576,27 +32555,6 @@
       }
     },
     {
-      "player_name": "Nyziah Hunter",
-      "team": "Nebraska",
-      "games_played_prior": 5,
-      "opponent": "Indiana",
-      "position": "WR/TE",
-      "projected_points": 5.1,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 22.3,
-        "receptions": 2.0,
-        "rush_att": 0.2,
-        "rush_tds": 0.0,
-        "rush_yds": 1.0
-      }
-    },
-    {
       "player_name": "Patrick Clacks III",
       "team": "Buffalo",
       "games_played_prior": 4,
@@ -32740,7 +32698,7 @@
         "receptions": 1.1,
         "rush_att": 4.8,
         "rush_tds": 0.2,
-        "rush_yds": 19.8
+        "rush_yds": 20.0
       }
     },
     {
@@ -33143,6 +33101,27 @@
       }
     },
     {
+      "player_name": "Jackson Mccarter",
+      "team": "James Madison",
+      "games_played_prior": 1,
+      "opponent": "Georgia Southern",
+      "position": "RB",
+      "projected_points": 5.1,
+      "stat_breakdown": {
+        "pass_att": 0.1,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.3,
+        "rec_tds": 0.0,
+        "rec_yds": 2.5,
+        "receptions": 0.3,
+        "rush_att": 5.7,
+        "rush_tds": 0.3,
+        "rush_yds": 28.5
+      }
+    },
+    {
       "player_name": "Vincent Carner",
       "team": "UNLV",
       "games_played_prior": 3,
@@ -33161,27 +33140,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.1
-      }
-    },
-    {
-      "player_name": "Phoenix Donghia",
-      "team": "James Madison",
-      "games_played_prior": 1,
-      "opponent": "Georgia Southern",
-      "position": "RB",
-      "projected_points": 5.1,
-      "stat_breakdown": {
-        "pass_att": 0.1,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.3,
-        "rec_tds": 0.0,
-        "rec_yds": 2.5,
-        "receptions": 0.3,
-        "rush_att": 5.0,
-        "rush_tds": 0.3,
-        "rush_yds": 26.5
       }
     },
     {
@@ -33434,6 +33392,27 @@
         "rush_att": 5.2,
         "rush_tds": 0.2,
         "rush_yds": 28.6
+      }
+    },
+    {
+      "player_name": "Nyziah Hunter",
+      "team": "Nebraska",
+      "games_played_prior": 5,
+      "opponent": "Indiana",
+      "position": "WR/TE",
+      "projected_points": 5.0,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 22.3,
+        "receptions": 2.0,
+        "rush_att": 0.2,
+        "rush_tds": 0.0,
+        "rush_yds": 1.0
       }
     },
     {
@@ -35495,27 +35474,6 @@
       }
     },
     {
-      "player_name": "Arrion Concepcion",
-      "team": "James Madison",
-      "games_played_prior": 1,
-      "opponent": "Georgia Southern",
-      "position": "WR/TE",
-      "projected_points": 4.8,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 20.1,
-        "receptions": 1.6,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
-      }
-    },
-    {
       "player_name": "Armaad Sharp",
       "team": "Eastern Michigan",
       "games_played_prior": 2,
@@ -35555,6 +35513,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.3
+      }
+    },
+    {
+      "player_name": "Phoenix Donghia",
+      "team": "James Madison",
+      "games_played_prior": 1,
+      "opponent": "Georgia Southern",
+      "position": "RB",
+      "projected_points": 4.8,
+      "stat_breakdown": {
+        "pass_att": 0.1,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.3,
+        "rec_tds": 0.0,
+        "rec_yds": 2.5,
+        "receptions": 0.3,
+        "rush_att": 5.0,
+        "rush_tds": 0.3,
+        "rush_yds": 24.1
       }
     },
     {
@@ -36293,6 +36272,27 @@
       }
     },
     {
+      "player_name": "Arrion Concepcion",
+      "team": "James Madison",
+      "games_played_prior": 1,
+      "opponent": "Georgia Southern",
+      "position": "WR/TE",
+      "projected_points": 4.7,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 20.1,
+        "receptions": 1.6,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
+      }
+    },
+    {
       "player_name": "Jay Jay Etheridge",
       "team": "Kent State",
       "games_played_prior": 1,
@@ -37007,27 +37007,6 @@
       }
     },
     {
-      "player_name": "Seth Cromwell",
-      "team": "James Madison",
-      "games_played_prior": 4,
-      "opponent": "Georgia Southern",
-      "position": "RB",
-      "projected_points": 4.6,
-      "stat_breakdown": {
-        "pass_att": 0.1,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.3,
-        "rec_tds": 0.0,
-        "rec_yds": 2.5,
-        "receptions": 0.3,
-        "rush_att": 5.0,
-        "rush_tds": 0.2,
-        "rush_yds": 25.1
-      }
-    },
-    {
       "player_name": "Keon Davis",
       "team": "Kennesaw State",
       "games_played_prior": 2,
@@ -37654,7 +37633,7 @@
         "receptions": 1.1,
         "rush_att": 3.9,
         "rush_tds": 0.1,
-        "rush_yds": 14.3
+        "rush_yds": 14.5
       }
     },
     {
@@ -38495,6 +38474,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.3
+      }
+    },
+    {
+      "player_name": "Seth Cromwell",
+      "team": "James Madison",
+      "games_played_prior": 4,
+      "opponent": "Georgia Southern",
+      "position": "RB",
+      "projected_points": 4.4,
+      "stat_breakdown": {
+        "pass_att": 0.1,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.3,
+        "rec_tds": 0.0,
+        "rec_yds": 2.5,
+        "receptions": 0.3,
+        "rush_att": 5.0,
+        "rush_tds": 0.2,
+        "rush_yds": 22.7
       }
     },
     {
@@ -41140,7 +41140,7 @@
         "receptions": 1.5,
         "rush_att": 0.1,
         "rush_tds": 0.0,
-        "rush_yds": 0.4
+        "rush_yds": 0.3
       }
     },
     {
@@ -43496,27 +43496,6 @@
       }
     },
     {
-      "player_name": "Demitrius Bell",
-      "team": "Nebraska",
-      "games_played_prior": 1,
-      "opponent": "Indiana",
-      "position": "WR/TE",
-      "projected_points": 3.7,
-      "stat_breakdown": {
-        "pass_att": 0.1,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.3,
-        "rec_tds": 0.1,
-        "rec_yds": 16.0,
-        "receptions": 1.5,
-        "rush_att": 0.2,
-        "rush_tds": 0.0,
-        "rush_yds": 0.0
-      }
-    },
-    {
       "player_name": "Elijah Brown",
       "team": "Washington",
       "games_played_prior": 1,
@@ -43850,6 +43829,27 @@
         "rush_att": 0.2,
         "rush_tds": 0.0,
         "rush_yds": 0.2
+      }
+    },
+    {
+      "player_name": "Demitrius Bell",
+      "team": "Nebraska",
+      "games_played_prior": 1,
+      "opponent": "Indiana",
+      "position": "WR/TE",
+      "projected_points": 3.6,
+      "stat_breakdown": {
+        "pass_att": 0.1,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.3,
+        "rec_tds": 0.1,
+        "rec_yds": 16.0,
+        "receptions": 1.5,
+        "rush_att": 0.2,
+        "rush_tds": 0.0,
+        "rush_yds": 0.0
       }
     },
     {
@@ -44332,7 +44332,7 @@
         "receptions": 0.4,
         "rush_att": 2.6,
         "rush_tds": 0.1,
-        "rush_yds": 17.4
+        "rush_yds": 17.0
       }
     },
     {
@@ -44542,7 +44542,7 @@
         "receptions": 0.4,
         "rush_att": 3.9,
         "rush_tds": 0.2,
-        "rush_yds": 15.3
+        "rush_yds": 15.5
       }
     },
     {
@@ -45071,27 +45071,6 @@
       }
     },
     {
-      "player_name": "Kwinten Ives",
-      "team": "Nebraska",
-      "games_played_prior": 3,
-      "opponent": "Indiana",
-      "position": "RB",
-      "projected_points": 3.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 6.7,
-        "receptions": 0.9,
-        "rush_att": 1.9,
-        "rush_tds": 0.1,
-        "rush_yds": 6.4
-      }
-    },
-    {
       "player_name": "Lucian Anderson III",
       "team": "South Carolina",
       "games_played_prior": 2,
@@ -45278,6 +45257,27 @@
         "rush_att": 3.9,
         "rush_tds": 0.1,
         "rush_yds": 14.2
+      }
+    },
+    {
+      "player_name": "Kwinten Ives",
+      "team": "Nebraska",
+      "games_played_prior": 3,
+      "opponent": "Indiana",
+      "position": "RB",
+      "projected_points": 2.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 6.5,
+        "receptions": 0.9,
+        "rush_att": 1.9,
+        "rush_tds": 0.1,
+        "rush_yds": 6.4
       }
     },
     {
@@ -45688,7 +45688,7 @@
       "projected_points": 2.8,
       "stat_breakdown": {
         "pass_att": 2.8,
-        "pass_comp": 1.6,
+        "pass_comp": 1.7,
         "pass_int": 0.1,
         "pass_tds": 0.2,
         "pass_yds": 20.9,
@@ -45697,7 +45697,7 @@
         "receptions": 0.2,
         "rush_att": 1.2,
         "rush_tds": 0.1,
-        "rush_yds": 0.4
+        "rush_yds": 0.3
       }
     },
     {
@@ -46016,6 +46016,27 @@
       }
     },
     {
+      "player_name": "Tyrese Woodgett",
+      "team": "Georgia Southern",
+      "games_played_prior": 1,
+      "opponent": "James Madison",
+      "position": "RB",
+      "projected_points": 2.7,
+      "stat_breakdown": {
+        "pass_att": 0.3,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.4,
+        "rec_tds": 0.0,
+        "rec_yds": 2.6,
+        "receptions": 0.4,
+        "rush_att": 3.4,
+        "rush_tds": 0.1,
+        "rush_yds": 13.1
+      }
+    },
+    {
       "player_name": "James Giggey",
       "team": "Arizona State",
       "games_played_prior": 2,
@@ -46160,27 +46181,6 @@
         "rush_att": 2.4,
         "rush_tds": 0.1,
         "rush_yds": 7.3
-      }
-    },
-    {
-      "player_name": "Tyrese Woodgett",
-      "team": "Georgia Southern",
-      "games_played_prior": 1,
-      "opponent": "James Madison",
-      "position": "RB",
-      "projected_points": 2.6,
-      "stat_breakdown": {
-        "pass_att": 0.3,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.4,
-        "rec_tds": 0.0,
-        "rec_yds": 2.6,
-        "receptions": 0.4,
-        "rush_att": 3.4,
-        "rush_tds": 0.1,
-        "rush_yds": 12.9
       }
     },
     {
@@ -46449,7 +46449,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.0,
-        "rec_yds": 4.7,
+        "rec_yds": 4.5,
         "receptions": 0.6,
         "rush_att": 2.4,
         "rush_tds": 0.1,
@@ -54190,5 +54190,5 @@
       "note": "Hasselbeck has been out of commission due to knee injury, and he is likely to miss the remainder of the season."
     }
   ],
-  "injuries_as_of": "2026-10-05T16:13:58.786807+00:00"
+  "injuries_as_of": "2026-10-05T16:56:34.627783+00:00"
 }

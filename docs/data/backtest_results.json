@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T16:06:14.677395+00:00",
+  "generated_at": "2026-10-05T16:47:45.689922+00:00",
   "seasons_covered": [
     2024,
     2025
@@ -277,6 +277,336 @@
           "2025": -0.284
         }
       }
-    ]
+    ],
+    "moneyline": {
+      "model_picks": [
+        {
+          "group": "every model moneyline pick",
+          "n": 708,
+          "record": "314-394-0",
+          "hit_rate": 0.444,
+          "units": 21.74,
+          "roi": 0.031,
+          "z": 0.61,
+          "roi_by_period": {
+            "2024": -0.008,
+            "2025": 0.071
+          }
+        },
+        {
+          "group": "near-even target (+100..+150, model 65%+)",
+          "n": 32,
+          "record": "13-19-0",
+          "hit_rate": 0.406,
+          "units": -3.27,
+          "roi": -0.102,
+          "z": -0.52,
+          "roi_by_period": {
+            "2024": -0.011,
+            "2025": -0.253
+          }
+        }
+      ],
+      "by_price": [
+        {
+          "group": "favorite -250 or more",
+          "n": 67,
+          "record": "51-16-0",
+          "hit_rate": 0.761,
+          "units": 0.06,
+          "roi": 0.001,
+          "z": 0.01,
+          "roi_by_period": {
+            "2024": -0.021,
+            "2025": 0.026
+          }
+        },
+        {
+          "group": "favorite -150 to -249",
+          "n": 70,
+          "record": "46-24-0",
+          "hit_rate": 0.657,
+          "units": 0.74,
+          "roi": 0.011,
+          "z": 0.12,
+          "roi_by_period": {
+            "2024": -0.077,
+            "2025": 0.127
+          }
+        },
+        {
+          "group": "favorite -101 to -149",
+          "n": 102,
+          "record": "57-45-0",
+          "hit_rate": 0.559,
+          "units": 0.73,
+          "roi": 0.007,
+          "z": 0.08,
+          "roi_by_period": {
+            "2024": -0.087,
+            "2025": 0.117
+          }
+        },
+        {
+          "group": "near even +100 to +150",
+          "n": 135,
+          "record": "63-72-0",
+          "hit_rate": 0.467,
+          "units": 6.15,
+          "roi": 0.046,
+          "z": 0.47,
+          "roi_by_period": {
+            "2024": 0.052,
+            "2025": 0.038
+          }
+        },
+        {
+          "group": "underdog +151 to +300",
+          "n": 223,
+          "record": "70-153-0",
+          "hit_rate": 0.314,
+          "units": 0.45,
+          "roi": 0.002,
+          "z": 0.02,
+          "roi_by_period": {
+            "2024": -0.047,
+            "2025": 0.045
+          }
+        },
+        {
+          "group": "underdog +301 or more",
+          "n": 111,
+          "record": "27-84-0",
+          "hit_rate": 0.243,
+          "units": 13.6,
+          "roi": 0.123,
+          "z": 0.65,
+          "roi_by_period": {
+            "2024": 0.121,
+            "2025": 0.124
+          }
+        }
+      ],
+      "by_confidence": [
+        {
+          "group": "model <55%",
+          "n": 339,
+          "record": "108-231-0",
+          "hit_rate": 0.319,
+          "units": 17.8,
+          "roi": 0.053,
+          "z": 0.6,
+          "roi_by_period": {
+            "2024": 0.05,
+            "2025": 0.054
+          }
+        },
+        {
+          "group": "model 55-65%",
+          "n": 107,
+          "record": "52-55-0",
+          "hit_rate": 0.486,
+          "units": 13.76,
+          "roi": 0.129,
+          "z": 1.06,
+          "roi_by_period": {
+            "2024": -0.007,
+            "2025": 0.33
+          }
+        },
+        {
+          "group": "model 65-75%",
+          "n": 124,
+          "record": "69-55-0",
+          "hit_rate": 0.556,
+          "units": 3.01,
+          "roi": 0.024,
+          "z": 0.28,
+          "roi_by_period": {
+            "2024": 0.002,
+            "2025": 0.05
+          }
+        },
+        {
+          "group": "model 75%+",
+          "n": 138,
+          "record": "85-53-0",
+          "hit_rate": 0.616,
+          "units": -12.83,
+          "roi": -0.093,
+          "z": -1.46,
+          "roi_by_period": {
+            "2024": -0.129,
+            "2025": -0.044
+          }
+        }
+      ],
+      "calibration": [
+        {
+          "bucket": "50-60%",
+          "n": 373,
+          "model_avg": 0.546,
+          "actual": 0.55,
+          "market_avg": 0.552
+        },
+        {
+          "bucket": "60-70%",
+          "n": 348,
+          "model_avg": 0.65,
+          "actual": 0.701,
+          "market_avg": 0.635
+        },
+        {
+          "bucket": "70-80%",
+          "n": 306,
+          "model_avg": 0.746,
+          "actual": 0.699,
+          "market_avg": 0.717
+        },
+        {
+          "bucket": "80-90%",
+          "n": 192,
+          "model_avg": 0.848,
+          "actual": 0.818,
+          "market_avg": 0.801
+        },
+        {
+          "bucket": "90%+",
+          "n": 89,
+          "model_avg": 0.937,
+          "actual": 0.854,
+          "market_avg": 0.867
+        }
+      ],
+      "blend_weight_on_model": 0.2,
+      "corrected": [
+        {
+          "group": "2025: model as-is",
+          "n": 345,
+          "record": "156-189-0",
+          "hit_rate": 0.452,
+          "units": 24.65,
+          "roi": 0.071,
+          "z": 0.97,
+          "roi_by_period": {
+            "2025": 0.071
+          }
+        },
+        {
+          "group": "2025: corrected model",
+          "n": 364,
+          "record": "139-225-0",
+          "hit_rate": 0.382,
+          "units": -6.26,
+          "roi": -0.017,
+          "z": -0.23,
+          "roi_by_period": {
+            "2025": -0.017
+          }
+        },
+        {
+          "group": "2025: corrected + blended (20% model)",
+          "n": 232,
+          "record": "83-149-0",
+          "hit_rate": 0.358,
+          "units": -0.44,
+          "roi": -0.002,
+          "z": -0.02,
+          "roi_by_period": {
+            "2025": -0.002
+          }
+        }
+      ],
+      "blended_by_price": [
+        {
+          "group": "blended | favorite -150+",
+          "n": 8,
+          "record": "5-3-0",
+          "hit_rate": 0.625,
+          "units": -1.08,
+          "roi": -0.135,
+          "z": -0.53,
+          "roi_by_period": {
+            "2025": -0.135
+          }
+        },
+        {
+          "group": "blended | favorite -101..-149",
+          "n": 36,
+          "record": "21-15-0",
+          "hit_rate": 0.583,
+          "units": 2.48,
+          "roi": 0.069,
+          "z": 0.45,
+          "roi_by_period": {
+            "2025": 0.069
+          }
+        },
+        {
+          "group": "blended | near even +100..+150",
+          "n": 50,
+          "record": "21-29-0",
+          "hit_rate": 0.42,
+          "units": -2.18,
+          "roi": -0.044,
+          "z": -0.27,
+          "roi_by_period": {
+            "2025": -0.044
+          }
+        },
+        {
+          "group": "blended | underdog +151+",
+          "n": 138,
+          "record": "36-102-0",
+          "hit_rate": 0.261,
+          "units": 0.34,
+          "roi": 0.002,
+          "z": 0.02,
+          "roi_by_period": {
+            "2025": 0.002
+          }
+        }
+      ],
+      "spread_vs_moneyline": [
+        {
+          "group": "moneyline cheaper than its spread by 3+ pts",
+          "n": 128,
+          "record": "44-84-0",
+          "hit_rate": 0.344,
+          "units": -4.87,
+          "roi": -0.038,
+          "z": -0.3,
+          "roi_by_period": {
+            "2024": 0.029,
+            "2025": -0.072
+          }
+        },
+        {
+          "group": "moneyline cheaper than its spread by 5+ pts",
+          "n": 20,
+          "record": "10-10-0",
+          "hit_rate": 0.5,
+          "units": 5.09,
+          "roi": 0.254,
+          "z": 0.82,
+          "roi_by_period": {
+            "2024": 0.48,
+            "2025": -0.164
+          }
+        },
+        {
+          "group": "moneyline cheaper than its spread by 8+ pts",
+          "n": 4,
+          "record": "3-1-0",
+          "hit_rate": 0.75,
+          "units": 2.62,
+          "roi": 0.655,
+          "z": 1.19,
+          "roi_by_period": {
+            "2024": 0.655
+          }
+        }
+      ]
+    }
   }
 }
