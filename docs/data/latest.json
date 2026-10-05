@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T20:36:54.469351+00:00",
+  "generated_at": "2026-10-05T20:50:30.837088+00:00",
   "team_metadata_year": 2025,
   "current_season_year": 2026,
   "preseason_prior": {
@@ -3205,8 +3205,8 @@
       "spread_away": -2.5,
       "spread_price_home": -112.0,
       "spread_price_away": -108.0,
-      "total_over": 47.5,
-      "total_under": 47.5,
+      "total_over": 46.5,
+      "total_under": 46.5,
       "home_unmatched": false,
       "away_unmatched": false,
       "injuries_home": [],
@@ -3774,8 +3774,8 @@
       "spread_away": 27.5,
       "spread_price_home": -110.0,
       "spread_price_away": -110.0,
-      "total_over": 59.5,
-      "total_under": 59.5,
+      "total_over": 57.5,
+      "total_under": 57.5,
       "home_unmatched": false,
       "away_unmatched": false,
       "injuries_home": [
@@ -4362,12 +4362,12 @@
       "home_color": "#00225b",
       "away_color": "#003595",
       "book_used": "draftkings",
-      "moneyline_home": -142.0,
-      "moneyline_away": 120.0,
+      "moneyline_home": -130.0,
+      "moneyline_away": 110.0,
       "spread_home": -2.5,
       "spread_away": 2.5,
-      "spread_price_home": -115.0,
-      "spread_price_away": -105.0,
+      "spread_price_home": -105.0,
+      "spread_price_away": -115.0,
       "total_over": 48.5,
       "total_under": 48.5,
       "home_unmatched": false,
@@ -4528,10 +4528,10 @@
       "model_away_win_prob": 0.4858,
       "model_fair_ml_home": -105.8,
       "model_fair_ml_away": 105.8,
-      "book_implied_prob_home": 0.5635,
-      "book_implied_prob_away": 0.4365,
-      "ev_home_pct": -12.37,
-      "ev_away_pct": 6.88,
+      "book_implied_prob_home": 0.5427,
+      "book_implied_prob_away": 0.4573,
+      "ev_home_pct": -9.03,
+      "ev_away_pct": 2.02,
       "residual_std": 15.544,
       "model_version": "upgraded",
       "qb_out_home": 0,
@@ -6624,10 +6624,10 @@
       "book_used": "draftkings",
       "moneyline_home": 195.0,
       "moneyline_away": -238.0,
-      "spread_home": 6.0,
-      "spread_away": -6.0,
-      "spread_price_home": -105.0,
-      "spread_price_away": -115.0,
+      "spread_home": 6.5,
+      "spread_away": -6.5,
+      "spread_price_home": -110.0,
+      "spread_price_away": -110.0,
       "total_over": 48.5,
       "total_under": 48.5,
       "home_unmatched": false,
@@ -7755,30 +7755,6 @@
     {
       "fixture_id": "82b83ec87fc2be5faa2e9f26ac50edef",
       "start_time": "2026-10-10T19:30:00Z",
-      "player_name": "John Mateer",
-      "market_name": "Pass Touchdowns",
-      "line": 0.5,
-      "over_price": -114,
-      "under_price": -114,
-      "book_used": "fanduel",
-      "model_predicted_value": 1.0,
-      "model_edge": 0.5,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "Oklahoma",
-      "opponent": "Texas",
-      "games_played": 4,
-      "rec_share": 0.0,
-      "carry_share": 0.31656759189086775,
-      "model_over_probability": 0.774,
-      "model_ev": 45.3,
-      "model_lean_probability": 0.774,
-      "is_official_play": false,
-      "is_watch_play": false
-    },
-    {
-      "fixture_id": "82b83ec87fc2be5faa2e9f26ac50edef",
-      "start_time": "2026-10-10T19:30:00Z",
       "player_name": "Arch Manning",
       "market_name": "Pass Touchdowns",
       "line": 1.5,
@@ -7797,6 +7773,30 @@
       "model_over_probability": 0.23,
       "model_ev": 12.8,
       "model_lean_probability": 0.77,
+      "is_official_play": false,
+      "is_watch_play": false
+    },
+    {
+      "fixture_id": "82b83ec87fc2be5faa2e9f26ac50edef",
+      "start_time": "2026-10-10T19:30:00Z",
+      "player_name": "John Mateer",
+      "market_name": "Pass Touchdowns",
+      "line": 0.5,
+      "over_price": -114,
+      "under_price": -114,
+      "book_used": "fanduel",
+      "model_predicted_value": 1.0,
+      "model_edge": 0.5,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Oklahoma",
+      "opponent": "Texas",
+      "games_played": 4,
+      "rec_share": 0.0,
+      "carry_share": 0.31656759189086775,
+      "model_over_probability": 0.774,
+      "model_ev": 45.3,
+      "model_lean_probability": 0.774,
       "is_official_play": false,
       "is_watch_play": false
     },
@@ -9627,6 +9627,27 @@
       }
     },
     {
+      "player_name": "Dylan Riley",
+      "team": "Boise State",
+      "games_played_prior": 5,
+      "opponent": "Fresno State",
+      "position": "RB",
+      "projected_points": 19.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 11.2,
+        "receptions": 1.4,
+        "rush_att": 20.7,
+        "rush_tds": 0.9,
+        "rush_yds": 113.2
+      }
+    },
+    {
       "player_name": "Jared Curtis",
       "team": "Vanderbilt",
       "games_played_prior": 4,
@@ -9834,27 +9855,6 @@
         "rush_att": 10.4,
         "rush_tds": 0.6,
         "rush_yds": 37.1
-      }
-    },
-    {
-      "player_name": "Dylan Riley",
-      "team": "Boise State",
-      "games_played_prior": 5,
-      "opponent": "Fresno State",
-      "position": "RB",
-      "projected_points": 19.3,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 11.2,
-        "receptions": 1.4,
-        "rush_att": 20.7,
-        "rush_tds": 0.8,
-        "rush_yds": 113.0
       }
     },
     {
@@ -10509,27 +10509,6 @@
       }
     },
     {
-      "player_name": "David McComb",
-      "team": "Miami (OH)",
-      "games_played_prior": 4,
-      "opponent": "Massachusetts",
-      "position": "QB",
-      "projected_points": 17.3,
-      "stat_breakdown": {
-        "pass_att": 30.6,
-        "pass_comp": 18.9,
-        "pass_int": 0.9,
-        "pass_tds": 1.5,
-        "pass_yds": 241.5,
-        "rec_tds": 0.0,
-        "rec_yds": 0.5,
-        "receptions": 0.1,
-        "rush_att": 6.5,
-        "rush_tds": 0.3,
-        "rush_yds": 14.0
-      }
-    },
-    {
       "player_name": "Luke Weaver",
       "team": "San Jos\u00e9 State",
       "games_played_prior": 5,
@@ -10548,6 +10527,27 @@
         "rush_att": 8.0,
         "rush_tds": 0.3,
         "rush_yds": 19.3
+      }
+    },
+    {
+      "player_name": "David McComb",
+      "team": "Miami (OH)",
+      "games_played_prior": 4,
+      "opponent": "Massachusetts",
+      "position": "QB",
+      "projected_points": 17.2,
+      "stat_breakdown": {
+        "pass_att": 30.6,
+        "pass_comp": 18.9,
+        "pass_int": 0.9,
+        "pass_tds": 1.5,
+        "pass_yds": 241.5,
+        "rec_tds": 0.0,
+        "rec_yds": 0.5,
+        "receptions": 0.1,
+        "rush_att": 6.5,
+        "rush_tds": 0.3,
+        "rush_yds": 14.0
       }
     },
     {
@@ -10818,7 +10818,7 @@
         "rec_tds": 0.0,
         "rec_yds": 0.4,
         "receptions": 0.1,
-        "rush_att": 6.2,
+        "rush_att": 6.1,
         "rush_tds": 0.3,
         "rush_yds": 13.7
       }
@@ -10947,6 +10947,27 @@
         "rush_att": 16.2,
         "rush_tds": 0.9,
         "rush_yds": 82.3
+      }
+    },
+    {
+      "player_name": "Sire Gaines",
+      "team": "Boise State",
+      "games_played_prior": 3,
+      "opponent": "Fresno State",
+      "position": "RB",
+      "projected_points": 16.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 13.4,
+        "receptions": 1.7,
+        "rush_att": 14.6,
+        "rush_tds": 0.7,
+        "rush_yds": 83.7
       }
     },
     {
@@ -11118,27 +11139,6 @@
       }
     },
     {
-      "player_name": "Sire Gaines",
-      "team": "Boise State",
-      "games_played_prior": 3,
-      "opponent": "Fresno State",
-      "position": "RB",
-      "projected_points": 15.9,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 13.4,
-        "receptions": 1.7,
-        "rush_att": 14.6,
-        "rush_tds": 0.6,
-        "rush_yds": 83.5
-      }
-    },
-    {
       "player_name": "Isaiah Myers",
       "team": "Missouri State",
       "games_played_prior": 3,
@@ -11178,27 +11178,6 @@
         "rush_att": 0.3,
         "rush_tds": 0.0,
         "rush_yds": 2.3
-      }
-    },
-    {
-      "player_name": "William Watson III",
-      "team": "Massachusetts",
-      "games_played_prior": 5,
-      "opponent": "Miami (OH)",
-      "position": "QB",
-      "projected_points": 15.8,
-      "stat_breakdown": {
-        "pass_att": 26.4,
-        "pass_comp": 16.2,
-        "pass_int": 0.6,
-        "pass_tds": 1.2,
-        "pass_yds": 196.4,
-        "rec_tds": 0.0,
-        "rec_yds": 0.9,
-        "receptions": 0.1,
-        "rush_att": 7.3,
-        "rush_tds": 0.3,
-        "rush_yds": 22.9
       }
     },
     {
@@ -11262,27 +11241,6 @@
         "rush_att": 13.4,
         "rush_tds": 0.8,
         "rush_yds": 72.4
-      }
-    },
-    {
-      "player_name": "Josiah Freeman",
-      "team": "Fresno State",
-      "games_played_prior": 4,
-      "opponent": "Boise State",
-      "position": "WR/TE",
-      "projected_points": 15.8,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.5,
-        "rec_yds": 68.2,
-        "receptions": 5.4,
-        "rush_att": 0.6,
-        "rush_tds": 0.1,
-        "rush_yds": 4.5
       }
     },
     {
@@ -11430,6 +11388,27 @@
         "rush_att": 14.1,
         "rush_tds": 0.8,
         "rush_yds": 65.5
+      }
+    },
+    {
+      "player_name": "Josiah Freeman",
+      "team": "Fresno State",
+      "games_played_prior": 4,
+      "opponent": "Boise State",
+      "position": "WR/TE",
+      "projected_points": 15.7,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.5,
+        "rec_yds": 68.2,
+        "receptions": 5.4,
+        "rush_att": 0.6,
+        "rush_tds": 0.1,
+        "rush_yds": 4.5
       }
     },
     {
@@ -11871,6 +11850,27 @@
         "rush_att": 0.4,
         "rush_tds": 0.0,
         "rush_yds": 3.9
+      }
+    },
+    {
+      "player_name": "William Watson III",
+      "team": "Massachusetts",
+      "games_played_prior": 5,
+      "opponent": "Miami (OH)",
+      "position": "QB",
+      "projected_points": 14.9,
+      "stat_breakdown": {
+        "pass_att": 26.4,
+        "pass_comp": 15.9,
+        "pass_int": 0.6,
+        "pass_tds": 1.1,
+        "pass_yds": 180.4,
+        "rec_tds": 0.0,
+        "rec_yds": 0.9,
+        "receptions": 0.1,
+        "rush_att": 7.3,
+        "rush_tds": 0.3,
+        "rush_yds": 22.9
       }
     },
     {
@@ -13428,6 +13428,27 @@
       }
     },
     {
+      "player_name": "Rasean Jones",
+      "team": "Boise State",
+      "games_played_prior": 5,
+      "opponent": "Fresno State",
+      "position": "WR/TE",
+      "projected_points": 12.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.4,
+        "rec_yds": 59.0,
+        "receptions": 4.2,
+        "rush_att": 0.6,
+        "rush_tds": 0.0,
+        "rush_yds": 3.6
+      }
+    },
+    {
       "player_name": "Gavin Griffin",
       "team": "Troy",
       "games_played_prior": 4,
@@ -13593,27 +13614,6 @@
         "rush_att": 10.9,
         "rush_tds": 0.4,
         "rush_yds": 60.6
-      }
-    },
-    {
-      "player_name": "Rasean Jones",
-      "team": "Boise State",
-      "games_played_prior": 5,
-      "opponent": "Fresno State",
-      "position": "WR/TE",
-      "projected_points": 12.8,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.4,
-        "rec_yds": 58.3,
-        "receptions": 4.2,
-        "rush_att": 0.6,
-        "rush_tds": 0.0,
-        "rush_yds": 3.5
       }
     },
     {
@@ -14751,27 +14751,6 @@
       }
     },
     {
-      "player_name": "Ty Harding",
-      "team": "Massachusetts",
-      "games_played_prior": 5,
-      "opponent": "Miami (OH)",
-      "position": "WR/TE",
-      "projected_points": 11.7,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 47.6,
-        "receptions": 3.9,
-        "rush_att": 1.0,
-        "rush_tds": 0.1,
-        "rush_yds": 7.5
-      }
-    },
-    {
       "player_name": "Chase Sowell",
       "team": "Penn State",
       "games_played_prior": 5,
@@ -14898,6 +14877,27 @@
       }
     },
     {
+      "player_name": "Ty Harding",
+      "team": "Massachusetts",
+      "games_played_prior": 5,
+      "opponent": "Miami (OH)",
+      "position": "WR/TE",
+      "projected_points": 11.6,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.3,
+        "rec_yds": 46.0,
+        "receptions": 3.9,
+        "rush_att": 1.0,
+        "rush_tds": 0.1,
+        "rush_yds": 7.5
+      }
+    },
+    {
       "player_name": "Ramone Green Jr.",
       "team": "Missouri State",
       "games_played_prior": 4,
@@ -15021,27 +15021,6 @@
         "rush_att": 9.6,
         "rush_tds": 0.3,
         "rush_yds": 57.6
-      }
-    },
-    {
-      "player_name": "Jaden Barnes",
-      "team": "Charlotte",
-      "games_played_prior": 5,
-      "opponent": "North Texas",
-      "position": "WR/TE",
-      "projected_points": 11.5,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 50.2,
-        "receptions": 4.6,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.6
       }
     },
     {
@@ -15357,27 +15336,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 1.0
-      }
-    },
-    {
-      "player_name": "Jaylen Hampton",
-      "team": "Charlotte",
-      "games_played_prior": 4,
-      "opponent": "North Texas",
-      "position": "WR/TE",
-      "projected_points": 11.3,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 50.5,
-        "receptions": 4.2,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.3
       }
     },
     {
@@ -15759,6 +15717,27 @@
       }
     },
     {
+      "player_name": "Jaden Barnes",
+      "team": "Charlotte",
+      "games_played_prior": 5,
+      "opponent": "North Texas",
+      "position": "WR/TE",
+      "projected_points": 11.0,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.3,
+        "rec_yds": 47.3,
+        "receptions": 4.6,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.6
+      }
+    },
+    {
       "player_name": "Mekhi Anderson",
       "team": "UTSA",
       "games_played_prior": 5,
@@ -15861,27 +15840,6 @@
         "rush_att": 4.7,
         "rush_tds": 0.2,
         "rush_yds": 0.0
-      }
-    },
-    {
-      "player_name": "Caleb Heavner",
-      "team": "Miami (OH)",
-      "games_played_prior": 4,
-      "opponent": "Massachusetts",
-      "position": "QB",
-      "projected_points": 10.9,
-      "stat_breakdown": {
-        "pass_att": 16.7,
-        "pass_comp": 9.4,
-        "pass_int": 0.5,
-        "pass_tds": 0.7,
-        "pass_yds": 119.2,
-        "rec_tds": 0.0,
-        "rec_yds": 0.5,
-        "receptions": 0.1,
-        "rush_att": 6.9,
-        "rush_tds": 0.3,
-        "rush_yds": 23.8
       }
     },
     {
@@ -16029,6 +15987,27 @@
         "rush_att": 11.6,
         "rush_tds": 0.5,
         "rush_yds": 50.5
+      }
+    },
+    {
+      "player_name": "Caleb Heavner",
+      "team": "Miami (OH)",
+      "games_played_prior": 4,
+      "opponent": "Massachusetts",
+      "position": "QB",
+      "projected_points": 10.8,
+      "stat_breakdown": {
+        "pass_att": 16.7,
+        "pass_comp": 9.4,
+        "pass_int": 0.5,
+        "pass_tds": 0.7,
+        "pass_yds": 119.2,
+        "rec_tds": 0.0,
+        "rec_yds": 0.5,
+        "receptions": 0.1,
+        "rush_att": 6.9,
+        "rush_tds": 0.3,
+        "rush_yds": 23.2
       }
     },
     {
@@ -16239,6 +16218,27 @@
         "rush_att": 3.2,
         "rush_tds": 0.3,
         "rush_yds": 26.5
+      }
+    },
+    {
+      "player_name": "Jaylen Hampton",
+      "team": "Charlotte",
+      "games_played_prior": 4,
+      "opponent": "North Texas",
+      "position": "WR/TE",
+      "projected_points": 10.6,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.3,
+        "rec_yds": 46.9,
+        "receptions": 4.2,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
       }
     },
     {
@@ -17019,27 +17019,6 @@
       }
     },
     {
-      "player_name": "Cole Gonzales",
-      "team": "Charlotte",
-      "games_played_prior": 5,
-      "opponent": "North Texas",
-      "position": "QB",
-      "projected_points": 10.0,
-      "stat_breakdown": {
-        "pass_att": 24.4,
-        "pass_comp": 13.8,
-        "pass_int": 0.6,
-        "pass_tds": 0.9,
-        "pass_yds": 146.7,
-        "rec_tds": 0.0,
-        "rec_yds": 0.4,
-        "receptions": 0.0,
-        "rush_att": 5.0,
-        "rush_tds": 0.2,
-        "rush_yds": 8.8
-      }
-    },
-    {
       "player_name": "Kendre Harrison",
       "team": "Oregon",
       "games_played_prior": 1,
@@ -17100,27 +17079,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.1
-      }
-    },
-    {
-      "player_name": "Jabari Lewis",
-      "team": "Massachusetts",
-      "games_played_prior": 3,
-      "opponent": "Miami (OH)",
-      "position": "WR/TE",
-      "projected_points": 10.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 47.4,
-        "receptions": 3.4,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
       }
     },
     {
@@ -17284,7 +17242,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.3,
-        "rec_yds": 47.2,
+        "rec_yds": 46.8,
         "receptions": 3.1,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -17305,7 +17263,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.3,
-        "rec_yds": 44.4,
+        "rec_yds": 45.2,
         "receptions": 3.5,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -17706,6 +17664,27 @@
         "rec_tds": 0.3,
         "rec_yds": 44.1,
         "receptions": 3.3,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.4
+      }
+    },
+    {
+      "player_name": "Jabari Lewis",
+      "team": "Massachusetts",
+      "games_played_prior": 3,
+      "opponent": "Miami (OH)",
+      "position": "WR/TE",
+      "projected_points": 9.8,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.3,
+        "rec_yds": 45.7,
+        "receptions": 3.4,
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.4
@@ -18586,7 +18565,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.3,
-        "rec_yds": 44.0,
+        "rec_yds": 43.6,
         "receptions": 3.0,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -18822,6 +18801,27 @@
         "rush_att": 12.3,
         "rush_tds": 0.5,
         "rush_yds": 51.2
+      }
+    },
+    {
+      "player_name": "Cole Gonzales",
+      "team": "Charlotte",
+      "games_played_prior": 5,
+      "opponent": "North Texas",
+      "position": "QB",
+      "projected_points": 9.2,
+      "stat_breakdown": {
+        "pass_att": 24.4,
+        "pass_comp": 13.6,
+        "pass_int": 0.6,
+        "pass_tds": 0.7,
+        "pass_yds": 142.5,
+        "rec_tds": 0.0,
+        "rec_yds": 0.2,
+        "receptions": 0.0,
+        "rush_att": 5.0,
+        "rush_tds": 0.2,
+        "rush_yds": 8.8
       }
     },
     {
@@ -19119,27 +19119,6 @@
       }
     },
     {
-      "player_name": "Joseph Griffin Jr.",
-      "team": "Massachusetts",
-      "games_played_prior": 3,
-      "opponent": "Miami (OH)",
-      "position": "WR/TE",
-      "projected_points": 9.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.3,
-        "rec_yds": 42.5,
-        "receptions": 3.0,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.2
-      }
-    },
-    {
       "player_name": "Sedrick Alexander",
       "team": "Vanderbilt",
       "games_played_prior": 5,
@@ -19237,7 +19216,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 12.2,
+        "rec_yds": 12.1,
         "receptions": 2.0,
         "rush_att": 9.1,
         "rush_tds": 0.2,
@@ -19578,6 +19557,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.6
+      }
+    },
+    {
+      "player_name": "Joseph Griffin Jr.",
+      "team": "Massachusetts",
+      "games_played_prior": 3,
+      "opponent": "Miami (OH)",
+      "position": "WR/TE",
+      "projected_points": 8.8,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.3,
+        "rec_yds": 40.5,
+        "receptions": 3.0,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.2
       }
     },
     {
@@ -20249,7 +20249,7 @@
         "receptions": 0.9,
         "rush_att": 10.8,
         "rush_tds": 0.4,
-        "rush_yds": 44.8
+        "rush_yds": 44.5
       }
     },
     {
@@ -20694,27 +20694,6 @@
       }
     },
     {
-      "player_name": "Khamani Alexander",
-      "team": "Charlotte",
-      "games_played_prior": 5,
-      "opponent": "North Texas",
-      "position": "RB",
-      "projected_points": 8.4,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 10.0,
-        "receptions": 1.3,
-        "rush_att": 8.6,
-        "rush_tds": 0.2,
-        "rush_yds": 43.1
-      }
-    },
-    {
       "player_name": "Sawyer Anderson",
       "team": "Arizona",
       "games_played_prior": 2,
@@ -21006,6 +20985,27 @@
         "rush_att": 7.2,
         "rush_tds": 0.2,
         "rush_yds": 33.1
+      }
+    },
+    {
+      "player_name": "Khamani Alexander",
+      "team": "Charlotte",
+      "games_played_prior": 5,
+      "opponent": "North Texas",
+      "position": "RB",
+      "projected_points": 8.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 9.9,
+        "receptions": 1.3,
+        "rush_att": 8.6,
+        "rush_tds": 0.2,
+        "rush_yds": 43.1
       }
     },
     {
@@ -21589,7 +21589,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 32.2,
+        "rec_yds": 32.0,
         "receptions": 2.8,
         "rush_att": 0.4,
         "rush_tds": 0.0,
@@ -21891,27 +21891,6 @@
       }
     },
     {
-      "player_name": "Brendan Loftus",
-      "team": "Miami (OH)",
-      "games_played_prior": 2,
-      "opponent": "Massachusetts",
-      "position": "WR/TE",
-      "projected_points": 8.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 36.9,
-        "receptions": 2.8,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.1
-      }
-    },
-    {
       "player_name": "Donnell Gee Jr.",
       "team": "Tulsa",
       "games_played_prior": 3,
@@ -22206,6 +22185,27 @@
       }
     },
     {
+      "player_name": "Brendan Loftus",
+      "team": "Miami (OH)",
+      "games_played_prior": 2,
+      "opponent": "Massachusetts",
+      "position": "WR/TE",
+      "projected_points": 7.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 36.5,
+        "receptions": 2.8,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.1
+      }
+    },
+    {
       "player_name": "Dashawn Martin",
       "team": "Virginia",
       "games_played_prior": 5,
@@ -22245,27 +22245,6 @@
         "rush_att": 0.3,
         "rush_tds": 0.0,
         "rush_yds": 2.3
-      }
-    },
-    {
-      "player_name": "Elijah Faulkner",
-      "team": "Massachusetts",
-      "games_played_prior": 5,
-      "opponent": "Miami (OH)",
-      "position": "RB",
-      "projected_points": 7.9,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 7.8,
-        "receptions": 0.9,
-        "rush_att": 9.5,
-        "rush_tds": 0.3,
-        "rush_yds": 40.2
       }
     },
     {
@@ -22623,6 +22602,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 1.2
+      }
+    },
+    {
+      "player_name": "Elijah Faulkner",
+      "team": "Massachusetts",
+      "games_played_prior": 5,
+      "opponent": "Miami (OH)",
+      "position": "RB",
+      "projected_points": 7.8,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 7.5,
+        "receptions": 0.9,
+        "rush_att": 9.5,
+        "rush_tds": 0.3,
+        "rush_yds": 40.2
       }
     },
     {
@@ -23256,27 +23256,6 @@
       }
     },
     {
-      "player_name": "Max Dowling",
-      "team": "Massachusetts",
-      "games_played_prior": 4,
-      "opponent": "Miami (OH)",
-      "position": "WR/TE",
-      "projected_points": 7.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 33.4,
-        "receptions": 2.8,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.2
-      }
-    },
-    {
       "player_name": "Bailey Stockton",
       "team": "Florida",
       "games_played_prior": 5,
@@ -23542,7 +23521,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 34.9,
+        "rec_yds": 34.5,
         "receptions": 2.7,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -23736,6 +23715,27 @@
         "rush_att": 6.6,
         "rush_tds": 0.3,
         "rush_yds": 39.9
+      }
+    },
+    {
+      "player_name": "Max Dowling",
+      "team": "Massachusetts",
+      "games_played_prior": 4,
+      "opponent": "Miami (OH)",
+      "position": "WR/TE",
+      "projected_points": 7.4,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 31.7,
+        "receptions": 2.8,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.2
       }
     },
     {
@@ -24177,27 +24177,6 @@
         "rush_att": 0.4,
         "rush_tds": 0.0,
         "rush_yds": 3.6
-      }
-    },
-    {
-      "player_name": "Derrick Eley",
-      "team": "Charlotte",
-      "games_played_prior": 5,
-      "opponent": "North Texas",
-      "position": "WR/TE",
-      "projected_points": 7.3,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 33.3,
-        "receptions": 2.7,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.3
       }
     },
     {
@@ -24978,6 +24957,27 @@
       }
     },
     {
+      "player_name": "Derrick Eley",
+      "team": "Charlotte",
+      "games_played_prior": 5,
+      "opponent": "North Texas",
+      "position": "WR/TE",
+      "projected_points": 7.0,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 31.6,
+        "receptions": 2.7,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
+      }
+    },
+    {
       "player_name": "Ofa Mataele",
       "team": "Western Michigan",
       "games_played_prior": 5,
@@ -25390,7 +25390,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 30.1,
+        "rec_yds": 29.9,
         "receptions": 2.3,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -27994,7 +27994,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 26.3,
+        "rec_yds": 26.4,
         "receptions": 2.2,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -30039,27 +30039,6 @@
       }
     },
     {
-      "player_name": "Reece Adkins",
-      "team": "Massachusetts",
-      "games_played_prior": 5,
-      "opponent": "Miami (OH)",
-      "position": "WR/TE",
-      "projected_points": 5.8,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 25.8,
-        "receptions": 2.2,
-        "rush_att": 0.2,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
-      }
-    },
-    {
       "player_name": "Jacob Bostick",
       "team": "San Diego State",
       "games_played_prior": 3,
@@ -30288,6 +30267,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.0
+      }
+    },
+    {
+      "player_name": "Cameron Bates",
+      "team": "Boise State",
+      "games_played_prior": 4,
+      "opponent": "Fresno State",
+      "position": "WR/TE",
+      "projected_points": 5.8,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 24.8,
+        "receptions": 2.0,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
       }
     },
     {
@@ -30732,27 +30732,6 @@
       }
     },
     {
-      "player_name": "Cameron Bates",
-      "team": "Boise State",
-      "games_played_prior": 4,
-      "opponent": "Fresno State",
-      "position": "WR/TE",
-      "projected_points": 5.7,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 24.7,
-        "receptions": 2.0,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.3
-      }
-    },
-    {
       "player_name": "Finn Furmanek",
       "team": "Penn State",
       "games_played_prior": 1,
@@ -31149,6 +31128,27 @@
         "rush_att": 6.7,
         "rush_tds": 0.3,
         "rush_yds": 30.9
+      }
+    },
+    {
+      "player_name": "Reece Adkins",
+      "team": "Massachusetts",
+      "games_played_prior": 5,
+      "opponent": "Miami (OH)",
+      "position": "WR/TE",
+      "projected_points": 5.6,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 25.0,
+        "receptions": 2.2,
+        "rush_att": 0.2,
+        "rush_tds": 0.0,
+        "rush_yds": 0.4
       }
     },
     {
@@ -32349,48 +32349,6 @@
       }
     },
     {
-      "player_name": "Henry Rutledge",
-      "team": "Charlotte",
-      "games_played_prior": 5,
-      "opponent": "North Texas",
-      "position": "RB",
-      "projected_points": 5.4,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.0,
-        "rec_yds": 6.4,
-        "receptions": 0.7,
-        "rush_att": 6.4,
-        "rush_tds": 0.1,
-        "rush_yds": 31.2
-      }
-    },
-    {
-      "player_name": "Cam Pedro",
-      "team": "Charlotte",
-      "games_played_prior": 1,
-      "opponent": "North Texas",
-      "position": "WR/TE",
-      "projected_points": 5.4,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 23.2,
-        "receptions": 2.2,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.3
-      }
-    },
-    {
       "player_name": "Jalen Macon",
       "team": "Northern Illinois",
       "games_played_prior": 2,
@@ -32892,6 +32850,48 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.8
+      }
+    },
+    {
+      "player_name": "Henry Rutledge",
+      "team": "Charlotte",
+      "games_played_prior": 5,
+      "opponent": "North Texas",
+      "position": "RB",
+      "projected_points": 5.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.0,
+        "rec_yds": 6.2,
+        "receptions": 0.7,
+        "rush_att": 6.4,
+        "rush_tds": 0.1,
+        "rush_yds": 31.2
+      }
+    },
+    {
+      "player_name": "Cam Pedro",
+      "team": "Charlotte",
+      "games_played_prior": 1,
+      "opponent": "North Texas",
+      "position": "WR/TE",
+      "projected_points": 5.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 23.1,
+        "receptions": 2.2,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
       }
     },
     {
@@ -33983,7 +33983,7 @@
         "receptions": 0.3,
         "rush_att": 7.2,
         "rush_tds": 0.2,
-        "rush_yds": 30.8
+        "rush_yds": 30.5
       }
     },
     {
@@ -35289,27 +35289,6 @@
       }
     },
     {
-      "player_name": "Dallas Elliott",
-      "team": "Massachusetts",
-      "games_played_prior": 4,
-      "opponent": "Miami (OH)",
-      "position": "WR/TE",
-      "projected_points": 5.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 21.6,
-        "receptions": 1.9,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
-      }
-    },
-    {
       "player_name": "Jabree Coleman",
       "team": "South Carolina",
       "games_played_prior": 5,
@@ -36021,6 +36000,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.0
+      }
+    },
+    {
+      "player_name": "Dallas Elliott",
+      "team": "Massachusetts",
+      "games_played_prior": 4,
+      "opponent": "Miami (OH)",
+      "position": "WR/TE",
+      "projected_points": 4.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 21.6,
+        "receptions": 1.9,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.4
       }
     },
     {
@@ -36738,27 +36738,6 @@
       }
     },
     {
-      "player_name": "Conner Harrell",
-      "team": "Charlotte",
-      "games_played_prior": 2,
-      "opponent": "North Texas",
-      "position": "QB",
-      "projected_points": 4.8,
-      "stat_breakdown": {
-        "pass_att": 15.3,
-        "pass_comp": 8.2,
-        "pass_int": 0.5,
-        "pass_tds": 0.5,
-        "pass_yds": 85.2,
-        "rec_tds": 0.0,
-        "rec_yds": 0.3,
-        "receptions": 0.0,
-        "rush_att": 2.6,
-        "rush_tds": 0.1,
-        "rush_yds": 0.0
-      }
-    },
-    {
       "player_name": "Sterling Berkhalter",
       "team": "Texas",
       "games_played_prior": 2,
@@ -37066,7 +37045,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 20.6,
+        "rec_yds": 20.0,
         "receptions": 2.0,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -37281,27 +37260,6 @@
         "rush_att": 4.9,
         "rush_tds": 0.2,
         "rush_yds": 20.2
-      }
-    },
-    {
-      "player_name": "Tank Boston",
-      "team": "Charlotte",
-      "games_played_prior": 1,
-      "opponent": "North Texas",
-      "position": "WR/TE",
-      "projected_points": 4.8,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 20.7,
-        "receptions": 1.9,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.3
       }
     },
     {
@@ -38124,6 +38082,27 @@
       }
     },
     {
+      "player_name": "Tank Boston",
+      "team": "Charlotte",
+      "games_played_prior": 1,
+      "opponent": "North Texas",
+      "position": "WR/TE",
+      "projected_points": 4.7,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 20.2,
+        "receptions": 1.9,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
+      }
+    },
+    {
       "player_name": "Arrion Concepcion",
       "team": "James Madison",
       "games_played_prior": 1,
@@ -38457,6 +38436,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.8
+      }
+    },
+    {
+      "player_name": "Conner Harrell",
+      "team": "Charlotte",
+      "games_played_prior": 2,
+      "opponent": "North Texas",
+      "position": "QB",
+      "projected_points": 4.6,
+      "stat_breakdown": {
+        "pass_att": 15.3,
+        "pass_comp": 8.2,
+        "pass_int": 0.5,
+        "pass_tds": 0.5,
+        "pass_yds": 85.2,
+        "rec_tds": 0.0,
+        "rec_yds": 0.1,
+        "receptions": 0.0,
+        "rush_att": 2.6,
+        "rush_tds": 0.1,
+        "rush_yds": 0.0
       }
     },
     {
@@ -39804,27 +39804,6 @@
       }
     },
     {
-      "player_name": "Zyheem Collick",
-      "team": "Charlotte",
-      "games_played_prior": 2,
-      "opponent": "North Texas",
-      "position": "WR/TE",
-      "projected_points": 4.5,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 20.0,
-        "receptions": 1.7,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.3
-      }
-    },
-    {
       "player_name": "Beau Baker",
       "team": "Washington State",
       "games_played_prior": 1,
@@ -40413,6 +40392,27 @@
       }
     },
     {
+      "player_name": "Zyheem Collick",
+      "team": "Charlotte",
+      "games_played_prior": 2,
+      "opponent": "North Texas",
+      "position": "WR/TE",
+      "projected_points": 4.4,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 19.4,
+        "receptions": 1.7,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
+      }
+    },
+    {
       "player_name": "Michael Gelatko",
       "team": "Buffalo",
       "games_played_prior": 1,
@@ -40530,7 +40530,7 @@
         "pass_int": 0.2,
         "pass_tds": 0.4,
         "pass_yds": 48.5,
-        "rec_tds": 0.1,
+        "rec_tds": 0.0,
         "rec_yds": 3.8,
         "receptions": 0.2,
         "rush_att": 2.2,
@@ -40636,7 +40636,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 18.6,
+        "rec_yds": 18.0,
         "receptions": 1.7,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -40934,7 +40934,7 @@
         "receptions": 0.3,
         "rush_att": 4.9,
         "rush_tds": 0.2,
-        "rush_yds": 22.9
+        "rush_yds": 23.1
       }
     },
     {
@@ -41439,27 +41439,6 @@
         "rush_att": 1.9,
         "rush_tds": 0.1,
         "rush_yds": 6.3
-      }
-    },
-    {
-      "player_name": "Gus McGee",
-      "team": "Charlotte",
-      "games_played_prior": 1,
-      "opponent": "North Texas",
-      "position": "WR/TE",
-      "projected_points": 4.2,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 16.6,
-        "receptions": 1.8,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.3
       }
     },
     {
@@ -42345,6 +42324,27 @@
       }
     },
     {
+      "player_name": "Gus McGee",
+      "team": "Charlotte",
+      "games_played_prior": 1,
+      "opponent": "North Texas",
+      "position": "WR/TE",
+      "projected_points": 4.1,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 16.1,
+        "receptions": 1.8,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
+      }
+    },
+    {
       "player_name": "Malachi Riley",
       "team": "San Jos\u00e9 State",
       "games_played_prior": 1,
@@ -42636,6 +42636,27 @@
         "rush_att": 1.4,
         "rush_tds": 0.0,
         "rush_yds": 5.3
+      }
+    },
+    {
+      "player_name": "Juelz Goff",
+      "team": "Boise State",
+      "games_played_prior": 3,
+      "opponent": "Fresno State",
+      "position": "RB",
+      "projected_points": 4.1,
+      "stat_breakdown": {
+        "pass_att": 0.2,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.3,
+        "rec_tds": 0.0,
+        "rec_yds": 2.3,
+        "receptions": 0.3,
+        "rush_att": 4.7,
+        "rush_tds": 0.2,
+        "rush_yds": 22.5
       }
     },
     {
@@ -43395,27 +43416,6 @@
       }
     },
     {
-      "player_name": "Juelz Goff",
-      "team": "Boise State",
-      "games_played_prior": 3,
-      "opponent": "Fresno State",
-      "position": "RB",
-      "projected_points": 4.0,
-      "stat_breakdown": {
-        "pass_att": 0.2,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.3,
-        "rec_tds": 0.0,
-        "rec_yds": 2.3,
-        "receptions": 0.3,
-        "rush_att": 4.7,
-        "rush_tds": 0.2,
-        "rush_yds": 22.3
-      }
-    },
-    {
       "player_name": "Ja'Kayden Ferguson",
       "team": "Kentucky",
       "games_played_prior": 3,
@@ -43710,27 +43710,6 @@
       }
     },
     {
-      "player_name": "D'Shawntae Jones",
-      "team": "Miami (OH)",
-      "games_played_prior": 5,
-      "opponent": "Massachusetts",
-      "position": "RB",
-      "projected_points": 4.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.0,
-        "rec_yds": 2.5,
-        "receptions": 0.5,
-        "rush_att": 5.3,
-        "rush_tds": 0.2,
-        "rush_yds": 19.0
-      }
-    },
-    {
       "player_name": "Nick Townsend",
       "team": "Texas",
       "games_played_prior": 1,
@@ -43811,7 +43790,7 @@
         "receptions": 0.4,
         "rush_att": 4.9,
         "rush_tds": 0.2,
-        "rush_yds": 21.4
+        "rush_yds": 20.8
       }
     },
     {
@@ -43980,27 +43959,6 @@
         "rush_att": 1.9,
         "rush_tds": 0.1,
         "rush_yds": 3.1
-      }
-    },
-    {
-      "player_name": "Brody Dawyot",
-      "team": "Charlotte",
-      "games_played_prior": 1,
-      "opponent": "North Texas",
-      "position": "WR/TE",
-      "projected_points": 4.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 17.3,
-        "receptions": 1.6,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.3
       }
     },
     {
@@ -44508,6 +44466,27 @@
       }
     },
     {
+      "player_name": "D'Shawntae Jones",
+      "team": "Miami (OH)",
+      "games_played_prior": 5,
+      "opponent": "Massachusetts",
+      "position": "RB",
+      "projected_points": 3.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.0,
+        "rec_yds": 2.5,
+        "receptions": 0.5,
+        "rush_att": 5.3,
+        "rush_tds": 0.2,
+        "rush_yds": 18.4
+      }
+    },
+    {
       "player_name": "Joe Stein",
       "team": "Northern Illinois",
       "games_played_prior": 1,
@@ -44778,6 +44757,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.1
+      }
+    },
+    {
+      "player_name": "Brody Dawyot",
+      "team": "Charlotte",
+      "games_played_prior": 1,
+      "opponent": "North Texas",
+      "position": "WR/TE",
+      "projected_points": 3.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 16.8,
+        "receptions": 1.6,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
       }
     },
     {
@@ -45907,7 +45907,7 @@
         "pass_tds": 0.0,
         "pass_yds": 1.4,
         "rec_tds": 0.0,
-        "rec_yds": 2.3,
+        "rec_yds": 2.2,
         "receptions": 0.3,
         "rush_att": 5.4,
         "rush_tds": 0.1,
@@ -47125,7 +47125,7 @@
         "pass_tds": 0.2,
         "pass_yds": 24.8,
         "rec_tds": 0.0,
-        "rec_yds": 3.0,
+        "rec_yds": 2.5,
         "receptions": 0.2,
         "rush_att": 2.1,
         "rush_tds": 0.1,
@@ -47994,27 +47994,6 @@
       }
     },
     {
-      "player_name": "Tavian Dashiell",
-      "team": "Massachusetts",
-      "games_played_prior": 2,
-      "opponent": "Miami (OH)",
-      "position": "RB",
-      "projected_points": 2.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 9.6,
-        "receptions": 0.9,
-        "rush_att": 1.0,
-        "rush_tds": 0.0,
-        "rush_yds": 0.4
-      }
-    },
-    {
       "player_name": "Amari Thomas",
       "team": "Florida State",
       "games_played_prior": 2,
@@ -48175,7 +48154,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.0,
-        "rec_yds": 4.9,
+        "rec_yds": 4.7,
         "receptions": 0.6,
         "rush_att": 2.5,
         "rush_tds": 0.1,
@@ -48264,6 +48243,27 @@
         "rush_att": 2.9,
         "rush_tds": 0.1,
         "rush_yds": 11.3
+      }
+    },
+    {
+      "player_name": "Tavian Dashiell",
+      "team": "Massachusetts",
+      "games_played_prior": 2,
+      "opponent": "Miami (OH)",
+      "position": "RB",
+      "projected_points": 2.5,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 9.6,
+        "receptions": 0.9,
+        "rush_att": 1.0,
+        "rush_tds": 0.0,
+        "rush_yds": 0.4
       }
     },
     {
@@ -49145,7 +49145,7 @@
         "receptions": 0.3,
         "rush_att": 2.1,
         "rush_tds": 0.1,
-        "rush_yds": 8.0
+        "rush_yds": 8.1
       }
     },
     {
@@ -56210,5 +56210,5 @@
       "note": "Hasselbeck has been out of commission due to knee injury, and he is likely to miss the remainder of the season."
     }
   ],
-  "injuries_as_of": "2026-10-05T20:35:01.198871+00:00"
+  "injuries_as_of": "2026-10-05T20:49:21.660634+00:00"
 }
