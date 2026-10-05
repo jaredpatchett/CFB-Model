@@ -22,7 +22,24 @@ if __name__ == "__main__":
         raise SystemExit(f"{path} not found — run scripts/build_features.py first.")
 
     df = pd.read_csv(path)
+    # The current-feature model is always trained and kept as a backup
+    # (models/game_model_v1.joblib). When the upgraded features are present
+    # (src/features/team_features_v2.py), the UPGRADED model becomes the main
+    # model (models/game_model.joblib) -- switched 10/2026 after it beat the
+    # current model on accuracy, line movement (57% of moves toward it), and
+    # results against opening spreads over 2024-2025.
+    v1 = GameMarginModel()
+    v1.fit(df, verbose=False)
+    v1.save(f"{config.MODELS_DIR}/game_model_v1.joblib")
+    print(f"Saved backup (current-feature) model to {config.MODELS_DIR}/game_model_v1.joblib")
     model = GameMarginModel()
+    try:
+        from src.features.team_features_v2 import FEATURE_COLUMNS_V2, V2_EXTRA
+        if all(c in df.columns for c in V2_EXTRA):
+            model.feature_columns = list(FEATURE_COLUMNS_V2)
+            print("Training the UPGRADED model as the main model")
+    except ImportError:
+        pass
     metrics = model.fit(df)
     model.save(f"{config.MODELS_DIR}/game_model.joblib")
     print(f"Saved model to {config.MODELS_DIR}/game_model.joblib")
