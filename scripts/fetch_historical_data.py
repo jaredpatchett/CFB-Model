@@ -122,6 +122,21 @@ def fetch_weather_and_core_if_missing(year: int, force: bool = False):
                   f"for this year (needs a CFBD Tier 1+ key; free tier doesn't include this endpoint)")
 
 
+def fetch_game_advanced_if_missing(year: int, force: bool = False):
+    """Per-game efficiency stats (PPA, success rate) for the challenger model
+    (added 10/2026). One CFBD call per season, skipped once saved, and run
+    outside the main cache check so already-cached seasons pick it up."""
+    path = f"{config.DATA_RAW_DIR}/game_advanced_{year}.csv"
+    if force or not os.path.exists(path):
+        try:
+            adv = cfbd.get_game_advanced_stats(year)
+            adv.to_csv(path, index=False)
+            print(f"  game_advanced: {len(adv)} rows")
+        except Exception as e:
+            print(f"  [warn] per-game advanced stats fetch failed for {year}: {e} -- challenger model "
+                  f"efficiency features unavailable for this year")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--years", type=int, nargs="+", required=True,
@@ -140,4 +155,5 @@ if __name__ == "__main__":
         else:
             fetch_year(year)
         fetch_weather_and_core_if_missing(year, force=args.force)
+        fetch_game_advanced_if_missing(year, force=args.force)
     print("\nDone.")
