@@ -92,6 +92,15 @@ def get_advanced_team_stats(year: int, week: int = None) -> pd.DataFrame:
     return pd.json_normalize(data)
 
 
+def get_game_advanced_stats(year: int, season_type: str = "regular") -> pd.DataFrame:
+    """Per-GAME advanced stats by team (CFBD /stats/game/advanced): offense
+    and defense PPA (expected points added per play), success rate,
+    explosiveness, flattened into dotted columns like 'offense.ppa'. One call
+    per season. Used by the challenger model (src/features/team_features_v2.py)."""
+    data = _get("/stats/game/advanced", {"year": year, "seasonType": season_type})
+    return pd.json_normalize(data)
+
+
 def get_returning_production(year: int) -> pd.DataFrame:
     """Percent of last season's total production (PPA-based) that's back on
     the roster this season, per team — CFBD's own computed metric (GET
