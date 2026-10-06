@@ -1,0 +1,2875 @@
+{
+  "generated_at": "2026-10-06T20:34:23.651728+00:00",
+  "train_years": [
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "season": 2026,
+  "min_edge": 0.1,
+  "pff_match": {
+    "pff_rows": 119515,
+    "matched_rows": 98302,
+    "pct_pff_rows_matched": 82.3,
+    "franchises_mapped_to_school": 1509,
+    "pct_kickoff_known": 100.0,
+    "pct_catchers_matched_by_season": {
+      "2022": 94.4,
+      "2023": 94.1,
+      "2024": 94.2,
+      "2025": 94.0,
+      "2026": 94.0
+    }
+  },
+  "results": {
+    "receptions": {
+      "current": {
+        "description": "Current 30 inputs, all players",
+        "n_inputs": 30,
+        "train_rows": 101337,
+        "test_2025": {
+          "n": 12297,
+          "mae": 1.424,
+          "bias": -0.02,
+          "naive_mae": 1.461,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2318,
+            "avg_gap_pts": 1.4,
+            "model_avg_over": 39.1,
+            "actual_over": 40.5,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 2027,
+                "model": 23.5,
+                "actual": 27.1
+              },
+              {
+                "bucket": "30-40%",
+                "n": 4626,
+                "model": 36.0,
+                "actual": 36.0
+              },
+              {
+                "bucket": "40-50%",
+                "n": 4185,
+                "model": 44.5,
+                "actual": 45.5
+              },
+              {
+                "bucket": "50-60%",
+                "n": 1339,
+                "model": 54.4,
+                "actual": 58.8
+              },
+              {
+                "bucket": "60-70%",
+                "n": 118,
+                "model": 61.1,
+                "actual": 63.6
+              },
+              {
+                "bucket": "70%+",
+                "n": 2,
+                "model": 71.1,
+                "actual": 50.0
+              }
+            ]
+          }
+        },
+        "props_2026": {
+          "n": 573,
+          "mae": 1.59,
+          "bias": -0.34,
+          "line_mae": 1.59,
+          "calibration": {
+            "n": 573,
+            "brier": 0.251,
+            "avg_gap_pts": 8.6,
+            "model_avg_over": 41.8,
+            "actual_over": 49.4,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 128,
+                "model": 23.1,
+                "actual": 36.7
+              },
+              {
+                "bucket": "30-40%",
+                "n": 164,
+                "model": 35.7,
+                "actual": 43.3
+              },
+              {
+                "bucket": "40-50%",
+                "n": 124,
+                "model": 45.3,
+                "actual": 57.3
+              },
+              {
+                "bucket": "50-60%",
+                "n": 94,
+                "model": 55.0,
+                "actual": 54.3
+              },
+              {
+                "bucket": "60-70%",
+                "n": 38,
+                "model": 63.5,
+                "actual": 68.4
+              },
+              {
+                "bucket": "70%+",
+                "n": 25,
+                "model": 77.0,
+                "actual": 68.0
+              }
+            ]
+          },
+          "over_all": {
+            "n": 573,
+            "record": "284-289",
+            "hit": 49.6,
+            "needs": 52.6,
+            "units": -34.8,
+            "roi": -6.1,
+            "roi_by_weekend": {
+              "2026-09-19": -5.9,
+              "2026-09-26": -8.0,
+              "2026-10-03": -4.1
+            }
+          },
+          "over_edge10": {
+            "n": 77,
+            "record": "51-26",
+            "hit": 66.2,
+            "needs": 52.4,
+            "units": 21.0,
+            "roi": 27.3,
+            "roi_by_weekend": {
+              "2026-09-19": 24.9,
+              "2026-09-26": 17.9,
+              "2026-10-03": 35.9
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 70,
+            "record": "45-25",
+            "hit": 64.3,
+            "needs": 51.9,
+            "units": 17.1,
+            "roi": 24.5,
+            "roi_by_weekend": {
+              "2026-09-19": 22.6,
+              "2026-09-26": 17.9,
+              "2026-10-03": 31.0
+            }
+          },
+          "under_all": {
+            "n": 573,
+            "record": "291-282",
+            "hit": 50.8,
+            "needs": 54.7,
+            "units": -45.4,
+            "roi": -7.9,
+            "roi_by_weekend": {
+              "2026-09-19": -8.0,
+              "2026-09-26": -7.6,
+              "2026-10-03": -8.2
+            }
+          },
+          "under_edge10": {
+            "n": 251,
+            "record": "133-118",
+            "hit": 53.0,
+            "needs": 54.0,
+            "units": -7.4,
+            "roi": -3.0,
+            "roi_by_weekend": {
+              "2026-09-19": 2.7,
+              "2026-09-26": -3.1,
+              "2026-10-03": -7.8
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 245,
+            "record": "129-116",
+            "hit": 52.7,
+            "needs": 53.9,
+            "units": -8.4,
+            "roi": -3.4,
+            "roi_by_weekend": {
+              "2026-09-19": -0.1,
+              "2026-09-26": -2.1,
+              "2026-10-03": -7.8
+            }
+          },
+          "proj_over_edge10": {
+            "n": 76,
+            "record": "50-26",
+            "hit": 65.8,
+            "needs": 52.4,
+            "units": 20.2,
+            "roi": 26.6,
+            "roi_by_weekend": {
+              "2026-09-19": 24.9,
+              "2026-09-26": 14.2,
+              "2026-10-03": 35.9
+            }
+          },
+          "proj_under_edge10": {
+            "n": 222,
+            "record": "124-98",
+            "hit": 55.9,
+            "needs": 55.1,
+            "units": 2.3,
+            "roi": 1.0,
+            "roi_by_weekend": {
+              "2026-09-19": 8.9,
+              "2026-09-26": 0.5,
+              "2026-10-03": -5.7
+            }
+          }
+        }
+      },
+      "receivers": {
+        "description": "Current inputs, trained on players with a prior catch",
+        "n_inputs": 30,
+        "train_rows": 78482,
+        "test_2025": {
+          "n": 12297,
+          "mae": 1.425,
+          "bias": -0.018,
+          "naive_mae": 1.461,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2325,
+            "avg_gap_pts": 2.0,
+            "model_avg_over": 38.8,
+            "actual_over": 40.5,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 3160,
+                "model": 25.5,
+                "actual": 29.5
+              },
+              {
+                "bucket": "30-40%",
+                "n": 2440,
+                "model": 35.5,
+                "actual": 34.9
+              },
+              {
+                "bucket": "40-50%",
+                "n": 4743,
+                "model": 44.0,
+                "actual": 43.9
+              },
+              {
+                "bucket": "50-60%",
+                "n": 1882,
+                "model": 51.6,
+                "actual": 56.7
+              },
+              {
+                "bucket": "60-70%",
+                "n": 72,
+                "model": 64.1,
+                "actual": 68.1
+              }
+            ]
+          }
+        },
+        "props_2026": {
+          "n": 573,
+          "mae": 1.59,
+          "bias": -0.34,
+          "line_mae": 1.59,
+          "calibration": {
+            "n": 573,
+            "brier": 0.2496,
+            "avg_gap_pts": 8.4,
+            "model_avg_over": 41.5,
+            "actual_over": 49.4,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 156,
+                "model": 24.1,
+                "actual": 37.8
+              },
+              {
+                "bucket": "30-40%",
+                "n": 112,
+                "model": 36.3,
+                "actual": 46.4
+              },
+              {
+                "bucket": "40-50%",
+                "n": 144,
+                "model": 44.2,
+                "actual": 50.7
+              },
+              {
+                "bucket": "50-60%",
+                "n": 110,
+                "model": 55.2,
+                "actual": 55.5
+              },
+              {
+                "bucket": "60-70%",
+                "n": 28,
+                "model": 63.4,
+                "actual": 78.6
+              },
+              {
+                "bucket": "70%+",
+                "n": 23,
+                "model": 76.0,
+                "actual": 69.6
+              }
+            ]
+          },
+          "over_all": {
+            "n": 573,
+            "record": "284-289",
+            "hit": 49.6,
+            "needs": 52.6,
+            "units": -35.6,
+            "roi": -6.2,
+            "roi_by_weekend": {
+              "2026-09-19": -5.9,
+              "2026-09-26": -8.4,
+              "2026-10-03": -4.1
+            }
+          },
+          "over_edge10": {
+            "n": 79,
+            "record": "52-27",
+            "hit": 65.8,
+            "needs": 51.7,
+            "units": 22.5,
+            "roi": 28.5,
+            "roi_by_weekend": {
+              "2026-09-19": 20.7,
+              "2026-09-26": 25.0,
+              "2026-10-03": 39.8
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 71,
+            "record": "46-25",
+            "hit": 64.8,
+            "needs": 51.2,
+            "units": 19.6,
+            "roi": 27.6,
+            "roi_by_weekend": {
+              "2026-09-19": 17.7,
+              "2026-09-26": 30.7,
+              "2026-10-03": 35.0
+            }
+          },
+          "under_all": {
+            "n": 573,
+            "record": "291-282",
+            "hit": 50.8,
+            "needs": 54.8,
+            "units": -45.4,
+            "roi": -7.9,
+            "roi_by_weekend": {
+              "2026-09-19": -8.0,
+              "2026-09-26": -7.6,
+              "2026-10-03": -8.2
+            }
+          },
+          "under_edge10": {
+            "n": 260,
+            "record": "136-124",
+            "hit": 52.3,
+            "needs": 54.3,
+            "units": -13.3,
+            "roi": -5.1,
+            "roi_by_weekend": {
+              "2026-09-19": -1.6,
+              "2026-09-26": -4.2,
+              "2026-10-03": -9.4
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 253,
+            "record": "132-121",
+            "hit": 52.2,
+            "needs": 54.2,
+            "units": -13.3,
+            "roi": -5.3,
+            "roi_by_weekend": {
+              "2026-09-19": -3.2,
+              "2026-09-26": -3.2,
+              "2026-10-03": -9.4
+            }
+          },
+          "proj_over_edge10": {
+            "n": 78,
+            "record": "51-27",
+            "hit": 65.4,
+            "needs": 51.6,
+            "units": 21.6,
+            "roi": 27.8,
+            "roi_by_weekend": {
+              "2026-09-19": 20.7,
+              "2026-09-26": 22.3,
+              "2026-10-03": 39.8
+            }
+          },
+          "proj_under_edge10": {
+            "n": 225,
+            "record": "125-100",
+            "hit": 55.6,
+            "needs": 55.8,
+            "units": -2.4,
+            "roi": -1.1,
+            "roi_by_weekend": {
+              "2026-09-19": 6.2,
+              "2026-09-26": 1.3,
+              "2026-10-03": -10.4
+            }
+          }
+        }
+      },
+      "trimmed": {
+        "description": "Receiving-specific inputs only",
+        "n_inputs": 14,
+        "train_rows": 78482,
+        "test_2025": {
+          "n": 12297,
+          "mae": 1.427,
+          "bias": -0.024,
+          "naive_mae": 1.461,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2323,
+            "avg_gap_pts": 1.0,
+            "model_avg_over": 40.3,
+            "actual_over": 40.5,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 2645,
+                "model": 27.6,
+                "actual": 28.4
+              },
+              {
+                "bucket": "30-40%",
+                "n": 3232,
+                "model": 35.2,
+                "actual": 35.6
+              },
+              {
+                "bucket": "40-50%",
+                "n": 4101,
+                "model": 45.0,
+                "actual": 44.0
+              },
+              {
+                "bucket": "50-60%",
+                "n": 2224,
+                "model": 53.1,
+                "actual": 54.9
+              },
+              {
+                "bucket": "60-70%",
+                "n": 94,
+                "model": 64.1,
+                "actual": 57.4
+              },
+              {
+                "bucket": "70%+",
+                "n": 1,
+                "model": 70.4,
+                "actual": 100.0
+              }
+            ]
+          }
+        },
+        "props_2026": {
+          "n": 573,
+          "mae": 1.6,
+          "bias": -0.35,
+          "line_mae": 1.59,
+          "calibration": {
+            "n": 573,
+            "brier": 0.2505,
+            "avg_gap_pts": 8.2,
+            "model_avg_over": 41.7,
+            "actual_over": 49.4,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 143,
+                "model": 24.0,
+                "actual": 39.2
+              },
+              {
+                "bucket": "30-40%",
+                "n": 124,
+                "model": 35.7,
+                "actual": 41.9
+              },
+              {
+                "bucket": "40-50%",
+                "n": 148,
+                "model": 44.7,
+                "actual": 53.4
+              },
+              {
+                "bucket": "50-60%",
+                "n": 107,
+                "model": 55.2,
+                "actual": 57.9
+              },
+              {
+                "bucket": "60-70%",
+                "n": 28,
+                "model": 63.4,
+                "actual": 64.3
+              },
+              {
+                "bucket": "70%+",
+                "n": 23,
+                "model": 76.1,
+                "actual": 69.6
+              }
+            ]
+          },
+          "over_all": {
+            "n": 573,
+            "record": "284-289",
+            "hit": 49.6,
+            "needs": 52.6,
+            "units": -35.6,
+            "roi": -6.2,
+            "roi_by_weekend": {
+              "2026-09-19": -5.9,
+              "2026-09-26": -8.4,
+              "2026-10-03": -4.1
+            }
+          },
+          "over_edge10": {
+            "n": 73,
+            "record": "48-25",
+            "hit": 65.8,
+            "needs": 51.5,
+            "units": 21.3,
+            "roi": 29.2,
+            "roi_by_weekend": {
+              "2026-09-19": 19.6,
+              "2026-09-26": 20.4,
+              "2026-10-03": 45.7
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 66,
+            "record": "42-24",
+            "hit": 63.6,
+            "needs": 51.1,
+            "units": 16.8,
+            "roi": 25.4,
+            "roi_by_weekend": {
+              "2026-09-19": 12.3,
+              "2026-09-26": 20.4,
+              "2026-10-03": 41.5
+            }
+          },
+          "under_all": {
+            "n": 573,
+            "record": "291-282",
+            "hit": 50.8,
+            "needs": 54.8,
+            "units": -45.4,
+            "roi": -7.9,
+            "roi_by_weekend": {
+              "2026-09-19": -8.0,
+              "2026-09-26": -7.6,
+              "2026-10-03": -8.2
+            }
+          },
+          "under_edge10": {
+            "n": 247,
+            "record": "130-117",
+            "hit": 52.6,
+            "needs": 54.1,
+            "units": -9.3,
+            "roi": -3.8,
+            "roi_by_weekend": {
+              "2026-09-19": -6.6,
+              "2026-09-26": 7.7,
+              "2026-10-03": -14.1
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 241,
+            "record": "126-115",
+            "hit": 52.3,
+            "needs": 54.0,
+            "units": -10.3,
+            "roi": -4.3,
+            "roi_by_weekend": {
+              "2026-09-19": -8.6,
+              "2026-09-26": 7.7,
+              "2026-10-03": -14.1
+            }
+          },
+          "proj_over_edge10": {
+            "n": 72,
+            "record": "47-25",
+            "hit": 65.3,
+            "needs": 51.7,
+            "units": 19.7,
+            "roi": 27.3,
+            "roi_by_weekend": {
+              "2026-09-19": 19.6,
+              "2026-09-26": 20.4,
+              "2026-10-03": 41.1
+            }
+          },
+          "proj_under_edge10": {
+            "n": 212,
+            "record": "119-93",
+            "hit": 56.1,
+            "needs": 55.4,
+            "units": 2.7,
+            "roi": 1.3,
+            "roi_by_weekend": {
+              "2026-09-19": 3.2,
+              "2026-09-26": 13.2,
+              "2026-10-03": -13.8
+            }
+          }
+        }
+      },
+      "extras": {
+        "description": "Current + trends, stability, game total, opponent per-attempt",
+        "n_inputs": 45,
+        "train_rows": 78482,
+        "test_2025": {
+          "n": 12297,
+          "mae": 1.425,
+          "bias": -0.018,
+          "naive_mae": 1.461,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2323,
+            "avg_gap_pts": 1.7,
+            "model_avg_over": 39.2,
+            "actual_over": 40.5,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 3096,
+                "model": 26.2,
+                "actual": 29.0
+              },
+              {
+                "bucket": "30-40%",
+                "n": 2502,
+                "model": 35.5,
+                "actual": 35.5
+              },
+              {
+                "bucket": "40-50%",
+                "n": 4585,
+                "model": 44.1,
+                "actual": 43.6
+              },
+              {
+                "bucket": "50-60%",
+                "n": 2024,
+                "model": 51.7,
+                "actual": 56.5
+              },
+              {
+                "bucket": "60-70%",
+                "n": 89,
+                "model": 63.8,
+                "actual": 62.9
+              },
+              {
+                "bucket": "70%+",
+                "n": 1,
+                "model": 80.9,
+                "actual": 0.0
+              }
+            ]
+          }
+        },
+        "props_2026": {
+          "n": 573,
+          "mae": 1.59,
+          "bias": -0.34,
+          "line_mae": 1.59,
+          "calibration": {
+            "n": 573,
+            "brier": 0.2495,
+            "avg_gap_pts": 8.1,
+            "model_avg_over": 41.4,
+            "actual_over": 49.4,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 160,
+                "model": 24.5,
+                "actual": 38.1
+              },
+              {
+                "bucket": "30-40%",
+                "n": 114,
+                "model": 36.5,
+                "actual": 46.5
+              },
+              {
+                "bucket": "40-50%",
+                "n": 140,
+                "model": 44.6,
+                "actual": 50.7
+              },
+              {
+                "bucket": "50-60%",
+                "n": 115,
+                "model": 54.9,
+                "actual": 58.3
+              },
+              {
+                "bucket": "60-70%",
+                "n": 20,
+                "model": 63.5,
+                "actual": 65.0
+              },
+              {
+                "bucket": "70%+",
+                "n": 24,
+                "model": 76.1,
+                "actual": 75.0
+              }
+            ]
+          },
+          "over_all": {
+            "n": 573,
+            "record": "284-289",
+            "hit": 49.6,
+            "needs": 52.6,
+            "units": -34.8,
+            "roi": -6.1,
+            "roi_by_weekend": {
+              "2026-09-19": -5.9,
+              "2026-09-26": -8.0,
+              "2026-10-03": -4.1
+            }
+          },
+          "over_edge10": {
+            "n": 67,
+            "record": "44-23",
+            "hit": 65.7,
+            "needs": 51.6,
+            "units": 18.8,
+            "roi": 28.1,
+            "roi_by_weekend": {
+              "2026-09-19": 16.9,
+              "2026-09-26": 30.7,
+              "2026-10-03": 34.7
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 59,
+            "record": "38-21",
+            "hit": 64.4,
+            "needs": 51.0,
+            "units": 15.9,
+            "roi": 26.9,
+            "roi_by_weekend": {
+              "2026-09-19": 11.3,
+              "2026-09-26": 36.9,
+              "2026-10-03": 28.8
+            }
+          },
+          "under_all": {
+            "n": 573,
+            "record": "291-282",
+            "hit": 50.8,
+            "needs": 54.7,
+            "units": -44.9,
+            "roi": -7.8,
+            "roi_by_weekend": {
+              "2026-09-19": -8.0,
+              "2026-09-26": -7.6,
+              "2026-10-03": -7.9
+            }
+          },
+          "under_edge10": {
+            "n": 261,
+            "record": "140-121",
+            "hit": 53.6,
+            "needs": 54.2,
+            "units": -5.5,
+            "roi": -2.1,
+            "roi_by_weekend": {
+              "2026-09-19": -0.7,
+              "2026-09-26": 2.5,
+              "2026-10-03": -8.4
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 254,
+            "record": "136-118",
+            "hit": 53.5,
+            "needs": 54.1,
+            "units": -5.5,
+            "roi": -2.2,
+            "roi_by_weekend": {
+              "2026-09-19": -2.2,
+              "2026-09-26": 3.5,
+              "2026-10-03": -8.4
+            }
+          },
+          "proj_over_edge10": {
+            "n": 66,
+            "record": "43-23",
+            "hit": 65.2,
+            "needs": 51.6,
+            "units": 18.0,
+            "roi": 27.2,
+            "roi_by_weekend": {
+              "2026-09-19": 16.9,
+              "2026-09-26": 28.1,
+              "2026-10-03": 34.7
+            }
+          },
+          "proj_under_edge10": {
+            "n": 220,
+            "record": "126-94",
+            "hit": 57.3,
+            "needs": 55.9,
+            "units": 4.7,
+            "roi": 2.2,
+            "roi_by_weekend": {
+              "2026-09-19": 8.9,
+              "2026-09-26": 7.8,
+              "2026-10-03": -10.0
+            }
+          }
+        }
+      },
+      "pff": {
+        "description": "Current + PFF routes and targets",
+        "n_inputs": 44,
+        "train_rows": 78482,
+        "test_2025": {
+          "n": 12297,
+          "mae": 1.403,
+          "bias": -0.04,
+          "naive_mae": 1.461,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2273,
+            "avg_gap_pts": 1.3,
+            "model_avg_over": 39.6,
+            "actual_over": 40.5,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 3262,
+                "model": 24.9,
+                "actual": 26.7
+              },
+              {
+                "bucket": "30-40%",
+                "n": 2880,
+                "model": 35.0,
+                "actual": 35.8
+              },
+              {
+                "bucket": "40-50%",
+                "n": 3572,
+                "model": 44.7,
+                "actual": 44.1
+              },
+              {
+                "bucket": "50-60%",
+                "n": 2081,
+                "model": 54.1,
+                "actual": 56.4
+              },
+              {
+                "bucket": "60-70%",
+                "n": 439,
+                "model": 63.9,
+                "actual": 64.9
+              },
+              {
+                "bucket": "70%+",
+                "n": 63,
+                "model": 71.9,
+                "actual": 69.8
+              }
+            ]
+          }
+        },
+        "props_2026": {
+          "n": 573,
+          "mae": 1.57,
+          "bias": -0.28,
+          "line_mae": 1.59,
+          "calibration": {
+            "n": 573,
+            "brier": 0.2431,
+            "avg_gap_pts": 7.2,
+            "model_avg_over": 43.3,
+            "actual_over": 49.4,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 123,
+                "model": 24.1,
+                "actual": 33.3
+              },
+              {
+                "bucket": "30-40%",
+                "n": 105,
+                "model": 35.6,
+                "actual": 42.9
+              },
+              {
+                "bucket": "40-50%",
+                "n": 161,
+                "model": 44.4,
+                "actual": 50.3
+              },
+              {
+                "bucket": "50-60%",
+                "n": 120,
+                "model": 54.9,
+                "actual": 60.8
+              },
+              {
+                "bucket": "60-70%",
+                "n": 40,
+                "model": 63.9,
+                "actual": 70.0
+              },
+              {
+                "bucket": "70%+",
+                "n": 24,
+                "model": 75.2,
+                "actual": 62.5
+              }
+            ]
+          },
+          "over_all": {
+            "n": 573,
+            "record": "284-289",
+            "hit": 49.6,
+            "needs": 52.6,
+            "units": -35.6,
+            "roi": -6.2,
+            "roi_by_weekend": {
+              "2026-09-19": -5.9,
+              "2026-09-26": -8.4,
+              "2026-10-03": -4.1
+            }
+          },
+          "over_edge10": {
+            "n": 77,
+            "record": "50-27",
+            "hit": 64.9,
+            "needs": 51.6,
+            "units": 21.2,
+            "roi": 27.5,
+            "roi_by_weekend": {
+              "2026-09-19": 33.2,
+              "2026-09-26": 31.6,
+              "2026-10-03": 15.1
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 70,
+            "record": "45-25",
+            "hit": 64.3,
+            "needs": 50.9,
+            "units": 19.3,
+            "roi": 27.6,
+            "roi_by_weekend": {
+              "2026-09-19": 37.0,
+              "2026-09-26": 31.6,
+              "2026-10-03": 9.9
+            }
+          },
+          "under_all": {
+            "n": 573,
+            "record": "291-282",
+            "hit": 50.8,
+            "needs": 54.7,
+            "units": -45.4,
+            "roi": -7.9,
+            "roi_by_weekend": {
+              "2026-09-19": -8.0,
+              "2026-09-26": -7.6,
+              "2026-10-03": -8.2
+            }
+          },
+          "under_edge10": {
+            "n": 223,
+            "record": "125-98",
+            "hit": 56.1,
+            "needs": 54.4,
+            "units": 3.5,
+            "roi": 1.6,
+            "roi_by_weekend": {
+              "2026-09-19": 15.0,
+              "2026-09-26": 6.1,
+              "2026-10-03": -16.5
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 220,
+            "record": "122-98",
+            "hit": 55.5,
+            "needs": 54.4,
+            "units": 1.2,
+            "roi": 0.5,
+            "roi_by_weekend": {
+              "2026-09-19": 12.1,
+              "2026-09-26": 6.1,
+              "2026-10-03": -16.5
+            }
+          },
+          "proj_over_edge10": {
+            "n": 76,
+            "record": "49-27",
+            "hit": 64.5,
+            "needs": 51.8,
+            "units": 19.6,
+            "roi": 25.8,
+            "roi_by_weekend": {
+              "2026-09-19": 33.2,
+              "2026-09-26": 31.6,
+              "2026-10-03": 8.1
+            }
+          },
+          "proj_under_edge10": {
+            "n": 193,
+            "record": "116-77",
+            "hit": 60.1,
+            "needs": 56.0,
+            "units": 13.8,
+            "roi": 7.1,
+            "roi_by_weekend": {
+              "2026-09-19": 24.1,
+              "2026-09-26": 8.2,
+              "2026-10-03": -10.7
+            }
+          }
+        }
+      },
+      "pff_extras": {
+        "description": "Everything",
+        "n_inputs": 59,
+        "train_rows": 78482,
+        "test_2025": {
+          "n": 12297,
+          "mae": 1.403,
+          "bias": -0.041,
+          "naive_mae": 1.461,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2278,
+            "avg_gap_pts": 1.5,
+            "model_avg_over": 39.6,
+            "actual_over": 40.5,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 3178,
+                "model": 25.0,
+                "actual": 26.7
+              },
+              {
+                "bucket": "30-40%",
+                "n": 3090,
+                "model": 35.3,
+                "actual": 36.5
+              },
+              {
+                "bucket": "40-50%",
+                "n": 3476,
+                "model": 44.9,
+                "actual": 43.8
+              },
+              {
+                "bucket": "50-60%",
+                "n": 2001,
+                "model": 53.5,
+                "actual": 56.1
+              },
+              {
+                "bucket": "60-70%",
+                "n": 536,
+                "model": 64.0,
+                "actual": 64.9
+              },
+              {
+                "bucket": "70%+",
+                "n": 16,
+                "model": 75.2,
+                "actual": 81.2
+              }
+            ]
+          }
+        },
+        "props_2026": {
+          "n": 573,
+          "mae": 1.57,
+          "bias": -0.27,
+          "line_mae": 1.59,
+          "calibration": {
+            "n": 573,
+            "brier": 0.2435,
+            "avg_gap_pts": 7.3,
+            "model_avg_over": 43.3,
+            "actual_over": 49.4,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 119,
+                "model": 24.6,
+                "actual": 34.5
+              },
+              {
+                "bucket": "30-40%",
+                "n": 110,
+                "model": 35.4,
+                "actual": 40.0
+              },
+              {
+                "bucket": "40-50%",
+                "n": 158,
+                "model": 44.0,
+                "actual": 52.5
+              },
+              {
+                "bucket": "50-60%",
+                "n": 123,
+                "model": 55.0,
+                "actual": 58.5
+              },
+              {
+                "bucket": "60-70%",
+                "n": 41,
+                "model": 63.9,
+                "actual": 73.2
+              },
+              {
+                "bucket": "70%+",
+                "n": 22,
+                "model": 75.7,
+                "actual": 59.1
+              }
+            ]
+          },
+          "over_all": {
+            "n": 573,
+            "record": "284-289",
+            "hit": 49.6,
+            "needs": 52.6,
+            "units": -35.6,
+            "roi": -6.2,
+            "roi_by_weekend": {
+              "2026-09-19": -5.9,
+              "2026-09-26": -8.4,
+              "2026-10-03": -4.1
+            }
+          },
+          "over_edge10": {
+            "n": 75,
+            "record": "46-29",
+            "hit": 61.3,
+            "needs": 51.6,
+            "units": 15.3,
+            "roi": 20.3,
+            "roi_by_weekend": {
+              "2026-09-19": 30.1,
+              "2026-09-26": 13.2,
+              "2026-10-03": 13.0
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 69,
+            "record": "42-27",
+            "hit": 60.9,
+            "needs": 50.9,
+            "units": 14.5,
+            "roi": 21.0,
+            "roi_by_weekend": {
+              "2026-09-19": 36.4,
+              "2026-09-26": 13.2,
+              "2026-10-03": 7.2
+            }
+          },
+          "under_all": {
+            "n": 573,
+            "record": "291-282",
+            "hit": 50.8,
+            "needs": 54.8,
+            "units": -46.3,
+            "roi": -8.1,
+            "roi_by_weekend": {
+              "2026-09-19": -8.0,
+              "2026-09-26": -8.1,
+              "2026-10-03": -8.2
+            }
+          },
+          "under_edge10": {
+            "n": 233,
+            "record": "132-101",
+            "hit": 56.7,
+            "needs": 54.2,
+            "units": 7.2,
+            "roi": 3.1,
+            "roi_by_weekend": {
+              "2026-09-19": 16.1,
+              "2026-09-26": 3.0,
+              "2026-10-03": -9.5
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 230,
+            "record": "129-101",
+            "hit": 56.1,
+            "needs": 54.2,
+            "units": 4.9,
+            "roi": 2.1,
+            "roi_by_weekend": {
+              "2026-09-19": 13.4,
+              "2026-09-26": 3.0,
+              "2026-10-03": -9.5
+            }
+          },
+          "proj_over_edge10": {
+            "n": 74,
+            "record": "45-29",
+            "hit": 60.8,
+            "needs": 51.8,
+            "units": 13.6,
+            "roi": 18.4,
+            "roi_by_weekend": {
+              "2026-09-19": 30.1,
+              "2026-09-26": 13.2,
+              "2026-10-03": 5.5
+            }
+          },
+          "proj_under_edge10": {
+            "n": 197,
+            "record": "121-76",
+            "hit": 61.4,
+            "needs": 55.8,
+            "units": 19.7,
+            "roi": 10.0,
+            "roi_by_weekend": {
+              "2026-09-19": 29.0,
+              "2026-09-26": 8.5,
+              "2026-10-03": -7.0
+            }
+          }
+        }
+      },
+      "as_live": {
+        "description": "Live model exactly as deployed",
+        "n_inputs": 30,
+        "props_2026": {
+          "n": 573,
+          "mae": 1.59,
+          "bias": -0.33,
+          "line_mae": 1.59,
+          "calibration": {
+            "n": 573,
+            "brier": 0.2493,
+            "avg_gap_pts": 8.1,
+            "model_avg_over": 41.8,
+            "actual_over": 49.4,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 125,
+                "model": 23.5,
+                "actual": 38.4
+              },
+              {
+                "bucket": "30-40%",
+                "n": 154,
+                "model": 35.9,
+                "actual": 41.6
+              },
+              {
+                "bucket": "40-50%",
+                "n": 130,
+                "model": 45.0,
+                "actual": 56.2
+              },
+              {
+                "bucket": "50-60%",
+                "n": 114,
+                "model": 54.4,
+                "actual": 56.1
+              },
+              {
+                "bucket": "60-70%",
+                "n": 27,
+                "model": 63.0,
+                "actual": 66.7
+              },
+              {
+                "bucket": "70%+",
+                "n": 23,
+                "model": 76.1,
+                "actual": 69.6
+              }
+            ]
+          },
+          "over_all": {
+            "n": 573,
+            "record": "284-289",
+            "hit": 49.6,
+            "needs": 52.6,
+            "units": -34.8,
+            "roi": -6.1,
+            "roi_by_weekend": {
+              "2026-09-19": -5.9,
+              "2026-09-26": -8.0,
+              "2026-10-03": -4.1
+            }
+          },
+          "over_edge10": {
+            "n": 69,
+            "record": "46-23",
+            "hit": 66.7,
+            "needs": 51.8,
+            "units": 20.3,
+            "roi": 29.5,
+            "roi_by_weekend": {
+              "2026-09-19": 20.5,
+              "2026-09-26": 27.3,
+              "2026-10-03": 38.9
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 62,
+            "record": "40-22",
+            "hit": 64.5,
+            "needs": 51.3,
+            "units": 16.4,
+            "roi": 26.5,
+            "roi_by_weekend": {
+              "2026-09-19": 16.7,
+              "2026-09-26": 27.3,
+              "2026-10-03": 34.0
+            }
+          },
+          "under_all": {
+            "n": 573,
+            "record": "290-283",
+            "hit": 50.6,
+            "needs": 54.7,
+            "units": -46.8,
+            "roi": -8.2,
+            "roi_by_weekend": {
+              "2026-09-19": -8.8,
+              "2026-09-26": -7.6,
+              "2026-10-03": -8.2
+            }
+          },
+          "under_edge10": {
+            "n": 252,
+            "record": "135-117",
+            "hit": 53.6,
+            "needs": 54.0,
+            "units": -5.5,
+            "roi": -2.2,
+            "roi_by_weekend": {
+              "2026-09-19": -1.4,
+              "2026-09-26": -0.1,
+              "2026-10-03": -5.4
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 246,
+            "record": "131-115",
+            "hit": 53.3,
+            "needs": 53.9,
+            "units": -6.5,
+            "roi": -2.6,
+            "roi_by_weekend": {
+              "2026-09-19": -4.3,
+              "2026-09-26": 1.0,
+              "2026-10-03": -5.4
+            }
+          },
+          "proj_over_edge10": {
+            "n": 68,
+            "record": "45-23",
+            "hit": 66.2,
+            "needs": 51.8,
+            "units": 19.5,
+            "roi": 28.7,
+            "roi_by_weekend": {
+              "2026-09-19": 20.5,
+              "2026-09-26": 23.9,
+              "2026-10-03": 38.9
+            }
+          },
+          "proj_under_edge10": {
+            "n": 219,
+            "record": "123-96",
+            "hit": 56.2,
+            "needs": 55.2,
+            "units": 2.1,
+            "roi": 1.0,
+            "roi_by_weekend": {
+              "2026-09-19": 4.7,
+              "2026-09-26": -0.0,
+              "2026-10-03": -1.4
+            }
+          }
+        }
+      }
+    },
+    "rec_yds": {
+      "current": {
+        "description": "Current 30 inputs, all players",
+        "n_inputs": 30,
+        "train_rows": 101337,
+        "test_2025": {
+          "n": 12297,
+          "mae": 22.542,
+          "bias": 0.018,
+          "naive_mae": 23.317,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2335,
+            "avg_gap_pts": 0.6,
+            "model_avg_over": 41.1,
+            "actual_over": 40.9,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 1597,
+                "model": 24.7,
+                "actual": 24.7
+              },
+              {
+                "bucket": "30-40%",
+                "n": 3934,
+                "model": 35.8,
+                "actual": 36.5
+              },
+              {
+                "bucket": "40-50%",
+                "n": 4960,
+                "model": 44.7,
+                "actual": 44.5
+              },
+              {
+                "bucket": "50-60%",
+                "n": 1433,
+                "model": 53.9,
+                "actual": 53.1
+              },
+              {
+                "bucket": "60-70%",
+                "n": 242,
+                "model": 63.5,
+                "actual": 60.3
+              },
+              {
+                "bucket": "70%+",
+                "n": 131,
+                "model": 80.0,
+                "actual": 67.2
+              }
+            ]
+          }
+        },
+        "props_2026": {
+          "n": 712,
+          "mae": 24.57,
+          "bias": -4.96,
+          "line_mae": 24.18,
+          "calibration": {
+            "n": 712,
+            "brier": 0.2583,
+            "avg_gap_pts": 9.7,
+            "model_avg_over": 44.3,
+            "actual_over": 51.5,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 82,
+                "model": 23.6,
+                "actual": 39.0
+              },
+              {
+                "bucket": "30-40%",
+                "n": 185,
+                "model": 35.1,
+                "actual": 47.0
+              },
+              {
+                "bucket": "40-50%",
+                "n": 211,
+                "model": 45.3,
+                "actual": 57.3
+              },
+              {
+                "bucket": "50-60%",
+                "n": 166,
+                "model": 54.2,
+                "actual": 51.2
+              },
+              {
+                "bucket": "60-70%",
+                "n": 52,
+                "model": 64.3,
+                "actual": 57.7
+              },
+              {
+                "bucket": "70%+",
+                "n": 16,
+                "model": 77.8,
+                "actual": 75.0
+              }
+            ]
+          },
+          "over_all": {
+            "n": 712,
+            "record": "371-341",
+            "hit": 52.1,
+            "needs": 53.3,
+            "units": -14.7,
+            "roi": -2.1,
+            "roi_by_weekend": {
+              "2026-09-19": 1.5,
+              "2026-09-26": -2.4,
+              "2026-10-03": -5.0
+            }
+          },
+          "over_edge10": {
+            "n": 91,
+            "record": "58-33",
+            "hit": 63.7,
+            "needs": 53.0,
+            "units": 18.3,
+            "roi": 20.1,
+            "roi_by_weekend": {
+              "2026-09-19": 20.3,
+              "2026-09-26": 8.9,
+              "2026-10-03": 35.3
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 80,
+            "record": "51-29",
+            "hit": 63.7,
+            "needs": 53.0,
+            "units": 16.2,
+            "roi": 20.2,
+            "roi_by_weekend": {
+              "2026-09-19": 25.2,
+              "2026-09-26": 11.8,
+              "2026-10-03": 29.1
+            }
+          },
+          "under_all": {
+            "n": 712,
+            "record": "348-364",
+            "hit": 48.9,
+            "needs": 53.6,
+            "units": -61.9,
+            "roi": -8.7,
+            "roi_by_weekend": {
+              "2026-09-19": -12.3,
+              "2026-09-26": -8.3,
+              "2026-10-03": -5.8
+            }
+          },
+          "under_edge10": {
+            "n": 289,
+            "record": "159-130",
+            "hit": 55.0,
+            "needs": 53.6,
+            "units": 8.7,
+            "roi": 3.0,
+            "roi_by_weekend": {
+              "2026-09-19": 2.6,
+              "2026-09-26": -2.4,
+              "2026-10-03": 10.0
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 282,
+            "record": "153-129",
+            "hit": 54.3,
+            "needs": 53.6,
+            "units": 4.4,
+            "roi": 1.6,
+            "roi_by_weekend": {
+              "2026-09-19": -2.0,
+              "2026-09-26": -2.4,
+              "2026-10-03": 10.0
+            }
+          },
+          "proj_over_edge10": {
+            "n": 91,
+            "record": "58-33",
+            "hit": 63.7,
+            "needs": 53.0,
+            "units": 18.3,
+            "roi": 20.1,
+            "roi_by_weekend": {
+              "2026-09-19": 20.3,
+              "2026-09-26": 8.9,
+              "2026-10-03": 35.3
+            }
+          },
+          "proj_under_edge10": {
+            "n": 194,
+            "record": "107-87",
+            "hit": 55.2,
+            "needs": 53.7,
+            "units": 6.4,
+            "roi": 3.3,
+            "roi_by_weekend": {
+              "2026-09-19": 7.8,
+              "2026-09-26": 5.7,
+              "2026-10-03": -4.6
+            }
+          }
+        }
+      },
+      "receivers": {
+        "description": "Current inputs, trained on players with a prior catch",
+        "n_inputs": 30,
+        "train_rows": 78482,
+        "test_2025": {
+          "n": 12297,
+          "mae": 22.56,
+          "bias": 0.086,
+          "naive_mae": 23.317,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2334,
+            "avg_gap_pts": 1.4,
+            "model_avg_over": 39.6,
+            "actual_over": 40.9,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 1845,
+                "model": 24.7,
+                "actual": 25.6
+              },
+              {
+                "bucket": "30-40%",
+                "n": 4655,
+                "model": 35.8,
+                "actual": 37.6
+              },
+              {
+                "bucket": "40-50%",
+                "n": 4309,
+                "model": 44.4,
+                "actual": 45.6
+              },
+              {
+                "bucket": "50-60%",
+                "n": 1216,
+                "model": 53.5,
+                "actual": 54.4
+              },
+              {
+                "bucket": "60-70%",
+                "n": 170,
+                "model": 64.0,
+                "actual": 61.8
+              },
+              {
+                "bucket": "70%+",
+                "n": 102,
+                "model": 80.2,
+                "actual": 73.5
+              }
+            ]
+          }
+        },
+        "props_2026": {
+          "n": 712,
+          "mae": 24.54,
+          "bias": -4.97,
+          "line_mae": 24.18,
+          "calibration": {
+            "n": 712,
+            "brier": 0.259,
+            "avg_gap_pts": 9.0,
+            "model_avg_over": 44.2,
+            "actual_over": 51.5,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 98,
+                "model": 24.4,
+                "actual": 48.0
+              },
+              {
+                "bucket": "30-40%",
+                "n": 149,
+                "model": 35.5,
+                "actual": 45.6
+              },
+              {
+                "bucket": "40-50%",
+                "n": 243,
+                "model": 45.0,
+                "actual": 52.7
+              },
+              {
+                "bucket": "50-60%",
+                "n": 162,
+                "model": 54.1,
+                "actual": 54.9
+              },
+              {
+                "bucket": "60-70%",
+                "n": 40,
+                "model": 64.2,
+                "actual": 55.0
+              },
+              {
+                "bucket": "70%+",
+                "n": 20,
+                "model": 76.4,
+                "actual": 65.0
+              }
+            ]
+          },
+          "over_all": {
+            "n": 712,
+            "record": "371-341",
+            "hit": 52.1,
+            "needs": 53.2,
+            "units": -14.4,
+            "roi": -2.0,
+            "roi_by_weekend": {
+              "2026-09-19": 1.7,
+              "2026-09-26": -2.4,
+              "2026-10-03": -5.0
+            }
+          },
+          "over_edge10": {
+            "n": 81,
+            "record": "50-31",
+            "hit": 61.7,
+            "needs": 53.0,
+            "units": 13.1,
+            "roi": 16.2,
+            "roi_by_weekend": {
+              "2026-09-19": 27.9,
+              "2026-09-26": -0.3,
+              "2026-10-03": 26.1
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 72,
+            "record": "44-28",
+            "hit": 61.1,
+            "needs": 53.0,
+            "units": 10.9,
+            "roi": 15.1,
+            "roi_by_weekend": {
+              "2026-09-19": 32.3,
+              "2026-09-26": 3.0,
+              "2026-10-03": 18.6
+            }
+          },
+          "under_all": {
+            "n": 712,
+            "record": "348-364",
+            "hit": 48.9,
+            "needs": 53.6,
+            "units": -62.0,
+            "roi": -8.7,
+            "roi_by_weekend": {
+              "2026-09-19": -12.4,
+              "2026-09-26": -8.2,
+              "2026-10-03": -5.8
+            }
+          },
+          "under_edge10": {
+            "n": 280,
+            "record": "154-126",
+            "hit": 55.0,
+            "needs": 53.5,
+            "units": 8.5,
+            "roi": 3.0,
+            "roi_by_weekend": {
+              "2026-09-19": 4.5,
+              "2026-09-26": 3.6,
+              "2026-10-03": 0.8
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 273,
+            "record": "148-125",
+            "hit": 54.2,
+            "needs": 53.5,
+            "units": 4.2,
+            "roi": 1.5,
+            "roi_by_weekend": {
+              "2026-09-19": -0.4,
+              "2026-09-26": 3.6,
+              "2026-10-03": 0.8
+            }
+          },
+          "proj_over_edge10": {
+            "n": 81,
+            "record": "50-31",
+            "hit": 61.7,
+            "needs": 53.0,
+            "units": 13.1,
+            "roi": 16.2,
+            "roi_by_weekend": {
+              "2026-09-19": 27.9,
+              "2026-09-26": -0.3,
+              "2026-10-03": 26.1
+            }
+          },
+          "proj_under_edge10": {
+            "n": 196,
+            "record": "106-90",
+            "hit": 54.1,
+            "needs": 53.6,
+            "units": 2.5,
+            "roi": 1.3,
+            "roi_by_weekend": {
+              "2026-09-19": 8.9,
+              "2026-09-26": 1.1,
+              "2026-10-03": -7.7
+            }
+          }
+        }
+      },
+      "trimmed": {
+        "description": "Receiving-specific inputs only",
+        "n_inputs": 14,
+        "train_rows": 78482,
+        "test_2025": {
+          "n": 12297,
+          "mae": 22.685,
+          "bias": -0.044,
+          "naive_mae": 23.317,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.236,
+            "avg_gap_pts": 0.6,
+            "model_avg_over": 40.7,
+            "actual_over": 40.9,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 1032,
+                "model": 25.0,
+                "actual": 24.0
+              },
+              {
+                "bucket": "30-40%",
+                "n": 4574,
+                "model": 36.0,
+                "actual": 36.6
+              },
+              {
+                "bucket": "40-50%",
+                "n": 5574,
+                "model": 44.3,
+                "actual": 44.7
+              },
+              {
+                "bucket": "50-60%",
+                "n": 897,
+                "model": 53.2,
+                "actual": 53.5
+              },
+              {
+                "bucket": "60-70%",
+                "n": 156,
+                "model": 63.3,
+                "actual": 59.6
+              },
+              {
+                "bucket": "70%+",
+                "n": 64,
+                "model": 80.8,
+                "actual": 68.8
+              }
+            ]
+          }
+        },
+        "props_2026": {
+          "n": 712,
+          "mae": 25.02,
+          "bias": -4.6,
+          "line_mae": 24.18,
+          "calibration": {
+            "n": 712,
+            "brier": 0.2629,
+            "avg_gap_pts": 10.5,
+            "model_avg_over": 45.9,
+            "actual_over": 51.5,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 87,
+                "model": 22.9,
+                "actual": 46.0
+              },
+              {
+                "bucket": "30-40%",
+                "n": 134,
+                "model": 35.0,
+                "actual": 49.3
+              },
+              {
+                "bucket": "40-50%",
+                "n": 220,
+                "model": 45.3,
+                "actual": 53.6
+              },
+              {
+                "bucket": "50-60%",
+                "n": 166,
+                "model": 53.9,
+                "actual": 50.0
+              },
+              {
+                "bucket": "60-70%",
+                "n": 73,
+                "model": 63.7,
+                "actual": 53.4
+              },
+              {
+                "bucket": "70%+",
+                "n": 32,
+                "model": 76.4,
+                "actual": 65.6
+              }
+            ]
+          },
+          "over_all": {
+            "n": 712,
+            "record": "371-341",
+            "hit": 52.1,
+            "needs": 53.2,
+            "units": -14.4,
+            "roi": -2.0,
+            "roi_by_weekend": {
+              "2026-09-19": 1.7,
+              "2026-09-26": -2.4,
+              "2026-10-03": -5.0
+            }
+          },
+          "over_edge10": {
+            "n": 121,
+            "record": "72-49",
+            "hit": 59.5,
+            "needs": 53.0,
+            "units": 14.3,
+            "roi": 11.8,
+            "roi_by_weekend": {
+              "2026-09-19": 10.5,
+              "2026-09-26": 7.7,
+              "2026-10-03": 17.8
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 112,
+            "record": "66-46",
+            "hit": 58.9,
+            "needs": 53.0,
+            "units": 12.0,
+            "roi": 10.7,
+            "roi_by_weekend": {
+              "2026-09-19": 10.0,
+              "2026-09-26": 10.0,
+              "2026-10-03": 12.2
+            }
+          },
+          "under_all": {
+            "n": 712,
+            "record": "348-364",
+            "hit": 48.9,
+            "needs": 53.6,
+            "units": -62.1,
+            "roi": -8.7,
+            "roi_by_weekend": {
+              "2026-09-19": -12.4,
+              "2026-09-26": -8.3,
+              "2026-10-03": -5.8
+            }
+          },
+          "under_edge10": {
+            "n": 242,
+            "record": "129-113",
+            "hit": 53.3,
+            "needs": 53.5,
+            "units": -0.6,
+            "roi": -0.2,
+            "roi_by_weekend": {
+              "2026-09-19": 1.2,
+              "2026-09-26": 0.5,
+              "2026-10-03": -2.7
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 235,
+            "record": "123-112",
+            "hit": 52.3,
+            "needs": 53.5,
+            "units": -4.8,
+            "roi": -2.1,
+            "roi_by_weekend": {
+              "2026-09-19": -4.7,
+              "2026-09-26": 0.5,
+              "2026-10-03": -2.7
+            }
+          },
+          "proj_over_edge10": {
+            "n": 121,
+            "record": "72-49",
+            "hit": 59.5,
+            "needs": 53.0,
+            "units": 14.3,
+            "roi": 11.8,
+            "roi_by_weekend": {
+              "2026-09-19": 10.5,
+              "2026-09-26": 7.7,
+              "2026-10-03": 17.8
+            }
+          },
+          "proj_under_edge10": {
+            "n": 183,
+            "record": "97-86",
+            "hit": 53.0,
+            "needs": 53.5,
+            "units": -1.1,
+            "roi": -0.6,
+            "roi_by_weekend": {
+              "2026-09-19": 0.3,
+              "2026-09-26": 0.7,
+              "2026-10-03": -2.8
+            }
+          }
+        }
+      },
+      "extras": {
+        "description": "Current + trends, stability, game total, opponent per-attempt",
+        "n_inputs": 45,
+        "train_rows": 78482,
+        "test_2025": {
+          "n": 12297,
+          "mae": 22.568,
+          "bias": 0.074,
+          "naive_mae": 23.317,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2334,
+            "avg_gap_pts": 1.2,
+            "model_avg_over": 40.0,
+            "actual_over": 40.9,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 1651,
+                "model": 24.6,
+                "actual": 25.0
+              },
+              {
+                "bucket": "30-40%",
+                "n": 4490,
+                "model": 35.6,
+                "actual": 36.7
+              },
+              {
+                "bucket": "40-50%",
+                "n": 4584,
+                "model": 44.3,
+                "actual": 45.8
+              },
+              {
+                "bucket": "50-60%",
+                "n": 1271,
+                "model": 53.6,
+                "actual": 52.6
+              },
+              {
+                "bucket": "60-70%",
+                "n": 201,
+                "model": 63.5,
+                "actual": 65.2
+              },
+              {
+                "bucket": "70%+",
+                "n": 100,
+                "model": 79.5,
+                "actual": 69.0
+              }
+            ]
+          }
+        },
+        "props_2026": {
+          "n": 712,
+          "mae": 24.45,
+          "bias": -4.79,
+          "line_mae": 24.18,
+          "calibration": {
+            "n": 712,
+            "brier": 0.2576,
+            "avg_gap_pts": 8.7,
+            "model_avg_over": 44.0,
+            "actual_over": 51.5,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 94,
+                "model": 24.3,
+                "actual": 45.7
+              },
+              {
+                "bucket": "30-40%",
+                "n": 167,
+                "model": 35.5,
+                "actual": 45.5
+              },
+              {
+                "bucket": "40-50%",
+                "n": 234,
+                "model": 44.9,
+                "actual": 53.8
+              },
+              {
+                "bucket": "50-60%",
+                "n": 154,
+                "model": 53.9,
+                "actual": 53.2
+              },
+              {
+                "bucket": "60-70%",
+                "n": 41,
+                "model": 64.3,
+                "actual": 61.0
+              },
+              {
+                "bucket": "70%+",
+                "n": 22,
+                "model": 76.6,
+                "actual": 68.2
+              }
+            ]
+          },
+          "over_all": {
+            "n": 712,
+            "record": "371-341",
+            "hit": 52.1,
+            "needs": 53.2,
+            "units": -14.2,
+            "roi": -2.0,
+            "roi_by_weekend": {
+              "2026-09-19": 1.7,
+              "2026-09-26": -2.3,
+              "2026-10-03": -5.0
+            }
+          },
+          "over_edge10": {
+            "n": 81,
+            "record": "49-32",
+            "hit": 60.5,
+            "needs": 53.1,
+            "units": 11.2,
+            "roi": 13.8,
+            "roi_by_weekend": {
+              "2026-09-19": 19.3,
+              "2026-09-26": 11.5,
+              "2026-10-03": 12.0
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 74,
+            "record": "45-29",
+            "hit": 60.8,
+            "needs": 53.0,
+            "units": 10.7,
+            "roi": 14.4,
+            "roi_by_weekend": {
+              "2026-09-19": 28.2,
+              "2026-09-26": 15.1,
+              "2026-10-03": 2.6
+            }
+          },
+          "under_all": {
+            "n": 712,
+            "record": "348-364",
+            "hit": 48.9,
+            "needs": 53.6,
+            "units": -62.1,
+            "roi": -8.7,
+            "roi_by_weekend": {
+              "2026-09-19": -12.4,
+              "2026-09-26": -8.3,
+              "2026-10-03": -5.8
+            }
+          },
+          "under_edge10": {
+            "n": 288,
+            "record": "160-128",
+            "hit": 55.6,
+            "needs": 53.5,
+            "units": 11.8,
+            "roi": 4.1,
+            "roi_by_weekend": {
+              "2026-09-19": -0.9,
+              "2026-09-26": 6.4,
+              "2026-10-03": 6.5
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 281,
+            "record": "154-127",
+            "hit": 54.8,
+            "needs": 53.5,
+            "units": 7.5,
+            "roi": 2.7,
+            "roi_by_weekend": {
+              "2026-09-19": -6.1,
+              "2026-09-26": 6.4,
+              "2026-10-03": 6.5
+            }
+          },
+          "proj_over_edge10": {
+            "n": 81,
+            "record": "49-32",
+            "hit": 60.5,
+            "needs": 53.1,
+            "units": 11.2,
+            "roi": 13.8,
+            "roi_by_weekend": {
+              "2026-09-19": 19.3,
+              "2026-09-26": 11.5,
+              "2026-10-03": 12.0
+            }
+          },
+          "proj_under_edge10": {
+            "n": 197,
+            "record": "108-89",
+            "hit": 54.8,
+            "needs": 53.5,
+            "units": 5.5,
+            "roi": 2.8,
+            "roi_by_weekend": {
+              "2026-09-19": 9.0,
+              "2026-09-26": 2.5,
+              "2026-10-03": -4.4
+            }
+          }
+        }
+      },
+      "pff": {
+        "description": "Current + PFF routes and targets",
+        "n_inputs": 44,
+        "train_rows": 78482,
+        "test_2025": {
+          "n": 12297,
+          "mae": 22.123,
+          "bias": -0.331,
+          "naive_mae": 23.317,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2293,
+            "avg_gap_pts": 1.4,
+            "model_avg_over": 39.5,
+            "actual_over": 40.9,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 2457,
+                "model": 23.9,
+                "actual": 25.8
+              },
+              {
+                "bucket": "30-40%",
+                "n": 3962,
+                "model": 35.1,
+                "actual": 37.2
+              },
+              {
+                "bucket": "40-50%",
+                "n": 3794,
+                "model": 44.7,
+                "actual": 44.7
+              },
+              {
+                "bucket": "50-60%",
+                "n": 1613,
+                "model": 53.8,
+                "actual": 54.9
+              },
+              {
+                "bucket": "60-70%",
+                "n": 332,
+                "model": 63.5,
+                "actual": 70.2
+              },
+              {
+                "bucket": "70%+",
+                "n": 139,
+                "model": 78.3,
+                "actual": 77.0
+              }
+            ]
+          }
+        },
+        "props_2026": {
+          "n": 712,
+          "mae": 24.41,
+          "bias": -4.02,
+          "line_mae": 24.18,
+          "calibration": {
+            "n": 712,
+            "brier": 0.253,
+            "avg_gap_pts": 7.0,
+            "model_avg_over": 46.2,
+            "actual_over": 51.5,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 64,
+                "model": 25.2,
+                "actual": 46.9
+              },
+              {
+                "bucket": "30-40%",
+                "n": 152,
+                "model": 36.0,
+                "actual": 44.1
+              },
+              {
+                "bucket": "40-50%",
+                "n": 238,
+                "model": 45.1,
+                "actual": 50.4
+              },
+              {
+                "bucket": "50-60%",
+                "n": 174,
+                "model": 54.6,
+                "actual": 52.3
+              },
+              {
+                "bucket": "60-70%",
+                "n": 66,
+                "model": 63.6,
+                "actual": 71.2
+              },
+              {
+                "bucket": "70%+",
+                "n": 18,
+                "model": 76.7,
+                "actual": 66.7
+              }
+            ]
+          },
+          "over_all": {
+            "n": 712,
+            "record": "371-341",
+            "hit": 52.1,
+            "needs": 53.3,
+            "units": -14.6,
+            "roi": -2.0,
+            "roi_by_weekend": {
+              "2026-09-19": 1.5,
+              "2026-09-26": -2.3,
+              "2026-10-03": -5.0
+            }
+          },
+          "over_edge10": {
+            "n": 110,
+            "record": "74-36",
+            "hit": 67.3,
+            "needs": 53.0,
+            "units": 29.4,
+            "roi": 26.7,
+            "roi_by_weekend": {
+              "2026-09-19": 37.7,
+              "2026-09-26": 14.1,
+              "2026-10-03": 25.6
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 99,
+            "record": "67-32",
+            "hit": 67.7,
+            "needs": 53.0,
+            "units": 27.2,
+            "roi": 27.4,
+            "roi_by_weekend": {
+              "2026-09-19": 45.1,
+              "2026-09-26": 17.7,
+              "2026-10-03": 17.9
+            }
+          },
+          "under_all": {
+            "n": 712,
+            "record": "348-364",
+            "hit": 48.9,
+            "needs": 53.6,
+            "units": -62.4,
+            "roi": -8.8,
+            "roi_by_weekend": {
+              "2026-09-19": -12.5,
+              "2026-09-26": -8.3,
+              "2026-10-03": -5.8
+            }
+          },
+          "under_edge10": {
+            "n": 232,
+            "record": "130-102",
+            "hit": 56.0,
+            "needs": 53.6,
+            "units": 10.7,
+            "roi": 4.6,
+            "roi_by_weekend": {
+              "2026-09-19": 9.1,
+              "2026-09-26": 4.7,
+              "2026-10-03": -0.8
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 226,
+            "record": "126-100",
+            "hit": 55.8,
+            "needs": 53.6,
+            "units": 9.2,
+            "roi": 4.1,
+            "roi_by_weekend": {
+              "2026-09-19": 6.2,
+              "2026-09-26": 5.8,
+              "2026-10-03": -0.8
+            }
+          },
+          "proj_over_edge10": {
+            "n": 110,
+            "record": "74-36",
+            "hit": 67.3,
+            "needs": 53.0,
+            "units": 29.4,
+            "roi": 26.7,
+            "roi_by_weekend": {
+              "2026-09-19": 37.7,
+              "2026-09-26": 14.1,
+              "2026-10-03": 25.6
+            }
+          },
+          "proj_under_edge10": {
+            "n": 167,
+            "record": "91-76",
+            "hit": 54.5,
+            "needs": 53.6,
+            "units": 2.9,
+            "roi": 1.7,
+            "roi_by_weekend": {
+              "2026-09-19": 17.4,
+              "2026-09-26": -3.7,
+              "2026-10-03": -13.0
+            }
+          }
+        }
+      },
+      "pff_extras": {
+        "description": "Everything",
+        "n_inputs": 59,
+        "train_rows": 78482,
+        "test_2025": {
+          "n": 12297,
+          "mae": 22.15,
+          "bias": -0.3,
+          "naive_mae": 23.317,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2293,
+            "avg_gap_pts": 1.3,
+            "model_avg_over": 39.7,
+            "actual_over": 40.9,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 2333,
+                "model": 24.1,
+                "actual": 26.0
+              },
+              {
+                "bucket": "30-40%",
+                "n": 4092,
+                "model": 35.3,
+                "actual": 36.4
+              },
+              {
+                "bucket": "40-50%",
+                "n": 3794,
+                "model": 44.5,
+                "actual": 45.1
+              },
+              {
+                "bucket": "50-60%",
+                "n": 1597,
+                "model": 53.7,
+                "actual": 55.3
+              },
+              {
+                "bucket": "60-70%",
+                "n": 339,
+                "model": 63.6,
+                "actual": 68.4
+              },
+              {
+                "bucket": "70%+",
+                "n": 142,
+                "model": 78.5,
+                "actual": 76.1
+              }
+            ]
+          }
+        },
+        "props_2026": {
+          "n": 712,
+          "mae": 24.4,
+          "bias": -3.91,
+          "line_mae": 24.18,
+          "calibration": {
+            "n": 712,
+            "brier": 0.2529,
+            "avg_gap_pts": 6.2,
+            "model_avg_over": 45.9,
+            "actual_over": 51.5,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 60,
+                "model": 25.2,
+                "actual": 48.3
+              },
+              {
+                "bucket": "30-40%",
+                "n": 150,
+                "model": 35.7,
+                "actual": 45.3
+              },
+              {
+                "bucket": "40-50%",
+                "n": 250,
+                "model": 44.9,
+                "actual": 49.6
+              },
+              {
+                "bucket": "50-60%",
+                "n": 183,
+                "model": 54.5,
+                "actual": 55.7
+              },
+              {
+                "bucket": "60-70%",
+                "n": 56,
+                "model": 64.0,
+                "actual": 62.5
+              },
+              {
+                "bucket": "70%+",
+                "n": 13,
+                "model": 77.4,
+                "actual": 69.2
+              }
+            ]
+          },
+          "over_all": {
+            "n": 712,
+            "record": "371-341",
+            "hit": 52.1,
+            "needs": 53.2,
+            "units": -14.4,
+            "roi": -2.0,
+            "roi_by_weekend": {
+              "2026-09-19": 1.7,
+              "2026-09-26": -2.4,
+              "2026-10-03": -5.0
+            }
+          },
+          "over_edge10": {
+            "n": 98,
+            "record": "67-31",
+            "hit": 68.4,
+            "needs": 53.0,
+            "units": 28.2,
+            "roi": 28.7,
+            "roi_by_weekend": {
+              "2026-09-19": 32.9,
+              "2026-09-26": 27.6,
+              "2026-10-03": 25.5
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 88,
+            "record": "61-27",
+            "hit": 69.3,
+            "needs": 53.0,
+            "units": 26.8,
+            "roi": 30.5,
+            "roi_by_weekend": {
+              "2026-09-19": 42.6,
+              "2026-09-26": 31.9,
+              "2026-10-03": 16.9
+            }
+          },
+          "under_all": {
+            "n": 712,
+            "record": "348-364",
+            "hit": 48.9,
+            "needs": 53.6,
+            "units": -62.3,
+            "roi": -8.7,
+            "roi_by_weekend": {
+              "2026-09-19": -12.5,
+              "2026-09-26": -8.3,
+              "2026-10-03": -5.8
+            }
+          },
+          "under_edge10": {
+            "n": 244,
+            "record": "135-109",
+            "hit": 55.3,
+            "needs": 53.6,
+            "units": 8.3,
+            "roi": 3.4,
+            "roi_by_weekend": {
+              "2026-09-19": 7.1,
+              "2026-09-26": 1.0,
+              "2026-10-03": 2.8
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 238,
+            "record": "131-107",
+            "hit": 55.0,
+            "needs": 53.6,
+            "units": 6.8,
+            "roi": 2.9,
+            "roi_by_weekend": {
+              "2026-09-19": 4.0,
+              "2026-09-26": 2.1,
+              "2026-10-03": 2.8
+            }
+          },
+          "proj_over_edge10": {
+            "n": 98,
+            "record": "67-31",
+            "hit": 68.4,
+            "needs": 53.0,
+            "units": 28.2,
+            "roi": 28.7,
+            "roi_by_weekend": {
+              "2026-09-19": 32.9,
+              "2026-09-26": 27.6,
+              "2026-10-03": 25.5
+            }
+          },
+          "proj_under_edge10": {
+            "n": 167,
+            "record": "89-78",
+            "hit": 53.3,
+            "needs": 53.6,
+            "units": -0.8,
+            "roi": -0.5,
+            "roi_by_weekend": {
+              "2026-09-19": 11.4,
+              "2026-09-26": -2.3,
+              "2026-10-03": -12.4
+            }
+          }
+        }
+      },
+      "as_live": {
+        "description": "Live model exactly as deployed",
+        "n_inputs": 30,
+        "props_2026": {
+          "n": 712,
+          "mae": 24.59,
+          "bias": -4.92,
+          "line_mae": 24.18,
+          "calibration": {
+            "n": 712,
+            "brier": 0.2574,
+            "avg_gap_pts": 9.4,
+            "model_avg_over": 43.9,
+            "actual_over": 51.5,
+            "buckets": [
+              {
+                "bucket": "under 30%",
+                "n": 84,
+                "model": 24.3,
+                "actual": 45.2
+              },
+              {
+                "bucket": "30-40%",
+                "n": 178,
+                "model": 35.3,
+                "actual": 44.4
+              },
+              {
+                "bucket": "40-50%",
+                "n": 243,
+                "model": 44.9,
+                "actual": 56.0
+              },
+              {
+                "bucket": "50-60%",
+                "n": 144,
+                "model": 54.0,
+                "actual": 54.2
+              },
+              {
+                "bucket": "60-70%",
+                "n": 48,
+                "model": 63.5,
+                "actual": 52.1
+              },
+              {
+                "bucket": "70%+",
+                "n": 15,
+                "model": 78.4,
+                "actual": 73.3
+              }
+            ]
+          },
+          "over_all": {
+            "n": 712,
+            "record": "371-341",
+            "hit": 52.1,
+            "needs": 53.3,
+            "units": -14.7,
+            "roi": -2.1,
+            "roi_by_weekend": {
+              "2026-09-19": 1.4,
+              "2026-09-26": -2.3,
+              "2026-10-03": -5.0
+            }
+          },
+          "over_edge10": {
+            "n": 83,
+            "record": "51-32",
+            "hit": 61.4,
+            "needs": 53.0,
+            "units": 12.9,
+            "roi": 15.6,
+            "roi_by_weekend": {
+              "2026-09-19": 24.8,
+              "2026-09-26": 2.6,
+              "2026-10-03": 23.5
+            }
+          },
+          "over_edge10_gp2": {
+            "n": 73,
+            "record": "44-29",
+            "hit": 60.3,
+            "needs": 53.0,
+            "units": 9.8,
+            "roi": 13.4,
+            "roi_by_weekend": {
+              "2026-09-19": 24.5,
+              "2026-09-26": 5.8,
+              "2026-10-03": 15.2
+            }
+          },
+          "under_all": {
+            "n": 712,
+            "record": "348-364",
+            "hit": 48.9,
+            "needs": 53.6,
+            "units": -61.9,
+            "roi": -8.7,
+            "roi_by_weekend": {
+              "2026-09-19": -12.3,
+              "2026-09-26": -8.3,
+              "2026-10-03": -5.8
+            }
+          },
+          "under_edge10": {
+            "n": 303,
+            "record": "165-138",
+            "hit": 54.5,
+            "needs": 53.6,
+            "units": 6.0,
+            "roi": 2.0,
+            "roi_by_weekend": {
+              "2026-09-19": 0.1,
+              "2026-09-26": 0.2,
+              "2026-10-03": 6.3
+            }
+          },
+          "under_edge10_gp2": {
+            "n": 295,
+            "record": "159-136",
+            "hit": 53.9,
+            "needs": 53.6,
+            "units": 2.7,
+            "roi": 0.9,
+            "roi_by_weekend": {
+              "2026-09-19": -4.3,
+              "2026-09-26": 1.1,
+              "2026-10-03": 6.3
+            }
+          },
+          "proj_over_edge10": {
+            "n": 83,
+            "record": "51-32",
+            "hit": 61.4,
+            "needs": 53.0,
+            "units": 12.9,
+            "roi": 15.6,
+            "roi_by_weekend": {
+              "2026-09-19": 24.8,
+              "2026-09-26": 2.6,
+              "2026-10-03": 23.5
+            }
+          },
+          "proj_under_edge10": {
+            "n": 226,
+            "record": "122-104",
+            "hit": 54.0,
+            "needs": 53.6,
+            "units": 2.6,
+            "roi": 1.1,
+            "roi_by_weekend": {
+              "2026-09-19": 6.7,
+              "2026-09-26": -2.1,
+              "2026-10-03": -1.8
+            }
+          }
+        }
+      }
+    }
+  }
+}
