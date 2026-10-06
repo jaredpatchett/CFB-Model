@@ -1,0 +1,50 @@
+name: PFF data check (routes run)
+
+# One-off check, manual trigger only. Confirms the PFF Pro API key works and
+# that college routes-run data is available per week back to 2022. Saves
+# docs/data/pff_check.json -- metadata only (column names, row counts,
+# percentages). No PFF stat values are committed: this repo is public.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      # The PFF key is read from a repo secret named PFF_API_KEY, or
+      # CFB_API_KEY if that is the name it was saved under.
+      PFF_API_KEY: ${{ secrets.PFF_API_KEY || secrets.CFB_API_KEY }}
+      CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check PFF key and routes-run data
+        run: python scripts/pff_check.py
+
+      - name: Commit result
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/pff_check.json || true
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "PFF data check result [skip ci]"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git merge -X ours --no-edit origin/main -m "Merge origin/main [skip ci]" && git push origin main; then
+              echo "Pushed on attempt $i"; break
+            fi
+            [ "$i" -eq 5 ] && echo "::error::Could not push result" && exit 1
+            sleep $((RANDOM % 10 + 5))
+          done
