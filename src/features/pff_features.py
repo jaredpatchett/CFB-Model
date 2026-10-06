@@ -14,7 +14,9 @@ routes and targets are the opportunity. This module
 Nothing here writes PFF numbers to disk. The repo is public and PFF data is
 licensed to the subscriber only.
 """
+import os
 import re
+import tempfile
 import unicodedata
 
 import numpy as np
@@ -34,6 +36,10 @@ PFF_FEATURE_COLUMNS = (
     + [f"last2_{c}" for c in LAST2_COLS]
     + ["roll_pff_tprr", "trend_pff_route_part", "trend_pff_target_share", "pff_matched"]
 )
+
+# The stats whose live models use the PFF inputs (10/2026 props lab: lower
+# projection error on 12,000+ unseen 2025 player-games for both).
+PFF_STATS = ("receptions", "rec_yds")
 
 
 def norm_name(name) -> str:
@@ -146,23 +152,41 @@ def match_pff_to_cfbd(wide: pd.DataFrame, games: pd.DataFrame, pff: pd.DataFrame
     return m[["gameId", "athleteId"] + GAME_COLS], info
 
 
+def _last2_charted(s: pd.Series) -> pd.Series:
+    """Average of the player's last two EARLIER games that PFF has charted.
+    A game with no PFF value yet is skipped rather than shrinking the window
+    to one game."""
+    prev = s.shift(1)
+    valid = prev.dropna()
+    if valid.empty:
+        return prev
+    return valid.rolling(2, min_periods=1).mean().reindex(prev.index).ffill()
+
+
 def add_pff_features(wide: pd.DataFrame, matched: pd.DataFrame) -> pd.DataFrame:
     """Adds PFF_FEATURE_COLUMNS to a player-game frame (must have gameId,
     athleteId, season, week). Leakage-safe: shift(1) before every average.
 
     A player PFF never matched gets the MISSING sentinel and pff_matched=0,
     so a model can still score him from box-score inputs alone. A matched
-    player with a box-score line but no PFF row that week ran no routes."""
+    player with a box-score line but no PFF row in a game PFF charted ran
+    no routes that game. `wide` must also carry `team`."""
     df = wide.merge(matched, on=["gameId", "athleteId"], how="left")
-    ever = df.groupby(["athleteId", "season"])["pff_routes"].transform(lambda s: s.notna().any())
+    has = df["pff_routes"].notna()
+    ever = has.groupby([df["athleteId"], df["season"]]).transform("any")
+    # "No PFF row" only means "ran no routes" if PFF has charted that game.
+    # A game it has not charted yet (a Sunday run after a Saturday game)
+    # is left out of the averages instead of being counted as zero.
+    charted = has.groupby([df["gameId"], df["team"]]).transform("any")
+    fill = ever & charted & ~has
     for c in ZERO_FILL_COLS:
-        df[c] = df[c].where(~(ever & df[c].isna()), 0.0)
+        df.loc[fill, c] = 0.0
     df = df.sort_values(["athleteId", "season", "week"])
     grp = df.groupby(["athleteId", "season"])
     for c in GAME_COLS:
         df[f"roll_{c}"] = grp[c].transform(lambda s: s.shift(1).expanding().mean())
     for c in LAST2_COLS:
-        df[f"last2_{c}"] = grp[c].transform(lambda s: s.shift(1).rolling(2, min_periods=1).mean())
+        df[f"last2_{c}"] = grp[c].transform(_last2_charted)
     # Targets per route run, from season-to-date totals (steadier than a mean of per-game ratios).
     cum_t = grp["pff_targets"].transform(lambda s: s.shift(1).expanding().sum())
     cum_r = grp["pff_routes"].transform(lambda s: s.shift(1).expanding().sum())
@@ -176,3 +200,94 @@ def add_pff_features(wide: pd.DataFrame, matched: pd.DataFrame) -> pd.DataFrame:
         elif c != "pff_matched":
             df[c] = df[c].fillna(MISSING)
     return df.drop(columns=GAME_COLS)
+
+
+# ------------------------------------------------------------ live use ----
+def missing_entry() -> dict:
+    """Feature values for a player with no PFF match -- the same values the
+    training rows of unmatched players carry."""
+    out = {}
+    for c in PFF_FEATURE_COLUMNS:
+        out[c] = 0.0 if (c.startswith("trend_") or c == "pff_matched") else MISSING
+    return out
+
+
+def current_pff_snapshot(wide: pd.DataFrame, matched: pd.DataFrame) -> dict:
+    """athleteId -> PFF feature values for that player's NEXT game, from all
+    of his games so far this season. Built by adding one placeholder "next
+    game" row per player and running the exact training code over it, so
+    live and training values cannot drift apart."""
+    base = wide[["gameId", "athleteId", "season", "week", "team"]].copy()
+    nxt = base.sort_values(["season", "week"]).groupby("athleteId").tail(1).copy()
+    nxt["week"] = nxt["week"] + 1000
+    numeric = pd.api.types.is_numeric_dtype(base["gameId"])
+    nxt["gameId"] = [-(i + 1) if numeric else f"next_{i}" for i in range(len(nxt))]
+    placeholder = set(nxt["gameId"])
+    feats = add_pff_features(pd.concat([base, nxt], ignore_index=True), matched)
+    feats = feats[feats["gameId"].isin(placeholder)]
+    return {aid: {c: float(v) for c, v in zip(PFF_FEATURE_COLUMNS, row)}
+            for aid, row in zip(feats["athleteId"], feats[PFF_FEATURE_COLUMNS].values)}
+
+
+def training_frame(feats: pd.DataFrame, games: pd.DataFrame, seasons: list, out_dir: str = None):
+    """The training frame with PFF features added: (frame, match info).
+    PFF data is pulled into a temp folder outside the repo; nothing derived
+    from it is written to disk here."""
+    from src.data import pff_client as pff
+    out_dir = out_dir or os.environ.get("PFF_DATA_DIR") or os.path.join(tempfile.gettempdir(), "pff_train")
+    recv, pgames = pff.fetch_receiving_seasons(list(seasons), out_dir)
+    if recv.empty:
+        raise RuntimeError("PFF returned no receiving rows")
+    matched, info = match_pff_to_cfbd(feats, games, prepare_pff_rows(recv, pgames))
+    return add_pff_features(feats, matched), info
+
+
+def live_snapshot(player_stats_long: pd.DataFrame, games: pd.DataFrame, season: int):
+    """(athleteId -> PFF features for the next game, match info) for the
+    current season. Always pulls fresh -- a new temp folder each call."""
+    from src.data import pff_client as pff
+    from src.features.player_features import pivot_player_game_stats
+    wide = pivot_player_game_stats(player_stats_long, games)
+    recv, pgames = pff.fetch_receiving_seasons([season], tempfile.mkdtemp(prefix="pff_live_"), verbose=False)
+    if recv.empty:
+        raise RuntimeError(f"PFF returned no {season} receiving rows")
+    matched, info = match_pff_to_cfbd(wide, games, prepare_pff_rows(recv, pgames))
+    if matched.empty:
+        raise RuntimeError("no PFF rows could be matched to CFBD players")
+    charted = wide.merge(matched[["gameId"]].drop_duplicates().assign(c=1), on="gameId", how="left")
+    info["cfbd_games"] = int(wide["gameId"].nunique())
+    info["games_charted_by_pff"] = int(charted.loc[charted["c"].notna(), "gameId"].nunique())
+    return current_pff_snapshot(wide, matched), info
+
+
+def apply_live_pff(player_form: dict, prop_models: dict, player_stats_long: pd.DataFrame,
+                   games: pd.DataFrame, season: int, models_dir: str, loader=None):
+    """Give every player in `player_form` his PFF feature values so the
+    receiving models can score him. Returns (prop_models, status text).
+
+    If PFF cannot be reached (outage, expired key), the receiving models are
+    swapped for their box-score-only fallbacks (saved next to them as
+    <stat>_base.joblib by train_props_model.py) so props are still scored.
+    Never raises."""
+    needs = [s for s, m in prop_models.items() if any(c in PFF_FEATURE_COLUMNS for c in (m.feature_columns or []))]
+    if not needs:
+        return prop_models, "box score only (models were trained without PFF)"
+    try:
+        snap, info = live_snapshot(player_stats_long, games, season)
+        for entry in player_form.values():
+            entry.update(snap.get(entry.get("athlete_id")) or missing_entry())
+        n = sum(1 for e in player_form.values() if e.get("pff_matched") == 1.0)
+        return prop_models, (f"PFF routes and targets ({n} of {len(player_form)} players matched, "
+                             f"{info.get('games_charted_by_pff')} of {info.get('cfbd_games')} games charted)")
+    except Exception as e:
+        out = dict(prop_models)
+        if loader is None:
+            from src.models.props_model import PlayerStatModel
+            loader = PlayerStatModel.load
+        for s in needs:
+            path = f"{models_dir}/{s}_base.joblib"
+            try:
+                out[s] = loader(path)
+            except Exception:
+                out.pop(s, None)
+        return out, f"box score only -- PFF unavailable this run ({type(e).__name__}: {e})"
