@@ -40,6 +40,7 @@ from src.features.live_player_features import (
     project_player_fantasy, MIN_GAMES_FOR_FANTASY, build_current_defense_allowed,
 )
 from src.features.player_features import STAT_MAP
+from src.features import pff_features
 from src.models import fair_odds as fo
 from src.models.game_model import GameMarginModel
 from src.models.props_model import PlayerStatModel
@@ -821,6 +822,9 @@ def main(year: int):
 
     player_form = {}
     opp_allowed_lookup = {}
+    # Which inputs the receptions / receiving-yards models used this run
+    # (10/2026): PFF routes and targets, or the box-score fallback.
+    props_receiving_inputs = "not scored this run"
     if prop_models and max_completed_week > 0:
         print(f"  pulling {season_year} player game stats through week {max_completed_week}...")
         all_player_stats = []
@@ -835,6 +839,13 @@ def main(year: int):
             player_stats_long_current = pd.concat(all_player_stats, ignore_index=True)
             player_form = build_current_player_form(player_stats_long_current, schedule_df)
             opp_allowed_lookup = build_current_defense_allowed(player_stats_long_current, schedule_df)
+            # PFF routes run and targets for the receiving models (10/2026).
+            # Never raises: if PFF can't be reached, those two models are
+            # swapped for their box-score-only fallbacks so props still score.
+            prop_models, props_receiving_inputs = pff_features.apply_live_pff(
+                player_form, prop_models, player_stats_long_current, schedule_df, season_year,
+                f"{config.MODELS_DIR}/props")
+            print(f"  receiving-model inputs: {props_receiving_inputs}")
             n_ready = sum(1 for v in player_form.values() if v["games_played_prior"] >= MIN_GAMES_FOR_PROP_MODEL)
             print(f"  {len(player_form)} player(s) matched to real {season_year} stats, "
                   f"{n_ready} of them already clear the {MIN_GAMES_FOR_PROP_MODEL}-game threshold")
@@ -1051,6 +1062,7 @@ def main(year: int):
         "teams": teams_out,
         "games": games_out,
         "props": props_out,
+        "props_receiving_inputs": props_receiving_inputs,
         "prop_market_catalog": prop_market_catalog,
         "fantasy": fantasy_out,
         "injuries": injuries,
