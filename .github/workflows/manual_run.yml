@@ -26,6 +26,10 @@ jobs:
       CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
       ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
       ODDSPAPI_API_KEY: ${{ secrets.PRIZEPICKS_API }}
+      # PFF Pro key (routes run + targets for the receiving props models),
+      # under whichever of these two names it was saved. If it is missing or
+      # PFF is down, those models fall back to box-score inputs.
+      PFF_API_KEY: ${{ secrets.PFF_API_KEY || secrets.CFB_API_KEY }}
       # schedule-triggered runs have no github.event.inputs at all (that
       # only exists for workflow_dispatch), so every step below that used
       # to read github.event.inputs.years directly now reads env.YEARS,
