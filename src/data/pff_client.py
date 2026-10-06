@@ -125,3 +125,66 @@ def get_facet_summary(report: str, season: int, week: int) -> pd.DataFrame:
 def get_receiving_summary(season: int, week: int) -> pd.DataFrame:
     """Charted receiving data for one week -- includes routes run and targets."""
     return get_facet_summary("receiving", season, week)
+
+
+def get_games(season: int, week: int) -> pd.DataFrame:
+    """One row per college game that week: PFF game id, both franchise ids
+    and the kickoff time. Used to line PFF rows up with CFBD games by date,
+    because the two sources number weeks differently (PFF has a Week 0 and
+    puts conference championships in week 17)."""
+    payload = _get("/v1/games", {"league": LEAGUE, "season": season, "week": week})
+    rows = [{"pff_game_id": g.get("id"), "home_franchise_id": g.get("home_franchise_id"),
+             "away_franchise_id": g.get("away_franchise_id"), "start": g.get("start")}
+            for g in (payload.get("games") or [])]
+    df = pd.DataFrame(rows)
+    if not df.empty:
+        df["season"], df["week"] = season, week
+    return df
+
+
+# Weeks worth pulling: 0-16 regular season plus 17 (conference championships,
+# which CFBD counts as regular season). Bowls are not used by the model.
+MODEL_WEEKS = list(range(0, 18))
+
+
+def fetch_receiving_seasons(seasons: list, out_dir: str, verbose: bool = True):
+    """Receiving rows and game kickoffs for every week of the given seasons.
+    Returns (receiving_df, games_df). Files are written to out_dir, which
+    must be OUTSIDE the repo and outside any cached folder -- this repo is
+    public and PFF's numbers are licensed to the subscriber only. About two
+    requests per week, well inside the 100-per-minute budget."""
+    os.makedirs(out_dir, exist_ok=True)
+    recv_parts, game_parts = [], []
+    for season in seasons:
+        rpath, gpath = f"{out_dir}/pff_receiving_{season}.csv", f"{out_dir}/pff_games_{season}.csv"
+        if os.path.exists(rpath) and os.path.exists(gpath):
+            recv_parts.append(pd.read_csv(rpath)); game_parts.append(pd.read_csv(gpath))
+            continue
+        rs, gs = [], []
+        for week in MODEL_WEEKS:
+            try:
+                r = get_receiving_summary(season, week)
+            except PFFError as e:
+                if e.status in (401, 403):
+                    raise
+                r = pd.DataFrame()
+            if r.empty:
+                continue
+            rs.append(r)
+            try:
+                g = get_games(season, week)
+                if not g.empty:
+                    gs.append(g)
+            except PFFError as e:
+                if verbose:
+                    print(f"  [warn] PFF games {season} week {week}: {e}")
+        r_all = pd.concat(rs, ignore_index=True) if rs else pd.DataFrame()
+        g_all = pd.concat(gs, ignore_index=True) if gs else pd.DataFrame()
+        if verbose:
+            print(f"  PFF {season}: {len(r_all)} receiving rows over {len(rs)} weeks, {len(g_all)} games")
+        if not r_all.empty:
+            r_all.to_csv(rpath, index=False); g_all.to_csv(gpath, index=False)
+            recv_parts.append(r_all); game_parts.append(g_all)
+    recv = pd.concat(recv_parts, ignore_index=True) if recv_parts else pd.DataFrame()
+    games = pd.concat([g for g in game_parts if not g.empty], ignore_index=True) if any(not g.empty for g in game_parts) else pd.DataFrame()
+    return recv, games
