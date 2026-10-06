@@ -1,0 +1,202 @@
+{
+  "generated_at": "2026-10-06T19:13:56.230149+00:00",
+  "ok": true,
+  "account": {
+    "tier": "pro",
+    "entitled": true,
+    "entitlement_reason": null,
+    "credential": "api_key"
+  },
+  "ncaa_seasons": [
+    2008,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "history_back_to_2022": true,
+  "current": {
+    "rows": 1828,
+    "n_columns": 51,
+    "columns": [
+      "avg_depth_of_target",
+      "avoided_tackles",
+      "caught_percent",
+      "contested_catch_rate",
+      "contested_receptions",
+      "contested_targets",
+      "declined_penalties",
+      "draft_season",
+      "drop_rate",
+      "drops",
+      "eligible_season",
+      "epa",
+      "first_downs",
+      "franchise_id",
+      "fumbles",
+      "grades_hands_drop",
+      "grades_hands_fumble",
+      "grades_offense",
+      "grades_pass_block",
+      "grades_pass_route",
+      "inline_rate",
+      "inline_snaps",
+      "interceptions",
+      "jersey_number",
+      "longest",
+      "pass_block_rate",
+      "pass_blocks",
+      "pass_plays",
+      "penalties",
+      "player",
+      "player_game_count",
+      "player_id",
+      "position",
+      "positive_epa_percent",
+      "receptions",
+      "route_rate",
+      "routes",
+      "slot_rate",
+      "slot_snaps",
+      "targeted_qb_rating",
+      "targets",
+      "team",
+      "team_name",
+      "touchdowns",
+      "wide_rate",
+      "wide_snaps",
+      "yards",
+      "yards_after_catch",
+      "yards_after_catch_per_reception",
+      "yards_per_reception",
+      "yprr"
+    ],
+    "route_columns": [
+      "grades_pass_route",
+      "yprr",
+      "route_rate",
+      "routes"
+    ],
+    "target_columns": [
+      "targets",
+      "contested_targets",
+      "targeted_qb_rating",
+      "avg_depth_of_target"
+    ],
+    "teams": 218,
+    "routes_count_column": "routes",
+    "pct_rows_with_routes": 99.8,
+    "season": 2026,
+    "latest_week_with_data": 5
+  },
+  "history": [
+    {
+      "rows": 1990,
+      "n_columns": 51,
+      "route_columns": [
+        "grades_pass_route",
+        "yprr",
+        "route_rate",
+        "routes"
+      ],
+      "target_columns": [
+        "targets",
+        "contested_targets",
+        "targeted_qb_rating",
+        "avg_depth_of_target"
+      ],
+      "teams": 238,
+      "routes_count_column": "routes",
+      "pct_rows_with_routes": 99.7,
+      "season": 2022,
+      "week": 5
+    },
+    {
+      "rows": 2006,
+      "n_columns": 51,
+      "route_columns": [
+        "grades_pass_route",
+        "yprr",
+        "route_rate",
+        "routes"
+      ],
+      "target_columns": [
+        "targets",
+        "contested_targets",
+        "targeted_qb_rating",
+        "avg_depth_of_target"
+      ],
+      "teams": 238,
+      "routes_count_column": "routes",
+      "pct_rows_with_routes": 100.0,
+      "season": 2023,
+      "week": 5
+    },
+    {
+      "rows": 1750,
+      "n_columns": 51,
+      "route_columns": [
+        "grades_pass_route",
+        "yprr",
+        "route_rate",
+        "routes"
+      ],
+      "target_columns": [
+        "targets",
+        "contested_targets",
+        "targeted_qb_rating",
+        "avg_depth_of_target"
+      ],
+      "teams": 214,
+      "routes_count_column": "routes",
+      "pct_rows_with_routes": 99.8,
+      "season": 2024,
+      "week": 5
+    },
+    {
+      "rows": 1802,
+      "n_columns": 51,
+      "route_columns": [
+        "grades_pass_route",
+        "yprr",
+        "route_rate",
+        "routes"
+      ],
+      "target_columns": [
+        "targets",
+        "contested_targets",
+        "targeted_qb_rating",
+        "avg_depth_of_target"
+      ],
+      "teams": 216,
+      "routes_count_column": "routes",
+      "pct_rows_with_routes": 99.7,
+      "season": 2025,
+      "week": 5
+    }
+  ],
+  "name_match": {
+    "cfbd_season": 2025,
+    "cfbd_week": 5,
+    "cfbd_players_with_catch": 1547,
+    "pff_week": 5,
+    "pct_matched_by_name": 91.3,
+    "pff_name_column": "player"
+  },
+  "routes_per_week_available": true,
+  "routes_history_available": true,
+  "backfill_requests_estimate": 84
+}
