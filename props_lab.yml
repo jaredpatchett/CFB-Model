@@ -1,0 +1,76 @@
+name: Props lab (routes run + new inputs test)
+
+# Manual trigger only. Trains the current receptions and receiving-yards
+# models and several candidate versions (role trends, PFF routes and targets)
+# side by side and grades them out of sample. Does NOT touch the live model,
+# the dashboard or the official-play rules.
+#
+# PFF data is pulled into a temp folder outside the repo for the length of
+# this run and is never cached or committed: this repo is public. The saved
+# results (docs/data/props_lab.json and props_lab_detail.csv) hold model
+# results only.
+
+on:
+  workflow_dispatch:
+    inputs:
+      season:
+        description: "Season whose posted prop lines are graded"
+        required: false
+        default: "2026"
+
+permissions:
+  contents: write
+
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
+      ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+      ODDSPAPI_API_KEY: ${{ secrets.PRIZEPICKS_API }}
+      # The PFF key, under whichever of these two names it was saved.
+      PFF_API_KEY: ${{ secrets.PFF_API_KEY || secrets.CFB_API_KEY }}
+      YEARS: "2022 2023 2024 2025"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history -- the saved prop lines live in past commits
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore cached historical CFBD data
+        uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: cfbd-raw-${{ env.YEARS }}-${{ github.run_id }}
+          restore-keys: |
+            cfbd-raw-${{ env.YEARS }}-
+            cfbd-raw-
+
+      - name: Fetch historical data
+        run: python scripts/fetch_historical_data.py --years ${{ env.YEARS }}
+
+      - name: Run the props lab
+        run: python scripts/props_lab.py --years ${{ env.YEARS }} --season ${{ github.event.inputs.season || '2026' }}
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/props_lab.json docs/data/props_lab_detail.csv
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Props lab results [skip ci]"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git merge -X ours --no-edit origin/main -m "Merge origin/main [skip ci]" && git push origin main; then
+              echo "Pushed on attempt $i"; break
+            fi
+            [ "$i" -eq 5 ] && echo "::error::Could not push results" && exit 1
+            sleep $((RANDOM % 10 + 5))
+          done
