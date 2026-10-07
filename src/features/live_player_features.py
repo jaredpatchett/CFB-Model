@@ -357,4 +357,12 @@ def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
         "model_over_probability": (
             round(result["over_probability"], 4) if result["over_probability"] is not None else None
         ),
+        # Whole-number lines can push (10/2026): the under chance is no
+        # longer simply 1 - over on those lines. 0.0 on half-point lines.
+        "model_under_probability": (
+            round(result["under_probability"], 4) if result.get("under_probability") is not None else None
+        ),
+        "model_push_probability": (
+            round(result["push_probability"], 4) if result.get("push_probability") is not None else None
+        ),
     }
