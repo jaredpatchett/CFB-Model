@@ -897,9 +897,15 @@ def main(year: int):
     #     (second/third options in an offense) -- 301-205 (+9.4%) in the
     #     backtest; tracked, not bet. Passing-yard and TD markets are never
     #     watch plays (consistent losers).
+    #   EDGE CAP (10/2026, props lab 2): a receptions over showing a 30%+
+    #     edge is NOT official -- it moves to Watch. In the backtest those
+    #     went 8-13 and lost in all three weekends, while 10-30% edges went
+    #     40-17; edges that large have mostly been the model missing
+    #     something, not a great bet.
     OFFICIAL_PROP_MARKET = "Receptions"
     OFFICIAL_PROP_SIDE = "over"
     MIN_PROP_EV_FOR_TARGETS = 10.0
+    MAX_OFFICIAL_PROP_EV = 30.0
     NEVER_WATCH_MARKETS = {"Pass Yards", "Pass Touchdowns", "Rush Touchdowns", "Reception Touchdowns",
                            "Pass Interceptions"}
     # Lines this small mean a low-usage player who often finishes at 0 --
@@ -927,14 +933,26 @@ def main(year: int):
                 lean = p.get("model_lean")
                 lean_price = p.get("over_price") if lean == "over" else p.get("under_price")
                 over_prob = p.get("model_over_probability")
-                lean_prob = (
-                    over_prob if lean == "over"
+                # Whole-number lines can push (10/2026). When the model gives
+                # a push chance, the under is its own number (not 1 - over)
+                # and a push returns the stake. Half-point lines have no push
+                # and are calculated exactly as before.
+                push_prob = p.get("model_push_probability") or 0.0
+                can_push = push_prob > 0 and p.get("model_under_probability") is not None
+                under_prob = (
+                    p.get("model_under_probability") if can_push
                     else (1 - over_prob) if over_prob is not None else None
                 )
+                lean_prob = over_prob if lean == "over" else under_prob
+                other_prob = under_prob if lean == "over" else over_prob
 
                 model_ev = None
                 if lean_prob is not None and _valid_price(lean_price):
-                    model_ev = round(fo.ev_percent(lean_prob, float(lean_price)), 1)
+                    if can_push:
+                        profit = fo.american_to_decimal(float(lean_price)) - 1
+                        model_ev = round((lean_prob * profit - other_prob) * 100, 1)
+                    else:
+                        model_ev = round(fo.ev_percent(lean_prob, float(lean_price)), 1)
                 p["model_ev"] = model_ev
                 p["model_lean_probability"] = round(lean_prob, 4) if lean_prob is not None else None
                 p["is_official_play"] = False
@@ -975,12 +993,18 @@ def main(year: int):
                     best[k] = p
             return list(best.values())
 
-        official = _best_per([p for p in props_out if _eligible(p)
-                              and p.get("market_name") == OFFICIAL_PROP_MARKET
-                              and p.get("model_lean") == OFFICIAL_PROP_SIDE],
-                             lambda p: (p.get("fixture_id"), p.get("player_name")))
+        candidates = _best_per([p for p in props_out if _eligible(p)
+                                and p.get("market_name") == OFFICIAL_PROP_MARKET
+                                and p.get("model_lean") == OFFICIAL_PROP_SIDE],
+                               lambda p: (p.get("fixture_id"), p.get("player_name")))
+        # Edge cap: 30%+ edges go to Watch instead of Official (see rules above).
+        official = [p for p in candidates if p["model_ev"] < MAX_OFFICIAL_PROP_EV]
+        capped = [p for p in candidates if p["model_ev"] >= MAX_OFFICIAL_PROP_EV]
         for p in official:
             p["is_official_play"] = True
+        for p in capped:
+            p["is_watch_play"] = True
+            p["edge_capped"] = True
         watch = _best_per([p for p in props_out if _eligible(p) and not p.get("is_official_play")
                            and p.get("market_name") not in NEVER_WATCH_MARKETS
                            and p.get("market_name") != OFFICIAL_PROP_MARKET
@@ -989,10 +1013,13 @@ def main(year: int):
         for p in watch:
             p["is_watch_play"] = True
         n_props_official = len(official)
-        n_props_watch = len(watch)
+        n_props_watch = len(watch) + len(capped)
+        if capped:
+            print(f"  {len(capped)} receptions over(s) with a {MAX_OFFICIAL_PROP_EV:.0f}%+ edge moved from Official to Watch (edge cap)")
     if props_out:
         print(f"  {n_props_scored} of {len(props_out)} posted prop line(s) scored with a real model prediction "
-              f"({n_props_official} OFFICIAL: receptions overs at {MIN_PROP_EV_FOR_TARGETS:.0f}%+ EV, best price; "
+              f"({n_props_official} OFFICIAL: receptions overs at {MIN_PROP_EV_FOR_TARGETS:.0f}%+ and under "
+              f"{MAX_OFFICIAL_PROP_EV:.0f}% EV, best price; "
               f"{n_props_watch} WATCH: secondary-role props at {MIN_PROP_EV_FOR_TARGETS:.0f}%+ EV -- "
               f"the rest show a LEAN or the posted line only. See "
               f"live_player_features.py's matching-limitations note if the scored count looks lower than "
