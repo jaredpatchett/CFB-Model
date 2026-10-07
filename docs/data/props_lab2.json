@@ -1,0 +1,6466 @@
+{
+  "generated_at": "2026-10-07T00:06:02.205429+00:00",
+  "train_years": [
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "season": 2026,
+  "pff": {
+    "pff_rows": 119572,
+    "matched_rows": 98348,
+    "pct_pff_rows_matched": 82.3,
+    "franchises_mapped_to_school": 1509,
+    "pct_kickoff_known": 100.0,
+    "dropbacks_source": "dropbacks",
+    "pct_rows_with_true_dropbacks": 100.0,
+    "estimate_vs_true_median_ratio": 1.053,
+    "estimate_vs_true_p10_p90": [
+      0.939,
+      1.357
+    ]
+  },
+  "results": {
+    "receptions": {
+      "pff": {
+        "description": "Live model: current inputs + PFF routes and targets",
+        "n_inputs": 44,
+        "test_2025": {
+          "n": 12297,
+          "mae": 1.403,
+          "rmse": 1.853,
+          "bias": -0.039,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2273,
+            "model_avg_over": 39.1,
+            "actual_over": 40.5,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 3323,
+                "model": 25.3,
+                "actual": 26.6
+              },
+              {
+                "bucket": "30-40%",
+                "n": 3038,
+                "model": 34.7,
+                "actual": 36.5
+              },
+              {
+                "bucket": "40-45%",
+                "n": 2089,
+                "model": 42.5,
+                "actual": 41.9
+              },
+              {
+                "bucket": "45-50%",
+                "n": 1353,
+                "model": 46.8,
+                "actual": 48.0
+              },
+              {
+                "bucket": "50-55%",
+                "n": 1631,
+                "model": 52.7,
+                "actual": 56.3
+              },
+              {
+                "bucket": "55-60%",
+                "n": 418,
+                "model": 57.6,
+                "actual": 60.8
+              },
+              {
+                "bucket": "60-65%",
+                "n": 225,
+                "model": 62.1,
+                "actual": 60.4
+              },
+              {
+                "bucket": "65-70%",
+                "n": 132,
+                "model": 67.5,
+                "actual": 69.7
+              },
+              {
+                "bucket": "70%+",
+                "n": 88,
+                "model": 72.3,
+                "actual": 73.9
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 2966,
+                "model": 52.9,
+                "actual": 54.4
+              },
+              {
+                "bucket": "55-60%",
+                "n": 2512,
+                "model": 57.4,
+                "actual": 58.4
+              },
+              {
+                "bucket": "60-65%",
+                "n": 1851,
+                "model": 63.1,
+                "actual": 61.9
+              },
+              {
+                "bucket": "65-70%",
+                "n": 1539,
+                "model": 67.5,
+                "actual": 65.3
+              },
+              {
+                "bucket": "70%+",
+                "n": 3429,
+                "model": 74.6,
+                "actual": 73.5
+              }
+            ],
+            "avg_gap_pts": 1.3
+          }
+        },
+        "props_2026": {
+          "n": 573,
+          "mae": 1.573,
+          "rmse": 2.111,
+          "bias": -0.277,
+          "line_mae": 1.587,
+          "calibration": {
+            "n": 573,
+            "brier": 0.2439,
+            "model_avg_over": 43.4,
+            "actual_over": 49.4,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 113,
+                "model": 23.7,
+                "actual": 33.6
+              },
+              {
+                "bucket": "30-40%",
+                "n": 125,
+                "model": 35.7,
+                "actual": 41.6
+              },
+              {
+                "bucket": "40-45%",
+                "n": 84,
+                "model": 42.3,
+                "actual": 54.8
+              },
+              {
+                "bucket": "45-50%",
+                "n": 64,
+                "model": 46.4,
+                "actual": 48.4
+              },
+              {
+                "bucket": "50-55%",
+                "n": 52,
+                "model": 52.5,
+                "actual": 57.7
+              },
+              {
+                "bucket": "55-60%",
+                "n": 66,
+                "model": 57.1,
+                "actual": 59.1
+              },
+              {
+                "bucket": "60-65%",
+                "n": 28,
+                "model": 62.0,
+                "actual": 67.9
+              },
+              {
+                "bucket": "65-70%",
+                "n": 18,
+                "model": 66.9,
+                "actual": 77.8
+              },
+              {
+                "bucket": "70%+",
+                "n": 23,
+                "model": 75.8,
+                "actual": 60.9
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 114,
+                "model": 53.1,
+                "actual": 54.4
+              },
+              {
+                "bucket": "55-60%",
+                "n": 152,
+                "model": 57.4,
+                "actual": 51.3
+              },
+              {
+                "bucket": "60-65%",
+                "n": 103,
+                "model": 62.1,
+                "actual": 60.2
+              },
+              {
+                "bucket": "65-70%",
+                "n": 68,
+                "model": 67.5,
+                "actual": 64.7
+              },
+              {
+                "bucket": "70%+",
+                "n": 136,
+                "model": 76.3,
+                "actual": 65.4
+              }
+            ],
+            "avg_gap_pts": 5.1
+          },
+          "rule": {
+            "n": 78,
+            "record": "48-30",
+            "hit": 61.5,
+            "needs": 52.1,
+            "units": 14.1,
+            "roi": 18.0,
+            "avg_model_edge": 22.7,
+            "avg_decimal_odds": 1.951,
+            "roi_by_weekend": {
+              "2026-09-19": 33.1,
+              "2026-09-26": 15.9,
+              "2026-10-03": -5.1
+            }
+          },
+          "rule_2plus_games": {
+            "n": 71,
+            "record": "43-28",
+            "hit": 60.6,
+            "needs": 51.5,
+            "units": 12.1,
+            "roi": 17.1,
+            "avg_model_edge": 22.8,
+            "avg_decimal_odds": 1.972,
+            "roi_by_weekend": {
+              "2026-09-19": 36.9,
+              "2026-09-26": 15.9,
+              "2026-10-03": -13.2
+            }
+          },
+          "rule_under_30_edge": {
+            "n": 57,
+            "record": "40-17",
+            "hit": 70.2,
+            "needs": 52.6,
+            "units": 19.4,
+            "roi": 34.0,
+            "avg_model_edge": 17.4,
+            "avg_decimal_odds": 1.929,
+            "roi_by_weekend": {
+              "2026-09-19": 44.8,
+              "2026-09-26": 38.1,
+              "2026-10-03": 0.4
+            }
+          },
+          "rule_30_plus_edge": {
+            "n": 21,
+            "record": "8-13",
+            "hit": 38.1,
+            "needs": 50.5,
+            "units": -5.3,
+            "roi": -25.3,
+            "avg_model_edge": 37.0,
+            "avg_decimal_odds": 2.011,
+            "roi_by_weekend": {
+              "2026-09-19": -12.0,
+              "2026-09-26": -68.2,
+              "2026-10-03": -11.8
+            }
+          },
+          "rule_pff_matched": {
+            "n": 78,
+            "record": "48-30",
+            "hit": 61.5,
+            "needs": 52.1,
+            "units": 14.1,
+            "roi": 18.0,
+            "avg_model_edge": 22.7,
+            "avg_decimal_odds": 1.951,
+            "roi_by_weekend": {
+              "2026-09-19": 33.1,
+              "2026-09-26": 15.9,
+              "2026-10-03": -5.1
+            }
+          },
+          "rule_pff_unmatched": {
+            "n": 0
+          },
+          "any_over_10": {
+            "n": 79,
+            "record": "49-30",
+            "hit": 62.0,
+            "needs": 51.9,
+            "units": 15.7,
+            "roi": 19.9,
+            "avg_model_edge": 22.6,
+            "avg_decimal_odds": 1.96,
+            "roi_by_weekend": {
+              "2026-09-19": 33.1,
+              "2026-09-26": 15.9,
+              "2026-10-03": 2.9
+            }
+          },
+          "any_under_10": {
+            "n": 236,
+            "record": "134-102",
+            "hit": 56.8,
+            "needs": 54.3,
+            "units": 8.0,
+            "roi": 3.4,
+            "avg_model_edge": 25.7,
+            "avg_decimal_odds": 1.883,
+            "roi_by_weekend": {
+              "2026-09-19": 20.1,
+              "2026-09-26": 6.5,
+              "2026-10-03": -16.8
+            }
+          },
+          "over_edge_buckets": [
+            {
+              "n": 438,
+              "record": "198-240",
+              "hit": 45.2,
+              "needs": 52.7,
+              "units": -65.6,
+              "roi": -15.0,
+              "avg_model_edge": -27.0,
+              "avg_decimal_odds": 1.929,
+              "roi_by_weekend": {
+                "2026-09-19": -21.0,
+                "2026-09-26": -13.7,
+                "2026-10-03": -11.1
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 31,
+              "record": "18-13",
+              "hit": 58.1,
+              "needs": 52.7,
+              "units": 3.5,
+              "roi": 11.3,
+              "avg_model_edge": 2.5,
+              "avg_decimal_odds": 1.933,
+              "roi_by_weekend": {
+                "2026-09-19": 20.4,
+                "2026-09-26": 2.9,
+                "2026-10-03": 14.5
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 25,
+              "record": "19-6",
+              "hit": 76.0,
+              "needs": 53.4,
+              "units": 10.9,
+              "roi": 43.4,
+              "avg_model_edge": 7.9,
+              "avg_decimal_odds": 1.899,
+              "roi_by_weekend": {
+                "2026-09-19": 43.6,
+                "2026-09-26": 4.1,
+                "2026-10-03": 87.6
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 24,
+              "record": "17-7",
+              "hit": 70.8,
+              "needs": 51.5,
+              "units": 9.3,
+              "roi": 38.8,
+              "avg_model_edge": 12.3,
+              "avg_decimal_odds": 1.977,
+              "roi_by_weekend": {
+                "2026-09-19": 96.8,
+                "2026-09-26": 20.7,
+                "2026-10-03": -14.2
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 18,
+              "record": "11-7",
+              "hit": 61.1,
+              "needs": 51.6,
+              "units": 3.9,
+              "roi": 21.8,
+              "avg_model_edge": 17.7,
+              "avg_decimal_odds": 1.966,
+              "roi_by_weekend": {
+                "2026-09-19": 8.1,
+                "2026-09-26": 59.6,
+                "2026-10-03": 2.5
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 16,
+              "record": "13-3",
+              "hit": 81.2,
+              "needs": 54.7,
+              "units": 7.8,
+              "roi": 48.6,
+              "avg_model_edge": 24.5,
+              "avg_decimal_odds": 1.861,
+              "roi_by_weekend": {
+                "2026-09-19": 43.5,
+                "2026-09-26": 65.9,
+                "2026-10-03": 46.4
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 21,
+              "record": "8-13",
+              "hit": 38.1,
+              "needs": 50.5,
+              "units": -5.3,
+              "roi": -25.3,
+              "avg_model_edge": 37.0,
+              "avg_decimal_odds": 2.011,
+              "roi_by_weekend": {
+                "2026-09-19": -12.0,
+                "2026-09-26": -68.2,
+                "2026-10-03": -11.8
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "under_edge_buckets": [
+            {
+              "n": 251,
+              "record": "111-140",
+              "hit": 44.2,
+              "needs": 54.9,
+              "units": -49.4,
+              "roi": -19.7,
+              "avg_model_edge": -17.6,
+              "avg_decimal_odds": 1.851,
+              "roi_by_weekend": {
+                "2026-09-19": -27.5,
+                "2026-09-26": -17.4,
+                "2026-10-03": -13.9
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 52,
+              "record": "24-28",
+              "hit": 46.2,
+              "needs": 56.3,
+              "units": -9.8,
+              "roi": -18.8,
+              "avg_model_edge": 2.7,
+              "avg_decimal_odds": 1.804,
+              "roi_by_weekend": {
+                "2026-09-19": -42.5,
+                "2026-09-26": -24.4,
+                "2026-10-03": 11.0
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 34,
+              "record": "22-12",
+              "hit": 64.7,
+              "needs": 55.3,
+              "units": 4.8,
+              "roi": 14.1,
+              "avg_model_edge": 7.0,
+              "avg_decimal_odds": 1.843,
+              "roi_by_weekend": {
+                "2026-09-19": 13.5,
+                "2026-09-26": -24.4,
+                "2026-10-03": 59.5
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 50,
+              "record": "31-19",
+              "hit": 62.0,
+              "needs": 57.0,
+              "units": 4.8,
+              "roi": 9.5,
+              "avg_model_edge": 12.3,
+              "avg_decimal_odds": 1.785,
+              "roi_by_weekend": {
+                "2026-09-19": 25.3,
+                "2026-09-26": 22.3,
+                "2026-10-03": -13.4
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 49,
+              "record": "28-21",
+              "hit": 57.1,
+              "needs": 53.8,
+              "units": 2.0,
+              "roi": 4.0,
+              "avg_model_edge": 17.6,
+              "avg_decimal_odds": 1.883,
+              "roi_by_weekend": {
+                "2026-09-19": 47.1,
+                "2026-09-26": 5.5,
+                "2026-10-03": -19.3
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 69,
+              "record": "34-35",
+              "hit": 49.3,
+              "needs": 55.8,
+              "units": -10.2,
+              "roi": -14.8,
+              "avg_model_edge": 24.0,
+              "avg_decimal_odds": 1.823,
+              "roi_by_weekend": {
+                "2026-09-19": 5.0,
+                "2026-09-26": -17.6,
+                "2026-10-03": -29.8
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 68,
+              "record": "41-27",
+              "hit": 60.3,
+              "needs": 51.1,
+              "units": 11.5,
+              "roi": 16.8,
+              "avg_model_edge": 43.2,
+              "avg_decimal_odds": 2.016,
+              "roi_by_weekend": {
+                "2026-09-19": 20.4,
+                "2026-09-26": 20.3,
+                "2026-10-03": 3.3
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "props_pff_matched_pct": 99.5
+        }
+      },
+      "pff+tiers": {
+        "description": "Live projections, misses also grouped by role stability",
+        "tier_cutoffs": [
+          0.4151215683678341,
+          0.6761237439571809
+        ],
+        "tier_sizes": {
+          "stable": 5334,
+          "average": 5333,
+          "volatile": 5334,
+          "short": 5601
+        },
+        "tiers_used": [
+          "average",
+          "short",
+          "stable",
+          "volatile"
+        ],
+        "test_2025": {
+          "n": 12297,
+          "mae": 1.403,
+          "rmse": 1.853,
+          "bias": -0.039,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2279,
+            "model_avg_over": 39.7,
+            "actual_over": 40.5,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 2920,
+                "model": 23.7,
+                "actual": 26.4
+              },
+              {
+                "bucket": "30-40%",
+                "n": 3878,
+                "model": 36.3,
+                "actual": 36.2
+              },
+              {
+                "bucket": "40-45%",
+                "n": 1302,
+                "model": 42.5,
+                "actual": 41.9
+              },
+              {
+                "bucket": "45-50%",
+                "n": 1488,
+                "model": 48.2,
+                "actual": 49.9
+              },
+              {
+                "bucket": "50-55%",
+                "n": 1522,
+                "model": 51.8,
+                "actual": 51.5
+              },
+              {
+                "bucket": "55-60%",
+                "n": 529,
+                "model": 57.5,
+                "actual": 58.8
+              },
+              {
+                "bucket": "60-65%",
+                "n": 392,
+                "model": 62.7,
+                "actual": 63.0
+              },
+              {
+                "bucket": "65-70%",
+                "n": 179,
+                "model": 66.4,
+                "actual": 67.6
+              },
+              {
+                "bucket": "70%+",
+                "n": 87,
+                "model": 72.8,
+                "actual": 70.1
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 3010,
+                "model": 51.8,
+                "actual": 50.8
+              },
+              {
+                "bucket": "55-60%",
+                "n": 1831,
+                "model": 57.5,
+                "actual": 58.3
+              },
+              {
+                "bucket": "60-65%",
+                "n": 3113,
+                "model": 62.4,
+                "actual": 62.8
+              },
+              {
+                "bucket": "65-70%",
+                "n": 1336,
+                "model": 67.0,
+                "actual": 66.6
+              },
+              {
+                "bucket": "70%+",
+                "n": 3007,
+                "model": 76.2,
+                "actual": 73.5
+              }
+            ],
+            "avg_gap_pts": 1.2
+          }
+        },
+        "props_2026": {
+          "n": 573,
+          "mae": 1.573,
+          "rmse": 2.111,
+          "bias": -0.277,
+          "line_mae": 1.587,
+          "calibration": {
+            "n": 573,
+            "brier": 0.245,
+            "model_avg_over": 43.2,
+            "actual_over": 49.4,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 94,
+                "model": 22.4,
+                "actual": 33.0
+              },
+              {
+                "bucket": "30-40%",
+                "n": 166,
+                "model": 35.5,
+                "actual": 44.0
+              },
+              {
+                "bucket": "40-45%",
+                "n": 61,
+                "model": 42.2,
+                "actual": 52.5
+              },
+              {
+                "bucket": "45-50%",
+                "n": 65,
+                "model": 47.6,
+                "actual": 49.2
+              },
+              {
+                "bucket": "50-55%",
+                "n": 65,
+                "model": 51.8,
+                "actual": 55.4
+              },
+              {
+                "bucket": "55-60%",
+                "n": 57,
+                "model": 57.5,
+                "actual": 57.9
+              },
+              {
+                "bucket": "60-65%",
+                "n": 29,
+                "model": 62.6,
+                "actual": 86.2
+              },
+              {
+                "bucket": "65-70%",
+                "n": 13,
+                "model": 68.0,
+                "actual": 61.5
+              },
+              {
+                "bucket": "70%+",
+                "n": 23,
+                "model": 75.7,
+                "actual": 56.5
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 128,
+                "model": 52.1,
+                "actual": 52.3
+              },
+              {
+                "bucket": "55-60%",
+                "n": 120,
+                "model": 57.6,
+                "actual": 53.3
+              },
+              {
+                "bucket": "60-65%",
+                "n": 145,
+                "model": 63.2,
+                "actual": 60.7
+              },
+              {
+                "bucket": "65-70%",
+                "n": 63,
+                "model": 67.3,
+                "actual": 60.3
+              },
+              {
+                "bucket": "70%+",
+                "n": 117,
+                "model": 77.2,
+                "actual": 65.0
+              }
+            ],
+            "avg_gap_pts": 4.8
+          },
+          "rule": {
+            "n": 79,
+            "record": "49-30",
+            "hit": 62.0,
+            "needs": 52.5,
+            "units": 14.6,
+            "roi": 18.5,
+            "avg_model_edge": 21.9,
+            "avg_decimal_odds": 1.938,
+            "roi_by_weekend": {
+              "2026-09-19": 29.9,
+              "2026-09-26": 19.5,
+              "2026-10-03": 1.9
+            }
+          },
+          "rule_2plus_games": {
+            "n": 74,
+            "record": "45-29",
+            "hit": 60.8,
+            "needs": 52.1,
+            "units": 12.7,
+            "roi": 17.2,
+            "avg_model_edge": 21.9,
+            "avg_decimal_odds": 1.952,
+            "roi_by_weekend": {
+              "2026-09-19": 31.0,
+              "2026-09-26": 19.5,
+              "2026-10-03": -4.7
+            }
+          },
+          "rule_under_30_edge": {
+            "n": 63,
+            "record": "42-21",
+            "hit": 66.7,
+            "needs": 52.4,
+            "units": 17.7,
+            "roi": 28.1,
+            "avg_model_edge": 17.8,
+            "avg_decimal_odds": 1.941,
+            "roi_by_weekend": {
+              "2026-09-19": 28.8,
+              "2026-09-26": 39.4,
+              "2026-10-03": 8.7
+            }
+          },
+          "rule_30_plus_edge": {
+            "n": 16,
+            "record": "7-9",
+            "hit": 43.8,
+            "needs": 52.8,
+            "units": -3.0,
+            "roi": -19.0,
+            "avg_model_edge": 38.3,
+            "avg_decimal_odds": 1.925,
+            "roi_by_weekend": {
+              "2026-09-19": 39.4,
+              "2026-09-26": -68.2,
+              "2026-10-03": -10.1
+            }
+          },
+          "rule_pff_matched": {
+            "n": 79,
+            "record": "49-30",
+            "hit": 62.0,
+            "needs": 52.5,
+            "units": 14.6,
+            "roi": 18.5,
+            "avg_model_edge": 21.9,
+            "avg_decimal_odds": 1.938,
+            "roi_by_weekend": {
+              "2026-09-19": 29.9,
+              "2026-09-26": 19.5,
+              "2026-10-03": 1.9
+            }
+          },
+          "rule_pff_unmatched": {
+            "n": 0
+          },
+          "any_over_10": {
+            "n": 79,
+            "record": "49-30",
+            "hit": 62.0,
+            "needs": 52.5,
+            "units": 14.6,
+            "roi": 18.5,
+            "avg_model_edge": 21.9,
+            "avg_decimal_odds": 1.938,
+            "roi_by_weekend": {
+              "2026-09-19": 29.9,
+              "2026-09-26": 19.5,
+              "2026-10-03": 1.9
+            }
+          },
+          "any_under_10": {
+            "n": 217,
+            "record": "126-91",
+            "hit": 58.1,
+            "needs": 54.0,
+            "units": 14.1,
+            "roi": 6.5,
+            "avg_model_edge": 27.3,
+            "avg_decimal_odds": 1.89,
+            "roi_by_weekend": {
+              "2026-09-19": 26.4,
+              "2026-09-26": 4.6,
+              "2026-10-03": -13.6
+            }
+          },
+          "over_edge_buckets": [
+            {
+              "n": 439,
+              "record": "197-242",
+              "hit": 44.9,
+              "needs": 52.7,
+              "units": -68.7,
+              "roi": -15.6,
+              "avg_model_edge": -27.2,
+              "avg_decimal_odds": 1.931,
+              "roi_by_weekend": {
+                "2026-09-19": -18.1,
+                "2026-09-26": -15.3,
+                "2026-10-03": -13.8
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 29,
+              "record": "19-10",
+              "hit": 65.5,
+              "needs": 53.1,
+              "units": 6.8,
+              "roi": 23.5,
+              "avg_model_edge": 2.3,
+              "avg_decimal_odds": 1.914,
+              "roi_by_weekend": {
+                "2026-09-19": -7.9,
+                "2026-09-26": 17.9,
+                "2026-10-03": 39.1
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 26,
+              "record": "19-7",
+              "hit": 73.1,
+              "needs": 51.5,
+              "units": 11.7,
+              "roi": 44.8,
+              "avg_model_edge": 6.9,
+              "avg_decimal_odds": 1.967,
+              "roi_by_weekend": {
+                "2026-09-19": 45.2,
+                "2026-09-26": 7.1,
+                "2026-10-03": 100.7
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 22,
+              "record": "17-5",
+              "hit": 77.3,
+              "needs": 54.1,
+              "units": 9.8,
+              "roi": 44.7,
+              "avg_model_edge": 12.3,
+              "avg_decimal_odds": 1.868,
+              "roi_by_weekend": {
+                "2026-09-19": 76.0,
+                "2026-09-26": -0.3,
+                "2026-10-03": 37.4
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 23,
+              "record": "17-6",
+              "hit": 73.9,
+              "needs": 52.5,
+              "units": 10.4,
+              "roi": 45.1,
+              "avg_model_edge": 17.4,
+              "avg_decimal_odds": 1.938,
+              "roi_by_weekend": {
+                "2026-09-19": 63.6,
+                "2026-09-26": 55.4,
+                "2026-10-03": -42.3
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 18,
+              "record": "8-10",
+              "hit": 44.4,
+              "needs": 50.1,
+              "units": -2.5,
+              "roi": -14.1,
+              "avg_model_edge": 24.9,
+              "avg_decimal_odds": 2.035,
+              "roi_by_weekend": {
+                "2026-09-19": -55.8,
+                "2026-09-26": 74.0,
+                "2026-10-03": 14.3
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 16,
+              "record": "7-9",
+              "hit": 43.8,
+              "needs": 52.8,
+              "units": -3.0,
+              "roi": -19.0,
+              "avg_model_edge": 38.3,
+              "avg_decimal_odds": 1.925,
+              "roi_by_weekend": {
+                "2026-09-19": 39.4,
+                "2026-09-26": -68.2,
+                "2026-10-03": -10.1
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "under_edge_buckets": [
+            {
+              "n": 241,
+              "record": "108-133",
+              "hit": 44.8,
+              "needs": 55.2,
+              "units": -45.5,
+              "roi": -18.9,
+              "avg_model_edge": -17.8,
+              "avg_decimal_odds": 1.842,
+              "roi_by_weekend": {
+                "2026-09-19": -28.3,
+                "2026-09-26": -15.9,
+                "2026-10-03": -13.6
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 46,
+              "record": "19-27",
+              "hit": 41.3,
+              "needs": 54.0,
+              "units": -11.6,
+              "roi": -25.1,
+              "avg_model_edge": 2.7,
+              "avg_decimal_odds": 1.89,
+              "roi_by_weekend": {
+                "2026-09-19": -32.1,
+                "2026-09-26": -47.7,
+                "2026-10-03": 25.4
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 69,
+              "record": "37-32",
+              "hit": 53.6,
+              "needs": 56.3,
+              "units": -4.9,
+              "roi": -7.1,
+              "avg_model_edge": 7.3,
+              "avg_decimal_odds": 1.807,
+              "roi_by_weekend": {
+                "2026-09-19": -39.7,
+                "2026-09-26": 4.6,
+                "2026-10-03": 9.5
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 38,
+              "record": "24-14",
+              "hit": 63.2,
+              "needs": 57.0,
+              "units": 3.6,
+              "roi": 9.4,
+              "avg_model_edge": 12.6,
+              "avg_decimal_odds": 1.768,
+              "roi_by_weekend": {
+                "2026-09-19": 73.8,
+                "2026-09-26": 7.9,
+                "2026-10-03": -22.9
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 41,
+              "record": "28-13",
+              "hit": 68.3,
+              "needs": 53.2,
+              "units": 11.9,
+              "roi": 29.0,
+              "avg_model_edge": 17.7,
+              "avg_decimal_odds": 1.904,
+              "roi_by_weekend": {
+                "2026-09-19": 63.0,
+                "2026-09-26": 35.5,
+                "2026-10-03": -5.2
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 69,
+              "record": "34-35",
+              "hit": 49.3,
+              "needs": 55.4,
+              "units": -9.6,
+              "roi": -13.9,
+              "avg_model_edge": 25.0,
+              "avg_decimal_odds": 1.832,
+              "roi_by_weekend": {
+                "2026-09-19": -2.2,
+                "2026-09-26": -11.7,
+                "2026-10-03": -26.8
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 69,
+              "record": "40-29",
+              "hit": 58.0,
+              "needs": 51.4,
+              "units": 8.3,
+              "roi": 12.0,
+              "avg_model_edge": 43.3,
+              "avg_decimal_odds": 2.007,
+              "roi_by_weekend": {
+                "2026-09-19": 16.4,
+                "2026-09-26": 10.7,
+                "2026-10-03": 3.1
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "props_pff_matched_pct": 99.5,
+          "rule_by_stability": {
+            "average": {
+              "n": 18,
+              "record": "9-9",
+              "hit": 50.0,
+              "needs": 49.1,
+              "units": 0.5,
+              "roi": 2.5,
+              "avg_model_edge": 22.5,
+              "avg_decimal_odds": 2.054,
+              "roi_by_weekend": {
+                "2026-09-19": 11.0,
+                "2026-09-26": 4.6,
+                "2026-10-03": -3.7
+              }
+            },
+            "short": {
+              "n": 32,
+              "record": "22-10",
+              "hit": 68.8,
+              "needs": 52.2,
+              "units": 9.8,
+              "roi": 30.8,
+              "avg_model_edge": 23.0,
+              "avg_decimal_odds": 1.952,
+              "roi_by_weekend": {
+                "2026-09-19": 24.9,
+                "2026-09-26": 30.9,
+                "2026-10-03": 79.9
+              }
+            },
+            "stable": {
+              "n": 28,
+              "record": "18-10",
+              "hit": 64.3,
+              "needs": 54.8,
+              "units": 5.3,
+              "roi": 19.0,
+              "avg_model_edge": 20.1,
+              "avg_decimal_odds": 1.853,
+              "roi_by_weekend": {
+                "2026-09-19": 84.5,
+                "2026-09-26": 27.3,
+                "2026-10-03": -6.3
+              }
+            },
+            "volatile": {
+              "n": 1,
+              "record": "0-1",
+              "hit": 0.0,
+              "needs": 56.5,
+              "units": -1.0,
+              "roi": -100.0,
+              "avg_model_edge": 30.2,
+              "avg_decimal_odds": 1.769,
+              "roi_by_weekend": {
+                "2026-10-03": -100.0
+              }
+            }
+          }
+        }
+      },
+      "pff+blend": {
+        "description": "Live hit chances averaged 50/50 with the market's",
+        "props_2026": {
+          "n": 573,
+          "mae": 1.573,
+          "rmse": 2.111,
+          "bias": -0.277,
+          "line_mae": 1.587,
+          "calibration": {
+            "n": 573,
+            "brier": 0.2395,
+            "model_avg_over": 46.1,
+            "actual_over": 49.4,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 17,
+                "model": 28.3,
+                "actual": 29.4
+              },
+              {
+                "bucket": "30-40%",
+                "n": 137,
+                "model": 36.1,
+                "actual": 36.5
+              },
+              {
+                "bucket": "40-45%",
+                "n": 131,
+                "model": 42.6,
+                "actual": 42.0
+              },
+              {
+                "bucket": "45-50%",
+                "n": 98,
+                "model": 47.6,
+                "actual": 56.1
+              },
+              {
+                "bucket": "50-55%",
+                "n": 83,
+                "model": 52.2,
+                "actual": 57.8
+              },
+              {
+                "bucket": "55-60%",
+                "n": 68,
+                "model": 57.1,
+                "actual": 63.2
+              },
+              {
+                "bucket": "60-65%",
+                "n": 27,
+                "model": 62.3,
+                "actual": 70.4
+              },
+              {
+                "bucket": "65-70%",
+                "n": 7,
+                "model": 66.4,
+                "actual": 71.4
+              },
+              {
+                "bucket": "70%+",
+                "n": 5,
+                "model": 73.7,
+                "actual": 60.0
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 181,
+                "model": 52.3,
+                "actual": 50.3
+              },
+              {
+                "bucket": "55-60%",
+                "n": 199,
+                "model": 57.3,
+                "actual": 59.8
+              },
+              {
+                "bucket": "60-65%",
+                "n": 119,
+                "model": 62.3,
+                "actual": 66.4
+              },
+              {
+                "bucket": "65-70%",
+                "n": 52,
+                "model": 67.2,
+                "actual": 61.5
+              },
+              {
+                "bucket": "70%+",
+                "n": 22,
+                "model": 72.2,
+                "actual": 68.2
+              }
+            ],
+            "avg_gap_pts": 3.0
+          },
+          "rule": {
+            "n": 26,
+            "record": "12-14",
+            "hit": 46.2,
+            "needs": 50.4,
+            "units": -2.3,
+            "roi": -8.8,
+            "avg_model_edge": 14.4,
+            "avg_decimal_odds": 2.014,
+            "roi_by_weekend": {
+              "2026-09-19": 4.1,
+              "2026-09-26": -45.5,
+              "2026-10-03": 0.3
+            }
+          },
+          "rule_2plus_games": {
+            "n": 25,
+            "record": "11-14",
+            "hit": 44.0,
+            "needs": 50.3,
+            "units": -3.2,
+            "roi": -12.7,
+            "avg_model_edge": 14.3,
+            "avg_decimal_odds": 2.019,
+            "roi_by_weekend": {
+              "2026-09-19": 4.1,
+              "2026-09-26": -45.5,
+              "2026-10-03": -9.6
+            }
+          },
+          "rule_under_30_edge": {
+            "n": 26,
+            "record": "12-14",
+            "hit": 46.2,
+            "needs": 50.4,
+            "units": -2.3,
+            "roi": -8.8,
+            "avg_model_edge": 14.4,
+            "avg_decimal_odds": 2.014,
+            "roi_by_weekend": {
+              "2026-09-19": 4.1,
+              "2026-09-26": -45.5,
+              "2026-10-03": 0.3
+            }
+          },
+          "rule_30_plus_edge": {
+            "n": 0
+          },
+          "rule_pff_matched": {
+            "n": 26,
+            "record": "12-14",
+            "hit": 46.2,
+            "needs": 50.4,
+            "units": -2.3,
+            "roi": -8.8,
+            "avg_model_edge": 14.4,
+            "avg_decimal_odds": 2.014,
+            "roi_by_weekend": {
+              "2026-09-19": 4.1,
+              "2026-09-26": -45.5,
+              "2026-10-03": 0.3
+            }
+          },
+          "rule_pff_unmatched": {
+            "n": 0
+          },
+          "any_over_10": {
+            "n": 26,
+            "record": "12-14",
+            "hit": 46.2,
+            "needs": 50.4,
+            "units": -2.3,
+            "roi": -8.8,
+            "avg_model_edge": 14.4,
+            "avg_decimal_odds": 2.014,
+            "roi_by_weekend": {
+              "2026-09-19": 4.1,
+              "2026-09-26": -45.5,
+              "2026-10-03": 0.3
+            }
+          },
+          "any_under_10": {
+            "n": 82,
+            "record": "48-34",
+            "hit": 58.5,
+            "needs": 51.8,
+            "units": 10.0,
+            "roi": 12.2,
+            "avg_model_edge": 16.9,
+            "avg_decimal_odds": 1.986,
+            "roi_by_weekend": {
+              "2026-09-19": 12.3,
+              "2026-09-26": 19.1,
+              "2026-10-03": 0.8
+            }
+          },
+          "over_edge_buckets": [
+            {
+              "n": 474,
+              "record": "221-253",
+              "hit": 46.6,
+              "needs": 52.7,
+              "units": -57.8,
+              "roi": -12.2,
+              "avg_model_edge": -15.7,
+              "avg_decimal_odds": 1.929,
+              "roi_by_weekend": {
+                "2026-09-19": -16.9,
+                "2026-09-26": -11.5,
+                "2026-10-03": -8.8
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 51,
+              "record": "36-15",
+              "hit": 70.6,
+              "needs": 52.2,
+              "units": 18.8,
+              "roi": 36.9,
+              "avg_model_edge": 2.4,
+              "avg_decimal_odds": 1.946,
+              "roi_by_weekend": {
+                "2026-09-19": 60.7,
+                "2026-09-26": 11.1,
+                "2026-10-03": 47.3
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 22,
+              "record": "15-7",
+              "hit": 68.2,
+              "needs": 54.2,
+              "units": 5.7,
+              "roi": 26.1,
+              "avg_model_edge": 7.2,
+              "avg_decimal_odds": 1.881,
+              "roi_by_weekend": {
+                "2026-09-19": 18.2,
+                "2026-09-26": 78.2,
+                "2026-10-03": 4.6
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 16,
+              "record": "8-8",
+              "hit": 50.0,
+              "needs": 50.3,
+              "units": -0.3,
+              "roi": -1.8,
+              "avg_model_edge": 12.5,
+              "avg_decimal_odds": 2.025,
+              "roi_by_weekend": {
+                "2026-09-19": -11.0,
+                "2026-09-26": 9.0,
+                "2026-10-03": 3.5
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 9,
+              "record": "3-6",
+              "hit": 33.3,
+              "needs": 50.5,
+              "units": -2.9,
+              "roi": -32.5,
+              "avg_model_edge": 16.8,
+              "avg_decimal_odds": 2.005,
+              "roi_by_weekend": {
+                "2026-09-19": 39.4,
+                "2026-09-26": -100.0,
+                "2026-10-03": -36.9
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 1,
+              "record": "1-0",
+              "hit": 100.0,
+              "needs": 51.9,
+              "units": 0.9,
+              "roi": 92.6,
+              "avg_model_edge": 23.5,
+              "avg_decimal_odds": 1.926,
+              "roi_by_weekend": {
+                "2026-10-03": 92.6
+              },
+              "bucket": "20-29.9%"
+            }
+          ],
+          "under_edge_buckets": [
+            {
+              "n": 319,
+              "record": "145-174",
+              "hit": 45.5,
+              "needs": 55.1,
+              "units": -56.9,
+              "roi": -17.8,
+              "avg_model_edge": -9.9,
+              "avg_decimal_odds": 1.845,
+              "roi_by_weekend": {
+                "2026-09-19": -29.4,
+                "2026-09-26": -19.4,
+                "2026-10-03": -5.2
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 81,
+              "record": "52-29",
+              "hit": 64.2,
+              "needs": 56.3,
+              "units": 11.5,
+              "roi": 14.2,
+              "avg_model_edge": 2.5,
+              "avg_decimal_odds": 1.803,
+              "roi_by_weekend": {
+                "2026-09-19": 32.9,
+                "2026-09-26": 17.8,
+                "2026-10-03": -2.2
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 91,
+              "record": "46-45",
+              "hit": 50.5,
+              "needs": 55.0,
+              "units": -10.0,
+              "roi": -11.0,
+              "avg_model_edge": 7.2,
+              "avg_decimal_odds": 1.848,
+              "roi_by_weekend": {
+                "2026-09-19": 20.4,
+                "2026-09-26": -13.6,
+                "2026-10-03": -30.1
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 43,
+              "record": "21-22",
+              "hit": 48.8,
+              "needs": 52.8,
+              "units": -4.0,
+              "roi": -9.2,
+              "avg_model_edge": 12.3,
+              "avg_decimal_odds": 1.92,
+              "roi_by_weekend": {
+                "2026-09-19": -15.9,
+                "2026-09-26": 7.6,
+                "2026-10-03": -38.8
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 15,
+              "record": "10-5",
+              "hit": 66.7,
+              "needs": 50.6,
+              "units": 4.0,
+              "roi": 26.4,
+              "avg_model_edge": 17.1,
+              "avg_decimal_odds": 2.168,
+              "roi_by_weekend": {
+                "2026-09-19": 58.2,
+                "2026-09-26": 17.2,
+                "2026-10-03": -32.3
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 20,
+              "record": "13-7",
+              "hit": 65.0,
+              "needs": 52.0,
+              "units": 5.0,
+              "roi": 25.0,
+              "avg_model_edge": 23.4,
+              "avg_decimal_odds": 1.938,
+              "roi_by_weekend": {
+                "2026-09-19": -4.1,
+                "2026-09-26": 81.7,
+                "2026-10-03": 55.7
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 4,
+              "record": "4-0",
+              "hit": 100.0,
+              "needs": 44.5,
+              "units": 5.0,
+              "roi": 125.5,
+              "avg_model_edge": 33.9,
+              "avg_decimal_odds": 2.255,
+              "roi_by_weekend": {
+                "2026-09-19": 132.5,
+                "2026-10-03": 118.5
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "props_pff_matched_pct": 99.5
+        }
+      },
+      "dropbacks": {
+        "description": "Route participation from true team dropbacks",
+        "n_inputs": 44,
+        "test_2025": {
+          "n": 12297,
+          "mae": 1.404,
+          "rmse": 1.854,
+          "bias": -0.04,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2284,
+            "model_avg_over": 39.7,
+            "actual_over": 40.5,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 3290,
+                "model": 24.9,
+                "actual": 26.7
+              },
+              {
+                "bucket": "30-40%",
+                "n": 2865,
+                "model": 34.8,
+                "actual": 37.1
+              },
+              {
+                "bucket": "40-45%",
+                "n": 1565,
+                "model": 42.8,
+                "actual": 39.0
+              },
+              {
+                "bucket": "45-50%",
+                "n": 1966,
+                "model": 47.4,
+                "actual": 47.3
+              },
+              {
+                "bucket": "50-55%",
+                "n": 1565,
+                "model": 52.5,
+                "actual": 54.8
+              },
+              {
+                "bucket": "55-60%",
+                "n": 499,
+                "model": 57.3,
+                "actual": 58.9
+              },
+              {
+                "bucket": "60-65%",
+                "n": 297,
+                "model": 62.4,
+                "actual": 61.6
+              },
+              {
+                "bucket": "65-70%",
+                "n": 201,
+                "model": 67.1,
+                "actual": 66.2
+              },
+              {
+                "bucket": "70%+",
+                "n": 49,
+                "model": 71.4,
+                "actual": 71.4
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 3522,
+                "model": 52.6,
+                "actual": 53.6
+              },
+              {
+                "bucket": "55-60%",
+                "n": 2065,
+                "model": 57.2,
+                "actual": 60.5
+              },
+              {
+                "bucket": "60-65%",
+                "n": 1777,
+                "model": 62.9,
+                "actual": 62.0
+              },
+              {
+                "bucket": "65-70%",
+                "n": 1581,
+                "model": 67.4,
+                "actual": 63.9
+              },
+              {
+                "bucket": "70%+",
+                "n": 3352,
+                "model": 75.0,
+                "actual": 73.3
+              }
+            ],
+            "avg_gap_pts": 1.9
+          }
+        },
+        "props_2026": {
+          "n": 573,
+          "mae": 1.576,
+          "rmse": 2.117,
+          "bias": -0.3,
+          "line_mae": 1.587,
+          "calibration": {
+            "n": 573,
+            "brier": 0.2444,
+            "model_avg_over": 42.8,
+            "actual_over": 49.4,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 136,
+                "model": 24.1,
+                "actual": 32.4
+              },
+              {
+                "bucket": "30-40%",
+                "n": 109,
+                "model": 35.4,
+                "actual": 46.8
+              },
+              {
+                "bucket": "40-45%",
+                "n": 87,
+                "model": 42.7,
+                "actual": 54.0
+              },
+              {
+                "bucket": "45-50%",
+                "n": 61,
+                "model": 47.1,
+                "actual": 44.3
+              },
+              {
+                "bucket": "50-55%",
+                "n": 47,
+                "model": 52.6,
+                "actual": 55.3
+              },
+              {
+                "bucket": "55-60%",
+                "n": 74,
+                "model": 57.3,
+                "actual": 64.9
+              },
+              {
+                "bucket": "60-65%",
+                "n": 18,
+                "model": 61.8,
+                "actual": 77.8
+              },
+              {
+                "bucket": "65-70%",
+                "n": 18,
+                "model": 68.0,
+                "actual": 61.1
+              },
+              {
+                "bucket": "70%+",
+                "n": 23,
+                "model": 76.3,
+                "actual": 65.2
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 107,
+                "model": 52.8,
+                "actual": 55.1
+              },
+              {
+                "bucket": "55-60%",
+                "n": 161,
+                "model": 57.3,
+                "actual": 55.3
+              },
+              {
+                "bucket": "60-65%",
+                "n": 83,
+                "model": 62.4,
+                "actual": 59.0
+              },
+              {
+                "bucket": "65-70%",
+                "n": 63,
+                "model": 67.6,
+                "actual": 54.0
+              },
+              {
+                "bucket": "70%+",
+                "n": 159,
+                "model": 75.9,
+                "actual": 67.3
+              }
+            ],
+            "avg_gap_pts": 5.4
+          },
+          "rule": {
+            "n": 70,
+            "record": "41-29",
+            "hit": 58.6,
+            "needs": 51.6,
+            "units": 10.4,
+            "roi": 14.9,
+            "avg_model_edge": 24.2,
+            "avg_decimal_odds": 1.972,
+            "roi_by_weekend": {
+              "2026-09-19": 19.3,
+              "2026-09-26": 19.7,
+              "2026-10-03": 2.7
+            }
+          },
+          "rule_2plus_games": {
+            "n": 63,
+            "record": "36-27",
+            "hit": 57.1,
+            "needs": 50.9,
+            "units": 8.5,
+            "roi": 13.5,
+            "avg_model_edge": 24.0,
+            "avg_decimal_odds": 1.997,
+            "roi_by_weekend": {
+              "2026-09-19": 20.9,
+              "2026-09-26": 19.7,
+              "2026-10-03": -4.9
+            }
+          },
+          "rule_under_30_edge": {
+            "n": 50,
+            "record": "31-19",
+            "hit": 62.0,
+            "needs": 51.2,
+            "units": 10.9,
+            "roi": 21.8,
+            "avg_model_edge": 19.0,
+            "avg_decimal_odds": 1.986,
+            "roi_by_weekend": {
+              "2026-09-19": 22.7,
+              "2026-09-26": 38.5,
+              "2026-10-03": -3.6
+            }
+          },
+          "rule_30_plus_edge": {
+            "n": 20,
+            "record": "10-10",
+            "hit": 50.0,
+            "needs": 52.5,
+            "units": -0.4,
+            "roi": -2.2,
+            "avg_model_edge": 37.1,
+            "avg_decimal_odds": 1.938,
+            "roi_by_weekend": {
+              "2026-09-19": 11.5,
+              "2026-09-26": -60.3,
+              "2026-10-03": 13.4
+            }
+          },
+          "rule_pff_matched": {
+            "n": 70,
+            "record": "41-29",
+            "hit": 58.6,
+            "needs": 51.6,
+            "units": 10.4,
+            "roi": 14.9,
+            "avg_model_edge": 24.2,
+            "avg_decimal_odds": 1.972,
+            "roi_by_weekend": {
+              "2026-09-19": 19.3,
+              "2026-09-26": 19.7,
+              "2026-10-03": 2.7
+            }
+          },
+          "rule_pff_unmatched": {
+            "n": 0
+          },
+          "any_over_10": {
+            "n": 71,
+            "record": "42-29",
+            "hit": 59.2,
+            "needs": 51.4,
+            "units": 12.1,
+            "roi": 17.0,
+            "avg_model_edge": 24.0,
+            "avg_decimal_odds": 1.981,
+            "roi_by_weekend": {
+              "2026-09-19": 19.3,
+              "2026-09-26": 19.7,
+              "2026-10-03": 10.6
+            }
+          },
+          "any_under_10": {
+            "n": 245,
+            "record": "139-106",
+            "hit": 56.7,
+            "needs": 54.2,
+            "units": 6.4,
+            "roi": 2.6,
+            "avg_model_edge": 26.7,
+            "avg_decimal_odds": 1.884,
+            "roi_by_weekend": {
+              "2026-09-19": 11.8,
+              "2026-09-26": 6.1,
+              "2026-10-03": -11.4
+            }
+          },
+          "over_edge_buckets": [
+            {
+              "n": 440,
+              "record": "197-243",
+              "hit": 44.8,
+              "needs": 52.7,
+              "units": -69.7,
+              "roi": -15.8,
+              "avg_model_edge": -28.2,
+              "avg_decimal_odds": 1.93,
+              "roi_by_weekend": {
+                "2026-09-19": -20.1,
+                "2026-09-26": -15.6,
+                "2026-10-03": -12.4
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 29,
+              "record": "19-10",
+              "hit": 65.5,
+              "needs": 53.7,
+              "units": 6.3,
+              "roi": 21.6,
+              "avg_model_edge": 2.5,
+              "avg_decimal_odds": 1.882,
+              "roi_by_weekend": {
+                "2026-09-19": 35.7,
+                "2026-09-26": 5.3,
+                "2026-10-03": 62.5
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 33,
+              "record": "26-7",
+              "hit": 78.8,
+              "needs": 53.5,
+              "units": 15.8,
+              "roi": 47.9,
+              "avg_model_edge": 7.2,
+              "avg_decimal_odds": 1.902,
+              "roi_by_weekend": {
+                "2026-09-19": 72.8,
+                "2026-09-26": 25.6,
+                "2026-10-03": 44.5
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 12,
+              "record": "7-5",
+              "hit": 58.3,
+              "needs": 49.8,
+              "units": 3.3,
+              "roi": 27.3,
+              "avg_model_edge": 12.2,
+              "avg_decimal_odds": 2.06,
+              "roi_by_weekend": {
+                "2026-09-19": 48.2,
+                "2026-09-26": 12.2,
+                "2026-10-03": 31.0
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 18,
+              "record": "12-6",
+              "hit": 66.7,
+              "needs": 51.3,
+              "units": 5.9,
+              "roi": 32.9,
+              "avg_model_edge": 17.3,
+              "avg_decimal_odds": 1.963,
+              "roi_by_weekend": {
+                "2026-09-19": 6.6,
+                "2026-09-26": 68.2,
+                "2026-10-03": 27.4
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 21,
+              "record": "13-8",
+              "hit": 61.9,
+              "needs": 51.3,
+              "units": 3.3,
+              "roi": 15.7,
+              "avg_model_edge": 24.1,
+              "avg_decimal_odds": 1.992,
+              "roi_by_weekend": {
+                "2026-09-19": 23.8,
+                "2026-09-26": 34.4,
+                "2026-10-03": -13.3
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 20,
+              "record": "10-10",
+              "hit": 50.0,
+              "needs": 52.5,
+              "units": -0.4,
+              "roi": -2.2,
+              "avg_model_edge": 37.1,
+              "avg_decimal_odds": 1.938,
+              "roi_by_weekend": {
+                "2026-09-19": 11.5,
+                "2026-09-26": -60.3,
+                "2026-10-03": 13.4
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "under_edge_buckets": [
+            {
+              "n": 245,
+              "record": "108-137",
+              "hit": 44.1,
+              "needs": 54.8,
+              "units": -48.3,
+              "roi": -19.7,
+              "avg_model_edge": -17.8,
+              "avg_decimal_odds": 1.855,
+              "roi_by_weekend": {
+                "2026-09-19": -30.3,
+                "2026-09-26": -18.1,
+                "2026-10-03": -10.7
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 45,
+              "record": "21-24",
+              "hit": 46.7,
+              "needs": 57.1,
+              "units": -7.3,
+              "roi": -16.3,
+              "avg_model_edge": 2.7,
+              "avg_decimal_odds": 1.777,
+              "roi_by_weekend": {
+                "2026-09-19": -6.7,
+                "2026-09-26": -30.1,
+                "2026-10-03": -7.4
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 38,
+              "record": "23-15",
+              "hit": 60.5,
+              "needs": 55.6,
+              "units": 3.9,
+              "roi": 10.2,
+              "avg_model_edge": 7.6,
+              "avg_decimal_odds": 1.832,
+              "roi_by_weekend": {
+                "2026-09-19": 30.1,
+                "2026-09-26": -4.9,
+                "2026-10-03": 15.3
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 47,
+              "record": "27-20",
+              "hit": 57.4,
+              "needs": 55.8,
+              "units": 0.4,
+              "roi": 0.9,
+              "avg_model_edge": 12.1,
+              "avg_decimal_odds": 1.829,
+              "roi_by_weekend": {
+                "2026-09-19": 22.2,
+                "2026-09-26": -3.5,
+                "2026-10-03": -11.5
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 55,
+              "record": "29-26",
+              "hit": 52.7,
+              "needs": 54.1,
+              "units": -3.0,
+              "roi": -5.4,
+              "avg_model_edge": 17.7,
+              "avg_decimal_odds": 1.875,
+              "roi_by_weekend": {
+                "2026-09-19": 1.7,
+                "2026-09-26": -5.7,
+                "2026-10-03": -12.7
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 67,
+              "record": "37-30",
+              "hit": 55.2,
+              "needs": 56.0,
+              "units": -3.3,
+              "roi": -5.0,
+              "avg_model_edge": 24.5,
+              "avg_decimal_odds": 1.815,
+              "roi_by_weekend": {
+                "2026-09-19": -0.6,
+                "2026-09-26": 10.8,
+                "2026-10-03": -22.9
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 76,
+              "record": "46-30",
+              "hit": 60.5,
+              "needs": 51.8,
+              "units": 12.3,
+              "roi": 16.2,
+              "avg_model_edge": 44.2,
+              "avg_decimal_odds": 1.987,
+              "roi_by_weekend": {
+                "2026-09-19": 21.3,
+                "2026-09-26": 16.5,
+                "2026-10-03": 6.9
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "props_pff_matched_pct": 99.5
+        }
+      },
+      "interactions": {
+        "description": "Live inputs + expected targets and role opportunity",
+        "n_inputs": 47,
+        "test_2025": {
+          "n": 12297,
+          "mae": 1.403,
+          "rmse": 1.853,
+          "bias": -0.038,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2273,
+            "model_avg_over": 39.9,
+            "actual_over": 40.5,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 3302,
+                "model": 25.2,
+                "actual": 26.4
+              },
+              {
+                "bucket": "30-40%",
+                "n": 2773,
+                "model": 35.3,
+                "actual": 36.2
+              },
+              {
+                "bucket": "40-45%",
+                "n": 1766,
+                "model": 42.9,
+                "actual": 40.8
+              },
+              {
+                "bucket": "45-50%",
+                "n": 1817,
+                "model": 47.0,
+                "actual": 47.1
+              },
+              {
+                "bucket": "50-55%",
+                "n": 1633,
+                "model": 53.4,
+                "actual": 54.9
+              },
+              {
+                "bucket": "55-60%",
+                "n": 497,
+                "model": 57.5,
+                "actual": 60.8
+              },
+              {
+                "bucket": "60-65%",
+                "n": 289,
+                "model": 62.4,
+                "actual": 60.9
+              },
+              {
+                "bucket": "65-70%",
+                "n": 144,
+                "model": 67.2,
+                "actual": 68.8
+              },
+              {
+                "bucket": "70%+",
+                "n": 76,
+                "model": 71.9,
+                "actual": 73.7
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 3440,
+                "model": 53.2,
+                "actual": 53.9
+              },
+              {
+                "bucket": "55-60%",
+                "n": 2271,
+                "model": 57.2,
+                "actual": 59.4
+              },
+              {
+                "bucket": "60-65%",
+                "n": 1869,
+                "model": 62.5,
+                "actual": 62.8
+              },
+              {
+                "bucket": "65-70%",
+                "n": 1331,
+                "model": 67.6,
+                "actual": 65.0
+              },
+              {
+                "bucket": "70%+",
+                "n": 3386,
+                "model": 74.7,
+                "actual": 73.6
+              }
+            ],
+            "avg_gap_pts": 1.2
+          }
+        },
+        "props_2026": {
+          "n": 573,
+          "mae": 1.571,
+          "rmse": 2.108,
+          "bias": -0.277,
+          "line_mae": 1.587,
+          "calibration": {
+            "n": 573,
+            "brier": 0.2441,
+            "model_avg_over": 43.0,
+            "actual_over": 49.4,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 124,
+                "model": 24.7,
+                "actual": 33.1
+              },
+              {
+                "bucket": "30-40%",
+                "n": 115,
+                "model": 35.1,
+                "actual": 44.3
+              },
+              {
+                "bucket": "40-45%",
+                "n": 85,
+                "model": 42.4,
+                "actual": 54.1
+              },
+              {
+                "bucket": "45-50%",
+                "n": 66,
+                "model": 47.0,
+                "actual": 47.0
+              },
+              {
+                "bucket": "50-55%",
+                "n": 55,
+                "model": 52.7,
+                "actual": 58.2
+              },
+              {
+                "bucket": "55-60%",
+                "n": 74,
+                "model": 56.7,
+                "actual": 62.2
+              },
+              {
+                "bucket": "60-65%",
+                "n": 17,
+                "model": 62.1,
+                "actual": 64.7
+              },
+              {
+                "bucket": "65-70%",
+                "n": 15,
+                "model": 67.6,
+                "actual": 73.3
+              },
+              {
+                "bucket": "70%+",
+                "n": 22,
+                "model": 76.3,
+                "actual": 63.6
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 117,
+                "model": 52.8,
+                "actual": 56.4
+              },
+              {
+                "bucket": "55-60%",
+                "n": 162,
+                "model": 57.1,
+                "actual": 53.1
+              },
+              {
+                "bucket": "60-65%",
+                "n": 83,
+                "model": 62.6,
+                "actual": 55.4
+              },
+              {
+                "bucket": "65-70%",
+                "n": 65,
+                "model": 67.5,
+                "actual": 61.5
+              },
+              {
+                "bucket": "70%+",
+                "n": 146,
+                "model": 75.4,
+                "actual": 66.4
+              }
+            ],
+            "avg_gap_pts": 5.9
+          },
+          "rule": {
+            "n": 69,
+            "record": "43-26",
+            "hit": 62.3,
+            "needs": 52.1,
+            "units": 14.6,
+            "roi": 21.2,
+            "avg_model_edge": 22.6,
+            "avg_decimal_odds": 1.957,
+            "roi_by_weekend": {
+              "2026-09-19": 29.8,
+              "2026-09-26": 8.9,
+              "2026-10-03": 19.3
+            }
+          },
+          "rule_2plus_games": {
+            "n": 63,
+            "record": "39-24",
+            "hit": 61.9,
+            "needs": 51.4,
+            "units": 13.8,
+            "roi": 22.0,
+            "avg_model_edge": 22.5,
+            "avg_decimal_odds": 1.983,
+            "roi_by_weekend": {
+              "2026-09-19": 36.9,
+              "2026-09-26": 8.9,
+              "2026-10-03": 14.8
+            }
+          },
+          "rule_under_30_edge": {
+            "n": 51,
+            "record": "35-16",
+            "hit": 68.6,
+            "needs": 52.0,
+            "units": 17.5,
+            "roi": 34.3,
+            "avg_model_edge": 17.4,
+            "avg_decimal_odds": 1.962,
+            "roi_by_weekend": {
+              "2026-09-19": 36.9,
+              "2026-09-26": 27.7,
+              "2026-10-03": 35.7
+            }
+          },
+          "rule_30_plus_edge": {
+            "n": 18,
+            "record": "8-10",
+            "hit": 44.4,
+            "needs": 52.3,
+            "units": -2.9,
+            "roi": -16.2,
+            "avg_model_edge": 37.2,
+            "avg_decimal_odds": 1.943,
+            "roi_by_weekend": {
+              "2026-09-19": 2.7,
+              "2026-09-26": -36.3,
+              "2026-10-03": -18.1
+            }
+          },
+          "rule_pff_matched": {
+            "n": 69,
+            "record": "43-26",
+            "hit": 62.3,
+            "needs": 52.1,
+            "units": 14.6,
+            "roi": 21.2,
+            "avg_model_edge": 22.6,
+            "avg_decimal_odds": 1.957,
+            "roi_by_weekend": {
+              "2026-09-19": 29.8,
+              "2026-09-26": 8.9,
+              "2026-10-03": 19.3
+            }
+          },
+          "rule_pff_unmatched": {
+            "n": 0
+          },
+          "any_over_10": {
+            "n": 69,
+            "record": "43-26",
+            "hit": 62.3,
+            "needs": 52.1,
+            "units": 14.6,
+            "roi": 21.2,
+            "avg_model_edge": 22.6,
+            "avg_decimal_odds": 1.957,
+            "roi_by_weekend": {
+              "2026-09-19": 29.8,
+              "2026-09-26": 8.9,
+              "2026-10-03": 19.3
+            }
+          },
+          "any_under_10": {
+            "n": 233,
+            "record": "132-101",
+            "hit": 56.7,
+            "needs": 54.2,
+            "units": 7.3,
+            "roi": 3.1,
+            "avg_model_edge": 25.9,
+            "avg_decimal_odds": 1.885,
+            "roi_by_weekend": {
+              "2026-09-19": 17.9,
+              "2026-09-26": 5.1,
+              "2026-10-03": -14.3
+            }
+          },
+          "over_edge_buckets": [
+            {
+              "n": 444,
+              "record": "205-239",
+              "hit": 46.2,
+              "needs": 52.8,
+              "units": -59.1,
+              "roi": -13.3,
+              "avg_model_edge": -27.0,
+              "avg_decimal_odds": 1.929,
+              "roi_by_weekend": {
+                "2026-09-19": -18.8,
+                "2026-09-26": -12.9,
+                "2026-10-03": -9.0
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 34,
+              "record": "21-13",
+              "hit": 61.8,
+              "needs": 51.7,
+              "units": 7.0,
+              "roi": 20.6,
+              "avg_model_edge": 2.8,
+              "avg_decimal_odds": 1.962,
+              "roi_by_weekend": {
+                "2026-09-19": 38.6,
+                "2026-09-26": 13.6,
+                "2026-10-03": 7.4
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 26,
+              "record": "15-11",
+              "hit": 57.7,
+              "needs": 53.2,
+              "units": 1.9,
+              "roi": 7.5,
+              "avg_model_edge": 7.2,
+              "avg_decimal_odds": 1.899,
+              "roi_by_weekend": {
+                "2026-09-19": 7.2,
+                "2026-09-26": 6.5,
+                "2026-10-03": 10.4
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 21,
+              "record": "14-7",
+              "hit": 66.7,
+              "needs": 51.7,
+              "units": 6.5,
+              "roi": 31.0,
+              "avg_model_edge": 12.5,
+              "avg_decimal_odds": 1.971,
+              "roi_by_weekend": {
+                "2026-09-19": 31.8,
+                "2026-09-26": 10.8,
+                "2026-10-03": 57.9
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 14,
+              "record": "12-2",
+              "hit": 85.7,
+              "needs": 51.3,
+              "units": 10.1,
+              "roi": 72.1,
+              "avg_model_edge": 16.9,
+              "avg_decimal_odds": 1.988,
+              "roi_by_weekend": {
+                "2026-09-19": 96.7,
+                "2026-09-26": 96.3,
+                "2026-10-03": 28.2
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 16,
+              "record": "9-7",
+              "hit": 56.2,
+              "needs": 53.1,
+              "units": 0.9,
+              "roi": 5.7,
+              "avg_model_edge": 24.3,
+              "avg_decimal_odds": 1.927,
+              "roi_by_weekend": {
+                "2026-09-19": -2.2,
+                "2026-09-26": -16.0,
+                "2026-10-03": 23.4
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 18,
+              "record": "8-10",
+              "hit": 44.4,
+              "needs": 52.3,
+              "units": -2.9,
+              "roi": -16.2,
+              "avg_model_edge": 37.2,
+              "avg_decimal_odds": 1.943,
+              "roi_by_weekend": {
+                "2026-09-19": 2.7,
+                "2026-09-26": -36.3,
+                "2026-10-03": -18.1
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "under_edge_buckets": [
+            {
+              "n": 243,
+              "record": "107-136",
+              "hit": 44.0,
+              "needs": 54.9,
+              "units": -49.3,
+              "roi": -20.3,
+              "avg_model_edge": -17.0,
+              "avg_decimal_odds": 1.85,
+              "roi_by_weekend": {
+                "2026-09-19": -28.4,
+                "2026-09-26": -21.8,
+                "2026-10-03": -10.8
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 50,
+              "record": "26-24",
+              "hit": 52.0,
+              "needs": 56.0,
+              "units": -3.2,
+              "roi": -6.3,
+              "avg_model_edge": 2.4,
+              "avg_decimal_odds": 1.816,
+              "roi_by_weekend": {
+                "2026-09-19": -29.7,
+                "2026-09-26": -4.8,
+                "2026-10-03": 7.6
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 47,
+              "record": "26-21",
+              "hit": 55.3,
+              "needs": 55.3,
+              "units": -0.2,
+              "roi": -0.4,
+              "avg_model_edge": 7.7,
+              "avg_decimal_odds": 1.848,
+              "roi_by_weekend": {
+                "2026-09-19": 1.5,
+                "2026-09-26": -11.2,
+                "2026-10-03": 17.1
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 45,
+              "record": "28-17",
+              "hit": 62.2,
+              "needs": 56.3,
+              "units": 4.2,
+              "roi": 9.2,
+              "avg_model_edge": 12.4,
+              "avg_decimal_odds": 1.807,
+              "roi_by_weekend": {
+                "2026-09-19": 24.6,
+                "2026-09-26": 8.8,
+                "2026-10-03": -4.7
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 54,
+              "record": "31-23",
+              "hit": 57.4,
+              "needs": 54.4,
+              "units": 1.5,
+              "roi": 2.7,
+              "avg_model_edge": 17.4,
+              "avg_decimal_odds": 1.868,
+              "roi_by_weekend": {
+                "2026-09-19": 49.4,
+                "2026-09-26": 11.0,
+                "2026-10-03": -26.8
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 64,
+              "record": "30-34",
+              "hit": 46.9,
+              "needs": 55.4,
+              "units": -11.2,
+              "roi": -17.5,
+              "avg_model_edge": 24.3,
+              "avg_decimal_odds": 1.831,
+              "roi_by_weekend": {
+                "2026-09-19": -13.6,
+                "2026-09-26": -20.5,
+                "2026-10-03": -17.1
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 70,
+              "record": "43-27",
+              "hit": 61.4,
+              "needs": 51.5,
+              "units": 12.9,
+              "roi": 18.4,
+              "avg_model_edge": 42.5,
+              "avg_decimal_odds": 1.997,
+              "roi_by_weekend": {
+                "2026-09-19": 24.7,
+                "2026-09-26": 29.6,
+                "2026-10-03": -4.4
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "props_pff_matched_pct": 99.5
+        }
+      },
+      "dropbacks_interactions": {
+        "description": "True dropbacks + interaction inputs",
+        "n_inputs": 47,
+        "test_2025": {
+          "n": 12297,
+          "mae": 1.402,
+          "rmse": 1.853,
+          "bias": -0.043,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2282,
+            "model_avg_over": 39.2,
+            "actual_over": 40.5,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 3439,
+                "model": 24.7,
+                "actual": 27.1
+              },
+              {
+                "bucket": "30-40%",
+                "n": 2844,
+                "model": 35.0,
+                "actual": 36.8
+              },
+              {
+                "bucket": "40-45%",
+                "n": 1714,
+                "model": 42.5,
+                "actual": 40.7
+              },
+              {
+                "bucket": "45-50%",
+                "n": 1792,
+                "model": 47.3,
+                "actual": 48.0
+              },
+              {
+                "bucket": "50-55%",
+                "n": 1542,
+                "model": 51.8,
+                "actual": 55.6
+              },
+              {
+                "bucket": "55-60%",
+                "n": 444,
+                "model": 57.3,
+                "actual": 57.7
+              },
+              {
+                "bucket": "60-65%",
+                "n": 282,
+                "model": 62.0,
+                "actual": 60.3
+              },
+              {
+                "bucket": "65-70%",
+                "n": 178,
+                "model": 67.4,
+                "actual": 67.4
+              },
+              {
+                "bucket": "70%+",
+                "n": 62,
+                "model": 71.7,
+                "actual": 72.6
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 3329,
+                "model": 52.3,
+                "actual": 53.6
+              },
+              {
+                "bucket": "55-60%",
+                "n": 2153,
+                "model": 57.4,
+                "actual": 59.2
+              },
+              {
+                "bucket": "60-65%",
+                "n": 1914,
+                "model": 62.8,
+                "actual": 61.8
+              },
+              {
+                "bucket": "65-70%",
+                "n": 1394,
+                "model": 67.6,
+                "actual": 64.9
+              },
+              {
+                "bucket": "70%+",
+                "n": 3507,
+                "model": 75.2,
+                "actual": 72.9
+              }
+            ],
+            "avg_gap_pts": 1.8
+          }
+        },
+        "props_2026": {
+          "n": 573,
+          "mae": 1.573,
+          "rmse": 2.113,
+          "bias": -0.295,
+          "line_mae": 1.587,
+          "calibration": {
+            "n": 573,
+            "brier": 0.2436,
+            "model_avg_over": 43.0,
+            "actual_over": 49.4,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 127,
+                "model": 24.3,
+                "actual": 32.3
+              },
+              {
+                "bucket": "30-40%",
+                "n": 109,
+                "model": 35.2,
+                "actual": 43.1
+              },
+              {
+                "bucket": "40-45%",
+                "n": 89,
+                "model": 42.4,
+                "actual": 53.9
+              },
+              {
+                "bucket": "45-50%",
+                "n": 69,
+                "model": 47.2,
+                "actual": 49.3
+              },
+              {
+                "bucket": "50-55%",
+                "n": 47,
+                "model": 52.6,
+                "actual": 55.3
+              },
+              {
+                "bucket": "55-60%",
+                "n": 80,
+                "model": 57.1,
+                "actual": 65.0
+              },
+              {
+                "bucket": "60-65%",
+                "n": 14,
+                "model": 62.4,
+                "actual": 71.4
+              },
+              {
+                "bucket": "65-70%",
+                "n": 18,
+                "model": 67.3,
+                "actual": 72.2
+              },
+              {
+                "bucket": "70%+",
+                "n": 20,
+                "model": 76.8,
+                "actual": 60.0
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 115,
+                "model": 52.7,
+                "actual": 52.2
+              },
+              {
+                "bucket": "55-60%",
+                "n": 170,
+                "model": 57.3,
+                "actual": 55.3
+              },
+              {
+                "bucket": "60-65%",
+                "n": 72,
+                "model": 62.4,
+                "actual": 59.7
+              },
+              {
+                "bucket": "65-70%",
+                "n": 69,
+                "model": 67.5,
+                "actual": 60.9
+              },
+              {
+                "bucket": "70%+",
+                "n": 147,
+                "model": 75.8,
+                "actual": 66.7
+              }
+            ],
+            "avg_gap_pts": 4.2
+          },
+          "rule": {
+            "n": 68,
+            "record": "39-29",
+            "hit": 57.4,
+            "needs": 51.9,
+            "units": 8.0,
+            "roi": 11.7,
+            "avg_model_edge": 22.8,
+            "avg_decimal_odds": 1.957,
+            "roi_by_weekend": {
+              "2026-09-19": 24.6,
+              "2026-09-26": 8.5,
+              "2026-10-03": -2.5
+            }
+          },
+          "rule_2plus_games": {
+            "n": 61,
+            "record": "34-27",
+            "hit": 55.7,
+            "needs": 51.2,
+            "units": 6.0,
+            "roi": 9.9,
+            "avg_model_edge": 22.6,
+            "avg_decimal_odds": 1.981,
+            "roi_by_weekend": {
+              "2026-09-19": 27.6,
+              "2026-09-26": 8.5,
+              "2026-10-03": -10.2
+            }
+          },
+          "rule_under_30_edge": {
+            "n": 52,
+            "record": "29-23",
+            "hit": 55.8,
+            "needs": 51.6,
+            "units": 4.9,
+            "roi": 9.4,
+            "avg_model_edge": 18.1,
+            "avg_decimal_odds": 1.971,
+            "roi_by_weekend": {
+              "2026-09-19": 17.2,
+              "2026-09-26": 22.0,
+              "2026-10-03": -17.3
+            }
+          },
+          "rule_30_plus_edge": {
+            "n": 16,
+            "record": "10-6",
+            "hit": 62.5,
+            "needs": 52.9,
+            "units": 3.1,
+            "roi": 19.2,
+            "avg_model_edge": 38.1,
+            "avg_decimal_odds": 1.912,
+            "roi_by_weekend": {
+              "2026-09-19": 57.4,
+              "2026-09-26": -34.6,
+              "2026-10-03": 32.3
+            }
+          },
+          "rule_pff_matched": {
+            "n": 68,
+            "record": "39-29",
+            "hit": 57.4,
+            "needs": 51.9,
+            "units": 8.0,
+            "roi": 11.7,
+            "avg_model_edge": 22.8,
+            "avg_decimal_odds": 1.957,
+            "roi_by_weekend": {
+              "2026-09-19": 24.6,
+              "2026-09-26": 8.5,
+              "2026-10-03": -2.5
+            }
+          },
+          "rule_pff_unmatched": {
+            "n": 0
+          },
+          "any_over_10": {
+            "n": 69,
+            "record": "40-29",
+            "hit": 58.0,
+            "needs": 51.7,
+            "units": 9.6,
+            "roi": 13.9,
+            "avg_model_edge": 22.6,
+            "avg_decimal_odds": 1.966,
+            "roi_by_weekend": {
+              "2026-09-19": 24.6,
+              "2026-09-26": 8.5,
+              "2026-10-03": 5.4
+            }
+          },
+          "any_under_10": {
+            "n": 239,
+            "record": "139-100",
+            "hit": 58.2,
+            "needs": 54.1,
+            "units": 14.1,
+            "roi": 5.9,
+            "avg_model_edge": 26.2,
+            "avg_decimal_odds": 1.887,
+            "roi_by_weekend": {
+              "2026-09-19": 14.0,
+              "2026-09-26": 11.2,
+              "2026-10-03": -7.8
+            }
+          },
+          "over_edge_buckets": [
+            {
+              "n": 440,
+              "record": "202-238",
+              "hit": 45.9,
+              "needs": 52.8,
+              "units": -60.7,
+              "roi": -13.8,
+              "avg_model_edge": -27.4,
+              "avg_decimal_odds": 1.927,
+              "roi_by_weekend": {
+                "2026-09-19": -19.1,
+                "2026-09-26": -12.7,
+                "2026-10-03": -10.4
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 36,
+              "record": "19-17",
+              "hit": 52.8,
+              "needs": 51.6,
+              "units": 1.6,
+              "roi": 4.4,
+              "avg_model_edge": 2.7,
+              "avg_decimal_odds": 1.978,
+              "roi_by_weekend": {
+                "2026-09-19": -9.7,
+                "2026-09-26": 2.4,
+                "2026-10-03": 25.5
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 28,
+              "record": "23-5",
+              "hit": 82.1,
+              "needs": 54.0,
+              "units": 13.9,
+              "roi": 49.7,
+              "avg_model_edge": 6.8,
+              "avg_decimal_odds": 1.88,
+              "roi_by_weekend": {
+                "2026-09-19": 71.2,
+                "2026-09-26": 10.9,
+                "2026-10-03": 71.3
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 16,
+              "record": "10-6",
+              "hit": 62.5,
+              "needs": 52.4,
+              "units": 3.8,
+              "roi": 23.7,
+              "avg_model_edge": 12.0,
+              "avg_decimal_odds": 1.941,
+              "roi_by_weekend": {
+                "2026-09-19": 32.0,
+                "2026-09-26": 13.2,
+                "2026-10-03": 31.0
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 19,
+              "record": "9-10",
+              "hit": 47.4,
+              "needs": 50.4,
+              "units": -0.2,
+              "roi": -1.3,
+              "avg_model_edge": 16.9,
+              "avg_decimal_odds": 2.014,
+              "roi_by_weekend": {
+                "2026-09-19": -17.6,
+                "2026-09-26": 37.7,
+                "2026-10-03": -20.4
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 18,
+              "record": "11-7",
+              "hit": 61.1,
+              "needs": 51.5,
+              "units": 3.0,
+              "roi": 16.5,
+              "avg_model_edge": 24.4,
+              "avg_decimal_odds": 1.987,
+              "roi_by_weekend": {
+                "2026-09-19": 24.2,
+                "2026-09-26": 11.3,
+                "2026-10-03": 4.0
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 16,
+              "record": "10-6",
+              "hit": 62.5,
+              "needs": 52.9,
+              "units": 3.1,
+              "roi": 19.2,
+              "avg_model_edge": 38.1,
+              "avg_decimal_odds": 1.912,
+              "roi_by_weekend": {
+                "2026-09-19": 57.4,
+                "2026-09-26": -34.6,
+                "2026-10-03": 32.3
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "under_edge_buckets": [
+            {
+              "n": 253,
+              "record": "111-142",
+              "hit": 43.9,
+              "needs": 54.9,
+              "units": -51.0,
+              "roi": -20.2,
+              "avg_model_edge": -16.7,
+              "avg_decimal_odds": 1.85,
+              "roi_by_weekend": {
+                "2026-09-19": -30.4,
+                "2026-09-26": -16.7,
+                "2026-10-03": -12.9
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 39,
+              "record": "20-19",
+              "hit": 51.3,
+              "needs": 56.5,
+              "units": -3.5,
+              "roi": -9.0,
+              "avg_model_edge": 2.3,
+              "avg_decimal_odds": 1.793,
+              "roi_by_weekend": {
+                "2026-09-19": 24.9,
+                "2026-09-26": -44.7,
+                "2026-10-03": 11.8
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 42,
+              "record": "21-21",
+              "hit": 50.0,
+              "needs": 55.9,
+              "units": -4.9,
+              "roi": -11.7,
+              "avg_model_edge": 7.8,
+              "avg_decimal_odds": 1.823,
+              "roi_by_weekend": {
+                "2026-09-19": -4.8,
+                "2026-09-26": -18.5,
+                "2026-10-03": -5.1
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 51,
+              "record": "33-18",
+              "hit": 64.7,
+              "needs": 55.7,
+              "units": 8.1,
+              "roi": 15.9,
+              "avg_model_edge": 12.4,
+              "avg_decimal_odds": 1.83,
+              "roi_by_weekend": {
+                "2026-09-19": 40.3,
+                "2026-09-26": 11.0,
+                "2026-10-03": 1.9
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 55,
+              "record": "30-25",
+              "hit": 54.5,
+              "needs": 53.8,
+              "units": -0.7,
+              "roi": -1.2,
+              "avg_model_edge": 17.3,
+              "avg_decimal_odds": 1.889,
+              "roi_by_weekend": {
+                "2026-09-19": -1.0,
+                "2026-09-26": 9.6,
+                "2026-10-03": -11.2
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 60,
+              "record": "30-30",
+              "hit": 50.0,
+              "needs": 56.2,
+              "units": -8.5,
+              "roi": -14.2,
+              "avg_model_edge": 24.6,
+              "avg_decimal_odds": 1.802,
+              "roi_by_weekend": {
+                "2026-09-19": -7.8,
+                "2026-09-26": -15.6,
+                "2026-10-03": -19.5
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 73,
+              "record": "46-27",
+              "hit": 63.0,
+              "needs": 51.6,
+              "units": 15.2,
+              "roi": 20.8,
+              "avg_model_edge": 43.8,
+              "avg_decimal_odds": 1.996,
+              "roi_by_weekend": {
+                "2026-09-19": 22.6,
+                "2026-09-26": 37.3,
+                "2026-10-03": -4.4
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "props_pff_matched_pct": 99.5
+        }
+      }
+    },
+    "rec_yds": {
+      "pff": {
+        "description": "Live model: current inputs + PFF routes and targets",
+        "n_inputs": 44,
+        "test_2025": {
+          "n": 12297,
+          "mae": 22.132,
+          "rmse": 30.045,
+          "bias": -0.291,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2291,
+            "model_avg_over": 39.9,
+            "actual_over": 40.9,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 2350,
+                "model": 24.0,
+                "actual": 25.3
+              },
+              {
+                "bucket": "30-40%",
+                "n": 3994,
+                "model": 35.2,
+                "actual": 37.1
+              },
+              {
+                "bucket": "40-45%",
+                "n": 2202,
+                "model": 42.5,
+                "actual": 42.4
+              },
+              {
+                "bucket": "45-50%",
+                "n": 1586,
+                "model": 47.5,
+                "actual": 47.8
+              },
+              {
+                "bucket": "50-55%",
+                "n": 1057,
+                "model": 52.3,
+                "actual": 53.3
+              },
+              {
+                "bucket": "55-60%",
+                "n": 563,
+                "model": 57.1,
+                "actual": 57.2
+              },
+              {
+                "bucket": "60-65%",
+                "n": 272,
+                "model": 62.2,
+                "actual": 64.7
+              },
+              {
+                "bucket": "65-70%",
+                "n": 114,
+                "model": 67.0,
+                "actual": 69.3
+              },
+              {
+                "bucket": "70%+",
+                "n": 159,
+                "model": 78.3,
+                "actual": 78.0
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 2641,
+                "model": 52.4,
+                "actual": 52.6
+              },
+              {
+                "bucket": "55-60%",
+                "n": 2757,
+                "model": 57.4,
+                "actual": 57.5
+              },
+              {
+                "bucket": "60-65%",
+                "n": 2374,
+                "model": 62.4,
+                "actual": 60.8
+              },
+              {
+                "bucket": "65-70%",
+                "n": 1992,
+                "model": 67.3,
+                "actual": 65.9
+              },
+              {
+                "bucket": "70%+",
+                "n": 2533,
+                "model": 76.1,
+                "actual": 74.9
+              }
+            ],
+            "avg_gap_pts": 0.8
+          }
+        },
+        "props_2026": {
+          "n": 712,
+          "mae": 24.418,
+          "rmse": 33.414,
+          "bias": -3.957,
+          "line_mae": 24.183,
+          "calibration": {
+            "n": 712,
+            "brier": 0.253,
+            "model_avg_over": 46.9,
+            "actual_over": 51.5,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 57,
+                "model": 25.3,
+                "actual": 43.9
+              },
+              {
+                "bucket": "30-40%",
+                "n": 138,
+                "model": 35.9,
+                "actual": 48.6
+              },
+              {
+                "bucket": "40-45%",
+                "n": 118,
+                "model": 42.5,
+                "actual": 46.6
+              },
+              {
+                "bucket": "45-50%",
+                "n": 121,
+                "model": 47.6,
+                "actual": 52.1
+              },
+              {
+                "bucket": "50-55%",
+                "n": 102,
+                "model": 52.3,
+                "actual": 48.0
+              },
+              {
+                "bucket": "55-60%",
+                "n": 87,
+                "model": 57.2,
+                "actual": 57.5
+              },
+              {
+                "bucket": "60-65%",
+                "n": 44,
+                "model": 62.0,
+                "actual": 59.1
+              },
+              {
+                "bucket": "65-70%",
+                "n": 28,
+                "model": 67.5,
+                "actual": 71.4
+              },
+              {
+                "bucket": "70%+",
+                "n": 17,
+                "model": 76.5,
+                "actual": 70.6
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 222,
+                "model": 52.3,
+                "actual": 47.7
+              },
+              {
+                "bucket": "55-60%",
+                "n": 206,
+                "model": 57.4,
+                "actual": 55.3
+              },
+              {
+                "bucket": "60-65%",
+                "n": 135,
+                "model": 62.1,
+                "actual": 53.3
+              },
+              {
+                "bucket": "65-70%",
+                "n": 74,
+                "model": 67.6,
+                "actual": 60.8
+              },
+              {
+                "bucket": "70%+",
+                "n": 75,
+                "model": 75.1,
+                "actual": 58.7
+              }
+            ],
+            "avg_gap_pts": 6.1
+          },
+          "rule": {
+            "n": 116,
+            "record": "75-41",
+            "hit": 64.7,
+            "needs": 53.0,
+            "units": 25.2,
+            "roi": 21.7,
+            "avg_model_edge": 22.6,
+            "avg_decimal_odds": 1.886,
+            "roi_by_weekend": {
+              "2026-09-19": 32.6,
+              "2026-09-26": 10.7,
+              "2026-10-03": 19.0
+            }
+          },
+          "rule_2plus_games": {
+            "n": 106,
+            "record": "69-37",
+            "hit": 65.1,
+            "needs": 53.0,
+            "units": 23.9,
+            "roi": 22.5,
+            "avg_model_edge": 22.2,
+            "avg_decimal_odds": 1.886,
+            "roi_by_weekend": {
+              "2026-09-19": 39.8,
+              "2026-09-26": 14.1,
+              "2026-10-03": 10.9
+            }
+          },
+          "rule_under_30_edge": {
+            "n": 89,
+            "record": "56-33",
+            "hit": 62.9,
+            "needs": 53.0,
+            "units": 16.6,
+            "roi": 18.6,
+            "avg_model_edge": 17.5,
+            "avg_decimal_odds": 1.888,
+            "roi_by_weekend": {
+              "2026-09-19": 32.3,
+              "2026-09-26": 2.3,
+              "2026-10-03": 14.6
+            }
+          },
+          "rule_30_plus_edge": {
+            "n": 27,
+            "record": "19-8",
+            "hit": 70.4,
+            "needs": 53.2,
+            "units": 8.6,
+            "roi": 32.0,
+            "avg_model_edge": 39.2,
+            "avg_decimal_odds": 1.879,
+            "roi_by_weekend": {
+              "2026-09-19": 34.3,
+              "2026-09-26": 31.0,
+              "2026-10-03": 31.3
+            }
+          },
+          "rule_pff_matched": {
+            "n": 116,
+            "record": "75-41",
+            "hit": 64.7,
+            "needs": 53.0,
+            "units": 25.2,
+            "roi": 21.7,
+            "avg_model_edge": 22.6,
+            "avg_decimal_odds": 1.886,
+            "roi_by_weekend": {
+              "2026-09-19": 32.6,
+              "2026-09-26": 10.7,
+              "2026-10-03": 19.0
+            }
+          },
+          "rule_pff_unmatched": {
+            "n": 0
+          },
+          "any_over_10": {
+            "n": 116,
+            "record": "75-41",
+            "hit": 64.7,
+            "needs": 53.0,
+            "units": 25.2,
+            "roi": 21.7,
+            "avg_model_edge": 22.6,
+            "avg_decimal_odds": 1.886,
+            "roi_by_weekend": {
+              "2026-09-19": 32.6,
+              "2026-09-26": 10.7,
+              "2026-10-03": 19.0
+            }
+          },
+          "any_under_10": {
+            "n": 221,
+            "record": "122-99",
+            "hit": 55.2,
+            "needs": 53.6,
+            "units": 6.7,
+            "roi": 3.1,
+            "avg_model_edge": 24.0,
+            "avg_decimal_odds": 1.865,
+            "roi_by_weekend": {
+              "2026-09-19": 7.1,
+              "2026-09-26": 3.2,
+              "2026-10-03": -2.1
+            }
+          },
+          "over_edge_buckets": [
+            {
+              "n": 503,
+              "record": "243-260",
+              "hit": 48.3,
+              "needs": 53.3,
+              "units": -46.5,
+              "roi": -9.2,
+              "avg_model_edge": -21.8,
+              "avg_decimal_odds": 1.876,
+              "roi_by_weekend": {
+                "2026-09-19": -9.5,
+                "2026-09-26": -1.5,
+                "2026-10-03": -16.7
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 50,
+              "record": "26-24",
+              "hit": 52.0,
+              "needs": 53.1,
+              "units": -0.9,
+              "roi": -1.7,
+              "avg_model_edge": 2.8,
+              "avg_decimal_odds": 1.884,
+              "roi_by_weekend": {
+                "2026-09-19": 7.4,
+                "2026-09-26": -17.1,
+                "2026-10-03": 16.2
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 43,
+              "record": "27-16",
+              "hit": 62.8,
+              "needs": 53.1,
+              "units": 7.8,
+              "roi": 18.1,
+              "avg_model_edge": 7.7,
+              "avg_decimal_odds": 1.884,
+              "roi_by_weekend": {
+                "2026-09-19": 24.5,
+                "2026-09-26": -21.4,
+                "2026-10-03": 41.6
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 36,
+              "record": "18-18",
+              "hit": 50.0,
+              "needs": 52.9,
+              "units": -2.0,
+              "roi": -5.5,
+              "avg_model_edge": 12.5,
+              "avg_decimal_odds": 1.893,
+              "roi_by_weekend": {
+                "2026-09-19": 17.8,
+                "2026-09-26": -68.7,
+                "2026-10-03": -5.0
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 27,
+              "record": "20-7",
+              "hit": 74.1,
+              "needs": 53.1,
+              "units": 10.6,
+              "roi": 39.4,
+              "avg_model_edge": 17.5,
+              "avg_decimal_odds": 1.882,
+              "roi_by_weekend": {
+                "2026-09-19": 30.0,
+                "2026-09-26": 41.5,
+                "2026-10-03": 56.9
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 26,
+              "record": "18-8",
+              "hit": 69.2,
+              "needs": 52.9,
+              "units": 7.9,
+              "roi": 30.5,
+              "avg_model_edge": 24.4,
+              "avg_decimal_odds": 1.889,
+              "roi_by_weekend": {
+                "2026-09-19": 64.8,
+                "2026-09-26": 13.5,
+                "2026-10-03": 17.2
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 27,
+              "record": "19-8",
+              "hit": 70.4,
+              "needs": 53.2,
+              "units": 8.6,
+              "roi": 32.0,
+              "avg_model_edge": 39.2,
+              "avg_decimal_odds": 1.879,
+              "roi_by_weekend": {
+                "2026-09-19": 34.3,
+                "2026-09-26": 31.0,
+                "2026-10-03": 31.3
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "under_edge_buckets": [
+            {
+              "n": 364,
+              "record": "165-199",
+              "hit": 45.3,
+              "needs": 53.6,
+              "units": -56.4,
+              "roi": -15.5,
+              "avg_model_edge": -17.0,
+              "avg_decimal_odds": 1.866,
+              "roi_by_weekend": {
+                "2026-09-19": -18.6,
+                "2026-09-26": -12.2,
+                "2026-10-03": -15.8
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 59,
+              "record": "28-31",
+              "hit": 47.5,
+              "needs": 53.8,
+              "units": -6.6,
+              "roi": -11.2,
+              "avg_model_edge": 2.6,
+              "avg_decimal_odds": 1.861,
+              "roi_by_weekend": {
+                "2026-09-19": -46.9,
+                "2026-09-26": -22.2,
+                "2026-10-03": 7.9
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 68,
+              "record": "33-35",
+              "hit": 48.5,
+              "needs": 53.7,
+              "units": -6.5,
+              "roi": -9.6,
+              "avg_model_edge": 7.5,
+              "avg_decimal_odds": 1.864,
+              "roi_by_weekend": {
+                "2026-09-19": -33.9,
+                "2026-09-26": -22.1,
+                "2026-10-03": 11.8
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 58,
+              "record": "32-26",
+              "hit": 55.2,
+              "needs": 53.6,
+              "units": 1.8,
+              "roi": 3.1,
+              "avg_model_edge": 12.4,
+              "avg_decimal_odds": 1.867,
+              "roi_by_weekend": {
+                "2026-09-19": -16.5,
+                "2026-09-26": -2.4,
+                "2026-10-03": 31.2
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 44,
+              "record": "20-24",
+              "hit": 45.5,
+              "needs": 53.4,
+              "units": -6.5,
+              "roi": -14.8,
+              "avg_model_edge": 17.2,
+              "avg_decimal_odds": 1.873,
+              "roi_by_weekend": {
+                "2026-09-19": -6.4,
+                "2026-09-26": -0.6,
+                "2026-10-03": -48.9
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 56,
+              "record": "35-21",
+              "hit": 62.5,
+              "needs": 54.0,
+              "units": 9.1,
+              "roi": 16.3,
+              "avg_model_edge": 24.4,
+              "avg_decimal_odds": 1.854,
+              "roi_by_weekend": {
+                "2026-09-19": 3.4,
+                "2026-09-26": 29.5,
+                "2026-10-03": 11.7
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 63,
+              "record": "35-28",
+              "hit": 55.6,
+              "needs": 53.5,
+              "units": 2.3,
+              "roi": 3.7,
+              "avg_model_edge": 39.0,
+              "avg_decimal_odds": 1.868,
+              "roi_by_weekend": {
+                "2026-09-19": 37.7,
+                "2026-09-26": -15.4,
+                "2026-10-03": -16.4
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "props_pff_matched_pct": 99.4
+        }
+      },
+      "pff+tiers": {
+        "description": "Live projections, misses also grouped by role stability",
+        "tier_cutoffs": [
+          0.4151215683678341,
+          0.6761237439571809
+        ],
+        "tier_sizes": {
+          "stable": 5334,
+          "average": 5333,
+          "volatile": 5334,
+          "short": 5601
+        },
+        "tiers_used": [
+          "average",
+          "short",
+          "stable",
+          "volatile"
+        ],
+        "test_2025": {
+          "n": 12297,
+          "mae": 22.132,
+          "rmse": 30.045,
+          "bias": -0.291,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2296,
+            "model_avg_over": 40.4,
+            "actual_over": 40.9,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 2179,
+                "model": 23.8,
+                "actual": 26.0
+              },
+              {
+                "bucket": "30-40%",
+                "n": 3832,
+                "model": 35.4,
+                "actual": 35.6
+              },
+              {
+                "bucket": "40-45%",
+                "n": 2346,
+                "model": 42.5,
+                "actual": 42.4
+              },
+              {
+                "bucket": "45-50%",
+                "n": 1606,
+                "model": 47.2,
+                "actual": 47.1
+              },
+              {
+                "bucket": "50-55%",
+                "n": 1122,
+                "model": 52.5,
+                "actual": 53.8
+              },
+              {
+                "bucket": "55-60%",
+                "n": 642,
+                "model": 57.0,
+                "actual": 54.5
+              },
+              {
+                "bucket": "60-65%",
+                "n": 275,
+                "model": 62.2,
+                "actual": 68.0
+              },
+              {
+                "bucket": "65-70%",
+                "n": 142,
+                "model": 67.2,
+                "actual": 66.9
+              },
+              {
+                "bucket": "70%+",
+                "n": 153,
+                "model": 78.8,
+                "actual": 72.5
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 2726,
+                "model": 52.7,
+                "actual": 53.2
+              },
+              {
+                "bucket": "55-60%",
+                "n": 2989,
+                "model": 57.4,
+                "actual": 57.0
+              },
+              {
+                "bucket": "60-65%",
+                "n": 2428,
+                "model": 62.4,
+                "actual": 62.7
+              },
+              {
+                "bucket": "65-70%",
+                "n": 1820,
+                "model": 67.3,
+                "actual": 67.3
+              },
+              {
+                "bucket": "70%+",
+                "n": 2334,
+                "model": 76.4,
+                "actual": 73.9
+              }
+            ],
+            "avg_gap_pts": 0.7
+          }
+        },
+        "props_2026": {
+          "n": 712,
+          "mae": 24.418,
+          "rmse": 33.414,
+          "bias": -3.957,
+          "line_mae": 24.183,
+          "calibration": {
+            "n": 712,
+            "brier": 0.2524,
+            "model_avg_over": 46.4,
+            "actual_over": 51.5,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 51,
+                "model": 25.3,
+                "actual": 47.1
+              },
+              {
+                "bucket": "30-40%",
+                "n": 152,
+                "model": 35.8,
+                "actual": 47.4
+              },
+              {
+                "bucket": "40-45%",
+                "n": 126,
+                "model": 42.5,
+                "actual": 45.2
+              },
+              {
+                "bucket": "45-50%",
+                "n": 125,
+                "model": 47.5,
+                "actual": 51.2
+              },
+              {
+                "bucket": "50-55%",
+                "n": 103,
+                "model": 52.5,
+                "actual": 49.5
+              },
+              {
+                "bucket": "55-60%",
+                "n": 70,
+                "model": 57.3,
+                "actual": 55.7
+              },
+              {
+                "bucket": "60-65%",
+                "n": 51,
+                "model": 62.1,
+                "actual": 72.5
+              },
+              {
+                "bucket": "65-70%",
+                "n": 14,
+                "model": 67.5,
+                "actual": 92.9
+              },
+              {
+                "bucket": "70%+",
+                "n": 20,
+                "model": 75.2,
+                "actual": 50.0
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 227,
+                "model": 52.5,
+                "actual": 49.3
+              },
+              {
+                "bucket": "55-60%",
+                "n": 197,
+                "model": 57.4,
+                "actual": 54.8
+              },
+              {
+                "bucket": "60-65%",
+                "n": 148,
+                "model": 62.3,
+                "actual": 59.5
+              },
+              {
+                "bucket": "65-70%",
+                "n": 69,
+                "model": 67.3,
+                "actual": 60.9
+              },
+              {
+                "bucket": "70%+",
+                "n": 71,
+                "model": 74.8,
+                "actual": 52.1
+              }
+            ],
+            "avg_gap_pts": 5.2
+          },
+          "rule": {
+            "n": 113,
+            "record": "77-36",
+            "hit": 68.1,
+            "needs": 53.1,
+            "units": 31.9,
+            "roi": 28.2,
+            "avg_model_edge": 21.6,
+            "avg_decimal_odds": 1.885,
+            "roi_by_weekend": {
+              "2026-09-19": 44.3,
+              "2026-09-26": 14.1,
+              "2026-10-03": 22.1
+            }
+          },
+          "rule_2plus_games": {
+            "n": 103,
+            "record": "70-33",
+            "hit": 68.0,
+            "needs": 53.1,
+            "units": 28.7,
+            "roi": 27.9,
+            "avg_model_edge": 21.3,
+            "avg_decimal_odds": 1.885,
+            "roi_by_weekend": {
+              "2026-09-19": 48.3,
+              "2026-09-26": 17.7,
+              "2026-10-03": 14.2
+            }
+          },
+          "rule_under_30_edge": {
+            "n": 91,
+            "record": "65-26",
+            "hit": 71.4,
+            "needs": 53.0,
+            "units": 31.4,
+            "roi": 34.5,
+            "avg_model_edge": 16.9,
+            "avg_decimal_odds": 1.887,
+            "roi_by_weekend": {
+              "2026-09-19": 43.6,
+              "2026-09-26": 17.3,
+              "2026-10-03": 36.6
+            }
+          },
+          "rule_30_plus_edge": {
+            "n": 22,
+            "record": "12-10",
+            "hit": 54.5,
+            "needs": 53.2,
+            "units": 0.5,
+            "roi": 2.4,
+            "avg_model_edge": 41.2,
+            "avg_decimal_odds": 1.88,
+            "roi_by_weekend": {
+              "2026-09-19": 49.4,
+              "2026-09-26": 5.5,
+              "2026-10-03": -30.4
+            }
+          },
+          "rule_pff_matched": {
+            "n": 113,
+            "record": "77-36",
+            "hit": 68.1,
+            "needs": 53.1,
+            "units": 31.9,
+            "roi": 28.2,
+            "avg_model_edge": 21.6,
+            "avg_decimal_odds": 1.885,
+            "roi_by_weekend": {
+              "2026-09-19": 44.3,
+              "2026-09-26": 14.1,
+              "2026-10-03": 22.1
+            }
+          },
+          "rule_pff_unmatched": {
+            "n": 0
+          },
+          "any_over_10": {
+            "n": 113,
+            "record": "77-36",
+            "hit": 68.1,
+            "needs": 53.1,
+            "units": 31.9,
+            "roi": 28.2,
+            "avg_model_edge": 21.6,
+            "avg_decimal_odds": 1.885,
+            "roi_by_weekend": {
+              "2026-09-19": 44.3,
+              "2026-09-26": 14.1,
+              "2026-10-03": 22.1
+            }
+          },
+          "any_under_10": {
+            "n": 226,
+            "record": "122-104",
+            "hit": 54.0,
+            "needs": 53.6,
+            "units": 1.5,
+            "roi": 0.7,
+            "avg_model_edge": 23.6,
+            "avg_decimal_odds": 1.865,
+            "roi_by_weekend": {
+              "2026-09-19": 2.9,
+              "2026-09-26": 2.0,
+              "2026-10-03": -3.7
+            }
+          },
+          "over_edge_buckets": [
+            {
+              "n": 507,
+              "record": "245-262",
+              "hit": 48.3,
+              "needs": 53.3,
+              "units": -46.6,
+              "roi": -9.2,
+              "avg_model_edge": -22.3,
+              "avg_decimal_odds": 1.876,
+              "roi_by_weekend": {
+                "2026-09-19": -9.9,
+                "2026-09-26": -5.1,
+                "2026-10-03": -12.8
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 53,
+              "record": "25-28",
+              "hit": 47.2,
+              "needs": 53.0,
+              "units": -5.8,
+              "roi": -11.0,
+              "avg_model_edge": 2.1,
+              "avg_decimal_odds": 1.888,
+              "roi_by_weekend": {
+                "2026-09-19": -13.1,
+                "2026-09-26": -10.0,
+                "2026-10-03": -10.7
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 39,
+              "record": "24-15",
+              "hit": 61.5,
+              "needs": 53.1,
+              "units": 6.1,
+              "roi": 15.8,
+              "avg_model_edge": 7.3,
+              "avg_decimal_odds": 1.883,
+              "roi_by_weekend": {
+                "2026-09-19": 6.3,
+                "2026-09-26": 17.8,
+                "2026-10-03": 22.5
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 42,
+              "record": "27-15",
+              "hit": 64.3,
+              "needs": 52.9,
+              "units": 8.9,
+              "roi": 21.1,
+              "avg_model_edge": 12.4,
+              "avg_decimal_odds": 1.89,
+              "roi_by_weekend": {
+                "2026-09-19": 52.9,
+                "2026-09-26": -24.6,
+                "2026-10-03": 17.9
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 26,
+              "record": "18-8",
+              "hit": 69.2,
+              "needs": 52.8,
+              "units": 8.0,
+              "roi": 30.9,
+              "avg_model_edge": 17.9,
+              "avg_decimal_odds": 1.895,
+              "roi_by_weekend": {
+                "2026-09-19": 34.8,
+                "2026-09-26": 13.1,
+                "2026-10-03": 35.9
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 23,
+              "record": "20-3",
+              "hit": 87.0,
+              "needs": 53.4,
+              "units": 14.5,
+              "roi": 62.9,
+              "avg_model_edge": 24.1,
+              "avg_decimal_odds": 1.872,
+              "roi_by_weekend": {
+                "2026-09-19": 40.6,
+                "2026-09-26": 66.3,
+                "2026-10-03": 87.4
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 22,
+              "record": "12-10",
+              "hit": 54.5,
+              "needs": 53.2,
+              "units": 0.5,
+              "roi": 2.4,
+              "avg_model_edge": 41.2,
+              "avg_decimal_odds": 1.88,
+              "roi_by_weekend": {
+                "2026-09-19": 49.4,
+                "2026-09-26": 5.5,
+                "2026-10-03": -30.4
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "under_edge_buckets": [
+            {
+              "n": 343,
+              "record": "158-185",
+              "hit": 46.1,
+              "needs": 53.6,
+              "units": -48.1,
+              "roi": -14.0,
+              "avg_model_edge": -16.6,
+              "avg_decimal_odds": 1.868,
+              "roi_by_weekend": {
+                "2026-09-19": -20.0,
+                "2026-09-26": -9.3,
+                "2026-10-03": -13.0
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 65,
+              "record": "32-33",
+              "hit": 49.2,
+              "needs": 54.0,
+              "units": -5.6,
+              "roi": -8.6,
+              "avg_model_edge": 2.6,
+              "avg_decimal_odds": 1.853,
+              "roi_by_weekend": {
+                "2026-09-19": -17.6,
+                "2026-09-26": -31.3,
+                "2026-10-03": 6.6
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 78,
+              "record": "36-42",
+              "hit": 46.2,
+              "needs": 53.7,
+              "units": -10.7,
+              "roi": -13.7,
+              "avg_model_edge": 7.5,
+              "avg_decimal_odds": 1.864,
+              "roi_by_weekend": {
+                "2026-09-19": -29.0,
+                "2026-09-26": -21.0,
+                "2026-10-03": 2.7
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 50,
+              "record": "24-26",
+              "hit": 48.0,
+              "needs": 53.5,
+              "units": -5.4,
+              "roi": -10.8,
+              "avg_model_edge": 12.5,
+              "avg_decimal_odds": 1.868,
+              "roi_by_weekend": {
+                "2026-09-19": -49.2,
+                "2026-09-26": -2.6,
+                "2026-10-03": 3.9
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 56,
+              "record": "28-28",
+              "hit": 50.0,
+              "needs": 53.7,
+              "units": -3.8,
+              "roi": -6.9,
+              "avg_model_edge": 17.1,
+              "avg_decimal_odds": 1.864,
+              "roi_by_weekend": {
+                "2026-09-19": -6.4,
+                "2026-09-26": 7.1,
+                "2026-10-03": -25.3
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 66,
+              "record": "42-24",
+              "hit": 63.6,
+              "needs": 53.7,
+              "units": 12.6,
+              "roi": 19.0,
+              "avg_model_edge": 24.3,
+              "avg_decimal_odds": 1.862,
+              "roi_by_weekend": {
+                "2026-09-19": 9.0,
+                "2026-09-26": 24.4,
+                "2026-10-03": 25.0
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 54,
+              "record": "28-26",
+              "hit": 51.9,
+              "needs": 53.5,
+              "units": -1.8,
+              "roi": -3.4,
+              "avg_model_edge": 39.5,
+              "avg_decimal_odds": 1.868,
+              "roi_by_weekend": {
+                "2026-09-19": 33.0,
+                "2026-09-26": -20.2,
+                "2026-10-03": -37.5
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "props_pff_matched_pct": 99.4,
+          "rule_by_stability": {
+            "average": {
+              "n": 21,
+              "record": "11-10",
+              "hit": 52.4,
+              "needs": 53.0,
+              "units": -0.2,
+              "roi": -1.1,
+              "avg_model_edge": 18.9,
+              "avg_decimal_odds": 1.886,
+              "roi_by_weekend": {
+                "2026-09-19": -100.0,
+                "2026-09-26": 25.7,
+                "2026-10-03": -5.4
+              }
+            },
+            "short": {
+              "n": 60,
+              "record": "45-15",
+              "hit": 75.0,
+              "needs": 53.1,
+              "units": 24.6,
+              "roi": 41.0,
+              "avg_model_edge": 22.3,
+              "avg_decimal_odds": 1.883,
+              "roi_by_weekend": {
+                "2026-09-19": 46.8,
+                "2026-09-26": 15.2,
+                "2026-10-03": 57.3
+              }
+            },
+            "stable": {
+              "n": 30,
+              "record": "21-9",
+              "hit": 70.0,
+              "needs": 52.9,
+              "units": 9.5,
+              "roi": 31.7,
+              "avg_model_edge": 21.4,
+              "avg_decimal_odds": 1.892,
+              "roi_by_weekend": {
+                "2026-09-19": 86.2,
+                "2026-09-26": 26.1,
+                "2026-10-03": 32.4
+              }
+            },
+            "volatile": {
+              "n": 2,
+              "record": "0-2",
+              "hit": 0.0,
+              "needs": 53.4,
+              "units": -2.0,
+              "roi": -100.0,
+              "avg_model_edge": 33.0,
+              "avg_decimal_odds": 1.873,
+              "roi_by_weekend": {
+                "2026-09-26": -100.0
+              }
+            }
+          }
+        }
+      },
+      "pff+blend": {
+        "description": "Live hit chances averaged 50/50 with the market's",
+        "props_2026": {
+          "n": 712,
+          "mae": 24.418,
+          "rmse": 33.414,
+          "bias": -3.957,
+          "line_mae": 24.183,
+          "calibration": {
+            "n": 712,
+            "brier": 0.2481,
+            "model_avg_over": 48.3,
+            "actual_over": 51.5,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 1,
+                "model": 29.5,
+                "actual": 100.0
+              },
+              {
+                "bucket": "30-40%",
+                "n": 61,
+                "model": 37.7,
+                "actual": 44.3
+              },
+              {
+                "bucket": "40-45%",
+                "n": 136,
+                "model": 42.9,
+                "actual": 47.1
+              },
+              {
+                "bucket": "45-50%",
+                "n": 233,
+                "model": 47.5,
+                "actual": 48.9
+              },
+              {
+                "bucket": "50-55%",
+                "n": 193,
+                "model": 52.2,
+                "actual": 53.9
+              },
+              {
+                "bucket": "55-60%",
+                "n": 73,
+                "model": 57.1,
+                "actual": 64.4
+              },
+              {
+                "bucket": "60-65%",
+                "n": 10,
+                "model": 61.9,
+                "actual": 80.0
+              },
+              {
+                "bucket": "65-70%",
+                "n": 4,
+                "model": 66.4,
+                "actual": 50.0
+              },
+              {
+                "bucket": "70%+",
+                "n": 1,
+                "model": 70.4,
+                "actual": 0.0
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 426,
+                "model": 52.4,
+                "actual": 52.3
+              },
+              {
+                "bucket": "55-60%",
+                "n": 208,
+                "model": 57.1,
+                "actual": 57.2
+              },
+              {
+                "bucket": "60-65%",
+                "n": 65,
+                "model": 61.8,
+                "actual": 58.5
+              },
+              {
+                "bucket": "65-70%",
+                "n": 11,
+                "model": 66.2,
+                "actual": 54.5
+              },
+              {
+                "bucket": "70%+",
+                "n": 2,
+                "model": 70.4,
+                "actual": 0.0
+              }
+            ],
+            "avg_gap_pts": 0.8
+          },
+          "rule": {
+            "n": 35,
+            "record": "23-12",
+            "hit": 65.7,
+            "needs": 53.2,
+            "units": 8.2,
+            "roi": 23.5,
+            "avg_model_edge": 15.1,
+            "avg_decimal_odds": 1.881,
+            "roi_by_weekend": {
+              "2026-09-19": 36.8,
+              "2026-09-26": 15.7,
+              "2026-10-03": 19.3
+            }
+          },
+          "rule_2plus_games": {
+            "n": 28,
+            "record": "19-9",
+            "hit": 67.9,
+            "needs": 53.2,
+            "units": 7.7,
+            "roi": 27.5,
+            "avg_model_edge": 15.7,
+            "avg_decimal_odds": 1.881,
+            "roi_by_weekend": {
+              "2026-09-19": 67.2,
+              "2026-09-26": 25.4,
+              "2026-10-03": -19.8
+            }
+          },
+          "rule_under_30_edge": {
+            "n": 34,
+            "record": "23-11",
+            "hit": 67.6,
+            "needs": 53.2,
+            "units": 9.2,
+            "roi": 27.1,
+            "avg_model_edge": 14.5,
+            "avg_decimal_odds": 1.88,
+            "roi_by_weekend": {
+              "2026-09-19": 36.8,
+              "2026-09-26": 25.4,
+              "2026-10-03": 19.3
+            }
+          },
+          "rule_30_plus_edge": {
+            "n": 1,
+            "record": "0-1",
+            "hit": 0.0,
+            "needs": 52.4,
+            "units": -1.0,
+            "roi": -100.0,
+            "avg_model_edge": 34.3,
+            "avg_decimal_odds": 1.909,
+            "roi_by_weekend": {
+              "2026-09-26": -100.0
+            }
+          },
+          "rule_pff_matched": {
+            "n": 35,
+            "record": "23-12",
+            "hit": 65.7,
+            "needs": 53.2,
+            "units": 8.2,
+            "roi": 23.5,
+            "avg_model_edge": 15.1,
+            "avg_decimal_odds": 1.881,
+            "roi_by_weekend": {
+              "2026-09-19": 36.8,
+              "2026-09-26": 15.7,
+              "2026-10-03": 19.3
+            }
+          },
+          "rule_pff_unmatched": {
+            "n": 0
+          },
+          "any_over_10": {
+            "n": 35,
+            "record": "23-12",
+            "hit": 65.7,
+            "needs": 53.2,
+            "units": 8.2,
+            "roi": 23.5,
+            "avg_model_edge": 15.1,
+            "avg_decimal_odds": 1.881,
+            "roi_by_weekend": {
+              "2026-09-19": 36.8,
+              "2026-09-26": 15.7,
+              "2026-10-03": 19.3
+            }
+          },
+          "any_under_10": {
+            "n": 76,
+            "record": "44-32",
+            "hit": 57.9,
+            "needs": 53.5,
+            "units": 6.2,
+            "roi": 8.2,
+            "avg_model_edge": 15.4,
+            "avg_decimal_odds": 1.869,
+            "roi_by_weekend": {
+              "2026-09-19": 39.6,
+              "2026-09-26": -9.6,
+              "2026-10-03": -2.2
+            }
+          },
+          "over_edge_buckets": [
+            {
+              "n": 562,
+              "record": "276-286",
+              "hit": 49.1,
+              "needs": 53.2,
+              "units": -42.6,
+              "roi": -7.6,
+              "avg_model_edge": -12.8,
+              "avg_decimal_odds": 1.879,
+              "roi_by_weekend": {
+                "2026-09-19": -7.1,
+                "2026-09-26": -3.3,
+                "2026-10-03": -12.4
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 75,
+              "record": "40-35",
+              "hit": 53.3,
+              "needs": 52.9,
+              "units": 0.6,
+              "roi": 0.7,
+              "avg_model_edge": 2.3,
+              "avg_decimal_odds": 1.89,
+              "roi_by_weekend": {
+                "2026-09-19": 3.3,
+                "2026-09-26": -33.5,
+                "2026-10-03": 19.3
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 40,
+              "record": "31-9",
+              "hit": 77.5,
+              "needs": 53.0,
+              "units": 18.3,
+              "roi": 45.9,
+              "avg_model_edge": 7.1,
+              "avg_decimal_odds": 1.886,
+              "roi_by_weekend": {
+                "2026-09-19": 61.5,
+                "2026-09-26": 34.7,
+                "2026-10-03": 40.7
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 26,
+              "record": "18-8",
+              "hit": 69.2,
+              "needs": 53.2,
+              "units": 7.9,
+              "roi": 30.3,
+              "avg_model_edge": 12.5,
+              "avg_decimal_odds": 1.882,
+              "roi_by_weekend": {
+                "2026-09-19": 18.3,
+                "2026-09-26": 12.8,
+                "2026-10-03": 64.1
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 3,
+              "record": "2-1",
+              "hit": 66.7,
+              "needs": 53.3,
+              "units": 0.7,
+              "roi": 24.9,
+              "avg_model_edge": 17.9,
+              "avg_decimal_odds": 1.875,
+              "roi_by_weekend": {
+                "2026-09-19": 87.0,
+                "2026-09-26": 87.7,
+                "2026-10-03": -100.0
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 5,
+              "record": "3-2",
+              "hit": 60.0,
+              "needs": 53.4,
+              "units": 0.6,
+              "roi": 12.0,
+              "avg_model_edge": 23.3,
+              "avg_decimal_odds": 1.871,
+              "roi_by_weekend": {
+                "2026-09-19": 85.5,
+                "2026-09-26": 89.3,
+                "2026-10-03": -100.0
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 1,
+              "record": "0-1",
+              "hit": 0.0,
+              "needs": 52.4,
+              "units": -1.0,
+              "roi": -100.0,
+              "avg_model_edge": 34.3,
+              "avg_decimal_odds": 1.909,
+              "roi_by_weekend": {
+                "2026-09-26": -100.0
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "under_edge_buckets": [
+            {
+              "n": 444,
+              "record": "201-243",
+              "hit": 45.3,
+              "needs": 53.6,
+              "units": -69.2,
+              "roi": -15.6,
+              "avg_model_edge": -9.8,
+              "avg_decimal_odds": 1.866,
+              "roi_by_weekend": {
+                "2026-09-19": -23.0,
+                "2026-09-26": -14.9,
+                "2026-10-03": -10.0
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 116,
+              "record": "60-56",
+              "hit": 51.7,
+              "needs": 53.6,
+              "units": -4.0,
+              "roi": -3.5,
+              "avg_model_edge": 2.4,
+              "avg_decimal_odds": 1.867,
+              "roi_by_weekend": {
+                "2026-09-19": -20.8,
+                "2026-09-26": -8.6,
+                "2026-10-03": 16.4
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 76,
+              "record": "43-33",
+              "hit": 56.6,
+              "needs": 53.8,
+              "units": 4.2,
+              "roi": 5.6,
+              "avg_model_edge": 7.2,
+              "avg_decimal_odds": 1.86,
+              "roi_by_weekend": {
+                "2026-09-19": 3.8,
+                "2026-09-26": 22.1,
+                "2026-10-03": -22.7
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 45,
+              "record": "28-17",
+              "hit": 62.2,
+              "needs": 53.5,
+              "units": 7.3,
+              "roi": 16.3,
+              "avg_model_edge": 12.7,
+              "avg_decimal_odds": 1.869,
+              "roi_by_weekend": {
+                "2026-09-19": 38.2,
+                "2026-09-26": 7.3,
+                "2026-10-03": 17.2
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 19,
+              "record": "8-11",
+              "hit": 42.1,
+              "needs": 53.5,
+              "units": -4.0,
+              "roi": -21.2,
+              "avg_model_edge": 16.9,
+              "avg_decimal_odds": 1.871,
+              "roi_by_weekend": {
+                "2026-09-19": -6.1,
+                "2026-09-26": -38.3,
+                "2026-10-03": -24.9
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 11,
+              "record": "8-3",
+              "hit": 72.7,
+              "needs": 53.5,
+              "units": 3.9,
+              "roi": 35.8,
+              "avg_model_edge": 22.8,
+              "avg_decimal_odds": 1.869,
+              "roi_by_weekend": {
+                "2026-09-19": 86.7,
+                "2026-09-26": -100.0,
+                "2026-10-03": -100.0
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 1,
+              "record": "0-1",
+              "hit": 0.0,
+              "needs": 53.5,
+              "units": -1.0,
+              "roi": -100.0,
+              "avg_model_edge": 31.7,
+              "avg_decimal_odds": 1.87,
+              "roi_by_weekend": {
+                "2026-10-03": -100.0
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "props_pff_matched_pct": 99.4
+        }
+      },
+      "dropbacks": {
+        "description": "Route participation from true team dropbacks",
+        "n_inputs": 44,
+        "test_2025": {
+          "n": 12297,
+          "mae": 22.16,
+          "rmse": 30.076,
+          "bias": -0.369,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2296,
+            "model_avg_over": 39.3,
+            "actual_over": 40.9,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 2415,
+                "model": 24.2,
+                "actual": 26.2
+              },
+              {
+                "bucket": "30-40%",
+                "n": 4366,
+                "model": 35.4,
+                "actual": 37.1
+              },
+              {
+                "bucket": "40-45%",
+                "n": 2102,
+                "model": 42.5,
+                "actual": 44.1
+              },
+              {
+                "bucket": "45-50%",
+                "n": 1484,
+                "model": 47.3,
+                "actual": 47.6
+              },
+              {
+                "bucket": "50-55%",
+                "n": 979,
+                "model": 52.3,
+                "actual": 54.6
+              },
+              {
+                "bucket": "55-60%",
+                "n": 498,
+                "model": 57.2,
+                "actual": 57.6
+              },
+              {
+                "bucket": "60-65%",
+                "n": 201,
+                "model": 61.9,
+                "actual": 68.2
+              },
+              {
+                "bucket": "65-70%",
+                "n": 101,
+                "model": 67.1,
+                "actual": 71.3
+              },
+              {
+                "bucket": "70%+",
+                "n": 151,
+                "model": 78.3,
+                "actual": 76.2
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 2444,
+                "model": 52.5,
+                "actual": 53.2
+              },
+              {
+                "bucket": "55-60%",
+                "n": 2598,
+                "model": 57.4,
+                "actual": 56.2
+              },
+              {
+                "bucket": "60-65%",
+                "n": 2668,
+                "model": 62.4,
+                "actual": 60.6
+              },
+              {
+                "bucket": "65-70%",
+                "n": 1999,
+                "model": 67.2,
+                "actual": 66.9
+              },
+              {
+                "bucket": "70%+",
+                "n": 2588,
+                "model": 75.9,
+                "actual": 73.9
+              }
+            ],
+            "avg_gap_pts": 1.3
+          }
+        },
+        "props_2026": {
+          "n": 712,
+          "mae": 24.407,
+          "rmse": 33.57,
+          "bias": -4.625,
+          "line_mae": 24.183,
+          "calibration": {
+            "n": 712,
+            "brier": 0.2555,
+            "model_avg_over": 45.2,
+            "actual_over": 51.5,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 74,
+                "model": 24.6,
+                "actual": 44.6
+              },
+              {
+                "bucket": "30-40%",
+                "n": 149,
+                "model": 35.6,
+                "actual": 45.0
+              },
+              {
+                "bucket": "40-45%",
+                "n": 140,
+                "model": 42.5,
+                "actual": 52.9
+              },
+              {
+                "bucket": "45-50%",
+                "n": 115,
+                "model": 47.5,
+                "actual": 53.0
+              },
+              {
+                "bucket": "50-55%",
+                "n": 96,
+                "model": 52.7,
+                "actual": 50.0
+              },
+              {
+                "bucket": "55-60%",
+                "n": 68,
+                "model": 57.0,
+                "actual": 52.9
+              },
+              {
+                "bucket": "60-65%",
+                "n": 38,
+                "model": 61.8,
+                "actual": 68.4
+              },
+              {
+                "bucket": "65-70%",
+                "n": 15,
+                "model": 67.0,
+                "actual": 80.0
+              },
+              {
+                "bucket": "70%+",
+                "n": 17,
+                "model": 77.7,
+                "actual": 58.8
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 208,
+                "model": 52.5,
+                "actual": 48.6
+              },
+              {
+                "bucket": "55-60%",
+                "n": 210,
+                "model": 57.3,
+                "actual": 48.6
+              },
+              {
+                "bucket": "60-65%",
+                "n": 132,
+                "model": 62.4,
+                "actual": 56.8
+              },
+              {
+                "bucket": "65-70%",
+                "n": 70,
+                "model": 67.2,
+                "actual": 65.7
+              },
+              {
+                "bucket": "70%+",
+                "n": 92,
+                "model": 75.8,
+                "actual": 55.4
+              }
+            ],
+            "avg_gap_pts": 7.5
+          },
+          "rule": {
+            "n": 88,
+            "record": "59-29",
+            "hit": 67.0,
+            "needs": 53.1,
+            "units": 22.9,
+            "roi": 26.0,
+            "avg_model_edge": 23.4,
+            "avg_decimal_odds": 1.884,
+            "roi_by_weekend": {
+              "2026-09-19": 41.0,
+              "2026-09-26": 10.3,
+              "2026-10-03": 25.2
+            }
+          },
+          "rule_2plus_games": {
+            "n": 77,
+            "record": "52-25",
+            "hit": 67.5,
+            "needs": 53.1,
+            "units": 20.8,
+            "roi": 27.1,
+            "avg_model_edge": 22.8,
+            "avg_decimal_odds": 1.885,
+            "roi_by_weekend": {
+              "2026-09-19": 50.6,
+              "2026-09-26": 14.2,
+              "2026-10-03": 17.5
+            }
+          },
+          "rule_under_30_edge": {
+            "n": 67,
+            "record": "45-22",
+            "hit": 67.2,
+            "needs": 53.1,
+            "units": 17.6,
+            "roi": 26.3,
+            "avg_model_edge": 17.1,
+            "avg_decimal_odds": 1.885,
+            "roi_by_weekend": {
+              "2026-09-19": 46.3,
+              "2026-09-26": -5.6,
+              "2026-10-03": 35.4
+            }
+          },
+          "rule_30_plus_edge": {
+            "n": 21,
+            "record": "14-7",
+            "hit": 66.7,
+            "needs": 53.2,
+            "units": 5.3,
+            "roi": 25.1,
+            "avg_model_edge": 43.6,
+            "avg_decimal_odds": 1.881,
+            "roi_by_weekend": {
+              "2026-09-19": 12.7,
+              "2026-09-26": 60.4,
+              "2026-10-03": 4.7
+            }
+          },
+          "rule_pff_matched": {
+            "n": 88,
+            "record": "59-29",
+            "hit": 67.0,
+            "needs": 53.1,
+            "units": 22.9,
+            "roi": 26.0,
+            "avg_model_edge": 23.4,
+            "avg_decimal_odds": 1.884,
+            "roi_by_weekend": {
+              "2026-09-19": 41.0,
+              "2026-09-26": 10.3,
+              "2026-10-03": 25.2
+            }
+          },
+          "rule_pff_unmatched": {
+            "n": 0
+          },
+          "any_over_10": {
+            "n": 88,
+            "record": "59-29",
+            "hit": 67.0,
+            "needs": 53.1,
+            "units": 22.9,
+            "roi": 26.0,
+            "avg_model_edge": 23.4,
+            "avg_decimal_odds": 1.884,
+            "roi_by_weekend": {
+              "2026-09-19": 41.0,
+              "2026-09-26": 10.3,
+              "2026-10-03": 25.2
+            }
+          },
+          "any_under_10": {
+            "n": 250,
+            "record": "141-109",
+            "hit": 56.4,
+            "needs": 53.6,
+            "units": 13.9,
+            "roi": 5.6,
+            "avg_model_edge": 25.6,
+            "avg_decimal_odds": 1.868,
+            "roi_by_weekend": {
+              "2026-09-19": 5.7,
+              "2026-09-26": 8.8,
+              "2026-10-03": 1.3
+            }
+          },
+          "over_edge_buckets": [
+            {
+              "n": 523,
+              "record": "259-264",
+              "hit": 49.5,
+              "needs": 53.3,
+              "units": -36.7,
+              "roi": -7.0,
+              "avg_model_edge": -24.3,
+              "avg_decimal_odds": 1.877,
+              "roi_by_weekend": {
+                "2026-09-19": -5.0,
+                "2026-09-26": -3.2,
+                "2026-10-03": -12.5
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 57,
+              "record": "26-31",
+              "hit": 45.6,
+              "needs": 53.2,
+              "units": -8.2,
+              "roi": -14.4,
+              "avg_model_edge": 2.2,
+              "avg_decimal_odds": 1.879,
+              "roi_by_weekend": {
+                "2026-09-19": -24.9,
+                "2026-09-26": 1.4,
+                "2026-10-03": -27.2
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 44,
+              "record": "27-17",
+              "hit": 61.4,
+              "needs": 52.9,
+              "units": 7.1,
+              "roi": 16.2,
+              "avg_model_edge": 7.0,
+              "avg_decimal_odds": 1.891,
+              "roi_by_weekend": {
+                "2026-09-19": 31.0,
+                "2026-09-26": -31.2,
+                "2026-10-03": 32.4
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 28,
+              "record": "19-9",
+              "hit": 67.9,
+              "needs": 53.1,
+              "units": 7.8,
+              "roi": 27.7,
+              "avg_model_edge": 12.7,
+              "avg_decimal_odds": 1.883,
+              "roi_by_weekend": {
+                "2026-09-19": 44.9,
+                "2026-09-26": -19.2,
+                "2026-10-03": 40.9
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 21,
+              "record": "14-7",
+              "hit": 66.7,
+              "needs": 53.1,
+              "units": 5.4,
+              "roi": 25.6,
+              "avg_model_edge": 17.1,
+              "avg_decimal_odds": 1.886,
+              "roi_by_weekend": {
+                "2026-09-19": 40.4,
+                "2026-09-26": 26.2,
+                "2026-10-03": 8.2
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 18,
+              "record": "12-6",
+              "hit": 66.7,
+              "needs": 53.0,
+              "units": 4.5,
+              "roi": 24.9,
+              "avg_model_edge": 23.9,
+              "avg_decimal_odds": 1.887,
+              "roi_by_weekend": {
+                "2026-09-19": 57.1,
+                "2026-09-26": -16.3,
+                "2026-10-03": 84.2
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 21,
+              "record": "14-7",
+              "hit": 66.7,
+              "needs": 53.2,
+              "units": 5.3,
+              "roi": 25.1,
+              "avg_model_edge": 43.6,
+              "avg_decimal_odds": 1.881,
+              "roi_by_weekend": {
+                "2026-09-19": 12.7,
+                "2026-09-26": 60.4,
+                "2026-10-03": 4.7
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "under_edge_buckets": [
+            {
+              "n": 306,
+              "record": "142-164",
+              "hit": 46.4,
+              "needs": 53.6,
+              "units": -41.1,
+              "roi": -13.4,
+              "avg_model_edge": -16.7,
+              "avg_decimal_odds": 1.867,
+              "roi_by_weekend": {
+                "2026-09-19": -22.6,
+                "2026-09-26": -6.1,
+                "2026-10-03": -12.5
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 75,
+              "record": "33-42",
+              "hit": 44.0,
+              "needs": 53.8,
+              "units": -13.8,
+              "roi": -18.4,
+              "avg_model_edge": 3.1,
+              "avg_decimal_odds": 1.859,
+              "roi_by_weekend": {
+                "2026-09-19": -3.0,
+                "2026-09-26": -49.2,
+                "2026-10-03": -7.5
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 81,
+              "record": "32-49",
+              "hit": 39.5,
+              "needs": 53.6,
+              "units": -21.2,
+              "roi": -26.1,
+              "avg_model_edge": 7.2,
+              "avg_decimal_odds": 1.867,
+              "roi_by_weekend": {
+                "2026-09-19": -58.7,
+                "2026-09-26": -42.4,
+                "2026-10-03": 1.2
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 44,
+              "record": "24-20",
+              "hit": 54.5,
+              "needs": 53.4,
+              "units": 1.3,
+              "roi": 2.8,
+              "avg_model_edge": 12.4,
+              "avg_decimal_odds": 1.876,
+              "roi_by_weekend": {
+                "2026-09-19": -3.0,
+                "2026-09-26": 5.6,
+                "2026-10-03": 4.5
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 62,
+              "record": "30-32",
+              "hit": 48.4,
+              "needs": 53.5,
+              "units": -6.0,
+              "roi": -9.6,
+              "avg_model_edge": 17.2,
+              "avg_decimal_odds": 1.871,
+              "roi_by_weekend": {
+                "2026-09-19": -28.6,
+                "2026-09-26": 14.9,
+                "2026-10-03": -15.4
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 70,
+              "record": "43-27",
+              "hit": 61.4,
+              "needs": 53.8,
+              "units": 10.4,
+              "roi": 14.8,
+              "avg_model_edge": 25.2,
+              "avg_decimal_odds": 1.861,
+              "roi_by_weekend": {
+                "2026-09-19": 0.8,
+                "2026-09-26": 20.0,
+                "2026-10-03": 28.3
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 74,
+              "record": "44-30",
+              "hit": 59.5,
+              "needs": 53.5,
+              "units": 8.3,
+              "roi": 11.2,
+              "avg_model_edge": 40.9,
+              "avg_decimal_odds": 1.869,
+              "roi_by_weekend": {
+                "2026-09-19": 39.6,
+                "2026-09-26": -6.2,
+                "2026-10-03": -6.2
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "props_pff_matched_pct": 99.4
+        }
+      },
+      "interactions": {
+        "description": "Live inputs + expected targets and role opportunity",
+        "n_inputs": 47,
+        "test_2025": {
+          "n": 12297,
+          "mae": 22.132,
+          "rmse": 30.026,
+          "bias": -0.253,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2294,
+            "model_avg_over": 39.3,
+            "actual_over": 40.9,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 2574,
+                "model": 24.1,
+                "actual": 26.1
+              },
+              {
+                "bucket": "30-40%",
+                "n": 4040,
+                "model": 35.2,
+                "actual": 37.4
+              },
+              {
+                "bucket": "40-45%",
+                "n": 1987,
+                "model": 42.3,
+                "actual": 42.9
+              },
+              {
+                "bucket": "45-50%",
+                "n": 1719,
+                "model": 47.2,
+                "actual": 48.6
+              },
+              {
+                "bucket": "50-55%",
+                "n": 999,
+                "model": 52.3,
+                "actual": 53.4
+              },
+              {
+                "bucket": "55-60%",
+                "n": 493,
+                "model": 57.3,
+                "actual": 58.0
+              },
+              {
+                "bucket": "60-65%",
+                "n": 223,
+                "model": 62.2,
+                "actual": 68.6
+              },
+              {
+                "bucket": "65-70%",
+                "n": 104,
+                "model": 67.4,
+                "actual": 68.3
+              },
+              {
+                "bucket": "70%+",
+                "n": 158,
+                "model": 78.2,
+                "actual": 75.9
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 2701,
+                "model": 52.6,
+                "actual": 52.1
+              },
+              {
+                "bucket": "55-60%",
+                "n": 2474,
+                "model": 57.6,
+                "actual": 57.2
+              },
+              {
+                "bucket": "60-65%",
+                "n": 2333,
+                "model": 62.4,
+                "actual": 61.6
+              },
+              {
+                "bucket": "65-70%",
+                "n": 2040,
+                "model": 67.2,
+                "actual": 64.7
+              },
+              {
+                "bucket": "70%+",
+                "n": 2749,
+                "model": 76.0,
+                "actual": 74.1
+              }
+            ],
+            "avg_gap_pts": 1.2
+          }
+        },
+        "props_2026": {
+          "n": 712,
+          "mae": 24.37,
+          "rmse": 33.372,
+          "bias": -4.067,
+          "line_mae": 24.183,
+          "calibration": {
+            "n": 712,
+            "brier": 0.2542,
+            "model_avg_over": 45.5,
+            "actual_over": 51.5,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 65,
+                "model": 25.1,
+                "actual": 41.5
+              },
+              {
+                "bucket": "30-40%",
+                "n": 170,
+                "model": 35.9,
+                "actual": 49.4
+              },
+              {
+                "bucket": "40-45%",
+                "n": 118,
+                "model": 42.4,
+                "actual": 45.8
+              },
+              {
+                "bucket": "45-50%",
+                "n": 105,
+                "model": 47.5,
+                "actual": 50.5
+              },
+              {
+                "bucket": "50-55%",
+                "n": 105,
+                "model": 52.3,
+                "actual": 53.3
+              },
+              {
+                "bucket": "55-60%",
+                "n": 73,
+                "model": 57.2,
+                "actual": 58.9
+              },
+              {
+                "bucket": "60-65%",
+                "n": 41,
+                "model": 61.7,
+                "actual": 68.3
+              },
+              {
+                "bucket": "65-70%",
+                "n": 19,
+                "model": 67.8,
+                "actual": 57.9
+              },
+              {
+                "bucket": "70%+",
+                "n": 16,
+                "model": 76.6,
+                "actual": 68.8
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 210,
+                "model": 52.4,
+                "actual": 51.4
+              },
+              {
+                "bucket": "55-60%",
+                "n": 189,
+                "model": 57.4,
+                "actual": 55.6
+              },
+              {
+                "bucket": "60-65%",
+                "n": 149,
+                "model": 62.0,
+                "actual": 53.0
+              },
+              {
+                "bucket": "65-70%",
+                "n": 83,
+                "model": 67.3,
+                "actual": 57.8
+              },
+              {
+                "bucket": "70%+",
+                "n": 81,
+                "model": 75.2,
+                "actual": 60.5
+              }
+            ],
+            "avg_gap_pts": 5.4
+          },
+          "rule": {
+            "n": 102,
+            "record": "67-35",
+            "hit": 65.7,
+            "needs": 53.1,
+            "units": 24.1,
+            "roi": 23.6,
+            "avg_model_edge": 21.8,
+            "avg_decimal_odds": 1.882,
+            "roi_by_weekend": {
+              "2026-09-19": 35.6,
+              "2026-09-26": 13.8,
+              "2026-10-03": 20.4
+            }
+          },
+          "rule_2plus_games": {
+            "n": 93,
+            "record": "61-32",
+            "hit": 65.6,
+            "needs": 53.1,
+            "units": 22.0,
+            "roi": 23.6,
+            "avg_model_edge": 21.4,
+            "avg_decimal_odds": 1.884,
+            "roi_by_weekend": {
+              "2026-09-19": 41.1,
+              "2026-09-26": 17.4,
+              "2026-10-03": 11.2
+            }
+          },
+          "rule_under_30_edge": {
+            "n": 78,
+            "record": "50-28",
+            "hit": 64.1,
+            "needs": 53.1,
+            "units": 16.2,
+            "roi": 20.8,
+            "avg_model_edge": 16.3,
+            "avg_decimal_odds": 1.883,
+            "roi_by_weekend": {
+              "2026-09-19": 29.5,
+              "2026-09-26": 8.6,
+              "2026-10-03": 23.6
+            }
+          },
+          "rule_30_plus_edge": {
+            "n": 24,
+            "record": "17-7",
+            "hit": 70.8,
+            "needs": 53.2,
+            "units": 7.9,
+            "roi": 33.0,
+            "avg_model_edge": 39.7,
+            "avg_decimal_odds": 1.882,
+            "roi_by_weekend": {
+              "2026-09-19": 61.1,
+              "2026-09-26": 33.2,
+              "2026-10-03": 13.3
+            }
+          },
+          "rule_pff_matched": {
+            "n": 102,
+            "record": "67-35",
+            "hit": 65.7,
+            "needs": 53.1,
+            "units": 24.1,
+            "roi": 23.6,
+            "avg_model_edge": 21.8,
+            "avg_decimal_odds": 1.882,
+            "roi_by_weekend": {
+              "2026-09-19": 35.6,
+              "2026-09-26": 13.8,
+              "2026-10-03": 20.4
+            }
+          },
+          "rule_pff_unmatched": {
+            "n": 0
+          },
+          "any_over_10": {
+            "n": 102,
+            "record": "67-35",
+            "hit": 65.7,
+            "needs": 53.1,
+            "units": 24.1,
+            "roi": 23.6,
+            "avg_model_edge": 21.8,
+            "avg_decimal_odds": 1.882,
+            "roi_by_weekend": {
+              "2026-09-19": 35.6,
+              "2026-09-26": 13.8,
+              "2026-10-03": 20.4
+            }
+          },
+          "any_under_10": {
+            "n": 263,
+            "record": "141-122",
+            "hit": 53.6,
+            "needs": 53.5,
+            "units": 0.4,
+            "roi": 0.1,
+            "avg_model_edge": 24.0,
+            "avg_decimal_odds": 1.869,
+            "roi_by_weekend": {
+              "2026-09-19": -3.3,
+              "2026-09-26": 4.6,
+              "2026-10-03": -1.7
+            }
+          },
+          "over_edge_buckets": [
+            {
+              "n": 529,
+              "record": "258-271",
+              "hit": 48.8,
+              "needs": 53.3,
+              "units": -44.3,
+              "roi": -8.4,
+              "avg_model_edge": -23.3,
+              "avg_decimal_odds": 1.877,
+              "roi_by_weekend": {
+                "2026-09-19": -7.6,
+                "2026-09-26": -1.9,
+                "2026-10-03": -15.8
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 43,
+              "record": "24-19",
+              "hit": 55.8,
+              "needs": 53.1,
+              "units": 2.3,
+              "roi": 5.3,
+              "avg_model_edge": 2.5,
+              "avg_decimal_odds": 1.885,
+              "roi_by_weekend": {
+                "2026-09-19": 25.3,
+                "2026-09-26": -37.1,
+                "2026-10-03": 19.5
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 38,
+              "record": "22-16",
+              "hit": 57.9,
+              "needs": 53.1,
+              "units": 3.4,
+              "roi": 8.8,
+              "avg_model_edge": 7.8,
+              "avg_decimal_odds": 1.885,
+              "roi_by_weekend": {
+                "2026-09-19": 0.9,
+                "2026-09-26": -21.5,
+                "2026-10-03": 44.8
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 40,
+              "record": "28-12",
+              "hit": 70.0,
+              "needs": 53.1,
+              "units": 12.8,
+              "roi": 32.0,
+              "avg_model_edge": 12.6,
+              "avg_decimal_odds": 1.886,
+              "roi_by_weekend": {
+                "2026-09-19": 24.0,
+                "2026-09-26": 37.8,
+                "2026-10-03": 33.8
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 22,
+              "record": "13-9",
+              "hit": 59.1,
+              "needs": 53.0,
+              "units": 2.6,
+              "roi": 11.9,
+              "avg_model_edge": 16.9,
+              "avg_decimal_odds": 1.886,
+              "roi_by_weekend": {
+                "2026-09-19": 37.6,
+                "2026-09-26": -23.8,
+                "2026-10-03": -5.5
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 16,
+              "record": "9-7",
+              "hit": 56.2,
+              "needs": 53.5,
+              "units": 0.8,
+              "roi": 5.0,
+              "avg_model_edge": 24.6,
+              "avg_decimal_odds": 1.869,
+              "roi_by_weekend": {
+                "2026-09-19": 25.4,
+                "2026-09-26": -7.3
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 24,
+              "record": "17-7",
+              "hit": 70.8,
+              "needs": 53.2,
+              "units": 7.9,
+              "roi": 33.0,
+              "avg_model_edge": 39.7,
+              "avg_decimal_odds": 1.882,
+              "roi_by_weekend": {
+                "2026-09-19": 61.1,
+                "2026-09-26": 33.2,
+                "2026-10-03": 13.3
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "under_edge_buckets": [
+            {
+              "n": 321,
+              "record": "140-181",
+              "hit": 43.6,
+              "needs": 53.7,
+              "units": -59.9,
+              "roi": -18.7,
+              "avg_model_edge": -16.9,
+              "avg_decimal_odds": 1.865,
+              "roi_by_weekend": {
+                "2026-09-19": -22.1,
+                "2026-09-26": -12.9,
+                "2026-10-03": -21.1
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 64,
+              "record": "33-31",
+              "hit": 51.6,
+              "needs": 53.6,
+              "units": -2.6,
+              "roi": -4.1,
+              "avg_model_edge": 2.8,
+              "avg_decimal_odds": 1.866,
+              "roi_by_weekend": {
+                "2026-09-19": -3.3,
+                "2026-09-26": -41.6,
+                "2026-10-03": 22.6
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 64,
+              "record": "34-30",
+              "hit": 53.1,
+              "needs": 53.7,
+              "units": -0.5,
+              "roi": -0.9,
+              "avg_model_edge": 7.6,
+              "avg_decimal_odds": 1.862,
+              "roi_by_weekend": {
+                "2026-09-19": -13.2,
+                "2026-09-26": -17.1,
+                "2026-10-03": 14.5
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 66,
+              "record": "34-32",
+              "hit": 51.5,
+              "needs": 53.5,
+              "units": -2.5,
+              "roi": -3.8,
+              "avg_model_edge": 12.7,
+              "avg_decimal_odds": 1.869,
+              "roi_by_weekend": {
+                "2026-09-19": -24.6,
+                "2026-09-26": 10.8,
+                "2026-10-03": -7.3
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 56,
+              "record": "24-32",
+              "hit": 42.9,
+              "needs": 53.5,
+              "units": -11.1,
+              "roi": -19.9,
+              "avg_model_edge": 17.4,
+              "avg_decimal_odds": 1.871,
+              "roi_by_weekend": {
+                "2026-09-19": -26.9,
+                "2026-09-26": -23.0,
+                "2026-10-03": -6.4
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 72,
+              "record": "42-30",
+              "hit": 58.3,
+              "needs": 53.6,
+              "units": 6.5,
+              "roi": 9.0,
+              "avg_model_edge": 24.7,
+              "avg_decimal_odds": 1.868,
+              "roi_by_weekend": {
+                "2026-09-19": -15.3,
+                "2026-09-26": 20.3,
+                "2026-10-03": 18.6
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 69,
+              "record": "41-28",
+              "hit": 59.4,
+              "needs": 53.5,
+              "units": 7.6,
+              "roi": 11.0,
+              "avg_model_edge": 39.5,
+              "avg_decimal_odds": 1.868,
+              "roi_by_weekend": {
+                "2026-09-19": 41.6,
+                "2026-09-26": -2.9,
+                "2026-10-03": -11.1
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "props_pff_matched_pct": 99.4
+        }
+      },
+      "dropbacks_interactions": {
+        "description": "True dropbacks + interaction inputs",
+        "n_inputs": 47,
+        "test_2025": {
+          "n": 12297,
+          "mae": 22.144,
+          "rmse": 30.041,
+          "bias": -0.339,
+          "calibration": {
+            "n": 12297,
+            "brier": 0.2297,
+            "model_avg_over": 38.7,
+            "actual_over": 40.9,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 2619,
+                "model": 23.9,
+                "actual": 26.6
+              },
+              {
+                "bucket": "30-40%",
+                "n": 4443,
+                "model": 35.2,
+                "actual": 37.8
+              },
+              {
+                "bucket": "40-45%",
+                "n": 1959,
+                "model": 42.5,
+                "actual": 44.3
+              },
+              {
+                "bucket": "45-50%",
+                "n": 1471,
+                "model": 47.3,
+                "actual": 48.2
+              },
+              {
+                "bucket": "50-55%",
+                "n": 905,
+                "model": 52.2,
+                "actual": 55.0
+              },
+              {
+                "bucket": "55-60%",
+                "n": 473,
+                "model": 57.1,
+                "actual": 59.6
+              },
+              {
+                "bucket": "60-65%",
+                "n": 182,
+                "model": 62.0,
+                "actual": 68.7
+              },
+              {
+                "bucket": "65-70%",
+                "n": 92,
+                "model": 67.3,
+                "actual": 63.0
+              },
+              {
+                "bucket": "70%+",
+                "n": 153,
+                "model": 78.1,
+                "actual": 77.1
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 2374,
+                "model": 52.5,
+                "actual": 53.0
+              },
+              {
+                "bucket": "55-60%",
+                "n": 2423,
+                "model": 57.4,
+                "actual": 56.5
+              },
+              {
+                "bucket": "60-65%",
+                "n": 2469,
+                "model": 62.4,
+                "actual": 59.7
+              },
+              {
+                "bucket": "65-70%",
+                "n": 2233,
+                "model": 67.4,
+                "actual": 65.5
+              },
+              {
+                "bucket": "70%+",
+                "n": 2798,
+                "model": 76.1,
+                "actual": 73.6
+              }
+            ],
+            "avg_gap_pts": 1.7
+          }
+        },
+        "props_2026": {
+          "n": 712,
+          "mae": 24.375,
+          "rmse": 33.559,
+          "bias": -4.531,
+          "line_mae": 24.183,
+          "calibration": {
+            "n": 712,
+            "brier": 0.2533,
+            "model_avg_over": 45.3,
+            "actual_over": 51.5,
+            "by_over_chance": [
+              {
+                "bucket": "under 30%",
+                "n": 71,
+                "model": 24.9,
+                "actual": 43.7
+              },
+              {
+                "bucket": "30-40%",
+                "n": 163,
+                "model": 35.6,
+                "actual": 44.2
+              },
+              {
+                "bucket": "40-45%",
+                "n": 119,
+                "model": 42.7,
+                "actual": 55.5
+              },
+              {
+                "bucket": "45-50%",
+                "n": 118,
+                "model": 47.4,
+                "actual": 54.2
+              },
+              {
+                "bucket": "50-55%",
+                "n": 96,
+                "model": 52.5,
+                "actual": 43.8
+              },
+              {
+                "bucket": "55-60%",
+                "n": 77,
+                "model": 57.5,
+                "actual": 58.4
+              },
+              {
+                "bucket": "60-65%",
+                "n": 35,
+                "model": 62.0,
+                "actual": 62.9
+              },
+              {
+                "bucket": "65-70%",
+                "n": 15,
+                "model": 67.3,
+                "actual": 80.0
+              },
+              {
+                "bucket": "70%+",
+                "n": 18,
+                "model": 76.9,
+                "actual": 72.2
+              }
+            ],
+            "by_favored_side": [
+              {
+                "bucket": "50-55%",
+                "n": 212,
+                "model": 52.5,
+                "actual": 44.8
+              },
+              {
+                "bucket": "55-60%",
+                "n": 197,
+                "model": 57.3,
+                "actual": 50.3
+              },
+              {
+                "bucket": "60-65%",
+                "n": 132,
+                "model": 62.2,
+                "actual": 56.8
+              },
+              {
+                "bucket": "65-70%",
+                "n": 80,
+                "model": 67.3,
+                "actual": 61.3
+              },
+              {
+                "bucket": "70%+",
+                "n": 91,
+                "model": 75.4,
+                "actual": 59.3
+              }
+            ],
+            "avg_gap_pts": 8.0
+          },
+          "rule": {
+            "n": 96,
+            "record": "68-28",
+            "hit": 70.8,
+            "needs": 53.0,
+            "units": 32.0,
+            "roi": 33.3,
+            "avg_model_edge": 22.7,
+            "avg_decimal_odds": 1.887,
+            "roi_by_weekend": {
+              "2026-09-19": 39.5,
+              "2026-09-26": 23.5,
+              "2026-10-03": 37.0
+            }
+          },
+          "rule_2plus_games": {
+            "n": 87,
+            "record": "62-25",
+            "hit": 71.3,
+            "needs": 53.0,
+            "units": 29.7,
+            "roi": 34.1,
+            "avg_model_edge": 22.1,
+            "avg_decimal_odds": 1.887,
+            "roi_by_weekend": {
+              "2026-09-19": 44.4,
+              "2026-09-26": 27.5,
+              "2026-10-03": 32.0
+            }
+          },
+          "rule_under_30_edge": {
+            "n": 74,
+            "record": "51-23",
+            "hit": 68.9,
+            "needs": 53.0,
+            "units": 22.0,
+            "roi": 29.8,
+            "avg_model_edge": 16.7,
+            "avg_decimal_odds": 1.888,
+            "roi_by_weekend": {
+              "2026-09-19": 37.6,
+              "2026-09-26": 6.4,
+              "2026-10-03": 43.2
+            }
+          },
+          "rule_30_plus_edge": {
+            "n": 22,
+            "record": "17-5",
+            "hit": 77.3,
+            "needs": 53.2,
+            "units": 9.9,
+            "roi": 45.2,
+            "avg_model_edge": 42.6,
+            "avg_decimal_odds": 1.881,
+            "roi_by_weekend": {
+              "2026-09-19": 49.3,
+              "2026-09-26": 67.3,
+              "2026-10-03": 17.7
+            }
+          },
+          "rule_pff_matched": {
+            "n": 96,
+            "record": "68-28",
+            "hit": 70.8,
+            "needs": 53.0,
+            "units": 32.0,
+            "roi": 33.3,
+            "avg_model_edge": 22.7,
+            "avg_decimal_odds": 1.887,
+            "roi_by_weekend": {
+              "2026-09-19": 39.5,
+              "2026-09-26": 23.5,
+              "2026-10-03": 37.0
+            }
+          },
+          "rule_pff_unmatched": {
+            "n": 0
+          },
+          "any_over_10": {
+            "n": 96,
+            "record": "68-28",
+            "hit": 70.8,
+            "needs": 53.0,
+            "units": 32.0,
+            "roi": 33.3,
+            "avg_model_edge": 22.7,
+            "avg_decimal_odds": 1.887,
+            "roi_by_weekend": {
+              "2026-09-19": 39.5,
+              "2026-09-26": 23.5,
+              "2026-10-03": 37.0
+            }
+          },
+          "any_under_10": {
+            "n": 252,
+            "record": "141-111",
+            "hit": 56.0,
+            "needs": 53.6,
+            "units": 11.8,
+            "roi": 4.7,
+            "avg_model_edge": 25.4,
+            "avg_decimal_odds": 1.868,
+            "roi_by_weekend": {
+              "2026-09-19": 1.2,
+              "2026-09-26": 9.5,
+              "2026-10-03": 3.3
+            }
+          },
+          "over_edge_buckets": [
+            {
+              "n": 525,
+              "record": "257-268",
+              "hit": 49.0,
+              "needs": 53.3,
+              "units": -41.9,
+              "roi": -8.0,
+              "avg_model_edge": -24.0,
+              "avg_decimal_odds": 1.878,
+              "roi_by_weekend": {
+                "2026-09-19": -7.7,
+                "2026-09-26": -3.7,
+                "2026-10-03": -12.5
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 47,
+              "record": "23-24",
+              "hit": 48.9,
+              "needs": 53.3,
+              "units": -3.7,
+              "roi": -7.9,
+              "avg_model_edge": 2.0,
+              "avg_decimal_odds": 1.878,
+              "roi_by_weekend": {
+                "2026-09-19": 7.2,
+                "2026-09-26": -31.7,
+                "2026-10-03": -11.6
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 44,
+              "record": "23-21",
+              "hit": 52.3,
+              "needs": 53.0,
+              "units": -0.5,
+              "roi": -1.2,
+              "avg_model_edge": 7.3,
+              "avg_decimal_odds": 1.886,
+              "roi_by_weekend": {
+                "2026-09-19": 19.5,
+                "2026-09-26": -16.2,
+                "2026-10-03": 1.6
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 35,
+              "record": "26-9",
+              "hit": 74.3,
+              "needs": 52.9,
+              "units": 14.0,
+              "roi": 40.0,
+              "avg_model_edge": 12.4,
+              "avg_decimal_odds": 1.89,
+              "roi_by_weekend": {
+                "2026-09-19": 47.9,
+                "2026-09-26": 4.6,
+                "2026-10-03": 57.3
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 18,
+              "record": "12-6",
+              "hit": 66.7,
+              "needs": 53.1,
+              "units": 4.6,
+              "roi": 25.5,
+              "avg_model_edge": 16.9,
+              "avg_decimal_odds": 1.883,
+              "roi_by_weekend": {
+                "2026-09-19": 7.3,
+                "2026-09-26": 13.0,
+                "2026-10-03": 57.2
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 21,
+              "record": "13-8",
+              "hit": 61.9,
+              "needs": 53.0,
+              "units": 3.5,
+              "roi": 16.4,
+              "avg_model_edge": 24.0,
+              "avg_decimal_odds": 1.889,
+              "roi_by_weekend": {
+                "2026-09-19": 51.3,
+                "2026-09-26": 4.6,
+                "2026-10-03": 6.8
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 22,
+              "record": "17-5",
+              "hit": 77.3,
+              "needs": 53.2,
+              "units": 9.9,
+              "roi": 45.2,
+              "avg_model_edge": 42.6,
+              "avg_decimal_odds": 1.881,
+              "roi_by_weekend": {
+                "2026-09-19": 49.3,
+                "2026-09-26": 67.3,
+                "2026-10-03": 17.7
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "under_edge_buckets": [
+            {
+              "n": 313,
+              "record": "141-172",
+              "hit": 45.0,
+              "needs": 53.6,
+              "units": -50.2,
+              "roi": -16.0,
+              "avg_model_edge": -16.8,
+              "avg_decimal_odds": 1.866,
+              "roi_by_weekend": {
+                "2026-09-19": -18.3,
+                "2026-09-26": -14.7,
+                "2026-10-03": -15.4
+              },
+              "bucket": "below 0"
+            },
+            {
+              "n": 76,
+              "record": "38-38",
+              "hit": 50.0,
+              "needs": 53.6,
+              "units": -5.2,
+              "roi": -6.8,
+              "avg_model_edge": 2.6,
+              "avg_decimal_odds": 1.868,
+              "roi_by_weekend": {
+                "2026-09-19": -18.1,
+                "2026-09-26": -15.2,
+                "2026-10-03": 3.9
+              },
+              "bucket": "0-4.9%"
+            },
+            {
+              "n": 71,
+              "record": "28-43",
+              "hit": 39.4,
+              "needs": 53.7,
+              "units": -18.6,
+              "roi": -26.3,
+              "avg_model_edge": 7.4,
+              "avg_decimal_odds": 1.864,
+              "roi_by_weekend": {
+                "2026-09-19": -41.4,
+                "2026-09-26": -35.0,
+                "2026-10-03": -6.4
+              },
+              "bucket": "5-9.9%"
+            },
+            {
+              "n": 51,
+              "record": "26-25",
+              "hit": 51.0,
+              "needs": 53.5,
+              "units": -2.4,
+              "roi": -4.7,
+              "avg_model_edge": 12.7,
+              "avg_decimal_odds": 1.87,
+              "roi_by_weekend": {
+                "2026-09-19": -27.9,
+                "2026-09-26": 20.6,
+                "2026-10-03": -6.8
+              },
+              "bucket": "10-14.9%"
+            },
+            {
+              "n": 49,
+              "record": "25-24",
+              "hit": 51.0,
+              "needs": 53.5,
+              "units": -2.0,
+              "roi": -4.2,
+              "avg_model_edge": 17.1,
+              "avg_decimal_odds": 1.871,
+              "roi_by_weekend": {
+                "2026-09-19": -13.3,
+                "2026-09-26": -1.1,
+                "2026-10-03": 5.6
+              },
+              "bucket": "15-19.9%"
+            },
+            {
+              "n": 75,
+              "record": "43-32",
+              "hit": 57.3,
+              "needs": 53.7,
+              "units": 5.3,
+              "roi": 7.1,
+              "avg_model_edge": 24.5,
+              "avg_decimal_odds": 1.864,
+              "roi_by_weekend": {
+                "2026-09-19": -13.9,
+                "2026-09-26": 16.5,
+                "2026-10-03": 21.5
+              },
+              "bucket": "20-29.9%"
+            },
+            {
+              "n": 77,
+              "record": "47-30",
+              "hit": 61.0,
+              "needs": 53.5,
+              "units": 10.9,
+              "roi": 14.1,
+              "avg_model_edge": 39.9,
+              "avg_decimal_odds": 1.87,
+              "roi_by_weekend": {
+                "2026-09-19": 36.5,
+                "2026-09-26": 0.9,
+                "2026-10-03": -1.5
+              },
+              "bucket": "30%+"
+            }
+          ],
+          "props_pff_matched_pct": 99.4
+        }
+      }
+    }
+  }
+}
