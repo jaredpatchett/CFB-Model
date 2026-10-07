@@ -111,6 +111,16 @@ jobs:
         continue-on-error: true
         run: python scripts/compute_clv.py
 
+      - name: Track line movement on flagged props
+        # Diagnostic only (10/2026). Logs each flagged prop at the price it
+        # was flagged at and follows that price until kickoff, so we can see
+        # how often the market moves toward the model's side. Reads the
+        # export above; keeps its log in data/clv/prop_flags.csv and writes
+        # docs/data/props_clv.json. continue-on-error so it can never block
+        # the dashboard commit below.
+        continue-on-error: true
+        run: python scripts/compute_props_clv.py
+
       - name: Build dashboard HTML
         run: python scripts/build_dashboard.py
 
@@ -124,6 +134,8 @@ jobs:
           # `git add` on a not-yet-existing path fails the whole step, so guard it rather
           # than assuming the file is already there this early in the season.
           [ -f data/clv/line_snapshots.csv ] && git add data/clv/line_snapshots.csv
+          [ -f docs/data/props_clv.json ] && git add docs/data/props_clv.json
+          [ -f data/clv/prop_flags.csv ] && git add data/clv/prop_flags.csv
           git diff --cached --quiet && echo "No changes to commit" || git commit -m "Update dashboard data + HTML [skip ci]"
 
           # The full pipeline above (historical fetch, feature build, model
