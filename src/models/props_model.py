@@ -166,10 +166,17 @@ class PlayerStatModel:
     NONNEGATIVE = {"pass_yds", "pass_tds", "pass_att", "pass_comp", "pass_int", "rush_tds", "rush_att",
                    "rec_yds", "rec_tds", "receptions"}
 
-    def over_probability(self, pred: float, prop_line: float):
-        """Chance the real stat lands over the line: the model's projection
+    def outcome_probabilities(self, pred: float, prop_line: float):
+        """(over, under, push) chances for a line: the model's projection
         plus its actual holdout misses for projections this size. Falls back
-        to a bell curve for models saved before misses were stored."""
+        to a bell curve for models saved before misses were stored.
+
+        Whole-number lines (10/2026): a stat is a whole number, so a line of
+        4.0 can push. Simulated outcomes are rounded to whole numbers on
+        those lines so a push is its own outcome -- before this, a push was
+        counted as a win for the under. Half-point lines cannot push and are
+        calculated exactly as before."""
+        whole = float(prop_line).is_integer()
         edges = getattr(self, "residual_bin_edges", None) or []
         samples = getattr(self, "residual_bin_samples", None) or []
         if edges and samples and len(samples) == len(edges):
@@ -179,16 +186,34 @@ class PlayerStatModel:
                 outcomes = pred + r
                 if self.stat_name in self.NONNEGATIVE:
                     outcomes = np.clip(outcomes, 0, None)
-                return float(np.mean(outcomes > prop_line))
+                if not whole:
+                    over = float(np.mean(outcomes > prop_line))
+                    return over, 1 - over, 0.0
+                outcomes = np.rint(outcomes)
+                over, under = float(np.mean(outcomes > prop_line)), float(np.mean(outcomes < prop_line))
+                return over, under, max(0.0, 1 - over - under)
         sd = self.std_for_prediction(pred)
-        return float(1 - norm.cdf(prop_line, loc=pred, scale=sd)) if sd and sd > 0 else None
+        if not sd or sd <= 0:
+            return None
+        if not whole:
+            over = float(1 - norm.cdf(prop_line, loc=pred, scale=sd))
+            return over, 1 - over, 0.0
+        over = float(1 - norm.cdf(prop_line + 0.5, loc=pred, scale=sd))
+        under = float(norm.cdf(prop_line - 0.5, loc=pred, scale=sd))
+        return over, under, max(0.0, 1 - over - under)
+
+    def over_probability(self, pred: float, prop_line: float):
+        """Chance the real stat lands over the line (see outcome_probabilities)."""
+        probs = self.outcome_probabilities(pred, prop_line)
+        return probs[0] if probs else None
 
     def predict_and_compare(self, features_row: pd.Series, prop_line: float) -> dict:
         pred = float(self.model.predict(features_row[self.feature_columns].to_frame().T)[0])
         if self.stat_name in self.NONNEGATIVE:
             pred = max(pred, 0.0)
         confidence = "low" if features_row.get("games_played_prior", 0) < 3 else "normal"
-        over_prob = self.over_probability(pred, prop_line)
+        probs = self.outcome_probabilities(pred, prop_line)
+        over_prob, under_prob, push_prob = probs if probs else (None, None, None)
         return {
             "stat": self.stat_name,
             "predicted_value": pred,
@@ -196,6 +221,8 @@ class PlayerStatModel:
             "edge": pred - prop_line,
             "lean": "over" if pred > prop_line else "under",
             "over_probability": over_prob,
+            "under_probability": under_prob,
+            "push_probability": push_prob,
             "confidence": confidence,
         }
 
