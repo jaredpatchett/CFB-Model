@@ -916,6 +916,31 @@ def main(year: int):
     def _valid_price(x):
         return x is not None and not (isinstance(x, float) and pd.isna(x))
 
+    def _prop_log_key(p):
+        try:
+            import compute_props_clv as _pclv
+            return _pclv.prop_key(p)
+        except Exception:
+            return None
+
+    def _first_prop_flags():
+        """{prop key: 'official' or 'capped'} -- whichever a play was tagged
+        FIRST, from the line-movement log. Empty (so nothing is sticky) if
+        the log is missing or unreadable; never raises."""
+        try:
+            import compute_props_clv as _pclv
+            first = {}
+            for (key, tag), rec in _pclv.load_state().items():
+                if tag not in ("official", "capped"):
+                    continue
+                when = str(rec.get("flagged_at") or "")
+                if key not in first or when < first[key][0]:
+                    first[key] = (when, tag)
+            return {k: v[1] for k, v in first.items()}
+        except Exception as e:
+            print(f"  [warn] line-movement log unreadable ({e}) -- edge cap judged on current edge only")
+            return {}
+
     n_props_scored = 0
     n_props_official = 0
     n_props_watch = 0
@@ -998,8 +1023,21 @@ def main(year: int):
                                 and p.get("model_lean") == OFFICIAL_PROP_SIDE],
                                lambda p: (p.get("fixture_id"), p.get("player_name")))
         # Edge cap: 30%+ edges go to Watch instead of Official (see rules above).
-        official = [p for p in candidates if p["model_ev"] < MAX_OFFICIAL_PROP_EV]
-        capped = [p for p in candidates if p["model_ev"] >= MAX_OFFICIAL_PROP_EV]
+        # The cap is decided ONCE, by the edge the first time a play is
+        # flagged (10/2026). That is how it was tested, and without it a
+        # capped play slides back to Official as soon as its price shortens
+        # (Cody Jackson: capped at +124 / 42.6%, Official an hour later at
+        # +100 / 27.3%). The first flag comes from the line-movement log,
+        # data/clv/prop_flags.csv; a play not in the log yet is new and is
+        # judged on its current edge.
+        first_flag = _first_prop_flags()
+
+        def _is_capped(p):
+            was = first_flag.get(_prop_log_key(p))
+            return (was == "capped") if was else p["model_ev"] >= MAX_OFFICIAL_PROP_EV
+
+        official = [p for p in candidates if not _is_capped(p)]
+        capped = [p for p in candidates if _is_capped(p)]
         for p in official:
             p["is_official_play"] = True
         for p in capped:
