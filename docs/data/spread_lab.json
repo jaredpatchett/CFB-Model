@@ -1,0 +1,662 @@
+{
+  "generated_at": "2026-10-07T17:17:44.068101+00:00",
+  "train_years": [
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "seasons_graded": [
+    2024,
+    2025
+  ],
+  "games_graded": 1140,
+  "join_strategy": "id",
+  "pff": {
+    "pff_team_weeks": 12784,
+    "franchises_mapped": 1198,
+    "cfbd_team_games_with_pff": 12617,
+    "cfbd_team_games": 29488,
+    "pct_games_with_pff_inputs": {
+      "2022": 37.5,
+      "2023": 44.0,
+      "2024": 43.8,
+      "2025": 46.1
+    }
+  },
+  "folds": [
+    {
+      "season": 2024,
+      "current": {
+        "train_games": 528,
+        "inputs": 23,
+        "games_scored": 671,
+        "top_inputs": [
+          [
+            "ewm_adj_margin_diff",
+            0.3069359161058815
+          ],
+          [
+            "sp_rating_diff",
+            0.13997661999287755
+          ],
+          [
+            "ewm_off_ppa_diff",
+            0.08270046719483429
+          ],
+          [
+            "core_overall_diff",
+            0.08143330656015846
+          ],
+          [
+            "roll_margin_diff",
+            0.04824684907442034
+          ],
+          [
+            "temperature",
+            0.04171204829026494
+          ],
+          [
+            "ewm_off_sr_diff",
+            0.04064659428746456
+          ],
+          [
+            "pace_diff",
+            0.040527364915002355
+          ]
+        ]
+      },
+      "pff_core": {
+        "train_games": 528,
+        "inputs": 27,
+        "games_scored": 671,
+        "top_inputs": [
+          [
+            "ewm_adj_margin_diff",
+            0.277791363761011
+          ],
+          [
+            "sp_rating_diff",
+            0.14619648806755864
+          ],
+          [
+            "core_overall_diff",
+            0.06288866732859417
+          ],
+          [
+            "ewm_off_ppa_diff",
+            0.057064708480812874
+          ],
+          [
+            "pff_off_grade_diff",
+            0.05649706156823065
+          ],
+          [
+            "pff_def_grade_diff",
+            0.04335426527445393
+          ],
+          [
+            "pace_diff",
+            0.04080849059073489
+          ],
+          [
+            "roll_margin_diff",
+            0.03771337483214268
+          ]
+        ]
+      },
+      "pff_full": {
+        "train_games": 528,
+        "inputs": 42,
+        "games_scored": 671,
+        "top_inputs": [
+          [
+            "ewm_adj_margin_diff",
+            0.25083696709229325
+          ],
+          [
+            "sp_rating_diff",
+            0.13233091866011837
+          ],
+          [
+            "ewm_off_ppa_diff",
+            0.05527762939020414
+          ],
+          [
+            "core_overall_diff",
+            0.05369940353066573
+          ],
+          [
+            "pff_qb_twp_diff",
+            0.03911600913711658
+          ],
+          [
+            "pff_pass_rush_diff",
+            0.030003687425415104
+          ],
+          [
+            "pff_pressure_made_diff",
+            0.02633172852013729
+          ],
+          [
+            "roll_margin_diff",
+            0.02567186202999832
+          ]
+        ]
+      }
+    },
+    {
+      "season": 2025,
+      "current": {
+        "train_games": 1065,
+        "inputs": 23,
+        "games_scored": 671,
+        "top_inputs": [
+          [
+            "ewm_adj_margin_diff",
+            0.3027610538772929
+          ],
+          [
+            "sp_rating_diff",
+            0.1925936532352131
+          ],
+          [
+            "roll_ppg_for_diff",
+            0.08598159289923565
+          ],
+          [
+            "ewm_off_ppa_diff",
+            0.050096393161603726
+          ],
+          [
+            "roll_margin_diff",
+            0.043768167816351955
+          ],
+          [
+            "ewm_off_sr_diff",
+            0.04278391641387141
+          ],
+          [
+            "pace_diff",
+            0.04251824824131131
+          ],
+          [
+            "core_overall_diff",
+            0.04108510373005772
+          ]
+        ]
+      },
+      "pff_core": {
+        "train_games": 1065,
+        "inputs": 27,
+        "games_scored": 671,
+        "top_inputs": [
+          [
+            "ewm_adj_margin_diff",
+            0.278752504001533
+          ],
+          [
+            "sp_rating_diff",
+            0.17162231519383228
+          ],
+          [
+            "roll_ppg_for_diff",
+            0.07109093313974876
+          ],
+          [
+            "ewm_off_ppa_diff",
+            0.05176976185098731
+          ],
+          [
+            "pff_def_grade_diff",
+            0.04955769080061851
+          ],
+          [
+            "pace_diff",
+            0.04524387595388339
+          ],
+          [
+            "roll_margin_diff",
+            0.04276724392939829
+          ],
+          [
+            "core_overall_diff",
+            0.039906041687661264
+          ]
+        ]
+      },
+      "pff_full": {
+        "train_games": 1065,
+        "inputs": 42,
+        "games_scored": 671,
+        "top_inputs": [
+          [
+            "ewm_adj_margin_diff",
+            0.26028262526529455
+          ],
+          [
+            "sp_rating_diff",
+            0.15702245246445248
+          ],
+          [
+            "roll_ppg_for_diff",
+            0.061854936316966744
+          ],
+          [
+            "ewm_off_ppa_diff",
+            0.04877473494042882
+          ],
+          [
+            "roll_margin_diff",
+            0.03684075193965309
+          ],
+          [
+            "pff_def_grade_diff",
+            0.03242429038304238
+          ],
+          [
+            "ewm_off_sr_diff",
+            0.027006478872591506
+          ],
+          [
+            "pace_diff",
+            0.026334500544408404
+          ]
+        ]
+      }
+    }
+  ],
+  "results": {
+    "current": {
+      "margin_mae": 13.141,
+      "margin_rmse": 16.747,
+      "win_prob_log_loss": 0.644,
+      "mae_by_season": {
+        "2024": 13.266,
+        "2025": 13.015
+      },
+      "vs_closing": {
+        "every_game": {
+          "group": "every game",
+          "n": 1140,
+          "record": "588-526-26",
+          "hit_rate": 0.528,
+          "units": 8.55,
+          "roi": 0.007,
+          "z": 0.27,
+          "roi_by_period": {
+            "2024": 0.031,
+            "2025": -0.016
+          }
+        },
+        "bet_card": {
+          "group": "bet card",
+          "n": 278,
+          "record": "133-140-5",
+          "hit_rate": 0.487,
+          "units": -19.09,
+          "roi": -0.069,
+          "z": -1.21,
+          "roi_by_period": {
+            "2024": -0.065,
+            "2025": -0.072
+          }
+        },
+        "bet_card_weeks_4_plus": {
+          "group": "bet card weeks 4+",
+          "n": 237,
+          "record": "116-116-5",
+          "hit_rate": 0.5,
+          "units": -10.55,
+          "roi": -0.044,
+          "z": -0.72,
+          "roi_by_period": {
+            "2024": -0.021,
+            "2025": -0.069
+          }
+        },
+        "edge_3_plus": {
+          "group": "model 3+ pts off the line",
+          "n": 730,
+          "record": "391-323-16",
+          "hit_rate": 0.548,
+          "units": 32.45,
+          "roi": 0.044,
+          "z": 1.28,
+          "roi_by_period": {
+            "2024": 0.088,
+            "2025": -0.002
+          }
+        },
+        "edge_7_plus": {
+          "group": "model 7+ pts off the line",
+          "n": 335,
+          "record": "172-157-6",
+          "hit_rate": 0.523,
+          "units": -0.64,
+          "roi": -0.002,
+          "z": -0.04,
+          "roi_by_period": {
+            "2024": 0.032,
+            "2025": -0.051
+          }
+        }
+      },
+      "vs_opening": {
+        "every_game": {
+          "group": "every game vs opener",
+          "n": 1049,
+          "record": "570-468-11",
+          "hit_rate": 0.549,
+          "units": 50.18,
+          "roi": 0.048,
+          "z": 1.64,
+          "roi_by_period": {
+            "2024": 0.112,
+            "2025": -0.015
+          }
+        },
+        "bet_card": {
+          "group": "bet card vs opener",
+          "n": 256,
+          "record": "138-114-4",
+          "hit_rate": 0.548,
+          "units": 11.45,
+          "roi": 0.045,
+          "z": 0.76,
+          "roi_by_period": {
+            "2024": 0.15,
+            "2025": -0.059
+          }
+        },
+        "lines_moved": 904,
+        "share_moved_toward_model": 0.574,
+        "avg_move_toward_model_pts": 0.6,
+        "card_share_moved_toward_model": 0.664,
+        "card_avg_move_pts": 1.416
+      },
+      "description": "Live spread model"
+    },
+    "pff_core": {
+      "margin_mae": 13.148,
+      "margin_rmse": 16.678,
+      "win_prob_log_loss": 0.6442,
+      "mae_by_season": {
+        "2024": 13.475,
+        "2025": 12.82
+      },
+      "vs_closing": {
+        "every_game": {
+          "group": "every game",
+          "n": 1140,
+          "record": "595-519-26",
+          "hit_rate": 0.534,
+          "units": 21.91,
+          "roi": 0.019,
+          "z": 0.69,
+          "roi_by_period": {
+            "2024": 0.021,
+            "2025": 0.018
+          }
+        },
+        "bet_card": {
+          "group": "bet card",
+          "n": 278,
+          "record": "137-134-7",
+          "hit_rate": 0.506,
+          "units": -9.45,
+          "roi": -0.034,
+          "z": -0.6,
+          "roi_by_period": {
+            "2024": -0.058,
+            "2025": -0.01
+          }
+        },
+        "bet_card_weeks_4_plus": {
+          "group": "bet card weeks 4+",
+          "n": 237,
+          "record": "119-112-6",
+          "hit_rate": 0.515,
+          "units": -3.82,
+          "roi": -0.016,
+          "z": -0.26,
+          "roi_by_period": {
+            "2024": -0.012,
+            "2025": -0.02
+          }
+        },
+        "edge_3_plus": {
+          "group": "model 3+ pts off the line",
+          "n": 733,
+          "record": "386-330-17",
+          "hit_rate": 0.539,
+          "units": 20.91,
+          "roi": 0.029,
+          "z": 0.82,
+          "roi_by_period": {
+            "2024": 0.014,
+            "2025": 0.044
+          }
+        },
+        "edge_7_plus": {
+          "group": "model 7+ pts off the line",
+          "n": 339,
+          "record": "171-158-10",
+          "hit_rate": 0.52,
+          "units": -2.55,
+          "roi": -0.008,
+          "z": -0.15,
+          "roi_by_period": {
+            "2024": 0.0,
+            "2025": -0.018
+          }
+        }
+      },
+      "vs_opening": {
+        "every_game": {
+          "group": "every game vs opener",
+          "n": 1049,
+          "record": "556-482-11",
+          "hit_rate": 0.536,
+          "units": 23.45,
+          "roi": 0.022,
+          "z": 0.76,
+          "roi_by_period": {
+            "2024": 0.049,
+            "2025": -0.004
+          }
+        },
+        "bet_card": {
+          "group": "bet card vs opener",
+          "n": 256,
+          "record": "137-115-4",
+          "hit_rate": 0.544,
+          "units": 9.55,
+          "roi": 0.037,
+          "z": 0.63,
+          "roi_by_period": {
+            "2024": 0.068,
+            "2025": 0.007
+          }
+        },
+        "lines_moved": 904,
+        "share_moved_toward_model": 0.571,
+        "avg_move_toward_model_pts": 0.546,
+        "card_share_moved_toward_model": 0.685,
+        "card_avg_move_pts": 1.586
+      },
+      "description": "Live + 4 PFF ratings (offense, defense, QB grade, QB EPA)"
+    },
+    "pff_full": {
+      "margin_mae": 13.27,
+      "margin_rmse": 16.813,
+      "win_prob_log_loss": 0.6534,
+      "mae_by_season": {
+        "2024": 13.463,
+        "2025": 13.077
+      },
+      "vs_closing": {
+        "every_game": {
+          "group": "every game",
+          "n": 1140,
+          "record": "564-550-26",
+          "hit_rate": 0.506,
+          "units": -37.27,
+          "roi": -0.033,
+          "z": -1.17,
+          "roi_by_period": {
+            "2024": -0.023,
+            "2025": -0.043
+          }
+        },
+        "bet_card": {
+          "group": "bet card",
+          "n": 278,
+          "record": "134-140-4",
+          "hit_rate": 0.489,
+          "units": -18.18,
+          "roi": -0.065,
+          "z": -1.15,
+          "roi_by_period": {
+            "2024": -0.093,
+            "2025": -0.038
+          }
+        },
+        "bet_card_weeks_4_plus": {
+          "group": "bet card weeks 4+",
+          "n": 237,
+          "record": "117-116-4",
+          "hit_rate": 0.502,
+          "units": -9.64,
+          "roi": -0.041,
+          "z": -0.66,
+          "roi_by_period": {
+            "2024": -0.037,
+            "2025": -0.045
+          }
+        },
+        "edge_3_plus": {
+          "group": "model 3+ pts off the line",
+          "n": 732,
+          "record": "379-338-15",
+          "hit_rate": 0.529,
+          "units": 6.55,
+          "roi": 0.009,
+          "z": 0.26,
+          "roi_by_period": {
+            "2024": 0.034,
+            "2025": -0.016
+          }
+        },
+        "edge_7_plus": {
+          "group": "model 7+ pts off the line",
+          "n": 329,
+          "record": "167-153-9",
+          "hit_rate": 0.522,
+          "units": -1.18,
+          "roi": -0.004,
+          "z": -0.07,
+          "roi_by_period": {
+            "2024": 0.01,
+            "2025": -0.023
+          }
+        }
+      },
+      "vs_opening": {
+        "every_game": {
+          "group": "every game vs opener",
+          "n": 1049,
+          "record": "547-491-11",
+          "hit_rate": 0.527,
+          "units": 6.27,
+          "roi": 0.006,
+          "z": 0.2,
+          "roi_by_period": {
+            "2024": 0.031,
+            "2025": -0.018
+          }
+        },
+        "bet_card": {
+          "group": "bet card vs opener",
+          "n": 256,
+          "record": "140-114-2",
+          "hit_rate": 0.551,
+          "units": 13.27,
+          "roi": 0.052,
+          "z": 0.88,
+          "roi_by_period": {
+            "2024": 0.045,
+            "2025": 0.058
+          }
+        },
+        "lines_moved": 904,
+        "share_moved_toward_model": 0.596,
+        "avg_move_toward_model_pts": 0.695,
+        "card_share_moved_toward_model": 0.674,
+        "card_avg_move_pts": 1.613
+      },
+      "description": "Live + every PFF rating and matchup"
+    }
+  },
+  "opposite_sides": {
+    "pff_core": {
+      "games": 172,
+      "current": {
+        "group": "current",
+        "n": 172,
+        "record": "81-88-3",
+        "hit_rate": 0.479,
+        "units": -14.36,
+        "roi": -0.084,
+        "z": -1.16,
+        "roi_by_period": {
+          "2024": -0.012,
+          "2025": -0.16
+        }
+      },
+      "pff_core": {
+        "group": "pff_core",
+        "n": 172,
+        "record": "88-81-3",
+        "hit_rate": 0.521,
+        "units": -1.0,
+        "roi": -0.006,
+        "z": -0.08,
+        "roi_by_period": {
+          "2024": -0.077,
+          "2025": 0.07
+        }
+      }
+    },
+    "pff_full": {
+      "games": 241,
+      "current": {
+        "group": "current",
+        "n": 241,
+        "record": "128-104-9",
+        "hit_rate": 0.552,
+        "units": 12.36,
+        "roi": 0.051,
+        "z": 0.85,
+        "roi_by_period": {
+          "2024": 0.07,
+          "2025": 0.027
+        }
+      },
+      "pff_full": {
+        "group": "pff_full",
+        "n": 241,
+        "record": "104-128-9",
+        "hit_rate": 0.448,
+        "units": -33.45,
+        "roi": -0.139,
+        "z": -2.31,
+        "roi_by_period": {
+          "2024": -0.156,
+          "2025": -0.117
+        }
+      }
+    }
+  },
+  "method": "walk-forward: each season graded by models trained only on earlier seasons; same games for every version; spreads under 20"
+}
