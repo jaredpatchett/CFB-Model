@@ -83,6 +83,14 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 DATA_PATH = "docs/data/latest.json"
 BACKTEST_PATH = "docs/data/backtest_results.json"
 CLV_PATH = "docs/data/clv_results.json"
+# Backtest results by size of the model's edge (10/2026), shown next to each
+# receiving over on the Props tab. Comes from the props lab run
+# (scripts/props_lab2.py); if the file is missing the column just shows the
+# edge with no history.
+PROPS_LAB_PATH = "docs/data/props_lab2.json"
+EDGE_HISTORY_MARKETS = {"Receptions": "receptions", "Reception Yards": "rec_yds"}
+EDGE_BUCKET_BOUNDS = {"below 0": (-999, 0), "0-4.9%": (0, 5), "5-9.9%": (5, 10), "10-14.9%": (10, 15),
+                      "15-19.9%": (15, 20), "20-29.9%": (20, 30), "30%+": (30, 999)}
 OUT_PATH = "docs/dashboard.html"
 
 MIN_EDGE_POINTS = 1.9  # unified board/card threshold; ~= our 5pp moneyline edge threshold
@@ -357,6 +365,42 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
 
 def esc_plain(s):
     return str(s) if s is not None else ""
+
+
+def build_prop_edge_history(path: str = PROPS_LAB_PATH):
+    """{market: [edge bucket -> record, units, ROI]} for the live receiving
+    models' OVERS in the backtest, or None if the lab file isn't there.
+    Never raises -- this is a display extra, not something the dashboard
+    should fail over."""
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path) as f:
+            lab = json.load(f)
+        markets, weekends = {}, set()
+        for market, stat in EDGE_HISTORY_MARKETS.items():
+            rows = []
+            for b in lab["results"][stat]["pff"]["props_2026"].get("over_edge_buckets") or []:
+                lo, hi = EDGE_BUCKET_BOUNDS.get(b.get("bucket"), (None, None))
+                if lo is None or not b.get("n"):
+                    continue
+                rows.append({"label": b["bucket"], "lo": lo, "hi": hi, "record": b.get("record"),
+                             "units": b.get("units"), "roi": b.get("roi"), "n": b.get("n")})
+                weekends.update((b.get("roi_by_weekend") or {}).keys())
+            if rows:
+                markets[market] = rows
+        if not markets:
+            return None
+        span = ""
+        try:
+            days = sorted(datetime.strptime(w, "%Y-%m-%d") for w in weekends)
+            span = f"{days[0]:%b} {days[0].day} to {days[-1]:%b} {days[-1].day}"
+        except Exception:
+            pass
+        return {"markets": markets, "nWeekends": len(weekends), "span": span}
+    except Exception as e:
+        print(f"  [note] could not read {path} ({e}) -- Props tab will show edges without past results")
+        return None
 
 
 def _fmt_generated_at(iso):
@@ -1812,9 +1856,27 @@ RENDERER_JS = """<script>
       return '<button class="tab tab--prop' + (m === mkt ? ' is-active' : '') + '" data-prop-market="' + esc(m) + '"><span>' + esc(m) + '</span></button>';
     }).join('') + '</div>';
 
-    var cols = 'grid-template-columns:86px 1.5fr 1.2fr 0.8fr 1fr 0.9fr;';
+    // Edge history (10/2026): how overs with this size of model edge did in
+    // the backtest. Only receiving overs have one; everything else shows the
+    // edge alone.
+    var EH = D.propEdgeHistory;
+    var edgeHist = function (r) {
+      if (!EH || r.model_lean !== 'over' || r.model_ev == null) return null;
+      var b = EH.markets[r.market_name];
+      if (!b) return null;
+      // A capped play is judged by the edge it had when first flagged (30%+),
+      // not by where its edge has drifted since.
+      for (var i = 0; i < b.length; i++) if (r.edge_capped ? b[i].lo >= 30 : (r.model_ev >= b[i].lo && r.model_ev < b[i].hi)) return b[i];
+      return null;
+    };
+    var signed = function (x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); };
+    var histColor = function (h) { return h.roi > 0 ? 'var(--green)' : (h.roi < 0 ? 'var(--red)' : 'var(--muted-3)'); };
+    var histText = function (h) { return esc(h.record) + ' &middot; ' + signed(h.units, 1) + 'u &middot; ' + signed(h.roi, 0) + '% ROI'; };
+
+    var cols = 'grid-template-columns:86px 1.5fr 1.2fr 0.8fr 1fr 1.35fr 0.9fr;';
     var thead = '<div class="thead" style="display:grid;' + cols + '">' +
-      '<div>Confidence</div><div>Player</div><div>Pick</div><div class="num">Model</div><div class="num">Hit % / needs</div><div class="num">Status</div></div>';
+      '<div>Confidence</div><div>Player</div><div>Pick</div><div class="num">Model</div><div class="num">Hit % / needs</div>' +
+      '<div class="num">Edge / past result</div><div class="num">Status</div></div>';
     var body = shown.map(function (r) {
       var isOver = r.model_lean === 'over';
       var diff = r.model_predicted_value - r.line;
@@ -1825,6 +1887,10 @@ RENDERER_JS = """<script>
           : '<span class="pchip is-lean">LEAN</span>';
       var inj = r.injury_status ? ' <span class="pchip" style="background:rgba(224,180,74,0.16);color:var(--amber)">' + esc(r.injury_status.toUpperCase()) + '</span>' : '';
       var gp = r.games_played != null ? '<span style="color:var(--muted-4);font-size:9.5px;margin-left:6px">' + r.games_played + ' GP</span>' : '';
+      var h = edgeHist(r);
+      var edgeCell = '<div class="num"><div style="font-weight:700">' + (r.model_ev != null ? signed(r.model_ev, 1) + '%' : '&mdash;') + '</div>' +
+        (h ? '<div style="font-size:9.5px;margin-top:3px;color:' + histColor(h) + '">&#9679; ' + (r.edge_capped ? 'capped at 30%+ &middot; ' : '') + histText(h) + '</div>'
+           : '<div style="font-size:9.5px;margin-top:3px;color:var(--muted-4)">no past result</div>') + '</div>';
       return '<div class="row"><div class="row-accent" style="background:' + r._conf.color + '"></div>' +
         '<div class="row-body" style="' + cols + 'padding:9px 14px;font-size:11.5px">' +
           '<div style="font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:.06em;color:' + r._conf.color + '">' + r._conf.tier + '</div>' +
@@ -1838,6 +1904,7 @@ RENDERER_JS = """<script>
             '<div style="font-size:9.5px;color:' + ((isOver ? diff : -diff) >= 0 ? 'var(--green)' : 'var(--red)') + ';margin-top:3px">' + (diff >= 0 ? '+' : '') + diff.toFixed(1) + ' vs line</div></div>' +
           '<div class="num"><div style="font-weight:700;font-size:13px">' + (r._lp != null ? (r._lp * 100).toFixed(0) + '%' : '\\u2014') + '</div>' +
             '<div style="font-size:9.5px;color:var(--muted-3);margin-top:3px">needs ' + (r._be != null ? (r._be * 100).toFixed(0) + '%' : '\\u2014') + '</div></div>' +
+          edgeCell +
           '<div class="num">' + tag + inj + '</div>' +
         '</div></div>';
     }).join('');
@@ -1849,7 +1916,27 @@ RENDERER_JS = """<script>
       'at the best price across books \\u2014 the one prop group that held up in the live backtest; these are auto-added to your tracker. ' +
       '<b>Watch</b> = other props with a 10%+ edge on secondary-role players \\u2014 promising in the backtest, tracked but not bet \\u2014 plus receptions overs showing a 30%+ edge, which lost in the backtest. Everything else is a lean.</span></div>';
 
-    return head + filters + thead + (body || '<div class="empty-state">No props match these filters.</div>') + foot;
+    // Key for the Edge / past result column.
+    var edgeKey = '';
+    if (EH) {
+      var chip = function (b) {
+        var good = b.roi > 0, bad = b.roi < 0;
+        return '<span style="display:inline-block;margin:3px 6px 0 0;padding:2px 7px;border-radius:3px;white-space:nowrap;background:' +
+          (good ? 'rgba(23,194,107,0.14)' : (bad ? 'rgba(232,93,93,0.14)' : 'rgba(255,255,255,0.06)')) + ';color:' + histColor(b) + '">' +
+          '<b>' + esc(b.label.replace('below 0', 'Below 0%')) + '</b> ' + histText(b) + '</span>';
+      };
+      var names = { 'Receptions': 'Receptions overs', 'Reception Yards': 'Receiving-yards overs' };
+      edgeKey = '<div class="table-foot" style="display:block"><div><b>Edge key.</b> The Edge column is what the model expects the bet to return, from its hit chance and the price. ' +
+        'Under it is how overs with that size of edge did in the backtest' + (EH.nWeekends ? ' (' + EH.nWeekends + ' weekends' + (EH.span ? ', ' + esc(EH.span) : '') + ')' : '') +
+        ', at 1 unit a bet: record, units won or lost, and ROI. <span style="color:var(--green)">&#9679; Green</span> means that group made money, ' +
+        '<span style="color:var(--red)">&#9679; red</span> means it lost. Each group is small, so read it as a guide, not a promise. ' +
+        'A play capped at 30%+ shows the 30%+ group, whatever its edge is now.</div>' +
+        Object.keys(EH.markets).map(function (m) {
+          return '<div style="margin-top:7px"><span style="display:inline-block;min-width:150px;font-weight:700">' + esc(names[m] || m) + '</span>' + EH.markets[m].map(chip).join('') + '</div>';
+        }).join('') + '</div>';
+    }
+
+    return head + filters + thead + (body || '<div class="empty-state">No props match these filters.</div>') + edgeKey + foot;
   }
 
   /* ---- Tracker (localStorage, this browser only, real bets you log) ---- */
@@ -2497,6 +2584,7 @@ def main():
               f"(expected before scripts/compute_clv.py has run in this pipeline)")
 
     model_data = build_model_data(data, backtest=backtest, clv=clv)
+    model_data["propEdgeHistory"] = build_prop_edge_history()
     data_script = "<script>\nwindow.MODEL_DATA = " + json.dumps(model_data) + ";\n</script>\n"
 
     html_out = HEAD_HTML + data_script + MATH_JS + RENDERER_JS + TAIL_HTML
