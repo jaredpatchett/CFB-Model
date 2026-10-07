@@ -1,0 +1,71 @@
+name: Spread lab (PFF team ratings test)
+
+# Manual trigger only. Backtests the live spread model against versions that
+# add PFF team ratings (quarterback, line play, pass rush, coverage, ...),
+# walk-forward on the same games, against closing and opening spreads. Does
+# NOT touch the live model, the dashboard or the Bet Card.
+#
+# PFF data is pulled into a temp folder outside the repo for the length of
+# this run and is never cached or committed: this repo is public. The saved
+# result (docs/data/spread_lab.json) holds model results only.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
+      ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+      ODDSPAPI_API_KEY: ${{ secrets.PRIZEPICKS_API }}
+      # The PFF key, under whichever of these two names it was saved.
+      PFF_API_KEY: ${{ secrets.PFF_API_KEY || secrets.CFB_API_KEY }}
+      YEARS: "2022 2023 2024 2025"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore cached historical CFBD data
+        uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: cfbd-raw-${{ env.YEARS }}-${{ github.run_id }}
+          restore-keys: |
+            cfbd-raw-${{ env.YEARS }}-
+            cfbd-raw-
+
+      - name: Fetch historical data
+        run: python scripts/fetch_historical_data.py --years ${{ env.YEARS }}
+
+      - name: Build features
+        run: python scripts/build_features.py --years ${{ env.YEARS }}
+
+      - name: Run the spread lab
+        run: python scripts/spread_lab.py --years ${{ env.YEARS }}
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/spread_lab.json
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Spread lab results [skip ci]"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git merge -X ours --no-edit origin/main -m "Merge origin/main [skip ci]" && git push origin main; then
+              echo "Pushed on attempt $i"; break
+            fi
+            [ "$i" -eq 5 ] && echo "::error::Could not push results" && exit 1
+            sleep $((RANDOM % 10 + 5))
+          done
