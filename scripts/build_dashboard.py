@@ -1724,8 +1724,9 @@ RENDERER_JS = """<script>
   }
   function propConfidence(r) {
     var lp = r._lp, be = r._be, gp = r.games_played, inj = r.injury_status;
-    // Official = receptions overs at 10%+ EV (the one prop group that held
-    // up in the live backtest) -- always listed first, as TARGET.
+    // Official = receptions overs at 10%+ and under 30% EV (the one prop
+    // group that held up in the live backtest) -- always listed first, as
+    // TARGET. 30%+ edges are capped to Watch by the export.
     if (r.is_official_play) return { tier: 'TARGET', rank: 0, color: 'var(--green)' };
     if (lp == null) return { tier: 'NONE', rank: 9, color: 'var(--muted-4)' };
     var gap = be != null ? lp - be : 0;
@@ -1844,9 +1845,9 @@ RENDERER_JS = """<script>
     var foot = '<div class="table-foot"><span>Confidence: <b>High</b> = 60%+ hit chance, at least 5 points above what the price needs, 3+ games of data, ' +
       'no injury flag. <b>Medium</b> = 55%+ and at least 2 points above breakeven. <b>Pass</b> = the price already needs more than the model gives, or the ' +
       'player is listed out. <b>Check</b> = the model is far from the market (80%+ claimed, or 25%+ and 12+ off the line) \\u2014 usually missing info like an injury or role change, ' +
-      'so verify before betting. TDs and interceptions max out at Low. <b>Official</b> (TARGET) = receptions overs where the model\\u2019s edge is 10%+, ' +
+      'so verify before betting. TDs and interceptions max out at Low. <b>Official</b> (TARGET) = receptions overs where the model\\u2019s edge is 10% up to 30%, ' +
       'at the best price across books \\u2014 the one prop group that held up in the live backtest; these are auto-added to your tracker. ' +
-      '<b>Watch</b> = other props with a 10%+ edge on secondary-role players \\u2014 promising in the backtest, tracked but not bet. Everything else is a lean.</span></div>';
+      '<b>Watch</b> = other props with a 10%+ edge on secondary-role players \\u2014 promising in the backtest, tracked but not bet \\u2014 plus receptions overs showing a 30%+ edge, which lost in the backtest. Everything else is a lean.</span></div>';
 
     return head + filters + thead + (body || '<div class="empty-state">No props match these filters.</div>') + foot;
   }
