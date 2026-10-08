@@ -31,6 +31,17 @@ import requests
 BASE_URL = "https://api.pff.com"
 LEAGUE = "ncaa"
 MAX_ATTEMPTS = 4
+RETRYABLE = (429, 500, 502, 503, 504)
+# A week that still fails after MAX_ATTEMPTS gets one more full round of
+# attempts after this pause, once the rest of the season has been pulled.
+SECOND_PASS_PAUSE = 20
+# PFF is treated as down (and the pull abandoned, so the caller can fall back
+# to box-score models) after this many failed weeks in a row.
+MAX_FAILS_IN_A_ROW = 4
+
+# What the latest fetch_receiving_seasons() call could not get, even after
+# the second pass: lists of (season, week). Read it with fetch_issues().
+LAST_FETCH = {"receiving": [], "kickoffs": []}
 
 
 class PFFError(RuntimeError):
@@ -56,7 +67,17 @@ def _get(path: str, params: dict = None) -> dict:
     headers = {"Authorization": f"Bearer {_key()}", "Accept": "application/json"}
     last = None
     for attempt in range(MAX_ATTEMPTS):
-        resp = requests.get(f"{BASE_URL}{path}", headers=headers, params=params or {}, timeout=60)
+        try:
+            resp = requests.get(f"{BASE_URL}{path}", headers=headers, params=params or {}, timeout=60)
+        except requests.RequestException as e:
+            # A dropped connection or a timeout on our side is retried like a
+            # 5xx instead of ending the whole pull. Only the error type is
+            # kept (never the request itself).
+            last = PFFError(0, "network_error", type(e).__name__, "no response from PFF")
+            if attempt < MAX_ATTEMPTS - 1:
+                time.sleep(5 * (attempt + 1))
+                continue
+            raise last
         if resp.status_code == 200:
             # Slow down before the budget runs out rather than after.
             try:
@@ -71,7 +92,7 @@ def _get(path: str, params: dict = None) -> dict:
         except ValueError:
             err = {}
         last = PFFError(resp.status_code, err.get("code"), (err.get("details") or {}).get("reason"), err.get("message"))
-        if resp.status_code in (429, 503, 502, 504) and attempt < MAX_ATTEMPTS - 1:
+        if resp.status_code in RETRYABLE and attempt < MAX_ATTEMPTS - 1:
             try:
                 wait = float(resp.headers.get("Retry-After", "") or 0)
             except ValueError:
@@ -147,44 +168,107 @@ def get_games(season: int, week: int) -> pd.DataFrame:
 MODEL_WEEKS = list(range(0, 18))
 
 
+def _attempt(fn, season: int, week: int):
+    """(result, None) or (None, error). A bad key still raises -- that is
+    not something a retry can fix."""
+    try:
+        return fn(season, week), None
+    except PFFError as e:
+        if e.status in (401, 403):
+            raise
+        return None, e
+
+
+def fetch_issues() -> str:
+    """Plain-text note on what the latest fetch_receiving_seasons() call
+    could not get, or '' if it got everything."""
+    def weeks(pairs):
+        return ", ".join(f"{s} wk {w}" for s, w in sorted(pairs))
+    parts = []
+    if LAST_FETCH["receiving"]:
+        parts.append(f"no receiving data for {weeks(LAST_FETCH['receiving'])}")
+    if LAST_FETCH["kickoffs"]:
+        parts.append(f"no kickoff times for {weeks(LAST_FETCH['kickoffs'])}")
+    return "; ".join(parts)
+
+
 def fetch_receiving_seasons(seasons: list, out_dir: str, verbose: bool = True):
     """Receiving rows and game kickoffs for every week of the given seasons.
     Returns (receiving_df, games_df). Files are written to out_dir, which
     must be OUTSIDE the repo and outside any cached folder -- this repo is
     public and PFF's numbers are licensed to the subscriber only. About two
-    requests per week, well inside the 100-per-minute budget."""
+    requests per week, well inside the 100-per-minute budget.
+
+    A week PFF fails on is never dropped quietly (10/2026: a run lost 196 of
+    703 games to PFF 504s and nothing said so). Each failed week gets a
+    second full round of attempts after the rest of the season is in;
+    anything still missing is listed in LAST_FETCH / fetch_issues() and
+    printed. If PFF fails on MAX_FAILS_IN_A_ROW weeks in a row it is treated
+    as down and the pull raises, so callers fall back to box-score models."""
     os.makedirs(out_dir, exist_ok=True)
+    LAST_FETCH["receiving"], LAST_FETCH["kickoffs"] = [], []
     recv_parts, game_parts = [], []
     for season in seasons:
         rpath, gpath = f"{out_dir}/pff_receiving_{season}.csv", f"{out_dir}/pff_games_{season}.csv"
         if os.path.exists(rpath) and os.path.exists(gpath):
             recv_parts.append(pd.read_csv(rpath)); game_parts.append(pd.read_csv(gpath))
             continue
-        rs, gs = [], []
-        for week in MODEL_WEEKS:
-            try:
-                r = get_receiving_summary(season, week)
-            except PFFError as e:
-                if e.status in (401, 403):
-                    raise
-                r = pd.DataFrame()
-            if r.empty:
-                continue
-            rs.append(r)
-            try:
-                g = get_games(season, week)
+        rs, gs = {}, {}                 # week -> rows
+        retry_r, retry_g = [], []       # weeks to try again
+        in_a_row = 0
+
+        def kickoffs(week, final=False):
+            g, err = _attempt(get_games, season, week)
+            if err is None:
                 if not g.empty:
-                    gs.append(g)
-            except PFFError as e:
-                if verbose:
-                    print(f"  [warn] PFF games {season} week {week}: {e}")
-        r_all = pd.concat(rs, ignore_index=True) if rs else pd.DataFrame()
-        g_all = pd.concat(gs, ignore_index=True) if gs else pd.DataFrame()
+                    gs[week] = g
+            elif final:
+                LAST_FETCH["kickoffs"].append((season, week))
+                print(f"  [warn] PFF kickoff times {season} week {week} still failing: {err}")
+            else:
+                retry_g.append(week)
+
+        for week in MODEL_WEEKS:
+            r, err = _attempt(get_receiving_summary, season, week)
+            if err is not None:
+                retry_r.append(week)
+                in_a_row += 1
+                if in_a_row >= MAX_FAILS_IN_A_ROW:
+                    raise PFFError(err.status, err.code, err.reason,
+                                   f"PFF failed on {in_a_row} weeks in a row ({season} week {week}) -- treating it as down")
+                continue
+            in_a_row = 0
+            if r.empty:                 # a real answer: no games that week
+                continue
+            rs[week] = r
+            kickoffs(week)
+
+        if retry_r or retry_g:
+            if verbose:
+                print(f"  PFF {season}: retrying {len(retry_r)} receiving week(s) and {len(retry_g)} kickoff week(s)...")
+            time.sleep(SECOND_PASS_PAUSE)
+            for week in retry_r:
+                r, err = _attempt(get_receiving_summary, season, week)
+                if err is not None:
+                    LAST_FETCH["receiving"].append((season, week))
+                    print(f"  [warn] PFF receiving {season} week {week} still failing: {err}")
+                elif not r.empty:
+                    rs[week] = r
+                    kickoffs(week, final=True)
+            for week in retry_g:
+                kickoffs(week, final=True)
+
+        r_all = pd.concat([rs[w] for w in sorted(rs)], ignore_index=True) if rs else pd.DataFrame()
+        g_all = pd.concat([gs[w] for w in sorted(gs)], ignore_index=True) if gs else pd.DataFrame()
         if verbose:
             print(f"  PFF {season}: {len(r_all)} receiving rows over {len(rs)} weeks, {len(g_all)} games")
         if not r_all.empty:
             r_all.to_csv(rpath, index=False); g_all.to_csv(gpath, index=False)
             recv_parts.append(r_all); game_parts.append(g_all)
+    if fetch_issues():
+        print(f"  [warn] PFF pull INCOMPLETE after retries: {fetch_issues()}")
+    elif verbose:
+        print("  PFF pull complete: every week answered")
     recv = pd.concat(recv_parts, ignore_index=True) if recv_parts else pd.DataFrame()
     games = pd.concat([g for g in game_parts if not g.empty], ignore_index=True) if any(not g.empty for g in game_parts) else pd.DataFrame()
     return recv, games
