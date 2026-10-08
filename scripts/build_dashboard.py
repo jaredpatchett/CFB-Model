@@ -83,14 +83,11 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 DATA_PATH = "docs/data/latest.json"
 BACKTEST_PATH = "docs/data/backtest_results.json"
 CLV_PATH = "docs/data/clv_results.json"
-# Backtest results by size of the model's edge (10/2026), shown next to each
-# receiving over on the Props tab. Comes from the props lab run
-# (scripts/props_lab2.py); if the file is missing the column just shows the
-# edge with no history.
-PROPS_LAB_PATH = "docs/data/props_lab2.json"
-EDGE_HISTORY_MARKETS = {"Receptions": "receptions", "Reception Yards": "rec_yds"}
-EDGE_BUCKET_BOUNDS = {"below 0": (-999, 0), "0-4.9%": (0, 5), "5-9.9%": (5, 10), "10-14.9%": (10, 15),
-                      "15-19.9%": (15, 20), "20-29.9%": (20, 30), "30%+": (30, 999)}
+# Backtest results by market, side and size of the model's edge (10/2026),
+# shown next to each prop on the Props tab. Built by
+# src/analysis/prop_edge_history.py, which the tracker
+# (scripts/compute_props_clv.py) also uses, so both agree on which groups are
+# up. If the backtest files are missing the column just shows the edge.
 OUT_PATH = "docs/dashboard.html"
 
 MIN_EDGE_POINTS = 1.9  # unified board/card threshold; ~= our 5pp moneyline edge threshold
@@ -367,39 +364,15 @@ def esc_plain(s):
     return str(s) if s is not None else ""
 
 
-def build_prop_edge_history(path: str = PROPS_LAB_PATH):
-    """{market: [edge bucket -> record, units, ROI]} for the live receiving
-    models' OVERS in the backtest, or None if the lab file isn't there.
-    Never raises -- this is a display extra, not something the dashboard
-    should fail over."""
-    if not os.path.exists(path):
-        return None
+def build_prop_edge_history():
+    """Backtest record for every market / side / edge size, or None. Never
+    raises -- this is a display extra, not something the dashboard should
+    fail over."""
     try:
-        with open(path) as f:
-            lab = json.load(f)
-        markets, weekends = {}, set()
-        for market, stat in EDGE_HISTORY_MARKETS.items():
-            rows = []
-            for b in lab["results"][stat]["pff"]["props_2026"].get("over_edge_buckets") or []:
-                lo, hi = EDGE_BUCKET_BOUNDS.get(b.get("bucket"), (None, None))
-                if lo is None or not b.get("n"):
-                    continue
-                rows.append({"label": b["bucket"], "lo": lo, "hi": hi, "record": b.get("record"),
-                             "units": b.get("units"), "roi": b.get("roi"), "n": b.get("n")})
-                weekends.update((b.get("roi_by_weekend") or {}).keys())
-            if rows:
-                markets[market] = rows
-        if not markets:
-            return None
-        span = ""
-        try:
-            days = sorted(datetime.strptime(w, "%Y-%m-%d") for w in weekends)
-            span = f"{days[0]:%b} {days[0].day} to {days[-1]:%b} {days[-1].day}"
-        except Exception:
-            pass
-        return {"markets": markets, "nWeekends": len(weekends), "span": span}
+        from src.analysis import prop_edge_history as peh
+        return peh.build_history()
     except Exception as e:
-        print(f"  [note] could not read {path} ({e}) -- Props tab will show edges without past results")
+        print(f"  [note] could not build the props track record ({e}) -- Props tab will show edges without it")
         return None
 
 
@@ -1861,8 +1834,8 @@ RENDERER_JS = """<script>
     // edge alone.
     var EH = D.propEdgeHistory;
     var edgeHist = function (r) {
-      if (!EH || r.model_lean !== 'over' || r.model_ev == null) return null;
-      var b = EH.markets[r.market_name];
+      if (!EH || r.model_ev == null || (r.model_lean !== 'over' && r.model_lean !== 'under')) return null;
+      var b = (EH.markets[r.market_name] || {})[r.model_lean];
       if (!b) return null;
       // A capped play is judged by the edge it had when first flagged (30%+),
       // not by where its edge has drifted since.
@@ -1870,27 +1843,36 @@ RENDERER_JS = """<script>
       return null;
     };
     var signed = function (x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); };
-    var histColor = function (h) { return h.roi > 0 ? 'var(--green)' : (h.roi < 0 ? 'var(--red)' : 'var(--muted-3)'); };
-    var histText = function (h) { return esc(h.record) + ' &middot; ' + signed(h.units, 1) + 'u &middot; ' + signed(h.roi, 0) + '% ROI'; };
+    // One easy read per play: green arrow up = this kind of play made money
+    // in the backtest, red arrow down = it lost, grey = too few bets to say.
+    var histColor = function (h) { return h.small ? 'var(--muted-3)' : (h.roi > 0 ? 'var(--green)' : (h.roi < 0 ? 'var(--red)' : 'var(--muted-3)')); };
+    var histLine = function (h) {
+      if (h.small) return 'small sample &middot; ' + esc(h.record);
+      return (h.roi > 0 ? '&#9650; ' : (h.roi < 0 ? '&#9660; ' : '')) + signed(h.roi, 0) + '% ROI &middot; ' + signed(h.units, 1) + 'u &middot; ' + esc(h.record);
+    };
+    // Tracked = the play's group is up in the backtest and the model shows an edge.
+    var isTracked = function (r, h) { return !!(h && h.up && r.model_ev != null && r.model_ev >= 0); };
 
     var cols = 'grid-template-columns:86px 1.5fr 1.2fr 0.8fr 1fr 1.35fr 0.9fr;';
     var thead = '<div class="thead" style="display:grid;' + cols + '">' +
       '<div>Confidence</div><div>Player</div><div>Pick</div><div class="num">Model</div><div class="num">Hit % / needs</div>' +
-      '<div class="num">Edge / past result</div><div class="num">Status</div></div>';
+      '<div class="num">Edge / track record</div><div class="num">Status</div></div>';
     var body = shown.map(function (r) {
       var isOver = r.model_lean === 'over';
       var diff = r.model_predicted_value - r.line;
+      var h = edgeHist(r);
       var tag = r.is_official_play
         ? '<span class="pchip is-official">OFFICIAL</span>'
+        : (!r.is_watch_play && isTracked(r, h))
+        ? '<span class="pchip" style="background:rgba(23,194,107,0.10);color:var(--green);border:1px solid rgba(23,194,107,0.35)" title="This kind of play is up in the backtest. Logged and graded automatically, not an official bet.">TRACK</span>'
         : r.is_watch_play
           ? '<span class="pchip" style="background:rgba(91,164,255,0.16);color:var(--blue-light)">WATCH</span>'
           : '<span class="pchip is-lean">LEAN</span>';
       var inj = r.injury_status ? ' <span class="pchip" style="background:rgba(224,180,74,0.16);color:var(--amber)">' + esc(r.injury_status.toUpperCase()) + '</span>' : '';
       var gp = r.games_played != null ? '<span style="color:var(--muted-4);font-size:9.5px;margin-left:6px">' + r.games_played + ' GP</span>' : '';
-      var h = edgeHist(r);
       var edgeCell = '<div class="num"><div style="font-weight:700">' + (r.model_ev != null ? signed(r.model_ev, 1) + '%' : '&mdash;') + '</div>' +
-        (h ? '<div style="font-size:9.5px;margin-top:3px;color:' + histColor(h) + '">&#9679; ' + (r.edge_capped ? 'capped at 30%+ &middot; ' : '') + histText(h) + '</div>'
-           : '<div style="font-size:9.5px;margin-top:3px;color:var(--muted-4)">no past result</div>') + '</div>';
+        (h ? '<div style="font-size:9.5px;margin-top:3px;font-weight:600;color:' + histColor(h) + '">' + (r.edge_capped ? 'capped &middot; ' : '') + histLine(h) + '</div>'
+           : '<div style="font-size:9.5px;margin-top:3px;color:var(--muted-4)">not in backtest</div>') + '</div>';
       return '<div class="row"><div class="row-accent" style="background:' + r._conf.color + '"></div>' +
         '<div class="row-body" style="' + cols + 'padding:9px 14px;font-size:11.5px">' +
           '<div style="font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:.06em;color:' + r._conf.color + '">' + r._conf.tier + '</div>' +
@@ -1916,24 +1898,29 @@ RENDERER_JS = """<script>
       'at the best price across books \\u2014 the one prop group that held up in the live backtest; these are auto-added to your tracker. ' +
       '<b>Watch</b> = other props with a 10%+ edge on secondary-role players \\u2014 promising in the backtest, tracked but not bet \\u2014 plus receptions overs showing a 30%+ edge, which lost in the backtest. Everything else is a lean.</span></div>';
 
-    // Key for the Edge / past result column.
+    // Key for the Edge / track record column: what the arrows mean, then
+    // only the groups that are up, so it stays short.
     var edgeKey = '';
     if (EH) {
-      var chip = function (b) {
-        var good = b.roi > 0, bad = b.roi < 0;
-        return '<span style="display:inline-block;margin:3px 6px 0 0;padding:2px 7px;border-radius:3px;white-space:nowrap;background:' +
-          (good ? 'rgba(23,194,107,0.14)' : (bad ? 'rgba(232,93,93,0.14)' : 'rgba(255,255,255,0.06)')) + ';color:' + histColor(b) + '">' +
-          '<b>' + esc(b.label.replace('below 0', 'Below 0%')) + '</b> ' + histText(b) + '</span>';
-      };
-      var names = { 'Receptions': 'Receptions overs', 'Reception Yards': 'Receiving-yards overs' };
-      edgeKey = '<div class="table-foot" style="display:block"><div><b>Edge key.</b> The Edge column is what the model expects the bet to return, from its hit chance and the price. ' +
-        'Under it is how overs with that size of edge did in the backtest' + (EH.nWeekends ? ' (' + EH.nWeekends + ' weekends' + (EH.span ? ', ' + esc(EH.span) : '') + ')' : '') +
-        ', at 1 unit a bet: record, units won or lost, and ROI. <span style="color:var(--green)">&#9679; Green</span> means that group made money, ' +
-        '<span style="color:var(--red)">&#9679; red</span> means it lost. Each group is small, so read it as a guide, not a promise. ' +
-        'A play capped at 30%+ shows the 30%+ group, whatever its edge is now.</div>' +
-        Object.keys(EH.markets).map(function (m) {
-          return '<div style="margin-top:7px"><span style="display:inline-block;min-width:150px;font-weight:700">' + esc(names[m] || m) + '</span>' + EH.markets[m].map(chip).join('') + '</div>';
-        }).join('') + '</div>';
+      var names = { 'Reception Yards': 'Receiving Yards' };
+      var upLines = [];
+      Object.keys(EH.markets).sort().forEach(function (m) {
+        ['over', 'under'].forEach(function (side) {
+          var ups = ((EH.markets[m] || {})[side] || []).filter(function (b) { return b.up; });
+          if (!ups.length) return;
+          upLines.push('<div style="margin-top:5px"><span style="display:inline-block;min-width:190px;font-weight:700">' + esc(names[m] || m) + ' ' + side + 's</span>' +
+            ups.map(function (b) {
+              return '<span style="display:inline-block;margin:2px 6px 0 0;padding:2px 7px;border-radius:3px;white-space:nowrap;background:rgba(23,194,107,0.14);color:var(--green)">' +
+                '<b>' + esc(b.label) + '</b> ' + signed(b.roi, 0) + '% &middot; ' + signed(b.units, 1) + 'u &middot; ' + esc(b.record) + '</span>';
+            }).join('') + '</div>');
+        });
+      });
+      edgeKey = '<div class="table-foot" style="display:block"><div><b>Track record key.</b> Under each edge is how plays like it did in the backtest' +
+        (EH.nWeekends ? ' (' + EH.nWeekends + ' weekends' + (EH.span ? ', ' + esc(EH.span) : '') + ', 1 unit a bet)' : '') + ': ROI, units and record. ' +
+        '<span style="color:var(--green)">&#9650; green</span> = that kind of play made money. <span style="color:var(--red)">&#9660; red</span> = it lost. ' +
+        'Grey = fewer than ' + (EH.minBets || 15) + ' bets, too few to say. <b>TRACK</b> = the play is in a group that is up by ' + (EH.minUnits || 2) + '+ units; every play with an edge is logged and graded automatically after its game. ' +
+        'Groups are small, so read this as a guide, not a promise.</div>' +
+        (upLines.length ? '<div style="margin-top:8px;font-weight:700">Groups that are up (edge size: ROI, units, record)</div>' + upLines.join('') : '') + '</div>';
     }
 
     return head + filters + thead + (body || '<div class="empty-state">No props match these filters.</div>') + edgeKey + foot;
