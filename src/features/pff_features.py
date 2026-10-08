@@ -239,6 +239,7 @@ def training_frame(feats: pd.DataFrame, games: pd.DataFrame, seasons: list, out_
     if recv.empty:
         raise RuntimeError("PFF returned no receiving rows")
     matched, info = match_pff_to_cfbd(feats, games, prepare_pff_rows(recv, pgames))
+    info["pff_incomplete"] = pff.fetch_issues() or "no"
     return add_pff_features(feats, matched), info
 
 
@@ -257,6 +258,7 @@ def live_snapshot(player_stats_long: pd.DataFrame, games: pd.DataFrame, season: 
     charted = wide.merge(matched[["gameId"]].drop_duplicates().assign(c=1), on="gameId", how="left")
     info["cfbd_games"] = int(wide["gameId"].nunique())
     info["games_charted_by_pff"] = int(charted.loc[charted["c"].notna(), "gameId"].nunique())
+    info["pff_incomplete"] = pff.fetch_issues()
     return current_pff_snapshot(wide, matched), info
 
 
@@ -277,8 +279,13 @@ def apply_live_pff(player_form: dict, prop_models: dict, player_stats_long: pd.D
         for entry in player_form.values():
             entry.update(snap.get(entry.get("athlete_id")) or missing_entry())
         n = sum(1 for e in player_form.values() if e.get("pff_matched") == 1.0)
-        return prop_models, (f"PFF routes and targets ({n} of {len(player_form)} players matched, "
-                             f"{info.get('games_charted_by_pff')} of {info.get('cfbd_games')} games charted)")
+        status = (f"PFF routes and targets ({n} of {len(player_form)} players matched, "
+                  f"{info.get('games_charted_by_pff')} of {info.get('cfbd_games')} games charted)")
+        if info.get("pff_incomplete"):
+            # PFF failed on some weeks even after retries: say so, so a short
+            # games-charted count is never mistaken for a normal one.
+            status += f" -- INCOMPLETE, PFF did not answer: {info['pff_incomplete']}"
+        return prop_models, status
     except Exception as e:
         out = dict(prop_models)
         if loader is None:
