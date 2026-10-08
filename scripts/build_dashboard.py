@@ -415,12 +415,58 @@ def build_prop_tracking(history, path: str = PROPS_TRACK_PATH, max_results: int 
 
         results = sorted((p for p in plays if p.get("result") in ("W", "L", "P")), key=lambda p: str(p.get("start_time")), reverse=True)
         upcoming = sorted((p for p in plays if not p.get("started")), key=lambda p: str(p.get("start_time")))
-        return {"asOf": log.get("generated_at"), "overall": agg(plays), "byKind": by_kind,
+        # Official plays' own live record (10/2026), for the Props tab's record line.
+        official = (log.get("results") or {}).get("official")
+        return {"asOf": log.get("generated_at"), "overall": agg(plays), "official": official, "byKind": by_kind,
                 "results": [slim(p) for p in results[:max_results]], "nResults": len(results),
                 "upcoming": [slim(p) for p in upcoming[:max_upcoming]], "nUpcoming": len(upcoming)}
     except Exception as e:
         print(f"  [note] could not read {path} ({e}) -- My Tracker will not show the automatic prop log")
         return None
+
+
+PROP_FLAGS_PATH = "data/clv/prop_flags.csv"
+
+
+def attach_prop_first_flags(props, path: str = PROP_FLAGS_PATH):
+    """Adds first_flag = {at, book, line, price} to each prop: the first time
+    the line-movement log (scripts/compute_props_clv.py) recorded the side
+    the model leans to. Shown in the Props tab's Details panel as the price
+    the play was first logged at. Display only: never raises, and a prop
+    that is not in the log simply gets nothing. Returns how many matched."""
+    if not props or not os.path.exists(path):
+        return 0
+    try:
+        import csv
+        import compute_props_clv as pclv   # same key the log itself is written with
+
+        def num(x):
+            try:
+                return float(x)
+            except (TypeError, ValueError):
+                return None
+
+        first = {}
+        with open(path, newline="") as f:
+            for r in csv.DictReader(f):
+                when, price = r.get("flagged_at") or "", num(r.get("price"))
+                if not r.get("key") or not when or price is None:
+                    continue
+                k = (r["key"], "under" if (r.get("side") or "over") == "under" else "over")
+                if k not in first or when < first[k]["at"]:
+                    first[k] = {"at": when, "book": r.get("book") or None, "line": num(r.get("line")), "price": price}
+        n = 0
+        for p in props:
+            if p.get("model_lean") not in ("over", "under"):
+                continue
+            rec = first.get((pclv.prop_key(p), p["model_lean"]))
+            if rec:
+                p["first_flag"] = rec
+                n += 1
+        return n
+    except Exception as e:
+        print(f"  [note] could not read {path} ({e}) -- Props details will not show the first logged price")
+        return 0
 
 
 def build_prop_edge_history():
@@ -740,16 +786,17 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .mt-md { margin-top: 38px; }
 .footer { margin-top: 48px; border-top: 1px solid var(--rule); padding-top: 16px; display: flex; justify-content: space-between; font-size: 9.5px; color: var(--muted-4); flex-wrap: wrap; gap: 8px; }
 
-/* ---- Player Props tab, redesigned 10/2026 for readability: a live-record
-   strip, plays grouped by status in one roomy table, then where the model
-   has been right and the latest graded results. ---- */
-.pp-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 16px 0 22px; }
-.pp-stat { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; }
-.pp-stat-label { font-family: var(--font-display); font-weight: 700; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.pp-stat-value { font-family: var(--font-led); font-weight: 900; font-size: 27px; line-height: 1.1; margin-top: 8px; color: var(--text); }
-.pp-stat-value.is-pos { color: var(--green); }
-.pp-stat-value.is-neg { color: var(--red); }
-.pp-stat-sub { font-size: 10.5px; color: var(--muted-3); margin-top: 6px; }
+/* ---- Player Props tab, simplified 10/2026: a one-line live record, then
+   the plays in one table (official plays first, by kickoff), a Details
+   panel per row, then where the model has been right and the latest graded
+   results. ---- */
+.pp-recline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 28px; margin: 14px 0 18px; padding: 12px 16px; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; }
+.pp-rec { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 4px 9px; font-size: 13.5px; }
+.pp-rec b { font-weight: 700; white-space: nowrap; }
+.pp-rec-label { font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.pp-rec-n { font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+.pp-key { margin-left: auto; font-size: 11.5px; line-height: 1.55; color: var(--muted); max-width: 560px; }
+.pp-key b { color: var(--text-dim); font-weight: 500; }
 .pp-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 10px; }
 .pp-seg { display: inline-flex; border: 1px solid var(--rule-strong); border-radius: 5px; overflow: hidden; }
 .pp-seg button { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.04em; background: transparent; color: var(--muted); border: none; padding: 7px 14px; cursor: pointer; }
@@ -757,41 +804,52 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .pp-seg button.is-on { background: var(--blue); color: #fff; }
 .pp-seg button:focus-visible, .pp-chip:focus-visible, .pp-trk:focus-visible, .pp-link:focus-visible { outline: 2px solid var(--blue-light); outline-offset: 2px; }
 .pp-select { background: var(--chip); color: var(--text-dim); border: 1px solid var(--rule-strong); border-radius: 5px; padding: 7px 10px; font-family: var(--font-data); font-size: 11.5px; }
-.pp-tally { margin-left: auto; font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.03em; color: var(--muted-3); display: flex; gap: 14px; }
 .pp-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
 .pp-chip { font-family: var(--font-display); font-weight: 700; font-size: 12.5px; letter-spacing: 0.03em; background: var(--chip); color: var(--muted); border: 1px solid transparent; border-radius: 5px; padding: 5px 12px; cursor: pointer; }
 .pp-chip.is-on { background: rgba(46,123,255,0.16); color: var(--blue-light); border-color: var(--blue); }
 .pp-table { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; overflow-x: auto; }
-.pp-grid { display: grid; grid-template-columns: 78px minmax(180px, 1.35fr) minmax(200px, 1.25fr) 88px 108px minmax(160px, 1fr) 128px 86px; align-items: center; column-gap: 14px; min-width: 1080px; }
+.pp-grid { display: grid; grid-template-columns: minmax(190px, 1.4fr) minmax(190px, 1.2fr) minmax(150px, 0.9fr) minmax(170px, 1.1fr) minmax(120px, 0.8fr) 190px; align-items: center; column-gap: 16px; min-width: 1040px; }
 .pp-head { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-2); padding: 11px 18px; border-bottom: 1px solid var(--rule); }
-.pp-group { display: flex; align-items: baseline; gap: 10px; padding: 12px 18px 9px; background: var(--panel-deep); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); min-width: 1080px; }
+.pp-group { display: flex; align-items: baseline; gap: 10px; padding: 12px 18px 9px; background: var(--panel-deep); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); min-width: 1040px; }
 .pp-table > .pp-group:first-of-type { border-top: none; }
 .pp-group-name { font-family: var(--font-display); font-weight: 800; font-size: 15px; letter-spacing: 0.05em; text-transform: uppercase; }
 .pp-group-count { font-family: var(--font-data); font-size: 11px; color: var(--muted); background: var(--chip); border-radius: 10px; padding: 1px 8px; }
 .pp-group-note { font-size: 10.5px; color: var(--muted-3); }
-.pp-row { padding: 13px 18px; border-bottom: 1px solid var(--rule-row); border-left: 4px solid transparent; font-size: 12.5px; }
+.pp-row { padding: 12px 18px; border-bottom: 1px solid var(--rule-row); font-size: 13px; }
+.pp-row.is-open { background: var(--row-active); }
 .pp-row:hover { background: var(--row-active); }
-.pp-conf { font-family: var(--font-display); font-weight: 800; font-size: 12.5px; letter-spacing: 0.07em; }
-.pp-name { font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: 0.01em; color: var(--text); }
-.pp-pick { font-weight: 700; font-size: 12.5px; color: var(--text); }
+.pp-name { font-family: var(--font-display); font-weight: 700; font-size: 17.5px; letter-spacing: 0.01em; color: var(--text); }
+.pp-pick { font-weight: 700; font-size: 13.5px; color: var(--text); }
 .pp-pick b { color: var(--blue-light); font-weight: 700; }
-.pp-sub { font-size: 10.5px; color: var(--muted-3); margin-top: 4px; }
+.pp-sub { font-size: 11.5px; color: var(--muted); margin-top: 4px; }
 .pp-big { font-weight: 700; font-size: 14px; }
-.pp-status { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
-.pp-status-line { display: flex; align-items: center; gap: 7px; }
-.pp-more { padding: 10px 18px; border-bottom: 1px solid var(--rule-row); min-width: 1080px; }
+.pp-edge { font-weight: 700; font-size: 18px; line-height: 1.1; }
+.pp-track { font-weight: 500; font-size: 13.5px; }
+.pp-track.is-none { color: var(--muted); }
+.pp-flags { display: flex; flex-wrap: wrap; gap: 6px; }
+.pp-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.pp-detail { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px 24px; padding: 14px 18px 16px; background: var(--panel-deep); border-bottom: 1px solid var(--rule-row); position: sticky; left: 0; }
+.pp-dcell.is-wide { grid-column: 1 / -1; }
+.pp-dlabel { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.pp-dval { font-size: 14px; font-weight: 500; color: var(--text); margin-top: 5px; }
+.pp-gls { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.pp-gl { display: inline-flex; flex-direction: column; align-items: center; min-width: 46px; padding: 5px 8px; border: 1px solid var(--rule-strong); border-radius: 4px; }
+.pp-gl b { font-size: 14px; font-weight: 700; color: var(--text-dim); }
+.pp-gl i { font-style: normal; font-size: 10px; color: var(--muted); margin-top: 2px; }
+.pp-gl.is-hit { border-color: rgba(23,194,107,0.55); background: rgba(23,194,107,0.10); }
+.pp-gl.is-hit b { color: var(--green); }
+.pp-more { padding: 10px 18px; border-bottom: 1px solid var(--rule-row); min-width: 1040px; }
 .pp-more .pp-link { margin-top: 0; }
-.pp-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex: none; }
 .pp-tag { font-family: var(--font-display); font-weight: 800; font-size: 11px; letter-spacing: 0.07em; padding: 3px 9px; border-radius: 4px; }
 .pp-tag.is-official { background: rgba(23,194,107,0.16); color: var(--green); }
 .pp-tag.is-watch { background: rgba(91,164,255,0.16); color: var(--blue-light); }
 .pp-tag.is-track { background: transparent; color: var(--green); border: 1px solid rgba(23,194,107,0.4); }
 .pp-tag.is-lean { background: var(--chip); color: var(--muted); }
 .pp-tag.is-inj { background: rgba(224,180,74,0.16); color: var(--amber); }
-.pp-trk { font-family: var(--font-display); font-weight: 700; font-size: 11.5px; letter-spacing: 0.05em; background: transparent; color: var(--text-dim); border: 1px solid var(--rule-strong); border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+.pp-tag.is-pass { background: rgba(255,82,82,0.14); color: var(--salmon); }
+.pp-trk { font-family: var(--font-display); font-weight: 700; font-size: 11.5px; letter-spacing: 0.05em; background: transparent; color: var(--text-dim); border: 1px solid var(--rule-strong); border-radius: 4px; padding: 7px 12px; cursor: pointer; white-space: nowrap; }
 .pp-trk:hover { border-color: var(--blue); color: var(--blue-light); }
-.pp-inlist { font-family: var(--font-display); font-weight: 700; font-size: 11.5px; letter-spacing: 0.04em; color: var(--blue-light); }
-.pp-legend { display: flex; align-items: center; gap: 7px; font-size: 10.5px; color: var(--muted-3); margin: 10px 2px 0; }
+.pp-inlist { font-family: var(--font-display); font-weight: 700; font-size: 11.5px; letter-spacing: 0.04em; color: var(--blue-light); white-space: nowrap; padding: 0 4px; }
 .pp-lower { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; margin-top: 26px; align-items: start; }
 .pp-panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 16px 18px 14px; }
 .pp-panel h3 { font-family: var(--font-display); font-weight: 800; font-size: 17px; letter-spacing: 0.05em; text-transform: uppercase; margin: 0; }
@@ -812,9 +870,8 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .pp-help-body p { margin: 0 0 9px; }
 .pp-help-body b { color: var(--text-dim); }
 @media (max-width: 1100px) {
-  .pp-strip { grid-template-columns: repeat(2, 1fr); }
+  .pp-key { margin-left: 0; }
   .pp-lower { grid-template-columns: 1fr; }
-  .pp-tally { margin-left: 0; }
 }
 @media (max-width: 1280px) {
   .main, .split { grid-template-columns: 1fr; }
@@ -1223,7 +1280,7 @@ RENDERER_JS = """<script>
   var M = window.ModelMath;
   var MARKETS = ['Spread', 'Moneyline'];
 
-  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate', propGame: 'ALL', propOfficialOnly: false, propShowPass: false, propView: 'main' };
+  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate', propGame: 'ALL', propOfficialOnly: false, propShowPass: false, propView: 'official', propDetail: null };
 
   var byName = {};
   D.teams.forEach(function (t) { byName[t.name] = t; });
@@ -1856,9 +1913,11 @@ RENDERER_JS = """<script>
   function bookLabel(key) { return PROP_BOOK_LABELS[key] || key; }
 
   // ---- Player Props (rebuilt 10/2026) ----
-  // One sortable table instead of stacked cards. Each row shows the model's
-  // projection against the line, its hit chance against what the price
-  // needs to break even, and a confidence rating that combines:
+  // One table instead of stacked cards. Each row shows the bet, the edge
+  // (hit chance against what the price needs to break even) and the
+  // backtest record for that edge size. propConfidence() below still rates
+  // each play, but only to order the Watch / All props lists and to raise a
+  // Check or Pass heads-up tag; the rating combines:
   //   * hit chance on the model's side,
   //   * how far that clears the price's breakeven,
   //   * games of data behind the projection,
@@ -1961,124 +2020,196 @@ RENDERER_JS = """<script>
       r._sec = r.is_official_play ? 'official' : (r.is_watch_play ? 'watch' : (r._auto ? 'tracked' : 'lean'));
     });
 
-    var view = state.propView || 'main';
-    var inView = function (r) { return view === 'all' || r._sec === 'official' || r._sec === 'watch' || (view === 'tracked' && r._sec === 'tracked'); };
+    // ---- Simplified 10/2026: each row answers "is there an edge?" once ----
+    // Row = the bet, the edge (hit chance against what the price needs), the
+    // backtest record for that edge size, and a heads-up tag only when
+    // something needs a second look. The projection, games played, role
+    // share, price history and game log moved into a Details panel. The tab
+    // opens on Official plays, in kickoff order; Watch and All props are one
+    // click away. The Conf column and the High/Medium/Low tally are gone
+    // (Check and Pass still show, as heads-up tags).
+    var view = (state.propView === 'watch' || state.propView === 'all') ? state.propView : 'official';
+    var visible = function (r) { return state.propShowPass || r._conf.tier !== 'PASS' || r.is_official_play; };
+    var mktOn = view === 'official' ? 'ALL' : mkt;   // official plays are one market; no chips in that view
     var shown = rows.filter(function (r) {
-      return (mkt === 'ALL' || r.market_name === mkt) &&
+      return (mktOn === 'ALL' || r.market_name === mktOn) &&
         (gameSel === 'ALL' || r.fixture_id === gameSel) &&
-        inView(r) &&
-        (state.propShowPass || r._conf.tier !== 'PASS' || r.is_official_play);
-    }).sort(function (x, y) {
-      return x._conf.rank - y._conf.rank || (y._lp || 0) - (x._lp || 0);
+        (view === 'all' || r._sec === view) && visible(r);
+    });
+    var byKick = function (x, y) {
+      var a = x.start_time || '', b = y.start_time || '';
+      return a < b ? -1 : (a > b ? 1 : (y.model_ev || 0) - (x.model_ev || 0));
+    };
+    var byStrength = function (x, y) { return x._conf.rank - y._conf.rank || (y._lp || 0) - (x._lp || 0); };
+
+    // Counts on the view buttons match what each view will actually list.
+    var nSec = { official: 0, watch: 0, tracked: 0, lean: 0 }, nPass = 0;
+    rows.forEach(function (r) {
+      if (r._conf.tier === 'PASS') nPass++;
+      if (visible(r)) nSec[r._sec]++;
     });
 
-    var tally = { HIGH: 0, MEDIUM: 0, LOW: 0, CHECK: 0, PASS: 0 };
-    rows.forEach(function (r) { if (tally[r._conf.tier] != null) tally[r._conf.tier]++; });
-    // Counts on the view buttons match what each view will actually list.
-    var nSec = { official: 0, watch: 0, tracked: 0, lean: 0 };
-    rows.forEach(function (r) { if (state.propShowPass || r._conf.tier !== 'PASS' || r.is_official_play) nSec[r._sec]++; });
+    // 1) Live record, one line, plus the key to the two numbers on each row.
+    var recBit = function (label, o) {
+      if (!o || !o.graded) return '<span class="pp-rec"><span class="pp-rec-label">' + label + '</span><span class="pp-rec-n">no graded plays yet</span></span>';
+      return '<span class="pp-rec"><span class="pp-rec-label">' + label + '</span><b>' + esc(o.record) + '</b>' +
+        '<b style="color:' + tone(o.units) + '">' + signed(o.units, 2) + 'u</b><span class="pp-rec-n">' + o.graded + ' graded</span></span>';
+    };
+    var strip = '<div class="pp-recline">' +
+      (T ? recBit('Official plays, live', T.official) + recBit('All auto-tracked', T.overall) : '') +
+      '<span class="pp-key"><b>Edge</b> is the model&rsquo;s hit chance against the price. <b>Track record</b> is how plays at that edge size did in the backtest.</span>' +
+    '</div>';
 
-    // 1) Live record of the auto-tracked plays.
-    var strip = '';
-    if (T && T.overall) {
-      var o = T.overall;
-      var stat = function (label, value, cls, sub) {
-        return '<div class="pp-stat"><div class="pp-stat-label">' + label + '</div><div class="pp-stat-value' + (cls ? ' ' + cls : '') + '">' + value + '</div>' +
-          '<div class="pp-stat-sub">' + sub + '</div></div>';
-      };
-      var pn = o.units > 0 ? 'is-pos' : (o.units < 0 ? 'is-neg' : '');
-      strip = '<div class="pp-strip">' +
-        stat('Record', esc(o.record), '', 'auto-tracked plays, graded') +
-        stat('Units', signed(o.units, 2) + 'u', pn, '1 unit a play') +
-        stat('ROI', o.roi != null ? signed(o.roi, 1) + '%' : '&mdash;', pn, 'on ' + o.graded + ' graded') +
-        stat('Graded', String(o.graded), '', 'from the box score') +
-        stat('Upcoming', String(o.upcoming), '', 'logged, not played yet') +
-      '</div>';
-    }
-
-    // 2) Controls: which plays, which game, which market.
+    // 2) Controls: which plays, which game, and (outside Official) which market.
     var seg = function (i, key, label, n) {
-      return '<button class="' + (view === key ? 'is-on' : '') + '" onclick="window.__cfbPropView(' + i + ')">' + label + ' (' + n + ')</button>';
+      return '<button class="' + (view === key ? 'is-on' : '') + '" aria-pressed="' + (view === key ? 'true' : 'false') + '" onclick="window.__cfbPropView(' + i + ')">' + label + ' (' + n + ')</button>';
     };
     var controls = '<div class="pp-controls">' +
       '<div class="pp-seg" role="group" aria-label="Which plays to show">' +
-        seg(0, 'main', 'Official &amp; watch', nSec.official + nSec.watch) +
-        seg(1, 'tracked', 'Auto-tracked', nSec.official + nSec.watch + nSec.tracked) +
+        seg(0, 'official', 'Official', nSec.official) +
+        seg(1, 'watch', 'Watch', nSec.watch) +
         seg(2, 'all', 'All props', nSec.official + nSec.watch + nSec.tracked + nSec.lean) +
       '</div>' +
       '<select class="pp-select" aria-label="Game" onchange="window.__cfbPropGame(this.value)">' +
         '<option value="ALL"' + (gameSel === 'ALL' ? ' selected' : '') + '>All games (' + gameIds.length + ')</option>' +
         gameIds.map(function (id) { return '<option value="' + esc(id) + '"' + (gameSel === id ? ' selected' : '') + '>' + esc(games[id].label) + ', ' + esc(propKickoff(games[id].t)) + '</option>'; }).join('') +
       '</select>' +
-      (view === 'all' ? '<button class="pp-chip' + (state.propShowPass ? ' is-on' : '') + '" onclick="window.__cfbPropShowPass()">Show passes (' + tally.PASS + ')</button>' : '') +
-      '<div class="pp-tally"><span style="color:var(--green)">' + tally.HIGH + ' High</span><span style="color:var(--blue-light)">' + tally.MEDIUM + ' Medium</span>' +
-        '<span>' + tally.LOW + ' Low</span><span style="color:var(--amber)">' + tally.CHECK + ' Check</span></div>' +
+      (view === 'all' ? '<button class="pp-chip' + (state.propShowPass ? ' is-on' : '') + '" onclick="window.__cfbPropShowPass()">Show passes (' + nPass + ')</button>' : '') +
     '</div>' +
-    '<div class="pp-chips">' + markets.map(function (m) {
+    (view === 'official' ? '' : '<div class="pp-chips">' + markets.map(function (m) {
       return '<button class="pp-chip' + (m === mkt ? ' is-on' : '') + '" data-prop-market="' + esc(m) + '">' + (m === 'ALL' ? 'All markets' : esc(marketName(m))) + '</button>';
-    }).join('') + '</div>';
+    }).join('') + '</div>');
 
-    // 3) The plays, grouped by status.
+    // 3) The plays. Official and Watch are grouped by kickoff day (soonest
+    // first); All props keeps the status groups.
+    var DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var pad2 = function (n) { return (n < 10 ? '0' : '') + n; };
+    var dayKey = function (iso) {
+      var d = new Date(iso || '');
+      return isNaN(d) ? '9999-99-99' : d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+    };
+    var dayLabel = function (iso) {
+      var d = new Date(iso || '');
+      if (isNaN(d)) return 'Kickoff not posted';
+      var txt = DAYS[d.getDay()] + ' ' + (d.getMonth() + 1) + '/' + d.getDate();
+      return (d.toDateString() === new Date().toDateString() ? 'Today, ' : '') + txt;
+    };
+    var kickTime = function (iso) {
+      var d = new Date(iso || '');
+      if (isNaN(d)) return '';
+      var h = d.getHours(), m = d.getMinutes();
+      return ((h % 12) || 12) + ':' + pad2(m) + ' ' + (h < 12 ? 'AM' : 'PM');
+    };
+    var groups = [];   // {key, name, note, cap, rows}
+    if (view === 'all') {
+      [['official', 'Official plays', 'Receptions overs with a 10% to 30% edge. The only props the rules call bets.', 0],
+       ['watch', 'Watch', 'A 10%+ edge on a secondary-role player, or a receptions over capped at 30%+. Tracked, not bet.', 12],
+       ['tracked', 'Auto-tracked', 'Has an edge and its kind of play is up in the backtest. Logged and graded automatically.', 12],
+       ['lean', 'Other leans', 'Everything else the model has a read on.', 20]].forEach(function (sec) {
+        var list = shown.filter(function (r) { return r._sec === sec[0]; }).sort(byStrength);
+        if (list.length) groups.push({ key: 'all|' + sec[0], name: sec[1], note: sec[2], cap: sec[3], rows: list });
+      });
+    } else {
+      var byDay = {};
+      shown.forEach(function (r) { var k = dayKey(r.start_time); (byDay[k] = byDay[k] || []).push(r); });
+      Object.keys(byDay).sort().forEach(function (k) {
+        var list = byDay[k].sort(view === 'official' ? byKick : byStrength);
+        groups.push({ key: view + '|' + k, name: dayLabel(list[0].start_time), note: '', cap: view === 'official' ? 0 : 12, rows: list });
+      });
+    }
+    var ordered = [];
+    groups.forEach(function (g) { g.start = ordered.length; ordered = ordered.concat(g.rows); });
+    window.__cfbPropRows = ordered;
+
     var myTrk = {};
     loadTrk().forEach(function (it) { if (it.type === 'Prop') myTrk[it.description] = true; });
-    window.__cfbPropRows = shown;
-    var rowHtml = function (r, i) {
-      var isOver = r.model_lean === 'over';
-      var diff = r.model_predicted_value - r.line;
-      var h = r._h;
-      var track = !h ? '<div class="pp-sub">not in backtest</div>'
-        : h.small ? '<div class="pp-sub" title="Too few bets to judge">small sample, ' + esc(h.record) + '</div>'
-        : '<div class="pp-sub" style="color:' + tone(h.roi) + ';font-weight:600" title="Backtest record ' + esc(h.record) + ' for ' + esc(marketName(r.market_name)) + ' ' + esc(r.model_lean) + 's at a ' + esc(h.label) + ' edge">' +
-            (h.roi > 0 ? '&#9650; ' : (h.roi < 0 ? '&#9660; ' : '')) + signed(h.roi, 0) + '% ROI &middot; ' + signed(h.units, 1) + 'u' + (r.edge_capped ? ' &middot; capped' : '') + '</div>';
-      var tag = r._sec === 'official' ? '<span class="pp-tag is-official">OFFICIAL</span>'
-        : r._sec === 'watch' ? '<span class="pp-tag is-watch">WATCH</span>'
-        : r._sec === 'tracked' ? '<span class="pp-tag is-track">TRACK</span>'
-        : '<span class="pp-tag is-lean">LEAN</span>';
-      return '<div class="pp-grid pp-row" style="border-left-color:' + r._conf.color + '">' +
-        '<div class="pp-conf" style="color:' + r._conf.color + '">' + r._conf.tier + '</div>' +
-        '<div><div class="pp-name">' + esc(r.player_name) + '</div>' +
-          '<div class="pp-sub">' + esc(schoolAbbr(r.team) || '') + (r.opponent ? ' vs ' + esc(schoolAbbr(r.opponent)) : '') + ' &middot; ' + esc(propKickoff(r.start_time)) +
-            (r.games_played != null ? ' &middot; ' + r.games_played + ' GP' : '') + '</div></div>' +
-        '<div><div class="pp-pick">' + esc(marketName(r.market_name)) + ' <b>' + (isOver ? 'Over' : 'Under') + ' ' + esc(r.line) + '</b></div>' +
-          '<div class="pp-sub">' + (r._price != null ? (r._price > 0 ? '+' : '') + r._price : 'no price') + (r.book_used ? ' &middot; ' + esc(bookLabel(r.book_used)) : '') +
-            (r._others ? ' &middot; +' + r._others + ' other line' + (r._others > 1 ? 's' : '') : '') + '</div></div>' +
-        '<div class="num"><div class="pp-big">' + r.model_predicted_value.toFixed(1) + '</div>' +
-          '<div class="pp-sub" style="color:' + ((isOver ? diff : -diff) >= 0 ? 'var(--green)' : 'var(--red)') + '">' + (diff >= 0 ? '+' : '') + diff.toFixed(1) + ' vs line</div></div>' +
-        '<div class="num"><div class="pp-big">' + (r._lp != null ? (r._lp * 100).toFixed(0) + '%' : '&mdash;') + '</div>' +
-          '<div class="pp-sub">needs ' + (r._be != null ? (r._be * 100).toFixed(0) + '%' : '&mdash;') + '</div></div>' +
-        '<div class="num"><div class="pp-big" style="color:' + (r.model_ev != null ? tone(r.model_ev) : 'var(--muted-3)') + '">' + (r.model_ev != null ? signed(r.model_ev, 1) + '%' : '&mdash;') + '</div>' + track + '</div>' +
-        '<div class="pp-status"><div class="pp-status-line">' + (r._auto ? '<span class="pp-dot" title="Logged and graded automatically"></span>' : '') + tag + '</div>' +
-          (r.injury_status ? '<div class="pp-status-line"><span class="pp-tag is-inj">' + esc(r.injury_status.toUpperCase()) + '</span></div>' : '') + '</div>' +
-        '<div class="num">' + (myTrk[propTrackLabel(r)]
-          ? '<span class="pp-inlist" title="Already in your own list in My Tracker">&#10003; My list</span>'
-          : '<button class="pp-trk" title="Add this play to your own list in My Tracker" onclick="window.__cfbTrackProp(' + i + ')">+ Track</button>') + '</div>' +
-      '</div>';
+    var keyOf = function (r) { return [r.fixture_id, r.player_name, r.market_name].join('|'); };
+    var nowMs = Date.now();
+    var priceTxt = function (x) { return x == null || isNaN(x) ? 'no price' : (x > 0 ? '+' : '') + Number(x); };
+    var numTxt = function (x) { var n = Number(x); return isNaN(n) ? '' : (Math.round(n * 10) / 10).toString(); };
+    var dcell = function (label, value, sub) {
+      return '<div class="pp-dcell"><div class="pp-dlabel">' + label + '</div><div class="pp-dval">' + value + '</div>' + (sub ? '<div class="pp-sub">' + sub + '</div>' : '') + '</div>';
     };
-    // Long groups start folded to their strongest plays (highest confidence,
-    // then highest hit chance) so the page stays short; one click opens them.
-    var sections = [
-      ['official', 'Official plays', 'Receptions overs with a 10% to 30% edge. Added to your list automatically.', 0],
-      ['watch', 'Watch', 'A 10%+ edge on a secondary-role player, or a receptions over capped at 30%+. Tracked, not bet.', 12],
-      ['tracked', 'Auto-tracked', 'Has an edge and its kind of play is up in the backtest. Logged and graded automatically.', 12],
-      ['lean', 'Other leans', 'Everything else the model has a read on.', 20]
-    ];
+    var detailHtml = function (r) {
+      var isOver = r.model_lean === 'over';
+      var cells = [];
+      cells.push(dcell('Projection', r.model_predicted_value.toFixed(1), 'line ' + esc(r.line)));
+      cells.push(dcell('Games this season', r.games_played != null ? String(r.games_played) : '&mdash;', 'with a box-score line'));
+      var isRec = /recep|receiv/i.test(r.market_name || ''), isRush = /rush/i.test(r.market_name || '');
+      var share = isRec ? r.rec_share : (isRush ? r.carry_share : null);
+      if (share != null && !isNaN(share)) cells.push(dcell(isRec ? 'Share of team catches' : 'Share of team carries', (share * 100).toFixed(0) + '%', 'per game, this season'));
+      var ff = r.first_flag;
+      var now = priceTxt(r._price) + (r.book_used ? ' &middot; ' + esc(bookLabel(r.book_used)) : '');
+      var was = '';
+      if (ff && ff.price != null) {
+        var fd = new Date(ff.at || '');
+        was = 'first logged ' + (isNaN(fd) ? '' : DAYS[fd.getDay()] + ' ' + (fd.getMonth() + 1) + '/' + fd.getDate() + ' ') + 'at ' + priceTxt(Number(ff.price)) +
+          (ff.line != null && Number(ff.line) !== Number(r.line) ? ', line ' + esc(ff.line) : '') + (ff.book ? ', ' + esc(bookLabel(ff.book)) : '');
+      }
+      cells.push(dcell('Price', now, (was || '') + (r._others ? (was ? ' &middot; ' : '') + '+' + r._others + ' other line' + (r._others > 1 ? 's' : '') + ' posted' : '')));
+      var gl = (D.propGameLogs || {})[r.game_log_key] || [];   // [week, opponent, value], oldest first
+      if (gl.length) {
+        var hits = 0;
+        var chips = gl.map(function (g) {
+          var wk = g[0], oppName = g[1], v = Number(g[2]), ok = isOver ? v > r.line : v < r.line;
+          if (ok) hits++;
+          var opp = (D.meta.schoolAbbr || {})[oppName] || (wk != null ? 'Wk ' + wk : '');
+          return '<span class="pp-gl' + (ok ? ' is-hit' : '') + '" title="' + (wk != null ? 'Week ' + esc(wk) : '') + (oppName ? ' vs ' + esc(oppName) : '') + '"><b>' + numTxt(v) + '</b><i>' + esc(opp) + '</i></span>';
+        }).join('');
+        cells.push('<div class="pp-dcell is-wide"><div class="pp-dlabel">' + esc(marketName(r.market_name)) + ' by game</div><div class="pp-gls">' + chips + '</div>' +
+          '<div class="pp-sub">' + (isOver ? 'Over ' : 'Under ') + esc(r.line) + ' in ' + hits + ' of ' + gl.length + '. The model already counts these games.</div></div>');
+      }
+      return '<div class="pp-detail">' + cells.join('') + '</div>';
+    };
+    var rowHtml = function (r, i, withDay) {
+      var isOver = r.model_lean === 'over';
+      var h = r._h;
+      var isOpen = state.propDetail === keyOf(r);
+      var started = r.start_time && new Date(r.start_time).getTime() < nowMs;
+      var track = !h ? '<div class="pp-track is-none">Not in backtest</div>'
+        : h.small ? '<div class="pp-track is-none">Small sample</div><div class="pp-sub">' + esc(h.record) + ' at this edge size</div>'
+        : '<div class="pp-track" style="color:' + tone(h.roi) + '">' + signed(h.roi, 0) + '% ROI &middot; ' + signed(h.units, 1) + 'u</div>' +
+          '<div class="pp-sub">' + esc(h.record) + ' at this edge size</div>';
+      var flags = [];
+      if (r.injury_status) flags.push('<span class="pp-tag is-inj" title="' + esc(r.injury_detail || 'On the injury report') + '">' + esc(r.injury_status) + '</span>');
+      if (r.edge_capped) flags.push('<span class="pp-tag is-inj" title="A receptions over with a 30%+ edge. Those lost in the backtest, so it is watched, not bet.">30%+ edge</span>');
+      else if (!r.is_official_play && r._conf.tier === 'CHECK') flags.push('<span class="pp-tag is-inj" title="The model is far from the market. Check for an injury or a role change first.">Check</span>');
+      if (r._conf.tier === 'PASS') flags.push('<span class="pp-tag is-pass" title="The price needs more than the model gives, or the player is out.">Pass</span>');
+      if (started) flags.push('<span class="pp-tag is-lean" title="This game has kicked off.">Started</span>');
+      return '<div class="pp-grid pp-row' + (isOpen ? ' is-open' : '') + '">' +
+        '<div><div class="pp-name">' + esc(r.player_name) + '</div>' +
+          '<div class="pp-sub">' + esc(schoolAbbr(r.team) || '') + (r.opponent ? ' vs ' + esc(schoolAbbr(r.opponent)) : '') + ' &middot; ' + esc(withDay ? propKickoff(r.start_time) : kickTime(r.start_time)) + '</div></div>' +
+        '<div><div class="pp-pick">' + esc(marketName(r.market_name)) + ' <b>' + (isOver ? 'Over' : 'Under') + ' ' + esc(r.line) + '</b></div>' +
+          '<div class="pp-sub">' + priceTxt(r._price) + (r.book_used ? ' &middot; ' + esc(bookLabel(r.book_used)) : '') + '</div></div>' +
+        '<div><div class="pp-edge" style="color:' + (r.model_ev != null ? tone(r.model_ev) : 'var(--muted-3)') + '">' + (r.model_ev != null ? signed(r.model_ev, 1) + '%' : '&mdash;') + '</div>' +
+          '<div class="pp-sub">' + (r._lp != null ? (r._lp * 100).toFixed(0) + '%' : '&mdash;') + ' vs ' + (r._be != null ? (r._be * 100).toFixed(0) + '%' : '&mdash;') + ' needed</div></div>' +
+        '<div>' + track + '</div>' +
+        '<div class="pp-flags">' + flags.join('') + '</div>' +
+        '<div class="pp-actions">' +
+          '<button class="pp-trk" aria-expanded="' + (isOpen ? 'true' : 'false') + '" onclick="window.__cfbPropDetail(' + i + ')">' + (isOpen ? 'Hide' : 'Details') + '</button>' +
+          (myTrk[propTrackLabel(r)]
+            ? '<span class="pp-inlist" title="Already in your own list in My Tracker">&#10003; My list</span>'
+            : '<button class="pp-trk" title="Add this play to your own list in My Tracker" onclick="window.__cfbTrackProp(' + i + ')">+ My list</button>') +
+        '</div>' +
+      '</div>' + (isOpen ? detailHtml(r) : '');
+    };
+    // Long groups start folded to their strongest plays so the page stays
+    // short; one click opens them.
     var open = state.propOpen || {};
-    var body = sections.map(function (sec, si) {
-      var list = [];
-      shown.forEach(function (r, i) { if (r._sec === sec[0]) list.push(rowHtml(r, i)); });
-      if (!list.length) return '';
-      var cap = sec[3], folded = cap && list.length > cap && !open[sec[0]];
-      return '<div class="pp-group"><span class="pp-group-name">' + sec[1] + '</span><span class="pp-group-count">' + list.length + '</span>' +
-        '<span class="pp-group-note">' + sec[2] + '</span></div>' + (folded ? list.slice(0, cap) : list).join('') +
-        (cap && list.length > cap ? '<div class="pp-more"><button class="pp-link" onclick="window.__cfbPropOpen(' + si + ')">' +
-          (folded ? 'Show all ' + list.length : 'Show top ' + cap + ' only') + '</button></div>' : '');
+    var body = groups.map(function (g) {
+      var list = g.rows.map(function (r, j) { return rowHtml(r, g.start + j, view === 'all'); });
+      var folded = g.cap && list.length > g.cap && !open[g.key];
+      return '<div class="pp-group"><span class="pp-group-name">' + esc(g.name) + '</span><span class="pp-group-count">' + list.length + '</span>' +
+        (g.note ? '<span class="pp-group-note">' + g.note + '</span>' : '') + '</div>' + (folded ? list.slice(0, g.cap) : list).join('') +
+        (g.cap && list.length > g.cap ? '<div class="pp-more"><button class="pp-link" data-prop-fold="' + esc(g.key) + '">' +
+          (folded ? 'Show all ' + list.length : 'Show top ' + g.cap + ' only') + '</button></div>' : '');
     }).join('');
+    var emptyMsg = view === 'official' ? 'No official plays right now. Watch and All props show everything else the model has a read on.'
+      : 'No plays match these filters. Try another market or game.';
     var table = '<div class="pp-table">' +
-      '<div class="pp-grid pp-head"><div>Conf</div><div>Player</div><div>Pick</div><div class="num">Model</div><div class="num">Hit % / needs</div>' +
-        '<div class="num">Edge / track record</div><div class="num">Status</div><div class="num">My list</div></div>' +
-      (body || '<div class="empty-state" style="border:none">No plays match these filters. Try another market or switch to All props.</div>') +
-    '</div>' +
-    '<div class="pp-legend"><span class="pp-dot"></span> Logged and graded automatically. The running record is at the top of this page and in My Tracker.</div>';
+      '<div class="pp-grid pp-head"><div>Player</div><div>Pick</div><div>Edge</div><div>Track record</div><div>Heads up</div><div></div></div>' +
+      (body || '<div class="empty-state" style="border:none">' + emptyMsg + '</div>') +
+    '</div>';
 
     // 4) Where the model has been right (backtest), and the latest results.
     var lower = '';
@@ -2124,17 +2255,18 @@ RENDERER_JS = """<script>
 
     // 5) The fine print, folded away until wanted.
     var help = '<details class="pp-help"><summary>How to read this page</summary><div class="pp-help-body">' +
-      '<p><b>Conf</b> is how much to trust the read. <b>High</b>: 60%+ hit chance, at least 5 points above what the price needs, 3+ games of data, no injury flag. ' +
-        '<b>Medium</b>: 55%+ and at least 2 points above. <b>Check</b>: the model is far from the market (an 80%+ hit chance, or a projection 25% and 12+ off the line), ' +
-        'which usually means it is missing an injury or a role change, so verify first. <b>Pass</b>: the price needs more than the model gives, or the player is out. ' +
-        'Touchdowns and interceptions never rate above Low.</p>' +
-      '<p><b>Hit % / needs</b> is the model&rsquo;s chance the pick wins, and the chance the price requires to break even. <b>Edge</b> is what the model expects the bet to return.</p>' +
-      '<p><b>Track record</b>, under each edge, is how plays of the same kind and edge size did in the backtest' +
-        (EH && EH.nWeekends ? ' (' + EH.nWeekends + ' weekends, 1 unit a play)' : '') + '. &#9650; green made money, &#9660; red lost, and &ldquo;small sample&rdquo; means fewer than ' +
-        ((EH && EH.minBets) || 15) + ' bets. Groups are small, so read it as a guide, not a promise.</p>' +
-      '<p><b>Official</b> plays are the only ones the rules call bets. <b>Watch</b> and <b>Track</b> plays are logged to see whether they hold up. ' +
-        'A green dot means the play is logged and graded automatically. <b>+ Track</b> adds any play to your own list in My Tracker.</p>' +
-      '<p>Kickoff times are in your own time zone.</p>' +
+      '<p><b>Official</b> plays are the only props the rules call bets: receptions overs with a 10% to 30% edge, at the best price across books. ' +
+        '<b>Watch</b> plays are logged to see whether they hold up, not bet. <b>All props</b> lists everything the model has a read on.</p>' +
+      '<p><b>Edge</b> is what the model expects the bet to return. Under it is the model&rsquo;s chance the pick wins, against the chance the price needs to break even.</p>' +
+      '<p><b>Track record</b> is how plays of the same kind and edge size did in the backtest' +
+        (EH && EH.nWeekends ? ' (' + EH.nWeekends + ' weekends, 1 unit a play)' : '') + '. Green made money, red lost, and &ldquo;small sample&rdquo; means fewer than ' +
+        ((EH && EH.minBets) || 15) + ' bets. Every play in the same edge range shows the same record. Groups are small, so read it as a guide, not a promise.</p>' +
+      '<p><b>Heads up</b> is empty unless something needs a second look: an injury listing, a <b>30%+ edge</b> (those lost in the backtest, so they are capped to Watch), ' +
+        '<b>Check</b> (the model is far from the market, which usually means it is missing an injury or a role change), ' +
+        '<b>Pass</b> (the price needs more than the model gives, or the player is out), or a game that has already started.</p>' +
+      '<p><b>Details</b> opens the projection, games played, share of the team&rsquo;s catches or carries, the price when the play was first logged, and the player&rsquo;s numbers by game. ' +
+        'The model already counts those games, so a good run there is not extra evidence.</p>' +
+      '<p><b>+ My list</b> adds any play to your own list in My Tracker. Kickoff times are in your own time zone.</p>' +
     '</div></details>';
 
     return head + strip + controls + table + lower + help;
@@ -2260,7 +2392,7 @@ RENDERER_JS = """<script>
     if (el && typeof el.scrollIntoView === 'function') el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // +TRK on a Props-tab row. Same description format the auto-added
+  // + My list on a Props-tab row. Same description format the auto-added
   // official props use, so a play can't land in the list twice.
   function propTrackLabel(r) {
     return playerLabel(r) + ' ' + r.market_name + ' ' + (r.model_lean === 'over' ? 'O' : 'U') + ' ' + r.line;
@@ -2576,7 +2708,7 @@ RENDERER_JS = """<script>
     var o = T.overall;
     var head = '<div class="section-head" id="trk-auto-section" style="margin-top:26px"><div class="section-title"><div class="section-flag is-green"></div><h2>Auto-Tracked Props</h2></div></div>' +
       '<div style="font-size:11px;color:var(--muted-3);line-height:1.55;margin:4px 0 12px">Automatic. Every prop whose kind of play is up in the backtest is logged the first time the model flags it, ' +
-      'then graded from the box score at 1 unit, at the price it was flagged at. These are the model&rsquo;s plays, not bets you placed. Your own plays are in the other sections; use +TRK on the Props tab to add any play to them.</div>';
+      'then graded from the box score at 1 unit, at the price it was flagged at. These are the model&rsquo;s plays, not bets you placed. Your own plays are in the other sections; use + My list on the Props tab to add any play to them.</div>';
     var summary = '<div class="trk-summary">' +
       '<div class="trk-box"><div class="trk-label">Record</div><div class="trk-value">' + esc(o.record) + '</div></div>' +
       '<div class="trk-box"><div class="trk-label">Units</div><div class="trk-value ' + cls(o.units) + '">' + sg(o.units, 2) + 'u</div></div>' +
@@ -2713,7 +2845,7 @@ RENDERER_JS = """<script>
       renderAutoTrackedProps() +
       renderTrackerSection(propItems, {
         title: 'My Player Props',
-        emptyMsg: 'No player-prop plays in your own list yet — official props get added here automatically after each pipeline run, and +TRK on the Props tab adds any other play.',
+        emptyMsg: 'No player-prop plays in your own list yet — official props get added here automatically after each pipeline run, and + My list on the Props tab adds any other play.',
         sectionId: 'trk-props-section',
         extraHtml: '<div class="prop-tabs" style="margin:10px 0 4px">' +
           '<button class="tab tab--prop" onclick="window.__cfbTrkClearPendingAutoProps()"><span>Clear ungraded auto-props</span></button>' +
@@ -2838,7 +2970,15 @@ RENDERER_JS = """<script>
   window.__cfbPropGame = function (v) { state.propGame = v; render(); };
   window.__cfbPropOfficial = function () { state.propOfficialOnly = !state.propOfficialOnly; render(); };
   window.__cfbPropShowPass = function () { state.propShowPass = !state.propShowPass; render(); };
-  window.__cfbPropView = function (i) { state.propView = ['main', 'tracked', 'all'][i] || 'main'; render(); };
+  window.__cfbPropView = function (i) { state.propView = ['official', 'watch', 'all'][i] || 'official'; render(); };
+  // Details panel on a Props-tab row: one open at a time.
+  window.__cfbPropDetail = function (i) {
+    var r = (window.__cfbPropRows || [])[i];
+    if (!r) return;
+    var k = [r.fixture_id, r.player_name, r.market_name].join('|');
+    state.propDetail = state.propDetail === k ? null : k;
+    render();
+  };
   window.__cfbGoTracker = function () { state.page = 'tracker'; render(); window.scrollTo(0, 0); };
   window.__cfbPropOpen = function (i) {
     var k = ['official', 'watch', 'tracked', 'lean'][i];
@@ -2856,6 +2996,8 @@ RENDERER_JS = """<script>
     if (m) { state.market = m.dataset.market; return render(); }
     var pm = e.target.closest('[data-prop-market]');
     if (pm) { state.propMarket = pm.dataset.propMarket; return render(); }
+    var pf = e.target.closest('[data-prop-fold]');
+    if (pf) { state.propOpen = state.propOpen || {}; state.propOpen[pf.dataset.propFold] = !state.propOpen[pf.dataset.propFold]; return render(); }
     var us = e.target.closest('[data-unit-size]');
     if (us) { state.unitSize = Number(us.dataset.unitSize); return render(); }
     var mt = e.target.closest('[data-model-tab]');
@@ -2895,6 +3037,11 @@ def main():
 
     model_data = build_model_data(data, backtest=backtest, clv=clv)
     model_data["propEdgeHistory"] = build_prop_edge_history()
+    attach_prop_first_flags(model_data.get("propsLive") or [])
+    # Game-by-game box-score numbers for the Details panel (10/2026); absent
+    # until scripts/export_dashboard_data.py writes them, and the panel just
+    # leaves that part out.
+    model_data["propGameLogs"] = data.get("prop_game_logs") or {}
     model_data["propTracking"] = build_prop_tracking(model_data["propEdgeHistory"])
     data_script = "<script>\nwindow.MODEL_DATA = " + json.dumps(model_data) + ";\n</script>\n"
 
