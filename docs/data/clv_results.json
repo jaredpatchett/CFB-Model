@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T17:01:44.037425+00:00",
+  "generated_at": "2026-10-08T18:40:15.803020+00:00",
   "n_games": 229,
   "avg_clv_points": 0.035,
   "median_clv_points": 0.0,
@@ -1892,19 +1892,6 @@
       "commence_time": "2026-09-26T19:00:00Z"
     },
     {
-      "game_id": 401861970,
-      "season": 2026,
-      "week": 4,
-      "home_team": "Miami (OH) RedHawks",
-      "away_team": "UConn Huskies",
-      "side": "away",
-      "recommended_spread_home": -4.5,
-      "closing_spread_home": -2.5,
-      "clv_points": 2.0,
-      "captured_at": "2026-09-21T16:00:15.108504+00:00",
-      "commence_time": "2026-09-26T19:30:00Z"
-    },
-    {
       "game_id": 401864579,
       "season": 2026,
       "week": 4,
@@ -1915,6 +1902,19 @@
       "closing_spread_home": 11.5,
       "clv_points": 1.0,
       "captured_at": "2026-09-21T18:20:34.438576+00:00",
+      "commence_time": "2026-09-26T19:30:00Z"
+    },
+    {
+      "game_id": 401856815,
+      "season": 2026,
+      "week": 4,
+      "home_team": "UCF Knights",
+      "away_team": "TCU Horned Frogs",
+      "side": "home",
+      "recommended_spread_home": 3.0,
+      "closing_spread_home": 3.5,
+      "clv_points": -0.5,
+      "captured_at": "2026-09-21T16:00:15.108504+00:00",
       "commence_time": "2026-09-26T19:30:00Z"
     },
     {
@@ -1957,15 +1957,15 @@
       "commence_time": "2026-09-26T19:30:00Z"
     },
     {
-      "game_id": 401856815,
+      "game_id": 401861970,
       "season": 2026,
       "week": 4,
-      "home_team": "UCF Knights",
-      "away_team": "TCU Horned Frogs",
-      "side": "home",
-      "recommended_spread_home": 3.0,
-      "closing_spread_home": 3.5,
-      "clv_points": -0.5,
+      "home_team": "Miami (OH) RedHawks",
+      "away_team": "UConn Huskies",
+      "side": "away",
+      "recommended_spread_home": -4.5,
+      "closing_spread_home": -2.5,
+      "clv_points": 2.0,
       "captured_at": "2026-09-21T16:00:15.108504+00:00",
       "commence_time": "2026-09-26T19:30:00Z"
     },
@@ -2269,19 +2269,6 @@
       "commence_time": "2026-09-27T02:00:00Z"
     },
     {
-      "game_id": 401858240,
-      "season": 2026,
-      "week": 4,
-      "home_team": "Stanford Cardinal",
-      "away_team": "Georgia Tech Yellow Jackets",
-      "side": "away",
-      "recommended_spread_home": 3.5,
-      "closing_spread_home": 3.0,
-      "clv_points": -0.5,
-      "captured_at": "2026-09-21T16:00:15.108504+00:00",
-      "commence_time": "2026-09-27T02:30:00Z"
-    },
-    {
       "game_id": 401864509,
       "season": 2026,
       "week": 4,
@@ -2291,6 +2278,19 @@
       "recommended_spread_home": 5.5,
       "closing_spread_home": 4.5,
       "clv_points": 1.0,
+      "captured_at": "2026-09-21T16:00:15.108504+00:00",
+      "commence_time": "2026-09-27T02:30:00Z"
+    },
+    {
+      "game_id": 401858240,
+      "season": 2026,
+      "week": 4,
+      "home_team": "Stanford Cardinal",
+      "away_team": "Georgia Tech Yellow Jackets",
+      "side": "away",
+      "recommended_spread_home": 3.5,
+      "closing_spread_home": 3.0,
+      "clv_points": -0.5,
       "captured_at": "2026-09-21T16:00:15.108504+00:00",
       "commence_time": "2026-09-27T02:30:00Z"
     },
