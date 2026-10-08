@@ -364,6 +364,65 @@ def esc_plain(s):
     return str(s) if s is not None else ""
 
 
+PROPS_TRACK_PATH = "docs/data/props_clv.json"
+
+
+def build_prop_tracking(history, path: str = PROPS_TRACK_PATH, max_results: int = 150, max_upcoming: int = 150):
+    """The automatic prop log for the My Tracker tab (10/2026): every prop in
+    a group that is up in the backtest, logged when first flagged and graded
+    from the box score by scripts/compute_props_clv.py. Returns the overall
+    record, a record per kind of play (market + side) next to its backtest
+    record, the latest graded plays and the upcoming ones. None if the log
+    isn't there yet. Never raises."""
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path) as f:
+            log = json.load(f)
+        plays = [p for p in (log.get("plays") or []) if p.get("tag") == "group"]
+        if not plays:
+            return None
+
+        def agg(rows):
+            graded = [r for r in rows if r.get("result") in ("W", "L", "P")]
+            w = sum(1 for r in graded if r["result"] == "W")
+            l = sum(1 for r in graded if r["result"] == "L")
+            pu = len(graded) - w - l
+            units = sum(float(r.get("units") or 0) for r in graded)
+            return {"logged": len(rows), "graded": len(graded), "record": f"{w}-{l}" + (f"-{pu}" if pu else ""),
+                    "units": round(units, 2), "roi": round(units / len(graded) * 100, 1) if graded else None,
+                    "upcoming": sum(1 for r in rows if not r.get("started"))}
+
+        kinds = {}
+        for p in plays:
+            kinds.setdefault((p.get("market"), p.get("side")), []).append(p)
+        by_kind = []
+        for (market, side), rows in kinds.items():
+            a = agg(rows)
+            a["market"], a["side"] = market, side
+            ups = [r for r in ((((history or {}).get("markets") or {}).get(market) or {}).get(side) or []) if r.get("up")]
+            if ups:
+                bw = sum(int(str(r["record"]).split("-")[0]) for r in ups)
+                bl = sum(int(str(r["record"]).split("-")[1]) for r in ups)
+                bu, bn = sum(r["units"] for r in ups), sum(r["n"] for r in ups)
+                a["backtest"] = {"record": f"{bw}-{bl}", "units": round(bu, 1), "roi": round(bu / bn * 100, 1) if bn else None}
+            by_kind.append(a)
+        by_kind.sort(key=lambda a: (-a["graded"], -a["logged"]))
+
+        def slim(p):
+            return {k: p.get(k) for k in ("player", "team", "opponent", "market", "side", "line", "price", "model_ev",
+                                          "group", "start_time", "result", "units", "actual")}
+
+        results = sorted((p for p in plays if p.get("result") in ("W", "L", "P")), key=lambda p: str(p.get("start_time")), reverse=True)
+        upcoming = sorted((p for p in plays if not p.get("started")), key=lambda p: str(p.get("start_time")))
+        return {"asOf": log.get("generated_at"), "overall": agg(plays), "byKind": by_kind,
+                "results": [slim(p) for p in results[:max_results]], "nResults": len(results),
+                "upcoming": [slim(p) for p in upcoming[:max_upcoming]], "nUpcoming": len(upcoming)}
+    except Exception as e:
+        print(f"  [note] could not read {path} ({e}) -- My Tracker will not show the automatic prop log")
+        return None
+
+
 def build_prop_edge_history():
     """Backtest record for every market / side / edge size, or None. Never
     raises -- this is a display extra, not something the dashboard should
@@ -1857,7 +1916,12 @@ RENDERER_JS = """<script>
     var thead = '<div class="thead" style="display:grid;' + cols + '">' +
       '<div>Confidence</div><div>Player</div><div>Pick</div><div class="num">Model</div><div class="num">Hit % / needs</div>' +
       '<div class="num">Edge / track record</div><div class="num">Status</div></div>';
-    var body = shown.map(function (r) {
+    // +TRK on every prop (10/2026): one click adds the play to your own
+    // list in My Tracker. Plays already there show a check mark instead.
+    var myTrk = {};
+    loadTrk().forEach(function (it) { if (it.type === 'Prop') myTrk[it.description] = true; });
+    window.__cfbPropRows = shown;
+    var body = shown.map(function (r, i) {
       var isOver = r.model_lean === 'over';
       var diff = r.model_predicted_value - r.line;
       var h = edgeHist(r);
@@ -1887,7 +1951,13 @@ RENDERER_JS = """<script>
           '<div class="num"><div style="font-weight:700;font-size:13px">' + (r._lp != null ? (r._lp * 100).toFixed(0) + '%' : '\\u2014') + '</div>' +
             '<div style="font-size:9.5px;color:var(--muted-3);margin-top:3px">needs ' + (r._be != null ? (r._be * 100).toFixed(0) + '%' : '\\u2014') + '</div></div>' +
           edgeCell +
-          '<div class="num">' + tag + inj + '</div>' +
+          '<div class="num">' + tag + inj +
+            '<div style="margin-top:6px;display:flex;justify-content:flex-end;align-items:center;gap:7px">' +
+              ((r.is_official_play || isTracked(r, h)) ? '<span style="font-size:8.5px;font-weight:700;letter-spacing:.05em;color:var(--green)" title="Logged and graded automatically. See Auto-Tracked Props in My Tracker.">AUTO-TRACKED</span>' : '') +
+              (myTrk[propTrackLabel(r)]
+                ? '<span style="font-size:8.5px;font-weight:700;letter-spacing:.05em;color:var(--blue-light)" title="Already in your own list in My Tracker.">&#10003; MY LIST</span>'
+                : '<button class="track-btn" style="padding:2px 6px;font-size:9.5px" title="Add this play to your own list in My Tracker" onclick="window.__cfbTrackProp(' + i + ')">+TRK</button>') +
+            '</div></div>' +
         '</div></div>';
     }).join('');
 
@@ -1918,7 +1988,8 @@ RENDERER_JS = """<script>
       edgeKey = '<div class="table-foot" style="display:block"><div><b>Track record key.</b> Under each edge is how plays like it did in the backtest' +
         (EH.nWeekends ? ' (' + EH.nWeekends + ' weekends' + (EH.span ? ', ' + esc(EH.span) : '') + ', 1 unit a bet)' : '') + ': ROI, units and record. ' +
         '<span style="color:var(--green)">&#9650; green</span> = that kind of play made money. <span style="color:var(--red)">&#9660; red</span> = it lost. ' +
-        'Grey = fewer than ' + (EH.minBets || 15) + ' bets, too few to say. <b>TRACK</b> = the play is in a group that is up by ' + (EH.minUnits || 2) + '+ units; every play with an edge is logged and graded automatically after its game. ' +
+        'Grey = fewer than ' + (EH.minBets || 15) + ' bets, too few to say. <b>AUTO-TRACKED</b> = the play is in a group that is up by ' + (EH.minUnits || 2) + '+ units, so it is logged and graded automatically after its game; the running record is under Auto-Tracked Props in My Tracker. ' +
+        '<b>+TRK</b> adds any play to your own list there. ' +
         'Groups are small, so read this as a guide, not a promise.</div>' +
         (upLines.length ? '<div style="margin-top:8px;font-weight:700">Groups that are up (edge size: ROI, units, record)</div>' + upLines.join('') : '') + '</div>';
     }
@@ -2044,6 +2115,27 @@ RENDERER_JS = """<script>
     render();
     var el = document.getElementById('trk-gamelines-section') || document.getElementById('trk-section');
     if (el && typeof el.scrollIntoView === 'function') el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // +TRK on a Props-tab row. Same description format the auto-added
+  // official props use, so a play can't land in the list twice.
+  function propTrackLabel(r) {
+    return playerLabel(r) + ' ' + r.market_name + ' ' + (r.model_lean === 'over' ? 'O' : 'U') + ' ' + r.line;
+  }
+  window.__cfbTrackProp = function (i) {
+    var r = (window.__cfbPropRows || [])[i];
+    if (!r) return;
+    var desc = propTrackLabel(r);
+    var items = loadTrk();
+    if (items.some(function (it) { return it.type === 'Prop' && it.description === desc; })) return;
+    items.unshift({
+      id: 't' + Date.now() + Math.random().toString(36).slice(2, 7),
+      description: desc, date: (r.start_time || '').slice(0, 10), type: 'Prop',
+      price: r.model_lean === 'over' ? r.over_price : r.under_price,
+      edge: r.model_ev, stake: 50, status: null
+    });
+    saveTrk(items);
+    render();
   };
 
   // Manual flip for any tracked play -- overrides the auto-detection above
@@ -2324,6 +2416,85 @@ RENDERER_JS = """<script>
       rows;
   }
 
+  // The automatic prop log (10/2026). Every prop in a group that is up in
+  // the backtest is logged the first time the model flags it and graded
+  // from the box score -- nothing to click. Comes from the pipeline
+  // (D.propTracking), not from this browser, so it is the same on every
+  // device. Kept apart from the user's own plays so the two records
+  // never mix.
+  function renderAutoTrackedProps() {
+    var T = D.propTracking;
+    if (!T) return '';
+    var sg = function (x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); };
+    var cls = function (x) { return x > 0 ? 'is-pos' : (x < 0 ? 'is-neg' : ''); };
+    var col = function (x) { return x > 0 ? 'var(--green)' : (x < 0 ? 'var(--red)' : 'var(--muted-3)'); };
+    var kind = function (m, s) { return (m === 'Reception Yards' ? 'Receiving Yards' : m) + ' ' + s + 's'; };
+    var price = function (x) { return x == null ? '' : (x > 0 ? '+' : '') + x; };
+    var o = T.overall;
+    var head = '<div class="section-head" id="trk-auto-section" style="margin-top:26px"><div class="section-title"><div class="section-flag is-green"></div><h2>Auto-Tracked Props</h2></div></div>' +
+      '<div style="font-size:11px;color:var(--muted-3);line-height:1.55;margin:4px 0 12px">Automatic. Every prop whose kind of play is up in the backtest is logged the first time the model flags it, ' +
+      'then graded from the box score at 1 unit, at the price it was flagged at. These are the model&rsquo;s plays, not bets you placed. Your own plays are in the other sections; use +TRK on the Props tab to add any play to them.</div>';
+    var summary = '<div class="trk-summary">' +
+      '<div class="trk-box"><div class="trk-label">Record</div><div class="trk-value">' + esc(o.record) + '</div></div>' +
+      '<div class="trk-box"><div class="trk-label">Units</div><div class="trk-value ' + cls(o.units) + '">' + sg(o.units, 2) + 'u</div></div>' +
+      '<div class="trk-box"><div class="trk-label">ROI</div><div class="trk-value ' + cls(o.roi || 0) + '">' + (o.roi != null ? sg(o.roi, 1) + '%' : '&mdash;') + '</div></div>' +
+      '<div class="trk-box"><div class="trk-label">Graded</div><div class="trk-value">' + o.graded + '</div></div>' +
+      '<div class="trk-box"><div class="trk-label">Upcoming</div><div class="trk-value">' + o.upcoming + '</div></div>' +
+    '</div>';
+
+    var kc = 'grid-template-columns:1.5fr 0.7fr 0.7fr 0.7fr 0.7fr 1.5fr;';
+    var kinds = '<div class="thead" style="display:grid;' + kc + 'margin-top:14px"><div>Kind of play</div><div class="num">Record</div><div class="num">Units</div><div class="num">ROI</div><div class="num">Upcoming</div><div class="num">Backtest</div></div>' +
+      T.byKind.map(function (k) {
+        var b = k.backtest;
+        return '<div class="row"><div class="row-accent" style="background:' + (k.graded ? col(k.units) : 'var(--rule)') + '"></div>' +
+          '<div class="row-body" style="' + kc + 'padding:8px 14px;font-size:11.5px">' +
+            '<div style="font-weight:700">' + esc(kind(k.market, k.side)) + '</div>' +
+            '<div class="num">' + (k.graded ? esc(k.record) : '&mdash;') + '</div>' +
+            '<div class="num" style="color:' + (k.graded ? col(k.units) : 'var(--muted-3)') + ';font-weight:700">' + (k.graded ? sg(k.units, 2) + 'u' : '&mdash;') + '</div>' +
+            '<div class="num" style="color:' + (k.graded ? col(k.roi) : 'var(--muted-3)') + '">' + (k.roi != null ? sg(k.roi, 0) + '%' : '&mdash;') + '</div>' +
+            '<div class="num">' + k.upcoming + '</div>' +
+            '<div class="num" style="color:var(--muted-3);font-size:10.5px">' + (b ? sg(b.roi, 0) + '% &middot; ' + sg(b.units, 1) + 'u &middot; ' + esc(b.record) : '&mdash;') + '</div>' +
+          '</div></div>';
+      }).join('');
+
+    var pc = 'grid-template-columns:1.5fr 1.3fr 0.7fr 1.1fr;';
+    var playRow = function (p) {
+      var done = p.result === 'W' || p.result === 'L' || p.result === 'P';
+      var rc = p.result === 'W' ? 'var(--green)' : (p.result === 'L' ? 'var(--red)' : (p.result === 'P' ? 'var(--amber)' : 'var(--rule)'));
+      var res = done
+        ? '<span class="pchip" style="color:' + rc + ';border:1px solid ' + rc + '">' + (p.result === 'W' ? 'WIN' : (p.result === 'L' ? 'LOSS' : 'PUSH')) + '</span>' +
+          '<div style="font-size:9.5px;color:var(--muted-3);margin-top:3px">final ' + (p.actual != null ? Number(p.actual) : '?') + ' &middot; ' + sg(p.units || 0, 2) + 'u</div>'
+        : '<span class="pchip is-lean">UPCOMING</span>';
+      return '<div class="row"><div class="row-accent" style="background:' + rc + '"></div>' +
+        '<div class="row-body" style="' + pc + 'padding:8px 14px;font-size:11.5px">' +
+          '<div><div style="font-weight:700">' + esc(p.player) + '</div><div style="font-size:9.5px;color:var(--muted-3);margin-top:3px">' +
+            esc(schoolAbbr(p.team) || '') + (p.opponent ? ' vs ' + esc(schoolAbbr(p.opponent)) : '') + ' &middot; ' + esc(propKickoff(p.start_time)) + '</div></div>' +
+          '<div><div style="font-weight:700">' + esc(p.market) + ' ' + (p.side === 'over' ? 'O' : 'U') + ' ' + esc(p.line) + '</div>' +
+            '<div style="font-size:9.5px;color:var(--muted-3);margin-top:3px">' + price(p.price) + '</div></div>' +
+          '<div class="num">' + (p.model_ev != null ? sg(p.model_ev, 1) + '%' : '&mdash;') + '</div>' +
+          '<div class="num">' + res + '</div>' +
+        '</div></div>';
+    };
+    var playHead = function (title, note) {
+      return '<div style="margin-top:16px;font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase">' + title +
+        (note ? ' <span style="font-weight:400;color:var(--muted-3);text-transform:none;letter-spacing:0">' + note + '</span>' : '') + '</div>' +
+        '<div class="thead" style="display:grid;' + pc + 'margin-top:6px"><div>Player</div><div>Pick</div><div class="num">Edge when flagged</div><div class="num">Result</div></div>';
+    };
+    var more = function (shown, total) { return total > shown ? '<div class="table-foot"><span>Showing ' + shown + ' of ' + total + '.</span></div>' : ''; };
+    var results = T.results.length
+      ? playHead('Results', 'newest first') + T.results.map(playRow).join('') + more(T.results.length, T.nResults)
+      : '<div class="trk-empty" style="margin-top:14px">No graded plays yet. They appear here after their games finish and the next pipeline run.</div>';
+    var showUp = !!state.trkAutoShowUpcoming;
+    var upcoming = T.upcoming.length
+      ? '<div class="prop-tabs" style="margin:16px 0 4px"><button class="tab tab--prop' + (showUp ? ' is-active' : '') + '" onclick="window.__cfbTrkAutoUpcoming()"><span>' +
+          (showUp ? 'Hide' : 'Show') + ' ' + T.nUpcoming + ' upcoming</span></button></div>' +
+        (showUp ? playHead('Upcoming', 'earliest kickoff first') + T.upcoming.map(playRow).join('') + more(T.upcoming.length, T.nUpcoming) : '')
+      : '';
+    var foot = '<div class="table-foot"><span>A few days of results is a very small sample, so the record will swing. Backtest = how the same kinds of play did before the log started.</span></div>';
+    return head + summary + kinds + results + upcoming + foot;
+  }
+  window.__cfbTrkAutoUpcoming = function () { state.trkAutoShowUpcoming = !state.trkAutoShowUpcoming; render(); };
+
   function renderTracker() {
     var items = loadTrk();
     // Two separate trackers sharing one localStorage log: Game Lines
@@ -2396,9 +2567,10 @@ RENDERER_JS = """<script>
         sectionId: 'trk-gamelines-section',
         extraHtml: modelTabBar,
       }) +
+      renderAutoTrackedProps() +
       renderTrackerSection(propItems, {
-        title: 'Player Props',
-        emptyMsg: 'No player-prop plays tracked yet — official props (see the Props tab) get added here automatically after each pipeline run.',
+        title: 'My Player Props',
+        emptyMsg: 'No player-prop plays in your own list yet — official props get added here automatically after each pipeline run, and +TRK on the Props tab adds any other play.',
         sectionId: 'trk-props-section',
         extraHtml: '<div class="prop-tabs" style="margin:10px 0 4px">' +
           '<button class="tab tab--prop" onclick="window.__cfbTrkClearPendingAutoProps()"><span>Clear ungraded auto-props</span></button>' +
@@ -2572,6 +2744,7 @@ def main():
 
     model_data = build_model_data(data, backtest=backtest, clv=clv)
     model_data["propEdgeHistory"] = build_prop_edge_history()
+    model_data["propTracking"] = build_prop_tracking(model_data["propEdgeHistory"])
     data_script = "<script>\nwindow.MODEL_DATA = " + json.dumps(model_data) + ";\n</script>\n"
 
     html_out = HEAD_HTML + data_script + MATH_JS + RENDERER_JS + TAIL_HTML
