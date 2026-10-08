@@ -14,6 +14,7 @@ Usage:
 """
 import argparse
 import json
+import math
 import os
 import re
 import sys
@@ -505,6 +506,84 @@ def prop_game_log(player_name, market_name, player_form: dict, game_logs: dict, 
         return f"{entry.get('athlete_id')}|{stat}", rows
     except Exception:
         return None, None
+
+
+def export_prop_distributions(prop_models: dict) -> dict:
+    """stat -> what the dashboard needs to work out a hit chance at ANY line
+    (10/2026), for the "Try another line" box in the Props tab's Details
+    panel. It is the same information PlayerStatModel.outcome_probabilities
+    uses: the projection-size buckets and each bucket's holdout misses, plus
+    the bell-curve spreads used as a fallback.
+
+      nonneg   the stat can't go below zero
+      edges    upper edge of each projection-size bucket (None = no limit)
+      samples  per bucket: the misses, sorted, as whole numbers of 1/scale,
+               each stored as the step up from the one before (keeps the
+               file small)
+      scales   per bucket: that scale. Fine enough (about 1/5000 of the
+               bucket's spread) that the dashboard's hit chance matches the
+               pipeline's to within a few hundredths of a point
+      stds/sd  per-bucket and pooled spread, for the bell-curve fallback
+
+    These are model errors (projection minus box score), not anyone's data.
+    Display only: never raises; a stat that fails is left out and the box
+    simply says it is unavailable."""
+    out = {}
+    for stat, m in (prop_models or {}).items():
+        try:
+            edges = [float(e) for e in (getattr(m, "residual_bin_edges", None) or [])]
+            samples = getattr(m, "residual_bin_samples", None) or []
+            stds = [float(x) for x in (getattr(m, "residual_bin_stds", None) or [])]
+            sd = getattr(m, "residual_std", None)
+            enc, scales = [], []
+            if edges and len(samples) == len(edges):
+                for r in samples:
+                    vals = [float(x) for x in r]
+                    spread = (sum((v - sum(vals) / len(vals)) ** 2 for v in vals) / len(vals)) ** 0.5 if vals else 0.0
+                    scale = 10 ** min(6, max(2, math.ceil(math.log10(5000 / max(spread, 1e-6)))))
+                    ints = sorted(int(round(v * scale)) for v in vals)
+                    enc.append([ints[0]] + [b - a for a, b in zip(ints, ints[1:])] if ints else [])
+                    scales.append(scale)
+            out[stat] = {
+                "nonneg": stat in getattr(m, "NONNEGATIVE", set()),
+                "edges": [None if (e != e or e in (float("inf"), float("-inf"))) else e for e in edges],
+                "stds": stds,
+                "sd": float(sd) if sd is not None and sd == sd else None,
+                "samples": enc,
+                "scales": scales,
+            }
+        except Exception as e:
+            print(f"  [note] could not export the {stat} distribution ({e}) -- its props will not offer another line")
+    return out
+
+
+def capture_raw_projections(prop_models: dict) -> dict:
+    """Lets the export read the UNROUNDED projection behind each scored prop
+    without touching the model code (changing anything under src/ would force
+    a full retrain). score_prop() only returns the projection rounded to one
+    decimal, which is not exact enough to recompute a hit chance at another
+    line. Each model's predict_and_compare is wrapped so its last result is
+    left in the returned dict under 'value'. Never raises."""
+    last = {}
+    for m in (prop_models or {}).values():
+        try:
+            if getattr(m, "_raw_projection_captured", False):
+                continue
+            orig = m.predict_and_compare
+
+            def wrapped(features_row, prop_line, _orig=orig):
+                res = _orig(features_row, prop_line)
+                try:
+                    last["value"] = float(res.get("predicted_value"))
+                except Exception:
+                    last.pop("value", None)
+                return res
+
+            m.predict_and_compare = wrapped
+            m._raw_projection_captured = True
+        except Exception as e:
+            print(f"  [note] could not capture raw projections for one props model ({e})")
+    return last
 
 
 def current_cfb_season_year(now: datetime = None) -> int:
@@ -1003,8 +1082,14 @@ def main(year: int):
     n_props_scored = 0
     n_props_official = 0
     n_props_watch = 0
+    # What the dashboard needs to price a line the feed does not have
+    # (10/2026, "Try another line" in the Props details).
+    prop_dists_out = {}
     if props_out and prop_models and player_form:
+        prop_dists_out = export_prop_distributions(prop_models)
+        raw_projection = capture_raw_projections(prop_models)
         for p in props_out:
+            raw_projection.pop("value", None)
             result = score_prop(
                 p.get("player_name"), p.get("market_name"), p.get("line"),
                 player_form, schedule_df, opp_defense_lookup, prop_models,
@@ -1020,6 +1105,11 @@ def main(year: int):
                 if gl_key:
                     p["game_log_key"] = gl_key
                     prop_game_logs_out[gl_key] = gl_rows
+                # The stat and unrounded projection, so the dashboard can
+                # work out this player's hit chance at any other line.
+                p["model_stat"] = market_name_to_stat(p.get("market_name"))
+                if raw_projection.get("value") is not None:
+                    p["model_projection_raw"] = round(raw_projection["value"], 6)
 
                 lean = p.get("model_lean")
                 lean_price = p.get("over_price") if lean == "over" else p.get("under_price")
@@ -1194,6 +1284,7 @@ def main(year: int):
         "games": games_out,
         "props": props_out,
         "prop_game_logs": prop_game_logs_out,
+        "prop_distributions": prop_dists_out,
         "props_receiving_inputs": props_receiving_inputs,
         "prop_market_catalog": prop_market_catalog,
         "fantasy": fantasy_out,
