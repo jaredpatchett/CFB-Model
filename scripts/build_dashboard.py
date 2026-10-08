@@ -740,6 +740,82 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .mt-md { margin-top: 38px; }
 .footer { margin-top: 48px; border-top: 1px solid var(--rule); padding-top: 16px; display: flex; justify-content: space-between; font-size: 9.5px; color: var(--muted-4); flex-wrap: wrap; gap: 8px; }
 
+/* ---- Player Props tab, redesigned 10/2026 for readability: a live-record
+   strip, plays grouped by status in one roomy table, then where the model
+   has been right and the latest graded results. ---- */
+.pp-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 16px 0 22px; }
+.pp-stat { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; }
+.pp-stat-label { font-family: var(--font-display); font-weight: 700; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.pp-stat-value { font-family: var(--font-led); font-weight: 900; font-size: 27px; line-height: 1.1; margin-top: 8px; color: var(--text); }
+.pp-stat-value.is-pos { color: var(--green); }
+.pp-stat-value.is-neg { color: var(--red); }
+.pp-stat-sub { font-size: 10.5px; color: var(--muted-3); margin-top: 6px; }
+.pp-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 10px; }
+.pp-seg { display: inline-flex; border: 1px solid var(--rule-strong); border-radius: 5px; overflow: hidden; }
+.pp-seg button { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.04em; background: transparent; color: var(--muted); border: none; padding: 7px 14px; cursor: pointer; }
+.pp-seg button + button { border-left: 1px solid var(--rule-strong); }
+.pp-seg button.is-on { background: var(--blue); color: #fff; }
+.pp-seg button:focus-visible, .pp-chip:focus-visible, .pp-trk:focus-visible, .pp-link:focus-visible { outline: 2px solid var(--blue-light); outline-offset: 2px; }
+.pp-select { background: var(--chip); color: var(--text-dim); border: 1px solid var(--rule-strong); border-radius: 5px; padding: 7px 10px; font-family: var(--font-data); font-size: 11.5px; }
+.pp-tally { margin-left: auto; font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.03em; color: var(--muted-3); display: flex; gap: 14px; }
+.pp-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
+.pp-chip { font-family: var(--font-display); font-weight: 700; font-size: 12.5px; letter-spacing: 0.03em; background: var(--chip); color: var(--muted); border: 1px solid transparent; border-radius: 5px; padding: 5px 12px; cursor: pointer; }
+.pp-chip.is-on { background: rgba(46,123,255,0.16); color: var(--blue-light); border-color: var(--blue); }
+.pp-table { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; overflow-x: auto; }
+.pp-grid { display: grid; grid-template-columns: 78px minmax(180px, 1.35fr) minmax(200px, 1.25fr) 88px 108px minmax(160px, 1fr) 128px 86px; align-items: center; column-gap: 14px; min-width: 1080px; }
+.pp-head { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-2); padding: 11px 18px; border-bottom: 1px solid var(--rule); }
+.pp-group { display: flex; align-items: baseline; gap: 10px; padding: 12px 18px 9px; background: var(--panel-deep); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); min-width: 1080px; }
+.pp-table > .pp-group:first-of-type { border-top: none; }
+.pp-group-name { font-family: var(--font-display); font-weight: 800; font-size: 15px; letter-spacing: 0.05em; text-transform: uppercase; }
+.pp-group-count { font-family: var(--font-data); font-size: 11px; color: var(--muted); background: var(--chip); border-radius: 10px; padding: 1px 8px; }
+.pp-group-note { font-size: 10.5px; color: var(--muted-3); }
+.pp-row { padding: 13px 18px; border-bottom: 1px solid var(--rule-row); border-left: 4px solid transparent; font-size: 12.5px; }
+.pp-row:hover { background: var(--row-active); }
+.pp-conf { font-family: var(--font-display); font-weight: 800; font-size: 12.5px; letter-spacing: 0.07em; }
+.pp-name { font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: 0.01em; color: var(--text); }
+.pp-pick { font-weight: 700; font-size: 12.5px; color: var(--text); }
+.pp-pick b { color: var(--blue-light); font-weight: 700; }
+.pp-sub { font-size: 10.5px; color: var(--muted-3); margin-top: 4px; }
+.pp-big { font-weight: 700; font-size: 14px; }
+.pp-status { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+.pp-status-line { display: flex; align-items: center; gap: 7px; }
+.pp-more { padding: 10px 18px; border-bottom: 1px solid var(--rule-row); min-width: 1080px; }
+.pp-more .pp-link { margin-top: 0; }
+.pp-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex: none; }
+.pp-tag { font-family: var(--font-display); font-weight: 800; font-size: 11px; letter-spacing: 0.07em; padding: 3px 9px; border-radius: 4px; }
+.pp-tag.is-official { background: rgba(23,194,107,0.16); color: var(--green); }
+.pp-tag.is-watch { background: rgba(91,164,255,0.16); color: var(--blue-light); }
+.pp-tag.is-track { background: transparent; color: var(--green); border: 1px solid rgba(23,194,107,0.4); }
+.pp-tag.is-lean { background: var(--chip); color: var(--muted); }
+.pp-tag.is-inj { background: rgba(224,180,74,0.16); color: var(--amber); }
+.pp-trk { font-family: var(--font-display); font-weight: 700; font-size: 11.5px; letter-spacing: 0.05em; background: transparent; color: var(--text-dim); border: 1px solid var(--rule-strong); border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+.pp-trk:hover { border-color: var(--blue); color: var(--blue-light); }
+.pp-inlist { font-family: var(--font-display); font-weight: 700; font-size: 11.5px; letter-spacing: 0.04em; color: var(--blue-light); }
+.pp-legend { display: flex; align-items: center; gap: 7px; font-size: 10.5px; color: var(--muted-3); margin: 10px 2px 0; }
+.pp-lower { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; margin-top: 26px; align-items: start; }
+.pp-panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 16px 18px 14px; }
+.pp-panel h3 { font-family: var(--font-display); font-weight: 800; font-size: 17px; letter-spacing: 0.05em; text-transform: uppercase; margin: 0; }
+.pp-panel-note { font-size: 10.5px; color: var(--muted-3); margin: 5px 0 12px; line-height: 1.5; }
+.pp-buckets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.pp-bucket { background: var(--panel-deep); border: 1px solid var(--rule-faint); border-radius: 5px; padding: 11px 13px; }
+.pp-bucket-name { font-family: var(--font-display); font-weight: 700; font-size: 14.5px; letter-spacing: 0.02em; }
+.pp-bucket-roi { font-family: var(--font-led); font-weight: 900; font-size: 20px; color: var(--green); margin-top: 5px; }
+.pp-res { display: grid; grid-template-columns: minmax(0, 1.6fr) 70px 62px 64px; align-items: center; column-gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--rule-row); font-size: 12px; }
+.pp-res:last-of-type { border-bottom: none; }
+.pp-res-name { font-family: var(--font-display); font-weight: 700; font-size: 14.5px; }
+.pp-result { font-family: var(--font-display); font-weight: 800; font-size: 11px; letter-spacing: 0.07em; padding: 2px 8px; border-radius: 4px; border: 1px solid; text-align: center; }
+.pp-link { font-family: var(--font-display); font-weight: 700; font-size: 12.5px; letter-spacing: 0.04em; background: transparent; color: var(--blue-light); border: 1px solid var(--rule-strong); border-radius: 4px; padding: 6px 12px; cursor: pointer; margin-top: 12px; }
+.pp-link:hover { border-color: var(--blue); }
+.pp-help { margin-top: 18px; border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); }
+.pp-help summary { cursor: pointer; padding: 12px 18px; font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: 0.04em; color: var(--text-dim); }
+.pp-help-body { padding: 0 18px 16px; font-size: 11.5px; line-height: 1.65; color: var(--muted); max-width: 980px; }
+.pp-help-body p { margin: 0 0 9px; }
+.pp-help-body b { color: var(--text-dim); }
+@media (max-width: 1100px) {
+  .pp-strip { grid-template-columns: repeat(2, 1fr); }
+  .pp-lower { grid-template-columns: 1fr; }
+  .pp-tally { margin-left: 0; }
+}
 @media (max-width: 1280px) {
   .main, .split { grid-template-columns: 1fr; }
   .kpis { grid-template-columns: repeat(2, 1fr); }
@@ -1147,7 +1223,7 @@ RENDERER_JS = """<script>
   var M = window.ModelMath;
   var MARKETS = ['Spread', 'Moneyline'];
 
-  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate', propGame: 'ALL', propOfficialOnly: false, propShowPass: false };
+  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate', propGame: 'ALL', propOfficialOnly: false, propShowPass: false, propView: 'main' };
 
   var byName = {};
   D.teams.forEach(function (t) { byName[t.name] = t; });
@@ -1793,10 +1869,12 @@ RENDERER_JS = """<script>
     if (!iso) return '';
     var d = new Date(iso);
     if (isNaN(d)) return '';
+    // Shown in the viewer's own time zone (10/2026) -- it used to be UTC,
+    // which put Saturday night games on "Sunday".
     var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    var h = d.getUTCHours(), m = d.getUTCMinutes();
-    return days[d.getUTCDay()] + ' ' + (d.getUTCMonth() + 1) + '/' + d.getUTCDate() + ', ' +
-      ((h % 12) || 12) + ':' + (m < 10 ? '0' : '') + m + (h < 12 ? 'AM' : 'PM') + ' UTC';
+    var h = d.getHours(), m = d.getMinutes();
+    return days[d.getDay()] + ' ' + (d.getMonth() + 1) + '/' + d.getDate() + ', ' +
+      ((h % 12) || 12) + ':' + (m < 10 ? '0' : '') + m + ' ' + (h < 12 ? 'AM' : 'PM');
   }
   function propConfidence(r) {
     var lp = r._lp, be = r._be, gp = r.games_played, inj = r.injury_status;
@@ -1860,141 +1938,206 @@ RENDERER_JS = """<script>
     });
     var gameIds = Object.keys(games).sort(function (x, y) { return games[x].t < games[y].t ? -1 : 1; });
     var gameSel = state.propGame && games[state.propGame] ? state.propGame : 'ALL';
+    // ---- Layout redesigned 10/2026 for readability ----
+    var EH = D.propEdgeHistory, T = D.propTracking;
+    // The backtest group a play belongs to (market + side + edge size). A
+    // capped play is judged by the 30%+ group it was in when first flagged.
+    var edgeHist = function (r) {
+      if (!EH || r.model_ev == null || (r.model_lean !== 'over' && r.model_lean !== 'under')) return null;
+      var bk = (EH.markets[r.market_name] || {})[r.model_lean];
+      if (!bk) return null;
+      for (var i = 0; i < bk.length; i++) if (r.edge_capped ? bk[i].lo >= 30 : (r.model_ev >= bk[i].lo && r.model_ev < bk[i].hi)) return bk[i];
+      return null;
+    };
+    var signed = function (x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); };
+    var tone = function (x) { return x > 0 ? 'var(--green)' : (x < 0 ? 'var(--red)' : 'var(--muted-3)'); };
+    // Auto-tracked = logged and graded by the pipeline: official plays, plus
+    // any play with an edge whose group is up in the backtest.
+    var isTracked = function (r, h) { return !!(h && h.up && r.model_ev != null && r.model_ev >= 0); };
+    var marketName = function (m) { return m === 'Reception Yards' ? 'Receiving Yards' : m; };
+    rows.forEach(function (r) {
+      r._h = edgeHist(r);
+      r._auto = !!(r.is_official_play || isTracked(r, r._h));
+      r._sec = r.is_official_play ? 'official' : (r.is_watch_play ? 'watch' : (r._auto ? 'tracked' : 'lean'));
+    });
+
+    var view = state.propView || 'main';
+    var inView = function (r) { return view === 'all' || r._sec === 'official' || r._sec === 'watch' || (view === 'tracked' && r._sec === 'tracked'); };
     var shown = rows.filter(function (r) {
       return (mkt === 'ALL' || r.market_name === mkt) &&
         (gameSel === 'ALL' || r.fixture_id === gameSel) &&
-        (!state.propOfficialOnly || r.is_official_play || r.is_watch_play) &&
-        (state.propShowPass || r._conf.tier !== 'PASS');
+        inView(r) &&
+        (state.propShowPass || r._conf.tier !== 'PASS' || r.is_official_play);
     }).sort(function (x, y) {
-      var pw = function (r) { return r.is_official_play ? 0 : (r.is_watch_play ? 1 : 2); };
-      return pw(x) - pw(y) || x._conf.rank - y._conf.rank || (y._lp || 0) - (x._lp || 0);
+      return x._conf.rank - y._conf.rank || (y._lp || 0) - (x._lp || 0);
     });
 
     var tally = { HIGH: 0, MEDIUM: 0, LOW: 0, CHECK: 0, PASS: 0 };
     rows.forEach(function (r) { if (tally[r._conf.tier] != null) tally[r._conf.tier]++; });
+    // Counts on the view buttons match what each view will actually list.
+    var nSec = { official: 0, watch: 0, tracked: 0, lean: 0 };
+    rows.forEach(function (r) { if (state.propShowPass || r._conf.tier !== 'PASS' || r.is_official_play) nSec[r._sec]++; });
 
-    var filters = '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0 6px">' +
-      '<select class="unit-size-input" style="width:auto" onchange="window.__cfbPropGame(this.value)">' +
+    // 1) Live record of the auto-tracked plays.
+    var strip = '';
+    if (T && T.overall) {
+      var o = T.overall;
+      var stat = function (label, value, cls, sub) {
+        return '<div class="pp-stat"><div class="pp-stat-label">' + label + '</div><div class="pp-stat-value' + (cls ? ' ' + cls : '') + '">' + value + '</div>' +
+          '<div class="pp-stat-sub">' + sub + '</div></div>';
+      };
+      var pn = o.units > 0 ? 'is-pos' : (o.units < 0 ? 'is-neg' : '');
+      strip = '<div class="pp-strip">' +
+        stat('Record', esc(o.record), '', 'auto-tracked plays, graded') +
+        stat('Units', signed(o.units, 2) + 'u', pn, '1 unit a play') +
+        stat('ROI', o.roi != null ? signed(o.roi, 1) + '%' : '&mdash;', pn, 'on ' + o.graded + ' graded') +
+        stat('Graded', String(o.graded), '', 'from the box score') +
+        stat('Upcoming', String(o.upcoming), '', 'logged, not played yet') +
+      '</div>';
+    }
+
+    // 2) Controls: which plays, which game, which market.
+    var seg = function (i, key, label, n) {
+      return '<button class="' + (view === key ? 'is-on' : '') + '" onclick="window.__cfbPropView(' + i + ')">' + label + ' (' + n + ')</button>';
+    };
+    var controls = '<div class="pp-controls">' +
+      '<div class="pp-seg" role="group" aria-label="Which plays to show">' +
+        seg(0, 'main', 'Official &amp; watch', nSec.official + nSec.watch) +
+        seg(1, 'tracked', 'Auto-tracked', nSec.official + nSec.watch + nSec.tracked) +
+        seg(2, 'all', 'All props', nSec.official + nSec.watch + nSec.tracked + nSec.lean) +
+      '</div>' +
+      '<select class="pp-select" aria-label="Game" onchange="window.__cfbPropGame(this.value)">' +
         '<option value="ALL"' + (gameSel === 'ALL' ? ' selected' : '') + '>All games (' + gameIds.length + ')</option>' +
-        gameIds.map(function (id) { return '<option value="' + esc(id) + '"' + (gameSel === id ? ' selected' : '') + '>' + esc(games[id].label) + ' \\u00b7 ' + esc(propKickoff(games[id].t)) + '</option>'; }).join('') +
+        gameIds.map(function (id) { return '<option value="' + esc(id) + '"' + (gameSel === id ? ' selected' : '') + '>' + esc(games[id].label) + ', ' + esc(propKickoff(games[id].t)) + '</option>'; }).join('') +
       '</select>' +
-      '<button class="tab tab--prop' + (state.propOfficialOnly ? ' is-active' : '') + '" onclick="window.__cfbPropOfficial()"><span>Official &amp; watch only</span></button>' +
-      '<button class="tab tab--prop' + (state.propShowPass ? ' is-active' : '') + '" onclick="window.__cfbPropShowPass()"><span>Show passes (' + tally.PASS + ')</span></button>' +
-      '<span style="font-size:10.5px;color:var(--muted-3);margin-left:6px">' +
-        '<b style="color:var(--green)">' + tally.HIGH + ' high</b> \\u00b7 <b style="color:var(--blue-light)">' + tally.MEDIUM + ' medium</b> \\u00b7 ' +
-        tally.LOW + ' low \\u00b7 <b style="color:var(--amber)">' + tally.CHECK + ' check</b></span>' +
+      (view === 'all' ? '<button class="pp-chip' + (state.propShowPass ? ' is-on' : '') + '" onclick="window.__cfbPropShowPass()">Show passes (' + tally.PASS + ')</button>' : '') +
+      '<div class="pp-tally"><span style="color:var(--green)">' + tally.HIGH + ' High</span><span style="color:var(--blue-light)">' + tally.MEDIUM + ' Medium</span>' +
+        '<span>' + tally.LOW + ' Low</span><span style="color:var(--amber)">' + tally.CHECK + ' Check</span></div>' +
     '</div>' +
-    '<div class="prop-tabs">' + markets.map(function (m) {
-      return '<button class="tab tab--prop' + (m === mkt ? ' is-active' : '') + '" data-prop-market="' + esc(m) + '"><span>' + esc(m) + '</span></button>';
+    '<div class="pp-chips">' + markets.map(function (m) {
+      return '<button class="pp-chip' + (m === mkt ? ' is-on' : '') + '" data-prop-market="' + esc(m) + '">' + (m === 'ALL' ? 'All markets' : esc(marketName(m))) + '</button>';
     }).join('') + '</div>';
 
-    // Edge history (10/2026): how overs with this size of model edge did in
-    // the backtest. Only receiving overs have one; everything else shows the
-    // edge alone.
-    var EH = D.propEdgeHistory;
-    var edgeHist = function (r) {
-      if (!EH || r.model_ev == null || (r.model_lean !== 'over' && r.model_lean !== 'under')) return null;
-      var b = (EH.markets[r.market_name] || {})[r.model_lean];
-      if (!b) return null;
-      // A capped play is judged by the edge it had when first flagged (30%+),
-      // not by where its edge has drifted since.
-      for (var i = 0; i < b.length; i++) if (r.edge_capped ? b[i].lo >= 30 : (r.model_ev >= b[i].lo && r.model_ev < b[i].hi)) return b[i];
-      return null;
-    };
-    var signed = function (x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); };
-    // One easy read per play: green arrow up = this kind of play made money
-    // in the backtest, red arrow down = it lost, grey = too few bets to say.
-    var histColor = function (h) { return h.small ? 'var(--muted-3)' : (h.roi > 0 ? 'var(--green)' : (h.roi < 0 ? 'var(--red)' : 'var(--muted-3)')); };
-    var histLine = function (h) {
-      if (h.small) return 'small sample &middot; ' + esc(h.record);
-      return (h.roi > 0 ? '&#9650; ' : (h.roi < 0 ? '&#9660; ' : '')) + signed(h.roi, 0) + '% ROI &middot; ' + signed(h.units, 1) + 'u &middot; ' + esc(h.record);
-    };
-    // Tracked = the play's group is up in the backtest and the model shows an edge.
-    var isTracked = function (r, h) { return !!(h && h.up && r.model_ev != null && r.model_ev >= 0); };
-
-    var cols = 'grid-template-columns:86px 1.5fr 1.2fr 0.8fr 1fr 1.35fr 0.9fr;';
-    var thead = '<div class="thead" style="display:grid;' + cols + '">' +
-      '<div>Confidence</div><div>Player</div><div>Pick</div><div class="num">Model</div><div class="num">Hit % / needs</div>' +
-      '<div class="num">Edge / track record</div><div class="num">Status</div></div>';
-    // +TRK on every prop (10/2026): one click adds the play to your own
-    // list in My Tracker. Plays already there show a check mark instead.
+    // 3) The plays, grouped by status.
     var myTrk = {};
     loadTrk().forEach(function (it) { if (it.type === 'Prop') myTrk[it.description] = true; });
     window.__cfbPropRows = shown;
-    var body = shown.map(function (r, i) {
+    var rowHtml = function (r, i) {
       var isOver = r.model_lean === 'over';
       var diff = r.model_predicted_value - r.line;
-      var h = edgeHist(r);
-      var tag = r.is_official_play
-        ? '<span class="pchip is-official">OFFICIAL</span>'
-        : (!r.is_watch_play && isTracked(r, h))
-        ? '<span class="pchip" style="background:rgba(23,194,107,0.10);color:var(--green);border:1px solid rgba(23,194,107,0.35)" title="This kind of play is up in the backtest. Logged and graded automatically, not an official bet.">TRACK</span>'
-        : r.is_watch_play
-          ? '<span class="pchip" style="background:rgba(91,164,255,0.16);color:var(--blue-light)">WATCH</span>'
-          : '<span class="pchip is-lean">LEAN</span>';
-      var inj = r.injury_status ? ' <span class="pchip" style="background:rgba(224,180,74,0.16);color:var(--amber)">' + esc(r.injury_status.toUpperCase()) + '</span>' : '';
-      var gp = r.games_played != null ? '<span style="color:var(--muted-4);font-size:9.5px;margin-left:6px">' + r.games_played + ' GP</span>' : '';
-      var edgeCell = '<div class="num"><div style="font-weight:700">' + (r.model_ev != null ? signed(r.model_ev, 1) + '%' : '&mdash;') + '</div>' +
-        (h ? '<div style="font-size:9.5px;margin-top:3px;font-weight:600;color:' + histColor(h) + '">' + (r.edge_capped ? 'capped &middot; ' : '') + histLine(h) + '</div>'
-           : '<div style="font-size:9.5px;margin-top:3px;color:var(--muted-4)">not in backtest</div>') + '</div>';
-      return '<div class="row"><div class="row-accent" style="background:' + r._conf.color + '"></div>' +
-        '<div class="row-body" style="' + cols + 'padding:9px 14px;font-size:11.5px">' +
-          '<div style="font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:.06em;color:' + r._conf.color + '">' + r._conf.tier + '</div>' +
-          '<div><div style="font-weight:700;font-size:12.5px">' + esc(r.player_name) + gp + '</div>' +
-            '<div style="font-size:9.5px;color:var(--muted-3);margin-top:3px">' + esc(schoolAbbr(r.team) || '') +
-              (r.opponent ? ' vs ' + esc(schoolAbbr(r.opponent)) : '') + ' \\u00b7 ' + esc(propKickoff(r.start_time)) + '</div></div>' +
-          '<div><div style="font-weight:700">' + esc(r.market_name) + ' ' + (isOver ? 'O' : 'U') + ' ' + esc(r.line) + '</div>' +
-            '<div style="font-size:9.5px;color:var(--muted-3);margin-top:3px">' + (r._price != null ? (r._price > 0 ? '+' : '') + r._price : 'no price') +
-              (r.book_used ? ' \\u00b7 ' + esc(bookLabel(r.book_used)) : '') + (r._others ? ' \\u00b7 +' + r._others + ' other line' + (r._others > 1 ? 's' : '') : '') + '</div></div>' +
-          '<div class="num"><div style="font-weight:700">' + r.model_predicted_value.toFixed(1) + '</div>' +
-            '<div style="font-size:9.5px;color:' + ((isOver ? diff : -diff) >= 0 ? 'var(--green)' : 'var(--red)') + ';margin-top:3px">' + (diff >= 0 ? '+' : '') + diff.toFixed(1) + ' vs line</div></div>' +
-          '<div class="num"><div style="font-weight:700;font-size:13px">' + (r._lp != null ? (r._lp * 100).toFixed(0) + '%' : '\\u2014') + '</div>' +
-            '<div style="font-size:9.5px;color:var(--muted-3);margin-top:3px">needs ' + (r._be != null ? (r._be * 100).toFixed(0) + '%' : '\\u2014') + '</div></div>' +
-          edgeCell +
-          '<div class="num">' + tag + inj +
-            '<div style="margin-top:6px;display:flex;justify-content:flex-end;align-items:center;gap:7px">' +
-              ((r.is_official_play || isTracked(r, h)) ? '<span style="font-size:8.5px;font-weight:700;letter-spacing:.05em;color:var(--green)" title="Logged and graded automatically. See Auto-Tracked Props in My Tracker.">AUTO-TRACKED</span>' : '') +
-              (myTrk[propTrackLabel(r)]
-                ? '<span style="font-size:8.5px;font-weight:700;letter-spacing:.05em;color:var(--blue-light)" title="Already in your own list in My Tracker.">&#10003; MY LIST</span>'
-                : '<button class="track-btn" style="padding:2px 6px;font-size:9.5px" title="Add this play to your own list in My Tracker" onclick="window.__cfbTrackProp(' + i + ')">+TRK</button>') +
-            '</div></div>' +
-        '</div></div>';
+      var h = r._h;
+      var track = !h ? '<div class="pp-sub">not in backtest</div>'
+        : h.small ? '<div class="pp-sub" title="Too few bets to judge">small sample, ' + esc(h.record) + '</div>'
+        : '<div class="pp-sub" style="color:' + tone(h.roi) + ';font-weight:600" title="Backtest record ' + esc(h.record) + ' for ' + esc(marketName(r.market_name)) + ' ' + esc(r.model_lean) + 's at a ' + esc(h.label) + ' edge">' +
+            (h.roi > 0 ? '&#9650; ' : (h.roi < 0 ? '&#9660; ' : '')) + signed(h.roi, 0) + '% ROI &middot; ' + signed(h.units, 1) + 'u' + (r.edge_capped ? ' &middot; capped' : '') + '</div>';
+      var tag = r._sec === 'official' ? '<span class="pp-tag is-official">OFFICIAL</span>'
+        : r._sec === 'watch' ? '<span class="pp-tag is-watch">WATCH</span>'
+        : r._sec === 'tracked' ? '<span class="pp-tag is-track">TRACK</span>'
+        : '<span class="pp-tag is-lean">LEAN</span>';
+      return '<div class="pp-grid pp-row" style="border-left-color:' + r._conf.color + '">' +
+        '<div class="pp-conf" style="color:' + r._conf.color + '">' + r._conf.tier + '</div>' +
+        '<div><div class="pp-name">' + esc(r.player_name) + '</div>' +
+          '<div class="pp-sub">' + esc(schoolAbbr(r.team) || '') + (r.opponent ? ' vs ' + esc(schoolAbbr(r.opponent)) : '') + ' &middot; ' + esc(propKickoff(r.start_time)) +
+            (r.games_played != null ? ' &middot; ' + r.games_played + ' GP' : '') + '</div></div>' +
+        '<div><div class="pp-pick">' + esc(marketName(r.market_name)) + ' <b>' + (isOver ? 'Over' : 'Under') + ' ' + esc(r.line) + '</b></div>' +
+          '<div class="pp-sub">' + (r._price != null ? (r._price > 0 ? '+' : '') + r._price : 'no price') + (r.book_used ? ' &middot; ' + esc(bookLabel(r.book_used)) : '') +
+            (r._others ? ' &middot; +' + r._others + ' other line' + (r._others > 1 ? 's' : '') : '') + '</div></div>' +
+        '<div class="num"><div class="pp-big">' + r.model_predicted_value.toFixed(1) + '</div>' +
+          '<div class="pp-sub" style="color:' + ((isOver ? diff : -diff) >= 0 ? 'var(--green)' : 'var(--red)') + '">' + (diff >= 0 ? '+' : '') + diff.toFixed(1) + ' vs line</div></div>' +
+        '<div class="num"><div class="pp-big">' + (r._lp != null ? (r._lp * 100).toFixed(0) + '%' : '&mdash;') + '</div>' +
+          '<div class="pp-sub">needs ' + (r._be != null ? (r._be * 100).toFixed(0) + '%' : '&mdash;') + '</div></div>' +
+        '<div class="num"><div class="pp-big" style="color:' + (r.model_ev != null ? tone(r.model_ev) : 'var(--muted-3)') + '">' + (r.model_ev != null ? signed(r.model_ev, 1) + '%' : '&mdash;') + '</div>' + track + '</div>' +
+        '<div class="pp-status"><div class="pp-status-line">' + (r._auto ? '<span class="pp-dot" title="Logged and graded automatically"></span>' : '') + tag + '</div>' +
+          (r.injury_status ? '<div class="pp-status-line"><span class="pp-tag is-inj">' + esc(r.injury_status.toUpperCase()) + '</span></div>' : '') + '</div>' +
+        '<div class="num">' + (myTrk[propTrackLabel(r)]
+          ? '<span class="pp-inlist" title="Already in your own list in My Tracker">&#10003; My list</span>'
+          : '<button class="pp-trk" title="Add this play to your own list in My Tracker" onclick="window.__cfbTrackProp(' + i + ')">+ Track</button>') + '</div>' +
+      '</div>';
+    };
+    // Long groups start folded to their strongest plays (highest confidence,
+    // then highest hit chance) so the page stays short; one click opens them.
+    var sections = [
+      ['official', 'Official plays', 'Receptions overs with a 10% to 30% edge. Added to your list automatically.', 0],
+      ['watch', 'Watch', 'A 10%+ edge on a secondary-role player, or a receptions over capped at 30%+. Tracked, not bet.', 12],
+      ['tracked', 'Auto-tracked', 'Has an edge and its kind of play is up in the backtest. Logged and graded automatically.', 12],
+      ['lean', 'Other leans', 'Everything else the model has a read on.', 20]
+    ];
+    var open = state.propOpen || {};
+    var body = sections.map(function (sec, si) {
+      var list = [];
+      shown.forEach(function (r, i) { if (r._sec === sec[0]) list.push(rowHtml(r, i)); });
+      if (!list.length) return '';
+      var cap = sec[3], folded = cap && list.length > cap && !open[sec[0]];
+      return '<div class="pp-group"><span class="pp-group-name">' + sec[1] + '</span><span class="pp-group-count">' + list.length + '</span>' +
+        '<span class="pp-group-note">' + sec[2] + '</span></div>' + (folded ? list.slice(0, cap) : list).join('') +
+        (cap && list.length > cap ? '<div class="pp-more"><button class="pp-link" onclick="window.__cfbPropOpen(' + si + ')">' +
+          (folded ? 'Show all ' + list.length : 'Show top ' + cap + ' only') + '</button></div>' : '');
     }).join('');
+    var table = '<div class="pp-table">' +
+      '<div class="pp-grid pp-head"><div>Conf</div><div>Player</div><div>Pick</div><div class="num">Model</div><div class="num">Hit % / needs</div>' +
+        '<div class="num">Edge / track record</div><div class="num">Status</div><div class="num">My list</div></div>' +
+      (body || '<div class="empty-state" style="border:none">No plays match these filters. Try another market or switch to All props.</div>') +
+    '</div>' +
+    '<div class="pp-legend"><span class="pp-dot"></span> Logged and graded automatically. The running record is at the top of this page and in My Tracker.</div>';
 
-    var foot = '<div class="table-foot"><span>Confidence: <b>High</b> = 60%+ hit chance, at least 5 points above what the price needs, 3+ games of data, ' +
-      'no injury flag. <b>Medium</b> = 55%+ and at least 2 points above breakeven. <b>Pass</b> = the price already needs more than the model gives, or the ' +
-      'player is listed out. <b>Check</b> = the model is far from the market (80%+ claimed, or 25%+ and 12+ off the line) \\u2014 usually missing info like an injury or role change, ' +
-      'so verify before betting. TDs and interceptions max out at Low. <b>Official</b> (TARGET) = receptions overs where the model\\u2019s edge is 10% up to 30%, ' +
-      'at the best price across books \\u2014 the one prop group that held up in the live backtest; these are auto-added to your tracker. ' +
-      '<b>Watch</b> = other props with a 10%+ edge on secondary-role players \\u2014 promising in the backtest, tracked but not bet \\u2014 plus receptions overs showing a 30%+ edge, which lost in the backtest. Everything else is a lean.</span></div>';
-
-    // Key for the Edge / track record column: what the arrows mean, then
-    // only the groups that are up, so it stays short.
-    var edgeKey = '';
+    // 4) Where the model has been right (backtest), and the latest results.
+    var lower = '';
+    var kinds = [];
     if (EH) {
-      var names = { 'Reception Yards': 'Receiving Yards' };
-      var upLines = [];
-      Object.keys(EH.markets).sort().forEach(function (m) {
+      Object.keys(EH.markets).forEach(function (m) {
         ['over', 'under'].forEach(function (side) {
-          var ups = ((EH.markets[m] || {})[side] || []).filter(function (b) { return b.up; });
+          var ups = ((EH.markets[m] || {})[side] || []).filter(function (g) { return g.up; });
           if (!ups.length) return;
-          upLines.push('<div style="margin-top:5px"><span style="display:inline-block;min-width:190px;font-weight:700">' + esc(names[m] || m) + ' ' + side + 's</span>' +
-            ups.map(function (b) {
-              return '<span style="display:inline-block;margin:2px 6px 0 0;padding:2px 7px;border-radius:3px;white-space:nowrap;background:rgba(23,194,107,0.14);color:var(--green)">' +
-                '<b>' + esc(b.label) + '</b> ' + signed(b.roi, 0) + '% &middot; ' + signed(b.units, 1) + 'u &middot; ' + esc(b.record) + '</span>';
-            }).join('') + '</div>');
+          var w = 0, l = 0, u = 0, n = 0;
+          ups.forEach(function (g) { var p = String(g.record).split('-'); w += Number(p[0]) || 0; l += Number(p[1]) || 0; u += g.units; n += g.n; });
+          kinds.push({ name: marketName(m) + ' ' + side + 's', roi: n ? u / n * 100 : 0, units: u, record: w + '-' + l,
+                       edges: ups.map(function (g) { return g.label; }).join(', ') });
         });
       });
-      edgeKey = '<div class="table-foot" style="display:block"><div><b>Track record key.</b> Under each edge is how plays like it did in the backtest' +
-        (EH.nWeekends ? ' (' + EH.nWeekends + ' weekends' + (EH.span ? ', ' + esc(EH.span) : '') + ', 1 unit a bet)' : '') + ': ROI, units and record. ' +
-        '<span style="color:var(--green)">&#9650; green</span> = that kind of play made money. <span style="color:var(--red)">&#9660; red</span> = it lost. ' +
-        'Grey = fewer than ' + (EH.minBets || 15) + ' bets, too few to say. <b>AUTO-TRACKED</b> = the play is in a group that is up by ' + (EH.minUnits || 2) + '+ units, so it is logged and graded automatically after its game; the running record is under Auto-Tracked Props in My Tracker. ' +
-        '<b>+TRK</b> adds any play to your own list there. ' +
-        'Groups are small, so read this as a guide, not a promise.</div>' +
-        (upLines.length ? '<div style="margin-top:8px;font-weight:700">Groups that are up (edge size: ROI, units, record)</div>' + upLines.join('') : '') + '</div>';
+      kinds.sort(function (x, y) { return y.units - x.units; });
     }
+    var bucketPanel = kinds.length
+      ? '<div class="pp-panel"><h3>Where the model has been right</h3>' +
+          '<div class="pp-panel-note">Backtest' + (EH.nWeekends ? ', ' + EH.nWeekends + ' weekends' + (EH.span ? ' (' + esc(EH.span) + ')' : '') : '') +
+            ', 1 unit a play. Only the edge sizes that finished up are counted, so these numbers flatter each kind of play.</div>' +
+          '<div class="pp-buckets">' + kinds.slice(0, 8).map(function (k) {
+            return '<div class="pp-bucket"><div class="pp-bucket-name">' + esc(k.name) + '</div><div class="pp-bucket-roi">' + signed(k.roi, 0) + '% ROI</div>' +
+              '<div class="pp-sub" style="color:var(--text-dim)">' + signed(k.units, 1) + 'u &middot; ' + esc(k.record) + '</div>' +
+              '<div class="pp-sub">edges ' + esc(k.edges) + '</div></div>';
+          }).join('') + '</div></div>'
+      : '';
+    var resultsPanel = '';
+    if (T && T.results && T.results.length) {
+      resultsPanel = '<div class="pp-panel"><h3>Latest results</h3>' +
+        '<div class="pp-panel-note">Auto-tracked plays, graded from the box score. Newest first.</div>' +
+        T.results.slice(0, 8).map(function (p) {
+          var rc = p.result === 'W' ? 'var(--green)' : (p.result === 'L' ? 'var(--red)' : 'var(--amber)');
+          return '<div class="pp-res"><div><div class="pp-res-name">' + esc(p.player) + '</div>' +
+              '<div class="pp-sub">' + esc(marketName(p.market)) + ' ' + (p.side === 'over' ? 'Over' : 'Under') + ' ' + esc(p.line) + ' &middot; final ' + (p.actual != null ? Number(p.actual) : '?') + '</div></div>' +
+            '<div class="num">' + (p.model_ev != null ? signed(p.model_ev, 1) + '%' : '') + '</div>' +
+            '<div class="pp-result" style="color:' + rc + ';border-color:' + rc + '">' + (p.result === 'W' ? 'WIN' : (p.result === 'L' ? 'LOSS' : 'PUSH')) + '</div>' +
+            '<div class="num" style="font-weight:700;color:' + tone(p.units || 0) + '">' + signed(p.units || 0, 2) + 'u</div></div>';
+        }).join('') +
+        '<button class="pp-link" onclick="window.__cfbGoTracker()">See every result in My Tracker</button></div>';
+    }
+    if (bucketPanel || resultsPanel) lower = '<div class="pp-lower">' + bucketPanel + resultsPanel + '</div>';
 
-    return head + filters + thead + (body || '<div class="empty-state">No props match these filters.</div>') + edgeKey + foot;
+    // 5) The fine print, folded away until wanted.
+    var help = '<details class="pp-help"><summary>How to read this page</summary><div class="pp-help-body">' +
+      '<p><b>Conf</b> is how much to trust the read. <b>High</b>: 60%+ hit chance, at least 5 points above what the price needs, 3+ games of data, no injury flag. ' +
+        '<b>Medium</b>: 55%+ and at least 2 points above. <b>Check</b>: the model is far from the market (an 80%+ hit chance, or a projection 25% and 12+ off the line), ' +
+        'which usually means it is missing an injury or a role change, so verify first. <b>Pass</b>: the price needs more than the model gives, or the player is out. ' +
+        'Touchdowns and interceptions never rate above Low.</p>' +
+      '<p><b>Hit % / needs</b> is the model&rsquo;s chance the pick wins, and the chance the price requires to break even. <b>Edge</b> is what the model expects the bet to return.</p>' +
+      '<p><b>Track record</b>, under each edge, is how plays of the same kind and edge size did in the backtest' +
+        (EH && EH.nWeekends ? ' (' + EH.nWeekends + ' weekends, 1 unit a play)' : '') + '. &#9650; green made money, &#9660; red lost, and &ldquo;small sample&rdquo; means fewer than ' +
+        ((EH && EH.minBets) || 15) + ' bets. Groups are small, so read it as a guide, not a promise.</p>' +
+      '<p><b>Official</b> plays are the only ones the rules call bets. <b>Watch</b> and <b>Track</b> plays are logged to see whether they hold up. ' +
+        'A green dot means the play is logged and graded automatically. <b>+ Track</b> adds any play to your own list in My Tracker.</p>' +
+      '<p>Kickoff times are in your own time zone.</p>' +
+    '</div></details>';
+
+    return head + strip + controls + table + lower + help;
   }
 
   /* ---- Tracker (localStorage, this browser only, real bets you log) ---- */
@@ -2695,6 +2838,14 @@ RENDERER_JS = """<script>
   window.__cfbPropGame = function (v) { state.propGame = v; render(); };
   window.__cfbPropOfficial = function () { state.propOfficialOnly = !state.propOfficialOnly; render(); };
   window.__cfbPropShowPass = function () { state.propShowPass = !state.propShowPass; render(); };
+  window.__cfbPropView = function (i) { state.propView = ['main', 'tracked', 'all'][i] || 'main'; render(); };
+  window.__cfbGoTracker = function () { state.page = 'tracker'; render(); window.scrollTo(0, 0); };
+  window.__cfbPropOpen = function (i) {
+    var k = ['official', 'watch', 'tracked', 'lean'][i];
+    state.propOpen = state.propOpen || {};
+    state.propOpen[k] = !state.propOpen[k];
+    render();
+  };
 
   document.addEventListener('click', function (e) {
     var p = e.target.closest('[data-page]');
