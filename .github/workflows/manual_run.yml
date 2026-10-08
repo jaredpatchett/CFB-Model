@@ -13,6 +13,11 @@ on:
         description: "Season(s) to fetch/train on, space-separated"
         required: false
         default: "2022 2023 2024 2025"
+      retrain:
+        description: "Retrain every model from scratch (slow). Leave unticked for a normal run."
+        type: boolean
+        required: false
+        default: false
   schedule:
     - cron: "0 12 * * *"
 
@@ -75,13 +80,89 @@ jobs:
       - name: Fetch historical data
         run: python scripts/fetch_historical_data.py --years ${{ env.YEARS }}
 
+      # ---- Reuse trained models between runs (10/2026) ----
+      # Every model here trains only on finished seasons (env.YEARS) with a
+      # fixed random seed, so training produces the same models every run.
+      # Building features, training and backtesting was most of the run time
+      # (the props step alone also re-pulls four seasons of PFF data), so the
+      # trained models and the feature tables are saved after a training run
+      # and restored on later runs. A run trains again only when:
+      #   - there are no saved models for this exact version of the model
+      #     code, seasons and library versions (so uploading a change to
+      #     anything under src/, config.py, requirements.txt or one of the
+      #     training scripts retrains on its own),
+      #   - the "retrain" box is ticked on a manual run, or
+      #   - it is the scheduled run on a Monday (a weekly from-scratch run,
+      #     so a saved copy can never go stale for more than a week).
+      # What is saved: models/ and data/processed/. Neither holds raw PFF
+      # numbers (PFF data is pulled into a temp folder and never written
+      # here), and both are already published in this run's artifact.
+      - name: Work out which saved models match this code
+        id: trainkey
+        run: |
+          CODE=$(git ls-files -s -- 'src/*.py' config.py requirements.txt \
+                   scripts/fetch_historical_data.py scripts/build_features.py \
+                   scripts/train_game_model.py scripts/run_backtest.py \
+                   scripts/train_props_model.py | sha256sum | cut -c1-16)
+          LIBS=$(pip freeze | grep -iE '^(scikit-learn|numpy|pandas|scipy|joblib)==' | sort | sha256sum | cut -c1-12)
+          SEASONS=$(echo "${{ env.YEARS }}" | tr -s ' ' '-')
+          echo "prefix=trained-v1-${SEASONS}-${CODE}-${LIBS}-" >> "$GITHUB_OUTPUT"
+          echo "Saved-models key: trained-v1-${SEASONS}-${CODE}-${LIBS}-"
+
+      - name: Restore saved trained models
+        id: trained
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            models
+            data/processed
+          key: ${{ steps.trainkey.outputs.prefix }}${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            ${{ steps.trainkey.outputs.prefix }}
+
+      - name: Decide whether to train this run
+        id: plan
+        env:
+          RETRAIN: ${{ github.event.inputs.retrain }}
+          RESTORED: ${{ steps.trained.outputs.cache-matched-key }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          train=false
+          why="reusing saved models"
+          if [ -z "$RESTORED" ]; then
+            train=true; why="no saved models for this version of the model code"
+          fi
+          if [ -n "$RESTORED" ]; then
+            for f in models/game_model.joblib models/props/receptions.joblib models/props/rec_yds.joblib \
+                     data/processed/team_game_features.csv data/processed/player_game_features.csv; do
+              if [ ! -s "$f" ]; then train=true; why="saved models are incomplete (missing $f)"; fi
+            done
+          fi
+          if [ "$EVENT" = "schedule" ] && [ "$(date -u +%u)" = "1" ]; then
+            train=true; why="weekly from-scratch run (scheduled run on a Monday)"
+          fi
+          if [ "$RETRAIN" = "true" ]; then
+            train=true; why="the retrain box was ticked"
+          fi
+          echo "train=$train" >> "$GITHUB_OUTPUT"
+          if [ "$train" = "true" ]; then
+            echo "Models: TRAINING this run -- $why"
+            echo "**Models: trained this run** -- $why" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Models: $why ($RESTORED)"
+            echo "**Models: reused saved models** (training steps skipped)" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Build features
+        if: steps.plan.outputs.train == 'true'
         run: python scripts/build_features.py --years ${{ env.YEARS }}
 
       - name: Train game model
+        if: steps.plan.outputs.train == 'true'
         run: python scripts/train_game_model.py
 
       - name: Backtest game model against real closing lines
+        if: steps.plan.outputs.train == 'true'
         # Diagnostic only — prints real ATS win rate / moneyline calibration
         # to this log. continue-on-error since a too-short --years range can
         # legitimately have too few scoreable games (should never block the
@@ -90,7 +171,40 @@ jobs:
         run: python scripts/run_backtest.py
 
       - name: Train props models
-        run: python scripts/train_props_model.py
+        if: steps.plan.outputs.train == 'true'
+        shell: bash
+        # The log is also kept in the runner's temp folder (never uploaded)
+        # so the next step can tell whether the PFF versions were trained.
+        run: |
+          set -o pipefail
+          python -u scripts/train_props_model.py 2>&1 | tee "$RUNNER_TEMP/train_props.log"
+
+      - name: Check the trained models are worth saving
+        id: keep
+        if: steps.plan.outputs.train == 'true'
+        # If the PFF key is set but PFF could not be reached, the receiving
+        # models were trained on box-score inputs only. This run still uses
+        # them (same as before), but they are not saved, so the next run
+        # trains again and picks PFF back up.
+        run: |
+          save=true
+          trained_pff=$(grep -c 'PFF version |' "$RUNNER_TEMP/train_props.log" || true)
+          if [ -n "${PFF_API_KEY:-}" ] && [ "${trained_pff:-0}" -lt 2 ]; then
+            save=false
+            echo "PFF versions trained: ${trained_pff:-0} of 2 -- not saving these models; the next run will train again."
+            echo "**Models not saved** -- PFF could not be reached while training, so the next run trains again." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "save=$save" >> "$GITHUB_OUTPUT"
+          echo "Save trained models: $save"
+
+      - name: Save trained models for later runs
+        if: steps.plan.outputs.train == 'true' && steps.keep.outputs.save == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            models
+            data/processed
+          key: ${{ steps.trained.outputs.cache-primary-key }}
 
       - name: Fetch current lines
         run: python scripts/fetch_current_lines.py
