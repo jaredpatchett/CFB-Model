@@ -838,6 +838,15 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .pp-gl i { font-style: normal; font-size: 10px; color: var(--muted); margin-top: 2px; }
 .pp-gl.is-hit { border-color: rgba(23,194,107,0.55); background: rgba(23,194,107,0.10); }
 .pp-gl.is-hit b { color: var(--green); }
+.pp-wi { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 8px; }
+.pp-wi-field { display: inline-flex; align-items: center; gap: 7px; font-size: 11.5px; color: var(--muted); }
+.pp-wi-input { width: 88px; background: var(--chip); color: var(--text); border: 1px solid var(--rule-strong); border-radius: 5px; padding: 7px 9px; font-family: var(--font-data); font-size: 13px; }
+.pp-wi-input:focus-visible { outline: 2px solid var(--blue-light); outline-offset: 1px; }
+.pp-wi-out { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; font-size: 13px; color: var(--text); }
+.pp-wi-main b { font-weight: 700; }
+.pp-wi-edge { font-weight: 700; font-size: 15px; }
+.pp-wi-note { font-size: 11.5px; color: var(--muted); }
+.pp-wi-posted { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; }
 .pp-more { padding: 10px 18px; border-bottom: 1px solid var(--rule-row); min-width: 1040px; }
 .pp-more .pp-link { margin-top: 0; }
 .pp-tag { font-family: var(--font-display); font-weight: 800; font-size: 11px; letter-spacing: 0.07em; padding: 3px 9px; border-radius: 4px; }
@@ -1959,6 +1968,88 @@ RENDERER_JS = """<script>
     if (/touchdown|interception/i.test(r.market_name || '') && t.rank < 3) t = { tier: 'LOW', rank: 3, color: 'var(--muted-3)' };
     return t;
   }
+  // ---- Hit chance at any line (10/2026) ----
+  // The "Try another line" box in a prop's Details works out the model's
+  // hit chance at a line the feed doesn't have. propOutcomeProbs mirrors
+  // PlayerStatModel.outcome_probabilities (src/models/props_model.py): the
+  // projection plus the actual holdout misses for projections that size,
+  // with the bell curve as the fallback. Keep the two in step.
+  var propDistCache = {};
+  function propDist(stat) {
+    if (propDistCache.hasOwnProperty(stat)) return propDistCache[stat];
+    var d = (D.propDists || {})[stat], out = null;
+    if (d) {
+      out = {
+        nonneg: !!d.nonneg,
+        edges: (d.edges || []).map(function (e) { return e == null ? Infinity : Number(e); }),
+        stds: d.stds || [],
+        sd: d.sd,
+        // Stored sorted, as whole numbers of 1/scale, each as the step up from the one before.
+        samples: (d.samples || []).map(function (enc, b) {
+          var acc = 0, a = new Array(enc.length), scale = (d.scales || [])[b] || 100;
+          for (var i = 0; i < enc.length; i++) { acc += enc[i]; a[i] = acc / scale; }
+          return a;
+        })
+      };
+    }
+    propDistCache[stat] = out;
+    return out;
+  }
+  function normCdf(z) {
+    // Abramowitz and Stegun 7.1.26; good to about 1e-7.
+    var x = Math.abs(z) / Math.SQRT2;
+    var t = 1 / (1 + 0.3275911 * x);
+    var erf = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
+    return z >= 0 ? 0.5 * (1 + erf) : 0.5 * (1 - erf);
+  }
+  function roundHalfEven(x) {   // numpy's rint
+    var f = Math.floor(x), d = x - f;
+    if (d < 0.5) return f;
+    if (d > 0.5) return f + 1;
+    return f % 2 === 0 ? f : f + 1;
+  }
+  // {over, under, push} for a stat, an unrounded projection and a line, or
+  // null when the data for it isn't there.
+  function propOutcomeProbs(stat, pred, line) {
+    var d = propDist(stat);
+    if (!d || pred == null || isNaN(pred) || line == null || isNaN(line)) return null;
+    var whole = Math.floor(line) === line;
+    var n = d.edges.length, i;
+    if (n && d.samples.length === n) {
+      for (i = 0; i < n; i++) if (pred <= d.edges[i]) break;
+      if (i >= n) i = n - 1;
+      var r = d.samples[i];
+      if (r.length >= 30) {
+        var over = 0, under = 0;
+        for (var k = 0; k < r.length; k++) {
+          var o = pred + r[k];
+          if (d.nonneg && o < 0) o = 0;
+          if (whole) o = roundHalfEven(o);
+          if (o > line) over++; else if (o < line) under++;
+        }
+        over /= r.length; under /= r.length;
+        return whole ? { over: over, under: under, push: Math.max(0, 1 - over - under) } : { over: over, under: 1 - over, push: 0 };
+      }
+    }
+    var sd = null;
+    for (i = 0; i < d.edges.length && i < d.stds.length; i++) if (pred <= d.edges[i]) { sd = d.stds[i]; break; }
+    if (sd == null) sd = d.stds.length ? d.stds[d.stds.length - 1] : d.sd;
+    if (!sd || sd <= 0) return null;
+    if (!whole) {
+      var ov = 1 - normCdf((line - pred) / sd);
+      return { over: ov, under: 1 - ov, push: 0 };
+    }
+    var o2 = 1 - normCdf((line + 0.5 - pred) / sd), u2 = normCdf((line - 0.5 - pred) / sd);
+    return { over: o2, under: u2, push: Math.max(0, 1 - o2 - u2) };
+  }
+  // "-115", "+120" or "120" -> a number; null if it isn't an American price.
+  function parseAmerican(txt) {
+    var s = String(txt == null ? '' : txt).split(' ').join('').split(',').join('').split(String.fromCharCode(8722)).join('-');
+    if (!s) return null;
+    var n = Number(s);
+    return (isNaN(n) || Math.abs(n) < 100) ? null : n;
+  }
+
   function renderProps() {
     var live = D.propsLive || [];
     var head = '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Player Props</h2></div></div>';
@@ -1969,7 +2060,7 @@ RENDERER_JS = """<script>
         : 'No player props posted right now. Books usually post most of the slate by Thursday or Friday.') + '</div>';
     }
     // Best line per player + market + game, by the model's hit chance on its side.
-    var best = {}, counts = {};
+    var best = {}, counts = {}, alts = {};
     scored.forEach(function (r) {
       var isOver = r.model_lean === 'over';
       var price = isOver ? r.over_price : r.under_price;
@@ -1979,11 +2070,12 @@ RENDERER_JS = """<script>
         : (r.model_over_probability != null ? (isOver ? r.model_over_probability : 1 - r.model_over_probability) : null);
       var key = [r.fixture_id, r.player_name, r.market_name].join('|');
       counts[key] = (counts[key] || 0) + 1;
+      (alts[key] = alts[key] || []).push(r);
       var cur = best[key];
       var pri = function (x) { return x.is_official_play ? 2 : (x.is_watch_play ? 1 : 0); };
       if (!cur || pri(r) > pri(cur) || (pri(r) === pri(cur) && (r._lp || 0) > (cur._lp || 0))) best[key] = r;
     });
-    var rows = Object.keys(best).map(function (k) { var r = best[k]; r._others = counts[k] - 1; r._conf = propConfidence(r); return r; });
+    var rows = Object.keys(best).map(function (k) { var r = best[k]; r._others = counts[k] - 1; r._alts = alts[k].filter(function (x) { return x !== r; }); r._conf = propConfidence(r); return r; });
 
     // Filters
     var markets = ['ALL'].concat(Array.from(new Set(rows.map(function (r) { return r.market_name; }))).sort());
@@ -2008,7 +2100,7 @@ RENDERER_JS = """<script>
       for (var i = 0; i < bk.length; i++) if (r.edge_capped ? bk[i].lo >= 30 : (r.model_ev >= bk[i].lo && r.model_ev < bk[i].hi)) return bk[i];
       return null;
     };
-    var signed = function (x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); };
+    var signed = function (x, d) { var v = Number(x).toFixed(d); if (Number(v) === 0) v = (0).toFixed(d); return (Number(v) > 0 ? '+' : '') + v; };
     var tone = function (x) { return x > 0 ? 'var(--green)' : (x < 0 ? 'var(--red)' : 'var(--muted-3)'); };
     // Auto-tracked = logged and graded by the pipeline: official plays, plus
     // any play with an edge whose group is up in the backtest.
@@ -2130,6 +2222,63 @@ RENDERER_JS = """<script>
     var dcell = function (label, value, sub) {
       return '<div class="pp-dcell"><div class="pp-dlabel">' + label + '</div><div class="pp-dval">' + value + '</div>' + (sub ? '<div class="pp-sub">' + sub + '</div>' : '') + '</div>';
     };
+    // "Try another line" (10/2026): the model's hit chance and edge at any
+    // line and price, e.g. when your book hangs 82.5 and the feed has 85.5.
+    // A line the feed already has uses the pipeline's own numbers; any other
+    // line is worked out here from the same projection and the same misses.
+    var whatIfHtml = function (r, side, lineTxt, priceIn) {
+      var line = parseFloat(lineTxt), price = parseAmerican(priceIn);
+      if (lineTxt === '' || lineTxt == null || isNaN(line) || line < 0) return '<span class="pp-wi-note">Enter a line, like 82.5.</span>';
+      var over = side !== 'under';
+      var posted = null;
+      [r].concat(r._alts || []).forEach(function (x) { if (!posted && Number(x.line) === line && x.model_over_probability != null) posted = x; });
+      var pr;
+      if (posted) {
+        var push0 = posted.model_push_probability || 0;
+        pr = { over: posted.model_over_probability, push: push0,
+               under: (push0 > 0 && posted.model_under_probability != null) ? posted.model_under_probability : 1 - posted.model_over_probability };
+      } else {
+        pr = r.model_projection_raw != null ? propOutcomeProbs(r.model_stat, Number(r.model_projection_raw), line) : null;
+      }
+      if (!pr) return '<span class="pp-wi-note">Not available for this play until the next model run.</span>';
+      var p = over ? pr.over : pr.under, q = over ? pr.under : pr.over;
+      var html = '<span class="pp-wi-main">' + (over ? 'Over ' : 'Under ') + line + ': <b>' + (p * 100).toFixed(1) + '%</b> hit chance</span>' +
+        (pr.push > 0 ? '<span class="pp-wi-note">push ' + (pr.push * 100).toFixed(1) + '%</span>' : '');
+      if (price == null) return html + '<span class="pp-wi-note">' + (String(priceIn || '').length ? 'Enter a price like -115 or +120.' : 'Add a price to see the edge.') + '</span>';
+      var dec = price > 0 ? 1 + price / 100 : 1 + 100 / Math.abs(price);
+      // Same sums as the pipeline: on a line that can push, a push returns the stake.
+      var ev = pr.push > 0 ? (p * (dec - 1) - q) * 100 : (p * dec - 1) * 100;
+      html += '<span class="pp-wi-note">needs ' + (100 / dec).toFixed(1) + '% at ' + priceTxt(price) + '</span>' +
+        '<span class="pp-wi-edge" style="color:' + tone(ev) + '">Edge ' + signed(ev, 1) + '%</span>';
+      var h = edgeHist({ market_name: r.market_name, model_lean: over ? 'over' : 'under', model_ev: ev });
+      if (h) html += '<span class="pp-wi-note">' + (h.small ? 'Small backtest sample at this edge size (' + esc(h.record) + ').'
+        : 'Backtest at this edge size: ' + esc(h.record) + ', ' + signed(h.roi, 0) + '% ROI.') + '</span>';
+      return html;
+    };
+    window.__cfbWhatIfHtml = whatIfHtml;
+    var whatIfCell = function (r) {
+      var wi = (state.propWhatIf && state.propWhatIf.key === keyOf(r)) ? state.propWhatIf : null;
+      if (!wi) wi = state.propWhatIf = { key: keyOf(r), side: r.model_lean === 'under' ? 'under' : 'over', line: String(r.line), price: r._price != null ? priceTxt(r._price) : '' };
+      window.__cfbPropOpenRow = r;
+      var postedRows = [r].concat(r._alts || []).sort(function (x, y) { return Number(x.line) - Number(y.line) || (y.model_ev || 0) - (x.model_ev || 0); });
+      window.__cfbPropOpenAlts = postedRows;
+      var postedHtml = postedRows.length > 1 ? '<div class="pp-wi-posted"><span class="pp-wi-note">Posted lines:</span>' + postedRows.map(function (x, j) {
+        var xp = x.model_lean === 'over' ? x.over_price : x.under_price;
+        xp = (xp == null || isNaN(xp)) ? null : Number(xp);
+        return '<button class="pp-chip" title="Load this line into the box" onclick="window.__cfbWhatIfUse(' + j + ')">' + (x.model_lean === 'over' ? 'Over ' : 'Under ') + esc(x.line) +
+          ' &middot; ' + priceTxt(xp) + (x.book_used ? ' ' + esc(bookLabel(x.book_used)) : '') + (x.model_ev != null ? ' &middot; ' + signed(x.model_ev, 1) + '%' : '') + '</button>';
+      }).join('') + '</div>' : '';
+      var sideBtn = function (i, key, label) {
+        return '<button id="pp-wi-' + key + '" class="' + (wi.side === key ? 'is-on' : '') + '" aria-pressed="' + (wi.side === key ? 'true' : 'false') + '" onclick="window.__cfbWhatIfSide(' + i + ')">' + label + '</button>';
+      };
+      return '<div class="pp-dcell is-wide"><div class="pp-dlabel">Try another line</div>' +
+        '<div class="pp-wi">' +
+          '<div class="pp-seg" role="group" aria-label="Side">' + sideBtn(0, 'over', 'Over') + sideBtn(1, 'under', 'Under') + '</div>' +
+          '<label class="pp-wi-field">Line <input id="pp-wi-line" class="pp-wi-input" type="number" step="0.5" min="0" inputmode="decimal" value="' + esc(wi.line) + '" oninput="window.__cfbWhatIf()"></label>' +
+          '<label class="pp-wi-field">Price <input id="pp-wi-price" class="pp-wi-input" type="text" placeholder="-115" autocomplete="off" value="' + esc(wi.price) + '" oninput="window.__cfbWhatIf()"></label>' +
+          '<div id="pp-wi-out" class="pp-wi-out" aria-live="polite">' + whatIfHtml(r, wi.side, wi.line, wi.price) + '</div>' +
+        '</div>' + postedHtml + '</div>';
+    };
     var detailHtml = function (r) {
       var isOver = r.model_lean === 'over';
       var cells = [];
@@ -2159,6 +2308,7 @@ RENDERER_JS = """<script>
         cells.push('<div class="pp-dcell is-wide"><div class="pp-dlabel">' + esc(marketName(r.market_name)) + ' by game</div><div class="pp-gls">' + chips + '</div>' +
           '<div class="pp-sub">' + (isOver ? 'Over ' : 'Under ') + esc(r.line) + ' in ' + hits + ' of ' + gl.length + '. The model already counts these games.</div></div>');
       }
+      cells.push(whatIfCell(r));
       return '<div class="pp-detail">' + cells.join('') + '</div>';
     };
     var rowHtml = function (r, i, withDay) {
@@ -2265,7 +2415,8 @@ RENDERER_JS = """<script>
         '<b>Check</b> (the model is far from the market, which usually means it is missing an injury or a role change), ' +
         '<b>Pass</b> (the price needs more than the model gives, or the player is out), or a game that has already started.</p>' +
       '<p><b>Details</b> opens the projection, games played, share of the team&rsquo;s catches or carries, the price when the play was first logged, and the player&rsquo;s numbers by game. ' +
-        'The model already counts those games, so a good run there is not extra evidence.</p>' +
+        'The model already counts those games, so a good run there is not extra evidence. ' +
+        '<b>Try another line</b>, in the same panel, gives the model&rsquo;s hit chance and edge at any line and price you type, for when your book has a different number.</p>' +
       '<p><b>+ My list</b> adds any play to your own list in My Tracker. Kickoff times are in your own time zone.</p>' +
     '</div></details>';
 
@@ -2977,7 +3128,39 @@ RENDERER_JS = """<script>
     if (!r) return;
     var k = [r.fixture_id, r.player_name, r.market_name].join('|');
     state.propDetail = state.propDetail === k ? null : k;
+    state.propWhatIf = null;   // the "Try another line" box starts from the posted line each time
     render();
+  };
+  // "Try another line" in a prop's Details. Recalculates in place as the
+  // line or price is typed, without redrawing the page, so the box you are
+  // typing in keeps its focus.
+  window.__cfbWhatIf = function () {
+    var r = window.__cfbPropOpenRow, w = state.propWhatIf, out = document.getElementById('pp-wi-out');
+    var lineEl = document.getElementById('pp-wi-line'), priceEl = document.getElementById('pp-wi-price');
+    if (!r || !w || !out || !lineEl || !priceEl || !window.__cfbWhatIfHtml) return;
+    w.line = lineEl.value;
+    w.price = priceEl.value;
+    out.innerHTML = window.__cfbWhatIfHtml(r, w.side, w.line, w.price);
+  };
+  window.__cfbWhatIfSide = function (i) {
+    var w = state.propWhatIf;
+    if (!w) return;
+    w.side = i === 1 ? 'under' : 'over';
+    ['over', 'under'].forEach(function (k) {
+      var b = document.getElementById('pp-wi-' + k);
+      if (b) { b.className = w.side === k ? 'is-on' : ''; b.setAttribute('aria-pressed', w.side === k ? 'true' : 'false'); }
+    });
+    window.__cfbWhatIf();
+  };
+  // Load one of the posted lines (its side, line and price) into the box.
+  window.__cfbWhatIfUse = function (j) {
+    var x = (window.__cfbPropOpenAlts || [])[j];
+    var lineEl = document.getElementById('pp-wi-line'), priceEl = document.getElementById('pp-wi-price');
+    if (!x || !lineEl || !priceEl) return;
+    var p = x.model_lean === 'over' ? x.over_price : x.under_price;
+    lineEl.value = x.line;
+    priceEl.value = (p == null || isNaN(p)) ? '' : (p > 0 ? '+' : '') + Number(p);
+    window.__cfbWhatIfSide(x.model_lean === 'under' ? 1 : 0);
   };
   window.__cfbGoTracker = function () { state.page = 'tracker'; render(); window.scrollTo(0, 0); };
   window.__cfbPropOpen = function (i) {
@@ -3042,6 +3225,9 @@ def main():
     # until scripts/export_dashboard_data.py writes them, and the panel just
     # leaves that part out.
     model_data["propGameLogs"] = data.get("prop_game_logs") or {}
+    # What the "Try another line" box needs to price a line the feed does
+    # not have (10/2026); same story -- absent until the export writes it.
+    model_data["propDists"] = data.get("prop_distributions") or {}
     model_data["propTracking"] = build_prop_tracking(model_data["propEdgeHistory"])
     data_script = "<script>\nwindow.MODEL_DATA = " + json.dumps(model_data) + ";\n</script>\n"
 
