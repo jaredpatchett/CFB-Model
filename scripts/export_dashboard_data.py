@@ -38,8 +38,9 @@ from src.features.live_features import (
 from src.features.live_player_features import (
     build_current_player_form, score_prop, MIN_GAMES_FOR_PROP_MODEL,
     project_player_fantasy, MIN_GAMES_FOR_FANTASY, build_current_defense_allowed,
+    market_name_to_stat, _normalize_name,
 )
-from src.features.player_features import STAT_MAP
+from src.features.player_features import STAT_MAP, pivot_player_game_stats
 from src.features import pff_features
 from src.models import fair_odds as fo
 from src.models.game_model import GameMarginModel
@@ -451,6 +452,61 @@ def compute_fair_odds_fields(home_rating, away_rating, moneyline_home, moneyline
     }
 
 
+# How many of a player's most recent games the Props tab's Details panel shows.
+PROP_GAME_LOG_GAMES = 8
+
+
+def build_player_game_logs(player_stats_long: pd.DataFrame, schedule_df: pd.DataFrame) -> dict:
+    """athleteId -> that player's games this season, oldest first, each
+    {'wk': week, 'opp': opponent school, <one value per stat in STAT_MAP>}.
+
+    Box-score numbers only (CFBD), the same rows the props models read --
+    nothing from PFF, so it is safe to publish. Used only to show a player's
+    game-by-game numbers next to a prop on the dashboard (10/2026). A player
+    only has a row for a game he recorded a stat in. Display only: never
+    raises, and returns {} if anything is missing."""
+    try:
+        if player_stats_long is None or player_stats_long.empty or schedule_df is None or schedule_df.empty:
+            return {}
+        wide = pivot_player_game_stats(player_stats_long, schedule_df)
+        if wide.empty or "athleteId" not in wide.columns:
+            return {}
+        stat_cols = sorted(set(STAT_MAP.values()))
+        has_opp = "opponent" in wide.columns
+        logs = {}
+        for r in wide.sort_values(["athleteId", "season", "week"]).to_dict(orient="records"):
+            wk = r.get("week")
+            row = {"wk": None if pd.isna(wk) else int(wk),
+                   "opp": (r.get("opponent") if has_opp and isinstance(r.get("opponent"), str) else None)}
+            for c in stat_cols:
+                v = r.get(c)
+                row[c] = 0.0 if v is None or pd.isna(v) else float(v)
+            logs.setdefault(r["athleteId"], []).append(row)
+        return logs
+    except Exception as e:
+        print(f"  [note] could not build player game logs ({e}) -- Props details will not show them")
+        return {}
+
+
+def prop_game_log(player_name, market_name, player_form: dict, game_logs: dict, max_games: int = PROP_GAME_LOG_GAMES):
+    """(key, [[week, opponent, value], ...]) for one prop: the player's last
+    max_games games for that prop's stat, oldest first. (None, None) if the
+    market or the player isn't recognised. The key is shared by every line
+    and book for the same player and stat, so the log is stored once."""
+    try:
+        stat = market_name_to_stat(market_name)
+        entry = (player_form or {}).get(_normalize_name(player_name))
+        if not stat or not entry:
+            return None, None
+        games = [g for g in (game_logs or {}).get(entry.get("athlete_id"), []) if stat in g]
+        if not games:
+            return None, None
+        rows = [[g["wk"], g["opp"], (int(g[stat]) if float(g[stat]).is_integer() else round(g[stat], 1))] for g in games[-max_games:]]
+        return f"{entry.get('athlete_id')}|{stat}", rows
+    except Exception:
+        return None, None
+
+
 def current_cfb_season_year(now: datetime = None) -> int:
     """The CFB season actually in progress right now, computed from real
     wall-clock time -- deliberately decoupled from the --year CLI argument.
@@ -821,6 +877,8 @@ def main(year: int):
         max_completed_week = int(completed_weeks.max()) if not completed_weeks.empty else 0
 
     player_form = {}
+    player_game_logs = {}     # athleteId -> this season's games (box score), for the Props details panel
+    prop_game_logs_out = {}   # "<athleteId>|<stat>" -> [[week, opponent, value], ...]
     opp_allowed_lookup = {}
     # Which inputs the receptions / receiving-yards models used this run
     # (10/2026): PFF routes and targets, or the box-score fallback.
@@ -838,6 +896,7 @@ def main(year: int):
         if all_player_stats:
             player_stats_long_current = pd.concat(all_player_stats, ignore_index=True)
             player_form = build_current_player_form(player_stats_long_current, schedule_df)
+            player_game_logs = build_player_game_logs(player_stats_long_current, schedule_df)
             opp_allowed_lookup = build_current_defense_allowed(player_stats_long_current, schedule_df)
             # PFF routes run and targets for the receiving models (10/2026).
             # Never raises: if PFF can't be reached, those two models are
@@ -954,6 +1013,13 @@ def main(year: int):
             if result:
                 p.update(result)
                 n_props_scored += 1
+                # This season's game-by-game numbers for this prop's stat
+                # (10/2026), shown in the Props tab's Details panel. Stored
+                # once per player and stat; each prop only carries the key.
+                gl_key, gl_rows = prop_game_log(p.get("player_name"), p.get("market_name"), player_form, player_game_logs)
+                if gl_key:
+                    p["game_log_key"] = gl_key
+                    prop_game_logs_out[gl_key] = gl_rows
 
                 lean = p.get("model_lean")
                 lean_price = p.get("over_price") if lean == "over" else p.get("under_price")
@@ -1127,6 +1193,7 @@ def main(year: int):
         "teams": teams_out,
         "games": games_out,
         "props": props_out,
+        "prop_game_logs": prop_game_logs_out,
         "props_receiving_inputs": props_receiving_inputs,
         "prop_market_catalog": prop_market_catalog,
         "fantasy": fantasy_out,
