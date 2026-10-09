@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T17:39:21.986225+00:00",
+  "generated_at": "2026-10-09T17:59:34.299466+00:00",
   "n_games": 232,
   "avg_clv_points": 0.034,
   "median_clv_points": 0.0,
@@ -2594,19 +2594,6 @@
       "commence_time": "2026-10-03T19:30:00Z"
     },
     {
-      "game_id": 401862787,
-      "season": 2026,
-      "week": 5,
-      "home_team": "Charlotte 49ers",
-      "away_team": "Memphis Tigers",
-      "side": "home",
-      "recommended_spread_home": 20.5,
-      "closing_spread_home": 18.5,
-      "clv_points": 2.0,
-      "captured_at": "2026-09-28T13:46:04.464071+00:00",
-      "commence_time": "2026-10-03T19:30:00Z"
-    },
-    {
       "game_id": 401866433,
       "season": 2026,
       "week": 5,
@@ -2629,6 +2616,19 @@
       "recommended_spread_home": -13.5,
       "closing_spread_home": -10.5,
       "clv_points": 3.0,
+      "captured_at": "2026-09-28T13:46:04.464071+00:00",
+      "commence_time": "2026-10-03T19:30:00Z"
+    },
+    {
+      "game_id": 401862787,
+      "season": 2026,
+      "week": 5,
+      "home_team": "Charlotte 49ers",
+      "away_team": "Memphis Tigers",
+      "side": "home",
+      "recommended_spread_home": 20.5,
+      "closing_spread_home": 18.5,
+      "clv_points": 2.0,
       "captured_at": "2026-09-28T13:46:04.464071+00:00",
       "commence_time": "2026-10-03T19:30:00Z"
     },
