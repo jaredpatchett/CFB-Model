@@ -280,6 +280,39 @@ def build_teams_export(games_out: list, team_lookup: dict, sp_lookup: dict, sp_s
     return list(seen.values())
 
 
+def build_team_directory(team_lookup: dict) -> list:
+    """Every FBS team CFBD returned -- not just this week's slate -- as
+    {abbr, school, logo, primary, secondary}. The tracker needs this
+    (10/2026): a tracked play is stored by team abbreviation ("MD +3.0 --
+    VT at MD") and stays in the tracker for the whole season, but 'teams'
+    above only covers teams with a game on the CURRENT slate, so a play on
+    a team that is on a bye this week had no logo or color to draw. Same
+    derive_abbr() as build_teams_export, so the abbreviation here is the
+    exact string a tracked play was saved with. Where two schools share an
+    abbreviation the first one wins and the clash is printed, rather than
+    one silently getting the other's logo."""
+    out, seen = [], {}
+    for rec in team_lookup.values():
+        school = rec.get("school")
+        if not school:
+            continue
+        abbr = derive_abbr(school, rec.get("abbreviation"))
+        if abbr in seen:
+            if seen[abbr] != school:
+                print(f"  [note] team directory: {school} and {seen[abbr]} share the abbreviation {abbr}; "
+                      f"keeping {seen[abbr]}")
+            continue
+        seen[abbr] = school
+        out.append({
+            "abbr": abbr,
+            "school": school,
+            "logo": rec.get("logo"),
+            "primary": rec.get("color"),
+            "secondary": rec.get("alt_color"),
+        })
+    return sorted(out, key=lambda t: t["abbr"])
+
+
 def build_neutral_site_lookup(games_df: pd.DataFrame) -> dict:
     """frozenset({normalized_home_school, normalized_away_school}) -> bool
     neutralSite, from CFBD's OWN /games endpoint (which knows the full
@@ -1281,6 +1314,7 @@ def main(year: int):
         "current_season_year": season_year,
         "preseason_prior": prior,
         "teams": teams_out,
+        "team_directory": build_team_directory(team_lookup),
         "games": games_out,
         "props": props_out,
         "prop_game_logs": prop_game_logs_out,
