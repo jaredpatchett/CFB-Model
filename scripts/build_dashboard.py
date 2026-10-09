@@ -259,6 +259,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
             "away": g["away_team"],
             "home": g["home_team"],
             "kickoff": fmt_kickoff(g.get("commence_time")),
+            "kickoffIso": g.get("commence_time"),
             "book": book,
             "marketSpread": g.get("spread_home"),
             "modelSpread": model_spread,
@@ -350,6 +351,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
     return {
         "meta": meta,
         "teams": teams,
+        "teamDir": build_team_dir(data, teams),
         "games": games,
         "clv": clv_out,
         "propCatalog": props_catalog,
@@ -358,6 +360,44 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
         "backtest": backtest_out,
         "injuries": data.get("injuries") or [],
     }
+
+
+def _https(url):
+    """CFBD hands some logo links back as http://, which a page served over
+    https (GitHub Pages) would refuse to load."""
+    if not url:
+        return None
+    url = str(url)
+    return "https://" + url[len("http://"):] if url.startswith("http://") else url
+
+
+def build_team_dir(data: dict, teams: list) -> dict:
+    """abbr -> {n: name, l: logo url, p: primary, s: secondary} for the
+    tracker's logos (10/2026). A tracked play is stored by abbreviation and
+    outlives the slate it was tracked on, so this is keyed by abbreviation
+    and built from the widest source available: the export's team_directory
+    (every FBS team) when it is there, then this slate's own teams and game
+    logos layered on top, since the slate's abbreviations are the exact
+    strings plays get tracked with. Before the export has written
+    team_directory, only this slate's teams have a logo and every other
+    team falls back to the helmet -- nothing is guessed."""
+    out = {}
+    for t in data.get("team_directory") or []:
+        abbr = t.get("abbr")
+        if not abbr:
+            continue
+        out[abbr] = {"n": t.get("school"), "l": _https(t.get("logo")),
+                     "p": t.get("primary"), "s": t.get("secondary")}
+    logo_by_name = {}
+    for g in data.get("games") or []:
+        for side in ("home", "away"):
+            if g.get(f"{side}_team") and g.get(f"{side}_logo"):
+                logo_by_name[g[f"{side}_team"]] = g[f"{side}_logo"]
+    for t in teams:
+        prev = out.get(t["abbr"]) or {}
+        out[t["abbr"]] = {"n": t["name"], "l": _https(logo_by_name.get(t["name"])) or prev.get("l"),
+                          "p": t["primary"], "s": t["secondary"]}
+    return out
 
 
 def esc_plain(s):
@@ -749,7 +789,6 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .pchip.is-lean { background: rgba(224,180,74,0.16); color: var(--amber); }
 .prop-lean-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; margin-bottom: 22px; }
 .prop-lean-card { background: var(--panel); border: 1px solid var(--rule-faint); border-radius: 4px; padding: 11px 13px; opacity: 0.88; }
-.trk-auto-tag { font-family: var(--font-display); font-weight: 800; font-size: 8.5px; letter-spacing: 0.06em; padding: 1px 5px; border-radius: 3px; background: rgba(46,123,255,0.16); color: var(--blue); vertical-align: middle; margin-left: 6px; }
 .pchip { font-family: var(--font-display); font-weight: 800; font-size: 9.5px; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 3px; }
 .pchip.is-live { background: rgba(23,194,107,0.16); color: var(--green); }
 .pchip.is-pending { background: var(--chip); color: var(--muted-4); }
@@ -764,16 +803,113 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .trk-value { font-family: var(--font-led); font-weight: 900; font-size: 20px; }
 .trk-value.is-pos { color: var(--green); }
 .trk-value.is-neg { color: var(--red); }
-.trk-grid { grid-template-columns: 1.6fr 70px 60px 60px 90px 150px 70px 34px; }
-.trk-row { display: grid; grid-template-columns: 1.6fr 70px 60px 60px 90px 150px 70px 34px; align-items: center; background: var(--panel); border-bottom: 1px solid var(--rule-row); padding: 9px 14px; gap: 6px; font-size: 11px; }
-.trk-row input[type=number] { width: 62px; background: var(--chip); border: 1px solid var(--rule); color: var(--text); border-radius: 3px; padding: 3px 6px; font-family: var(--font-data); font-size: 11px; }
 .trk-status-btns { display: flex; gap: 3px; }
 .trk-status-btn { border: 1px solid var(--rule); background: var(--chip); color: var(--muted-3); border-radius: 3px; padding: 3px 7px; font-size: 9px; font-weight: 800; cursor: pointer; font-family: var(--font-display); letter-spacing: 0.04em; }
 .trk-status-btn.is-win { background: rgba(23,194,107,0.18); color: var(--green); border-color: var(--green); }
 .trk-status-btn.is-loss { background: rgba(255,82,82,0.16); color: var(--red); border-color: var(--red); }
 .trk-status-btn.is-push { background: rgba(224,180,74,0.16); color: var(--amber); border-color: var(--amber); }
-.trk-remove { background: none; border: none; color: var(--muted-4); cursor: pointer; font-size: 15px; }
 .trk-empty { color: var(--muted-3); font-size: 12px; padding: 26px; text-align: center; border: 1px dashed var(--rule); }
+/* Tracker table: search, filters, logos, and rows edited in place (10/2026) */
+.trk-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 10px; }
+.trk-search, .trk-sel, .trk-in { background: var(--chip); border: 1px solid var(--rule-strong); color: var(--text); border-radius: 4px; padding: 7px 10px; font-family: var(--font-data); font-size: 12px; }
+.trk-search { flex: 1 1 240px; max-width: 360px; }
+.trk-in, .trk-sel, .trk-search { color-scheme: dark; }
+.trk-search::placeholder, .trk-in::placeholder { color: var(--muted-3); }
+.trk-sel { color: var(--text-dim); cursor: pointer; }
+.trk-search:focus-visible, .trk-sel:focus-visible, .trk-in:focus-visible, .trk-chip:focus-visible, .trk-btn:focus-visible, .trk-pill:focus-visible, .trk-icon:focus-visible, .trk-tagbtn:focus-visible, .trk-switch:focus-visible, .trk-status-btn:focus-visible, .trk-linkbtn:focus-visible { outline: 2px solid var(--blue-light); outline-offset: 1px; }
+.trk-in.is-bad { border-color: var(--red); }
+.trk-msg { color: var(--red); font-size: 10.5px; margin-top: 4px; line-height: 1.35; }
+.trk-filtered { font-size: 11.5px; color: var(--text-dim); background: rgba(46,123,255,0.10); border: 1px solid rgba(46,123,255,0.35); border-radius: 4px; padding: 8px 12px; margin: 0 0 10px; }
+.trk-linkbtn { background: none; border: none; color: var(--blue-light); cursor: pointer; font: inherit; padding: 0; text-decoration: underline; }
+.trk-table { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; margin-top: 1px; }
+.trk-g { display: grid; grid-template-columns: 84px minmax(210px, 1.5fr) minmax(128px, 0.7fr) 52px 66px 78px 98px 84px 72px 100px 56px; column-gap: 10px; align-items: center; padding: 10px 14px; }
+.trk-h { font-family: var(--font-display); font-weight: 700; font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted-2); border-bottom: 1px solid var(--rule); }
+.trk-r { border-bottom: 1px solid var(--rule-row); font-size: 12px; }
+.trk-r:last-child { border-bottom: none; }
+.trk-r:hover { background: var(--row-active); }
+.trk-when { color: var(--text-dim); }
+.trk-was { font-size: 10px; color: var(--muted); margin-top: 3px; line-height: 1.35; }
+.trk-dim { color: var(--muted-3); }
+.trk-dim2 { color: var(--muted); font-size: 11px; }
+.trk-neg { color: var(--red); }
+.trk-match { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; }
+.trk-team { display: inline-flex; align-items: center; gap: 6px; }
+.trk-team b { font-family: var(--font-display); font-weight: 800; font-size: 14.5px; letter-spacing: 0.04em; }
+.trk-at { color: var(--muted-3); font-size: 10.5px; }
+.trk-desc { font-weight: 500; font-size: 12px; }
+/* A thin light edge so a dark logo (navy, black) still reads on the dark panel. */
+.trk-logo { display: block; flex: none; object-fit: contain; filter: drop-shadow(0 0 0.6px rgba(255,255,255,0.75)); }
+.trk-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.trk-tag { font-family: var(--font-display); font-weight: 800; font-size: 9.5px; letter-spacing: 0.07em; text-transform: uppercase; padding: 1px 6px; border-radius: 3px; border: 1px solid var(--rule-strong); color: var(--muted); }
+.trk-tag.is-model { color: var(--green); border-color: rgba(23,194,107,0.55); background: rgba(23,194,107,0.10); }
+.trk-tag.is-auto { color: var(--blue-light); border-color: rgba(46,123,255,0.5); background: rgba(46,123,255,0.12); }
+.trk-tag.is-injury { color: #FF8A8A; border-color: rgba(255,82,82,0.6); background: rgba(255,82,82,0.12); }
+.trk-note { font-size: 10.5px; color: var(--muted); margin-top: 5px; max-width: 420px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.trk-chip { display: inline-flex; align-items: center; gap: 7px; background: var(--chip); border: 1px solid var(--rule-strong); color: var(--text); border-radius: 4px; padding: 5px 9px; font-family: var(--font-data); font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.trk-chip svg { color: var(--muted-2); flex: none; }
+.trk-chip:hover { border-color: var(--blue); }
+.trk-chip:hover svg { color: var(--blue-light); }
+.trk-chip.is-plain { background: transparent; border-color: transparent; font-weight: 500; padding: 5px 6px; margin-left: -6px; }
+.trk-chip.is-plain:hover { background: var(--chip); border-color: var(--blue); }
+.trk-chip.is-static { cursor: default; }
+.trk-chip.is-static:hover { border-color: var(--rule-strong); }
+.trk-editor { display: flex; flex-direction: column; gap: 5px; }
+.trk-editor .trk-in { width: 100%; min-width: 0; padding: 5px 8px; border-color: var(--blue); }
+.trk-editor-btns { display: flex; gap: 4px; }
+.trk-btn { font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 0.05em; background: transparent; color: var(--text-dim); border: 1px solid var(--rule-strong); border-radius: 4px; padding: 5px 10px; cursor: pointer; white-space: nowrap; }
+.trk-btn:hover { border-color: var(--blue); color: var(--text); }
+.trk-btn.is-primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+.trk-btn.is-primary:hover { background: var(--blue-light); border-color: var(--blue-light); }
+.trk-btn.is-danger { color: #FF8A8A; border-color: rgba(255,82,82,0.45); }
+.trk-btn.is-danger:hover { border-color: var(--red); color: #fff; }
+.trk-in--stake { width: 62px; padding: 5px 7px; }
+.trk-profit { font-weight: 700; }
+.trk-pill { font-family: var(--font-display); font-weight: 800; font-size: 10.5px; letter-spacing: 0.08em; border-radius: 3px; padding: 4px 8px; cursor: pointer; background: transparent; white-space: nowrap; }
+.trk-pill.is-official { color: var(--green); border: 1px solid rgba(23,194,107,0.6); }
+.trk-pill.is-unofficial { color: #FF8A8A; border: 1px solid rgba(255,82,82,0.6); background: rgba(255,82,82,0.10); }
+.trk-pill:hover { filter: brightness(1.25); }
+.trk-acts { display: flex; align-items: center; justify-content: flex-end; gap: 2px; }
+.trk-icon { background: none; border: 1px solid transparent; color: var(--muted); cursor: pointer; border-radius: 4px; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; font-size: 17px; line-height: 1; padding: 0; }
+.trk-icon:hover { color: var(--text); border-color: var(--rule-strong); background: var(--chip); }
+.trk-icon.is-x:hover { color: var(--red); }
+.trk-add { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; margin: 4px 0 6px; padding: 12px; border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); }
+.trk-add .trk-in { min-width: 0; }
+.trk-add-hint { flex-basis: 100%; font-size: 10.5px; color: var(--muted); line-height: 1.5; }
+.trk-backdrop { position: fixed; inset: 0; background: rgba(4,7,11,0.6); z-index: 80; }
+.trk-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: 400px; max-width: 100vw; background: var(--panel-deep); border-left: 1px solid var(--rule-strong); z-index: 81; display: flex; flex-direction: column; box-shadow: -18px 0 40px rgba(0,0,0,0.45); }
+.trk-d-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px 12px; border-bottom: 1px solid var(--rule); }
+.trk-d-head h3 { font-family: var(--font-display); font-weight: 800; font-size: 19px; letter-spacing: 0.05em; text-transform: uppercase; margin: 0; }
+.trk-d-body { flex: 1; overflow-y: auto; padding: 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+.trk-d-game { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 12px 14px; }
+.trk-d-game .trk-team b { font-size: 18px; }
+.trk-d-field { display: flex; flex-direction: column; gap: 6px; }
+.trk-d-field > span { font-family: var(--font-display); font-weight: 700; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.trk-d-field .trk-in, .trk-d-field .trk-sel { width: 100%; font-size: 13px; padding: 8px 10px; }
+.trk-d-field textarea.trk-in { resize: vertical; min-height: 84px; line-height: 1.5; }
+.trk-d-two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.trk-d-preview { font-size: 12.5px; line-height: 1.5; }
+.trk-d-preview:empty { display: none; }
+.trk-d-preview b { font-size: 14px; }
+.trk-d-count { font-size: 10px; color: var(--muted-3); text-align: right; }
+.trk-tagrow { display: flex; flex-wrap: wrap; gap: 6px; }
+.trk-tagbtn { font-family: var(--font-display); font-weight: 700; font-size: 12.5px; letter-spacing: 0.04em; background: var(--chip); color: var(--muted); border: 1px solid var(--rule-strong); border-radius: 4px; padding: 5px 11px; cursor: pointer; }
+.trk-tagbtn:hover { color: var(--text); }
+.trk-tagbtn.is-on { background: rgba(46,123,255,0.16); color: var(--blue-light); border-color: var(--blue); }
+.trk-tagbtn.is-on.is-injury { background: rgba(255,82,82,0.14); color: #FF8A8A; border-color: var(--red); }
+.trk-d-addtag { display: flex; gap: 6px; }
+.trk-switchrow { display: flex; align-items: center; gap: 10px; }
+.trk-switch { position: relative; width: 38px; height: 22px; border-radius: 11px; border: 1px solid rgba(255,82,82,0.6); background: rgba(255,82,82,0.22); cursor: pointer; padding: 0; flex: none; }
+.trk-switch-knob { position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #FF8A8A; transition: left 0.12s; }
+.trk-switch.is-on { border-color: rgba(23,194,107,0.7); background: rgba(23,194,107,0.22); }
+.trk-switch.is-on .trk-switch-knob { left: 18px; background: var(--green); }
+.trk-switch-label { font-size: 12px; color: var(--text-dim); }
+.trk-d-foot { display: flex; align-items: center; gap: 8px; padding: 12px 18px; border-top: 1px solid var(--rule); background: var(--panel); }
+.trk-d-foot .trk-btn { padding: 8px 14px; font-size: 13px; }
+@media (max-width: 1180px) {
+  .trk-table { overflow-x: auto; }
+  .trk-g { min-width: 1080px; }
+}
+@media (prefers-reduced-motion: reduce) { .trk-switch-knob { transition: none; } }
 .trk-summary-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); margin-bottom: 1px; }
 .unit-size-input { width: 108px; background: var(--chip); border: 1px solid var(--rule); color: var(--text); border-radius: 3px; padding: 6px 9px; font-family: var(--font-data); font-size: 11px; }
 
@@ -1326,7 +1462,13 @@ RENDERER_JS = """<script>
   }
 
   function helmet(teamName, width, height, flip) {
-    var t = team(teamName), p = esc(M.displayColor(t.primary)), s = esc(t.secondary || '#E7EDF5');
+    var t = team(teamName);
+    return helmetSvg(t.primary, t.secondary, width, height, flip);
+  }
+  // Same helmet from a pair of colors, for a team that isn't on this
+  // week's slate (the tracker's logo fallback -- see trkMark).
+  function helmetSvg(primary, secondary, width, height, flip) {
+    var p = esc(M.displayColor(primary)), s = esc(secondary || '#E7EDF5');
     return '<svg class="helmet' + (flip ? ' helmet--flip' : '') + '" viewBox="0 0 54 32" ' +
       'style="width:' + width + 'px;height:' + height + 'px">' +
       '<path d="M25 4C36 4 43 10.5 43 19.5V23C43 25.5 41 27 38 27H14C8.5 27 5 23 5 18.5 5 10.5 14 4 25 4Z" ' +
@@ -1434,7 +1576,7 @@ RENDERER_JS = """<script>
 
     return esc(JSON.stringify({
       description: p.playLabel + ' \\u2014 ' + abbrOf(g.away) + ' at ' + abbrOf(g.home),
-      date: g.kickoff, type: p.market,
+      date: g.kickoff, kickoffIso: g.kickoffIso || null, type: p.market,
       price: p.market === 'Moneyline' ? p.sideMoneyline : -110,
       edge: Math.round(Math.abs(p.edge) * 10) / 10,
       unofficial: autoUnofficial,
@@ -2214,7 +2356,9 @@ RENDERER_JS = """<script>
     window.__cfbPropRows = ordered;
 
     var myTrk = {};
-    loadTrk().forEach(function (it) { if (it.type === 'Prop') myTrk[it.description] = true; });
+    // flaggedDesc: a play whose line you later changed in the tracker still
+    // counts as the same play here, under the line it was added at.
+    loadTrk().forEach(function (it) { if (it.type === 'Prop') { myTrk[it.description] = true; if (it.flaggedDesc) myTrk[it.flaggedDesc] = true; } });
     var keyOf = function (r) { return [r.fixture_id, r.player_name, r.market_name].join('|'); };
     var nowMs = Date.now();
     var priceTxt = function (x) { return x == null || isNaN(x) ? 'no price' : (x > 0 ? '+' : '') + Number(x); };
@@ -2486,7 +2630,7 @@ RENDERER_JS = """<script>
       // already entered is never overwritten.
       if (imported && !Array.isArray(imported) && Array.isArray(imported.grades)) {
         var trk = loadTrk();
-        var applied = 0;
+        var applied = 0, skippedEdited = {};
         imported.grades.forEach(function (g) {
           if (!g || ['win', 'loss', 'push'].indexOf(g.status) === -1) return;
           trk.forEach(function (it) {
@@ -2495,13 +2639,23 @@ RENDERER_JS = """<script>
             var hit = g.play
               ? desc.split(' \\u2014 ')[0] === g.play
               : (g.player && g.market && it.type === 'Prop' && desc.indexOf(g.player + ' ' + g.market) !== -1);
-            if (hit) { it.status = g.status; applied++; }
+            // A prop grade is matched by player + market only, on the
+            // understanding that the row sits at the line the model
+            // flagged. Once you've changed a prop's line or side in the
+            // tracker (10/2026) that no longer holds -- the Over can win
+            // where your Under lost -- so those rows are left for you to
+            // grade. Game lines need no such guard: their match includes
+            // the number, so an edited spread simply doesn't match.
+            if (hit && !g.play && it.flaggedDesc && it.flaggedDesc !== desc) { skippedEdited[it.id] = true; return; }
+            if (hit) { it.status = g.status; it.updatedAt = Date.now(); applied++; }
           });
         });
         saveTrk(trk);
         input.value = '';
         render();
-        alert(applied + ' tracked play(s) graded from the file.');
+        var nSkipped = Object.keys(skippedEdited).length;
+        alert(applied + ' tracked play(s) graded from the file.' +
+          (nSkipped ? '\\n\\n' + nSkipped + ' prop(s) whose line or side you changed were left ungraded \\u2014 grade those yourself.' : ''));
         return;
       }
       if (!Array.isArray(imported)) {
@@ -2510,33 +2664,71 @@ RENDERER_JS = """<script>
       }
       // Merge by id so re-importing the same file twice (or importing on
       // a laptop that already has some overlapping plays) never duplicates
-      // a row -- only genuinely new ids get added.
+      // a row. An auto-tracked prop is also matched by its sourceId: each
+      // browser gives the same official prop its own random id, so matching
+      // on id alone added a second copy of every one.
+      //
+      // A play that IS already here (10/2026, now that plays can be edited):
+      //  - whichever copy was changed more recently wins -- every edit,
+      //    tag, note and grade stamps updatedAt, and a copy with no stamp
+      //    counts as oldest -- so a spread fixed on one laptop carries to
+      //    the other and re-importing an old file can't roll an edit back;
+      //  - a grade is never dropped by that. If the copy that wins has no
+      //    grade and the other one does, the grade is kept, as long as both
+      //    copies are the same bet (same description);
+      //  - if they are NOT the same bet (the line was changed on one
+      //    laptop after the other graded it at the old number), the old
+      //    grade can't be trusted at the new number, so the play is left
+      //    ungraded and counted in the message as needing a grade.
       var existing = loadTrk();
-      var known = {};
-      existing.forEach(function (it) { known[it.id] = true; });
+      var at = Object.create(null), atSource = Object.create(null);
+      existing.forEach(function (it, i) { at[it.id] = i; if (it.sourceId) atSource[it.sourceId] = i; });
       var merged = existing.slice();
-      var added = 0;
+      var added = 0, updated = 0, gradesKept = 0, regrade = 0;
       imported.forEach(function (it) {
-        if (it && it.id && !known[it.id]) { merged.push(it); known[it.id] = true; added++; }
+        if (!it || !it.id) return;
+        var i = at[it.id];
+        if (i === undefined && it.sourceId) i = atSource[it.sourceId];
+        if (i === undefined) {
+          at[it.id] = merged.length;
+          if (it.sourceId) atSource[it.sourceId] = merged.length;
+          merged.push(it); added++;
+          return;
+        }
+        var mine = merged[i], sameBet = mine.description === it.description;
+        if ((Number(it.updatedAt) || 0) > (Number(mine.updatedAt) || 0)) {
+          var next = JSON.parse(JSON.stringify(it));
+          next.id = mine.id;   // one row per play in this browser, under the id it already has here
+          if (!next.status && mine.status) {
+            if (sameBet) next.status = mine.status; else regrade++;
+          }
+          merged[i] = next; updated++;
+        } else if (!mine.status && it.status && sameBet) {
+          mine.status = it.status; gradesKept++;
+        }
       });
       saveTrk(merged);
       input.value = '';
       render();
-      alert(added + ' play(s) imported (' + (imported.length - added) + ' already present, skipped).');
+      alert(added + ' play(s) added, ' + updated + ' updated with newer edits' +
+        (gradesKept ? ', ' + gradesKept + ' grade(s) brought over' : '') + '.' +
+        (regrade ? '\\n\\n' + regrade + ' play(s) had their line changed after being graded at the old number. They are now ungraded \\u2014 grade them at the new line.' : ''));
     };
     reader.readAsText(file);
   };
 
   window.__cfbTrack = function (play) {
     var items = loadTrk();
-    items.unshift({
+    var item = {
       id: 't' + Date.now() + Math.random().toString(36).slice(2, 7),
       description: play.description, date: play.date, type: play.type,
       price: play.price, edge: play.edge, stake: 50, status: null,
       unofficial: !!play.unofficial,
       modelSource: play.modelSource || null,
       modelVersion: play.modelVersion || null
-    });
+    };
+    if (play.kickoffIso) item.kickoffIso = play.kickoffIso;   // real kickoff, so the row can show it in your own time zone
+    items.unshift(item);
     saveTrk(items);
     render();
     var el = document.getElementById('trk-gamelines-section') || document.getElementById('trk-section');
@@ -2553,24 +2745,15 @@ RENDERER_JS = """<script>
     if (!r) return;
     var desc = propTrackLabel(r);
     var items = loadTrk();
-    if (items.some(function (it) { return it.type === 'Prop' && it.description === desc; })) return;
+    if (items.some(function (it) { return it.type === 'Prop' && (it.description === desc || it.flaggedDesc === desc); })) return;
     items.unshift({
       id: 't' + Date.now() + Math.random().toString(36).slice(2, 7),
-      description: desc, date: (r.start_time || '').slice(0, 10), type: 'Prop',
+      description: desc, date: (r.start_time || '').slice(0, 10), kickoffIso: r.start_time || undefined, type: 'Prop',
       price: r.model_lean === 'over' ? r.over_price : r.under_price,
       edge: r.model_ev, stake: 50, status: null
     });
     saveTrk(items);
     render();
-  };
-
-  // Manual flip for any tracked play -- overrides the auto-detection above
-  // in either direction, and is the only way to mark/unmark a manually-
-  // added or auto-tracked-prop play as unofficial.
-  window.__cfbTrkToggleUnofficial = function (id) {
-    var items = loadTrk();
-    var it = items.find(function (x) { return x.id === id; });
-    if (it) { it.unofficial = !it.unofficial; saveTrk(items); render(); }
   };
 
   // Manual add -- for plays with no model behind them yet (e.g. Totals,
@@ -2588,12 +2771,22 @@ RENDERER_JS = """<script>
     var unofficialEl = document.getElementById('trk-manual-unofficial');
     var description = (descEl.value || '').trim();
     if (!description) { descEl.focus(); return; }
+    // The date box is a date-and-time picker in your own time zone. Stored
+    // both as the real moment (kickoffIso) and as the same "Sat 9/19,
+    // 11:30PM UTC" text every other play carries.
+    var when = dateEl.value ? new Date(dateEl.value) : null, dateText = '';
+    if (when && !isNaN(when)) {
+      var hh = when.getUTCHours(), mm = when.getUTCMinutes();
+      dateText = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][when.getUTCDay()] + ' ' + (when.getUTCMonth() + 1) + '/' + when.getUTCDate() + ', ' +
+        ((hh % 12) || 12) + ':' + (mm < 10 ? '0' : '') + mm + (hh < 12 ? 'AM' : 'PM') + ' UTC';
+    } else { when = null; }
     var items = loadTrk();
     items.unshift({
       id: 't' + Date.now() + Math.random().toString(36).slice(2, 7),
       description: description,
-      date: (dateEl.value || '').trim(),
-      type: typeEl.value,
+      date: dateText,
+      kickoffIso: when ? when.toISOString() : undefined,
+      type: trkGuessType(description, typeEl.value),
       price: priceEl.value !== '' ? Number(priceEl.value) : -110,
       edge: edgeEl.value !== '' ? Number(edgeEl.value) : null,
       stake: stakeEl.value !== '' ? Number(stakeEl.value) : 50,
@@ -2647,6 +2840,7 @@ RENDERER_JS = """<script>
         sourceId: sid,
         description: playerLabel(r) + ' ' + r.market_name + ' ' + (isOver ? 'O' : 'U') + ' ' + r.line,
         date: (r.start_time || '').slice(0, 10),
+        kickoffIso: r.start_time || undefined,
         type: 'Prop',
         price: price != null ? price : null,
         edge: r.model_ev,
@@ -2709,16 +2903,6 @@ RENDERER_JS = """<script>
     return stake * americanToDecimal(item.price) - stake;
   }
 
-  window.__cfbTrkStake = function (id, value) {
-    var items = loadTrk();
-    var it = items.find(function (x) { return x.id === id; });
-    if (it) { it.stake = value; saveTrk(items); render(); }
-  };
-  window.__cfbTrkStatus = function (id, status) {
-    var items = loadTrk();
-    var it = items.find(function (x) { return x.id === id; });
-    if (it) { it.status = (it.status === status ? null : status); saveTrk(items); render(); }
-  };
   // One-click cleanup for the auto-tracked prop backlog (added 9/2026).
   // Before the top-5 official-prop filter, every pipeline run auto-logged
   // every prop that cleared a miscalibrated 3%-EV bar, leaving hundreds of
@@ -2749,7 +2933,434 @@ RENDERER_JS = """<script>
     return sign + '$' + Math.abs(n).toFixed(2).replace(/\\.00$/, '');
   }
 
-  function renderTrackerSection(items, opts) {
+  /* ---- Tracked plays you can edit in place (10/2026) ------------------
+     Before this, a tracked play was one line of text ("MD +3.0 -- VT at
+     MD") and the only way to fix a spread you actually got at a different
+     number was to add the play again by hand. Now the spread, odds, stake,
+     tags and notes are all editable on the row or in the Edit panel.
+
+     The description stays the one stored source of truth for the pick and
+     the line -- the grades file, the export and the prop de-duplication all
+     read it -- so the helpers below read the pick and line back OUT of the
+     description (trkParse) and write an edited one back INTO it in the same
+     format (trkDescribe). Nothing in a browser's saved tracker is rewritten
+     until a row is actually edited, so there is no migration to go wrong. */
+
+  var TRK_TAG_PRESETS = ['Injury', 'Fade', 'Degen'];
+  var TRK_NOTE_MAX = 500;
+
+  function trkNum(v) {
+    if (v === '' || v == null) return null;
+    var n = Number(v);
+    return isNaN(n) ? null : n;
+  }
+  // "+3.0", "-2.5" -- one decimal, like the Edge Board writes them -- but a
+  // quarter-point or alt line keeps every digit ("+3.25"), so opening and
+  // saving a play can never round its number.
+  function trkFmtLine(v) {
+    v = Number(v);
+    return (v > 0 ? '+' : '') + (Math.round(v * 10) / 10 === v ? v.toFixed(1) : String(v));
+  }
+  function trkHasTag(tags, t) { t = String(t).toLowerCase(); return tags.some(function (x) { return String(x).toLowerCase() === t; }); }
+  // Which kind of bet a hand-typed description is, when it's written in one
+  // of the shapes trkParse reads: "TOL ML ..." / "O 55.5 ..." / "PITT -2.5 ...".
+  // The add-a-play form uses it so a spread typed with the Type box still on
+  // "Total" is saved as a spread, not as a total nothing can read.
+  function trkGuessType(desc, chosen) {
+    var cut = /\\s+(?:—|–|--)\\s+/.exec(desc), label = (cut ? desc.slice(0, cut.index) : desc).trim();
+    if (/^\\S.*?\\s+ML$/i.test(label)) return 'Moneyline';
+    if (/^(O|U|Over|Under)\\s*\\d+(?:\\.\\d+)?$/i.test(label)) return 'Total';
+    if (/^\\S.*?\\s+([+-]?\\d+(?:\\.\\d+)?|PK)$/i.test(label)) return 'Spread';
+    return chosen;
+  }
+  function trkFmtPrice(v) { return (v == null || v === '') ? '—' : ((Number(v) > 0 ? '+' : '') + v); }
+  function trkTagsOf(it) { return Array.isArray(it.tags) ? it.tags : []; }
+  function trkFind(items, id) { for (var i = 0; i < items.length; i++) if (items[i].id === id) return items[i]; return null; }
+
+  // Pick + line + matchup, read back out of the stored description.
+  //   game lines: "<pick> <line|ML> — <away> at <home>"   (also "--", "@", "vs")
+  //   props:      "<team> <player> <market> <O|U> <line>"
+  // ok is false when the text doesn't fit (a hand-typed description in some
+  // other shape): the row then just shows the text as written, and the line
+  // can't be edited on its own -- the Edit panel offers the whole
+  // description instead.
+  function trkParse(it) {
+    var desc = String(it.description || ''), m;
+    var out = { pick: null, line: null, away: null, home: null, head: null, tail: '', ok: false };
+    if (it.type === 'Prop') {
+      m = /^(.*?)\\s+([OU])\\s+(\\d+(?:\\.\\d+)?)$/.exec(desc);
+      if (m) { out.head = m[1]; out.pick = m[2]; out.line = Number(m[3]); out.ok = true; }
+      return out;
+    }
+    var cut = /\\s+(?:—|–|--)\\s+/.exec(desc);
+    var label = cut ? desc.slice(0, cut.index) : desc;
+    out.tail = cut ? desc.slice(cut.index + cut[0].length) : '';
+    m = /^(\\S.*?)\\s+(?:at|@|vs\\.?)\\s+(\\S.*)$/i.exec(out.tail);
+    if (m) { out.away = m[1].trim(); out.home = m[2].trim(); }
+    if (it.type === 'Moneyline') {
+      m = /^(\\S.*?)\\s+ML$/i.exec(label);
+      if (m) { out.pick = m[1]; out.ok = true; }
+    } else if (it.type === 'Total') {
+      m = /^(O|U|Over|Under)\\s*(\\d+(?:\\.\\d+)?)$/i.exec(label);
+      if (m) { out.pick = m[1].charAt(0).toUpperCase(); out.line = Number(m[2]); out.ok = true; }
+    } else {
+      m = /^(\\S.*?)\\s+([+-]?\\d+(?:\\.\\d+)?|PK)$/i.exec(label);
+      if (m) { out.pick = m[1]; out.line = /^pk$/i.test(m[2]) ? 0 : Number(m[2]); out.ok = true; }
+    }
+    return out;
+  }
+  function trkLabel(kind, pick, line) {
+    if (kind === 'Moneyline') return pick + ' ML';
+    if (kind === 'Total' || kind === 'Prop') return pick + ' ' + Number(line);
+    return pick + ' ' + trkFmtLine(line);
+  }
+  // Same text shapes trackPayload / propTrackLabel write, so an edited row
+  // is indistinguishable from one tracked at that number in the first place.
+  function trkDescribe(kind, p, pick, line) {
+    if (kind === 'Prop') return p.head + ' ' + trkLabel(kind, pick, line);
+    return trkLabel(kind, pick, line) + (p.tail ? ' — ' + p.tail : '');
+  }
+
+  function trkImplied(price) {
+    price = Number(price);
+    return price > 0 ? 100 / (price + 100) : -price / (-price + 100);
+  }
+  // What the play looked like when its edge was measured. Frozen onto the
+  // row (orig*) the first time anything about the bet is changed, so every
+  // later edit is worked out from the original numbers rather than stacking
+  // rounding on top of the last edit.
+  function trkBase(it, p) {
+    var frozen = it.origEdge !== undefined;
+    return {
+      frozen: frozen,
+      pick: frozen ? it.origPick : p.pick,
+      line: frozen ? it.origLine : p.line,
+      price: frozen ? it.origPrice : it.price,
+      edge: frozen ? it.origEdge : it.edge
+    };
+  }
+  // The edge at the number you actually bet, from the edge at the number
+  // the play was flagged at. Returns { edge, stale }; stale means "this is
+  // still the flagged edge, it could not be moved to your number".
+  //   Spread: a point of line is a point of edge. Flagged PITT -3 at +9.0
+  //     and bet -2.5 is +9.5; the other side at +3 is -9.0.
+  //   Total:  same, in whichever direction helps the side you took.
+  //   Moneyline: the edge is win chance minus the price's implied chance,
+  //     so a different price moves it by the change in implied chance.
+  //     Close, not exact -- the flagged edge had the book's margin taken
+  //     out using BOTH sides' prices and only one is stored.
+  //   Prop: the edge is expected return at the price. A new price on the
+  //     same half-point line is exact; a different line needs the model's
+  //     projection, which the tracker doesn't keep, so it stays stale.
+  function trkEdgeAt(kind, base, pick, line, price) {
+    var e = trkNum(base.edge);
+    if (e == null) return { edge: base.edge == null ? null : base.edge, stale: false };
+    var r1 = function (x) { return Math.round(x * 10) / 10; };
+    var flipped = base.pick != null && pick != null && pick !== base.pick;
+    if (kind === 'Spread') {
+      if (base.line == null || line == null) return { edge: e, stale: false };
+      return { edge: r1(flipped ? -e + line + base.line : e + line - base.line), stale: false };
+    }
+    if (kind === 'Total') {
+      if (base.line == null || line == null) return { edge: e, stale: false };
+      var modelOver = (base.pick === 'U' ? -e : e) + base.line - line;   // model total minus the new line
+      return { edge: r1(pick === 'U' ? -modelOver : modelOver), stale: false };
+    }
+    var p0 = trkNum(base.price), p1 = trkNum(price);
+    if (kind === 'Moneyline') {
+      if (flipped) return { edge: r1(-e), stale: false };
+      if (p0 == null || p1 == null || p0 === p1) return { edge: e, stale: false };
+      return { edge: r1(e + (trkImplied(p0) - trkImplied(p1)) * 100), stale: false };
+    }
+    // Prop
+    if (flipped || line !== base.line) return { edge: e, stale: true };
+    if (p0 == null || p1 == null || p0 === p1) return { edge: e, stale: false };
+    if (line == null || Math.round(line * 2) % 2 === 0) return { edge: e, stale: true };   // whole-number line can push
+    return { edge: r1(((1 + e / 100) / americanToDecimal(p0) * americanToDecimal(p1) - 1) * 100), stale: false };
+  }
+
+  // Reads what was typed into a line / odds / stake box. Lenient about a
+  // leading "+" and "pk", strict about the result being a real number.
+  function trkCheck(kind, field, raw) {
+    var txt = String(raw == null ? '' : raw).trim().replace(/^\\+/, '');
+    var bad = function (msg) { return { ok: false, msg: msg }; };
+    if (field === 'line' && kind === 'Spread' && /^pk$/i.test(txt)) return { ok: true, value: 0 };
+    var n = trkNum(txt);
+    if (field === 'line') {
+      if (n == null) return bad(kind === 'Spread' ? 'Enter a spread, like -2.5' : 'Enter a line, like 55.5');
+      if (kind === 'Spread' ? Math.abs(n) > 80 : (n < 0 || n > 2000)) return bad('That line looks off');
+      return { ok: true, value: n };
+    }
+    if (field === 'price') {
+      if (n == null || n !== Math.round(n) || Math.abs(n) < 100 || Math.abs(n) > 100000) return bad('Use American odds, like -110 or +120');
+      return { ok: true, value: n };
+    }
+    if (n == null || n < 0) return bad('Enter a stake, like 50');
+    return { ok: true, value: n };
+  }
+
+  // The one place a tracked play is changed. ch may carry any of: pick,
+  // line, price, stake, tags, notes, unofficial, description. Every change
+  // is stamped (updatedAt) so Import can tell which copy of a play is newer.
+  function trkCommit(id, ch) {
+    var items = loadTrk();
+    var it = trkFind(items, id);
+    if (!it) return false;
+    var p = trkParse(it);
+    var pick = ch.pick != null ? ch.pick : p.pick;
+    var line = ch.line != null ? ch.line : p.line;
+    var price = ch.price !== undefined ? ch.price : it.price;
+    var betChanged = p.ok && (pick !== p.pick || (it.type !== 'Moneyline' && line !== p.line));
+    var priceChanged = trkNum(price) !== trkNum(it.price);
+    if (betChanged || priceChanged) {
+      if (it.origEdge === undefined) {
+        it.origPick = p.pick; it.origLine = p.line;
+        it.origPrice = it.price == null ? null : it.price;
+        it.origEdge = it.edge == null ? null : it.edge;
+        if (it.type === 'Prop') it.flaggedDesc = it.description;   // keeps "in My list" on the Props tab pointing at this row
+      }
+      var res = trkEdgeAt(it.type, trkBase(it, p), pick, line, price);
+      it.edge = res.edge;
+      if (res.stale) it.edgeStale = true; else delete it.edgeStale;
+      if (betChanged) {
+        // The 20+ point fade rule follows the number you actually took.
+        if (it.type === 'Spread') {
+          var wasBig = Math.abs(p.line) >= 20, isBig = Math.abs(line) >= 20;
+          if (isBig && !wasBig) it.unofficial = true;
+          else if (wasBig && !isBig && it.unofficial) it.unofficial = false;
+        }
+        it.description = trkDescribe(it.type, p, pick, line);
+      }
+      it.price = price;
+      // Edited back to exactly what was flagged: it's the original play again.
+      if (pick === it.origPick && line === it.origLine && trkNum(price) === trkNum(it.origPrice)) {
+        it.edge = it.origEdge;
+        delete it.origPick; delete it.origLine; delete it.origPrice; delete it.origEdge; delete it.edgeStale; delete it.flaggedDesc;
+      }
+    }
+    if (ch.description != null && !p.ok && String(ch.description).trim() && String(ch.description).trim() !== it.description) {
+      it.description = String(ch.description).trim();
+      // Rewritten by hand: whatever was frozen while the text was unreadable
+      // (no pick, no line) says nothing about the play as it now reads.
+      delete it.origPick; delete it.origLine; delete it.origPrice; delete it.origEdge; delete it.edgeStale; delete it.flaggedDesc;
+    }
+    if (ch.stake !== undefined) it.stake = ch.stake;
+    if (ch.tags !== undefined) {
+      var seen = {}, tags = [];
+      (ch.tags || []).forEach(function (t) {
+        t = String(t || '').trim().slice(0, 24);
+        TRK_TAG_PRESETS.forEach(function (pre) { if (pre.toLowerCase() === t.toLowerCase()) t = pre; });   // "injury" is the Injury tag
+        if (t && !seen[t.toLowerCase()]) { seen[t.toLowerCase()] = true; tags.push(t); }
+      });
+      if (tags.length) it.tags = tags; else delete it.tags;
+    }
+    if (ch.notes !== undefined) {
+      var note = String(ch.notes || '').trim().slice(0, TRK_NOTE_MAX);
+      if (note) it.notes = note; else delete it.notes;
+    }
+    if (ch.unofficial !== undefined) it.unofficial = !!ch.unofficial;
+    if (ch.status !== undefined) it.status = ch.status;
+    it.updatedAt = Date.now();
+    saveTrk(items);
+    return true;
+  }
+
+  // When the game is, for display and for sorting. New plays carry the real
+  // kickoff (kickoffIso); older ones only have the text the dashboard
+  // showed at the time ("Sat 9/19, 11:30PM UTC", or "2026-10-11" for a
+  // prop), so that text is read back. Shown in your own time zone, like the
+  // Props tab. Anything unreadable (a hand-typed date) is shown as typed.
+  function trkWhen(it) {
+    var raw = String(it.date || ''), d = null, dateOnly = false, m;
+    if (it.kickoffIso) {
+      d = new Date(it.kickoffIso);
+    } else if ((m = /^(\\d{4})-(\\d\\d)-(\\d\\d)$/.exec(raw))) {
+      d = new Date(+m[1], +m[2] - 1, +m[3]); dateOnly = true;
+    } else if ((m = /(\\d{1,2})\\/(\\d{1,2}),\\s*(\\d{1,2}):(\\d\\d)\\s*(AM|PM)\\s*UTC/i.exec(raw))) {
+      // No year in that text. A play is tracked close to its game, so use
+      // the year it was tracked in (the first 13 digits of its id are the
+      // moment it was added), stepping a year for a bowl game in January.
+      var added = parseInt(String(it.id || '').slice(1, 14), 10);
+      var ref = added > 1e12 ? new Date(added) : new Date();
+      var yr = ref.getUTCFullYear(), mo = +m[1], refMo = ref.getUTCMonth() + 1;
+      if (mo - refMo > 6) yr--; else if (refMo - mo > 6) yr++;
+      d = new Date(Date.UTC(yr, mo - 1, +m[2], (+m[3] % 12) + (/pm/i.test(m[5]) ? 12 : 0), +m[4]));
+    }
+    if (!d || isNaN(d)) return { top: raw, sub: '', ts: null };
+    var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var h = d.getHours(), mi = d.getMinutes();
+    return {
+      top: days[d.getDay()] + ' ' + months[d.getMonth()] + ' ' + d.getDate(),
+      sub: dateOnly ? '' : ((h % 12) || 12) + ':' + (mi < 10 ? '0' : '') + mi + ' ' + (h < 12 ? 'AM' : 'PM'),
+      ts: d.getTime()
+    };
+  }
+
+  // Team logo for a tracked play, by the abbreviation the play was saved
+  // with. Real school logos (CFBD's), falling back to the same color-
+  // accurate helmet the rest of the dashboard draws when there is no logo
+  // for that team or the image won't load.
+  var trkLogoBad = {};
+  function trkTeam(abbr) { return (D.teamDir || {})[abbr] || null; }
+  function trkHelmet(abbr, size) {
+    var t = trkTeam(abbr);
+    return helmetSvg(t && t.p ? t.p : '#8A94A3', t && t.s ? t.s : '#E7EDF5', Math.round(size * 1.3), Math.round(size * 0.77), false);
+  }
+  function trkMark(abbr, size) {
+    var t = trkTeam(abbr);
+    if (t && t.l && !trkLogoBad[t.l]) {
+      return '<img class="trk-logo" src="' + esc(t.l) + '" alt="" width="' + size + '" height="' + size + '" data-trk-abbr="' + esc(abbr) + '" data-trk-size="' + size + '">';
+    }
+    return trkHelmet(abbr, size);
+  }
+  function trkTeamHtml(abbr, size) {
+    var t = trkTeam(abbr);
+    return '<span class="trk-team"' + (t && t.n ? ' title="' + esc(t.n) + '"' : '') + '>' + trkMark(abbr, size) + '<b>' + esc(abbr) + '</b></span>';
+  }
+  function trkMatchHtml(it, p, size) {
+    if (it.type === 'Prop') {
+      if (!p.ok) return '<span class="trk-desc">' + esc(it.description) + '</span>';
+      // "MINN Javon Tracy Receptions": the team tag leads when the model knew the team.
+      var sp = p.head.indexOf(' '), first = sp > 0 ? p.head.slice(0, sp) : '';
+      if (first && trkTeam(first)) return '<span class="trk-team" title="' + esc(trkTeam(first).n || first) + '">' + trkMark(first, size) + '<b>' + esc(first) + '</b></span><span class="trk-desc">' + esc(p.head.slice(sp + 1)) + '</span>';
+      return '<span class="trk-desc">' + esc(p.head) + '</span>';
+    }
+    // Only when the pick reads too. A matchup with a pick that doesn't fit
+    // ("Over 55.5 1H -- VT at MD") shows the whole text as written, since
+    // the pick column has nothing to show for it.
+    if (p.ok && p.away && p.home) return trkTeamHtml(p.away, size) + '<span class="trk-at">at</span>' + trkTeamHtml(p.home, size);
+    return '<span class="trk-desc">' + esc(it.description) + '</span>';
+  }
+
+  /* ---- Tracker table: search, filters, and rows edited in place ------- */
+
+  function trkPencil(size) {
+    return '<svg viewBox="0 0 16 16" width="' + size + '" height="' + size + '" aria-hidden="true"><path d="M11.4 1.6l3 3L5 14H2v-3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>';
+  }
+  var TRK_PENCIL = trkPencil(11);
+
+  function trkFilterState(sec) {
+    state.trkF = state.trkF || {};
+    return state.trkF[sec] || (state.trkF[sec] = { q: '', status: 'all', tag: 'all', sort: 'added' });
+  }
+  function trkFiltering(f) { return !!f.q || f.status !== 'all' || f.tag !== 'all'; }
+  function trkFiltered(items, f) {
+    var q = (f.q || '').toLowerCase().trim();
+    var out = items.filter(function (it) {
+      if (f.status === 'pending' && it.status) return false;
+      if ((f.status === 'win' || f.status === 'loss' || f.status === 'push') && it.status !== f.status) return false;
+      if (f.status === 'official' && it.unofficial) return false;
+      if (f.status === 'unofficial' && !it.unofficial) return false;
+      if (f.tag !== 'all' && trkTagsOf(it).indexOf(f.tag) === -1) return false;
+      if (q) {
+        var p = trkParse(it), names = [p.away, p.home].map(function (a) { var t = a && trkTeam(a); return t && t.n ? t.n : ''; });
+        var hay = [it.description, it.type, it.notes || '', trkTagsOf(it).join(' '), names.join(' ')].join(' ').toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    });
+    if (f.sort === 'added') return out;   // the order plays were added in, newest first -- how the list has always read
+    var key = f.sort === 'edge' ? function (it) { return trkNum(it.edge); }
+      : f.sort === 'profit' ? function (it) { return computeProfit(it); }
+      : function (it) { return trkWhen(it).ts; };
+    var dir = f.sort === 'date_asc' ? 1 : -1;
+    // Rows with nothing to sort on (no edge, ungraded, unreadable date) go last either way.
+    return out.map(function (it, i) { return { it: it, k: key(it), i: i }; }).sort(function (a, b) {
+      if (a.k == null && b.k == null) return a.i - b.i;
+      if (a.k == null) return 1;
+      if (b.k == null) return -1;
+      return a.k === b.k ? a.i - b.i : (a.k - b.k) * dir;
+    }).map(function (x) { return x.it; });
+  }
+
+  function trkEditorHtml(ed, label) {
+    return '<div class="trk-editor" data-trk-editing>' +
+      '<input id="trk-edit-input" class="trk-in' + (ed.msg ? ' is-bad' : '') + '" type="text" autocomplete="off" aria-label="' + label + '" value="' + esc(ed.value) + '">' +
+      (ed.msg ? '<div class="trk-msg" role="alert">' + esc(ed.msg) + '</div>' : '') +
+      '<div class="trk-editor-btns"><button class="trk-btn is-primary" data-trk-act="save">Save</button>' +
+      '<button class="trk-btn" data-trk-act="cancel">Cancel</button></div></div>';
+  }
+  function trkTagChip(t) { return '<span class="trk-tag' + (t === 'Injury' ? ' is-injury' : '') + '">' + esc(t) + '</span>'; }
+
+  function trkRowHtml(it) {
+    var p = trkParse(it), base = trkBase(it, p), profit = computeProfit(it), when = trkWhen(it), id = esc(it.id);
+    var ed = state.trkEdit && state.trkEdit.id === it.id ? state.trkEdit : null;
+    var edgeUnit = it.type === 'Moneyline' ? 'pp' : (it.type === 'Prop' ? '%' : 'pt');
+    var was = it.modelSource === 'manual' ? 'was ' : 'flagged ';
+    var modelTag = it.modelSource === 'trained_model' ? (it.modelVersion === 'upgraded' ? 'UPGRADED' : 'TRAINED')
+      : it.modelSource === 'preseason_prior' ? 'UNTRAINED'
+      : it.modelSource === 'manual' ? 'MANUAL' : null;
+
+    var tags = (modelTag ? '<span class="trk-tag' + (it.modelSource === 'trained_model' ? ' is-model' : '') + '">' + modelTag + '</span>' : '') +
+      (it.auto ? '<span class="trk-tag is-auto">AUTO</span>' : '') +
+      trkTagsOf(it).map(trkTagChip).join('');
+    var matchCell = '<div><div class="trk-match">' + trkMatchHtml(it, p, 22) + '</div>' +
+      (tags ? '<div class="trk-tags">' + tags + '</div>' : '') +
+      (it.notes ? '<div class="trk-note" title="' + esc(it.notes) + '">' + esc(it.notes) + '</div>' : '') + '</div>';
+
+    var pickText = !p.ok ? '' : it.type === 'Prop' ? (p.pick === 'O' ? 'Over ' : 'Under ') + p.line : trkLabel(it.type, p.pick, p.line);
+    var pickCell;
+    if (ed && ed.field === 'line') {
+      pickCell = trkEditorHtml(ed, it.type === 'Spread' ? 'Spread' : 'Line');
+    } else if (!p.ok) {
+      pickCell = '<span class="trk-dim">—</span>';
+    } else if (it.type === 'Moneyline') {
+      pickCell = '<span class="trk-chip is-static">' + esc(pickText) + '</span>';
+    } else {
+      pickCell = '<button class="trk-chip" data-trk-act="edit" data-trk-field="line" data-trk-id="' + id + '" title="Change the ' + (it.type === 'Spread' ? 'spread' : 'line') + ' to the number you got">' +
+        '<span>' + esc(pickText) + '</span>' + TRK_PENCIL + '</button>';
+    }
+    if (p.ok && base.frozen && base.pick != null && (base.pick !== p.pick || base.line !== p.line)) {
+      pickCell += '<div class="trk-was">' + was + esc(it.type === 'Prop' ? base.pick + ' ' + base.line : trkLabel(it.type, base.pick, base.line)) + '</div>';
+    }
+
+    var oddsCell = (ed && ed.field === 'price') ? trkEditorHtml(ed, 'Odds')
+      : '<button class="trk-chip is-plain" data-trk-act="edit" data-trk-field="price" data-trk-id="' + id + '" title="Change the odds to the price you got">' +
+        '<span>' + esc(trkFmtPrice(it.price)) + '</span>' + TRK_PENCIL + '</button>';
+    if (base.frozen && trkNum(base.price) !== trkNum(it.price) && base.price != null) {
+      oddsCell += '<div class="trk-was">' + was + esc(trkFmtPrice(base.price)) + '</div>';
+    }
+
+    var edgeCell = it.edge == null ? '<span class="trk-dim">—</span>'
+      : '<span class="' + (it.edgeStale ? 'trk-dim' : (Number(it.edge) < 0 ? 'trk-neg' : '')) + '"' +
+        (it.edgeStale ? ' title="Measured at the flagged line. A prop edge is not recalculated for a different line."' : '') + '>' +
+        (it.edge > 0 ? '+' : '') + esc(it.edge) + edgeUnit + '</span>';
+    if (it.edgeStale) edgeCell += '<div class="trk-was">at flagged line</div>';
+    else if (base.frozen && base.edge != null && Number(base.edge) !== Number(it.edge)) {
+      edgeCell += '<div class="trk-was">was ' + (base.edge > 0 ? '+' : '') + esc(base.edge) + edgeUnit + '</div>';
+    }
+
+    var grade = ['win', 'loss', 'push'].map(function (s) {
+      return '<button class="trk-status-btn' + (it.status === s ? ' is-' + s : '') + '" data-trk-act="grade" data-trk-status="' + s + '" data-trk-id="' + id + '" ' +
+        'aria-pressed="' + (it.status === s ? 'true' : 'false') + '" title="' + (s === 'win' ? 'Win' : s === 'loss' ? 'Loss' : 'Push') + '">' + s.charAt(0).toUpperCase() + '</button>';
+    }).join('');
+
+    return '<div class="trk-g trk-r' + (it.unofficial ? ' is-unofficial' : '') + '">' +
+      '<div class="trk-when"><div>' + (when.top ? esc(when.top) : '<span class="trk-dim">\\u2014</span>') + '</div>' + (when.sub ? '<div class="trk-was">' + esc(when.sub) + '</div>' : '') + '</div>' +
+      matchCell +
+      '<div>' + pickCell + '</div>' +
+      '<div class="trk-dim2">' + (it.type === 'Moneyline' ? 'ML' : esc(it.type)) + '</div>' +
+      '<div><input id="trk-stake-' + id + '" class="trk-in trk-in--stake" type="number" min="0" step="5" value="' + esc(it.stake == null ? '' : it.stake) + '" data-trk-stake="' + id + '" aria-label="Stake"></div>' +
+      '<div>' + oddsCell + '</div>' +
+      '<div>' + edgeCell + '</div>' +
+      '<div class="trk-status-btns">' + grade + '</div>' +
+      '<div class="trk-profit" style="color:' + (profit === null ? 'var(--muted-4)' : (profit >= 0 ? 'var(--green)' : 'var(--red)')) + '">' + (profit === null ? '—' : fmtMoney(profit)) + '</div>' +
+      '<div><button class="trk-pill ' + (it.unofficial ? 'is-unofficial' : 'is-official') + '" data-trk-act="official" data-trk-id="' + id + '" ' +
+        'title="Click to switch. Unofficial plays stay in the list but are left out of the record.">' + (it.unofficial ? 'UNOFFICIAL' : 'OFFICIAL') + '</button></div>' +
+      '<div class="trk-acts"><button class="trk-icon" data-trk-act="drawer" data-trk-id="' + id + '" aria-label="Edit play" title="Edit play: pick, tags, notes">' + trkPencil(13) + '</button>' +
+        '<button class="trk-icon is-x" data-trk-act="remove" data-trk-id="' + id + '" aria-label="Remove play" title="Remove play">×</button></div>' +
+    '</div>';
+  }
+
+  function renderTrackerSection(allItems, opts) {
+    var f = trkFilterState(opts.sec);
+    var tagsInUse = {};
+    allItems.forEach(function (it) { trkTagsOf(it).forEach(function (t) { tagsInUse[t] = true; }); });
+    if (f.tag !== 'all' && !tagsInUse[f.tag]) f.tag = 'all';   // the last play with that tag was edited or removed
+    var items = trkFiltered(allItems, f);
+    var filtering = trkFiltering(f);
+
     var wins = 0, losses = 0, pushes = 0, staked = 0, profit = 0;
     // Units record is independent of whatever real $ stake was logged per
     // bet -- it grades every bet as a flat 1 unit won/lost/pushed (the
@@ -2778,8 +3389,31 @@ RENDERER_JS = """<script>
     var head = '<div class="section-head mt-lg" id="' + opts.sectionId + '"><div class="section-title"><div class="section-flag is-green"></div><h2>' + esc(opts.title) + '</h2></div></div>' +
       (opts.extraHtml || '');
 
-    if (!items.length) {
+    if (!allItems.length) {
       return head + '<div class="trk-empty">' + esc(opts.emptyMsg) + '</div>';
+    }
+
+    var sec = esc(opts.sec);
+    var opt = function (v, label, cur) { return '<option value="' + esc(v) + '"' + (cur === v ? ' selected' : '') + '>' + esc(label) + '</option>'; };
+    var tools = '<div class="trk-tools">' +
+      '<input id="trk-q-' + sec + '" class="trk-search" type="search" placeholder="Search teams, tags or notes" autocomplete="off" value="' + esc(f.q) + '" data-trk-filter="q" data-trk-sec="' + sec + '" aria-label="Search tracked plays">' +
+      '<select class="trk-sel" data-trk-filter="status" data-trk-sec="' + sec + '" aria-label="Filter by status">' +
+        [['all', 'All statuses'], ['pending', 'Not graded yet'], ['win', 'Wins'], ['loss', 'Losses'], ['push', 'Pushes'], ['official', 'Official only'], ['unofficial', 'Unofficial only']]
+          .map(function (o) { return opt(o[0], o[1], f.status); }).join('') + '</select>' +
+      '<select class="trk-sel" data-trk-filter="tag" data-trk-sec="' + sec + '" aria-label="Filter by tag">' +
+        opt('all', Object.keys(tagsInUse).length ? 'All tags' : 'No tags yet', f.tag) +
+        Object.keys(tagsInUse).sort().map(function (t) { return opt(t, t, f.tag); }).join('') + '</select>' +
+      '<select class="trk-sel" data-trk-filter="sort" data-trk-sec="' + sec + '" aria-label="Sort plays">' +
+        [['added', 'Sort: newest added'], ['date_desc', 'Sort: latest game first'], ['date_asc', 'Sort: earliest game first'], ['edge', 'Sort: biggest edge'], ['profit', 'Sort: biggest profit']]
+          .map(function (o) { return opt(o[0], o[1], f.sort); }).join('') + '</select>' +
+    '</div>';
+    var banner = filtering
+      ? '<div class="trk-filtered">Showing ' + items.length + ' of ' + allItems.length + ' plays. The record, profit and units below count only these. ' +
+        '<button class="trk-linkbtn" data-trk-act="clearf" data-trk-sec="' + sec + '">Clear filters</button></div>'
+      : '';
+
+    if (!items.length) {
+      return head + tools + banner + '<div class="trk-empty">No plays match these filters.</div>';
     }
 
     var summary = '<div class="trk-summary">' +
@@ -2813,34 +3447,346 @@ RENDERER_JS = """<script>
       unitSizeBar +
       (unitsGraded ? unitsSummary : '<div class="trk-empty">No graded plays yet — mark a play W/L/P below to start building a units record.</div>');
 
-    var rows = items.map(function (it) {
-      var p = computeProfit(it);
-      var edgeUnit = it.type === 'Moneyline' ? 'pp' : (it.type === 'Prop' ? '%' : 'pt');
-      var modelTagText = it.modelSource === 'trained_model' ? (it.modelVersion === 'upgraded' ? 'UPGRADED' : 'TRAINED')
-        : it.modelSource === 'preseason_prior' ? 'UNTRAINED'
-        : it.modelSource === 'manual' ? 'MANUAL' : null;
-      var modelTagColor = it.modelSource === 'trained_model' ? '#2ecc71' : '#8A94A3';
-      return '<div class="trk-row">' +
-        '<div>' + esc(it.description) + (it.auto ? ' <span class="trk-auto-tag">AUTO</span>' : '') + (it.unofficial ? ' <span class="trk-auto-tag" style="background:#ff0000;color:#fff;font-weight:700">UNOFFICIAL</span>' : '') + (modelTagText ? ' <span class="trk-auto-tag" style="background:' + modelTagColor + '26;color:' + modelTagColor + ';border:1px solid ' + modelTagColor + '">' + modelTagText + '</span>' : '') + '</div>' +
-        '<div>' + esc(it.date) + '</div>' +
-        '<div>' + esc(it.type) + '</div>' +
-        '<div>' + (it.price > 0 ? '+' : '') + (it.price != null ? esc(it.price) : '—') + '</div>' +
-        '<div>' + (it.edge != null ? ((it.edge > 0 ? '+' : '') + esc(it.edge) + edgeUnit) : '—') + '</div>' +
-        '<div class="trk-status-btns">' +
-          '<input type="number" value="' + it.stake + '" min="0" step="5" onchange="window.__cfbTrkStake(\\'' + it.id + '\\', this.value)">' +
-          '<button class="trk-status-btn' + (it.status === 'win' ? ' is-win' : '') + '" onclick="window.__cfbTrkStatus(\\'' + it.id + '\\',\\'win\\')">W</button>' +
-          '<button class="trk-status-btn' + (it.status === 'loss' ? ' is-loss' : '') + '" onclick="window.__cfbTrkStatus(\\'' + it.id + '\\',\\'loss\\')">L</button>' +
-          '<button class="trk-status-btn' + (it.status === 'push' ? ' is-push' : '') + '" onclick="window.__cfbTrkStatus(\\'' + it.id + '\\',\\'push\\')">P</button>' +
-        '</div>' +
-        '<div style="color:' + (p === null ? 'var(--muted-4)' : (p >= 0 ? 'var(--green)' : 'var(--red)')) + ';font-weight:700">' + (p === null ? '\\u2014' : fmtMoney(p)) + '</div>' +
-        '<div><button class="trk-remove" style="font-size:9px;padding:2px 5px;margin-right:4px" title="Toggle whether this play counts in the record" onclick="window.__cfbTrkToggleUnofficial(\\'' + it.id + '\\')">' + (it.unofficial ? 'MAKE OFFICIAL' : 'MAKE UNOFFICIAL') + '</button><button class="trk-remove" onclick="window.__cfbTrkRemove(\\'' + it.id + '\\')">\\u00d7</button></div>' +
-      '</div>';
-    }).join('');
+    var isProps = opts.sec === 'props';
+    var table = '<div class="trk-table">' +
+      '<div class="trk-g trk-h"><div>Date</div><div>' + (isProps ? 'Player' : 'Matchup') + '</div><div>' + (isProps ? 'Pick / Line' : 'Pick / Spread') + '</div><div>Type</div><div>Stake</div><div>Odds</div><div>Edge</div><div>Grade</div><div>Profit</div><div>Status</div><div></div></div>' +
+      items.map(trkRowHtml).join('') +
+    '</div>';
 
-    return head + summary + unitsHtml +
-      '<div class="thead trk-grid"><div>Description</div><div>Date</div><div>Type</div><div>Price</div><div>Edge</div><div>Stake / Grade</div><div>Profit</div><div></div></div>' +
-      rows;
+    return head + tools + banner + summary + unitsHtml + table;
   }
+
+  /* ---- Edit panel: everything about one play, in one place ------------
+     Slides in over the right edge. Lives outside #app (its own node on
+     <body>) and keeps what's been typed in trkDraft, so the page redrawing
+     underneath never wipes a half-typed note. Nothing is saved until
+     Save changes. */
+  var trkDraft = null;
+
+  function trkDraftCtx() {
+    var it = trkDraft && trkFind(loadTrk(), trkDraft.id);
+    if (!it) return null;
+    var p = trkParse(it);
+    return { it: it, p: p, base: trkBase(it, p), hasLine: p.ok && it.type !== 'Moneyline' };
+  }
+  // The typed line and odds, checked. An empty odds box is fine on a play
+  // that never had a price (some props are flagged before one is posted).
+  function trkDraftVals(c) {
+    var line = c.hasLine ? trkCheck(c.it.type, 'line', trkDraft.line) : { ok: true, value: c.p.line };
+    var price = (String(trkDraft.price).trim() === '' && c.it.price == null) ? { ok: true, value: null } : trkCheck(c.it.type, 'price', trkDraft.price);
+    var stake = (String(trkDraft.stake).trim() === '' && (c.it.stake == null || c.it.stake === '')) ? { ok: true, value: undefined } : trkCheck(c.it.type, 'stake', trkDraft.stake);
+    return { line: line, price: price, stake: stake };
+  }
+  // Official or not as it will be saved: your own switch if you touched it,
+  // otherwise whatever the 20+ point rule says about the line now typed.
+  function trkDraftUnofficial(c, v) {
+    if (trkDraft.unofficialTouched) return trkDraft.unofficial;
+    if (c.it.type === 'Spread' && c.p.ok && v.line.ok) {
+      var wasBig = Math.abs(c.p.line) >= 20, isBig = Math.abs(v.line.value) >= 20;
+      if (isBig && !wasBig) return true;
+      if (wasBig && !isBig) return false;
+    }
+    return !!c.it.unofficial;
+  }
+  function trkPreviewHtml(c) {
+    var v = trkDraftVals(c), kind = c.it.type, unit = kind === 'Moneyline' ? 'pp' : (kind === 'Prop' ? '%' : 'pt');
+    if (!v.line.ok || !v.price.ok) return '';
+    var sg = function (x) { return (x > 0 ? '+' : '') + esc(x) + unit; };
+    var res = trkEdgeAt(kind, c.base, trkDraft.pick, v.line.value, v.price.value);
+    var moved = c.p.ok && c.base.pick != null && (trkDraft.pick !== c.base.pick || (c.hasLine && v.line.value !== c.base.line));
+    var repriced = trkNum(v.price.value) !== trkNum(c.base.price);
+    var out = [];
+    if (res.edge != null) {
+      var baseLabel = !c.p.ok ? '' : kind === 'Prop' ? c.base.pick + ' ' + c.base.line : trkLabel(kind, c.base.pick, c.base.line);
+      out.push('<div>Edge <b' + (Number(res.edge) < 0 ? ' class="trk-neg"' : '') + '>' + sg(res.edge) + '</b>' +
+        ((moved || repriced) && c.base.edge != null
+          ? ' <span class="trk-was">' + sg(c.base.edge) + ' when flagged' + (baseLabel ? ' at ' + esc(baseLabel) : '') + (c.base.price != null ? ' ' + esc(trkFmtPrice(c.base.price)) : '') + '</span>'
+          : '') + '</div>');
+    }
+    if (res.stale) out.push('<div class="trk-was">A prop edge can’t be moved to a different line here, so it stays at the flagged number.</div>');
+    else if (kind === 'Moneyline' && repriced && res.edge != null && trkDraft.pick === c.base.pick) out.push('<div class="trk-was">Moneyline edge at a new price is close, not exact.</div>');
+    if (kind === 'Spread' && c.p.ok && !trkDraft.unofficialTouched) {
+      var wasBig = Math.abs(c.p.line) >= 20, isBig = Math.abs(v.line.value) >= 20;
+      if (isBig && !wasBig) out.push('<div class="trk-was">20+ point spreads are faded by rule, so this saves as unofficial.</div>');
+      else if (wasBig && !isBig && c.it.unofficial) out.push('<div class="trk-was">Under 20 points now, so this saves as official.</div>');
+    }
+    return out.join('');
+  }
+  function trkSwitchHtml(c) {
+    var off = trkDraftUnofficial(c, trkDraftVals(c));
+    return '<button id="trk-d-official" class="trk-switch' + (off ? '' : ' is-on') + '" role="switch" aria-checked="' + (off ? 'false' : 'true') + '" data-trk-act="dofficial">' +
+      '<span class="trk-switch-knob"></span></button><span class="trk-switch-label">' + (off ? 'Unofficial — left out of the record' : 'Official — counts in the record') + '</span>';
+  }
+
+  function trkDrawerHtml() {
+    var c = trkDraftCtx();
+    if (!c) return '';
+    var it = c.it, p = c.p, d = trkDraft, when = trkWhen(it);
+    var field = function (label, key, extra) {
+      return '<label class="trk-d-field"><span>' + label + '</span>' +
+        '<input id="trk-d-' + key + '" class="trk-in' + (d.msg[key] ? ' is-bad' : '') + '" type="text" autocomplete="off" value="' + esc(d[key]) + '" data-trk-d="' + key + '"' + (extra || '') + '>' +
+        (d.msg[key] ? '<div class="trk-msg" role="alert">' + esc(d.msg[key]) + '</div>' : '') + '</label>';
+    };
+    var pickField = '';
+    if (p.ok) {
+      var opts = (it.type === 'Total' || it.type === 'Prop') ? [['O', 'Over'], ['U', 'Under']]
+        : [p.away, p.home].filter(function (a) { return !!a; }).map(function (a) { var t = trkTeam(a); return [a, a + (t && t.n ? ' — ' + t.n : '')]; });
+      if (!opts.some(function (o) { return o[0] === d.pick; })) opts.unshift([d.pick, d.pick]);
+      pickField = '<label class="trk-d-field"><span>' + (it.type === 'Total' || it.type === 'Prop' ? 'Side' : 'Pick') + '</span>' +
+        '<select id="trk-d-pick" class="trk-sel" data-trk-d="pick">' +
+        opts.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (o[0] === d.pick ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('') +
+        '</select></label>';
+    }
+    // Presets first, then any tag already used on some other play, then this play's own.
+    var pool = TRK_TAG_PRESETS.slice(), seen = {};
+    loadTrk().forEach(function (x) { trkTagsOf(x).forEach(function (t) { pool.push(t); }); });
+    d.tags.forEach(function (t) { pool.push(t); });
+    var chips = pool.filter(function (t) { var k = t.toLowerCase(); if (seen[k]) return false; seen[k] = true; return true; })
+      .map(function (t, i) {
+        var on = trkHasTag(d.tags, t);
+        return '<button id="trk-d-tag-' + i + '" class="trk-tagbtn' + (on ? ' is-on' : '') + (t === 'Injury' ? ' is-injury' : '') + '" aria-pressed="' + (on ? 'true' : 'false') + '" data-trk-act="dtag" data-trk-tag="' + esc(t) + '">' + esc(t) + '</button>';
+      }).join('');
+
+    return '<div class="trk-backdrop" data-trk-act="dclose"></div>' +
+      '<aside class="trk-drawer" role="dialog" aria-label="Edit play">' +
+        '<div class="trk-d-head"><h3>Edit play</h3><button class="trk-icon is-x" data-trk-act="dclose" aria-label="Close">×</button></div>' +
+        '<div class="trk-d-body">' +
+          '<div class="trk-d-game"><div class="trk-match">' + trkMatchHtml(it, p, 30) + '</div>' +
+            '<div class="trk-was">' + esc(it.type) + (when.top ? ' · ' + esc(when.top) : '') + (when.sub ? ', ' + esc(when.sub) : '') + '</div></div>' +
+          (p.ok ? '' : field('Description', 'description')) +
+          pickField +
+          (c.hasLine ? field(it.type === 'Spread' ? 'Spread' : 'Line', 'line') : '') +
+          '<div class="trk-d-two">' + field('Odds', 'price') + field('Stake', 'stake') + '</div>' +
+          '<div id="trk-d-preview" class="trk-d-preview">' + trkPreviewHtml(c) + '</div>' +
+          '<div class="trk-d-field"><span>Tags</span><div class="trk-tagrow">' + chips + '</div>' +
+            '<div class="trk-d-addtag"><input id="trk-d-newTag" class="trk-in" type="text" maxlength="24" autocomplete="off" placeholder="Add your own tag" value="' + esc(d.newTag) + '" data-trk-d="newTag" aria-label="New tag">' +
+            '<button class="trk-btn" data-trk-act="dtagadd">Add</button></div></div>' +
+          '<div class="trk-d-field"><span>Official play</span><div id="trk-d-switch" class="trk-switchrow">' + trkSwitchHtml(c) + '</div></div>' +
+          '<label class="trk-d-field"><span>Notes</span>' +
+            '<textarea id="trk-d-notes" class="trk-in" rows="4" maxlength="' + TRK_NOTE_MAX + '" placeholder="Why you took it, what moved, anything worth remembering" data-trk-d="notes">' + esc(d.notes) + '</textarea>' +
+            '<div id="trk-d-count" class="trk-d-count">' + d.notes.length + '/' + TRK_NOTE_MAX + '</div></label>' +
+        '</div>' +
+        '<div class="trk-d-foot"><button class="trk-btn is-danger" data-trk-act="ddelete">Remove play</button><span style="flex:1"></span>' +
+          '<button class="trk-btn" data-trk-act="dclose">Cancel</button><button class="trk-btn is-primary" data-trk-act="dsave">Save changes</button></div>' +
+      '</aside>';
+  }
+  function trkDrawerRender(focusId) {
+    var root = document.getElementById('trk-drawer-root');
+    if (!root) { root = document.createElement('div'); root.id = 'trk-drawer-root'; document.body.appendChild(root); }
+    root.innerHTML = trkDraft ? trkDrawerHtml() : '';
+    if (!root.innerHTML) trkDraft = null;
+    var el = focusId && document.getElementById(focusId);
+    if (el) el.focus();
+  }
+  // Just the live read-out and the official switch -- redrawing the whole
+  // panel on every keystroke would drop the cursor out of the box being typed in.
+  function trkDrawerRefresh() {
+    var c = trkDraftCtx();
+    if (!c) return;
+    var pv = document.getElementById('trk-d-preview'), sw = document.getElementById('trk-d-switch'), n = document.getElementById('trk-d-count');
+    if (pv) pv.innerHTML = trkPreviewHtml(c);
+    if (sw) sw.innerHTML = trkSwitchHtml(c);
+    if (n) n.textContent = trkDraft.notes.length + '/' + TRK_NOTE_MAX;
+  }
+  function trkOpenDrawer(id) {
+    var it = trkFind(loadTrk(), id);
+    if (!it) return;
+    var p = trkParse(it);
+    state.trkEdit = null;
+    trkDraft = {
+      id: id, pick: p.pick,
+      line: p.line == null ? '' : (it.type === 'Spread' ? trkFmtLine(p.line) : String(p.line)),
+      price: it.price == null ? '' : trkFmtPrice(it.price),
+      stake: it.stake == null ? '' : String(it.stake),
+      tags: trkTagsOf(it).slice(), notes: it.notes || '', newTag: '',
+      unofficial: !!it.unofficial, unofficialTouched: false,
+      description: it.description || '', msg: {}
+    };
+    render();
+    trkDrawerRender(!p.ok ? 'trk-d-description' : (it.type === 'Moneyline' ? 'trk-d-price' : 'trk-d-line'));
+  }
+  function trkCloseDrawer() { trkDraft = null; trkDrawerRender(); }
+  function trkDraftAddTag() {
+    var t = String(trkDraft.newTag || '').trim().slice(0, 24);
+    if (!t) return;
+    if (!trkHasTag(trkDraft.tags, t)) trkDraft.tags.push(t);
+    trkDraft.newTag = '';
+    trkDrawerRender('trk-d-newTag');
+  }
+  function trkDrawerSave() {
+    var c = trkDraftCtx();
+    if (!c) return trkCloseDrawer();
+    var v = trkDraftVals(c);
+    trkDraft.msg = {};
+    if (!v.line.ok) trkDraft.msg.line = v.line.msg;
+    if (!v.price.ok) trkDraft.msg.price = v.price.msg;
+    if (!v.stake.ok) trkDraft.msg.stake = v.stake.msg;
+    if (!c.p.ok && !String(trkDraft.description).trim()) trkDraft.msg.description = 'Enter a description';
+    var firstBad = ['description', 'line', 'price', 'stake'].filter(function (k) { return trkDraft.msg[k]; })[0];
+    if (firstBad) return trkDrawerRender('trk-d-' + firstBad);
+    var typed = String(trkDraft.newTag || '').trim();   // a tag typed but not yet added still counts
+    var ch = { stake: v.stake.value, notes: trkDraft.notes, tags: typed ? trkDraft.tags.concat([typed]) : trkDraft.tags };
+    if (c.p.ok) { ch.pick = trkDraft.pick; if (c.hasLine) ch.line = v.line.value; }
+    else ch.description = trkDraft.description;
+    if (v.price.value != null) ch.price = v.price.value;
+    if (trkDraft.unofficialTouched) ch.unofficial = trkDraft.unofficial;
+    trkCommit(trkDraft.id, ch);
+    trkCloseDrawer();
+    render();
+  }
+
+  /* ---- Tracker events -------------------------------------------------
+     One listener per kind of event for every tracker control, keyed off
+     data-trk-* attributes, since rows are redrawn on every change. */
+  function renderKeep() {
+    var a = document.activeElement, id = a && a.id, s = null, e = null;
+    try { s = a.selectionStart; e = a.selectionEnd; } catch (x) {}
+    render();
+    var n = id && document.getElementById(id);
+    if (n) { n.focus(); try { if (s != null) n.setSelectionRange(s, e); } catch (x) {} }
+  }
+  function trkFocusEditor() {
+    var n = document.getElementById('trk-edit-input');
+    if (n) { n.focus(); n.select(); }
+  }
+  function trkSaveInline() {
+    var ed = state.trkEdit;
+    if (!ed) return;
+    var it = trkFind(loadTrk(), ed.id);
+    if (!it) { state.trkEdit = null; return render(); }
+    var chk = trkCheck(it.type, ed.field, ed.value);
+    if (!chk.ok) { ed.msg = chk.msg; render(); return trkFocusEditor(); }
+    var ch = {};
+    ch[ed.field] = chk.value;
+    trkCommit(ed.id, ch);
+    state.trkEdit = null;
+    render();
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-page]')) { state.trkEdit = null; if (trkDraft) trkCloseDrawer(); return; }   // leaving the tab drops a half-typed edit
+    var el = e.target.closest('[data-trk-act]');
+    if (!el) return;
+    var act = el.dataset.trkAct, id = el.dataset.trkId, it;
+    if (act === 'edit') {
+      it = trkFind(loadTrk(), id);
+      if (!it) return;
+      var p = trkParse(it);
+      state.trkEdit = { id: id, field: el.dataset.trkField, msg: '',
+        value: el.dataset.trkField === 'price' ? (it.price == null ? '' : trkFmtPrice(it.price))
+          : (it.type === 'Spread' ? trkFmtLine(p.line) : String(p.line)) };
+      render();
+      return trkFocusEditor();
+    }
+    if (act === 'save') return trkSaveInline();
+    if (act === 'cancel') { state.trkEdit = null; return render(); }
+    if (act === 'grade') {
+      it = trkFind(loadTrk(), id);
+      if (it) { trkCommit(id, { status: it.status === el.dataset.trkStatus ? null : el.dataset.trkStatus }); render(); }
+      return;
+    }
+    if (act === 'official') {
+      it = trkFind(loadTrk(), id);
+      if (it) { trkCommit(id, { unofficial: !it.unofficial }); render(); }
+      return;
+    }
+    if (act === 'remove') {
+      it = trkFind(loadTrk(), id);
+      if (it && confirm('Remove this play from the tracker?\\n\\n' + it.description)) window.__cfbTrkRemove(id);
+      return;
+    }
+    if (act === 'drawer') return trkOpenDrawer(id);
+    if (act === 'clearf') { var f = trkFilterState(el.dataset.trkSec); f.q = ''; f.status = 'all'; f.tag = 'all'; return render(); }
+    if (act === 'addtoggle') { state.trkAddOpen = !state.trkAddOpen; return render(); }
+    if (!trkDraft) return;
+    if (act === 'dclose') return trkCloseDrawer();
+    if (act === 'dsave') return trkDrawerSave();
+    if (act === 'ddelete') {
+      it = trkFind(loadTrk(), trkDraft.id);
+      if (it && confirm('Remove this play from the tracker?\\n\\n' + it.description)) { var rid = trkDraft.id; trkCloseDrawer(); window.__cfbTrkRemove(rid); }
+      return;
+    }
+    if (act === 'dtag') {
+      var t = el.dataset.trkTag;
+      if (trkHasTag(trkDraft.tags, t)) trkDraft.tags = trkDraft.tags.filter(function (x) { return String(x).toLowerCase() !== t.toLowerCase(); });
+      else trkDraft.tags.push(t);
+      return trkDrawerRender(el.id);
+    }
+    if (act === 'dtagadd') return trkDraftAddTag();
+    if (act === 'dofficial') {
+      var c = trkDraftCtx();
+      if (!c) return;
+      trkDraft.unofficial = !trkDraftUnofficial(c, trkDraftVals(c));
+      trkDraft.unofficialTouched = true;
+      trkDrawerRefresh();
+      var sw = document.getElementById('trk-d-official');
+      if (sw) sw.focus();
+    }
+  });
+
+  document.addEventListener('input', function (e) {
+    var el = e.target;
+    if (el.id === 'trk-edit-input' && state.trkEdit) { state.trkEdit.value = el.value; return; }
+    if (el.dataset && el.dataset.trkFilter === 'q') { trkFilterState(el.dataset.trkSec).q = el.value; return renderKeep(); }
+    if (el.dataset && el.dataset.trkD && trkDraft && el.tagName !== 'SELECT') { trkDraft[el.dataset.trkD] = el.value; trkDrawerRefresh(); }
+  });
+
+  document.addEventListener('change', function (e) {
+    var el = e.target;
+    if (!el.dataset) return;
+    if (el.dataset.trkFilter && el.tagName === 'SELECT') { trkFilterState(el.dataset.trkSec)[el.dataset.trkFilter] = el.value; return render(); }
+    if (el.dataset.trkStake) {
+      var chk = trkCheck('', 'stake', el.value);
+      if (chk.ok) trkCommit(el.dataset.trkStake, { stake: chk.value });
+      return renderKeep();
+    }
+    if (el.dataset.trkD === 'pick' && trkDraft) {
+      var c = trkDraftCtx();
+      // Switching sides on a spread flips the sign of the number in the box:
+      // PITT -2.5 becomes UNC +2.5, which is almost always what was meant.
+      if (c && c.it.type === 'Spread' && el.value !== trkDraft.pick) {
+        var cur = trkCheck('Spread', 'line', trkDraft.line);
+        if (cur.ok) trkDraft.line = trkFmtLine(-cur.value);
+      }
+      trkDraft.pick = el.value;
+      trkDrawerRender('trk-d-pick');
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    var el = e.target;
+    if (el.id === 'trk-edit-input' && state.trkEdit) {
+      if (e.key === 'Enter') { e.preventDefault(); return trkSaveInline(); }
+      if (e.key === 'Escape') { e.preventDefault(); state.trkEdit = null; return render(); }
+      // Up / down arrows walk a spread or line by half a point.
+      if ((e.key === 'ArrowUp' || e.key === 'ArrowDown') && state.trkEdit.field === 'line') {
+        var it = trkFind(loadTrk(), state.trkEdit.id), cur = it && trkCheck(it.type, 'line', el.value);
+        if (cur && cur.ok) {
+          e.preventDefault();
+          var nx = cur.value + (e.key === 'ArrowUp' ? 0.5 : -0.5);
+          el.value = state.trkEdit.value = it.type === 'Spread' ? trkFmtLine(nx) : String(Math.max(0, nx));
+        }
+      }
+      return;
+    }
+    if (!trkDraft) return;
+    if (e.key === 'Escape') { e.preventDefault(); return trkCloseDrawer(); }
+    if (e.key === 'Enter' && el.dataset && el.dataset.trkD && el.tagName === 'INPUT') {
+      e.preventDefault();
+      return el.dataset.trkD === 'newTag' ? trkDraftAddTag() : trkDrawerSave();
+    }
+  });
+
+  // A logo that won't load (no logo on file under that link, or offline)
+  // is swapped for the team's helmet, and not asked for again this visit.
+  document.addEventListener('error', function (e) {
+    var el = e.target;
+    if (!el || el.tagName !== 'IMG' || !el.classList.contains('trk-logo')) return;
+    trkLogoBad[el.getAttribute('src')] = true;
+    var box = document.createElement('span');
+    box.innerHTML = trkHelmet(el.dataset.trkAbbr, Number(el.dataset.trkSize) || 22);
+    if (el.parentNode && box.firstChild) el.parentNode.replaceChild(box.firstChild, el);
+  }, true);
 
   // The automatic prop log (10/2026). Every prop in a group that is up in
   // the backtest is logged the first time the model flags it and graded
@@ -2952,28 +3898,31 @@ RENDERER_JS = """<script>
     var gameLineItemsShown = state.trackerModelTab === 'all' ? gameLineItems
       : gameLineItems.filter(function (it) { return it.modelSource === state.trackerModelTab; });
 
-    // Manual add-a-play form -- for anything not driven by a live model
-    // signal (right now: Totals). Free text date so it can match the
-    // "Sat 9/19, 11:30PM UTC" style the rest of the Tracker uses, but any
-    // format you want works since it's just displayed, never parsed.
-    var manualAddForm = '<div class="trk-manual-add" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 4px;padding:10px;border:1px solid var(--border-1, #2a2f3a);border-radius:8px">' +
-      '<select id="trk-manual-type" style="min-width:110px">' +
+    // Add-a-play form -- for anything not driven by a live model signal
+    // (right now: Totals). Folded away behind a button (10/2026) now that a
+    // tracked spread can be corrected on its own row, which is what the
+    // form mostly got used for.
+    var manualAddForm = !state.trkAddOpen ? '' : '<div class="trk-add">' +
+      '<select id="trk-manual-type" class="trk-sel" aria-label="Type">' +
         '<option value="Spread">Spread</option>' +
         '<option value="Moneyline">Moneyline</option>' +
         '<option value="Total" selected>Total</option>' +
       '</select>' +
-      '<input id="trk-manual-desc" type="text" placeholder="Description, e.g. O 55.5 -- VT at MD" style="flex:2;min-width:220px">' +
-      '<input id="trk-manual-date" type="text" placeholder="Date, e.g. Sat 9/19, 11:30PM UTC" style="flex:1;min-width:170px">' +
-      '<input id="trk-manual-price" type="number" placeholder="Price" value="-110" style="width:90px">' +
-      '<input id="trk-manual-edge" type="number" step="0.1" placeholder="Edge (pts)" style="width:100px">' +
-      '<input id="trk-manual-stake" type="number" placeholder="Stake" value="50" style="width:80px">' +
-      '<label style="display:flex;align-items:center;gap:4px;font-size:12px;color:var(--muted-4,#888)">' +
+      '<input id="trk-manual-desc" class="trk-in" type="text" placeholder="O 55.5 -- VT at MD" style="flex:2 1 240px" aria-label="Play">' +
+      '<input id="trk-manual-date" class="trk-in" type="datetime-local" style="flex:0 1 200px" aria-label="Kickoff, your time" title="Kickoff, in your own time zone">' +
+      '<input id="trk-manual-price" class="trk-in" type="number" placeholder="Odds" value="-110" style="width:90px" aria-label="Odds">' +
+      '<input id="trk-manual-edge" class="trk-in" type="number" step="0.1" placeholder="Edge (pts)" style="width:112px" aria-label="Edge in points">' +
+      '<input id="trk-manual-stake" class="trk-in" type="number" placeholder="Stake" value="50" style="width:84px" aria-label="Stake">' +
+      '<label style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);padding:7px 2px">' +
         '<input id="trk-manual-unofficial" type="checkbox"> Unofficial' +
       '</label>' +
-      '<button class="tab tab--prop" onclick="window.__cfbTrkManualAdd()"><span>+ Add Play</span></button>' +
+      '<button class="trk-btn is-primary" style="padding:7px 14px" onclick="window.__cfbTrkManualAdd()">Add play</button>' +
+      '<div class="trk-add-hint">Write the pick, two dashes, then the game: <b>O 55.5 -- VT at MD</b>, <b>PITT -2.5 -- UNC at PITT</b> or <b>TOL ML -- TOL at MSU</b>. ' +
+        'Written that way the row gets team logos and a line you can click to change. Anything else is kept exactly as typed.</div>' +
     '</div>';
 
-    var exportImportBar = '<div class="prop-tabs" style="margin:10px 0 4px">' +
+    var exportImportBar = '<div class="prop-tabs" style="margin:12px 0 4px">' +
+      '<button class="tab tab--prop' + (state.trkAddOpen ? ' is-active' : '') + '" data-trk-act="addtoggle" aria-expanded="' + (state.trkAddOpen ? 'true' : 'false') + '"><span>+ Add a play</span></button>' +
       '<button class="tab tab--prop" onclick="window.__cfbTrkExport()"><span>Export JSON</span></button>' +
       '<label class="tab tab--prop" style="cursor:pointer">' +
         '<span>Import JSON</span>' +
@@ -2982,8 +3931,8 @@ RENDERER_JS = """<script>
     '</div>';
 
     return '<div class="section-head" id="trk-section"><div class="section-title"><div class="section-flag is-green"></div><h2>Tracker</h2></div></div>' +
-      manualAddForm +
       exportImportBar +
+      manualAddForm +
       (items.length ? '' : '<div class="trk-empty">No plays tracked yet. Click +TRK on any Edge Board row or Bet Card play, or check back after the next run — official player props get added here automatically.</div>') +
       renderTrackerSection(gameLineItemsShown, {
         title: 'Game Lines (Moneyline / Spread / Total)',
@@ -2991,6 +3940,7 @@ RENDERER_JS = """<script>
           ? 'No game-line plays tracked yet. Click +TRK on any Edge Board row or Bet Card play.'
           : 'No ' + (state.trackerModelTab === 'trained_model' ? 'trained-model' : 'untrained-model') + ' plays tracked yet under this tab.',
         sectionId: 'trk-gamelines-section',
+        sec: 'lines',
         extraHtml: modelTabBar,
       }) +
       renderAutoTrackedProps() +
@@ -2998,6 +3948,7 @@ RENDERER_JS = """<script>
         title: 'My Player Props',
         emptyMsg: 'No player-prop plays in your own list yet — official props get added here automatically after each pipeline run, and + My list on the Props tab adds any other play.',
         sectionId: 'trk-props-section',
+        sec: 'props',
         extraHtml: '<div class="prop-tabs" style="margin:10px 0 4px">' +
           '<button class="tab tab--prop" onclick="window.__cfbTrkClearPendingAutoProps()"><span>Clear ungraded auto-props</span></button>' +
         '</div>',
@@ -3107,7 +4058,7 @@ RENDERER_JS = """<script>
       '<div class="wrap">' +
         renderPage(priced, card, sel) +
         '<div class="footer">' +
-          '<span>Team marks are generic color-accurate helmets, not school logos. Preseason: no in-season form exists yet for 2026, ' +
+          '<span>Team marks are generic color-accurate helmets, except in My Tracker, which shows school logos where one is on file. Preseason: no in-season form exists yet for 2026, ' +
           'so every model number here comes from SP+ rating differential plus a fitted home-field constant, adjusted by any active ' +
           'manual injury/availability override (config/injury_overrides.csv \\u2014 hand-maintained, not scraped; no free CFB injury API ' +
           'exists). No Total/Team-total market, weather, travel, pace, returning-production, or futures data is fetched by this pipeline ' +
