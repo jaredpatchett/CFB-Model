@@ -456,8 +456,11 @@ def build_prop_tracking(history, path: str = PROPS_TRACK_PATH, max_results: int 
         results = sorted((p for p in plays if p.get("result") in ("W", "L", "P")), key=lambda p: str(p.get("start_time")), reverse=True)
         upcoming = sorted((p for p in plays if not p.get("started")), key=lambda p: str(p.get("start_time")))
         # Official plays' own live record (10/2026), for the Props tab's record line.
-        official = (log.get("results") or {}).get("official")
-        return {"asOf": log.get("generated_at"), "overall": agg(plays), "official": official, "byKind": by_kind,
+        live = log.get("results") or {}
+        official = live.get("official")
+        # Receptions unders (10/2026): plays and leans, each on its own line.
+        return {"asOf": log.get("generated_at"), "overall": agg(plays), "official": official,
+                "underPlay": live.get("under_play"), "underLean": live.get("under_lean"), "byKind": by_kind,
                 "results": [slim(p) for p in results[:max_results]], "nResults": len(results),
                 "upcoming": [slim(p) for p in upcoming[:max_upcoming]], "nUpcoming": len(upcoming)}
     except Exception as e:
@@ -507,6 +510,47 @@ def attach_prop_first_flags(props, path: str = PROP_FLAGS_PATH):
     except Exception as e:
         print(f"  [note] could not read {path} ({e}) -- Props details will not show the first logged price")
         return 0
+
+
+PROPS_LAB3_PATH = "docs/data/props_lab3.json"
+
+
+def build_prop_rules(path: str = PROPS_LAB3_PATH):
+    """How each receptions RULE did over every season graded in props lab 3
+    (this season's saved lines plus the past seasons pulled), for the Props
+    tab's Track record column: {'rec_over': official overs, 10% to 30% edge;
+    'rec_under': unders at 30%+; 'rec_under_lean': unders at 10% to 30%},
+    each {record, units, roi, n, seasons}. None if the lab file is not there.
+    Never raises -- a display extra."""
+    try:
+        if not os.path.exists(path):
+            return None
+        with open(path) as f:
+            res = json.load(f)["results"]["pff"]
+        sets = [x for x in [res.get("props_2026")] + list((res.get("props_history") or {}).values()) if x and x.get("n")]
+
+        def total(rows):
+            w = l = n = 0
+            units = 0.0
+            for r in rows:
+                if not r or not r.get("n"):
+                    continue
+                a, b = (int(x) for x in str(r["record"]).split("-")[:2])
+                w, l, n, units = w + a, l + b, n + int(r["n"]), units + float(r["units"])
+            if not n:
+                return None
+            return {"record": f"{w}-{l}", "units": round(units, 1), "roi": round(units / n * 100, 1), "n": n, "seasons": len(sets)}
+
+        def unders(x, labels):
+            return [b for b in (x.get("under_edge_buckets") or []) if b.get("bucket") in labels]
+
+        out = {"rec_over": total([x.get("rule_under_30_edge") for x in sets]),
+               "rec_under": total([b for x in sets for b in unders(x, {"30%+"})]),
+               "rec_under_lean": total([b for x in sets for b in unders(x, {"10-14.9%", "15-19.9%", "20-29.9%"})])}
+        return {k: v for k, v in out.items() if v} or None
+    except Exception as e:
+        print(f"  [note] could not read {path} ({e}) -- receptions rules will show the single-season track record")
+        return None
 
 
 def build_prop_edge_history():
@@ -2241,9 +2285,9 @@ RENDERER_JS = """<script>
   }
   function propConfidence(r) {
     var lp = r._lp, be = r._be, gp = r.games_played, inj = r.injury_status;
-    // Official = receptions overs at 10%+ and under 30% EV (the one prop
-    // group that held up in the live backtest) -- always listed first, as
-    // TARGET. 30%+ edges are capped to Watch by the export.
+    // Official = receptions overs at 10%+ and under 30% EV, and (10/2026)
+    // receptions unders at 30%+ EV -- always listed first, as TARGET. Overs
+    // at 30%+ are capped to Watch by the export.
     if (r.is_official_play) return { tier: 'TARGET', rank: 0, color: 'var(--green)' };
     if (lp == null) return { tier: 'NONE', rank: 9, color: 'var(--muted-4)' };
     var gap = be != null ? lp - be : 0;
@@ -2404,7 +2448,9 @@ RENDERER_JS = """<script>
     rows.forEach(function (r) {
       r._h = edgeHist(r);
       r._auto = !!(r.is_official_play || isTracked(r, r._h));
-      r._sec = r.is_official_play ? 'official' : (r.is_watch_play ? 'watch' : (r._auto ? 'tracked' : 'lean'));
+      // Receptions unders at a 10% to 30% edge are leans with their own view
+      // and their own record (10/2026).
+      r._sec = r.is_official_play ? 'official' : (r.is_under_lean ? 'underlean' : (r.is_watch_play ? 'watch' : (r._auto ? 'tracked' : 'lean')));
     });
 
     // ---- Simplified 10/2026: each row answers "is there an edge?" once ----
@@ -2415,9 +2461,10 @@ RENDERER_JS = """<script>
     // opens on Official plays, in kickoff order; Watch and All props are one
     // click away. The Conf column and the High/Medium/Low tally are gone
     // (Check and Pass still show, as heads-up tags).
-    var view = (state.propView === 'watch' || state.propView === 'all') ? state.propView : 'official';
+    var view = (state.propView === 'watch' || state.propView === 'all' || state.propView === 'underlean') ? state.propView : 'official';
+    var oneMarket = view === 'official' || view === 'underlean';   // receptions only: no market chips, every play listed
     var visible = function (r) { return state.propShowPass || r._conf.tier !== 'PASS' || r.is_official_play; };
-    var mktOn = view === 'official' ? 'ALL' : mkt;   // official plays are one market; no chips in that view
+    var mktOn = oneMarket ? 'ALL' : mkt;
     var shown = rows.filter(function (r) {
       return (mktOn === 'ALL' || r.market_name === mktOn) &&
         (gameSel === 'ALL' || r.fixture_id === gameSel) &&
@@ -2430,7 +2477,7 @@ RENDERER_JS = """<script>
     var byStrength = function (x, y) { return x._conf.rank - y._conf.rank || (y._lp || 0) - (x._lp || 0); };
 
     // Counts on the view buttons match what each view will actually list.
-    var nSec = { official: 0, watch: 0, tracked: 0, lean: 0 }, nPass = 0;
+    var nSec = { official: 0, underlean: 0, watch: 0, tracked: 0, lean: 0 }, nPass = 0;
     rows.forEach(function (r) {
       if (r._conf.tier === 'PASS') nPass++;
       if (visible(r)) nSec[r._sec]++;
@@ -2443,7 +2490,7 @@ RENDERER_JS = """<script>
         '<b style="color:' + tone(o.units) + '">' + signed(o.units, 2) + 'u</b><span class="pp-rec-n">' + o.graded + ' graded</span></span>';
     };
     var strip = '<div class="pp-recline">' +
-      (T ? recBit('Official plays, live', T.official) + recBit('All auto-tracked', T.overall) : '') +
+      (T ? recBit('Official overs', T.official) + recBit('Official unders', T.underPlay) + recBit('Under leans', T.underLean) + recBit('All auto-tracked', T.overall) : '') +
       '<span class="pp-key"><b>Edge</b> is the model&rsquo;s hit chance against the price. <b>Track record</b> is how plays at that edge size did in the backtest.</span>' +
     '</div>';
 
@@ -2454,8 +2501,9 @@ RENDERER_JS = """<script>
     var controls = '<div class="pp-controls">' +
       '<div class="pp-seg" role="group" aria-label="Which plays to show">' +
         seg(0, 'official', 'Official', nSec.official) +
+        seg(3, 'underlean', 'Under leans', nSec.underlean) +
         seg(1, 'watch', 'Watch', nSec.watch) +
-        seg(2, 'all', 'All props', nSec.official + nSec.watch + nSec.tracked + nSec.lean) +
+        seg(2, 'all', 'All props', nSec.official + nSec.underlean + nSec.watch + nSec.tracked + nSec.lean) +
       '</div>' +
       '<select class="pp-select" aria-label="Game" onchange="window.__cfbPropGame(this.value)">' +
         '<option value="ALL"' + (gameSel === 'ALL' ? ' selected' : '') + '>All games (' + gameIds.length + ')</option>' +
@@ -2463,7 +2511,7 @@ RENDERER_JS = """<script>
       '</select>' +
       (view === 'all' ? '<button class="pp-chip' + (state.propShowPass ? ' is-on' : '') + '" onclick="window.__cfbPropShowPass()">Show passes (' + nPass + ')</button>' : '') +
     '</div>' +
-    (view === 'official' ? '' : '<div class="pp-chips">' + markets.map(function (m) {
+    (oneMarket ? '' : '<div class="pp-chips">' + markets.map(function (m) {
       return '<button class="pp-chip' + (m === mkt ? ' is-on' : '') + '" data-prop-market="' + esc(m) + '">' + (m === 'ALL' ? 'All markets' : esc(marketName(m))) + '</button>';
     }).join('') + '</div>');
 
@@ -2489,7 +2537,8 @@ RENDERER_JS = """<script>
     };
     var groups = [];   // {key, name, note, cap, rows}
     if (view === 'all') {
-      [['official', 'Official plays', 'Receptions overs with a 10% to 30% edge. The only props the rules call bets.', 0],
+      [['official', 'Official plays', 'Receptions overs with a 10% to 30% edge, and receptions unders with a 30%+ edge. The only props the rules call bets.', 0],
+       ['underlean', 'Under leans', 'Receptions unders with a 10% to 30% edge. Winners in all three seasons tested, by a thin margin. Graded on their own line.', 12],
        ['watch', 'Watch', 'A 10%+ edge on a secondary-role player, or a receptions over capped at 30%+. Tracked, not bet.', 12],
        ['tracked', 'Auto-tracked', 'Has an edge and its kind of play is up in the backtest. Logged and graded automatically.', 12],
        ['lean', 'Other leans', 'Everything else the model has a read on.', 20]].forEach(function (sec) {
@@ -2500,8 +2549,8 @@ RENDERER_JS = """<script>
       var byDay = {};
       shown.forEach(function (r) { var k = dayKey(r.start_time); (byDay[k] = byDay[k] || []).push(r); });
       Object.keys(byDay).sort().forEach(function (k) {
-        var list = byDay[k].sort(view === 'official' ? byKick : byStrength);
-        groups.push({ key: view + '|' + k, name: dayLabel(list[0].start_time), note: '', cap: view === 'official' ? 0 : 12, rows: list });
+        var list = byDay[k].sort(oneMarket ? byKick : byStrength);
+        groups.push({ key: view + '|' + k, name: dayLabel(list[0].start_time), note: '', cap: oneMarket ? 0 : 12, rows: list });
       });
     }
     var ordered = [];
@@ -2605,19 +2654,57 @@ RENDERER_JS = """<script>
         cells.push('<div class="pp-dcell is-wide"><div class="pp-dlabel">' + esc(marketName(r.market_name)) + ' by game</div><div class="pp-gls">' + chips + '</div>' +
           '<div class="pp-sub">' + (isOver ? 'Over ' : 'Under ') + esc(r.line) + ' in ' + hits + ' of ' + gl.length + '. The model already counts these games.</div></div>');
       }
+      var muD = matchupOf(r);
+      if (muD) cells.push(dcell('Matchup', esc(muD.label), esc(muD.title)));
+      else if (r.market_name === 'Receptions' && r.matchup === 'average') cells.push(dcell('Matchup', 'Average defense against ' + (MATCHUP_GROUPS[r.matchup_vs] || 'his position'), 'It has allowed about what its opponents usually get.'));
       cells.push(whatIfCell(r));
       return '<div class="pp-detail">' + cells.join('') + '</div>';
+    };
+    // Matchup marker on receptions props (10/2026). The export labels the
+    // opposing defense tough, average or soft against this player's position
+    // group (catches allowed against what those offenses usually get, earlier
+    // games only). Nothing is shown for an average defense.
+    //   fire   an under with a 10%+ edge against a tough defense -- the one
+    //          pairing the three-season backtest supports (260-164)
+    //   check  an over with a 10%+ edge against a soft defense -- agrees
+    //          with the pick, but did not add anything in the backtest
+    //   plain  the defense goes against the pick, or the edge is under 10%
+    var MATCHUP_GROUPS = { WR: 'wide receivers', TE: 'tight ends', RB: 'running backs' };
+    var matchupOf = function (r) {
+      if (r.market_name !== 'Receptions' || (r.matchup !== 'tough' && r.matchup !== 'soft')) return null;
+      if (r.model_lean !== 'over' && r.model_lean !== 'under') return null;
+      var tough = r.matchup === 'tough', over = r.model_lean === 'over', edge = r.model_ev != null && r.model_ev >= 10;
+      var name = tough ? 'Tough D' : 'Soft D';
+      var what = 'This defense has allowed ' + (tough ? 'fewer' : 'more') + ' catches to ' + (MATCHUP_GROUPS[r.matchup_vs] || 'his position') + ' than its opponents usually get.';
+      if (!over && tough && edge) return { kind: 'fire', cls: 'is-official', text: '&#128293; ' + name, label: 'Tough defense against ' + (MATCHUP_GROUPS[r.matchup_vs] || 'his position'),
+        title: what + ' Unders with a 10%+ edge against tough defenses went 260-164 over three seasons, and were up in each one.' };
+      if (over && !tough && edge) return { kind: 'check', cls: 'is-track', text: '&#10003; ' + name, label: 'Soft defense against ' + (MATCHUP_GROUPS[r.matchup_vs] || 'his position'),
+        title: what + ' That agrees with the over, but it is not a proven edge: official overs against soft defenses went 33-25 over three seasons, no better than other overs.' };
+      var against = over === tough;
+      return { kind: against ? 'against' : 'plain', cls: 'is-lean', text: name, label: (tough ? 'Tough' : 'Soft') + ' defense against ' + (MATCHUP_GROUPS[r.matchup_vs] || 'his position'),
+        title: what + (against ? ' That goes against this pick.' + (over ? ' Official overs against tough defenses went 79-72 over three seasons.' : ' Unders with a 10%+ edge against soft defenses went 160-132 over three seasons.')
+                               : ' The edge here is under 10%, below where the matchup was tested.') };
     };
     var rowHtml = function (r, i, withDay) {
       var isOver = r.model_lean === 'over';
       var h = r._h;
       var isOpen = state.propDetail === keyOf(r);
       var started = r.start_time && new Date(r.start_time).getTime() < nowMs;
-      var track = !h ? '<div class="pp-track is-none">Not in backtest</div>'
+      // A play made under one of the receptions rules shows that RULE's
+      // record over every season graded (props lab 3), not the record of
+      // its narrow edge band in this season alone.
+      var rule = (D.propRules || {})[r.play_kind];
+      var track = rule ? '<div class="pp-track" style="color:' + tone(rule.roi) + '">' + signed(rule.roi, 0) + '% ROI &middot; ' + signed(rule.units, 1) + 'u</div>' +
+          '<div class="pp-sub">' + esc(rule.record) + ' under this rule, ' + rule.seasons + ' season' + (rule.seasons === 1 ? '' : 's') + '</div>'
+        : !h ? '<div class="pp-track is-none">Not in backtest</div>'
         : h.small ? '<div class="pp-track is-none">Small sample</div><div class="pp-sub">' + esc(h.record) + ' at this edge size</div>'
         : '<div class="pp-track" style="color:' + tone(h.roi) + '">' + signed(h.roi, 0) + '% ROI &middot; ' + signed(h.units, 1) + 'u</div>' +
           '<div class="pp-sub">' + esc(h.record) + ' at this edge size</div>';
       var flags = [];
+      if (r.play_kind === 'rec_under') flags.push('<span class="pp-tag is-official" title="A receptions under with a 30%+ edge. An official play.">Under play</span>');
+      else if (r.is_under_lean) flags.push('<span class="pp-tag is-watch" title="A receptions under with a 10% to 30% edge. A lean, graded on its own line.">Under lean</span>');
+      var mu = matchupOf(r);
+      if (mu) flags.push('<span class="pp-tag ' + mu.cls + '" title="' + esc(mu.title) + '">' + mu.text + '</span>');
       if (r.injury_status) flags.push('<span class="pp-tag is-inj" title="' + esc(r.injury_detail || 'On the injury report') + '">' + esc(r.injury_status) + '</span>');
       if (r.edge_capped) flags.push('<span class="pp-tag is-inj" title="A receptions over with a 30%+ edge. Those lost in the backtest, so it is watched, not bet.">30%+ edge</span>');
       else if (!r.is_official_play && r._conf.tier === 'CHECK') flags.push('<span class="pp-tag is-inj" title="The model is far from the market. Check for an injury or a role change first.">Check</span>');
@@ -2651,7 +2738,8 @@ RENDERER_JS = """<script>
         (g.cap && list.length > g.cap ? '<div class="pp-more"><button class="pp-link" data-prop-fold="' + esc(g.key) + '">' +
           (folded ? 'Show all ' + list.length : 'Show top ' + g.cap + ' only') + '</button></div>' : '');
     }).join('');
-    var emptyMsg = view === 'official' ? 'No official plays right now. Watch and All props show everything else the model has a read on.'
+    var emptyMsg = view === 'official' ? 'No official plays right now. Under leans, Watch and All props show everything else the model has a read on.'
+      : view === 'underlean' ? 'No under leans right now. They are receptions unders with a 10% to 30% edge.'
       : 'No plays match these filters. Try another market or game.';
     var table = '<div class="pp-table">' +
       '<div class="pp-grid pp-head"><div>Player</div><div>Pick</div><div>Edge</div><div>Track record</div><div>Heads up</div><div></div></div>' +
@@ -2702,15 +2790,21 @@ RENDERER_JS = """<script>
 
     // 5) The fine print, folded away until wanted.
     var help = '<details class="pp-help"><summary>How to read this page</summary><div class="pp-help-body">' +
-      '<p><b>Official</b> plays are the only props the rules call bets: receptions overs with a 10% to 30% edge, at the best price across books. ' +
+      '<p><b>Official</b> plays are the only props the rules call bets: receptions overs with a 10% to 30% edge, and receptions unders with a 30%+ edge, at the best price across books. ' +
+        '<b>Under leans</b> are receptions unders with a 10% to 30% edge: they won in all three seasons tested, but by a thin margin, so they are graded on their own line. ' +
+        'An under is a play or a lean by its edge at the best price right now, so it can move between the two; the record grades each one once, at the price and label it was first flagged with. ' +
         '<b>Watch</b> plays are logged to see whether they hold up, not bet. <b>All props</b> lists everything the model has a read on.</p>' +
       '<p><b>Edge</b> is what the model expects the bet to return. Under it is the model&rsquo;s chance the pick wins, against the chance the price needs to break even.</p>' +
       '<p><b>Track record</b> is how plays of the same kind and edge size did in the backtest' +
         (EH && EH.nWeekends ? ' (' + EH.nWeekends + ' weekends, 1 unit a play)' : '') + '. Green made money, red lost, and &ldquo;small sample&rdquo; means fewer than ' +
-        ((EH && EH.minBets) || 15) + ' bets. Every play in the same edge range shows the same record. Groups are small, so read it as a guide, not a promise.</p>' +
-      '<p><b>Heads up</b> is empty unless something needs a second look: an injury listing, a <b>30%+ edge</b> (those lost in the backtest, so they are capped to Watch), ' +
+        ((EH && EH.minBets) || 15) + ' bets. Every play in the same edge range shows the same record. Groups are small, so read it as a guide, not a promise. ' +
+        'Official plays and under leans show their whole rule&rsquo;s record over every season tested instead.</p>' +
+      '<p><b>Heads up</b> marks unders as an <b>Under play</b> or an <b>Under lean</b>. Otherwise it is empty unless something needs a second look: an injury listing, a <b>30%+ edge</b> on an over (those lost in the backtest, so they are capped to Watch), ' +
         '<b>Check</b> (the model is far from the market, which usually means it is missing an injury or a role change), ' +
         '<b>Pass</b> (the price needs more than the model gives, or the player is out), or a game that has already started.</p>' +
+      '<p><b>&#128293; Tough D</b> and <b>&#10003; Soft D</b> appear on receptions props when the opposing defense has allowed clearly fewer, or clearly more, catches to that player&rsquo;s position than its opponents usually get (earlier games this season only). ' +
+        'The fire marks an under with a 10%+ edge against a tough defense: those went 260-164 over three seasons. The check marks an over with a 10%+ edge against a soft defense: it agrees with the pick, but overs there did no better than other overs, so treat it as context. ' +
+        'A plain grey Tough D or Soft D means the defense goes against the pick. Hover any of them for the detail.</p>' +
       '<p><b>Details</b> opens the projection, games played, share of the team&rsquo;s catches or carries, the price when the play was first logged, and the player&rsquo;s numbers by game. ' +
         'The model already counts those games, so a good run there is not extra evidence. ' +
         '<b>Try another line</b>, in the same panel, gives the model&rsquo;s hit chance and edge at any line and price you type, for when your book has a different number.</p>' +
@@ -3010,6 +3104,9 @@ RENDERER_JS = """<script>
         edge: r.model_ev,
         stake: 50, status: null, auto: true,
       });
+      // Official unders carry a tag (10/2026), so the tag filter in My Player
+      // Props shows their record apart from the overs.
+      if (!isOver) items[0].tags = ['Rec under'];
       known[sid] = true;
       added = true;
     });
@@ -4096,6 +4193,26 @@ RENDERER_JS = """<script>
     '</div>';
 
     var kc = 'grid-template-columns:1.5fr 0.7fr 0.7fr 0.7fr 0.7fr 1.5fr;';
+    // The receptions rules, each on its own line (10/2026): live record since
+    // the log started, next to the rule's record over every season tested.
+    var R = D.propRules || {};
+    var ruleRow = function (name, live, bt) {
+      var g = live && live.graded;
+      return '<div class="row"><div class="row-accent" style="background:' + (g ? col(live.units) : 'var(--rule)') + '"></div>' +
+        '<div class="row-body" style="' + kc + 'padding:8px 14px;font-size:11.5px">' +
+          '<div style="font-weight:700">' + name + '</div>' +
+          '<div class="num">' + (g ? esc(live.record) : '&mdash;') + '</div>' +
+          '<div class="num" style="color:' + (g ? col(live.units) : 'var(--muted-3)') + ';font-weight:700">' + (g ? sg(live.units, 2) + 'u' : '&mdash;') + '</div>' +
+          '<div class="num" style="color:' + (g ? col(live.roi) : 'var(--muted-3)') + '">' + (g && live.roi != null ? sg(live.roi, 0) + '%' : '&mdash;') + '</div>' +
+          '<div class="num">' + (g ? live.graded : 0) + '</div>' +
+          '<div class="num" style="color:var(--muted-3);font-size:10.5px">' + (bt ? sg(bt.roi, 0) + '% &middot; ' + sg(bt.units, 1) + 'u &middot; ' + esc(bt.record) : '&mdash;') + '</div>' +
+        '</div></div>';
+    };
+    var rules = '<div class="thead" style="display:grid;' + kc + 'margin-top:14px"><div>Receptions rule</div><div class="num">Record</div><div class="num">Units</div><div class="num">ROI</div><div class="num">Graded</div><div class="num">' +
+        (R.rec_over ? R.rec_over.seasons + '-season backtest' : 'Backtest') + '</div></div>' +
+      ruleRow('Official overs, 10% to 30% edge', T.official, R.rec_over) +
+      ruleRow('Official unders, 30%+ edge', T.underPlay, R.rec_under) +
+      ruleRow('Under leans, 10% to 30% edge', T.underLean, R.rec_under_lean);
     var kinds = '<div class="thead" style="display:grid;' + kc + 'margin-top:14px"><div>Kind of play</div><div class="num">Record</div><div class="num">Units</div><div class="num">ROI</div><div class="num">Upcoming</div><div class="num">Backtest</div></div>' +
       T.byKind.map(function (k) {
         var b = k.backtest;
@@ -4144,7 +4261,7 @@ RENDERER_JS = """<script>
         (showUp ? playHead('Upcoming', 'earliest kickoff first') + T.upcoming.map(playRow).join('') + more(T.upcoming.length, T.nUpcoming) : '')
       : '';
     var foot = '<div class="table-foot"><span>A few days of results is a very small sample, so the record will swing. Backtest = how the same kinds of play did before the log started.</span></div>';
-    return head + summary + kinds + results + upcoming + foot;
+    return head + summary + rules + kinds + results + upcoming + foot;
   }
   window.__cfbTrkAutoUpcoming = function () { state.trkAutoShowUpcoming = !state.trkAutoShowUpcoming; render(); };
 
@@ -4356,7 +4473,7 @@ RENDERER_JS = """<script>
   window.__cfbPropGame = function (v) { state.propGame = v; render(); };
   window.__cfbPropOfficial = function () { state.propOfficialOnly = !state.propOfficialOnly; render(); };
   window.__cfbPropShowPass = function () { state.propShowPass = !state.propShowPass; render(); };
-  window.__cfbPropView = function (i) { state.propView = ['official', 'watch', 'all'][i] || 'official'; render(); };
+  window.__cfbPropView = function (i) { state.propView = ['official', 'watch', 'all', 'underlean'][i] || 'official'; render(); };
   // Details panel on a Props-tab row: one open at a time.
   window.__cfbPropDetail = function (i) {
     var r = (window.__cfbPropRows || [])[i];
@@ -4462,6 +4579,7 @@ def main():
 
     model_data = build_model_data(data, backtest=backtest, clv=clv)
     model_data["propEdgeHistory"] = build_prop_edge_history()
+    model_data["propRules"] = build_prop_rules()
     attach_prop_first_flags(model_data.get("propsLive") or [])
     # Game-by-game box-score numbers for the Details panel (10/2026); absent
     # until scripts/export_dashboard_data.py writes them, and the panel just
