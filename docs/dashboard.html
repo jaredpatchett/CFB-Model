@@ -329,6 +329,9 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .trk-icon { background: none; border: 1px solid transparent; color: var(--muted); cursor: pointer; border-radius: 4px; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; font-size: 17px; line-height: 1; padding: 0; }
 .trk-icon:hover { color: var(--text); border-color: var(--rule-strong); background: var(--chip); }
 .trk-icon.is-x:hover { color: var(--red); }
+.trk-dupes { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin: 8px 0 4px; padding: 11px 14px; border: 1px solid rgba(224,180,74,0.5); background: rgba(224,180,74,0.08); border-radius: 6px; font-size: 12px; line-height: 1.5; color: var(--text-dim); }
+.trk-dupes b { color: var(--amber); font-weight: 700; }
+.trk-dupes .trk-btn { padding: 7px 14px; }
 .trk-add { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; margin: 4px 0 6px; padding: 12px; border: 1px solid var(--rule); border-radius: 6px; background: var(--panel); }
 .trk-add .trk-in { min-width: 0; }
 .trk-add-hint { flex-basis: 100%; font-size: 10.5px; color: var(--muted); line-height: 1.5; }
@@ -2145,11 +2148,15 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
   var SEED_TRACKER = [{"id": "t1789600000000seed00", "description": "MD +3.0 — VT at MD", "date": "Sat 9/19, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 13.6, "stake": 50, "status": null, "modelSource": "preseason_prior"}, {"id": "t1789600000137seed01", "description": "LT +19.5 — LT at BAY", "date": "Sat 9/19, 8:00PM UTC", "type": "Spread", "price": -110, "edge": 14.1, "stake": 50, "status": null, "modelSource": "preseason_prior"}, {"id": "t1789600000274seed02", "description": "MISS +2.5 — LSU at MISS", "date": "Sat 9/19, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 15.1, "stake": 50, "status": null, "modelSource": "preseason_prior"}, {"id": "t1789600000411seed03", "description": "UNT +3.0 — UNLV at UNT", "date": "Sat 9/12, 7:45PM UTC", "type": "Spread", "price": -110, "edge": 12.9, "stake": 50, "status": "win", "modelSource": "preseason_prior"}, {"id": "t1789600000548seed04", "description": "CONN +11.5 — MD at CONN", "date": "Sat 9/12, 7:30PM UTC", "type": "Spread", "price": -110, "edge": 18.1, "stake": 50, "status": "loss", "modelSource": "preseason_prior"}, {"id": "t1789600000685seed05", "description": "SDSU +12.5 — SDSU at UCLA", "date": "Sat 9/12, 11:15PM UTC", "type": "Spread", "price": -110, "edge": 19, "stake": 50, "status": "loss", "modelSource": "preseason_prior"}, {"id": "t1789600000822seed06", "description": "LT +35.5 — LT at LSU", "date": "Sat 9/12, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 24.3, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600000959seed07", "description": "ODU +19.5 — ODU at VT", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 26.4, "stake": 50, "status": "loss", "modelSource": "preseason_prior"}, {"id": "t1789600001096seed08", "description": "MICH +5.5 — OU at MICH", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 5.3, "stake": 50, "status": "win", "modelSource": "preseason_prior"}, {"id": "t1789600001233seed09", "description": "WSU +17.5 — WSU at KSU", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 11.8, "stake": 50, "status": "loss", "modelSource": "preseason_prior"}, {"id": "t1789600001370seed10", "description": "USF +3.0 — USF at ARMY", "date": "Sat 9/12, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 6.5, "stake": 50, "status": "win", "modelSource": "preseason_prior"}, {"id": "t1789600001507seed11", "description": "RUTG +3.0 — RUTG at BC", "date": "Fri 9/11, 11:30PM UTC", "type": "Spread", "price": -110, "edge": 5.6, "stake": 50, "status": "loss", "modelSource": "preseason_prior"}, {"id": "t1789600001644seed12", "description": "BOIS +24.5 — BOIS at ORE", "date": "Sat 9/5, 7:30PM UTC", "type": "Spread", "price": -110, "edge": 5.9, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600001781seed13", "description": "ORST +21.0 — ORST at HOU", "date": "Sat 9/5, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 2.1, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600001918seed14", "description": "CCU +21.0 — CCU at WVU", "date": "Sat 9/5, 4:00PM UTC", "type": "Spread", "price": -110, "edge": 11.9, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600002055seed15", "description": "WMU +27.5 — WMU at MICH", "date": "Sat 9/5, 11:00PM UTC", "type": "Spread", "price": -110, "edge": 14.8, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600002192seed16", "description": "JMU ML — LIB at JMU", "date": "Sat 9/5, 4:00PM UTC", "type": "Moneyline", "price": -225, "edge": 17.7, "stake": 50, "status": "win", "modelSource": "preseason_prior"}, {"id": "t1789600002329seed17", "description": "TLSA +13.5 — OKST at TLSA", "date": "Sat 9/5, 7:45PM UTC", "type": "Spread", "price": -110, "edge": 20.5, "stake": 50, "status": "win", "modelSource": "preseason_prior"}, {"id": "t1789600002466seed18", "description": "TOL +10.0 — TOL at MSU", "date": "Sat 9/5, 12:00AM UTC", "type": "Spread", "price": -110, "edge": 12.5, "stake": 50, "status": "win", "modelSource": "preseason_prior"}, {"id": "t1789600002603seed19", "description": "UAB +27.5 — UAB at ILL", "date": "Fri 9/4, 1:00AM UTC", "type": "Spread", "price": -110, "edge": 5.1, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600002740seed20", "description": "GT -6.5 — COLO at GT", "date": "Fri 9/4, 12:00AM UTC", "type": "Spread", "price": -110, "edge": 8.7, "stake": 50, "status": "loss", "modelSource": "preseason_prior"}, {"id": "t1789600002877seed21", "description": "AKR +25.5 — AKR at WAKE", "date": "Thu 9/3, 11:00PM UTC", "type": "Spread", "price": -110, "edge": 9, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600003014seed22", "description": "NMSU +31.5 — NMSU at FSU", "date": "Sat 8/29, 11:00PM UTC", "type": "Spread", "price": -110, "edge": 13, "stake": 50, "status": "win", "unofficial": true, "modelSource": "preseason_prior"}, {"id": "t1789600003151seed23", "description": "UVA -4.0 — NCSU at UVA", "date": "Sat 8/29, 7:30PM UTC", "type": "Spread", "price": -110, "edge": 3.8, "stake": 50, "status": "win", "modelSource": "preseason_prior"}];
   function seedTrackerIfMissing() {
     var items = loadTrk();
-    var known = {};
-    items.forEach(function (it) { known[it.id] = true; });
+    var known = {}, bets = {};
+    // bets: every play already here, by what the bet IS (trkDupKey), not
+    // just by id (10/2026). Without it, removing the restored copy of a bet
+    // that also exists as the original row brought the copy straight back
+    // on the next page load, since its id was "missing" again.
+    items.forEach(function (it) { known[it.id] = true; bets[trkDupKey(it)] = true; });
     var added = false;
     SEED_TRACKER.forEach(function (it) {
-      if (!known[it.id]) { items.push(it); known[it.id] = true; added = true; }
+      if (!known[it.id] && !bets[trkDupKey(it)]) { items.push(it); known[it.id] = true; added = true; }
     });
     if (added) saveTrk(items);
   }
@@ -2245,16 +2252,22 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       //    grade can't be trusted at the new number, so the play is left
       //    ungraded and counted in the message as needing a grade.
       var existing = loadTrk();
-      var at = Object.create(null), atSource = Object.create(null);
-      existing.forEach(function (it, i) { at[it.id] = i; if (it.sourceId) atSource[it.sourceId] = i; });
+      // atBet: the same bet under a different id -- the other laptop's copy
+      // of a play both laptops tracked, or the copy that Remove duplicates
+      // already folded away here. Matched last, after id and sourceId, so
+      // importing a file can't bring removed duplicates back.
+      var at = Object.create(null), atSource = Object.create(null), atBet = Object.create(null);
+      existing.forEach(function (it, i) { at[it.id] = i; if (it.sourceId) atSource[it.sourceId] = i; if (atBet[trkDupKey(it)] === undefined) atBet[trkDupKey(it)] = i; });
       var merged = existing.slice();
       var added = 0, updated = 0, gradesKept = 0, regrade = 0;
       imported.forEach(function (it) {
         if (!it || !it.id) return;
         var i = at[it.id];
         if (i === undefined && it.sourceId) i = atSource[it.sourceId];
+        if (i === undefined) i = atBet[trkDupKey(it)];
         if (i === undefined) {
           at[it.id] = merged.length;
+          atBet[trkDupKey(it)] = merged.length;
           if (it.sourceId) atSource[it.sourceId] = merged.length;
           merged.push(it); added++;
           return;
@@ -2727,6 +2740,99 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     it.updatedAt = Date.now();
     saveTrk(items);
     return true;
+  }
+
+  /* ---- Duplicate plays (10/2026) ----------------------------------------
+     The same bet can end up in the tracker twice: the September log that
+     was restored after a browser lost its storage (SEED_TRACKER) sits next
+     to the original rows on any browser that still had them, and a slate
+     tracked on two laptops and then imported lands twice as well. Every
+     copy counts in the record, so the record reads better than it is.
+
+     Two rows are the same bet only when ALL of these match: type, pick,
+     line, game, kickoff, and the edge the play was flagged at. A row whose
+     line or odds were later edited is compared on what it was flagged at
+     (orig*), so an edited copy still matches its untouched twin. The edge
+     is part of the test on purpose: the same pick tracked once under the
+     untrained model and once under the trained one are two different
+     reads, and are left alone. */
+  function trkDupKey(it) {
+    var p = trkParse(it), base = trkBase(it, p), w = trkWhen(it), e = trkNum(base.edge);
+    var bet = p.ok
+      ? [base.pick != null ? base.pick : p.pick,
+         it.type === 'Moneyline' ? 'ML' : Number(base.line != null ? base.line : p.line),
+         p.head || (p.away && p.home ? p.away + '@' + p.home : p.tail)].join('|')
+      : String(it.description || '').trim();
+    return [it.type, bet.toLowerCase(), w.ts != null ? w.ts : String(it.date || '').trim().toLowerCase(), e == null ? '' : e].join('||');
+  }
+  // How much of YOUR input a row carries -- the copy that gets kept.
+  function trkRichness(it) {
+    return (it.updatedAt ? 4 : 0) + (it.notes ? 2 : 0) + (trkTagsOf(it).length ? 2 : 0) + (it.origEdge !== undefined ? 2 : 0) + (it.modelSource ? 1 : 0) + (it.status ? 1 : 0);
+  }
+  // { groups: [[keep, copy, ...], ...], extra: rows that would go, conflicts: sets left alone }
+  // A set whose copies are graded differently (one a win, one a loss) is a
+  // conflict: there is no telling which is right, so it is never touched.
+  function trkFindDuplicates(items) {
+    var by = Object.create(null), groups = [], conflicts = 0, extra = 0;
+    items.forEach(function (it) { var k = trkDupKey(it); (by[k] = by[k] || []).push(it); });
+    Object.keys(by).forEach(function (k) {
+      var g = by[k];
+      if (g.length < 2) return;
+      var grades = {};
+      g.forEach(function (it) { if (it.status) grades[it.status] = true; });
+      if (Object.keys(grades).length > 1) { conflicts++; return; }
+      g = g.slice().sort(function (a, b) { return trkRichness(b) - trkRichness(a); });   // stable: ties keep tracker order
+      groups.push(g); extra += g.length - 1;
+    });
+    return { groups: groups, extra: extra, conflicts: conflicts };
+  }
+  // Folds each set into its kept copy, then drops the rest. Nothing a copy
+  // knew is lost: a grade, tags, a note, which model made the play and the
+  // kickoff time all carry over, and the bet stays unofficial if ANY copy
+  // was (the restored September rows carry the 20+ point flag that the
+  // originals were tracked before).
+  function trkRemoveDuplicates() {
+    var items = loadTrk(), found = trkFindDuplicates(items), gone = [];
+    found.groups.forEach(function (g) {
+      var keep = g[0];
+      g.slice(1).forEach(function (o) {
+        if (!keep.status && o.status) keep.status = o.status;
+        if (o.unofficial) keep.unofficial = true;
+        if (!keep.notes && o.notes) keep.notes = o.notes;
+        var tags = trkTagsOf(keep).slice();
+        trkTagsOf(o).forEach(function (t) { if (!trkHasTag(tags, t)) tags.push(t); });
+        if (tags.length) keep.tags = tags;
+        ['modelSource', 'modelVersion', 'kickoffIso', 'sourceId'].forEach(function (f) { if (keep[f] == null && o[f] != null) keep[f] = o[f]; });
+        gone.push(o);
+      });
+      keep.updatedAt = Date.now();
+    });
+    // Dropped by identity of the row object, not by id: two copies could in
+    // principle share an id, and dropping by id would take both.
+    saveTrk(items.filter(function (it) { return gone.indexOf(it) === -1; }));
+    return found;
+  }
+  function trkDuplicateBanner(items) {
+    var found = trkFindDuplicates(items);
+    if (!found.extra) return '';
+    return '<div class="trk-dupes" role="status"><div><b>' + found.extra + ' ' + (found.extra === 1 ? 'bet is' : 'bets are') + ' in the tracker twice.</b> ' +
+      'Each copy counts in the record below, so it reads better or worse than it really is.</div>' +
+      '<button class="trk-btn is-primary" data-trk-act="dedupe">Remove duplicates</button></div>';
+  }
+  function trkDedupeClick() {
+    var found = trkFindDuplicates(loadTrk());
+    if (!found.extra) return render();
+    var names = found.groups.slice(0, 6).map(function (g) { return '  ' + g[0].description; });
+    if (found.groups.length > 6) names.push('  ...and ' + (found.groups.length - 6) + ' more');
+    if (!confirm('Remove ' + found.extra + ' duplicate ' + (found.extra === 1 ? 'play' : 'plays') + '?\n\n' +
+      'These bets are in the tracker more than once with the same pick, line, game and edge:\n' + names.join('\n') + '\n\n' +
+      'One copy of each is kept, with its grade, tags and notes. If either copy was marked unofficial, the kept one stays unofficial.\n\n' +
+      'A backup of the tracker downloads first.')) return;
+    window.__cfbTrkExport();
+    var done = trkRemoveDuplicates();
+    render();
+    alert('Removed ' + done.extra + ' duplicate ' + (done.extra === 1 ? 'play' : 'plays') + '.' +
+      (done.conflicts ? '\n\n' + done.conflicts + ' set(s) were left alone because their copies are graded differently. Fix the grade on one, then remove duplicates again.' : ''));
   }
 
   // When the game is, for display and for sorting. New plays carry the real
@@ -3262,6 +3368,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     if (act === 'drawer') return trkOpenDrawer(id);
     if (act === 'clearf') { var f = trkFilterState(el.dataset.trkSec); f.q = ''; f.status = 'all'; f.tag = 'all'; return render(); }
     if (act === 'addtoggle') { state.trkAddOpen = !state.trkAddOpen; return render(); }
+    if (act === 'dedupe') return trkDedupeClick();
     if (!trkDraft) return;
     if (act === 'dclose') return trkCloseDrawer();
     if (act === 'dsave') return trkDrawerSave();
@@ -3496,6 +3603,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
 
     return '<div class="section-head" id="trk-section"><div class="section-title"><div class="section-flag is-green"></div><h2>Tracker</h2></div></div>' +
       exportImportBar +
+      trkDuplicateBanner(items) +
       manualAddForm +
       (items.length ? '' : '<div class="trk-empty">No plays tracked yet. Click +TRK on any Edge Board row or Bet Card play, or check back after the next run — official player props get added here automatically.</div>') +
       renderTrackerSection(gameLineItemsShown, {
