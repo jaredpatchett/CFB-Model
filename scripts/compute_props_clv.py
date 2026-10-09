@@ -8,9 +8,16 @@ it flagged it, the market is agreeing with the model. This script follows
 every flagged prop from the price it was flagged at to the last price seen
 before kickoff.
 
-What gets tracked (always the OVER, at the book it was flagged at)
+What gets tracked (the OVER unless it says under, at the book it was flagged at)
   official      receptions overs flagged as official plays
   capped        receptions overs moved to Watch by the 30% edge cap
+  under_play    (10/2026) receptions UNDERS with a 30%+ edge -- official
+                plays since props lab 3 (203-143 over three seasons)
+  under_lean    (10/2026) receptions UNDERS with a 10% to 30% edge -- leans,
+                tracked on their own line (487-369 over three seasons)
+                An under is logged once, with the tier and price it had
+                the first time it was flagged; the dashboard labels it by
+                its edge now, so the two can differ after the price moves.
   rec_yds_over  receiving-yards overs at a 10%+ edge (the candidate second
                 market; best book per player and game)
   baseline      every receptions and receiving-yards over the first time it
@@ -66,8 +73,11 @@ LATEST = "docs/data/latest.json"
 MIN_EDGE = 10.0
 BLOCKING = {"Out", "Out for Season", "IR", "Doubtful"}
 BASELINE_MARKETS = {"Receptions", "Reception Yards"}
-TAGS = ["official", "capped", "rec_yds_over", "baseline"]
-GRADED_TAGS = ("official", "capped", "rec_yds_over", "group")
+TAGS = ["official", "capped", "under_play", "under_lean", "rec_yds_over", "baseline"]
+GRADED_TAGS = ("official", "capped", "under_play", "under_lean", "rec_yds_over", "group")
+UNDER_MARKET = "Receptions"
+UNDER_PLAY_EDGE = 30.0             # a receptions under at this edge or more is a play; 10% up to this is a lean
+UNDER_TAGS = {"under_play": "play", "under_lean": "lean"}
 GRADE_AFTER_HOURS = 5              # don't look for a box score until the game has had time to finish
 MATCH_HOURS = 36                   # a logged kickoff and CFBD's kickoff for the same game
 COLS = ["key", "tag", "player", "team", "opponent", "market", "start_time", "flagged_at", "book", "line", "price",
@@ -137,6 +147,32 @@ def _record(p, tag, when, side="over", group=None, group_up=None):
             "side": side, "group": group, "group_up": group_up, "actual": None, "result": None, "units": None}
 
 
+def _under_tier_of_group_row(r):
+    """'play' / 'lean' for a 'group' row that is a receptions under with a
+    10%+ edge when it was first logged; None for anything else."""
+    ev = _num(r.get("model_ev"))
+    if r.get("market") != UNDER_MARKET or _side(r) != "under" or ev is None or ev < MIN_EDGE:
+        return None
+    return "play" if ev >= UNDER_PLAY_EDGE else "lean"
+
+
+def seed_under_tags(state):
+    """Receptions unders the log already holds as 'group' rows (logged and
+    graded since 10/6/2026) get their own under_play / under_lean row, so the
+    new record lines start with every under the model has flagged so far, at
+    the price it was first flagged at. Runs every time; adds a row once."""
+    added = 0
+    for (key, tag), r in list(state.items()):
+        if tag != "group" or any((key, t) in state for t in UNDER_TAGS):
+            continue
+        tier = _under_tier_of_group_row(r)
+        if tier:
+            new_tag = "under_play" if tier == "play" else "under_lean"
+            state[(key, new_tag)] = dict(r, tag=new_tag, group=None, group_up=None)
+            added += 1
+    return added
+
+
 def update_state(state, props, when, history=None):
     """One snapshot of posted props: log new flags, refresh open ones."""
     live_all = []
@@ -167,14 +203,23 @@ def update_state(state, props, when, history=None):
                   "last_other_price": _num(p.get(f"{other}_price")), "looks": int(r.get("looks") or 0) + 1})
 
     # 2) Log anything newly flagged.
-    def add(p, tag):
+    def add(p, tag, side="over"):
         k = (prop_key(p), tag)
         if k not in state:
-            state[k] = _record(p, tag, when)
+            state[k] = _record(p, tag, when, side=side)
+
+    # Receptions unders (10/2026): the export marks them by their edge now.
+    # The log holds each under once, under the tier it was FIRST flagged
+    # with, so one that later crosses 30% either way is not logged again.
+    for p in live_all:
+        kind = p.get("play_kind")
+        if kind in ("rec_under", "rec_under_lean") and _num(p.get("under_price")) is not None:
+            if not any((prop_key(p), t) in state for t in UNDER_TAGS):
+                add(p, "under_play" if kind == "rec_under" else "under_lean", side="under")
 
     best_yds = {}
     for p in live:
-        if p.get("is_official_play"):
+        if p.get("is_official_play") and p.get("play_kind") != "rec_under":
             add(p, "official")
         if p.get("edge_capped"):
             add(p, "capped")
@@ -352,7 +397,8 @@ def summarize(state, now):
                       "last_seen_at": r["last_seen_at"], "last_line": r["last_line"], "last_price": r["last_price"],
                       "actual": r.get("actual"), "result": r.get("result"), "units": r.get("units"), **measure(r)})
     # Live results (graded from box scores).
-    results = {t: _record_units([r for (k, tag), r in state.items() if tag == t]) for t in ("official", "capped", "rec_yds_over")}
+    results = {t: _record_units([r for (k, tag), r in state.items() if tag == t])
+               for t in ("official", "capped", "under_play", "under_lean", "rec_yds_over")}
     groups = {}
     for (k, t), r in state.items():
         if t == "group" and r.get("group"):
@@ -381,8 +427,10 @@ def main(backfill_since=None):
         import backtest_props_live as bpl
         state, n, last = {}, 0, None
         for when, d in bpl.snapshots(backfill_since):
+            seed_under_tags(state)                     # at the price each under was first seen, as the live run does
             update_state(state, d.get("props") or [], when, history)
             n, last = n + 1, when
+        seed_under_tags(state)                         # older snapshots carry no under marks
         print(f"Rebuilt from {n} saved snapshot(s) since {backfill_since}")
         now = last or datetime.now(timezone.utc)
     else:
@@ -390,6 +438,9 @@ def main(backfill_since=None):
         with open(LATEST) as f:
             d = json.load(f)
         now = _ts(d.get("generated_at")) if d.get("generated_at") else datetime.now(timezone.utc)
+        n_seeded = seed_under_tags(state)
+        if n_seeded:
+            print(f"  {n_seeded} receptions under(s) already in the log given their own under_play / under_lean row")
         update_state(state, d.get("props") or [], now, history)
     n_graded = grade_state(state, now)
     save_state(state)
