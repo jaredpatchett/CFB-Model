@@ -1,0 +1,870 @@
+season,event_id,commence_time,home_team,away_team,asked_for,status,lines,credits
+2024,329ee4daba3514dce8018d5768e5043f,2024-08-24T16:00:00Z,Georgia Tech Yellow Jackets,Florida State Seminoles,2024-08-24T14:00:00Z,lines,13,10
+2024,e5a3e6c63951de708e5db5cd8a392b5e,2024-08-24T20:00:00Z,New Mexico Lobos,Montana State Bobcats,2024-08-24T18:00:00Z,none,0,0
+2024,feeae1f09a033ab65edd9b354d36b432,2024-08-25T00:00:00Z,Nevada Wolf Pack,SMU Mustangs,2024-08-24T22:00:00Z,lines,3,10
+2024,2e99ad00c2d7e94febcf3ac2efdbb1fe,2024-08-25T04:00:00Z,Hawaii Rainbow Warriors,Delaware State Hornets,2024-08-25T02:00:00Z,none,0,0
+2024,a3dc1c529fa7790e8d56b433e53cc6d1,2024-08-29T22:00:00Z,Rutgers Scarlet Knights,Howard Bison,2024-08-29T20:00:00Z,none,0,0
+2024,f705807d266e12c218a04818fe316bb9,2024-08-29T23:00:00Z,Bowling Green Falcons,Fordham Rams,2024-08-29T21:00:00Z,none,0,0
+2024,ccb3e7f0007c6d0f93fa239fe9f37b44,2024-08-29T23:00:00Z,Buffalo Bulls,Lafayette Leopards,2024-08-29T21:00:00Z,none,0,0
+2024,f41300bf918cf399e8e4a7dac6751651,2024-08-29T23:00:00Z,Central Michigan Chippewas,Central Connecticut Blue Devils,2024-08-29T21:00:00Z,none,0,0
+2024,d08f7762395628c4c83ea2ec006a4d1e,2024-08-29T23:00:00Z,UL Monroe Warhawks,Jackson State Tigers,2024-08-29T21:00:00Z,none,0,0
+2024,74ffa349414a14f126c5189d8cb77e97,2024-08-29T23:00:00Z,NC State Wolfpack,Western Carolina Catamounts,2024-08-29T21:00:00Z,none,0,0
+2024,579ce761d0579853f043f2d34b31a14b,2024-08-29T23:00:00Z,UCF Knights,New Hampshire Wildcats,2024-08-29T21:00:00Z,none,0,0
+2024,7cad5d331d56af55a1828b080c5d4260,2024-08-29T23:00:00Z,Wake Forest Demon Deacons,North Carolina A&T Aggies,2024-08-29T21:00:00Z,none,0,0
+2024,7e2d6bd1bd1194e058659bd0a0f1a06a,2024-08-29T23:30:00Z,Arkansas Razorbacks,Arkansas Pine Bluff Golden Lions,2024-08-29T21:30:00Z,none,0,0
+2024,57a4a698b16927e050ac49aa6db9e550,2024-08-29T23:30:00Z,Toledo Rockets,Duquesne Dukes,2024-08-29T21:30:00Z,none,0,0
+2024,94eba6bbfca6b049a8391e6c9b2ab814,2024-08-30T00:00:00Z,UAB Blazers,Alcorn State Braves,2024-08-29T22:00:00Z,none,0,0
+2024,4d96b9f881cb6da50b487e33842fad99,2024-08-30T00:00:00Z,Jacksonville State Gamecocks,Coastal Carolina Chanticleers,2024-08-29T22:00:00Z,none,0,0
+2024,dcdb8c457156ddcda61c0b5cd30dbf56,2024-08-30T00:00:00Z,Colorado Buffaloes,North Dakota State Bison,2024-08-29T22:00:00Z,none,0,0
+2024,2a98b586c4b7e076433996d103e8dde4,2024-08-30T00:00:00Z,UAB Blazers,Florida State Seminoles,2024-08-29T22:00:00Z,none,0,0
+2024,a52590ab5d49c24e3c3ab8835bf047d7,2024-08-30T00:00:00Z,Kansas Jayhawks,Lindenwood Lions,2024-08-29T22:00:00Z,none,0,0
+2024,3096ece82ca23e3ca2d28716001590d9,2024-08-30T00:00:00Z,Minnesota Golden Gophers,North Carolina Tar Heels,2024-08-29T22:00:00Z,none,0,0
+2024,57b36c8dfed7d68edb6f97ad829a825a,2024-08-30T00:00:00Z,Missouri Tigers,Murray State Racers,2024-08-29T22:00:00Z,none,0,0
+2024,403585a0315dd1523dcaee0459d6abad,2024-08-30T00:00:00Z,Tulsa Golden Hurricane,Northwestern State Demons,2024-08-29T22:00:00Z,none,0,0
+2024,a4820ba6984b72cc9eec9e48a9394e18,2024-08-30T00:00:00Z,Tulane Green Wave,Southeastern Louisiana Lions,2024-08-29T22:00:00Z,none,0,0
+2024,c87b270916686109e0798418a5253091,2024-08-30T01:00:00Z,Illinois Fighting Illini,Eastern Illinois Panthers,2024-08-29T23:00:00Z,none,0,0
+2024,571562481037d5f1db00380ee004a5e2,2024-08-30T01:00:00Z,Utah Utes,Southern Utah Thunderbirds,2024-08-29T23:00:00Z,none,0,0
+2024,53bdf0788679475576837f1b103f0075,2024-08-30T02:00:00Z,San Jose State Spartans,Sacramento State Hornets,2024-08-30T00:00:00Z,none,0,0
+2024,d16464298ad895ee74d1cdd7ae70941b,2024-08-30T22:00:00Z,Army Black Knights,Lehigh Mountain Hawks,2024-08-30T20:00:00Z,none,0,0
+2024,167159b67739742d3f7b6dc15dc1aabc,2024-08-30T23:00:00Z,Michigan State Spartans,Florida Atlantic Owls,2024-08-30T21:00:00Z,lines,2,10
+2024,9b39164758e131a557fdbd478ecf58f2,2024-08-30T23:00:00Z,Oklahoma Sooners,Temple Owls,2024-08-30T21:00:00Z,none,0,0
+2024,05dadc80444890d526e79022aec203d3,2024-08-30T23:30:00Z,Duke Blue Devils,Elon Phoenix,2024-08-30T21:30:00Z,none,0,0
+2024,97a5d3c62467dfd828d4cbab92ac46e2,2024-08-31T01:00:00Z,Wisconsin Badgers,Western Michigan Broncos,2024-08-30T23:00:00Z,lines,5,10
+2024,9798363c8b3934bbc4b67c5328e24453,2024-08-31T02:30:00Z,Stanford Cardinal,TCU Horned Frogs,2024-08-31T00:30:00Z,lines,4,10
+2024,2945ab7c2887a5b04e16cdb7a5ff726c,2024-08-31T16:00:00Z,Louisville Cardinals,Austin Peay Governors,2024-08-31T14:00:00Z,none,0,0
+2024,7ce91bf836fcf8d0b8283ba3512ef1f0,2024-08-31T16:00:00Z,Navy Midshipmen,Bucknell Bison,2024-08-31T14:00:00Z,none,0,0
+2024,b7cf707bbb8579f69e1eb332ff5d5ce8,2024-08-31T16:00:00Z,Georgia Bulldogs,Clemson Tigers,2024-08-31T14:00:00Z,lines,11,10
+2024,170991c648c40ac743bff26b63054c73,2024-08-31T16:00:00Z,Iowa Hawkeyes,Illinois State Redbirds,2024-08-31T14:00:00Z,none,0,0
+2024,5e86689ace8f5d4c237c97758672fbf8,2024-08-31T16:00:00Z,Purdue Boilermakers,Indiana State Sycamores,2024-08-31T14:00:00Z,none,0,0
+2024,3193c0fe08c0c2c113885fe4dfab3713,2024-08-31T16:00:00Z,Pittsburgh Panthers,Kent State Golden Flashes,2024-08-31T14:00:00Z,lines,2,10
+2024,2197689ad02f46a4200fc6151f4cee92,2024-08-31T16:00:00Z,Maryland Terrapins,UConn Huskies,2024-08-31T14:00:00Z,lines,1,10
+2024,96d6e41b508026a32e912290df5ac8e2,2024-08-31T16:00:00Z,West Virginia Mountaineers,Penn State Nittany Lions,2024-08-31T14:00:00Z,lines,8,10
+2024,2660d8902ca1543928e52596083b3345,2024-08-31T16:00:00Z,Vanderbilt Commodores,Virginia Tech Hokies,2024-08-31T14:00:00Z,lines,2,10
+2024,36422f914d647c74f82ba2d6d23ac8b8,2024-08-31T16:45:00Z,Tennessee Volunteers,Chattanooga Mocs,2024-08-31T14:45:00Z,none,0,0
+2024,98f41adc9f4b8d0d796f7ae1fc24954c,2024-08-31T18:00:00Z,Oklahoma State Cowboys,South Dakota State Jackrabbits,2024-08-31T16:00:00Z,none,0,0
+2024,b949f2a28bc87713dbbf651c5348f097,2024-08-31T18:30:00Z,Cincinnati Bearcats,Towson Tigers,2024-08-31T16:30:00Z,none,0,0
+2024,7081942c79f4b10cf2fdcc1e846d48cc,2024-08-31T19:00:00Z,Washington State Cougars,Portland State Vikings,2024-08-31T17:00:00Z,none,0,0
+2024,3d31cbad5d479add5ad5cd4887ae53ab,2024-08-31T19:30:00Z,Air Force Falcons,Merrimack Warriors,2024-08-31T17:30:00Z,none,0,0
+2024,954cadfc52b8ffeda3e97b752512db5f,2024-08-31T19:30:00Z,Ohio State Buckeyes,Akron Zips,2024-08-31T17:30:00Z,none,0,0
+2024,002039122d8941134f5678215f3b87ea,2024-08-31T19:30:00Z,Appalachian State Mountaineers,East Tennessee State Buccaneers,2024-08-31T17:30:00Z,none,0,0
+2024,ed7c9ef7b3fc7793bc1082b50e0ae333,2024-08-31T19:30:00Z,Texas Longhorns,Colorado State Rams,2024-08-31T17:30:00Z,lines,1,10
+2024,298133e619a2eee371d5a4de30870bac,2024-08-31T19:30:00Z,UMass Minutemen,Eastern Michigan Eagles,2024-08-31T17:30:00Z,none,0,0
+2024,09e20a1709bbb242daf2a4ec09a82c4a,2024-08-31T19:30:00Z,Florida Gators,Miami Hurricanes,2024-08-31T17:30:00Z,lines,4,10
+2024,6a7ff6efb4330fbf4798816c3c801394,2024-08-31T19:30:00Z,Indiana Hoosiers,Florida International Panthers,2024-08-31T17:30:00Z,none,0,0
+2024,0e2a2ba1c342d05b535ecb238617e811,2024-08-31T19:30:00Z,Iowa State Cyclones,North Dakota Fighting Hawks,2024-08-31T17:30:00Z,none,0,0
+2024,f64152a4f660b5f43b4cddea5444113f,2024-08-31T19:30:00Z,UTSA Roadrunners,Kennesaw State Owls,2024-08-31T17:30:00Z,none,0,0
+2024,00d889ceb70c2cf3d372d12d64a789bd,2024-08-31T19:30:00Z,Northwestern Wildcats,Miami (OH) RedHawks,2024-08-31T17:30:00Z,lines,4,10
+2024,f4939787f295b6d7c82de1c9fdc5df4d,2024-08-31T19:30:00Z,Nebraska Cornhuskers,UTEP Miners,2024-08-31T17:30:00Z,lines,3,10
+2024,b9c88a2a472f3a636722c59f1b90473c,2024-08-31T19:30:00Z,Northern Illinois Huskies,Western Illinois Leathernecks,2024-08-31T17:30:00Z,none,0,0
+2024,a10095d49a03565fbb827f644c498795,2024-08-31T19:30:00Z,Syracuse Orange,Ohio Bobcats,2024-08-31T17:30:00Z,lines,1,10
+2024,ed3846257b4fce2647a094043b58bbaa,2024-08-31T20:00:00Z,Georgia Southern Eagles,Boise State Broncos,2024-08-31T18:00:00Z,none,0,0
+2024,a0b7798430eff6ed03c1057a499e9371,2024-08-31T20:15:00Z,South Carolina Gamecocks,Old Dominion Monarchs,2024-08-31T18:15:00Z,lines,2,10
+2024,5c212e4b95d382ab0ebecef2e6eb4182,2024-08-31T21:00:00Z,California Golden Bears,UC Davis Aggies,2024-08-31T19:00:00Z,none,0,0
+2024,e21434301a306c0466b657de186c1221,2024-08-31T21:00:00Z,Marshall Thundering Herd,Stony Brook Seawolves,2024-08-31T19:00:00Z,none,0,0
+2024,bcb6a98ce03d1ae87574a780858bcbc5,2024-08-31T21:00:00Z,South Alabama Jaguars,North Texas Mean Green,2024-08-31T19:00:00Z,none,0,0
+2024,2c7cb28146b29f4fabcf1f28d759114a,2024-08-31T22:00:00Z,Liberty Flames,Campbell Fighting Camels,2024-08-31T20:00:00Z,none,0,0
+2024,a47fa8a18276849617b73ec32c94a351,2024-08-31T22:00:00Z,East Carolina Pirates,Norfolk State Spartans,2024-08-31T20:00:00Z,none,0,0
+2024,50db408c6057bd3ac00717260b7a629c,2024-08-31T22:00:00Z,Mississippi State Bulldogs,Eastern Kentucky Colonels,2024-08-31T20:00:00Z,none,0,0
+2024,df7e2cbfd24ae8f4b81bbd96b08544dd,2024-08-31T22:00:00Z,Virginia Cavaliers,Richmond Spiders,2024-08-31T20:00:00Z,none,0,0
+2024,1b72f42caf3b046cba1260b8299c44df,2024-08-31T22:30:00Z,Oregon State Beavers,Idaho State Bengals,2024-08-31T20:30:00Z,none,0,0
+2024,faa057f157528dc6f2d968dabafb238f,2024-08-31T23:00:00Z,Alabama Crimson Tide,Western Kentucky Hilltoppers,2024-08-31T21:00:00Z,lines,2,10
+2024,0e58078bb0fef8bc31336ba801ca196d,2024-08-31T23:00:00Z,Arkansas State Red Wolves,Central Arkansas Bears,2024-08-31T21:00:00Z,none,0,0
+2024,26c00c4ec72cee948c78dd55817d7bfe,2024-08-31T23:00:00Z,Baylor Bears,Tarleton State Texans,2024-08-31T21:00:00Z,none,0,0
+2024,0e83894f82016743b2ff72a9c1f37bea,2024-08-31T23:00:00Z,South Florida Bulls,Bethune-Cookman Wildcats,2024-08-31T21:00:00Z,none,0,0
+2024,a995ed9e3c1fc19b02033be275bcb0d9,2024-08-31T23:00:00Z,Ole Miss Rebels,Furman Paladins,2024-08-31T21:00:00Z,none,0,0
+2024,3613de1c4f73f6eb1deefd5f82c57bfe,2024-08-31T23:00:00Z,Houston Cougars,UNLV Rebels,2024-08-31T21:00:00Z,lines,6,10
+2024,ec4de97d6f6abcc6fd02f9702ba6c26d,2024-08-31T23:00:00Z,Kansas State Wildcats,UT Martin Skyhawks,2024-08-31T21:00:00Z,none,0,0
+2024,ac77fe34cb438923f6dfea776e484e39,2024-08-31T23:00:00Z,Memphis Tigers,North Alabama Lions,2024-08-31T21:00:00Z,none,0,0
+2024,f1e05caa21e624397ddcfad394436280,2024-08-31T23:00:00Z,Middle Tennessee Blue Raiders,Tennessee Tech Golden Eagles,2024-08-31T21:00:00Z,none,0,0
+2024,fa91d7eb51af9cd0251b2da50e20d0b3,2024-08-31T23:00:00Z,Troy Trojans,Nevada Wolf Pack,2024-08-31T21:00:00Z,none,0,0
+2024,0f2d30e5c56bbbe9d55c483f01d27ae9,2024-08-31T23:00:00Z,Rice Owls,Sam Houston State Bearkats,2024-08-31T21:00:00Z,none,0,0
+2024,f49be94a09b49524978b0e716bb19da5,2024-08-31T23:30:00Z,Texas Tech Red Raiders,Abilene Christian Wildcats,2024-08-31T21:30:00Z,none,0,0
+2024,f21423944a8e1fe7f0c9d663349e0df1,2024-08-31T23:30:00Z,Auburn Tigers,Alabama A&M Bulldogs,2024-08-31T21:30:00Z,none,0,0
+2024,64b81816ec38c2bcb5e1aeaecdac4b52,2024-08-31T23:30:00Z,Michigan Wolverines,Fresno State Bulldogs,2024-08-31T21:30:00Z,none,0,0
+2024,5d050582601b53b82f047e04138d30b7,2024-08-31T23:30:00Z,Hawaii Rainbow Warriors,UCLA Bruins,2024-08-31T21:30:00Z,lines,3,10
+2024,74f6b675d010fdede0218c8b54e896fa,2024-08-31T23:30:00Z,Oregon Ducks,Idaho Vandals,2024-08-31T21:30:00Z,none,0,0
+2024,0154080042357cf8dd2cf7f55c132885,2024-08-31T23:30:00Z,Texas A&M Aggies,Notre Dame Fighting Irish,2024-08-31T21:30:00Z,lines,11,10
+2024,70af7727fe719e12411e253b4361efd8,2024-08-31T23:45:00Z,Kentucky Wildcats,Southern Mississippi Golden Eagles,2024-08-31T21:45:00Z,none,0,0
+2024,4f96e06a13082a1f1f2d21caa833253d,2024-09-01T00:00:00Z,BYU Cougars,Southern Illinois Salukis,2024-08-31T22:00:00Z,none,0,0
+2024,25d9dfb0a00d0e3e6ba3db5b05d86d61,2024-09-01T00:00:00Z,Charlotte 49ers,James Madison Dukes,2024-08-31T22:00:00Z,none,0,0
+2024,873498501b5ca470c610794ce3bb6572,2024-09-01T00:00:00Z,Georgia Tech Yellow Jackets,Georgia State Panthers,2024-08-31T22:00:00Z,none,0,0
+2024,212f4f198addc31233bc64ace223a552,2024-09-01T00:00:00Z,Louisiana Ragin Cajuns,Grambling State Tigers,2024-08-31T22:00:00Z,none,0,0
+2024,1b62e65f6b702d0984f404473e078727,2024-09-01T00:00:00Z,SMU Mustangs,Houston Baptist Huskies,2024-08-31T22:00:00Z,none,0,0
+2024,e851052bceefbd8a1d9fac81225ad94d,2024-09-01T00:00:00Z,Texas State Bobcats,Lamar Cardinals,2024-08-31T22:00:00Z,none,0,0
+2024,d0874e1eca7d32dbfeedadced5bf69e8,2024-09-01T00:00:00Z,Louisiana Tech Bulldogs,Nicholls State Colonels,2024-08-31T22:00:00Z,none,0,0
+2024,f45f627d6b1fd2cafbdb7708847e1623,2024-09-01T00:00:00Z,Utah State Aggies,Robert Morris Colonials,2024-08-31T22:00:00Z,none,0,0
+2024,e01f0a21a2e4dc776f86b299cf351eb4,2024-09-01T00:00:00Z,San Diego State Aztecs,Texas A&M-Commerce Lions,2024-08-31T22:00:00Z,none,0,0
+2024,ac2db3bd27dc0d4c18f61855bca94109,2024-09-01T01:00:00Z,New Mexico State Aggies,Southeast Missouri State Redhawks,2024-08-31T23:00:00Z,none,0,0
+2024,1e02295cf6d5254bb6ab3b750f53fbfe,2024-09-01T02:30:00Z,Arizona State Sun Devils,Wyoming Cowboys,2024-09-01T00:30:00Z,lines,2,10
+2024,4809ae007cbc093b93a9ccf0a3585e54,2024-09-01T02:30:00Z,Arizona Wildcats,New Mexico Lobos,2024-09-01T00:30:00Z,lines,1,10
+2024,c083515d9bd125fd534d0e193ce9fac5,2024-09-01T03:00:00Z,Washington Huskies,Weber State Wildcats,2024-09-01T01:00:00Z,none,0,0
+2024,ed94b4cac3505c1011053cc8b9a3fdb5,2024-09-01T23:30:00Z,USC Trojans,LSU Tigers,2024-09-01T21:30:00Z,lines,5,10
+2024,a344144cb2e1ffaf163c7b905f07af53,2024-09-02T23:30:00Z,Florida State Seminoles,Boston College Eagles,2024-09-02T21:30:00Z,lines,15,10
+2024,400a49032b18768874421ec72ac3be3a,2024-09-06T23:00:00Z,SMU Mustangs,BYU Cougars,2024-09-06T21:00:00Z,lines,6,10
+2024,2388dc1cef4766f68215bd769777f03a,2024-09-06T23:00:00Z,Indiana Hoosiers,Western Illinois Leathernecks,2024-09-06T21:00:00Z,none,0,0
+2024,0c96888505ac1aad514c566f45e316ce,2024-09-07T01:00:00Z,Northwestern Wildcats,Duke Blue Devils,2024-09-06T23:00:00Z,lines,3,10
+2024,8b5b1b4d5d915fbf8c88f6b8d0cc0204,2024-09-07T16:00:00Z,Rutgers Scarlet Knights,Akron Zips,2024-09-07T14:00:00Z,none,0,0
+2024,fa1859a14a67bde250d18569371d0a19,2024-09-07T16:00:00Z,Oklahoma State Cowboys,Arkansas Razorbacks,2024-09-07T14:00:00Z,lines,6,10
+2024,6e9bbbabe9ae5b585e6dc087342d73ca,2024-09-07T16:00:00Z,Florida Atlantic Owls,Army Black Knights,2024-09-07T14:00:00Z,none,0,0
+2024,f41b9e58eef7c281f6120a8f5be59520,2024-09-07T16:00:00Z,Penn State Nittany Lions,Bowling Green Falcons,2024-09-07T14:00:00Z,none,0,0
+2024,71ef08093c5ff042341cc3f774315d33,2024-09-07T16:00:00Z,Cincinnati Bearcats,Pittsburgh Panthers,2024-09-07T14:00:00Z,lines,1,10
+2024,881fce0b9a79055748756d237e12485b,2024-09-07T16:00:00Z,Syracuse Orange,Georgia Tech Yellow Jackets,2024-09-07T14:00:00Z,lines,6,10
+2024,0540b3e034dd80286051cf9d535554ec,2024-09-07T16:00:00Z,Tulane Green Wave,Kansas State Wildcats,2024-09-07T14:00:00Z,lines,5,10
+2024,f70b3c77bc247832a6d7ed6ae0ab6480,2024-09-07T16:00:00Z,Memphis Tigers,Troy Trojans,2024-09-07T14:00:00Z,none,0,0
+2024,8c4da696fa5e039519138e0860deff0f,2024-09-07T16:00:00Z,UConn Huskies,Merrimack Warriors,2024-09-07T14:00:00Z,none,0,0
+2024,8e3045f419101edb642054549768ac67,2024-09-07T16:00:00Z,Michigan Wolverines,Texas Longhorns,2024-09-07T14:00:00Z,lines,11,10
+2024,fbcd3511d7e2f0da0d3089214d23e7e5,2024-09-07T16:00:00Z,Minnesota Golden Gophers,Rhode Island Rams,2024-09-07T14:00:00Z,none,0,0
+2024,aaae8ab0e450f92bb513d0f5147950d0,2024-09-07T16:45:00Z,Texas A&M Aggies,McNeese State Cowboys,2024-09-07T14:45:00Z,none,0,0
+2024,670f67a72408058b62ca2d4aab05e7dd,2024-09-07T18:00:00Z,Ball State Cardinals,Missouri State Bears,2024-09-07T16:00:00Z,none,0,0
+2024,32f1f9ae50d4db8f898db6457266984b,2024-09-07T18:00:00Z,Georgia Bulldogs,Tennessee Tech Golden Eagles,2024-09-07T16:00:00Z,none,0,0
+2024,39645286b873cd6d92106d2766b91b82,2024-09-07T19:30:00Z,Auburn Tigers,California Golden Bears,2024-09-07T17:30:00Z,lines,4,10
+2024,621e5bd1dbcee75ac410925248d52477,2024-09-07T19:30:00Z,Utah Utes,Baylor Bears,2024-09-07T17:30:00Z,none,0,0
+2024,dcc3c10064e1da83b6e9a834071aa51c,2024-09-07T19:30:00Z,Boston College Eagles,Duquesne Dukes,2024-09-07T17:30:00Z,none,0,0
+2024,ac40d4dd3d6f472769ce1a6136cbacc9,2024-09-07T19:30:00Z,North Carolina Tar Heels,Charlotte 49ers,2024-09-07T17:30:00Z,lines,3,10
+2024,1fb22320a65a107860a11fbdbd6312cb,2024-09-07T19:30:00Z,Washington Huskies,Eastern Michigan Eagles,2024-09-07T17:30:00Z,none,0,0
+2024,186fc1909f59fc9c4b205e03d8cc6381,2024-09-07T19:30:00Z,Wyoming Cowboys,Idaho Vandals,2024-09-07T17:30:00Z,none,0,0
+2024,2f856f64f32add975208b5cc7ca48245,2024-09-07T19:30:00Z,Iowa Hawkeyes,Iowa State Cyclones,2024-09-07T17:30:00Z,lines,5,10
+2024,99624fb764146606cc8ba6c9a99f9110,2024-09-07T19:30:00Z,Louisville Cardinals,Jacksonville State Gamecocks,2024-09-07T17:30:00Z,none,0,0
+2024,369c11a55cbc49648c46f710c16e1a77,2024-09-07T19:30:00Z,Kentucky Wildcats,South Carolina Gamecocks,2024-09-07T17:30:00Z,lines,4,10
+2024,5cc6e3964963a70cbfeceec14994233a,2024-09-07T19:30:00Z,Maryland Terrapins,Michigan State Spartans,2024-09-07T17:30:00Z,none,0,0
+2024,1a3fb4aa08f05451a3faa02f10b43670,2024-09-07T19:30:00Z,Navy Midshipmen,Temple Owls,2024-09-07T17:30:00Z,none,0,0
+2024,2083e67b9c0b904e875308cb332c3e57,2024-09-07T19:30:00Z,Notre Dame Fighting Irish,Northern Illinois Huskies,2024-09-07T17:30:00Z,lines,2,10
+2024,8f6b298290989800d5d17a900e2765b9,2024-09-07T19:30:00Z,Wisconsin Badgers,South Dakota Coyotes,2024-09-07T17:30:00Z,none,0,0
+2024,5d7f12e96580626b17b3dede9b3984bb,2024-09-07T19:30:00Z,Toledo Rockets,UMass Minutemen,2024-09-07T17:30:00Z,none,0,0
+2024,7fb3f2b871618a33844c19a5b6bfbc55,2024-09-07T20:00:00Z,Texas State Bobcats,UTSA Roadrunners,2024-09-07T18:00:00Z,none,0,0
+2024,6a196c92442d8900e2e7272dad3f4bf3,2024-09-07T20:15:00Z,Ole Miss Rebels,Middle Tennessee Blue Raiders,2024-09-07T18:15:00Z,lines,1,10
+2024,c7fccbb966bffa2abccda982c0cb20fe,2024-09-07T20:30:00Z,Virginia Tech Hokies,Marshall Thundering Herd,2024-09-07T18:30:00Z,none,0,0
+2024,9b723c270e25ab718e2583457b24f8b3,2024-09-07T22:00:00Z,West Virginia Mountaineers,Albany,2024-09-07T20:00:00Z,none,0,0
+2024,a3aca5a8190776b10b622aac6aaa594b,2024-09-07T22:00:00Z,Florida International Panthers,Central Michigan Chippewas,2024-09-07T20:00:00Z,none,0,0
+2024,5b4906dbd1062b986efbce8cb226428a,2024-09-07T22:00:00Z,Old Dominion Monarchs,East Carolina Pirates,2024-09-07T20:00:00Z,none,0,0
+2024,4edae3014e0285cf7fc791260f35f749,2024-09-07T22:00:00Z,Miami Hurricanes,Florida A&M Rattlers,2024-09-07T20:00:00Z,none,0,0
+2024,643d12270c82a30638d5347908ad4460,2024-09-07T22:00:00Z,James Madison Dukes,Gardner-Webb Runnin Bulldogs,2024-09-07T20:00:00Z,none,0,0
+2024,4e93ca80fcd0c0a4ad678d78e64d40dd,2024-09-07T22:00:00Z,Ohio Bobcats,South Alabama Jaguars,2024-09-07T20:00:00Z,none,0,0
+2024,a52d7f0070366cb7a960b049a7b293e8,2024-09-07T22:30:00Z,UCF Knights,Sam Houston State Bearkats,2024-09-07T20:30:00Z,none,0,0
+2024,378f6f16b8f7575cfcab6144123b98bc,2024-09-07T23:00:00Z,Air Force Falcons,San Jose State Spartans,2024-09-07T21:00:00Z,none,0,0
+2024,8f0519eba5c057cfd16c6272768f918c,2024-09-07T23:00:00Z,Alabama Crimson Tide,South Florida Bulls,2024-09-07T21:00:00Z,none,0,0
+2024,be4dc955d99e799fc1a7f187ca36abf3,2024-09-07T23:00:00Z,Arkansas State Red Wolves,Tulsa Golden Hurricane,2024-09-07T21:00:00Z,none,0,0
+2024,093d9a5ea4592a015deaece3db5d6657,2024-09-07T23:00:00Z,Missouri Tigers,Buffalo Bulls,2024-09-07T21:00:00Z,none,0,0
+2024,9103837872f8718d10fd33924d446d79,2024-09-07T23:00:00Z,Georgia State Panthers,Chattanooga Mocs,2024-09-07T21:00:00Z,none,0,0
+2024,c776c675c69b529ead1caf56cb3112c3,2024-09-07T23:00:00Z,Coastal Carolina Chanticleers,William and Mary Tribe,2024-09-07T21:00:00Z,none,0,0
+2024,04a12da88d27579ef5e4691a2905420a,2024-09-07T23:00:00Z,Colorado State Rams,Northern Colorado Bears,2024-09-07T21:00:00Z,none,0,0
+2024,1651369be911ec4d56d4b3d928d43ffd,2024-09-07T23:00:00Z,Western Kentucky Hilltoppers,Eastern Kentucky Colonels,2024-09-07T21:00:00Z,none,0,0
+2024,0113c2133c280201fc4d4920529999eb,2024-09-07T23:00:00Z,Florida Gators,Samford Bulldogs,2024-09-07T21:00:00Z,none,0,0
+2024,723e1e5d3f0fa74a5b023f2016d8105f,2024-09-07T23:00:00Z,Nevada Wolf Pack,Georgia Southern Eagles,2024-09-07T21:00:00Z,none,0,0
+2024,713a99fcffbeec38d13d871ca6ef79d6,2024-09-07T23:00:00Z,Illinois Fighting Illini,Kansas Jayhawks,2024-09-07T21:00:00Z,lines,4,10
+2024,35be76ff7c9b40706020c3c0cc6f7658,2024-09-07T23:00:00Z,Kennesaw State Owls,Louisiana Ragin Cajuns,2024-09-07T21:00:00Z,none,0,0
+2024,e738d8744cf07354833952cdfacf44cf,2024-09-07T23:00:00Z,Rice Owls,Texas Southern Tigers,2024-09-07T21:00:00Z,none,0,0
+2024,7071a6a7112f7eded333f310c825ffdd,2024-09-07T23:00:00Z,Southern Mississippi Golden Eagles,Southeastern Louisiana Lions,2024-09-07T21:00:00Z,none,0,0
+2024,4189a06fff7d1f4028711416677dafb8,2024-09-07T23:00:00Z,UL Monroe Warhawks,UAB Blazers,2024-09-07T21:00:00Z,none,0,0
+2024,e13832e246d44f980ab00fa4ddfcff50,2024-09-07T23:00:00Z,Wake Forest Demon Deacons,Virginia Cavaliers,2024-09-07T21:00:00Z,lines,2,10
+2024,e811a42e7ec501ef88f3727e4055fe76,2024-09-07T23:30:00Z,Nebraska Cornhuskers,Colorado Buffaloes,2024-09-07T21:30:00Z,lines,9,10
+2024,076734684b48c2b61257ce6cb77c436f,2024-09-07T23:30:00Z,LSU Tigers,Nicholls State Colonels,2024-09-07T21:30:00Z,none,0,0
+2024,5fb50081beafd71ef63db91284c85276,2024-09-07T23:30:00Z,NC State Wolfpack,Tennessee Volunteers,2024-09-07T21:30:00Z,lines,7,10
+2024,d4f892127cab87ffa4af340c32891c7e,2024-09-07T23:30:00Z,Ohio State Buckeyes,Western Michigan Broncos,2024-09-07T21:30:00Z,lines,2,10
+2024,1b2f1c377451283a06df57d552353a77,2024-09-07T23:45:00Z,Oklahoma Sooners,Houston Cougars,2024-09-07T21:45:00Z,lines,3,10
+2024,fe9e41d4df9e3508b350a256ae4343d1,2024-09-08T00:00:00Z,Clemson Tigers,Appalachian State Mountaineers,2024-09-07T22:00:00Z,lines,3,10
+2024,f5574551a7991647fadf7b48ae462efb,2024-09-08T00:00:00Z,TCU Horned Frogs,LIU Sharks,2024-09-07T22:00:00Z,none,0,0
+2024,6f7d8b7ef9791ac23e0df174a036a7fc,2024-09-08T01:00:00Z,UTEP Miners,Southern Utah Thunderbirds,2024-09-07T23:00:00Z,none,0,0
+2024,dae6575ce003dcb1d052280d72a5f097,2024-09-08T02:00:00Z,Arizona Wildcats,Northern Arizona Lumberjacks,2024-09-08T00:00:00Z,none,0,0
+2024,2ab94419fda80293dac710f50c42ca36,2024-09-08T02:00:00Z,Oregon Ducks,Boise State Broncos,2024-09-08T00:00:00Z,lines,3,10
+2024,68a39df9328fe33c017d77cf075c5bce,2024-09-08T02:00:00Z,Fresno State Bulldogs,Sacramento State Hornets,2024-09-08T00:00:00Z,none,0,0
+2024,6171220b7c80602d65dec2fef0c0d0d5,2024-09-08T02:00:00Z,Washington State Cougars,Texas Tech Red Raiders,2024-09-08T00:00:00Z,lines,2,10
+2024,573c0ae3bc8b1f38f3eded2538ba30df,2024-09-08T02:15:00Z,New Mexico State Aggies,Liberty Flames,2024-09-08T00:15:00Z,none,0,0
+2024,5f6a373e322caf11066cfcc8fddea5b2,2024-09-08T02:30:00Z,Arizona State Sun Devils,Mississippi State Bulldogs,2024-09-08T00:30:00Z,lines,4,10
+2024,54a1e9524508c37d4459046e3537afba,2024-09-08T02:30:00Z,San Diego State Aztecs,Oregon State Beavers,2024-09-08T00:30:00Z,none,0,0
+2024,52416d529a9fa29243dd0a213773fec5,2024-09-08T03:00:00Z,USC Trojans,Utah State Aggies,2024-09-08T01:00:00Z,none,0,0
+2024,ca06dff474b58a9341bba1aff7fa3f8f,2024-09-12T23:30:00Z,Texas State Bobcats,Arizona State Sun Devils,2024-09-12T21:30:00Z,lines,2,10
+2024,ca26c454350757f869e21f0eacb33629,2024-09-12T23:30:00Z,South Alabama Jaguars,Northwestern State Demons,2024-09-12T21:30:00Z,none,0,0
+2024,737ede87453abc6c47fa9e8847994ee5,2024-09-13T23:00:00Z,Kansas Jayhawks,UNLV Rebels,2024-09-13T21:00:00Z,lines,8,10
+2024,4e3ef83970208d9b5a2d8dd1113ce5fe,2024-09-14T00:00:00Z,Kansas State Wildcats,Arizona Wildcats,2024-09-13T22:00:00Z,lines,11,10
+2024,c5989c3e62b33845bd7e6120a1480575,2024-09-14T15:59:00Z,Wisconsin Badgers,Alabama Crimson Tide,2024-09-14T13:59:00Z,lines,10,10
+2024,4219f417bdd7f4b3f82bd3ab47c211a3,2024-09-14T16:00:00Z,Michigan Wolverines,Arkansas State Red Wolves,2024-09-14T14:00:00Z,lines,3,10
+2024,0e308fd9693543b22bd36077d8aa75d8,2024-09-14T16:00:00Z,Illinois Fighting Illini,Central Michigan Chippewas,2024-09-14T14:00:00Z,lines,3,10
+2024,8576a104af8ad640a3e8f0c0724c8ffa,2024-09-14T16:00:00Z,Miami (OH) RedHawks,Cincinnati Bearcats,2024-09-14T14:00:00Z,lines,2,10
+2024,13fbcedec841ad34d14e111f7bc0b70d,2024-09-14T16:00:00Z,Florida State Seminoles,Memphis Tigers,2024-09-14T14:00:00Z,lines,4,10
+2024,72cc593efe27fd744150916ff4d25540,2024-09-14T16:00:00Z,South Carolina Gamecocks,LSU Tigers,2024-09-14T14:00:00Z,lines,2,10
+2024,4515a35e01480c91ec20a899578df8c1,2024-09-14T16:00:00Z,NC State Wolfpack,Louisiana Tech Bulldogs,2024-09-14T14:00:00Z,lines,1,10
+2024,1ce3f7b8a59095eb45f4cffd45772bc0,2024-09-14T16:00:00Z,Texas Tech Red Raiders,North Texas Mean Green,2024-09-14T14:00:00Z,none,0,0
+2024,6f83307e1b98d8d73a1f0be00ffb333d,2024-09-14T16:00:00Z,Tulsa Golden Hurricane,Oklahoma State Cowboys,2024-09-14T14:00:00Z,lines,2,10
+2024,07ab58f371ba387610afbb3dc669ef52,2024-09-14T16:45:00Z,Missouri Tigers,Boston College Eagles,2024-09-14T14:45:00Z,lines,3,10
+2024,b7d731371bfad1eeaab67782c675a76b,2024-09-14T17:00:00Z,Buffalo Bulls,UMass Minutemen,2024-09-14T15:00:00Z,none,0,0
+2024,6f07f680981b54a87428a2e10687b122,2024-09-14T18:00:00Z,Temple Owls,Coastal Carolina Chanticleers,2024-09-14T16:00:00Z,none,0,0
+2024,46868b23792e785cf44db40a8c6f1d7d,2024-09-14T19:30:00Z,Miami Hurricanes,Ball State Cardinals,2024-09-14T17:30:00Z,none,0,0
+2024,25eb04220b6b5a15ed02509bf651a335,2024-09-14T19:30:00Z,Florida Gators,Texas A&M Aggies,2024-09-14T17:30:00Z,lines,3,10
+2024,79ae5398af4b849b74aeee0bc628011e,2024-09-14T19:30:00Z,Georgia Tech Yellow Jackets,VMI Keydets,2024-09-14T17:30:00Z,none,0,0
+2024,bbeec6184453e73bffb917aa3a9796bd,2024-09-14T19:30:00Z,Michigan State Spartans,Prairie View A&M Panthers,2024-09-14T17:30:00Z,none,0,0
+2024,c8113c30e8dca65ee259dd52a430f23b,2024-09-14T19:30:00Z,Minnesota Golden Gophers,Nevada Wolf Pack,2024-09-14T17:30:00Z,lines,4,10
+2024,cfb90cf1ba894eec5e7eb2421b109b89,2024-09-14T19:30:00Z,Ohio Bobcats,Morgan State Bears,2024-09-14T17:30:00Z,none,0,0
+2024,fde106a67b7071dd8e20074b59e23759,2024-09-14T19:30:00Z,Purdue Boilermakers,Notre Dame Fighting Irish,2024-09-14T17:30:00Z,lines,6,10
+2024,9e4a714e4c34635dbeac186d8b07eb84,2024-09-14T19:30:00Z,Oklahoma Sooners,Tulane Green Wave,2024-09-14T17:30:00Z,none,0,0
+2024,695b786df9d340454dd222a46d7c383d,2024-09-14T19:30:00Z,Oregon State Beavers,Oregon Ducks,2024-09-14T17:30:00Z,lines,18,10
+2024,ab3cd0fe1ed805fc1deddc9a0f461950,2024-09-14T19:30:00Z,Pittsburgh Panthers,West Virginia Mountaineers,2024-09-14T17:30:00Z,lines,12,10
+2024,31747b0f2781fdac95044af5cef25f61,2024-09-14T19:30:00Z,Washington Huskies,Washington State Cougars,2024-09-14T17:30:00Z,lines,4,10
+2024,51334abd7f10ec7cfd2511a7fe8ce005,2024-09-14T20:00:00Z,East Carolina Pirates,Appalachian State Mountaineers,2024-09-14T18:00:00Z,none,0,0
+2024,66ab070a5a418a17617baf5e397528cd,2024-09-14T20:00:00Z,Iowa Hawkeyes,Troy Trojans,2024-09-14T18:00:00Z,lines,4,10
+2024,e8b736a15e008bdd44bf3be88e4c58af,2024-09-14T20:15:00Z,Arkansas Razorbacks,UAB Blazers,2024-09-14T18:15:00Z,none,0,0
+2024,3d50a1c49af0442b8abbac981591fb3f,2024-09-14T20:30:00Z,Utah State Aggies,Utah Utes,2024-09-14T18:30:00Z,none,0,0
+2024,f3e086a3d4ee5143b56e3711f777b0c9,2024-09-14T22:00:00Z,Akron Zips,Colgate Raiders,2024-09-14T20:00:00Z,none,0,0
+2024,979161f739991da905d3b3ff94ba6ed4,2024-09-14T22:00:00Z,Charlotte 49ers,Gardner-Webb Runnin Bulldogs,2024-09-14T20:00:00Z,none,0,0
+2024,6f09efae74a95c390041ff487dda3082,2024-09-14T22:00:00Z,Duke Blue Devils,UConn Huskies,2024-09-14T20:00:00Z,lines,1,10
+2024,5e03009102ec9d276165aa248f352d68,2024-09-14T22:00:00Z,Florida Atlantic Owls,Florida International Panthers,2024-09-14T20:00:00Z,none,0,0
+2024,d9600fe77bf4680170f2690862e9315b,2024-09-14T22:00:00Z,Georgia Southern Eagles,South Carolina State Bulldogs,2024-09-14T20:00:00Z,none,0,0
+2024,dda54dec2ce31e2b244e3a8fcbd0e304,2024-09-14T22:00:00Z,Liberty Flames,UTEP Miners,2024-09-14T20:00:00Z,none,0,0
+2024,960af0a49b394a34c36e06f8947ceb07,2024-09-14T22:00:00Z,North Carolina Tar Heels,North Carolina Central Eagles,2024-09-14T20:00:00Z,none,0,0
+2024,f81466234077eecfc820a494ee5a2a27,2024-09-14T22:00:00Z,Old Dominion Monarchs,Virginia Tech Hokies,2024-09-14T20:00:00Z,none,0,0
+2024,ee044afe887448a6b5c0cd77a95a40b9,2024-09-14T22:30:00Z,Western Michigan Broncos,Bethune-Cookman Wildcats,2024-09-14T20:30:00Z,none,0,0
+2024,c031abd1b35fc611261ffc2b95bdf970,2024-09-14T22:30:00Z,Wake Forest Demon Deacons,Ole Miss Rebels,2024-09-14T20:30:00Z,lines,5,10
+2024,78b6ebae16982fad4add9ba4482221a1,2024-09-14T23:00:00Z,Eastern Michigan Eagles,Jacksonville State Gamecocks,2024-09-14T21:00:00Z,none,0,0
+2024,720b76271ef3a4a57e05323f90e518ac,2024-09-14T23:00:00Z,Georgia State Panthers,Vanderbilt Commodores,2024-09-14T21:00:00Z,none,0,0
+2024,47fd8b91f03ba59a0a87174733445973,2024-09-14T23:00:00Z,Sam Houston State Bearkats,Hawaii Rainbow Warriors,2024-09-14T21:00:00Z,none,0,0
+2024,4ce4439c361dcace8f6f52ec234b10ad,2024-09-14T23:00:00Z,San Jose State Spartans,Kennesaw State Owls,2024-09-14T21:00:00Z,none,0,0
+2024,bf088bf8a99f899cc00ee3c5c448a7f5,2024-09-14T23:00:00Z,Middle Tennessee Blue Raiders,Western Kentucky Hilltoppers,2024-09-14T21:00:00Z,none,0,0
+2024,d76dc3684e0d97e5fee40c9369ad0a6f,2024-09-14T23:00:00Z,Southern Mississippi Golden Eagles,South Florida Bulls,2024-09-14T21:00:00Z,none,0,0
+2024,101d22eb010c05eb0ea429deae93e107,2024-09-14T23:00:00Z,Texas Longhorns,UTSA Roadrunners,2024-09-14T21:00:00Z,none,0,0
+2024,954d384c4f06f663c04269cdf3267747,2024-09-14T23:30:00Z,Baylor Bears,Air Force Falcons,2024-09-14T21:30:00Z,none,0,0
+2024,a074e2f7ec90e7224aef81d438cf9eaa,2024-09-14T23:30:00Z,Auburn Tigers,New Mexico Lobos,2024-09-14T21:30:00Z,lines,3,10
+2024,d6c2c911e21414b4aff9ee40f4ce6bc7,2024-09-14T23:30:00Z,Colorado State Rams,Colorado Buffaloes,2024-09-14T21:30:00Z,lines,2,10
+2024,f463c6fb0f1f69919d1f64553957a840,2024-09-14T23:30:00Z,Northwestern Wildcats,Eastern Illinois Panthers,2024-09-14T21:30:00Z,none,0,0
+2024,3e51b684784efbc72b6cc1d1754f86af,2024-09-14T23:30:00Z,Kentucky Wildcats,Georgia Bulldogs,2024-09-14T21:30:00Z,lines,10,10
+2024,2f3fe2f65dd1824f1ef45fce533cb13d,2024-09-14T23:30:00Z,UCLA Bruins,Indiana Hoosiers,2024-09-14T21:30:00Z,lines,2,10
+2024,d7b5ab17ae9bd3db22da990a87bba946,2024-09-14T23:30:00Z,Mississippi State Bulldogs,Toledo Rockets,2024-09-14T21:30:00Z,lines,3,10
+2024,dbc97e27ac37b640dd0e9bb000e79589,2024-09-14T23:30:00Z,Nebraska Cornhuskers,Northern Iowa Panthers,2024-09-14T21:30:00Z,none,0,0
+2024,75b6bbb2a2af151832dbb825f2df4561,2024-09-14T23:30:00Z,TCU Horned Frogs,UCF Knights,2024-09-14T21:30:00Z,none,0,0
+2024,3ce13f27ef4c9f6ca7b449db492a80d3,2024-09-14T23:45:00Z,Tennessee Volunteers,Kent State Golden Flashes,2024-09-14T21:45:00Z,none,0,0
+2024,82c4d074022f6973e44d368054da7d47,2024-09-15T00:00:00Z,Houston Cougars,Rice Owls,2024-09-14T22:00:00Z,lines,2,10
+2024,65d922b50c50605432e7aa3222a1b53a,2024-09-15T00:00:00Z,Virginia Cavaliers,Maryland Terrapins,2024-09-14T22:00:00Z,lines,4,10
+2024,cbde16e511d8d9b11a446bff43dc8d22,2024-09-15T01:00:00Z,Wyoming Cowboys,BYU Cougars,2024-09-14T23:00:00Z,none,0,0
+2024,600e589a78995de29b96d05660f5fd23,2024-09-15T02:30:00Z,California Golden Bears,San Diego State Aztecs,2024-09-15T00:30:00Z,none,0,0
+2024,9b588476085b3d0c6327d39d5f2b76b3,2024-09-15T02:30:00Z,Fresno State Bulldogs,New Mexico State Aggies,2024-09-15T00:30:00Z,none,0,0
+2024,f931441f789084af1514d17ecb21cf41,2024-09-19T23:30:00Z,Appalachian State Mountaineers,South Alabama Jaguars,2024-09-19T21:30:00Z,lines,2,10
+2024,4d4ab6dbdbebf0c0416c553683170be7,2024-09-20T23:30:00Z,Syracuse Orange,Stanford Cardinal,2024-09-20T21:30:00Z,lines,12,10
+2024,eecfee6902563394d3354b045fe4beff,2024-09-21T00:00:00Z,Nebraska Cornhuskers,Illinois Fighting Illini,2024-09-20T22:00:00Z,lines,13,10
+2024,aa0567e19b2363bb6f01091b0ce91566,2024-09-21T02:00:00Z,Washington State Cougars,San Jose State Spartans,2024-09-21T00:00:00Z,lines,8,10
+2024,58e963cc7d1b60edeb7d786039655ae6,2024-09-21T16:00:00Z,Army Black Knights,Rice Owls,2024-09-21T14:00:00Z,none,0,0
+2024,7a692240af01a547f8a53683082f35ea,2024-09-21T16:00:00Z,Indiana Hoosiers,Charlotte 49ers,2024-09-21T14:00:00Z,none,0,0
+2024,316c1a764d19f0e6dfbf1ee4cc598db7,2024-09-21T16:00:00Z,Cincinnati Bearcats,Houston Cougars,2024-09-21T14:00:00Z,lines,5,10
+2024,b6a0c7231206813162f41600e123632d,2024-09-21T16:00:00Z,Clemson Tigers,NC State Wolfpack,2024-09-21T14:00:00Z,lines,3,10
+2024,d5d0bb417b3cab8bea5de1725ae8a6ce,2024-09-21T16:00:00Z,Mississippi State Bulldogs,Florida Gators,2024-09-21T14:00:00Z,lines,5,10
+2024,0d80b318bb12dc860df0ac1ded662f7a,2024-09-21T16:00:00Z,North Carolina Tar Heels,James Madison Dukes,2024-09-21T14:00:00Z,lines,1,10
+2024,03ef895ff27c79f447e3d2065d2754e7,2024-09-21T16:00:00Z,West Virginia Mountaineers,Kansas Jayhawks,2024-09-21T14:00:00Z,lines,1,10
+2024,0ddabd7a395476a69d6a90cf6b3f9308,2024-09-21T16:00:00Z,Louisiana Ragin Cajuns,Tulane Green Wave,2024-09-21T14:00:00Z,none,0,0
+2024,e4594ef89e677e971bd1fe29db01a8b2,2024-09-21T16:00:00Z,Ohio State Buckeyes,Marshall Thundering Herd,2024-09-21T14:00:00Z,lines,6,10
+2024,5398a5b185adbc4b8081e2df2cbccc55,2024-09-21T16:03:00Z,Maryland Terrapins,Villanova Wildcats,2024-09-21T14:03:00Z,none,0,0
+2024,c0c89be32fe519f25fbb19ccd632378b,2024-09-21T16:45:00Z,Kentucky Wildcats,Ohio Bobcats,2024-09-21T14:45:00Z,lines,3,10
+2024,b5c3731c6b2f84bb3ef63c78abd5dd48,2024-09-21T17:00:00Z,Central Michigan Chippewas,Ball State Cardinals,2024-09-21T15:00:00Z,none,0,0
+2024,e95b8a9707d7ab7e53c63ec3edea2d3b,2024-09-21T18:00:00Z,Coastal Carolina Chanticleers,Virginia Cavaliers,2024-09-21T16:00:00Z,lines,3,10
+2024,1c776740da9c5da22529676edb6c153e,2024-09-21T18:00:00Z,Eastern Michigan Eagles,St. Francis (PA) Red Flash,2024-09-21T16:00:00Z,none,0,0
+2024,18277f7c805fcb73042efd6fbc514244,2024-09-21T18:00:00Z,Temple Owls,Utah State Aggies,2024-09-21T16:00:00Z,none,0,0
+2024,dd6af5156dc9a9db8e0ed14925017d1a,2024-09-21T18:02:00Z,Iowa State Cyclones,Arkansas State Red Wolves,2024-09-21T16:02:00Z,lines,2,10
+2024,84d42eb7b3c773349c87e66d51a6b36e,2024-09-21T19:00:00Z,Jacksonville State Gamecocks,Southern Mississippi Golden Eagles,2024-09-21T17:00:00Z,none,0,0
+2024,c4f1dedb0fa7d9f7215803db3e6ede23,2024-09-21T19:03:00Z,Nevada Wolf Pack,Eastern Washington Eagles,2024-09-21T17:03:00Z,none,0,0
+2024,da1382195833f2088c49b4c8199ec71f,2024-09-21T19:30:00Z,Texas Tech Red Raiders,Arizona State Sun Devils,2024-09-21T17:30:00Z,lines,7,10
+2024,f9e54c3735e3aaa5bb757f12dc6e3251,2024-09-21T19:30:00Z,Auburn Tigers,Arkansas Razorbacks,2024-09-21T17:30:00Z,lines,5,10
+2024,510f8cad2762b60d7981c66992c09271,2024-09-21T19:30:00Z,Northern Illinois Huskies,Buffalo Bulls,2024-09-21T17:30:00Z,none,0,0
+2024,b0ee26d4ebfe0164e4443e2eb444efaf,2024-09-21T19:30:00Z,Louisville Cardinals,Georgia Tech Yellow Jackets,2024-09-21T17:30:00Z,lines,3,10
+2024,404e24d135570afc727be3d1fc971188,2024-09-21T19:30:00Z,Penn State Nittany Lions,Kent State Golden Flashes,2024-09-21T17:30:00Z,none,0,0
+2024,739caa58847ee0a0802c2199592d0379,2024-09-21T19:30:00Z,LSU Tigers,UCLA Bruins,2024-09-21T17:30:00Z,lines,7,10
+2024,7d3c0f219d54ee74205a1020fe6996f8,2024-09-21T19:30:00Z,Navy Midshipmen,Memphis Tigers,2024-09-21T17:30:00Z,none,0,0
+2024,b6c5a7c5f37ba1eccd6d0062a7f58846,2024-09-21T19:30:00Z,Notre Dame Fighting Irish,Miami (OH) RedHawks,2024-09-21T17:30:00Z,lines,1,10
+2024,3888fcdff94338bf73827deca21aae02,2024-09-21T19:30:00Z,Michigan Wolverines,USC Trojans,2024-09-21T17:30:00Z,lines,7,10
+2024,4558674aa49f1fa83358042356f343a2,2024-09-21T19:30:00Z,Missouri Tigers,Vanderbilt Commodores,2024-09-21T17:30:00Z,lines,5,10
+2024,e92c605c2391a75c68073d9fbbd097c3,2024-09-21T19:30:00Z,Virginia Tech Hokies,Rutgers Scarlet Knights,2024-09-21T17:30:00Z,lines,4,10
+2024,537aa5b99f60609733ccce24f4ad4315,2024-09-21T19:33:00Z,UMass Minutemen,Central Connecticut Blue Devils,2024-09-21T17:33:00Z,none,0,0
+2024,c57d8d897639e0c605a3036a51841681,2024-09-21T19:33:00Z,UTSA Roadrunners,Houston Baptist Huskies,2024-09-21T17:33:00Z,none,0,0
+2024,575eec48f38b8fd6e4c0e255048eb1dd,2024-09-21T19:33:00Z,Pittsburgh Panthers,Youngstown St Penguins,2024-09-21T17:33:00Z,none,0,0
+2024,aeed42249b8d51c6fa0215934e1212c8,2024-09-21T20:00:00Z,Middle Tennessee Blue Raiders,Duke Blue Devils,2024-09-21T18:00:00Z,lines,1,10
+2024,b4d54c7adc67dbb3232b35a8f0a19ece,2024-09-21T20:00:00Z,Oklahoma State Cowboys,Utah Utes,2024-09-21T18:00:00Z,lines,5,10
+2024,a0858592346a5b0027beb41382a4da45,2024-09-21T21:00:00Z,Colorado State Rams,UTEP Miners,2024-09-21T19:00:00Z,none,0,0
+2024,657334d10414c158d02e818901d6b94e,2024-09-21T21:00:00Z,SMU Mustangs,TCU Horned Frogs,2024-09-21T19:00:00Z,lines,4,10
+2024,748ef02ea10754fc0e3408b1a7f40c8b,2024-09-21T22:00:00Z,Liberty Flames,East Carolina Pirates,2024-09-21T20:00:00Z,none,0,0
+2024,3b137adbecc18148688d274fe0308d19,2024-09-21T22:00:00Z,Florida International Panthers,Monmouth Hawks,2024-09-21T20:00:00Z,none,0,0
+2024,5c108471e5bc4703aee906210b98022c,2024-09-21T23:00:00Z,Florida State Seminoles,California Golden Bears,2024-09-21T21:00:00Z,lines,2,10
+2024,b48e0c3c2a29f849448eb08247c8ae64,2024-09-21T23:00:00Z,UConn Huskies,Florida Atlantic Owls,2024-09-21T21:00:00Z,none,0,0
+2024,90f041d16ec26eb56168118415a36a10,2024-09-21T23:00:00Z,Louisiana Tech Bulldogs,Tulsa Golden Hurricane,2024-09-21T21:00:00Z,none,0,0
+2024,adb02203b80cbea2096cad939e7a7094,2024-09-21T23:00:00Z,South Florida Bulls,Miami Hurricanes,2024-09-21T21:00:00Z,lines,5,10
+2024,7bc4f45e7322650b88697a7c9aca5684,2024-09-21T23:00:00Z,Sam Houston State Bearkats,New Mexico State Aggies,2024-09-21T21:00:00Z,none,0,0
+2024,90429af2fa75c8fea915547191a8f7d5,2024-09-21T23:00:00Z,North Texas Mean Green,Wyoming Cowboys,2024-09-21T21:00:00Z,none,0,0
+2024,874e92594c46cb8021d5b91dabbf27c3,2024-09-21T23:00:00Z,Washington Huskies,Northwestern Wildcats,2024-09-21T21:00:00Z,lines,9,10
+2024,7e077c4cd267ba234f3b47ef99aa2277,2024-09-21T23:00:00Z,Western Kentucky Hilltoppers,Toledo Rockets,2024-09-21T21:00:00Z,none,0,0
+2024,94ac8457fa70b580838642d38a67fc51,2024-09-21T23:03:00Z,Troy Trojans,Florida A&M Rattlers,2024-09-21T21:03:00Z,none,0,0
+2024,6a2cdf51160b6997230affa8b0458526,2024-09-21T23:30:00Z,South Carolina Gamecocks,Akron Zips,2024-09-21T21:30:00Z,none,0,0
+2024,73bb9d89f656d5f8f637cc729e4de3a2,2024-09-21T23:30:00Z,Texas A&M Aggies,Bowling Green Falcons,2024-09-21T21:30:00Z,none,0,0
+2024,1319cf706a2f4c7e697a279277655a8d,2024-09-21T23:30:00Z,Minnesota Golden Gophers,Iowa Hawkeyes,2024-09-21T21:30:00Z,lines,8,10
+2024,2603ecc743ccc0d388aad523d4b59bf0,2024-09-21T23:30:00Z,Oklahoma Sooners,Tennessee Volunteers,2024-09-21T21:30:00Z,lines,12,10
+2024,5c76ae411cf4b08fc4ff469f3ef48499,2024-09-21T23:45:00Z,Ole Miss Rebels,Georgia Southern Eagles,2024-09-21T21:45:00Z,none,0,0
+2024,72afd4ee223ca68955d8d621130261ea,2024-09-22T00:00:00Z,Colorado Buffaloes,Baylor Bears,2024-09-21T22:00:00Z,lines,3,10
+2024,9701db391e6189374476ac205fa0674a,2024-09-22T00:00:00Z,Boston College Eagles,Michigan State Spartans,2024-09-21T22:00:00Z,lines,4,10
+2024,b352dd924277ad40eba152b9e686f3c5,2024-09-22T00:00:00Z,Texas Longhorns,UL Monroe Warhawks,2024-09-21T22:00:00Z,none,0,0
+2024,5e798d81ae04a17f98bea97e8764b52f,2024-09-22T00:30:00Z,New Mexico Lobos,Fresno State Bulldogs,2024-09-21T22:30:00Z,none,0,0
+2024,9e487e3f3a8493e4385bcdba59e9e28c,2024-09-22T00:30:00Z,Oregon State Beavers,Purdue Boilermakers,2024-09-21T22:30:00Z,lines,5,10
+2024,75656f55f37becf5b4f9d391c8b6b6c5,2024-09-22T01:48:00Z,Boise State Broncos,Portland State Vikings,2024-09-21T23:48:00Z,none,0,0
+2024,55cf76bfadb791ce7b75e04571993f7c,2024-09-22T02:30:00Z,BYU Cougars,Kansas State Wildcats,2024-09-22T00:30:00Z,lines,4,10
+2024,2a56fdea3f312e4bc887ae8e0f15cdc2,2024-09-22T03:59:00Z,Hawaii Rainbow Warriors,Northern Iowa Panthers,2024-09-22T01:59:00Z,none,0,0
+2024,4e499c5f43a3e3d07afd6ed54ff1be10,2024-09-26T23:30:00Z,Temple Owls,Army Black Knights,2024-09-26T21:30:00Z,none,0,0
+2024,680b41c2022e66bdfb559acad2ccb7cb,2024-09-27T23:30:00Z,Miami Hurricanes,Virginia Tech Hokies,2024-09-27T21:30:00Z,lines,11,10
+2024,1b30b07ed8b4fa5ad9002f5dd9597bb4,2024-09-28T00:00:00Z,Rutgers Scarlet Knights,Washington Huskies,2024-09-27T22:00:00Z,lines,5,10
+2024,950f643219d964e32a562225febdfa5a,2024-09-28T16:00:00Z,Baylor Bears,BYU Cougars,2024-09-28T14:00:00Z,none,0,0
+2024,4614cfd4ab738b0e03d228f262eff76c,2024-09-28T16:00:00Z,Boston College Eagles,Western Kentucky Hilltoppers,2024-09-28T14:00:00Z,none,0,0
+2024,4ebc42fd0bb46d3124239e1ba23a9539,2024-09-28T16:00:00Z,UConn Huskies,Buffalo Bulls,2024-09-28T14:00:00Z,none,0,0
+2024,7524d30e3468cd07067137f30c355705,2024-09-28T16:00:00Z,Syracuse Orange,Holy Cross Crusaders,2024-09-28T14:00:00Z,none,0,0
+2024,361f4da79d038dd85314ff1af5a53738,2024-09-28T16:00:00Z,Indiana Hoosiers,Maryland Terrapins,2024-09-28T14:00:00Z,lines,6,10
+2024,411cf47f5fabdd934b0f317a24e75b62,2024-09-28T16:00:00Z,Kansas State Wildcats,Oklahoma State Cowboys,2024-09-28T14:00:00Z,lines,7,10
+2024,52e83c9a384a2cb325b83b4a666ab541,2024-09-28T16:00:00Z,Ole Miss Rebels,Kentucky Wildcats,2024-09-28T14:00:00Z,lines,6,10
+2024,f0d3d3bbe269e4db0ea36b532bdce193,2024-09-28T16:00:00Z,Michigan Wolverines,Minnesota Golden Gophers,2024-09-28T14:00:00Z,lines,4,10
+2024,4ff191d3625d6024b7513a3183ac5f58,2024-09-28T16:00:00Z,NC State Wolfpack,Northern Illinois Huskies,2024-09-28T14:00:00Z,none,0,0
+2024,f8297ccc0badd42fd63f5fbc6241aad2,2024-09-28T16:00:00Z,UAB Blazers,Navy Midshipmen,2024-09-28T14:00:00Z,none,0,0
+2024,f57e89c320b97a1e1906c6a5673a016e,2024-09-28T16:00:00Z,Purdue Boilermakers,Nebraska Cornhuskers,2024-09-28T14:00:00Z,lines,7,10
+2024,95277bf5c9398a29acf35f1f0fecd95f,2024-09-28T16:00:00Z,Tulane Green Wave,South Florida Bulls,2024-09-28T14:00:00Z,lines,1,10
+2024,0d469959983aee5bd80bf76a80e5f33c,2024-09-28T17:30:00Z,James Madison Dukes,Ball State Cardinals,2024-09-28T15:30:00Z,none,0,0
+2024,d4075ea2a9e5e6a100aee3e5e134f27e,2024-09-28T19:00:00Z,Sam Houston State Bearkats,Texas State Bobcats,2024-09-28T17:00:00Z,none,0,0
+2024,f44709a724692bf94d06fd0cb5a4a670,2024-09-28T19:30:00Z,Ohio Bobcats,Akron Zips,2024-09-28T17:30:00Z,none,0,0
+2024,7c8da12dccf36e1e539f4ec0e9408a09,2024-09-28T19:30:00Z,Texas A&M Aggies,Arkansas Razorbacks,2024-09-28T17:30:00Z,lines,4,10
+2024,036114d7a9ad265cb7eeb269e274a8ea,2024-09-28T19:30:00Z,Auburn Tigers,Oklahoma Sooners,2024-09-28T17:30:00Z,lines,4,10
+2024,e647d9a567c02e695a25f916e1c59ee1,2024-09-28T19:30:00Z,Central Michigan Chippewas,San Diego State Aztecs,2024-09-28T17:30:00Z,none,0,0
+2024,9363deed7f7b482bfd66be094b8e0d7e,2024-09-28T19:30:00Z,UCF Knights,Colorado Buffaloes,2024-09-28T17:30:00Z,lines,9,10
+2024,94ee396c6afdb2056ce57f506b7491f2,2024-09-28T19:30:00Z,Kent State Golden Flashes,Eastern Michigan Eagles,2024-09-28T17:30:00Z,none,0,0
+2024,d053bfc03e420444ea558afbb342665d,2024-09-28T19:30:00Z,UNLV Rebels,Fresno State Bulldogs,2024-09-28T17:30:00Z,none,0,0
+2024,5d17e44edde0d6ce4950188847f432f2,2024-09-28T19:30:00Z,Georgia State Panthers,Georgia Southern Eagles,2024-09-28T17:30:00Z,none,0,0
+2024,5d016550a91725ca7a6da5ff11139302,2024-09-28T19:30:00Z,Kansas Jayhawks,TCU Horned Frogs,2024-09-28T17:30:00Z,lines,2,10
+2024,4dfb453270e92971df96bf61232cfa09,2024-09-28T19:30:00Z,Wake Forest Demon Deacons,Louisiana Ragin Cajuns,2024-09-28T17:30:00Z,lines,3,10
+2024,66d439ee905633bda3e1b6d9f2f9a2ed,2024-09-28T19:30:00Z,Notre Dame Fighting Irish,Louisville Cardinals,2024-09-28T17:30:00Z,lines,7,10
+2024,b601e9fa96898aa9f795d29da6536c0e,2024-09-28T19:30:00Z,Marshall Thundering Herd,Western Michigan Broncos,2024-09-28T17:30:00Z,none,0,0
+2024,5c78129faea8cde72e6280420cdb5a16,2024-09-28T19:30:00Z,Miami (OH) RedHawks,UMass Minutemen,2024-09-28T17:30:00Z,none,0,0
+2024,1b881f215165d0f01a4d1187525d70aa,2024-09-28T19:30:00Z,USC Trojans,Wisconsin Badgers,2024-09-28T17:30:00Z,lines,9,10
+2024,5742c3a8aa35e8d6dbbc2522570f3d7c,2024-09-28T20:00:00Z,Duke Blue Devils,North Carolina Tar Heels,2024-09-28T18:00:00Z,lines,4,10
+2024,50ec8cc5315f367161fa03f3a838d31b,2024-09-28T20:00:00Z,East Carolina Pirates,UTSA Roadrunners,2024-09-28T18:00:00Z,none,0,0
+2024,f0ab6844d122b388e9b8eac92bc1b154,2024-09-28T20:15:00Z,Texas Longhorns,Mississippi State Bulldogs,2024-09-28T18:15:00Z,lines,1,10
+2024,affbef467cd79952347f437f0ac931ee,2024-09-28T21:00:00Z,Bowling Green Falcons,Old Dominion Monarchs,2024-09-28T19:00:00Z,none,0,0
+2024,435419d8a6e9e6f019db6a6711c098a4,2024-09-28T22:00:00Z,Florida Atlantic Owls,Wagner Seahawks,2024-09-28T20:00:00Z,none,0,0
+2024,ec905cc9477bd05dee9366c310b2e6b9,2024-09-28T22:00:00Z,Florida International Panthers,Louisiana Tech Bulldogs,2024-09-28T20:00:00Z,none,0,0
+2024,a32e0c4e138fbd0f28627e769d2954f1,2024-09-28T22:00:00Z,Kennesaw State Owls,UT Martin Skyhawks,2024-09-28T20:00:00Z,none,0,0
+2024,3c107f2be471b0cb1cabaae094a6f900,2024-09-28T23:00:00Z,Rice Owls,Charlotte 49ers,2024-09-28T21:00:00Z,none,0,0
+2024,f0e54263ae46738e248076acc2ef03bc,2024-09-28T23:00:00Z,Clemson Tigers,Stanford Cardinal,2024-09-28T21:00:00Z,none,0,0
+2024,84583a6b23d72609ec9fa68e0562f27e,2024-09-28T23:00:00Z,Houston Cougars,Iowa State Cyclones,2024-09-28T21:00:00Z,none,0,0
+2024,b4f5b2b3159bb8cb0d4cc1d424f89665,2024-09-28T23:00:00Z,North Texas Mean Green,Tulsa Golden Hurricane,2024-09-28T21:00:00Z,none,0,0
+2024,5ee00ea5b638663a01ca06a4edcc3a0f,2024-09-28T23:00:00Z,Troy Trojans,UL Monroe Warhawks,2024-09-28T21:00:00Z,none,0,0
+2024,ccab62d689b7fa48fe8923801105f436,2024-09-28T23:30:00Z,Alabama Crimson Tide,Georgia Bulldogs,2024-09-28T21:30:00Z,lines,15,10
+2024,089cfaec600efc7438564013e440ae07,2024-09-28T23:30:00Z,Penn State Nittany Lions,Illinois Fighting Illini,2024-09-28T21:30:00Z,lines,11,10
+2024,b20e904813bd85af33ee826627eba52b,2024-09-28T23:30:00Z,Memphis Tigers,Middle Tennessee Blue Raiders,2024-09-28T21:30:00Z,none,0,0
+2024,891df4bc12c5d981572121a81312997e,2024-09-28T23:30:00Z,Michigan State Spartans,Ohio State Buckeyes,2024-09-28T21:30:00Z,lines,4,10
+2024,c670644c604d4a500367d8f3fd0dc528,2024-09-28T23:45:00Z,LSU Tigers,South Alabama Jaguars,2024-09-28T21:45:00Z,lines,3,10
+2024,f20169cf0dd37ea60119180203879b5d,2024-09-29T00:00:00Z,Wyoming Cowboys,Air Force Falcons,2024-09-28T22:00:00Z,none,0,0
+2024,2005a2c0590c0dc29990a8c11182b0eb,2024-09-29T00:00:00Z,Texas Tech Red Raiders,Cincinnati Bearcats,2024-09-28T22:00:00Z,none,0,0
+2024,b7f0adbc3ff86d4e7e70b682a511b30e,2024-09-29T00:00:00Z,SMU Mustangs,Florida State Seminoles,2024-09-28T22:00:00Z,lines,2,10
+2024,80339d3a340d60e59faac83c71d15238,2024-09-29T00:00:00Z,New Mexico State Aggies,New Mexico Lobos,2024-09-28T22:00:00Z,none,0,0
+2024,558ffafbe6501ef2ffce7e651f7c360d,2024-09-29T02:00:00Z,Boise State Broncos,Washington State Cougars,2024-09-29T00:00:00Z,lines,8,10
+2024,3263eec38157d23d2bcf01dfaedf08ab,2024-09-29T02:15:00Z,Utah Utes,Arizona Wildcats,2024-09-29T00:15:00Z,lines,6,10
+2024,3eb17941aef9319cb810e2a373d83d67,2024-09-29T03:00:00Z,UCLA Bruins,Oregon Ducks,2024-09-29T01:00:00Z,lines,8,10
+2024,66c180153e4c6d591688c51581bc692f,2024-10-03T23:00:00Z,Troy Trojans,Texas State Bobcats,2024-10-03T21:00:00Z,lines,4,10
+2024,cf349f675786138bf00cd7d0704e163a,2024-10-04T01:00:00Z,UTEP Miners,Sam Houston State Bearkats,2024-10-03T23:00:00Z,none,0,0
+2024,a9ba22efb610f181f3e66f32faac30f2,2024-10-04T23:00:00Z,Kennesaw State Owls,Jacksonville State Gamecocks,2024-10-04T21:00:00Z,none,0,0
+2024,5419674ef3f4bae949329fa983d7760c,2024-10-04T23:30:00Z,TCU Horned Frogs,Houston Cougars,2024-10-04T21:30:00Z,lines,8,10
+2024,f6976b59bd840fa975fd9af3c2c19fd2,2024-10-05T01:00:00Z,Oregon Ducks,Michigan State Spartans,2024-10-04T23:00:00Z,lines,11,10
+2024,c4c825dab388e0ef12316078205dc366,2024-10-05T01:00:00Z,UNLV Rebels,Syracuse Orange,2024-10-04T23:00:00Z,lines,10,10
+2024,dae74a738bd3e7dc8a13d179021acdb4,2024-10-05T16:00:00Z,Air Force Falcons,Navy Midshipmen,2024-10-05T14:00:00Z,none,0,0
+2024,077c9c93dc9413a6287ff296ffa9c850,2024-10-05T16:00:00Z,Tulsa Golden Hurricane,Army Black Knights,2024-10-05T14:00:00Z,none,0,0
+2024,e75d27f24b331e66fd5b3fbc96c18682,2024-10-05T16:00:00Z,Virginia Cavaliers,Boston College Eagles,2024-10-05T14:00:00Z,lines,3,10
+2024,85c9b6470c260bc449e3a23e8106d6aa,2024-10-05T16:00:00Z,Louisville Cardinals,SMU Mustangs,2024-10-05T14:00:00Z,lines,3,10
+2024,42264009b99d6ca876978fe8b4b61992,2024-10-05T16:00:00Z,Texas A&M Aggies,Missouri Tigers,2024-10-05T14:00:00Z,lines,5,10
+2024,5c429c89da3e026f5dad123052cb4194,2024-10-05T16:00:00Z,NC State Wolfpack,Wake Forest Demon Deacons,2024-10-05T14:00:00Z,lines,4,10
+2024,6b58f9b6a854fe9d6fc4d2d83cea9ac3,2024-10-05T16:00:00Z,North Carolina Tar Heels,Pittsburgh Panthers,2024-10-05T14:00:00Z,lines,5,10
+2024,7ed4dac25ec054ed46914df9586196bb,2024-10-05T16:00:00Z,Northern Illinois Huskies,UMass Minutemen,2024-10-05T14:00:00Z,none,0,0
+2024,dcbb136e7701ce747d059706c608ecdb,2024-10-05T16:00:00Z,Penn State Nittany Lions,UCLA Bruins,2024-10-05T14:00:00Z,lines,2,10
+2024,7f6db1890c120f15e6e68ec28cd5499d,2024-10-05T16:00:00Z,Wisconsin Badgers,Purdue Boilermakers,2024-10-05T14:00:00Z,lines,6,10
+2024,78190e89ec75abdc1426fb364d9cc017,2024-10-05T17:00:00Z,UAB Blazers,Tulane Green Wave,2024-10-05T15:00:00Z,none,0,0
+2024,ee524ff1b2504ec862e1d0ac5c881655,2024-10-05T18:00:00Z,Ball State Cardinals,Western Michigan Broncos,2024-10-05T16:00:00Z,none,0,0
+2024,22b456fd3c16eeebac67daf5b2ba1e0a,2024-10-05T19:30:00Z,Akron Zips,Bowling Green Falcons,2024-10-05T17:30:00Z,none,0,0
+2024,b7dd8b2215a41f46a6e52f6b38cdd7d8,2024-10-05T19:30:00Z,Marshall Thundering Herd,Appalachian State Mountaineers,2024-10-05T17:30:00Z,none,0,0
+2024,ed933ce5742a7a39fe660f44301f54d3,2024-10-05T19:30:00Z,Georgia Bulldogs,Auburn Tigers,2024-10-05T17:30:00Z,lines,9,10
+2024,951a5c8e956717c6b6b0f634550f7c41,2024-10-05T19:30:00Z,Charlotte 49ers,East Carolina Pirates,2024-10-05T17:30:00Z,none,0,0
+2024,b001ff30e8f373a70697f9e4b2d39bda,2024-10-05T19:30:00Z,Northwestern Wildcats,Indiana Hoosiers,2024-10-05T17:30:00Z,lines,3,10
+2024,9cee431bd1c95e2e4b62a8f5912eae3b,2024-10-05T19:30:00Z,Ohio State Buckeyes,Iowa Hawkeyes,2024-10-05T17:30:00Z,lines,9,10
+2024,bc48f7ab402392d486c92cc0c64d2ee4,2024-10-05T19:30:00Z,Toledo Rockets,Miami (OH) RedHawks,2024-10-05T17:30:00Z,none,0,0
+2024,d97f2b60c1da38b72168fd1496097777,2024-10-05T19:30:00Z,South Carolina Gamecocks,Ole Miss Rebels,2024-10-05T17:30:00Z,none,0,0
+2024,0efd63ad7e2f2a3973bded60555f6e6c,2024-10-05T19:30:00Z,Stanford Cardinal,Virginia Tech Hokies,2024-10-05T17:30:00Z,none,0,0
+2024,93718cd5e2b7fd0d7c802c30205a0048,2024-10-05T19:30:00Z,UConn Huskies,Temple Owls,2024-10-05T17:30:00Z,none,0,0
+2024,0250b69b546214d4165601e64626828a,2024-10-05T20:00:00Z,Nebraska Cornhuskers,Rutgers Scarlet Knights,2024-10-05T18:00:00Z,lines,6,10
+2024,ad2232b25e454da6240156485729b386,2024-10-05T20:00:00Z,Oklahoma State Cowboys,West Virginia Mountaineers,2024-10-05T18:00:00Z,lines,6,10
+2024,2e864b3f43fd089b568142ac6ebfd7c7,2024-10-05T20:15:00Z,Vanderbilt Commodores,Alabama Crimson Tide,2024-10-05T18:15:00Z,lines,6,10
+2024,eb474dffe17f94e7348f2c929fb38531,2024-10-05T22:30:00Z,Oregon State Beavers,Colorado State Rams,2024-10-05T20:30:00Z,lines,1,10
+2024,1f182c6414bb85ef469d1514c4ce94f7,2024-10-05T23:00:00Z,Arkansas State Red Wolves,South Alabama Jaguars,2024-10-05T21:00:00Z,none,0,0
+2024,a047f1a6036e2fd2b7d75725211ac818,2024-10-05T23:00:00Z,Boise State Broncos,Utah State Aggies,2024-10-05T21:00:00Z,none,0,0
+2024,f2dde4349858c89afe3cccea78f6950a,2024-10-05T23:00:00Z,Florida State Seminoles,Clemson Tigers,2024-10-05T21:00:00Z,lines,4,10
+2024,3f23045c7e82461679aa6cd6ce38564a,2024-10-05T23:00:00Z,Coastal Carolina Chanticleers,Old Dominion Monarchs,2024-10-05T21:00:00Z,none,0,0
+2024,23ae8e97e22dd9cb6f92d1b5c33b7d81,2024-10-05T23:00:00Z,UL Monroe Warhawks,James Madison Dukes,2024-10-05T21:00:00Z,none,0,0
+2024,68c5afd7b029380a54e18c1a84f1ca16,2024-10-05T23:00:00Z,Southern Mississippi Golden Eagles,Louisiana Ragin Cajuns,2024-10-05T21:00:00Z,none,0,0
+2024,4078833b7492708387929ba7d0bad2cb,2024-10-05T23:30:00Z,Arkansas Razorbacks,Tennessee Volunteers,2024-10-05T21:30:00Z,lines,5,10
+2024,7ba6a0096b4e4cad36c53a8113cf69a8,2024-10-05T23:30:00Z,Iowa State Cyclones,Baylor Bears,2024-10-05T21:30:00Z,lines,4,10
+2024,e34e1ba3c038f2fb8739318355793866,2024-10-05T23:30:00Z,Washington Huskies,Michigan Wolverines,2024-10-05T21:30:00Z,lines,5,10
+2024,594f3ba810896ba537d2d825212606a3,2024-10-05T23:30:00Z,Minnesota Golden Gophers,USC Trojans,2024-10-05T21:30:00Z,lines,8,10
+2024,6418eb030bb13f02df57b97c804f1ff2,2024-10-05T23:30:00Z,San Jose State Spartans,Nevada Wolf Pack,2024-10-05T21:30:00Z,none,0,0
+2024,705401f67271a5dac4e0606a289fa0bd,2024-10-05T23:45:00Z,Florida Gators,UCF Knights,2024-10-05T21:45:00Z,lines,4,10
+2024,e16bc69571f5c6a9c762abdd774fc23a,2024-10-06T00:00:00Z,Arizona State Sun Devils,Kansas Jayhawks,2024-10-05T22:00:00Z,lines,8,10
+2024,bef187e97bb37eae9df31e939cd79dbd,2024-10-06T00:00:00Z,Georgia Tech Yellow Jackets,Duke Blue Devils,2024-10-05T22:00:00Z,lines,4,10
+2024,33d23a23904d3195ea9e24b351444a90,2024-10-06T00:00:00Z,San Diego State Aztecs,Hawaii Rainbow Warriors,2024-10-05T22:00:00Z,none,0,0
+2024,e5dab5da9af89a576fbbbce9fb6d2d2e,2024-10-06T02:30:00Z,California Golden Bears,Miami Hurricanes,2024-10-06T00:30:00Z,lines,7,10
+2024,56571a2616e8a8595a87eae87514112f,2024-10-06T03:00:00Z,Arizona Wildcats,Texas Tech Red Raiders,2024-10-06T01:00:00Z,lines,1,10
+2024,61e2b09b148c838745dd7e520719bdb9,2024-10-08T23:00:00Z,Liberty Flames,Florida International Panthers,2024-10-08T21:00:00Z,lines,9,10
+2024,b6f77e9926f88eabe27f904d9097b1c6,2024-10-09T23:30:00Z,Jacksonville State Gamecocks,New Mexico State Aggies,2024-10-09T21:30:00Z,none,0,0
+2024,1a9f221fc0145435d820b62cf0f433e0,2024-10-10T23:30:00Z,James Madison Dukes,Coastal Carolina Chanticleers,2024-10-10T21:30:00Z,none,0,0
+2024,8491f9c56a3c55b8296c36c34a7b52d7,2024-10-11T00:00:00Z,Louisiana Tech Bulldogs,Middle Tennessee Blue Raiders,2024-10-10T22:00:00Z,none,0,0
+2024,807eb4b33ddee38cd04cb84661cf8a54,2024-10-11T00:00:00Z,Western Kentucky Hilltoppers,UTEP Miners,2024-10-10T22:00:00Z,lines,4,10
+2024,4faea3f97b001ba08674a22f622cc9cf,2024-10-12T00:00:00Z,Maryland Terrapins,Northwestern Wildcats,2024-10-11T22:00:00Z,lines,11,10
+2024,75117d5af6d6269cda13fc9cf3ead3d8,2024-10-12T01:00:00Z,Utah State Aggies,UNLV Rebels,2024-10-11T23:00:00Z,lines,2,10
+2024,efc5d736dc2fc2f1d28def2d76212b27,2024-10-12T02:30:00Z,Arizona State Sun Devils,Utah Utes,2024-10-12T00:30:00Z,lines,3,10
+2024,18981958470b3289c1c91268a9ac6173,2024-10-12T16:00:00Z,Alabama Crimson Tide,South Carolina Gamecocks,2024-10-12T14:00:00Z,lines,7,10
+2024,fe044cee71d34b74e002c332a61cb431,2024-10-12T16:00:00Z,Army Black Knights,UAB Blazers,2024-10-12T14:00:00Z,none,0,0
+2024,631271f24c613402ca0f87c89c2ae273,2024-10-12T16:00:00Z,Kent State Golden Flashes,Ball State Cardinals,2024-10-12T14:00:00Z,none,0,0
+2024,acec1058c7889486ef7eafa74b74b29a,2024-10-12T16:00:00Z,Buffalo Bulls,Toledo Rockets,2024-10-12T14:00:00Z,none,0,0
+2024,84804b2b151a434540c6c187bae4b0a4,2024-10-12T16:00:00Z,Wake Forest Demon Deacons,Clemson Tigers,2024-10-12T14:00:00Z,lines,4,10
+2024,762b9ffd9ceb5e3d35890f69472b1adb,2024-10-12T16:00:00Z,North Carolina Tar Heels,Georgia Tech Yellow Jackets,2024-10-12T14:00:00Z,none,0,0
+2024,ecf597598bc3cc6dfa3222d95a130031,2024-10-12T16:00:00Z,Iowa Hawkeyes,Washington Huskies,2024-10-12T14:00:00Z,lines,9,10
+2024,85c0dc03b80234a9db6161f0b30ab08f,2024-10-12T16:00:00Z,UMass Minutemen,Missouri Tigers,2024-10-12T14:00:00Z,none,0,0
+2024,0ed4ccec5843b2798516f1fb1f218f2f,2024-10-12T16:00:00Z,Rutgers Scarlet Knights,Wisconsin Badgers,2024-10-12T14:00:00Z,lines,1,10
+2024,08ae8e36880c7e81244fc206b48153a7,2024-10-12T18:00:00Z,Eastern Michigan Eagles,Miami (OH) RedHawks,2024-10-12T16:00:00Z,none,0,0
+2024,d9716a342cb751d058bfb498c5bca7f4,2024-10-12T19:30:00Z,Western Michigan Broncos,Akron Zips,2024-10-12T17:30:00Z,none,0,0
+2024,6f534dfc8a623915789ab2902bd0dc6f,2024-10-12T19:30:00Z,Bowling Green Falcons,Northern Illinois Huskies,2024-10-12T17:30:00Z,none,0,0
+2024,9c48527ea3013d562e61e05c44507137,2024-10-12T19:30:00Z,Pittsburgh Panthers,California Golden Bears,2024-10-12T17:30:00Z,none,0,0
+2024,d5fe947092b49d7f6ca8d37796c9e6ef,2024-10-12T19:30:00Z,UCF Knights,Cincinnati Bearcats,2024-10-12T17:30:00Z,lines,1,10
+2024,7061e228b14c45b516bebaec86a9d433,2024-10-12T19:30:00Z,Colorado State Rams,San Jose State Spartans,2024-10-12T17:30:00Z,none,0,0
+2024,5e9ef9ef40086e05db5c9317646dcefb,2024-10-12T19:30:00Z,Georgia State Panthers,Old Dominion Monarchs,2024-10-12T17:30:00Z,none,0,0
+2024,976c3efa457dce0d6430d76069b09454,2024-10-12T19:30:00Z,Illinois Fighting Illini,Purdue Boilermakers,2024-10-12T17:30:00Z,lines,7,10
+2024,d0842ccb36f48e552583883741cdf5d0,2024-10-12T19:30:00Z,Virginia Cavaliers,Louisville Cardinals,2024-10-12T17:30:00Z,lines,1,10
+2024,63418e8edb22dd2539a0847956b56813,2024-10-12T19:30:00Z,South Florida Bulls,Memphis Tigers,2024-10-12T17:30:00Z,none,0,0
+2024,5ae1edfbcb2867bf81521c38d99c8280,2024-10-12T19:30:00Z,Notre Dame Fighting Irish,Stanford Cardinal,2024-10-12T17:30:00Z,lines,2,10
+2024,d4637f010f52e3d47c1efa4b2be0ca5b,2024-10-12T19:30:00Z,Oklahoma Sooners,Texas Longhorns,2024-10-12T17:30:00Z,lines,12,10
+2024,ec2a1deabdf4718b04b863b01fa8d46c,2024-10-12T19:30:00Z,USC Trojans,Penn State Nittany Lions,2024-10-12T17:30:00Z,lines,6,10
+2024,eff52aef293ca1e8a18bc527accf7106,2024-10-12T19:30:00Z,Wyoming Cowboys,San Diego State Aztecs,2024-10-12T17:30:00Z,none,0,0
+2024,c2c5135d0d091f1269473266b77839d9,2024-10-12T20:00:00Z,BYU Cougars,Arizona Wildcats,2024-10-12T18:00:00Z,lines,2,10
+2024,0983429e2ccc6ed6a7943d271940fb6f,2024-10-12T20:00:00Z,Central Michigan Chippewas,Ohio Bobcats,2024-10-12T18:00:00Z,none,0,0
+2024,56a389aa660514383b9743f1752e98e9,2024-10-12T20:15:00Z,Georgia Bulldogs,Mississippi State Bulldogs,2024-10-12T18:15:00Z,none,0,0
+2024,3335008c015ca3d292f851f7d614d404,2024-10-12T21:00:00Z,UL Monroe Warhawks,Southern Mississippi Golden Eagles,2024-10-12T19:00:00Z,none,0,0
+2024,d8287f3cf3dd5601a73877ab8edde386,2024-10-12T23:00:00Z,New Mexico Lobos,Air Force Falcons,2024-10-12T21:00:00Z,none,0,0
+2024,85f73ea34a56732c73cb3104611c7a46,2024-10-12T23:00:00Z,Texas State Bobcats,Arkansas State Red Wolves,2024-10-12T21:00:00Z,none,0,0
+2024,b6fe5824d2af27a484cf57778caba402,2024-10-12T23:00:00Z,Florida Atlantic Owls,North Texas Mean Green,2024-10-12T21:00:00Z,none,0,0
+2024,17b46a19baf4a7b532a112b22ac49214,2024-10-12T23:00:00Z,Tennessee Volunteers,Florida Gators,2024-10-12T21:00:00Z,lines,6,10
+2024,a56fbef38ac1d7c784d04e407f272905,2024-10-12T23:00:00Z,Fresno State Bulldogs,Washington State Cougars,2024-10-12T21:00:00Z,lines,3,10
+2024,dd9354c4fff9229ee3d2553d38f8dd4a,2024-10-12T23:00:00Z,Rice Owls,UTSA Roadrunners,2024-10-12T21:00:00Z,none,0,0
+2024,4f365be3c3d4665f60e5f7550ea6fc05,2024-10-12T23:30:00Z,Louisiana Ragin Cajuns,Appalachian State Mountaineers,2024-10-12T21:30:00Z,none,0,0
+2024,70fc99b8141b073b2ca8d5c22335a377,2024-10-12T23:30:00Z,LSU Tigers,Ole Miss Rebels,2024-10-12T21:30:00Z,lines,15,10
+2024,1311afa1b07108fbd223653f9f813d46,2024-10-12T23:30:00Z,Nevada Wolf Pack,Oregon State Beavers,2024-10-12T21:30:00Z,lines,2,10
+2024,3e401f110827c69c08fdcd237d08bdb9,2024-10-12T23:30:00Z,Oregon Ducks,Ohio State Buckeyes,2024-10-12T21:30:00Z,lines,14,10
+2024,d278f47b052f215ce68c6749c83d0bfd,2024-10-12T23:45:00Z,Kentucky Wildcats,Vanderbilt Commodores,2024-10-12T21:45:00Z,lines,6,10
+2024,0da1d813bcd901acf66dc4697ccce504,2024-10-13T00:00:00Z,Georgia Southern Eagles,Marshall Thundering Herd,2024-10-12T22:00:00Z,none,0,0
+2024,1de2ab366110ceaa624051c3872e3979,2024-10-13T00:00:00Z,West Virginia Mountaineers,Iowa State Cyclones,2024-10-12T22:00:00Z,none,0,0
+2024,ffc93203d210a48251be2b3704f31a51,2024-10-13T00:00:00Z,NC State Wolfpack,Syracuse Orange,2024-10-12T22:00:00Z,lines,2,10
+2024,34544ca5e9aac17280fd757e1eb0f9c8,2024-10-13T01:00:00Z,UCLA Bruins,Minnesota Golden Gophers,2024-10-12T23:00:00Z,lines,5,10
+2024,81da56712c879ebb7c1d76ae01b443cd,2024-10-13T02:15:00Z,Colorado Buffaloes,Kansas State Wildcats,2024-10-13T00:15:00Z,lines,8,10
+2024,c16e38af3311a719b9f56e192feed0fd,2024-10-13T03:00:00Z,Hawaii Rainbow Warriors,Boise State Broncos,2024-10-13T01:00:00Z,none,0,0
+2024,b532d316421b26a3df1a1e58a56eae21,2024-10-15T23:30:00Z,South Alabama Jaguars,Troy Trojans,2024-10-15T21:30:00Z,none,0,0
+2024,b10309421026f0cce2e8a794e491718d,2024-10-16T00:00:00Z,Middle Tennessee Blue Raiders,Kennesaw State Owls,2024-10-15T22:00:00Z,none,0,0
+2024,35a4c5e18cc612592bf72fa3e2df3232,2024-10-16T01:00:00Z,New Mexico State Aggies,Louisiana Tech Bulldogs,2024-10-15T23:00:00Z,none,0,0
+2024,dcce8224e611fc1d54694bca00317c6f,2024-10-16T23:00:00Z,Sam Houston State Bearkats,Western Kentucky Hilltoppers,2024-10-16T21:00:00Z,none,0,0
+2024,c37ca64f39b0f9efa4f5f5ff269656b4,2024-10-17T01:00:00Z,UTEP Miners,Florida International Panthers,2024-10-16T23:00:00Z,lines,4,10
+2024,f859eeed0b13f4e9927dcda2da05495e,2024-10-17T23:00:00Z,Marshall Thundering Herd,Georgia State Panthers,2024-10-17T21:00:00Z,none,0,0
+2024,e3269474a869004082e2176516258025,2024-10-17T23:30:00Z,Virginia Tech Hokies,Boston College Eagles,2024-10-17T21:30:00Z,none,0,0
+2024,a7da4ac4a8257c3eca59a7a6da421897,2024-10-18T23:00:00Z,Duke Blue Devils,Florida State Seminoles,2024-10-18T21:00:00Z,lines,4,10
+2024,d4980eb8da9c681b77822434458c38e8,2024-10-19T00:00:00Z,Purdue Boilermakers,Oregon Ducks,2024-10-18T22:00:00Z,lines,5,10
+2024,8ab4bbbb8f6f8cdecf18d7a7fefda4c3,2024-10-19T02:15:00Z,BYU Cougars,Oklahoma State Cowboys,2024-10-19T00:15:00Z,lines,5,10
+2024,85b317055675b9c6ac10c842fe8a91a9,2024-10-19T02:30:00Z,Nevada Wolf Pack,Fresno State Bulldogs,2024-10-19T00:30:00Z,lines,2,10
+2024,956243c4e379101cdaa718a0af1d6c74,2024-10-19T16:00:00Z,Cincinnati Bearcats,Arizona State Sun Devils,2024-10-19T14:00:00Z,none,0,0
+2024,c4d7df94b9fb130dbc533946f1b1bbbd,2024-10-19T16:00:00Z,Army Black Knights,East Carolina Pirates,2024-10-19T14:00:00Z,none,0,0
+2024,015031b93e173fc000db81e2f5743072,2024-10-19T16:00:00Z,Missouri Tigers,Auburn Tigers,2024-10-19T14:00:00Z,none,0,0
+2024,ac42946f6276b9b7da14e4b28f4bfdc1,2024-10-19T16:00:00Z,Clemson Tigers,Virginia Cavaliers,2024-10-19T14:00:00Z,none,0,0
+2024,e6f74d7a1a3bd6e80d0b149c3f7d88c9,2024-10-19T16:00:00Z,Coastal Carolina Chanticleers,Louisiana Ragin Cajuns,2024-10-19T14:00:00Z,none,0,0
+2024,51b6c2faaa4b4f17a0d4fcc077c1f506,2024-10-19T16:00:00Z,Indiana Hoosiers,Nebraska Cornhuskers,2024-10-19T14:00:00Z,none,0,0
+2024,b29fdda5866e04602bcd184dc8882498,2024-10-19T16:00:00Z,Louisville Cardinals,Miami Hurricanes,2024-10-19T14:00:00Z,none,0,0
+2024,772ae562e6c10879cbb3894615918822,2024-10-19T16:00:00Z,Northwestern Wildcats,Wisconsin Badgers,2024-10-19T14:00:00Z,none,0,0
+2024,691225d4130eed206a8feda090cd1632,2024-10-19T16:00:00Z,Rutgers Scarlet Knights,UCLA Bruins,2024-10-19T14:00:00Z,none,0,0
+2024,a3ea39660ceffb8fdab5b9116c55d8ba,2024-10-19T16:00:00Z,UConn Huskies,Wake Forest Demon Deacons,2024-10-19T14:00:00Z,none,0,0
+2024,5b8dd4e92000e9ba3bd3d17da6ea620d,2024-10-19T16:45:00Z,Oklahoma Sooners,South Carolina Gamecocks,2024-10-19T14:45:00Z,none,0,0
+2024,e66660e21a5d1c7557ed2a03d42d46c4,2024-10-19T18:00:00Z,Eastern Michigan Eagles,Central Michigan Chippewas,2024-10-19T16:00:00Z,none,0,0
+2024,fb6856c0b5b35bdfd1bed172dd48aeaa,2024-10-19T18:00:00Z,Temple Owls,Tulsa Golden Hurricane,2024-10-19T16:00:00Z,none,0,0
+2024,746bac443526d6738f8fdcd279669d1a,2024-10-19T19:30:00Z,Tennessee Volunteers,Alabama Crimson Tide,2024-10-19T17:30:00Z,lines,6,10
+2024,d2636e2419639e24d354c9a0ad4b034d,2024-10-19T19:30:00Z,Bowling Green Falcons,Kent State Golden Flashes,2024-10-19T17:30:00Z,none,0,0
+2024,dc163a8438627098c959b9492f34c7f2,2024-10-19T19:30:00Z,Buffalo Bulls,Western Michigan Broncos,2024-10-19T17:30:00Z,none,0,0
+2024,91169c6b426979fc547311ee17cf080f,2024-10-19T19:30:00Z,California Golden Bears,NC State Wolfpack,2024-10-19T17:30:00Z,none,0,0
+2024,d67a8bbfc0aa5fdc22f9c6131fa2778e,2024-10-19T19:30:00Z,Navy Midshipmen,Charlotte 49ers,2024-10-19T17:30:00Z,none,0,0
+2024,edacbd76d190f10b036dc4c1e02d9a79,2024-10-19T19:30:00Z,UTSA Roadrunners,Florida Atlantic Owls,2024-10-19T17:30:00Z,none,0,0
+2024,bd1bf8eea4851c0a287245528b15b116,2024-10-19T19:30:00Z,Georgia Tech Yellow Jackets,Notre Dame Fighting Irish,2024-10-19T17:30:00Z,none,0,0
+2024,8efed5ef512baa683af1205f2a45a927,2024-10-19T19:30:00Z,Washington State Cougars,Hawaii Rainbow Warriors,2024-10-19T17:30:00Z,none,0,0
+2024,15b31c444f527d29237f502558b9b701,2024-10-19T19:30:00Z,Kansas Jayhawks,Houston Cougars,2024-10-19T17:30:00Z,none,0,0
+2024,ba693c88994d536fb28055961519347f,2024-10-19T19:30:00Z,Illinois Fighting Illini,Michigan Wolverines,2024-10-19T17:30:00Z,none,0,0
+2024,fdf527c6c439ef05f09bce153cb13f06,2024-10-19T19:30:00Z,Miami (OH) RedHawks,Ohio Bobcats,2024-10-19T17:30:00Z,none,0,0
+2024,7d152be29ebfec2bc95ad080ca9ba671,2024-10-19T19:30:00Z,Northern Illinois Huskies,Toledo Rockets,2024-10-19T17:30:00Z,none,0,0
+2024,1d9e91b5dad01ee413d172b512fa607d,2024-10-19T19:30:00Z,Old Dominion Monarchs,Texas State Bobcats,2024-10-19T17:30:00Z,none,0,0
+2024,f9e8ef58704052ba19611779788eb7e2,2024-10-19T19:30:00Z,Tulane Green Wave,Rice Owls,2024-10-19T17:30:00Z,none,0,0
+2024,58f97081d0b2ed18eec0c9375e607084,2024-10-19T19:30:00Z,South Florida Bulls,UAB Blazers,2024-10-19T17:30:00Z,none,0,0
+2024,5ca046f34c1bcdbac7b886458a0d06a4,2024-10-19T20:00:00Z,Arizona Wildcats,Colorado Buffaloes,2024-10-19T18:00:00Z,none,0,0
+2024,c7574974d09e5f81a040ab971bf30366,2024-10-19T20:00:00Z,Texas Tech Red Raiders,Baylor Bears,2024-10-19T18:00:00Z,none,0,0
+2024,f999055f168ae1e140c614ffa650490a,2024-10-19T20:00:00Z,Georgia Southern Eagles,James Madison Dukes,2024-10-19T18:00:00Z,none,0,0
+2024,17ba22212fccff25a61c0958020d416e,2024-10-19T20:00:00Z,Maryland Terrapins,USC Trojans,2024-10-19T18:00:00Z,none,0,0
+2024,666484957d94d1aa3abbd5404149eb2c,2024-10-19T20:00:00Z,Utah State Aggies,New Mexico Lobos,2024-10-19T18:00:00Z,none,0,0
+2024,d158af30d428a9b77e55a4ba7ebdbd83,2024-10-19T20:00:00Z,San Jose State Spartans,Wyoming Cowboys,2024-10-19T18:00:00Z,none,0,0
+2024,187680771d12221679a40ee9f533a077,2024-10-19T20:15:00Z,Mississippi State Bulldogs,Texas A&M Aggies,2024-10-19T18:15:00Z,none,0,0
+2024,103e7859edc6e3f4644e27b6a0894059,2024-10-19T23:00:00Z,Arkansas Razorbacks,LSU Tigers,2024-10-19T21:00:00Z,lines,7,10
+2024,4b2e9cdeaea6ff0aaa63c5f5a06341ef,2024-10-19T23:00:00Z,Southern Mississippi Golden Eagles,Arkansas State Red Wolves,2024-10-19T21:00:00Z,none,0,0
+2024,992036ad0dd19b4501e704191ddfc9a9,2024-10-19T23:00:00Z,Vanderbilt Commodores,Ball State Cardinals,2024-10-19T21:00:00Z,none,0,0
+2024,f43fc740d809a33e1916b3599da34740,2024-10-19T23:30:00Z,Texas Longhorns,Georgia Bulldogs,2024-10-19T21:30:00Z,lines,29,10
+2024,fae3fbd0dab8224c511fb1a57ac154b3,2024-10-19T23:30:00Z,Michigan State Spartans,Iowa Hawkeyes,2024-10-19T21:30:00Z,none,0,0
+2024,273ad7475d8ca01414e94aa07c9ec85e,2024-10-19T23:30:00Z,Iowa State Cyclones,UCF Knights,2024-10-19T21:30:00Z,none,0,0
+2024,15c0035f6c10317bba7f114fe5839f46,2024-10-19T23:30:00Z,West Virginia Mountaineers,Kansas State Wildcats,2024-10-19T21:30:00Z,none,0,0
+2024,b829e6741711042c9fc3c5d8c58ecede,2024-10-19T23:30:00Z,Memphis Tigers,North Texas Mean Green,2024-10-19T21:30:00Z,none,0,0
+2024,4fb1ed3731c6020ecc5a4899dd25823c,2024-10-19T23:45:00Z,Florida Gators,Kentucky Wildcats,2024-10-19T21:45:00Z,none,0,0
+2024,78481cedc5059732b86d2888a69c9be9,2024-10-20T00:00:00Z,Air Force Falcons,Colorado State Rams,2024-10-19T22:00:00Z,none,0,0
+2024,845df3e309799314c11e8164e92b30fa,2024-10-20T00:00:00Z,Stanford Cardinal,SMU Mustangs,2024-10-19T22:00:00Z,none,0,0
+2024,4253daba32665b13bb63b1a33bf9cd64,2024-10-20T02:00:00Z,Oregon State Beavers,UNLV Rebels,2024-10-20T00:00:00Z,none,0,0
+2024,440796bdbf4c46618b946a8e05dd79c4,2024-10-20T02:30:00Z,Utah Utes,TCU Horned Frogs,2024-10-20T00:30:00Z,none,0,0
+2024,dfca0a437ea1072737944e2768b0ea9d,2024-10-22T23:30:00Z,Florida International Panthers,Sam Houston State Bearkats,2024-10-22T21:30:00Z,lines,3,10
+2024,6d67f572c595cea32dc970f3e51f1dcf,2024-10-23T00:00:00Z,Louisiana Tech Bulldogs,UTEP Miners,2024-10-22T22:00:00Z,lines,4,10
+2024,3dc62d56cdcdf19c0ae82e5c46667d05,2024-10-23T23:00:00Z,Kennesaw State Owls,Liberty Flames,2024-10-23T21:00:00Z,none,0,0
+2024,bbfc387798386ea5703664e22f24ec82,2024-10-23T23:30:00Z,Jacksonville State Gamecocks,Middle Tennessee Blue Raiders,2024-10-23T21:30:00Z,none,0,0
+2024,a89c155b6c1071a1f28f7514f226470c,2024-10-24T23:00:00Z,Old Dominion Monarchs,Georgia Southern Eagles,2024-10-24T21:00:00Z,none,0,0
+2024,29f35f7427d48b44a6dd5fd4e794fbfd,2024-10-24T23:30:00Z,Pittsburgh Panthers,Syracuse Orange,2024-10-24T21:30:00Z,lines,7,10
+2024,4e184419cc930bc3bfd55535ec333e66,2024-10-25T23:30:00Z,Boston College Eagles,Louisville Cardinals,2024-10-25T21:30:00Z,lines,14,10
+2024,14af91c3c25b6e2ddc4afd78c2adb17a,2024-10-26T02:30:00Z,UNLV Rebels,Boise State Broncos,2024-10-26T00:30:00Z,lines,12,10
+2024,8c436a836a67253a5885cf450f076d41,2024-10-26T03:00:00Z,USC Trojans,Rutgers Scarlet Knights,2024-10-26T01:00:00Z,lines,4,10
+2024,380444bb888f4419e9894dfd94d4b95a,2024-10-26T16:00:00Z,Ohio Bobcats,Buffalo Bulls,2024-10-26T14:00:00Z,none,0,0
+2024,36b37c024b4db022c91cfd07220f8739,2024-10-26T16:00:00Z,Memphis Tigers,Charlotte 49ers,2024-10-26T14:00:00Z,none,0,0
+2024,e1aff946546de10cb11241bd3a8ed69c,2024-10-26T16:00:00Z,Virginia Tech Hokies,Georgia Tech Yellow Jackets,2024-10-26T14:00:00Z,none,0,0
+2024,07956ba3f9671780d5863103632fee51,2024-10-26T16:00:00Z,Indiana Hoosiers,Washington Huskies,2024-10-26T14:00:00Z,lines,14,10
+2024,62ccc83dd951794c02ccb031ab74d800,2024-10-26T16:00:00Z,Navy Midshipmen,Notre Dame Fighting Irish,2024-10-26T14:00:00Z,lines,2,10
+2024,85757dcfa3a96f1784839617f744fca9,2024-10-26T16:00:00Z,Ohio State Buckeyes,Nebraska Cornhuskers,2024-10-26T14:00:00Z,lines,17,10
+2024,624be06541ba81904774d34305883ade,2024-10-26T16:00:00Z,Virginia Cavaliers,North Carolina Tar Heels,2024-10-26T14:00:00Z,lines,6,10
+2024,07a19964c77b73f336cec7e2af986954,2024-10-26T16:00:00Z,North Texas Mean Green,Tulane Green Wave,2024-10-26T14:00:00Z,none,0,0
+2024,2059c52e67a51bdaa3cf03c93c5731fc,2024-10-26T16:00:00Z,Ole Miss Rebels,Oklahoma Sooners,2024-10-26T14:00:00Z,lines,6,10
+2024,59556ae558c8b4e7afc293d9d56a937a,2024-10-26T16:45:00Z,Mississippi State Bulldogs,Arkansas Razorbacks,2024-10-26T14:45:00Z,none,0,0
+2024,c3e26e9a9bdeaf8c8194961aeb1d0315,2024-10-26T17:00:00Z,Appalachian State Mountaineers,Georgia State Panthers,2024-10-26T15:00:00Z,none,0,0
+2024,ec4eaa21c909d479c3312950034c8958,2024-10-26T18:00:00Z,Miami (OH) RedHawks,Central Michigan Chippewas,2024-10-26T16:00:00Z,none,0,0
+2024,6990c6ff0afbd98f9fc52f31c30116cf,2024-10-26T18:00:00Z,East Carolina Pirates,Temple Owls,2024-10-26T16:00:00Z,none,0,0
+2024,aae4cb948e6992df662cd99b4ec862fc,2024-10-26T19:30:00Z,Akron Zips,Eastern Michigan Eagles,2024-10-26T17:30:00Z,none,0,0
+2024,eab4b10a563d620db74df4a632d02bac,2024-10-26T19:30:00Z,Alabama Crimson Tide,Missouri Tigers,2024-10-26T17:30:00Z,lines,5,10
+2024,81cbb952086888b9ed73298d5000c10f,2024-10-26T19:30:00Z,UCF Knights,BYU Cougars,2024-10-26T17:30:00Z,lines,6,10
+2024,2ef12725c7fbada17fd5e2545406b8fe,2024-10-26T19:30:00Z,Ball State Cardinals,Northern Illinois Huskies,2024-10-26T17:30:00Z,none,0,0
+2024,3161e02b2a9a17d993ad42198bcbc931,2024-10-26T19:30:00Z,Baylor Bears,Oklahoma State Cowboys,2024-10-26T17:30:00Z,lines,1,10
+2024,c40171e4cfe652ed10f98804260d454f,2024-10-26T19:30:00Z,Toledo Rockets,Bowling Green Falcons,2024-10-26T17:30:00Z,none,0,0
+2024,63293d6e3ad0b836f6a5ff0650926ade,2024-10-26T19:30:00Z,Oregon Ducks,Illinois Fighting Illini,2024-10-26T17:30:00Z,lines,11,10
+2024,bb54e9601e3f832e1e6a1445ba306a4a,2024-10-26T19:30:00Z,Iowa Hawkeyes,Northwestern Wildcats,2024-10-26T17:30:00Z,lines,7,10
+2024,0285c87a0496a349cfd43ab0e6c8b60d,2024-10-26T19:30:00Z,James Madison Dukes,Southern Mississippi Golden Eagles,2024-10-26T17:30:00Z,none,0,0
+2024,49f81a55c9f6a4d283fc7aa70d81aec4,2024-10-26T19:30:00Z,Western Michigan Broncos,Kent State Golden Flashes,2024-10-26T17:30:00Z,none,0,0
+2024,28959ec6116efbc13f8924930a94516c,2024-10-26T19:30:00Z,Minnesota Golden Gophers,Maryland Terrapins,2024-10-26T17:30:00Z,lines,11,10
+2024,c1cfb773be0c0734ba0fce7d15511fa3,2024-10-26T19:30:00Z,UConn Huskies,Rice Owls,2024-10-26T17:30:00Z,none,0,0
+2024,7b8ab9dda56c8d1934bf12e8fdedd3f2,2024-10-26T19:30:00Z,Stanford Cardinal,Wake Forest Demon Deacons,2024-10-26T17:30:00Z,none,0,0
+2024,ca1b7dce792ab83422b6e04ab6ebf7b2,2024-10-26T19:30:00Z,TCU Horned Frogs,Texas Tech Red Raiders,2024-10-26T17:30:00Z,lines,6,10
+2024,6757e5f7d0d376fe024f7c932cad1528,2024-10-26T19:30:00Z,Tulsa Golden Hurricane,UTSA Roadrunners,2024-10-26T17:30:00Z,none,0,0
+2024,f4a55699b4532691ec194cdc2e526111,2024-10-26T20:00:00Z,California Golden Bears,Oregon State Beavers,2024-10-26T18:00:00Z,lines,2,10
+2024,6de6c1ba145b75009c8c0a9071df3af6,2024-10-26T20:15:00Z,Vanderbilt Commodores,Texas Longhorns,2024-10-26T18:15:00Z,lines,5,10
+2024,1dfa6bbe92760f8cfebffe6f6fb5a3f2,2024-10-26T21:00:00Z,Colorado State Rams,New Mexico Lobos,2024-10-26T19:00:00Z,none,0,0
+2024,43b8116742145181999ed675c4a44777,2024-10-26T21:00:00Z,South Alabama Jaguars,UL Monroe Warhawks,2024-10-26T19:00:00Z,none,0,0
+2024,15daf1c3b8406dd651de09ebe9bb61c2,2024-10-26T23:00:00Z,Arizona Wildcats,West Virginia Mountaineers,2024-10-26T21:00:00Z,lines,3,10
+2024,9dc9370758138e256ffb635177b5bdcb,2024-10-26T23:00:00Z,Arkansas State Red Wolves,Troy Trojans,2024-10-26T21:00:00Z,none,0,0
+2024,df417085b37403584e7158a4a2574761,2024-10-26T23:00:00Z,Miami Hurricanes,Florida State Seminoles,2024-10-26T21:00:00Z,lines,3,10
+2024,854cef55ae4a72f75ab8e8e3a30e5c25,2024-10-26T23:00:00Z,Houston Cougars,Utah Utes,2024-10-26T21:00:00Z,lines,1,10
+2024,ff17c698d69f1b593bf7f36c018d8ebb,2024-10-26T23:00:00Z,Wyoming Cowboys,Utah State Aggies,2024-10-26T21:00:00Z,none,0,0
+2024,82dcc16d6c0f65fefd3f968cf4714f98,2024-10-26T23:30:00Z,Texas A&M Aggies,LSU Tigers,2024-10-26T21:30:00Z,lines,11,10
+2024,94abae1ed05d125bd1238fb700d654e6,2024-10-26T23:30:00Z,Michigan Wolverines,Michigan State Spartans,2024-10-26T21:30:00Z,lines,4,10
+2024,a1840196105c79050dd273ae8c9fb83e,2024-10-26T23:30:00Z,Wisconsin Badgers,Penn State Nittany Lions,2024-10-26T21:30:00Z,lines,11,10
+2024,eed8ae07e2d0ae86f97258277f948f05,2024-10-26T23:45:00Z,Kentucky Wildcats,Auburn Tigers,2024-10-26T21:45:00Z,none,0,0
+2024,c767c542202e44e3c7fe5dc7592a3803,2024-10-27T00:00:00Z,Duke Blue Devils,SMU Mustangs,2024-10-26T22:00:00Z,none,0,0
+2024,17a5bdd2890ea8a6d8ce1f6a20e0d304,2024-10-27T00:00:00Z,Fresno State Bulldogs,San Jose State Spartans,2024-10-26T22:00:00Z,none,0,0
+2024,05290db63c0280b94f0d3a9289ebe95c,2024-10-27T00:00:00Z,Kansas State Wildcats,Kansas Jayhawks,2024-10-26T22:00:00Z,none,0,0
+2024,da0a9d7361e8d4287282f376acd348e2,2024-10-27T02:30:00Z,San Diego State Aztecs,Washington State Cougars,2024-10-27T00:30:00Z,lines,2,10
+2024,aa4535a94d6e217634077cc724dba794,2024-10-27T03:15:00Z,Colorado Buffaloes,Cincinnati Bearcats,2024-10-27T01:15:00Z,lines,11,10
+2024,6da64bbb8848cb6c3e712e9bf2dd97e5,2024-10-27T04:00:00Z,Hawaii Rainbow Warriors,Nevada Wolf Pack,2024-10-27T02:00:00Z,none,0,0
+2024,a2df6ce49133c7ec9805c54c3e792db9,2024-10-29T23:00:00Z,Florida International Panthers,New Mexico State Aggies,2024-10-29T21:00:00Z,lines,2,10
+2024,e9f84cca1df90940966cb6f2605c9139,2024-10-29T23:30:00Z,Texas State Bobcats,Louisiana Ragin Cajuns,2024-10-29T21:30:00Z,lines,4,10
+2024,c3eb0c718a80f318e8863bfaf93ddd31,2024-10-30T00:00:00Z,Sam Houston State Bearkats,Louisiana Tech Bulldogs,2024-10-29T22:00:00Z,lines,1,10
+2024,cab2d273177d7c42eccf0329b1b60b64,2024-10-30T23:00:00Z,Liberty Flames,Jacksonville State Gamecocks,2024-10-30T21:00:00Z,lines,3,10
+2024,bfd599645f7e98fa7e465cbd58b2ae5c,2024-10-30T23:30:00Z,Western Kentucky Hilltoppers,Kennesaw State Owls,2024-10-30T21:30:00Z,lines,3,10
+2024,aef31b37e609902bd20a33aaf9458044,2024-10-31T23:30:00Z,Charlotte 49ers,Tulane Green Wave,2024-10-31T21:30:00Z,lines,6,10
+2024,3d6bbf6b6a6289f950a2e40e8f16f4be,2024-11-01T23:00:00Z,UConn Huskies,Georgia State Panthers,2024-11-01T21:00:00Z,none,0,0
+2024,aa350a5df0fe737ab6451fd05cbf1ed0,2024-11-01T23:30:00Z,Florida Atlantic Owls,South Florida Bulls,2024-11-01T21:30:00Z,lines,1,10
+2024,f16b1ab144ed0f547c889e3390df2191,2024-11-02T00:00:00Z,Boise State Broncos,San Diego State Aztecs,2024-11-01T22:00:00Z,lines,4,10
+2024,bbc2ec506b5cd06ff3fe060bfafdeb79,2024-11-02T16:00:00Z,Army Black Knights,Air Force Falcons,2024-11-02T14:00:00Z,none,0,0
+2024,507153f2bd10d440fd62b941efcbae88,2024-11-02T16:00:00Z,Akron Zips,Buffalo Bulls,2024-11-02T14:00:00Z,none,0,0
+2024,33238f885b5c45df396a4ecba23cec39,2024-11-02T16:00:00Z,Arkansas Razorbacks,Ole Miss Rebels,2024-11-02T14:00:00Z,lines,2,10
+2024,b311a74d2982edec5dadf8e04b73d92f,2024-11-02T16:00:00Z,Miami Hurricanes,Duke Blue Devils,2024-11-02T14:00:00Z,none,0,0
+2024,64968e0103d02321a7c5aed3115fcf76,2024-11-02T16:00:00Z,Eastern Michigan Eagles,Toledo Rockets,2024-11-02T14:00:00Z,none,0,0
+2024,dea9100ddfff7ce09e45ec70a127bdc6,2024-11-02T16:00:00Z,Illinois Fighting Illini,Minnesota Golden Gophers,2024-11-02T14:00:00Z,lines,7,10
+2024,d3ed18023d0a8414e55b0a49b432a68d,2024-11-02T16:00:00Z,Oklahoma Sooners,Maine Black Bears,2024-11-02T14:00:00Z,none,0,0
+2024,fb87221298e9cc14a67d1008db4a767a,2024-11-02T16:00:00Z,UTSA Roadrunners,Memphis Tigers,2024-11-02T14:00:00Z,none,0,0
+2024,2fc8a9cf603ad15a1569473304c80208,2024-11-02T16:00:00Z,NC State Wolfpack,Stanford Cardinal,2024-11-02T14:00:00Z,none,0,0
+2024,300bad7238c6be69705cdbac3980c553,2024-11-02T16:00:00Z,Purdue Boilermakers,Northwestern Wildcats,2024-11-02T14:00:00Z,lines,3,10
+2024,bb29983e844e59860c155bce82aa403e,2024-11-02T16:00:00Z,Penn State Nittany Lions,Ohio State Buckeyes,2024-11-02T14:00:00Z,lines,15,10
+2024,f66b58e09ec8b2c3cb35b5abca1ed4de,2024-11-02T16:00:00Z,Syracuse Orange,Virginia Tech Hokies,2024-11-02T14:00:00Z,none,0,0
+2024,896d6a895c826ba0e3e6aef53b33e2a9,2024-11-02T16:45:00Z,Auburn Tigers,Vanderbilt Commodores,2024-11-02T14:45:00Z,lines,4,10
+2024,5958db85c490720e52a5e9a12f60d9ac,2024-11-02T18:30:00Z,Appalachian State Mountaineers,Old Dominion Monarchs,2024-11-02T16:30:00Z,none,0,0
+2024,7344e726b6f229bdcd96f16f48599bb5,2024-11-02T18:30:00Z,UAB Blazers,Tulsa Golden Hurricane,2024-11-02T16:30:00Z,none,0,0
+2024,0fbc765026192c14d25b8e7f1c5515b9,2024-11-02T19:30:00Z,UCF Knights,Arizona Wildcats,2024-11-02T17:30:00Z,lines,3,10
+2024,92cd6706e21997567d299f6cf705b0cf,2024-11-02T19:30:00Z,Georgia Bulldogs,Florida Gators,2024-11-02T17:30:00Z,lines,8,10
+2024,9c918ec54f03eb25d3cb7e60de63ea42,2024-11-02T19:30:00Z,Florida State Seminoles,North Carolina Tar Heels,2024-11-02T17:30:00Z,none,0,0
+2024,0be5c676d920310d0adbb472b1f0b27f,2024-11-02T19:30:00Z,Houston Cougars,Kansas State Wildcats,2024-11-02T17:30:00Z,lines,2,10
+2024,d85259e1c581aae214a54adc8b5658ad,2024-11-02T19:30:00Z,Michigan State Spartans,Indiana Hoosiers,2024-11-02T17:30:00Z,lines,7,10
+2024,df3c7f545615664ac1e30aca35b4a11f,2024-11-02T19:30:00Z,Iowa State Cyclones,Texas Tech Red Raiders,2024-11-02T17:30:00Z,none,0,0
+2024,e508a31060e2e536472005cde1facc54,2024-11-02T19:30:00Z,Marshall Thundering Herd,UL Monroe Warhawks,2024-11-02T17:30:00Z,none,0,0
+2024,7553bd444e7fbf9edd3d45812536f459,2024-11-02T19:30:00Z,Michigan Wolverines,Oregon Ducks,2024-11-02T17:30:00Z,lines,7,10
+2024,1c0723b13ec3bd0ffd1d2efe393038f1,2024-11-02T19:30:00Z,UTEP Miners,Middle Tennessee Blue Raiders,2024-11-02T17:30:00Z,none,0,0
+2024,a94bc6c99d77f585071830f1fe7b46e3,2024-11-02T19:30:00Z,Nebraska Cornhuskers,UCLA Bruins,2024-11-02T17:30:00Z,lines,7,10
+2024,7a544195a8edc9e50a80d1eab2159c26,2024-11-02T20:00:00Z,Troy Trojans,Coastal Carolina Chanticleers,2024-11-02T18:00:00Z,none,0,0
+2024,e068befdace07d4ad52c7e17bc145847,2024-11-02T20:00:00Z,Rice Owls,Navy Midshipmen,2024-11-02T18:00:00Z,none,0,0
+2024,9fb37cffc5ee5d5182e61dd71e8e68e7,2024-11-02T20:00:00Z,New Mexico Lobos,Wyoming Cowboys,2024-11-02T18:00:00Z,none,0,0
+2024,4b1198ded9571463e099640f0c979f7a,2024-11-02T20:15:00Z,Mississippi State Bulldogs,UMass Minutemen,2024-11-02T18:15:00Z,none,0,0
+2024,300598c00c9b07fc8c0e3b12265bf467,2024-11-02T23:00:00Z,Oklahoma State Cowboys,Arizona State Sun Devils,2024-11-02T21:00:00Z,none,0,0
+2024,7b764cfd3ab3a3fdde58bdd9f0fb3087,2024-11-02T23:00:00Z,Fresno State Bulldogs,Hawaii Rainbow Warriors,2024-11-02T21:00:00Z,none,0,0
+2024,3bb669a83ee319837f19dd3a6cb186f2,2024-11-02T23:30:00Z,Clemson Tigers,Louisville Cardinals,2024-11-02T21:30:00Z,lines,2,10
+2024,93ac06682c9ff6dcddb1f7359fa8baaf,2024-11-02T23:30:00Z,South Alabama Jaguars,Georgia Southern Eagles,2024-11-02T21:30:00Z,none,0,0
+2024,3e438efccf12ed627cc52a8071ea73e4,2024-11-02T23:30:00Z,Iowa Hawkeyes,Wisconsin Badgers,2024-11-02T21:30:00Z,lines,3,10
+2024,39be76fe09acf0f28e13ffec871ff9f6,2024-11-02T23:30:00Z,South Carolina Gamecocks,Texas A&M Aggies,2024-11-02T21:30:00Z,lines,7,10
+2024,46b0b530760bb788f140b95df52735d8,2024-11-02T23:30:00Z,Washington Huskies,USC Trojans,2024-11-02T21:30:00Z,lines,8,10
+2024,a02346a306a143c06f4b02b87a533e81,2024-11-02T23:45:00Z,Tennessee Volunteers,Kentucky Wildcats,2024-11-02T21:45:00Z,lines,4,10
+2024,af8c5b12c90eb7ec8876cadcd395ff67,2024-11-03T00:00:00Z,Baylor Bears,TCU Horned Frogs,2024-11-02T22:00:00Z,lines,1,10
+2024,b11f11222f197a7d1eb42d38d74b71fc,2024-11-03T00:00:00Z,Nevada Wolf Pack,Colorado State Rams,2024-11-02T22:00:00Z,none,0,0
+2024,a3167c54e867a6a348e52cb4ba17fe9b,2024-11-03T00:00:00Z,SMU Mustangs,Pittsburgh Panthers,2024-11-02T22:00:00Z,none,0,0
+2024,9a3a036f97a21646baa5d49a8c80c15d,2024-11-06T00:30:00Z,Central Michigan Chippewas,Bowling Green Falcons,2024-11-05T22:30:00Z,lines,2,10
+2024,16c9909c72ff4fb48207cad2a0e93284,2024-11-06T01:00:00Z,Ball State Cardinals,Miami (OH) RedHawks,2024-11-05T23:00:00Z,none,0,0
+2024,524d728fe39116685daedf3f5d571c8c,2024-11-07T00:00:00Z,Kent State Golden Flashes,Ohio Bobcats,2024-11-06T22:00:00Z,lines,2,10
+2024,906047b9e20b678bec7010f078b5402e,2024-11-07T00:00:00Z,Western Michigan Broncos,Northern Illinois Huskies,2024-11-06T22:00:00Z,none,0,0
+2024,ccea5784a8ff6d2ffccade2e8cddb236,2024-11-08T01:00:00Z,Coastal Carolina Chanticleers,Appalachian State Mountaineers,2024-11-07T23:00:00Z,none,0,0
+2024,8fa94a55c503f9a9226c0c98c62bd081,2024-11-08T01:00:00Z,East Carolina Pirates,Florida Atlantic Owls,2024-11-07T23:00:00Z,none,0,0
+2024,0266af62b06ad01694cce6ea408f06b5,2024-11-09T01:00:00Z,Wake Forest Demon Deacons,California Golden Bears,2024-11-08T23:00:00Z,lines,2,10
+2024,3a1acc7a2493a0d1c037a93b0141519e,2024-11-09T02:00:00Z,UCLA Bruins,Iowa Hawkeyes,2024-11-09T00:00:00Z,lines,6,10
+2024,c737b3b65bc83d8bd1fb2b4830a390b3,2024-11-09T02:00:00Z,Memphis Tigers,Rice Owls,2024-11-09T00:00:00Z,lines,4,10
+2024,209d861edddc7b18f26ded357225cec3,2024-11-09T03:30:00Z,San Diego State Aztecs,New Mexico Lobos,2024-11-09T01:30:00Z,lines,1,10
+2024,64976a6bbb4436f2d44d40dc3fa48138,2024-11-09T17:00:00Z,Boston College Eagles,Syracuse Orange,2024-11-09T15:00:00Z,lines,3,10
+2024,5718743e438500e5592159152c2a11c9,2024-11-09T17:00:00Z,Cincinnati Bearcats,West Virginia Mountaineers,2024-11-09T15:00:00Z,lines,2,10
+2024,32670f2ec15ffb0b50edac971500d1b0,2024-11-09T17:00:00Z,Texas Longhorns,Florida Gators,2024-11-09T15:00:00Z,lines,1,10
+2024,f101037492debd6f8a0c6f2bc47d19c4,2024-11-09T17:00:00Z,Georgia Tech Yellow Jackets,Miami Hurricanes,2024-11-09T15:00:00Z,lines,3,10
+2024,51353fa22409639e6ba41e1a63ce7bda,2024-11-09T17:00:00Z,Rutgers Scarlet Knights,Minnesota Golden Gophers,2024-11-09T15:00:00Z,lines,6,10
+2024,16fcbd384da3db6b6e41499a46133657,2024-11-09T17:00:00Z,South Florida Bulls,Navy Midshipmen,2024-11-09T15:00:00Z,lines,1,10
+2024,bf90222162e7f5a55ad1e78ff8f8c7c8,2024-11-09T17:00:00Z,Ohio State Buckeyes,Purdue Boilermakers,2024-11-09T15:00:00Z,lines,9,10
+2024,fe4416822860f6bafa3ad4fcc722cf43,2024-11-09T17:00:00Z,UL Monroe Warhawks,Texas State Bobcats,2024-11-09T15:00:00Z,none,0,0
+2024,653031fab831987fcd9ca812b4fae7c3,2024-11-09T18:00:00Z,Middle Tennessee Blue Raiders,Liberty Flames,2024-11-09T16:00:00Z,none,0,0
+2024,6d8107038c60e4624d5cdbd2e222dfdf,2024-11-09T19:30:00Z,UAB Blazers,UConn Huskies,2024-11-09T17:30:00Z,none,0,0
+2024,f4e64f79b84c43705f42d32017487f9b,2024-11-09T20:00:00Z,Southern Mississippi Golden Eagles,Marshall Thundering Herd,2024-11-09T18:00:00Z,none,0,0
+2024,b22cfce29808cfd956d6e608469eecba,2024-11-09T20:30:00Z,North Texas Mean Green,Army Black Knights,2024-11-09T18:30:00Z,none,0,0
+2024,bacc5ec5be557c0b04bea2350447eb2a,2024-11-09T20:30:00Z,Virginia Tech Hokies,Clemson Tigers,2024-11-09T18:30:00Z,lines,2,10
+2024,7edd60bdc109dbd4aa8bddc3e9588262,2024-11-09T20:30:00Z,NC State Wolfpack,Duke Blue Devils,2024-11-09T18:30:00Z,none,0,0
+2024,98b1e9e3344e4fab2142f7579cd8229e,2024-11-09T20:30:00Z,Ole Miss Rebels,Georgia Bulldogs,2024-11-09T18:30:00Z,lines,6,10
+2024,ccb2d0f24b6a32e8a3d9dbb60c88e56b,2024-11-09T20:30:00Z,James Madison Dukes,Georgia State Panthers,2024-11-09T18:30:00Z,none,0,0
+2024,17e6f9d3d83834e6791888ace6a10b90,2024-11-09T20:30:00Z,Indiana Hoosiers,Michigan Wolverines,2024-11-09T18:30:00Z,lines,7,10
+2024,92ef7f8b2d1f7530e38cd030d071f528,2024-11-09T20:30:00Z,Kansas Jayhawks,Iowa State Cyclones,2024-11-09T18:30:00Z,lines,3,10
+2024,49d82dc1745f969d220953d5037ea144,2024-11-09T20:30:00Z,Oregon State Beavers,San Jose State Spartans,2024-11-09T18:30:00Z,lines,2,10
+2024,9d6edcd4f87545c5a5d045202ceaa3ce,2024-11-09T21:00:00Z,Texas Tech Red Raiders,Colorado Buffaloes,2024-11-09T19:00:00Z,lines,9,10
+2024,0d53def0bf22597c1dbdfbfb8b3a2d73,2024-11-09T21:00:00Z,UTEP Miners,Kennesaw State Owls,2024-11-09T19:00:00Z,none,0,0
+2024,812326de4f2c99999d249eb0f90a91c8,2024-11-09T21:00:00Z,Tulane Green Wave,Temple Owls,2024-11-09T19:00:00Z,none,0,0
+2024,720fec0445ed28753839e78d89f75a95,2024-11-09T21:15:00Z,Vanderbilt Commodores,South Carolina Gamecocks,2024-11-09T19:15:00Z,lines,4,10
+2024,bf5d6906457448868cfa99204b51bc93,2024-11-09T21:30:00Z,Louisiana Tech Bulldogs,Jacksonville State Gamecocks,2024-11-09T19:30:00Z,none,0,0
+2024,209f61bdb463ecd442d858f3735c32a8,2024-11-09T22:00:00Z,Louisiana Ragin Cajuns,Arkansas State Red Wolves,2024-11-09T20:00:00Z,none,0,0
+2024,f1447155b7aadc2e5014fc1c52c34596,2024-11-09T23:00:00Z,New Mexico State Aggies,Western Kentucky Hilltoppers,2024-11-09T21:00:00Z,none,0,0
+2024,5ec11b006e7d7e919cb63aa1f4a5ffaa,2024-11-10T00:00:00Z,LSU Tigers,Alabama Crimson Tide,2024-11-09T22:00:00Z,lines,13,10
+2024,0c2f315200bc1b7f595958a360c7b6dd,2024-11-10T00:00:00Z,Arizona State Sun Devils,UCF Knights,2024-11-09T22:00:00Z,lines,3,10
+2024,bbaa4c97caeb63a308d9cb66690456ba,2024-11-10T00:00:00Z,Oregon Ducks,Maryland Terrapins,2024-11-09T22:00:00Z,lines,8,10
+2024,4694ad2b7237294889a7ec5162b7d4a9,2024-11-10T00:00:00Z,Tennessee Volunteers,Mississippi State Bulldogs,2024-11-09T22:00:00Z,lines,4,10
+2024,89745a154884ef76c39eb48da4db602a,2024-11-10T00:00:00Z,TCU Horned Frogs,Oklahoma State Cowboys,2024-11-09T22:00:00Z,lines,3,10
+2024,57f7450009aab1d55edbf8e73f1d14ad,2024-11-10T00:30:00Z,Notre Dame Fighting Irish,Florida State Seminoles,2024-11-09T22:30:00Z,lines,3,10
+2024,18320113053896a50bac36c7e3c17774,2024-11-10T00:45:00Z,Missouri Tigers,Oklahoma Sooners,2024-11-09T22:45:00Z,lines,4,10
+2024,d531da107f4f00bd49339d3d127d16cc,2024-11-10T01:00:00Z,Boise State Broncos,Nevada Wolf Pack,2024-11-09T23:00:00Z,none,0,0
+2024,0f68c4c7ce9aa1d52b194b80ad06f9b7,2024-11-10T01:00:00Z,Penn State Nittany Lions,Washington Huskies,2024-11-09T23:00:00Z,lines,13,10
+2024,8cbb3b071e11ed7dc77e3e8a1c36c27c,2024-11-10T01:00:00Z,Pittsburgh Panthers,Virginia Cavaliers,2024-11-09T23:00:00Z,lines,2,10
+2024,e6da07c89ac26f0a7bfc1ef94a4fe682,2024-11-10T02:00:00Z,Hawaii Rainbow Warriors,UNLV Rebels,2024-11-10T00:00:00Z,none,0,0
+2024,e23fa42d2c6f1d6a434d73dcd5291f31,2024-11-10T02:45:00Z,Air Force Falcons,Fresno State Bulldogs,2024-11-10T00:45:00Z,none,0,0
+2024,86ea6cb24276e8a779b37c3990149612,2024-11-10T03:15:00Z,Utah Utes,BYU Cougars,2024-11-10T01:15:00Z,lines,5,10
+2024,9ac117a8a788ffc841c83b78fcc211a4,2024-11-10T03:30:00Z,Washington State Cougars,Utah State Aggies,2024-11-10T01:30:00Z,lines,2,10
+2024,c431d005672d460f05a08248af515148,2024-11-13T00:00:00Z,Buffalo Bulls,Ball State Cardinals,2024-11-12T22:00:00Z,none,0,0
+2024,9778328429d3b67818b0dec3625dbab5,2024-11-13T00:00:00Z,Bowling Green Falcons,Western Michigan Broncos,2024-11-12T22:00:00Z,lines,6,10
+2024,790f1dc72f3a79345e96248c2171a7b9,2024-11-13T00:00:00Z,Toledo Rockets,Central Michigan Chippewas,2024-11-12T22:00:00Z,lines,2,10
+2024,ffb97c3a4d6479981aeb692dfc0df001,2024-11-14T00:00:00Z,Northern Illinois Huskies,Akron Zips,2024-11-13T22:00:00Z,lines,4,10
+2024,95353db44b2fe8a0ded7b8c7a7ddfda4,2024-11-14T00:00:00Z,Ohio Bobcats,Eastern Michigan Eagles,2024-11-13T22:00:00Z,lines,1,10
+2024,b87429617918f0eae86ccac37b257b4d,2024-11-14T00:00:00Z,Miami (OH) RedHawks,Kent State Golden Flashes,2024-11-13T22:00:00Z,none,0,0
+2024,a2e2f28771048c39d9b9f94b360f8931,2024-11-15T00:30:00Z,Tulsa Golden Hurricane,East Carolina Pirates,2024-11-14T22:30:00Z,lines,5,10
+2024,24f904101bde55075c01cd1233004b73,2024-11-16T01:00:00Z,Colorado State Rams,Wyoming Cowboys,2024-11-15T23:00:00Z,lines,2,10
+2024,74c2cec5bbf20a0f1f2d95e96854b47d,2024-11-16T01:00:00Z,UTSA Roadrunners,North Texas Mean Green,2024-11-15T23:00:00Z,lines,8,10
+2024,19f36c2fe68ea5aa2cef96fd8e5ea8e9,2024-11-16T02:00:00Z,Washington Huskies,UCLA Bruins,2024-11-16T00:00:00Z,lines,12,10
+2024,ecee7071e08684b5ab5caaacf9913a8b,2024-11-16T03:15:00Z,Arizona Wildcats,Houston Cougars,2024-11-16T01:15:00Z,lines,3,10
+2024,6df5b1e43ed313959917724e66cd4704,2024-11-16T17:00:00Z,Arkansas Razorbacks,Texas Longhorns,2024-11-16T15:00:00Z,lines,13,10
+2024,629701d796fb7ce41e0c738d45a82caf,2024-11-16T17:00:00Z,Pittsburgh Panthers,Clemson Tigers,2024-11-16T15:00:00Z,lines,2,10
+2024,fe838c1ea48e936dc0639da966430cdf,2024-11-16T17:00:00Z,Colorado Buffaloes,Utah Utes,2024-11-16T15:00:00Z,lines,8,10
+2024,a2b1fbd1c9d635d34a0a997d585315a4,2024-11-16T17:00:00Z,UMass Minutemen,Liberty Flames,2024-11-16T15:00:00Z,none,0,0
+2024,cdc367927930a882093d852fed8813d5,2024-11-16T17:00:00Z,Western Kentucky Hilltoppers,Louisiana Tech Bulldogs,2024-11-16T15:00:00Z,none,0,0
+2024,485dc810e5090e83900ff245e64b6044,2024-11-16T17:00:00Z,Navy Midshipmen,Tulane Green Wave,2024-11-16T15:00:00Z,none,0,0
+2024,1421705a08deba76b415943c78b77254,2024-11-16T17:00:00Z,Northwestern Wildcats,Ohio State Buckeyes,2024-11-16T15:00:00Z,lines,7,10
+2024,1014574605d8b2e62f7b587b9a00555b,2024-11-16T17:45:00Z,Auburn Tigers,UL Monroe Warhawks,2024-11-16T15:45:00Z,lines,2,10
+2024,7df7c1a8b2bb8656e3daef9d78ee9ff3,2024-11-16T18:00:00Z,Marshall Thundering Herd,Coastal Carolina Chanticleers,2024-11-16T16:00:00Z,none,0,0
+2024,28cdd3e7187f1ce9e5830f7044de0d75,2024-11-16T18:30:00Z,Kentucky Wildcats,Murray State Racers,2024-11-16T16:30:00Z,none,0,0
+2024,4e655d296e28c3209de1731cf43d406c,2024-11-16T19:00:00Z,Alabama Crimson Tide,Mercer Bears,2024-11-16T17:00:00Z,none,0,0
+2024,7c2bf15661ac49e835f8aff608f8e011,2024-11-16T19:00:00Z,Temple Owls,Florida Atlantic Owls,2024-11-16T17:00:00Z,none,0,0
+2024,d88bb020449c841522cd15a98b9a217a,2024-11-16T19:00:00Z,Jacksonville State Gamecocks,Florida International Panthers,2024-11-16T17:00:00Z,none,0,0
+2024,01dcd729158c16de6244a30609e7eaa5,2024-11-16T19:30:00Z,Illinois Fighting Illini,Michigan State Spartans,2024-11-16T17:30:00Z,lines,4,10
+2024,7c0b3b7d05898d56bde94fca773c17d0,2024-11-16T20:00:00Z,California Golden Bears,Syracuse Orange,2024-11-16T18:00:00Z,lines,1,10
+2024,de71768ba161b6adb5869aff87a297e1,2024-11-16T20:00:00Z,Utah State Aggies,Hawaii Rainbow Warriors,2024-11-16T18:00:00Z,none,0,0
+2024,2ec7344ed4c346a8b3ee5a3f92696a7d,2024-11-16T20:00:00Z,Kennesaw State Owls,Sam Houston State Bearkats,2024-11-16T18:00:00Z,none,0,0
+2024,0eef8259aaab3edce707e77326edca7c,2024-11-16T20:30:00Z,Air Force Falcons,Oregon State Beavers,2024-11-16T18:30:00Z,lines,2,10
+2024,3428f017ae747ddcdbffc09e7b1ce8d8,2024-11-16T20:30:00Z,SMU Mustangs,Boston College Eagles,2024-11-16T18:30:00Z,lines,1,10
+2024,8f0442a1edcf3b23fe69d0c073702357,2024-11-16T20:30:00Z,Charlotte 49ers,South Florida Bulls,2024-11-16T18:30:00Z,none,0,0
+2024,066f54aae1d0626b80a03e4d543d4059,2024-11-16T20:30:00Z,Florida Gators,LSU Tigers,2024-11-16T18:30:00Z,lines,10,10
+2024,b7bbe548bf6d5efb53b2a65c8747c767,2024-11-16T20:30:00Z,Georgia Bulldogs,Tennessee Volunteers,2024-11-16T18:30:00Z,lines,17,10
+2024,54c963829cd22dcda5640ab5b359770d,2024-11-16T20:30:00Z,Stanford Cardinal,Louisville Cardinals,2024-11-16T18:30:00Z,none,0,0
+2024,d948ac40464c9fbca124267b7f15cdc3,2024-11-16T20:30:00Z,Notre Dame Fighting Irish,Virginia Cavaliers,2024-11-16T18:30:00Z,lines,6,10
+2024,6c0820222a763ec3d6d6e277ba1422b2,2024-11-16T20:30:00Z,Purdue Boilermakers,Penn State Nittany Lions,2024-11-16T18:30:00Z,lines,6,10
+2024,b0407b941de3f36bc0648393913899ed,2024-11-16T21:00:00Z,West Virginia Mountaineers,Baylor Bears,2024-11-16T19:00:00Z,lines,4,10
+2024,9cb85b2d0aacaaa4f07818358938ceed,2024-11-16T21:00:00Z,Georgia Southern Eagles,Troy Trojans,2024-11-16T19:00:00Z,none,0,0
+2024,60f40ae785f7f0e35a1b3b92f0e38e9b,2024-11-16T21:00:00Z,Old Dominion Monarchs,James Madison Dukes,2024-11-16T19:00:00Z,none,0,0
+2024,38550fc4dd45b5df98d53124ed6fe6f3,2024-11-16T21:00:00Z,USC Trojans,Nebraska Cornhuskers,2024-11-16T19:00:00Z,lines,9,10
+2024,aba39946ec7c926236822a908b545e38,2024-11-16T21:15:00Z,South Carolina Gamecocks,Missouri Tigers,2024-11-16T19:15:00Z,lines,4,10
+2024,1730d5229dd062b48f9f50a5703601c3,2024-11-16T22:00:00Z,Georgia State Panthers,Arkansas State Red Wolves,2024-11-16T20:00:00Z,none,0,0
+2024,d93b0e35e2a8f93f46dd7c65a3c3d667,2024-11-16T23:00:00Z,Maryland Terrapins,Rutgers Scarlet Knights,2024-11-16T21:00:00Z,lines,5,10
+2024,05e2bab9e0432940355e7e0e697f6818,2024-11-17T00:00:00Z,Kansas State Wildcats,Arizona State Sun Devils,2024-11-16T22:00:00Z,lines,7,10
+2024,affc409979cf24fc21e89d8fa0c45e82,2024-11-17T00:00:00Z,San Jose State Spartans,Boise State Broncos,2024-11-16T22:00:00Z,lines,5,10
+2024,1884378ea7119e11358ac987cf5c7f2d,2024-11-17T00:00:00Z,Louisiana Ragin Cajuns,South Alabama Jaguars,2024-11-16T22:00:00Z,none,0,0
+2024,45cceca691512827859b657cfdf6bbec,2024-11-17T00:00:00Z,Texas State Bobcats,Southern Mississippi Golden Eagles,2024-11-16T22:00:00Z,none,0,0
+2024,0242db4d76ac4c0e8fa10d282293de4d,2024-11-17T00:30:00Z,Wisconsin Badgers,Oregon Ducks,2024-11-16T22:30:00Z,lines,8,10
+2024,8d58253f41f597ada4234484776ede00,2024-11-17T00:45:00Z,Texas A&M Aggies,New Mexico State Aggies,2024-11-16T22:45:00Z,none,0,0
+2024,8c1b8764463817958e95e9005cbd8fcc,2024-11-17T01:00:00Z,Iowa State Cyclones,Cincinnati Bearcats,2024-11-16T23:00:00Z,none,0,0
+2024,4d471dbc67e27113fd4272542d1dbfe1,2024-11-17T01:00:00Z,Memphis Tigers,UAB Blazers,2024-11-16T23:00:00Z,none,0,0
+2024,acb9264da1b2775146f7d71a03c451c4,2024-11-17T01:00:00Z,North Carolina Tar Heels,Wake Forest Demon Deacons,2024-11-16T23:00:00Z,lines,2,10
+2024,0b25991a43488647618a3a19fe96950a,2024-11-17T02:30:00Z,New Mexico Lobos,Washington State Cougars,2024-11-17T00:30:00Z,lines,2,10
+2024,d1be7b47dd0c78f72845aa26f25f5ae7,2024-11-17T03:15:00Z,BYU Cougars,Kansas Jayhawks,2024-11-17T01:15:00Z,lines,10,10
+2024,de4efbb34b63fa034d553cfb616c244c,2024-11-17T03:30:00Z,UNLV Rebels,San Diego State Aztecs,2024-11-17T01:30:00Z,none,0,0
+2024,b5bb5807f325e45e30a869a2c7c41458,2024-11-20T00:00:00Z,Kent State Golden Flashes,Akron Zips,2024-11-19T22:00:00Z,lines,7,10
+2024,f13508f1d7592ccb7370f2626ab1fd35,2024-11-20T00:30:00Z,Central Michigan Chippewas,Western Michigan Broncos,2024-11-19T22:30:00Z,lines,2,10
+2024,14f18961f7ad47973074f4c1d6b1a52b,2024-11-20T01:00:00Z,Miami (OH) RedHawks,Northern Illinois Huskies,2024-11-19T23:00:00Z,none,0,0
+2024,227328edd7df1dcbb204e8a87b104279,2024-11-21T00:00:00Z,Eastern Michigan Eagles,Buffalo Bulls,2024-11-20T22:00:00Z,lines,3,10
+2024,32649b508b4c2da04f47e9437bcc0223,2024-11-21T00:00:00Z,Toledo Rockets,Ohio Bobcats,2024-11-20T22:00:00Z,lines,4,10
+2024,0c8c3b302aa20424ea4f798a73aff81b,2024-11-22T00:30:00Z,Georgia Tech Yellow Jackets,NC State Wolfpack,2024-11-21T22:30:00Z,lines,2,10
+2024,d9897998d20a3854497d7a38de699348,2024-11-23T00:00:00Z,UTSA Roadrunners,Temple Owls,2024-11-22T22:00:00Z,none,0,0
+2024,1bdce3382f5109a87884f61b174fab5e,2024-11-23T01:00:00Z,Michigan State Spartans,Purdue Boilermakers,2024-11-22T23:00:00Z,lines,12,10
+2024,65748b6f37593821c65204bd3d826a12,2024-11-23T03:00:00Z,San Jose State Spartans,UNLV Rebels,2024-11-23T01:00:00Z,lines,4,10
+2024,d79451faf94f5f696937a50e1052257c,2024-11-23T17:00:00Z,Boston College Eagles,North Carolina Tar Heels,2024-11-23T15:00:00Z,none,0,0
+2024,31183109679db9f7ac07fcc63600f917,2024-11-23T17:00:00Z,Florida Gators,Ole Miss Rebels,2024-11-23T15:00:00Z,lines,9,10
+2024,576739dc5b91f00500b5238eb6a49c2b,2024-11-23T17:00:00Z,Rutgers Scarlet Knights,Illinois Fighting Illini,2024-11-23T15:00:00Z,lines,7,10
+2024,a52122e33aa8168d2bc17f49266ffcc3,2024-11-23T17:00:00Z,Ohio State Buckeyes,Indiana Hoosiers,2024-11-23T15:00:00Z,lines,15,10
+2024,b7a8eae6466eb3bbdfecf460de9dc0a9,2024-11-23T17:00:00Z,Maryland Terrapins,Iowa Hawkeyes,2024-11-23T15:00:00Z,lines,3,10
+2024,a8a48949ffd3bfe57165e72140c45c64,2024-11-23T17:00:00Z,Jacksonville State Gamecocks,Sam Houston State Bearkats,2024-11-23T15:00:00Z,none,0,0
+2024,79b076939a7acc279b14fd10d382f5ff,2024-11-23T17:00:00Z,Miami Hurricanes,Wake Forest Demon Deacons,2024-11-23T15:00:00Z,lines,4,10
+2024,538a65a20fa09db446b3bfc3dec0188e,2024-11-23T17:00:00Z,Virginia Cavaliers,SMU Mustangs,2024-11-23T15:00:00Z,lines,5,10
+2024,e9c017a9c2ce9d14e48fcdca52ce1a00,2024-11-23T17:00:00Z,Syracuse Orange,UConn Huskies,2024-11-23T15:00:00Z,lines,6,10
+2024,ca2808d88ea9ada33936e3c32ea6ed08,2024-11-23T17:45:00Z,Georgia Bulldogs,UMass Minutemen,2024-11-23T15:45:00Z,none,0,0
+2024,55feb1212d66f2cf55cbc512c1b2f02d,2024-11-23T18:00:00Z,Liberty Flames,Western Kentucky Hilltoppers,2024-11-23T16:00:00Z,none,0,0
+2024,6c78df917f81c3f7c15a600270727d93,2024-11-23T18:00:00Z,Tennessee Volunteers,UTEP Miners,2024-11-23T16:00:00Z,none,0,0
+2024,2c4119d5821e1ae2edaead2f05a75f2d,2024-11-23T18:30:00Z,Florida State Seminoles,Charleston Southern Buccaneers,2024-11-23T16:30:00Z,none,0,0
+2024,6914961be2a4aecfc7e0899f111b0335,2024-11-23T19:00:00Z,Ball State Cardinals,Bowling Green Falcons,2024-11-23T17:00:00Z,none,0,0
+2024,c6cc098db7c68b4d19f99528a8d25a11,2024-11-23T19:00:00Z,UAB Blazers,Rice Owls,2024-11-23T17:00:00Z,none,0,0
+2024,2c9bbdcdb56a7f84fa227396f9a5c743,2024-11-23T19:30:00Z,Appalachian State Mountaineers,James Madison Dukes,2024-11-23T17:30:00Z,none,0,0
+2024,f49b0a1012a0402458fab35b06e2453f,2024-11-23T19:30:00Z,Middle Tennessee Blue Raiders,New Mexico State Aggies,2024-11-23T17:30:00Z,none,0,0
+2024,88baf2a79404080b764331ff7e07aee4,2024-11-23T20:00:00Z,TCU Horned Frogs,Arizona Wildcats,2024-11-23T18:00:00Z,lines,5,10
+2024,004fd104097191abbf42cf9ee5c32042,2024-11-23T20:00:00Z,Arkansas State Red Wolves,UL Monroe Warhawks,2024-11-23T18:00:00Z,none,0,0
+2024,6cedf281f1cf3f94aa15ed3954d02d64,2024-11-23T20:00:00Z,Florida Atlantic Owls,Charlotte 49ers,2024-11-23T18:00:00Z,none,0,0
+2024,f657726f38062bfefe616d889b293dce,2024-11-23T20:00:00Z,Kennesaw State Owls,Florida International Panthers,2024-11-23T18:00:00Z,none,0,0
+2024,229ffd41c950e5191a7bbe087bd2890b,2024-11-23T20:00:00Z,Southern Mississippi Golden Eagles,South Alabama Jaguars,2024-11-23T18:00:00Z,none,0,0
+2024,27740f23daf53a69646379b22c14832a,2024-11-23T20:30:00Z,Arizona State Sun Devils,BYU Cougars,2024-11-23T18:30:00Z,lines,8,10
+2024,09315d8e126e7cf23ea5a91a68c5e592,2024-11-23T20:30:00Z,California Golden Bears,Stanford Cardinal,2024-11-23T18:30:00Z,none,0,0
+2024,ef685120e4a56eb89b61fa939f6bbc0c,2024-11-23T20:30:00Z,Clemson Tigers,Citadel Bulldogs,2024-11-23T18:30:00Z,none,0,0
+2024,b9e556b00e62cea51ea133dc8b603197,2024-11-23T20:30:00Z,Coastal Carolina Chanticleers,Georgia Southern Eagles,2024-11-23T18:30:00Z,none,0,0
+2024,c135605d16dcc7b162a822fad6d43461,2024-11-23T20:30:00Z,Kansas Jayhawks,Colorado Buffaloes,2024-11-23T18:30:00Z,lines,12,10
+2024,9ce513a32b0b553431b36db6451de36e,2024-11-23T20:30:00Z,North Texas Mean Green,East Carolina Pirates,2024-11-23T18:30:00Z,none,0,0
+2024,b2722db5505934918296b34854f6979b,2024-11-23T20:30:00Z,Texas Longhorns,Kentucky Wildcats,2024-11-23T18:30:00Z,lines,9,10
+2024,5f8c812f7005f60849b5968113ef5603,2024-11-23T20:30:00Z,Michigan Wolverines,Northwestern Wildcats,2024-11-23T18:30:00Z,lines,10,10
+2024,3cb2fe112f272a2ff5f5dea18a2d2a43,2024-11-23T20:30:00Z,Minnesota Golden Gophers,Penn State Nittany Lions,2024-11-23T18:30:00Z,lines,10,10
+2024,f8e73e633a113e26c493cedc557dd6f4,2024-11-23T20:30:00Z,Nebraska Cornhuskers,Wisconsin Badgers,2024-11-23T18:30:00Z,lines,11,10
+2024,b9def8e60b8c4387bf18e2a94c976b9b,2024-11-23T20:30:00Z,Oklahoma State Cowboys,Texas Tech Red Raiders,2024-11-23T18:30:00Z,lines,7,10
+2024,1747d8102fc6b04dad9173212aeaa234,2024-11-23T20:30:00Z,Utah State Aggies,San Diego State Aztecs,2024-11-23T18:30:00Z,none,0,0
+2024,445949bbc047a46ac93e577a5b5dfc81,2024-11-23T20:30:00Z,South Florida Bulls,Tulsa Golden Hurricane,2024-11-23T18:30:00Z,none,0,0
+2024,559f5d3d9acfdabb1e8816a3ec5ce36a,2024-11-23T20:30:00Z,West Virginia Mountaineers,UCF Knights,2024-11-23T18:30:00Z,lines,3,10
+2024,62f3e4c5339146b69dfff1eda082439c,2024-11-23T21:00:00Z,Arkansas Razorbacks,Louisiana Tech Bulldogs,2024-11-23T19:00:00Z,none,0,0
+2024,42454324d4778650c9b107395cf99858,2024-11-23T21:00:00Z,Louisville Cardinals,Pittsburgh Panthers,2024-11-23T19:00:00Z,lines,1,10
+2024,ce19177c8142332049e6562829fa8667,2024-11-23T21:00:00Z,South Carolina Gamecocks,Wofford Terriers,2024-11-23T19:00:00Z,none,0,0
+2024,9509ca629e6a241dd7d0100af0ac19ef,2024-11-23T21:15:00Z,Mississippi State Bulldogs,Missouri Tigers,2024-11-23T19:15:00Z,lines,4,10
+2024,c6d1e39a53f53422a607877a9651b2a1,2024-11-23T22:00:00Z,Louisiana Ragin Cajuns,Troy Trojans,2024-11-23T20:00:00Z,none,0,0
+2024,aff6740543af073f3733126ee436fdc6,2024-11-24T00:00:00Z,Notre Dame Fighting Irish,Army Black Knights,2024-11-23T22:00:00Z,lines,6,10
+2024,c4acfc61d5c36d82164e235e6c12bb08,2024-11-24T00:00:00Z,Houston Cougars,Baylor Bears,2024-11-23T22:00:00Z,lines,1,10
+2024,3372126468899d84d3d9f2824f9560a2,2024-11-24T00:00:00Z,Wyoming Cowboys,Boise State Broncos,2024-11-23T22:00:00Z,lines,3,10
+2024,66de01cdb73179d6d10d1f92c13d75e0,2024-11-24T00:00:00Z,Texas State Bobcats,Georgia State Panthers,2024-11-23T22:00:00Z,none,0,0
+2024,f35d99ab1654d4da80b26086a2eca73c,2024-11-24T00:00:00Z,Oregon State Beavers,Washington State Cougars,2024-11-23T22:00:00Z,lines,2,10
+2024,b979bc22f567cba7136c9e36c69be753,2024-11-24T00:30:00Z,Oklahoma Sooners,Alabama Crimson Tide,2024-11-23T22:30:00Z,lines,10,10
+2024,ec6355a99c146d332f6b7346cb19e942,2024-11-24T00:30:00Z,Auburn Tigers,Texas A&M Aggies,2024-11-23T22:30:00Z,lines,8,10
+2024,c826ea424f0ef101045df525a8f9bb96,2024-11-24T00:30:00Z,Utah Utes,Iowa State Cyclones,2024-11-23T22:30:00Z,lines,5,10
+2024,3d27f1b09a318809243057d9aec2e2b0,2024-11-24T00:30:00Z,Old Dominion Monarchs,Marshall Thundering Herd,2024-11-23T22:30:00Z,none,0,0
+2024,59f674104ba6ff69d47b98c0f03e0c4b,2024-11-24T00:45:00Z,LSU Tigers,Vanderbilt Commodores,2024-11-23T22:45:00Z,lines,13,10
+2024,03af1ca69df2a20142c1a0162b352a3d,2024-11-24T01:00:00Z,Kansas State Wildcats,Cincinnati Bearcats,2024-11-23T23:00:00Z,lines,4,10
+2024,fdad54899f1f79a90023037d64d51cb7,2024-11-24T01:00:00Z,Duke Blue Devils,Virginia Tech Hokies,2024-11-23T23:00:00Z,none,0,0
+2024,208962261cf4d30d641763efd725bbcb,2024-11-24T03:30:00Z,Nevada Wolf Pack,Air Force Falcons,2024-11-24T01:30:00Z,lines,2,10
+2024,083ba17dd015fef3461633deb8cdf325,2024-11-24T03:30:00Z,Fresno State Bulldogs,Colorado State Rams,2024-11-24T01:30:00Z,none,0,0
+2024,da6d8ef29df83aa0d64e677c688d6088,2024-11-24T03:30:00Z,UCLA Bruins,USC Trojans,2024-11-24T01:30:00Z,lines,12,10
+2024,745572faed049d780aa0138cebe3f18c,2024-11-27T00:00:00Z,Akron Zips,Toledo Rockets,2024-11-26T22:00:00Z,lines,3,10
+2024,09cb2bafc2789744562791532a4aeb42,2024-11-27T00:00:00Z,Buffalo Bulls,Kent State Golden Flashes,2024-11-26T22:00:00Z,none,0,0
+2024,3d79140623bce7919b7a7873b72840d4,2024-11-29T00:30:00Z,Tulane Green Wave,Memphis Tigers,2024-11-28T22:30:00Z,lines,5,10
+2024,f3bc3e77cc961d1ac0a0fd4d8faf23c6,2024-11-29T17:00:00Z,Ohio Bobcats,Ball State Cardinals,2024-11-29T15:00:00Z,none,0,0
+2024,dfe036f83b6493df343a71aba50c1916,2024-11-29T17:00:00Z,Boise State Broncos,Oregon State Beavers,2024-11-29T15:00:00Z,lines,12,10
+2024,189adc91c1a4631c028150956bbc13ef,2024-11-29T17:00:00Z,Bowling Green Falcons,Miami (OH) RedHawks,2024-11-29T15:00:00Z,none,0,0
+2024,88a74ccdc17cb5de413ee058976efa51,2024-11-29T17:00:00Z,Colorado Buffaloes,Oklahoma State Cowboys,2024-11-29T15:00:00Z,lines,10,10
+2024,6105cf9e43d512683860a2d6826de1f3,2024-11-29T17:00:00Z,East Carolina Pirates,Navy Midshipmen,2024-11-29T15:00:00Z,none,0,0
+2024,d39b6684678db134dce51f889da0b8bb,2024-11-29T17:00:00Z,Wisconsin Badgers,Minnesota Golden Gophers,2024-11-29T15:00:00Z,lines,13,10
+2024,5b4cab9b680f19f79ed7cb3b46871aac,2024-11-29T20:30:00Z,Colorado State Rams,Utah State Aggies,2024-11-29T18:30:00Z,none,0,0
+2024,485e283a4cb057369cd654b7d57a09fb,2024-11-29T20:30:00Z,Sam Houston State Bearkats,Liberty Flames,2024-11-29T18:30:00Z,none,0,0
+2024,2360ac15de03618dd99c4392a969259e,2024-11-29T20:30:00Z,Ole Miss Rebels,Mississippi State Bulldogs,2024-11-29T18:30:00Z,lines,6,10
+2024,07876ff7c5ffbe800c668651ad68f07a,2024-11-29T20:30:00Z,South Alabama Jaguars,Texas State Bobcats,2024-11-29T18:30:00Z,lines,3,10
+2024,543cc029ef5d64446d13dfb064b89faa,2024-11-29T21:00:00Z,San Jose State Spartans,Stanford Cardinal,2024-11-29T19:00:00Z,none,0,0
+2024,1b13f96e71ee08b091eba9cc620f9ace,2024-11-30T00:30:00Z,Georgia Bulldogs,Georgia Tech Yellow Jackets,2024-11-29T22:30:00Z,lines,6,10
+2024,62f4f9a88274469693c2e52119af7967,2024-11-30T00:30:00Z,Iowa Hawkeyes,Nebraska Cornhuskers,2024-11-29T22:30:00Z,lines,10,10
+2024,3acc6dfae2b3d57e52583f7e011f2b54,2024-11-30T01:00:00Z,UCF Knights,Utah Utes,2024-11-29T23:00:00Z,lines,3,10
+2024,57c4b6f6fafe4eb0ea1f71aac74c26ab,2024-11-30T05:00:00Z,North Carolina Tar Heels,NC State Wolfpack,2024-11-30T03:00:00Z,none,0,0
+2024,4eec4411de5932ccc9cf38a54088bf79,2024-11-30T17:00:00Z,Baylor Bears,Kansas Jayhawks,2024-11-30T15:00:00Z,none,0,0
+2024,f94c83d0738d40ee17ee3b9d93dafa31,2024-11-30T17:00:00Z,Clemson Tigers,South Carolina Gamecocks,2024-11-30T15:00:00Z,none,0,0
+2024,e61d60899e6352ab9bc09454928eb37b,2024-11-30T17:00:00Z,Wake Forest Demon Deacons,Duke Blue Devils,2024-11-30T15:00:00Z,lines,2,10
+2024,88122adf8cf24fb7605592693b0924ed,2024-11-30T17:00:00Z,Florida State Seminoles,Florida Gators,2024-11-30T15:00:00Z,lines,2,10
+2024,5b041e03755355442ba04cd00ceba554,2024-11-30T17:00:00Z,Kentucky Wildcats,Louisville Cardinals,2024-11-30T15:00:00Z,lines,5,10
+2024,27a8846b7b9d56b5360098f7ba184cf0,2024-11-30T17:00:00Z,Ohio State Buckeyes,Michigan Wolverines,2024-11-30T15:00:00Z,lines,12,10
+2024,d34d33ae18154f93ac4c9da4c664653d,2024-11-30T17:00:00Z,Oregon Ducks,Washington Huskies,2024-11-30T15:00:00Z,lines,2,10
+2024,a6148a87376095e79c2a2f076d8eb704,2024-11-30T17:00:00Z,Vanderbilt Commodores,Tennessee Volunteers,2024-11-30T15:00:00Z,lines,10,10
+2024,093f5f58cf17b22b4fd1fb0f6b4b62d8,2024-11-30T17:00:00Z,Texas Tech Red Raiders,West Virginia Mountaineers,2024-11-30T15:00:00Z,lines,6,10
+2024,647a97c6a2068be28b1b4f0fb178a57d,2024-11-30T17:01:00Z,Army Black Knights,UTSA Roadrunners,2024-11-30T15:01:00Z,none,0,0
+2024,1cd58cffde8845b822c103f2735b82d3,2024-11-30T17:01:00Z,Northwestern Wildcats,Illinois Fighting Illini,2024-11-30T15:01:00Z,lines,8,10
+2024,616c907c6d637246f7aabc1dd7acc3ab,2024-11-30T17:01:00Z,UL Monroe Warhawks,Louisiana Ragin Cajuns,2024-11-30T15:01:00Z,none,0,0
+2024,eee0f0b3dede3e45d4fbd3f8e0010f75,2024-11-30T17:01:00Z,Temple Owls,North Texas Mean Green,2024-11-30T15:01:00Z,none,0,0
+2024,abc33d0f4f05a4a44604120fa86e66ed,2024-11-30T17:01:00Z,UMass Minutemen,UConn Huskies,2024-11-30T15:01:00Z,none,0,0
+2024,5c0db4f4bf62c43c2b64668f30ea635e,2024-11-30T18:30:00Z,Western Michigan Broncos,Eastern Michigan Eagles,2024-11-30T16:30:00Z,none,0,0
+2024,bd2fa57ef13e1e9542c8a10ee7c6ee29,2024-11-30T19:00:00Z,Georgia State Panthers,Coastal Carolina Chanticleers,2024-11-30T17:00:00Z,none,0,0
+2024,c9085dc62a241c95355f1b99821aeace,2024-11-30T19:00:00Z,Florida International Panthers,Middle Tennessee Blue Raiders,2024-11-30T17:00:00Z,none,0,0
+2024,1d4b6f0dd362af4887f75f5eb84fcdc4,2024-11-30T19:00:00Z,Rice Owls,South Florida Bulls,2024-11-30T17:00:00Z,none,0,0
+2024,b916a78ea2a1f34475f6c98e6a367040,2024-11-30T19:00:00Z,Troy Trojans,Southern Mississippi Golden Eagles,2024-11-30T17:00:00Z,none,0,0
+2024,7d050141777f05a1c4bb50a36902e7ed,2024-11-30T20:00:00Z,Arkansas State Red Wolves,Old Dominion Monarchs,2024-11-30T18:00:00Z,none,0,0
+2024,ea51d566742b8d65d8cedc0ef3af83c2,2024-11-30T20:00:00Z,Boston College Eagles,Pittsburgh Panthers,2024-11-30T18:00:00Z,none,0,0
+2024,145b2e2b4f6c8934169f867be7b8b2f1,2024-11-30T20:30:00Z,Alabama Crimson Tide,Auburn Tigers,2024-11-30T18:30:00Z,lines,5,10
+2024,68230a9d3c340e07ce2e344889b9a919,2024-11-30T20:30:00Z,Arizona Wildcats,Arizona State Sun Devils,2024-11-30T18:30:00Z,lines,12,10
+2024,6c94a7f5aee067accafb3de3e79384bf,2024-11-30T20:30:00Z,Missouri Tigers,Arkansas Razorbacks,2024-11-30T18:30:00Z,lines,6,10
+2024,0ff353c56405634eaba81a42c8874462,2024-11-30T20:30:00Z,SMU Mustangs,California Golden Bears,2024-11-30T18:30:00Z,none,0,0
+2024,65e2685bf8103f6d32c92fc50a7c56f8,2024-11-30T20:30:00Z,Northern Illinois Huskies,Central Michigan Chippewas,2024-11-30T18:30:00Z,none,0,0
+2024,4657ac403ac1cc331f1f630cbc9b418e,2024-11-30T20:30:00Z,Charlotte 49ers,UAB Blazers,2024-11-30T18:30:00Z,none,0,0
+2024,9f621aff629eb8412eefe4ec01b305f8,2024-11-30T20:30:00Z,Tulsa Golden Hurricane,Florida Atlantic Owls,2024-11-30T18:30:00Z,none,0,0
+2024,323cb5621058dd5894500377d084a42a,2024-11-30T20:30:00Z,UCLA Bruins,Fresno State Bulldogs,2024-11-30T18:30:00Z,lines,3,10
+2024,0544e944ad9e8a578f392f9b5bb1f860,2024-11-30T20:30:00Z,Penn State Nittany Lions,Maryland Terrapins,2024-11-30T18:30:00Z,lines,12,10
+2024,d0e59b5ef1130b2be0b9b4aa952ca900,2024-11-30T20:30:00Z,Syracuse Orange,Miami Hurricanes,2024-11-30T18:30:00Z,lines,10,10
+2024,62612f868c1aac71bbc52c1617f1deb6,2024-11-30T20:30:00Z,Michigan State Spartans,Rutgers Scarlet Knights,2024-11-30T18:30:00Z,lines,6,10
+2024,23040a961a68007ef6cf906458977fe8,2024-11-30T20:30:00Z,USC Trojans,Notre Dame Fighting Irish,2024-11-30T18:30:00Z,lines,4,10
+2024,f39617a38ed48d22900c408eee870eb7,2024-11-30T20:30:00Z,Texas A&M Aggies,Texas Longhorns,2024-11-30T18:30:00Z,lines,18,10
+2024,6c96bee6e2454befcd9ad2e357ca94cd,2024-11-30T21:00:00Z,Western Kentucky Hilltoppers,Jacksonville State Gamecocks,2024-11-30T19:00:00Z,none,0,0
+2024,cd41dfafacdc1bd2079240240c8f024c,2024-11-30T21:00:00Z,Louisiana Tech Bulldogs,Kennesaw State Owls,2024-11-30T19:00:00Z,none,0,0
+2024,93a02e050ce7f0feb354f247063da5a1,2024-11-30T21:00:00Z,New Mexico State Aggies,UTEP Miners,2024-11-30T19:00:00Z,none,0,0
+2024,232ce2e76548a78829b6630725bdaee5,2024-11-30T23:00:00Z,Georgia Southern Eagles,Appalachian State Mountaineers,2024-11-30T21:00:00Z,none,0,0
+2024,c8f38cf5e36c0f3754d248203cd3c669,2024-11-30T23:00:00Z,Cincinnati Bearcats,TCU Horned Frogs,2024-11-30T21:00:00Z,lines,5,10
+2024,f1e6dcdcb70e6355702273b9aae23dec,2024-11-30T23:30:00Z,Washington State Cougars,Wyoming Cowboys,2024-11-30T21:30:00Z,lines,1,10
+2024,404a0f56860d11dbcdeffc938a9c1536,2024-12-01T00:00:00Z,Indiana Hoosiers,Purdue Boilermakers,2024-11-30T22:00:00Z,lines,2,10
+2024,cd9a6db9aebe9411dd67fc582c1fd013,2024-12-01T00:00:00Z,LSU Tigers,Oklahoma Sooners,2024-11-30T22:00:00Z,lines,9,10
+2024,217c7e995825ff86bac4a711020ca768,2024-12-01T00:30:00Z,Iowa State Cyclones,Kansas State Wildcats,2024-11-30T22:30:00Z,lines,5,10
+2024,c249700b2676915ccde23c4c4fd66813,2024-12-01T01:00:00Z,James Madison Dukes,Marshall Thundering Herd,2024-11-30T23:00:00Z,none,0,0
+2024,fa5bcf4ac8b96aac6f081ec129ef3dec,2024-12-01T01:00:00Z,UNLV Rebels,Nevada Wolf Pack,2024-11-30T23:00:00Z,none,0,0
+2024,93e7fe924b99caf07f98ff37b667f165,2024-12-01T01:00:00Z,Virginia Tech Hokies,Virginia Cavaliers,2024-11-30T23:00:00Z,none,0,0
+2024,1e7108944df3eeadddb401bc2c56a000,2024-12-01T03:15:00Z,BYU Cougars,Houston Cougars,2024-12-01T01:15:00Z,lines,1,10
+2024,c7120230748ca480b1a4543d36e61359,2024-12-01T03:30:00Z,San Diego State Aztecs,Air Force Falcons,2024-12-01T01:30:00Z,none,0,0
+2024,4eae3af58f815455900f7d9738f2c70e,2024-12-01T04:00:00Z,Hawaii Rainbow Warriors,New Mexico Lobos,2024-12-01T02:00:00Z,none,0,0
+2024,e85506bcac215c46f2dff4d543b1af44,2024-12-07T00:00:00Z,Jacksonville State Gamecocks,Western Kentucky Hilltoppers,2024-12-06T22:00:00Z,lines,11,10
+2024,2a7cb192af99e4ee970ad8298c4f7389,2024-12-07T01:00:00Z,Army Black Knights,Tulane Green Wave,2024-12-06T23:00:00Z,lines,8,10
+2024,e528617ed0a91d4ee71629b8868c11d9,2024-12-07T01:00:00Z,Boise State Broncos,UNLV Rebels,2024-12-06T23:00:00Z,lines,10,10
+2024,30f75a68014813a6b3854e1ad8d0ed3d,2024-12-07T17:00:00Z,Arizona State Sun Devils,Iowa State Cyclones,2024-12-07T15:00:00Z,lines,6,10
+2024,c07572934b96405faa9089480a38e510,2024-12-07T17:00:00Z,Miami (OH) RedHawks,Ohio Bobcats,2024-12-07T15:00:00Z,lines,10,10
+2024,0543dfbfdf9f0bf86a798b7723d75a3e,2024-12-07T21:00:00Z,Texas Longhorns,Georgia Bulldogs,2024-12-07T19:00:00Z,lines,18,10
+2024,112a900c2fddd88b81b2e49e367f9257,2024-12-08T00:30:00Z,Louisiana Ragin Cajuns,Marshall Thundering Herd,2024-12-07T22:30:00Z,lines,6,10
+2024,071d046fb495ff25136408752a5e4235,2024-12-08T01:00:00Z,SMU Mustangs,Clemson Tigers,2024-12-07T23:00:00Z,lines,12,10
+2024,50d74ba6fb9d4386671296eb4faeff82,2024-12-08T01:00:00Z,Oregon Ducks,Penn State Nittany Lions,2024-12-07T23:00:00Z,lines,13,10
+2024,2cfb2f7d9fabef29d5d3e119f9da1c48,2024-12-14T20:00:00Z,Army Black Knights,Navy Midshipmen,2024-12-14T18:00:00Z,lines,1,10
+2024,c63fab4c9cb95b883f9349d582bb34c0,2024-12-15T02:00:00Z,Western Michigan Broncos,South Alabama Jaguars,2024-12-15T00:00:00Z,lines,4,10

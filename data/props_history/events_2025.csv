@@ -1,0 +1,890 @@
+season,event_id,commence_time,home_team,away_team,asked_for,status,lines,credits
+2025,20740de7481ec1f20c2efbc30852f6c6,2025-08-23T16:00:00Z,Kansas State Wildcats,Iowa State Cyclones,2025-08-23T14:00:00Z,lines,6,10
+2025,aebbca630f1fa214f2a7ede77b7cbe00,2025-08-23T20:00:00Z,UNLV Rebels,Idaho State Bengals,2025-08-23T18:00:00Z,none,0,0
+2025,bc9ca531af3bbd6fcb8271267655450e,2025-08-23T22:30:00Z,Kansas Jayhawks,Fresno State Bulldogs,2025-08-23T20:30:00Z,lines,8,10
+2025,69b92f6edcf58ce33ac39d43bc1f21a5,2025-08-23T23:00:00Z,Western Kentucky Hilltoppers,Sam Houston State Bearkats,2025-08-23T21:00:00Z,none,0,0
+2025,f88be3eb99624912fed9f8dfc9c3b017,2025-08-23T23:30:00Z,Hawaii Rainbow Warriors,Stanford Cardinal,2025-08-23T21:30:00Z,lines,8,10
+2025,ba3ec216f7117a8f9acbef2fe092c87b,2025-08-28T21:30:00Z,South Florida Bulls,Boise State Broncos,2025-08-28T19:30:00Z,lines,6,10
+2025,0340d587efabc6bbf7114392cb51dfd5,2025-08-28T22:00:00Z,Rutgers Scarlet Knights,Ohio Bobcats,2025-08-28T20:00:00Z,lines,3,10
+2025,d7ab1b23eca061461501011f6d913b89,2025-08-28T22:05:00Z,Bowling Green Falcons,Lafayette Leopards,2025-08-28T20:05:00Z,none,0,0
+2025,03799e82b32ca4fb9dd248a037685d38,2025-08-28T23:00:00Z,Akron Zips,Wyoming Cowboys,2025-08-28T21:00:00Z,none,0,0
+2025,6e308b5e56e38cfe79a4f6b4783e1bfc,2025-08-28T23:00:00Z,NC State Wolfpack,East Carolina Pirates,2025-08-28T21:00:00Z,lines,5,10
+2025,05a8d6ea14b00a0173aef3a7114468ae,2025-08-28T23:00:00Z,UL Monroe Warhawks,St. Francis (PA) Red Flash,2025-08-28T21:00:00Z,none,0,0
+2025,93a0241d6b1478ab0f1b1df756c086d1,2025-08-28T23:05:00Z,Delaware Blue Hens,Delaware State Hornets,2025-08-28T21:05:00Z,none,0,0
+2025,5b752439ba344f0fbe7c47649e41f2ad,2025-08-28T23:05:00Z,UCF Knights,Jacksonville State Gamecocks,2025-08-28T21:05:00Z,none,0,0
+2025,487db659f61cd6b639930789ea3e3a7b,2025-08-28T23:30:00Z,Missouri Tigers,Central Arkansas Bears,2025-08-28T21:30:00Z,none,0,0
+2025,02a146113c8e455ffb3234d2966b9539,2025-08-28T23:30:00Z,Duke Blue Devils,Elon Phoenix,2025-08-28T21:30:00Z,none,0,0
+2025,325e1f14e3a41628ed0319f2ecedf2de,2025-08-28T23:30:00Z,Oklahoma State Cowboys,UT Martin Skyhawks,2025-08-28T21:30:00Z,none,0,0
+2025,5287f56aa50eff29efc0d8c19c41ec01,2025-08-29T00:00:00Z,Minnesota Golden Gophers,Buffalo Bulls,2025-08-28T22:00:00Z,lines,4,10
+2025,8c32f78dfb4ad3a5ab23114d92194124,2025-08-29T00:00:00Z,Houston Cougars,Stephen F. Austin Lumberjacks,2025-08-28T22:00:00Z,none,0,0
+2025,cde48c374106f42368e37698bf654103,2025-08-29T00:30:00Z,UAB Blazers,Alabama State Hornets,2025-08-28T22:30:00Z,none,0,0
+2025,f2cf826d5734af1bedd0fb1510a7605c,2025-08-29T01:00:00Z,Cincinnati Bearcats,Nebraska Cornhuskers,2025-08-28T23:00:00Z,lines,12,10
+2025,5258088fbe3a7c3b887cc597a1f0d59d,2025-08-29T01:00:00Z,Wisconsin Badgers,Miami (OH) RedHawks,2025-08-28T23:00:00Z,lines,5,10
+2025,d2f9e75253f8fcaaa78de1ceadc4b349,2025-08-29T02:00:00Z,San Diego State Aztecs,Stony Brook Seawolves,2025-08-29T00:00:00Z,none,0,0
+2025,fe3b3339307b2e4fbf016b666b09255d,2025-08-29T22:00:00Z,Army Black Knights,Tarleton State Texans,2025-08-29T20:00:00Z,none,0,0
+2025,3a175beb7105d6a842ae58311a15f4d1,2025-08-29T23:00:00Z,Charlotte 49ers,Appalachian State Mountaineers,2025-08-29T21:00:00Z,none,0,0
+2025,7658b924afd85474454c6b96f1fde759,2025-08-29T23:00:00Z,Florida International Panthers,Bethune-Cookman Wildcats,2025-08-29T21:00:00Z,none,0,0
+2025,6b720706eed963bd287b802d86a85024,2025-08-29T23:00:00Z,Wake Forest Demon Deacons,Kennesaw State Owls,2025-08-29T21:00:00Z,lines,2,10
+2025,cc964607d7c521019e0c91768bb2c024,2025-08-29T23:00:00Z,Michigan State Spartans,Western Michigan Broncos,2025-08-29T21:00:00Z,lines,9,10
+2025,5a3128645784cad46eb5bde204e7d618,2025-08-29T23:30:00Z,Illinois Fighting Illini,Western Illinois Leathernecks,2025-08-29T21:30:00Z,none,0,0
+2025,a3ec71fa36e9de13e2f1306b1ae4e8b6,2025-08-29T23:30:00Z,Kansas Jayhawks,Wagner Seahawks,2025-08-29T21:30:00Z,none,0,0
+2025,091114ab96129401a22aa7b2ba683ec1,2025-08-30T00:00:00Z,Baylor Bears,Auburn Tigers,2025-08-29T22:00:00Z,lines,23,10
+2025,09043eb30bb7d92001afc88201788f05,2025-08-30T00:00:00Z,Colorado Buffaloes,Georgia Tech Yellow Jackets,2025-08-29T22:00:00Z,lines,10,10
+2025,6805d37180d92fd870ab5fac57eebee5,2025-08-30T01:30:00Z,Sam Houston State Bearkats,UNLV Rebels,2025-08-29T23:30:00Z,none,0,0
+2025,559c446a5e9976d63eb7f67a3e189be4,2025-08-30T02:30:00Z,San Jose State Spartans,Central Michigan Chippewas,2025-08-30T00:30:00Z,none,0,0
+2025,a21e71cf77c563760aa9ca01826c2583,2025-08-30T16:00:00Z,Purdue Boilermakers,Ball State Cardinals,2025-08-30T14:00:00Z,lines,2,10
+2025,478ec5b3fbf88e66161f1c6b60122955,2025-08-30T16:00:00Z,Pittsburgh Panthers,Duquesne Dukes,2025-08-30T14:00:00Z,none,0,0
+2025,f412c431e3f6d5b0645351971479df7b,2025-08-30T16:00:00Z,Maryland Terrapins,Florida Atlantic Owls,2025-08-30T14:00:00Z,lines,10,10
+2025,c046e0640625fe9ab9661a89eea14e88,2025-08-30T16:00:00Z,Kent State Golden Flashes,Merrimack Warriors,2025-08-30T14:00:00Z,none,0,0
+2025,0ee5bcc393d7591e62d85d0090796cdc,2025-08-30T16:00:00Z,Southern Mississippi Golden Eagles,Mississippi State Bulldogs,2025-08-30T14:00:00Z,lines,4,10
+2025,50308f92d57c1fdb7b19c12ce8ef1159,2025-08-30T16:00:00Z,Navy Midshipmen,VMI Keydets,2025-08-30T14:00:00Z,none,0,0
+2025,108112065d320b9bc531736b51f1053f,2025-08-30T16:00:00Z,Tulane Green Wave,Northwestern Wildcats,2025-08-30T14:00:00Z,lines,4,10
+2025,243c8fc42fd9e0d035d2f904384185e4,2025-08-30T16:00:00Z,Ohio State Buckeyes,Texas Longhorns,2025-08-30T14:00:00Z,lines,28,10
+2025,eb08e0869675a469f223fefa2b7c1aac,2025-08-30T16:00:00Z,Tennessee Volunteers,Syracuse Orange,2025-08-30T14:00:00Z,lines,6,10
+2025,c3d1a98456d7bcfc2273efc4c64a6cd6,2025-08-30T16:45:00Z,Kentucky Wildcats,Toledo Rockets,2025-08-30T14:45:00Z,lines,4,10
+2025,33d9786fcff3fcf5e281d2e750883421,2025-08-30T18:00:00Z,Boston College Eagles,Fordham Rams,2025-08-30T16:00:00Z,none,0,0
+2025,e06ac6b6ae06cd0ab15d16967d2bbed6,2025-08-30T18:00:00Z,UConn Huskies,Central Connecticut Blue Devils,2025-08-30T16:00:00Z,none,0,0
+2025,9bdaf2860fd82da8bc0fcc5c38d66323,2025-08-30T18:00:00Z,West Virginia Mountaineers,Robert Morris Colonials,2025-08-30T16:00:00Z,none,0,0
+2025,a7e9ac25c43abf7a563c1c978d805b4b,2025-08-30T18:30:00Z,Indiana Hoosiers,Old Dominion Monarchs,2025-08-30T16:30:00Z,none,0,0
+2025,fcdc35425f50cb7bda3057b6a43b7fab,2025-08-30T19:00:00Z,Louisville Cardinals,Eastern Kentucky Colonels,2025-08-30T17:00:00Z,none,0,0
+2025,901815b907870c08f831bcec682fcd7c,2025-08-30T19:30:00Z,Air Force Falcons,Bucknell Bison,2025-08-30T17:30:00Z,none,0,0
+2025,5c32c6337881a5345e232f266665e6dd,2025-08-30T19:30:00Z,Florida State Seminoles,Alabama Crimson Tide,2025-08-30T17:30:00Z,lines,12,10
+2025,663302976d25e5e68e83f286db1418f6,2025-08-30T19:30:00Z,Georgia Bulldogs,Marshall Thundering Herd,2025-08-30T17:30:00Z,none,0,0
+2025,922b6299efbf42689d115cb571231c4e,2025-08-30T19:30:00Z,Northern Illinois Huskies,Holy Cross Crusaders,2025-08-30T17:30:00Z,none,0,0
+2025,aeb1e8186d2e362190477db433dab5f7,2025-08-30T19:30:00Z,Iowa State Cyclones,South Dakota Coyotes,2025-08-30T17:30:00Z,none,0,0
+2025,e2a51da70ed1084d9bce9f024d0a69a0,2025-08-30T19:30:00Z,Penn State Nittany Lions,Nevada Wolf Pack,2025-08-30T17:30:00Z,lines,4,10
+2025,a6df0cb69b95b8eb8c8bb7520471d978,2025-08-30T19:30:00Z,UMass Minutemen,Temple Owls,2025-08-30T17:30:00Z,none,0,0
+2025,9ec692ed45038a7318dd884505ec19c0,2025-08-30T20:00:00Z,Liberty Flames,Maine Black Bears,2025-08-30T18:00:00Z,none,0,0
+2025,ec583779fa6cdf81885b9c785cf4da5a,2025-08-30T20:00:00Z,Oregon Ducks,Montana State Bobcats,2025-08-30T18:00:00Z,none,0,0
+2025,9ca7b95362e9caa4742659555a1765f4,2025-08-30T20:15:00Z,Arkansas Razorbacks,Alabama A&M Bulldogs,2025-08-30T18:15:00Z,none,0,0
+2025,0f885b0193a77ef9cf18cde250f58c17,2025-08-30T20:30:00Z,Memphis Tigers,Chattanooga Mocs,2025-08-30T18:30:00Z,none,0,0
+2025,24dfea2363dac7a2a0f4f460d175580d,2025-08-30T22:00:00Z,Iowa Hawkeyes,Albany,2025-08-30T20:00:00Z,none,0,0
+2025,6af1e17d7174b1cba28f644a02600e3b,2025-08-30T22:00:00Z,Virginia Cavaliers,Coastal Carolina Chanticleers,2025-08-30T20:00:00Z,lines,2,10
+2025,411a22839a0415e8122bf6655d692dcb,2025-08-30T22:00:00Z,Oklahoma Sooners,Illinois State Redbirds,2025-08-30T20:00:00Z,none,0,0
+2025,8d1ce3fa873b4adc946c19ef1778e235,2025-08-30T22:00:00Z,James Madison Dukes,Weber State Wildcats,2025-08-30T20:00:00Z,none,0,0
+2025,d368359056ae756db52495aec9e68aca,2025-08-30T23:00:00Z,Arkansas State Red Wolves,Southeast Missouri State Redhawks,2025-08-30T21:00:00Z,none,0,0
+2025,b9b7362cde9dff460a263d4b19c8e462,2025-08-30T23:00:00Z,Middle Tennessee Blue Raiders,Austin Peay Governors,2025-08-30T21:00:00Z,none,0,0
+2025,80f3010fb9711b746dc8ebab53fe7c47,2025-08-30T23:00:00Z,Vanderbilt Commodores,Charleston Southern Buccaneers,2025-08-30T21:00:00Z,none,0,0
+2025,5e25531fbb1876c4c48cd017d5b5671c,2025-08-30T23:00:00Z,Florida Gators,LIU Sharks,2025-08-30T21:00:00Z,none,0,0
+2025,5af5d9416c9a7a1c9aeee7272f64782d,2025-08-30T23:00:00Z,Kansas State Wildcats,North Dakota Fighting Hawks,2025-08-30T21:00:00Z,none,0,0
+2025,5518ec42aea2d53d95ae0525da16dcce,2025-08-30T23:00:00Z,South Alabama Jaguars,Morgan State Bears,2025-08-30T21:00:00Z,none,0,0
+2025,7aed5f886c986b97e83d23faa060e65d,2025-08-30T23:00:00Z,Troy Trojans,Nicholls State Colonels,2025-08-30T21:00:00Z,none,0,0
+2025,b16c8fc4179692cae0332f7b65e14b39,2025-08-30T23:00:00Z,Western Kentucky Hilltoppers,North Alabama Lions,2025-08-30T21:00:00Z,none,0,0
+2025,60004aaab0613df8d1081256ed66e212,2025-08-30T23:30:00Z,Texas Tech Red Raiders,Arkansas Pine Bluff Golden Lions,2025-08-30T21:30:00Z,none,0,0
+2025,9315c835a22a931d29e34ef0f15c9429,2025-08-30T23:30:00Z,Clemson Tigers,LSU Tigers,2025-08-30T21:30:00Z,lines,23,10
+2025,b9644727bdb769f76dccd79898ddd02f,2025-08-30T23:30:00Z,Louisiana Tech Bulldogs,Southeastern Louisiana Lions,2025-08-30T21:30:00Z,none,0,0
+2025,f146d157f41678d4d8d9ffc7bade8af6,2025-08-30T23:30:00Z,Michigan Wolverines,New Mexico Lobos,2025-08-30T21:30:00Z,none,0,0
+2025,9d06a9977b4d0299fa17257634f2123d,2025-08-30T23:30:00Z,USC Trojans,Missouri State Bears,2025-08-30T21:30:00Z,none,0,0
+2025,ce5e306794394e11f8e703c89ac39dcb,2025-08-30T23:30:00Z,Utah State Aggies,UTEP Miners,2025-08-30T21:30:00Z,none,0,0
+2025,095df3e0d5e42c81f2ba3918568d6051,2025-08-30T23:45:00Z,Ole Miss Rebels,Georgia State Panthers,2025-08-30T21:45:00Z,none,0,0
+2025,ebc2af05ee84f4ad5485349875442fa4,2025-08-31T00:00:00Z,Tulsa Golden Hurricane,Abilene Christian Wildcats,2025-08-30T22:00:00Z,none,0,0
+2025,fb72179c63f6d05558016847bcf47a8d,2025-08-31T00:00:00Z,BYU Cougars,Portland State Vikings,2025-08-30T22:00:00Z,none,0,0
+2025,d66929ae5687924dabdd2c8b06593a44,2025-08-31T00:00:00Z,Texas State Bobcats,Eastern Michigan Eagles,2025-08-30T22:00:00Z,none,0,0
+2025,309c300c69b10173f523cb8a47a24f27,2025-08-31T00:00:00Z,North Texas Mean Green,Lamar Cardinals,2025-08-30T22:00:00Z,none,0,0
+2025,d818fb3e1ad167a0802887763f7699e8,2025-08-31T00:00:00Z,Louisiana Ragin Cajuns,Rice Owls,2025-08-30T22:00:00Z,none,0,0
+2025,73835ae319d1f5533c2322dc70375c77,2025-08-31T01:00:00Z,New Mexico State Aggies,Bryant Bulldogs,2025-08-30T23:00:00Z,none,0,0
+2025,e621163d95de7f9f309e5c46fe4e8457,2025-08-31T01:00:00Z,SMU Mustangs,East Texas A&M Lions,2025-08-30T23:00:00Z,none,0,0
+2025,99aa25f6c7299ea1a9b444ef813a9770,2025-08-31T01:00:00Z,Texas A&M Aggies,UTSA Roadrunners,2025-08-30T23:00:00Z,lines,4,10
+2025,d25adc138f4395cd1cd3a31270362764,2025-08-31T01:30:00Z,Fresno State Bulldogs,Georgia Southern Eagles,2025-08-30T23:30:00Z,none,0,0
+2025,793c5f3c22499efa9d6968b2bccfad4c,2025-08-31T02:00:00Z,Arizona State Sun Devils,Northern Arizona Lumberjacks,2025-08-31T00:00:00Z,none,0,0
+2025,55bbfffac34b3738268dbdcc78b58dc8,2025-08-31T02:00:00Z,Washington State Cougars,Idaho Vandals,2025-08-31T00:00:00Z,none,0,0
+2025,b9668bd42d810933d0a2d1de428fc5fd,2025-08-31T02:30:00Z,Arizona Wildcats,Hawaii Rainbow Warriors,2025-08-31T00:30:00Z,none,0,0
+2025,5d864fb9feccc540dfedf3f1141bc4cb,2025-08-31T02:30:00Z,Oregon State Beavers,California Golden Bears,2025-08-31T00:30:00Z,lines,2,10
+2025,d52b301586f5ce0e1e8b6f3dad18af47,2025-08-31T03:00:00Z,Washington Huskies,Colorado State Rams,2025-08-31T01:00:00Z,lines,8,10
+2025,57de482f01e31e5f31e1010a072d8369,2025-08-31T03:00:00Z,UCLA Bruins,Utah Utes,2025-08-31T01:00:00Z,lines,13,10
+2025,1803d7f4d655fb3f6d5f39fcfd893b96,2025-08-31T19:00:00Z,South Carolina Gamecocks,Virginia Tech Hokies,2025-08-31T17:00:00Z,lines,9,10
+2025,8c138af84cb5ff1e6c4e11b591ff041f,2025-08-31T23:30:00Z,Miami Hurricanes,Notre Dame Fighting Irish,2025-08-31T21:30:00Z,lines,21,10
+2025,9418aabb5edf415f4296c694fa210c3b,2025-09-02T00:00:00Z,North Carolina Tar Heels,TCU Horned Frogs,2025-09-01T22:00:00Z,lines,10,10
+2025,3e06ec27bf0f5024ab751815479d9c4e,2025-09-05T23:00:00Z,Louisville Cardinals,James Madison Dukes,2025-09-05T21:00:00Z,lines,6,10
+2025,319bff020a1a38e8a0b8123c6d9f06c5,2025-09-05T23:30:00Z,Maryland Terrapins,Northern Illinois Huskies,2025-09-05T21:30:00Z,lines,4,10
+2025,d4edaa264115d6aa5601ac5094c3fcbf,2025-09-05T23:30:00Z,Northwestern Wildcats,Western Illinois Leathernecks,2025-09-05T21:30:00Z,none,0,0
+2025,5d261118034763fb8926590e23054879,2025-09-06T01:00:00Z,Boise State Broncos,Eastern Washington Eagles,2025-09-05T23:00:00Z,none,0,0
+2025,d617ea38af0130201ac40d901bf13d0f,2025-09-06T16:00:00Z,SMU Mustangs,Baylor Bears,2025-09-06T14:00:00Z,lines,17,10
+2025,851e2c80e37b4bc2a49538ea658fce35,2025-09-06T16:00:00Z,Pittsburgh Panthers,Central Michigan Chippewas,2025-09-06T14:00:00Z,lines,2,10
+2025,22ef820a384ce82c9d0d9c530451b8ae,2025-09-06T16:00:00Z,Duke Blue Devils,Illinois Fighting Illini,2025-09-06T14:00:00Z,lines,19,10
+2025,6f47dd0ec1e77d03b09f973a889a9888,2025-09-06T16:00:00Z,Penn State Nittany Lions,Florida International Panthers,2025-09-06T14:00:00Z,none,0,0
+2025,31d94acd80bcf0d456a020d0ca96fd0e,2025-09-06T16:00:00Z,Indiana Hoosiers,Kennesaw State Owls,2025-09-06T14:00:00Z,lines,6,10
+2025,601f11a56ce690549ff1275c569cddab,2025-09-06T16:00:00Z,Iowa State Cyclones,Iowa Hawkeyes,2025-09-06T14:00:00Z,lines,22,10
+2025,6a92f4972c35c421f08a5bf601d60cdf,2025-09-06T16:00:00Z,Jacksonville State Gamecocks,Liberty Flames,2025-09-06T14:00:00Z,none,0,0
+2025,1d337b460d2d48e8cd152c4cfc0feb65,2025-09-06T16:00:00Z,Texas Tech Red Raiders,Kent State Golden Flashes,2025-09-06T14:00:00Z,none,0,0
+2025,aa0b998acde7ec673cd145a43ec0d42a,2025-09-06T16:00:00Z,NC State Wolfpack,Virginia Cavaliers,2025-09-06T14:00:00Z,lines,16,10
+2025,9c8c520f16b3fec7180880aa3a8305f6,2025-09-06T16:00:00Z,Texas Longhorns,San Jose State Spartans,2025-09-06T14:00:00Z,lines,8,10
+2025,aa65a4823f86a4a55119734ee9bf936d,2025-09-06T16:00:00Z,Syracuse Orange,UConn Huskies,2025-09-06T14:00:00Z,none,0,0
+2025,23bf555b2956fe362e113bae8a0a5317,2025-09-06T16:05:00Z,Florida State Seminoles,East Texas A&M Lions,2025-09-06T14:05:00Z,none,0,0
+2025,aec36a89b807af38a872836d8f21c340,2025-09-06T16:05:00Z,Minnesota Golden Gophers,Northwestern State Demons,2025-09-06T14:05:00Z,none,0,0
+2025,6a4da08f393ad5e4ee1e32e24ff0e280,2025-09-06T16:45:00Z,Texas A&M Aggies,Utah State Aggies,2025-09-06T14:45:00Z,lines,1,10
+2025,768fd5137a06619d87538d884eddbcc8,2025-09-06T18:05:00Z,Temple Owls,Howard Bison,2025-09-06T16:05:00Z,none,0,0
+2025,4be8ee33ee54d89bf2bca677f33972fe,2025-09-06T18:05:00Z,Wake Forest Demon Deacons,Western Carolina Catamounts,2025-09-06T16:05:00Z,none,0,0
+2025,ea67a3db1f2b5827009f6d8e63c5c721,2025-09-06T19:05:00Z,New Mexico Lobos,Idaho State Bengals,2025-09-06T17:05:00Z,none,0,0
+2025,7e7fec9c9790702ee91c2bb9ab777e76,2025-09-06T19:30:00Z,Cincinnati Bearcats,Bowling Green Falcons,2025-09-06T17:30:00Z,lines,3,10
+2025,52db5ee0ae390264d46abf260d58d239,2025-09-06T19:30:00Z,Clemson Tigers,Troy Trojans,2025-09-06T17:30:00Z,none,0,0
+2025,2147ecdbd826245e414d585251ef87e1,2025-09-06T19:30:00Z,Colorado Buffaloes,Delaware Blue Hens,2025-09-06T17:30:00Z,none,0,0
+2025,4dfcb17f8f10fd2ee8f5794cdabebf94,2025-09-06T19:30:00Z,Oregon State Beavers,Fresno State Bulldogs,2025-09-06T17:30:00Z,none,0,0
+2025,60385595d3e501feeba3a45fafead46f,2025-09-06T19:30:00Z,Missouri Tigers,Kansas Jayhawks,2025-09-06T17:30:00Z,lines,19,10
+2025,d531b8e12cb18d265d2a68e50008904c,2025-09-06T19:30:00Z,Kentucky Wildcats,Ole Miss Rebels,2025-09-06T17:30:00Z,lines,10,10
+2025,1637d24e5e78c310cc3a006e53d93d24,2025-09-06T19:30:00Z,Rutgers Scarlet Knights,Miami (OH) RedHawks,2025-09-06T17:30:00Z,none,0,0
+2025,82a0730f5bc12bc2bd0b3e77b2e6d343,2025-09-06T19:30:00Z,Navy Midshipmen,UAB Blazers,2025-09-06T17:30:00Z,none,0,0
+2025,10651a24aaafce3c973435290bb5cc58,2025-09-06T19:30:00Z,Western Michigan Broncos,North Texas Mean Green,2025-09-06T17:30:00Z,none,0,0
+2025,aae11c793bc039b1fe617662aa7a30ac,2025-09-06T19:30:00Z,Oregon Ducks,Oklahoma State Cowboys,2025-09-06T17:30:00Z,lines,10,10
+2025,7fd2b35cdf431bfdacae0b428f1b8550,2025-09-06T19:30:00Z,UTSA Roadrunners,Texas State Bobcats,2025-09-06T17:30:00Z,none,0,0
+2025,cc6d57b7668726c93fde64f6de4a7c68,2025-09-06T19:35:00Z,Appalachian State Mountaineers,Lindenwood Lions,2025-09-06T17:35:00Z,none,0,0
+2025,3975575c3ff9da1842f4019db37825e7,2025-09-06T19:35:00Z,Georgia Bulldogs,Austin Peay Governors,2025-09-06T17:35:00Z,none,0,0
+2025,5ec37f47324f863bca4140bf9742c2b3,2025-09-06T19:35:00Z,UMass Minutemen,Bryant Bulldogs,2025-09-06T17:35:00Z,none,0,0
+2025,2b9526d89cef299d27d40df2c7d089cc,2025-09-06T19:35:00Z,Buffalo Bulls,St. Francis (PA) Red Flash,2025-09-06T17:35:00Z,none,0,0
+2025,26dc6f197e66104d32d01209b8ad80f2,2025-09-06T19:35:00Z,Tennessee Volunteers,East Tennessee State Buccaneers,2025-09-06T17:35:00Z,none,0,0
+2025,6c45601f8d031fc1d9051354e7341c88,2025-09-06T19:35:00Z,Georgia Tech Yellow Jackets,Gardner-Webb Runnin Bulldogs,2025-09-06T17:35:00Z,none,0,0
+2025,71a02bb7a06ec61fbcc90614e1709887,2025-09-06T19:35:00Z,Ohio State Buckeyes,Grambling State Tigers,2025-09-06T17:35:00Z,none,0,0
+2025,ef5e4d5fdd91ba13abea3c1b880bf6cb,2025-09-06T20:00:00Z,Wisconsin Badgers,Middle Tennessee Blue Raiders,2025-09-06T18:00:00Z,lines,6,10
+2025,116fcf63d006815e16ad77e27a1b7ec6,2025-09-06T20:00:00Z,Ohio Bobcats,West Virginia Mountaineers,2025-09-06T18:00:00Z,lines,4,10
+2025,d27640d7a7262d1212283491984a25e3,2025-09-06T20:05:00Z,Wyoming Cowboys,Northern Iowa Panthers,2025-09-06T18:05:00Z,none,0,0
+2025,adfb4c2e2052c3e066089e9b30c0e496,2025-09-06T20:15:00Z,Florida Gators,South Florida Bulls,2025-09-06T18:15:00Z,lines,6,10
+2025,b3afa7e549f06046d220f15be8f57bdd,2025-09-06T21:00:00Z,Arkansas Razorbacks,Arkansas State Red Wolves,2025-09-06T19:00:00Z,none,0,0
+2025,9a9297190f7b672f20a8c2169e4e0dda,2025-09-06T21:05:00Z,Southern Mississippi Golden Eagles,Jackson State Tigers,2025-09-06T19:05:00Z,none,0,0
+2025,189f13a5956430a8b8bc19a071dbe396,2025-09-06T21:05:00Z,Nevada Wolf Pack,Sacramento State Hornets,2025-09-06T19:05:00Z,none,0,0
+2025,fee631583a9845afb9bf9d8b3b0b8251,2025-09-06T22:00:00Z,Marshall Thundering Herd,Missouri State Bears,2025-09-06T20:00:00Z,none,0,0
+2025,e4921c9abbbc6fad654953b98a917c85,2025-09-06T22:05:00Z,Utah Utes,Cal Poly Mustangs,2025-09-06T20:05:00Z,none,0,0
+2025,56cf14d9ec460e3d925d15a74ff96480,2025-09-06T22:05:00Z,East Carolina Pirates,Campbell Fighting Camels,2025-09-06T20:05:00Z,none,0,0
+2025,3f8386d941941a0dfabcc52c2d49a779,2025-09-06T22:05:00Z,Florida Atlantic Owls,Florida A&M Rattlers,2025-09-06T20:05:00Z,none,0,0
+2025,ab853cd1e0b0c0ec52ed1281c0f4430b,2025-09-06T22:05:00Z,Old Dominion Monarchs,North Carolina Central Eagles,2025-09-06T20:05:00Z,none,0,0
+2025,2364417c745994c23e50a4b9539d9dcf,2025-09-06T23:00:00Z,Kansas State Wildcats,Army Black Knights,2025-09-06T21:00:00Z,lines,4,10
+2025,8933c7632f6f0163dd8c1746835726cf,2025-09-06T23:00:00Z,Charlotte 49ers,North Carolina Tar Heels,2025-09-06T21:00:00Z,none,0,0
+2025,babcab8106759c4005c0d44f7b372d40,2025-09-06T23:00:00Z,Georgia State Panthers,Memphis Tigers,2025-09-06T21:00:00Z,none,0,0
+2025,7812e5178fa6fc42110523dcc932684b,2025-09-06T23:00:00Z,Rice Owls,Houston Cougars,2025-09-06T21:00:00Z,none,0,0
+2025,5a5d9bfe189d87fab86e00ae8e5f5ea1,2025-09-06T23:00:00Z,South Alabama Jaguars,Tulane Green Wave,2025-09-06T21:00:00Z,none,0,0
+2025,fde61dca2f5d5d96267fb00ce6a3d1b9,2025-09-06T23:00:00Z,Toledo Rockets,Western Kentucky Hilltoppers,2025-09-06T21:00:00Z,none,0,0
+2025,ba99311bb57bf1aefb82f82ac0b3fb88,2025-09-06T23:05:00Z,Miami Hurricanes,Bethune-Cookman Wildcats,2025-09-06T21:05:00Z,none,0,0
+2025,5405aa2c12cc8d8da76ee7abc8c53a91,2025-09-06T23:05:00Z,Colorado State Rams,Northern Colorado Bears,2025-09-06T21:05:00Z,none,0,0
+2025,a936ece803772890be537dfaff8a10b2,2025-09-06T23:05:00Z,Eastern Michigan Eagles,LIU Sharks,2025-09-06T21:05:00Z,none,0,0
+2025,c90ceed1e5d6fa2b9b18f41698e72ae3,2025-09-06T23:05:00Z,UCF Knights,North Carolina A&T Aggies,2025-09-06T21:05:00Z,none,0,0
+2025,d1a993205667b96cd89e55d185d24593,2025-09-06T23:05:00Z,South Carolina Gamecocks,South Carolina State Bulldogs,2025-09-06T21:05:00Z,none,0,0
+2025,4e799f80f1960a286b99111d18d13597,2025-09-06T23:30:00Z,Nebraska Cornhuskers,Akron Zips,2025-09-06T21:30:00Z,lines,7,10
+2025,98c92ca46c07070ed67047af259e07a9,2025-09-06T23:30:00Z,Mississippi State Bulldogs,Arizona State Sun Devils,2025-09-06T21:30:00Z,lines,18,10
+2025,bc35dafac8197c8b37cf45f2845e46c5,2025-09-06T23:30:00Z,Auburn Tigers,Ball State Cardinals,2025-09-06T21:30:00Z,none,0,0
+2025,846163dd682584dccfd473a3e19ab98a,2025-09-06T23:30:00Z,Michigan State Spartans,Boston College Eagles,2025-09-06T21:30:00Z,lines,14,10
+2025,c3fba6444cf81b6e2d5214d40362bff9,2025-09-06T23:30:00Z,USC Trojans,Georgia Southern Eagles,2025-09-06T21:30:00Z,none,0,0
+2025,9f0b65a8f99dd25660e14da120f3f49b,2025-09-06T23:30:00Z,LSU Tigers,Louisiana Tech Bulldogs,2025-09-06T21:30:00Z,none,0,0
+2025,5efdee187e4f412e747582a3c18f725b,2025-09-06T23:30:00Z,Oklahoma Sooners,Michigan Wolverines,2025-09-06T21:30:00Z,lines,19,10
+2025,1a3f2c51d3af5b356c44b737195a5b46,2025-09-06T23:30:00Z,Virginia Tech Hokies,Vanderbilt Commodores,2025-09-06T21:30:00Z,lines,6,10
+2025,28baf07528786ceba750f04765da80f2,2025-09-06T23:35:00Z,Coastal Carolina Chanticleers,Charleston Southern Buccaneers,2025-09-06T21:35:00Z,none,0,0
+2025,f3fa678cb608349c6a01b82ea311cc98,2025-09-06T23:35:00Z,Purdue Boilermakers,Southern Illinois Salukis,2025-09-06T21:35:00Z,none,0,0
+2025,0f7ab013d577d4ce6596cddb496a4e2e,2025-09-06T23:45:00Z,Alabama Crimson Tide,UL Monroe Warhawks,2025-09-06T21:45:00Z,none,0,0
+2025,d445a4ea45f024ba386b422a8f293177,2025-09-07T00:00:00Z,UNLV Rebels,UCLA Bruins,2025-09-06T22:00:00Z,lines,6,10
+2025,c730d999aec044ecdb025b4b0aadca95,2025-09-07T00:05:00Z,Louisiana Ragin Cajuns,McNeese State Cowboys,2025-09-06T22:05:00Z,none,0,0
+2025,b2d958e3de35cf037c3879cd2357ba2a,2025-09-07T01:00:00Z,New Mexico State Aggies,Tulsa Golden Hurricane,2025-09-06T23:00:00Z,none,0,0
+2025,fe157539436ac33506849b9a37a657f5,2025-09-07T01:05:00Z,California Golden Bears,Texas Southern Tigers,2025-09-06T23:05:00Z,none,0,0
+2025,643822150f0bf436abb517c7fc1c71f0,2025-09-07T01:05:00Z,UTEP Miners,UT Martin Skyhawks,2025-09-06T23:05:00Z,none,0,0
+2025,164279d656466280a5aae94c4a56855c,2025-09-07T02:05:00Z,Arizona Wildcats,Weber State Wildcats,2025-09-07T00:05:00Z,none,0,0
+2025,d4d307f058aeaa574cfa993534dc6329,2025-09-07T02:15:00Z,BYU Cougars,Stanford Cardinal,2025-09-07T00:15:00Z,lines,8,10
+2025,c412e71c1e290c935cce3c2579a9606a,2025-09-07T02:15:00Z,Washington State Cougars,San Diego State Aztecs,2025-09-07T00:15:00Z,none,0,0
+2025,dd516b114a67242fa7d18b57158981a6,2025-09-07T03:00:00Z,Washington Huskies,UC Davis Aggies,2025-09-07T01:00:00Z,none,0,0
+2025,8cb9bffac37420e5cd3f489d4d8eb9fa,2025-09-07T04:00:00Z,Hawaii Rainbow Warriors,Sam Houston State Bearkats,2025-09-07T02:00:00Z,lines,5,10
+2025,542ba39fc8c6d30999a48dd24a805716,2025-09-11T23:30:00Z,Wake Forest Demon Deacons,NC State Wolfpack,2025-09-11T21:30:00Z,lines,25,10
+2025,27b116b4ae0add4a567ac13e648a969c,2025-09-12T22:30:00Z,Indiana Hoosiers,Indiana State Sycamores,2025-09-12T20:30:00Z,none,0,0
+2025,c0cb57ad4cf6559c9e66a282af20a70f,2025-09-12T23:00:00Z,Syracuse Orange,Colgate Raiders,2025-09-12T21:00:00Z,none,0,0
+2025,3364cb1ca333090467399c9202106e85,2025-09-12T23:30:00Z,Houston Cougars,Colorado Buffaloes,2025-09-12T21:30:00Z,lines,5,10
+2025,15fc1863106a88d0c4fbbab5fb4104d8,2025-09-13T01:00:00Z,Arizona Wildcats,Kansas State Wildcats,2025-09-12T23:00:00Z,lines,10,10
+2025,fc14fc6cc614c501289dce87abdaa041,2025-09-13T02:00:00Z,UCLA Bruins,New Mexico Lobos,2025-09-13T00:00:00Z,lines,8,10
+2025,4448884985daf34694092893ff17f308,2025-09-13T16:00:00Z,Alabama Crimson Tide,Wisconsin Badgers,2025-09-13T14:00:00Z,lines,21,10
+2025,5aa5556ffd91ab02dd10e760119389c9,2025-09-13T16:00:00Z,Baylor Bears,Samford Bulldogs,2025-09-13T14:00:00Z,none,0,0
+2025,cf8be0afa61692fc5367a63efe3acb04,2025-09-13T16:00:00Z,Kent State Golden Flashes,Buffalo Bulls,2025-09-13T14:00:00Z,none,0,0
+2025,e56fc1fd0535fb4df5965ec3b167affc,2025-09-13T16:00:00Z,Michigan Wolverines,Central Michigan Chippewas,2025-09-13T14:00:00Z,lines,6,10
+2025,1e8f948c71b57bb3ab85019401680e55,2025-09-13T16:00:00Z,Georgia Tech Yellow Jackets,Clemson Tigers,2025-09-13T14:00:00Z,lines,11,10
+2025,890ecf657e6554cb83401877d8a2d4af,2025-09-13T16:00:00Z,Nebraska Cornhuskers,Houston Baptist Huskies,2025-09-13T14:00:00Z,none,0,0
+2025,bb7a8c32ea520cdc25a01fe1826ca550,2025-09-13T16:00:00Z,Maryland Terrapins,Towson Tigers,2025-09-13T14:00:00Z,none,0,0
+2025,7055717ca227bcf67daddfde8ce538d7,2025-09-13T16:00:00Z,Troy Trojans,Memphis Tigers,2025-09-13T14:00:00Z,none,0,0
+2025,e578eee84f74b91f768a10409dad34e2,2025-09-13T16:00:00Z,Northwestern Wildcats,Oregon Ducks,2025-09-13T14:00:00Z,lines,12,10
+2025,b8524329bb15afd228c75ffbf68f4cc0,2025-09-13T16:00:00Z,Temple Owls,Oklahoma Sooners,2025-09-13T14:00:00Z,lines,6,10
+2025,3f24d5cd198b8d71346ee485024d92e4,2025-09-13T16:00:00Z,Virginia Cavaliers,William and Mary Tribe,2025-09-13T14:00:00Z,none,0,0
+2025,769239155fdcf442b46fd841cc830644,2025-09-13T16:45:00Z,Auburn Tigers,South Alabama Jaguars,2025-09-13T14:45:00Z,none,0,0
+2025,6e02ca12a913adc7a3e54664fab9ec5f,2025-09-13T17:00:00Z,Missouri Tigers,Louisiana Ragin Cajuns,2025-09-13T15:00:00Z,none,0,0
+2025,06d8d06bf18254cb7da10f3df605b694,2025-09-13T18:00:00Z,Ball State Cardinals,New Hampshire Wildcats,2025-09-13T16:00:00Z,none,0,0
+2025,a8f7d11f07a3638d7cbf6db26063a7d6,2025-09-13T19:00:00Z,Delaware Blue Hens,UConn Huskies,2025-09-13T17:00:00Z,none,0,0
+2025,e35cf990260dfc344edcde78f6f259a7,2025-09-13T19:30:00Z,Cincinnati Bearcats,Northwestern State Demons,2025-09-13T17:30:00Z,none,0,0
+2025,2f5eb17fc3460a510e64c0da17592c23,2025-09-13T19:30:00Z,Tennessee Volunteers,Georgia Bulldogs,2025-09-13T17:30:00Z,lines,26,10
+2025,4814e0006160018eb4640a5954482c73,2025-09-13T19:30:00Z,UTSA Roadrunners,Incarnate Word Cardinals,2025-09-13T17:30:00Z,none,0,0
+2025,e8b76d9da9d28dd941d01df1ee8456d2,2025-09-13T19:30:00Z,Michigan State Spartans,Youngstown St Penguins,2025-09-13T17:30:00Z,none,0,0
+2025,32dedd329ad7a2cf2ef10ea7ce94ac2f,2025-09-13T19:30:00Z,Missouri State Bears,SMU Mustangs,2025-09-13T17:30:00Z,none,0,0
+2025,f77f31a47eb33d465d89794897312559,2025-09-13T19:30:00Z,Toledo Rockets,Morgan State Bears,2025-09-13T17:30:00Z,none,0,0
+2025,3ad5a91e618cb376c6a36ce3661ddeaa,2025-09-13T19:30:00Z,Rutgers Scarlet Knights,Norfolk State Spartans,2025-09-13T17:30:00Z,none,0,0
+2025,f1fa192df7e4f63e08254cc59d41daab,2025-09-13T19:30:00Z,North Carolina Tar Heels,Richmond Spiders,2025-09-13T17:30:00Z,none,0,0
+2025,4d626c9b7d06d80a9f435e9d370d7552,2025-09-13T19:30:00Z,North Texas Mean Green,Washington State Cougars,2025-09-13T17:30:00Z,none,0,0
+2025,08d8516f4e80463c999592cabffaab09,2025-09-13T19:30:00Z,Texas Tech Red Raiders,Oregon State Beavers,2025-09-13T17:30:00Z,lines,23,10
+2025,e1a21478d0bb7a47dd4ed8d77f7aebfd,2025-09-13T19:30:00Z,Penn State Nittany Lions,Villanova Wildcats,2025-09-13T17:30:00Z,none,0,0
+2025,bd0a69e509effeb418dc2c02e2812904,2025-09-13T19:30:00Z,West Virginia Mountaineers,Pittsburgh Panthers,2025-09-13T17:30:00Z,lines,10,10
+2025,77658b71d1a453dde664a6dac3e3aee5,2025-09-13T19:30:00Z,Purdue Boilermakers,USC Trojans,2025-09-13T17:30:00Z,lines,14,10
+2025,139289c50a551da95bd2eabf6369f603,2025-09-13T20:00:00Z,Arkansas State Red Wolves,Iowa State Cyclones,2025-09-13T18:00:00Z,lines,3,10
+2025,9f28051e129f9d7c9b1592843975f35e,2025-09-13T20:15:00Z,Texas Longhorns,UTEP Miners,2025-09-13T18:15:00Z,none,0,0
+2025,abd9abc5f6d6a3cc918ef6796b35613a,2025-09-13T20:30:00Z,Miami Hurricanes,South Florida Bulls,2025-09-13T18:30:00Z,lines,20,10
+2025,d0dd41e1d1fbdb7fb28108d71cef7191,2025-09-13T21:00:00Z,Bowling Green Falcons,Liberty Flames,2025-09-13T19:00:00Z,none,0,0
+2025,875846e5665b70d5469951f3fcb7882c,2025-09-13T21:00:00Z,Nevada Wolf Pack,Middle Tennessee Blue Raiders,2025-09-13T19:00:00Z,none,0,0
+2025,7013b142407fdb3a33b73bb74b9f9955,2025-09-13T22:00:00Z,Mississippi State Bulldogs,Alcorn State Braves,2025-09-13T20:00:00Z,none,0,0
+2025,5ae8e6f0b5efe437b1443149ae0ec642,2025-09-13T22:00:00Z,Charlotte 49ers,Monmouth Hawks,2025-09-13T20:00:00Z,none,0,0
+2025,4bd781526f99dcec03fbfa22ac331354,2025-09-13T22:00:00Z,Marshall Thundering Herd,Eastern Kentucky Colonels,2025-09-13T20:00:00Z,none,0,0
+2025,f725f3f6b4997b4743eab27059a76b9a,2025-09-13T22:00:00Z,Florida International Panthers,Florida Atlantic Owls,2025-09-13T20:00:00Z,none,0,0
+2025,24639a99272a5b62097223d827ee87d8,2025-09-13T22:00:00Z,Kennesaw State Owls,Merrimack Warriors,2025-09-13T20:00:00Z,none,0,0
+2025,8b7338452f03e6d1f390ba7683da7a46,2025-09-13T23:00:00Z,Southern Mississippi Golden Eagles,Appalachian State Mountaineers,2025-09-13T21:00:00Z,none,0,0
+2025,ed60227b309e7c8b24a7fd098d830bca,2025-09-13T23:00:00Z,Ole Miss Rebels,Arkansas Razorbacks,2025-09-13T21:00:00Z,lines,16,10
+2025,84b736e35a7f73afa8b8c938c65169af,2025-09-13T23:00:00Z,Georgia Southern Eagles,Jacksonville State Gamecocks,2025-09-13T21:00:00Z,none,0,0
+2025,019f0593640b99c42289e23d88f54fe2,2025-09-13T23:00:00Z,Georgia State Panthers,Murray State Racers,2025-09-13T21:00:00Z,none,0,0
+2025,550c9e1c0682a94c17ec7df68381a94b,2025-09-13T23:00:00Z,Illinois Fighting Illini,Western Michigan Broncos,2025-09-13T21:00:00Z,lines,6,10
+2025,c08b8bf01131025509bb852aa41e2f91,2025-09-13T23:00:00Z,Ohio State Buckeyes,Ohio Bobcats,2025-09-13T21:00:00Z,lines,6,10
+2025,208a16b828d2456abbb1f12037625758,2025-09-13T23:00:00Z,Virginia Tech Hokies,Old Dominion Monarchs,2025-09-13T21:00:00Z,lines,4,10
+2025,d7240ebe1bb46d3db3bb15d267cae7de,2025-09-13T23:00:00Z,Rice Owls,Prairie View A&M Panthers,2025-09-13T21:00:00Z,none,0,0
+2025,2f3b6a7a4a7b55d909fa1d7673b7c452,2025-09-13T23:00:00Z,South Carolina Gamecocks,Vanderbilt Commodores,2025-09-13T21:00:00Z,lines,12,10
+2025,1fa46226598488bf1844c212919bccc0,2025-09-13T23:30:00Z,Coastal Carolina Chanticleers,East Carolina Pirates,2025-09-13T21:30:00Z,none,0,0
+2025,bbf986aa26a838709271939437a8c9c5,2025-09-13T23:30:00Z,Kentucky Wildcats,Eastern Michigan Eagles,2025-09-13T21:30:00Z,none,0,0
+2025,b83c7f30440d9f80736b1b7cc5b2fa7f,2025-09-13T23:30:00Z,LSU Tigers,Florida Gators,2025-09-13T21:30:00Z,lines,24,10
+2025,df7f1ccceef734c9353bcd44a4236601,2025-09-13T23:30:00Z,Iowa Hawkeyes,UMass Minutemen,2025-09-13T21:30:00Z,lines,3,10
+2025,d3f2f26060c42cb5ae2b941b73a794d8,2025-09-13T23:30:00Z,Louisiana Tech Bulldogs,New Mexico State Aggies,2025-09-13T21:30:00Z,none,0,0
+2025,d20307e8474bbfe4a52934a6af6fe2d9,2025-09-13T23:30:00Z,Notre Dame Fighting Irish,Texas A&M Aggies,2025-09-13T21:30:00Z,lines,17,10
+2025,fd20bb3cdf2afbfeaa3daa9b665a5767,2025-09-14T00:00:00Z,TCU Horned Frogs,Abilene Christian Wildcats,2025-09-13T22:00:00Z,none,0,0
+2025,835d0fbb20287ee86ac00d5f3fa3b3b6,2025-09-14T00:00:00Z,Tulane Green Wave,Duke Blue Devils,2025-09-13T22:00:00Z,lines,6,10
+2025,674f125e76bbaa23c17ed7bfc92a7e2f,2025-09-14T00:00:00Z,Tulsa Golden Hurricane,Navy Midshipmen,2025-09-13T22:00:00Z,none,0,0
+2025,ad2a98c2fe26866d3fe7664110c1b5f7,2025-09-14T00:00:00Z,Wyoming Cowboys,Utah Utes,2025-09-13T22:00:00Z,none,0,0
+2025,410236d82315e057f9465b5c12df7bf2,2025-09-14T00:30:00Z,UAB Blazers,Akron Zips,2025-09-13T22:30:00Z,none,0,0
+2025,36ac69de72f616b39cbcc1f2e89a9430,2025-09-14T01:45:00Z,Utah State Aggies,Air Force Falcons,2025-09-13T23:45:00Z,none,0,0
+2025,76fa944a050adddb7c2cb6e4c4d38d6b,2025-09-14T02:00:00Z,Fresno State Bulldogs,Southern University Jaguars,2025-09-14T00:00:00Z,none,0,0
+2025,f52fd1eb78ff6a44662e772a4950263b,2025-09-14T02:30:00Z,Arizona State Sun Devils,Texas State Bobcats,2025-09-14T00:30:00Z,lines,8,10
+2025,4ac5fec6b02d255aa548dfd6cc1edbb9,2025-09-14T02:30:00Z,Stanford Cardinal,Boston College Eagles,2025-09-14T00:30:00Z,lines,8,10
+2025,5d85387fe9b718ea0c754c1e1b51a434,2025-09-14T02:30:00Z,California Golden Bears,Minnesota Golden Gophers,2025-09-14T00:30:00Z,lines,17,10
+2025,bbe327e5d8f123a57f4279e3597d40ae,2025-09-14T03:59:00Z,Hawaii Rainbow Warriors,Portland State Vikings,2025-09-14T01:59:00Z,none,0,0
+2025,88a5a0bbf82083c43c806d40071b340e,2025-09-18T23:30:00Z,Charlotte 49ers,Rice Owls,2025-09-18T21:30:00Z,lines,2,10
+2025,f7f75940634e8ec62dac353f09be0677,2025-09-19T23:30:00Z,Oklahoma State Cowboys,Tulsa Golden Hurricane,2025-09-19T21:30:00Z,none,0,0
+2025,4bab9cbac51f27b9f12617b760247074,2025-09-20T00:00:00Z,Rutgers Scarlet Knights,Iowa Hawkeyes,2025-09-19T22:00:00Z,none,0,0
+2025,c0b1ac9a610885d8e56a1891adf68d57,2025-09-20T16:00:00Z,Memphis Tigers,Arkansas Razorbacks,2025-09-20T14:00:00Z,none,0,0
+2025,a85c3e810f12d0a8bf904fa1a2795aa6,2025-09-20T16:00:00Z,Army Black Knights,North Texas Mean Green,2025-09-20T14:00:00Z,none,0,0
+2025,a007e86de8d7082641da38233ddeb1b7,2025-09-20T16:00:00Z,Louisville Cardinals,Bowling Green Falcons,2025-09-20T14:00:00Z,none,0,0
+2025,3f96037e0014fee643fc8b7a5efaa2d0,2025-09-20T16:00:00Z,Clemson Tigers,Syracuse Orange,2025-09-20T14:00:00Z,lines,5,10
+2025,13e04598f89948bf768f8f5456c9bc66,2025-09-20T16:00:00Z,Wisconsin Badgers,Maryland Terrapins,2025-09-20T14:00:00Z,none,0,0
+2025,84ae085a96a7a0b18f00587c6136884f,2025-09-20T16:00:00Z,TCU Horned Frogs,SMU Mustangs,2025-09-20T14:00:00Z,none,0,0
+2025,9449961a57cdf571e7248d18613ec131,2025-09-20T16:00:00Z,South Florida Bulls,South Carolina State Bulldogs,2025-09-20T14:00:00Z,none,0,0
+2025,3aa7e2c30d9051691c378e202279c6fc,2025-09-20T16:00:00Z,Utah Utes,Texas Tech Red Raiders,2025-09-20T14:00:00Z,lines,7,10
+2025,340927bb8c4eb3f1d8a13c5480646b51,2025-09-20T16:00:00Z,Virginia Tech Hokies,Wofford Terriers,2025-09-20T14:00:00Z,none,0,0
+2025,3fdda89f6826aab0083880182b962b27,2025-09-20T16:05:00Z,Miami (OH) RedHawks,UNLV Rebels,2025-09-20T14:05:00Z,none,0,0
+2025,6c5b117f5091e161561240ae95fe99a4,2025-09-20T16:45:00Z,Tennessee Volunteers,UAB Blazers,2025-09-20T14:45:00Z,lines,1,10
+2025,cbf53f44970801ab245ec4d71276519e,2025-09-20T17:00:00Z,Central Michigan Chippewas,Wagner Seahawks,2025-09-20T15:00:00Z,none,0,0
+2025,ee813cd96576a01199eedf7066cc54d1,2025-09-20T19:00:00Z,Oregon Ducks,Oregon State Beavers,2025-09-20T17:00:00Z,none,0,0
+2025,103dcd715ce54d763f5d49157b11b2a2,2025-09-20T19:30:00Z,Oklahoma Sooners,Auburn Tigers,2025-09-20T17:30:00Z,lines,6,10
+2025,93682b6473bd43d01f8b37a24132ef75,2025-09-20T19:30:00Z,UConn Huskies,Ball State Cardinals,2025-09-20T17:30:00Z,none,0,0
+2025,3a348b84db164ba3eddf330ec773c06d,2025-09-20T19:30:00Z,Buffalo Bulls,Troy Trojans,2025-09-20T17:30:00Z,none,0,0
+2025,3624fd697b751f6852328275de12fd1c,2025-09-20T19:30:00Z,Eastern Michigan Eagles,Louisiana Ragin Cajuns,2025-09-20T17:30:00Z,none,0,0
+2025,857f26585f6083c7cfc300026e647ee6,2025-09-20T19:30:00Z,Florida State Seminoles,Kent State Golden Flashes,2025-09-20T17:30:00Z,none,0,0
+2025,2c779264544468120afddc92b13c62e3,2025-09-20T19:30:00Z,Ohio Bobcats,Gardner-Webb Runnin Bulldogs,2025-09-20T17:30:00Z,none,0,0
+2025,f652e81624955a035c53f10089a56e2e,2025-09-20T19:30:00Z,Liberty Flames,James Madison Dukes,2025-09-20T17:30:00Z,none,0,0
+2025,e7873a03eb97c9a032544e448cc2d55c,2025-09-20T19:30:00Z,Nebraska Cornhuskers,Michigan Wolverines,2025-09-20T17:30:00Z,lines,7,10
+2025,038cd404ffe4a5be92eb7c38c93ffd68,2025-09-20T19:30:00Z,UCF Knights,North Carolina Tar Heels,2025-09-20T17:30:00Z,lines,2,10
+2025,af17a22d1102bd35d73a24c0332f762f,2025-09-20T19:30:00Z,Notre Dame Fighting Irish,Purdue Boilermakers,2025-09-20T17:30:00Z,lines,5,10
+2025,c2b9d588bf5c96622fea7d89d5f0c115,2025-09-20T19:30:00Z,Ole Miss Rebels,Tulane Green Wave,2025-09-20T17:30:00Z,none,0,0
+2025,12046fc0c213511df41b0eac4fc599ca,2025-09-20T19:30:00Z,Western Michigan Broncos,Toledo Rockets,2025-09-20T17:30:00Z,none,0,0
+2025,19c25ee727d70638bb04d4e1bce612ea,2025-09-20T20:00:00Z,Duke Blue Devils,NC State Wolfpack,2025-09-20T18:00:00Z,none,0,0
+2025,03977e2fadb000a89f6b3da8a5b174cd,2025-09-20T20:15:00Z,Mississippi State Bulldogs,Northern Illinois Huskies,2025-09-20T18:15:00Z,none,0,0
+2025,e42cbc33af5d7a0d0045f0858e3cdf96,2025-09-20T20:30:00Z,Georgia Tech Yellow Jackets,Temple Owls,2025-09-20T18:30:00Z,none,0,0
+2025,9d1789382895a78e49e86838a9f8c44d,2025-09-20T21:00:00Z,San Jose State Spartans,Idaho Vandals,2025-09-20T19:00:00Z,none,0,0
+2025,8a6aaf025db38602e739a75bd9cd79a2,2025-09-20T22:00:00Z,Kennesaw State Owls,Arkansas State Red Wolves,2025-09-20T20:00:00Z,none,0,0
+2025,40e0ef27cf4ecc8195310d798dee3be9,2025-09-20T22:00:00Z,Florida International Panthers,Delaware Blue Hens,2025-09-20T20:00:00Z,none,0,0
+2025,6be90d4768b93c43b3b3e55de45a3925,2025-09-20T22:00:00Z,Kansas Jayhawks,West Virginia Mountaineers,2025-09-20T20:00:00Z,lines,5,10
+2025,79e3a2057511c8c7faff696a65ad00a5,2025-09-20T22:07:00Z,Akron Zips,Duquesne Dukes,2025-09-20T20:07:00Z,none,0,0
+2025,95902da68b0cef406dd2413e4399a320,2025-09-20T23:00:00Z,Air Force Falcons,Boise State Broncos,2025-09-20T21:00:00Z,none,0,0
+2025,f65d280c50613dc0089571280476bc4a,2025-09-20T23:00:00Z,South Alabama Jaguars,Coastal Carolina Chanticleers,2025-09-20T21:00:00Z,none,0,0
+2025,eba637423f4dc14f6c7039c4b25fa523,2025-09-20T23:00:00Z,Middle Tennessee Blue Raiders,Marshall Thundering Herd,2025-09-20T21:00:00Z,none,0,0
+2025,0a99c4c19ec716237226adf6f20506ce,2025-09-20T23:00:00Z,Missouri Tigers,South Carolina Gamecocks,2025-09-20T21:00:00Z,lines,3,10
+2025,c6c93f60d8369525b707f1f11c2cd0a1,2025-09-20T23:00:00Z,Western Kentucky Hilltoppers,Nevada Wolf Pack,2025-09-20T21:00:00Z,none,0,0
+2025,5631867903a80876d292ca9634f4749f,2025-09-20T23:07:00Z,Georgia Southern Eagles,Maine Black Bears,2025-09-20T21:07:00Z,none,0,0
+2025,fe8803c09e7627bae0109bc98e3ac310,2025-09-20T23:07:00Z,Jacksonville State Gamecocks,Murray State Racers,2025-09-20T21:07:00Z,none,0,0
+2025,512e428ad08bc3ef6efb803bc679d933,2025-09-20T23:07:00Z,Missouri State Bears,UT Martin Skyhawks,2025-09-20T21:07:00Z,none,0,0
+2025,23ce9d15b3cbcee45fd1d13550ee2a1a,2025-09-20T23:30:00Z,Baylor Bears,Arizona State Sun Devils,2025-09-20T21:30:00Z,lines,5,10
+2025,2347ab8f55c1890bd4340b29032381fe,2025-09-20T23:30:00Z,East Carolina Pirates,BYU Cougars,2025-09-20T21:30:00Z,none,0,0
+2025,e12a027ef3182426888607f1aa77a6bc,2025-09-20T23:30:00Z,Miami Hurricanes,Florida Gators,2025-09-20T21:30:00Z,lines,7,10
+2025,b953fbd602d01288f5e295c636d69dc9,2025-09-20T23:30:00Z,Vanderbilt Commodores,Georgia State Panthers,2025-09-20T21:30:00Z,none,0,0
+2025,efb65d1caa41db87771cf8d31fda1c03,2025-09-20T23:30:00Z,Indiana Hoosiers,Illinois Fighting Illini,2025-09-20T21:30:00Z,lines,7,10
+2025,c5fd71cee9ea79e7c966ec74aad118ce,2025-09-20T23:30:00Z,Louisiana Tech Bulldogs,Southern Mississippi Golden Eagles,2025-09-20T21:30:00Z,none,0,0
+2025,a4df26224ac6173274f8facd32942ca4,2025-09-20T23:30:00Z,Virginia Cavaliers,Stanford Cardinal,2025-09-20T21:30:00Z,none,0,0
+2025,8f3febddcf1504cb91454ac61d25caa8,2025-09-20T23:30:00Z,Washington State Cougars,Washington Huskies,2025-09-20T21:30:00Z,lines,5,10
+2025,be4553c118c2689f5cf14fd9dd580c96,2025-09-20T23:52:00Z,LSU Tigers,Southeastern Louisiana Lions,2025-09-20T21:52:00Z,none,0,0
+2025,d098d8c6ee0dc177926284d2b55548e1,2025-09-21T00:00:00Z,Texas Longhorns,Sam Houston State Bearkats,2025-09-20T22:00:00Z,none,0,0
+2025,a675cd586e97d568bbe7bed7d2a7170c,2025-09-21T00:07:00Z,Utah State Aggies,McNeese State Cowboys,2025-09-20T22:07:00Z,none,0,0
+2025,81975f3dd4ec47b2bbd4e39edbe91815,2025-09-21T00:07:00Z,Texas State Bobcats,Nicholls State Colonels,2025-09-20T22:07:00Z,none,0,0
+2025,cd4b42ea2180255f5116e232c2b2b819,2025-09-21T01:00:00Z,UTEP Miners,UL Monroe Warhawks,2025-09-20T23:00:00Z,none,0,0
+2025,9cbec31b71841a2e3c176c793476259c,2025-09-21T01:30:00Z,Colorado State Rams,UTSA Roadrunners,2025-09-20T23:30:00Z,none,0,0
+2025,0428899902640b8db4774cf8c53379d2,2025-09-21T02:15:00Z,Colorado Buffaloes,Wyoming Cowboys,2025-09-21T00:15:00Z,none,0,0
+2025,8162cc38b88546a32110dee7af01cb60,2025-09-21T02:30:00Z,San Diego State Aztecs,California Golden Bears,2025-09-21T00:30:00Z,none,0,0
+2025,3494518f6430d858bb0c13fe8b29b108,2025-09-21T03:00:00Z,USC Trojans,Michigan State Spartans,2025-09-21T01:00:00Z,lines,5,10
+2025,4306843c52f1847f42d57fdc5e59652a,2025-09-21T03:59:00Z,Hawaii Rainbow Warriors,Fresno State Bulldogs,2025-09-21T01:59:00Z,none,0,0
+2025,9f0c39a454dbb72e6d5d3d8175d63f24,2025-09-25T23:30:00Z,East Carolina Pirates,Army Black Knights,2025-09-25T21:30:00Z,lines,3,10
+2025,0aa30bdb9295af4b13475b7aabb2cfea,2025-09-26T23:00:00Z,Virginia Cavaliers,Florida State Seminoles,2025-09-26T21:00:00Z,lines,4,10
+2025,f921de41ef2918f15fc38af1091d6206,2025-09-27T01:00:00Z,Arizona State Sun Devils,TCU Horned Frogs,2025-09-26T23:00:00Z,lines,6,10
+2025,8d2d9d2d52be2c1b040572a949cbeb8d,2025-09-27T02:30:00Z,Oregon State Beavers,Houston Cougars,2025-09-27T00:30:00Z,lines,4,10
+2025,9c00e60e6d66a511cce53c0a0f5bde43,2025-09-27T16:00:00Z,Arkansas Razorbacks,Notre Dame Fighting Irish,2025-09-27T14:00:00Z,lines,5,10
+2025,00e4a622dd9d352a89042411d98011c2,2025-09-27T16:00:00Z,Ohio Bobcats,Bowling Green Falcons,2025-09-27T14:00:00Z,none,0,0
+2025,b4e694771eec00d29e8b0e767fd89844,2025-09-27T16:00:00Z,Kansas Jayhawks,Cincinnati Bearcats,2025-09-27T14:00:00Z,none,0,0
+2025,e29f3c5ebdb03de4f11f032cd29fdc30,2025-09-27T16:00:00Z,Syracuse Orange,Duke Blue Devils,2025-09-27T14:00:00Z,none,0,0
+2025,276535da04befff08724bafd3838f086,2025-09-27T16:00:00Z,Wake Forest Demon Deacons,Georgia Tech Yellow Jackets,2025-09-27T14:00:00Z,none,0,0
+2025,9211d988a7a37c1171c0402c46bd3ed5,2025-09-27T16:00:00Z,Illinois Fighting Illini,USC Trojans,2025-09-27T14:00:00Z,lines,7,10
+2025,1c9f81f98890e8287c3a203f1b95a78b,2025-09-27T16:00:00Z,Kansas State Wildcats,UCF Knights,2025-09-27T14:00:00Z,none,0,0
+2025,c7e9d66aaf9eb361d2c3b2077d637ef6,2025-09-27T16:00:00Z,Pittsburgh Panthers,Louisville Cardinals,2025-09-27T14:00:00Z,none,0,0
+2025,d7402904994b361eb19c9e7d1c46c221,2025-09-27T16:00:00Z,Minnesota Golden Gophers,Rutgers Scarlet Knights,2025-09-27T14:00:00Z,none,0,0
+2025,0fddb3073ac2e4cf64b1fbab530bd46a,2025-09-27T16:00:00Z,North Texas Mean Green,South Alabama Jaguars,2025-09-27T14:00:00Z,none,0,0
+2025,f0e1630f32dc039064b2536422a040ce,2025-09-27T16:45:00Z,Vanderbilt Commodores,Utah State Aggies,2025-09-27T14:45:00Z,none,0,0
+2025,7a898acd2cc5f139754fd615d5d03b5b,2025-09-27T17:00:00Z,Central Michigan Chippewas,Eastern Michigan Eagles,2025-09-27T15:00:00Z,none,0,0
+2025,4079ac405679c86d2ef11dde29e5713a,2025-09-27T17:30:00Z,James Madison Dukes,Georgia Southern Eagles,2025-09-27T15:30:00Z,none,0,0
+2025,f1cf62076107958a8c8076e6ce1c5672,2025-09-27T19:00:00Z,UL Monroe Warhawks,Arkansas State Red Wolves,2025-09-27T17:00:00Z,none,0,0
+2025,2af41e5b7328a096d3f710fa3601cf7a,2025-09-27T19:30:00Z,Toledo Rockets,Akron Zips,2025-09-27T17:30:00Z,none,0,0
+2025,5c42d56cd31ee19b3d7baba7a220b103,2025-09-27T19:30:00Z,Texas A&M Aggies,Auburn Tigers,2025-09-27T17:30:00Z,none,0,0
+2025,95a5fa32d92ea8e02948487d72448740,2025-09-27T19:30:00Z,Oklahoma State Cowboys,Baylor Bears,2025-09-27T17:30:00Z,none,0,0
+2025,e88139ad8e275ed8101bbcb08dc7425b,2025-09-27T19:30:00Z,Boston College Eagles,California Golden Bears,2025-09-27T17:30:00Z,none,0,0
+2025,d0d5d76137834bd53f2f2d9b89185b45,2025-09-27T19:30:00Z,Buffalo Bulls,UConn Huskies,2025-09-27T17:30:00Z,none,0,0
+2025,af7edb090e4bdcac144f29453cc9b416,2025-09-27T19:30:00Z,Iowa Hawkeyes,Indiana Hoosiers,2025-09-27T17:30:00Z,lines,5,10
+2025,f0daa9672398345c140434330134b8e2,2025-09-27T19:30:00Z,Ole Miss Rebels,LSU Tigers,2025-09-27T17:30:00Z,lines,15,10
+2025,abb1fda962de8e077ef60b6371be4655,2025-09-27T19:30:00Z,Miami (OH) RedHawks,Lindenwood Lions,2025-09-27T17:30:00Z,none,0,0
+2025,b084a084e383c1025454bfcf8fed4dfe,2025-09-27T19:30:00Z,Navy Midshipmen,Rice Owls,2025-09-27T17:30:00Z,none,0,0
+2025,09386790d17406b6cf395cc3f5eb7a10,2025-09-27T19:30:00Z,Northern Illinois Huskies,San Diego State Aztecs,2025-09-27T17:30:00Z,none,0,0
+2025,1b22149e990bdff226742aa529b1147c,2025-09-27T19:30:00Z,Northwestern Wildcats,UCLA Bruins,2025-09-27T17:30:00Z,none,0,0
+2025,38ec707066a2e19151e10f088803554b,2025-09-27T19:30:00Z,Washington Huskies,Ohio State Buckeyes,2025-09-27T17:30:00Z,lines,10,10
+2025,b9ca3daaa52f5e5e91ac5def4b9b0789,2025-09-27T19:30:00Z,West Virginia Mountaineers,Utah Utes,2025-09-27T17:30:00Z,none,0,0
+2025,58c785bf8f43b721c53ca155b8dff5f8,2025-09-27T20:00:00Z,New Mexico Lobos,New Mexico State Aggies,2025-09-27T18:00:00Z,none,0,0
+2025,fdbf98c8da4412e69fc190ad9d6b8278,2025-09-27T20:00:00Z,Tulsa Golden Hurricane,Tulane Green Wave,2025-09-27T18:00:00Z,none,0,0
+2025,f48274120104b3dd6de484cecdbc7e02,2025-09-27T20:10:00Z,Air Force Falcons,Hawaii Rainbow Warriors,2025-09-27T18:10:00Z,none,0,0
+2025,ad226dc6bd485c9b53acebd5ceae531f,2025-09-27T20:15:00Z,Mississippi State Bulldogs,Tennessee Volunteers,2025-09-27T18:15:00Z,none,0,0
+2025,22a1dc3f8ead3ed004f12a805b5f0bba,2025-09-27T22:00:00Z,Kennesaw State Owls,Middle Tennessee Blue Raiders,2025-09-27T20:00:00Z,none,0,0
+2025,eebdc0d5bb5bf588dc76ef79c2d2f205,2025-09-27T22:00:00Z,Old Dominion Monarchs,Liberty Flames,2025-09-27T20:00:00Z,none,0,0
+2025,65642a972639b4294a3dfb32e1025df6,2025-09-27T22:30:00Z,Western Michigan Broncos,Rhode Island Rams,2025-09-27T20:30:00Z,none,0,0
+2025,c0f4af0d027dc651e1eb60ede8415ec1,2025-09-27T23:00:00Z,Iowa State Cyclones,Arizona Wildcats,2025-09-27T21:00:00Z,none,0,0
+2025,63b6a142067e7f67ea91cc67e534ca6f,2025-09-27T23:00:00Z,Florida Atlantic Owls,Memphis Tigers,2025-09-27T21:00:00Z,none,0,0
+2025,fb1b5add87c95152d9887785fdfaff81,2025-09-27T23:00:00Z,Southern Mississippi Golden Eagles,Jacksonville State Gamecocks,2025-09-27T21:00:00Z,none,0,0
+2025,90f6536a4ea2981769343cbd80baf1cc,2025-09-27T23:00:00Z,Missouri State Bears,Western Kentucky Hilltoppers,2025-09-27T21:00:00Z,none,0,0
+2025,89ed3d21b7cc87bb80ba621f040d538e,2025-09-27T23:00:00Z,NC State Wolfpack,Virginia Tech Hokies,2025-09-27T21:00:00Z,none,0,0
+2025,b41939807dad226f718eeb8fa56d7342,2025-09-27T23:30:00Z,Georgia Bulldogs,Alabama Crimson Tide,2025-09-27T21:30:00Z,lines,12,10
+2025,5e919b1126a9cf2a7de96993f9c9b43a,2025-09-27T23:30:00Z,Boise State Broncos,Appalachian State Mountaineers,2025-09-27T21:30:00Z,none,0,0
+2025,e645c7214a8be1033aacb0416c72d314,2025-09-27T23:30:00Z,Colorado State Rams,Washington State Cougars,2025-09-27T21:30:00Z,none,0,0
+2025,b50c9a0239712b72d97978f4adcd4dae,2025-09-27T23:30:00Z,Missouri Tigers,UMass Minutemen,2025-09-27T21:30:00Z,none,0,0
+2025,0aed7c08799beb9a4ed133518b11194a,2025-09-27T23:30:00Z,Penn State Nittany Lions,Oregon Ducks,2025-09-27T21:30:00Z,lines,16,10
+2025,d69912e6f6817c68ca7871d0c47722a8,2025-09-27T23:30:00Z,Stanford Cardinal,San Jose State Spartans,2025-09-27T21:30:00Z,none,0,0
+2025,e436c32bc827c2699f7254c2ca5409b0,2025-09-27T23:45:00Z,South Carolina Gamecocks,Kentucky Wildcats,2025-09-27T21:45:00Z,none,0,0
+2025,8288a19f634bebb4d5d03b9ead0a77fd,2025-09-28T00:00:00Z,Louisiana Ragin Cajuns,Marshall Thundering Herd,2025-09-27T22:00:00Z,none,0,0
+2025,aaab0ac9ec64cffb7d2921481eab8670,2025-09-28T01:00:00Z,UTEP Miners,Louisiana Tech Bulldogs,2025-09-27T23:00:00Z,none,0,0
+2025,c3b917feed8e8d174995ae62cfd8942c,2025-09-28T02:15:00Z,Colorado Buffaloes,BYU Cougars,2025-09-28T00:15:00Z,none,0,0
+2025,d6d5e5483a3441fbe03027ae75861a88,2025-10-03T01:00:00Z,New Mexico State Aggies,Sam Houston State Bearkats,2025-10-02T23:00:00Z,none,0,0
+2025,ed6e2166a1b10224914b27016e04ee80,2025-10-03T23:00:00Z,South Florida Bulls,Charlotte 49ers,2025-10-03T21:00:00Z,lines,4,10
+2025,60be30c76c784a4f4c7e3f4c4a0fbea2,2025-10-03T23:00:00Z,Delaware Blue Hens,Western Kentucky Hilltoppers,2025-10-03T21:00:00Z,lines,5,10
+2025,4ce2d16a7941f87821553c4d18504581,2025-10-04T02:00:00Z,San Jose State Spartans,New Mexico Lobos,2025-10-04T00:00:00Z,lines,3,10
+2025,f92b0c2e0458d4b67a708cf2cc086479,2025-10-04T02:30:00Z,BYU Cougars,West Virginia Mountaineers,2025-10-04T00:30:00Z,lines,6,10
+2025,6dd65fe376b5947e6b3e12f53e4f2f85,2025-10-04T02:30:00Z,San Diego State Aztecs,Colorado State Rams,2025-10-04T00:30:00Z,lines,1,10
+2025,7bf7e3851e7ac12cd6fe2f8ec3b795da,2025-10-04T16:00:00Z,Navy Midshipmen,Air Force Falcons,2025-10-04T14:00:00Z,none,0,0
+2025,e4f37b5c4c242407568e3e36b4f9612c,2025-10-04T16:00:00Z,UAB Blazers,Army Black Knights,2025-10-04T14:00:00Z,none,0,0
+2025,03d3f28e904cf8e05320709c03cbf06e,2025-10-04T16:00:00Z,Ball State Cardinals,Ohio Bobcats,2025-10-04T14:00:00Z,none,0,0
+2025,22b680e3b474d2c7da3c0f3d223374c4,2025-10-04T16:00:00Z,Baylor Bears,Kansas State Wildcats,2025-10-04T14:00:00Z,none,0,0
+2025,4c9bd2ce4bac0213c310def6bf4fb8be,2025-10-04T16:00:00Z,Pittsburgh Panthers,Boston College Eagles,2025-10-04T14:00:00Z,none,0,0
+2025,81a0b8c7652008629139781d76b75ef8,2025-10-04T16:00:00Z,Cincinnati Bearcats,Iowa State Cyclones,2025-10-04T14:00:00Z,none,0,0
+2025,2e59cc43133dd809fffed4c843d7afcc,2025-10-04T16:00:00Z,North Carolina Tar Heels,Clemson Tigers,2025-10-04T14:00:00Z,lines,3,10
+2025,2d276512e01be0ee84a7d0bb9fc4d604,2025-10-04T16:00:00Z,Georgia Bulldogs,Kentucky Wildcats,2025-10-04T14:00:00Z,lines,2,10
+2025,04cd118858c9a4749333439b29cdc548,2025-10-04T16:00:00Z,Purdue Boilermakers,Illinois Fighting Illini,2025-10-04T14:00:00Z,none,0,0
+2025,3cdecb280dab6308f21d5b4bf89806f6,2025-10-04T16:00:00Z,Michigan Wolverines,Wisconsin Badgers,2025-10-04T14:00:00Z,lines,3,10
+2025,863c5961ee2ec9ffac32398c75e5dcbe,2025-10-04T17:00:00Z,Temple Owls,UTSA Roadrunners,2025-10-04T15:00:00Z,none,0,0
+2025,4579a2cd837e62498e3b3831d4475c96,2025-10-04T17:00:00Z,Virginia Tech Hokies,Wake Forest Demon Deacons,2025-10-04T15:00:00Z,none,0,0
+2025,175e98e745271259421b397d967614a9,2025-10-04T18:00:00Z,NC State Wolfpack,Campbell Fighting Camels,2025-10-04T16:00:00Z,none,0,0
+2025,3c1a2eb27aec91630f0cda00f959ee61,2025-10-04T18:30:00Z,UMass Minutemen,Western Michigan Broncos,2025-10-04T16:30:00Z,none,0,0
+2025,32aab37746e32d72605120ee63924aea,2025-10-04T19:00:00Z,Arizona Wildcats,Oklahoma State Cowboys,2025-10-04T17:00:00Z,none,0,0
+2025,48dea4f4b99b6976d2c519dc48b52ed4,2025-10-04T19:30:00Z,Akron Zips,Central Michigan Chippewas,2025-10-04T17:30:00Z,none,0,0
+2025,0169b39d461abff544e93d0287c1fab1,2025-10-04T19:30:00Z,Alabama Crimson Tide,Vanderbilt Commodores,2025-10-04T17:30:00Z,lines,10,10
+2025,ab12d90680e822942845aa98dba1933b,2025-10-04T19:30:00Z,Appalachian State Mountaineers,Oregon State Beavers,2025-10-04T17:30:00Z,none,0,0
+2025,8fe4d3c56069de55c950af75be1ef8d2,2025-10-04T19:30:00Z,Notre Dame Fighting Irish,Boise State Broncos,2025-10-04T17:30:00Z,lines,3,10
+2025,01952fae15b67aadeb32d7a34d063ee6,2025-10-04T19:30:00Z,Buffalo Bulls,Eastern Michigan Eagles,2025-10-04T17:30:00Z,none,0,0
+2025,fbde7d91385363d991f47b06e939428c,2025-10-04T19:30:00Z,Florida Gators,Texas Longhorns,2025-10-04T17:30:00Z,lines,11,10
+2025,b23708a801d86a636d823d2678d169ed,2025-10-04T19:30:00Z,UConn Huskies,Florida International Panthers,2025-10-04T17:30:00Z,none,0,0
+2025,6d9c7edbf2884eb46707ebd76ff969d7,2025-10-04T19:30:00Z,Georgia State Panthers,James Madison Dukes,2025-10-04T17:30:00Z,none,0,0
+2025,6713f27b1f4032c4ebc0f91d0fc86306,2025-10-04T19:30:00Z,Louisville Cardinals,Virginia Cavaliers,2025-10-04T17:30:00Z,lines,5,10
+2025,0626d930549333f431b6e7700ffd7291,2025-10-04T19:30:00Z,Maryland Terrapins,Washington Huskies,2025-10-04T17:30:00Z,none,0,0
+2025,2452392bdaa989acacde27de93db32ca,2025-10-04T19:30:00Z,Northern Illinois Huskies,Miami (OH) RedHawks,2025-10-04T17:30:00Z,none,0,0
+2025,677f3f81a852b917bb6fac083e68f60b,2025-10-04T19:30:00Z,Northwestern Wildcats,UL Monroe Warhawks,2025-10-04T17:30:00Z,none,0,0
+2025,cb392d95625a9a1bc0c9d38b48e01e04,2025-10-04T19:30:00Z,UCLA Bruins,Penn State Nittany Lions,2025-10-04T17:30:00Z,lines,4,10
+2025,7648558d15898b0c5a9006655091fc11,2025-10-04T19:30:00Z,SMU Mustangs,Syracuse Orange,2025-10-04T17:30:00Z,none,0,0
+2025,a62fc08c67b4e292879a17791a727e4a,2025-10-04T20:00:00Z,Arkansas State Red Wolves,Texas State Bobcats,2025-10-04T18:00:00Z,none,0,0
+2025,5f923887c7b45059d84dcd5972b25a16,2025-10-04T20:00:00Z,Oklahoma Sooners,Kent State Golden Flashes,2025-10-04T18:00:00Z,none,0,0
+2025,600cefc5681276f67a98d1b895388901,2025-10-04T20:00:00Z,Nebraska Cornhuskers,Michigan State Spartans,2025-10-04T18:00:00Z,none,0,0
+2025,9af91cb4d445ab55fec6eb8d60e079f8,2025-10-04T22:00:00Z,Old Dominion Monarchs,Coastal Carolina Chanticleers,2025-10-04T20:00:00Z,none,0,0
+2025,ba6b6f78dac14dd7cab6745b0b6c8cd6,2025-10-04T23:00:00Z,Rice Owls,Florida Atlantic Owls,2025-10-04T21:00:00Z,none,0,0
+2025,16d1658b495dc746aed5d921ffbae9a9,2025-10-04T23:00:00Z,Houston Cougars,Texas Tech Red Raiders,2025-10-04T21:00:00Z,none,0,0
+2025,9b3e942a28f2b0df98e0c79c83864a15,2025-10-04T23:00:00Z,Troy Trojans,South Alabama Jaguars,2025-10-04T21:00:00Z,none,0,0
+2025,08fe7e0a9a16b45419f955cb3ac4f443,2025-10-04T23:00:00Z,Wyoming Cowboys,UNLV Rebels,2025-10-04T21:00:00Z,none,0,0
+2025,c1614464ceef18bdc3108d0fb3899343,2025-10-04T23:30:00Z,TCU Horned Frogs,Colorado Buffaloes,2025-10-04T21:30:00Z,none,0,0
+2025,e3f1c7a8b94a532b18987dfd0c13998e,2025-10-04T23:30:00Z,Florida State Seminoles,Miami Hurricanes,2025-10-04T21:30:00Z,lines,5,10
+2025,70e137c2073f1c524e66e3d5c2cb3f1b,2025-10-04T23:30:00Z,UCF Knights,Kansas Jayhawks,2025-10-04T21:30:00Z,none,0,0
+2025,1c2bc1c8623e7527c13a515529541b89,2025-10-04T23:30:00Z,Ohio State Buckeyes,Minnesota Golden Gophers,2025-10-04T21:30:00Z,lines,8,10
+2025,cb7d85df1a2186ede6f66305485ddc22,2025-10-04T23:30:00Z,Texas A&M Aggies,Mississippi State Bulldogs,2025-10-04T21:30:00Z,none,0,0
+2025,c9a9afb46bbfe7047e145ad5dfd95593,2025-10-05T00:00:00Z,Memphis Tigers,Tulsa Golden Hurricane,2025-10-04T22:00:00Z,none,0,0
+2025,98032c76517a301d3547a0224bb802f1,2025-10-05T01:30:00Z,California Golden Bears,Duke Blue Devils,2025-10-04T23:30:00Z,lines,9,10
+2025,e90085ebaf4a599c531e3e0bd5a6c1b1,2025-10-05T02:30:00Z,Fresno State Bulldogs,Nevada Wolf Pack,2025-10-05T00:30:00Z,none,0,0
+2025,f35e80c2c336d6a9769b1b9a5ea34ebb,2025-10-08T23:30:00Z,Middle Tennessee Blue Raiders,Missouri State Bears,2025-10-08T21:30:00Z,lines,1,10
+2025,1ee44e88d618c903c43292b3aa6443b4,2025-10-09T00:00:00Z,UTEP Miners,Liberty Flames,2025-10-08T22:00:00Z,none,0,0
+2025,80be7099edd5c7bdd8543513a959d509,2025-10-09T23:00:00Z,Kennesaw State Owls,Louisiana Tech Bulldogs,2025-10-09T21:00:00Z,lines,5,10
+2025,7d21808c0d39ffee98aaef9aaf4fc226,2025-10-09T23:30:00Z,Tulane Green Wave,East Carolina Pirates,2025-10-09T21:30:00Z,lines,7,10
+2025,dbc3a87d503d63341ab1d1229c196ce6,2025-10-10T00:00:00Z,Georgia Southern Eagles,Southern Mississippi Golden Eagles,2025-10-09T22:00:00Z,none,0,0
+2025,57283eb69be8d23bc114313e20af0fc0,2025-10-10T00:00:00Z,Sam Houston State Bearkats,Jacksonville State Gamecocks,2025-10-09T22:00:00Z,lines,2,10
+2025,ebc400e419d11f88b555c4c425a101aa,2025-10-10T23:30:00Z,North Texas Mean Green,South Florida Bulls,2025-10-10T21:30:00Z,lines,4,10
+2025,17add79d604adf8b590ad1dc8f5cab4e,2025-10-11T01:00:00Z,Colorado State Rams,Fresno State Bulldogs,2025-10-10T23:00:00Z,none,0,0
+2025,6e0da65d6200a6d993ec698ac7b1cd57,2025-10-11T01:00:00Z,Washington Huskies,Rutgers Scarlet Knights,2025-10-10T23:00:00Z,none,0,0
+2025,4e5471d34b6f44691d945144edd9e96c,2025-10-11T15:59:00Z,Missouri Tigers,Alabama Crimson Tide,2025-10-11T13:59:00Z,lines,10,10
+2025,1bd680d6e204dc9bea4500e1932e0545,2025-10-11T16:00:00Z,Akron Zips,Miami (OH) RedHawks,2025-10-11T14:00:00Z,none,0,0
+2025,d65896e25870aebe734b5c277d80b725,2025-10-11T16:00:00Z,Army Black Knights,Charlotte 49ers,2025-10-11T14:00:00Z,none,0,0
+2025,d9d7e0d0a40be472b39e0d0c54e13633,2025-10-11T16:00:00Z,Bowling Green Falcons,Toledo Rockets,2025-10-11T14:00:00Z,none,0,0
+2025,babde2a716ec01f56e9a027cd748e6b0,2025-10-11T16:00:00Z,Cincinnati Bearcats,UCF Knights,2025-10-11T14:00:00Z,none,0,0
+2025,e10dad3c927f07d7129982a4a4563de8,2025-10-11T16:00:00Z,Florida State Seminoles,Pittsburgh Panthers,2025-10-11T14:00:00Z,none,0,0
+2025,b65090ae8762083bc31e6546f50bd38e,2025-10-11T16:00:00Z,Oklahoma State Cowboys,Houston Cougars,2025-10-11T14:00:00Z,none,0,0
+2025,6850ce38681c03906af201d68cdd70e7,2025-10-11T16:00:00Z,Illinois Fighting Illini,Ohio State Buckeyes,2025-10-11T14:00:00Z,lines,8,10
+2025,cbfdd173a396ca6a65a08405a56e99cd,2025-10-11T16:00:00Z,James Madison Dukes,Louisiana Ragin Cajuns,2025-10-11T14:00:00Z,none,0,0
+2025,9821bdaca6409c7e1dfb70a4ec2ad3e2,2025-10-11T16:00:00Z,Michigan State Spartans,UCLA Bruins,2025-10-11T14:00:00Z,lines,4,10
+2025,d2da5b6ac5caea4b17580cb517e7606b,2025-10-11T16:00:00Z,SMU Mustangs,Stanford Cardinal,2025-10-11T14:00:00Z,lines,4,10
+2025,e3bcfd275ce0b20d919ac20c49997962,2025-10-11T16:45:00Z,Ole Miss Rebels,Washington State Cougars,2025-10-11T14:45:00Z,none,0,0
+2025,a0726b9498032688269d61facad7a939,2025-10-11T17:00:00Z,Eastern Michigan Eagles,Northern Illinois Huskies,2025-10-11T15:00:00Z,none,0,0
+2025,9fd9a11eec7dbd74c2164ed2415336c2,2025-10-11T18:30:00Z,Kent State Golden Flashes,UMass Minutemen,2025-10-11T16:30:00Z,none,0,0
+2025,64bc4fba5d35860770b37c2866775e78,2025-10-11T19:30:00Z,UNLV Rebels,Air Force Falcons,2025-10-11T17:30:00Z,none,0,0
+2025,f8af8764a2800e0546e0d630375c5155,2025-10-11T19:30:00Z,Georgia State Panthers,Appalachian State Mountaineers,2025-10-11T17:30:00Z,none,0,0
+2025,3d0bb9b5fd3ea8d38a3c67c60cd814f4,2025-10-11T19:30:00Z,Western Michigan Broncos,Ball State Cardinals,2025-10-11T17:30:00Z,none,0,0
+2025,2158ab9881202465881edfe230af0bf6,2025-10-11T19:30:00Z,Colorado Buffaloes,Iowa State Cyclones,2025-10-11T17:30:00Z,none,0,0
+2025,b558ad432d602df7b43579becf16eece,2025-10-11T19:30:00Z,Georgia Tech Yellow Jackets,Virginia Tech Hokies,2025-10-11T17:30:00Z,none,0,0
+2025,2bba5df15d3c9222962c8bb8fc24ae80,2025-10-11T19:30:00Z,Oregon Ducks,Indiana Hoosiers,2025-10-11T17:30:00Z,lines,12,10
+2025,66153d8e67a550f1f9ee3afbee0bb357,2025-10-11T19:30:00Z,Kansas State Wildcats,TCU Horned Frogs,2025-10-11T17:30:00Z,none,0,0
+2025,001094ad5e8edd36b0f407a392085d77,2025-10-11T19:30:00Z,Marshall Thundering Herd,Old Dominion Monarchs,2025-10-11T17:30:00Z,none,0,0
+2025,53d43629918c049046ee009bff70b49f,2025-10-11T19:30:00Z,Maryland Terrapins,Nebraska Cornhuskers,2025-10-11T17:30:00Z,none,0,0
+2025,9a98b243fbc72d5438eb3445e054b915,2025-10-11T19:30:00Z,Notre Dame Fighting Irish,NC State Wolfpack,2025-10-11T17:30:00Z,lines,6,10
+2025,c72db8267333fdc3c1e924d377d5531f,2025-10-11T19:30:00Z,Penn State Nittany Lions,Northwestern Wildcats,2025-10-11T17:30:00Z,none,0,0
+2025,ec5a3648e7b879155389f31cc523f840,2025-10-11T19:30:00Z,Texas Longhorns,Oklahoma Sooners,2025-10-11T17:30:00Z,lines,11,10
+2025,fc6dab7a706de775417de1c94b3dd419,2025-10-11T19:30:00Z,Oregon State Beavers,Wake Forest Demon Deacons,2025-10-11T17:30:00Z,none,0,0
+2025,4a8cd81e8dfa8d72f9d05b1a086fb418,2025-10-11T20:00:00Z,Temple Owls,Navy Midshipmen,2025-10-11T18:00:00Z,none,0,0
+2025,a0ce391a3e1dcc42703e273e7cd43308,2025-10-11T20:15:00Z,Tennessee Volunteers,Arkansas Razorbacks,2025-10-11T18:15:00Z,none,0,0
+2025,eecb202a746e0d50cc69d21b73860e13,2025-10-11T22:00:00Z,Florida Atlantic Owls,UAB Blazers,2025-10-11T20:00:00Z,none,0,0
+2025,d1b49901efafa2e7efbd64e5dcb29c0d,2025-10-11T23:00:00Z,Coastal Carolina Chanticleers,UL Monroe Warhawks,2025-10-11T21:00:00Z,none,0,0
+2025,2f94142f11ca602b35004f81f0fb6bb4,2025-10-11T23:00:00Z,Texas A&M Aggies,Florida Gators,2025-10-11T21:00:00Z,lines,10,10
+2025,e1e0f5c2cc82d1255fc57a8637ddc18c,2025-10-11T23:00:00Z,Wisconsin Badgers,Iowa Hawkeyes,2025-10-11T21:00:00Z,none,0,0
+2025,afe2544f878a71b70d8c52006bd78482,2025-10-11T23:00:00Z,Wyoming Cowboys,San Jose State Spartans,2025-10-11T21:00:00Z,none,0,0
+2025,5a1127219ae128003dc5154af7f3561e,2025-10-11T23:30:00Z,Auburn Tigers,Georgia Bulldogs,2025-10-11T21:30:00Z,lines,10,10
+2025,b1b3789cd2775eb8f60d82704df02f59,2025-10-11T23:30:00Z,Boston College Eagles,Clemson Tigers,2025-10-11T21:30:00Z,lines,12,10
+2025,80fb909a58417752399944b7c3ad9a90,2025-10-11T23:30:00Z,Texas Tech Red Raiders,Kansas Jayhawks,2025-10-11T21:30:00Z,none,0,0
+2025,e06151a147cb4d93456e732ad2013a3e,2025-10-11T23:30:00Z,USC Trojans,Michigan Wolverines,2025-10-11T21:30:00Z,lines,11,10
+2025,c5b4bf26258afaed3cca9b67ef3783f8,2025-10-11T23:30:00Z,Minnesota Golden Gophers,Purdue Boilermakers,2025-10-11T21:30:00Z,none,0,0
+2025,d87fbc40deede78fd9497d87a0e2e225,2025-10-11T23:30:00Z,UTSA Roadrunners,Rice Owls,2025-10-11T21:30:00Z,none,0,0
+2025,4a191067aa0558b3ee24343551fbd8d1,2025-10-11T23:45:00Z,LSU Tigers,South Carolina Gamecocks,2025-10-11T21:45:00Z,lines,7,10
+2025,bab9f41c47521171fd5a7452bf778f5a,2025-10-12T00:00:00Z,Arizona Wildcats,BYU Cougars,2025-10-11T22:00:00Z,none,0,0
+2025,1814879e45bd0008dd1182de86f8c3ae,2025-10-12T00:00:00Z,Texas State Bobcats,Troy Trojans,2025-10-11T22:00:00Z,none,0,0
+2025,4a72e67b0c10cd94ec4f994e0b9692ab,2025-10-12T01:45:00Z,Boise State Broncos,New Mexico Lobos,2025-10-11T23:45:00Z,none,0,0
+2025,a109b71f4beba173453582bb0043e075,2025-10-12T02:15:00Z,Utah Utes,Arizona State Sun Devils,2025-10-12T00:15:00Z,lines,4,10
+2025,42e2757eda4ea3c97d054d008c5cc7d6,2025-10-12T02:30:00Z,Nevada Wolf Pack,San Diego State Aztecs,2025-10-12T00:30:00Z,none,0,0
+2025,455af8d3dabc721a5899d78834243422,2025-10-12T03:59:00Z,Hawaii Rainbow Warriors,Utah State Aggies,2025-10-12T01:59:00Z,none,0,0
+2025,f63b3ba5fb0084b3b5d735394f10ce43,2025-10-14T23:00:00Z,Liberty Flames,New Mexico State Aggies,2025-10-14T21:00:00Z,none,0,0
+2025,c2d428cbf0b787ee8c1fe0402266ea6c,2025-10-14T23:30:00Z,South Alabama Jaguars,Arkansas State Red Wolves,2025-10-14T21:30:00Z,none,0,0
+2025,195edecefe4d9e28b6370f4cca6696c9,2025-10-15T00:00:00Z,Western Kentucky Hilltoppers,Florida International Panthers,2025-10-14T22:00:00Z,lines,3,10
+2025,0d244c0f45b386c4306834705afb971f,2025-10-15T23:00:00Z,Jacksonville State Gamecocks,Delaware Blue Hens,2025-10-15T21:00:00Z,lines,3,10
+2025,36ef3598137923f8a1f12dc61fabddf5,2025-10-15T23:00:00Z,Sam Houston State Bearkats,UTEP Miners,2025-10-15T21:00:00Z,lines,1,10
+2025,9d110dc5627ec6c7593c880dcb906fa9,2025-10-16T23:30:00Z,East Carolina Pirates,Tulsa Golden Hurricane,2025-10-16T21:30:00Z,lines,3,10
+2025,10a111c1fd81ba0536dae762d6f9f933,2025-10-17T23:00:00Z,Miami Hurricanes,Louisville Cardinals,2025-10-17T21:00:00Z,lines,6,10
+2025,92964692e49d56868cc78cea5254c061,2025-10-18T00:00:00Z,Minnesota Golden Gophers,Nebraska Cornhuskers,2025-10-17T22:00:00Z,lines,7,10
+2025,fabf700114de9a665c40478e8dceccc9,2025-10-18T01:00:00Z,Utah State Aggies,San Jose State Spartans,2025-10-17T23:00:00Z,none,0,0
+2025,078a33fd428923f0d673fd35a79edc42,2025-10-18T02:30:00Z,California Golden Bears,North Carolina Tar Heels,2025-10-18T00:30:00Z,lines,2,10
+2025,1719a33bcb26ce3c5119d8dbbe883d08,2025-10-18T16:00:00Z,Houston Cougars,Arizona Wildcats,2025-10-18T14:00:00Z,none,0,0
+2025,aecb861cfa6664f9cbb94adfd16b16f8,2025-10-18T16:00:00Z,Tulane Green Wave,Army Black Knights,2025-10-18T14:00:00Z,none,0,0
+2025,f087da86c9f333ede5023b3c5da3e683,2025-10-18T16:00:00Z,TCU Horned Frogs,Baylor Bears,2025-10-18T14:00:00Z,none,0,0
+2025,00a6974f28c6bc5a62c7dddffe277772,2025-10-18T16:00:00Z,Boston College Eagles,UConn Huskies,2025-10-18T14:00:00Z,none,0,0
+2025,09dc8e89288cf0e0a7b356ecba1368bf,2025-10-18T16:00:00Z,Bowling Green Falcons,Central Michigan Chippewas,2025-10-18T14:00:00Z,none,0,0
+2025,04ec553198d4be4f4c61412514fa3ed6,2025-10-18T16:00:00Z,Duke Blue Devils,Georgia Tech Yellow Jackets,2025-10-18T14:00:00Z,lines,8,10
+2025,9ae9257ec6ad7304073eab4e09b08569,2025-10-18T16:00:00Z,Miami (OH) RedHawks,Eastern Michigan Eagles,2025-10-18T14:00:00Z,none,0,0
+2025,bb18900848211296ea7c10692c3c4f01,2025-10-18T16:00:00Z,Vanderbilt Commodores,LSU Tigers,2025-10-18T14:00:00Z,lines,5,10
+2025,e79f6c92e621c517179918e7e1ef4a26,2025-10-18T16:00:00Z,Michigan Wolverines,Washington Huskies,2025-10-18T14:00:00Z,lines,5,10
+2025,d44075b0d3f4aac36f4761cf1bc2e5ea,2025-10-18T16:45:00Z,South Carolina Gamecocks,Oklahoma Sooners,2025-10-18T14:45:00Z,none,0,0
+2025,b4f42c88b4d5eb45150b23ab3b186d0a,2025-10-18T17:00:00Z,UCF Knights,West Virginia Mountaineers,2025-10-18T15:00:00Z,none,0,0
+2025,e4aa139820c2dd11f83027e8cf90077a,2025-10-18T18:00:00Z,Toledo Rockets,Kent State Golden Flashes,2025-10-18T16:00:00Z,none,0,0
+2025,803607925bbb470049b655d113c0ad5d,2025-10-18T18:30:00Z,UMass Minutemen,Buffalo Bulls,2025-10-18T16:30:00Z,none,0,0
+2025,b90c1e699a3f75f21ca7e436584b6add,2025-10-18T19:00:00Z,Northwestern Wildcats,Purdue Boilermakers,2025-10-18T17:00:00Z,none,0,0
+2025,4fcd227a8f65146f3f05ef6bf5dbbdee,2025-10-18T19:00:00Z,UL Monroe Warhawks,Troy Trojans,2025-10-18T17:00:00Z,none,0,0
+2025,27691e5354e5380e613d02c9437e963d,2025-10-18T19:30:00Z,Air Force Falcons,Wyoming Cowboys,2025-10-18T17:30:00Z,none,0,0
+2025,79f01f984b254490779e3ed91fae3ab7,2025-10-18T19:30:00Z,Ball State Cardinals,Akron Zips,2025-10-18T17:30:00Z,none,0,0
+2025,140129cd7d0dc8e98b52a47a682134ec,2025-10-18T19:30:00Z,Appalachian State Mountaineers,Coastal Carolina Chanticleers,2025-10-18T17:30:00Z,none,0,0
+2025,521d005c0199e69e1af5faf379b6bfc7,2025-10-18T19:30:00Z,Arkansas Razorbacks,Texas A&M Aggies,2025-10-18T17:30:00Z,lines,5,10
+2025,fa2d5dbab5d79c98893ce5b7a23c1d3e,2025-10-18T19:30:00Z,Boise State Broncos,UNLV Rebels,2025-10-18T17:30:00Z,none,0,0
+2025,82b43016aa3e0c0a524320b9e9830678,2025-10-18T19:30:00Z,Charlotte 49ers,Temple Owls,2025-10-18T17:30:00Z,none,0,0
+2025,7be66ff7eb8a7b2aaeb7f3d4d2e8806a,2025-10-18T19:30:00Z,Clemson Tigers,SMU Mustangs,2025-10-18T17:30:00Z,none,0,0
+2025,55f5ab2c82d0f2993231587e63a6b782,2025-10-18T19:30:00Z,Georgia Bulldogs,Ole Miss Rebels,2025-10-18T17:30:00Z,lines,9,10
+2025,d205e781f229cb68ddac1fc2ad3e24ec,2025-10-18T19:30:00Z,Indiana Hoosiers,Michigan State Spartans,2025-10-18T17:30:00Z,lines,4,10
+2025,8d5ca9cb62b5ab0a5427f363f56d814b,2025-10-18T19:30:00Z,James Madison Dukes,Old Dominion Monarchs,2025-10-18T17:30:00Z,none,0,0
+2025,d15fdb8ae860183a48c201265d28b77a,2025-10-18T19:30:00Z,Marshall Thundering Herd,Texas State Bobcats,2025-10-18T17:30:00Z,none,0,0
+2025,2648046a739ad39505d834b82d62e13b,2025-10-18T19:30:00Z,North Texas Mean Green,UTSA Roadrunners,2025-10-18T17:30:00Z,none,0,0
+2025,2073cfebcfc3368e22b436a6edf10cef,2025-10-18T19:30:00Z,Ohio Bobcats,Northern Illinois Huskies,2025-10-18T17:30:00Z,none,0,0
+2025,b40fd4e70194bfdabd7e68dfc269f268,2025-10-18T19:30:00Z,Wisconsin Badgers,Ohio State Buckeyes,2025-10-18T17:30:00Z,lines,10,10
+2025,970b5191ee6e19666dfdec2eb19954ce,2025-10-18T20:00:00Z,Arizona State Sun Devils,Texas Tech Red Raiders,2025-10-18T18:00:00Z,none,0,0
+2025,9f7eb2d2b2e7b68f14a18a521765e53b,2025-10-18T20:00:00Z,UAB Blazers,Memphis Tigers,2025-10-18T18:00:00Z,none,0,0
+2025,2c7763e732f47af87d2034549c69f82d,2025-10-18T20:15:00Z,Florida Gators,Mississippi State Bulldogs,2025-10-18T18:15:00Z,none,0,0
+2025,5da9ef579c5fd86b10be56e99d1d1c10,2025-10-18T21:00:00Z,Louisiana Ragin Cajuns,Southern Mississippi Golden Eagles,2025-10-18T19:00:00Z,none,0,0
+2025,cd5818a61eb4ec516c371a55c24a240a,2025-10-18T22:30:00Z,Rutgers Scarlet Knights,Oregon Ducks,2025-10-18T20:30:00Z,none,0,0
+2025,27566d5b43cf09db1545d28a013b2bc9,2025-10-18T22:30:00Z,Virginia Cavaliers,Washington State Cougars,2025-10-18T20:30:00Z,none,0,0
+2025,c4df5ac5f03e73a930f280f72caaae43,2025-10-18T23:00:00Z,Colorado State Rams,Hawaii Rainbow Warriors,2025-10-18T21:00:00Z,none,0,0
+2025,3ca674b081dddf7f8ac3d9862186b8e8,2025-10-18T23:00:00Z,Georgia Southern Eagles,Georgia State Panthers,2025-10-18T21:00:00Z,none,0,0
+2025,7d42c9f08d93cc592f5540348561ddb3,2025-10-18T23:00:00Z,Iowa Hawkeyes,Penn State Nittany Lions,2025-10-18T21:00:00Z,none,0,0
+2025,5866b06f9fe4c1e8ae23a581602b0fe9,2025-10-18T23:00:00Z,Kentucky Wildcats,Texas Longhorns,2025-10-18T21:00:00Z,lines,5,10
+2025,b0b386c767a0ce6a0a239fb9f79c3e7a,2025-10-18T23:00:00Z,UCLA Bruins,Maryland Terrapins,2025-10-18T21:00:00Z,none,0,0
+2025,7634f8df416fbdbf3f700c4fcaa4b03a,2025-10-18T23:30:00Z,Alabama Crimson Tide,Tennessee Volunteers,2025-10-18T21:30:00Z,lines,16,10
+2025,3cde3895b46bdd55cfc55a6fb9a69418,2025-10-18T23:30:00Z,South Florida Bulls,Florida Atlantic Owls,2025-10-18T21:30:00Z,none,0,0
+2025,432e5ee9d4c8297a2460d82e89ec5161,2025-10-18T23:30:00Z,Notre Dame Fighting Irish,USC Trojans,2025-10-18T21:30:00Z,lines,14,10
+2025,5a12bbdbc2d087e0ed12ba3aa360f9fd,2025-10-18T23:30:00Z,Syracuse Orange,Pittsburgh Panthers,2025-10-18T21:30:00Z,none,0,0
+2025,6a478f550fac197ca8dd95162c8f7980,2025-10-18T23:45:00Z,Auburn Tigers,Missouri Tigers,2025-10-18T21:45:00Z,none,0,0
+2025,4db5e24ddb0d1e1e5aa7d9e508670e0f,2025-10-19T00:00:00Z,BYU Cougars,Utah Utes,2025-10-18T22:00:00Z,lines,6,10
+2025,ee56fe628302db3edce970e4bf7cc970,2025-10-19T00:00:00Z,Oklahoma State Cowboys,Cincinnati Bearcats,2025-10-18T22:00:00Z,none,0,0
+2025,065fb6a48a35eda8e711f8b37b9f8562,2025-10-19T01:45:00Z,New Mexico Lobos,Nevada Wolf Pack,2025-10-18T23:45:00Z,none,0,0
+2025,47b7021076d4be57f72b90c608c1b2c9,2025-10-19T02:00:00Z,Oregon State Beavers,Lafayette Leopards,2025-10-19T00:00:00Z,none,0,0
+2025,75cd206b980e4155e21e3785bb9503f8,2025-10-19T02:30:00Z,Stanford Cardinal,Florida State Seminoles,2025-10-19T00:30:00Z,none,0,0
+2025,cd7b0b1d0350c1e6809e2d393237ce7f,2025-10-21T23:00:00Z,Florida International Panthers,Kennesaw State Owls,2025-10-21T21:00:00Z,lines,3,10
+2025,d14cac73f8519bbd6ba794bbdd4e6571,2025-10-21T23:30:00Z,Louisiana Tech Bulldogs,Western Kentucky Hilltoppers,2025-10-21T21:30:00Z,lines,5,10
+2025,e7a634e96e359fdb00cb9da904f4ff0c,2025-10-22T23:30:00Z,Delaware Blue Hens,Middle Tennessee Blue Raiders,2025-10-22T21:30:00Z,lines,6,10
+2025,a54e8d52ec4fb8c7d3f9ebd2b8a38c64,2025-10-23T01:00:00Z,New Mexico State Aggies,Missouri State Bears,2025-10-22T23:00:00Z,lines,5,10
+2025,481b881b9ede3ab69cbdefbd5876c6b4,2025-10-23T23:30:00Z,Georgia State Panthers,South Alabama Jaguars,2025-10-23T21:30:00Z,lines,4,10
+2025,6b01b4b140795584d285e8f0195e07dd,2025-10-24T23:00:00Z,Charlotte 49ers,North Texas Mean Green,2025-10-24T21:00:00Z,lines,7,10
+2025,ab8eb9a18a61f86e888d6d066728fd98,2025-10-24T23:30:00Z,Virginia Tech Hokies,California Golden Bears,2025-10-24T21:30:00Z,lines,7,10
+2025,bcd14745ebe1e1409d1a682fc3af8fb2,2025-10-25T02:00:00Z,Nevada Wolf Pack,Boise State Broncos,2025-10-25T00:00:00Z,lines,2,10
+2025,b1541b2d3b6372bc40e356fac18bfcbf,2025-10-25T16:00:00Z,Old Dominion Monarchs,Appalachian State Mountaineers,2025-10-25T14:00:00Z,none,0,0
+2025,1ce6db5fcde5d7eb3e970bc9489c52fd,2025-10-25T16:00:00Z,Kent State Golden Flashes,Bowling Green Falcons,2025-10-25T14:00:00Z,none,0,0
+2025,7e95ef7ef16d33001afdc50fb9afab63,2025-10-25T16:00:00Z,Eastern Michigan Eagles,Ohio Bobcats,2025-10-25T14:00:00Z,none,0,0
+2025,a68793984cb3bab7bdae68b8dbe5b36a,2025-10-25T16:00:00Z,Georgia Tech Yellow Jackets,Syracuse Orange,2025-10-25T14:00:00Z,none,0,0
+2025,43bc24c6358317da3648cedea890e3b3,2025-10-25T16:00:00Z,Indiana Hoosiers,UCLA Bruins,2025-10-25T14:00:00Z,none,0,0
+2025,ecdc07baec885297b19dd029dd0004dc,2025-10-25T16:00:00Z,Kansas Jayhawks,Kansas State Wildcats,2025-10-25T14:00:00Z,none,0,0
+2025,3548718cee61146dc3968e06c15ef1a8,2025-10-25T16:00:00Z,Memphis Tigers,South Florida Bulls,2025-10-25T14:00:00Z,none,0,0
+2025,567f88999397ec54c373f5384f76510e,2025-10-25T16:00:00Z,Nebraska Cornhuskers,Northwestern Wildcats,2025-10-25T14:00:00Z,none,0,0
+2025,0427477ee198451d3b343adbb969dc75,2025-10-25T16:00:00Z,North Carolina Tar Heels,Virginia Cavaliers,2025-10-25T14:00:00Z,none,0,0
+2025,b58f9041beb02f4a0dba118904a62c57,2025-10-25T16:00:00Z,Oklahoma Sooners,Ole Miss Rebels,2025-10-25T14:00:00Z,lines,10,10
+2025,2dbca87cd64d7ed47c15502789993291,2025-10-25T16:00:00Z,Purdue Boilermakers,Rutgers Scarlet Knights,2025-10-25T14:00:00Z,none,0,0
+2025,86e379d366206903056d0d15997dd756,2025-10-25T16:00:00Z,Wake Forest Demon Deacons,SMU Mustangs,2025-10-25T14:00:00Z,none,0,0
+2025,37c6546256bb2bb144539c81dc931806,2025-10-25T16:45:00Z,Arkansas Razorbacks,Auburn Tigers,2025-10-25T14:45:00Z,none,0,0
+2025,6541b290fae8de6d5a2710e00f827b1a,2025-10-25T17:00:00Z,Buffalo Bulls,Akron Zips,2025-10-25T15:00:00Z,none,0,0
+2025,e183901d24e9b1d3e750fb8f3c5f2676,2025-10-25T19:00:00Z,New Mexico Lobos,Utah State Aggies,2025-10-25T17:00:00Z,none,0,0
+2025,ca0bb13499fcb91539c0cf821a0576d7,2025-10-25T19:00:00Z,Rice Owls,UConn Huskies,2025-10-25T17:00:00Z,none,0,0
+2025,3e97b6f70731e23aa7124b444cfc22aa,2025-10-25T19:30:00Z,South Carolina Gamecocks,Alabama Crimson Tide,2025-10-25T17:30:00Z,lines,5,10
+2025,4fa1c6e86e5b4257bc7b9bbae3ed4e0d,2025-10-25T19:30:00Z,Iowa State Cyclones,BYU Cougars,2025-10-25T17:30:00Z,lines,3,10
+2025,59fce1a707c83b093c630c371326c855,2025-10-25T19:30:00Z,Northern Illinois Huskies,Ball State Cardinals,2025-10-25T17:30:00Z,none,0,0
+2025,aae15c183f1acfa42f5fbb342d177a73,2025-10-25T19:30:00Z,Central Michigan Chippewas,UMass Minutemen,2025-10-25T17:30:00Z,none,0,0
+2025,5eff3381bc29273c041cc3bba7127145,2025-10-25T19:30:00Z,Navy Midshipmen,Florida Atlantic Owls,2025-10-25T17:30:00Z,none,0,0
+2025,b1b41fb67ca67b471802ad3cd778810d,2025-10-25T19:30:00Z,Fresno State Bulldogs,San Diego State Aztecs,2025-10-25T17:30:00Z,none,0,0
+2025,6ba41f5aec285de1cc47eebd40516dde,2025-10-25T19:30:00Z,Washington Huskies,Illinois Fighting Illini,2025-10-25T17:30:00Z,none,0,0
+2025,3758bd67c5316c1bbfb1233631178e37,2025-10-25T19:30:00Z,Iowa Hawkeyes,Minnesota Golden Gophers,2025-10-25T17:30:00Z,none,0,0
+2025,e8214d5efd726f045d7fb54be5c1d984,2025-10-25T19:30:00Z,Miami (OH) RedHawks,Western Michigan Broncos,2025-10-25T17:30:00Z,none,0,0
+2025,cc91d8692c5fd56b32deabaf55bbfa47,2025-10-25T19:30:00Z,Vanderbilt Commodores,Missouri Tigers,2025-10-25T17:30:00Z,lines,8,10
+2025,e0c04bf1060f22e45123ad9ab379ab2d,2025-10-25T19:30:00Z,Pittsburgh Panthers,NC State Wolfpack,2025-10-25T17:30:00Z,none,0,0
+2025,ed8f13ecfcb204caae8d2ab790dbf2a1,2025-10-25T19:30:00Z,Southern Mississippi Golden Eagles,UL Monroe Warhawks,2025-10-25T17:30:00Z,none,0,0
+2025,56e00fae472e97f1016a9c0abefb4c2e,2025-10-25T19:30:00Z,Tulsa Golden Hurricane,Temple Owls,2025-10-25T17:30:00Z,none,0,0
+2025,5a0f3b1bd4b3bdec4e47aa8e95a6e7e2,2025-10-25T19:30:00Z,Washington State Cougars,Toledo Rockets,2025-10-25T17:30:00Z,none,0,0
+2025,99a767848857d6a003492e414c23cfd2,2025-10-25T20:00:00Z,Cincinnati Bearcats,Baylor Bears,2025-10-25T18:00:00Z,none,0,0
+2025,2d138dd1213df66409b2439ed0119dde,2025-10-25T20:00:00Z,Texas Tech Red Raiders,Oklahoma State Cowboys,2025-10-25T18:00:00Z,none,0,0
+2025,98b94390f0f573839b1e38252f37918b,2025-10-25T20:15:00Z,Mississippi State Bulldogs,Texas Longhorns,2025-10-25T18:15:00Z,none,0,0
+2025,7f074836c751b9fe50b994520f000181,2025-10-25T22:00:00Z,West Virginia Mountaineers,TCU Horned Frogs,2025-10-25T20:00:00Z,none,0,0
+2025,ec37466f088394b44c2221a0e2ad8818,2025-10-25T23:00:00Z,Arkansas State Red Wolves,Georgia Southern Eagles,2025-10-25T21:00:00Z,none,0,0
+2025,ab90efbe36ace5f60feeb6f1bc5c8a63,2025-10-25T23:00:00Z,Troy Trojans,Louisiana Ragin Cajuns,2025-10-25T21:00:00Z,none,0,0
+2025,ea34e43ecca5cdceabb78a1e669f61c0,2025-10-25T23:00:00Z,Miami Hurricanes,Stanford Cardinal,2025-10-25T21:00:00Z,none,0,0
+2025,4bc05ea1a05cad391b367e493e2efac1,2025-10-25T23:00:00Z,Oregon Ducks,Wisconsin Badgers,2025-10-25T21:00:00Z,none,0,0
+2025,3768a025a13a62b8c2e3538dd92c4747,2025-10-25T23:30:00Z,Louisville Cardinals,Boston College Eagles,2025-10-25T21:30:00Z,lines,3,10
+2025,99b1cbd48d6128850573b38308b57711,2025-10-25T23:30:00Z,Wyoming Cowboys,Colorado State Rams,2025-10-25T21:30:00Z,none,0,0
+2025,32d34a26fb17b033fb1d33a6a8103cfb,2025-10-25T23:30:00Z,LSU Tigers,Texas A&M Aggies,2025-10-25T21:30:00Z,lines,8,10
+2025,07c10f14cd8f63779c9c32a0b015a62e,2025-10-25T23:30:00Z,Michigan State Spartans,Michigan Wolverines,2025-10-25T21:30:00Z,lines,7,10
+2025,997d540a1f3e018bb3fc40d4d6789463,2025-10-25T23:45:00Z,Kentucky Wildcats,Tennessee Volunteers,2025-10-25T21:45:00Z,lines,13,10
+2025,8bedec4696dc9f4587b85a2322c49d7b,2025-10-26T00:00:00Z,Arizona State Sun Devils,Houston Cougars,2025-10-25T22:00:00Z,none,0,0
+2025,e18c1f37c95bf989baf40bc9692ad742,2025-10-26T02:15:00Z,Utah Utes,Colorado Buffaloes,2025-10-26T00:15:00Z,lines,6,10
+2025,b972aaf6a19883fa0fbf06d89f86acf7,2025-10-29T00:00:00Z,Texas State Bobcats,James Madison Dukes,2025-10-28T22:00:00Z,lines,3,10
+2025,392073cad7207da5ea1097f3cac57ddd,2025-10-29T00:00:00Z,Kennesaw State Owls,UTEP Miners,2025-10-28T22:00:00Z,lines,4,10
+2025,ef481710788d18502f9de2f9906fd74c,2025-10-29T23:30:00Z,Middle Tennessee Blue Raiders,Jacksonville State Gamecocks,2025-10-29T21:30:00Z,lines,4,10
+2025,9cfd27bf66c6a8328d7ac615cbee50fc,2025-10-30T00:00:00Z,Missouri State Bears,Florida International Panthers,2025-10-29T22:00:00Z,lines,3,10
+2025,1248fc45fafc31ef759edb57607c1c0a,2025-10-30T23:30:00Z,Coastal Carolina Chanticleers,Marshall Thundering Herd,2025-10-30T21:30:00Z,lines,2,10
+2025,812bace34e4d06fa48911a30e8b6acf8,2025-10-30T23:30:00Z,UTSA Roadrunners,Tulane Green Wave,2025-10-30T21:30:00Z,lines,3,10
+2025,56c958d4f7fedaf6a6dd660d39791acc,2025-10-31T23:00:00Z,Rice Owls,Memphis Tigers,2025-10-31T21:00:00Z,none,0,0
+2025,a39d31e5d3f010d7b4f68453167a174e,2025-10-31T23:30:00Z,Syracuse Orange,North Carolina Tar Heels,2025-10-31T21:30:00Z,lines,3,10
+2025,c2470d79a7b0a887cd057f8149f289c2,2025-11-01T00:00:00Z,Louisiana Tech Bulldogs,Sam Houston State Bearkats,2025-10-31T22:00:00Z,none,0,0
+2025,dacf20288266d28c38b2f5d2a59a4a4d,2025-11-01T16:00:00Z,Air Force Falcons,Army Black Knights,2025-11-01T14:00:00Z,none,0,0
+2025,30cf3214dc9b486eaffd416cf0728735,2025-11-01T16:00:00Z,Baylor Bears,UCF Knights,2025-11-01T14:00:00Z,none,0,0
+2025,6e207b3d856ec783cd789253121c4c47,2025-11-01T16:00:00Z,Bowling Green Falcons,Buffalo Bulls,2025-11-01T14:00:00Z,none,0,0
+2025,fafc61915d3429e8949bfa512a15505c,2025-11-01T16:00:00Z,Clemson Tigers,Duke Blue Devils,2025-11-01T14:00:00Z,none,0,0
+2025,a4f262424af98c3bfad4a9ee78dd4308,2025-11-01T16:00:00Z,Houston Cougars,West Virginia Mountaineers,2025-11-01T14:00:00Z,none,0,0
+2025,020028a27dd3acc26e8dc35eb9f65a86,2025-11-01T16:00:00Z,Illinois Fighting Illini,Rutgers Scarlet Knights,2025-11-01T14:00:00Z,none,0,0
+2025,d3e107e5a95bc8bdbd31b4de403f0e80,2025-11-01T16:00:00Z,SMU Mustangs,Miami Hurricanes,2025-11-01T14:00:00Z,lines,1,10
+2025,e007d238425b17b08d195dd9c64deb80,2025-11-01T16:00:00Z,North Texas Mean Green,Navy Midshipmen,2025-11-01T14:00:00Z,none,0,0
+2025,6496fb908a00a0d0df24b47b120e87c8,2025-11-01T16:00:00Z,Ohio State Buckeyes,Penn State Nittany Lions,2025-11-01T14:00:00Z,lines,3,10
+2025,f7e3b232e4a570cc7d5d4484f83f3a5c,2025-11-01T16:00:00Z,Texas Longhorns,Vanderbilt Commodores,2025-11-01T14:00:00Z,lines,7,10
+2025,752adb4a9d7012c1c0838961bffb7eec,2025-11-01T16:00:00Z,UConn Huskies,UAB Blazers,2025-11-01T14:00:00Z,none,0,0
+2025,0de6ce3fb8d1eddd40362f63a1c9a089,2025-11-01T17:00:00Z,Iowa State Cyclones,Arizona State Sun Devils,2025-11-01T15:00:00Z,none,0,0
+2025,c12e5ca692c0ace90c4614bd0efd665b,2025-11-01T18:00:00Z,Temple Owls,East Carolina Pirates,2025-11-01T16:00:00Z,none,0,0
+2025,af2ced7d37b1b9c35b81d69ce26dd870,2025-11-01T19:00:00Z,Virginia Tech Hokies,Louisville Cardinals,2025-11-01T17:00:00Z,none,0,0
+2025,6231165e3a20b2247cfb4dc4d4f14d50,2025-11-01T19:00:00Z,UNLV Rebels,New Mexico Lobos,2025-11-01T17:00:00Z,none,0,0
+2025,44c4dad3152fde5571154dc29bf30020,2025-11-01T19:30:00Z,Boise State Broncos,Fresno State Bulldogs,2025-11-01T17:30:00Z,none,0,0
+2025,661cc693646282b81a3ff474863155b1,2025-11-01T19:30:00Z,Boston College Eagles,Notre Dame Fighting Irish,2025-11-01T17:30:00Z,none,0,0
+2025,f27f05325cb971e8a0169da77094ac09,2025-11-01T19:30:00Z,Liberty Flames,Delaware Blue Hens,2025-11-01T17:30:00Z,none,0,0
+2025,0a13bda89bf79d35ae4e7f26d142cbd3,2025-11-01T19:30:00Z,Florida Gators,Georgia Bulldogs,2025-11-01T17:30:00Z,lines,5,10
+2025,35d3e354ceb275c759e3d2381e24ba87,2025-11-01T19:30:00Z,Maryland Terrapins,Indiana Hoosiers,2025-11-01T17:30:00Z,lines,7,10
+2025,d666a11a38728da38c8404862f2ca14e,2025-11-01T19:30:00Z,Kansas State Wildcats,Texas Tech Red Raiders,2025-11-01T17:30:00Z,lines,7,10
+2025,f47ceaaef63b9125717a578648bdaab7,2025-11-01T19:30:00Z,South Alabama Jaguars,Louisiana Ragin Cajuns,2025-11-01T17:30:00Z,none,0,0
+2025,e7ae87b2889092ea8b3df2c3eafc6585,2025-11-01T19:30:00Z,Minnesota Golden Gophers,Michigan State Spartans,2025-11-01T17:30:00Z,none,0,0
+2025,ea97ced3fcccbb59d54a3b1a05f1729e,2025-11-01T19:30:00Z,Western Kentucky Hilltoppers,New Mexico State Aggies,2025-11-01T17:30:00Z,none,0,0
+2025,c355c82023259a8a8948de47caa0be6a,2025-11-01T19:30:00Z,UL Monroe Warhawks,Old Dominion Monarchs,2025-11-01T17:30:00Z,none,0,0
+2025,5f0f820ae84368851f7e601c02282f77,2025-11-01T19:30:00Z,Stanford Cardinal,Pittsburgh Panthers,2025-11-01T17:30:00Z,none,0,0
+2025,c0bc52db8d2e691a93a72e79728f957c,2025-11-01T19:45:00Z,California Golden Bears,Virginia Cavaliers,2025-11-01T17:45:00Z,none,0,0
+2025,759604e0d7cc42d57d5742459a0ff266,2025-11-01T20:00:00Z,Arkansas Razorbacks,Mississippi State Bulldogs,2025-11-01T18:00:00Z,none,0,0
+2025,e9cc9630246eff99b50f3e471b481d70,2025-11-01T20:00:00Z,Western Michigan Broncos,Central Michigan Chippewas,2025-11-01T18:00:00Z,none,0,0
+2025,0c6d8e4de8cd331a55b0c998f5630bee,2025-11-01T20:00:00Z,Kansas Jayhawks,Oklahoma State Cowboys,2025-11-01T18:00:00Z,none,0,0
+2025,3f5427025f543bc0aaee3f1a090a0e7b,2025-11-01T23:00:00Z,Colorado Buffaloes,Arizona Wildcats,2025-11-01T21:00:00Z,none,0,0
+2025,8c6529f0e44f9c2ec4dfb637d49a6215,2025-11-01T23:00:00Z,Michigan Wolverines,Purdue Boilermakers,2025-11-01T21:00:00Z,none,0,0
+2025,67c2f115dc5ae1183a8f0d3812bdbaea,2025-11-01T23:00:00Z,Ole Miss Rebels,South Carolina Gamecocks,2025-11-01T21:00:00Z,lines,8,10
+2025,debf2f1ee7f3bd2c48255b4f1c06a4db,2025-11-01T23:00:00Z,San Diego State Aztecs,Wyoming Cowboys,2025-11-01T21:00:00Z,none,0,0
+2025,0c23a288344d38514845804a03b43fd3,2025-11-01T23:30:00Z,Auburn Tigers,Kentucky Wildcats,2025-11-01T21:30:00Z,lines,3,10
+2025,c1b53247fa3559f99f93d9bd8fdb810b,2025-11-01T23:30:00Z,Florida State Seminoles,Wake Forest Demon Deacons,2025-11-01T21:30:00Z,none,0,0
+2025,ff33b4ccd0e554b0184b5e313a738c95,2025-11-01T23:30:00Z,NC State Wolfpack,Georgia Tech Yellow Jackets,2025-11-01T21:30:00Z,none,0,0
+2025,fa877e625753f69bd36947d9b697faae,2025-11-01T23:30:00Z,Nebraska Cornhuskers,USC Trojans,2025-11-01T21:30:00Z,lines,8,10
+2025,f53cf7187de74814bd8b0651a729b94b,2025-11-01T23:30:00Z,Tennessee Volunteers,Oklahoma Sooners,2025-11-01T21:30:00Z,lines,3,10
+2025,483bce381dd0c25d1eaf721c28c486bc,2025-11-01T23:30:00Z,Oregon State Beavers,Washington State Cougars,2025-11-01T21:30:00Z,none,0,0
+2025,0a43c1170a988e95d770ea59eff92696,2025-11-02T00:00:00Z,Troy Trojans,Arkansas State Red Wolves,2025-11-01T22:00:00Z,none,0,0
+2025,3a295f4683347d18fea2de7ee64aa079,2025-11-02T02:15:00Z,Utah Utes,Cincinnati Bearcats,2025-11-02T00:15:00Z,lines,2,10
+2025,d00a52f83db97af88e3675f61fe97985,2025-11-02T02:30:00Z,San Jose State Spartans,Hawaii Rainbow Warriors,2025-11-02T00:30:00Z,lines,1,10
+2025,7f01fac9e7dd5dc973c84b4af0b12b16,2025-11-05T00:00:00Z,Akron Zips,UMass Minutemen,2025-11-04T22:00:00Z,none,0,0
+2025,d28f0497fa7a5eac34da18d9ceccac3c,2025-11-05T00:00:00Z,Ohio Bobcats,Miami (OH) RedHawks,2025-11-04T22:00:00Z,lines,2,10
+2025,e0208223bb8f700332d996c99c787f92,2025-11-06T00:00:00Z,Ball State Cardinals,Kent State Golden Flashes,2025-11-05T22:00:00Z,none,0,0
+2025,002b7d85d301b778efcd83e8bd8cfbd7,2025-11-06T00:00:00Z,Toledo Rockets,Northern Illinois Huskies,2025-11-05T22:00:00Z,lines,2,10
+2025,602be51cf8f06f98f7cd893d7f223a42,2025-11-07T00:30:00Z,Appalachian State Mountaineers,Georgia Southern Eagles,2025-11-06T22:30:00Z,none,0,0
+2025,9372006930638e099fc61bbfa7e94e7b,2025-11-07T00:30:00Z,South Florida Bulls,UTSA Roadrunners,2025-11-06T22:30:00Z,none,0,0
+2025,a8096293bcac3a6df5e395942f73e3ce,2025-11-08T01:00:00Z,UCF Knights,Houston Cougars,2025-11-07T23:00:00Z,none,0,0
+2025,01d86623adf868d561f8674498fb9eca,2025-11-08T02:00:00Z,Memphis Tigers,Tulane Green Wave,2025-11-08T00:00:00Z,none,0,0
+2025,9073c528b41f8e63e3d7e072d81fbb20,2025-11-08T02:00:00Z,USC Trojans,Northwestern Wildcats,2025-11-08T00:00:00Z,lines,4,10
+2025,524a2e816a5a5ddc923714f0a7bf78e7,2025-11-08T17:00:00Z,Arkansas State Red Wolves,Southern Mississippi Golden Eagles,2025-11-08T15:00:00Z,none,0,0
+2025,d1ac1162aa4955bcb20a428c2b662152,2025-11-08T17:00:00Z,Army Black Knights,Temple Owls,2025-11-08T15:00:00Z,none,0,0
+2025,7492442a7d4ea720e20334407be28836,2025-11-08T17:00:00Z,Texas Tech Red Raiders,BYU Cougars,2025-11-08T15:00:00Z,lines,8,10
+2025,53806a8547cd26b21d866aec355f1285,2025-11-08T17:00:00Z,Boston College Eagles,SMU Mustangs,2025-11-08T15:00:00Z,none,0,0
+2025,eba18280b341d7cbd8e9ed1dcd18bf05,2025-11-08T17:00:00Z,West Virginia Mountaineers,Colorado Buffaloes,2025-11-08T15:00:00Z,lines,2,10
+2025,b41044c11856a02c999522fe8f4977e4,2025-11-08T17:00:00Z,Mississippi State Bulldogs,Georgia Bulldogs,2025-11-08T15:00:00Z,lines,3,10
+2025,7f8f24a59d3218a96bb68c20dbc593de,2025-11-08T17:00:00Z,Penn State Nittany Lions,Indiana Hoosiers,2025-11-08T15:00:00Z,none,0,0
+2025,5ab48663d7528b3705a647d83aadaf19,2025-11-08T17:00:00Z,Marshall Thundering Herd,James Madison Dukes,2025-11-08T15:00:00Z,none,0,0
+2025,552a14f5a8b493a2b807777b77f77f55,2025-11-08T18:00:00Z,Eastern Michigan Eagles,Bowling Green Falcons,2025-11-08T16:00:00Z,none,0,0
+2025,221e7ddb221193456934c87f32d38956,2025-11-08T18:00:00Z,Ole Miss Rebels,Citadel Bulldogs,2025-11-08T16:00:00Z,none,0,0
+2025,14a129638d680c27d25390e3783d7ea2,2025-11-08T18:00:00Z,Liberty Flames,Missouri State Bears,2025-11-08T16:00:00Z,none,0,0
+2025,2307b8527e5d6be27f3190e5243b8c7f,2025-11-08T18:00:00Z,Purdue Boilermakers,Ohio State Buckeyes,2025-11-08T16:00:00Z,lines,4,10
+2025,f007c65cee3245c0f25a8121fb8d2126,2025-11-08T19:00:00Z,Rice Owls,UAB Blazers,2025-11-08T17:00:00Z,none,0,0
+2025,5447f4e28c65233177a96786054ec7a9,2025-11-08T19:30:00Z,Rutgers Scarlet Knights,Maryland Terrapins,2025-11-08T17:30:00Z,none,0,0
+2025,8573ff0ded9e7d3ed63b1179a615e847,2025-11-08T20:00:00Z,East Carolina Pirates,Charlotte 49ers,2025-11-08T18:00:00Z,none,0,0
+2025,1400414373023c7d699f70c811b981c0,2025-11-08T20:00:00Z,Delaware Blue Hens,Louisiana Tech Bulldogs,2025-11-08T18:00:00Z,none,0,0
+2025,afdaf6b3f429f827b1f864dc0597ba02,2025-11-08T20:00:00Z,Florida Atlantic Owls,Tulsa Golden Hurricane,2025-11-08T18:00:00Z,none,0,0
+2025,df5bb6e14637f00bfb4cdcf30c97eef7,2025-11-08T20:00:00Z,Middle Tennessee Blue Raiders,Florida International Panthers,2025-11-08T18:00:00Z,none,0,0
+2025,79503d71656345e764cb595a53aeb4f8,2025-11-08T20:00:00Z,UTEP Miners,Jacksonville State Gamecocks,2025-11-08T18:00:00Z,none,0,0
+2025,60f69546f72b1cb5dc22aa0096258e19,2025-11-08T20:30:00Z,Arizona Wildcats,Kansas Jayhawks,2025-11-08T18:30:00Z,lines,2,10
+2025,a5c302e7a8e94cf154a833afdb676594,2025-11-08T20:30:00Z,UConn Huskies,Duke Blue Devils,2025-11-08T18:30:00Z,none,0,0
+2025,398c47249f361616ea373b30dc8acbf1,2025-11-08T20:30:00Z,Iowa Hawkeyes,Oregon Ducks,2025-11-08T18:30:00Z,lines,2,10
+2025,c205a1246ae9fe0764f768737f975def,2025-11-08T20:30:00Z,TCU Horned Frogs,Iowa State Cyclones,2025-11-08T18:30:00Z,none,0,0
+2025,ed3ba19ab5726f4f03c2b8bdeebfc142,2025-11-08T20:30:00Z,Miami Hurricanes,Syracuse Orange,2025-11-08T18:30:00Z,none,0,0
+2025,4bf0ba6b4a8a5231ae6fd7ea67a97bc8,2025-11-08T20:30:00Z,Missouri Tigers,Texas A&M Aggies,2025-11-08T18:30:00Z,lines,5,10
+2025,29f2b8725ab86e10209d0e64a3128330,2025-11-08T21:00:00Z,Coastal Carolina Chanticleers,Georgia State Panthers,2025-11-08T19:00:00Z,none,0,0
+2025,5589a6fb0147c472aa8d1222bad27271,2025-11-08T21:00:00Z,New Mexico State Aggies,Kennesaw State Owls,2025-11-08T19:00:00Z,none,0,0
+2025,23e16c37a89c4381943ed6dda736199b,2025-11-08T21:01:00Z,Vanderbilt Commodores,Auburn Tigers,2025-11-08T19:01:00Z,none,0,0
+2025,27541ef6d74cf828a2d977a93d5dffd4,2025-11-08T21:30:00Z,North Carolina Tar Heels,Stanford Cardinal,2025-11-08T19:30:00Z,none,0,0
+2025,ed52f478980429ecf4e19140ba17b1cd,2025-11-08T21:30:00Z,Wisconsin Badgers,Washington Huskies,2025-11-08T19:30:00Z,none,0,0
+2025,a69f6a6be64a31d8e22809160b63b969,2025-11-08T22:00:00Z,Louisiana Ragin Cajuns,Texas State Bobcats,2025-11-08T20:00:00Z,none,0,0
+2025,1305956eb98f14b25577b43c51660d82,2025-11-08T23:00:00Z,San Jose State Spartans,Air Force Falcons,2025-11-08T21:00:00Z,none,0,0
+2025,a99979f2428b8243c82e4a02562a947a,2025-11-09T00:00:00Z,Louisville Cardinals,California Golden Bears,2025-11-08T22:00:00Z,none,0,0
+2025,10199f7e5c5b453746cded34d0b34e6f,2025-11-09T00:00:00Z,Clemson Tigers,Florida State Seminoles,2025-11-08T22:00:00Z,none,0,0
+2025,3dec9604577d82e2589fe2319f14dbdc,2025-11-09T00:00:00Z,Virginia Cavaliers,Wake Forest Demon Deacons,2025-11-08T22:00:00Z,none,0,0
+2025,a4fd5ab6f224d271ca76719ac8277176,2025-11-09T00:30:00Z,Alabama Crimson Tide,LSU Tigers,2025-11-08T22:30:00Z,lines,7,10
+2025,3c44dd1ba67c8192815306b5bb894fcd,2025-11-09T00:30:00Z,Kentucky Wildcats,Florida Gators,2025-11-08T22:30:00Z,lines,3,10
+2025,b0065a8740c11ddd389e3c3b2e169bca,2025-11-09T00:30:00Z,Notre Dame Fighting Irish,Navy Midshipmen,2025-11-08T22:30:00Z,lines,5,10
+2025,786dd84b9d3aa51537d4ed4bf0ebb6a1,2025-11-09T00:30:00Z,Utah State Aggies,Nevada Wolf Pack,2025-11-08T22:30:00Z,none,0,0
+2025,9c020bd7d3fb34116f63a1e56ef90b74,2025-11-09T02:00:00Z,UCLA Bruins,Nebraska Cornhuskers,2025-11-09T00:00:00Z,lines,5,10
+2025,cd38558312e1cb427ace0dd9bac1b4c2,2025-11-09T02:30:00Z,Colorado State Rams,UNLV Rebels,2025-11-09T00:30:00Z,none,0,0
+2025,31abe905b4b9ec98ab5d77869ca46d6c,2025-11-09T03:00:00Z,Oregon State Beavers,Sam Houston State Bearkats,2025-11-09T01:00:00Z,none,0,0
+2025,c5771e4204e8803e7ed806a0a72f14a2,2025-11-09T04:00:00Z,Hawaii Rainbow Warriors,San Diego State Aztecs,2025-11-09T02:00:00Z,none,0,0
+2025,a262301eedaacdcf2d2f66b6e774d284,2025-11-12T00:30:00Z,Akron Zips,Kent State Golden Flashes,2025-11-11T22:30:00Z,lines,5,10
+2025,3e0b12f621379f7492aabe9f44a74477,2025-11-12T01:00:00Z,Western Michigan Broncos,Ohio Bobcats,2025-11-11T23:00:00Z,lines,3,10
+2025,9ab397bd666c0c0bfe6f8ad0305a0120,2025-11-13T00:00:00Z,Central Michigan Chippewas,Buffalo Bulls,2025-11-12T22:00:00Z,lines,4,10
+2025,abb21e9ff3fecf0e831ca3109c84bb92,2025-11-13T00:00:00Z,Miami (OH) RedHawks,Toledo Rockets,2025-11-12T22:00:00Z,lines,4,10
+2025,400e78d747b851ab6b491404d939c700,2025-11-13T00:00:00Z,UMass Minutemen,Northern Illinois Huskies,2025-11-12T22:00:00Z,none,0,0
+2025,5222230f425c1618238b84e01d1f63f0,2025-11-14T00:30:00Z,Old Dominion Monarchs,Troy Trojans,2025-11-13T22:30:00Z,lines,3,10
+2025,42cca8d28245b1fbf784f639a81f2542,2025-11-15T00:30:00Z,Louisville Cardinals,Clemson Tigers,2025-11-14T22:30:00Z,none,0,0
+2025,e6f69472213fa5c127d39a0c4db53a3e,2025-11-15T02:00:00Z,Oregon Ducks,Minnesota Golden Gophers,2025-11-15T00:00:00Z,none,0,0
+2025,014f34fb67363402c0c5d90db5115c55,2025-11-15T17:00:00Z,UConn Huskies,Air Force Falcons,2025-11-15T15:00:00Z,none,0,0
+2025,4097313a7b920350f695d5ebf4441e25,2025-11-15T17:00:00Z,Cincinnati Bearcats,Arizona Wildcats,2025-11-15T15:00:00Z,lines,2,10
+2025,88aa7ebc4cd199227641753c6f027e5c,2025-11-15T17:00:00Z,Ball State Cardinals,Eastern Michigan Eagles,2025-11-15T15:00:00Z,none,0,0
+2025,228355203b7cb130a9276d7b3f01c1e7,2025-11-15T17:00:00Z,Charlotte 49ers,UTSA Roadrunners,2025-11-15T15:00:00Z,none,0,0
+2025,c3f4a939fa4e8748810ff0e16a85c224,2025-11-15T17:00:00Z,Indiana Hoosiers,Wisconsin Badgers,2025-11-15T15:00:00Z,none,0,0
+2025,d86064b6f9a69da0f1fe77f95eafcfd8,2025-11-15T17:00:00Z,Oklahoma State Cowboys,Kansas State Wildcats,2025-11-15T15:00:00Z,none,0,0
+2025,221109619a512745557119257181ec71,2025-11-15T17:00:00Z,Northwestern Wildcats,Michigan Wolverines,2025-11-15T15:00:00Z,none,0,0
+2025,3e96265c0539c2de97577de90c2b992a,2025-11-15T17:00:00Z,Navy Midshipmen,South Florida Bulls,2025-11-15T15:00:00Z,lines,2,10
+2025,8f72253f75cd68254f847d6d33c464d8,2025-11-15T17:00:00Z,Pittsburgh Panthers,Notre Dame Fighting Irish,2025-11-15T15:00:00Z,lines,14,10
+2025,b417c55071b8eb7aa75b4073707d90c7,2025-11-15T17:00:00Z,Texas A&M Aggies,South Carolina Gamecocks,2025-11-15T15:00:00Z,none,0,0
+2025,a374973b9d0e1c2134328868cc80aabf,2025-11-15T17:45:00Z,LSU Tigers,Arkansas Razorbacks,2025-11-15T15:45:00Z,lines,10,10
+2025,ea4c70f2e05bf3e57e0aef9b8f22543b,2025-11-15T18:00:00Z,Arizona State Sun Devils,West Virginia Mountaineers,2025-11-15T16:00:00Z,none,0,0
+2025,922d91bba05ae227e389cc67bee9aa3d,2025-11-15T18:00:00Z,Tulsa Golden Hurricane,Oregon State Beavers,2025-11-15T16:00:00Z,none,0,0
+2025,a19ab727d5ca38676b64d4d2b8b168cc,2025-11-15T18:30:00Z,Kentucky Wildcats,Tennessee Tech Golden Eagles,2025-11-15T16:30:00Z,none,0,0
+2025,450441ce20015b77a67d789a077704c9,2025-11-15T19:00:00Z,Georgia State Panthers,Marshall Thundering Herd,2025-11-15T17:00:00Z,none,0,0
+2025,bfd46197c4ead0562ab9914ef48e8b11,2025-11-15T19:00:00Z,UAB Blazers,North Texas Mean Green,2025-11-15T17:00:00Z,none,0,0
+2025,942ff726f7d68269186e344b41a000f7,2025-11-15T20:00:00Z,New Mexico Lobos,Colorado State Rams,2025-11-15T18:00:00Z,none,0,0
+2025,36d31c0bf72754e41d62e02ff964f34d,2025-11-15T20:00:00Z,Missouri State Bears,UTEP Miners,2025-11-15T18:00:00Z,none,0,0
+2025,e434a92689a2c3329dbac8efa816cc89,2025-11-15T20:30:00Z,Alabama Crimson Tide,Oklahoma Sooners,2025-11-15T18:30:00Z,lines,12,10
+2025,dcc22d82135f6b6d80b76b7af4b89b5f,2025-11-15T20:30:00Z,James Madison Dukes,Appalachian State Mountaineers,2025-11-15T18:30:00Z,none,0,0
+2025,acd0ed7c958d706d5f4eda180654eea0,2025-11-15T20:30:00Z,Boston College Eagles,Georgia Tech Yellow Jackets,2025-11-15T18:30:00Z,none,0,0
+2025,b5fabc4bda15869a027bae77baf8f936,2025-11-15T20:30:00Z,Duke Blue Devils,Virginia Cavaliers,2025-11-15T18:30:00Z,lines,6,10
+2025,a40ff33f45e8c4ecf2bc9b4f921cbca1,2025-11-15T20:30:00Z,Illinois Fighting Illini,Maryland Terrapins,2025-11-15T18:30:00Z,none,0,0
+2025,cea967651cf4258888de42948d1e99fa,2025-11-15T20:30:00Z,USC Trojans,Iowa Hawkeyes,2025-11-15T18:30:00Z,lines,3,10
+2025,a3bc2f29faa5c8d6f92b0d3909f1bae3,2025-11-15T20:30:00Z,Miami Hurricanes,NC State Wolfpack,2025-11-15T18:30:00Z,lines,2,10
+2025,adb79482ac6a03cfb466361a0acc0ad8,2025-11-15T20:30:00Z,Michigan State Spartans,Penn State Nittany Lions,2025-11-15T18:30:00Z,none,0,0
+2025,b258e8aed63bc16b5d5cf7e3d0cea208,2025-11-15T20:30:00Z,Western Kentucky Hilltoppers,Middle Tennessee Blue Raiders,2025-11-15T18:30:00Z,none,0,0
+2025,51cc3e112085325c2e5a4d7bb211d3c8,2025-11-15T20:30:00Z,Nevada Wolf Pack,San Jose State Spartans,2025-11-15T18:30:00Z,none,0,0
+2025,746eede942625764b9f241da1ad51d66,2025-11-15T20:30:00Z,UL Monroe Warhawks,South Alabama Jaguars,2025-11-15T18:30:00Z,none,0,0
+2025,e3d2cf0a6786b052ff011884e70e1a8d,2025-11-15T20:30:00Z,Southern Mississippi Golden Eagles,Texas State Bobcats,2025-11-15T18:30:00Z,none,0,0
+2025,7d83d246bcce48aa3d7f9d047999af1e,2025-11-15T20:30:00Z,Texas Tech Red Raiders,UCF Knights,2025-11-15T18:30:00Z,none,0,0
+2025,7f636a75f0da1a1241c63faefda1b2bc,2025-11-15T21:00:00Z,East Carolina Pirates,Memphis Tigers,2025-11-15T19:00:00Z,none,0,0
+2025,6ecff78e16c9ff8b6ce3f165615a61cf,2025-11-15T21:00:00Z,Tulane Green Wave,Florida Atlantic Owls,2025-11-15T19:00:00Z,none,0,0
+2025,6542b8b48c9b9cff8cc4dd12c44301b3,2025-11-15T21:15:00Z,Tennessee Volunteers,New Mexico State Aggies,2025-11-15T19:15:00Z,none,0,0
+2025,c659e27887d8657d921c7d1251b1f827,2025-11-15T21:30:00Z,Wake Forest Demon Deacons,North Carolina Tar Heels,2025-11-15T19:30:00Z,none,0,0
+2025,57c1c1686850ce008f55f69fdf062a8b,2025-11-15T22:00:00Z,Florida International Panthers,Liberty Flames,2025-11-15T20:00:00Z,none,0,0
+2025,0a3c900a4145e5d1e5cd73de1eb34ba7,2025-11-15T23:00:00Z,Georgia Southern Eagles,Coastal Carolina Chanticleers,2025-11-15T21:00:00Z,none,0,0
+2025,75dcf3454fcec490600dd3a21ee0b1aa,2025-11-16T00:00:00Z,Baylor Bears,Utah Utes,2025-11-15T22:00:00Z,none,0,0
+2025,5ba0b8e2033aceb0a3ea2e24491242a4,2025-11-16T00:00:00Z,Sam Houston State Bearkats,Delaware Blue Hens,2025-11-15T22:00:00Z,none,0,0
+2025,542f9c5f191a245fb9a0d0b73b7838b7,2025-11-16T00:00:00Z,Ole Miss Rebels,Florida Gators,2025-11-15T22:00:00Z,lines,7,10
+2025,c29526decee9dfa73fa86c4b594acb76,2025-11-16T00:00:00Z,Washington Huskies,Purdue Boilermakers,2025-11-15T22:00:00Z,none,0,0
+2025,0993581f0f1861095ef3ee3b9b84ddbc,2025-11-16T00:00:00Z,UNLV Rebels,Utah State Aggies,2025-11-15T22:00:00Z,none,0,0
+2025,115a258be837f0ab18a9e2c4482f49db,2025-11-16T00:30:00Z,Florida State Seminoles,Virginia Tech Hokies,2025-11-15T22:30:00Z,none,0,0
+2025,98cb354e78a2e035f0e5c36736d65f7e,2025-11-16T00:30:00Z,Georgia Bulldogs,Texas Longhorns,2025-11-15T22:30:00Z,lines,3,10
+2025,d4c6b7b779184709320894b0023e17e5,2025-11-16T00:30:00Z,Ohio State Buckeyes,UCLA Bruins,2025-11-15T22:30:00Z,lines,3,10
+2025,36766ef9e4777301de083b914263ee45,2025-11-16T00:45:00Z,Missouri Tigers,Mississippi State Bulldogs,2025-11-15T22:45:00Z,none,0,0
+2025,5a69d6f97264110b3e44ca131dff9f59,2025-11-16T01:00:00Z,Jacksonville State Gamecocks,Kennesaw State Owls,2025-11-15T23:00:00Z,none,0,0
+2025,d5d10c3a94ad4b0229842951f8a32115,2025-11-16T03:00:00Z,Washington State Cougars,Louisiana Tech Bulldogs,2025-11-16T01:00:00Z,none,0,0
+2025,24d287473010335df59c46edbc012292,2025-11-16T03:15:00Z,BYU Cougars,TCU Horned Frogs,2025-11-16T01:15:00Z,none,0,0
+2025,181186b4a0b636da7b07c536fafebdfa,2025-11-16T03:30:00Z,San Diego State Aztecs,Boise State Broncos,2025-11-16T01:30:00Z,none,0,0
+2025,5ad9e266182c9aa66d0763532db6b37b,2025-11-16T03:30:00Z,Fresno State Bulldogs,Wyoming Cowboys,2025-11-16T01:30:00Z,none,0,0
+2025,267b970018dfc120df1233bc42b4bcc4,2025-11-19T00:00:00Z,Bowling Green Falcons,Akron Zips,2025-11-18T22:00:00Z,none,0,0
+2025,84461d5f585c397b4fd2214191faa0df,2025-11-19T00:00:00Z,Northern Illinois Huskies,Western Michigan Broncos,2025-11-18T22:00:00Z,lines,3,10
+2025,f9b664cce99aad69a23c81635e4fac0f,2025-11-19T00:00:00Z,Ohio Bobcats,UMass Minutemen,2025-11-18T22:00:00Z,lines,2,10
+2025,e5a53fa5f42755ccc9077aeffecd8d67,2025-11-20T00:00:00Z,Buffalo Bulls,Miami (OH) RedHawks,2025-11-19T22:00:00Z,none,0,0
+2025,21c67118f480a739b3961a7d3bb128d1,2025-11-20T00:00:00Z,Kent State Golden Flashes,Central Michigan Chippewas,2025-11-19T22:00:00Z,none,0,0
+2025,425bbfaa3561f07998f8e4c4ae3159be,2025-11-21T00:30:00Z,Arkansas State Red Wolves,Louisiana Ragin Cajuns,2025-11-20T22:30:00Z,lines,4,10
+2025,da5a19b5f8e8746e71279c368fddfec8,2025-11-22T01:00:00Z,NC State Wolfpack,Florida State Seminoles,2025-11-21T23:00:00Z,lines,11,10
+2025,be5363918c8ce65bae1baa2259bbcea5,2025-11-22T03:30:00Z,UNLV Rebels,Hawaii Rainbow Warriors,2025-11-22T01:30:00Z,none,0,0
+2025,50f8cf307af5c9631f2cd029314ef90f,2025-11-22T17:00:00Z,Army Black Knights,Tulsa Golden Hurricane,2025-11-22T15:00:00Z,none,0,0
+2025,4e2541ac75b5c82ae76739edaa451117,2025-11-22T17:00:00Z,Wake Forest Demon Deacons,Delaware Blue Hens,2025-11-22T15:00:00Z,none,0,0
+2025,231cf66816550b9ed37afec3760f8ef5,2025-11-22T17:00:00Z,Iowa State Cyclones,Kansas Jayhawks,2025-11-22T15:00:00Z,lines,4,10
+2025,f22a5eb25fe6c98b41dc3457a0317fe5,2025-11-22T17:00:00Z,SMU Mustangs,Louisville Cardinals,2025-11-22T15:00:00Z,none,0,0
+2025,1017c0ad63c09ffae97740888d8b1f78,2025-11-22T17:00:00Z,Virginia Tech Hokies,Miami Hurricanes,2025-11-22T15:00:00Z,none,0,0
+2025,b06413bd5f2f786ebdbe891492d67f71,2025-11-22T17:00:00Z,Northwestern Wildcats,Minnesota Golden Gophers,2025-11-22T15:00:00Z,none,0,0
+2025,3ff98544de6910e3e7332504955f64df,2025-11-22T17:00:00Z,Oklahoma Sooners,Missouri Tigers,2025-11-22T15:00:00Z,lines,7,10
+2025,2883481b61fdd600db0e709c87428332,2025-11-22T17:00:00Z,Ohio State Buckeyes,Rutgers Scarlet Knights,2025-11-22T15:00:00Z,none,0,0
+2025,7db3948dca2ce84a47459a94c61db2ce,2025-11-22T17:00:00Z,Texas A&M Aggies,Samford Bulldogs,2025-11-22T15:00:00Z,none,0,0
+2025,e94477e5dd3cf352113919093803aa2a,2025-11-22T17:45:00Z,Georgia Bulldogs,Charlotte 49ers,2025-11-22T15:45:00Z,none,0,0
+2025,f3f7c2b0939ba9e800a45fc7cb870914,2025-11-22T18:00:00Z,Arizona Wildcats,Baylor Bears,2025-11-22T16:00:00Z,none,0,0
+2025,31667911777e27d23d74adaf5109d04e,2025-11-22T18:00:00Z,Georgia Southern Eagles,Old Dominion Monarchs,2025-11-22T16:00:00Z,none,0,0
+2025,bbc412b8dbbd31afc909896f8a277d3f,2025-11-22T18:00:00Z,James Madison Dukes,Washington State Cougars,2025-11-22T16:00:00Z,none,0,0
+2025,4488b598e3c442fca385311902ea6300,2025-11-22T19:00:00Z,Auburn Tigers,Mercer Bears,2025-11-22T17:00:00Z,none,0,0
+2025,5fb8d908f2befbbfe9b70586eeb1a633,2025-11-22T19:00:00Z,Toledo Rockets,Ball State Cardinals,2025-11-22T17:00:00Z,none,0,0
+2025,fde1da5b11f312009f2b0a445728ef08,2025-11-22T19:00:00Z,Kennesaw State Owls,Missouri State Bears,2025-11-22T17:00:00Z,none,0,0
+2025,ee7227545587b7c4b3f692822855279b,2025-11-22T19:00:00Z,Wyoming Cowboys,Nevada Wolf Pack,2025-11-22T17:00:00Z,none,0,0
+2025,096152d72e2b70bde57ad5d547decab0,2025-11-22T19:02:00Z,Alabama Crimson Tide,Eastern Illinois Panthers,2025-11-22T17:02:00Z,none,0,0
+2025,49a93417406ae5adb273a66f6afb7865,2025-11-22T19:30:00Z,Appalachian State Mountaineers,Marshall Thundering Herd,2025-11-22T17:30:00Z,none,0,0
+2025,3e9dfc4d7f79fb996ffad0f138799cd7,2025-11-22T20:00:00Z,Florida Atlantic Owls,UConn Huskies,2025-11-22T18:00:00Z,none,0,0
+2025,866521b3fc18961377dedbd68ae46b50,2025-11-22T20:00:00Z,Louisiana Tech Bulldogs,Liberty Flames,2025-11-22T18:00:00Z,none,0,0
+2025,b12494a0b58befa6a9488323449a9f84,2025-11-22T20:00:00Z,Middle Tennessee Blue Raiders,Sam Houston State Bearkats,2025-11-22T18:00:00Z,none,0,0
+2025,e44ec327bba08498d83ec6f165b3b571,2025-11-22T20:00:00Z,UTEP Miners,New Mexico State Aggies,2025-11-22T18:00:00Z,none,0,0
+2025,6e03051c0aaf44c045e6aeee9a75cc6c,2025-11-22T20:00:00Z,UAB Blazers,South Florida Bulls,2025-11-22T18:00:00Z,none,0,0
+2025,946ab16f8cfe9004a0d3fc67ac8411d7,2025-11-22T20:30:00Z,Texas Longhorns,Arkansas Razorbacks,2025-11-22T18:30:00Z,lines,10,10
+2025,c2ca3efd4fc3f87659b7366cde3a2e94,2025-11-22T20:30:00Z,North Carolina Tar Heels,Duke Blue Devils,2025-11-22T18:30:00Z,lines,3,10
+2025,87560b54fbd2c136a9a342f90fc8c447,2025-11-22T20:30:00Z,UTSA Roadrunners,East Carolina Pirates,2025-11-22T18:30:00Z,none,0,0
+2025,1b1aee18fb11ab2ee4a85cd6c3f53ed3,2025-11-22T20:30:00Z,Florida International Panthers,Jacksonville State Gamecocks,2025-11-22T18:30:00Z,none,0,0
+2025,6d8fbe63a65f1c1032a6c1c65863ca23,2025-11-22T20:30:00Z,Iowa Hawkeyes,Michigan State Spartans,2025-11-22T18:30:00Z,none,0,0
+2025,370e6b93a4490c8e6c3b6c1d9e123128,2025-11-22T20:30:00Z,Vanderbilt Commodores,Kentucky Wildcats,2025-11-22T18:30:00Z,lines,6,10
+2025,55fdf66a9ec5e21e439f8b66071457f2,2025-11-22T20:30:00Z,Notre Dame Fighting Irish,Syracuse Orange,2025-11-22T18:30:00Z,none,0,0
+2025,125e9c0f6043227f58577c41cbd0e85b,2025-11-22T20:30:00Z,Oregon Ducks,USC Trojans,2025-11-22T18:30:00Z,lines,10,10
+2025,9ecbb88fcab392aaa87a855d9b592269,2025-11-22T20:30:00Z,South Alabama Jaguars,Southern Mississippi Golden Eagles,2025-11-22T18:30:00Z,none,0,0
+2025,de7677c8d3b8855223812d92b7933bb0,2025-11-22T20:45:00Z,Temple Owls,Tulane Green Wave,2025-11-22T18:45:00Z,none,0,0
+2025,1ea8d1554ca20a37c4891648c8b8707b,2025-11-22T21:00:00Z,Troy Trojans,Georgia State Panthers,2025-11-22T19:00:00Z,none,0,0
+2025,dcd183de7cecb414ad6e23d5de9c57cc,2025-11-22T21:00:00Z,Houston Cougars,TCU Horned Frogs,2025-11-22T19:00:00Z,none,0,0
+2025,1218850e6d356283ca4fdbb33a2b4d33,2025-11-22T21:00:00Z,Utah Utes,Kansas State Wildcats,2025-11-22T19:00:00Z,none,0,0
+2025,a99fad4a0da088809c8269a52bc4ad86,2025-11-22T21:00:00Z,Maryland Terrapins,Michigan Wolverines,2025-11-22T19:00:00Z,none,0,0
+2025,6fa4662e90c67a085d8cceec802890f1,2025-11-22T21:00:00Z,UCF Knights,Oklahoma State Cowboys,2025-11-22T19:00:00Z,none,0,0
+2025,b4eec250102bbb8f8e572d3fe056258e,2025-11-22T21:15:00Z,South Carolina Gamecocks,Coastal Carolina Chanticleers,2025-11-22T19:15:00Z,none,0,0
+2025,3f3198d8ec7bd7e458a37b922f1b8c48,2025-11-22T21:30:00Z,Clemson Tigers,Furman Paladins,2025-11-22T19:30:00Z,none,0,0
+2025,e07a0fd751788ee54312e351723fba5f,2025-11-22T22:00:00Z,Texas State Bobcats,UL Monroe Warhawks,2025-11-22T20:00:00Z,none,0,0
+2025,53287adc308e4bef3ab38d3652713c14,2025-11-23T00:00:00Z,Air Force Falcons,New Mexico Lobos,2025-11-22T22:00:00Z,none,0,0
+2025,1bfbad5173d703fa96481a8221e544f7,2025-11-23T00:00:00Z,Boise State Broncos,Colorado State Rams,2025-11-22T22:00:00Z,none,0,0
+2025,8bec841379ab4efeec22c0a571a95b0e,2025-11-23T00:00:00Z,Georgia Tech Yellow Jackets,Pittsburgh Panthers,2025-11-22T22:00:00Z,lines,8,10
+2025,44a2361269f83f940cea7de9319ffe61,2025-11-23T00:00:00Z,Penn State Nittany Lions,Nebraska Cornhuskers,2025-11-22T22:00:00Z,none,0,0
+2025,be7c95542aaf1d15193678f771745992,2025-11-23T00:30:00Z,Stanford Cardinal,California Golden Bears,2025-11-22T22:30:00Z,lines,12,10
+2025,887fdd527230bece5974b0cface30528,2025-11-23T00:30:00Z,Florida Gators,Tennessee Volunteers,2025-11-22T22:30:00Z,lines,6,10
+2025,d2fd5b19d4a2ff572beaa0b3c67e8861,2025-11-23T00:30:00Z,Wisconsin Badgers,Illinois Fighting Illini,2025-11-22T22:30:00Z,lines,6,10
+2025,13ced0e9ea8ed17742771c1f5aef349e,2025-11-23T00:30:00Z,Rice Owls,North Texas Mean Green,2025-11-22T22:30:00Z,none,0,0
+2025,5bb0b0bdd9a7370f7f8f35db2374a4e2,2025-11-23T00:45:00Z,LSU Tigers,Western Kentucky Hilltoppers,2025-11-22T22:45:00Z,none,0,0
+2025,968d201306e35699b83b5bb24289914c,2025-11-23T01:00:00Z,Colorado Buffaloes,Arizona State Sun Devils,2025-11-22T23:00:00Z,lines,1,10
+2025,8c8fb93b29e1f780db6a427d7274ed91,2025-11-23T01:00:00Z,Cincinnati Bearcats,BYU Cougars,2025-11-22T23:00:00Z,lines,8,10
+2025,da9a26d1e98cd30b4be15e216bb95291,2025-11-23T03:30:00Z,Fresno State Bulldogs,Utah State Aggies,2025-11-23T01:30:00Z,none,0,0
+2025,435c548cea0f26f2df00d9c9df0a7924,2025-11-23T03:30:00Z,San Diego State Aztecs,San Jose State Spartans,2025-11-23T01:30:00Z,lines,4,10
+2025,f0ad800d071b9335db5bd1c5634a28ca,2025-11-23T03:30:00Z,UCLA Bruins,Washington Huskies,2025-11-23T01:30:00Z,none,0,0
+2025,7058d3392573bc5d3b2802b1c3cb8c34,2025-11-25T21:30:00Z,UMass Minutemen,Bowling Green Falcons,2025-11-25T19:30:00Z,none,0,0
+2025,36f13df92e5c272f20ed7d541c8cf2d4,2025-11-26T00:30:00Z,Eastern Michigan Eagles,Western Michigan Broncos,2025-11-25T22:30:00Z,lines,4,10
+2025,643198f60ea064a8030db080f2540513,2025-11-28T00:30:00Z,Memphis Tigers,Navy Midshipmen,2025-11-27T22:30:00Z,lines,3,10
+2025,3d51dc9f725e59fd6750915622f55394,2025-11-28T17:00:00Z,Buffalo Bulls,Ohio Bobcats,2025-11-28T15:00:00Z,none,0,0
+2025,76916d758d1a2bc57d840d9d1c63aaa3,2025-11-28T17:00:00Z,Nebraska Cornhuskers,Iowa Hawkeyes,2025-11-28T15:00:00Z,lines,6,10
+2025,0f1ce102c69b3c21a363d3997879f16a,2025-11-28T17:00:00Z,Kansas Jayhawks,Utah Utes,2025-11-28T15:00:00Z,lines,5,10
+2025,5b4e38825c71d19c51ebcd39665d9694,2025-11-28T17:00:00Z,Northern Illinois Huskies,Kent State Golden Flashes,2025-11-28T15:00:00Z,lines,4,10
+2025,f959699d770536ccda4fc4df72a954ea,2025-11-28T17:00:00Z,Mississippi State Bulldogs,Ole Miss Rebels,2025-11-28T15:00:00Z,lines,11,10
+2025,ecdb13413222992d666fb1be5f3f15c4,2025-11-28T20:00:00Z,Colorado State Rams,Air Force Falcons,2025-11-28T18:00:00Z,none,0,0
+2025,ee12d0d5e2a05a709506af59bd525728,2025-11-28T20:30:00Z,Georgia Tech Yellow Jackets,Georgia Bulldogs,2025-11-28T18:30:00Z,lines,8,10
+2025,5522e41053ad21182dcb8e88569c3239,2025-11-28T20:30:00Z,New Mexico Lobos,San Diego State Aztecs,2025-11-28T18:30:00Z,none,0,0
+2025,4ed54dc6116ec6373f9a1cf015ca6070,2025-11-28T20:30:00Z,North Texas Mean Green,Temple Owls,2025-11-28T18:30:00Z,none,0,0
+2025,baf849e79f0978d22d19b6c5e9df6622,2025-11-28T21:00:00Z,Utah State Aggies,Boise State Broncos,2025-11-28T19:00:00Z,lines,7,10
+2025,0f077fbc1706837ce351b4841cf850c9,2025-11-29T00:30:00Z,Purdue Boilermakers,Indiana Hoosiers,2025-11-28T22:30:00Z,lines,10,10
+2025,031eaf298fe62f9cc1ee593ebf867ad2,2025-11-29T00:30:00Z,Texas Longhorns,Texas A&M Aggies,2025-11-28T22:30:00Z,lines,9,10
+2025,eef629c46747c4f201a425717b019fde,2025-11-29T02:00:00Z,Arizona State Sun Devils,Arizona Wildcats,2025-11-29T00:00:00Z,none,0,0
+2025,56a84e83bd6d308bd7e7639bcb7b5879,2025-11-29T17:00:00Z,Miami (OH) RedHawks,Ball State Cardinals,2025-11-29T15:00:00Z,none,0,0
+2025,09d90f3370c02dea5e1eac347ffe476f,2025-11-29T17:00:00Z,Baylor Bears,Houston Cougars,2025-11-29T15:00:00Z,none,0,0
+2025,19367e63058bb517983e08c2502c9c4c,2025-11-29T17:00:00Z,Central Michigan Chippewas,Toledo Rockets,2025-11-29T15:00:00Z,none,0,0
+2025,c739b05669e6035797b50a66f2c23ce0,2025-11-29T17:00:00Z,South Carolina Gamecocks,Clemson Tigers,2025-11-29T15:00:00Z,none,0,0
+2025,98355c397c652869253cd333094fd6a8,2025-11-29T17:00:00Z,Kansas State Wildcats,Colorado Buffaloes,2025-11-29T15:00:00Z,none,0,0
+2025,254de28063691b5c8d711686691d3c90,2025-11-29T17:00:00Z,Florida Atlantic Owls,East Carolina Pirates,2025-11-29T15:00:00Z,none,0,0
+2025,6f1fb568ca7f6fa5adc55fb37e6cbf3b,2025-11-29T17:00:00Z,Oklahoma State Cowboys,Iowa State Cyclones,2025-11-29T15:00:00Z,none,0,0
+2025,f64071bbf06bf34a684c347ad45f82a9,2025-11-29T17:00:00Z,Louisville Cardinals,Kentucky Wildcats,2025-11-29T15:00:00Z,none,0,0
+2025,8f08d4462c8cbc09b866893ca21ae406,2025-11-29T17:00:00Z,Pittsburgh Panthers,Miami Hurricanes,2025-11-29T15:00:00Z,lines,4,10
+2025,a17c0bb6637ad2192754d6d1059f7e92,2025-11-29T17:00:00Z,Michigan Wolverines,Ohio State Buckeyes,2025-11-29T15:00:00Z,lines,7,10
+2025,9328f7960f57736e8da4b90cb2bdd826,2025-11-29T17:00:00Z,West Virginia Mountaineers,Texas Tech Red Raiders,2025-11-29T15:00:00Z,none,0,0
+2025,8e9db25305896f6a8ee5bf0e94c260f5,2025-11-29T18:00:00Z,BYU Cougars,UCF Knights,2025-11-29T16:00:00Z,none,0,0
+2025,2b6eb9e9331db7145e356d6a101aa182,2025-11-29T18:00:00Z,Delaware Blue Hens,UTEP Miners,2025-11-29T16:00:00Z,none,0,0
+2025,c66eb20cac802e1eec89aeda0d77ffd6,2025-11-29T18:00:00Z,Sam Houston State Bearkats,Florida International Panthers,2025-11-29T16:00:00Z,none,0,0
+2025,6888a4fdeae90f5ab2eb0051e9b20ed4,2025-11-29T18:30:00Z,Marshall Thundering Herd,Georgia Southern Eagles,2025-11-29T16:30:00Z,none,0,0
+2025,b1296a643a8d9b6bb75acc3d224e1394,2025-11-29T19:00:00Z,Old Dominion Monarchs,Georgia State Panthers,2025-11-29T17:00:00Z,none,0,0
+2025,0bf97e02f7764b89a22261ca0e26867a,2025-11-29T19:00:00Z,Jacksonville State Gamecocks,Western Kentucky Hilltoppers,2025-11-29T17:00:00Z,none,0,0
+2025,40957cd6146dab4aa2d4b8431e1fb6df,2025-11-29T19:00:00Z,Missouri State Bears,Louisiana Tech Bulldogs,2025-11-29T17:00:00Z,none,0,0
+2025,adba965eb4a76372f31e42f5a02f4157,2025-11-29T19:30:00Z,Appalachian State Mountaineers,Arkansas State Red Wolves,2025-11-29T17:30:00Z,none,0,0
+2025,f227f0ba147cb8471b7fa0200e02b853,2025-11-29T20:00:00Z,Syracuse Orange,Boston College Eagles,2025-11-29T18:00:00Z,none,0,0
+2025,12bd1537fbeb1dc2a7c5bffa180a01bc,2025-11-29T20:00:00Z,Louisiana Ragin Cajuns,UL Monroe Warhawks,2025-11-29T18:00:00Z,none,0,0
+2025,e050c8ec35a8408df75a681edd27d65c,2025-11-29T20:00:00Z,New Mexico State Aggies,Middle Tennessee Blue Raiders,2025-11-29T18:00:00Z,none,0,0
+2025,3b8f7932b91ca36668646fcf4eca8509,2025-11-29T20:00:00Z,Texas State Bobcats,South Alabama Jaguars,2025-11-29T18:00:00Z,none,0,0
+2025,71922a98a9b3e7e072bf9676e0470921,2025-11-29T20:00:00Z,Tulsa Golden Hurricane,UAB Blazers,2025-11-29T18:00:00Z,none,0,0
+2025,c90e85208735f83419bdd9fafea09515,2025-11-29T20:30:00Z,Arkansas Razorbacks,Missouri Tigers,2025-11-29T18:30:00Z,lines,2,10
+2025,13dee23ac75967bb3de963098e51b050,2025-11-29T20:30:00Z,UTSA Roadrunners,Army Black Knights,2025-11-29T18:30:00Z,none,0,0
+2025,8e6c3c00b853707c6c0ced7e96ff80eb,2025-11-29T20:30:00Z,TCU Horned Frogs,Cincinnati Bearcats,2025-11-29T18:30:00Z,none,0,0
+2025,bf37e86fb31ad838e265fe2d48f4ebee,2025-11-29T20:30:00Z,Duke Blue Devils,Wake Forest Demon Deacons,2025-11-29T18:30:00Z,none,0,0
+2025,884dea46381785292d51d8864de287c7,2025-11-29T20:30:00Z,Liberty Flames,Kennesaw State Owls,2025-11-29T18:30:00Z,none,0,0
+2025,fca43c84b575e6d2a974da994e1ca32f,2025-11-29T20:30:00Z,Oklahoma Sooners,LSU Tigers,2025-11-29T18:30:00Z,lines,9,10
+2025,01a5a9e3a1d3ecea3295256c33dfef3e,2025-11-29T20:30:00Z,Minnesota Golden Gophers,Wisconsin Badgers,2025-11-29T18:30:00Z,none,0,0
+2025,0deeb2c4386d575a59e7437fe01d1f6f,2025-11-29T20:30:00Z,Washington Huskies,Oregon Ducks,2025-11-29T18:30:00Z,lines,5,10
+2025,73c36d76de852e49c6d45b557ce30928,2025-11-29T20:30:00Z,Rutgers Scarlet Knights,Penn State Nittany Lions,2025-11-29T18:30:00Z,none,0,0
+2025,011ef17b2d5d53a4f74992fa28c703ce,2025-11-29T20:30:00Z,Southern Mississippi Golden Eagles,Troy Trojans,2025-11-29T18:30:00Z,none,0,0
+2025,8ff0041fc39ed3aaabd78295aaa44ccc,2025-11-29T20:30:00Z,Tennessee Volunteers,Vanderbilt Commodores,2025-11-29T18:30:00Z,lines,6,10
+2025,e715dd3730c3991c2b6a7630adbcb862,2025-11-29T20:45:00Z,Coastal Carolina Chanticleers,James Madison Dukes,2025-11-29T18:45:00Z,none,0,0
+2025,48712c446fe47c5fa3e18038bdd703e8,2025-11-29T21:30:00Z,Florida Gators,Florida State Seminoles,2025-11-29T19:30:00Z,none,0,0
+2025,db441b5da7cf49c5de57f49bff11d8ec,2025-11-29T23:30:00Z,Washington State Cougars,Oregon State Beavers,2025-11-29T21:30:00Z,none,0,0
+2025,79975b63437cb1b2a9d06d3b63150977,2025-11-30T00:00:00Z,Michigan State Spartans,Maryland Terrapins,2025-11-29T22:00:00Z,none,0,0
+2025,9d54a50182205f4d1c75bb7616993cf0,2025-11-30T00:00:00Z,South Florida Bulls,Rice Owls,2025-11-29T22:00:00Z,none,0,0
+2025,62c8f91b581d1bcca5fb6496ec65aae7,2025-11-30T00:01:00Z,Virginia Cavaliers,Virginia Tech Hokies,2025-11-29T22:01:00Z,lines,10,10
+2025,181afdc9ce2683ff7c1debad66022351,2025-11-30T00:30:00Z,Auburn Tigers,Alabama Crimson Tide,2025-11-29T22:30:00Z,lines,4,10
+2025,5459063e0c574b3e0a15501fe3797968,2025-11-30T00:30:00Z,Tulane Green Wave,Charlotte 49ers,2025-11-29T22:30:00Z,none,0,0
+2025,ed1f7d744112bf4d7184c2a3bbb2648c,2025-11-30T00:30:00Z,Illinois Fighting Illini,Northwestern Wildcats,2025-11-29T22:30:00Z,none,0,0
+2025,48a0d56354caf6da69d210132615c809,2025-11-30T00:30:00Z,NC State Wolfpack,North Carolina Tar Heels,2025-11-29T22:30:00Z,lines,9,10
+2025,7f71f4ba886e8f1f4855dad0152ca08e,2025-11-30T00:30:00Z,USC Trojans,UCLA Bruins,2025-11-29T22:30:00Z,lines,3,10
+2025,53c3b0253fe365f12e298b8b31b8f24a,2025-11-30T01:02:00Z,California Golden Bears,SMU Mustangs,2025-11-29T23:02:00Z,none,0,0
+2025,a8661dd205a3e868ac61c3f1c994dc7e,2025-11-30T02:00:00Z,Nevada Wolf Pack,UNLV Rebels,2025-11-30T00:00:00Z,none,0,0
+2025,1dbdbcf9d57952730a65559b09cc2b36,2025-11-30T03:30:00Z,San Jose State Spartans,Fresno State Bulldogs,2025-11-30T01:30:00Z,none,0,0
+2025,4e2c6842ce33619ecb4c77938e3093bc,2025-11-30T03:30:00Z,Stanford Cardinal,Notre Dame Fighting Irish,2025-11-30T01:30:00Z,none,0,0
+2025,6a888c041e81b35c741eb91824fd02c6,2025-11-30T04:00:00Z,Hawaii Rainbow Warriors,Wyoming Cowboys,2025-11-30T02:00:00Z,none,0,0
+2025,855b4b7959efc4b7309d16b8b17dd708,2025-12-06T00:00:00Z,Jacksonville State Gamecocks,Kennesaw State Owls,2025-12-05T22:00:00Z,lines,3,10
+2025,34fe27e86b995ea9e3cdc015d1ff5a46,2025-12-06T00:00:00Z,James Madison Dukes,Troy Trojans,2025-12-05T22:00:00Z,lines,8,10
+2025,bcda84050f6f1fe4756756124d40f116,2025-12-06T01:00:00Z,Tulane Green Wave,North Texas Mean Green,2025-12-05T23:00:00Z,lines,7,10
+2025,05574125db5d3bc8c0a9f0ce97971957,2025-12-06T01:01:00Z,Boise State Broncos,UNLV Rebels,2025-12-05T23:01:00Z,lines,3,10
+2025,87fe86f5fa1edd149d6cc5f8bcb82be2,2025-12-06T17:00:00Z,Texas Tech Red Raiders,BYU Cougars,2025-12-06T15:00:00Z,lines,9,10
+2025,825ab37366030db2e15565370bfc0104,2025-12-06T17:00:00Z,Western Michigan Broncos,Miami (OH) RedHawks,2025-12-06T15:00:00Z,lines,5,10
+2025,aa6121f597f3dd0a363e477797cd13f0,2025-12-06T21:00:00Z,Alabama Crimson Tide,Georgia Bulldogs,2025-12-06T19:00:00Z,lines,6,10
+2025,cb3db4cd7e1781ff0fa5e3caaf2d74e4,2025-12-07T01:00:00Z,Virginia Cavaliers,Duke Blue Devils,2025-12-06T23:00:00Z,lines,6,10
+2025,ed821485171f0486828ac8bfae9537a3,2025-12-07T01:00:00Z,Ohio State Buckeyes,Indiana Hoosiers,2025-12-06T23:00:00Z,lines,5,10
+2025,86b2f11373631509f973bd3e72f5732d,2025-12-13T20:00:00Z,Navy Midshipmen,Army Black Knights,2025-12-13T18:00:00Z,lines,1,10
+2025,a12597fe519a345d8bfdb3f8bd37fc2d,2025-12-14T01:00:00Z,Washington Huskies,Boise State Broncos,2025-12-13T23:00:00Z,lines,4,10
