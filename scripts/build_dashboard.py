@@ -649,7 +649,6 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .thead { font-family: var(--font-display); font-weight: 700; font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted-2); padding: 10px 14px; border-bottom: 1px solid var(--rule-faint); display: grid; }
 .num { text-align: right; }
 
-.edge-grid { grid-template-columns: 1fr 72px 72px 62px 54px 46px 54px; }
 .rate-grid { grid-template-columns: 26px 1fr 56px 1fr 100px; }
 .fantasy-grid { grid-template-columns: 26px 1fr 120px 90px; }
 .card-row  { grid-template-columns: 1fr 58px 68px 46px 58px; }
@@ -665,8 +664,6 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .team-abbr { font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: 0.03em; text-transform: uppercase; }
 .at { font-size: 9.5px; color: var(--muted-4); letter-spacing: 0.1em; }
 .meta { font-size: 9.5px; color: var(--muted-3); margin-top: 5px; display: flex; gap: 10px; white-space: nowrap; overflow: hidden; }
-.edge-play-pill { display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 4px; font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.02em; }
-.edge-fade-pill { display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 4px; font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.02em; background: rgba(255,255,255,0.05); border: 1px solid var(--muted-3); color: var(--muted-3); }
 
 .cell-market { font-size: 12.5px; color: var(--muted); }
 .cell-model  { font-size: 13px; font-weight: 700; }
@@ -674,7 +671,6 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .cell-edge.is-pos { color: var(--green); }
 .cell-edge.is-neg { color: var(--red); }
 .cell-edge.is-off { color: var(--muted-4); }
-.cell-prob   { font-size: 11.5px; color: var(--muted); }
 
 .tier { display: inline-block; transform: skewX(var(--skew)); font-family: var(--font-display); font-weight: 800; font-size: 12.5px; letter-spacing: 0.06em; padding: 3px 9px; background: var(--text); color: var(--bg); }
 .tier > span { display: inline-block; transform: skewX(11deg); }
@@ -700,10 +696,6 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .projector { background: var(--panel); border-bottom: 1px solid var(--rule); }
 .proj-head { padding: 20px 22px 18px; position: relative; overflow: hidden; }
 .proj-head-inner { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-.proj-side { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: none; }
-.proj-bar { width: 58px; height: 5px; transform: skewX(var(--skew)); }
-.proj-title { font-family: var(--font-display); font-weight: 800; font-size: 27px; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.05; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); }
-.proj-title .at-lg { font-size: 15px; color: rgba(255, 255, 255, 0.55); }
 .proj-meta { font-size: 9.5px; color: rgba(255, 255, 255, 0.62); margin-top: 7px; letter-spacing: 0.05em; }
 
 .scoreboard { display: flex; align-items: stretch; border-bottom: 1px solid var(--rule); background: var(--panel-deep); }
@@ -1014,6 +1006,55 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .pp-help-body { padding: 0 18px 16px; font-size: 11.5px; line-height: 1.65; color: var(--muted); max-width: 980px; }
 .pp-help-body p { margin: 0 0 9px; }
 .pp-help-body b { color: var(--text-dim); }
+/* Edge Board rows + Projector header (rebuilt 10/2026) */
+.eb-grid { grid-template-columns: minmax(186px, 1fr) 56px 56px 74px 48px 138px 48px; column-gap: 8px; }
+.eb-tools { margin: 12px 0 2px; }
+.eb-count { margin-left: auto; font-size: 11px; color: var(--muted); white-space: nowrap; }
+.eb-match { min-width: 0; }
+.eb-match .matchup { gap: 7px; }
+.eb-src { font-family: var(--font-display); font-weight: 700; letter-spacing: .05em; color: #8A94A3; }
+.eb-src.is-trained { color: #2ecc71; }
+.eb-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+.eb-inj { font-family: var(--font-display); font-weight: 800; font-size: 10.5px; letter-spacing: 0.06em; padding: 1px 6px; border-radius: 3px; border: 1px solid rgba(224,180,74,0.55); color: var(--amber); background: rgba(224,180,74,0.08); cursor: help; white-space: nowrap; }
+.eb-inj.is-out { border-color: rgba(255,82,82,0.6); color: #FF8A8A; background: rgba(255,82,82,0.10); }
+.eb-ring { position: relative; width: 44px; height: 44px; margin-left: auto; }
+.eb-ring svg { display: block; }
+.eb-ring span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 700; letter-spacing: -0.03em; color: var(--text-dim); }
+.eb-ring-track { stroke: var(--rule-strong); }
+.eb-ring-val { stroke: #54657A; }
+.eb-ring.is-play .eb-ring-val { stroke: var(--blue-light); }
+.eb-ring.is-card .eb-ring-val { stroke: var(--green); }
+.eb-ring.is-card span, .eb-ring.is-play span { color: var(--text); }
+.eb-play { min-width: 0; }
+.eb-noplay { display: block; text-align: center; color: var(--muted-4); }
+.eb-pill { border: 1px solid; border-radius: 5px; padding: 5px 6px 6px; text-align: center; line-height: 1.15; }
+.eb-pill-top { font-family: var(--font-display); font-weight: 800; font-size: 10.5px; letter-spacing: 0.1em; white-space: nowrap; }
+.eb-pill-pick { font-family: var(--font-display); font-weight: 700; font-size: 14.5px; letter-spacing: 0.02em; margin-top: 3px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.eb-pill-pick span { font-weight: 500; color: var(--text-dim); }
+.eb-pill-sub { font-size: 9.5px; margin-top: 3px; white-space: nowrap; }
+.eb-pill.is-card { background: rgba(23,194,107,0.13); border-color: var(--green); color: var(--green); }
+.eb-pill.is-track { background: rgba(46,123,255,0.09); border-color: rgba(91,164,255,0.55); color: var(--blue-light); }
+.eb-pill.is-warn { background: rgba(224,180,74,0.07); border-color: rgba(224,180,74,0.45); color: var(--amber); }
+.eb-pill.is-warn .eb-pill-pick, .eb-pill.is-track .eb-pill-pick { color: var(--text-dim); }
+.proj-side { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: none; width: 132px; }
+.proj-team { font-family: var(--font-display); font-weight: 800; font-size: 27px; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); }
+.proj-school { font-size: 10px; color: rgba(255, 255, 255, 0.7); text-align: center; line-height: 1.3; }
+.proj-mid { flex: 1; min-width: 0; text-align: center; }
+.proj-at { font-family: var(--font-display); font-weight: 800; font-size: 13px; letter-spacing: 0.18em; color: rgba(255, 255, 255, 0.5); }
+.proj-when { font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: 0.03em; margin-top: 4px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); }
+.proj-flags { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; margin-top: 9px; }
+.proj-flags .flag-chip { margin-left: 0; }
+.cmp-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 12px; padding: 3px 0; }
+.cmp-row span { color: var(--muted); font-size: 11px; }
+.cmp-row b { font-weight: 700; text-align: right; }
+.cmp-row i { font-style: normal; font-weight: 400; color: var(--muted); font-size: 11px; margin-left: 4px; }
+.cmp-row.is-gap { border-top: 1px solid var(--rule-faint); margin-top: 4px; padding-top: 7px; }
+.cmp-row.is-gap b { color: var(--blue-light); }
+.card-play { display: flex; align-items: center; gap: 8px; }
+.eb-match .meta { flex-wrap: wrap; row-gap: 2px; overflow: visible; }
+.eb-match .meta span { white-space: nowrap; }
+/* The board needs about 690px; below this the two columns stack rather than squeeze it. */
+@media (max-width: 1320px) { .main { grid-template-columns: 1fr; } }
 @media (max-width: 1100px) {
   .pp-key { margin-left: 0; }
   .pp-lower { grid-template-columns: 1fr; }
@@ -1425,7 +1466,7 @@ RENDERER_JS = """<script>
   var M = window.ModelMath;
   var MARKETS = ['Spread', 'Moneyline'];
 
-  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate', propGame: 'ALL', propOfficialOnly: false, propShowPass: false, propView: 'official', propDetail: null };
+  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', edgeSort: 'kickoff', edgeShow: 'all', edgeConf: 'ALL', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate', propGame: 'ALL', propOfficialOnly: false, propShowPass: false, propView: 'official', propDetail: null };
 
   var byName = {};
   D.teams.forEach(function (t) { byName[t.name] = t; });
@@ -1522,10 +1563,13 @@ RENDERER_JS = """<script>
       '</div></div>';
   }
 
-  function renderKpis(card) {
+  function renderKpis(card, priced) {
+    // "Qualifying edges" used to show card.length, which is capped at the
+    // Bet Card's ten -- it read "10" however many plays cleared the bar.
+    var flagged = (priced || []).filter(function (p) { return p.qualifies; }).length;
     var k = [
       ['Games priced', String(D.meta.gamesPriced), D.meta.totalGames + ' total in slate \\u00b7 ' + (D.meta.totalGames - D.meta.gamesPriced) + ' unpriced (no FBS SP+ rating or no market line)', false],
-      ['Qualifying edges', String(card.length), '\\u2265 ' + D.meta.minEdge.toFixed(1) + ' pt threshold, ' + state.market + ' market', false],
+      ['Qualifying edges', String(flagged), card.length + ' on the Bet Card \\u00b7 \\u2265 ' + D.meta.minEdge.toFixed(1) + ' pt threshold, ' + state.market + ' market', false],
       ['Model \\u03c3 margin', D.meta.marginSd != null ? D.meta.marginSd.toFixed(1) : '\\u2014', 'league-wide residual std, fit from ' + (D.meta.spN || 0) + ' 2021-2025 games', false],
       ['SP+ slope fit', D.meta.spSlope != null ? D.meta.spSlope.toFixed(3) : '\\u2014', 'margin = slope\\u00d7SP+diff + ' + (D.meta.spIntercept != null ? D.meta.spIntercept.toFixed(2) : '\\u2014'), false]
     ];
@@ -1585,8 +1629,77 @@ RENDERER_JS = """<script>
     }));
   }
 
+  /* ---- Edge Board (rows rebuilt 10/2026) ------------------------------
+     Same numbers as before -- every cell still comes straight from
+     priceGame() -- laid out so they can be read at a glance:
+       - school logos (helmet when there isn't one on file);
+       - the play in its own column instead of pills stacked under the
+         matchup, labelled by what to DO with it: BET CARD (wager), TRACK
+         ONLY, UNOFFICIAL, FADE. The label comes from playStatusOf(), the
+         same call the Projector makes, so the two can't disagree;
+       - win % as a ring; QB injuries as one short badge (hover for who);
+       - kickoff in your own time zone, like the Props tab and the tracker;
+       - sort and filters above the table. */
+  var EDGE_SORTS = [['kickoff', 'Sort: kickoff'], ['edge', 'Sort: biggest edge'], ['prob', 'Sort: highest win %']];
+  var EDGE_SHOWS = [['all', 'All games'], ['card', 'Bet Card plays'], ['plays', 'All flagged plays']];
+
+  function edgeBook(g) { return PROP_BOOK_LABELS[String(g.book || '').toLowerCase()] || g.book || ''; }
+  function edgeKickoff(g) { return propKickoff(g.kickoffIso) || g.kickoff; }
+  function edgeOnCard(s) { return s.kind === 'card' || (s.kind === 'target' && s.onCard); }
+  function edgeFiltering() { return state.edgeShow !== 'all' || state.edgeConf !== 'ALL'; }
+
+  function edgeRing(prob, tone) {
+    var c = 2 * Math.PI * 17, pct = Math.max(0, Math.min(1, prob)), txt = (pct * 100).toFixed(1) + '%';
+    return '<div class="eb-ring' + (tone ? ' ' + tone : '') + '" role="img" aria-label="' + txt + '">' +
+      '<svg viewBox="0 0 44 44" width="44" height="44" aria-hidden="true">' +
+        '<circle class="eb-ring-track" cx="22" cy="22" r="17" fill="none" stroke-width="4"/>' +
+        '<circle class="eb-ring-val" cx="22" cy="22" r="17" fill="none" stroke-width="4" stroke-linecap="round" ' +
+          'stroke-dasharray="' + (c * pct).toFixed(2) + ' ' + c.toFixed(2) + '" transform="rotate(-90 22 22)"/>' +
+      '</svg><span>' + txt + '</span></div>';
+  }
+  // "QB L. Kienholz (Questionable)" on Louisville -> "LOU QB QUESTIONABLE",
+  // with the full line on hover. Out is red, anything short of it amber.
+  function edgeInjuryBadge(f) {
+    var m = /\\(([^)]+)\\)\\s*$/.exec(f.text || ''), status = m ? m[1] : '';
+    return '<span class="eb-inj' + (/^out/i.test(status) ? ' is-out' : '') + '" title="' + esc(abbrOf(f.team) + ' ' + f.text) + '">⚠ ' +
+      esc(abbrOf(f.team)) + ' QB' + (status ? ' ' + esc(status.toUpperCase()) : '') + '</span>';
+  }
+  function edgePlayPill(s) {
+    var top, cls, title = s.note, extra = '';
+    if (edgeOnCard(s)) {
+      top = 'BET CARD'; cls = 'is-card'; title = 'On the Bet Card — wager';
+      if (s.kind === 'target') { extra = '<div class="eb-pill-sub">★ near-even · small stake</div>'; title = 'On the Bet Card. Near-even target: ' + s.note; }
+    } else if (s.kind === 'target') { top = 'NEAR-EVEN TARGET'; cls = 'is-track'; }
+    else if (s.kind === 'official') { top = 'TRACK ONLY'; cls = 'is-track'; title = 'Official play, not on the Bet Card — track only'; }
+    else if (s.kind === 'bigdog') { top = 'UNOFFICIAL DOG'; cls = 'is-warn'; title = 'Underdog moneyline longer than +150 — unofficial, track only'; }
+    else if (s.kind === 'bigspread') { top = 'FADE · 20+ PT'; cls = 'is-warn'; title = '20+ point spread — faded by rule'; }
+    else if (s.kind === 'fade') { top = 'FADE'; cls = 'is-warn'; }
+    else return '<span class="eb-noplay" title="' + esc(s.kind === 'nospread' ? 'No spread posted' : 'No play: ' + s.note) + '">—</span>';
+    return '<div class="eb-pill ' + cls + '" title="' + esc(title) + '"><div class="eb-pill-top">' + top + '</div>' +
+      '<div class="eb-pill-pick">' + esc(s.playText) + (cls === 'is-card' ? ' <span>· ' + esc(s.p.tier) + '</span>' : '') + '</div>' + extra + '</div>';
+  }
+
   function renderEdgeBoard(priced, card) {
-    var visible = priced.filter(function (p) { return matchesSearch(p.game); });
+    var all = priced.map(function (p, i) {
+      return { p: p, i: i, s: playStatusOf(p, card.some(function (c) { return c.game === p.game; })) };
+    });
+    var confs = {};
+    all.forEach(function (r) { [team(r.p.game.away).conf, team(r.p.game.home).conf].forEach(function (c) { if (c) confs[c] = true; }); });
+    if (state.edgeConf !== 'ALL' && !confs[state.edgeConf]) state.edgeConf = 'ALL';
+    var visible = all.filter(function (r) {
+      var g = r.p.game;
+      if (!matchesSearch(g)) return false;
+      if (state.edgeShow === 'card' && !edgeOnCard(r.s)) return false;
+      if (state.edgeShow === 'plays' && !r.p.qualifies) return false;
+      if (state.edgeConf !== 'ALL' && team(g.away).conf !== state.edgeConf && team(g.home).conf !== state.edgeConf) return false;
+      return true;
+    });
+    // The slate arrives in kickoff order, so "kickoff" is simply the order
+    // it came in; the other two sort on the picked side's own number.
+    if (state.edgeSort === 'edge') visible.sort(function (a, b) { return (b.p.sideEdge - a.p.sideEdge) || (a.i - b.i); });
+    else if (state.edgeSort === 'prob') visible.sort(function (a, b) { return (b.p.sideProb - a.p.sideProb) || (a.i - b.i); });
+
+    var opt = function (v, label, cur) { return '<option value="' + esc(v) + '"' + (cur === v ? ' selected' : '') + '>' + esc(label) + '</option>'; };
     var head = '' +
       '<div class="section-head">' +
         '<div class="section-title"><div class="section-flag"></div><h2>Edge Board</h2></div>' +
@@ -1594,40 +1707,28 @@ RENDERER_JS = """<script>
           return '<button class="tab tab--market' + (m === state.market ? ' is-active' : '') + '" data-market="' + esc(m) + '"><span>' + esc(m) + '</span></button>';
         }).join('') + '</div>' +
       '</div>' +
-      '<div class="thead edge-grid"><div>Matchup</div><div class="num">Market</div><div class="num">Model</div>' +
-      '<div class="num">Edge</div><div class="num">Win%</div><div class="num">Play</div><div class="num"></div></div>';
+      '<div class="trk-tools eb-tools">' +
+        '<select class="trk-sel" data-edge-filter="edgeShow" aria-label="Which games to show">' + EDGE_SHOWS.map(function (o) { return opt(o[0], o[1], state.edgeShow); }).join('') + '</select>' +
+        '<select class="trk-sel" data-edge-filter="edgeConf" aria-label="Filter by conference">' + opt('ALL', 'All conferences', state.edgeConf) +
+          Object.keys(confs).sort().map(function (c) { return opt(c, c, state.edgeConf); }).join('') + '</select>' +
+        '<select class="trk-sel" data-edge-filter="edgeSort" aria-label="Sort games">' + EDGE_SORTS.map(function (o) { return opt(o[0], o[1], state.edgeSort); }).join('') + '</select>' +
+        '<span class="eb-count">' + visible.length + ' of ' + all.length + ' games' +
+          (edgeFiltering() || state.search ? ' · <button class="trk-linkbtn" data-edge-clear="1">Show all</button>' : '') + '</span>' +
+      '</div>' +
+      '<div class="thead eb-grid"><div>Matchup</div><div class="num" title="Home team’s number">Market</div><div class="num" title="Home team’s number">Model</div>' +
+      '<div class="num">Edge</div><div class="num">Win %</div><div style="text-align:center">Play</div><div></div></div>';
 
-    var rows = visible.map(function (p) {
-      var g = p.game, a = team(g.away), h = team(g.home);
-      var i = priced.indexOf(p);
-      // cls now reflects "is this row actually good/bad," not raw
-      // home-team sign: is-off below the edge threshold or price-cap-
-      // excluded, is-neg for a confirmed-negative-EV FADE, is-pos for an
-      // actual qualifying play. (See sideEdge/sideEdgeLabel in priceGame
-      // for why the Edge column text itself also switched off raw p.edge.)
+    var rows = visible.map(function (r) {
+      var p = r.p, s = r.s, i = r.i, g = p.game, a = team(g.away), h = team(g.home);
+      // cls reflects "is this row actually good/bad," not raw home-team
+      // sign: is-off below the edge threshold or price-cap-excluded, is-neg
+      // for a confirmed-negative-EV FADE, is-pos for an actual qualifying
+      // play. (See sideEdge/sideEdgeLabel in priceGame for why the Edge
+      // column text itself also switched off raw p.edge.)
       var cls = Math.abs(p.edgeForTier) < D.meta.minEdge ? 'is-off'
         : p.isFade ? 'is-neg'
         : p.qualifies ? 'is-pos'
         : 'is-off';
-      var qualifies = p.qualifies;
-      var playPillLabel = qualifies
-        ? (p.market === 'Moneyline'
-            ? p.playLabel + ' ' + (p.sideMoneyline > 0 ? '+' : '') + p.sideMoneyline
-            : p.playLabel)
-        : null;
-      var playPillColor = qualifies ? M.displayColor(team(p.side).primary) : null;
-      // FADE: the model disagreed with the market on this side but it
-      // isn't actually positive EV at the price offered -- shown so it's
-      // visibly "not a play," not silently dropped. Never implies the
-      // OTHER side is a play (see isFade in priceGame()).
-      var fadePillLabel = p.isFade
-        ? p.playLabel + ' ' + (p.sideMoneyline > 0 ? '+' : '') + p.sideMoneyline
-        : null;
-      // Same idea as the Moneyline FADE pill above, for the 20+pt spread
-      // exclusion: the model still has an opinion here (often a big one --
-      // that's the whole problem), but it's not a play, so say so instead
-      // of the row just looking like nothing happened.
-      var bigSpreadPillLabel = p.bigSpread ? p.playLabel : null;
       // Which model priced this game -- shown on EVERY row (not just
       // PLAY/FADE ones), since it's a property of the game itself, not the
       // pick. Same flag the tracker badge/priceGame's untrustedUnderdog
@@ -1637,42 +1738,37 @@ RENDERER_JS = """<script>
       // tracking a play.
       var isTrainedGame = (g.flags || []).some(function (f) { return f.text === 'In-season model'; });
       var modelSrcLabel = isTrainedGame ? (g.modelVersion === 'upgraded' ? 'UPGRADED' : 'TRAINED') : 'UNTRAINED';
-      var modelSrcColor = isTrainedGame ? '#2ecc71' : '#8A94A3';
+      var injuries = (g.flags || []).filter(function (f) { return f.qb; }).map(edgeInjuryBadge).join('');
       return '' +
         '<div class="row row--click' + (i === state.selected ? ' is-selected' : '') + '" data-game="' + i + '">' +
           '<div class="row-accent" style="background:linear-gradient(' + esc(M.displayColor(a.primary)) + ',' + esc(M.displayColor(h.primary)) + ')"></div>' +
-          '<div class="row-body edge-grid">' +
-            '<div><div class="matchup">' +
-              helmet(g.away, 32, 19, false) +
-              '<span class="team-abbr">' + esc(a.abbr) + '</span>' +
+          '<div class="row-body eb-grid">' +
+            '<div class="eb-match"><div class="matchup">' +
+              trkMark(a.abbr, 26) +
+              '<span class="team-abbr" title="' + esc(g.away) + '">' + esc(a.abbr) + '</span>' +
               '<span class="at">AT</span>' +
-              helmet(g.home, 32, 19, true) +
-              '<span class="team-abbr">' + esc(h.abbr) + '</span>' +
+              trkMark(h.abbr, 26) +
+              '<span class="team-abbr" title="' + esc(g.home) + '">' + esc(h.abbr) + '</span>' +
             '</div>' +
-            '<div class="meta"><span>' + esc(g.kickoff) + '</span><span>' + esc(g.book) + '</span>' +
-              '<span style="font-family:var(--font-display);font-weight:700;letter-spacing:.05em;color:' + modelSrcColor + '">' + modelSrcLabel + '</span></div>' +
-            (qualifies ? '<div class="edge-play-pill" style="background:' + esc(playPillColor) + '26;border:1px solid ' + esc(playPillColor) + ';color:' + esc(playPillColor) + '">PLAY: ' + esc(playPillLabel) + '</div>' : '') +
-            (p.isFade ? '<div class="edge-fade-pill">FADE: ' + esc(fadePillLabel) + '</div>' : '') +
-            (p.bigSpread ? '<div class="edge-fade-pill">FADE: 20+PT SPREAD</div>' : '') +
-            (isNearEvenTarget(p) ? '<div class="edge-play-pill" style="background:rgba(23,194,107,0.16);border:1px solid var(--green);color:var(--green);margin-left:6px">TARGET: NEAR-EVEN ML</div>' : '') +
-            (g.flags || []).filter(function (f) { return f.qb; }).map(function (f) {
-              return '<div class="edge-fade-pill" style="border-color:var(--amber);color:var(--amber);margin-left:6px">\u26a0 ' + esc(abbrOf(f.team)) + ' ' + esc(f.text) + '</div>';
-            }).join('') +
+            '<div class="meta"><span>' + esc(edgeKickoff(g)) + '</span><span>' + esc(edgeBook(g)) + '</span>' +
+              '<span class="eb-src' + (isTrainedGame ? ' is-trained' : '') + '">' + modelSrcLabel + '</span></div>' +
+            (injuries ? '<div class="eb-badges">' + injuries + '</div>' : '') +
             '</div>' +
             '<div class="num cell-market">' + esc(p.marketLabel) + '</div>' +
             '<div class="num cell-model">' + esc(p.modelLabel) + '</div>' +
             '<div class="num cell-edge ' + cls + '">' + esc(p.sideEdgeLabel) + '</div>' +
-            '<div class="num cell-prob">' + (p.sideProb * 100).toFixed(1) + '%</div>' +
-            '<div class="num"><span class="tier' + (p.tier === '\\u2014' ? ' is-off' : '') + '"><span>' + esc(p.tier) + '</span></span></div>' +
+            '<div>' + edgeRing(p.sideProb, edgeOnCard(s) ? 'is-card' : (p.qualifies ? 'is-play' : '')) + '</div>' +
+            '<div class="eb-play">' + edgePlayPill(s) + '</div>' +
             '<div class="num"><button class="track-btn" onclick="event.stopPropagation();window.__cfbTrack(' + trackPayload(p) + ')">+TRK</button></div>' +
           '</div>' +
         '</div>';
     }).join('');
 
     var foot = '<div class="table-foot"><span>Edge stated in points of expected value against the posted number. ' +
-      'Threshold ' + D.meta.minEdge.toFixed(1) + ' pts.</span><span>' + card.length + ' qualifying plays \\u00b7 ' + visible.length + ' shown</span></div>';
+      'Threshold ' + D.meta.minEdge.toFixed(1) + ' pts. Market and Model are the home team’s number; Edge and Win % are for the side the model takes.</span>' +
+      '<span>' + card.length + ' on the Bet Card · ' + visible.length + ' shown</span></div>';
 
-    return head + (visible.length ? rows : '<div class="empty-state">No games match that search.</div>') + foot;
+    return head + (visible.length ? rows : '<div class="empty-state">No games match. <button class="trk-linkbtn" data-edge-clear="1">Show all</button></div>') + foot;
   }
 
   function renderRatings() {
@@ -1836,54 +1932,71 @@ RENDERER_JS = """<script>
       'usage, not a verified roster field \u2014 treat it as a label, not a guarantee.</span></div>';
   }
 
+  // ---- How to treat one priced play, under the betting rules ------------
+  // The single place that decides it (10/2026). The Projector's "Model's
+  // play" panel and the Edge Board's Play column both read this, so a row
+  // on the board can never say one thing while the Projector says another:
+  //   Bet Card + official ................ wager
+  //   official but off the card .......... track only
+  //   underdog moneyline past +150 ....... unofficial, track only
+  //   20+ point spread ................... faded by rule
+  //   clears the edge bar but not +EV .... fade
+  //   otherwise .......................... no play
+  // p is a priceGame() result; onCard is whether that game is on the Bet
+  // Card for p's market.
+  function playStatusOf(p, onCard) {
+    var market = p.market;
+    var playText = market === 'Moneyline' && p.sideMoneyline != null
+      ? p.playLabel + ' ' + (p.sideMoneyline > 0 ? '+' : '') + p.sideMoneyline
+      : p.playLabel;
+    var bigDogML = market === 'Moneyline' && p.sideMoneyline > 150;
+    var s = { p: p, onCard: !!onCard, playText: playText, note: '' };
+    if (market === 'Spread' && p.playLabel === 'No spread posted') {
+      s.kind = 'nospread'; s.label = 'NO SPREAD POSTED'; s.color = 'var(--muted-3)'; s.playText = '—';
+    } else if (isNearEvenTarget(p)) {
+      s.kind = 'target'; s.label = 'TARGET · NEAR-EVEN ML'; s.color = 'var(--green)'; s.note = 'model 65%+ at +100 to +150 — small stake';
+    } else if (p.qualifies && bigDogML) {
+      s.kind = 'bigdog'; s.label = 'UNOFFICIAL · BIG UNDERDOG ML'; s.color = 'var(--amber)'; s.note = 'track only — longer than +150';
+    } else if (p.qualifies && onCard) {
+      s.kind = 'card'; s.label = 'OFFICIAL · BET CARD'; s.color = 'var(--green)'; s.note = 'wager';
+    } else if (p.qualifies) {
+      s.kind = 'official'; s.label = 'OFFICIAL PLAY'; s.color = 'var(--blue-light)'; s.note = 'not on the Bet Card — track only';
+    } else if (p.bigSpread) {
+      s.kind = 'bigspread'; s.label = 'UNOFFICIAL · 20+ PT SPREAD'; s.color = 'var(--amber)'; s.note = 'faded by rule';
+    } else if (p.isFade) {
+      s.kind = 'fade'; s.label = 'FADE'; s.color = 'var(--amber)'; s.note = 'model disagrees, but not +EV at this price';
+    } else {
+      s.kind = 'none'; s.label = 'NO PLAY'; s.color = 'var(--muted-3)';
+      s.note = market === 'Spread' ? 'edge under the ' + D.meta.minEdge.toFixed(1) + '-pt threshold' : 'edge under the play threshold';
+    }
+    return s;
+  }
+
   // ---- "Model's play" panel for the selected game (added 10/2026) ----
   // Spells out, for BOTH markets, what the model's play is and how to treat
-  // it under the betting rules: Bet Card + official = wager; official but
-  // off the card = track only; underdog moneylines and 20+ pt spreads =
-  // unofficial; otherwise no play.
+  // it under the betting rules (see playStatusOf).
   function modelPlaysPanel(g) {
     var trained = (g.flags || []).some(function (f) { return f.text === 'In-season model'; });
     function row(market) {
       var o = { market: market, minEdge: D.meta.minEdge, abbrOf: abbrOf };
       var p = M.priceGame(g, o);
       var onCard = M.buildBetCard(D.games, o).some(function (c) { return c.game === g; });
-      var label, color, note = '';
-      var playText = market === 'Moneyline' && p.sideMoneyline != null
-        ? p.playLabel + ' ' + (p.sideMoneyline > 0 ? '+' : '') + p.sideMoneyline
-        : p.playLabel;
-      var bigDogML = market === 'Moneyline' && p.sideMoneyline > 150;
-      if (market === 'Spread' && p.playLabel === 'No spread posted') {
-        label = 'NO SPREAD POSTED'; color = 'var(--muted-3)'; playText = '\\u2014';
-      } else if (isNearEvenTarget(p)) {
-        label = 'TARGET \\u00b7 NEAR-EVEN ML'; color = 'var(--green)'; note = 'model 65%+ at +100 to +150 \\u2014 small stake';
-      } else if (p.qualifies && bigDogML) {
-        label = 'UNOFFICIAL \\u00b7 BIG UNDERDOG ML'; color = 'var(--amber)'; note = 'track only \\u2014 longer than +150';
-      } else if (p.qualifies && onCard) {
-        label = 'OFFICIAL \\u00b7 BET CARD'; color = 'var(--green)'; note = 'wager';
-      } else if (p.qualifies) {
-        label = 'OFFICIAL PLAY'; color = 'var(--blue-light)'; note = 'not on the Bet Card \\u2014 track only';
-      } else if (p.bigSpread) {
-        label = 'UNOFFICIAL \\u00b7 20+ PT SPREAD'; color = 'var(--amber)'; note = 'faded by rule';
-      } else if (p.isFade) {
-        label = 'FADE'; color = 'var(--amber)'; note = 'model disagrees, but not +EV at this price';
-      } else {
-        label = 'NO PLAY'; color = 'var(--muted-3)';
-        note = market === 'Spread' ? 'edge under the ' + D.meta.minEdge.toFixed(1) + '-pt threshold' : 'edge under the play threshold';
-      }
+      var s = playStatusOf(p, onCard);
+      var label = s.label, color = s.color, note = s.note, playText = s.playText;
       var showLean = label !== 'NO SPREAD POSTED';
       return '<div style="display:grid;grid-template-columns:96px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--rule-faint)">' +
         '<div class="proj-stat-label" style="margin:0">' + esc(market) + '</div>' +
         '<div><div style="font-family:var(--font-display);font-weight:700;font-size:17px">' + esc(playText) + '</div>' +
           '<div style="font-size:10px;color:var(--muted-3);margin-top:3px">' +
-            (showLean ? (market === 'Spread' ? 'cover' : 'win') + ' prob ' + (p.sideProb * 100).toFixed(1) + '% \\u00b7 edge ' + esc(p.sideEdgeLabel) : '') +
-            (note ? (showLean ? ' \\u00b7 ' : '') + esc(note) : '') + '</div></div>' +
+            (showLean ? (market === 'Spread' ? 'cover' : 'win') + ' prob ' + (p.sideProb * 100).toFixed(1) + '% · edge ' + esc(p.sideEdgeLabel) : '') +
+            (note ? (showLean ? ' · ' : '') + esc(note) : '') + '</div></div>' +
         '<div style="font-family:var(--font-display);font-weight:800;font-size:11px;letter-spacing:.06em;padding:4px 9px;border-radius:3px;' +
           'border:1px solid ' + color + ';color:' + color + ';white-space:nowrap">' + label + '</div>' +
       '</div>';
     }
     return '<div class="panel-pad" style="padding-top:14px;padding-bottom:10px;border-bottom:1px solid var(--rule)">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">' +
-        '<div class="chart-head" style="margin:0">Model\\u2019s play</div>' +
+        '<div class="chart-head" style="margin:0">Model’s play</div>' +
         '<span class="pchip" style="background:' + (trained ? 'rgba(23,194,107,0.16);color:var(--green)' : 'rgba(255,255,255,0.06);color:var(--muted-3)') + '">' +
           (trained ? (g.modelVersion === 'upgraded' ? 'UPGRADED MODEL' : 'TRAINED MODEL') : 'UNTRAINED (PRESEASON) MODEL') + '</span>' +
       '</div>' + row('Spread') + row('Moneyline') + '</div>';
@@ -1907,29 +2020,43 @@ RENDERER_JS = """<script>
     var favPosted = favHome ? g.marketMoneyline : g.awayMoneyline;
     var favFair = M.fairAmerican(favProb);
     var gap = favMkt == null ? null : Math.abs(favLine - favMkt);
-    function amer(v) { return v == null ? '\\u2014' : (v > 0 ? '+' : '') + v; }
+    // What the posted moneylines say that same team's chance is, with the
+    // book's margin taken out -- the same removeVig() the Moneyline edge on
+    // the board is measured against, so the gap here IS that edge, stated
+    // for the model's favorite.
+    var hasML = g.marketMoneyline != null && g.awayMoneyline != null && !isNaN(g.marketMoneyline) && !isNaN(g.awayMoneyline);
+    var mktProbs = hasML ? M.removeVig(g.marketMoneyline, g.awayMoneyline) : null;
+    var favMktProb = mktProbs ? (favHome ? mktProbs[0] : mktProbs[1]) : null;
+    var probGap = favMktProb == null ? null : (favProb - favMktProb) * 100;
+    function amer(v) { return v == null ? '—' : (v > 0 ? '+' : '') + v; }
     var aC = M.displayColor(a.primary), hC = M.displayColor(h.primary);
     var split = 'linear-gradient(100deg,' + aC + '55 0%,' + aC + '18 33%,' +
       'var(--panel-deep) 46%,var(--panel-deep) 54%,' + hC + '18 67%,' + hC + '55 100%)';
+    var side = function (name, t) {
+      return '<div class="proj-side">' + trkMark(t.abbr, 64) +
+        '<div class="proj-team">' + esc(t.abbr) + '</div>' +
+        (name !== t.abbr ? '<div class="proj-school">' + esc(name) + '</div>' : '') + '</div>';
+    };
+    var cmp = function (label, value, cls) {
+      return '<div class="cmp-row' + (cls ? ' ' + cls : '') + '"><span>' + label + '</span><b>' + value + '</b></div>';
+    };
 
     return '' +
       '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Matchup Projector</h2></div></div>' +
       '<div class="projector">' +
 
         '<div class="proj-head" style="background:' + split + '"><div class="proj-head-inner">' +
-          '<div class="proj-side">' + helmet(g.away, 86, 51, false) +
-            '<div class="proj-bar" style="background:' + esc(aC) + '"></div></div>' +
-          '<div style="text-align:center;flex:1">' +
-            '<div class="proj-title">' + esc(a.abbr) + ' <span class="at-lg">AT</span> ' + esc(h.abbr) + '</div>' +
-            '<div class="proj-meta">' + esc(g.kickoff) + ' \\u00b7 line: ' + esc(g.book) +
-              (g.flags && g.flags.length ? g.flags.map(function (f) {
-                var cls = f.level === 1 ? ' is-warn' : (f.level === 2 ? ' is-good' : '');
-                return '<span class="flag-chip' + cls + '">' + esc(f.text) + '</span>';
-              }).join('') : '') +
-            '</div>' +
+          side(g.away, a) +
+          '<div class="proj-mid">' +
+            '<div class="proj-at">AT</div>' +
+            '<div class="proj-when">' + esc(edgeKickoff(g)) + '</div>' +
+            '<div class="proj-meta">line: ' + esc(edgeBook(g)) + '</div>' +
+            (g.flags && g.flags.length ? '<div class="proj-flags">' + g.flags.map(function (f) {
+              var cls = f.level === 1 ? ' is-warn' : (f.level === 2 ? ' is-good' : '');
+              return '<span class="flag-chip' + cls + '">' + (f.qb ? esc(abbrOf(f.team)) + ' ' : '') + esc(f.text) + '</span>';
+            }).join('') + '</div>' : '') +
           '</div>' +
-          '<div class="proj-side">' + helmet(g.home, 86, 51, true) +
-            '<div class="proj-bar" style="background:' + esc(hC) + '"></div></div>' +
+          side(g.home, h) +
         '</div></div>' +
 
         modelPlaysPanel(g) +
@@ -1941,18 +2068,23 @@ RENDERER_JS = """<script>
             '<div class="score-value is-blue">' + (favProb * 100).toFixed(0) + '%</div></div>' +
         '</div>' +
 
+        // Model against market, both ways of asking the question: by how
+        // many points, and how often the model's favorite wins.
         '<div class="proj-pair">' +
-          '<div class="proj-stat"><div class="proj-stat-label">Market line</div>' +
-            '<div class="proj-stat-value">' + (favMkt == null ? '\u2014' : esc(fav.abbr) + ' ' + M.signed(favMkt)) + '</div>' +
-            '<div class="proj-stat-sub">' + (gap == null ? 'no spread posted yet' : 'model is ' + gap.toFixed(1) + ' pts ' +
-              (favLine < favMkt ? 'more on ' : 'less on ') + esc(fav.abbr)) + '</div></div>' +
-          '<div class="proj-stat"><div class="proj-stat-label">' + esc(fav.abbr) + ' moneyline</div>' +
-            '<div class="proj-stat-value">fair ' + amer(favFair) + '</div>' +
-            '<div class="proj-stat-sub">posted ' + amer(favPosted) + '</div></div>' +
+          '<div class="proj-stat"><div class="proj-stat-label">Spread</div>' +
+            cmp('Model', esc(fav.abbr) + ' ' + M.signed(favLine)) +
+            cmp('Market', favMkt == null ? '—' : esc(fav.abbr) + ' ' + M.signed(favMkt)) +
+            cmp('Gap', gap == null ? 'no spread posted yet' : gap.toFixed(1) + ' pts ' + (favLine < favMkt ? 'more' : 'less') + ' on ' + esc(fav.abbr), 'is-gap') +
+          '</div>' +
+          '<div class="proj-stat"><div class="proj-stat-label">' + esc(fav.abbr) + ' to win</div>' +
+            cmp('Model', (favProb * 100).toFixed(1) + '% <i>fair ' + amer(favFair) + '</i>') +
+            cmp('<span title="What the posted moneylines imply, with the book’s margin taken out">Market</span>', favMktProb == null ? '—' : (favMktProb * 100).toFixed(1) + '% <i>posted ' + amer(favPosted) + '</i>') +
+            cmp('Gap', probGap == null ? 'no moneyline posted yet' : M.signed(probGap) + ' pp', 'is-gap') +
+          '</div>' +
         '</div>' +
 
         '<div class="panel-pad">' +
-          '<div class="chart-head"><span>' + esc(dist.title) + '</span><span>\\u03c3 ' + dist.sigma.toFixed(1) + ' (league-wide)</span></div>' +
+          '<div class="chart-head"><span>' + esc(dist.title) + '</span><span>σ ' + dist.sigma.toFixed(1) + ' (league-wide)</span></div>' +
           '<div class="field">' +
             '<div class="field-shade" style="left:' + dist.shadeFromPct.toFixed(2) + '%;width:' + dist.shadeWidthPct.toFixed(2) + '%"></div>' +
             '<div class="field-bars">' + dist.bins.map(function (b) {
@@ -1971,7 +2103,7 @@ RENDERER_JS = """<script>
 
         '<div class="panel-pad--tight">' +
           '<div class="chart-head chart-head--ruled"><span>Line decomposition</span>' +
-            '<span class="legend">\\u2190 ' + esc(h.abbr) + ' \\u00b7 ' + esc(a.abbr) + ' \\u2192</span></div>' +
+            '<span class="legend">← ' + esc(h.abbr) + ' · ' + esc(a.abbr) + ' →</span></div>' +
           '<div class="decomp"><div class="decomp-axis"></div>' +
             dec.rows.map(function (r) {
               var col = r.points === 0 ? '#3A4757' : (r.towardHome ? hC : aC);
@@ -1984,7 +2116,7 @@ RENDERER_JS = """<script>
               '</div>';
             }).join('') +
             '<div class="decomp-row"><div></div><div class="decomp-scale">' +
-              '<span style="left:0%">\\u2212' + dec.scaleMax + '</span><span style="left:50%">0</span>' +
+              '<span style="left:0%">−' + dec.scaleMax + '</span><span style="left:50%">0</span>' +
               '<span style="left:100%">+' + dec.scaleMax + '</span></div><div></div></div>' +
           '</div>' +
           '<div class="decomp-total"><div class="decomp-total-label">Model line</div>' +
@@ -2036,8 +2168,8 @@ RENDERER_JS = """<script>
           var qbFlags = (c.game.flags || []).filter(function (f) { return f.qb; });
           return '<div class="row"><div class="row-accent" style="background:' + esc(col) + '"></div>' +
             '<div class="row-body card-row">' +
-              '<div><div class="card-play">' + esc(c.playLabel) + '</div>' +
-                '<div class="card-note">' + esc(abbrOf(c.game.away) + ' at ' + abbrOf(c.game.home) + ' \\u00b7 ' + c.game.kickoff) +
+              '<div><div class="card-play">' + (c.side ? trkMark(abbrOf(c.side), 22) : '') + '<span>' + esc(c.playLabel) + '</span></div>' +
+                '<div class="card-note">' + esc(abbrOf(c.game.away) + ' at ' + abbrOf(c.game.home) + ' \\u00b7 ' + edgeKickoff(c.game)) +
                   ' \\u00b7 <span style="font-weight:700;color:' + (isTrainedGame ? '#2ecc71' : '#8A94A3') + '">' + (isTrainedGame ? (c.game.modelVersion === 'upgraded' ? 'UPGRADED' : 'TRAINED') : 'UNTRAINED') + '</span></div></div>' +
               '<div class="card-price">' + esc(sidePriceLabel) + '</div>' +
               '<div class="card-conf">' + (sideProb * 100).toFixed(1) + '%</div>' +
@@ -4039,7 +4171,7 @@ RENDERER_JS = """<script>
       case 'performance': return renderBacktest() + renderClv();
       case 'edge':
       default:
-        return renderKpis(card) +
+        return renderKpis(card, priced) +
           '<div class="main">' +
             '<div>' + renderEdgeBoard(priced, card) + '</div>' +
             '<div>' + renderProjector(sel) + renderBetCard(card) + '</div>' +
@@ -4058,7 +4190,7 @@ RENDERER_JS = """<script>
       '<div class="wrap">' +
         renderPage(priced, card, sel) +
         '<div class="footer">' +
-          '<span>Team marks are generic color-accurate helmets, except in My Tracker, which shows school logos where one is on file. Preseason: no in-season form exists yet for 2026, ' +
+          '<span>Team marks are school logos where one is on file (Edge Board, Projector, Bet Card, My Tracker) and a generic color-accurate helmet otherwise. Preseason: no in-season form exists yet for 2026, ' +
           'so every model number here comes from SP+ rating differential plus a fitted home-field constant, adjusted by any active ' +
           'manual injury/availability override (config/injury_overrides.csv \\u2014 hand-maintained, not scraped; no free CFB injury API ' +
           'exists). No Total/Team-total market, weather, travel, pace, returning-production, or futures data is fetched by this pipeline ' +
@@ -4068,7 +4200,9 @@ RENDERER_JS = """<script>
       '</div>';
   }
 
-  window.__cfbSearch = function (v) { state.search = v; render(); };
+  // renderKeep, not render: redrawing the page rebuilt the search box too,
+  // so the cursor fell out of it after every single letter typed.
+  window.__cfbSearch = function (v) { state.search = v; renderKeep(); };
   window.__cfbPropGame = function (v) { state.propGame = v; render(); };
   window.__cfbPropOfficial = function () { state.propOfficialOnly = !state.propOfficialOnly; render(); };
   window.__cfbPropShowPass = function () { state.propShowPass = !state.propShowPass; render(); };
@@ -4128,6 +4262,7 @@ RENDERER_JS = """<script>
     if (g) { state.selected = +g.dataset.game; return render(); }
     var m = e.target.closest('[data-market]');
     if (m) { state.market = m.dataset.market; return render(); }
+    if (e.target.closest('[data-edge-clear]')) { state.edgeShow = 'all'; state.edgeConf = 'ALL'; state.search = ''; return render(); }
     var pm = e.target.closest('[data-prop-market]');
     if (pm) { state.propMarket = pm.dataset.propMarket; return render(); }
     var pf = e.target.closest('[data-prop-fold]');
@@ -4138,6 +4273,12 @@ RENDERER_JS = """<script>
     if (mt) { state.trackerModelTab = mt.dataset.modelTab; return render(); }
     var is = e.target.closest('[data-inj-scope]');
     if (is) { state.injScope = is.dataset.injScope; return render(); }
+  });
+
+  // Edge Board sort / filter dropdowns.
+  document.addEventListener('change', function (e) {
+    var k = e.target && e.target.dataset && e.target.dataset.edgeFilter;
+    if (k === 'edgeSort' || k === 'edgeShow' || k === 'edgeConf') { state[k] = e.target.value; render(); }
   });
 
   seedTrackerIfMissing();
