@@ -42,6 +42,10 @@ How each is graded
   2026  Train on 2022-2025. Every saved receptions line scored on both
         sides at its real prices: the official rule, by edge size, and by
         matchup.
+  Past  If past-season lines have been pulled (pull_props_history.py), each
+        of those seasons is graded the same way: trained only on the seasons
+        before it, at the real prices posted before kickoff. With 2022 as
+        the first season of data, 2024 and 2025 can be graded.
 
 Outputs (model results only -- no PFF numbers; the repo is public)
   docs/data/props_lab3.json
@@ -65,14 +69,18 @@ import numpy as np
 import pandas as pd
 from scipy.optimize import minimize
 
+import backtest_props_live as bpl
 import props_lab as lab
 import props_lab2 as lab2
 from src.data import pff_client as pff
 from src.features import pff_features as pf
+from src.features.live_player_features import _normalize_name
 
 STAT = "receptions"
 OUT_JSON = "docs/data/props_lab3.json"
 OUT_CSV = "docs/data/props_lab3_detail.csv"
+HIST_DIR = "data/props_history"         # past-season lines, saved by pull_props_history.py
+MIN_ROWS = 200
 SHRINK_GAMES = 3                    # a defense's number is pulled toward 1.00 as if it had 3 average games behind it
 MIN_COVERAGE_SNAPS = 40             # coverage snaps a position group needs before its grade is used
 TOUGH, SOFT = 0.93, 1.07            # matchup buckets on the position number
@@ -419,6 +427,98 @@ def props_by_matchup(rows, idx_of, feats):
             "unders_10_plus": {k: lab2.rec_line(g, "under") for k, g in under_rule.groupby("matchup")}}
 
 
+# ------------------------------------------------- past-season lines ----
+def history_props(feats, seasons):
+    """Past-season receptions lines saved by pull_props_history.py, each
+    matched to that player's box score row for that game. Returns
+    ({season: [props]}, {season: counts})."""
+    out, notes = {}, {}
+    for s in seasons:
+        path = f"{HIST_DIR}/receptions_{s}.csv"
+        if not os.path.exists(path):
+            continue
+        try:
+            raw = pd.read_csv(path)
+        except pd.errors.EmptyDataError:
+            continue
+        raw = raw.dropna(subset=["event_id", "player", "line", "commence_time"])
+        if raw.empty:
+            continue
+        cur = feats[feats["season"] == s]
+        by_name = {}
+        for idx, start, player, team in zip(cur.index, cur["start"], cur["player"], cur["team"]):
+            try:
+                st = bpl._ts(start) if pd.notna(start) else None
+            except Exception:
+                st = None
+            by_name.setdefault(_normalize_name(player), []).append({"team": team, "start": st, "idx": idx})
+        props, posted = [], 0
+        for (_, player), g in raw.groupby(["event_id", "player"]):
+            posted += 1
+            start_time = g["commence_time"].iloc[0]
+            try:
+                m = bpl.match_actual({"player": player, "start_time": start_time}, by_name)
+            except Exception:
+                m = None
+            if m is None:
+                continue
+            kick = pd.Timestamp(bpl._ts(start_time)) - pd.Timedelta(hours=5)
+            sat = (kick + pd.Timedelta(days={0: -2, 1: -3, 2: 3, 3: 2, 4: 1, 5: 0, 6: -1}[kick.weekday()])).date()
+            rows = [{"line": float(r.line), "over": r.over, "under": r.under, "book": r.book} for r in g.itertuples()]
+            props.append({"idx": m["idx"], "stat": STAT, "player": player, "market": "Receptions", "weekend": str(sat), "rows": rows})
+        out[s] = props
+        notes[str(s)] = {"players_with_a_line": posted, "matched_to_a_box_score": len(props),
+                         "games_with_lines": int(raw["event_id"].nunique())}
+    return out, notes
+
+
+# ------------------------------------------------------------ versions ----
+class Version:
+    """One version of the model. Everything is forward in time: to grade
+    season S it is trained on the seasons before S, and its hit chances come
+    from the misses of a model trained before S-1 on the games of S-1."""
+    def __init__(self, name, cols, desc, feats, pop):
+        self.name, self.cols, self.desc, self.feats, self.pop = name, list(cols), desc, feats, pop
+        self._models, self._graded, self.extra = {}, {}, {}
+
+    def rows(self, s):
+        return self.feats[self.pop & (self.feats.season == s)]
+
+    def can_grade(self, s):
+        return len(self.rows(s - 1)) >= MIN_ROWS and int((self.pop & (self.feats.season < s - 1)).sum()) >= MIN_ROWS
+
+    def model(self, cut):
+        if cut not in self._models:
+            self._models[cut] = lab.fit_predict(self.feats[self.pop & (self.feats.season < cut)], self.cols, STAT)
+        return self._models[cut]
+
+    def _grade(self, s):
+        ho = self.rows(s - 1)
+        m = self.model(s)
+        return m, lab2.Pools(m, self.cols, STAT, lab.predict(self.model(s - 1), ho, self.cols), ho[STAT])
+
+    def graded(self, s):
+        if s not in self._graded:
+            self._graded[s] = self._grade(s)
+        return self._graded[s]
+
+
+class FormulaVersion(Version):
+    """The live projection x the matchup multiplier. The three strengths
+    used for season S are fitted on season S-1."""
+    def __init__(self, live):
+        super().__init__(FORMULA, live.cols + F_COLS, "Live projection x position^a x alignment^b x coverage adjustment", live.feats, live.pop)
+        self.live = live
+        self.extra["strengths_by_graded_season"] = {}
+
+    def _grade(self, s):
+        ho, prev = self.live.rows(s - 1), self.live.model(s - 1)
+        k, fit = fit_formula(lab.predict(prev, ho, self.live.cols), ho[STAT].values, ho)
+        self.extra["strengths_by_graded_season"][str(s)] = fit
+        m = FormulaModel(self.live.model(s), self.live.cols, k)
+        return m, lab2.Pools(m, self.cols, STAT, FormulaModel(prev, self.live.cols, k).predict(ho), ho[STAT])
+
+
 # ----------------------------------------------------------------- main ----
 def build(years, season):
     feats, info, _ = lab2.build_frame(years, season)
@@ -451,14 +551,11 @@ def build(years, season):
 def main(years, season):
     t0 = time.time()
     feats, info = build(years, season)
-    last, prev = max(years), max(years) - 1
+    last = max(years)
     all_cols = sorted({c for cols, _ in VARIANTS.values() for c in cols} | set(F_COLS))
     missing = [c for c in all_cols if c not in feats.columns]
     if missing:
         raise SystemExit(f"Feature columns missing from the frame: {missing}")
-    props = [p for p in lab.collect_props(feats, season) if p["stat"] == STAT]
-    idx_of = {(p["player"], p["market"], p["weekend"]): p["idx"] for p in props}
-    print(f"Receptions props matched to box scores: {len(props)}")
 
     stat = STAT
     ok = feats[all_cols + [stat]].notna().all(axis=1) & (feats["games_played_prior"] >= 1)
@@ -466,48 +563,55 @@ def main(years, season):
     usable = set(feats.index[ok])
     test = feats[ok & (feats.season == last) & (feats.games_played_prior >= 2) & (feats.roll_receptions >= lab2.ROLE_MIN_CATCHES)]
     test_line = np.floor(test[f"roll_{stat}"]) + 0.5
-    tr0, ho0 = feats[pop & (feats.season < prev)], feats[pop & (feats.season == prev)]
-    trA, hoA = feats[pop & (feats.season < last)], feats[pop & (feats.season == last)]
-    trB = feats[pop & (feats.season <= last)]
-    print(f"\n===== {stat}: {len(trB)} training rows, {len(test)} in the {last} role-player test =====")
-    if min(len(tr0), len(ho0), len(trA), len(hoA)) < 200:
+
+    versions = [Version(name, cols, desc, feats, pop) for name, (cols, desc) in VARIANTS.items()]
+    live = next(v for v in versions if v.name == LIVE)
+    versions.append(FormulaVersion(live))
+    if not live.can_grade(last):
         raise SystemExit("Not enough rows to run.")
 
-    results, detail, live = {}, [], {}
+    # Lines to grade: this season's saved lines, plus any past seasons pulled.
+    line_sets = {season: [p for p in lab.collect_props(feats, season) if p["stat"] == stat]}
+    hist, notes = history_props(feats, [s for s in years if live.can_grade(s)])
+    line_sets.update(hist)
+    info["history_lines"] = notes or "none found -- run the Props history pull first to grade past seasons"
+    idx_of = {(p["player"], p["market"], p["weekend"]): p["idx"] for props in line_sets.values() for p in props}
+    print(f"\n===== {stat}: {int((pop & (feats.season <= last)).sum())} training rows, {len(test)} in the {last} role-player test =====")
+    print("Lines to grade: " + ", ".join(f"{s}: {len(p)}" for s, p in sorted(line_sets.items())))
 
-    def grade(name, desc, cols, mA, mB, p0, pA, extra=None):
-        std_test, std_live = lab2.Pools(mA, cols, stat, p0, ho0[stat]), lab2.Pools(mB, cols, stat, pA, hoA[stat])
-        r25 = lab2.test_2025(mA, cols, std_test, test, stat, test_line, False)
-        pt = lab.predict(mA, test, cols)
+    results, detail = {}, []
+    for v in versions:
+        mA, pools = v.graded(last)
+        r25 = lab2.test_2025(mA, v.cols, pools, test, stat, test_line, False)
+        pt = lab.predict(mA, test, v.cols)
         r25["by_matchup"] = by_matchup(pt, test[stat].values, test["f_pos"].values, test["has_matchup"].values == 1)
-        rows = lab2.evaluate_props(name, mB, cols, std_live, stat, feats, props, usable)
-        detail.extend(rows)
-        p26 = lab2.summarize(pd.DataFrame(rows)) if rows else {"n": 0}
-        p26["by_matchup"] = props_by_matchup(rows, idx_of, feats)
-        results[name] = dict({"description": desc, "n_inputs": len(cols), "test_2025": r25, "props_2026": p26}, **(extra or {}))
+        res = {"description": v.desc, "n_inputs": len(v.cols), "test_2025": r25, "props_history": {}}
+        if v.name == LIVE:
+            res["matchup_signal_2025"] = signal(pt, test[stat].values, test)
+        past = []
+        for s, props in sorted(line_sets.items()):
+            if not props or not v.can_grade(s):
+                continue
+            m, pl = v.graded(s)
+            rows = lab2.evaluate_props(v.name, m, v.cols, pl, stat, feats, props, usable)
+            for r in rows:
+                r["lines_season"] = s
+                r["lines_read"] = "first posted" if s == season else "before kickoff"
+            detail.extend(rows)
+            summary = lab2.summarize(pd.DataFrame(rows)) if rows else {"n": 0}
+            summary["by_matchup"] = props_by_matchup(rows, idx_of, feats)
+            if s == season:
+                res["props_2026"] = summary
+            else:
+                res["props_history"][str(s)] = summary
+                past.extend(rows)
+        res.setdefault("props_2026", {"n": 0})
+        if past:
+            res["props_history_all"] = dict(lab2.summarize(pd.DataFrame(past)), by_matchup=props_by_matchup(past, idx_of, feats))
+        res.update(v.extra)
+        results[v.name] = res
         c = r25["calibration"]
-        print(f"  {name:<13} {last}: error {r25['mae']:.3f} rmse {r25['rmse']:.3f} brier {c.get('brier')} | {len(rows)} props")
-        return pt
-
-    for name, (cols, desc) in VARIANTS.items():
-        g0, gA, gB = (lab.fit_predict(x, cols, stat) for x in (tr0, trA, trB))
-        p0, pA = lab.predict(g0, ho0, cols), lab.predict(gA, hoA, cols)
-        pt = grade(name, desc, cols, gA, gB, p0, pA)
-        if name == LIVE:
-            live = {"g0": g0, "gA": gA, "gB": gB, "p0": p0, "pA": pA, "cols": cols}
-            results[name]["matchup_signal_2025"] = signal(pt, test[stat].values, test)
-
-    # The plain formula: live projection x matchup multiplier. Strengths are
-    # fitted on the season BEFORE the one being graded, both times.
-    fcols = live["cols"] + F_COLS
-    k0, fit0 = fit_formula(live["p0"], ho0[stat].values, ho0)           # fitted on prev, graded on last
-    kA, fitA = fit_formula(live["pA"], hoA[stat].values, hoA)           # fitted on last, graded on this season
-    mA, mB = FormulaModel(live["gA"], live["cols"], k0), FormulaModel(live["gB"], live["cols"], kA)
-    p0f = FormulaModel(live["g0"], live["cols"], k0).predict(ho0)
-    pAf = FormulaModel(live["gA"], live["cols"], kA).predict(hoA)
-    grade(FORMULA, "Live projection x position^a x alignment^b x coverage adjustment", fcols, mA, mB, p0f, pAf,
-          {"strengths_for_2025_test": fit0, "strengths_for_2026_lines": fitA})
-    print(f"  formula strengths (position, alignment, coverage): {last} test {k0}, {season} lines {kA}")
+        print(f"  {v.name:<13} {last}: error {r25['mae']:.3f} rmse {r25['rmse']:.3f} brier {c.get('brier')}")
 
     report(results, last, season)
     os.makedirs(os.path.dirname(OUT_JSON), exist_ok=True)
@@ -522,19 +626,39 @@ def main(years, season):
 
 def report(results, last, season):
     def r(x):
-        return f"{x.get('record', '-'):>7} {x.get('roi', 0):+6.1f}% n={x.get('n', 0):<3}" if x and x.get("n") else f"{'-':>20}"
+        return f"{x.get('record', '-'):>9} {x.get('roi', 0):+6.1f}% n={x.get('n', 0):<4}" if x and x.get("n") else f"{'-':>23}"
+
+    def table(title, pick):
+        if not any((pick(x) or {}).get("n") for x in results.values()):
+            return
+        print(f"\n{title}")
+        print(f"{'version':<13} | {'lines':>5} {'error':>6} {'brier':>7} | {'overs, 10%+ edge':>23} | {'overs, 10-30% edge':>23} | {'unders, 10%+ edge':>23}")
+        for name, x in results.items():
+            p = pick(x) or {}
+            print(f"{name:<13} | {p.get('n', 0):>5} {p.get('mae', float('nan')):>6.3f} {(p.get('calibration') or {}).get('brier', float('nan')):>7} | "
+                  f"{r(p.get('rule')):>23} | {r(p.get('rule_under_30_edge')):>23} | {r(p.get('any_under_10')):>23}")
+
     print(f"\n################ receptions ################")
-    print(f"{'version':<13} | {str(last) + ' err':>8} {'brier':>7} | {str(season) + ' err':>8} {'brier':>7} | {'rule (overs 10%+)':>22} | {'under 30% edge':>22}")
+    print(f"{last} accuracy (players with a real role)")
     for name, x in results.items():
-        t, p = x.get("test_2025") or {}, x.get("props_2026") or {}
-        print(f"{name:<13} | {t.get('mae', float('nan')):>8.3f} {(t.get('calibration') or {}).get('brier', float('nan')):>7} | "
-              f"{p.get('mae', float('nan')):>8.3f} {(p.get('calibration') or {}).get('brier', float('nan')):>7} | "
-              f"{r(p.get('rule')):>22} | {r(p.get('rule_under_30_edge')):>22}")
+        t = x.get("test_2025") or {}
+        print(f"  {name:<13} error {t.get('mae', float('nan')):.3f}  brier {(t.get('calibration') or {}).get('brier')}")
     live = results.get(LIVE) or {}
     print(f"\nLive model's miss by matchup, {last} (bias = projection minus actual):")
     for k, v in ((live.get("test_2025") or {}).get("by_matchup") or {}).items():
         print(f"  {k:<8} n={v['n']:<6} bias {v['bias']:+.3f}  error {v['mae']:.3f}")
     print(f"Matchup signal in the live model's misses: {live.get('matchup_signal_2025')}")
+    table(f"{season} saved lines (first posted)", lambda x: x.get("props_2026"))
+    seasons = sorted({s for x in results.values() for s in (x.get("props_history") or {})})
+    for s in seasons:
+        table(f"{s} lines (read before kickoff)", lambda x, s=s: (x.get("props_history") or {}).get(s))
+    if len(seasons) > 1:
+        table("Past seasons combined", lambda x: x.get("props_history_all"))
+    if seasons:
+        print("\nPast seasons, official-shape overs by matchup:")
+        for name, x in results.items():
+            bm = ((x.get("props_history_all") or (x.get("props_history") or {}).get(seasons[0]) or {}).get("by_matchup") or {}).get("rule_overs") or {}
+            print(f"  {name:<13} " + "   ".join(f"{k}: {v.get('record')} {v.get('roi', 0):+.1f}%" for k, v in bm.items()))
 
 
 if __name__ == "__main__":
