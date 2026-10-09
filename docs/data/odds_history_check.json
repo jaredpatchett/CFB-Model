@@ -1,0 +1,91 @@
+{
+  "generated_at": "2026-10-09T20:15:59.787773+00:00",
+  "market": "player_receptions",
+  "region": "us",
+  "samples": [
+    {
+      "season": 2023,
+      "asked_for": "2023-10-07T14:00:00Z",
+      "credits_spent": 11,
+      "quota": {
+        "remaining": "65819",
+        "used": "34181",
+        "last": "10"
+      },
+      "events_ok": true,
+      "snapshot": "2023-10-07T13:55:41Z",
+      "games_on_board": 45,
+      "games_tried": [
+        {
+          "game": "LSU Tigers at Missouri Tigers",
+          "ok": true,
+          "books_with_receptions_lines": {
+            "fanduel": 3,
+            "betrivers": 2
+          },
+          "players_priced": 3
+        }
+      ],
+      "props_found": true
+    },
+    {
+      "season": 2024,
+      "asked_for": "2024-10-05T14:00:00Z",
+      "credits_spent": 11,
+      "quota": {
+        "remaining": "65808",
+        "used": "34192",
+        "last": "10"
+      },
+      "events_ok": true,
+      "snapshot": "2024-10-05T13:55:38Z",
+      "games_on_board": 43,
+      "games_tried": [
+        {
+          "game": "Missouri Tigers at Texas A&M Aggies",
+          "ok": true,
+          "books_with_receptions_lines": {
+            "bovada": 4,
+            "fanduel": 1
+          },
+          "players_priced": 4
+        }
+      ],
+      "props_found": true
+    },
+    {
+      "season": 2025,
+      "asked_for": "2025-10-04T14:00:00Z",
+      "credits_spent": 11,
+      "quota": {
+        "remaining": "65797",
+        "used": "34203",
+        "last": "10"
+      },
+      "events_ok": true,
+      "snapshot": "2025-10-04T13:55:38Z",
+      "games_on_board": 45,
+      "games_tried": [
+        {
+          "game": "Wisconsin Badgers at Michigan Wolverines",
+          "ok": true,
+          "books_with_receptions_lines": {
+            "fanduel": 3
+          },
+          "players_priced": 3
+        }
+      ],
+      "props_found": true
+    }
+  ],
+  "historical_access": true,
+  "seasons_with_receptions_props": [
+    2023,
+    2024,
+    2025
+  ],
+  "credits_spent": 33,
+  "credits_remaining": "65797",
+  "credits_per_saturday_one_reading": 440,
+  "verdict": "Historical receptions props are available for 2023, 2024, 2025. A profit backtest on past seasons is possible."
+}
