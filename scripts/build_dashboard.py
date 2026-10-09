@@ -834,6 +834,7 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .trk-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
 .trk-tag { font-family: var(--font-display); font-weight: 800; font-size: 9.5px; letter-spacing: 0.07em; text-transform: uppercase; padding: 1px 6px; border-radius: 3px; border: 1px solid var(--rule-strong); color: var(--muted); }
 .trk-tag.is-model { color: var(--green); border-color: rgba(23,194,107,0.55); background: rgba(23,194,107,0.10); }
+.trk-tag.is-card { color: var(--green); border-color: var(--green); background: rgba(23,194,107,0.16); }
 .trk-tag.is-auto { color: var(--blue-light); border-color: rgba(46,123,255,0.5); background: rgba(46,123,255,0.12); }
 .trk-tag.is-injury { color: #FF8A8A; border-color: rgba(255,82,82,0.6); background: rgba(255,82,82,0.12); }
 .trk-note { font-size: 10.5px; color: var(--muted); margin-top: 5px; max-width: 420px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -895,6 +896,8 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .trk-switchrow { display: flex; align-items: center; gap: 10px; }
 .trk-switch { position: relative; width: 38px; height: 22px; border-radius: 11px; border: 1px solid rgba(255,82,82,0.6); background: rgba(255,82,82,0.22); cursor: pointer; padding: 0; flex: none; }
 .trk-switch-knob { position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #FF8A8A; transition: left 0.12s; }
+.trk-switch.is-plain:not(.is-on) { border-color: var(--rule-strong); background: var(--chip); }
+.trk-switch.is-plain:not(.is-on) .trk-switch-knob { background: var(--muted-2); }
 .trk-switch.is-on { border-color: rgba(23,194,107,0.7); background: rgba(23,194,107,0.22); }
 .trk-switch.is-on .trk-switch-knob { left: 18px; background: var(--green); }
 .trk-switch-label { font-size: 12px; color: var(--text-dim); }
@@ -1587,7 +1590,7 @@ RENDERER_JS = """<script>
     }).join('') + '</div>';
   }
 
-  function trackPayload(p) {
+  function trackPayload(p, onCard) {
     var g = p.game;
     // Same fix as renderBetCard: g.marketMoneyline is always the HOME
     // team's price, but p.playLabel names whichever team (home or away)
@@ -1609,7 +1612,21 @@ RENDERER_JS = """<script>
     // via the row's unofficial toggle.
     var lineMatch = /([+-]?\\d+(?:\\.\\d+)?)\\s*$/.exec(p.playLabel);
     var lineSize = lineMatch ? Math.abs(parseFloat(lineMatch[1])) : 0;
-    var autoUnofficial = p.market === 'Spread' && lineSize >= 20;
+    // The tracker's official record is Bet Card spreads and nothing else
+    // (10/2026, the rule the user set on 10/5: "we're only officially
+    // tracking spreads", wager only the Bet Card). Until now +TRK marked
+    // every play official unless it was a 20+ point spread, so moneylines
+    // and off-the-card spreads all counted in the record unless they were
+    // flipped by hand. Now a play is tracked as official only when it is a
+    // spread AND on the spread Bet Card at the moment it is tracked;
+    // everything else -- every moneyline (favorites, near-even targets and
+    // underdogs alike), off-the-card spreads, 20+ point spreads -- goes in
+    // as unofficial: still listed and graded, just not in the record. The
+    // row's Official pill still flips any single play either way.
+    // betCard travels with the play, so the tracker can show the Bet Card's
+    // own record later without anyone having to remember which plays it was.
+    var betCard = !!onCard && p.qualifies;
+    var autoUnofficial = !(p.market === 'Spread' && betCard && lineSize < 20);
     // Which model actually priced this game, captured at track time so it
     // travels with the pick permanently -- a game can switch from
     // preseason_prior to trained_model on a LATER run (more games played),
@@ -1627,6 +1644,7 @@ RENDERER_JS = """<script>
       price: p.market === 'Moneyline' ? p.sideMoneyline : -110,
       edge: Math.round(Math.abs(p.edge) * 10) / 10,
       unofficial: autoUnofficial,
+      betCard: betCard,
       modelSource: modelSource,
       modelVersion: g.modelVersion || null
     }));
@@ -1762,7 +1780,7 @@ RENDERER_JS = """<script>
             '<div class="num cell-edge ' + cls + '">' + esc(p.sideEdgeLabel) + '</div>' +
             '<div>' + edgeRing(p.sideProb, edgeOnCard(s) ? 'is-card' : (p.qualifies ? 'is-play' : '')) + '</div>' +
             '<div class="eb-play">' + edgePlayPill(s) + '</div>' +
-            '<div class="num"><button class="track-btn" onclick="event.stopPropagation();window.__cfbTrack(' + trackPayload(p) + ')">+TRK</button></div>' +
+            '<div class="num"><button class="track-btn" onclick="event.stopPropagation();window.__cfbTrack(' + trackPayload(p, s.onCard) + ')">+TRK</button></div>' +
           '</div>' +
         '</div>';
     }).join('');
@@ -2177,7 +2195,7 @@ RENDERER_JS = """<script>
               '<div class="card-price">' + esc(sidePriceLabel) + '</div>' +
               '<div class="card-conf">' + (sideProb * 100).toFixed(1) + '%</div>' +
               '<div class="num"><span class="tier"><span>' + esc(c.tier) + '</span></span></div>' +
-              '<div class="num"><button class="track-btn" onclick="window.__cfbTrack(' + trackPayload(c) + ')">+TRK</button></div>' +
+              '<div class="num"><button class="track-btn" onclick="window.__cfbTrack(' + trackPayload(c, true) + ')">+TRK</button></div>' +
               (isNearEvenTarget(c) ? '<div style="grid-column:1/-1;font-size:11px;color:var(--green);padding-top:6px;line-height:1.4">\u2605 Near-even target: +100 to +150 with the model at 65%+ \u2014 small stake</div>' : '') +
               (qbFlags.length ? '<div style="grid-column:1/-1;font-size:11px;color:var(--amber);padding-top:6px;line-height:1.4">\u26a0 Injury: ' +
                 qbFlags.map(function (f) { return esc(abbrOf(f.team)) + ' ' + esc(f.text); }).join(' \u00b7 ') +
@@ -2873,6 +2891,7 @@ RENDERER_JS = """<script>
       modelVersion: play.modelVersion || null
     };
     if (play.kickoffIso) item.kickoffIso = play.kickoffIso;   // real kickoff, so the row can show it in your own time zone
+    if (play.betCard) item.betCard = true;                    // was on the Bet Card for its market when tracked
     items.unshift(item);
     saveTrk(items);
     render();
@@ -3304,6 +3323,7 @@ RENDERER_JS = """<script>
       if (note) it.notes = note; else delete it.notes;
     }
     if (ch.unofficial !== undefined) it.unofficial = !!ch.unofficial;
+    if (ch.betCard !== undefined) { if (ch.betCard) it.betCard = true; else delete it.betCard; }
     if (ch.status !== undefined) it.status = ch.status;
     it.updatedAt = Date.now();
     saveTrk(items);
@@ -3366,6 +3386,7 @@ RENDERER_JS = """<script>
       g.slice(1).forEach(function (o) {
         if (!keep.status && o.status) keep.status = o.status;
         if (o.unofficial) keep.unofficial = true;
+        if (o.betCard) keep.betCard = true;
         if (!keep.notes && o.notes) keep.notes = o.notes;
         var tags = trkTagsOf(keep).slice();
         trkTagsOf(o).forEach(function (t) { if (!trkHasTag(tags, t)) tags.push(t); });
@@ -3373,7 +3394,10 @@ RENDERER_JS = """<script>
         ['modelSource', 'modelVersion', 'kickoffIso', 'sourceId'].forEach(function (f) { if (keep[f] == null && o[f] != null) keep[f] = o[f]; });
         gone.push(o);
       });
-      keep.updatedAt = Date.now();
+      // Stamped no older than any copy it absorbed, so a file exported or
+      // prepared slightly "ahead" of this clock can't look newer than the
+      // merged row and be re-applied over it on the next import.
+      keep.updatedAt = Math.max.apply(null, [Date.now()].concat(g.map(function (x) { return Number(x.updatedAt) || 0; })));
     });
     // Dropped by identity of the row object, not by id: two copies could in
     // principle share an id, and dropping by id would take both.
@@ -3490,6 +3514,7 @@ RENDERER_JS = """<script>
       if ((f.status === 'win' || f.status === 'loss' || f.status === 'push') && it.status !== f.status) return false;
       if (f.status === 'official' && it.unofficial) return false;
       if (f.status === 'unofficial' && !it.unofficial) return false;
+      if (f.status === 'betcard' && !it.betCard) return false;
       if (f.tag !== 'all' && trkTagsOf(it).indexOf(f.tag) === -1) return false;
       if (q) {
         var p = trkParse(it), names = [p.away, p.home].map(function (a) { var t = a && trkTeam(a); return t && t.n ? t.n : ''; });
@@ -3531,6 +3556,7 @@ RENDERER_JS = """<script>
       : it.modelSource === 'manual' ? 'MANUAL' : null;
 
     var tags = (modelTag ? '<span class="trk-tag' + (it.modelSource === 'trained_model' ? ' is-model' : '') + '">' + modelTag + '</span>' : '') +
+      (it.betCard ? '<span class="trk-tag is-card" title="On the Bet Card when it was tracked">BET CARD</span>' : '') +
       (it.auto ? '<span class="trk-tag is-auto">AUTO</span>' : '') +
       trkTagsOf(it).map(trkTagChip).join('');
     var matchCell = '<div><div class="trk-match">' + trkMatchHtml(it, p, 22) + '</div>' +
@@ -3636,7 +3662,7 @@ RENDERER_JS = """<script>
     var tools = '<div class="trk-tools">' +
       '<input id="trk-q-' + sec + '" class="trk-search" type="search" placeholder="Search teams, tags or notes" autocomplete="off" value="' + esc(f.q) + '" data-trk-filter="q" data-trk-sec="' + sec + '" aria-label="Search tracked plays">' +
       '<select class="trk-sel" data-trk-filter="status" data-trk-sec="' + sec + '" aria-label="Filter by status">' +
-        [['all', 'All statuses'], ['pending', 'Not graded yet'], ['win', 'Wins'], ['loss', 'Losses'], ['push', 'Pushes'], ['official', 'Official only'], ['unofficial', 'Unofficial only']]
+        [['all', 'All statuses'], ['pending', 'Not graded yet'], ['win', 'Wins'], ['loss', 'Losses'], ['push', 'Pushes'], ['official', 'Official only'], ['unofficial', 'Unofficial only'], ['betcard', 'Bet Card plays']]
           .map(function (o) { return opt(o[0], o[1], f.status); }).join('') + '</select>' +
       '<select class="trk-sel" data-trk-filter="tag" data-trk-sec="' + sec + '" aria-label="Filter by tag">' +
         opt('all', Object.keys(tagsInUse).length ? 'All tags' : 'No tags yet', f.tag) +
@@ -3756,6 +3782,12 @@ RENDERER_JS = """<script>
       '<span class="trk-switch-knob"></span></button><span class="trk-switch-label">' + (off ? 'Unofficial — left out of the record' : 'Official — counts in the record') + '</span>';
   }
 
+  function trkCardSwitchHtml() {
+    var on = !!trkDraft.betCard;
+    return '<button id="trk-d-betcard" class="trk-switch is-plain' + (on ? ' is-on' : '') + '" role="switch" aria-checked="' + (on ? 'true' : 'false') + '" data-trk-act="dbetcard">' +
+      '<span class="trk-switch-knob"></span></button><span class="trk-switch-label">' + (on ? 'On the Bet Card when it was tracked' : 'Not a Bet Card play') + '</span>';
+  }
+
   function trkDrawerHtml() {
     var c = trkDraftCtx();
     if (!c) return '';
@@ -3800,6 +3832,7 @@ RENDERER_JS = """<script>
             '<div class="trk-d-addtag"><input id="trk-d-newTag" class="trk-in" type="text" maxlength="24" autocomplete="off" placeholder="Add your own tag" value="' + esc(d.newTag) + '" data-trk-d="newTag" aria-label="New tag">' +
             '<button class="trk-btn" data-trk-act="dtagadd">Add</button></div></div>' +
           '<div class="trk-d-field"><span>Official play</span><div id="trk-d-switch" class="trk-switchrow">' + trkSwitchHtml(c) + '</div></div>' +
+          '<div class="trk-d-field"><span>Bet Card play</span><div id="trk-d-card" class="trk-switchrow">' + trkCardSwitchHtml() + '</div></div>' +
           '<label class="trk-d-field"><span>Notes</span>' +
             '<textarea id="trk-d-notes" class="trk-in" rows="4" maxlength="' + TRK_NOTE_MAX + '" placeholder="Why you took it, what moved, anything worth remembering" data-trk-d="notes">' + esc(d.notes) + '</textarea>' +
             '<div id="trk-d-count" class="trk-d-count">' + d.notes.length + '/' + TRK_NOTE_MAX + '</div></label>' +
@@ -3837,7 +3870,7 @@ RENDERER_JS = """<script>
       price: it.price == null ? '' : trkFmtPrice(it.price),
       stake: it.stake == null ? '' : String(it.stake),
       tags: trkTagsOf(it).slice(), notes: it.notes || '', newTag: '',
-      unofficial: !!it.unofficial, unofficialTouched: false,
+      unofficial: !!it.unofficial, unofficialTouched: false, betCard: !!it.betCard,
       description: it.description || '', msg: {}
     };
     render();
@@ -3868,6 +3901,7 @@ RENDERER_JS = """<script>
     else ch.description = trkDraft.description;
     if (v.price.value != null) ch.price = v.price.value;
     if (trkDraft.unofficialTouched) ch.unofficial = trkDraft.unofficial;
+    if (!!trkDraft.betCard !== !!c.it.betCard) ch.betCard = !!trkDraft.betCard;
     trkCommit(trkDraft.id, ch);
     trkCloseDrawer();
     render();
@@ -3952,6 +3986,14 @@ RENDERER_JS = """<script>
       return trkDrawerRender(el.id);
     }
     if (act === 'dtagadd') return trkDraftAddTag();
+    if (act === 'dbetcard') {
+      trkDraft.betCard = !trkDraft.betCard;
+      var cardRow = document.getElementById('trk-d-card');
+      if (cardRow) cardRow.innerHTML = trkCardSwitchHtml();
+      var cardBtn = document.getElementById('trk-d-betcard');
+      if (cardBtn) cardBtn.focus();
+      return;
+    }
     if (act === 'dofficial') {
       var c = trkDraftCtx();
       if (!c) return;
