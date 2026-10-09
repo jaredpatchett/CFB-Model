@@ -1,0 +1,77 @@
+name: Props history pull (past-season receptions lines)
+
+# Manual trigger only. Reads the receptions prop lines that were posted
+# before every college game of past seasons from The Odds API and saves them
+# to data/props_history/, so props lab 3 can grade the receptions model and
+# its matchup versions for profit on seasons that are already over.
+#
+# Spends Odds API credits: about 10 for each game that had receptions lines,
+# roughly 4,000-8,500 for a full season. It stops on its own when this run
+# has spent "max_credits", or before the key's balance would fall below
+# "reserve" (held back for the daily model runs). A run that stops early can
+# simply be run again: games already read are never paid for twice.
+# Does NOT touch the live model, the dashboard or the daily run.
+
+on:
+  workflow_dispatch:
+    inputs:
+      seasons:
+        description: "Seasons to pull (space separated)"
+        required: false
+        default: "2024 2025"
+      max_credits:
+        description: "Most credits this run may spend"
+        required: false
+        default: "20000"
+      reserve:
+        description: "Stop before the key's balance falls below this"
+        required: false
+        default: "25000"
+      hours_before:
+        description: "Read each game's lines this many hours before kickoff"
+        required: false
+        default: "2"
+
+permissions:
+  contents: write
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Pull past-season receptions lines
+        run: >
+          python scripts/pull_props_history.py
+          --seasons ${{ github.event.inputs.seasons || '2024 2025' }}
+          --max-credits ${{ github.event.inputs.max_credits || '20000' }}
+          --reserve ${{ github.event.inputs.reserve || '25000' }}
+          --hours-before ${{ github.event.inputs.hours_before || '2' }}
+
+      - name: Commit the lines
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/props_history || true
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Past-season receptions lines [skip ci]"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git merge -X ours --no-edit origin/main -m "Merge origin/main [skip ci]" && git push origin main; then
+              echo "Pushed on attempt $i"; break
+            fi
+            [ "$i" -eq 5 ] && echo "::error::Could not push the lines" && exit 1
+            sleep $((RANDOM % 10 + 5))
+          done
