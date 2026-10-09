@@ -43,6 +43,10 @@ from src.features.live_player_features import (
 )
 from src.features.player_features import STAT_MAP, pivot_player_game_stats
 from src.features import pff_features
+try:
+    from src.features import matchup as matchup_features
+except Exception:                  # the matchup labels are an extra; a run must never depend on them
+    matchup_features = None
 from src.models import fair_odds as fo
 from src.models.game_model import GameMarginModel
 from src.models.props_model import PlayerStatModel
@@ -541,6 +545,15 @@ def prop_game_log(player_name, market_name, player_form: dict, game_logs: dict, 
         return None, None
 
 
+
+def split_reception_unders(unders, play_min_ev):
+    """(plays, leans) for receptions unders that already clear the 10% bar,
+    one row per player and game: a play at play_min_ev or more at the
+    current best price, a lean below it."""
+    plays = [p for p in unders if p["model_ev"] >= play_min_ev]
+    leans = [p for p in unders if p["model_ev"] < play_min_ev]
+    return plays, leans
+
 def export_prop_distributions(prop_models: dict) -> dict:
     """stat -> what the dashboard needs to work out a hit chance at ANY line
     (10/2026), for the "Try another line" box in the Props tab's Details
@@ -995,6 +1008,10 @@ def main(year: int):
     # Which inputs the receptions / receiving-yards models used this run
     # (10/2026): PFF routes and targets, or the box-score fallback.
     props_receiving_inputs = "not scored this run"
+    # Matchup labels for receptions props (10/2026): is the opposing defense
+    # tough, average or soft against this player's position group? Only the
+    # label is exported -- see src/features/matchup.py.
+    matchup_pos, matchup_def, props_matchups = {}, {}, "not built this run"
     if prop_models and max_completed_week > 0:
         print(f"  pulling {season_year} player game stats through week {max_completed_week}...")
         all_player_stats = []
@@ -1017,6 +1034,11 @@ def main(year: int):
                 player_form, prop_models, player_stats_long_current, schedule_df, season_year,
                 f"{config.MODELS_DIR}/props")
             print(f"  receiving-model inputs: {props_receiving_inputs}")
+            # Never raises: without PFF the props simply carry no label.
+            if matchup_features is not None:
+                matchup_pos, matchup_def, props_matchups = matchup_features.live_matchups(
+                    player_stats_long_current, schedule_df, season_year)
+            print(f"  matchups: {props_matchups}")
             n_ready = sum(1 for v in player_form.values() if v["games_played_prior"] >= MIN_GAMES_FOR_PROP_MODEL)
             print(f"  {len(player_form)} player(s) matched to real {season_year} stats, "
                   f"{n_ready} of them already clear the {MIN_GAMES_FOR_PROP_MODEL}-game threshold")
@@ -1073,8 +1095,24 @@ def main(year: int):
     #     went 8-13 and lost in all three weekends, while 10-30% edges went
     #     40-17; edges that large have mostly been the model missing
     #     something, not a great bet.
+    #   RECEPTIONS UNDERS (10/2026, props lab 3 -- 2024 and 2025 lines read
+    #     before kickoff plus this season's saved lines, each season graded
+    #     by a model trained only on earlier seasons):
+    #       30%+ edge       203-143 (+16.8%), up in all three seasons -> an
+    #                       OFFICIAL play, alongside the receptions overs.
+    #       10% to 30% edge 487-369 (+4.8%), a winning record every season
+    #                       but a thin margin -> an UNDER LEAN: listed under
+    #                       Watch and graded on its own line.
+    #     The opposite of the overs, where 30%+ edges lose (25-42). An under
+    #     is a play or a lean by its edge at the CURRENT best price -- that
+    #     is the edge the rule was tested on (the edge at the moment of the
+    #     bet). No first-flag stickiness here, unlike the overs' edge cap:
+    #     that exists to stop a losing group sliding back to Official, and
+    #     both under tiers are winning groups. The line-movement log still
+    #     grades each under once, at the price and tier it was FIRST flagged.
     OFFICIAL_PROP_MARKET = "Receptions"
     OFFICIAL_PROP_SIDE = "over"
+    UNDER_PLAY_MIN_EV = 30.0
     MIN_PROP_EV_FOR_TARGETS = 10.0
     MAX_OFFICIAL_PROP_EV = 30.0
     NEVER_WATCH_MARKETS = {"Pass Yards", "Pass Touchdowns", "Rush Touchdowns", "Reception Touchdowns",
@@ -1115,6 +1153,8 @@ def main(year: int):
     n_props_scored = 0
     n_props_official = 0
     n_props_watch = 0
+    n_under_plays = 0
+    n_under_leans = 0
     # What the dashboard needs to price a line the feed does not have
     # (10/2026, "Try another line" in the Props details).
     prop_dists_out = {}
@@ -1229,9 +1269,40 @@ def main(year: int):
         capped = [p for p in candidates if _is_capped(p)]
         for p in official:
             p["is_official_play"] = True
+            p["play_kind"] = "rec_over"
         for p in capped:
             p["is_watch_play"] = True
             p["edge_capped"] = True
+
+        # ---- Receptions unders (10/2026 rules above) ----
+        # Best line per player and game, like the overs. A player who is
+        # already a receptions over this game (two books far enough apart to
+        # put the model on both sides) stays an over.
+        over_keys = {(p.get("fixture_id"), p.get("player_name")) for p in candidates}
+        unders = _best_per([p for p in props_out if _eligible(p)
+                            and p.get("market_name") == OFFICIAL_PROP_MARKET
+                            and p.get("model_lean") == "under"
+                            and (p.get("fixture_id"), p.get("player_name")) not in over_keys],
+                           lambda p: (p.get("fixture_id"), p.get("player_name")))
+        under_plays, under_leans = split_reception_unders(unders, UNDER_PLAY_MIN_EV)
+        for p in under_plays:
+            p["is_official_play"] = True
+            p["play_kind"] = "rec_under"
+        for p in under_leans:
+            p["is_watch_play"] = True
+            p["is_under_lean"] = True
+            p["play_kind"] = "rec_under_lean"
+        n_under_plays, n_under_leans = len(under_plays), len(under_leans)
+
+        # ---- Matchup label on every receptions prop (10/2026) ----
+        try:
+            from src.features.live_player_features import _normalize_name as _name_key
+            n_labelled = (matchup_features.label_props(props_out, player_form, matchup_pos, matchup_def, _name_key)
+                          if matchup_features is not None and matchup_def else 0)
+            if matchup_def:
+                print(f"  {n_labelled} receptions prop line(s) given a matchup label")
+        except Exception as e:
+            print(f"  [warn] matchup labels skipped ({type(e).__name__}: {e})")
         watch = _best_per([p for p in props_out if _eligible(p) and not p.get("is_official_play")
                            and p.get("market_name") not in NEVER_WATCH_MARKETS
                            and p.get("market_name") != OFFICIAL_PROP_MARKET
@@ -1247,6 +1318,8 @@ def main(year: int):
         print(f"  {n_props_scored} of {len(props_out)} posted prop line(s) scored with a real model prediction "
               f"({n_props_official} OFFICIAL: receptions overs at {MIN_PROP_EV_FOR_TARGETS:.0f}%+ and under "
               f"{MAX_OFFICIAL_PROP_EV:.0f}% EV, best price; "
+              f"{n_under_plays} OFFICIAL: receptions unders at {UNDER_PLAY_MIN_EV:.0f}%+ EV; "
+              f"{n_under_leans} UNDER LEAN: receptions unders at {MIN_PROP_EV_FOR_TARGETS:.0f}% to {UNDER_PLAY_MIN_EV:.0f}% EV; "
               f"{n_props_watch} WATCH: secondary-role props at {MIN_PROP_EV_FOR_TARGETS:.0f}%+ EV -- "
               f"the rest show a LEAN or the posted line only. See "
               f"live_player_features.py's matching-limitations note if the scored count looks lower than "
@@ -1320,6 +1393,7 @@ def main(year: int):
         "prop_game_logs": prop_game_logs_out,
         "prop_distributions": prop_dists_out,
         "props_receiving_inputs": props_receiving_inputs,
+        "props_matchups": props_matchups,
         "prop_market_catalog": prop_market_catalog,
         "fantasy": fantasy_out,
         "injuries": injuries,
