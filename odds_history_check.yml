@@ -1,0 +1,50 @@
+name: Odds history check (past-season prop lines)
+
+# One-off check, manual trigger only. Asks The Odds API whether this key can
+# read HISTORICAL player-prop lines for college football, and for which
+# seasons (2023, 2024, 2025). That decides whether the receptions props model
+# can be backtested for profit on past seasons. Costs about 33 credits, at
+# most 63, and nothing if the plan has no historical access. Saves
+# docs/data/odds_history_check.json -- counts and sportsbook names only.
+# Does not touch the live model, the dashboard or the daily run.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check for historical prop lines
+        run: python scripts/odds_history_check.py
+
+      - name: Commit result
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/odds_history_check.json || true
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Odds history check result [skip ci]"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git merge -X ours --no-edit origin/main -m "Merge origin/main [skip ci]" && git push origin main; then
+              echo "Pushed on attempt $i"; break
+            fi
+            [ "$i" -eq 5 ] && echo "::error::Could not push result" && exit 1
+            sleep $((RANDOM % 10 + 5))
+          done
