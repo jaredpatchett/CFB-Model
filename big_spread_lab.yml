@@ -1,0 +1,80 @@
+name: Big-spread lab (are 20+ point spreads worth betting?)
+
+# Manual trigger only. Re-tests the live rule that fades every spread of 20+
+# points: walk-forward on 2024 and 2025 (models trained only on earlier
+# seasons), plus 2026 so far when CFBD has it. Graded against closing and
+# opening spreads. Does NOT touch the live model, the dashboard or the Bet
+# Card. Saves docs/data/big_spread_lab.json and docs/data/big_spread_detail.csv.
+#
+# 2026 data is pulled fresh for this run only (about 20 CFBD calls) and is
+# never saved to the shared data cache, so the daily model run is unaffected.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
+      ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+      ODDSPAPI_API_KEY: ${{ secrets.PRIZEPICKS_API }}
+      YEARS: "2022 2023 2024 2025"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Restore only -- this run never saves a cache.
+      - name: Restore cached historical CFBD data
+        uses: actions/cache/restore@v4
+        with:
+          path: data/raw
+          key: cfbd-raw-${{ env.YEARS }}-${{ github.run_id }}
+          restore-keys: |
+            cfbd-raw-${{ env.YEARS }}-
+            cfbd-raw-
+
+      - name: Fetch historical data (2022-2025, cached)
+        run: python scripts/fetch_historical_data.py --years ${{ env.YEARS }}
+
+      - name: Fetch 2026 so far (best effort)
+        run: |
+          rm -f data/raw/*_2026.csv
+          python scripts/fetch_historical_data.py --years 2026 || echo "::warning::2026 fetch failed -- grading 2024-2025 only"
+
+      - name: Build features
+        run: |
+          Y="${{ env.YEARS }}"
+          if [ -f data/raw/games_2026.csv ] && [ -f data/raw/lines_2026.csv ]; then Y="$Y 2026"; fi
+          echo "Building features for: $Y"
+          python scripts/build_features.py --years $Y
+          echo "LAB_YEARS=$Y" >> "$GITHUB_ENV"
+
+      - name: Run the big-spread lab
+        run: python scripts/big_spread_lab.py --years $LAB_YEARS
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/big_spread_lab.json docs/data/big_spread_detail.csv
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Big-spread lab results [skip ci]"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git merge -X ours --no-edit origin/main -m "Merge origin/main [skip ci]" && git push origin main; then
+              echo "Pushed on attempt $i"; break
+            fi
+            [ "$i" -eq 5 ] && echo "::error::Could not push results" && exit 1
+            sleep $((RANDOM % 10 + 5))
+          done
