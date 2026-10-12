@@ -250,6 +250,7 @@ jobs:
           [ -f data/clv/line_snapshots.csv ] && git add data/clv/line_snapshots.csv
           [ -f docs/data/props_clv.json ] && git add docs/data/props_clv.json
           [ -f data/clv/prop_flags.csv ] && git add data/clv/prop_flags.csv
+          [ -f docs/data/model_inputs_log.csv ] && git add docs/data/model_inputs_log.csv
           git diff --cached --quiet && echo "No changes to commit" || git commit -m "Update dashboard data + HTML [skip ci]"
 
           # The full pipeline above (historical fetch, feature build, model
