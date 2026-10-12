@@ -299,6 +299,7 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .trk-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
 .trk-tag { font-family: var(--font-display); font-weight: 800; font-size: 9.5px; letter-spacing: 0.07em; text-transform: uppercase; padding: 1px 6px; border-radius: 3px; border: 1px solid var(--rule-strong); color: var(--muted); }
 .trk-tag.is-model { color: var(--green); border-color: rgba(23,194,107,0.55); background: rgba(23,194,107,0.10); }
+.trk-tag.is-watch { color: var(--blue-light); border-color: var(--blue-light); background: rgba(90,160,255,0.14); }
 .trk-tag.is-card { color: var(--green); border-color: var(--green); background: rgba(23,194,107,0.16); }
 .trk-tag.is-auto { color: var(--blue-light); border-color: rgba(46,123,255,0.5); background: rgba(46,123,255,0.12); }
 .trk-tag.is-injury { color: #FF8A8A; border-color: rgba(255,82,82,0.6); background: rgba(255,82,82,0.12); }
@@ -738,6 +739,14 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     // property of the linear SP+ slope fit diverging at large differentials
     // in general, not specifically an underdog-side bias.
     var bigSpread = market === 'Spread' && Math.abs(game.marketSpread) >= 20;
+    // Big-dog watch (10/2026): the one 20+ pocket the big-spread lab found
+    // worth following -- the model's side is the UNDERDOG getting 28 to 34.5
+    // points and clears the normal edge bar. Walk-forward 2024-2026: 29-16
+    // (+23%) at the opening line, only 30-26 (+2%) at the close, so the value
+    // is in getting the early number. Watch only: never official, never on
+    // the Bet Card, the 20+ fade above still applies (see big_spread_lab.json).
+    var sideLine = market === 'Spread' && side ? (side === game.home ? game.marketSpread : -game.marketSpread) : null;
+    var bigDogWatch = bigSpread && edgeClears && sideLine != null && sideLine >= 28 && sideLine < 35;
     var qualifies = edgeClears && priceInRange && isPositiveEV && !bigSpread;
     // A moneyline pick that clears the probability-edge bar and passes the
     // price sanity check, but comes out negative on real dollar EV (or is
@@ -776,6 +785,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       qualifies: qualifies,
       isFade: isFade,
       bigSpread: bigSpread,
+      bigDogWatch: bigDogWatch,
       tier: qualifies ? tierFor(market === 'Moneyline' ? sideProb : coverProb) : '\u2014'
     };
   }
@@ -1077,6 +1087,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       edge: Math.round(Math.abs(p.edge) * 10) / 10,
       unofficial: autoUnofficial,
       betCard: betCard,
+      dogWatch: !!p.bigDogWatch,
       modelSource: modelSource,
       modelVersion: g.modelVersion || null
     }));
@@ -1094,7 +1105,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
        - kickoff in your own time zone, like the Props tab and the tracker;
        - sort and filters above the table. */
   var EDGE_SORTS = [['kickoff', 'Sort: kickoff'], ['edge', 'Sort: biggest edge'], ['prob', 'Sort: highest win %']];
-  var EDGE_SHOWS = [['all', 'All games'], ['card', 'Bet Card plays'], ['plays', 'All flagged plays']];
+  var EDGE_SHOWS = [['all', 'All games'], ['card', 'Bet Card plays'], ['plays', 'All flagged plays'], ['dogwatch', 'Big-dog watch']];
 
   function edgeBook(g) { return PROP_BOOK_LABELS[String(g.book || '').toLowerCase()] || g.book || ''; }
   function edgeKickoff(g) { return propKickoff(g.kickoffIso) || g.kickoff; }
@@ -1125,6 +1136,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     } else if (s.kind === 'target') { top = 'NEAR-EVEN TARGET'; cls = 'is-track'; }
     else if (s.kind === 'official') { top = 'TRACK ONLY'; cls = 'is-track'; title = 'Official play, not on the Bet Card — track only'; }
     else if (s.kind === 'bigdog') { top = 'UNOFFICIAL DOG'; cls = 'is-warn'; title = 'Underdog moneyline longer than +150 — unofficial, track only'; }
+    else if (s.kind === 'dogwatch') { top = 'WATCH · BIG DOG'; cls = 'is-track'; title = '28–34.5 point underdog the model likes — watch only, track at the opening line'; }
     else if (s.kind === 'bigspread') { top = 'FADE · 20+ PT'; cls = 'is-warn'; title = '20+ point spread — faded by rule'; }
     else if (s.kind === 'fade') { top = 'FADE'; cls = 'is-warn'; }
     else return '<span class="eb-noplay" title="' + esc(s.kind === 'nospread' ? 'No spread posted' : 'No play: ' + s.note) + '">—</span>';
@@ -1144,6 +1156,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       if (!matchesSearch(g)) return false;
       if (state.edgeShow === 'card' && !edgeOnCard(r.s)) return false;
       if (state.edgeShow === 'plays' && !r.p.qualifies) return false;
+      if (state.edgeShow === 'dogwatch' && r.s.kind !== 'dogwatch') return false;
       if (state.edgeConf !== 'ALL' && team(g.away).conf !== state.edgeConf && team(g.home).conf !== state.edgeConf) return false;
       return true;
     });
@@ -1414,6 +1427,9 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       s.kind = 'card'; s.label = 'OFFICIAL · BET CARD'; s.color = 'var(--green)'; s.note = 'wager';
     } else if (p.qualifies) {
       s.kind = 'official'; s.label = 'OFFICIAL PLAY'; s.color = 'var(--blue-light)'; s.note = 'not on the Bet Card — track only';
+    } else if (p.bigDogWatch) {
+      s.kind = 'dogwatch'; s.label = 'WATCH · BIG DOG 28–34.5'; s.color = 'var(--blue-light)';
+      s.note = 'watch only — not official. The edge is at the opening line, so track it when lines first post';
     } else if (p.bigSpread) {
       s.kind = 'bigspread'; s.label = 'UNOFFICIAL · 20+ PT SPREAD'; s.color = 'var(--amber)'; s.note = 'faded by rule';
     } else if (p.isFade) {
@@ -2373,6 +2389,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       modelVersion: play.modelVersion || null
     };
     if (play.kickoffIso) item.kickoffIso = play.kickoffIso;   // real kickoff, so the row can show it in your own time zone
+    if (play.dogWatch) item.dogWatch = true;                  // big-dog watch play (28-34.5 underdog) when tracked
     if (play.betCard) item.betCard = true;                    // was on the Bet Card for its market when tracked
     items.unshift(item);
     saveTrk(items);
@@ -2872,6 +2889,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
         if (!keep.status && o.status) keep.status = o.status;
         if (o.unofficial) keep.unofficial = true;
         if (o.betCard) keep.betCard = true;
+        if (o.dogWatch) keep.dogWatch = true;
         if (!keep.notes && o.notes) keep.notes = o.notes;
         var tags = trkTagsOf(keep).slice();
         trkTagsOf(o).forEach(function (t) { if (!trkHasTag(tags, t)) tags.push(t); });
@@ -3000,6 +3018,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       if (f.status === 'official' && it.unofficial) return false;
       if (f.status === 'unofficial' && !it.unofficial) return false;
       if (f.status === 'betcard' && !it.betCard) return false;
+      if (f.status === 'dogwatch' && !it.dogWatch) return false;
       if (f.tag !== 'all' && trkTagsOf(it).indexOf(f.tag) === -1) return false;
       if (q) {
         var p = trkParse(it), names = [p.away, p.home].map(function (a) { var t = a && trkTeam(a); return t && t.n ? t.n : ''; });
@@ -3042,6 +3061,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
 
     var tags = (modelTag ? '<span class="trk-tag' + (it.modelSource === 'trained_model' ? ' is-model' : '') + '">' + modelTag + '</span>' : '') +
       (it.betCard ? '<span class="trk-tag is-card" title="On the Bet Card when it was tracked">BET CARD</span>' : '') +
+      (it.dogWatch ? '<span class="trk-tag is-watch" title="Big-dog watch: 28–34.5 point underdog, watch only">BIG-DOG WATCH</span>' : '') +
       (it.auto ? '<span class="trk-tag is-auto">AUTO</span>' : '') +
       trkTagsOf(it).map(trkTagChip).join('');
     var matchCell = '<div><div class="trk-match">' + trkMatchHtml(it, p, 22) + '</div>' +
@@ -3147,7 +3167,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     var tools = '<div class="trk-tools">' +
       '<input id="trk-q-' + sec + '" class="trk-search" type="search" placeholder="Search teams, tags or notes" autocomplete="off" value="' + esc(f.q) + '" data-trk-filter="q" data-trk-sec="' + sec + '" aria-label="Search tracked plays">' +
       '<select class="trk-sel" data-trk-filter="status" data-trk-sec="' + sec + '" aria-label="Filter by status">' +
-        [['all', 'All statuses'], ['pending', 'Not graded yet'], ['win', 'Wins'], ['loss', 'Losses'], ['push', 'Pushes'], ['official', 'Official only'], ['unofficial', 'Unofficial only'], ['betcard', 'Bet Card plays']]
+        [['all', 'All statuses'], ['pending', 'Not graded yet'], ['win', 'Wins'], ['loss', 'Losses'], ['push', 'Pushes'], ['official', 'Official only'], ['unofficial', 'Unofficial only'], ['betcard', 'Bet Card plays'], ['dogwatch', 'Big-dog watch']]
           .map(function (o) { return opt(o[0], o[1], f.status); }).join('') + '</select>' +
       '<select class="trk-sel" data-trk-filter="tag" data-trk-sec="' + sec + '" aria-label="Filter by tag">' +
         opt('all', Object.keys(tagsInUse).length ? 'All tags' : 'No tags yet', f.tag) +
