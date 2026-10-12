@@ -347,7 +347,8 @@ def build_neutral_site_lookup(games_df: pd.DataFrame) -> dict:
 
 MODEL_INPUTS_LOG = "docs/data/model_inputs_log.csv"
 MODEL_INPUT_LOG_FIXED = ["run_at", "home", "away", "commence_time", "spread_home", "model_margin",
-                         "margin_weather_neutral", "model_source", "model_version", "missing_inputs"]
+                         "margin_weather_neutral", "model_source", "model_version", "missing_inputs",
+                         "missing_inputs_upgraded"]
 
 
 def append_model_inputs_log(rows: list, path: str) -> int:
@@ -361,8 +362,18 @@ def append_model_inputs_log(rows: list, path: str) -> int:
         return 0
     cols = MODEL_INPUT_LOG_FIXED + list(FEATURE_COLUMNS_V2)
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    new = not os.path.exists(path)
+    new = not os.path.exists(path) or os.path.getsize(path) == 0
     os.makedirs(os.path.dirname(path), exist_ok=True)
+    if not new:
+        # Columns added since the file was started: rewrite it once with the new header.
+        with open(path, newline="") as f:
+            rd = csv.DictReader(f)
+            if rd.fieldnames != cols:
+                old = list(rd)
+                with open(path, "w", newline="") as g:
+                    w0 = csv.DictWriter(g, fieldnames=cols, extrasaction="ignore")
+                    w0.writeheader()
+                    w0.writerows(old)
     with open(path, "a", newline="") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
         if new:
@@ -371,7 +382,8 @@ def append_model_inputs_log(rows: list, path: str) -> int:
             out = {"run_at": now, "home": r.get("_home"), "away": r.get("_away"), "commence_time": r.get("_commence"),
                    "spread_home": r.get("_spread_home"), "model_margin": r.get("_margin"),
                    "margin_weather_neutral": r.get("_margin_weather_neutral"), "model_source": r.get("_source"),
-                   "model_version": r.get("_version"), "missing_inputs": r.get("_missing")}
+                   "model_version": r.get("_version"), "missing_inputs": r.get("_missing"),
+                   "missing_inputs_upgraded": r.get("_missing_upgraded")}
             for c in FEATURE_COLUMNS_V2:
                 v = r.get(c)
                 out[c] = round(v, 4) if isinstance(v, float) else v
@@ -949,6 +961,7 @@ def main(year: int):
                     diagnostics=trained_model_diagnostics, inputs_out=game_inputs, **score_args,
                 )
                 used_model = trained_model if trained_margin is not None else None
+                upgraded_missing = game_inputs.get("_missing") if trained_margin is None else ""
                 if trained_margin is None and trained_model_v1 is not None:
                     game_inputs = {}
                     trained_margin = score_with_trained_model(
@@ -985,7 +998,8 @@ def main(year: int):
                     n_neutral_unknown += 1
                 if fair_fields.get("has_model_line"):
                     n_with_model_line += 1
-                input_log_rows.append(dict(game_inputs, _home=game_out.get("home_school"), _away=game_out.get("away_school"),
+                input_log_rows.append(dict(game_inputs, _missing_upgraded=upgraded_missing,
+                                           _home=game_out.get("home_school"), _away=game_out.get("away_school"),
                                            _commence=game_out.get("commence_time"), _spread_home=game_out.get("spread_home"),
                                            _margin=game_out.get("model_predicted_margin"),
                                            _source=game_out.get("model_source"), _version=game_out.get("model_version")))
