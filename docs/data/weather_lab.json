@@ -1,0 +1,350 @@
+{
+  "generated_at": "2026-10-12T14:31:44.713364+00:00",
+  "seasons_graded": [
+    2024,
+    2025,
+    2026
+  ],
+  "games": 1357,
+  "join_strategy": "id",
+  "results": {
+    "upgraded": {
+      "margin_mae": 13.192,
+      "vs_closing": {
+        "every_game": {
+          "group": "every game",
+          "n": 1357,
+          "record": "690-638-29",
+          "hit_rate": 0.52,
+          "units": -10.73,
+          "roi": -0.008,
+          "z": -0.31,
+          "roi_by_period": {
+            "2024": 0.031,
+            "2025": -0.016,
+            "2026": -0.089
+          }
+        },
+        "bet_card": {
+          "group": "bet card",
+          "n": 330,
+          "record": "152-172-6",
+          "hit_rate": 0.469,
+          "units": -33.82,
+          "roi": -0.102,
+          "z": -1.97,
+          "roi_by_period": {
+            "2024": -0.065,
+            "2025": -0.072,
+            "2026": -0.283
+          }
+        },
+        "edge_3_plus": {
+          "group": "3+ pts off",
+          "n": 881,
+          "record": "456-406-19",
+          "hit_rate": 0.529,
+          "units": 8.55,
+          "roi": 0.01,
+          "z": 0.31,
+          "roi_by_period": {
+            "2024": 0.088,
+            "2025": -0.002,
+            "2026": -0.158
+          }
+        }
+      },
+      "vs_opening": {
+        "every_game": {
+          "group": "every game vs opener",
+          "n": 1278,
+          "record": "686-575-17",
+          "hit_rate": 0.544,
+          "units": 48.64,
+          "roi": 0.038,
+          "z": 1.44,
+          "roi_by_period": {
+            "2024": 0.109,
+            "2025": -0.017,
+            "2026": 0.0
+          }
+        },
+        "bet_card": {
+          "group": "bet card vs opener",
+          "n": 308,
+          "record": "159-141-8",
+          "hit_rate": 0.53,
+          "units": 3.55,
+          "roi": 0.012,
+          "z": 0.21,
+          "roi_by_period": {
+            "2024": 0.15,
+            "2025": -0.059,
+            "2026": -0.152
+          }
+        }
+      }
+    },
+    "no_temp": {
+      "margin_mae": 13.306,
+      "vs_closing": {
+        "every_game": {
+          "group": "every game",
+          "n": 1357,
+          "record": "690-638-29",
+          "hit_rate": 0.52,
+          "units": -10.73,
+          "roi": -0.008,
+          "z": -0.31,
+          "roi_by_period": {
+            "2024": 0.018,
+            "2025": -0.006,
+            "2026": -0.08
+          }
+        },
+        "bet_card": {
+          "group": "bet card",
+          "n": 330,
+          "record": "151-172-7",
+          "hit_rate": 0.467,
+          "units": -34.73,
+          "roi": -0.105,
+          "z": -2.03,
+          "roi_by_period": {
+            "2024": -0.024,
+            "2025": -0.106,
+            "2026": -0.32
+          }
+        },
+        "edge_3_plus": {
+          "group": "3+ pts off",
+          "n": 880,
+          "record": "443-419-18",
+          "hit_rate": 0.514,
+          "units": -16.27,
+          "roi": -0.018,
+          "z": -0.58,
+          "roi_by_period": {
+            "2024": 0.044,
+            "2025": -0.028,
+            "2026": -0.155
+          }
+        }
+      },
+      "vs_opening": {
+        "every_game": {
+          "group": "every game vs opener",
+          "n": 1278,
+          "record": "683-578-17",
+          "hit_rate": 0.542,
+          "units": 42.91,
+          "roi": 0.034,
+          "z": 1.27,
+          "roi_by_period": {
+            "2024": 0.065,
+            "2025": 0.005,
+            "2026": 0.027
+          }
+        },
+        "bet_card": {
+          "group": "bet card vs opener",
+          "n": 308,
+          "record": "163-138-7",
+          "hit_rate": 0.542,
+          "units": 10.18,
+          "roi": 0.033,
+          "z": 0.62,
+          "roi_by_period": {
+            "2024": 0.135,
+            "2025": 0.0,
+            "2026": -0.135
+          }
+        }
+      }
+    },
+    "no_weather": {
+      "margin_mae": 13.242,
+      "vs_closing": {
+        "every_game": {
+          "group": "every game",
+          "n": 1357,
+          "record": "693-635-29",
+          "hit_rate": 0.522,
+          "units": -5.0,
+          "roi": -0.004,
+          "z": -0.14,
+          "roi_by_period": {
+            "2024": 0.038,
+            "2025": -0.029,
+            "2026": -0.045
+          }
+        },
+        "bet_card": {
+          "group": "bet card",
+          "n": 330,
+          "record": "158-165-7",
+          "hit_rate": 0.489,
+          "units": -21.36,
+          "roi": -0.065,
+          "z": -1.24,
+          "roi_by_period": {
+            "2024": -0.01,
+            "2025": -0.037,
+            "2026": -0.283
+          }
+        },
+        "edge_3_plus": {
+          "group": "3+ pts off",
+          "n": 861,
+          "record": "427-413-21",
+          "hit_rate": 0.508,
+          "units": -24.82,
+          "roi": -0.029,
+          "z": -0.9,
+          "roi_by_period": {
+            "2024": -0.003,
+            "2025": -0.025,
+            "2026": -0.107
+          }
+        }
+      },
+      "vs_opening": {
+        "every_game": {
+          "group": "every game vs opener",
+          "n": 1278,
+          "record": "682-579-17",
+          "hit_rate": 0.541,
+          "units": 41.0,
+          "roi": 0.032,
+          "z": 1.21,
+          "roi_by_period": {
+            "2024": 0.062,
+            "2025": -0.013,
+            "2026": 0.071
+          }
+        },
+        "bet_card": {
+          "group": "bet card vs opener",
+          "n": 308,
+          "record": "163-138-7",
+          "hit_rate": 0.542,
+          "units": 10.18,
+          "roi": 0.033,
+          "z": 0.62,
+          "roi_by_period": {
+            "2024": 0.143,
+            "2025": -0.037,
+            "2026": -0.061
+          }
+        }
+      }
+    }
+  },
+  "weather_sensitivity_live_model": {
+    "2024": {
+      "temp_plus_10F": {
+        "avg_pts": 1.47,
+        "share_moved_2plus": 0.268,
+        "max_pts": 9.1
+      },
+      "temp_minus_10F": {
+        "avg_pts": 1.47,
+        "share_moved_2plus": 0.267,
+        "max_pts": 9.8
+      },
+      "rain_on": {
+        "avg_pts": 4.91,
+        "share_moved_2plus": 0.517,
+        "max_pts": 16.9
+      },
+      "rain_off": {
+        "avg_pts": 0.21,
+        "share_moved_2plus": 0.026,
+        "max_pts": 16.7
+      }
+    },
+    "2025": {
+      "temp_plus_10F": {
+        "avg_pts": 0.44,
+        "share_moved_2plus": 0.032,
+        "max_pts": 13.6
+      },
+      "temp_minus_10F": {
+        "avg_pts": 0.65,
+        "share_moved_2plus": 0.079,
+        "max_pts": 12.5
+      },
+      "rain_on": {
+        "avg_pts": 3.01,
+        "share_moved_2plus": 0.611,
+        "max_pts": 10.9
+      },
+      "rain_off": {
+        "avg_pts": 0.06,
+        "share_moved_2plus": 0.011,
+        "max_pts": 7.7
+      }
+    },
+    "2026": {
+      "temp_plus_10F": {
+        "avg_pts": 1.07,
+        "share_moved_2plus": 0.164,
+        "max_pts": 5.5
+      },
+      "temp_minus_10F": {
+        "avg_pts": 0.98,
+        "share_moved_2plus": 0.149,
+        "max_pts": 3.7
+      },
+      "rain_on": {
+        "avg_pts": 4.41,
+        "share_moved_2plus": 0.71,
+        "max_pts": 12.5
+      },
+      "rain_off": {
+        "avg_pts": 0.34,
+        "share_moved_2plus": 0.065,
+        "max_pts": 11.2
+      }
+    }
+  },
+  "weather_input_importance": {
+    "2024_upgraded": {
+      "temperature": 0.0417,
+      "wind_speed": 0.0164,
+      "precipitation": 0.0147,
+      "game_indoors": 0.0001
+    },
+    "2024_no_temp": {
+      "precipitation": 0.0178,
+      "wind_speed": 0.0177,
+      "game_indoors": 0.0
+    },
+    "2024_no_weather": {},
+    "2025_upgraded": {
+      "temperature": 0.02,
+      "wind_speed": 0.013,
+      "precipitation": 0.0075,
+      "game_indoors": 0.0
+    },
+    "2025_no_temp": {
+      "wind_speed": 0.0127,
+      "precipitation": 0.0076,
+      "game_indoors": 0.0
+    },
+    "2025_no_weather": {},
+    "2026_upgraded": {
+      "temperature": 0.0172,
+      "wind_speed": 0.0136,
+      "precipitation": 0.0078,
+      "game_indoors": 0.0
+    },
+    "2026_no_temp": {
+      "wind_speed": 0.0166,
+      "precipitation": 0.0068,
+      "game_indoors": 0.0
+    },
+    "2026_no_weather": {}
+  },
+  "method": "walk-forward; same games for every version; spreads under 20; -110"
+}
