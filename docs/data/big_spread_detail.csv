@@ -1,0 +1,1054 @@
+season,week,awayTeam,homeTeam,game_type,market_spread_open_home,market_spread_home,m_preseason,m_current,m_upgraded,m_as_live,margin,home_games_played_prior,away_games_played_prior
+2024,1,SMU,Nevada,Power 4 vs Group of 5,25.0,27.0,-19.3,,,-19.3,-5.0,0,0
+2024,1,SMU,Nevada,Power 4 vs Group of 5,25.0,27.0,-19.3,,,-19.3,-5.0,0,1
+2024,1,SMU,Nevada,Power 4 vs Group of 5,25.0,27.0,-19.3,,,-19.3,-5.0,1,0
+2024,1,SMU,Nevada,Power 4 vs Group of 5,25.0,27.0,-19.3,-11.36,,-19.3,-5.0,1,1
+2024,1,Delaware State,Hawai'i,involves FCS,-38.0,-38.0,,,,,21.0,0,0
+2024,1,Delaware State,Hawai'i,involves FCS,-38.0,-38.0,,,,,21.0,0,1
+2024,1,Delaware State,Hawai'i,involves FCS,-38.0,-38.0,,,,,21.0,1,0
+2024,1,Delaware State,Hawai'i,involves FCS,-38.0,-38.0,,,,,21.0,1,1
+2024,1,Howard,Rutgers,involves FCS,,-38.5,,,,,37.0,0,0
+2024,1,Central Connecticut,Central Michigan,involves FCS,,-33.5,,,,,56.0,0,0
+2024,1,New Hampshire,UCF,involves FCS,,-38.5,,,,,54.0,0,0
+2024,1,Western Carolina,NC State,involves FCS,,-32.5,,,,,17.0,0,0
+2024,1,Presbyterian,Mercer,involves FCS,,-27.5,,,,,53.0,0,0
+2024,1,Arkansas-Pine Bluff,Arkansas,involves FCS,,-50.5,,,,,70.0,0,0
+2024,1,Duquesne,Toledo,involves FCS,,-27.5,,,,,39.0,0,0
+2024,1,Lindenwood,Kansas,involves FCS,,-48.5,,,,,45.0,0,0
+2024,1,Murray State,Missouri,involves FCS,,-50.5,,,,,51.0,0,0
+2024,1,SE Louisiana,Tulane,involves FCS,,-28.5,,,,,52.0,0,0
+2024,1,Northwestern State,Tulsa,involves FCS,,-37.5,,,,,34.0,0,0
+2024,1,Alcorn State,UAB,involves FCS,,-29.5,,,,,38.0,0,0
+2024,1,Southern Utah,Utah,involves FCS,,-37.5,,,,,49.0,0,0
+2024,1,Eastern Illinois,Illinois,involves FCS,,-28.5,,,,,45.0,0,0
+2024,1,Temple,Oklahoma,Power 4 vs Group of 5,-42.5,-42.5,27.47,,,27.47,48.0,0,0
+2024,1,Elon,Duke,involves FCS,,-24.5,,,,,23.0,0,0
+2024,1,Western Michigan,Wisconsin,Power 4 vs Group of 5,-24.0,-24.0,20.12,,,20.12,14.0,0,0
+2024,1,UConn,Maryland,Power 4 vs Group of 5,-21.0,-20.5,21.02,,,21.02,43.0,0,0
+2024,1,Austin Peay,Louisville,involves FCS,,-38.5,,,,,62.0,0,0
+2024,1,Kent State,Pittsburgh,Power 4 vs Group of 5,-23.5,-23.5,15.8,,,15.8,31.0,0,0
+2024,1,Indiana State,Purdue,involves FCS,,-35.5,,,,,49.0,0,0
+2024,1,Bucknell,Navy,involves FCS,,-31.5,,,,,28.0,0,0
+2024,1,Chattanooga,Tennessee,involves FCS,,-38.5,,,,,66.0,0,0
+2024,1,Towson,Cincinnati,involves FCS,,-33.5,,,,,18.0,0,0
+2024,1,Portland State,Washington State,involves FCS,,-26.5,,,,,40.0,0,0
+2024,1,East Tennessee State,App State,involves FCS,,-35.5,,,,,28.0,0,0
+2024,1,Florida International,Indiana,Power 4 vs Group of 5,-19.5,-20.5,12.22,,,12.22,24.0,0,0
+2024,1,North Dakota,Iowa State,involves FCS,,-30.5,,,,,18.0,0,0
+2024,1,Merrimack,Air Force,involves FCS,,-30.5,,,,,15.0,0,0
+2024,1,Kennesaw State,UTSA,Group of 5 vs Group of 5,-24.0,-24.0,,,,,12.0,0,0
+2024,1,Western Illinois,Northern Illinois,involves FCS,,-36.5,,,,,39.0,0,0
+2024,1,Colorado State,Texas,Power 4 vs Group of 5,-35.5,-35.5,24.79,,,24.79,52.0,0,0
+2024,1,UTEP,Nebraska,Power 4 vs Group of 5,-27.5,-27.5,14.08,,,14.08,33.0,0,0
+2024,1,Akron,Ohio State,Power 4 vs Group of 5,-50.5,-50.5,34.89,,,34.89,46.0,0,0
+2024,1,Old Dominion,South Carolina,Power 4 vs Group of 5,-20.0,-20.0,12.64,,,12.64,4.0,0,0
+2024,1,Stony Brook,Marshall,involves FCS,,-32.5,,,,,42.0,0,0
+2024,1,UC Davis,California,involves FCS,,-20.5,,,,,18.0,0,0
+2024,1,Campbell,Liberty,involves FCS,,-41.5,,,,,17.0,0,0
+2024,1,Mississippi Valley State,Tennessee State,involves FCS,,-20.0,,,,,20.0,0,0
+2024,1,Norfolk State,East Carolina,involves FCS,,-31.5,,,,,39.0,0,0
+2024,1,Norfolk State,East Carolina,involves FCS,,-31.5,,,,,39.0,0,1
+2024,1,Eastern Kentucky,Mississippi State,involves FCS,,-26.5,,,,,49.0,0,0
+2024,1,Idaho State,Oregon State,involves FCS,,-29.5,,,,,23.0,0,0
+2024,1,Long Island University,UAlbany,involves FCS,,-23.5,,,,,6.0,0,0
+2024,1,North Alabama,Memphis,involves FCS,,-38.5,,,,,40.0,0,0
+2024,1,North Alabama,Memphis,involves FCS,,-38.5,,,,,40.0,0,1
+2024,1,Northern Colorado,Incarnate Word,involves FCS,,-22.5,,,,,21.0,0,0
+2024,1,Western Kentucky,Alabama,Power 4 vs Group of 5,-31.0,-31.0,19.99,,,19.99,63.0,0,0
+2024,1,Furman,Ole Miss,involves FCS,,-45.5,,,,,76.0,0,0
+2024,1,Tarleton State,Baylor,involves FCS,,-33.5,,,,,42.0,0,0
+2024,1,Tarleton State,Baylor,involves FCS,,-33.5,,,,,42.0,0,1
+2024,1,UT Martin,Kansas State,involves FCS,,-36.5,,,,,35.0,0,0
+2024,1,Fresno State,Michigan,Power 4 vs Group of 5,-21.0,-21.0,22.53,,,22.53,20.0,0,0
+2024,1,Alabama A&M,Auburn,involves FCS,,-48.5,,,,,70.0,0,0
+2024,1,Abilene Christian,Texas Tech,involves FCS,,-34.5,,,,,1.0,0,0
+2024,1,Southern Miss,Kentucky,Power 4 vs Group of 5,-25.5,-25.5,19.85,,,19.85,31.0,0,0
+2024,1,Georgia State,Georgia Tech,Power 4 vs Group of 5,-20.5,-20.5,7.62,,,7.62,23.0,0,0
+2024,1,Georgia State,Georgia Tech,Power 4 vs Group of 5,-20.5,-20.5,7.62,,,7.62,23.0,1,0
+2024,1,Montana State,Utah Tech,involves FCS,,30.5,,,,,-24.0,0,0
+2024,1,Montana State,Utah Tech,involves FCS,,30.5,,,,,-24.0,0,1
+2024,1,New Mexico,Arizona,Power 4 vs Group of 5,-30.5,-30.5,23.76,,,23.76,22.0,0,0
+2024,1,New Mexico,Arizona,Power 4 vs Group of 5,-30.5,-30.5,23.76,,,23.76,22.0,0,1
+2024,1,Weber State,Washington,involves FCS,,-29.0,,,,,32.0,0,0
+2024,1,Boston College,Florida State,Power 4 vs Power 4,-22.0,-16.5,20.12,,,20.12,-15.0,0,0
+2024,1,Boston College,Florida State,Power 4 vs Power 4,-22.0,-16.5,20.12,,,20.12,-15.0,1,0
+2024,2,Western Illinois,Indiana,involves FCS,-42.5,-44.5,,,,,74.0,1,1
+2024,2,Rhode Island,Minnesota,involves FCS,-24.5,-27.5,,,,,48.0,1,1
+2024,2,Akron,Rutgers,Power 4 vs Group of 5,-23.0,-24.5,19.99,22.84,21.88,19.99,32.0,1,1
+2024,2,Bowling Green,Penn State,Power 4 vs Group of 5,-32.0,-35.0,24.25,27.8,12.71,24.25,7.0,1,1
+2024,2,McNeese,Texas A&M,involves FCS,-48.0,-48.5,,,,,42.0,1,2
+2024,2,Valparaiso,Youngstown State,involves FCS,,-35.5,,,,,34.0,1,1
+2024,2,Tennessee Tech,Georgia,involves FCS,-54.5,-54.5,,,,,45.0,1,1
+2024,2,Mercer,Bethune-Cookman,involves FCS,,21.5,,,,,-29.0,1,1
+2024,2,Utah Tech,UNLV,involves FCS,,-41.5,,,,,58.0,1,1
+2024,2,Tennessee State,North Dakota State,involves FCS,,-35.5,,,,,49.0,1,1
+2024,2,Northern Illinois,Notre Dame,Power 4 vs Group of 5,-30.5,-27.5,21.7,21.17,6.81,21.7,-2.0,1,1
+2024,2,Charlotte,North Carolina,Power 4 vs Group of 5,-22.5,-22.0,22.53,23.66,17.87,22.53,18.0,1,1
+2024,2,Eastern Michigan,Washington,Power 4 vs Group of 5,-24.5,-25.0,22.46,22.55,35.87,22.46,21.0,1,1
+2024,2,Jacksonville State,Louisville,Power 4 vs Group of 5,-27.0,-29.0,9.34,,,9.34,35.0,1,1
+2024,2,Duquesne,Boston College,involves FCS,-34.5,-33.5,,,,,56.0,1,1
+2024,2,Middle Tennessee,Ole Miss,Power 4 vs Group of 5,-40.5,-43.0,21.91,26.4,24.48,21.91,49.0,1,1
+2024,2,Marshall,Virginia Tech,Power 4 vs Group of 5,-16.5,-20.5,12.91,5.89,13.84,12.91,17.0,1,1
+2024,2,Charleston Southern,Furman,involves FCS,,-20.0,,,,,-4.0,1,1
+2024,2,Gardner-Webb,James Madison,involves FCS,-33.0,-35.5,,,,,7.0,1,1
+2024,2,Fordham,Central Connecticut,involves FCS,,23.5,,,,,30.0,1,1
+2024,2,Florida A&M,Miami,involves FCS,-44.5,-46.5,,,,,47.0,1,2
+2024,2,UAlbany,West Virginia,involves FCS,-33.5,-38.5,,,,,35.0,1,1
+2024,2,Sam Houston,UCF,Power 4 vs Group of 5,-24.0,-21.5,14.56,,,14.56,31.0,1,1
+2024,2,Texas Southern,Rice,involves FCS,-29.5,-30.0,,,,,62.0,1,1
+2024,2,Samford,Florida,involves FCS,-37.0,-38.5,,,,,38.0,1,1
+2024,2,Drake,Eastern Washington,involves FCS,,-35.0,,,,,-3.0,1,1
+2024,2,Buffalo,Missouri,Power 4 vs Group of 5,-35.0,-34.5,26.44,32.13,30.58,26.44,38.0,1,1
+2024,2,Central Arkansas,Lindenwood,involves FCS,,20.5,,,,,-21.0,1,1
+2024,2,Mississippi Valley State,Lamar,involves FCS,,-27.0,,,,,14.0,1,1
+2024,2,Incarnate Word,South Dakota State,involves FCS,,-25.0,,,,,21.0,1,1
+2024,2,Northern Colorado,Colorado State,involves FCS,-28.5,-31.0,,,,,21.0,1,1
+2024,2,Eastern Kentucky,Western Kentucky,involves FCS,-20.5,-18.5,,,,,31.0,1,1
+2024,2,Cal Poly,Stanford,involves FCS,-35.5,-33.5,,,,,34.0,1,1
+2024,2,South Florida,Alabama,Power 4 vs Group of 5,-31.0,-31.0,23.15,34.24,21.82,23.15,26.0,1,1
+2024,2,Nicholls,LSU,involves FCS,-50.5,-50.5,,,,,23.0,1,1
+2024,2,Alcorn State,Vanderbilt,involves FCS,-31.0,-32.5,,,,,55.0,1,1
+2024,2,Western Michigan,Ohio State,Power 4 vs Group of 5,-39.5,-37.5,30.98,42.59,34.06,30.98,56.0,1,1
+2024,2,Stephen F. Austin,North Texas,involves FCS,-23.5,-21.5,,,,,15.0,1,1
+2024,2,Houston,Oklahoma,Power 4 vs Power 4,-27.0,-28.0,18.41,25.03,24.28,18.41,4.0,1,1
+2024,2,Long Island University,TCU,involves FCS,-45.5,-45.5,,,,,45.0,1,1
+2024,2,Maine,Montana State,involves FCS,,-30.5,,,,,17.0,2,1
+2024,2,Boise State,Oregon,Power 4 vs Group of 5,-19.5,-21.0,16.69,19.49,10.23,16.69,3.0,1,1
+2024,2,East Texas A&M,UC Davis,involves FCS,,-28.0,,,,,14.0,1,1
+2024,2,Northern Arizona,Arizona,involves FCS,-43.0,-43.0,,,,,12.0,1,1
+2024,2,Liberty,New Mexico State,Group of 5 vs Group of 5,20.5,22.0,-3.99,-0.89,-8.12,-3.99,-6.0,1,1
+2024,2,Utah State,USC,Power 4 vs Group of 5,-27.0,-28.5,16.69,12.62,10.25,16.69,48.0,1,1
+2024,3,Northwestern State,South Alabama,involves FCS,-38.0,-36.5,,,,,77.0,2,2
+2024,3,Arkansas State,Michigan,Power 4 vs Group of 5,-22.5,-22.5,28.57,24.33,15.2,15.2,10.0,2,2
+2024,3,Louisiana Tech,NC State,Power 4 vs Group of 5,-21.5,-21.5,16.69,11.64,18.26,16.69,10.0,2,1
+2024,3,Central Michigan,Illinois,Power 4 vs Group of 5,-20.0,-20.0,14.15,14.3,12.56,12.56,21.0,2,2
+2024,3,Oklahoma State,Tulsa,Power 4 vs Group of 5,20.0,20.0,-11.27,-1.32,-1.39,-1.39,-35.0,2,2
+2024,3,Marist,Lafayette,involves FCS,,-33.0,,,,,42.0,2,1
+2024,3,Western Illinois,Illinois State,involves FCS,,-36.0,,,,,17.0,2,2
+2024,3,Stetson,Furman,involves FCS,,-30.5,,,,,41.0,2,2
+2024,3,Morehead State,Montana,involves FCS,,-37.0,,,,,57.0,2,2
+2024,3,Oregon,Oregon State,Power 4 vs Group of 5,20.5,16.0,-6.6,-7.47,-0.05,-0.05,-35.0,2,2
+2024,3,VMI,Georgia Tech,involves FCS,-43.0,-42.5,,,,,52.0,3,2
+2024,3,Prairie View A&M,Michigan State,involves FCS,-40.5,-42.5,,,,,40.0,2,2
+2024,3,Ball State,Miami,Power 4 vs Group of 5,-36.5,-36.5,19.57,30.76,39.31,19.57,62.0,2,1
+2024,3,Troy,Iowa,Power 4 vs Group of 5,-22.5,-22.5,-0.0,3.64,4.57,4.57,17.0,2,2
+2024,3,UAB,Arkansas,Power 4 vs Group of 5,-24.0,-24.0,15.25,22.33,20.0,20.0,10.0,2,2
+2024,3,Utah,Utah State,Power 4 vs Group of 5,21.5,21.5,-10.58,-17.0,-13.94,-13.94,-17.0,2,2
+2024,3,North Dakota State,East Tennessee State,involves FCS,,27.0,,,,,-3.0,2,2
+2024,3,UTEP,Liberty,Group of 5 vs Group of 5,-23.5,-23.5,19.37,27.02,17.6,17.6,18.0,2,2
+2024,3,Stonehill,New Hampshire,involves FCS,,-27.5,,,,,39.0,2,1
+2024,3,North Carolina Central,North Carolina,involves FCS,-37.5,-37.5,,,,,35.0,2,2
+2024,3,Bethune-Cookman,Western Michigan,involves FCS,-33.0,-33.5,,,,,28.0,2,2
+2024,3,Ole Miss,Wake Forest,Power 4 vs Power 4,23.0,23.5,-15.32,-15.6,-22.91,-22.91,-34.0,2,2
+2024,3,Kennesaw State,San José State,Group of 5 vs Group of 5,-20.0,-19.0,,,,,21.0,2,2
+2024,3,Arkansas-Pine Bluff,Tennessee State,involves FCS,,-20.0,,,,,13.0,2,2
+2024,3,UTSA,Texas,Power 4 vs Group of 5,-34.5,-34.5,14.97,16.07,6.58,6.58,49.0,2,2
+2024,3,Lindenwood,Missouri State,involves FCS,,-26.5,,,,,14.0,2,2
+2024,3,Georgia,Kentucky,Power 4 vs Power 4,18.0,24.0,-11.47,-19.87,-23.34,-23.34,-1.0,2,2
+2024,3,New Mexico,Auburn,Power 4 vs Group of 5,-28.0,-28.0,19.3,21.91,26.55,26.55,26.0,2,2
+2024,3,Kent State,Tennessee,Power 4 vs Group of 5,-48.0,-47.5,31.94,46.24,40.48,40.48,71.0,2,2
+2024,3,Northern Arizona,Utah Tech,involves FCS,,20.0,,,,,-28.0,2,2
+2024,3,New Mexico State,Fresno State,Group of 5 vs Group of 5,-19.5,-20.0,5.7,3.06,-0.19,-0.19,48.0,2,2
+2024,4,Villanova,Maryland,involves FCS,,-22.0,,,,,18.0,3,3
+2024,4,Charlotte,Indiana,Power 4 vs Group of 5,,-28.5,12.36,23.7,20.74,20.74,38.0,3,3
+2024,4,Marshall,Ohio State,Power 4 vs Group of 5,-40.0,-40.0,26.24,33.8,24.9,24.9,35.0,2,2
+2024,4,Stetson,Harvard,involves FCS,,-34.5,,,,,35.0,0,3
+2024,4,Ohio,Kentucky,Power 4 vs Group of 5,,-21.5,11.06,10.02,3.26,3.26,35.0,3,3
+2024,4,Towson,North Dakota State,involves FCS,,-25.0,,,,,17.0,3,3
+2024,4,Drake,South Dakota,involves FCS,,-28.0,,,,,39.0,3,2
+2024,4,Saint Francis,Eastern Michigan,involves FCS,-24.0,-25.5,,,,,36.0,3,3
+2024,4,Arkansas State,Iowa State,Power 4 vs Group of 5,,-20.5,12.22,12.41,12.88,12.88,45.0,2,3
+2024,4,San Diego,North Dakota,involves FCS,,-27.5,,,,,17.0,3,2
+2024,4,Mercyhurst,Montana State,involves FCS,,-49.5,,,,,39.0,3,3
+2024,4,Kent State,Penn State,Power 4 vs Group of 5,-49.0,-49.0,36.95,53.31,39.62,39.62,56.0,2,3
+2024,4,Youngstown State,Pittsburgh,involves FCS,,-27.0,,,,,56.0,3,3
+2024,4,UCLA,LSU,Power 4 vs Power 4,,-21.5,9.2,-0.68,12.77,12.77,17.0,3,2
+2024,4,Miami (OH),Notre Dame,Power 4 vs Group of 5,,-27.5,14.63,22.48,22.91,22.91,25.0,3,2
+2024,4,Houston Christian,UTSA,involves FCS,-35.5,-35.5,,,,,38.0,3,3
+2024,4,Mississippi Valley State,Nicholls,involves FCS,,-30.0,,,,,66.0,3,3
+2024,4,Richmond,Delaware State,involves FCS,,23.5,,,,,-14.0,3,3
+2024,4,The Citadel,Mercer,involves FCS,,-20.5,,,,,17.0,3,3
+2024,4,Morehead State,Eastern Kentucky,involves FCS,,-28.0,,,,,29.0,3,3
+2024,4,Central Arkansas,Arkansas-Pine Bluff,involves FCS,,33.0,,,,,-39.0,3,3
+2024,4,Florida A&M,Troy,involves FCS,,-21.5,,,,,22.0,3,3
+2024,4,Weber State,Northwestern State,involves FCS,,31.5,,,,,-39.0,3,3
+2024,4,Bowling Green,Texas A&M,Power 4 vs Group of 5,,-21.0,18.82,7.49,15.29,15.29,6.0,3,2
+2024,4,Akron,South Carolina,Power 4 vs Group of 5,-27.5,-25.0,20.54,21.35,9.42,9.42,43.0,3,3
+2024,4,Georgia Southern,Ole Miss,Power 4 vs Group of 5,-36.0,-35.0,18.96,23.31,22.3,22.3,39.0,3,3
+2024,4,UL Monroe,Texas,Power 4 vs Group of 5,-44.5,-43.5,33.52,39.96,38.53,38.53,48.0,3,2
+2024,4,Portland State,Boise State,involves FCS,-41.5,-43.0,,,,,42.0,2,3
+2024,5,Holy Cross,Syracuse,involves FCS,,-30.0,,,,,28.0,3,4
+2024,5,Ball State,James Madison,Group of 5 vs Group of 5,-17.0,-22.0,21.09,29.48,20.34,20.34,56.0,3,3
+2024,5,Murray State,North Dakota,involves FCS,,-21.0,,,,,37.0,4,3
+2024,5,Sacred Heart,Delaware,involves FCS,,-31.0,,,,,49.0,3,4
+2024,5,Northwestern State,Southeast Missouri State,involves FCS,,-33.5,,,,,19.0,4,4
+2024,5,Mississippi State,Texas,Power 4 vs Power 4,-35.5,-37.0,18.34,21.61,21.14,21.14,22.0,4,4
+2024,5,Long Island University,Villanova,involves FCS,,-24.0,,,,,14.0,4,4
+2024,5,Wagner,Florida Atlantic,involves FCS,-31.5,-35.0,,,,,31.0,4,4
+2024,5,Stanford,Clemson,Power 4 vs Power 4,-22.5,-24.0,18.13,21.39,22.52,22.52,26.0,3,3
+2024,5,Ohio State,Michigan State,Power 4 vs Power 4,25.0,23.5,-19.23,-13.69,-20.46,-20.46,-31.0,4,3
+2024,5,Middle Tennessee,Memphis,Group of 5 vs Group of 5,-23.0,-27.0,11.68,15.13,13.13,13.13,17.0,4,4
+2024,5,South Alabama,LSU,Power 4 vs Group of 5,-22.0,-21.0,12.36,5.38,9.05,9.05,32.0,4,4
+2024,5,Oregon,UCLA,Power 4 vs Power 4,24.0,23.5,-8.59,-12.77,-22.14,-22.14,-21.0,3,3
+2024,6,Michigan State,Oregon,Power 4 vs Power 4,-26.5,-22.5,25.41,29.18,31.48,31.48,21.0,4,5
+2024,6,UCLA,Penn State,Power 4 vs Power 4,-27.5,-30.0,12.22,14.63,16.0,16.0,16.0,4,4
+2024,6,Marist,Davidson,involves FCS,,-20.5,,,,,23.0,4,4
+2024,6,North Carolina A&T,Richmond,involves FCS,,-22.5,,,,,3.0,5,5
+2024,6,South Dakota,Murray State,involves FCS,,27.5,,,,,-59.0,4,5
+2024,6,Auburn,Georgia,Power 4 vs Power 4,-23.5,-21.0,18.96,15.82,16.43,16.43,18.0,4,5
+2024,6,Iowa,Ohio State,Power 4 vs Power 4,-24.0,-17.0,16.07,33.76,21.0,21.0,28.0,4,4
+2024,6,Northern Colorado,Montana State,involves FCS,,-37.5,,,,,38.0,5,5
+2024,6,Alabama,Vanderbilt,Power 4 vs Power 4,24.0,23.5,-21.84,-16.49,-15.26,-15.26,5.0,4,4
+2024,6,South Dakota State,Northern Iowa,involves FCS,,24.5,,,,,-38.0,4,4
+2024,6,Prairie View A&M,Incarnate Word,involves FCS,,-23.5,,,,,28.0,4,5
+2024,6,Utah State,Boise State,Group of 5 vs Group of 5,-25.0,-28.0,14.29,16.35,18.14,18.14,32.0,4,4
+2024,6,Northwestern State,Stephen F. Austin,involves FCS,,-35.0,,,,,42.0,4,5
+2024,7,New Mexico State,Jacksonville State,Group of 5 vs Group of 5,-20.5,-21.0,2.88,,,2.88,41.0,5,5
+2024,7,Missouri,Massachusetts,Power 4 vs Group of 5,28.5,27.0,-22.53,-24.31,-29.71,-29.71,-42.0,6,5
+2024,7,South Carolina,Alabama,Power 4 vs Power 4,-21.5,-21.0,15.66,25.5,25.59,25.59,2.0,5,5
+2024,7,Clemson,Wake Forest,Power 4 vs Power 4,20.5,21.0,-9.89,-13.39,-14.77,-14.77,-35.0,5,5
+2024,7,UAB,Army,Group of 5 vs Group of 5,-18.5,-27.0,10.1,9.71,18.09,18.09,34.0,5,5
+2024,7,Northern Iowa,South Dakota,involves FCS,,-21.5,,,,,25.0,6,5
+2024,7,North Dakota State,Southern Illinois,involves FCS,,22.5,,,,,-21.0,6,6
+2024,7,Youngstown State,South Dakota State,involves FCS,,-33.0,,,,,50.0,5,6
+2024,7,Purdue,Illinois,Power 4 vs Power 4,-17.5,-22.5,6.04,8.29,13.53,13.53,1.0,5,5
+2024,7,Stanford,Notre Dame,Power 4 vs Power 4,-23.0,-22.5,24.73,29.91,22.39,22.39,42.0,5,5
+2024,7,UT Martin,Western Illinois,involves FCS,,21.5,,,,,-28.0,5,6
+2024,7,Mississippi State,Georgia,Power 4 vs Power 4,-34.5,-34.0,23.83,17.71,19.84,19.84,10.0,5,5
+2024,7,West Georgia,Central Arkansas,involves FCS,,-23.5,,,,,1.0,6,5
+2024,7,Utah Tech,Tarleton State,involves FCS,,-24.0,,,,,42.0,6,6
+2024,7,Northern Colorado,Weber State,involves FCS,,-27.0,,,,,-4.0,6,6
+2024,7,Boise State,Hawai'i,Group of 5 vs Group of 5,21.0,21.0,-12.57,-10.01,-15.28,-15.28,-21.0,5,5
+2024,8,Oregon,Purdue,Power 4 vs Power 4,29.5,30.0,-20.27,-20.14,-27.26,-27.26,-35.0,6,6
+2024,8,Northwestern State,Nicholls,involves FCS,,-30.0,,,,,20.0,6,7
+2024,8,Virginia,Clemson,Power 4 vs Power 4,-21.0,-20.0,17.38,19.86,17.34,17.34,17.0,6,6
+2024,8,Indiana State,Missouri State,involves FCS,,-27.0,,,,,25.0,6,6
+2024,8,Kent State,Bowling Green,Group of 5 vs Group of 5,-24.5,-24.0,15.45,20.88,21.88,21.88,21.0,6,6
+2024,8,Rice,Tulane,Group of 5 vs Group of 5,-23.5,-21.5,11.68,10.73,8.85,8.85,14.0,6,6
+2024,8,Cal Poly,Idaho,involves FCS,,-22.0,,,,,5.0,7,6
+2024,8,Montana State,Portland State,involves FCS,,21.5,,,,,-30.0,7,7
+2024,8,Texas A&M,Mississippi State,Power 4 vs Power 4,15.0,21.0,-7.63,-14.47,-14.56,-14.56,-10.0,6,6
+2024,8,South Dakota,Youngstown State,involves FCS,,23.5,,,,,-10.0,7,7
+2024,8,Ball State,Vanderbilt,Power 4 vs Group of 5,-24.5,-27.5,4.26,9.93,20.03,20.03,10.0,6,6
+2024,9,Liberty,Kennesaw State,Group of 5 vs Group of 5,22.5,27.0,,,,,3.0,6,5
+2024,9,Middle Tennessee,Jacksonville State,Group of 5 vs Group of 5,-21.5,-20.5,8.17,,,8.17,22.0,6,7
+2024,9,Nebraska,Ohio State,Power 4 vs Power 4,-25.5,-25.0,19.85,29.38,36.72,36.72,4.0,6,7
+2024,9,Duquesne,Stonehill,involves FCS,,21.0,,,,,-14.0,6,6
+2024,9,North Dakota State,Murray State,involves FCS,,35.0,,,,,-53.0,7,8
+2024,9,Montana,Northern Colorado,involves FCS,,24.0,,,,,-24.0,7,7
+2024,9,Utah Tech,Eastern Kentucky,involves FCS,,-20.0,,,,,11.0,7,8
+2024,9,Illinois,Oregon,Power 4 vs Power 4,-21.5,-22.0,22.46,19.23,20.63,20.63,29.0,7,7
+2024,9,Wagner,Massachusetts,involves FCS,-23.0,-23.0,,,,,28.0,7,8
+2024,9,Southern Miss,James Madison,Group of 5 vs Group of 5,-23.0,-24.0,20.74,34.13,24.22,24.22,17.0,7,7
+2024,9,VMI,Chattanooga,involves FCS,,-30.5,,,,,21.0,7,7
+2024,9,Texas,Vanderbilt,Power 4 vs Power 4,21.0,17.0,-21.91,-8.2,-7.31,-7.31,-3.0,7,7
+2024,9,Florida State,Miami,Power 4 vs Power 4,1.0,-22.5,-3.99,7.06,4.56,4.56,22.0,7,7
+2024,9,Michigan State,Michigan,Power 4 vs Power 4,-22.0,-3.5,28.92,26.09,7.31,7.31,7.0,7,7
+2024,10,Kennesaw State,Western Kentucky,Group of 5 vs Group of 5,-24.5,-24.0,,,,,17.0,7,7
+2024,10,San Diego State,Boise State,Group of 5 vs Group of 5,-22.5,-24.5,13.87,23.6,22.79,22.79,32.0,7,7
+2024,10,Maine,Oklahoma,involves FCS,,-37.5,,,,,45.0,8,8
+2024,10,Air Force,Army,Group of 5 vs Group of 5,-23.0,-18.0,-4.05,4.02,9.08,9.08,17.0,7,7
+2024,10,Mercyhurst,Duquesne,involves FCS,,-26.5,,,,,7.0,7,8
+2024,10,Duke,Miami,Power 4 vs Power 4,-19.5,-21.0,2.88,3.45,14.88,14.88,22.0,8,8
+2024,10,Stetson,Butler,involves FCS,,-26.5,,,,,33.0,8,8
+2024,10,Arkansas-Pine Bluff,Jackson State,involves FCS,,-24.5,,,,,38.0,8,8
+2024,10,Murray State,South Dakota State,involves FCS,,-42.0,,,,,46.0,8,8
+2024,10,Houston Christian,Incarnate Word,involves FCS,,-23.5,,,,,25.0,8,8
+2024,10,Florida,Georgia,Power 4 vs Power 4,-21.0,-14.5,16.76,17.61,15.36,15.36,14.0,7,7
+2024,10,Northern Iowa,North Dakota State,involves FCS,,-30.0,,,,,23.0,9,8
+2024,10,Northern Colorado,UC Davis,involves FCS,,-23.5,,,,,52.0,8,8
+2024,10,Central Arkansas,Utah Tech,involves FCS,,24.5,,,,,13.0,9,8
+2024,10,Massachusetts,Mississippi State,Power 4 vs Group of 5,-22.5,-19.5,15.11,15.41,5.04,5.04,25.0,8,8
+2024,10,Montana,Cal Poly,involves FCS,,20.5,,,,,-35.0,7,8
+2024,11,Ohio,Kent State,Group of 5 vs Group of 5,17.0,20.5,-14.22,-0.33,-24.0,-24.0,-41.0,8,8
+2024,11,Florida,Texas,Power 4 vs Power 4,-17.5,-23.0,14.01,15.5,15.46,15.46,32.0,8,8
+2024,11,Purdue,Ohio State,Power 4 vs Power 4,-38.5,-37.5,25.07,29.38,37.25,37.25,45.0,8,8
+2024,11,Northwestern State,SE Louisiana,involves FCS,,-28.0,,,,,41.0,10,9
+2024,11,North Carolina A&T,Villanova,involves FCS,,-25.5,,,,,28.0,9,9
+2024,11,Mercer,VMI,involves FCS,,21.0,,,,,-34.0,9,9
+2024,11,Missouri State,Murray State,involves FCS,,24.0,,,,,-28.0,9,9
+2024,11,Indiana State,South Dakota,involves FCS,,-31.0,,,,,49.0,9,9
+2024,11,Mississippi Valley State,Jackson State,involves FCS,,-31.5,,,,,37.0,9,9
+2024,11,Temple,Tulane,Group of 5 vs Group of 5,-24.5,-26.0,19.09,28.47,22.1,22.1,46.0,9,8
+2024,11,Mississippi State,Tennessee,Power 4 vs Power 4,-23.0,-26.0,13.53,19.87,18.34,18.34,19.0,8,9
+2024,11,Maryland,Oregon,Power 4 vs Power 4,-26.5,-24.0,13.19,15.91,26.74,26.74,21.0,9,8
+2024,11,Florida State,Notre Dame,Power 4 vs Power 4,-3.5,-25.5,3.23,13.24,16.94,16.94,49.0,8,9
+2024,11,Nevada,Boise State,Group of 5 vs Group of 5,-24.5,-23.5,21.91,19.13,14.72,14.72,7.0,8,10
+2024,11,Utah State,Washington State,Group of 5 vs Group of 5,-20.0,-20.0,13.6,17.21,15.06,15.06,21.0,8,8
+2024,12,Kent State,Miami (OH),Group of 5 vs Group of 5,-30.5,-31.0,22.73,26.41,28.1,28.1,27.0,9,9
+2024,12,North Carolina A&T,Towson,involves FCS,,-22.0,,,,,18.0,10,10
+2024,12,Ohio State,Northwestern,Power 4 vs Power 4,30.5,28.0,-18.2,-18.15,-19.05,-19.05,-24.0,9,9
+2024,12,Stonehill,Lafayette,involves FCS,,-22.0,,,,,32.0,10,9
+2024,12,UL Monroe,Auburn,Power 4 vs Group of 5,-25.5,-24.5,22.8,18.13,26.63,26.63,34.0,9,9
+2024,12,Mississippi Valley State,Florida A&M,involves FCS,,-31.0,,,,,-3.0,9,10
+2024,12,VMI,Western Carolina,involves FCS,,-24.5,,,,,30.0,10,10
+2024,12,Bryant,William & Mary,involves FCS,,-21.0,,,,,10.0,10,10
+2024,12,Murray State,Kentucky,involves FCS,,-41.5,,,,,42.0,9,10
+2024,12,Western Illinois,Southeast Missouri State,involves FCS,,-24.0,,,,,9.0,10,10
+2024,12,Mercer,Alabama,involves FCS,,-42.0,,,,,45.0,9,10
+2024,12,McNeese,Northwestern State,involves FCS,,25.5,,,,,-32.0,10,10
+2024,12,Southern Illinois,South Dakota State,involves FCS,,-30.5,,,,,31.0,10,10
+2024,12,Sam Houston,Kennesaw State,Group of 5 vs Group of 5,13.5,21.0,,,,,-6.0,9,9
+2024,12,Virginia,Notre Dame,Power 4 vs Power 4,-20.0,-20.5,23.97,40.44,33.58,33.58,21.0,9,9
+2024,12,Penn State,Purdue,Power 4 vs Power 4,28.0,30.0,-18.41,-18.83,-23.02,-23.02,-39.0,9,9
+2024,12,Louisville,Stanford,Power 4 vs Power 4,20.0,21.0,-10.92,-23.98,-23.77,-23.77,3.0,9,9
+2024,12,Stetson,San Diego,involves FCS,,-27.5,,,,,39.0,9,10
+2024,12,Southern Miss,Texas State,Group of 5 vs Group of 5,-25.5,-27.5,11.54,20.7,18.07,18.07,55.0,9,9
+2024,12,New Mexico State,Texas A&M,Power 4 vs Group of 5,-42.0,-38.5,14.7,11.3,17.0,17.0,35.0,9,9
+2024,12,San Diego State,UNLV,Group of 5 vs Group of 5,-18.5,-22.0,10.78,,,10.78,21.0,9,9
+2024,13,Wake Forest,Miami,Power 4 vs Power 4,-24.0,-23.5,14.77,26.32,11.46,11.46,28.0,10,10
+2024,13,Massachusetts,Georgia,Power 4 vs Group of 5,-45.5,-42.5,36.2,22.31,17.51,17.51,38.0,10,10
+2024,13,North Carolina Central,Delaware State,involves FCS,,23.5,,,,,-42.0,11,10
+2024,13,UTEP,Tennessee,Power 4 vs Group of 5,-41.5,-41.5,25.0,32.24,24.46,24.46,56.0,10,10
+2024,13,Charleston Southern,Florida State,involves FCS,,-33.0,,,,,34.0,10,11
+2024,13,Incarnate Word,East Texas A&M,involves FCS,,21.5,,,,,-14.0,11,11
+2024,13,South Alabama,Southern Miss,Group of 5 vs Group of 5,21.5,24.0,-10.65,-27.41,-27.32,-27.32,-21.0,10,10
+2024,13,The Citadel,Clemson,involves FCS,,-49.5,,,,,37.0,10,11
+2024,13,Kentucky,Texas,Power 4 vs Power 4,-21.0,-18.5,11.47,24.64,18.14,18.14,17.0,10,10
+2024,13,Wofford,South Carolina,involves FCS,-42.5,-42.5,,,,,44.0,10,11
+2024,13,Louisiana Tech,Arkansas,Power 4 vs Group of 5,-23.5,-23.5,14.01,16.91,16.05,16.05,21.0,10,10
+2024,13,Boise State,Wyoming,Group of 5 vs Group of 5,22.5,22.0,-3.78,-12.4,-21.0,-21.0,-4.0,10,10
+2024,13,Georgia State,Texas State,Group of 5 vs Group of 5,-18.0,-23.0,6.32,11.84,9.02,9.02,-8.0,10,10
+2024,14,Kent State,Buffalo,Group of 5 vs Group of 5,-21.5,-23.5,10.37,17.63,19.71,19.71,36.0,11,11
+2024,14,Mississippi State,Ole Miss,Power 4 vs Power 4,-27.5,-26.0,15.04,20.62,17.02,17.02,12.0,11,11
+2024,14,Georgia Tech,Georgia,Power 4 vs Power 4,-20.5,-17.0,23.97,18.83,23.29,23.29,2.0,11,11
+2024,14,Maryland,Penn State,Power 4 vs Power 4,-24.5,-26.0,11.33,9.27,14.85,14.85,37.0,11,11
+2024,14,Purdue,Indiana,Power 4 vs Power 4,-25.5,-28.5,2.68,4.72,12.63,12.63,66.0,11,11
+2024,14,Washington,Oregon,Power 4 vs Power 4,-20.0,-17.0,9.48,13.73,18.3,18.3,28.0,11,11
+2024,15,Montana,South Dakota State,involves FCS,,-22.5,,,,,17.0,12,13
+2024,15,Abilene Christian,North Dakota State,involves FCS,,-21.5,,,,,20.0,12,13
+2024,16,Incarnate Word,South Dakota State,involves FCS,,-20.5,,,,,41.0,13,13
+2024,16,Mercer,North Dakota State,involves FCS,,-23.5,,,,,24.0,13,13
+2025,1,Idaho State,UNLV,involves FCS,-24.5,-30.5,,,,,7.0,0,0
+2025,1,Idaho State,UNLV,involves FCS,-24.5,-30.5,,,,,7.0,0,1
+2025,1,Idaho State,UNLV,involves FCS,-24.5,-30.5,,,,,7.0,1,0
+2025,1,Idaho State,UNLV,involves FCS,-24.5,-30.5,,,,,7.0,1,1
+2025,1,Lafayette,Bowling Green,involves FCS,-14.5,-21.0,,,,,19.0,0,0
+2025,1,Mercyhurst,Youngstown State,involves FCS,,-24.0,,,,,9.0,0,0
+2025,1,Delaware State,Delaware,involves FCS,-29.5,-30.5,,,,,18.0,0,0
+2025,1,Saint Francis,UL Monroe,involves FCS,-23.5,-31.0,,,,,29.0,0,0
+2025,1,Central Arkansas,Missouri,involves FCS,-36.5,-38.5,,,,,55.0,0,0
+2025,1,UT Martin,Oklahoma State,involves FCS,-19.5,-26.0,,,,,20.0,0,0
+2025,1,Elon,Duke,involves FCS,-33.5,-36.5,,,,,28.0,0,0
+2025,1,Stephen F. Austin,Houston,involves FCS,-22.5,-24.5,,,,,27.0,0,0
+2025,1,Alabama State,UAB,involves FCS,-20.0,-21.0,,,,,10.0,0,0
+2025,1,Bethune-Cookman,Florida International,involves FCS,-31.0,-26.5,,,,,33.0,0,0
+2025,1,Western Illinois,Illinois,involves FCS,-45.5,-48.5,,,,,49.0,0,0
+2025,1,Wagner,Kansas,involves FCS,-46.5,-46.5,,,,,39.0,0,0
+2025,1,Wagner,Kansas,involves FCS,-46.5,-46.5,,,,,39.0,1,0
+2025,1,VMI,Navy,involves FCS,-41.0,-42.0,,,,,45.0,0,0
+2025,1,Duquesne,Pittsburgh,involves FCS,-39.0,-39.0,,,,,52.0,0,0
+2025,1,Central Connecticut,UConn,involves FCS,-26.5,-28.0,,,,,46.0,0,0
+2025,1,Robert Morris,West Virginia,involves FCS,-37.5,-40.0,,,,,42.0,0,0
+2025,1,Fordham,Boston College,involves FCS,-34.5,-35.0,,,,,56.0,0,0
+2025,1,Old Dominion,Indiana,Power 4 vs Group of 5,-23.5,-23.5,19.93,,,19.93,13.0,0,0
+2025,1,Eastern Kentucky,Louisville,involves FCS,-37.5,-38.0,,,,,34.0,0,0
+2025,1,Bucknell,Air Force,involves FCS,-32.0,-31.0,,,,,36.0,0,0
+2025,1,Nevada,Penn State,Power 4 vs Group of 5,-45.5,-45.5,28.6,,,28.6,35.0,0,0
+2025,1,Marshall,Georgia,Power 4 vs Group of 5,-39.5,-39.5,16.83,,,16.83,38.0,0,0
+2025,1,Montana State,Oregon,involves FCS,-26.5,-28.0,,,,,46.0,0,0
+2025,1,Maine,Liberty,involves FCS,-25.5,-25.5,,,,,21.0,0,0
+2025,1,Alabama A&M,Arkansas,involves FCS,-46.5,-48.5,,,,,45.0,0,0
+2025,1,Chattanooga,Memphis,involves FCS,-28.0,-30.5,,,,,35.0,0,0
+2025,1,Murray State,East Tennessee State,involves FCS,,-31.0,,,,,28.0,0,0
+2025,1,Illinois State,Oklahoma,involves FCS,-35.5,-39.5,,,,,32.0,0,0
+2025,1,Presbyterian,Mercer,involves FCS,,-22.5,,,,,-5.0,0,0
+2025,1,Weber State,James Madison,involves FCS,-27.5,-26.5,,,,,35.0,0,0
+2025,1,UAlbany,Iowa,involves FCS,-37.5,-39.5,,,,,27.0,0,0
+2025,1,North Dakota,Kansas State,involves FCS,-25.5,-27.5,,,,,3.0,0,0
+2025,1,North Dakota,Kansas State,involves FCS,-25.5,-27.5,,,,,3.0,1,0
+2025,1,Charleston Southern,Vanderbilt,involves FCS,-37.5,-37.5,,,,,42.0,0,0
+2025,1,Long Island University,Florida,involves FCS,-45.5,-47.0,,,,,55.0,0,0
+2025,1,UTSA,Texas A&M,Power 4 vs Group of 5,-21.5,-21.5,12.78,,,12.78,18.0,0,0
+2025,1,North Alabama,Western Kentucky,involves FCS,-28.5,-27.5,,,,,49.0,0,0
+2025,1,North Alabama,Western Kentucky,involves FCS,-28.5,-27.5,,,,,49.0,1,0
+2025,1,Morgan State,South Alabama,involves FCS,-28.5,-28.5,,,,,17.0,0,0
+2025,1,Nicholls,Troy,involves FCS,-21.5,-19.5,,,,,18.0,0,0
+2025,1,Nicholls,Troy,involves FCS,-21.5,-19.5,,,,,18.0,0,1
+2025,1,Arkansas-Pine Bluff,Texas Tech,involves FCS,-52.5,-54.5,,,,,60.0,0,0
+2025,1,Missouri State,USC,Power 4 vs Group of 5,-34.5,-34.5,,,,,60.0,0,0
+2025,1,New Mexico,Michigan,Power 4 vs Group of 5,-36.5,-36.5,19.49,,,19.49,17.0,0,0
+2025,1,Georgia State,Ole Miss,Power 4 vs Group of 5,-38.5,-38.5,32.4,,,32.4,56.0,0,0
+2025,1,Lamar,North Texas,involves FCS,-24.5,-27.5,,,,,51.0,0,0
+2025,1,Portland State,BYU,involves FCS,-43.5,-43.5,,,,,69.0,0,0
+2025,1,Portland State,BYU,involves FCS,-43.5,-43.5,,,,,69.0,0,1
+2025,1,East Texas A&M,SMU,involves FCS,-50.5,-51.0,,,,,29.0,0,0
+2025,1,Northern Arizona,Arizona State,involves FCS,-28.5,-30.5,,,,,19.0,0,0
+2025,1,Colorado State,Washington,Power 4 vs Group of 5,-20.5,-20.5,8.99,,,8.99,17.0,0,0
+2025,2,Western Illinois,Northwestern,involves FCS,-28.5,-31.5,,,,,35.0,1,1
+2025,2,Eastern Washington,Boise State,involves FCS,-29.5,-33.0,,,,,37.0,1,1
+2025,2,Florida International,Penn State,Power 4 vs Group of 5,-42.0,-42.0,26.64,21.38,10.06,26.64,34.0,1,1
+2025,2,Northwestern State,Minnesota,involves FCS,-43.0,-43.0,,,,,66.0,1,1
+2025,2,Sacred Heart,Lehigh,involves FCS,,-20.0,,,,,18.0,1,1
+2025,2,Kent State,Texas Tech,Power 4 vs Group of 5,-49.0,-48.5,27.02,27.84,38.95,27.02,48.0,1,1
+2025,2,Central Michigan,Pittsburgh,Power 4 vs Group of 5,-21.5,-21.5,16.52,16.62,16.98,16.52,28.0,1,1
+2025,2,Kennesaw State,Indiana,Power 4 vs Group of 5,-35.5,-35.5,32.02,,,32.02,47.0,1,1
+2025,2,East Texas A&M,Florida State,involves FCS,-43.5,-45.5,,,,,74.0,1,1
+2025,2,San José State,Texas,Power 4 vs Group of 5,-36.0,-37.0,22.15,11.75,21.74,22.15,31.0,1,1
+2025,2,Utah State,Texas A&M,Power 4 vs Group of 5,-29.5,-34.5,20.76,19.07,23.47,20.76,22.0,1,1
+2025,2,Howard,Temple,involves FCS,-27.5,-28.0,,,,,48.0,1,1
+2025,2,Western Carolina,Wake Forest,involves FCS,-20.0,-17.5,,,,,32.0,1,1
+2025,2,North Dakota State,Tennessee State,involves FCS,,32.5,,,,,-56.0,1,1
+2025,2,Lindenwood,App State,involves FCS,-31.0,-31.5,,,,,7.0,1,1
+2025,2,Gardner-Webb,Georgia Tech,involves FCS,-37.5,-37.5,,,,,47.0,1,1
+2025,2,Delaware,Colorado,Power 4 vs Group of 5,-23.5,-23.5,,,,,24.0,1,1
+2025,2,Grambling,Ohio State,involves FCS,-55.5,-55.5,,,,,70.0,1,1
+2025,2,UAB,Navy,Group of 5 vs Group of 5,-21.0,-20.5,12.78,21.91,18.18,12.78,14.0,1,1
+2025,2,East Tennessee State,Tennessee,involves FCS,-41.0,-39.5,,,,,55.0,1,1
+2025,2,Austin Peay,Georgia,involves FCS,-48.0,-47.0,,,,,22.0,1,1
+2025,2,Saint Francis,Buffalo,involves FCS,-35.5,-37.0,,,,,39.0,1,1
+2025,2,Troy,Clemson,Power 4 vs Group of 5,-32.0,-31.0,16.01,1.07,4.35,16.01,11.0,1,1
+2025,2,Oklahoma State,Oregon,Power 4 vs Power 4,-28.0,-28.5,21.52,19.19,18.58,21.52,66.0,1,1
+2025,2,Bowling Green,Cincinnati,Power 4 vs Group of 5,-18.0,-22.5,4.49,-4.5,4.58,4.49,14.0,1,1
+2025,2,St. Thomas (MN),Idaho,involves FCS,,-21.5,,,,,7.0,1,1
+2025,2,Middle Tennessee,Wisconsin,Power 4 vs Group of 5,-27.5,-28.5,20.76,26.76,27.56,20.76,32.0,1,1
+2025,2,Arkansas State,Arkansas,Power 4 vs Group of 5,-21.5,-23.5,13.23,19.42,28.13,13.23,42.0,1,1
+2025,2,Utah Tech,Northern Arizona,involves FCS,,-21.0,,,,,7.0,1,1
+2025,2,Texas Southern,California,involves FCS,-45.0,-44.5,,,,,32.0,1,1
+2025,2,Cal Poly,Utah,involves FCS,-41.5,-42.5,,,,,54.0,1,1
+2025,2,Davidson,Elon,involves FCS,,-27.5,,,,,48.0,1,1
+2025,2,Florida A&M,Florida Atlantic,involves FCS,-20.0,-21.0,,,,,42.0,1,1
+2025,2,Campbell,East Carolina,involves FCS,-29.5,-30.0,,,,,53.0,1,1
+2025,2,Colgate,Villanova,involves FCS,,-20.0,,,,,7.0,0,1
+2025,2,North Carolina Central,Old Dominion,involves FCS,-20.0,-22.0,,,,,48.0,1,2
+2025,2,Bethune-Cookman,Miami,involves FCS,-56.5,-54.5,,,,,42.0,1,1
+2025,2,Arkansas-Pine Bluff,Central Arkansas,involves FCS,,-27.0,,,,,24.0,1,1
+2025,2,Mississippi Valley State,Tarleton State,involves FCS,,-44.5,,,,,56.0,2,1
+2025,2,South Carolina State,South Carolina,involves FCS,-42.5,-43.0,,,,,28.0,1,1
+2025,2,SE Louisiana,Murray State,involves FCS,,21.5,,,,,-21.0,1,1
+2025,2,Northern Colorado,Colorado State,involves FCS,-35.0,-35.0,,,,,4.0,1,1
+2025,2,North Carolina A&T,UCF,involves FCS,-39.5,-38.0,,,,,61.0,1,1
+2025,2,Morehead State,Illinois State,involves FCS,,-31.5,,,,,28.0,1,1
+2025,2,Long Island University,Eastern Michigan,involves FCS,-22.5,-22.5,,,,,-5.0,1,1
+2025,2,Portland State,North Dakota,involves FCS,,-36.5,,,,,30.0,1,2
+2025,2,Charleston Southern,Coastal Carolina,involves FCS,-28.5,-28.5,,,,,13.0,1,1
+2025,2,Akron,Nebraska,Power 4 vs Group of 5,-34.0,-34.0,18.23,16.92,22.45,18.23,68.0,1,1
+2025,2,Southern Illinois,Purdue,involves FCS,-20.0,-19.5,,,,,17.0,1,1
+2025,2,Ball State,Auburn,Power 4 vs Group of 5,-43.5,-43.0,21.96,,,21.96,39.0,1,1
+2025,2,Louisiana Tech,LSU,Power 4 vs Group of 5,-38.0,-36.5,20.82,-4.52,0.27,20.82,16.0,1,1
+2025,2,Georgia Southern,USC,Power 4 vs Group of 5,-28.0,-29.0,12.02,30.17,13.92,12.02,39.0,1,1
+2025,2,UL Monroe,Alabama,Power 4 vs Group of 5,-37.5,-34.0,29.81,-4.55,4.96,29.81,73.0,1,1
+2025,2,McNeese,Louisiana,involves FCS,-20.5,-19.0,,,,,24.0,1,1
+2025,2,Southern Utah,San Diego,involves FCS,,20.5,,,,,3.0,1,1
+2025,2,Weber State,Arizona,involves FCS,-31.5,-31.5,,,,,45.0,1,1
+2025,2,Stanford,BYU,Power 4 vs Power 4,-18.5,-20.5,18.29,20.95,26.6,18.29,24.0,1,1
+2025,2,UC Davis,Washington,involves FCS,-28.5,-28.0,,,,,60.0,1,1
+2025,3,Indiana State,Indiana,involves FCS,,-47.5,,,,,73.0,2,2
+2025,3,Colgate,Syracuse,involves FCS,-37.5,-36.5,,,,,42.0,2,2
+2025,3,Samford,Baylor,involves FCS,,-51.5,,,,,35.0,2,2
+2025,3,William & Mary,Virginia,involves FCS,,-30.5,,,,,39.0,2,2
+2025,3,Houston Christian,Nebraska,involves FCS,-42.5,-48.5,,,,,52.0,2,2
+2025,3,Oklahoma,Temple,Power 4 vs Group of 5,,23.5,-15.44,-1.41,-5.1,-5.1,-39.0,2,2
+2025,3,Oregon,Northwestern,Power 4 vs Power 4,,25.5,-18.22,,,-18.22,-20.0,2,2
+2025,3,Buffalo,Kent State,Group of 5 vs Group of 5,,23.5,-14.93,-27.1,-23.23,-23.23,-3.0,2,2
+2025,3,Towson,Maryland,involves FCS,,-28.5,,,,,27.0,2,2
+2025,3,Central Michigan,Michigan,Power 4 vs Group of 5,,-27.5,20.12,19.04,20.9,20.9,60.0,2,2
+2025,3,South Alabama,Auburn,Power 4 vs Group of 5,,-26.5,7.66,10.17,6.11,6.11,16.0,2,2
+2025,3,Louisiana,Missouri,Power 4 vs Group of 5,-27.5,-27.5,9.24,10.87,11.56,11.56,42.0,2,2
+2025,3,Davidson,Tennessee Tech,involves FCS,,-40.5,,,,,58.0,2,2
+2025,3,Northern Colorado,South Dakota,involves FCS,,-21.5,,,,,7.0,2,2
+2025,3,San Diego,Montana State,involves FCS,,-31.0,,,,,34.0,2,2
+2025,3,Illinois State,Eastern Illinois,involves FCS,,20.5,,,,,-12.0,2,2
+2025,3,SMU,Missouri State,Power 4 vs Group of 5,,29.5,,,,,-18.0,2,2
+2025,3,Morgan State,Toledo,involves FCS,-34.5,-33.5,,,,,60.0,2,2
+2025,3,Richmond,North Carolina,involves FCS,,-24.5,,,,,35.0,2,2
+2025,3,Norfolk State,Rutgers,involves FCS,,-44.5,,,,,50.0,2,2
+2025,3,Youngstown State,Michigan State,involves FCS,,-23.5,,,,,17.0,2,2
+2025,3,USC,Purdue,Power 4 vs Power 4,,20.5,-14.36,-8.4,-7.48,-7.48,-16.0,2,2
+2025,3,Villanova,Penn State,involves FCS,-47.5,-46.5,,,,,46.0,2,1
+2025,3,Incarnate Word,UTSA,involves FCS,,-21.0,,,,,28.0,2,2
+2025,3,Southeast Missouri State,North Dakota State,involves FCS,,-31.5,,,,,27.0,2,2
+2025,3,Oregon State,Texas Tech,Power 4 vs Group of 5,,-24.5,10.38,23.04,18.75,18.75,31.0,2,2
+2025,3,Northwestern State,Cincinnati,involves FCS,-45.5,-48.5,,,,,70.0,2,2
+2025,3,Iowa State,Arkansas State,Power 4 vs Group of 5,,21.0,-9.36,-21.4,-27.75,-27.75,-8.0,2,3
+2025,3,UTEP,Texas,Power 4 vs Group of 5,,-39.5,33.03,21.55,31.1,31.1,17.0,2,2
+2025,3,Alcorn State,Mississippi State,involves FCS,-38.5,-42.5,,,,,63.0,2,2
+2025,3,Stetson,Chattanooga,involves FCS,,-27.5,,,,,63.0,2,2
+2025,3,Stonehill,Maine,involves FCS,,-21.0,,,,,-3.0,2,2
+2025,3,Murray State,Georgia State,involves FCS,,-31.5,,,,,16.0,2,2
+2025,3,Mississippi Valley State,SE Louisiana,involves FCS,,-32.5,,,,,53.0,2,2
+2025,3,Morehead State,Austin Peay,involves FCS,,-25.5,,,,,49.0,2,2
+2025,3,Prairie View A&M,Rice,involves FCS,,-29.5,,,,,21.0,2,2
+2025,3,Drake,South Dakota State,involves FCS,,-34.0,,,,,16.0,2,1
+2025,3,Ohio,Ohio State,Power 4 vs Group of 5,,-28.5,21.71,28.66,28.48,28.48,28.0,2,2
+2025,3,Western Michigan,Illinois,Power 4 vs Group of 5,,-27.5,15.95,24.9,20.86,20.86,38.0,2,2
+2025,3,Massachusetts,Iowa,Power 4 vs Group of 5,-35.5,-35.5,27.28,35.55,31.93,31.93,40.0,2,2
+2025,3,Eastern Michigan,Kentucky,Power 4 vs Group of 5,,-26.5,15.32,13.86,13.72,13.72,25.0,2,2
+2025,3,Utah,Wyoming,Power 4 vs Group of 5,,24.5,-10.06,-18.87,-10.81,-10.81,-25.0,2,2
+2025,3,Abilene Christian,TCU,involves FCS,-38.5,-42.5,,,,,21.0,1,2
+2025,3,Mercyhurst,Sacramento State,involves FCS,,-21.5,,,,,21.0,2,2
+2025,3,Southern,Fresno State,involves FCS,-35.5,-37.5,,,,,49.0,3,3
+2025,3,Portland State,Hawai'i,involves FCS,-38.5,-35.5,,,,,20.0,3,3
+2025,4,Bowling Green,Louisville,Power 4 vs Group of 5,-27.5,-26.5,13.16,17.38,17.83,17.83,23.0,2,3
+2025,4,Wofford,Virginia Tech,involves FCS,-35.5,-34.5,,,,,32.0,3,3
+2025,4,South Carolina State,South Florida,involves FCS,,-36.5,,,,,49.0,3,3
+2025,4,UAB,Tennessee,Power 4 vs Group of 5,-41.5,-39.5,24.49,28.07,29.12,29.12,32.0,3,3
+2025,4,Wagner,Central Michigan,involves FCS,,-29.5,,,,,39.0,3,3
+2025,4,Harvard,Stetson,involves FCS,,35.5,,,,,-52.0,3,0
+2025,4,Oregon State,Oregon,Power 4 vs Group of 5,-26.5,-33.5,24.11,39.12,32.1,32.1,34.0,3,3
+2025,4,Indiana State,Montana,involves FCS,,-21.0,,,,,43.0,2,3
+2025,4,Mercyhurst,Montana State,involves FCS,,-29.5,,,,,17.0,3,3
+2025,4,Ball State,UConn,Group of 5 vs Group of 5,-18.5,-21.0,16.9,25.77,20.52,20.52,6.0,3,3
+2025,4,Purdue,Notre Dame,Power 4 vs Power 4,-30.5,-24.5,28.79,19.95,31.24,31.24,26.0,2,3
+2025,4,Kent State,Florida State,Power 4 vs Group of 5,-45.5,-44.5,22.28,43.76,41.09,41.09,56.0,2,3
+2025,4,Gardner-Webb,Ohio,involves FCS,,-30.5,,,,,17.0,3,3
+2025,4,Valparaiso,North Dakota,involves FCS,,-44.0,,,,,51.0,3,3
+2025,4,Northern Illinois,Mississippi State,Power 4 vs Group of 5,-21.5,-23.5,3.04,12.19,0.83,0.83,28.0,3,2
+2025,4,Temple,Georgia Tech,Power 4 vs Group of 5,-24.5,-24.5,17.47,23.1,27.85,27.85,21.0,3,3
+2025,4,Murray State,Jacksonville State,involves FCS,-35.5,-35.5,,,,,35.0,3,3
+2025,4,Chattanooga,Tarleton State,involves FCS,,-27.0,,,,,28.0,4,3
+2025,4,Maine,Georgia Southern,involves FCS,,-23.5,,,,,28.0,3,3
+2025,4,Georgia State,Vanderbilt,Power 4 vs Group of 5,-26.5,-27.5,17.85,30.19,25.04,25.04,49.0,3,3
+2025,4,Washington,Washington State,Power 4 vs Group of 5,12.5,21.0,2.28,-17.47,-13.18,-13.18,-35.0,3,2
+2025,4,SE Louisiana,LSU,involves FCS,-40.5,-49.0,,,,,46.0,3,3
+2025,4,Nicholls,Texas State,involves FCS,,-32.5,,,,,32.0,3,3
+2025,4,McNeese,Utah State,involves FCS,,-24.5,,,,,41.0,3,3
+2025,4,Sam Houston,Texas,Power 4 vs Group of 5,-40.5,-39.5,23.04,24.04,22.52,22.52,55.0,3,3
+2025,5,Stetson,Dayton,involves FCS,,-25.5,,,,,34.0,3,4
+2025,5,Utah State,Vanderbilt,Power 4 vs Group of 5,-21.5,-23.5,13.1,14.65,20.97,20.97,20.0,4,4
+2025,5,Morehead State,Presbyterian,involves FCS,,-23.5,,,,,41.0,4,4
+2025,5,South Dakota,North Dakota State,involves FCS,,-25.5,,,,,38.0,3,4
+2025,5,Mercyhurst,South Dakota State,involves FCS,,-32.5,,,,,44.0,3,4
+2025,5,Lindenwood,Miami (OH),involves FCS,,-22.5,,,,,38.0,3,4
+2025,5,Baylor,Oklahoma State,Power 4 vs Power 4,17.5,21.0,-3.54,-8.23,-15.82,-15.82,-18.0,3,4
+2025,5,Akron,Toledo,Group of 5 vs Group of 5,-21.0,-21.5,13.16,23.34,20.75,20.75,42.0,4,4
+2025,5,Eastern Washington,Montana State,involves FCS,,-21.0,,,,,54.0,4,4
+2025,5,Tennessee Tech,Tennessee State,involves FCS,,31.5,,,,,-27.0,3,3
+2025,5,Northern Arizona,Portland State,involves FCS,,21.0,,,,,-14.0,4,4
+2025,5,Massachusetts,Missouri,Power 4 vs Group of 5,-42.5,-44.5,26.14,36.84,31.26,31.26,36.0,4,3
+2025,6,Charlotte,South Florida,Group of 5 vs Group of 5,-26.5,-27.5,11.65,17.58,20.93,20.93,28.0,4,4
+2025,6,Kentucky,Georgia,Power 4 vs Power 4,-20.5,-19.5,15.32,16.94,19.03,19.03,21.0,4,4
+2025,6,Delaware State,Monmouth,involves FCS,,-21.5,,,,,11.0,4,5
+2025,6,Western Illinois,Tennessee Tech,involves FCS,,-35.5,,,,,46.0,4,5
+2025,6,Valparaiso,Drake,involves FCS,,-25.0,,,,,41.0,3,4
+2025,6,Campbell,NC State,involves FCS,-42.5,-42.5,,,,,46.0,5,5
+2025,6,Oklahoma State,Arizona,Power 4 vs Power 4,-17.5,-21.5,3.29,10.91,18.12,18.12,28.0,4,4
+2025,6,Boise State,Notre Dame,Power 4 vs Group of 5,-16.5,-21.5,12.15,12.15,18.44,18.44,21.0,4,4
+2025,6,North Carolina A&T,William & Mary,involves FCS,,-20.5,,,,,4.0,5,5
+2025,6,Penn State,UCLA,Power 4 vs Power 4,27.5,24.5,-12.97,-26.16,-16.64,-16.64,5.0,4,4
+2025,6,Kent State,Oklahoma,Power 4 vs Group of 5,-45.5,-46.5,30.31,54.95,52.45,52.45,44.0,4,4
+2025,6,Southern Utah,Tarleton State,involves FCS,,-20.5,,,,,10.0,5,5
+2025,6,Minnesota,Ohio State,Power 4 vs Power 4,-21.0,-23.5,16.58,15.14,19.22,19.22,39.0,4,4
+2025,6,Tulsa,Memphis,Group of 5 vs Group of 5,-21.0,-21.0,22.53,19.12,21.07,21.07,38.0,5,5
+2025,7,Cornell,Harvard,involves FCS,,-32.5,,,,,24.0,3,3
+2025,7,Charlotte,Army,Group of 5 vs Group of 5,-20.5,-17.5,18.92,22.35,21.02,21.02,17.0,5,5
+2025,7,Washington State,Ole Miss,Power 4 vs Group of 5,-32.5,-33.5,20.25,24.42,23.13,23.13,3.0,5,5
+2025,7,St. Thomas (MN),Davidson,involves FCS,,21.5,,,,,-44.0,5,5
+2025,7,Idaho State,Montana State,involves FCS,,-22.5,,,,,34.0,6,6
+2025,7,Mississippi Valley State,Alabama A&M,involves FCS,,-21.0,,,,,20.0,6,4
+2025,7,Northern Iowa,South Dakota State,involves FCS,,-28.5,,,,,28.0,5,5
+2025,7,Southern Illinois,North Dakota State,involves FCS,,-20.0,,,,,28.0,5,5
+2025,7,Northwestern,Penn State,Power 4 vs Power 4,-21.5,-20.5,24.17,31.25,28.71,28.71,-1.0,5,5
+2025,7,NC State,Notre Dame,Power 4 vs Power 4,-21.5,-23.5,16.07,16.06,14.82,14.82,29.0,5,6
+2025,7,Tennessee Tech,Charleston Southern,involves FCS,,30.5,,,,,-14.0,6,5
+2025,7,Illinois State,Murray State,involves FCS,,23.5,,,,,-14.0,5,5
+2025,7,Tarleton State,Utah Tech,involves FCS,,28.0,,,,,-18.0,6,6
+2025,8,Merrimack,Harvard,involves FCS,,-27.5,,,,,24.0,4,7
+2025,8,Stonehill,Yale,involves FCS,,-21.5,,,,,40.0,4,6
+2025,8,North Dakota State,Indiana State,involves FCS,,33.5,,,,,-31.0,6,6
+2025,8,Davidson,Drake,involves FCS,,-33.5,,,,,45.0,5,6
+2025,8,Stetson,Presbyterian,involves FCS,,-34.5,,,,,35.0,6,7
+2025,8,Hampton,Villanova,involves FCS,,-24.5,,,,,42.0,6,7
+2025,8,Kent State,Toledo,Group of 5 vs Group of 5,-23.5,-25.5,22.72,28.64,21.67,21.67,35.0,6,6
+2025,8,South Dakota State,Murray State,involves FCS,,37.5,,,,,-21.0,6,6
+2025,8,Valparaiso,St. Thomas (MN),involves FCS,,-27.5,,,,,38.0,6,6
+2025,8,Sacred Heart,Montana,involves FCS,,-26.5,,,,,22.0,6,7
+2025,8,Michigan State,Indiana,Power 4 vs Power 4,-25.5,-26.5,19.05,28.05,28.81,28.81,25.0,6,6
+2025,8,Ohio State,Wisconsin,Power 4 vs Power 4,28.5,24.5,-14.43,-31.85,-21.05,-21.05,-34.0,6,6
+2025,8,Memphis,UAB,Group of 5 vs Group of 5,21.5,23.5,-9.81,-27.03,-18.94,-18.94,7.0,6,6
+2025,8,Northwestern State,SE Louisiana,involves FCS,,-31.0,,,,,49.0,6,6
+2025,8,West Georgia,Tarleton State,involves FCS,,-20.0,,,,,35.0,7,7
+2025,8,Florida Atlantic,South Florida,Group of 5 vs Group of 5,-18.5,-20.5,10.0,8.93,14.2,14.2,35.0,6,6
+2025,8,Cincinnati,Oklahoma State,Power 4 vs Power 4,21.5,23.5,1.84,-11.13,-10.61,-10.61,-32.0,6,6
+2025,8,Lafayette,Oregon State,involves FCS,,-21.0,,,,,32.0,7,7
+2025,9,North Texas,Charlotte,Group of 5 vs Group of 5,27.5,25.5,-3.42,-19.7,-14.48,-14.48,-34.0,7,7
+2025,9,Boise State,Nevada,Group of 5 vs Group of 5,21.5,21.0,-12.59,-15.03,-15.61,-15.61,-21.0,7,7
+2025,9,San Diego,Davidson,involves FCS,,28.5,,,,,-12.0,7,7
+2025,9,Duquesne,Wagner,involves FCS,,23.5,,,,,11.0,7,8
+2025,9,UCLA,Indiana,Power 4 vs Power 4,-23.5,-26.5,16.96,31.11,25.79,25.79,50.0,7,7
+2025,9,St. Thomas (MN),Stetson,involves FCS,,25.5,,,,,-42.0,8,7
+2025,9,Lehigh,Fordham,involves FCS,,24.5,,,,,-21.0,7,7
+2025,9,Southeast Missouri State,Tennessee Tech,involves FCS,,-21.5,,,,,19.0,7,7
+2025,9,Murray State,Youngstown State,involves FCS,,-24.5,,,,,34.0,7,7
+2025,9,Monmouth,Hampton,involves FCS,,25.0,,,,,-18.0,8,7
+2025,9,Tarleton State,Eastern Kentucky,involves FCS,,24.0,,,,,-24.0,7,8
+2025,9,VMI,Mercer,involves FCS,,-27.5,,,,,62.0,6,7
+2025,9,SE Louisiana,Houston Christian,involves FCS,,21.5,,,,,-24.0,7,7
+2025,9,Lamar,Northwestern State,involves FCS,,24.5,,,,,-27.0,7,7
+2025,9,UAlbany,Villanova,involves FCS,,-31.5,,,,,13.0,7,7
+2025,9,Indiana State,North Dakota,involves FCS,,-30.0,,,,,29.0,7,7
+2025,9,Oklahoma State,Texas Tech,Power 4 vs Power 4,-36.5,-37.5,7.78,22.06,18.16,18.16,42.0,7,7
+2025,9,Portland State,Idaho,involves FCS,,-21.5,,,,,39.0,7,7
+2025,9,Jackson State,Grambling,involves FCS,,21.0,,,,,2.0,7,6
+2025,9,Wisconsin,Oregon,Power 4 vs Power 4,-33.5,-31.5,17.97,24.06,22.78,22.78,14.0,7,7
+2025,9,Stanford,Miami,Power 4 vs Power 4,-30.5,-28.5,22.28,22.8,23.55,23.55,35.0,6,7
+2025,9,Boston College,Louisville,Power 4 vs Power 4,-22.5,-25.5,11.27,17.46,21.48,21.48,14.0,6,7
+2025,9,Montana State,Cal Poly,involves FCS,,21.5,,,,,-17.0,7,7
+2025,10,Georgetown,Lehigh,involves FCS,,-24.0,,,,,41.0,8,8
+2025,10,Columbia,Yale,involves FCS,,-21.5,,,,,14.0,6,6
+2025,10,Valparaiso,Presbyterian,involves FCS,,-31.5,,,,,29.0,8,8
+2025,10,Montana State,Northern Colorado,involves FCS,,23.5,,,,,-48.0,8,8
+2025,10,Mississippi Valley State,Bethune-Cookman,involves FCS,,-22.0,,,,,8.0,8,7
+2025,10,Indiana State,South Dakota State,involves FCS,,-31.0,,,,,-12.0,8,8
+2025,10,Youngstown State,North Dakota State,involves FCS,,-26.5,,,,,8.0,8,8
+2025,10,Indiana,Maryland,Power 4 vs Power 4,16.5,21.0,-11.77,-11.56,-15.42,-15.42,-45.0,7,8
+2025,10,Notre Dame,Boston College,Power 4 vs Power 4,27.5,31.5,-10.95,-19.56,-19.71,-19.71,-15.0,8,7
+2025,10,Oklahoma State,Kansas,Power 4 vs Power 4,-24.5,-24.5,8.16,19.45,17.12,17.12,17.0,8,8
+2025,10,Southern Illinois,Murray State,involves FCS,,24.5,,,,,-20.0,8,8
+2025,10,Purdue,Michigan,Power 4 vs Power 4,-20.5,-21.0,20.38,19.91,22.12,22.12,5.0,8,8
+2025,11,Harvard,Columbia,involves FCS,,29.5,,,,,-17.0,7,7
+2025,11,Holy Cross,Lehigh,involves FCS,,-20.0,,,,,35.0,9,9
+2025,11,Presbyterian,Davidson,involves FCS,,22.5,,,,,1.0,9,9
+2025,11,Ohio State,Purdue,Power 4 vs Power 4,28.5,29.5,-26.58,-29.38,-25.69,-25.69,-24.0,9,8
+2025,11,Tennessee Tech,Eastern Illinois,involves FCS,,24.5,,,,,-12.0,9,9
+2025,11,The Citadel,Ole Miss,involves FCS,-51.5,-51.5,,,,,49.0,9,9
+2025,11,San Diego,Valparaiso,involves FCS,,23.5,,,,,-16.0,9,9
+2025,11,Incarnate Word,Northwestern State,involves FCS,,24.5,,,,,-35.0,9,9
+2025,11,Norfolk State,North Carolina Central,involves FCS,,-25.5,,,,,3.0,9,9
+2025,11,Utah Tech,Abilene Christian,involves FCS,,-20.5,,,,,21.0,9,9
+2025,11,Jackson State,Mississippi Valley State,involves FCS,,27.5,,,,,-39.0,8,8
+2025,11,Charlotte,East Carolina,Group of 5 vs Group of 5,-28.5,-27.5,12.47,24.56,19.98,19.98,26.0,8,8
+2025,11,Weber State,Montana State,involves FCS,,-28.5,,,,,52.0,9,9
+2025,11,Stephen F. Austin,Houston Christian,involves FCS,,24.5,,,,,-47.0,9,9
+2025,11,Eastern Washington,Montana,involves FCS,,-27.0,,,,,5.0,9,9
+2025,11,Syracuse,Miami,Power 4 vs Power 4,-28.5,-28.5,13.61,19.15,20.31,20.31,28.0,8,9
+2025,11,Sacramento State,Portland State,involves FCS,,20.5,,,,,-28.0,9,9
+2025,11,Navy,Notre Dame,Power 4 vs Group of 5,-24.5,-30.5,16.33,17.27,19.4,19.4,39.0,8,8
+2025,11,Sam Houston,Oregon State,Group of 5 vs Group of 5,-17.5,-21.0,3.55,28.31,15.64,15.64,-4.0,9,8
+2025,12,Minnesota,Oregon,Power 4 vs Power 4,-22.5,-26.5,13.29,15.83,19.75,19.75,29.0,9,9
+2025,12,Kansas State,Oklahoma State,Power 4 vs Power 4,20.5,19.5,-7.15,-20.02,-18.63,-18.63,-8.0,9,9
+2025,12,Monmouth,North Carolina A&T,involves FCS,,21.5,,,,,-44.0,10,10
+2025,12,Wisconsin,Indiana,Power 4 vs Power 4,-30.5,-28.5,14.24,28.81,17.15,17.15,24.0,10,9
+2025,12,Indiana State,Youngstown State,involves FCS,,-20.5,,,,,19.0,10,10
+2025,12,North Dakota,Murray State,involves FCS,,34.0,,,,,-18.0,10,10
+2025,12,Pennsylvania,Harvard,involves FCS,,-23.0,,,,,2.0,8,8
+2025,12,Bethune-Cookman,Jackson State,involves FCS,,-23.5,,,,,15.0,9,10
+2025,12,VMI,Furman,involves FCS,,-20.5,,,,,18.0,10,10
+2025,12,Tennessee Tech,Kentucky,involves FCS,,-22.5,,,,,32.0,9,10
+2025,12,Samford,Austin Peay,involves FCS,,-25.5,,,,,14.0,10,10
+2025,12,Arkansas-Pine Bluff,Prairie View A&M,involves FCS,,-21.0,,,,,47.0,10,9
+2025,12,App State,James Madison,Group of 5 vs Group of 5,-19.5,-21.0,13.29,16.79,20.08,20.08,48.0,9,9
+2025,12,Northern Iowa,North Dakota State,involves FCS,,-34.0,,,,,32.0,10,10
+2025,12,UCF,Texas Tech,Power 4 vs Power 4,,-24.5,4.37,10.84,13.05,13.05,39.0,10,9
+2025,12,Northwestern State,Nicholls,involves FCS,,-23.5,,,,,5.0,10,10
+2025,12,New Mexico State,Tennessee,Power 4 vs Group of 5,-39.5,-41.5,29.36,38.64,39.6,39.6,33.0,9,9
+2025,12,Montana,Portland State,involves FCS,,30.5,,,,,-46.0,10,10
+2025,12,Alabama State,Mississippi Valley State,involves FCS,,29.5,,,,,-38.0,9,9
+2025,12,North Alabama,Tarleton State,involves FCS,,-33.5,,,,,61.0,10,10
+2025,12,UCLA,Ohio State,Power 4 vs Power 4,-31.5,-33.5,23.98,52.28,36.3,36.3,38.0,9,9
+2025,13,Massachusetts,Ohio,Group of 5 vs Group of 5,-29.5,-33.5,18.73,28.85,32.37,32.37,28.0,10,10
+2025,13,Stephen F. Austin,Northwestern State,involves FCS,,37.5,,,,,-48.0,11,11
+2025,13,Samford,Texas A&M,involves FCS,-54.5,-54.5,,,,,48.0,10,11
+2025,13,Rutgers,Ohio State,Power 4 vs Power 4,-32.5,-28.5,19.11,44.58,29.88,29.88,33.0,10,10
+2025,13,UAlbany,Monmouth,involves FCS,,-29.5,,,,,-7.0,11,11
+2025,13,Western Carolina,VMI,involves FCS,,25.5,,,,,-42.0,11,11
+2025,13,Charlotte,Georgia,Power 4 vs Group of 5,-44.5,-42.5,28.48,37.19,38.13,38.13,32.0,10,10
+2025,13,San Diego,Stetson,involves FCS,,22.0,,,,,-34.0,11,11
+2025,13,Hampton,Rhode Island,involves FCS,,-31.5,,,,,28.0,11,11
+2025,13,Morehead State,Drake,involves FCS,,-21.5,,,,,7.0,10,11
+2025,13,Arkansas-Pine Bluff,Alabama State,involves FCS,,-26.5,,,,,31.0,10,10
+2025,13,Mercer,Auburn,involves FCS,,-26.5,,,,,45.0,10,10
+2025,13,Eastern Illinois,Alabama,involves FCS,-50.5,-50.5,,,,,56.0,10,11
+2025,13,Ball State,Toledo,Group of 5 vs Group of 5,-22.5,-29.5,14.37,32.25,31.15,31.15,29.0,10,10
+2025,13,North Carolina A&T,Elon,involves FCS,,-21.0,,,,,38.0,11,11
+2025,13,South Florida,UAB,Group of 5 vs Group of 5,21.5,21.5,-2.28,-11.42,-14.43,-14.43,-30.0,10,10
+2025,13,Mississippi Valley State,Prairie View A&M,involves FCS,,-29.5,,,,,53.0,11,10
+2025,13,St. Thomas (MN),North Dakota State,involves FCS,,-33.5,,,,,55.0,11,11
+2025,13,Syracuse,Notre Dame,Power 4 vs Power 4,-34.5,-36.5,15.06,37.02,30.74,30.74,63.0,10,10
+2025,13,Coastal Carolina,South Carolina,Power 4 vs Group of 5,-23.5,-23.5,18.48,10.55,13.33,13.33,44.0,10,10
+2025,13,Furman,Clemson,involves FCS,-41.5,-41.5,,,,,35.0,10,11
+2025,13,UL Monroe,Texas State,Group of 5 vs Group of 5,-17.5,-20.5,17.4,37.42,22.71,22.71,17.0,10,10
+2025,13,Western Kentucky,LSU,Power 4 vs Group of 5,-22.5,-24.5,14.87,14.49,14.09,14.09,3.0,10,10
+2025,14,Temple,North Texas,Group of 5 vs Group of 5,-18.5,-20.5,13.42,16.91,25.2,25.2,27.0,11,11
+2025,14,Indiana,Purdue,Power 4 vs Power 4,27.5,28.5,-19.55,-39.08,-26.26,-26.26,-53.0,11,11
+2025,14,Texas Tech,West Virginia,Power 4 vs Power 4,19.5,24.5,2.03,-25.11,-14.41,-14.41,-49.0,11,11
+2025,14,Drake,South Dakota,involves FCS,,-21.0,,,,,21.0,12,11
+2025,14,Georgia State,Old Dominion,Group of 5 vs Group of 5,-23.5,-28.5,10.95,13.18,35.74,35.74,17.0,11,11
+2025,14,James Madison,Coastal Carolina,Group of 5 vs Group of 5,21.0,24.5,-5.69,-18.24,-15.24,-15.24,-49.0,11,11
+2025,14,Rice,South Florida,Group of 5 vs Group of 5,-24.5,-28.5,9.18,19.64,24.91,24.91,49.0,11,11
+2025,14,Charlotte,Tulane,Group of 5 vs Group of 5,-28.5,-30.5,16.71,17.77,31.13,31.13,27.0,11,11
+2025,14,UCLA,USC,Power 4 vs Power 4,-19.5,-21.5,11.77,28.76,28.5,28.5,19.0,11,11
+2025,14,Notre Dame,Stanford,Power 4 vs Power 4,29.5,32.5,-16.89,-39.28,-25.99,-25.99,-29.0,11,11
+2025,15,Troy,James Madison,Group of 5 vs Group of 5,,-24.5,12.34,11.84,32.51,32.51,17.0,12,12
+2026,1,Mercyhurst,Youngstown State,involves FCS,,-30.5,,,,,33.0,0,0
+2026,1,Mercyhurst,Youngstown State,involves FCS,,-30.5,,,,,33.0,0,1
+2026,1,Mercyhurst,Youngstown State,involves FCS,,-30.5,,,,,33.0,1,0
+2026,1,Mercyhurst,Youngstown State,involves FCS,,-30.5,,,,,33.0,1,1
+2026,1,Mississippi Valley State,Nicholls,involves FCS,,-28.5,,,,,34.0,0,0
+2026,1,Mississippi Valley State,Nicholls,involves FCS,,-28.5,,,,,34.0,0,1
+2026,1,Mississippi Valley State,Nicholls,involves FCS,,-28.5,,,,,34.0,1,0
+2026,1,Mississippi Valley State,Nicholls,involves FCS,,-28.5,,,,,34.0,1,1
+2026,1,Houston Christian,SE Louisiana,involves FCS,,-24.5,,,,,-6.0,0,0
+2026,1,Houston Christian,SE Louisiana,involves FCS,,-24.5,,,,,-6.0,0,1
+2026,1,Houston Christian,SE Louisiana,involves FCS,,-24.5,,,,,-6.0,1,0
+2026,1,Houston Christian,SE Louisiana,involves FCS,,-24.5,,,,,-6.0,1,1
+2026,1,Long Island University,North Dakota,involves FCS,,-27.5,,,,,21.0,0,0
+2026,1,Long Island University,North Dakota,involves FCS,,-27.5,,,,,21.0,0,1
+2026,1,Long Island University,North Dakota,involves FCS,,-27.5,,,,,21.0,1,0
+2026,1,Long Island University,North Dakota,involves FCS,,-27.5,,,,,21.0,1,1
+2026,1,Rhode Island,Merrimack,involves FCS,20.5,21.0,,,,,-27.0,0,0
+2026,1,Rhode Island,Merrimack,involves FCS,20.5,21.0,,,,,-27.0,0,1
+2026,1,Rhode Island,Merrimack,involves FCS,20.5,21.0,,,,,-27.0,1,0
+2026,1,Rhode Island,Merrimack,involves FCS,20.5,21.0,,,,,-27.0,1,1
+2026,1,Central Connecticut,South Dakota,involves FCS,-22.5,-20.5,,,,,39.0,0,0
+2026,1,Central Connecticut,South Dakota,involves FCS,-22.5,-20.5,,,,,39.0,1,0
+2026,1,UC Davis,Portland State,involves FCS,24.5,25.5,,,,,-7.0,0,0
+2026,1,UC Davis,Portland State,involves FCS,24.5,25.5,,,,,-7.0,0,1
+2026,1,UC Davis,Portland State,involves FCS,24.5,25.5,,,,,-7.0,1,0
+2026,1,UC Davis,Portland State,involves FCS,24.5,25.5,,,,,-7.0,1,1
+2026,1,San José State,USC,Power 4 vs Group of 5,-35.5,-37.5,24.07,,,24.07,16.0,0,0
+2026,1,San José State,USC,Power 4 vs Group of 5,-35.5,-37.5,24.07,,,24.07,16.0,0,1
+2026,1,San José State,USC,Power 4 vs Group of 5,-35.5,-37.5,24.07,,,24.07,16.0,1,0
+2026,1,San José State,USC,Power 4 vs Group of 5,-35.5,-37.5,24.07,35.8,,24.07,16.0,1,1
+2026,1,VMI,Idaho State,involves FCS,-34.5,-34.5,,,,,28.0,0,0
+2026,1,VMI,Idaho State,involves FCS,-34.5,-34.5,,,,,28.0,0,1
+2026,1,VMI,Idaho State,involves FCS,-34.5,-34.5,,,,,28.0,1,0
+2026,1,VMI,Idaho State,involves FCS,-34.5,-34.5,,,,,28.0,1,1
+2026,1,New Mexico State,Florida State,Power 4 vs Group of 5,-28.5,-30.5,18.5,,,18.5,17.0,0,0
+2026,1,New Mexico State,Florida State,Power 4 vs Group of 5,-28.5,-30.5,18.5,,,18.5,17.0,0,1
+2026,1,New Mexico State,Florida State,Power 4 vs Group of 5,-28.5,-30.5,18.5,,,18.5,17.0,1,0
+2026,1,New Mexico State,Florida State,Power 4 vs Group of 5,-28.5,-30.5,18.5,28.39,,18.5,17.0,1,1
+2026,1,East Texas A&M,Mercer,involves FCS,-23.5,-22.5,,,,,8.0,0,0
+2026,1,East Texas A&M,Mercer,involves FCS,-23.5,-22.5,,,,,8.0,0,1
+2026,1,East Texas A&M,Mercer,involves FCS,-23.5,-22.5,,,,,8.0,1,0
+2026,1,East Texas A&M,Mercer,involves FCS,-23.5,-22.5,,,,,8.0,1,1
+2026,1,Stetson,South Dakota State,involves FCS,-47.5,-50.5,,,,,63.0,0,0
+2026,1,Stetson,South Dakota State,involves FCS,-47.5,-50.5,,,,,63.0,0,1
+2026,1,Stetson,South Dakota State,involves FCS,-47.5,-50.5,,,,,63.0,1,0
+2026,1,Stetson,South Dakota State,involves FCS,-47.5,-50.5,,,,,63.0,1,1
+2026,1,Prairie View A&M,Tarleton State,involves FCS,-21.5,-19.5,,,,,19.0,0,0
+2026,1,Prairie View A&M,Tarleton State,involves FCS,-21.5,-19.5,,,,,19.0,0,1
+2026,1,Prairie View A&M,Tarleton State,involves FCS,-21.5,-19.5,,,,,19.0,1,0
+2026,1,Prairie View A&M,Tarleton State,involves FCS,-21.5,-19.5,,,,,19.0,1,1
+2026,1,Montana State,Utah Tech,involves FCS,31.5,32.5,,,,,-54.0,0,0
+2026,1,Montana State,Utah Tech,involves FCS,31.5,32.5,,,,,-54.0,0,1
+2026,1,Montana State,Utah Tech,involves FCS,31.5,32.5,,,,,-54.0,1,0
+2026,1,Montana State,Utah Tech,involves FCS,31.5,32.5,,,,,-54.0,1,1
+2026,1,Massachusetts,Rutgers,Power 4 vs Group of 5,-30.5,-29.5,28.27,,,28.27,-16.0,0,0
+2026,1,Merrimack,Delaware,involves FCS,-28.5,-31.5,,,,,35.0,0,0
+2026,1,Merrimack,Delaware,involves FCS,-28.5,-31.5,,,,,35.0,0,1
+2026,1,Bethune-Cookman,UCF,involves FCS,-41.5,-43.5,,,,,67.0,0,0
+2026,1,West Georgia,Kennesaw State,involves FCS,-22.5,-22.5,,,,,47.0,0,0
+2026,1,West Georgia,Kennesaw State,involves FCS,-22.5,-22.5,,,,,47.0,0,1
+2026,1,Southern Illinois,Samford,involves FCS,24.5,20.5,,,,,-4.0,0,0
+2026,1,Southern Illinois,Samford,involves FCS,24.5,20.5,,,,,-4.0,0,1
+2026,1,Southern Illinois,Samford,involves FCS,24.5,20.5,,,,,-4.0,1,0
+2026,1,Southern Illinois,Samford,involves FCS,24.5,20.5,,,,,-4.0,1,1
+2026,1,UAlbany,Buffalo,involves FCS,-24.5,-18.5,,,,,4.0,0,0
+2026,1,UAlbany,Buffalo,involves FCS,-24.5,-18.5,,,,,4.0,0,1
+2026,1,Akron,Wake Forest,Power 4 vs Group of 5,-22.5,-27.5,16.47,,,16.47,22.0,0,0
+2026,1,Eastern Illinois,Minnesota,involves FCS,-43.5,-42.5,,,,,52.0,0,0
+2026,1,Eastern Illinois,Minnesota,involves FCS,-43.5,-42.5,,,,,52.0,0,1
+2026,1,Arkansas-Pine Bluff,Missouri,involves FCS,-54.5,-55.5,,,,,40.0,0,0
+2026,1,Arkansas-Pine Bluff,Missouri,involves FCS,-54.5,-55.5,,,,,40.0,0,1
+2026,1,Idaho,Utah,involves FCS,-32.5,-38.5,,,,,52.0,0,0
+2026,1,Idaho,Utah,involves FCS,-32.5,-38.5,,,,,52.0,0,1
+2026,1,UAB,Illinois,Power 4 vs Group of 5,-27.5,-25.5,22.44,,,22.44,19.0,0,0
+2026,1,North Carolina A&T,Georgia State,involves FCS,-28.5,-28.5,,,,,49.0,0,0
+2026,1,North Carolina A&T,Georgia State,involves FCS,-28.5,-28.5,,,,,49.0,0,1
+2026,1,Indiana State,Purdue,involves FCS,-34.5,-35.5,,,,,25.0,0,0
+2026,1,Indiana State,Purdue,involves FCS,-34.5,-35.5,,,,,25.0,0,1
+2026,1,Long Island University,Kansas,involves FCS,-38.5,-44.5,,,,,45.0,0,0
+2026,1,Long Island University,Kansas,involves FCS,-38.5,-44.5,,,,,45.0,0,1
+2026,1,UTEP,Oklahoma,Power 4 vs Group of 5,-40.5,-40.5,27.09,,,27.09,51.0,0,0
+2026,1,Fresno State,USC,Power 4 vs Group of 5,-23.5,-21.5,13.52,,,13.52,39.0,0,0
+2026,1,Fresno State,USC,Power 4 vs Group of 5,-23.5,-21.5,13.52,,,13.52,39.0,1,0
+2026,1,Miami,Stanford,Power 4 vs Power 4,21.5,24.5,-17.67,,,-17.67,-39.0,0,0
+2026,1,Miami,Stanford,Power 4 vs Power 4,21.5,24.5,-17.67,,,-17.67,-39.0,1,0
+2026,1,Lafayette,UConn,involves FCS,-19.5,-21.5,,,,,49.0,0,0
+2026,1,East Carolina,Alabama,Power 4 vs Group of 5,-25.5,-28.5,8.09,,,8.09,38.0,0,0
+2026,1,Coastal Carolina,West Virginia,Power 4 vs Group of 5,-17.5,-21.0,9.07,,,9.07,7.0,0,0
+2026,1,New Hampshire,Syracuse,involves FCS,-32.5,-35.5,,,,,63.0,0,0
+2026,1,New Hampshire,Syracuse,involves FCS,-32.5,-35.5,,,,,63.0,0,1
+2026,1,Bryant,Army,involves FCS,-36.5,-37.5,,,,,56.0,0,0
+2026,1,Bryant,Army,involves FCS,-36.5,-37.5,,,,,56.0,0,1
+2026,1,Oregon State,Houston,Power 4 vs Group of 5,-18.5,-21.0,18.9,,,18.9,13.0,0,0
+2026,1,Ohio,Nebraska,Power 4 vs Group of 5,-23.5,-23.5,10.31,,,10.31,28.0,0,0
+2026,1,North Texas,Indiana,Power 4 vs Group of 5,-40.5,-39.5,15.82,,,15.82,36.0,0,0
+2026,1,Ball State,Ohio State,Power 4 vs Group of 5,-49.5,-50.5,38.42,,,38.42,53.0,0,0
+2026,1,Lehigh,Georgetown,involves FCS,20.5,22.5,,,,,-31.0,0,0
+2026,1,Lehigh,Georgetown,involves FCS,20.5,22.5,,,,,-31.0,0,1
+2026,1,Kent State,South Carolina,Power 4 vs Group of 5,-33.5,-35.5,20.14,,,20.14,57.0,0,0
+2026,1,Duquesne,Air Force,involves FCS,-30.5,-31.5,,,,,34.0,0,0
+2026,1,Southeast Missouri State,Iowa State,involves FCS,-29.5,-29.5,,,,,28.0,0,0
+2026,1,Southeast Missouri State,Iowa State,involves FCS,-29.5,-29.5,,,,,28.0,0,1
+2026,1,Youngstown State,Kentucky,involves FCS,-23.5,-22.5,,,,,32.0,0,0
+2026,1,Youngstown State,Kentucky,involves FCS,-23.5,-22.5,,,,,32.0,0,1
+2026,1,Tennessee State,Georgia,involves FCS,-46.5,-49.5,,,,,60.0,0,0
+2026,1,Tennessee State,Georgia,involves FCS,-46.5,-49.5,,,,,60.0,0,1
+2026,1,Drake,Montana,involves FCS,-34.5,-35.5,,,,,35.0,0,0
+2026,1,Drake,Montana,involves FCS,-34.5,-35.5,,,,,35.0,0,1
+2026,1,Drake,Montana,involves FCS,-34.5,-35.5,,,,,35.0,1,0
+2026,1,Drake,Montana,involves FCS,-34.5,-35.5,,,,,35.0,1,1
+2026,1,UT Rio Grande Valley,UTSA,involves FCS,-28.5,-28.5,,,,,29.0,0,0
+2026,1,UT Rio Grande Valley,UTSA,involves FCS,-28.5,-28.5,,,,,29.0,0,1
+2026,1,Boise State,Oregon,Power 4 vs Group of 5,-24.5,-24.5,18.57,,,18.57,7.0,0,0
+2026,1,Towson,Navy,involves FCS,-30.5,-31.5,,,,,27.0,0,0
+2026,1,Towson,Navy,involves FCS,-30.5,-31.5,,,,,27.0,0,1
+2026,1,The Citadel,Charlotte,involves FCS,-15.5,-20.5,,,,,-2.0,0,0
+2026,1,The Citadel,Charlotte,involves FCS,-15.5,-20.5,,,,,-2.0,0,1
+2026,1,Marshall,Penn State,Power 4 vs Group of 5,-23.5,-23.5,18.44,,,18.44,45.0,0,0
+2026,1,Furman,Tennessee,involves FCS,-46.5,-49.5,,,,,47.0,0,0
+2026,1,Furman,Tennessee,involves FCS,-46.5,-49.5,,,,,47.0,0,1
+2026,1,Fordham,North Dakota State,involves FCS,-39.5,-41.5,,,,,38.0,0,0
+2026,1,Fordham,North Dakota State,involves FCS,-39.5,-41.5,,,,,38.0,0,1
+2026,1,Fordham,North Dakota State,involves FCS,-39.5,-41.5,,,,,38.0,1,0
+2026,1,Fordham,North Dakota State,involves FCS,-39.5,-41.5,,,,,38.0,1,1
+2026,1,Maine,App State,involves FCS,-17.5,-21.0,,,,,52.0,0,0
+2026,1,Maine,App State,involves FCS,-17.5,-21.0,,,,,52.0,0,1
+2026,1,Texas State,Texas,Power 4 vs Group of 5,-30.5,-29.5,12.74,,,12.74,52.0,0,0
+2026,1,St. Thomas (MN),North Dakota,involves FCS,-27.5,-28.5,,,,,36.0,0,0
+2026,1,St. Thomas (MN),North Dakota,involves FCS,-27.5,-28.5,,,,,36.0,0,1
+2026,1,St. Thomas (MN),North Dakota,involves FCS,-27.5,-28.5,,,,,36.0,1,0
+2026,1,St. Thomas (MN),North Dakota,involves FCS,-27.5,-28.5,,,,,36.0,1,1
+2026,1,Northern Illinois,Iowa,Power 4 vs Group of 5,-29.5,-31.5,27.48,,,27.48,40.0,0,0
+2026,1,North Alabama,Arkansas,involves FCS,-40.5,-40.5,,,,,17.0,0,0
+2026,1,North Alabama,Arkansas,involves FCS,-40.5,-40.5,,,,,17.0,0,1
+2026,1,Alcorn State,Southern Miss,involves FCS,-21.0,-20.5,,,,,46.0,0,0
+2026,1,Alcorn State,Southern Miss,involves FCS,-21.0,-20.5,,,,,46.0,0,1
+2026,1,Norfolk State,Old Dominion,involves FCS,-41.5,-41.5,,,,,21.0,0,0
+2026,1,Norfolk State,Old Dominion,involves FCS,-41.5,-41.5,,,,,21.0,0,1
+2026,1,Villanova,Bucknell,involves FCS,26.5,22.5,,,,,-1.0,0,0
+2026,1,Villanova,Bucknell,involves FCS,26.5,22.5,,,,,-1.0,0,1
+2026,1,Villanova,Bucknell,involves FCS,26.5,22.5,,,,,-1.0,1,0
+2026,1,Villanova,Bucknell,involves FCS,26.5,22.5,,,,,-1.0,1,1
+2026,1,Elon,Davidson,involves FCS,31.5,32.5,,,,,-38.0,0,0
+2026,1,Elon,Davidson,involves FCS,31.5,32.5,,,,,-38.0,0,1
+2026,1,Elon,Davidson,involves FCS,31.5,32.5,,,,,-38.0,1,0
+2026,1,Elon,Davidson,involves FCS,31.5,32.5,,,,,-38.0,1,1
+2026,1,Presbyterian,Mercer,involves FCS,-21.5,-22.5,,,,,59.0,0,0
+2026,1,Presbyterian,Mercer,involves FCS,-21.5,-22.5,,,,,59.0,0,1
+2026,1,Presbyterian,Mercer,involves FCS,-21.5,-22.5,,,,,59.0,1,0
+2026,1,Presbyterian,Mercer,involves FCS,-21.5,-22.5,,,,,59.0,1,1
+2026,1,Chicago State,UT Martin,involves FCS,-44.5,-45.5,,,,,35.0,0,0
+2026,1,Chicago State,UT Martin,involves FCS,-44.5,-45.5,,,,,35.0,0,1
+2026,1,Chicago State,UT Martin,involves FCS,-44.5,-45.5,,,,,35.0,1,0
+2026,1,Chicago State,UT Martin,involves FCS,-44.5,-45.5,,,,,35.0,1,1
+2026,1,Houston Christian,Rice,involves FCS,-24.5,-22.5,,,,,28.0,0,0
+2026,1,Houston Christian,Rice,involves FCS,-24.5,-22.5,,,,,28.0,0,1
+2026,1,Eastern Kentucky,Jacksonville State,involves FCS,-19.5,-22.5,,,,,42.0,0,0
+2026,1,Eastern Kentucky,Jacksonville State,involves FCS,-19.5,-22.5,,,,,42.0,0,1
+2026,1,Eastern Kentucky,Jacksonville State,involves FCS,-19.5,-22.5,,,,,42.0,1,0
+2026,1,Eastern Kentucky,Jacksonville State,involves FCS,-19.5,-22.5,,,,,42.0,1,1
+2026,1,Charleston Southern,Georgia Southern,involves FCS,-25.5,-28.5,,,,,31.0,0,0
+2026,1,Charleston Southern,Georgia Southern,involves FCS,-25.5,-28.5,,,,,31.0,0,1
+2026,1,Austin Peay,Vanderbilt,involves FCS,-30.5,-29.5,,,,,19.0,0,0
+2026,1,Austin Peay,Vanderbilt,involves FCS,-30.5,-29.5,,,,,19.0,0,1
+2026,1,Murray State,Middle Tennessee,involves FCS,-20.5,-22.5,,,,,24.0,0,0
+2026,1,Murray State,Middle Tennessee,involves FCS,-20.5,-22.5,,,,,24.0,0,1
+2026,1,Missouri State,Texas A&M,Power 4 vs Group of 5,-38.5,-38.5,24.2,,,24.2,50.0,0,0
+2026,1,Abilene Christian,Texas Tech,involves FCS,-42.5,-45.5,,,,,23.0,0,0
+2026,1,Abilene Christian,Texas Tech,involves FCS,-42.5,-45.5,,,,,23.0,0,1
+2026,1,Nicholls,Kansas State,involves FCS,-40.5,-41.5,,,,,68.0,0,0
+2026,1,Nicholls,Kansas State,involves FCS,-40.5,-41.5,,,,,68.0,0,1
+2026,1,UL Monroe,Mississippi State,Power 4 vs Group of 5,-28.5,-28.5,20.47,,,20.47,49.0,0,0
+2026,1,Northwestern State,Louisiana Tech,involves FCS,-41.5,-44.5,,,,,74.0,0,0
+2026,1,Northwestern State,Louisiana Tech,involves FCS,-41.5,-44.5,,,,,74.0,0,1
+2026,1,Western Michigan,Michigan,Power 4 vs Group of 5,-26.5,-27.5,12.67,,,12.67,1.0,0,0
+2026,1,VMI,Virginia Tech,involves FCS,-50.5,-54.5,,,,,70.0,0,0
+2026,1,VMI,Virginia Tech,involves FCS,-50.5,-54.5,,,,,70.0,0,1
+2026,1,Florida Atlantic,Florida,Power 4 vs Group of 5,-25.5,-26.5,11.62,,,11.62,45.0,0,0
+2026,1,East Texas A&M,Stephen F. Austin,involves FCS,-25.5,-23.5,,,,,37.0,0,0
+2026,1,East Texas A&M,Stephen F. Austin,involves FCS,-25.5,-23.5,,,,,37.0,0,1
+2026,1,East Texas A&M,Stephen F. Austin,involves FCS,-25.5,-23.5,,,,,37.0,1,0
+2026,1,East Texas A&M,Stephen F. Austin,involves FCS,-25.5,-23.5,,,,,37.0,1,1
+2026,1,Utah Tech,BYU,involves FCS,-47.5,-50.5,,,,,56.0,0,0
+2026,1,Utah Tech,BYU,involves FCS,-47.5,-50.5,,,,,56.0,0,1
+2026,1,Hampton,Maryland,involves FCS,-45.5,-45.5,,,,,62.0,0,0
+2026,1,Hampton,Maryland,involves FCS,-45.5,-45.5,,,,,62.0,0,1
+2026,1,Illinois State,Western Illinois,involves FCS,23.5,20.5,,,,,-31.0,0,0
+2026,1,Illinois State,Western Illinois,involves FCS,23.5,20.5,,,,,-31.0,0,1
+2026,1,Illinois State,Western Illinois,involves FCS,23.5,20.5,,,,,-31.0,1,0
+2026,1,Illinois State,Western Illinois,involves FCS,23.5,20.5,,,,,-31.0,1,1
+2026,1,South Dakota,Northern Colorado,involves FCS,20.5,20.5,,,,,-15.0,0,0
+2026,1,South Dakota,Northern Colorado,involves FCS,20.5,20.5,,,,,-15.0,0,1
+2026,1,South Dakota,Northern Colorado,involves FCS,20.5,20.5,,,,,-15.0,1,0
+2026,1,South Dakota,Northern Colorado,involves FCS,20.5,20.5,,,,,-15.0,1,1
+2026,1,Lamar,Louisiana,involves FCS,-18.5,-20.5,,,,,31.0,0,0
+2026,1,Lamar,Louisiana,involves FCS,-18.5,-20.5,,,,,31.0,0,1
+2026,1,Butler,Montana State,involves FCS,-45.5,-45.5,,,,,27.0,0,0
+2026,1,Butler,Montana State,involves FCS,-45.5,-45.5,,,,,27.0,0,1
+2026,1,Butler,Montana State,involves FCS,-45.5,-45.5,,,,,27.0,1,0
+2026,1,Butler,Montana State,involves FCS,-45.5,-45.5,,,,,27.0,1,1
+2026,1,Mercyhurst,New Mexico State,involves FCS,-24.5,-29.5,,,,,37.0,0,0
+2026,1,Mercyhurst,New Mexico State,involves FCS,-24.5,-29.5,,,,,37.0,0,1
+2026,1,Mercyhurst,New Mexico State,involves FCS,-24.5,-29.5,,,,,37.0,1,0
+2026,1,Mercyhurst,New Mexico State,involves FCS,-24.5,-29.5,,,,,37.0,1,1
+2026,1,Northern Arizona,Arizona,involves FCS,-31.5,-33.5,,,,,28.0,0,0
+2026,1,Northern Arizona,Arizona,involves FCS,-31.5,-33.5,,,,,28.0,0,1
+2026,1,Portland State,San Diego State,involves FCS,-38.5,-38.5,,,,,33.0,0,0
+2026,1,Portland State,San Diego State,involves FCS,-38.5,-38.5,,,,,33.0,0,1
+2026,1,Morgan State,Arizona State,involves FCS,-41.5,-43.5,,,,,63.0,0,0
+2026,1,Morgan State,Arizona State,involves FCS,-41.5,-43.5,,,,,63.0,0,1
+2026,1,Mississippi Valley State,Sacramento State,involves FCS,-35.5,-38.5,,,,,52.0,0,0
+2026,1,Mississippi Valley State,Sacramento State,involves FCS,-35.5,-38.5,,,,,52.0,0,1
+2026,1,Mississippi Valley State,Sacramento State,involves FCS,-35.5,-38.5,,,,,52.0,1,0
+2026,1,Mississippi Valley State,Sacramento State,involves FCS,-35.5,-38.5,,,,,52.0,1,1
+2026,1,Washington State,Washington,Power 4 vs Group of 5,-21.5,-23.5,13.2,,,13.2,14.0,0,0
+2026,1,Wisconsin,Notre Dame,Power 4 vs Power 4,,-21.0,18.87,,,18.87,28.0,0,0
+2026,2,Florida A&M,Miami,involves FCS,-55.5,-59.5,,,,,70.0,1,2
+2026,2,Richmond,NC State,involves FCS,-30.5,-33.5,,,,,73.0,1,2
+2026,2,Norfolk State,Virginia,involves FCS,-44.5,-47.5,,,,,56.0,1,2
+2026,2,Villanova,Louisville,involves FCS,-36.5,-39.5,,,,,46.0,1,2
+2026,2,Gardner-Webb,Liberty,involves FCS,-25.5,-28.5,,,,,1.0,1,2
+2026,2,Howard,Indiana,involves FCS,-56.5,-57.5,,,,,55.0,1,2
+2026,2,Penn State,Temple,Power 4 vs Group of 5,21.5,24.5,-11.57,-12.93,-11.38,-11.57,-18.0,1,1
+2026,2,North Carolina A&T,North Carolina Central,involves FCS,-24.5,-24.5,,,,,8.0,2,2
+2026,2,Wagner,James Madison,involves FCS,-45.5,-46.5,,,,,84.0,1,2
+2026,2,Oregon,Oklahoma State,Power 4 vs Power 4,18.5,24.5,-23.24,-14.37,-17.66,-23.24,8.0,1,1
+2026,2,East Tennessee State,North Carolina,involves FCS,-34.5,-36.5,,,,,32.0,1,2
+2026,2,Western Kentucky,Georgia,Power 4 vs Group of 5,-35.5,-40.5,18.37,32.1,37.88,18.37,50.0,1,1
+2026,2,Holy Cross,Miami (OH),involves FCS,-30.5,-30.5,,,,,38.0,1,2
+2026,2,Colgate,Central Michigan,involves FCS,-23.5,-18.5,,,,,3.0,1,2
+2026,2,UT Martin,West Virginia,involves FCS,-40.5,-41.5,,,,,45.0,1,2
+2026,2,Duquesne,Youngstown State,involves FCS,-22.5,-22.5,,,,,57.0,2,1
+2026,2,Utah Tech,Montana,involves FCS,-38.5,-35.5,,,,,21.0,2,2
+2026,2,Utah State,Washington,Power 4 vs Group of 5,-24.5,-28.5,17.72,28.17,27.6,17.72,2.0,1,1
+2026,2,Central Connecticut,Toledo,involves FCS,-33.5,-36.5,,,,,53.0,1,1
+2026,2,Weber State,Colorado,involves FCS,-33.5,-38.5,,,,,31.0,1,2
+2026,2,Robert Morris,Akron,involves FCS,-27.5,-26.5,,,,,35.0,1,2
+2026,2,Rice,Notre Dame,Power 4 vs Group of 5,-44.5,-44.5,29.32,38.47,29.43,29.32,52.0,1,1
+2026,2,Sacred Heart,Massachusetts,involves FCS,-23.5,-23.5,,,,,27.0,1,1
+2026,2,Northern Colorado,Wyoming,involves FCS,-22.5,-23.5,,,,,8.0,1,2
+2026,2,UC Davis,SMU,involves FCS,-24.5,-32.5,,,,,46.0,1,2
+2026,2,Mercyhurst,New Mexico,involves FCS,-40.5,-42.5,,,,,63.0,1,2
+2026,2,Alabama State,Troy,involves FCS,,-23.5,,,,,17.0,1,2
+2026,2,Delaware,Vanderbilt,Power 4 vs Group of 5,-21.5,-20.5,24.07,,,24.07,9.0,1,1
+2026,2,Morehead State,Austin Peay,involves FCS,-34.5,-36.5,,,,,56.0,2,2
+2026,2,Campbell,Florida,involves FCS,-49.5,-51.5,,,,,49.0,1,2
+2026,2,San Diego,Idaho State,involves FCS,-25.5,-22.5,,,,,42.0,2,1
+2026,2,Monmouth,Western Michigan,involves FCS,-25.5,-29.5,,,,,35.0,1,2
+2026,2,West Georgia,Arkansas State,involves FCS,-31.5,-31.5,,,,,45.0,1,2
+2026,2,Samford,Tennessee Tech,involves FCS,-26.5,-26.5,,,,,26.0,2,2
+2026,2,Western Carolina,Cincinnati,involves FCS,-36.5,-36.5,,,,,52.0,1,2
+2026,2,Southern Utah,Colorado State,involves FCS,-20.5,-19.5,,,,,34.0,1,2
+2026,2,Bowling Green,Nebraska,Power 4 vs Group of 5,-25.5,-30.5,15.95,25.74,23.31,15.95,49.0,1,1
+2026,2,Southern,Houston,involves FCS,-51.5,-51.5,,,,,71.0,1,2
+2026,2,New Haven,South Dakota State,involves FCS,-44.5,-42.5,,,,,43.0,2,2
+2026,2,Northwestern State,East Texas A&M,involves FCS,-20.5,-20.5,,,,,24.0,2,2
+2026,2,Tarleton State,McNeese,involves FCS,20.5,19.5,,,,,-3.0,2,2
+2026,2,Towson,South Carolina,involves FCS,-43.5,-44.5,,,,,36.0,1,2
+2026,2,Western Illinois,Wisconsin,involves FCS,-38.5,-43.5,,,,,27.0,1,2
+2026,2,Georgia Southern,Clemson,Power 4 vs Group of 5,-26.5,-20.5,16.01,7.1,1.4,16.01,15.0,1,1
+2026,2,Louisiana Tech,LSU,Power 4 vs Group of 5,-31.5,-34.5,11.23,0.56,-0.36,11.23,31.0,1,1
+2026,2,Texas Tech,Oregon State,Power 4 vs Group of 5,27.5,25.5,-24.87,-21.67,-20.99,-24.87,-11.0,1,1
+2026,2,Fordham,Coastal Carolina,involves FCS,-31.5,-36.5,,,,,38.0,1,2
+2026,2,Charlotte,Ole Miss,Power 4 vs Group of 5,-46.5,-44.5,36.85,32.93,29.38,36.85,32.0,1,1
+2026,2,Southern Miss,Auburn,Power 4 vs Group of 5,-29.5,-32.5,15.88,1.27,6.62,15.88,35.0,1,1
+2026,2,Grambling,TCU,involves FCS,-43.5,-44.5,,,,,56.0,1,2
+2026,2,Prairie View A&M,Baylor,involves FCS,-37.5,-37.5,,,,,41.0,1,2
+2026,2,Texas Southern,UTEP,involves FCS,-25.5,-27.5,,,,,41.0,1,2
+2026,2,Cal Poly,San José State,involves FCS,-20.5,-21.5,,,,,10.0,2,2
+2026,2,North Dakota,Portland State,involves FCS,25.5,25.5,,,,,-24.0,2,2
+2026,2,Louisiana,USC,Power 4 vs Group of 5,-28.5,-30.5,21.32,27.86,8.27,21.32,19.0,2,1
+2026,3,Miami,Wake Forest,Power 4 vs Power 4,19.5,20.5,-6.2,-18.49,-19.29,-19.29,-13.0,2,2
+2026,3,Portland State,Oregon,involves FCS,-57.5,-58.5,,,,,84.0,2,3
+2026,3,Georgia,Arkansas,Power 4 vs Power 4,17.5,24.5,-8.82,-14.47,-15.81,-15.81,-28.0,2,2
+2026,3,Buffalo,Penn State,Power 4 vs Group of 5,-39.5,-39.5,20.4,23.96,29.65,29.65,42.0,2,2
+2026,3,Kent State,Ohio State,Power 4 vs Group of 5,-52.5,-52.5,36.0,46.83,37.18,37.18,56.0,2,2
+2026,3,Tulane,Kansas State,Power 4 vs Group of 5,-20.5,-20.5,4.09,17.5,16.3,16.3,11.0,2,2
+2026,3,Akron,Minnesota,Power 4 vs Group of 5,-26.5,-22.5,13.72,11.56,9.3,9.3,34.0,2,2
+2026,3,Bowling Green,Iowa State,Power 4 vs Group of 5,-22.5,-22.5,18.37,25.4,28.09,28.09,48.0,2,2
+2026,3,Mercer,Georgia Tech,involves FCS,-38.5,-38.5,,,,,33.0,2,3
+2026,3,Eastern Michigan,Wisconsin,Power 4 vs Group of 5,-24.5,-23.5,10.38,9.97,16.96,16.96,44.0,2,3
+2026,3,Chicago State,Butler,involves FCS,-19.5,-20.5,,,,,27.0,3,3
+2026,3,Valparaiso,Indiana State,involves FCS,-22.5,-22.5,,,,,23.0,3,2
+2026,3,Yale,Holy Cross,involves FCS,18.5,21.0,,,,,-10.0,3,0
+2026,3,Southern Illinois,Illinois,involves FCS,-41.5,-34.5,,,,,38.0,2,3
+2026,3,Maine,Boston College,involves FCS,-38.5,-37.5,,,,,6.0,2,3
+2026,3,Presbyterian,Western Carolina,involves FCS,-28.5,-33.5,,,,,44.0,3,2
+2026,3,Eastern Illinois,Illinois State,involves FCS,-29.5,-29.5,,,,,36.0,3,3
+2026,3,Central Connecticut,Montana State,involves FCS,-38.5,-41.5,,,,,5.0,3,2
+2026,3,Utah State,Utah,Power 4 vs Group of 5,-27.5,-26.5,20.21,25.74,33.7,33.7,33.0,2,2
+2026,3,USC,Rutgers,Power 4 vs Power 4,24.5,21.0,-6.79,-16.77,-20.21,-20.21,-7.0,2,3
+2026,3,UTEP,Michigan,Power 4 vs Group of 5,-36.5,-34.5,23.22,12.67,16.13,16.13,35.0,2,2
+2026,3,Stonehill,Massachusetts,involves FCS,-33.5,-30.5,,,,,22.0,2,3
+2026,3,Duquesne,Washington State,involves FCS,-37.5,-38.5,,,,,41.0,2,2
+2026,3,Wagner,California,involves FCS,-58.5,-58.5,,,,,42.0,2,3
+2026,3,Western Kentucky,Indiana,Power 4 vs Group of 5,-44.5,-44.5,23.81,31.71,30.53,30.53,38.0,2,2
+2026,3,Northern Iowa,Iowa,involves FCS,-40.5,-37.5,,,,,55.0,2,2
+2026,3,Louisiana Tech,Baylor,Power 4 vs Group of 5,-17.5,-20.5,5.4,1.18,3.09,3.09,17.0,2,2
+2026,3,North Carolina A&T,Campbell,involves FCS,-18.5,-20.5,,,,,28.0,3,3
+2026,3,Merrimack,Tarleton State,involves FCS,-34.5,-32.5,,,,,25.0,3,3
+2026,3,Delaware State,South Florida,involves FCS,-36.5,-37.5,,,,,42.0,2,3
+2026,3,Murray State,Oklahoma State,involves FCS,-56.5,-56.5,,,,,59.0,2,3
+2026,3,Morehead State,Western Illinois,involves FCS,-18.5,-20.5,,,,,57.0,3,3
+2026,3,Troy,Missouri,Power 4 vs Group of 5,-27.5,-26.5,16.21,28.73,28.17,28.17,10.0,2,2
+2026,3,Nicholls,Sam Houston,involves FCS,-17.5,-21.0,,,,,59.0,2,3
+2026,3,UT Martin,Memphis,involves FCS,-34.5,-33.5,,,,,24.0,3,3
+2026,3,Georgia State,UCF,Power 4 vs Group of 5,-21.0,-17.5,18.9,21.17,21.93,21.93,14.0,2,2
+2026,3,Eastern Washington,Washington,involves FCS,-42.5,-42.5,,,,,32.0,2,3
+2026,3,North Dakota,Nebraska,involves FCS,-24.5,-27.5,,,,,27.0,2,3
+2026,3,Michigan State,Notre Dame,Power 4 vs Power 4,-29.5,-28.5,21.85,35.26,21.02,21.02,17.0,2,2
+2026,3,BYU,Colorado State,Power 4 vs Group of 5,21.0,17.5,-17.01,-5.73,-13.24,-13.24,-18.0,2,2
+2026,3,New Mexico,Oklahoma,Power 4 vs Group of 5,-23.5,-21.5,15.03,5.29,7.05,7.05,8.0,2,2
+2026,3,Kennesaw State,Tennessee,Power 4 vs Group of 5,-34.5,-35.5,17.0,21.81,30.2,30.2,33.0,2,2
+2026,3,Northwestern State,Weber State,involves FCS,-34.5,-35.5,,,,,29.0,3,3
+2026,3,Northern Arizona,Utah Tech,involves FCS,21.5,16.5,,,,,-12.0,3,3
+2026,3,UTSA,Texas,Power 4 vs Group of 5,-29.5,-29.5,11.82,12.56,13.82,13.82,24.0,2,2
+2026,3,Arkansas State,TCU,Power 4 vs Group of 5,-20.5,-18.5,14.83,19.01,19.25,19.25,24.0,2,2
+2026,3,East Texas A&M,Tulsa,involves FCS,-42.5,-41.5,,,,,42.0,2,3
+2026,3,Stetson,UC Davis,involves FCS,-47.5,-47.5,,,,,38.0,3,3
+2026,3,South Dakota,Boise State,involves FCS,-23.5,-28.5,,,,,14.0,2,3
+2026,3,North Dakota State,Sacramento State,Group of 5 vs Group of 5,23.5,26.5,,,,,-21.0,3,3
+2026,3,Northern Illinois,Arizona,Power 4 vs Group of 5,-35.5,-34.5,22.44,28.02,27.65,27.65,25.0,2,2
+2026,4,Howard,Rutgers,involves FCS,-41.5,-42.5,,,,,51.0,3,3
+2026,4,Northwestern,Indiana,Power 4 vs Power 4,-23.5,-20.5,21.06,22.94,25.16,25.16,6.0,3,2
+2026,4,Sam Houston,Texas Tech,Power 4 vs Group of 5,-37.5,-34.5,39.93,23.13,39.29,39.29,35.0,3,3
+2026,4,Illinois,Ohio State,Power 4 vs Power 4,-27.5,-25.5,14.9,22.67,20.16,20.16,23.0,3,3
+2026,4,Bucknell,Pittsburgh,involves FCS,-53.5,-54.5,,,,,59.0,3,4
+2026,4,South Alabama,Kentucky,Power 4 vs Group of 5,-19.5,-20.5,13.13,8.11,9.99,9.99,24.0,3,3
+2026,4,Lindenwood,Eastern Michigan,involves FCS,-25.5,-24.5,,,,,26.0,4,3
+2026,4,Notre Dame,Purdue,Power 4 vs Power 4,27.5,27.5,-16.36,-14.28,-17.96,-17.96,-39.0,3,3
+2026,4,Central Arkansas,Florida State,involves FCS,-42.5,-45.5,,,,,27.0,3,4
+2026,4,William & Mary,Duke,involves FCS,-43.5,-43.5,,,,,55.0,3,4
+2026,4,Gardner-Webb,Marshall,involves FCS,-23.5,-24.5,,,,,1.0,3,4
+2026,4,Robert Morris,Buffalo,involves FCS,-28.5,-27.5,,,,,3.0,3,3
+2026,4,Stonehill,Ohio,involves FCS,-34.5,-32.5,,,,,28.0,3,4
+2026,4,North Carolina Central,East Carolina,involves FCS,-34.5,-37.5,,,,,33.0,3,4
+2026,4,Rhode Island,North Carolina A&T,involves FCS,24.5,24.5,,,,,4.0,4,4
+2026,4,Campbell,Hampton,involves FCS,18.5,20.5,,,,,-24.0,4,4
+2026,4,Mississippi Valley State,Alabama State,involves FCS,-34.5,-34.5,,,,,26.0,3,4
+2026,4,Incarnate Word,Texas State,involves FCS,-29.5,-30.5,,,,,53.0,3,3
+2026,4,Long Island University,Florida International,involves FCS,-35.5,-37.5,,,,,17.0,3,4
+2026,4,Delaware,Virginia,Power 4 vs Group of 5,-20.5,-19.5,18.05,,,18.05,39.0,3,3
+2026,4,Central Michigan,Miami,Power 4 vs Group of 5,-42.5,-41.5,22.96,28.56,32.14,32.14,49.0,3,3
+2026,4,Southern,Jackson State,involves FCS,-20.5,-20.5,,,,,18.0,3,4
+2026,4,Mercyhurst,Western Kentucky,involves FCS,-38.5,-39.5,,,,,45.0,3,4
+2026,4,SE Louisiana,Northwestern State,involves FCS,39.5,37.5,,,,,-31.0,4,4
+2026,4,Eastern Illinois,South Dakota State,involves FCS,-34.5,-34.5,,,,,35.0,4,4
+2026,4,Houston Christian,North Texas,involves FCS,-37.5,-38.5,,,,,49.0,3,4
+2026,4,Missouri State,SMU,Power 4 vs Group of 5,-34.5,-30.5,19.42,,,19.42,10.0,3,3
+2026,4,Northern Arizona,Montana State,involves FCS,-19.5,-20.5,,,,,14.0,4,4
+2026,5,Memphis,Charlotte,Group of 5 vs Group of 5,21.5,18.5,-18.85,-12.05,-15.08,-15.08,-51.0,4,4
+2026,5,Boston College,SMU,Power 4 vs Power 4,-21.0,-21.5,17.98,20.05,21.62,21.62,9.0,4,4
+2026,5,Notre Dame,North Carolina,Power 4 vs Power 4,23.5,21.0,-16.68,-12.61,-11.63,-11.63,-11.0,3,4
+2026,5,Fordham,Lehigh,involves FCS,-21.5,-22.5,,,,,34.0,5,5
+2026,5,Middle Tennessee,Kansas,Power 4 vs Group of 5,-21.5,-21.5,16.8,16.03,19.52,19.52,55.0,3,4
+2026,5,St. Thomas (MN),Presbyterian,involves FCS,24.5,28.5,,,,,34.0,4,5
+2026,5,Vanderbilt,Georgia,Power 4 vs Power 4,-23.5,-25.5,6.12,13.51,16.43,16.43,24.0,4,4
+2026,5,Mercer,VMI,involves FCS,35.5,34.5,,,,,-51.0,5,5
+2026,5,Toledo,Ball State,Group of 5 vs Group of 5,17.5,20.5,-15.37,-30.11,-25.62,-25.62,-15.0,4,4
+2026,5,Murray State,North Dakota,involves FCS,-35.5,-37.5,,,,,27.0,5,5
+2026,5,The Citadel,South Carolina State,involves FCS,-20.5,-17.5,,,,,-3.0,5,4
+2026,5,Prairie View A&M,Mississippi Valley State,involves FCS,26.5,29.5,,,,,1.0,5,5
+2026,5,Wyoming,North Dakota State,Group of 5 vs Group of 5,-21.0,-17.5,,,,,28.0,4,4
+2026,5,Samford,UAB,involves FCS,-30.5,-30.5,,,,,19.0,4,4
+2026,5,UTEP,New Mexico,Group of 5 vs Group of 5,-21.0,-23.5,15.69,31.74,30.85,30.85,54.0,4,4
+2026,5,Northern Colorado,Montana,involves FCS,-26.5,-21.5,,,,,22.0,5,5
+2026,5,New Haven,Austin Peay,involves FCS,-35.5,-35.5,,,,,25.0,5,5
+2026,5,Texas Southern,Florida Atlantic,involves FCS,-43.5,-47.5,,,,,56.0,4,4
+2026,5,Northwestern State,Lamar,involves FCS,,-40.5,,,,,28.0,4,5
+2026,5,Chicago State,Tarleton State,involves FCS,-49.5,-50.5,,,,,35.0,4,5
+2026,5,Utah State,Boise State,Group of 5 vs Group of 5,-20.5,-19.5,7.69,10.26,13.94,13.94,19.0,4,4
+2026,5,McNeese,LSU,involves FCS,-53.5,-53.5,,,,,49.0,4,5
+2026,5,Indiana,Rutgers,Power 4 vs Power 4,23.5,24.5,-16.95,-16.54,-16.93,-16.93,-32.0,4,4
+2026,6,Morehead State,Dayton,involves FCS,-20.5,-21.5,,,,,28.0,4,5
+2026,6,Princeton,Wagner,involves FCS,22.5,25.5,,,,,-15.0,5,3
+2026,6,Ball State,Northwestern,Power 4 vs Group of 5,-36.5,-34.5,22.5,30.75,30.33,30.33,31.0,4,5
+2026,6,Stetson,St. Thomas (MN),involves FCS,-22.5,-22.5,,,,,43.0,6,5
+2026,6,Stanford,Notre Dame,Power 4 vs Power 4,-38.5,-40.5,27.35,38.58,39.59,39.59,51.0,5,5
+2026,6,Buffalo,Toledo,Group of 5 vs Group of 5,-20.5,-18.5,12.48,23.05,17.46,17.46,-15.0,5,5
+2026,6,Charlotte,North Texas,Group of 5 vs Group of 5,-28.5,-27.5,30.17,41.94,41.2,41.2,40.0,5,5
+2026,6,Maryland,Ohio State,Power 4 vs Power 4,-34.5,-31.5,22.96,31.67,29.59,29.59,29.0,5,5
+2026,6,Hawai'i,Arizona State,Power 4 vs Group of 5,-20.5,-20.5,5.07,13.07,14.25,14.25,18.0,4,5
