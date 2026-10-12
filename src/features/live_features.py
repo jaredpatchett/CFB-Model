@@ -216,7 +216,8 @@ def score_with_trained_model(home_school: str, away_school: str, home_rating, aw
                               neutral_site: bool, current_season_form: dict, model,
                               pace_returning: dict = None, core_ratings: dict = None,
                               weather: dict = None, diagnostics: dict = None,
-                              v2_lookup: dict = None, qb_out: dict = None, kickoff=None) -> float:
+                              v2_lookup: dict = None, qb_out: dict = None, kickoff=None,
+                              inputs_out: dict = None) -> float:
     """Returns the trained GameMarginModel's predicted home margin for this
     matchup, or None if it shouldn't be trusted yet — either team missing
     from current_season_form (hasn't played this season), either team under
@@ -343,10 +344,27 @@ def score_with_trained_model(home_school: str, away_school: str, home_rating, aw
     available["home_qb_out"] = float(qb_out.get(home_school, 0))
     available["away_qb_out"] = float(qb_out.get(away_school, 0))
     missing = [c for c in model.feature_columns if c not in available or available[c] is None]
+    if inputs_out is not None:
+        # Input log (10/2026): every value the model was handed for this game,
+        # so day-to-day changes in its number can be traced to the input that
+        # moved. See export_dashboard_data.py (docs/data/model_inputs_log.csv).
+        inputs_out.update({c: available.get(c) for c in model.feature_columns})
+        inputs_out["_missing"] = "|".join(missing)
     if missing:
         for m in missing:
             _bump('missing_feature:' + m)
         return None
 
     row = pd.DataFrame([{c: available[c] for c in model.feature_columns}])
-    return float(model.predict_margin(row)[0])
+    margin = float(model.predict_margin(row)[0])
+    if inputs_out is not None:
+        # Same game with the weather inputs set to a mild, dry, outdoor day
+        # (indoor games keep their own values): how many points the forecast
+        # alone is moving this game's number.
+        neutral = {c: available[c] for c in model.feature_columns}
+        if not available.get("game_indoors"):
+            for c, v in (("temperature", 65.0), ("wind_speed", 6.0), ("precipitation", 0.0)):
+                if c in neutral:
+                    neutral[c] = v
+        inputs_out["_margin_weather_neutral"] = round(float(model.predict_margin(pd.DataFrame([neutral]))[0]), 2)
+    return margin
