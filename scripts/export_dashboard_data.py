@@ -345,6 +345,40 @@ def build_neutral_site_lookup(games_df: pd.DataFrame) -> dict:
     return lookup
 
 
+MODEL_INPUTS_LOG = "docs/data/model_inputs_log.csv"
+MODEL_INPUT_LOG_FIXED = ["run_at", "home", "away", "commence_time", "spread_home", "model_margin",
+                         "margin_weather_neutral", "model_source", "model_version", "missing_inputs"]
+
+
+def append_model_inputs_log(rows: list, path: str) -> int:
+    """Appends one row per priced game per run (10/2026): every input the
+    trained model was handed, the margin it produced, and the margin with
+    the weather set to a mild dry day. Lets day-to-day moves in a game's
+    number be traced to the input that changed. CFBD-derived values only."""
+    import csv
+    from src.features.team_features_v2 import FEATURE_COLUMNS_V2
+    if not rows:
+        return 0
+    cols = MODEL_INPUT_LOG_FIXED + list(FEATURE_COLUMNS_V2)
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    new = not os.path.exists(path)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "a", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
+        if new:
+            w.writeheader()
+        for r in rows:
+            out = {"run_at": now, "home": r.get("_home"), "away": r.get("_away"), "commence_time": r.get("_commence"),
+                   "spread_home": r.get("_spread_home"), "model_margin": r.get("_margin"),
+                   "margin_weather_neutral": r.get("_margin_weather_neutral"), "model_source": r.get("_source"),
+                   "model_version": r.get("_version"), "missing_inputs": r.get("_missing")}
+            for c in FEATURE_COLUMNS_V2:
+                v = r.get(c)
+                out[c] = round(v, 4) if isinstance(v, float) else v
+            w.writerow(out)
+    return len(rows)
+
+
 def build_weather_lookup(weather_df: pd.DataFrame) -> dict:
     """frozenset({normalized_home_school, normalized_away_school}) ->
     {temperature, wind_speed, precipitation, game_indoors}, from CFBD's own
@@ -842,6 +876,7 @@ def main(year: int):
     props_path = f"{config.DATA_CURRENT_DIR}/player_props.csv"
 
     games_out = []
+    input_log_rows = []
     n_with_model_line = 0
     n_neutral_unknown = 0
     n_injury_applications = 0
@@ -907,16 +942,18 @@ def main(year: int):
                 score_args = dict(pace_returning=pace_returning_lookup, core_ratings=core_ratings_lookup,
                                   weather=game_weather, v2_lookup=v2_lookup, qb_out=qb_out,
                                   kickoff=g.get("commence_time"))
+                game_inputs = {}
                 trained_margin = score_with_trained_model(
                     home_meta.get("school"), away_meta.get("school"), home_rating, away_rating,
                     bool(neutral), current_season_form, trained_model,
-                    diagnostics=trained_model_diagnostics, **score_args,
+                    diagnostics=trained_model_diagnostics, inputs_out=game_inputs, **score_args,
                 )
                 used_model = trained_model if trained_margin is not None else None
                 if trained_margin is None and trained_model_v1 is not None:
+                    game_inputs = {}
                     trained_margin = score_with_trained_model(
                         home_meta.get("school"), away_meta.get("school"), home_rating, away_rating,
-                        bool(neutral), current_season_form, trained_model_v1, **score_args,
+                        bool(neutral), current_season_form, trained_model_v1, inputs_out=game_inputs, **score_args,
                     )
                     used_model = trained_model_v1 if trained_margin is not None else None
                     if trained_margin is not None:
@@ -948,6 +985,10 @@ def main(year: int):
                     n_neutral_unknown += 1
                 if fair_fields.get("has_model_line"):
                     n_with_model_line += 1
+                input_log_rows.append(dict(game_inputs, _home=game_out.get("home_school"), _away=game_out.get("away_school"),
+                                           _commence=game_out.get("commence_time"), _spread_home=game_out.get("spread_home"),
+                                           _margin=game_out.get("model_predicted_margin"),
+                                           _source=game_out.get("model_source"), _version=game_out.get("model_version")))
             else:
                 game_out["has_model_line"] = False
                 game_out["no_line_reason"] = "no_prior_fitted"
@@ -1378,6 +1419,12 @@ def main(year: int):
               f"any of these against real closing lines once their games are complete.")
     except Exception as e:
         print(f"  [warn] CLV snapshot step failed: {e} — dashboard export continues unaffected")
+
+    try:
+        n_logged = append_model_inputs_log(input_log_rows, MODEL_INPUTS_LOG)
+        print(f"  logged the model's inputs for {n_logged} game(s) to {MODEL_INPUTS_LOG}")
+    except Exception as e:
+        print(f"  [warn] model input log failed: {e} -- dashboard export continues unaffected")
 
     teams_out = build_teams_export(games_out, team_lookup, sp_lookup, sp_splits_lookup, pace_returning_lookup)
 
