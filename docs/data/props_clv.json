@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T17:20:33.132026+00:00",
+  "generated_at": "2026-10-12T02:44:22.218601+00:00",
   "summary": {
     "official": {
       "tracked": 30,
@@ -68,7 +68,7 @@
       "avg_value_at_close_pct": -8.1
     },
     "baseline_rec_yds": {
-      "tracked": 302,
+      "tracked": 310,
       "games_started": 302,
       "with_a_later_look": 280,
       "moved_our_way": 84,
@@ -116,14 +116,14 @@
     "record": "141-135",
     "units": -17.83,
     "roi": -6.5,
-    "logged": 299
+    "logged": 301
   },
   "groups_not_up_in_backtest": {
     "graded": 533,
     "record": "295-238",
     "units": -0.29,
     "roi": -0.1,
-    "logged": 558
+    "logged": 568
   },
   "groups": [
     {
@@ -192,7 +192,7 @@
     {
       "group": "Rush Yards under 20-29.9%",
       "up_in_backtest": true,
-      "logged": 20,
+      "logged": 21,
       "graded": 20,
       "record": "11-9",
       "units": 0.47,
@@ -327,7 +327,7 @@
     {
       "group": "Reception Yards under 30%+",
       "up_in_backtest": true,
-      "logged": 20,
+      "logged": 21,
       "graded": 19,
       "record": "7-12",
       "units": -5.98,
@@ -408,7 +408,7 @@
     {
       "group": "Pass Yards under 30%+",
       "up_in_backtest": false,
-      "logged": 44,
+      "logged": 48,
       "graded": 41,
       "record": "23-18",
       "units": 2.03,
@@ -426,7 +426,7 @@
     {
       "group": "Rush Yards over 0-4.9%",
       "up_in_backtest": false,
-      "logged": 15,
+      "logged": 16,
       "graded": 15,
       "record": "9-6",
       "units": 1.77,
@@ -435,7 +435,7 @@
     {
       "group": "Pass Touchdowns under 20-29.9%",
       "up_in_backtest": false,
-      "logged": 8,
+      "logged": 9,
       "graded": 8,
       "record": "6-2",
       "units": 1.61,
@@ -453,7 +453,7 @@
     {
       "group": "Pass Touchdowns over 15-19.9%",
       "up_in_backtest": false,
-      "logged": 4,
+      "logged": 5,
       "graded": 4,
       "record": "3-1",
       "units": 1.54,
@@ -885,7 +885,7 @@
     {
       "group": "Reception Yards under 15-19.9%",
       "up_in_backtest": false,
-      "logged": 22,
+      "logged": 25,
       "graded": 17,
       "record": "8-9",
       "units": -1.98,
@@ -12647,6 +12647,52 @@
       "later_look": true,
       "direction": "our way",
       "line_moved": true
+    },
+    {
+      "tag": "group",
+      "player": "Caden Creel",
+      "team": "Jacksonville State",
+      "opponent": "Florida International",
+      "market": "Rush Yards",
+      "side": "under",
+      "group": "Rush Yards under 20-29.9%",
+      "start_time": "2026-10-14T00:00:00Z",
+      "started": false,
+      "book": "fanduel",
+      "flagged_at": "2026-10-12T02:44:22.218601+00:00",
+      "line": 66.5,
+      "price": -114.0,
+      "model_ev": 24.6,
+      "last_seen_at": "2026-10-12T02:44:22.218601+00:00",
+      "last_line": 66.5,
+      "last_price": -114.0,
+      "actual": null,
+      "result": null,
+      "units": null,
+      "later_look": false
+    },
+    {
+      "tag": "group",
+      "player": "Jeremiah Smith",
+      "team": "Ohio State",
+      "opponent": "Indiana",
+      "market": "Reception Yards",
+      "side": "under",
+      "group": "Reception Yards under 30%+",
+      "start_time": "2026-10-17T16:00:00Z",
+      "started": false,
+      "book": "fanduel",
+      "flagged_at": "2026-10-12T02:44:22.218601+00:00",
+      "line": 124.5,
+      "price": -114.0,
+      "model_ev": 58.2,
+      "last_seen_at": "2026-10-12T02:44:22.218601+00:00",
+      "last_line": 124.5,
+      "last_price": -114.0,
+      "actual": null,
+      "result": null,
+      "units": null,
+      "later_look": false
     }
   ],
   "note": "Each prop is followed at the book it was flagged at. Results are graded from box scores at the logged price; NA means the player had no box-score line. 'group' plays are every 0%+ edge the model showed, filed by backtest group."
