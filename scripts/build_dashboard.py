@@ -440,7 +440,9 @@ def build_prop_tracking(history, path: str = PROPS_TRACK_PATH, max_results: int 
         for (market, side), rows in kinds.items():
             a = agg(rows)
             a["market"], a["side"] = market, side
-            ups = [r for r in ((((history or {}).get("markets") or {}).get(market) or {}).get(side) or []) if r.get("up")]
+            # Every edge size of 0%+, not just the ones that finished up (10/23/2026):
+            # counting only the winning sizes made every kind look better than it was.
+            ups = [r for r in ((((history or {}).get("markets") or {}).get(market) or {}).get(side) or []) if r.get("lo", -1) >= 0]
             if ups:
                 bw = sum(int(str(r["record"]).split("-")[0]) for r in ups)
                 bl = sum(int(str(r["record"]).split("-")[1]) for r in ups)
@@ -460,7 +462,8 @@ def build_prop_tracking(history, path: str = PROPS_TRACK_PATH, max_results: int 
         official = live.get("official")
         # Receptions unders (10/2026): plays and leans, each on its own line.
         return {"asOf": log.get("generated_at"), "overall": agg(plays), "official": official,
-                "underPlay": live.get("under_play"), "underLean": live.get("under_lean"), "byKind": by_kind,
+                "underPlay": live.get("under_play"), "underLean": live.get("under_lean"),
+                "recYdsPlay": live.get("rec_yds_play"), "rushUnderPlay": live.get("rush_under_play"), "byKind": by_kind,
                 "results": [slim(p) for p in results[:max_results]], "nResults": len(results),
                 "upcoming": [slim(p) for p in upcoming[:max_upcoming]], "nUpcoming": len(upcoming)}
     except Exception as e:
@@ -547,6 +550,22 @@ def build_prop_rules(path: str = PROPS_LAB3_PATH):
         out = {"rec_over": total([x.get("rule_under_30_edge") for x in sets]),
                "rec_under": total([b for x in sets for b in unders(x, {"30%+"})]),
                "rec_under_lean": total([b for x in sets for b in unders(x, {"10-14.9%", "15-19.9%", "20-29.9%"})])}
+        # 10/23/2026 official rules, from the edge history (this season's
+        # backtest weekends only -- no past-season lines for these markets).
+        try:
+            from src.analysis import prop_edge_history as peh
+            hist = (peh.build_history() or {}).get("markets") or {}
+
+            def from_hist(market, side, lo):
+                rows = [r for r in ((hist.get(market) or {}).get(side) or []) if r["lo"] >= lo]
+                t = total(rows)
+                if t:
+                    t["seasons"] = 1
+                return t
+            out["rec_yds_over"] = from_hist("Reception Yards", "over", 15)
+            out["rush_under"] = from_hist("Rush Yards", "under", 0)
+        except Exception as e:
+            print(f"  [note] new prop rules' backtest skipped ({e})")
         return {k: v for k, v in out.items() if v} or None
     except Exception as e:
         print(f"  [note] could not read {path} ({e}) -- receptions rules will show the single-season track record")
@@ -2506,7 +2525,7 @@ RENDERER_JS = """<script>
         '<b style="color:' + tone(o.units) + '">' + signed(o.units, 2) + 'u</b><span class="pp-rec-n">' + o.graded + ' graded</span></span>';
     };
     var strip = '<div class="pp-recline">' +
-      (T ? recBit('Official overs', T.official) + recBit('Official unders', T.underPlay) + recBit('Under leans', T.underLean) + recBit('All auto-tracked', T.overall) : '') +
+      (T ? recBit('Rec yds overs', T.recYdsPlay) + recBit('Rush yds unders', T.rushUnderPlay) + recBit('Rec unders', T.underPlay) + recBit('Rec overs (watch)', T.official) + recBit('All auto-tracked', T.overall) : '') +
       '<span class="pp-key"><b>Edge</b> is the model&rsquo;s hit chance against the price. <b>Track record</b> is how plays at that edge size did in the backtest.</span>' +
     '</div>';
 
@@ -2553,9 +2572,9 @@ RENDERER_JS = """<script>
     };
     var groups = [];   // {key, name, note, cap, rows}
     if (view === 'all') {
-      [['official', 'Official plays', 'Receptions overs with a 10% to 30% edge, and receptions unders with a 30%+ edge. The only props the rules call bets.', 0],
+      [['official', 'Official plays', 'Receiving yards overs with a 15%+ edge, rush yards unders with any edge, and receptions unders with a 30%+ edge. The only props the rules call bets.', 0],
        ['underlean', 'Under leans', 'Receptions unders with a 10% to 30% edge. Winners in all three seasons tested, by a thin margin. Graded on their own line.', 12],
-       ['watch', 'Watch', 'A 10%+ edge on a secondary-role player, or a receptions over capped at 30%+. Tracked, not bet.', 12],
+       ['watch', 'Watch', 'Receptions overs with a 10%+ edge, or a 10%+ edge on a secondary-role player. Tracked, not bet.', 12],
        ['tracked', 'Auto-tracked', 'Has an edge and its kind of play is up in the backtest. Logged and graded automatically.', 12],
        ['lean', 'Other leans', 'Everything else the model has a read on.', 20]].forEach(function (sec) {
         var list = shown.filter(function (r) { return r._sec === sec[0]; }).sort(byStrength);
@@ -2718,6 +2737,9 @@ RENDERER_JS = """<script>
           '<div class="pp-sub">' + esc(h.record) + ' at this edge size</div>';
       var flags = [];
       if (r.play_kind === 'rec_under') flags.push('<span class="pp-tag is-official" title="A receptions under with a 30%+ edge. An official play.">Under play</span>');
+      else if (r.play_kind === 'rec_yds_over') flags.push('<span class="pp-tag is-official" title="A receiving yards over with a 15%+ edge. An official play.">Rec yds play</span>');
+      else if (r.play_kind === 'rush_under') flags.push('<span class="pp-tag is-official" title="A rush yards under with an edge. An official play.">Rush under play</span>');
+      else if (r.play_kind === 'rec_over' && !r.is_official_play && !r.edge_capped) flags.push('<span class="pp-tag is-watch" title="A receptions over with a 10% to 30% edge. Watch only since 10/23/2026.">Rec over watch</span>');
       else if (r.is_under_lean) flags.push('<span class="pp-tag is-watch" title="A receptions under with a 10% to 30% edge. A lean, graded on its own line.">Under lean</span>');
       var mu = matchupOf(r);
       if (mu) flags.push('<span class="pp-tag ' + mu.cls + '" title="' + esc(mu.title) + '">' + mu.text + '</span>');
@@ -2806,7 +2828,7 @@ RENDERER_JS = """<script>
 
     // 5) The fine print, folded away until wanted.
     var help = '<details class="pp-help"><summary>How to read this page</summary><div class="pp-help-body">' +
-      '<p><b>Official</b> plays are the only props the rules call bets: receptions overs with a 10% to 30% edge, and receptions unders with a 30%+ edge, at the best price across books. ' +
+      '<p><b>Official</b> plays are the only props the rules call bets: receiving yards overs with a 15%+ edge, rush yards unders with any edge, and receptions unders with a 30%+ edge, at the best price across books. Receptions overs moved to Watch on 10/23/2026. ' +
         '<b>Under leans</b> are receptions unders with a 10% to 30% edge: they won in all three seasons tested, but by a thin margin, so they are graded on their own line. ' +
         'An under is a play or a lean by its edge at the best price right now, so it can move between the two; the record grades each one once, at the price and label it was first flagged with. ' +
         '<b>Watch</b> plays are logged to see whether they hold up, not bet. <b>All props</b> lists everything the model has a read on.</p>' +
@@ -3123,7 +3145,8 @@ RENDERER_JS = """<script>
       });
       // Official unders carry a tag (10/2026), so the tag filter in My Player
       // Props shows their record apart from the overs.
-      if (!isOver) items[0].tags = ['Rec under'];
+      var kindTag = { rec_under: 'Rec under', rec_yds_over: 'Rec yds over', rush_under: 'Rush under' }[r.play_kind];
+      if (kindTag) items[0].tags = [kindTag];
       known[sid] = true;
       added = true;
     });
@@ -4228,11 +4251,14 @@ RENDERER_JS = """<script>
           '<div class="num" style="color:var(--muted-3);font-size:10.5px">' + (bt ? sg(bt.roi, 0) + '% &middot; ' + sg(bt.units, 1) + 'u &middot; ' + esc(bt.record) : '&mdash;') + '</div>' +
         '</div></div>';
     };
-    var rules = '<div class="thead" style="display:grid;' + kc + 'margin-top:14px"><div>Receptions rule</div><div class="num">Record</div><div class="num">Units</div><div class="num">ROI</div><div class="num">Graded</div><div class="num">' +
-        (R.rec_over ? R.rec_over.seasons + '-season backtest' : 'Backtest') + '</div></div>' +
-      ruleRow('Official overs, 10% to 30% edge', T.official, R.rec_over) +
-      ruleRow('Official unders, 30%+ edge', T.underPlay, R.rec_under) +
-      ruleRow('Under leans, 10% to 30% edge', T.underLean, R.rec_under_lean);
+    var btLabel = function (bt) { return bt ? ' <span style="color:var(--muted-3);font-weight:400">(' + bt.seasons + ' season' + (bt.seasons === 1 ? '' : 's') + ')</span>' : ''; };
+    var rules = '<div class="thead" style="display:grid;' + kc + 'margin-top:14px"><div>Official rules</div><div class="num">Record</div><div class="num">Units</div><div class="num">ROI</div><div class="num">Graded</div><div class="num">Backtest</div></div>' +
+      ruleRow('Receiving yards overs, 15%+ edge' + btLabel(R.rec_yds_over), T.recYdsPlay, R.rec_yds_over) +
+      ruleRow('Rush yards unders, any edge' + btLabel(R.rush_under), T.rushUnderPlay, R.rush_under) +
+      ruleRow('Receptions unders, 30%+ edge' + btLabel(R.rec_under), T.underPlay, R.rec_under) +
+      '<div class="thead" style="display:grid;' + kc + 'margin-top:10px"><div>Watch rules</div><div></div><div></div><div></div><div></div><div></div></div>' +
+      ruleRow('Receptions overs, 10% to 30% edge' + btLabel(R.rec_over), T.official, R.rec_over) +
+      ruleRow('Receptions under leans, 10% to 30% edge' + btLabel(R.rec_under_lean), T.underLean, R.rec_under_lean);
     var kinds = '<div class="thead" style="display:grid;' + kc + 'margin-top:14px"><div>Kind of play</div><div class="num">Record</div><div class="num">Units</div><div class="num">ROI</div><div class="num">Upcoming</div><div class="num">Backtest</div></div>' +
       T.byKind.map(function (k) {
         var b = k.backtest;

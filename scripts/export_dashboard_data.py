@@ -1165,11 +1165,24 @@ def main(year: int):
     #     that exists to stop a losing group sliding back to Official, and
     #     both under tiers are winning groups. The line-movement log still
     #     grades each under once, at the price and tier it was FIRST flagged.
+    #   OFFICIAL LIST REVIEW (10/23/2026, docs: props-official-rules-review):
+    #     RECEIVING YARDS OVERS at a 15%+ edge -> OFFICIAL. Backtest 57-23
+    #       (+34%), live 38-18 (+27.5%), up every backtest weekend and both
+    #       live weeks. 0-15% edges were about break-even in both.
+    #     RUSH YARDS UNDERS at any 0%+ edge -> OFFICIAL. Backtest 142-99
+    #       (+9.8%), live 87-64 (+6.7%), no pattern by edge size.
+    #     RECEPTIONS OVERS 10-30% -> WATCH. Every-edge record by season:
+    #       2024 +4.7%, 2025 -2.3%, Sept 2026 +19.8%; live 27-26 (-4%). Still
+    #       logged and graded on their own line ("official" tag in the log,
+    #       kept for continuity).
     OFFICIAL_PROP_MARKET = "Receptions"
     OFFICIAL_PROP_SIDE = "over"
     UNDER_PLAY_MIN_EV = 30.0
     MIN_PROP_EV_FOR_TARGETS = 10.0
     MAX_OFFICIAL_PROP_EV = 30.0
+    REC_OVERS_OFFICIAL = False          # 10/23/2026: receptions overs 10-30% are Watch, not Official
+    REC_YDS_OVER_MIN_EV = 15.0          # receiving yards overs at this edge or more are Official
+    RUSH_UNDER_MIN_EV = 0.0             # rush yards unders at any non-negative edge are Official
     NEVER_WATCH_MARKETS = {"Pass Yards", "Pass Touchdowns", "Rush Touchdowns", "Reception Touchdowns",
                            "Pass Interceptions"}
     # Lines this small mean a low-usage player who often finishes at 0 --
@@ -1323,7 +1336,8 @@ def main(year: int):
         official = [p for p in candidates if not _is_capped(p)]
         capped = [p for p in candidates if _is_capped(p)]
         for p in official:
-            p["is_official_play"] = True
+            p["is_official_play"] = REC_OVERS_OFFICIAL
+            p["is_watch_play"] = not REC_OVERS_OFFICIAL
             p["play_kind"] = "rec_over"
         for p in capped:
             p["is_watch_play"] = True
@@ -1349,6 +1363,28 @@ def main(year: int):
             p["play_kind"] = "rec_under_lean"
         n_under_plays, n_under_leans = len(under_plays), len(under_leans)
 
+        # ---- Receiving yards overs and rush yards unders (10/23/2026 rules above) ----
+        rec_yds_plays = _best_per([p for p in props_out if _eligible(p)
+                                   and p.get("market_name") == "Reception Yards"
+                                   and p.get("model_lean") == "over"
+                                   and p["model_ev"] >= REC_YDS_OVER_MIN_EV],
+                                  lambda p: (p.get("fixture_id"), p.get("player_name")))
+        for p in rec_yds_plays:
+            p["is_official_play"] = True
+            p["is_watch_play"] = False
+            p["play_kind"] = "rec_yds_over"
+        rush_under_plays = _best_per([p for p in props_out
+                                      if p.get("model_ev") is not None and p["model_ev"] >= RUSH_UNDER_MIN_EV
+                                      and p.get("injury_status") not in BLOCKING_STATUSES
+                                      and p.get("market_name") == "Rush Yards"
+                                      and p.get("model_lean") == "under"
+                                      and _valid_price(p.get("under_price"))],
+                                     lambda p: (p.get("fixture_id"), p.get("player_name")))
+        for p in rush_under_plays:
+            p["is_official_play"] = True
+            p["is_watch_play"] = False
+            p["play_kind"] = "rush_under"
+
         # ---- Matchup label on every receptions prop (10/2026) ----
         try:
             from src.features.live_player_features import _normalize_name as _name_key
@@ -1358,21 +1394,24 @@ def main(year: int):
                 print(f"  {n_labelled} receptions prop line(s) given a matchup label")
         except Exception as e:
             print(f"  [warn] matchup labels skipped ({type(e).__name__}: {e})")
+        official_keys = {(p.get("fixture_id"), p.get("player_name"), p.get("market_name"))
+                         for p in props_out if p.get("is_official_play")}
         watch = _best_per([p for p in props_out if _eligible(p) and not p.get("is_official_play")
+                           and (p.get("fixture_id"), p.get("player_name"), p.get("market_name")) not in official_keys
                            and p.get("market_name") not in NEVER_WATCH_MARKETS
                            and p.get("market_name") != OFFICIAL_PROP_MARKET
                            and _role(p) == "secondary"],
                           lambda p: (p.get("fixture_id"), p.get("player_name"), p.get("market_name")))
         for p in watch:
             p["is_watch_play"] = True
-        n_props_official = len(official)
-        n_props_watch = len(watch) + len(capped)
+        n_props_official = (len(official) if REC_OVERS_OFFICIAL else 0) + len(rec_yds_plays) + len(rush_under_plays)
+        n_props_watch = len(watch) + len(capped) + (0 if REC_OVERS_OFFICIAL else len(official))
         if capped:
             print(f"  {len(capped)} receptions over(s) with a {MAX_OFFICIAL_PROP_EV:.0f}%+ edge moved from Official to Watch (edge cap)")
     if props_out:
         print(f"  {n_props_scored} of {len(props_out)} posted prop line(s) scored with a real model prediction "
-              f"({n_props_official} OFFICIAL: receptions overs at {MIN_PROP_EV_FOR_TARGETS:.0f}%+ and under "
-              f"{MAX_OFFICIAL_PROP_EV:.0f}% EV, best price; "
+              f"({n_props_official} OFFICIAL: receiving yards overs at {REC_YDS_OVER_MIN_EV:.0f}%+ EV and "
+              f"rush yards unders at {RUSH_UNDER_MIN_EV:.0f}%+ EV, best price; "
               f"{n_under_plays} OFFICIAL: receptions unders at {UNDER_PLAY_MIN_EV:.0f}%+ EV; "
               f"{n_under_leans} UNDER LEAN: receptions unders at {MIN_PROP_EV_FOR_TARGETS:.0f}% to {UNDER_PLAY_MIN_EV:.0f}% EV; "
               f"{n_props_watch} WATCH: secondary-role props at {MIN_PROP_EV_FOR_TARGETS:.0f}%+ EV -- "
