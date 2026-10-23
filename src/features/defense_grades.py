@@ -150,9 +150,13 @@ def pff_defense_grades(deff):
     return pd.DataFrame(out)
 
 
-def build_profiles(wide=None, recv=None, pgames=None, deff=None, school_of=None):
+def build_profiles(wide=None, recv=None, pgames=None, deff=None, school_of=None, pool=None):
     """{school: {"inputs": {name: value}, "scores": {key: {pct, rank, of}}}}
-    where key is rec_wr / rec_te / rec_rb / rush / pass."""
+    where key is rec_wr / rec_te / rec_rb / rush / pass. With `pool` (a
+    set of school names, e.g. FBS), only those defenses are scored and
+    ranked -- ranking FBS defenses against FCS ones made nearly every FBS
+    defense look tough (10/23/2026: the worst FBS run defense ranked 271st
+    of 316, so overs almost never graded well)."""
     school_of = school_of or {}
     inputs = {}
 
@@ -177,6 +181,10 @@ def build_profiles(wide=None, recv=None, pgames=None, deff=None, school_of=None)
     if not inputs:
         return {}
     table = pd.DataFrame.from_dict(inputs, orient="index")
+    if pool:
+        table = table[table.index.isin(pool)]
+        if table.empty:
+            return {}
     keys = {"rush": COMPONENTS["rush"], "pass": COMPONENTS["pass"]}
     for grp in mu.GROUPS:
         keys[f"rec_{grp}"] = [(n.format(g=grp), w, hi) for n, w, hi in COMPONENTS["rec"]]
@@ -201,7 +209,8 @@ def build_profiles(wide=None, recv=None, pgames=None, deff=None, school_of=None)
         rank = comp.rank(ascending=False, method="min").astype(int)
         for school in comp.index:
             scores.setdefault(school, {})[key] = {"pct": float(pct[school]), "rank": int(rank[school]), "of": int(len(comp))}
-    return {s: {"inputs": inputs.get(s, {}), "scores": scores.get(s, {})} for s in set(inputs) | set(scores)}
+    keep = set(table.index)
+    return {s: {"inputs": inputs.get(s, {}), "scores": scores.get(s, {})} for s in keep}
 
 
 def _pct_txt(ratio):
@@ -282,7 +291,7 @@ def fetch_pff_defense(season, weeks=None):
     return pd.concat(parts, ignore_index=True) if parts else pd.DataFrame()
 
 
-def live_profiles(season):
+def live_profiles(season, pool=None):
     """(profiles, status text). Uses the receiving rows, box scores and
     franchise -> school map the matchup labels just built (matchup.LAST),
     plus this season's PFF defense grades. Never raises."""
@@ -293,10 +302,10 @@ def live_profiles(season):
             deff = fetch_pff_defense(season)
         except Exception as e:
             note = f" (no PFF defense grades: {type(e).__name__})"
-        profiles = build_profiles(last.get("wide"), last.get("recv"), last.get("pgames"), deff, last.get("school"))
+        profiles = build_profiles(last.get("wide"), last.get("recv"), last.get("pgames"), deff, last.get("school"), pool=pool)
         if not profiles:
             return {}, "no matchup grades this run -- no defense numbers"
         n = sum(1 for v in profiles.values() if v["scores"])
-        return profiles, f"matchup grades for {n} defenses{note}"
+        return profiles, f"matchup grades for {n} {'FBS ' if pool else ''}defenses{note}"
     except Exception as e:
         return {}, f"no matchup grades this run ({type(e).__name__}: {e})"

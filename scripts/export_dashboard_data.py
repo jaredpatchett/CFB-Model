@@ -1101,7 +1101,8 @@ def main(year: int):
                     player_stats_long_current, schedule_df, season_year)
             print(f"  matchups: {props_matchups}")
             if defense_grades is not None:
-                grade_profiles, props_matchup_grades = defense_grades.live_profiles(season_year)
+                grade_profiles, props_matchup_grades = defense_grades.live_profiles(
+                    season_year, pool=set(teams_df["school"].dropna()) if "school" in teams_df.columns else None)
             print(f"  matchup grades: {props_matchup_grades}")
             n_ready = sum(1 for v in player_form.values() if v["games_played_prior"] >= MIN_GAMES_FOR_PROP_MODEL)
             print(f"  {len(player_form)} player(s) matched to real {season_year} stats, "
