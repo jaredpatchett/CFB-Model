@@ -1058,6 +1058,42 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .pp-trk:hover { border-color: var(--blue); color: var(--blue-light); }
 .pp-inlist { font-family: var(--font-display); font-weight: 700; font-size: 11.5px; letter-spacing: 0.04em; color: var(--blue-light); white-space: nowrap; padding: 0 4px; }
 .pp-lower { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; margin-top: 26px; align-items: start; }
+/* Sort & Filter panel on the Props tab (10/2026) */
+.pp-filter { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px 12px; margin: 0 0 14px; }
+.pp-ftop { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 12px; }
+.pp-ftitle { font-family: var(--font-display); font-weight: 800; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text); }
+.pp-fnote { font-size: 11.5px; color: var(--muted); }
+.pp-fbtns { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.pp-frow { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 18px; margin-top: 10px; }
+.pp-fgroup { display: flex; flex-direction: column; gap: 5px; }
+.pp-flabel { font-family: var(--font-display); font-weight: 700; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-2); }
+.pp-search { min-width: 220px; background: var(--chip); color: var(--text); border: 1px solid var(--rule-strong); border-radius: 5px; padding: 7px 10px; font-family: var(--font-data); font-size: 12.5px; }
+.pp-search:focus-visible, .pp-select:focus-visible { outline: 2px solid var(--blue-light); outline-offset: 1px; }
+.pp-chip .pp-cn { font-family: var(--font-data); font-weight: 400; font-size: 10.5px; opacity: 0.75; margin-left: 5px; }
+.pp-chip.is-dim { opacity: 0.45; }
+.pp-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
+.pp-mkt { display: inline-block; font-family: var(--font-display); font-weight: 800; font-size: 10.5px; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 3px; margin-right: 7px; vertical-align: 1px; white-space: nowrap; }
+.pp-mkt.is-rec, .pp-dot.is-rec { background: rgba(32,201,201,0.16); color: #3FD6D6; }
+.pp-mkt.is-rush, .pp-dot.is-rush { background: rgba(255,146,64,0.16); color: #FF9F5A; }
+.pp-mkt.is-pass, .pp-dot.is-pass { background: rgba(167,123,255,0.18); color: #B796FF; }
+.pp-mkt.is-other, .pp-dot.is-other { background: var(--chip); color: var(--muted); }
+.pp-dot.is-rec { background: #3FD6D6; } .pp-dot.is-rush { background: #FF9F5A; } .pp-dot.is-pass { background: #B796FF; } .pp-dot.is-other { background: var(--muted); }
+.pp-toggle { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 12.5px; color: var(--muted); background: transparent; border: 1px solid var(--rule-strong); border-radius: 5px; padding: 6px 11px; cursor: pointer; }
+.pp-toggle i { width: 26px; height: 14px; border-radius: 8px; background: var(--rule-strong); position: relative; }
+.pp-toggle i::after { content: ''; position: absolute; top: 2px; left: 2px; width: 10px; height: 10px; border-radius: 50%; background: #fff; transition: left 0.15s; }
+.pp-toggle.is-on { color: var(--blue-light); border-color: var(--blue); }
+.pp-toggle.is-on i { background: var(--blue); }
+.pp-toggle.is-on i::after { left: 14px; }
+.pp-btn { font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 0.04em; border-radius: 5px; padding: 7px 13px; cursor: pointer; border: 1px solid var(--rule-strong); background: transparent; color: var(--text-dim); }
+.pp-btn.is-primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+.pp-btn:focus-visible, .pp-toggle:focus-visible, .pp-sorth:focus-visible { outline: 2px solid var(--blue-light); outline-offset: 2px; }
+.pp-saved { font-size: 11.5px; color: var(--green); }
+.pp-sorth { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+.pp-sorth:hover, .pp-sorth.is-on { color: var(--blue-light); }
+.pp-sorth .pp-arr { font-size: 9px; opacity: 0.6; }
+.pp-sorth.is-on .pp-arr { opacity: 1; }
+.pp-who { display: flex; align-items: center; gap: 10px; }
+.pp-who .trk-logo, .pp-who svg { flex: none; }
 .pp-panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 16px 18px 14px; }
 .pp-panel h3 { font-family: var(--font-display); font-weight: 800; font-size: 17px; letter-spacing: 0.05em; text-transform: uppercase; margin: 0; }
 .pp-panel-note { font-size: 10.5px; color: var(--muted-3); margin: 5px 0 12px; line-height: 1.5; }
@@ -1545,7 +1581,16 @@ RENDERER_JS = """<script>
   var M = window.ModelMath;
   var MARKETS = ['Spread', 'Moneyline'];
 
-  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', edgeSort: 'kickoff', edgeShow: 'all', edgeConf: 'ALL', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate', propGame: 'ALL', propOfficialOnly: false, propShowPass: false, propView: 'official', propDetail: null };
+  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', edgeSort: 'kickoff', edgeShow: 'all', edgeConf: 'ALL', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate', propGame: 'ALL', propOfficialOnly: false, propShowPass: false, propView: 'official', propDetail: null,
+    propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propQ: '', propMyList: false };
+  // Props tab Sort & Filter preset (10/2026): saved per browser, applied on load.
+  var PROP_PRESET_KEY = 'cfb_props_preset_v1';
+  var PROP_PRESET_FIELDS = ['propView', 'propMarket', 'propGame', 'propSort', 'propSort2', 'propSortRev', 'propDir', 'propBook', 'propMinEdge', 'propMyList', 'propShowPass'];
+  var PROP_DEFAULTS = { propView: 'official', propMarket: 'ALL', propGame: 'ALL', propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propMyList: false, propShowPass: false };
+  try {
+    var pp0 = JSON.parse(localStorage.getItem(PROP_PRESET_KEY) || 'null');
+    if (pp0) PROP_PRESET_FIELDS.forEach(function (k) { if (pp0.hasOwnProperty(k)) state[k] = pp0[k]; });
+  } catch (e) {}
 
   var byName = {};
   D.teams.forEach(function (t) { byName[t.name] = t; });
@@ -2435,6 +2480,9 @@ RENDERER_JS = """<script>
     }
     // Best line per player + market + game, by the model's hit chance on its side.
     var best = {}, counts = {}, alts = {};
+    var bookKeys = {};
+    scored.forEach(function (r) { if (r.book_used) (bookKeys[r.book_used] = bookKeys[r.book_used] || {})[[r.fixture_id, r.player_name, r.market_name].join('|')] = 1; });
+    var bookSel = state.propBook && bookKeys[state.propBook] ? state.propBook : 'ALL';
     scored.forEach(function (r) {
       var isOver = r.model_lean === 'over';
       var price = isOver ? r.over_price : r.under_price;
@@ -2445,6 +2493,8 @@ RENDERER_JS = """<script>
       var key = [r.fixture_id, r.player_name, r.market_name].join('|');
       counts[key] = (counts[key] || 0) + 1;
       (alts[key] = alts[key] || []).push(r);
+      // Sportsbook filter (10/2026): the row shown is the best line on that book.
+      if (bookSel !== 'ALL' && r.book_used !== bookSel) return;
       var cur = best[key];
       var pri = function (x) { return x.is_official_play ? 2 : (x.is_watch_play ? 1 : 0); };
       if (!cur || pri(r) > pri(cur) || (pri(r) === pri(cur) && (r._lp || 0) > (cur._lp || 0))) best[key] = r;
@@ -2497,25 +2547,75 @@ RENDERER_JS = """<script>
     // click away. The Conf column and the High/Medium/Low tally are gone
     // (Check and Pass still show, as heads-up tags).
     var view = (state.propView === 'watch' || state.propView === 'all' || state.propView === 'underlean') ? state.propView : 'official';
-    var oneMarket = view === 'official' || view === 'underlean';   // receptions only: no market chips, every play listed
     var visible = function (r) { return state.propShowPass || r._conf.tier !== 'PASS' || r.is_official_play; };
-    var mktOn = oneMarket ? 'ALL' : mkt;
-    var shown = rows.filter(function (r) {
-      return (mktOn === 'ALL' || r.market_name === mktOn) &&
-        (gameSel === 'ALL' || r.fixture_id === gameSel) &&
-        (view === 'all' || r._sec === view) && visible(r);
-    });
-    var byKick = function (x, y) {
-      var a = x.start_time || '', b = y.start_time || '';
-      return a < b ? -1 : (a > b ? 1 : (y.model_ev || 0) - (x.model_ev || 0));
+
+    // ---- Sort & Filter (10/2026) ----
+    // Every filter applies in every view. Counts on each button are what
+    // that button would show with the other filters left as they are.
+    var myTrk = {};
+    // flaggedDesc: a play whose line you later changed in the tracker still
+    // counts as the same play here, under the line it was added at.
+    loadTrk().forEach(function (it) { if (it.type === 'Prop') { myTrk[it.description] = true; if (it.flaggedDesc) myTrk[it.flaggedDesc] = true; } });
+    var F = {
+      dir: state.propDir === 'over' || state.propDir === 'under' ? state.propDir : 'all',
+      minEdge: Number(state.propMinEdge) || 0,
+      q: String(state.propQ || '').trim().toLowerCase(),
+      mine: !!state.propMyList
     };
-    var byStrength = function (x, y) { return x._conf.rank - y._conf.rank || (y._lp || 0) - (x._lp || 0); };
+    var passes = function (r, skip) {
+      if (skip !== 'view' && view !== 'all' && r._sec !== view) return false;
+      if (skip !== 'market' && mkt !== 'ALL' && r.market_name !== mkt) return false;
+      if (skip !== 'game' && gameSel !== 'ALL' && r.fixture_id !== gameSel) return false;
+      if (skip !== 'dir' && F.dir !== 'all' && r.model_lean !== F.dir) return false;
+      if (skip !== 'edge' && F.minEdge && !(r.model_ev != null && r.model_ev >= F.minEdge)) return false;
+      if (F.q) {
+        var hay = [r.player_name, r.team, schoolAbbr(r.team), r.opponent, schoolAbbr(r.opponent)].join(' ').toLowerCase();
+        if (hay.indexOf(F.q) === -1) return false;
+      }
+      if (F.mine && !myTrk[propTrackLabel(r)]) return false;
+      return visible(r);
+    };
+    var countBy = function (skip, test) { var n = 0; rows.forEach(function (r) { if (passes(r, skip) && test(r)) n++; }); return n; };
+    var shown = rows.filter(function (r) { return passes(r); });
+
+    // Sorting: a main sort and a tiebreaker. Clicking a column header sets
+    // the main sort; clicking it again flips the direction.
+    var SORTS = [['kickoff', 'Kickoff'], ['edge', 'Highest edge'], ['hit', 'Hit chance'], ['roi', 'Track record ROI'], ['player', 'Player A-Z'], ['market', 'Market']];
+    var sortOk = function (k) { return SORTS.some(function (x) { return x[0] === k; }); };
+    var sort1 = sortOk(state.propSort) ? state.propSort : 'kickoff';
+    var sort2 = sortOk(state.propSort2) ? state.propSort2 : 'edge';
+    var trackRoi = function (r) {
+      var ru = (D.propRules || {})[r.play_kind];
+      if (ru) return ru.roi;
+      return r._h && !r._h.small ? r._h.roi : -1e9;
+    };
+    var num = function (x) { return x == null || isNaN(x) ? -1e9 : Number(x); };
+    var cmpOf = function (k) {
+      switch (k) {
+        case 'edge': return function (a, b) { return num(b.model_ev) - num(a.model_ev); };
+        case 'hit': return function (a, b) { return num(b._lp) - num(a._lp); };
+        case 'roi': return function (a, b) { return trackRoi(b) - trackRoi(a); };
+        case 'player': return function (a, b) { return String(a.player_name || '').localeCompare(String(b.player_name || '')); };
+        case 'market': return function (a, b) { return marketName(a.market_name).localeCompare(marketName(b.market_name)) || (a.model_lean < b.model_lean ? -1 : a.model_lean > b.model_lean ? 1 : 0); };
+        default: return function (a, b) { var x = a.start_time || '9', y = b.start_time || '9'; return x < y ? -1 : (x > y ? 1 : 0); };
+      }
+    };
+    var rev = state.propSortRev ? -1 : 1;
+    var c1 = cmpOf(sort1), c2 = cmpOf(sort2);
+    var cmp = function (a, b) { return rev * c1(a, b) || c2(a, b) || num(b.model_ev) - num(a.model_ev); };
+
+    // Prop type badge: color by family (receiving teal, rushing orange,
+    // passing purple) so the kind of prop reads at a glance.
+    var mktCat = function (m) { m = m || ''; return /pass/i.test(m) ? 'pass' : (/rush/i.test(m) ? 'rush' : (/recep/i.test(m) ? 'rec' : 'other')); };
+    var MKT_SHORT = { 'Receptions': 'REC', 'Reception Yards': 'REC YDS', 'Reception Touchdowns': 'REC TD', 'Rush Yards': 'RUSH YDS', 'Rush Attempts': 'RUSH ATT',
+      'Rush Touchdowns': 'RUSH TD', 'Pass Yards': 'PASS YDS', 'Pass Touchdowns': 'PASS TD', 'Pass Attempts': 'PASS ATT', 'Pass Completions': 'COMP', 'Pass Interceptions': 'INT' };
+    var mktBadge = function (m) { return '<span class="pp-mkt is-' + mktCat(m) + '">' + esc(MKT_SHORT[m] || marketName(m)) + '</span>'; };
 
     // Counts on the view buttons match what each view will actually list.
     var nSec = { official: 0, underlean: 0, watch: 0, tracked: 0, lean: 0 }, nPass = 0;
     rows.forEach(function (r) {
       if (r._conf.tier === 'PASS') nPass++;
-      if (visible(r)) nSec[r._sec]++;
+      if (passes(r, 'view')) nSec[r._sec]++;
     });
 
     // 1) Live record, one line, plus the key to the two numbers on each row.
@@ -2529,10 +2629,27 @@ RENDERER_JS = """<script>
       '<span class="pp-key"><b>Edge</b> is the model&rsquo;s hit chance against the price. <b>Track record</b> is how plays at that edge size did in the backtest.</span>' +
     '</div>';
 
-    // 2) Controls: which plays, which game, and (outside Official) which market.
+    // 2) Controls: which plays, then the Sort & Filter panel.
     var seg = function (i, key, label, n) {
       return '<button class="' + (view === key ? 'is-on' : '') + '" aria-pressed="' + (view === key ? 'true' : 'false') + '" onclick="window.__cfbPropView(' + i + ')">' + label + ' (' + n + ')</button>';
     };
+    var segOpt = function (field, value, cur, label, n) {
+      return '<button class="' + (cur === value ? 'is-on' : '') + '" aria-pressed="' + (cur === value ? 'true' : 'false') + '" data-prop-set="' + field + '" data-prop-val="' + esc(value) + '">' + label + (n != null ? ' (' + n + ')' : '') + '</button>';
+    };
+    var sortSel = function (field, cur) {
+      return '<select class="pp-select" data-prop-select="' + field + '" aria-label="' + (field === 'propSort' ? 'Sort by' : 'Then by') + '">' +
+        SORTS.map(function (x) { return '<option value="' + x[0] + '"' + (x[0] === cur ? ' selected' : '') + '>' + x[1] + '</option>'; }).join('') + '</select>';
+    };
+    var mktCounts = {};
+    rows.forEach(function (r) { if (passes(r, 'market')) mktCounts[r.market_name] = (mktCounts[r.market_name] || 0) + 1; });
+    var mktOrder = markets.slice(1).sort(function (a, b) {
+      var ca = ['rec', 'rush', 'pass', 'other'].indexOf(mktCat(a)), cb = ['rec', 'rush', 'pass', 'other'].indexOf(mktCat(b));
+      return ca - cb || marketName(a).localeCompare(marketName(b));
+    });
+    var nAllMkt = 0; Object.keys(mktCounts).forEach(function (k) { nAllMkt += mktCounts[k]; });
+    var books = Object.keys(bookKeys).sort(function (a, b) { return bookLabel(a).localeCompare(bookLabel(b)); });
+    var edgeOpt = function (v, label) { return segOpt('propMinEdge', String(v), String(F.minEdge), label, countBy('edge', function (r) { return !v || (r.model_ev != null && r.model_ev >= v); })); };
+    var nActive = (mkt !== 'ALL') + (gameSel !== 'ALL') + (F.dir !== 'all') + (bookSel !== 'ALL') + (F.minEdge > 0) + (F.q ? 1 : 0) + (F.mine ? 1 : 0);
     var controls = '<div class="pp-controls">' +
       '<div class="pp-seg" role="group" aria-label="Which plays to show">' +
         seg(0, 'official', 'Official', nSec.official) +
@@ -2540,15 +2657,48 @@ RENDERER_JS = """<script>
         seg(1, 'watch', 'Watch', nSec.watch) +
         seg(2, 'all', 'All props', nSec.official + nSec.underlean + nSec.watch + nSec.tracked + nSec.lean) +
       '</div>' +
-      '<select class="pp-select" aria-label="Game" onchange="window.__cfbPropGame(this.value)">' +
-        '<option value="ALL"' + (gameSel === 'ALL' ? ' selected' : '') + '>All games (' + gameIds.length + ')</option>' +
-        gameIds.map(function (id) { return '<option value="' + esc(id) + '"' + (gameSel === id ? ' selected' : '') + '>' + esc(games[id].label) + ', ' + esc(propKickoff(games[id].t)) + '</option>'; }).join('') +
-      '</select>' +
       (view === 'all' ? '<button class="pp-chip' + (state.propShowPass ? ' is-on' : '') + '" onclick="window.__cfbPropShowPass()">Show passes (' + nPass + ')</button>' : '') +
     '</div>' +
-    (oneMarket ? '' : '<div class="pp-chips">' + markets.map(function (m) {
-      return '<button class="pp-chip' + (m === mkt ? ' is-on' : '') + '" data-prop-market="' + esc(m) + '">' + (m === 'ALL' ? 'All markets' : esc(marketName(m))) + '</button>';
-    }).join('') + '</div>');
+    '<div class="pp-filter">' +
+      '<div class="pp-ftop"><span class="pp-ftitle">Sort &amp; Filter</span>' +
+        '<span class="pp-fnote">' + shown.length + ' prop' + (shown.length === 1 ? '' : 's') + ' shown' + (nActive ? ' &middot; ' + nActive + ' filter' + (nActive === 1 ? '' : 's') + ' on' : '') + '</span>' +
+        '<div class="pp-fbtns">' + (state.propPresetMsg ? '<span class="pp-saved">' + esc(state.propPresetMsg) + '</span>' : '') +
+          '<button class="pp-btn" onclick="window.__cfbPropReset()">Reset all</button>' +
+          '<button class="pp-btn is-primary" title="Open the Props tab with these filters and this sort every time, in this browser" onclick="window.__cfbPropSavePreset()">Save preset</button>' +
+        '</div></div>' +
+      '<div class="pp-frow">' +
+        '<div class="pp-fgroup"><span class="pp-flabel">Sort by</span><div style="display:flex;gap:6px">' + sortSel('propSort', sort1) +
+          '<button class="pp-btn" title="Flip the direction" aria-label="Flip sort direction" data-prop-flip="1">' + (state.propSortRev ? '&uarr;' : '&darr;') + '</button></div></div>' +
+        '<div class="pp-fgroup"><span class="pp-flabel">Then by</span>' + sortSel('propSort2', sort2) + '</div>' +
+        '<div class="pp-fgroup"><span class="pp-flabel">Player or team</span><input id="pp-search" class="pp-search" type="search" placeholder="e.g. Jeanty, BSU" autocomplete="off" value="' + esc(state.propQ || '') + '" oninput="window.__cfbPropQ(this.value)"></div>' +
+      '</div>' +
+      '<div class="pp-frow"><div class="pp-fgroup"><span class="pp-flabel">Market</span><div class="pp-chips" style="margin:0">' +
+        '<button class="pp-chip' + (mkt === 'ALL' ? ' is-on' : '') + '" data-prop-market="ALL">All markets<span class="pp-cn">' + nAllMkt + '</span></button>' +
+        mktOrder.map(function (m) {
+          var n = mktCounts[m] || 0;
+          return '<button class="pp-chip' + (m === mkt ? ' is-on' : '') + (n ? '' : ' is-dim') + '" data-prop-market="' + esc(m) + '"><span class="pp-dot is-' + mktCat(m) + '"></span>' + esc(marketName(m)) + '<span class="pp-cn">' + n + '</span></button>';
+        }).join('') +
+      '</div></div></div>' +
+      '<div class="pp-frow">' +
+        '<div class="pp-fgroup"><span class="pp-flabel">Direction</span><div class="pp-seg" role="group" aria-label="Direction">' +
+          segOpt('propDir', 'all', F.dir, 'All') +
+          segOpt('propDir', 'over', F.dir, 'Overs', countBy('dir', function (r) { return r.model_lean === 'over'; })) +
+          segOpt('propDir', 'under', F.dir, 'Unders', countBy('dir', function (r) { return r.model_lean === 'under'; })) +
+        '</div></div>' +
+        '<div class="pp-fgroup"><span class="pp-flabel">Min edge</span><div class="pp-seg" role="group" aria-label="Minimum edge">' +
+          edgeOpt(0, 'Any') + edgeOpt(10, '10%+') + edgeOpt(15, '15%+') + edgeOpt(20, '20%+') + edgeOpt(30, '30%+') +
+        '</div></div>' +
+        '<div class="pp-fgroup"><span class="pp-flabel">Sportsbook</span><select class="pp-select" data-prop-select="propBook" aria-label="Sportsbook">' +
+          '<option value="ALL"' + (bookSel === 'ALL' ? ' selected' : '') + '>All books (best price)</option>' +
+          books.map(function (b) { return '<option value="' + esc(b) + '"' + (bookSel === b ? ' selected' : '') + '>' + esc(bookLabel(b)) + ' (' + Object.keys(bookKeys[b]).length + ')</option>'; }).join('') +
+        '</select></div>' +
+        '<div class="pp-fgroup"><span class="pp-flabel">Game</span><select class="pp-select" aria-label="Game" onchange="window.__cfbPropGame(this.value)">' +
+          '<option value="ALL"' + (gameSel === 'ALL' ? ' selected' : '') + '>All games (' + gameIds.length + ')</option>' +
+          gameIds.map(function (id) { return '<option value="' + esc(id) + '"' + (gameSel === id ? ' selected' : '') + '>' + esc(games[id].label) + ', ' + esc(propKickoff(games[id].t)) + '</option>'; }).join('') +
+        '</select></div>' +
+        '<div class="pp-fgroup"><span class="pp-flabel">&nbsp;</span><button class="pp-toggle' + (F.mine ? ' is-on' : '') + '" aria-pressed="' + (F.mine ? 'true' : 'false') + '" data-prop-set="propMyList" data-prop-val="' + (F.mine ? '' : '1') + '">&#9733; My list only <i></i></button></div>' +
+      '</div>' +
+    '</div>';
 
     // 3) The plays. Official and Watch are grouped by kickoff day (soonest
     // first); All props keeps the status groups.
@@ -2571,31 +2721,31 @@ RENDERER_JS = """<script>
       return ((h % 12) || 12) + ':' + pad2(m) + ' ' + (h < 12 ? 'AM' : 'PM');
     };
     var groups = [];   // {key, name, note, cap, rows}
-    if (view === 'all') {
+    if (sort1 !== 'kickoff') {
+      // Any sort other than kickoff: one flat list in that order.
+      var sname = SORTS.filter(function (x) { return x[0] === sort1; })[0][1];
+      if (shown.length) groups.push({ key: 'sorted|' + view + '|' + sort1, name: 'Sorted by ' + sname + (state.propSortRev ? ' (reversed)' : ''), note: '', cap: 60, rows: shown.slice().sort(cmp) });
+    } else if (view === 'all') {
       [['official', 'Official plays', 'Receiving yards overs with a 15%+ edge, rush yards unders with any edge, and receptions unders with a 30%+ edge. The only props the rules call bets.', 0],
        ['underlean', 'Under leans', 'Receptions unders with a 10% to 30% edge. Winners in all three seasons tested, by a thin margin. Graded on their own line.', 12],
        ['watch', 'Watch', 'Receptions overs with a 10%+ edge, or a 10%+ edge on a secondary-role player. Tracked, not bet.', 12],
        ['tracked', 'Auto-tracked', 'Has an edge and its kind of play is up in the backtest. Logged and graded automatically.', 12],
        ['lean', 'Other leans', 'Everything else the model has a read on.', 20]].forEach(function (sec) {
-        var list = shown.filter(function (r) { return r._sec === sec[0]; }).sort(byStrength);
+        var list = shown.filter(function (r) { return r._sec === sec[0]; }).sort(cmp);
         if (list.length) groups.push({ key: 'all|' + sec[0], name: sec[1], note: sec[2], cap: sec[3], rows: list });
       });
     } else {
       var byDay = {};
       shown.forEach(function (r) { var k = dayKey(r.start_time); (byDay[k] = byDay[k] || []).push(r); });
-      Object.keys(byDay).sort().forEach(function (k) {
-        var list = byDay[k].sort(oneMarket ? byKick : byStrength);
-        groups.push({ key: view + '|' + k, name: dayLabel(list[0].start_time), note: '', cap: oneMarket ? 0 : 12, rows: list });
+      Object.keys(byDay).sort(function (a, b) { return rev * (a < b ? -1 : a > b ? 1 : 0); }).forEach(function (k) {
+        var list = byDay[k].sort(cmp);
+        groups.push({ key: view + '|' + k, name: dayLabel(list[0].start_time), note: '', cap: view === 'official' || view === 'underlean' ? 0 : 30, rows: list });
       });
     }
     var ordered = [];
     groups.forEach(function (g) { g.start = ordered.length; ordered = ordered.concat(g.rows); });
     window.__cfbPropRows = ordered;
 
-    var myTrk = {};
-    // flaggedDesc: a play whose line you later changed in the tracker still
-    // counts as the same play here, under the line it was added at.
-    loadTrk().forEach(function (it) { if (it.type === 'Prop') { myTrk[it.description] = true; if (it.flaggedDesc) myTrk[it.flaggedDesc] = true; } });
     var keyOf = function (r) { return [r.fixture_id, r.player_name, r.market_name].join('|'); };
     var nowMs = Date.now();
     var priceTxt = function (x) { return x == null || isNaN(x) ? 'no price' : (x > 0 ? '+' : '') + Number(x); };
@@ -2749,9 +2899,9 @@ RENDERER_JS = """<script>
       if (r._conf.tier === 'PASS') flags.push('<span class="pp-tag is-pass" title="The price needs more than the model gives, or the player is out.">Pass</span>');
       if (started) flags.push('<span class="pp-tag is-lean" title="This game has kicked off.">Started</span>');
       return '<div class="pp-grid pp-row' + (isOpen ? ' is-open' : '') + '">' +
-        '<div><div class="pp-name">' + esc(r.player_name) + '</div>' +
-          '<div class="pp-sub">' + esc(schoolAbbr(r.team) || '') + (r.opponent ? ' vs ' + esc(schoolAbbr(r.opponent)) : '') + ' &middot; ' + esc(withDay ? propKickoff(r.start_time) : kickTime(r.start_time)) + '</div></div>' +
-        '<div><div class="pp-pick">' + esc(marketName(r.market_name)) + ' <b>' + (isOver ? 'Over' : 'Under') + ' ' + esc(r.line) + '</b></div>' +
+        '<div class="pp-who">' + (r.team ? trkMark(schoolAbbr(r.team), 28) : '') + '<div><div class="pp-name">' + esc(r.player_name) + '</div>' +
+          '<div class="pp-sub">' + esc(schoolAbbr(r.team) || '') + (r.opponent ? ' vs ' + esc(schoolAbbr(r.opponent)) : '') + ' &middot; ' + esc(withDay ? propKickoff(r.start_time) : kickTime(r.start_time)) + '</div></div></div>' +
+        '<div><div class="pp-pick">' + mktBadge(r.market_name) + esc(marketName(r.market_name)) + ' <b>' + (isOver ? 'Over' : 'Under') + ' ' + esc(r.line) + '</b></div>' +
           '<div class="pp-sub">' + priceTxt(r._price) + (r.book_used ? ' &middot; ' + esc(bookLabel(r.book_used)) : '') + '</div></div>' +
         '<div><div class="pp-edge" style="color:' + (r.model_ev != null ? tone(r.model_ev) : 'var(--muted-3)') + '">' + (r.model_ev != null ? signed(r.model_ev, 1) + '%' : '&mdash;') + '</div>' +
           '<div class="pp-sub">' + (r._lp != null ? (r._lp * 100).toFixed(0) + '%' : '&mdash;') + ' vs ' + (r._be != null ? (r._be * 100).toFixed(0) + '%' : '&mdash;') + ' needed</div></div>' +
@@ -2769,18 +2919,22 @@ RENDERER_JS = """<script>
     // short; one click opens them.
     var open = state.propOpen || {};
     var body = groups.map(function (g) {
-      var list = g.rows.map(function (r, j) { return rowHtml(r, g.start + j, view === 'all'); });
+      var list = g.rows.map(function (r, j) { return rowHtml(r, g.start + j, view === 'all' || sort1 !== 'kickoff'); });
       var folded = g.cap && list.length > g.cap && !open[g.key];
       return '<div class="pp-group"><span class="pp-group-name">' + esc(g.name) + '</span><span class="pp-group-count">' + list.length + '</span>' +
         (g.note ? '<span class="pp-group-note">' + g.note + '</span>' : '') + '</div>' + (folded ? list.slice(0, g.cap) : list).join('') +
         (g.cap && list.length > g.cap ? '<div class="pp-more"><button class="pp-link" data-prop-fold="' + esc(g.key) + '">' +
           (folded ? 'Show all ' + list.length : 'Show top ' + g.cap + ' only') + '</button></div>' : '');
     }).join('');
-    var emptyMsg = view === 'official' ? 'No official plays right now. Under leans, Watch and All props show everything else the model has a read on.'
+    var emptyMsg = nActive ? 'No plays match these filters. Loosen one, or hit Reset all.'
+      : view === 'official' ? 'No official plays right now. Under leans, Watch and All props show everything else the model has a read on.'
       : view === 'underlean' ? 'No under leans right now. They are receptions unders with a 10% to 30% edge.'
-      : 'No plays match these filters. Try another market or game.';
+      : 'No plays match these filters. Loosen one, or hit Reset all.';
     var table = '<div class="pp-table">' +
-      '<div class="pp-grid pp-head"><div>Player</div><div>Pick</div><div>Edge</div><div>Track record</div><div>Heads up</div><div></div></div>' +
+      '<div class="pp-grid pp-head">' + [['player', 'Player'], ['market', 'Pick'], ['edge', 'Edge'], ['roi', 'Track record']].map(function (c) {
+        var on = sort1 === c[0];
+        return '<div><button class="pp-sorth' + (on ? ' is-on' : '') + '" data-prop-sorth="' + c[0] + '" title="Sort by ' + c[1] + '">' + c[1] + ' <span class="pp-arr">' + (on ? (state.propSortRev ? '&#9650;' : '&#9660;') : '&#8597;') + '</span></button></div>';
+      }).join('') + '<div>Heads up</div><div></div></div>' +
       (body || '<div class="empty-state" style="border:none">' + emptyMsg + '</div>') +
     '</div>';
 
@@ -2846,6 +3000,9 @@ RENDERER_JS = """<script>
       '<p><b>Details</b> opens the projection, games played, share of the team&rsquo;s catches or carries, the price when the play was first logged, and the player&rsquo;s numbers by game. ' +
         'The model already counts those games, so a good run there is not extra evidence. ' +
         '<b>Try another line</b>, in the same panel, gives the model&rsquo;s hit chance and edge at any line and price you type, for when your book has a different number.</p>' +
+      '<p><b>Sort &amp; Filter</b> works in every view. Kickoff order groups plays by day; any other sort lists them in one run (click a column header to sort by it, again to flip it). ' +
+        '<b>Sportsbook</b> shows each prop at that book&rsquo;s line, so the edge is the one you can actually bet there. The colored tag on each pick is the kind of prop: teal receiving, orange rushing, purple passing. ' +
+        '<b>Save preset</b> opens the tab with your filters and sort every time, in this browser.</p>' +
       '<p><b>+ My list</b> adds any play to your own list in My Tracker. Kickoff times are in your own time zone.</p>' +
     '</div></details>';
 
@@ -4516,7 +4673,19 @@ RENDERER_JS = """<script>
   // renderKeep, not render: redrawing the page rebuilt the search box too,
   // so the cursor fell out of it after every single letter typed.
   window.__cfbSearch = function (v) { state.search = v; renderKeep(); };
-  window.__cfbPropGame = function (v) { state.propGame = v; render(); };
+  window.__cfbPropGame = function (v) { state.propGame = v; state.propPresetMsg = ''; render(); };
+  window.__cfbPropQ = function (v) { state.propQ = v; state.propPresetMsg = ''; renderKeep(); };
+  window.__cfbPropReset = function () {
+    Object.keys(PROP_DEFAULTS).forEach(function (k) { state[k] = PROP_DEFAULTS[k]; });
+    state.propQ = ''; state.propPresetMsg = ''; render();
+  };
+  window.__cfbPropSavePreset = function () {
+    var o = {};
+    PROP_PRESET_FIELDS.forEach(function (k) { o[k] = state[k]; });
+    try { localStorage.setItem(PROP_PRESET_KEY, JSON.stringify(o)); state.propPresetMsg = 'Preset saved'; }
+    catch (e) { state.propPresetMsg = 'Could not save in this browser'; }
+    render();
+  };
   window.__cfbPropOfficial = function () { state.propOfficialOnly = !state.propOfficialOnly; render(); };
   window.__cfbPropShowPass = function () { state.propShowPass = !state.propShowPass; render(); };
   window.__cfbPropView = function (i) { state.propView = ['official', 'watch', 'all', 'underlean'][i] || 'official'; render(); };
@@ -4577,7 +4746,21 @@ RENDERER_JS = """<script>
     if (m) { state.market = m.dataset.market; return render(); }
     if (e.target.closest('[data-edge-clear]')) { state.edgeShow = 'all'; state.edgeConf = 'ALL'; state.search = ''; return render(); }
     var pm = e.target.closest('[data-prop-market]');
-    if (pm) { state.propMarket = pm.dataset.propMarket; return render(); }
+    if (pm) { state.propMarket = pm.dataset.propMarket; state.propPresetMsg = ''; return render(); }
+    var ps = e.target.closest('[data-prop-set]');
+    if (ps) {
+      var f = ps.dataset.propSet, v = ps.dataset.propVal;
+      state[f] = f === 'propMinEdge' ? Number(v) || 0 : (f === 'propMyList' ? !!v : v);
+      state.propPresetMsg = ''; return render();
+    }
+    var sh = e.target.closest('[data-prop-sorth]');
+    if (sh) {
+      var k = sh.dataset.propSorth;
+      if (state.propSort === k) state.propSortRev = !state.propSortRev;
+      else { state.propSort = k; state.propSortRev = false; }
+      state.propPresetMsg = ''; return render();
+    }
+    if (e.target.closest('[data-prop-flip]')) { state.propSortRev = !state.propSortRev; state.propPresetMsg = ''; return render(); }
     var pf = e.target.closest('[data-prop-fold]');
     if (pf) { state.propOpen = state.propOpen || {}; state.propOpen[pf.dataset.propFold] = !state.propOpen[pf.dataset.propFold]; return render(); }
     var us = e.target.closest('[data-unit-size]');
@@ -4592,6 +4775,12 @@ RENDERER_JS = """<script>
   document.addEventListener('change', function (e) {
     var k = e.target && e.target.dataset && e.target.dataset.edgeFilter;
     if (k === 'edgeSort' || k === 'edgeShow' || k === 'edgeConf') { state[k] = e.target.value; render(); }
+    var pk = e.target && e.target.dataset && e.target.dataset.propSelect;
+    if (pk === 'propSort' || pk === 'propSort2' || pk === 'propBook') {
+      state[pk] = e.target.value;
+      if (pk === 'propSort') state.propSortRev = false;
+      state.propPresetMsg = ''; render();
+    }
   });
 
   seedTrackerIfMissing();
