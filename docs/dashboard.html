@@ -408,9 +408,17 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .pp-chip { font-family: var(--font-display); font-weight: 700; font-size: 12.5px; letter-spacing: 0.03em; background: var(--chip); color: var(--muted); border: 1px solid transparent; border-radius: 5px; padding: 5px 12px; cursor: pointer; }
 .pp-chip.is-on { background: rgba(46,123,255,0.16); color: var(--blue-light); border-color: var(--blue); }
 .pp-table { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; overflow-x: auto; }
-.pp-grid { display: grid; grid-template-columns: minmax(190px, 1.4fr) minmax(190px, 1.2fr) minmax(150px, 0.9fr) minmax(170px, 1.1fr) minmax(120px, 0.8fr) 190px; align-items: center; column-gap: 16px; min-width: 1040px; }
+.pp-grid { display: grid; grid-template-columns: minmax(190px, 1.4fr) minmax(190px, 1.2fr) minmax(130px, 0.8fr) minmax(120px, 0.75fr) minmax(170px, 1.1fr) minmax(120px, 0.8fr) 190px; align-items: center; column-gap: 16px; min-width: 1180px; }
+.pp-mu { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; font-family: var(--font-display); font-weight: 800; font-size: 15px; padding: 3px 8px; border-radius: 4px; border: 1px solid currentColor; }
+.pp-mu.is-a { color: var(--green); background: rgba(23,194,107,0.12); }
+.pp-mu.is-b { color: #8FD694; background: rgba(143,214,148,0.10); }
+.pp-mu.is-c { color: var(--muted); background: var(--chip); border-color: var(--rule-strong); }
+.pp-mu.is-d { color: var(--amber); background: rgba(224,180,74,0.12); }
+.pp-mu.is-f { color: var(--salmon); background: rgba(255,82,82,0.12); }
+.pp-mu-list { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 5px; font-size: 12.5px; color: var(--text-dim); }
+.pp-mu-list b { font-weight: 700; }
 .pp-head { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-2); padding: 11px 18px; border-bottom: 1px solid var(--rule); }
-.pp-group { display: flex; align-items: baseline; gap: 10px; padding: 12px 18px 9px; background: var(--panel-deep); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); min-width: 1040px; }
+.pp-group { display: flex; align-items: baseline; gap: 10px; padding: 12px 18px 9px; background: var(--panel-deep); border-bottom: 1px solid var(--rule); border-top: 1px solid var(--rule); min-width: 1180px; }
 .pp-table > .pp-group:first-of-type { border-top: none; }
 .pp-group-name { font-family: var(--font-display); font-weight: 800; font-size: 15px; letter-spacing: 0.05em; text-transform: uppercase; }
 .pp-group-count { font-family: var(--font-data); font-size: 11px; color: var(--muted); background: var(--chip); border-radius: 10px; padding: 1px 8px; }
@@ -447,7 +455,7 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .pp-wi-edge { font-weight: 700; font-size: 15px; }
 .pp-wi-note { font-size: 11.5px; color: var(--muted); }
 .pp-wi-posted { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; }
-.pp-more { padding: 10px 18px; border-bottom: 1px solid var(--rule-row); min-width: 1040px; }
+.pp-more { padding: 10px 18px; border-bottom: 1px solid var(--rule-row); min-width: 1180px; }
 .pp-more .pp-link { margin-top: 0; }
 .pp-tag { font-family: var(--font-display); font-weight: 800; font-size: 11px; letter-spacing: 0.07em; padding: 3px 9px; border-radius: 4px; }
 .pp-tag.is-official { background: rgba(23,194,107,0.16); color: var(--green); }
@@ -954,8 +962,8 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propQ: '', propMyList: false };
   // Props tab Sort & Filter preset (10/2026): saved per browser, applied on load.
   var PROP_PRESET_KEY = 'cfb_props_preset_v1';
-  var PROP_PRESET_FIELDS = ['propView', 'propMarket', 'propGame', 'propSort', 'propSort2', 'propSortRev', 'propDir', 'propBook', 'propMinEdge', 'propMyList', 'propShowPass'];
-  var PROP_DEFAULTS = { propView: 'official', propMarket: 'ALL', propGame: 'ALL', propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propMyList: false, propShowPass: false };
+  var PROP_PRESET_FIELDS = ['propView', 'propMarket', 'propGame', 'propSort', 'propSort2', 'propSortRev', 'propDir', 'propBook', 'propMinEdge', 'propMyList', 'propShowPass', 'propMinMu'];
+  var PROP_DEFAULTS = { propView: 'official', propMarket: 'ALL', propGame: 'ALL', propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propMyList: false, propShowPass: false, propMinMu: 0 };
   try {
     var pp0 = JSON.parse(localStorage.getItem(PROP_PRESET_KEY) || 'null');
     if (pp0) PROP_PRESET_FIELDS.forEach(function (k) { if (pp0.hasOwnProperty(k)) state[k] = pp0[k]; });
@@ -1929,7 +1937,8 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       dir: state.propDir === 'over' || state.propDir === 'under' ? state.propDir : 'all',
       minEdge: Number(state.propMinEdge) || 0,
       q: String(state.propQ || '').trim().toLowerCase(),
-      mine: !!state.propMyList
+      mine: !!state.propMyList,
+      minMu: Number(state.propMinMu) || 0
     };
     var passes = function (r, skip) {
       if (skip !== 'view' && view !== 'all' && r._sec !== view) return false;
@@ -1942,6 +1951,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
         if (hay.indexOf(F.q) === -1) return false;
       }
       if (F.mine && !myTrk[propTrackLabel(r)]) return false;
+      if (skip !== 'mu' && F.minMu && !(r.mu_score != null && r.mu_score >= F.minMu)) return false;
       return visible(r);
     };
     var countBy = function (skip, test) { var n = 0; rows.forEach(function (r) { if (passes(r, skip) && test(r)) n++; }); return n; };
@@ -1949,7 +1959,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
 
     // Sorting: a main sort and a tiebreaker. Clicking a column header sets
     // the main sort; clicking it again flips the direction.
-    var SORTS = [['kickoff', 'Kickoff'], ['edge', 'Highest edge'], ['hit', 'Hit chance'], ['roi', 'Track record ROI'], ['player', 'Player A-Z'], ['market', 'Market']];
+    var SORTS = [['kickoff', 'Kickoff'], ['edge', 'Highest edge'], ['hit', 'Hit chance'], ['roi', 'Track record ROI'], ['matchup', 'Matchup grade'], ['player', 'Player A-Z'], ['market', 'Market']];
     var sortOk = function (k) { return SORTS.some(function (x) { return x[0] === k; }); };
     var sort1 = sortOk(state.propSort) ? state.propSort : 'kickoff';
     var sort2 = sortOk(state.propSort2) ? state.propSort2 : 'edge';
@@ -1964,6 +1974,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
         case 'edge': return function (a, b) { return num(b.model_ev) - num(a.model_ev); };
         case 'hit': return function (a, b) { return num(b._lp) - num(a._lp); };
         case 'roi': return function (a, b) { return trackRoi(b) - trackRoi(a); };
+        case 'matchup': return function (a, b) { return num(b.mu_score) - num(a.mu_score); };
         case 'player': return function (a, b) { return String(a.player_name || '').localeCompare(String(b.player_name || '')); };
         case 'market': return function (a, b) { return marketName(a.market_name).localeCompare(marketName(b.market_name)) || (a.model_lean < b.model_lean ? -1 : a.model_lean > b.model_lean ? 1 : 0); };
         default: return function (a, b) { var x = a.start_time || '9', y = b.start_time || '9'; return x < y ? -1 : (x > y ? 1 : 0); };
@@ -2018,7 +2029,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     var nAllMkt = 0; Object.keys(mktCounts).forEach(function (k) { nAllMkt += mktCounts[k]; });
     var books = Object.keys(bookKeys).sort(function (a, b) { return bookLabel(a).localeCompare(bookLabel(b)); });
     var edgeOpt = function (v, label) { return segOpt('propMinEdge', String(v), String(F.minEdge), label, countBy('edge', function (r) { return !v || (r.model_ev != null && r.model_ev >= v); })); };
-    var nActive = (mkt !== 'ALL') + (gameSel !== 'ALL') + (F.dir !== 'all') + (bookSel !== 'ALL') + (F.minEdge > 0) + (F.q ? 1 : 0) + (F.mine ? 1 : 0);
+    var nActive = (mkt !== 'ALL') + (gameSel !== 'ALL') + (F.dir !== 'all') + (bookSel !== 'ALL') + (F.minEdge > 0) + (F.q ? 1 : 0) + (F.mine ? 1 : 0) + (F.minMu > 0);
     var controls = '<div class="pp-controls">' +
       '<div class="pp-seg" role="group" aria-label="Which plays to show">' +
         seg(0, 'official', 'Official', nSec.official) +
@@ -2056,6 +2067,11 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
         '</div></div>' +
         '<div class="pp-fgroup"><span class="pp-flabel">Min edge</span><div class="pp-seg" role="group" aria-label="Minimum edge">' +
           edgeOpt(0, 'Any') + edgeOpt(10, '10%+') + edgeOpt(15, '15%+') + edgeOpt(20, '20%+') + edgeOpt(30, '30%+') +
+        '</div></div>' +
+        '<div class="pp-fgroup"><span class="pp-flabel">Matchup grade</span><div class="pp-seg" role="group" aria-label="Minimum matchup grade">' +
+          [[0, 'Any'], [60, 'B or better'], [80, 'A or better']].map(function (o) {
+            return segOpt('propMinMu', String(o[0]), String(F.minMu), o[1], countBy('mu', function (r) { return !o[0] || (r.mu_score != null && r.mu_score >= o[0]); }));
+          }).join('') +
         '</div></div>' +
         '<div class="pp-fgroup"><span class="pp-flabel">Sportsbook</span><select class="pp-select" data-prop-select="propBook" aria-label="Sportsbook">' +
           '<option value="ALL"' + (bookSel === 'ALL' ? ' selected' : '') + '>All books (best price)</option>' +
@@ -2211,6 +2227,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       var muD = matchupOf(r);
       if (muD) cells.push(dcell('Matchup', esc(muD.label), esc(muD.title)));
       else if (r.market_name === 'Receptions' && r.matchup === 'average') cells.push(dcell('Matchup', 'Average defense against ' + (MATCHUP_GROUPS[r.matchup_vs] || 'his position'), 'It has allowed about what its opponents usually get.'));
+      if (r.mu_grade) cells.push(muDetail(r));
       cells.push(whatIfCell(r));
       return '<div class="pp-detail">' + cells.join('') + '</div>';
     };
@@ -2238,6 +2255,34 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       return { kind: against ? 'against' : 'plain', cls: 'is-lean', text: name, label: (tough ? 'Tough' : 'Soft') + ' defense against ' + (MATCHUP_GROUPS[r.matchup_vs] || 'his position'),
         title: what + (against ? ' That goes against this pick.' + (over ? ' Official overs against tough defenses went 79-72 over three seasons.' : ' Unders with a 10%+ edge against soft defenses went 160-132 over three seasons.')
                                : ' The edge here is under 10%, below where the matchup was tested.') };
+    };
+    // Matchup grade (10/2026, src/features/defense_grades.py): how the
+    // opposing defense rates against what this pick needs. A = the defense
+    // helps the pick (tough D for an under, soft D for an over). Context
+    // only -- not part of the edge or the official rules.
+    var ordinal = function (n) { var s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); };
+    var muCls = function (g) { return 'is-' + String(g || 'c').charAt(0).toLowerCase(); };
+    var muTitle = function (r) {
+      return (r.mu_def === 'tough' ? 'Tough' : r.mu_def === 'soft' ? 'Soft' : 'Average') + ' defense vs ' + r.mu_vs + ': ' + ordinal(r.mu_rank) + ' of ' + r.mu_of +
+        ' (1st = toughest). Grade ' + r.mu_grade + ' for this ' + (r.model_lean === 'over' ? 'over' : 'under') + ' (' + r.mu_score + '/100).';
+    };
+    var muCell = function (r) {
+      if (!r.mu_grade) return '<span class="pp-track is-none">&mdash;</span>';
+      return '<span class="pp-mu ' + muCls(r.mu_grade) + '" title="' + esc(muTitle(r)) + '">' + esc(r.mu_grade) + '</span>' +
+        '<div class="pp-sub">D ' + ordinal(r.mu_rank) + ' vs ' + esc(r.mu_vs) + '</div>';
+    };
+    var muDetail = function (r) {
+      if (!r.mu_grade) return '';
+      var bits = [];
+      Object.keys(r.mu_allowed || {}).forEach(function (k) {
+        var v = r.mu_allowed[k];
+        bits.push('<span>Allows <b style="color:' + (v > 0 ? 'var(--salmon)' : v < 0 ? 'var(--green)' : 'var(--muted)') + '">' + (v > 0 ? '+' : '') + v + '%</b> ' + esc(k) + ' vs usual</span>');
+      });
+      Object.keys(r.mu_pff || {}).forEach(function (k) { bits.push('<span>PFF ' + esc(k) + ' <b>' + Number(r.mu_pff[k]).toFixed(1) + '</b></span>'); });
+      return '<div class="pp-dcell is-wide"><div class="pp-dlabel">Matchup grade</div>' +
+        '<div class="pp-dval"><span class="pp-mu ' + muCls(r.mu_grade) + '">' + esc(r.mu_grade) + '</span> &nbsp;' + esc(muTitle(r)) + '</div>' +
+        (bits.length ? '<div class="pp-mu-list">' + bits.join('') + '</div>' : '') +
+        '<div class="pp-sub">Context, not part of the edge. "vs usual" = against what the same offenses get in their other games.</div></div>';
     };
     var rowHtml = function (r, i, withDay) {
       var isOver = r.model_lean === 'over';
@@ -2274,6 +2319,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
           '<div class="pp-sub">' + priceTxt(r._price) + (r.book_used ? ' &middot; ' + esc(bookLabel(r.book_used)) : '') + '</div></div>' +
         '<div><div class="pp-edge" style="color:' + (r.model_ev != null ? tone(r.model_ev) : 'var(--muted-3)') + '">' + (r.model_ev != null ? signed(r.model_ev, 1) + '%' : '&mdash;') + '</div>' +
           '<div class="pp-sub">' + (r._lp != null ? (r._lp * 100).toFixed(0) + '%' : '&mdash;') + ' vs ' + (r._be != null ? (r._be * 100).toFixed(0) + '%' : '&mdash;') + ' needed</div></div>' +
+        '<div>' + muCell(r) + '</div>' +
         '<div>' + track + '</div>' +
         '<div class="pp-flags">' + flags.join('') + '</div>' +
         '<div class="pp-actions">' +
@@ -2300,7 +2346,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       : view === 'underlean' ? 'No under leans right now. They are receptions unders with a 10% to 30% edge.'
       : 'No plays match these filters. Loosen one, or hit Reset all.';
     var table = '<div class="pp-table">' +
-      '<div class="pp-grid pp-head">' + [['player', 'Player'], ['market', 'Pick'], ['edge', 'Edge'], ['roi', 'Track record']].map(function (c) {
+      '<div class="pp-grid pp-head">' + [['player', 'Player'], ['market', 'Pick'], ['edge', 'Edge'], ['matchup', 'Matchup'], ['roi', 'Track record']].map(function (c) {
         var on = sort1 === c[0];
         return '<div><button class="pp-sorth' + (on ? ' is-on' : '') + '" data-prop-sorth="' + c[0] + '" title="Sort by ' + c[1] + '">' + c[1] + ' <span class="pp-arr">' + (on ? (state.propSortRev ? '&#9650;' : '&#9660;') : '&#8597;') + '</span></button></div>';
       }).join('') + '<div>Heads up</div><div></div></div>' +
@@ -2372,6 +2418,10 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       '<p><b>Sort &amp; Filter</b> works in every view. Kickoff order groups plays by day; any other sort lists them in one run (click a column header to sort by it, again to flip it). ' +
         '<b>Sportsbook</b> shows each prop at that book&rsquo;s line, so the edge is the one you can actually bet there. The colored tag on each pick is the kind of prop: teal receiving, orange rushing, purple passing. ' +
         '<b>Save preset</b> opens the tab with your filters and sort every time, in this browser.</p>' +
+      '<p><b>Matchup</b> grades the opposing defense against what the pick needs, A+ to F: A means the defense helps the pick (a tough defense for an under, a soft one for an over). ' +
+        'Receiving props are graded against the player&rsquo;s position (catches and yards allowed to WRs, TEs or RBs, plus coverage), rushing props against the run (rush yards allowed, run defense, tackling), passing props against the pass (pass yards allowed, coverage, pass rush). ' +
+        '&ldquo;D 12th vs RBs&rdquo; is the defense&rsquo;s national rank, 1st being the toughest. Attempts props get no grade. ' +
+        'It is context, not part of the edge: the model already counts yards allowed, and only tough-defense receptions unders have held up in the backtest so far.</p>' +
       '<p><b>+ My list</b> adds any play to your own list in My Tracker. Kickoff times are in your own time zone.</p>' +
     '</div></details>';
 
@@ -4119,7 +4169,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     var ps = e.target.closest('[data-prop-set]');
     if (ps) {
       var f = ps.dataset.propSet, v = ps.dataset.propVal;
-      state[f] = f === 'propMinEdge' ? Number(v) || 0 : (f === 'propMyList' ? !!v : v);
+      state[f] = (f === 'propMinEdge' || f === 'propMinMu') ? Number(v) || 0 : (f === 'propMyList' ? !!v : v);
       state.propPresetMsg = ''; return render();
     }
     var sh = e.target.closest('[data-prop-sorth]');

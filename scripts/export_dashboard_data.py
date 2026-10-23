@@ -47,6 +47,10 @@ try:
     from src.features import matchup as matchup_features
 except Exception:                  # the matchup labels are an extra; a run must never depend on them
     matchup_features = None
+try:
+    from src.features import defense_grades
+except Exception:                  # matchup grades are an extra too
+    defense_grades = None
 from src.models import fair_odds as fo
 from src.models.game_model import GameMarginModel
 from src.models.props_model import PlayerStatModel
@@ -1067,6 +1071,8 @@ def main(year: int):
     # tough, average or soft against this player's position group? Only the
     # label is exported -- see src/features/matchup.py.
     matchup_pos, matchup_def, props_matchups = {}, {}, "not built this run"
+    # Matchup grades on every prop (10/2026) -- see src/features/defense_grades.py.
+    grade_profiles, props_matchup_grades = {}, "not built this run"
     if prop_models and max_completed_week > 0:
         print(f"  pulling {season_year} player game stats through week {max_completed_week}...")
         all_player_stats = []
@@ -1094,6 +1100,9 @@ def main(year: int):
                 matchup_pos, matchup_def, props_matchups = matchup_features.live_matchups(
                     player_stats_long_current, schedule_df, season_year)
             print(f"  matchups: {props_matchups}")
+            if defense_grades is not None:
+                grade_profiles, props_matchup_grades = defense_grades.live_profiles(season_year)
+            print(f"  matchup grades: {props_matchup_grades}")
             n_ready = sum(1 for v in player_form.values() if v["games_played_prior"] >= MIN_GAMES_FOR_PROP_MODEL)
             print(f"  {len(player_form)} player(s) matched to real {season_year} stats, "
                   f"{n_ready} of them already clear the {MIN_GAMES_FOR_PROP_MODEL}-game threshold")
@@ -1394,6 +1403,16 @@ def main(year: int):
                 print(f"  {n_labelled} receptions prop line(s) given a matchup label")
         except Exception as e:
             print(f"  [warn] matchup labels skipped ({type(e).__name__}: {e})")
+        # ---- Matchup grade (A+ to F) on every gradable prop (10/2026) ----
+        try:
+            if defense_grades is not None and grade_profiles:
+                from src.features.live_player_features import _normalize_name as _name_key
+                n_graded = defense_grades.label_props(props_out, player_form, matchup_pos, grade_profiles, _name_key,
+                                                      publish_pff=bool(getattr(config, "PUBLISH_PFF_NUMBERS", False)))
+                print(f"  {n_graded} prop line(s) given a matchup grade"
+                      f"{' (with PFF numbers)' if getattr(config, 'PUBLISH_PFF_NUMBERS', False) else ''}")
+        except Exception as e:
+            print(f"  [warn] matchup grades skipped ({type(e).__name__}: {e})")
         official_keys = {(p.get("fixture_id"), p.get("player_name"), p.get("market_name"))
                          for p in props_out if p.get("is_official_play")}
         watch = _best_per([p for p in props_out if _eligible(p) and not p.get("is_official_play")
@@ -1494,6 +1513,7 @@ def main(year: int):
         "prop_distributions": prop_dists_out,
         "props_receiving_inputs": props_receiving_inputs,
         "props_matchups": props_matchups,
+        "props_matchup_grades": props_matchup_grades,
         "prop_market_catalog": prop_market_catalog,
         "fantasy": fantasy_out,
         "injuries": injuries,

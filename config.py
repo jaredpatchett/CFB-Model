@@ -52,3 +52,11 @@ def require_keys(*names):
             f"Missing required API key(s): {', '.join(missing)}. "
             f"Set them in a .env file locally, or as GitHub Actions secrets in CI."
         )
+
+
+# Player Props matchup grades (10/2026): publish the PFF grades and PFF-
+# derived numbers behind each grade on the dashboard. PFF's data is licensed
+# to the subscriber -- keep this False while the repo / GitHub Pages site is
+# public. The A+ to F grade, the defense's rank and the box-score numbers
+# are published either way.
+PUBLISH_PFF_NUMBERS = False

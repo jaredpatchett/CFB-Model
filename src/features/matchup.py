@@ -36,6 +36,9 @@ GROUPS = ("wr", "te", "rb")
 GROUP_NAMES = {"wr": "WR", "te": "TE", "rb": "RB"}
 KEYS = ["season", "week", "franchise_id"]
 METRICS = [f"rec_{g}" for g in GROUPS]
+# What the last live run built, for src/features/defense_grades.py to reuse
+# (box scores, PFF receiving rows and games, PFF franchise -> CFBD school).
+LAST = {}
 
 
 def _num(df, col):
@@ -132,6 +135,7 @@ def build_matchups(wide, games, recv, pgames):
     teams = link.merge(wide[["gameId", "athleteId", "team"]], on=["gameId", "athleteId"], how="left").dropna(subset=["team", "franchise_id"])
     votes = teams.groupby(["franchise_id", "team"]).size().rename("v").reset_index().sort_values("v", ascending=False)
     school = votes.drop_duplicates("franchise_id").set_index("franchise_id")["team"]
+    LAST["school"] = school.to_dict()
     dn = defense_numbers_now(offense_games(recv, pgames))
     dn["school"] = dn["franchise_id"].map(school)
     dn = dn.dropna(subset=["school"]).drop_duplicates("school")
@@ -148,12 +152,15 @@ def live_matchups(player_stats_long, games, season, recv=None, pgames=None):
     why, and props simply carry no matchup label."""
     try:
         from src.features.player_features import pivot_player_game_stats
+        LAST.clear()
+        LAST["wide"] = pivot_player_game_stats(player_stats_long, games)
         if recv is None:
             from src.data import pff_client as pff
             recv, pgames = pff.fetch_receiving_seasons([season], tempfile.mkdtemp(prefix="pff_matchup_"), verbose=False)
         if recv is None or recv.empty:
             return {}, {}, f"no matchup labels -- PFF returned no {season} receiving rows"
-        wide = pivot_player_game_stats(player_stats_long, games)
+        LAST["recv"], LAST["pgames"] = recv, pgames
+        wide = LAST["wide"]
         pos, defense, info = build_matchups(wide, games, recv, pgames)
         if not defense:
             return {}, {}, "no matchup labels -- PFF's schedule did not line up with the box scores"
