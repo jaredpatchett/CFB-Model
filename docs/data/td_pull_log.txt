@@ -1,0 +1,7 @@
+Reading anytime_td lines 2h before kickoff. Limits: 20,000 credits this run, 25,000 held back.
+2024: 869 games looked at, 576 had anytime_td lines (2205 different players, 24.9 per game, 48331 book lines)
+2025: 889 games looked at, 528 had anytime_td lines (2012 different players, 21.3 per game, 46333 book lines)
+2026: 522 games looked at, 415 had anytime_td lines (2269 different players, 24.2 per game, 35454 book lines)
+
+Credits spent this run: 15,345   remaining on the key: 34,876
+FINISHED: every game of the seasons asked for has been read.
