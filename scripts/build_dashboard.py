@@ -357,6 +357,8 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
         "propCatalog": props_catalog,
         "propsLive": props_live,
         "fantasy": fantasy_out,
+        "anytimeTd": data.get("anytime_td") or [],
+        "anytimeTdNote": data.get("anytime_td_note"),
         "backtest": backtest_out,
         "injuries": data.get("injuries") or [],
     }
@@ -1590,7 +1592,8 @@ RENDERER_JS = """<script>
   var MARKETS = ['Spread', 'Moneyline'];
 
   var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', edgeSort: 'kickoff', edgeShow: 'all', edgeConf: 'ALL', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate', propGame: 'ALL', propOfficialOnly: false, propShowPass: false, propView: 'official', propDetail: null,
-    propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propQ: '', propMyList: false };
+    propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propQ: '', propMyList: false,
+    atdView: 'all', atdBasis: 'best', atdSort: 'edge', atdGame: 'ALL' };
   // Props tab Sort & Filter preset (10/2026): saved per browser, applied on load.
   var PROP_PRESET_KEY = 'cfb_props_preset_v1';
   var PROP_PRESET_FIELDS = ['propView', 'propMarket', 'propGame', 'propSort', 'propSort2', 'propSortRev', 'propDir', 'propBook', 'propMinEdge', 'propMyList', 'propShowPass', 'propMinMu'];
@@ -1659,6 +1662,7 @@ RENDERER_JS = """<script>
     { id: 'edge', label: 'Edge Board' },
     { id: 'ratings', label: 'Power Ratings' },
     { id: 'props', label: 'Player Props' },
+    { id: 'anytime', label: 'Anytime TD' },
     { id: 'fantasy', label: 'Fantasy' },
     { id: 'injuries', label: 'Injury Report' },
     { id: 'tracker', label: 'My Tracker' },
@@ -2080,6 +2084,116 @@ RENDERER_JS = """<script>
       '6 pt rush/rec TD, 4 pt pass TD, -2 INT), projected from each player\u2019s own trained stat model against ' +
       'their next scheduled opponent. Hover a player for their full stat-line breakdown. Position is inferred from ' +
       'usage, not a verified roster field \u2014 treat it as a label, not a guarantee.</span></div>';
+  }
+
+  // ---- Anytime TD (10/2026, display only) ----
+  // The model's chance each player scores, the fair odds that chance implies,
+  // and every book's price next to it. Nothing here is an official play or
+  // tracked -- see scripts/anytime_td.py for how the chance is worked out and
+  // what the backtest found.
+  function renderAnytime() {
+    var all = D.anytimeTd || [];
+    var head = '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Anytime TD</h2></div>' +
+      '<div style="font-size:10px;color:var(--muted-3)">Model odds vs sportsbook odds &middot; not official plays</div></div>';
+    if (!all.length) {
+      return head + '<div class="empty-state">No anytime TD lines posted right now' +
+        (D.anytimeTdNote ? ' (' + esc(D.anytimeTdNote) + ')' : '') + '. Books usually post them a day or two before kickoff.</div>';
+    }
+    var odds = function (x) { if (x == null || isNaN(x)) return '&ndash;'; x = Math.round(Number(x)); return (x > 0 ? '+' : '') + x; };
+    var pct = function (x) { return x == null ? '&ndash;' : (x * 100).toFixed(1) + '%'; };
+    var sgn = function (x) { return x == null ? '&ndash;' : (x > 0 ? '+' : '') + Number(x).toFixed(1) + '%'; };
+    var tone = function (x) { return x == null ? 'var(--muted-3)' : (x > 0 ? 'var(--green)' : (x < 0 ? 'var(--red)' : 'var(--muted-3)')); };
+    var basis = state.atdBasis === 'dk' ? 'dk' : 'best';
+    var edgeOf = function (r) { return basis === 'dk' ? r.edge_dk : r.edge_best; };
+    var priceOf = function (r) { return basis === 'dk' ? r.dk_price : r.best_price; };
+
+    var games = {};
+    all.forEach(function (r) {
+      if (!games[r.fixture_id]) games[r.fixture_id] = { label: (r.away_team || '') + ' @ ' + (r.home_team || ''), t: r.start_time || '' };
+    });
+    var gameIds = Object.keys(games).sort(function (a, b) { return games[a].t < games[b].t ? -1 : 1; });
+    var gameSel = state.atdGame && games[state.atdGame] ? state.atdGame : 'ALL';
+    var view = ['all', 'beats', 'value'].indexOf(state.atdView) === -1 ? 'all' : state.atdView;
+
+    var rows = all.filter(function (r) {
+      if (gameSel !== 'ALL' && r.fixture_id !== gameSel) return false;
+      var e = edgeOf(r);
+      if (view === 'beats') return r.model_prob != null && e != null && e > 0;
+      if (view === 'value') return r.model_prob != null && e != null && e >= 20 && r.tag !== 'caution';
+      return true;
+    });
+    var sort = ['edge', 'chance', 'kickoff'].indexOf(state.atdSort) === -1 ? 'edge' : state.atdSort;
+    rows.sort(function (a, b) {
+      if (sort === 'chance') return (b.model_prob || -1) - (a.model_prob || -1);
+      if (sort === 'kickoff') return (a.start_time || '') < (b.start_time || '') ? -1 : ((a.start_time || '') > (b.start_time || '') ? 1 : ((edgeOf(b) || -999) - (edgeOf(a) || -999)));
+      var ea = edgeOf(a), eb = edgeOf(b);
+      return (eb == null ? -9999 : eb) - (ea == null ? -9999 : ea);
+    });
+
+    var seg = function (key, val, cur, label) {
+      return '<button class="tab tab--prop' + (cur === val ? ' is-active' : '') + '" data-atd-set="' + key + '" data-atd-val="' + val + '"><span>' + label + '</span></button>';
+    };
+    var nBeats = all.filter(function (r) { var e = edgeOf(r); return r.model_prob != null && e != null && e > 0; }).length;
+    var nValue = all.filter(function (r) { var e = edgeOf(r); return r.model_prob != null && e != null && e >= 20 && r.tag !== 'caution'; }).length;
+    var filters = '<div class="prop-tabs" style="margin:12px 0 8px">' +
+        seg('atdView', 'all', view, 'All (' + all.length + ')') +
+        seg('atdView', 'beats', view, 'Price better than fair (' + nBeats + ')') +
+        seg('atdView', 'value', view, '20%+ edge (' + nValue + ')') +
+      '</div>' +
+      '<div class="prop-tabs" style="margin:0 0 14px;align-items:flex-end">' +
+        '<div class="pp-fgroup"><span class="pp-flabel">Price</span><div style="display:flex;gap:6px">' +
+          seg('atdBasis', 'best', basis, 'Best legal book') + seg('atdBasis', 'dk', basis, 'DraftKings') + '</div></div>' +
+        '<div class="pp-fgroup"><span class="pp-flabel">Sort</span><div style="display:flex;gap:6px">' +
+          seg('atdSort', 'edge', sort, 'Edge') + seg('atdSort', 'chance', sort, 'Chance') + seg('atdSort', 'kickoff', sort, 'Kickoff') + '</div></div>' +
+        '<div class="pp-fgroup" style="min-width:0;max-width:100%"><span class="pp-flabel">Game</span><select class="pp-select" style="max-width:100%" aria-label="Game" onchange="window.__cfbAtdGame(this.value)">' +
+          '<option value="ALL"' + (gameSel === 'ALL' ? ' selected' : '') + '>All games (' + gameIds.length + ')</option>' +
+          gameIds.map(function (id) { return '<option value="' + esc(id) + '"' + (gameSel === id ? ' selected' : '') + '>' + esc(games[id].label) + ', ' + esc(propKickoff(games[id].t)) + '</option>'; }).join('') +
+        '</select></div>' +
+      '</div>';
+
+    if (!rows.length) {
+      return head + filters + '<div class="empty-state">No players match this view.</div>' + atdFoot();
+    }
+    var cards = rows.slice(0, 300).map(function (r) {
+      var chip = '';
+      if (r.tag === 'value') chip = '<span style="color:var(--green);font-size:9.5px;letter-spacing:.08em">20%+ EDGE</span>';
+      else if (r.tag === 'caution') chip = '<span style="color:var(--amber);font-size:9.5px;letter-spacing:.08em" title="QBs and lead running backs lost at every edge size in the backtest">CAUTION</span>';
+      var inj = r.injury_status ? ' <span style="color:var(--red);font-size:9.5px">' + esc(r.injury_status) + '</span>' : '';
+      var sub = [r.role, r.team ? schoolAbbr(r.team) + (r.opponent ? ' vs ' + schoolAbbr(r.opponent) : '') : (r.away_team + ' @ ' + r.home_team), propKickoff(r.start_time)]
+        .filter(Boolean).map(esc).join(' &middot; ');
+      var model = r.model_prob != null
+        ? '<div class="pcard-line-row"><span>Model chance</span><span><b>' + pct(r.model_prob) + '</b> &rarr; fair <b>' + odds(r.fair_odds) + '</b></span></div>'
+        : '<div class="pcard-line-row"><span style="color:var(--muted-3)">No model read (needs 2+ games this season)</span><span></span></div>';
+      var line = function (label, price, book, e) {
+        if (price == null) return '';
+        return '<div class="pcard-line-row"><span>' + label + ' <b>' + odds(price) + '</b>' + (book ? ' <span style="color:var(--muted-3)">' + esc(book) + '</span>' : '') +
+          ' <span style="color:var(--muted-4);font-size:9.5px">(' + pct(M.impliedProb(price)) + ')</span></span>' +
+          '<span style="color:' + tone(e) + ';font-weight:700">' + (r.model_prob != null ? sgn(e) : '') + '</span></div>';
+      };
+      var others = (r.books || []).filter(function (b) { return b.book !== r.best_book && b.book !== 'draftkings'; })
+        .map(function (b) { return esc(b.label) + ' ' + odds(b.price) + (b.offshore ? '*' : ''); }).join(' &middot; ');
+      var proj = r.model_prob != null
+        ? '<div style="font-size:9.5px;color:var(--muted-4);padding-top:5px">Projected ' + Number(r.rush_td_proj).toFixed(2) + ' rush TD + ' + Number(r.rec_td_proj).toFixed(2) + ' rec TD' +
+          (r.games_played ? ' &middot; ' + r.games_played + ' games' : '') + '</div>' : '';
+      return '<div class="pcard"><div class="pcard-head"><span>' + esc(r.player_name) + inj + '</span>' + chip + '</div>' +
+        '<div style="font-size:10px;color:var(--muted-3);margin:-4px 0 6px">' + sub + '</div>' +
+        model +
+        line('Best', r.best_price, r.best_book_label, r.edge_best) +
+        (r.best_book !== 'draftkings' ? line('DraftKings', r.dk_price, '', r.edge_dk) : '') +
+        (others ? '<div style="font-size:9.5px;color:var(--muted-3);padding-top:5px">' + others + '</div>' : '') +
+        proj + '</div>';
+    }).join('');
+    return head + filters + '<div class="pcard-grid">' + cards + '</div>' +
+      (rows.length > 300 ? '<div class="table-foot"><span>Showing 300 of ' + rows.length + '. Pick a game to narrow it down.</span></div>' : '') +
+      atdFoot();
+  }
+
+  function atdFoot() {
+    return '<div class="table-foot"><span>Model chance = the rush TD and receiving TD projections added together and turned into the chance of at least one touchdown. ' +
+      'Fair = the odds where that chance breaks even; a book price longer than fair is in your favor, and Edge is the expected return per 1u at that price. ' +
+      'In the 2024&ndash;26 backtest these chances matched reality (27.7% said, 27.3% scored), but books price Yes well above the real rate, so most lines lose. ' +
+      'QBs and lead running backs lost at every edge size; main receivers at a 20%+ edge were about break-even at DraftKings. ' +
+      'Best legal book leaves out offshore books (marked *). Display only &mdash; not official plays and not tracked.</span></div>';
   }
 
   // ---- How to treat one priced play, under the betting rules ------------
@@ -4685,6 +4799,7 @@ RENDERER_JS = """<script>
     switch (state.page) {
       case 'ratings': return renderRatings();
       case 'props': return renderProps();
+      case 'anytime': return renderAnytime();
       case 'fantasy': return renderFantasy();
       case 'injuries': return renderInjuries();
       case 'tracker': return renderTracker();
@@ -4723,6 +4838,7 @@ RENDERER_JS = """<script>
   // renderKeep, not render: redrawing the page rebuilt the search box too,
   // so the cursor fell out of it after every single letter typed.
   window.__cfbSearch = function (v) { state.search = v; renderKeep(); };
+  window.__cfbAtdGame = function (v) { state.atdGame = v; render(); };
   window.__cfbPropGame = function (v) { state.propGame = v; state.propPresetMsg = ''; render(); };
   window.__cfbPropQ = function (v) { state.propQ = v; state.propPresetMsg = ''; renderKeep(); };
   window.__cfbPropReset = function () {
@@ -4819,6 +4935,8 @@ RENDERER_JS = """<script>
     if (mt) { state.trackerModelTab = mt.dataset.modelTab; return render(); }
     var is = e.target.closest('[data-inj-scope]');
     if (is) { state.injScope = is.dataset.injScope; return render(); }
+    var atd = e.target.closest('[data-atd-set]');
+    if (atd) { state[atd.dataset.atdSet] = atd.dataset.atdVal; return render(); }
   });
 
   // Edge Board sort / filter dropdowns.

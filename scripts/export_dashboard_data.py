@@ -1499,6 +1499,24 @@ def main(year: int):
     except Exception as e:
         print(f"  [warn] model input log failed: {e} -- dashboard export continues unaffected")
 
+    # ---- Anytime TD section (10/2026, display only -- see scripts/anytime_td.py) ----
+    anytime_td_out, anytime_td_note = [], "not built this run"
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import anytime_td as _atd
+        # Reuse the props loop's capture: models are only wrapped once, so a
+        # second capture would hand back a dict nothing ever fills.
+        _raw_td = locals().get("raw_projection")
+        if _raw_td is None and prop_models:
+            _raw_td = capture_raw_projections(prop_models)
+        anytime_td_out, anytime_td_note = _atd.build(
+            player_form, schedule_df, opp_defense_lookup, prop_models, score_prop, _normalize_name,
+            env_lookup=env_lookup, opp_allowed_lookup=opp_allowed_lookup,
+            injury_lookup=lambda team, player: match_player(injury_index, team, player), raw=_raw_td)
+    except Exception as e:
+        anytime_td_note = f"skipped ({type(e).__name__}: {e})"
+    print(f"  anytime TD: {anytime_td_note}")
+
     teams_out = build_teams_export(games_out, team_lookup, sp_lookup, sp_splits_lookup, pace_returning_lookup)
 
     output = {
@@ -1517,6 +1535,8 @@ def main(year: int):
         "props_matchup_grades": props_matchup_grades,
         "prop_market_catalog": prop_market_catalog,
         "fantasy": fantasy_out,
+        "anytime_td": anytime_td_out,
+        "anytime_td_note": anytime_td_note,
         "injuries": injuries,
         "injuries_as_of": injuries_asof,
     }

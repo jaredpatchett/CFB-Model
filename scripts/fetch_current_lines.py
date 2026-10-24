@@ -17,6 +17,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import config
 from src.data import odds_api_client
 
@@ -36,5 +37,14 @@ if __name__ == "__main__":
         print(f"  {len(props_df)} prop lines")
     except Exception as e:
         print(f"  [warn] player props fetch failed: {e}")
+
+    print("Fetching anytime TD lines (every book)...")
+    try:
+        import anytime_td
+        atd = anytime_td.fetch(raw_odds)
+        atd.to_csv(anytime_td.CSV_PATH, index=False)
+        print(f"  {len(atd)} anytime TD prices")
+    except Exception as e:
+        print(f"  [warn] anytime TD fetch failed: {e}")
 
     print("Done.")
