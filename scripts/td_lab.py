@@ -410,4 +410,14 @@ if __name__ == "__main__":
     ap.add_argument("--years", type=int, nargs="+", default=[2022, 2023, 2024, 2025])
     ap.add_argument("--season", type=int, default=2026)
     a = ap.parse_args()
-    main(sorted(a.years), a.season)
+    try:
+        main(sorted(a.years), a.season)
+    except BaseException as e:
+        if isinstance(e, SystemExit) and not e.code:
+            raise
+        import traceback
+        tb = traceback.format_exc()
+        print(tb)
+        # Shows the error on the run's summary page (readable without logs).
+        print("::error title=td_lab failed::" + tb[-3000:].replace("%", "%25").replace("\r", "").replace("\n", "%0A"))
+        sys.exit(1)

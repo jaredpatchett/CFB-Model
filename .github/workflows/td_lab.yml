@@ -10,6 +10,7 @@ name: Anytime TD lab (pull past lines + backtest)
 # anytime TD lines plus 1 a day to list games. Stops at "max_credits" or
 # before the key's balance falls below "reserve". Games already read are
 # never paid for twice, so a re-run only pays for the daily game lists.
+# A push of this file re-runs the lab on the saved lines only (no pull).
 # Does NOT touch the live model, the dashboard or the daily run.
 
 on:
@@ -58,7 +59,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Pull past anytime TD lines
-        if: ${{ github.event.inputs.pull != 'false' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.pull != 'false' }}
         run: >
           python scripts/pull_props_history.py --market anytime_td
           --seasons ${{ github.event.inputs.seasons || '2024 2025 2026' }}
@@ -71,7 +72,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/props_history docs/data/td_pull_log.txt || true
+          git add data/props_history || true
+          [ -f docs/data/td_pull_log.txt ] && git add docs/data/td_pull_log.txt
           git diff --cached --quiet && echo "No changes to commit" && exit 0
           git commit -m "Past-season anytime TD lines [skip ci]"
           for i in 1 2 3 4 5; do
@@ -105,7 +107,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/data/td_lab.json docs/data/td_lab_detail.csv docs/data/td_lab_report.txt docs/data/td_lab_log.txt || true
+          for f in docs/data/td_lab.json docs/data/td_lab_detail.csv docs/data/td_lab_report.txt docs/data/td_lab_log.txt; do
+            [ -f "$f" ] && git add "$f"
+          done
           git diff --cached --quiet && echo "No changes to commit" && exit 0
           git commit -m "Anytime TD lab results [skip ci]"
           for i in 1 2 3 4 5; do
