@@ -1,0 +1,118 @@
+name: Anytime TD lab (pull past lines + backtest)
+
+# Pulls the anytime touchdown lines posted before every college game of
+# 2024, 2025 and 2026 so far from The Odds API (saved to data/props_history/),
+# then grades several ways of pricing a player's chance to score against
+# them, trained forward in time. Results: docs/data/td_lab.json,
+# td_lab_detail.csv and td_lab_report.txt.
+#
+# Spends Odds API credits on the pull: about 10 for each game that had
+# anytime TD lines plus 1 a day to list games. Stops at "max_credits" or
+# before the key's balance falls below "reserve". Games already read are
+# never paid for twice, so a re-run only pays for the daily game lists.
+# Does NOT touch the live model, the dashboard or the daily run.
+
+on:
+  workflow_dispatch:
+    inputs:
+      pull:
+        description: "Pull lines first (false = grade what is saved)"
+        required: false
+        default: "true"
+      seasons:
+        description: "Seasons to pull"
+        required: false
+        default: "2024 2025 2026"
+      max_credits:
+        description: "Most credits this run may spend"
+        required: false
+        default: "20000"
+      reserve:
+        description: "Stop before the key's balance falls below this"
+        required: false
+        default: "25000"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/td_lab.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
+      ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+      YEARS: "2022 2023 2024 2025"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Pull past anytime TD lines
+        if: ${{ github.event.inputs.pull != 'false' }}
+        run: >
+          python scripts/pull_props_history.py --market anytime_td
+          --seasons ${{ github.event.inputs.seasons || '2024 2025 2026' }}
+          --max-credits ${{ github.event.inputs.max_credits || '20000' }}
+          --reserve ${{ github.event.inputs.reserve || '25000' }}
+          2>&1 | tee docs/data/td_pull_log.txt
+
+      - name: Save the lines
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/props_history docs/data/td_pull_log.txt || true
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Past-season anytime TD lines [skip ci]"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git merge -X ours --no-edit origin/main -m "Merge origin/main [skip ci]" && git push origin main; then
+              echo "Pushed on attempt $i"; break
+            fi
+            [ "$i" -eq 5 ] && echo "::error::Could not push the lines" && exit 1
+            sleep $((RANDOM % 10 + 5))
+          done
+
+      - name: Restore cached historical CFBD data
+        uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: cfbd-raw-${{ env.YEARS }}-${{ github.run_id }}
+          restore-keys: |
+            cfbd-raw-${{ env.YEARS }}-
+            cfbd-raw-
+
+      - name: Fetch historical data
+        run: python scripts/fetch_historical_data.py --years ${{ env.YEARS }}
+
+      - name: Run the anytime TD lab
+        run: |
+          set -o pipefail
+          python scripts/td_lab.py --years ${{ env.YEARS }} --season 2026 2>&1 | tee docs/data/td_lab_log.txt
+
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/td_lab.json docs/data/td_lab_detail.csv docs/data/td_lab_report.txt docs/data/td_lab_log.txt || true
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Anytime TD lab results [skip ci]"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git merge -X ours --no-edit origin/main -m "Merge origin/main [skip ci]" && git push origin main; then
+              echo "Pushed on attempt $i"; break
+            fi
+            [ "$i" -eq 5 ] && echo "::error::Could not push results" && exit 1
+            sleep $((RANDOM % 10 + 5))
+          done

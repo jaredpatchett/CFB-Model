@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
-Pull past-season receptions prop lines from The Odds API (added 10/2026).
+Pull past-season prop lines from The Odds API (added 10/2026).
+
+Markets (--market): "receptions" (the default, as before) and "anytime_td"
+(added 10/2026 for the anytime-touchdown lab). An anytime TD line is a
+yes/no bet; it is saved in the same layout with line 0.5, the "Yes" price
+in the over column and the "No" price (when a book posts one) in under.
 
 Run from the Actions tab. Feeds props lab 3, which grades the receptions
 model and its matchup versions against these lines for profit. Does not
@@ -24,6 +29,8 @@ Saved (prices from sportsbooks, the same kind of data the repo already keeps
 in data/clv)
   data/props_history/receptions_<season>.csv   one row per game, book, player, line
   data/props_history/events_<season>.csv       every game looked at, and what came back
+  data/props_history/anytime_td_<season>.csv, anytime_td_events_<season>.csv
+                                               the same for --market anytime_td
 
 Usage:
   python scripts/pull_props_history.py --seasons 2024 2025
@@ -41,7 +48,10 @@ import requests
 import config
 
 OUT_DIR = "data/props_history"
-MARKET = "player_receptions"
+MARKETS = {"receptions": "player_receptions", "anytime_td": "player_anytime_td"}
+MARKET_NAME = "receptions"                           # set from --market in main()
+MARKET = MARKETS[MARKET_NAME]
+SIDES = {"over": "over", "under": "under", "yes": "over", "no": "under"}
 REGION = "us"
 FMT = "%Y-%m-%dT%H:%M:%SZ"
 SEASON_START, SEASON_END = (8, 20), (12, 16)         # regular season and conference championships
@@ -127,8 +137,10 @@ def parse_lines(data, season, snapshot):
             if m.get("key") != MARKET:
                 continue
             for o in m.get("outcomes") or []:
-                player, side, point, price = o.get("description"), str(o.get("name") or "").lower(), o.get("point"), o.get("price")
-                if not player or side not in ("over", "under") or point is None or price is None:
+                player, side, point, price = o.get("description"), SIDES.get(str(o.get("name") or "").lower()), o.get("point"), o.get("price")
+                if point is None and MARKET_NAME == "anytime_td":
+                    point = 0.5                         # yes/no: "Yes" = 1+ touchdown
+                if not player or side is None or point is None or price is None:
                     continue
                 key = (bk.get("key"), player, float(point))
                 row = rows.setdefault(key, {"season": season, "event_id": data.get("id"), "commence_time": data.get("commence_time"),
@@ -149,7 +161,10 @@ def load(path, cols):
 
 def pull_season(season, hours_before, budget):
     """Returns (lines, events, finished). Saves as it goes."""
-    lpath, epath = f"{OUT_DIR}/receptions_{season}.csv", f"{OUT_DIR}/events_{season}.csv"
+    if MARKET_NAME == "receptions":
+        lpath, epath = f"{OUT_DIR}/receptions_{season}.csv", f"{OUT_DIR}/events_{season}.csv"
+    else:
+        lpath, epath = f"{OUT_DIR}/{MARKET_NAME}_{season}.csv", f"{OUT_DIR}/{MARKET_NAME}_events_{season}.csv"
     lines, events = load(lpath, LINE_COLS), load(epath, EVENT_COLS)
     done = set(events["event_id"].astype(str))
     new_lines, new_events, finished, why = [], [], True, ""
@@ -195,11 +210,13 @@ def pull_season(season, hours_before, budget):
     return lines, events, finished, why
 
 
-def main(seasons, hours_before, max_credits, reserve):
+def main(seasons, hours_before, max_credits, reserve, market="receptions"):
+    global MARKET_NAME, MARKET
+    MARKET_NAME, MARKET = market, MARKETS[market]
     config.require_keys("ODDS_API_KEY")
     os.makedirs(OUT_DIR, exist_ok=True)
     budget = Budget(max_credits, reserve)
-    print(f"Reading receptions lines {hours_before:g}h before kickoff. Limits: {max_credits:,} credits this run, {reserve:,} held back.")
+    print(f"Reading {MARKET_NAME} lines {hours_before:g}h before kickoff. Limits: {max_credits:,} credits this run, {reserve:,} held back.")
     stopped = ""
     for season in seasons:
         if stopped:
@@ -208,7 +225,7 @@ def main(seasons, hours_before, max_credits, reserve):
         lines, events, finished, why = pull_season(season, hours_before, budget)
         with_lines = int((events["status"] == "lines").sum()) if len(events) else 0
         players = lines.groupby("event_id")["player"].nunique().mean() if len(lines) else 0
-        print(f"{season}: {len(events)} games looked at, {with_lines} had receptions lines "
+        print(f"{season}: {len(events)} games looked at, {with_lines} had {MARKET_NAME} lines "
               f"({lines['player'].nunique() if len(lines) else 0} different players, {players:.1f} per game, "
               f"{len(lines)} book lines){'' if finished else ' -- NOT FINISHED'}")
         if not finished:
@@ -227,5 +244,6 @@ if __name__ == "__main__":
     ap.add_argument("--hours-before", type=float, default=2.0)
     ap.add_argument("--max-credits", type=int, default=20000)
     ap.add_argument("--reserve", type=int, default=25000)
+    ap.add_argument("--market", choices=sorted(MARKETS), default="receptions")
     a = ap.parse_args()
-    main(sorted(a.seasons), a.hours_before, a.max_credits, a.reserve)
+    main(sorted(a.seasons), a.hours_before, a.max_credits, a.reserve, a.market)
