@@ -1,0 +1,19 @@
+Loading CFBD history and this season...
+  157493 player-games, seasons [np.int64(2022), np.int64(2023), np.int64(2024), np.int64(2025), np.int64(2026)]; return TDs found: 416
+Lines matched to box scores: 22639 ({'2024': {'players_with_a_line': 14371, 'matched_to_a_box_score': 8755, 'games_with_lines': 576, 'books': ['betmgm', 'betonlineag', 'betrivers', 'bovada', 'draftkings', 'fanduel', 'williamhill_us']}, '2025': {'players_with_a_line': 11225, 'matched_to_a_box_score': 7772, 'games_with_lines': 528, 'books': ['betmgm', 'betonlineag', 'betrivers', 'bovada', 'draftkings', 'fanduel', 'williamhill_us']}, '2026': {'players_with_a_line': 10039, 'matched_to_a_box_score': 6112, 'games_with_lines': 415, 'books': ['betmgm', 'betonlineag', 'betrivers', 'bovada', 'draftkings', 'fanduel', 'williamhill_us']}})
+  grading 2024: training on seasons before 2024 (8196 props)...
+Traceback (most recent call last):
+  File "/home/runner/work/CFB-Model/CFB-Model/scripts/td_lab.py", line 414, in <module>
+    main(sorted(a.years), a.season)
+  File "/home/runner/work/CFB-Model/CFB-Model/scripts/td_lab.py", line 391, in main
+    det = grade_props(feats, props, pop, sorted({p["season"] for p in props}))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/CFB-Model/CFB-Model/scripts/td_lab.py", line 258, in grade_props
+    r[f"yes_{tag}_ev"] = round(pr * bpl.payout(price) - (1 - pr), 4)
+                                    ^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/CFB-Model/CFB-Model/scripts/backtest_props_live.py", line 62, in payout
+    return price / 100 if price > 0 else 100 / (-price)
+                                         ~~~~^~~~~~~~~~
+ZeroDivisionError: float division by zero
+
+::error title=td_lab failed::Traceback (most recent call last):%0A  File "/home/runner/work/CFB-Model/CFB-Model/scripts/td_lab.py", line 414, in <module>%0A    main(sorted(a.years), a.season)%0A  File "/home/runner/work/CFB-Model/CFB-Model/scripts/td_lab.py", line 391, in main%0A    det = grade_props(feats, props, pop, sorted({p["season"] for p in props}))%0A          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%0A  File "/home/runner/work/CFB-Model/CFB-Model/scripts/td_lab.py", line 258, in grade_props%0A    r[f"yes_{tag}_ev"] = round(pr * bpl.payout(price) - (1 - pr), 4)%0A                                    ^^^^^^^^^^^^^^^^^%0A  File "/home/runner/work/CFB-Model/CFB-Model/scripts/backtest_props_live.py", line 62, in payout%0A    return price / 100 if price > 0 else 100 / (-price)%0A                                         ~~~~^~~~~~~~~~%0AZeroDivisionError: float division by zero%0A
