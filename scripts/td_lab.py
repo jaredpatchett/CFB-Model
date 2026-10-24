@@ -148,7 +148,7 @@ def load_lines(feats, seasons):
             except Exception:
                 st = None
             by_name.setdefault(_normalize_name(player), []).append({"team": team, "start": st, "idx": idx})
-        posted = matched = 0
+        posted = matched = ghosts = 0
         for (eid, player), g in raw.groupby(["event_id", "player"]):
             posted += 1
             start_time = g["commence_time"].iloc[0]
@@ -156,16 +156,48 @@ def load_lines(feats, seasons):
                 m = bpl.match_actual({"player": player, "start_time": start_time}, by_name)
             except Exception:
                 m = None
+            ghost = False
             if m is None:
-                continue
-            matched += 1
+                # No box-score row for this game. If he played for one of these
+                # teams in an earlier game this season, he either sat (book
+                # voids) or played without touching the ball (Yes loses) --
+                # he did NOT score, since every TD shows up in the box score.
+                # Priced from his most recent earlier game's inputs.
+                m = prior_row(player, start_time, g, by_name)
+                if m is None:
+                    continue
+                ghost = True
+                ghosts += 1
+            else:
+                matched += 1
             kick = pd.Timestamp(bpl._ts(start_time)) - pd.Timedelta(hours=5)
             sat = (kick + pd.Timedelta(days={0: -2, 1: -3, 2: 3, 3: 2, 4: 1, 5: 0, 6: -1}[kick.weekday()])).date()
             books = [{"book": r.book, "yes": float(r.over), "no": (None if pd.isna(r.under) else float(r.under))} for r in g.itertuples()]
-            props.append({"idx": m["idx"], "season": s, "player": player, "weekend": str(sat), "event_id": eid, "books": books})
+            books = [b for b in books if abs(b["yes"]) >= 100]
+            if not books:
+                continue
+            props.append({"idx": m["idx"], "season": s, "player": player, "weekend": str(sat), "event_id": eid, "books": books, "ghost": ghost})
         notes[str(s)] = {"players_with_a_line": posted, "matched_to_a_box_score": matched,
+                         "no_box_score_row_but_played_earlier": ghosts,
                          "games_with_lines": int(raw["event_id"].nunique()), "books": sorted(raw["book"].dropna().unique().tolist())}
     return props, notes
+
+
+def prior_row(player, start_time, g, by_name, max_days=30):
+    teams = [str(x) for x in (g["home_team"].iloc[0], g["away_team"].iloc[0])]
+    kick = bpl._ts(start_time)
+    cands = [c for c in by_name.get(_normalize_name(player), [])
+             if c["start"] is not None and kick - pd.Timedelta(days=max_days) <= c["start"] < kick - pd.Timedelta(hours=36)
+             and any(t == str(c["team"]) or t.startswith(str(c["team"]) + " ") for t in teams)]
+    return max(cands, key=lambda c: c["start"]) if cands else None
+
+
+def to_decimal(price):
+    return 1 + bpl.payout(price)
+
+
+def from_decimal(dec):
+    return (dec - 1) * 100 if dec >= 2 else -100 / (dec - 1)
 
 
 # --------------------------------------------------------------- models ----
@@ -234,12 +266,13 @@ def grade_props(feats, props, pop, seasons):
         for i, (p, (_, fr)) in enumerate(zip(sp, X.iterrows())):
             yes = [b["yes"] for b in p["books"]]
             best_yes = max(yes, key=bpl.payout)
-            med_yes = float(np.median(yes))
+            med_yes = float(from_decimal(float(np.median([to_decimal(y) for y in yes]))))
             nv = [implied(b["yes"]) / (implied(b["yes"]) + implied(b["no"])) for b in p["books"] if b["no"] is not None]
             nos = [b["no"] for b in p["books"] if b["no"] is not None]
             best_no = max(nos, key=bpl.payout) if nos else None
             dk = next((b["yes"] for b in p["books"] if b["book"] == "draftkings"), None)
-            scored = int(fr["any_td"])
+            ghost = bool(p.get("ghost"))
+            scored = 0 if ghost else int(fr["any_td"])
             base = {"season": s, "weekend": p["weekend"], "player": p["player"], "team": fr.get("team"), "opponent": fr.get("opponent"),
                     "role": role(fr), "gp": int(fr["games_played_prior"]), "team_spread": fr.get("team_spread"),
                     "team_implied_total": fr.get("team_implied_total"), "n_books": len(yes),
@@ -247,7 +280,7 @@ def grade_props(feats, props, pop, seasons):
                     "best_yes": best_yes, "median_yes": med_yes, "dk_yes": dk, "best_no": best_no,
                     "mkt_implied": round(float(np.mean([implied(y) for y in yes])), 4),
                     "mkt_novig": round(float(np.mean(nv)), 4) if nv else None,
-                    "rush_tds": fr["rush_tds"], "rec_tds": fr["rec_tds"], "ret_tds": fr["ret_tds"], "scored": scored}
+                    "ghost": ghost, "scored": scored}
             for v in VERSIONS:
                 pr = float(priced[v][i])
                 r = dict(base, version=v, p=round(pr, 4))
@@ -287,10 +320,13 @@ def logloss(p, y):
 def summarize(det):
     out = {}
     for v in VERSIONS:
-        d = det[det.version == v]
+        full = det[det.version == v]
+        d = full[~full.ghost]
         if d.empty:
             continue
-        res = {"n_props": int(len(d))}
+        res = {"n_props": int(len(d)), "n_no_box_score_row": int(full.ghost.sum())}
+        res["yes_by_edge_best_no_stat_as_loss"] = {lb: rec(g, "yes_best_ev", "yes_best_units", "best_yes")
+                                                   for lb, g in full.groupby(pd.cut(full.yes_best_ev, EDGE_BINS, labels=EDGE_LABELS), observed=True)}
         # Honesty: model vs market vs what happened.
         nv = d[d.mkt_novig.notna()]
         res["honesty"] = {
@@ -326,7 +362,7 @@ def summarize(det):
                              for lb, g in no.groupby(pd.cut(no.no_ev, EDGE_BINS, labels=EDGE_LABELS), observed=True)}
         out[v] = res
     # No model at all: every Yes at the best price, by price range and role.
-    d = det[det.version == VERSIONS[0]]
+    d = det[(det.version == VERSIONS[0]) & ~det.ghost]
     out["no_model_every_yes"] = {
         "all": rec(d, "yes_best_ev", "yes_best_units", "best_yes"),
         "by_price": {lb: rec(g, "yes_best_ev", "yes_best_units", "best_yes")
@@ -370,7 +406,8 @@ def report(summary, notes):
         for title, key in (("Yes, best price, by edge", "yes_by_edge_best"), ("Yes, median book, by edge", "yes_by_edge_median"),
                            ("Yes, DraftKings, by edge", "yes_by_edge_draftkings"), ("Yes 0%+ edge by season", "yes_edge0_by_season"),
                            ("Yes 10%+ edge by season", "yes_edge10_by_season"), ("Yes 0%+ edge by price", "yes_edge0_by_price"),
-                           ("Yes 0%+ edge by role", "yes_edge0_by_role"), ("No side by edge", "no_by_edge")):
+                           ("Yes 0%+ edge by role", "yes_edge0_by_role"), ("No side by edge", "no_by_edge"),
+                           ("Yes, best price, by edge, players with no box-score line counted as losses", "yes_by_edge_best_no_stat_as_loss")):
             print(f"  {title}:")
             for k, r in (res.get(key) or {}).items():
                 print(f"    {str(k):<28} {fmt(r)}")
