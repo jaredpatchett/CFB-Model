@@ -1,0 +1,1816 @@
+{
+  "generated_at": "2026-10-24T03:26:04.502717+00:00",
+  "train_years": [
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "season": 2026,
+  "lines": {
+    "2024": {
+      "players_with_a_line": 14371,
+      "matched_to_a_box_score": 8755,
+      "no_box_score_row_but_played_earlier": 2882,
+      "games_with_lines": 576,
+      "books": [
+        "betmgm",
+        "betonlineag",
+        "betrivers",
+        "bovada",
+        "draftkings",
+        "fanduel",
+        "williamhill_us"
+      ]
+    },
+    "2025": {
+      "players_with_a_line": 11225,
+      "matched_to_a_box_score": 7772,
+      "no_box_score_row_but_played_earlier": 1857,
+      "games_with_lines": 528,
+      "books": [
+        "betmgm",
+        "betonlineag",
+        "betrivers",
+        "bovada",
+        "draftkings",
+        "fanduel",
+        "williamhill_us"
+      ]
+    },
+    "2026": {
+      "players_with_a_line": 10039,
+      "matched_to_a_box_score": 6112,
+      "no_box_score_row_but_played_earlier": 1693,
+      "games_with_lines": 415,
+      "books": [
+        "betmgm",
+        "betonlineag",
+        "betrivers",
+        "bovada",
+        "draftkings",
+        "fanduel",
+        "williamhill_us"
+      ]
+    },
+    "props_with_a_prior_game": 25611
+  },
+  "results": {
+    "live": {
+      "n_props": 20486,
+      "n_no_box_score_row": 5125,
+      "yes_by_edge_best_no_stat_as_loss": {
+        "below 0": {
+          "n": 15953,
+          "record": "4013-11940",
+          "hit": 25.2,
+          "units": -4960.6,
+          "roi": -31.1,
+          "needs": 34.9
+        },
+        "0-5%": {
+          "n": 1328,
+          "record": "294-1034",
+          "hit": 22.1,
+          "units": -355.4,
+          "roi": -26.8,
+          "needs": 28.2
+        },
+        "5-10%": {
+          "n": 1130,
+          "record": "240-890",
+          "hit": 21.2,
+          "units": -284.6,
+          "roi": -25.2,
+          "needs": 27.0
+        },
+        "10-20%": {
+          "n": 1834,
+          "record": "358-1476",
+          "hit": 19.5,
+          "units": -537.5,
+          "roi": -29.3,
+          "needs": 25.9
+        },
+        "20-30%": {
+          "n": 1377,
+          "record": "235-1142",
+          "hit": 17.1,
+          "units": -411.7,
+          "roi": -29.9,
+          "needs": 22.4
+        },
+        "30%+": {
+          "n": 3989,
+          "record": "448-3541",
+          "hit": 11.2,
+          "units": -1213.5,
+          "roi": -30.4,
+          "needs": 16.0
+        }
+      },
+      "honesty": {
+        "all": {
+          "n": 20486,
+          "model": 27.4,
+          "market_with_vig": 34.5,
+          "actual": 27.3,
+          "logloss_model": 0.5495
+        },
+        "rows_with_both_sides": {
+          "n": 0,
+          "model": null,
+          "market_no_vig": null,
+          "actual": null,
+          "logloss_model": null,
+          "logloss_market": null
+        }
+      },
+      "by_model_chance": [
+        {
+          "bucket": "<15%",
+          "n": 2365,
+          "model": 10.8,
+          "market": 16.7,
+          "actual": 11.8
+        },
+        {
+          "bucket": "15-25%",
+          "n": 7719,
+          "model": 18.8,
+          "market": 25.1,
+          "actual": 18.7
+        },
+        {
+          "bucket": "25-35%",
+          "n": 4959,
+          "model": 31.1,
+          "market": 37.7,
+          "actual": 31.2
+        },
+        {
+          "bucket": "35-45%",
+          "n": 4340,
+          "model": 38.7,
+          "market": 48.4,
+          "actual": 37.4
+        },
+        {
+          "bucket": "45-55%",
+          "n": 531,
+          "model": 47.6,
+          "market": 63.2,
+          "actual": 55.4
+        },
+        {
+          "bucket": "55-65%",
+          "n": 153,
+          "model": 59.4,
+          "market": 69.6,
+          "actual": 62.1
+        },
+        {
+          "bucket": "65%+",
+          "n": 419,
+          "model": 82.4,
+          "market": 76.7,
+          "actual": 73.0
+        }
+      ],
+      "yes_by_edge_best": {
+        "below 0": {
+          "n": 13495,
+          "record": "4013-9482",
+          "hit": 29.7,
+          "units": -2502.6,
+          "roi": -18.5,
+          "needs": 36.4
+        },
+        "0-5%": {
+          "n": 1087,
+          "record": "294-793",
+          "hit": 27.0,
+          "units": -114.4,
+          "roi": -10.5,
+          "needs": 29.5
+        },
+        "5-10%": {
+          "n": 917,
+          "record": "240-677",
+          "hit": 26.2,
+          "units": -71.6,
+          "roi": -7.8,
+          "needs": 28.4
+        },
+        "10-20%": {
+          "n": 1422,
+          "record": "358-1064",
+          "hit": 25.2,
+          "units": -125.5,
+          "roi": -8.8,
+          "needs": 27.5
+        },
+        "20-30%": {
+          "n": 1049,
+          "record": "235-814",
+          "hit": 22.4,
+          "units": -83.7,
+          "roi": -8.0,
+          "needs": 23.9
+        },
+        "30%+": {
+          "n": 2516,
+          "record": "448-2068",
+          "hit": 17.8,
+          "units": 259.5,
+          "roi": 10.3,
+          "needs": 16.7
+        }
+      },
+      "yes_by_edge_median": {
+        "below 0": {
+          "n": 15419,
+          "record": "4499-10920",
+          "hit": 29.2,
+          "units": -3547.6,
+          "roi": -23.0,
+          "needs": 37.8
+        },
+        "0-5%": {
+          "n": 945,
+          "record": "216-729",
+          "hit": 22.9,
+          "units": -255.5,
+          "roi": -27.0,
+          "needs": 30.5
+        },
+        "5-10%": {
+          "n": 730,
+          "record": "182-548",
+          "hit": 24.9,
+          "units": -136.3,
+          "roi": -18.7,
+          "needs": 29.5
+        },
+        "10-20%": {
+          "n": 1148,
+          "record": "269-879",
+          "hit": 23.4,
+          "units": -193.9,
+          "roi": -16.9,
+          "needs": 27.7
+        },
+        "20-30%": {
+          "n": 701,
+          "record": "157-544",
+          "hit": 22.4,
+          "units": -25.5,
+          "roi": -3.6,
+          "needs": 23.7
+        },
+        "30%+": {
+          "n": 1543,
+          "record": "265-1278",
+          "hit": 17.2,
+          "units": 113.2,
+          "roi": 7.3,
+          "needs": 16.6
+        }
+      },
+      "yes_by_edge_draftkings": {
+        "below 0": {
+          "n": 14046,
+          "record": "4106-9940",
+          "hit": 29.2,
+          "units": -3245.6,
+          "roi": -23.1,
+          "needs": 37.9
+        },
+        "0-5%": {
+          "n": 893,
+          "record": "227-666",
+          "hit": 25.4,
+          "units": -150.0,
+          "roi": -16.8,
+          "needs": 30.1
+        },
+        "5-10%": {
+          "n": 698,
+          "record": "167-531",
+          "hit": 23.9,
+          "units": -107.1,
+          "roi": -15.3,
+          "needs": 28.2
+        },
+        "10-20%": {
+          "n": 1071,
+          "record": "259-812",
+          "hit": 24.2,
+          "units": -147.6,
+          "roi": -13.8,
+          "needs": 27.7
+        },
+        "20-30%": {
+          "n": 663,
+          "record": "141-522",
+          "hit": 21.3,
+          "units": -46.8,
+          "roi": -7.1,
+          "needs": 23.2
+        },
+        "30%+": {
+          "n": 1476,
+          "record": "249-1227",
+          "hit": 16.9,
+          "units": 35.0,
+          "roi": 2.4,
+          "needs": 16.6
+        }
+      },
+      "yes_edge0_by_season": {
+        "2024": {
+          "n": 2602,
+          "record": "598-2004",
+          "hit": 23.0,
+          "units": -103.4,
+          "roi": -4.0,
+          "needs": 24.3
+        },
+        "2025": {
+          "n": 2597,
+          "record": "590-2007",
+          "hit": 22.7,
+          "units": -92.2,
+          "roi": -3.5,
+          "needs": 23.7
+        },
+        "2026": {
+          "n": 1792,
+          "record": "387-1405",
+          "hit": 21.6,
+          "units": 59.9,
+          "roi": 3.3,
+          "needs": 22.2
+        }
+      },
+      "yes_edge10_by_season": {
+        "2024": {
+          "n": 1858,
+          "record": "404-1454",
+          "hit": 21.7,
+          "units": 18.8,
+          "roi": 1.0,
+          "needs": 21.8
+        },
+        "2025": {
+          "n": 1814,
+          "record": "370-1444",
+          "hit": 20.4,
+          "units": -58.3,
+          "roi": -3.2,
+          "needs": 21.6
+        },
+        "2026": {
+          "n": 1315,
+          "record": "267-1048",
+          "hit": 20.3,
+          "units": 89.8,
+          "roi": 6.8,
+          "needs": 20.2
+        }
+      },
+      "yes_edge0_by_price": {
+        "-200 or shorter": {
+          "n": 264,
+          "record": "200-64",
+          "hit": 75.8,
+          "units": -1.7,
+          "roi": -0.6,
+          "needs": 76.3
+        },
+        "-199 to -110": {
+          "n": 111,
+          "record": "73-38",
+          "hit": 65.8,
+          "units": 6.4,
+          "roi": 5.8,
+          "needs": 61.9
+        },
+        "-109 to +150": {
+          "n": 143,
+          "record": "49-94",
+          "hit": 34.3,
+          "units": -28.6,
+          "roi": -20.0,
+          "needs": 42.6
+        },
+        "+151 to +300": {
+          "n": 2112,
+          "record": "584-1528",
+          "hit": 27.7,
+          "units": -197.1,
+          "roi": -9.3,
+          "needs": 30.6
+        },
+        "+301 or longer": {
+          "n": 4361,
+          "record": "669-3692",
+          "hit": 15.3,
+          "units": 85.2,
+          "roi": 2.0,
+          "needs": 15.3
+        }
+      },
+      "yes_edge0_by_role": {
+        "QB": {
+          "n": 639,
+          "record": "166-473",
+          "hit": 26.0,
+          "units": -41.8,
+          "roi": -6.5,
+          "needs": 26.8
+        },
+        "backup rusher": {
+          "n": 787,
+          "record": "160-627",
+          "hit": 20.3,
+          "units": -97.2,
+          "roi": -12.4,
+          "needs": 23.2
+        },
+        "lead rusher (8+ carries)": {
+          "n": 835,
+          "record": "358-477",
+          "hit": 42.9,
+          "units": -118.4,
+          "roi": -14.2,
+          "needs": 47.0
+        },
+        "main receiver (3+ catches)": {
+          "n": 1688,
+          "record": "384-1304",
+          "hit": 22.7,
+          "units": -73.2,
+          "roi": -4.3,
+          "needs": 24.2
+        },
+        "minor role": {
+          "n": 3042,
+          "record": "507-2535",
+          "hit": 16.7,
+          "units": 194.9,
+          "roi": 6.4,
+          "needs": 16.1
+        }
+      },
+      "no_by_edge": {}
+    },
+    "poisson": {
+      "n_props": 20486,
+      "n_no_box_score_row": 5125,
+      "yes_by_edge_best_no_stat_as_loss": {
+        "below 0": {
+          "n": 16551,
+          "record": "4243-12308",
+          "hit": 25.6,
+          "units": -5235.5,
+          "roi": -31.6,
+          "needs": 35.5
+        },
+        "0-5%": {
+          "n": 1493,
+          "record": "344-1149",
+          "hit": 23.0,
+          "units": -263.8,
+          "roi": -17.7,
+          "needs": 27.6
+        },
+        "5-10%": {
+          "n": 1202,
+          "record": "234-968",
+          "hit": 19.5,
+          "units": -328.2,
+          "roi": -27.3,
+          "needs": 24.6
+        },
+        "10-20%": {
+          "n": 1739,
+          "record": "282-1457",
+          "hit": 16.2,
+          "units": -483.1,
+          "roi": -27.8,
+          "needs": 22.0
+        },
+        "20-30%": {
+          "n": 1151,
+          "record": "156-995",
+          "hit": 13.6,
+          "units": -330.5,
+          "roi": -28.7,
+          "needs": 19.2
+        },
+        "30%+": {
+          "n": 3475,
+          "record": "329-3146",
+          "hit": 9.5,
+          "units": -1122.1,
+          "roi": -32.3,
+          "needs": 14.2
+        }
+      },
+      "honesty": {
+        "all": {
+          "n": 20486,
+          "model": 27.7,
+          "market_with_vig": 34.5,
+          "actual": 27.3,
+          "logloss_model": 0.541
+        },
+        "rows_with_both_sides": {
+          "n": 0,
+          "model": null,
+          "market_no_vig": null,
+          "actual": null,
+          "logloss_model": null,
+          "logloss_market": null
+        }
+      },
+      "by_model_chance": [
+        {
+          "bucket": "<15%",
+          "n": 2726,
+          "model": 12.3,
+          "market": 17.1,
+          "actual": 10.8
+        },
+        {
+          "bucket": "15-25%",
+          "n": 7586,
+          "model": 19.8,
+          "market": 25.1,
+          "actual": 19.3
+        },
+        {
+          "bucket": "25-35%",
+          "n": 5211,
+          "model": 29.6,
+          "market": 37.1,
+          "actual": 29.1
+        },
+        {
+          "bucket": "35-45%",
+          "n": 2770,
+          "model": 39.5,
+          "market": 48.6,
+          "actual": 38.8
+        },
+        {
+          "bucket": "45-55%",
+          "n": 1272,
+          "model": 49.3,
+          "market": 59.8,
+          "actual": 49.2
+        },
+        {
+          "bucket": "55-65%",
+          "n": 631,
+          "model": 59.2,
+          "market": 68.9,
+          "actual": 62.4
+        },
+        {
+          "bucket": "65%+",
+          "n": 290,
+          "model": 70.6,
+          "market": 78.8,
+          "actual": 74.5
+        }
+      ],
+      "yes_by_edge_best": {
+        "below 0": {
+          "n": 14076,
+          "record": "4243-9833",
+          "hit": 30.1,
+          "units": -2760.5,
+          "roi": -19.6,
+          "needs": 37.0
+        },
+        "0-5%": {
+          "n": 1256,
+          "record": "344-912",
+          "hit": 27.4,
+          "units": -26.8,
+          "roi": -2.1,
+          "needs": 28.7
+        },
+        "5-10%": {
+          "n": 962,
+          "record": "234-728",
+          "hit": 24.3,
+          "units": -88.2,
+          "roi": -9.2,
+          "needs": 25.5
+        },
+        "10-20%": {
+          "n": 1342,
+          "record": "282-1060",
+          "hit": 21.0,
+          "units": -86.1,
+          "roi": -6.4,
+          "needs": 22.8
+        },
+        "20-30%": {
+          "n": 825,
+          "record": "156-669",
+          "hit": 18.9,
+          "units": -4.5,
+          "roi": -0.5,
+          "needs": 19.5
+        },
+        "30%+": {
+          "n": 2025,
+          "record": "329-1696",
+          "hit": 16.2,
+          "units": 327.9,
+          "roi": 16.2,
+          "needs": 14.2
+        }
+      },
+      "yes_by_edge_median": {
+        "below 0": {
+          "n": 16329,
+          "record": "4789-11540",
+          "hit": 29.3,
+          "units": -3916.5,
+          "roi": -24.0,
+          "needs": 38.1
+        },
+        "0-5%": {
+          "n": 888,
+          "record": "215-673",
+          "hit": 24.2,
+          "units": -95.3,
+          "roi": -10.7,
+          "needs": 26.4
+        },
+        "5-10%": {
+          "n": 643,
+          "record": "123-520",
+          "hit": 19.1,
+          "units": -134.1,
+          "roi": -20.9,
+          "needs": 24.5
+        },
+        "10-20%": {
+          "n": 885,
+          "record": "177-708",
+          "hit": 20.0,
+          "units": -67.1,
+          "roi": -7.6,
+          "needs": 21.2
+        },
+        "20-30%": {
+          "n": 559,
+          "record": "110-449",
+          "hit": 19.7,
+          "units": 84.4,
+          "roi": 15.1,
+          "needs": 18.2
+        },
+        "30%+": {
+          "n": 1182,
+          "record": "174-1008",
+          "hit": 14.7,
+          "units": 82.9,
+          "roi": 7.0,
+          "needs": 14.2
+        }
+      },
+      "yes_by_edge_draftkings": {
+        "below 0": {
+          "n": 14808,
+          "record": "4369-10439",
+          "hit": 29.5,
+          "units": -3536.5,
+          "roi": -23.9,
+          "needs": 38.3
+        },
+        "0-5%": {
+          "n": 863,
+          "record": "201-662",
+          "hit": 23.3,
+          "units": -64.8,
+          "roi": -7.5,
+          "needs": 26.2
+        },
+        "5-10%": {
+          "n": 611,
+          "record": "123-488",
+          "hit": 20.1,
+          "units": -128.6,
+          "roi": -21.0,
+          "needs": 24.3
+        },
+        "10-20%": {
+          "n": 891,
+          "record": "191-700",
+          "hit": 21.4,
+          "units": 4.5,
+          "roi": 0.5,
+          "needs": 21.1
+        },
+        "20-30%": {
+          "n": 541,
+          "record": "98-443",
+          "hit": 18.1,
+          "units": 10.6,
+          "roi": 2.0,
+          "needs": 18.0
+        },
+        "30%+": {
+          "n": 1133,
+          "record": "167-966",
+          "hit": 14.7,
+          "units": 52.6,
+          "roi": 4.6,
+          "needs": 14.4
+        }
+      },
+      "yes_edge0_by_season": {
+        "2024": {
+          "n": 2185,
+          "record": "464-1721",
+          "hit": 21.2,
+          "units": -32.2,
+          "roi": -1.5,
+          "needs": 22.0
+        },
+        "2025": {
+          "n": 2435,
+          "record": "500-1935",
+          "hit": 20.5,
+          "units": -26.5,
+          "roi": -1.1,
+          "needs": 21.5
+        },
+        "2026": {
+          "n": 1790,
+          "record": "381-1409",
+          "hit": 21.3,
+          "units": 180.9,
+          "roi": 10.1,
+          "needs": 19.9
+        }
+      },
+      "yes_edge10_by_season": {
+        "2024": {
+          "n": 1351,
+          "record": "242-1109",
+          "hit": 17.9,
+          "units": 35.9,
+          "roi": 2.7,
+          "needs": 18.1
+        },
+        "2025": {
+          "n": 1591,
+          "record": "287-1304",
+          "hit": 18.0,
+          "units": 43.9,
+          "roi": 2.8,
+          "needs": 18.2
+        },
+        "2026": {
+          "n": 1252,
+          "record": "239-1013",
+          "hit": 19.1,
+          "units": 161.4,
+          "roi": 12.9,
+          "needs": 17.5
+        }
+      },
+      "yes_edge0_by_price": {
+        "-200 or shorter": {
+          "n": 28,
+          "record": "23-5",
+          "hit": 82.1,
+          "units": 4.4,
+          "roi": 15.7,
+          "needs": 71.2
+        },
+        "-199 to -110": {
+          "n": 139,
+          "record": "77-62",
+          "hit": 55.4,
+          "units": -8.4,
+          "roi": -6.0,
+          "needs": 58.4
+        },
+        "-109 to +150": {
+          "n": 309,
+          "record": "119-190",
+          "hit": 38.5,
+          "units": -40.8,
+          "roi": -13.2,
+          "needs": 44.2
+        },
+        "+151 to +300": {
+          "n": 1370,
+          "record": "395-975",
+          "hit": 28.8,
+          "units": -88.4,
+          "roi": -6.5,
+          "needs": 30.8
+        },
+        "+301 or longer": {
+          "n": 4564,
+          "record": "731-3833",
+          "hit": 16.0,
+          "units": 255.4,
+          "roi": 5.6,
+          "needs": 15.3
+        }
+      },
+      "yes_edge0_by_role": {
+        "QB": {
+          "n": 562,
+          "record": "128-434",
+          "hit": 22.8,
+          "units": -60.6,
+          "roi": -10.8,
+          "needs": 23.9
+        },
+        "backup rusher": {
+          "n": 651,
+          "record": "132-519",
+          "hit": 20.3,
+          "units": 2.6,
+          "roi": 0.4,
+          "needs": 20.8
+        },
+        "lead rusher (8+ carries)": {
+          "n": 649,
+          "record": "214-435",
+          "hit": 33.0,
+          "units": -126.0,
+          "roi": -19.4,
+          "needs": 38.2
+        },
+        "main receiver (3+ catches)": {
+          "n": 1612,
+          "record": "394-1218",
+          "hit": 24.4,
+          "units": -5.1,
+          "roi": -0.3,
+          "needs": 24.9
+        },
+        "minor role": {
+          "n": 2936,
+          "record": "477-2459",
+          "hit": 16.2,
+          "units": 311.3,
+          "roi": 10.6,
+          "needs": 15.0
+        }
+      },
+      "no_by_edge": {}
+    },
+    "direct": {
+      "n_props": 20486,
+      "n_no_box_score_row": 5125,
+      "yes_by_edge_best_no_stat_as_loss": {
+        "below 0": {
+          "n": 16641,
+          "record": "4312-12329",
+          "hit": 25.9,
+          "units": -5176.2,
+          "roi": -31.1,
+          "needs": 35.6
+        },
+        "0-5%": {
+          "n": 1370,
+          "record": "276-1094",
+          "hit": 20.1,
+          "units": -429.9,
+          "roi": -31.4,
+          "needs": 27.4
+        },
+        "5-10%": {
+          "n": 1175,
+          "record": "232-943",
+          "hit": 19.7,
+          "units": -246.0,
+          "roi": -20.9,
+          "needs": 24.4
+        },
+        "10-20%": {
+          "n": 1720,
+          "record": "273-1447",
+          "hit": 15.9,
+          "units": -474.0,
+          "roi": -27.6,
+          "needs": 21.5
+        },
+        "20-30%": {
+          "n": 1200,
+          "record": "172-1028",
+          "hit": 14.3,
+          "units": -315.8,
+          "roi": -26.3,
+          "needs": 18.6
+        },
+        "30%+": {
+          "n": 3505,
+          "record": "323-3182",
+          "hit": 9.2,
+          "units": -1121.4,
+          "roi": -32.0,
+          "needs": 13.9
+        }
+      },
+      "honesty": {
+        "all": {
+          "n": 20486,
+          "model": 27.4,
+          "market_with_vig": 34.5,
+          "actual": 27.3,
+          "logloss_model": 0.5413
+        },
+        "rows_with_both_sides": {
+          "n": 0,
+          "model": null,
+          "market_no_vig": null,
+          "actual": null,
+          "logloss_model": null,
+          "logloss_market": null
+        }
+      },
+      "by_model_chance": [
+        {
+          "bucket": "<15%",
+          "n": 2630,
+          "model": 12.5,
+          "market": 17.4,
+          "actual": 11.6
+        },
+        {
+          "bucket": "15-25%",
+          "n": 8131,
+          "model": 19.7,
+          "market": 25.4,
+          "actual": 19.4
+        },
+        {
+          "bucket": "25-35%",
+          "n": 4894,
+          "model": 29.5,
+          "market": 37.7,
+          "actual": 29.5
+        },
+        {
+          "bucket": "35-45%",
+          "n": 2678,
+          "model": 39.4,
+          "market": 48.6,
+          "actual": 38.9
+        },
+        {
+          "bucket": "45-55%",
+          "n": 1287,
+          "model": 49.2,
+          "market": 60.0,
+          "actual": 49.2
+        },
+        {
+          "bucket": "55-65%",
+          "n": 599,
+          "model": 59.3,
+          "market": 69.3,
+          "actual": 63.8
+        },
+        {
+          "bucket": "65%+",
+          "n": 267,
+          "model": 70.3,
+          "market": 79.3,
+          "actual": 76.8
+        }
+      ],
+      "yes_by_edge_best": {
+        "below 0": {
+          "n": 14262,
+          "record": "4312-9950",
+          "hit": 30.2,
+          "units": -2797.2,
+          "roi": -19.6,
+          "needs": 37.0
+        },
+        "0-5%": {
+          "n": 1126,
+          "record": "276-850",
+          "hit": 24.5,
+          "units": -185.9,
+          "roi": -16.5,
+          "needs": 28.8
+        },
+        "5-10%": {
+          "n": 941,
+          "record": "232-709",
+          "hit": 24.7,
+          "units": -12.0,
+          "roi": -1.3,
+          "needs": 25.2
+        },
+        "10-20%": {
+          "n": 1287,
+          "record": "273-1014",
+          "hit": 21.2,
+          "units": -41.0,
+          "roi": -3.2,
+          "needs": 22.3
+        },
+        "20-30%": {
+          "n": 874,
+          "record": "172-702",
+          "hit": 19.7,
+          "units": 10.2,
+          "roi": 1.2,
+          "needs": 18.8
+        },
+        "30%+": {
+          "n": 1996,
+          "record": "323-1673",
+          "hit": 16.2,
+          "units": 387.6,
+          "roi": 19.4,
+          "needs": 13.9
+        }
+      },
+      "yes_by_edge_median": {
+        "below 0": {
+          "n": 16339,
+          "record": "4789-11550",
+          "hit": 29.3,
+          "units": -4066.1,
+          "roi": -24.9,
+          "needs": 38.2
+        },
+        "0-5%": {
+          "n": 896,
+          "record": "203-693",
+          "hit": 22.7,
+          "units": -111.2,
+          "roi": -12.4,
+          "needs": 25.9
+        },
+        "5-10%": {
+          "n": 668,
+          "record": "138-530",
+          "hit": 20.7,
+          "units": -63.8,
+          "roi": -9.6,
+          "needs": 23.4
+        },
+        "10-20%": {
+          "n": 873,
+          "record": "189-684",
+          "hit": 21.6,
+          "units": 49.7,
+          "roi": 5.7,
+          "needs": 20.7
+        },
+        "20-30%": {
+          "n": 543,
+          "record": "99-444",
+          "hit": 18.2,
+          "units": 20.2,
+          "roi": 3.7,
+          "needs": 17.7
+        },
+        "30%+": {
+          "n": 1167,
+          "record": "170-997",
+          "hit": 14.6,
+          "units": 125.6,
+          "roi": 10.8,
+          "needs": 13.8
+        }
+      },
+      "yes_by_edge_draftkings": {
+        "below 0": {
+          "n": 14865,
+          "record": "4377-10488",
+          "hit": 29.4,
+          "units": -3652.2,
+          "roi": -24.6,
+          "needs": 38.3
+        },
+        "0-5%": {
+          "n": 789,
+          "record": "182-607",
+          "hit": 23.1,
+          "units": -84.9,
+          "roi": -10.8,
+          "needs": 26.2
+        },
+        "5-10%": {
+          "n": 649,
+          "record": "140-509",
+          "hit": 21.6,
+          "units": -40.8,
+          "roi": -6.3,
+          "needs": 23.7
+        },
+        "10-20%": {
+          "n": 830,
+          "record": "175-655",
+          "hit": 21.1,
+          "units": 9.8,
+          "roi": 1.2,
+          "needs": 20.7
+        },
+        "20-30%": {
+          "n": 570,
+          "record": "110-460",
+          "hit": 19.3,
+          "units": 30.0,
+          "roi": 5.3,
+          "needs": 18.2
+        },
+        "30%+": {
+          "n": 1144,
+          "record": "165-979",
+          "hit": 14.4,
+          "units": 75.9,
+          "roi": 6.6,
+          "needs": 13.9
+        }
+      },
+      "yes_edge0_by_season": {
+        "2024": {
+          "n": 2130,
+          "record": "429-1701",
+          "hit": 20.1,
+          "units": -36.9,
+          "roi": -1.7,
+          "needs": 21.1
+        },
+        "2025": {
+          "n": 2364,
+          "record": "481-1883",
+          "hit": 20.3,
+          "units": -16.3,
+          "roi": -0.7,
+          "needs": 21.3
+        },
+        "2026": {
+          "n": 1730,
+          "record": "366-1364",
+          "hit": 21.2,
+          "units": 212.1,
+          "roi": 12.3,
+          "needs": 19.5
+        }
+      },
+      "yes_edge10_by_season": {
+        "2024": {
+          "n": 1360,
+          "record": "232-1128",
+          "hit": 17.1,
+          "units": 15.3,
+          "roi": 1.1,
+          "needs": 17.6
+        },
+        "2025": {
+          "n": 1542,
+          "record": "285-1257",
+          "hit": 18.5,
+          "units": 89.9,
+          "roi": 5.8,
+          "needs": 17.8
+        },
+        "2026": {
+          "n": 1255,
+          "record": "251-1004",
+          "hit": 20.0,
+          "units": 251.6,
+          "roi": 20.0,
+          "needs": 17.2
+        }
+      },
+      "yes_edge0_by_price": {
+        "-200 or shorter": {
+          "n": 20,
+          "record": "18-2",
+          "hit": 90.0,
+          "units": 5.3,
+          "roi": 26.7,
+          "needs": 71.4
+        },
+        "-199 to -110": {
+          "n": 114,
+          "record": "68-46",
+          "hit": 59.6,
+          "units": 1.5,
+          "roi": 1.3,
+          "needs": 58.6
+        },
+        "-109 to +150": {
+          "n": 291,
+          "record": "109-182",
+          "hit": 37.5,
+          "units": -45.3,
+          "roi": -15.6,
+          "needs": 44.1
+        },
+        "+151 to +300": {
+          "n": 1266,
+          "record": "362-904",
+          "hit": 28.6,
+          "units": -98.5,
+          "roi": -7.8,
+          "needs": 31.0
+        },
+        "+301 or longer": {
+          "n": 4533,
+          "record": "719-3814",
+          "hit": 15.9,
+          "units": 295.9,
+          "roi": 6.5,
+          "needs": 15.2
+        }
+      },
+      "yes_edge0_by_role": {
+        "QB": {
+          "n": 429,
+          "record": "89-340",
+          "hit": 20.7,
+          "units": -57.7,
+          "roi": -13.5,
+          "needs": 23.0
+        },
+        "backup rusher": {
+          "n": 560,
+          "record": "107-453",
+          "hit": 19.1,
+          "units": -19.0,
+          "roi": -3.4,
+          "needs": 20.1
+        },
+        "lead rusher (8+ carries)": {
+          "n": 507,
+          "record": "170-337",
+          "hit": 33.5,
+          "units": -97.2,
+          "roi": -19.2,
+          "needs": 38.6
+        },
+        "main receiver (3+ catches)": {
+          "n": 1690,
+          "record": "421-1269",
+          "hit": 24.9,
+          "units": -10.1,
+          "roi": -0.6,
+          "needs": 25.6
+        },
+        "minor role": {
+          "n": 3038,
+          "record": "489-2549",
+          "hit": 16.1,
+          "units": 343.1,
+          "roi": 11.3,
+          "needs": 14.8
+        }
+      },
+      "no_by_edge": {}
+    },
+    "direct_cal": {
+      "n_props": 20486,
+      "n_no_box_score_row": 5125,
+      "yes_by_edge_best_no_stat_as_loss": {
+        "below 0": {
+          "n": 16836,
+          "record": "4303-12533",
+          "hit": 25.6,
+          "units": -5242.7,
+          "roi": -31.1,
+          "needs": 35.2
+        },
+        "0-5%": {
+          "n": 1383,
+          "record": "281-1102",
+          "hit": 20.3,
+          "units": -389.8,
+          "roi": -28.2,
+          "needs": 27.4
+        },
+        "5-10%": {
+          "n": 1186,
+          "record": "246-940",
+          "hit": 20.7,
+          "units": -244.4,
+          "roi": -20.6,
+          "needs": 25.2
+        },
+        "10-20%": {
+          "n": 1684,
+          "record": "278-1406",
+          "hit": 16.5,
+          "units": -485.5,
+          "roi": -28.8,
+          "needs": 22.1
+        },
+        "20-30%": {
+          "n": 1214,
+          "record": "185-1029",
+          "hit": 15.2,
+          "units": -222.3,
+          "roi": -18.3,
+          "needs": 19.0
+        },
+        "30%+": {
+          "n": 3308,
+          "record": "295-3013",
+          "hit": 8.9,
+          "units": -1178.6,
+          "roi": -35.6,
+          "needs": 14.2
+        }
+      },
+      "honesty": {
+        "all": {
+          "n": 20486,
+          "model": 27.3,
+          "market_with_vig": 34.5,
+          "actual": 27.3,
+          "logloss_model": 0.5414
+        },
+        "rows_with_both_sides": {
+          "n": 0,
+          "model": null,
+          "market_no_vig": null,
+          "actual": null,
+          "logloss_model": null,
+          "logloss_market": null
+        }
+      },
+      "by_model_chance": [
+        {
+          "bucket": "<15%",
+          "n": 2973,
+          "model": 12.4,
+          "market": 17.6,
+          "actual": 11.8
+        },
+        {
+          "bucket": "15-25%",
+          "n": 7915,
+          "model": 19.7,
+          "market": 25.8,
+          "actual": 19.8
+        },
+        {
+          "bucket": "25-35%",
+          "n": 4725,
+          "model": 29.5,
+          "market": 37.9,
+          "actual": 29.4
+        },
+        {
+          "bucket": "35-45%",
+          "n": 2650,
+          "model": 39.5,
+          "market": 48.4,
+          "actual": 39.1
+        },
+        {
+          "bucket": "45-55%",
+          "n": 1288,
+          "model": 49.4,
+          "market": 59.2,
+          "actual": 48.1
+        },
+        {
+          "bucket": "55-65%",
+          "n": 620,
+          "model": 59.2,
+          "market": 68.9,
+          "actual": 62.6
+        },
+        {
+          "bucket": "65%+",
+          "n": 315,
+          "model": 70.5,
+          "market": 77.8,
+          "actual": 74.6
+        }
+      ],
+      "yes_by_edge_best": {
+        "below 0": {
+          "n": 14395,
+          "record": "4303-10092",
+          "hit": 29.9,
+          "units": -2801.7,
+          "roi": -19.5,
+          "needs": 36.5
+        },
+        "0-5%": {
+          "n": 1127,
+          "record": "281-846",
+          "hit": 24.9,
+          "units": -133.8,
+          "roi": -11.9,
+          "needs": 28.7
+        },
+        "5-10%": {
+          "n": 951,
+          "record": "246-705",
+          "hit": 25.9,
+          "units": -9.4,
+          "roi": -1.0,
+          "needs": 26.3
+        },
+        "10-20%": {
+          "n": 1280,
+          "record": "278-1002",
+          "hit": 21.7,
+          "units": -81.5,
+          "roi": -6.4,
+          "needs": 23.1
+        },
+        "20-30%": {
+          "n": 883,
+          "record": "185-698",
+          "hit": 21.0,
+          "units": 108.7,
+          "roi": 12.3,
+          "needs": 19.3
+        },
+        "30%+": {
+          "n": 1850,
+          "record": "295-1555",
+          "hit": 15.9,
+          "units": 279.4,
+          "roi": 15.1,
+          "needs": 14.2
+        }
+      },
+      "yes_by_edge_median": {
+        "below 0": {
+          "n": 16486,
+          "record": "4790-11696",
+          "hit": 29.1,
+          "units": -4076.8,
+          "roi": -24.7,
+          "needs": 37.8
+        },
+        "0-5%": {
+          "n": 922,
+          "record": "212-710",
+          "hit": 23.0,
+          "units": -126.8,
+          "roi": -13.7,
+          "needs": 26.4
+        },
+        "5-10%": {
+          "n": 629,
+          "record": "142-487",
+          "hit": 22.6,
+          "units": -36.1,
+          "roi": -5.7,
+          "needs": 24.5
+        },
+        "10-20%": {
+          "n": 831,
+          "record": "186-645",
+          "hit": 22.4,
+          "units": 93.3,
+          "roi": 11.2,
+          "needs": 21.5
+        },
+        "20-30%": {
+          "n": 547,
+          "record": "104-443",
+          "hit": 19.0,
+          "units": 44.7,
+          "roi": 8.2,
+          "needs": 18.3
+        },
+        "30%+": {
+          "n": 1071,
+          "record": "154-917",
+          "hit": 14.4,
+          "units": 56.2,
+          "roi": 5.2,
+          "needs": 14.1
+        }
+      },
+      "yes_by_edge_draftkings": {
+        "below 0": {
+          "n": 14992,
+          "record": "4379-10613",
+          "hit": 29.2,
+          "units": -3641.1,
+          "roi": -24.3,
+          "needs": 37.9
+        },
+        "0-5%": {
+          "n": 804,
+          "record": "187-617",
+          "hit": 23.3,
+          "units": -98.6,
+          "roi": -12.3,
+          "needs": 26.7
+        },
+        "5-10%": {
+          "n": 628,
+          "record": "141-487",
+          "hit": 22.5,
+          "units": -52.2,
+          "roi": -8.3,
+          "needs": 25.0
+        },
+        "10-20%": {
+          "n": 826,
+          "record": "178-648",
+          "hit": 21.5,
+          "units": 36.0,
+          "roi": 4.4,
+          "needs": 21.5
+        },
+        "20-30%": {
+          "n": 574,
+          "record": "115-459",
+          "hit": 20.0,
+          "units": 63.0,
+          "roi": 11.0,
+          "needs": 18.3
+        },
+        "30%+": {
+          "n": 1023,
+          "record": "149-874",
+          "hit": 14.6,
+          "units": 30.8,
+          "roi": 3.0,
+          "needs": 14.3
+        }
+      },
+      "yes_edge0_by_season": {
+        "2024": {
+          "n": 2043,
+          "record": "393-1650",
+          "hit": 19.2,
+          "units": -25.0,
+          "roi": -1.2,
+          "needs": 20.0
+        },
+        "2025": {
+          "n": 2365,
+          "record": "519-1846",
+          "hit": 21.9,
+          "units": -34.2,
+          "roi": -1.4,
+          "needs": 23.1
+        },
+        "2026": {
+          "n": 1683,
+          "record": "373-1310",
+          "hit": 22.2,
+          "units": 222.7,
+          "roi": 13.2,
+          "needs": 20.7
+        }
+      },
+      "yes_edge10_by_season": {
+        "2024": {
+          "n": 1315,
+          "record": "217-1098",
+          "hit": 16.5,
+          "units": 18.0,
+          "roi": 1.4,
+          "needs": 16.9
+        },
+        "2025": {
+          "n": 1511,
+          "record": "292-1219",
+          "hit": 19.3,
+          "units": 38.1,
+          "roi": 2.5,
+          "needs": 19.4
+        },
+        "2026": {
+          "n": 1188,
+          "record": "249-939",
+          "hit": 21.0,
+          "units": 249.6,
+          "roi": 21.0,
+          "needs": 18.0
+        }
+      },
+      "yes_edge0_by_price": {
+        "-200 or shorter": {
+          "n": 33,
+          "record": "24-9",
+          "hit": 72.7,
+          "units": 0.8,
+          "roi": 2.3,
+          "needs": 71.5
+        },
+        "-199 to -110": {
+          "n": 147,
+          "record": "85-62",
+          "hit": 57.8,
+          "units": -2.2,
+          "roi": -1.5,
+          "needs": 58.5
+        },
+        "-109 to +150": {
+          "n": 328,
+          "record": "125-203",
+          "hit": 38.1,
+          "units": -46.6,
+          "roi": -14.2,
+          "needs": 44.3
+        },
+        "+151 to +300": {
+          "n": 1265,
+          "record": "366-899",
+          "hit": 28.9,
+          "units": -89.0,
+          "roi": -7.0,
+          "needs": 31.2
+        },
+        "+301 or longer": {
+          "n": 4318,
+          "record": "685-3633",
+          "hit": 15.9,
+          "units": 300.6,
+          "roi": 7.0,
+          "needs": 15.1
+        }
+      },
+      "yes_edge0_by_role": {
+        "QB": {
+          "n": 435,
+          "record": "100-335",
+          "hit": 23.0,
+          "units": -49.3,
+          "roi": -11.3,
+          "needs": 24.6
+        },
+        "backup rusher": {
+          "n": 539,
+          "record": "103-436",
+          "hit": 19.1,
+          "units": -29.8,
+          "roi": -5.5,
+          "needs": 20.4
+        },
+        "lead rusher (8+ carries)": {
+          "n": 557,
+          "record": "194-363",
+          "hit": 34.8,
+          "units": -102.6,
+          "roi": -18.4,
+          "needs": 40.4
+        },
+        "main receiver (3+ catches)": {
+          "n": 1687,
+          "record": "422-1265",
+          "hit": 25.0,
+          "units": -10.5,
+          "roi": -0.6,
+          "needs": 25.9
+        },
+        "minor role": {
+          "n": 2873,
+          "record": "466-2407",
+          "hit": 16.2,
+          "units": 355.7,
+          "roi": 12.4,
+          "needs": 14.7
+        }
+      },
+      "no_by_edge": {}
+    },
+    "no_model_every_yes": {
+      "all": {
+        "n": 20486,
+        "record": "5588-14898",
+        "hit": 27.3,
+        "units": -2638.3,
+        "roi": -12.9,
+        "needs": 32.0
+      },
+      "by_price": {
+        "-200 or shorter": {
+          "n": 779,
+          "record": "540-239",
+          "hit": 69.3,
+          "units": -46.4,
+          "roi": -6.0,
+          "needs": 73.6
+        },
+        "-199 to -110": {
+          "n": 1893,
+          "record": "922-971",
+          "hit": 48.7,
+          "units": -317.2,
+          "roi": -16.8,
+          "needs": 58.2
+        },
+        "-109 to +150": {
+          "n": 3159,
+          "record": "1138-2021",
+          "hit": 36.0,
+          "units": -625.9,
+          "roi": -19.8,
+          "needs": 45.0
+        },
+        "+151 to +300": {
+          "n": 6620,
+          "record": "1729-4891",
+          "hit": 26.1,
+          "units": -1158.7,
+          "roi": -17.5,
+          "needs": 31.6
+        },
+        "+301 or longer": {
+          "n": 8035,
+          "record": "1259-6776",
+          "hit": 15.7,
+          "units": -490.2,
+          "roi": -6.1,
+          "needs": 17.0
+        }
+      },
+      "by_role": {
+        "QB": {
+          "n": 2427,
+          "record": "726-1701",
+          "hit": 29.9,
+          "units": -370.7,
+          "roi": -15.3,
+          "needs": 34.7
+        },
+        "backup rusher": {
+          "n": 2791,
+          "record": "662-2129",
+          "hit": 23.7,
+          "units": -609.9,
+          "roi": -21.9,
+          "needs": 31.4
+        },
+        "lead rusher (8+ carries)": {
+          "n": 3136,
+          "record": "1375-1761",
+          "hit": 43.8,
+          "units": -554.0,
+          "roi": -17.7,
+          "needs": 51.7
+        },
+        "main receiver (3+ catches)": {
+          "n": 5196,
+          "record": "1579-3617",
+          "hit": 30.4,
+          "units": -542.2,
+          "roi": -10.4,
+          "needs": 34.6
+        },
+        "minor role": {
+          "n": 6936,
+          "record": "1246-5690",
+          "hit": 18.0,
+          "units": -561.5,
+          "roi": -8.1,
+          "needs": 20.6
+        }
+      },
+      "by_season": {
+        "2024": {
+          "n": 8196,
+          "record": "2227-5969",
+          "hit": 27.2,
+          "units": -1339.1,
+          "roi": -16.3,
+          "needs": 32.7
+        },
+        "2025": {
+          "n": 7049,
+          "record": "1950-5099",
+          "hit": 27.7,
+          "units": -797.7,
+          "roi": -11.3,
+          "needs": 31.7
+        },
+        "2026": {
+          "n": 5241,
+          "record": "1411-3830",
+          "hit": 26.9,
+          "units": -501.4,
+          "roi": -9.6,
+          "needs": 31.5
+        }
+      }
+    }
+  }
+}
