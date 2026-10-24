@@ -1,0 +1,26 @@
+name: Start the daily run now
+
+# Starts "Manual CFB model run" (the daily run) right away with its normal
+# settings. Lets a session that can push code but can't press "Run
+# workflow" kick off a refresh: pushing a change to this file starts it.
+# Also runnable from the Actions tab.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/start_daily_run.yml"
+
+permissions:
+  actions: write
+
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start the daily run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run manual_run.yml --repo "${{ github.repository }}" --ref main
+# last started: 2026-10-24 (Anytime TD tab)
