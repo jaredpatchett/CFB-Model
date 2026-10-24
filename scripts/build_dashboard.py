@@ -2093,6 +2093,14 @@ RENDERER_JS = """<script>
   // what the backtest found.
   function renderAnytime() {
     var all = D.anytimeTd || [];
+    // Tag from the player's role (also set by the export; recomputed here so
+    // older data reads the same way).
+    all.forEach(function (r) {
+      if (r.model_prob == null) return;
+      if (r.role === 'QB' || r.role === 'Lead RB') r.tag = 'caution';
+      else if (r.role === 'Minor role' || r.role === 'Backup RB') r.tag = 'longshot';
+    });
+    var okTag = function (r) { return r.tag !== 'caution' && r.tag !== 'longshot'; };
     var head = '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Anytime TD</h2></div>' +
       '<div style="font-size:10px;color:var(--muted-3)">Model odds vs sportsbook odds &middot; not official plays</div></div>';
     if (!all.length) {
@@ -2119,7 +2127,7 @@ RENDERER_JS = """<script>
       if (gameSel !== 'ALL' && r.fixture_id !== gameSel) return false;
       var e = edgeOf(r);
       if (view === 'beats') return r.model_prob != null && e != null && e > 0;
-      if (view === 'value') return r.model_prob != null && e != null && e >= 20 && r.tag !== 'caution';
+      if (view === 'value') return r.model_prob != null && e != null && e >= 20 && okTag(r);
       return true;
     });
     var sort = ['edge', 'chance', 'kickoff'].indexOf(state.atdSort) === -1 ? 'edge' : state.atdSort;
@@ -2134,11 +2142,11 @@ RENDERER_JS = """<script>
       return '<button class="tab tab--prop' + (cur === val ? ' is-active' : '') + '" data-atd-set="' + key + '" data-atd-val="' + val + '"><span>' + label + '</span></button>';
     };
     var nBeats = all.filter(function (r) { var e = edgeOf(r); return r.model_prob != null && e != null && e > 0; }).length;
-    var nValue = all.filter(function (r) { var e = edgeOf(r); return r.model_prob != null && e != null && e >= 20 && r.tag !== 'caution'; }).length;
+    var nValue = all.filter(function (r) { var e = edgeOf(r); return r.model_prob != null && e != null && e >= 20 && okTag(r); }).length;
     var filters = '<div class="prop-tabs" style="margin:12px 0 8px">' +
         seg('atdView', 'all', view, 'All (' + all.length + ')') +
         seg('atdView', 'beats', view, 'Price better than fair (' + nBeats + ')') +
-        seg('atdView', 'value', view, '20%+ edge (' + nValue + ')') +
+        seg('atdView', 'value', view, '20%+ edge, main roles (' + nValue + ')') +
       '</div>' +
       '<div class="prop-tabs" style="margin:0 0 14px;align-items:flex-end">' +
         '<div class="pp-fgroup"><span class="pp-flabel">Price</span><div style="display:flex;gap:6px">' +
@@ -2156,7 +2164,9 @@ RENDERER_JS = """<script>
     }
     var cards = rows.slice(0, 300).map(function (r) {
       var chip = '';
-      if (r.tag === 'value') chip = '<span style="color:var(--green);font-size:9.5px;letter-spacing:.08em">20%+ EDGE</span>';
+      var e0 = edgeOf(r);
+      if (r.tag === 'longshot') chip = '<span style="color:var(--amber);font-size:9.5px;letter-spacing:.08em" title="Small role: often does not touch the ball. In the backtest this group only looked profitable when players without a box-score line were left out">LONG SHOT</span>';
+      else if (r.tag !== 'caution' && r.model_prob != null && e0 != null && e0 >= 20) chip = '<span style="color:var(--green);font-size:9.5px;letter-spacing:.08em">20%+ EDGE</span>';
       else if (r.tag === 'caution') chip = '<span style="color:var(--amber);font-size:9.5px;letter-spacing:.08em" title="QBs and lead running backs lost at every edge size in the backtest">CAUTION</span>';
       var inj = r.injury_status ? ' <span style="color:var(--red);font-size:9.5px">' + esc(r.injury_status) + '</span>' : '';
       var sub = [r.role, r.team ? schoolAbbr(r.team) + (r.opponent ? ' vs ' + schoolAbbr(r.opponent) : '') : (r.away_team + ' @ ' + r.home_team), propKickoff(r.start_time)]
@@ -2192,7 +2202,8 @@ RENDERER_JS = """<script>
     return '<div class="table-foot"><span>Model chance = the rush TD and receiving TD projections added together and turned into the chance of at least one touchdown. ' +
       'Fair = the odds where that chance breaks even; a book price longer than fair is in your favor, and Edge is the expected return per 1u at that price. ' +
       'In the 2024&ndash;26 backtest these chances matched reality (27.7% said, 27.3% scored), but books price Yes well above the real rate, so most lines lose. ' +
-      'QBs and lead running backs lost at every edge size; main receivers at a 20%+ edge were about break-even at DraftKings. ' +
+      'QBs and lead running backs (CAUTION) lost at every edge size. Small-role players (LONG SHOT) show the biggest edges, but about a third of their lines had no box-score line (sat, or never touched the ball) and the edge disappeared once those were counted. ' +
+      'Main receivers at a 20%+ edge were about break-even at DraftKings. ' +
       'Best legal book leaves out offshore books (marked *). Display only &mdash; not official plays and not tracked.</span></div>';
   }
 

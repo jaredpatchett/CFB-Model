@@ -49,6 +49,11 @@ BOOK_LABELS = {
 OFFSHORE = {"bovada", "betonlineag", "mybookieag"}
 VALUE_MIN_EDGE = 20.0          # "price beats the model by 20%+" tag
 CAUTION_ROLES = {"QB", "Lead RB"}
+# Minor-role players and backup backs are tagged "longshot", never "value":
+# about a third of their lines in the backtest had no box-score row (sat, or
+# played without touching the ball), and their apparent edge disappeared
+# once those were counted.
+LONGSHOT_ROLES = {"Minor role", "Backup RB"}
 
 
 # ---------------------------------------------------------------- fetch ----
@@ -205,6 +210,8 @@ def build(player_form, schedule_df, opp_defense_lookup, prop_models, score_prop,
             if row.get("model_prob") is not None:
                 if row.get("role") in CAUTION_ROLES:
                     row["tag"] = "caution"
+                elif row.get("role") in LONGSHOT_ROLES:
+                    row["tag"] = "longshot"
                 elif row["edge_best"] >= VALUE_MIN_EDGE and row.get("injury_status") not in ("Out", "Out For Season", "IR", "Doubtful"):
                     row["tag"] = "value"
             out.append(row)
