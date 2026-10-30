@@ -1,0 +1,65 @@
+name: Matchup lab (defense vs position grades, backtested on props and anytime TDs)
+
+# Builds week-by-week matchup grades from CFBD box scores and rosters
+# (catches / yards / TDs allowed to each position, rush yards allowed) and
+# checks whether they help the official props and anytime TDs. Uses lines
+# already saved in the repo -- no Odds API credits. Results:
+# docs/data/matchup_lab.json, matchup_lab_report.txt, matchup_lab_detail.csv,
+# td_allowed_by_position_2026.csv. Does NOT touch the live model or dashboard.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [matchup-lab]
+    paths:
+      - ".github/workflows/matchup_lab.yml"
+      - "scripts/matchup_lab.py"
+
+permissions:
+  contents: write
+
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
+      YEARS: "2022 2023 2024 2025"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore cached historical CFBD data
+        uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: cfbd-raw-${{ env.YEARS }}-${{ github.run_id }}
+          restore-keys: |
+            cfbd-raw-${{ env.YEARS }}-
+            cfbd-raw-
+
+      - name: Fetch historical data
+        run: python scripts/fetch_historical_data.py --years ${{ env.YEARS }}
+
+      - name: Run the matchup lab
+        run: |
+          set -o pipefail
+          python scripts/matchup_lab.py --years ${{ env.YEARS }} --season 2026 2>&1 | tee docs/data/matchup_lab_log.txt
+
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          for f in docs/data/matchup_lab.json docs/data/matchup_lab_report.txt docs/data/matchup_lab_detail.csv docs/data/td_allowed_by_position_2026.csv docs/data/matchup_lab_log.txt; do
+            [ -f "$f" ] && git add "$f"
+          done
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Matchup lab results [skip ci]"
+          git push origin HEAD:matchup-lab
