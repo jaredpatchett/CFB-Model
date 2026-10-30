@@ -1,0 +1,419 @@
+snapshot_at,player,team,pos,opponent,kickoff,opp_td_rank,opp_td_pg,bet,line,side,price,book,model_prob,model_ev,official
+2026-10-30T20:13:22.459080+00:00,Jamauri McClure,Tulane,RB,Charlotte,2026-10-30T23:00:00Z,4,2.0,Anytime TD,,yes,425.0,draftkings,0.2199,,
+2026-10-30T20:13:22.459080+00:00,Jaylin Lucas,Tulane,RB,Charlotte,2026-10-30T23:00:00Z,4,2.0,Anytime TD,,yes,110.0,draftkings,0.2344,,
+2026-10-30T20:13:22.459080+00:00,Johnnie Daniels,Tulane,RB,Charlotte,2026-10-30T23:00:00Z,4,2.0,Anytime TD,,yes,-190.0,draftkings,0.4346,,
+2026-10-30T20:13:22.459080+00:00,Johnnie Daniels,Tulane,RB,Charlotte,2026-10-30T23:00:00Z,4,2.0,Rush Yards,64.5,under,-114.0,fanduel,0.589,10.6,True
+2026-10-30T20:13:22.459080+00:00,Maurice Turner,Tulane,RB,Charlotte,2026-10-30T23:00:00Z,4,2.0,Anytime TD,,yes,105.0,draftkings,0.3873,,
+2026-10-30T20:13:22.459080+00:00,Maurice Turner,Tulane,RB,Charlotte,2026-10-30T23:00:00Z,4,2.0,Rush Yards,64.5,under,-125.0,espnbet,0.6155,10.8,True
+2026-10-30T20:13:22.459080+00:00,Bredell Richardson,Tulane,WR,Charlotte,2026-10-30T23:00:00Z,8,1.71,Anytime TD,,yes,650.0,draftkings,0.1663,,
+2026-10-30T20:13:22.459080+00:00,Cash Semonza,Tulane,WR,Charlotte,2026-10-30T23:00:00Z,8,1.71,Anytime TD,,yes,950.0,draftkings,0.1521,,
+2026-10-30T20:13:22.459080+00:00,Destyn Hill,Tulane,WR,Charlotte,2026-10-30T23:00:00Z,8,1.71,Anytime TD,,yes,150.0,draftkings,0.3176,,
+2026-10-30T20:13:22.459080+00:00,Destyn Hill,Tulane,WR,Charlotte,2026-10-30T23:00:00Z,8,1.71,Reception Yards,48.5,over,-122.0,hardrockbet,0.524,-4.6,False
+2026-10-30T20:13:22.459080+00:00,Destyn Hill,Tulane,WR,Charlotte,2026-10-30T23:00:00Z,8,1.71,Receptions,3.5,over,-122.0,fanduel,0.562,2.3,False
+2026-10-30T20:13:22.459080+00:00,Destyn Hill,Tulane,WR,Charlotte,2026-10-30T23:00:00Z,8,1.71,Reception Touchdowns,0.5,under,,fliff,0.6605,,False
+2026-10-30T20:13:22.459080+00:00,Garrett Mmahat,Tulane,WR,Charlotte,2026-10-30T23:00:00Z,8,1.71,Anytime TD,,yes,475.0,draftkings,0.1771,,
+2026-10-30T20:13:22.459080+00:00,Garrett Mmahat,Tulane,WR,Charlotte,2026-10-30T23:00:00Z,8,1.71,Reception Yards,22.5,over,-114.0,fanduel,0.5485,3.0,False
+2026-10-30T20:13:22.459080+00:00,Oliver Mitchell Jr.,Tulane,WR,Charlotte,2026-10-30T23:00:00Z,8,1.71,Anytime TD,,yes,490.0,fanduel,0.1848,,
+2026-10-30T20:13:22.459080+00:00,Cole Gonzales,Charlotte,QB,Tulane,2026-10-30T23:00:00Z,10,0.86,Anytime TD,,yes,340.0,betmgm,0.1678,,
+2026-10-30T20:13:22.459080+00:00,Conner Harrell,Charlotte,QB,Tulane,2026-10-30T23:00:00Z,10,0.86,Anytime TD,,yes,390.0,draftkings,0.1773,,
+2026-10-30T20:13:22.459080+00:00,Conner Harrell,Charlotte,QB,Tulane,2026-10-30T23:00:00Z,10,0.86,Pass Touchdowns,0.5,over,-182.0,fanduel,0.83,28.6,False
+2026-10-30T20:13:22.459080+00:00,Conner Harrell,Charlotte,QB,Tulane,2026-10-30T23:00:00Z,10,0.86,Pass Yards,202.5,under,-114.0,fanduel,0.76,42.7,False
+2026-10-30T20:13:22.459080+00:00,Conner Harrell,Charlotte,QB,Tulane,2026-10-30T23:00:00Z,10,0.86,Rush Touchdowns,0.5,under,,fliff,0.832,,False
+2026-10-30T20:13:22.459080+00:00,Kadin Semonza,Tulane,QB,Charlotte,2026-10-30T23:00:00Z,10,0.86,Anytime TD,,yes,110.0,betonlineag,0.2616,,
+2026-10-30T20:13:22.459080+00:00,Trace Johnson,Tulane,QB,Charlotte,2026-10-30T23:00:00Z,10,0.86,Anytime TD,,yes,265.0,draftkings,0.2022,,
+2026-10-30T20:13:22.459080+00:00,Trace Johnson,Tulane,QB,Charlotte,2026-10-30T23:00:00Z,10,0.86,Pass Touchdowns,1.5,under,-205.0,fanduel,0.774,15.2,False
+2026-10-30T20:13:22.459080+00:00,Trace Johnson,Tulane,QB,Charlotte,2026-10-30T23:00:00Z,10,0.86,Pass Yards,197.5,under,-114.0,fanduel,0.7195,35.1,False
+2026-10-30T20:13:22.459080+00:00,Trace Johnson,Tulane,QB,Charlotte,2026-10-30T23:00:00Z,10,0.86,Rush Attempts,5.5,under,110.0,fliff,0.6735,41.4,False
+2026-10-30T20:13:22.459080+00:00,Trace Johnson,Tulane,QB,Charlotte,2026-10-30T23:00:00Z,10,0.86,Rush Touchdowns,0.5,under,,fliff,0.832,,False
+2026-10-30T20:13:22.459080+00:00,Trace Johnson,Tulane,QB,Charlotte,2026-10-30T23:00:00Z,10,0.86,Rush Yards,11.5,under,-125.0,fliff,0.9125,64.2,True
+2026-10-30T20:13:22.459080+00:00,Dawson Johnson,Tulane,TE,Charlotte,2026-10-30T23:00:00Z,11,0.57,Anytime TD,,yes,400.0,draftkings,0.1558,,
+2026-10-30T20:13:22.459080+00:00,Dawson Johnson,Tulane,TE,Charlotte,2026-10-30T23:00:00Z,11,0.57,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,DJ Lagway,Baylor,QB,UCF,2026-10-30T23:30:00Z,15,0.71,Anytime TD,,yes,320.0,draftkings,0.2098,,
+2026-10-30T20:13:22.459080+00:00,DJ Lagway,Baylor,QB,UCF,2026-10-30T23:30:00Z,15,0.71,Pass Touchdowns,1.5,under,-122.0,fanduel,0.7465,35.8,False
+2026-10-30T20:13:22.459080+00:00,DJ Lagway,Baylor,QB,UCF,2026-10-30T23:30:00Z,15,0.71,Pass Yards,246.5,under,-115.0,betmgm,0.694,29.7,False
+2026-10-30T20:13:22.459080+00:00,DJ Lagway,Baylor,QB,UCF,2026-10-30T23:30:00Z,15,0.71,Rush Touchdowns,0.5,under,,fliff,0.832,,False
+2026-10-30T20:13:22.459080+00:00,Christian Abney,Illinois,TE,Maryland,2026-10-31T16:00:00Z,1,0.71,Anytime TD,,yes,1000.0,draftkings,0.1713,,
+2026-10-30T20:13:22.459080+00:00,Christian Abney,Illinois,TE,Maryland,2026-10-31T16:00:00Z,1,0.71,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Christian Abney,Illinois,TE,Maryland,2026-10-31T16:00:00Z,1,0.71,Reception Yards,5.5,over,-130.0,fliff,0.8365,48.0,True
+2026-10-30T20:13:22.459080+00:00,Christian Abney,Illinois,TE,Maryland,2026-10-31T16:00:00Z,1,0.71,Receptions,0.5,over,-240.0,fliff,0.876,24.1,False
+2026-10-30T20:13:22.459080+00:00,Davin Stoffel,Illinois,TE,Maryland,2026-10-31T16:00:00Z,1,0.71,Anytime TD,,yes,850.0,draftkings,0.1509,,
+2026-10-30T20:13:22.459080+00:00,Davin Stoffel,Illinois,TE,Maryland,2026-10-31T16:00:00Z,1,0.71,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Jordan Collins,Navy,TE,Notre Dame,2026-10-31T16:00:00Z,1,0.71,Anytime TD,,yes,380.0,draftkings,0.2165,,
+2026-10-30T20:13:22.459080+00:00,Jordan Collins,Navy,TE,Notre Dame,2026-10-31T16:00:00Z,1,0.71,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Kaden Feagin,Illinois,TE,Maryland,2026-10-31T16:00:00Z,1,0.71,Anytime TD,,yes,600.0,draftkings,0.1519,,
+2026-10-30T20:13:22.459080+00:00,Kaden Feagin,Illinois,TE,Maryland,2026-10-31T16:00:00Z,1,0.71,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Kaden Feagin,Illinois,TE,Maryland,2026-10-31T16:00:00Z,1,0.71,Reception Yards,5.5,over,-120.0,fliff,0.8225,50.8,True
+2026-10-30T20:13:22.459080+00:00,Kaden Feagin,Illinois,TE,Maryland,2026-10-31T16:00:00Z,1,0.71,Receptions,0.5,over,-250.0,fliff,0.8565,19.9,False
+2026-10-30T20:13:22.459080+00:00,Davion Gause,NC State,RB,California,2026-10-31T16:00:00Z,3,2.12,Anytime TD,,yes,-150.0,fanduel,0.5493,,
+2026-10-30T20:13:22.459080+00:00,Davion Gause,NC State,RB,California,2026-10-31T16:00:00Z,3,2.12,Reception Yards,24.5,over,-114.0,fanduel,0.4005,-24.8,False
+2026-10-30T20:13:22.459080+00:00,Davion Gause,NC State,RB,California,2026-10-31T16:00:00Z,3,2.12,Rush Yards,61.5,under,-114.0,fanduel,0.5835,9.5,True
+2026-10-30T20:13:22.459080+00:00,Davion Gause,NC State,RB,California,2026-10-31T16:00:00Z,3,2.12,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Davion Gause,NC State,RB,California,2026-10-31T16:00:00Z,3,2.12,Rush Touchdowns,0.5,over,-185.0,fliff,0.39,-39.9,False
+2026-10-30T20:13:22.459080+00:00,Deandre Desinor,NC State,RB,California,2026-10-31T16:00:00Z,3,2.12,Anytime TD,,yes,360.0,fanduel,0.1686,,
+2026-10-30T20:13:22.459080+00:00,Dylan McCoy,NC State,RB,California,2026-10-31T16:00:00Z,3,2.12,Anytime TD,,yes,325.0,hardrockbet,0.2836,,
+2026-10-30T20:13:22.459080+00:00,Elijah Burress,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Anytime TD,,yes,700.0,draftkings,0.2003,,
+2026-10-30T20:13:22.459080+00:00,Jaden Greathouse,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Anytime TD,,yes,145.0,draftkings,0.252,,
+2026-10-30T20:13:22.459080+00:00,Jaden Greathouse,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Reception Yards,45.5,over,-114.0,fanduel,0.4575,-14.1,False
+2026-10-30T20:13:22.459080+00:00,Jaden Greathouse,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Receptions,3.5,over,-138.0,fanduel,0.4895,-15.6,False
+2026-10-30T20:13:22.459080+00:00,Jaden Greathouse,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Reception Touchdowns,0.5,under,,fliff,0.664,,False
+2026-10-30T20:13:22.459080+00:00,Jayden Scott,NC State,RB,California,2026-10-31T16:00:00Z,3,2.12,Anytime TD,,yes,-125.0,betonlineag,0.5507,,
+2026-10-30T20:13:22.459080+00:00,Jerome Bettis Jr.,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Anytime TD,,yes,700.0,draftkings,0.1656,,
+2026-10-30T20:13:22.459080+00:00,Jordan Faison,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Anytime TD,,yes,-135.0,draftkings,0.3463,,
+2026-10-30T20:13:22.459080+00:00,Jordan Faison,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Reception Yards,63.5,over,-114.0,fanduel,0.445,-16.5,False
+2026-10-30T20:13:22.459080+00:00,Jordan Faison,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Receptions,4.5,under,112.0,fanduel,0.5625,19.3,False
+2026-10-30T20:13:22.459080+00:00,Jordan Faison,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Reception Touchdowns,0.5,under,,fliff,0.6605,,False
+2026-10-30T20:13:22.459080+00:00,Micah Gilbert,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Anytime TD,,yes,125.0,draftkings,0.3053,,
+2026-10-30T20:13:22.459080+00:00,Micah Gilbert,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Reception Yards,43.5,over,-125.0,fliff,0.4725,-15.0,False
+2026-10-30T20:13:22.459080+00:00,Micah Gilbert,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Receptions,3.5,under,-194.0,fanduel,0.6875,4.2,False
+2026-10-30T20:13:22.459080+00:00,Micah Gilbert,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Reception Touchdowns,0.5,under,,fliff,0.6605,,False
+2026-10-30T20:13:22.459080+00:00,Mylan Graham,Notre Dame,WR,Navy,2026-10-31T16:00:00Z,3,1.86,Anytime TD,,yes,450.0,draftkings,0.1388,,
+2026-10-30T20:13:22.459080+00:00,Aidan Laughery,Illinois,RB,Maryland,2026-10-31T16:00:00Z,4,2.0,Anytime TD,,yes,-165.0,draftkings,0.4708,,
+2026-10-30T20:13:22.459080+00:00,Aidan Laughery,Illinois,RB,Maryland,2026-10-31T16:00:00Z,4,2.0,Rush Yards,94.5,under,-120.0,espnbet,0.6635,21.6,True
+2026-10-30T20:13:22.459080+00:00,Aidan Laughery,Illinois,RB,Maryland,2026-10-31T16:00:00Z,4,2.0,Reception Touchdowns,0.5,under,,fliff,0.9675,,False
+2026-10-30T20:13:22.459080+00:00,Aidan Laughery,Illinois,RB,Maryland,2026-10-31T16:00:00Z,4,2.0,Reception Yards,6.5,over,-125.0,fliff,0.396,-28.7,False
+2026-10-30T20:13:22.459080+00:00,Aidan Laughery,Illinois,RB,Maryland,2026-10-31T16:00:00Z,4,2.0,Receptions,1.5,under,-180.0,fliff,0.6195,-3.6,False
+2026-10-30T20:13:22.459080+00:00,Aidan Laughery,Illinois,RB,Maryland,2026-10-31T16:00:00Z,4,2.0,Rush Attempts,17.5,under,-140.0,fliff,0.7635,30.9,False
+2026-10-30T20:13:22.459080+00:00,Aidan Laughery,Illinois,RB,Maryland,2026-10-31T16:00:00Z,4,2.0,Rush Touchdowns,0.5,over,-150.0,fliff,0.3905,-34.9,False
+2026-10-30T20:13:22.459080+00:00,Christian Rhodes,SMU,RB,Syracuse,2026-10-31T16:00:00Z,4,2.0,Anytime TD,,yes,250.0,fanduel,0.2918,,
+2026-10-30T20:13:22.459080+00:00,Javari Barnett,Illinois,RB,Maryland,2026-10-31T16:00:00Z,4,2.0,Anytime TD,,yes,400.0,draftkings,0.2165,,
+2026-10-30T20:13:22.459080+00:00,Javari Barnett,Illinois,RB,Maryland,2026-10-31T16:00:00Z,4,2.0,Rush Yards,27.5,under,-118.0,betonlineag,0.6595,21.8,True
+2026-10-30T20:13:22.459080+00:00,Javari Barnett,Illinois,RB,Maryland,2026-10-31T16:00:00Z,4,2.0,Reception Touchdowns,0.5,under,,fliff,0.988,,False
+2026-10-30T20:13:22.459080+00:00,Javari Barnett,Illinois,RB,Maryland,2026-10-31T16:00:00Z,4,2.0,Rush Attempts,5.5,under,-135.0,fliff,0.61,6.2,False
+2026-10-30T20:13:22.459080+00:00,Javari Barnett,Illinois,RB,Maryland,2026-10-31T16:00:00Z,4,2.0,Rush Touchdowns,0.5,under,,fliff,0.832,,False
+2026-10-30T20:13:22.459080+00:00,Kendrick Raphael,SMU,RB,Syracuse,2026-10-31T16:00:00Z,4,2.0,Anytime TD,,yes,-300.0,hardrockbet,0.7089,,
+2026-10-30T20:13:22.459080+00:00,Kendrick Raphael,SMU,RB,Syracuse,2026-10-31T16:00:00Z,4,2.0,Rush Yards,110.5,under,-125.0,fliff,0.623,12.1,True
+2026-10-30T20:13:22.459080+00:00,Kendrick Raphael,SMU,RB,Syracuse,2026-10-31T16:00:00Z,4,2.0,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Kendrick Raphael,SMU,RB,Syracuse,2026-10-31T16:00:00Z,4,2.0,Rush Touchdowns,1.5,under,,fliff,0.672,,False
+2026-10-30T20:13:22.459080+00:00,Hunter Provience,NC State,TE,California,2026-10-31T16:00:00Z,7,0.62,Anytime TD,,yes,420.0,fanduel,0.1828,,
+2026-10-30T20:13:22.459080+00:00,Preston Douglas,NC State,TE,California,2026-10-31T16:00:00Z,7,0.62,Anytime TD,,yes,175.0,fliff,0.2455,,
+2026-10-30T20:13:22.459080+00:00,Preston Douglas,NC State,TE,California,2026-10-31T16:00:00Z,7,0.62,Reception Yards,42.5,under,-125.0,fliff,0.6195,11.5,False
+2026-10-30T20:13:22.459080+00:00,Preston Douglas,NC State,TE,California,2026-10-31T16:00:00Z,7,0.62,Receptions,3.5,under,-112.0,fanduel,0.688,30.2,True
+2026-10-30T20:13:22.459080+00:00,Preston Douglas,NC State,TE,California,2026-10-31T16:00:00Z,7,0.62,Reception Touchdowns,0.5,under,,fliff,0.6645,,False
+2026-10-30T20:13:22.459080+00:00,Daunte Bacheyie,Syracuse,TE,SMU,2026-10-31T16:00:00Z,11,0.57,Anytime TD,,yes,390.0,fanduel,0.2649,,
+2026-10-30T20:13:22.459080+00:00,Daunte Bacheyie,Syracuse,TE,SMU,2026-10-31T16:00:00Z,11,0.57,Reception Yards,27.5,over,-120.0,fliff,0.5485,0.6,False
+2026-10-30T20:13:22.459080+00:00,Daunte Bacheyie,Syracuse,TE,SMU,2026-10-31T16:00:00Z,11,0.57,Reception Touchdowns,0.5,under,,fliff,0.6635,,False
+2026-10-30T20:13:22.459080+00:00,David Clement,Syracuse,TE,SMU,2026-10-31T16:00:00Z,11,0.57,Anytime TD,,yes,900.0,fanduel,0.1607,,
+2026-10-30T20:13:22.459080+00:00,David Clement,Syracuse,TE,SMU,2026-10-31T16:00:00Z,11,0.57,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Noah Meyers,Syracuse,TE,SMU,2026-10-31T16:00:00Z,11,0.57,Anytime TD,,yes,650.0,betonlineag,0.1404,,
+2026-10-30T20:13:22.459080+00:00,Brandon Phelps,Arizona,WR,Texas Tech,2026-10-31T16:00:00Z,12,1.57,Anytime TD,,yes,190.0,draftkings,0.223,,
+2026-10-30T20:13:22.459080+00:00,Brandon Phelps,Arizona,WR,Texas Tech,2026-10-31T16:00:00Z,12,1.57,Reception Yards,40.5,under,-160.0,hardrockbet,0.63,2.4,False
+2026-10-30T20:13:22.459080+00:00,Brandon Phelps,Arizona,WR,Texas Tech,2026-10-31T16:00:00Z,12,1.57,Receptions,3.5,under,110.0,betonlineag,0.6445,35.3,True
+2026-10-30T20:13:22.459080+00:00,Brandon Phelps,Arizona,WR,Texas Tech,2026-10-31T16:00:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Caleb Smith,Arizona,WR,Texas Tech,2026-10-31T16:00:00Z,12,1.57,Anytime TD,,yes,240.0,draftkings,0.1928,,
+2026-10-30T20:13:22.459080+00:00,Caleb Smith,Arizona,WR,Texas Tech,2026-10-31T16:00:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Chase Hendricks,California,WR,NC State,2026-10-31T16:00:00Z,12,1.57,Anytime TD,,yes,150.0,hardrockbet,0.3336,,
+2026-10-30T20:13:22.459080+00:00,Chase Hendricks,California,WR,NC State,2026-10-31T16:00:00Z,12,1.57,Reception Yards,65.5,under,-114.0,fanduel,0.588,10.4,False
+2026-10-30T20:13:22.459080+00:00,Chase Hendricks,California,WR,NC State,2026-10-31T16:00:00Z,12,1.57,Receptions,5.5,over,-160.0,fanduel,0.5395,-12.3,False
+2026-10-30T20:13:22.459080+00:00,Cooper Perry,California,WR,NC State,2026-10-31T16:00:00Z,12,1.57,Anytime TD,,yes,425.0,hardrockbet,0.1793,,
+2026-10-30T20:13:22.459080+00:00,Gio Richardson,Arizona,WR,Texas Tech,2026-10-31T16:00:00Z,12,1.57,Anytime TD,,yes,370.0,draftkings,0.2769,,
+2026-10-30T20:13:22.459080+00:00,Ian Strong,California,WR,NC State,2026-10-31T16:00:00Z,12,1.57,Anytime TD,,yes,425.0,hardrockbet,0.2889,,
+2026-10-30T20:13:22.459080+00:00,Ian Strong,California,WR,NC State,2026-10-31T16:00:00Z,12,1.57,Reception Yards,63.5,under,-114.0,fanduel,0.6505,22.1,False
+2026-10-30T20:13:22.459080+00:00,Ian Strong,California,WR,NC State,2026-10-31T16:00:00Z,12,1.57,Receptions,4.5,under,-108.0,fanduel,0.584,12.5,False
+2026-10-30T20:13:22.459080+00:00,Isaiah Mizell,Arizona,WR,Texas Tech,2026-10-31T16:00:00Z,12,1.57,Anytime TD,,yes,170.0,draftkings,0.4144,,
+2026-10-30T20:13:22.459080+00:00,Isaiah Mizell,Arizona,WR,Texas Tech,2026-10-31T16:00:00Z,12,1.57,Reception Yards,83.5,under,-125.0,fliff,0.7425,33.7,False
+2026-10-30T20:13:22.459080+00:00,Isaiah Mizell,Arizona,WR,Texas Tech,2026-10-31T16:00:00Z,12,1.57,Receptions,5.5,under,115.0,betonlineag,0.706,51.8,True
+2026-10-30T20:13:22.459080+00:00,Isaiah Mizell,Arizona,WR,Texas Tech,2026-10-31T16:00:00Z,12,1.57,Reception Touchdowns,0.5,over,-110.0,fliff,0.34,-35.1,False
+2026-10-30T20:13:22.459080+00:00,Jordan King,California,WR,NC State,2026-10-31T16:00:00Z,12,1.57,Anytime TD,,yes,425.0,hardrockbet,0.1557,,
+2026-10-30T20:13:22.459080+00:00,Kyion Grayes,California,WR,NC State,2026-10-31T16:00:00Z,12,1.57,Anytime TD,,yes,425.0,hardrockbet,0.1847,,
+2026-10-30T20:13:22.459080+00:00,Tyree Sams,California,WR,NC State,2026-10-31T16:00:00Z,12,1.57,Anytime TD,,yes,400.0,hardrockbet,0.1673,,
+2026-10-30T20:13:22.459080+00:00,Michael Van Buren Jr.,South Florida,QB,UAB,2026-10-31T16:00:00Z,15,0.71,Anytime TD,,yes,100.0,draftkings,0.2607,,
+2026-10-30T20:13:22.459080+00:00,Cole Cabana,Western Michigan,RB,Bowling Green,2026-10-31T16:00:00Z,19,1.62,Anytime TD,,yes,380.0,draftkings,0.1546,,
+2026-10-30T20:13:22.459080+00:00,Jalen Buckley,Western Michigan,RB,Bowling Green,2026-10-31T16:00:00Z,19,1.62,Anytime TD,,yes,-330.0,draftkings,0.6284,,
+2026-10-30T20:13:22.459080+00:00,Ofa Mataele,Western Michigan,RB,Bowling Green,2026-10-31T16:00:00Z,19,1.62,Anytime TD,,yes,140.0,courtside,0.316,,
+2026-10-30T20:13:22.459080+00:00,DeJuan Williams,Maryland,RB,Illinois,2026-10-31T16:00:00Z,23,1.57,Anytime TD,,yes,105.0,draftkings,0.4944,,
+2026-10-30T20:13:22.459080+00:00,DeJuan Williams,Maryland,RB,Illinois,2026-10-31T16:00:00Z,23,1.57,Rush Yards,66.5,under,-125.0,fliff,0.5785,4.1,True
+2026-10-30T20:13:22.459080+00:00,DeJuan Williams,Maryland,RB,Illinois,2026-10-31T16:00:00Z,23,1.57,Reception Yards,22.5,under,-125.0,espnbet,0.616,10.9,False
+2026-10-30T20:13:22.459080+00:00,DeJuan Williams,Maryland,RB,Illinois,2026-10-31T16:00:00Z,23,1.57,Receptions,3.5,under,-135.0,espnbet,0.7445,29.6,False
+2026-10-30T20:13:22.459080+00:00,DeJuan Williams,Maryland,RB,Illinois,2026-10-31T16:00:00Z,23,1.57,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,DeJuan Williams,Maryland,RB,Illinois,2026-10-31T16:00:00Z,23,1.57,Rush Attempts,14.5,under,-140.0,fliff,0.725,24.3,False
+2026-10-30T20:13:22.459080+00:00,DeJuan Williams,Maryland,RB,Illinois,2026-10-31T16:00:00Z,23,1.57,Rush Touchdowns,0.5,over,-145.0,fliff,0.39,-34.1,False
+2026-10-30T20:13:22.459080+00:00,Iverson Howard,Maryland,RB,Illinois,2026-10-31T16:00:00Z,23,1.57,Anytime TD,,yes,-140.0,draftkings,0.348,,
+2026-10-30T20:13:22.459080+00:00,Liam Willson,Maryland,RB,Illinois,2026-10-31T16:00:00Z,23,1.57,Anytime TD,,yes,500.0,draftkings,0.1434,,
+2026-10-30T20:13:22.459080+00:00,Bryson Kuzdzal,Michigan,RB,Rutgers,2026-10-31T16:30:00Z,18,1.71,Anytime TD,,yes,340.0,draftkings,0.1781,,
+2026-10-30T20:13:22.459080+00:00,Bryson Kuzdzal,Michigan,RB,Rutgers,2026-10-31T16:30:00Z,18,1.71,Rush Touchdowns,0.5,under,,fliff,0.832,,False
+2026-10-30T20:13:22.459080+00:00,Jordan Marshall,Michigan,RB,Rutgers,2026-10-31T16:30:00Z,18,1.71,Anytime TD,,yes,-215.0,draftkings,0.4511,,
+2026-10-30T20:13:22.459080+00:00,Jordan Marshall,Michigan,RB,Rutgers,2026-10-31T16:30:00Z,18,1.71,Rush Yards,71.5,under,-125.0,fliff,0.691,24.4,True
+2026-10-30T20:13:22.459080+00:00,Jordan Marshall,Michigan,RB,Rutgers,2026-10-31T16:30:00Z,18,1.71,Reception Touchdowns,0.5,under,,fliff,0.9675,,False
+2026-10-30T20:13:22.459080+00:00,Jordan Marshall,Michigan,RB,Rutgers,2026-10-31T16:30:00Z,18,1.71,Rush Attempts,12.5,under,-110.0,fliff,0.622,18.7,False
+2026-10-30T20:13:22.459080+00:00,Jordan Marshall,Michigan,RB,Rutgers,2026-10-31T16:30:00Z,18,1.71,Rush Touchdowns,0.5,over,-190.0,fliff,0.3885,-40.7,False
+2026-10-30T20:13:22.459080+00:00,Savion Hiter,Michigan,RB,Rutgers,2026-10-31T16:30:00Z,18,1.71,Anytime TD,,yes,-155.0,draftkings,0.4061,,
+2026-10-30T20:13:22.459080+00:00,Savion Hiter,Michigan,RB,Rutgers,2026-10-31T16:30:00Z,18,1.71,Rush Yards,63.5,under,-125.0,fliff,0.6975,25.6,True
+2026-10-30T20:13:22.459080+00:00,Savion Hiter,Michigan,RB,Rutgers,2026-10-31T16:30:00Z,18,1.71,Reception Touchdowns,0.5,under,,fliff,0.9675,,False
+2026-10-30T20:13:22.459080+00:00,Savion Hiter,Michigan,RB,Rutgers,2026-10-31T16:30:00Z,18,1.71,Rush Attempts,10.5,under,-115.0,fliff,0.58,8.4,False
+2026-10-30T20:13:22.459080+00:00,Savion Hiter,Michigan,RB,Rutgers,2026-10-31T16:30:00Z,18,1.71,Rush Touchdowns,0.5,under,,fliff,0.618,,False
+2026-10-30T20:13:22.459080+00:00,Andrew Marsh,Michigan,WR,Rutgers,2026-10-31T16:30:00Z,24,1.43,Anytime TD,,yes,125.0,draftkings,0.2491,,
+2026-10-30T20:13:22.459080+00:00,Andrew Marsh,Michigan,WR,Rutgers,2026-10-31T16:30:00Z,24,1.43,Reception Yards,38.5,over,-114.0,fanduel,0.597,12.1,False
+2026-10-30T20:13:22.459080+00:00,Andrew Marsh,Michigan,WR,Rutgers,2026-10-31T16:30:00Z,24,1.43,Receptions,3.5,over,112.0,fanduel,0.5625,19.3,False
+2026-10-30T20:13:22.459080+00:00,Andrew Marsh,Michigan,WR,Rutgers,2026-10-31T16:30:00Z,24,1.43,Reception Touchdowns,0.5,under,,fliff,0.6645,,False
+2026-10-30T20:13:22.459080+00:00,JJ Buchanan,Michigan,WR,Rutgers,2026-10-31T16:30:00Z,24,1.43,Anytime TD,,yes,-105.0,draftkings,0.4513,,
+2026-10-30T20:13:22.459080+00:00,JJ Buchanan,Michigan,WR,Rutgers,2026-10-31T16:30:00Z,24,1.43,Reception Yards,61.5,over,-114.0,fanduel,0.606,13.8,False
+2026-10-30T20:13:22.459080+00:00,JJ Buchanan,Michigan,WR,Rutgers,2026-10-31T16:30:00Z,24,1.43,Receptions,4.5,over,-114.0,fanduel,0.5305,-0.4,False
+2026-10-30T20:13:22.459080+00:00,JJ Buchanan,Michigan,WR,Rutgers,2026-10-31T16:30:00Z,24,1.43,Reception Touchdowns,0.5,over,120.0,fliff,0.34,-25.2,False
+2026-10-30T20:13:22.459080+00:00,Travis Johnson,Michigan,WR,Rutgers,2026-10-31T16:30:00Z,24,1.43,Anytime TD,,yes,1000.0,draftkings,0.1223,,
+2026-10-30T20:13:22.459080+00:00,Travis Johnson,Michigan,WR,Rutgers,2026-10-31T16:30:00Z,24,1.43,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Byrum Brown,Auburn,QB,Ole Miss,2026-10-31T16:45:00Z,15,0.71,Anytime TD,,yes,-155.0,draftkings,0.4924,,
+2026-10-30T20:13:22.459080+00:00,Byrum Brown,Auburn,QB,Ole Miss,2026-10-31T16:45:00Z,15,0.71,Pass Touchdowns,0.5,over,-255.0,fliff,0.8305,15.6,False
+2026-10-30T20:13:22.459080+00:00,Byrum Brown,Auburn,QB,Ole Miss,2026-10-31T16:45:00Z,15,0.71,Pass Yards,199.5,under,-115.0,espnbet,0.711,32.9,False
+2026-10-30T20:13:22.459080+00:00,Byrum Brown,Auburn,QB,Ole Miss,2026-10-31T16:45:00Z,15,0.71,Rush Yards,53.5,over,-125.0,fliff,0.608,9.4,False
+2026-10-30T20:13:22.459080+00:00,Byrum Brown,Auburn,QB,Ole Miss,2026-10-31T16:45:00Z,15,0.71,Rush Attempts,19.5,under,-125.0,fliff,0.7515,35.3,False
+2026-10-30T20:13:22.459080+00:00,Byrum Brown,Auburn,QB,Ole Miss,2026-10-31T16:45:00Z,15,0.71,Rush Touchdowns,0.5,over,-110.0,fliff,0.395,-24.6,False
+2026-10-30T20:13:22.459080+00:00,JT Lindsey,Ole Miss,RB,Auburn,2026-10-31T16:45:00Z,23,1.57,Anytime TD,,yes,140.0,draftkings,0.2094,,
+2026-10-30T20:13:22.459080+00:00,JT Lindsey,Ole Miss,RB,Auburn,2026-10-31T16:45:00Z,23,1.57,Reception Touchdowns,0.5,under,,fliff,0.988,,False
+2026-10-30T20:13:22.459080+00:00,JT Lindsey,Ole Miss,RB,Auburn,2026-10-31T16:45:00Z,23,1.57,Rush Touchdowns,0.5,under,,fliff,0.832,,False
+2026-10-30T20:13:22.459080+00:00,Joshua Dye,Ole Miss,RB,Auburn,2026-10-31T16:45:00Z,23,1.57,Anytime TD,,yes,325.0,fliff,0.0983,,
+2026-10-30T20:13:22.459080+00:00,Joshua Dye,Ole Miss,RB,Auburn,2026-10-31T16:45:00Z,23,1.57,Reception Touchdowns,0.5,under,,fliff,0.9675,,False
+2026-10-30T20:13:22.459080+00:00,Joshua Dye,Ole Miss,RB,Auburn,2026-10-31T16:45:00Z,23,1.57,Rush Touchdowns,0.5,under,,fliff,0.971,,False
+2026-10-30T20:13:22.459080+00:00,Kewan Lacy,Ole Miss,RB,Auburn,2026-10-31T16:45:00Z,23,1.57,Anytime TD,,yes,-333.0,betonlineag,0.508,,
+2026-10-30T20:13:22.459080+00:00,Makhi Frazier,Ole Miss,RB,Auburn,2026-10-31T16:45:00Z,23,1.57,Anytime TD,,yes,-165.0,draftkings,0.3587,,
+2026-10-30T20:13:22.459080+00:00,Makhi Frazier,Ole Miss,RB,Auburn,2026-10-31T16:45:00Z,23,1.57,Reception Touchdowns,0.5,under,,fliff,0.9675,,False
+2026-10-30T20:13:22.459080+00:00,Makhi Frazier,Ole Miss,RB,Auburn,2026-10-31T16:45:00Z,23,1.57,Rush Touchdowns,0.5,under,,fliff,0.6225,,False
+2026-10-30T20:13:22.459080+00:00,JJ Harrell,Old Dominion,WR,Marshall,2026-10-31T17:00:00Z,3,1.86,Anytime TD,,yes,650.0,draftkings,0.1571,,
+2026-10-30T20:13:22.459080+00:00,Josh Rodriguez,Old Dominion,WR,Marshall,2026-10-31T17:00:00Z,3,1.86,Anytime TD,,yes,340.0,draftkings,0.176,,
+2026-10-30T20:13:22.459080+00:00,Kendall Harris,Old Dominion,WR,Marshall,2026-10-31T17:00:00Z,3,1.86,Anytime TD,,yes,340.0,draftkings,0.174,,
+2026-10-30T20:13:22.459080+00:00,TJ Johnson,Old Dominion,WR,Marshall,2026-10-31T17:00:00Z,3,1.86,Anytime TD,,yes,200.0,draftkings,0.2314,,
+2026-10-30T20:13:22.459080+00:00,Zialis Blackmon,Old Dominion,WR,Marshall,2026-10-31T17:00:00Z,3,1.86,Anytime TD,,yes,1100.0,draftkings,0.1525,,
+2026-10-30T20:13:22.459080+00:00,Toby Payne,Marshall,TE,Old Dominion,2026-10-31T17:00:00Z,22,0.5,Anytime TD,,yes,190.0,draftkings,0.2204,,
+2026-10-30T20:13:22.459080+00:00,Deuce Bailey,Coastal Carolina,QB,Georgia State,2026-10-31T18:00:00Z,5,1.0,Anytime TD,,yes,300.0,betonlineag,0.3294,,
+2026-10-30T20:13:22.459080+00:00,Charlie Williams,Colorado,TE,Kansas State,2026-10-31T18:00:00Z,11,0.57,Anytime TD,,yes,500.0,draftkings,0.1618,,
+2026-10-30T20:13:22.459080+00:00,Fisher Clements,Colorado,TE,Kansas State,2026-10-31T18:00:00Z,11,0.57,Anytime TD,,yes,1000.0,draftkings,0.1151,,
+2026-10-30T20:13:22.459080+00:00,DJ Riles,Georgia State,WR,Coastal Carolina,2026-10-31T18:00:00Z,24,1.43,Anytime TD,,yes,300.0,betonlineag,0.2512,,
+2026-10-30T20:13:22.459080+00:00,Derrick Avery Jr.,Georgia State,WR,Coastal Carolina,2026-10-31T18:00:00Z,24,1.43,Anytime TD,,yes,350.0,betonlineag,0.2258,,
+2026-10-30T20:13:22.459080+00:00,Derrick Salley Jr.,Kansas State,WR,Colorado,2026-10-31T18:00:00Z,24,1.43,Anytime TD,,yes,425.0,draftkings,0.3351,,
+2026-10-30T20:13:22.459080+00:00,Jaron Tibbs,Kansas State,WR,Colorado,2026-10-31T18:00:00Z,24,1.43,Anytime TD,,yes,190.0,draftkings,0.2844,,
+2026-10-30T20:13:22.459080+00:00,Eli Finley,Louisiana Tech,TE,South Alabama,2026-10-31T19:00:00Z,1,0.71,Anytime TD,,yes,100.0,draftkings,0.3612,,
+2026-10-30T20:13:22.459080+00:00,Andrew Burnette,Louisiana Tech,RB,South Alabama,2026-10-31T19:00:00Z,4,2.0,Anytime TD,,yes,-180.0,draftkings,0.458,,
+2026-10-30T20:13:22.459080+00:00,Jaden Miller,Louisiana Tech,RB,South Alabama,2026-10-31T19:00:00Z,4,2.0,Anytime TD,,yes,265.0,draftkings,0.2811,,
+2026-10-30T20:13:22.459080+00:00,Sergio Snider,Louisiana Tech,RB,South Alabama,2026-10-31T19:00:00Z,4,2.0,Anytime TD,,yes,225.0,draftkings,0.2523,,
+2026-10-30T20:13:22.459080+00:00,Emory Williams,East Carolina,QB,Temple,2026-10-31T19:00:00Z,5,1.0,Anytime TD,,yes,210.0,draftkings,0.2839,,
+2026-10-30T20:13:22.459080+00:00,Jared Hollins,South Alabama,QB,Louisiana Tech,2026-10-31T19:00:00Z,5,1.0,Anytime TD,,yes,195.0,draftkings,0.2554,,
+2026-10-30T20:13:22.459080+00:00,Ismael Smith Flores,East Carolina,TE,Temple,2026-10-31T19:00:00Z,11,0.57,Anytime TD,,yes,310.0,draftkings,0.1823,,
+2026-10-30T20:13:22.459080+00:00,Kanen Hamlett,East Carolina,TE,Temple,2026-10-31T19:00:00Z,11,0.57,Anytime TD,,yes,950.0,draftkings,0.1512,,
+2026-10-30T20:13:22.459080+00:00,Simon Kibbee,Air Force,TE,UConn,2026-10-31T19:00:00Z,11,0.57,Anytime TD,,yes,310.0,draftkings,0.1795,,
+2026-10-30T20:13:22.459080+00:00,Ajani Sheppard,Temple,QB,East Carolina,2026-10-31T19:00:00Z,15,0.71,Anytime TD,,yes,125.0,draftkings,0.3851,,
+2026-10-30T20:13:22.459080+00:00,Jaxon Smolik,Temple,QB,East Carolina,2026-10-31T19:00:00Z,15,0.71,Anytime TD,,yes,1200.0,draftkings,0.1669,,
+2026-10-30T20:13:22.459080+00:00,Isaac Brown,Louisville,RB,Stanford,2026-10-31T19:15:00Z,2,2.5,Anytime TD,,yes,-330.0,draftkings,0.6313,,
+2026-10-30T20:13:22.459080+00:00,Isaac Brown,Louisville,RB,Stanford,2026-10-31T19:15:00Z,2,2.5,Rush Yards,63.5,over,-114.0,fanduel,0.608,14.1,False
+2026-10-30T20:13:22.459080+00:00,Keyjuan Brown,Louisville,RB,Stanford,2026-10-31T19:15:00Z,2,2.5,Anytime TD,,yes,-140.0,draftkings,0.5536,,
+2026-10-30T20:13:22.459080+00:00,Keyjuan Brown,Louisville,RB,Stanford,2026-10-31T19:15:00Z,2,2.5,Rush Yards,65.5,over,-114.0,fanduel,0.437,-18.0,False
+2026-10-30T20:13:22.459080+00:00,Marquise Davis,Louisville,RB,Stanford,2026-10-31T19:15:00Z,2,2.5,Anytime TD,,yes,-165.0,draftkings,0.3987,,
+2026-10-30T20:13:22.459080+00:00,Lincoln Kienholz,Louisville,QB,Stanford,2026-10-31T19:15:00Z,13,0.75,Anytime TD,,yes,-425.0,draftkings,0.5907,,
+2026-10-30T20:13:22.459080+00:00,Lincoln Kienholz,Louisville,QB,Stanford,2026-10-31T19:15:00Z,13,0.75,Pass Touchdowns,1.5,over,-188.0,fanduel,0.7955,21.9,False
+2026-10-30T20:13:22.459080+00:00,Lincoln Kienholz,Louisville,QB,Stanford,2026-10-31T19:15:00Z,13,0.75,Pass Yards,246.5,under,-105.0,hardrockbet,0.703,37.3,False
+2026-10-30T20:13:22.459080+00:00,Lincoln Kienholz,Louisville,QB,Stanford,2026-10-31T19:15:00Z,13,0.75,Rush Yards,34.5,over,-112.0,fanduel,0.508,-3.8,False
+2026-10-30T20:13:22.459080+00:00,Lincoln Kienholz,Louisville,QB,Stanford,2026-10-31T19:15:00Z,13,0.75,Rush Touchdowns,0.5,over,-190.0,fliff,0.5915,-9.7,False
+2026-10-30T20:13:22.459080+00:00,Jackson Voth,Louisville,WR,Stanford,2026-10-31T19:15:00Z,20,1.5,Anytime TD,,yes,1800.0,draftkings,0.2313,,
+2026-10-30T20:13:22.459080+00:00,Lawayne McCoy,Louisville,WR,Stanford,2026-10-31T19:15:00Z,20,1.5,Anytime TD,,yes,130.0,draftkings,0.4632,,
+2026-10-30T20:13:22.459080+00:00,Lawayne McCoy,Louisville,WR,Stanford,2026-10-31T19:15:00Z,20,1.5,Receptions,4.5,under,-135.0,espnbet,0.625,8.8,False
+2026-10-30T20:13:22.459080+00:00,Lawayne McCoy,Louisville,WR,Stanford,2026-10-31T19:15:00Z,20,1.5,Reception Yards,70.5,under,-115.0,hardrockbet,0.607,13.5,False
+2026-10-30T20:13:22.459080+00:00,Tre Richardson,Louisville,WR,Stanford,2026-10-31T19:15:00Z,20,1.5,Anytime TD,,yes,115.0,draftkings,0.4841,,
+2026-10-30T20:13:22.459080+00:00,Tre Richardson,Louisville,WR,Stanford,2026-10-31T19:15:00Z,20,1.5,Reception Yards,58.5,over,-114.0,fanduel,0.4265,-19.9,False
+2026-10-30T20:13:22.459080+00:00,Tre Richardson,Louisville,WR,Stanford,2026-10-31T19:15:00Z,20,1.5,Receptions,4.5,under,-112.0,fanduel,0.5955,12.7,False
+2026-10-30T20:13:22.459080+00:00,TreyShun Hurry,Louisville,WR,Stanford,2026-10-31T19:15:00Z,20,1.5,Anytime TD,,yes,230.0,draftkings,0.3569,,
+2026-10-30T20:13:22.459080+00:00,TreyShun Hurry,Louisville,WR,Stanford,2026-10-31T19:15:00Z,20,1.5,Receptions,4.5,under,-130.0,fanduel,0.6705,18.6,False
+2026-10-30T20:13:22.459080+00:00,TreyShun Hurry,Louisville,WR,Stanford,2026-10-31T19:15:00Z,20,1.5,Reception Yards,59.5,under,-115.0,hardrockbet,0.6205,16.0,False
+2026-10-30T20:13:22.459080+00:00,Atticus Joseph,Stanford,WR,Louisville,2026-10-31T19:15:00Z,24,1.43,Anytime TD,,yes,700.0,draftkings,0.1558,,
+2026-10-30T20:13:22.459080+00:00,Caden High,Stanford,WR,Louisville,2026-10-31T19:15:00Z,24,1.43,Anytime TD,,yes,205.0,draftkings,0.3217,,
+2026-10-30T20:13:22.459080+00:00,Caden High,Stanford,WR,Louisville,2026-10-31T19:15:00Z,24,1.43,Reception Yards,45.5,over,-114.0,fanduel,0.463,-13.1,False
+2026-10-30T20:13:22.459080+00:00,Caden High,Stanford,WR,Louisville,2026-10-31T19:15:00Z,24,1.43,Receptions,4.5,under,-140.0,espnbet,0.595,2.0,False
+2026-10-30T20:13:22.459080+00:00,Caden High,Stanford,WR,Louisville,2026-10-31T19:15:00Z,24,1.43,Reception Touchdowns,0.5,under,,fliff,0.6605,,False
+2026-10-30T20:13:22.459080+00:00,Jonanthony Hall,Stanford,WR,Louisville,2026-10-31T19:15:00Z,24,1.43,Anytime TD,,yes,600.0,draftkings,0.1615,,
+2026-10-30T20:13:22.459080+00:00,Jordan Onovughe,Stanford,WR,Louisville,2026-10-31T19:15:00Z,24,1.43,Anytime TD,,yes,600.0,draftkings,0.1532,,
+2026-10-30T20:13:22.459080+00:00,Nico Brown,Stanford,WR,Louisville,2026-10-31T19:15:00Z,24,1.43,Anytime TD,,yes,280.0,draftkings,0.247,,
+2026-10-30T20:13:22.459080+00:00,Nico Brown,Stanford,WR,Louisville,2026-10-31T19:15:00Z,24,1.43,Reception Yards,40.5,over,-114.0,fanduel,0.4715,-11.5,False
+2026-10-30T20:13:22.459080+00:00,Nico Brown,Stanford,WR,Louisville,2026-10-31T19:15:00Z,24,1.43,Receptions,3.5,over,-122.0,fanduel,0.4615,-16.0,False
+2026-10-30T20:13:22.459080+00:00,Nico Brown,Stanford,WR,Louisville,2026-10-31T19:15:00Z,24,1.43,Reception Touchdowns,0.5,under,,fliff,0.664,,False
+2026-10-30T20:13:22.459080+00:00,Zion Robinson,Stanford,WR,Louisville,2026-10-31T19:15:00Z,24,1.43,Anytime TD,,yes,600.0,draftkings,0.1682,,
+2026-10-30T20:13:22.459080+00:00,AJ Ia,Arizona State,TE,BYU,2026-10-31T19:30:00Z,1,0.71,Anytime TD,,yes,950.0,draftkings,0.1178,,
+2026-10-30T20:13:22.459080+00:00,Javen Jacobs,Utah State,RB,Colorado State,2026-10-31T19:30:00Z,1,2.86,Anytime TD,,yes,-900.0,draftkings,0.5326,,
+2026-10-30T20:13:22.459080+00:00,Noah White,Utah State,RB,Colorado State,2026-10-31T19:30:00Z,1,2.86,Anytime TD,,yes,150.0,draftkings,0.1083,,
+2026-10-30T20:13:22.459080+00:00,Craig Dandridge,Georgia,WR,Florida,2026-10-31T19:30:00Z,8,1.71,Anytime TD,,yes,220.0,draftkings,0.2243,,
+2026-10-30T20:13:22.459080+00:00,Craig Dandridge,Georgia,WR,Florida,2026-10-31T19:30:00Z,8,1.71,Reception Yards,40.5,over,-115.0,hardrockbet,0.5005,-6.4,False
+2026-10-30T20:13:22.459080+00:00,Craig Dandridge,Georgia,WR,Florida,2026-10-31T19:30:00Z,8,1.71,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Jeremy Bell,Georgia,WR,Florida,2026-10-31T19:30:00Z,8,1.71,Anytime TD,,yes,1600.0,draftkings,0.2421,,
+2026-10-30T20:13:22.459080+00:00,Landon Roldan,Georgia,WR,Florida,2026-10-31T19:30:00Z,8,1.71,Anytime TD,,yes,500.0,draftkings,0.1769,,
+2026-10-30T20:13:22.459080+00:00,London Humphreys,Georgia,WR,Florida,2026-10-31T19:30:00Z,8,1.71,Anytime TD,,yes,255.0,draftkings,0.2115,,
+2026-10-30T20:13:22.459080+00:00,London Humphreys,Georgia,WR,Florida,2026-10-31T19:30:00Z,8,1.71,Reception Yards,33.5,under,-118.0,betonlineag,0.6205,14.6,False
+2026-10-30T20:13:22.459080+00:00,London Humphreys,Georgia,WR,Florida,2026-10-31T19:30:00Z,8,1.71,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Talyn Taylor,Georgia,WR,Florida,2026-10-31T19:30:00Z,8,1.71,Anytime TD,,yes,170.0,draftkings,0.2991,,
+2026-10-30T20:13:22.459080+00:00,Talyn Taylor,Georgia,WR,Florida,2026-10-31T19:30:00Z,8,1.71,Reception Yards,46.5,under,-125.0,fliff,0.661,19.0,False
+2026-10-30T20:13:22.459080+00:00,Talyn Taylor,Georgia,WR,Florida,2026-10-31T19:30:00Z,8,1.71,Reception Touchdowns,0.5,under,,fliff,0.662,,False
+2026-10-30T20:13:22.459080+00:00,Aidan Armenta,UL Monroe,QB,Southern Miss,2026-10-31T19:30:00Z,10,0.86,Anytime TD,,yes,195.0,draftkings,0.2414,,
+2026-10-30T20:13:22.459080+00:00,Austin Carlisle,UL Monroe,QB,Southern Miss,2026-10-31T19:30:00Z,10,0.86,Anytime TD,,yes,125.0,draftkings,0.3426,,
+2026-10-30T20:13:22.459080+00:00,Amir Jackson,Florida,TE,Georgia,2026-10-31T19:30:00Z,11,0.57,Anytime TD,,yes,600.0,draftkings,0.1822,,
+2026-10-30T20:13:22.459080+00:00,Amir Jackson,Florida,TE,Georgia,2026-10-31T19:30:00Z,11,0.57,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Bryson Roland,UL Monroe,RB,Southern Miss,2026-10-31T19:30:00Z,11,1.86,Anytime TD,,yes,200.0,draftkings,0.1959,,
+2026-10-30T20:13:22.459080+00:00,CJ Phillip,UL Monroe,RB,Southern Miss,2026-10-31T19:30:00Z,11,1.86,Anytime TD,,yes,255.0,draftkings,0.1832,,
+2026-10-30T20:13:22.459080+00:00,Derrick Jameson,UL Monroe,RB,Southern Miss,2026-10-31T19:30:00Z,11,1.86,Anytime TD,,yes,170.0,draftkings,0.2667,,
+2026-10-30T20:13:22.459080+00:00,Kache Kaio,Utah State,TE,Colorado State,2026-10-31T19:30:00Z,11,0.57,Anytime TD,,yes,1300.0,draftkings,0.1824,,
+2026-10-30T20:13:22.459080+00:00,Luke Harpring,Florida,TE,Georgia,2026-10-31T19:30:00Z,11,0.57,Anytime TD,,yes,650.0,draftkings,0.135,,
+2026-10-30T20:13:22.459080+00:00,Luke Harpring,Florida,TE,Georgia,2026-10-31T19:30:00Z,11,0.57,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Anthony Garcia,Utah State,WR,Colorado State,2026-10-31T19:30:00Z,12,1.57,Anytime TD,,yes,240.0,draftkings,0.2189,,
+2026-10-30T20:13:22.459080+00:00,Demick Starling,Utah State,WR,Colorado State,2026-10-31T19:30:00Z,12,1.57,Anytime TD,,yes,225.0,draftkings,0.2341,,
+2026-10-30T20:13:22.459080+00:00,Eli Wood,Utah State,WR,Colorado State,2026-10-31T19:30:00Z,12,1.57,Anytime TD,,yes,-195.0,draftkings,0.5055,,
+2026-10-30T20:13:22.459080+00:00,Javon Robinson,Utah State,WR,Colorado State,2026-10-31T19:30:00Z,12,1.57,Anytime TD,,yes,110.0,draftkings,0.2667,,
+2026-10-30T20:13:22.459080+00:00,Gunner Stockton,Georgia,QB,Florida,2026-10-31T19:30:00Z,15,0.71,Anytime TD,,yes,135.0,draftkings,0.2626,,
+2026-10-30T20:13:22.459080+00:00,Gunner Stockton,Georgia,QB,Florida,2026-10-31T19:30:00Z,15,0.71,Pass Touchdowns,1.5,over,-174.0,fanduel,0.6465,1.8,False
+2026-10-30T20:13:22.459080+00:00,Gunner Stockton,Georgia,QB,Florida,2026-10-31T19:30:00Z,15,0.71,Pass Yards,248.5,under,-115.0,betonlineag,0.728,36.1,False
+2026-10-30T20:13:22.459080+00:00,Gunner Stockton,Georgia,QB,Florida,2026-10-31T19:30:00Z,15,0.71,Rush Yards,25.5,under,-115.0,hardrockbet,0.7035,31.5,True
+2026-10-30T20:13:22.459080+00:00,Gunner Stockton,Georgia,QB,Florida,2026-10-31T19:30:00Z,15,0.71,Rush Touchdowns,0.5,under,,fliff,0.832,,False
+2026-10-30T20:13:22.459080+00:00,Dakota Twitty,Virginia,TE,Wake Forest,2026-10-31T19:45:00Z,1,0.71,Anytime TD,,yes,600.0,draftkings,0.1499,,
+2026-10-30T20:13:22.459080+00:00,Dakota Twitty,Virginia,TE,Wake Forest,2026-10-31T19:45:00Z,1,0.71,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,John Rogers,Virginia,TE,Wake Forest,2026-10-31T19:45:00Z,1,0.71,Anytime TD,,yes,550.0,draftkings,0.1854,,
+2026-10-30T20:13:22.459080+00:00,John Rogers,Virginia,TE,Wake Forest,2026-10-31T19:45:00Z,1,0.71,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Byrd Ficklin,Utah,QB,Cincinnati,2026-10-31T19:45:00Z,15,0.71,Anytime TD,,yes,240.0,draftkings,0.1932,,
+2026-10-30T20:13:22.459080+00:00,Devon Dampier,Utah,QB,Cincinnati,2026-10-31T19:45:00Z,15,0.71,Anytime TD,,yes,-115.0,draftkings,0.4535,,
+2026-10-30T20:13:22.459080+00:00,Devon Dampier,Utah,QB,Cincinnati,2026-10-31T19:45:00Z,15,0.71,Pass Touchdowns,1.5,under,-118.0,fanduel,0.758,40.0,False
+2026-10-30T20:13:22.459080+00:00,Devon Dampier,Utah,QB,Cincinnati,2026-10-31T19:45:00Z,15,0.71,Pass Yards,226.5,under,-115.0,hardrockbet,0.711,32.9,False
+2026-10-30T20:13:22.459080+00:00,Devon Dampier,Utah,QB,Cincinnati,2026-10-31T19:45:00Z,15,0.71,Rush Yards,49.5,under,-125.0,espnbet,0.5765,3.8,True
+2026-10-30T20:13:22.459080+00:00,Devon Dampier,Utah,QB,Cincinnati,2026-10-31T19:45:00Z,15,0.71,Rush Attempts,10.5,over,-155.0,fliff,0.5445,-10.4,False
+2026-10-30T20:13:22.459080+00:00,Devon Dampier,Utah,QB,Cincinnati,2026-10-31T19:45:00Z,15,0.71,Rush Touchdowns,0.5,over,-110.0,fliff,0.391,-25.4,False
+2026-10-30T20:13:22.459080+00:00,Elijah Thomas,Oklahoma,WR,South Carolina,2026-10-31T20:15:00Z,8,1.71,Anytime TD,,yes,500.0,draftkings,0.1098,,
+2026-10-30T20:13:22.459080+00:00,Elijah Thomas,Oklahoma,WR,South Carolina,2026-10-31T20:15:00Z,8,1.71,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Mackenzie Alleyne,Oklahoma,WR,South Carolina,2026-10-31T20:15:00Z,8,1.71,Anytime TD,,yes,600.0,draftkings,0.1598,,
+2026-10-30T20:13:22.459080+00:00,Mackenzie Alleyne,Oklahoma,WR,South Carolina,2026-10-31T20:15:00Z,8,1.71,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Manny Choice,Oklahoma,WR,South Carolina,2026-10-31T20:15:00Z,8,1.71,Anytime TD,,yes,400.0,draftkings,0.1744,,
+2026-10-30T20:13:22.459080+00:00,Manny Choice,Oklahoma,WR,South Carolina,2026-10-31T20:15:00Z,8,1.71,Reception Yards,36.5,under,-130.0,fliff,0.601,6.3,False
+2026-10-30T20:13:22.459080+00:00,Manny Choice,Oklahoma,WR,South Carolina,2026-10-31T20:15:00Z,8,1.71,Receptions,3.5,under,-210.0,fanduel,0.6715,-0.9,False
+2026-10-30T20:13:22.459080+00:00,Manny Choice,Oklahoma,WR,South Carolina,2026-10-31T20:15:00Z,8,1.71,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Parker Livingstone,Oklahoma,WR,South Carolina,2026-10-31T20:15:00Z,8,1.71,Anytime TD,,yes,1000.0,draftkings,0.1257,,
+2026-10-30T20:13:22.459080+00:00,Parker Livingstone,Oklahoma,WR,South Carolina,2026-10-31T20:15:00Z,8,1.71,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Trell Harris,Oklahoma,WR,South Carolina,2026-10-31T20:15:00Z,8,1.71,Anytime TD,,yes,600.0,draftkings,0.2924,,
+2026-10-30T20:13:22.459080+00:00,Hayden Hansen,Oklahoma,TE,South Carolina,2026-10-31T20:15:00Z,11,0.57,Anytime TD,,yes,650.0,draftkings,0.1404,,
+2026-10-30T20:13:22.459080+00:00,Hayden Hansen,Oklahoma,TE,South Carolina,2026-10-31T20:15:00Z,11,0.57,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Rocky Beers,Oklahoma,TE,South Carolina,2026-10-31T20:15:00Z,11,0.57,Anytime TD,,yes,115.0,draftkings,0.3229,,
+2026-10-30T20:13:22.459080+00:00,Rocky Beers,Oklahoma,TE,South Carolina,2026-10-31T20:15:00Z,11,0.57,Reception Yards,37.5,over,-125.0,fliff,0.529,-4.8,False
+2026-10-30T20:13:22.459080+00:00,Rocky Beers,Oklahoma,TE,South Carolina,2026-10-31T20:15:00Z,11,0.57,Receptions,4.5,under,-180.0,fanduel,0.6215,-3.3,False
+2026-10-30T20:13:22.459080+00:00,Rocky Beers,Oklahoma,TE,South Carolina,2026-10-31T20:15:00Z,11,0.57,Reception Touchdowns,0.5,under,,fliff,0.6605,,False
+2026-10-30T20:13:22.459080+00:00,Brett Eskildsen,Penn State,WR,Purdue,2026-10-31T20:15:00Z,12,1.57,Anytime TD,,yes,170.0,draftkings,0.2502,,
+2026-10-30T20:13:22.459080+00:00,Brett Eskildsen,Penn State,WR,Purdue,2026-10-31T20:15:00Z,12,1.57,Reception Yards,44.5,under,-115.0,espnbet,0.6715,25.5,False
+2026-10-30T20:13:22.459080+00:00,Brett Eskildsen,Penn State,WR,Purdue,2026-10-31T20:15:00Z,12,1.57,Receptions,3.5,under,-132.0,betonlineag,0.688,20.9,False
+2026-10-30T20:13:22.459080+00:00,Brett Eskildsen,Penn State,WR,Purdue,2026-10-31T20:15:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.664,,False
+2026-10-30T20:13:22.459080+00:00,Chase Sowell,Penn State,WR,Purdue,2026-10-31T20:15:00Z,12,1.57,Anytime TD,,yes,100.0,draftkings,0.4035,,
+2026-10-30T20:13:22.459080+00:00,Chase Sowell,Penn State,WR,Purdue,2026-10-31T20:15:00Z,12,1.57,Reception Yards,68.5,under,-115.0,betonlineag,0.5895,10.2,False
+2026-10-30T20:13:22.459080+00:00,Chase Sowell,Penn State,WR,Purdue,2026-10-31T20:15:00Z,12,1.57,Receptions,4.5,over,-123.0,betonlineag,0.465,-15.7,False
+2026-10-30T20:13:22.459080+00:00,Chase Sowell,Penn State,WR,Purdue,2026-10-31T20:15:00Z,12,1.57,Reception Touchdowns,0.5,over,110.0,fliff,0.34,-28.6,False
+2026-10-30T20:13:22.459080+00:00,Koby Howard,Penn State,WR,Purdue,2026-10-31T20:15:00Z,12,1.57,Anytime TD,,yes,110.0,fanduel,0.4703,,
+2026-10-30T20:13:22.459080+00:00,Zay Robinson,Penn State,WR,Purdue,2026-10-31T20:15:00Z,12,1.57,Anytime TD,,yes,500.0,draftkings,0.1926,,
+2026-10-30T20:13:22.459080+00:00,Zay Robinson,Penn State,WR,Purdue,2026-10-31T20:15:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Cam Wallace,Penn State,RB,Purdue,2026-10-31T20:15:00Z,23,1.57,Anytime TD,,yes,275.0,draftkings,0.3081,,
+2026-10-30T20:13:22.459080+00:00,Carson Hansen,Penn State,RB,Purdue,2026-10-31T20:15:00Z,23,1.57,Anytime TD,,yes,-150.0,draftkings,0.49,,
+2026-10-30T20:13:22.459080+00:00,Carson Hansen,Penn State,RB,Purdue,2026-10-31T20:15:00Z,23,1.57,Rush Yards,66.5,under,-114.0,fanduel,0.6575,23.4,True
+2026-10-30T20:13:22.459080+00:00,Carson Hansen,Penn State,RB,Purdue,2026-10-31T20:15:00Z,23,1.57,Reception Touchdowns,0.5,under,,fliff,0.9675,,False
+2026-10-30T20:13:22.459080+00:00,Carson Hansen,Penn State,RB,Purdue,2026-10-31T20:15:00Z,23,1.57,Rush Attempts,14.5,under,-125.0,fliff,0.741,33.4,False
+2026-10-30T20:13:22.459080+00:00,Carson Hansen,Penn State,RB,Purdue,2026-10-31T20:15:00Z,23,1.57,Rush Touchdowns,0.5,over,-155.0,fliff,0.392,-35.5,False
+2026-10-30T20:13:22.459080+00:00,James Peoples,Penn State,RB,Purdue,2026-10-31T20:15:00Z,23,1.57,Anytime TD,,yes,105.0,draftkings,0.3606,,
+2026-10-30T20:13:22.459080+00:00,James Peoples,Penn State,RB,Purdue,2026-10-31T20:15:00Z,23,1.57,Rush Yards,31.5,over,-114.0,betonlineag,0.5425,1.8,False
+2026-10-30T20:13:22.459080+00:00,James Peoples,Penn State,RB,Purdue,2026-10-31T20:15:00Z,23,1.57,Reception Touchdowns,0.5,under,,fliff,0.9675,,False
+2026-10-30T20:13:22.459080+00:00,James Peoples,Penn State,RB,Purdue,2026-10-31T20:15:00Z,23,1.57,Rush Touchdowns,0.5,under,,fliff,0.621,,False
+2026-10-30T20:13:22.459080+00:00,Quinton Martin Jr.,Penn State,RB,Purdue,2026-10-31T20:15:00Z,23,1.57,Anytime TD,,yes,210.0,draftkings,0.2476,,
+2026-10-30T20:13:22.459080+00:00,Quinton Martin Jr.,Penn State,RB,Purdue,2026-10-31T20:15:00Z,23,1.57,Reception Touchdowns,0.5,under,,fliff,0.9675,,False
+2026-10-30T20:13:22.459080+00:00,Quinton Martin Jr.,Penn State,RB,Purdue,2026-10-31T20:15:00Z,23,1.57,Rush Touchdowns,0.5,under,,fliff,0.832,,False
+2026-10-30T20:13:22.459080+00:00,Kirby Vorhees,Washington State,RB,San Diego State,2026-10-31T23:00:00Z,9,1.88,Anytime TD,,yes,100.0,draftkings,0.2668,,
+2026-10-30T20:13:22.459080+00:00,Leo Pulalasi,Washington State,RB,San Diego State,2026-10-31T23:00:00Z,9,1.88,Anytime TD,,yes,230.0,draftkings,0.1687,,
+2026-10-30T20:13:22.459080+00:00,Maxwell Woods,Washington State,RB,San Diego State,2026-10-31T23:00:00Z,9,1.88,Anytime TD,,yes,200.0,draftkings,0.1554,,
+2026-10-30T20:13:22.459080+00:00,Drew Mestemaker,Oklahoma State,QB,Iowa State,2026-10-31T23:00:00Z,15,0.71,Anytime TD,,yes,155.0,draftkings,0.2753,,
+2026-10-30T20:13:22.459080+00:00,Drew Mestemaker,Oklahoma State,QB,Iowa State,2026-10-31T23:00:00Z,15,0.71,Pass Touchdowns,2.5,under,-200.0,fanduel,0.8685,30.3,False
+2026-10-30T20:13:22.459080+00:00,Drew Mestemaker,Oklahoma State,QB,Iowa State,2026-10-31T23:00:00Z,15,0.71,Pass Yards,299.5,under,-115.0,espnbet,0.774,44.7,False
+2026-10-30T20:13:22.459080+00:00,Drew Mestemaker,Oklahoma State,QB,Iowa State,2026-10-31T23:00:00Z,15,0.71,Rush Attempts,4.5,over,110.0,fliff,0.5945,24.8,False
+2026-10-30T20:13:22.459080+00:00,Drew Mestemaker,Oklahoma State,QB,Iowa State,2026-10-31T23:00:00Z,15,0.71,Rush Touchdowns,0.5,under,,fliff,0.637,,False
+2026-10-30T20:13:22.459080+00:00,Drew Mestemaker,Oklahoma State,QB,Iowa State,2026-10-31T23:00:00Z,15,0.71,Rush Yards,4.5,over,-120.0,fliff,0.7115,30.4,False
+2026-10-30T20:13:22.459080+00:00,Bert Emanuel Jr.,San Diego State,WR,Washington State,2026-10-31T23:00:00Z,20,1.5,Anytime TD,,yes,500.0,draftkings,0.1964,,
+2026-10-30T20:13:22.459080+00:00,Donovan Brown,San Diego State,WR,Washington State,2026-10-31T23:00:00Z,20,1.5,Anytime TD,,yes,600.0,draftkings,0.1787,,
+2026-10-30T20:13:22.459080+00:00,Jacob Bostick,San Diego State,WR,Washington State,2026-10-31T23:00:00Z,20,1.5,Anytime TD,,yes,425.0,draftkings,0.187,,
+2026-10-30T20:13:22.459080+00:00,Jaylon Hawkins,San Diego State,WR,Washington State,2026-10-31T23:00:00Z,20,1.5,Anytime TD,,yes,140.0,betonlineag,0.3434,,
+2026-10-30T20:13:22.459080+00:00,Jordan Napier,San Diego State,WR,Washington State,2026-10-31T23:00:00Z,20,1.5,Anytime TD,,yes,285.0,draftkings,0.2397,,
+2026-10-30T20:13:22.459080+00:00,Nathan Acevedo,San Diego State,WR,Washington State,2026-10-31T23:00:00Z,20,1.5,Anytime TD,,yes,235.0,draftkings,0.247,,
+2026-10-30T20:13:22.459080+00:00,Jack Pedersen,Washington State,TE,San Diego State,2026-10-31T23:00:00Z,22,0.5,Anytime TD,,yes,275.0,draftkings,0.1596,,
+2026-10-30T20:13:22.459080+00:00,Trey Leckner,Washington State,TE,San Diego State,2026-10-31T23:00:00Z,22,0.5,Anytime TD,,yes,1000.0,draftkings,0.1662,,
+2026-10-30T20:13:22.459080+00:00,Caden Pinnick,Washington State,QB,San Diego State,2026-10-31T23:00:00Z,24,0.62,Anytime TD,,yes,-143.0,betonlineag,0.3939,,
+2026-10-30T20:13:22.459080+00:00,Cody Jackson,Iowa State,WR,Oklahoma State,2026-10-31T23:00:00Z,24,1.43,Anytime TD,,yes,175.0,draftkings,0.3114,,
+2026-10-30T20:13:22.459080+00:00,Cody Jackson,Iowa State,WR,Oklahoma State,2026-10-31T23:00:00Z,24,1.43,Reception Yards,26.5,over,-114.0,fanduel,0.6285,18.0,True
+2026-10-30T20:13:22.459080+00:00,Cody Jackson,Iowa State,WR,Oklahoma State,2026-10-31T23:00:00Z,24,1.43,Reception Touchdowns,0.5,under,,fliff,0.6605,,False
+2026-10-30T20:13:22.459080+00:00,Jamal Polite Jr.,Iowa State,WR,Oklahoma State,2026-10-31T23:00:00Z,24,1.43,Anytime TD,,yes,500.0,fanduel,0.1569,,
+2026-10-30T20:13:22.459080+00:00,Jamal Polite Jr.,Iowa State,WR,Oklahoma State,2026-10-31T23:00:00Z,24,1.43,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Omari Hayes,Iowa State,WR,Oklahoma State,2026-10-31T23:00:00Z,24,1.43,Anytime TD,,yes,170.0,draftkings,0.2342,,
+2026-10-30T20:13:22.459080+00:00,Omari Hayes,Iowa State,WR,Oklahoma State,2026-10-31T23:00:00Z,24,1.43,Reception Yards,34.5,over,-110.0,espnbet,0.516,-1.5,False
+2026-10-30T20:13:22.459080+00:00,Omari Hayes,Iowa State,WR,Oklahoma State,2026-10-31T23:00:00Z,24,1.43,Receptions,3.5,over,134.0,fanduel,0.445,4.1,False
+2026-10-30T20:13:22.459080+00:00,Omari Hayes,Iowa State,WR,Oklahoma State,2026-10-31T23:00:00Z,24,1.43,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Owen Eshelman,Washington State,QB,San Diego State,2026-10-31T23:00:00Z,24,0.62,Anytime TD,,yes,155.0,draftkings,0.5788,,
+2026-10-30T20:13:22.459080+00:00,Mason Williams,Ohio State,TE,USC,2026-10-31T23:30:00Z,7,0.62,Anytime TD,,yes,750.0,draftkings,0.1865,,
+2026-10-30T20:13:22.459080+00:00,Mason Williams,Ohio State,TE,USC,2026-10-31T23:30:00Z,7,0.62,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Nate Roberts,Ohio State,TE,USC,2026-10-31T23:30:00Z,7,0.62,Anytime TD,,yes,400.0,draftkings,0.1877,,
+2026-10-30T20:13:22.459080+00:00,Nate Roberts,Ohio State,TE,USC,2026-10-31T23:30:00Z,7,0.62,Reception Yards,12.5,over,-108.0,betonlineag,0.739,42.3,True
+2026-10-30T20:13:22.459080+00:00,Nate Roberts,Ohio State,TE,USC,2026-10-31T23:30:00Z,7,0.62,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Nate Roberts,Ohio State,TE,USC,2026-10-31T23:30:00Z,7,0.62,Receptions,1.5,over,-110.0,fliff,0.5685,8.5,False
+2026-10-30T20:13:22.459080+00:00,Cam Coleman,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Anytime TD,,yes,100.0,draftkings,0.2708,,
+2026-10-30T20:13:22.459080+00:00,Cam Coleman,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Reception Yards,49.5,under,-110.0,espnbet,0.593,13.2,False
+2026-10-30T20:13:22.459080+00:00,Cam Coleman,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Receptions,3.5,under,-130.0,fanduel,0.649,14.8,False
+2026-10-30T20:13:22.459080+00:00,Cam Coleman,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.6625,,False
+2026-10-30T20:13:22.459080+00:00,Emmett Mosley V,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Anytime TD,,yes,210.0,draftkings,0.2224,,
+2026-10-30T20:13:22.459080+00:00,Emmett Mosley V,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Reception Yards,34.5,over,-118.0,fanduel,0.531,-1.9,False
+2026-10-30T20:13:22.459080+00:00,Emmett Mosley V,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Receptions,2.5,over,-148.0,fanduel,0.59,-1.1,False
+2026-10-30T20:13:22.459080+00:00,Emmett Mosley V,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Jermaine Bishop Jr.,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Anytime TD,,yes,380.0,draftkings,0.1745,,
+2026-10-30T20:13:22.459080+00:00,Jermaine Bishop Jr.,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Ryan Wingo,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Anytime TD,,yes,105.0,draftkings,0.3528,,
+2026-10-30T20:13:22.459080+00:00,Ryan Wingo,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Reception Yards,57.5,over,-115.0,hardrockbet,0.474,-11.4,False
+2026-10-30T20:13:22.459080+00:00,Ryan Wingo,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Receptions,4.5,over,-138.0,fanduel,0.463,-20.1,False
+2026-10-30T20:13:22.459080+00:00,Ryan Wingo,Texas,WR,Mississippi State,2026-10-31T23:30:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.6605,,False
+2026-10-30T20:13:22.459080+00:00,Damon Ferguson Jr.,Pittsburgh,RB,Georgia Tech,2026-10-31T23:30:00Z,23,1.57,Anytime TD,,yes,-190.0,draftkings,0.5532,,
+2026-10-30T20:13:22.459080+00:00,Damon Ferguson Jr.,Pittsburgh,RB,Georgia Tech,2026-10-31T23:30:00Z,23,1.57,Rush Yards,70.5,over,-114.0,betonlineag,0.4575,-14.1,False
+2026-10-30T20:13:22.459080+00:00,Damon Ferguson Jr.,Pittsburgh,RB,Georgia Tech,2026-10-31T23:30:00Z,23,1.57,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Damon Ferguson Jr.,Pittsburgh,RB,Georgia Tech,2026-10-31T23:30:00Z,23,1.57,Rush Touchdowns,0.5,over,-120.0,fliff,0.398,-27.0,False
+2026-10-30T20:13:22.459080+00:00,Ja'Kyrian Turner,Pittsburgh,RB,Georgia Tech,2026-10-31T23:30:00Z,23,1.57,Anytime TD,,yes,110.0,draftkings,0.5297,,
+2026-10-30T20:13:22.459080+00:00,Jamal Roberts,Missouri,RB,Arkansas,2026-10-31T23:45:00Z,4,2.0,Anytime TD,,yes,-205.0,draftkings,0.6917,,
+2026-10-30T20:13:22.459080+00:00,Jamal Roberts,Missouri,RB,Arkansas,2026-10-31T23:45:00Z,4,2.0,Rush Yards,116.5,under,-125.0,fliff,0.5905,6.3,True
+2026-10-30T20:13:22.459080+00:00,Jamal Roberts,Missouri,RB,Arkansas,2026-10-31T23:45:00Z,4,2.0,Reception Yards,14.5,over,-114.0,betonlineag,0.452,-15.2,False
+2026-10-30T20:13:22.459080+00:00,Jamal Roberts,Missouri,RB,Arkansas,2026-10-31T23:45:00Z,4,2.0,Receptions,2.5,under,-145.0,betonlineag,0.699,18.1,False
+2026-10-30T20:13:22.459080+00:00,Jamal Roberts,Missouri,RB,Arkansas,2026-10-31T23:45:00Z,4,2.0,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Jamal Roberts,Missouri,RB,Arkansas,2026-10-31T23:45:00Z,4,2.0,Rush Touchdowns,1.5,under,,fliff,0.7025,,False
+2026-10-30T20:13:22.459080+00:00,Brett Norfleet,Missouri,TE,Arkansas,2026-10-31T23:45:00Z,11,0.57,Anytime TD,,yes,390.0,draftkings,0.1512,,
+2026-10-30T20:13:22.459080+00:00,Brett Norfleet,Missouri,TE,Arkansas,2026-10-31T23:45:00Z,11,0.57,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Antonio Jordan,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Anytime TD,,yes,600.0,draftkings,0.139,,
+2026-10-30T20:13:22.459080+00:00,Antonio Jordan,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,CJ Brown,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Anytime TD,,yes,380.0,draftkings,0.1277,,
+2026-10-30T20:13:22.459080+00:00,CJ Brown,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Chris Marshall,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Anytime TD,,yes,190.0,draftkings,0.3728,,
+2026-10-30T20:13:22.459080+00:00,Chris Marshall,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Reception Yards,72.5,under,-115.0,hardrockbet,0.648,21.1,False
+2026-10-30T20:13:22.459080+00:00,Chris Marshall,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Receptions,5.5,under,-125.0,espnbet,0.6595,18.7,False
+2026-10-30T20:13:22.459080+00:00,Chris Marshall,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.66,,False
+2026-10-30T20:13:22.459080+00:00,Donovan Faupel,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Anytime TD,,yes,650.0,draftkings,0.1206,,
+2026-10-30T20:13:22.459080+00:00,Donovan Faupel,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Ismael Cisse,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Anytime TD,,yes,310.0,draftkings,0.1704,,
+2026-10-30T20:13:22.459080+00:00,Ismael Cisse,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.816,,False
+2026-10-30T20:13:22.459080+00:00,Jamari Hawkins,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Anytime TD,,yes,600.0,draftkings,0.1664,,
+2026-10-30T20:13:22.459080+00:00,Jamari Hawkins,Arkansas,WR,Missouri,2026-10-31T23:45:00Z,12,1.57,Reception Touchdowns,0.5,under,,fliff,0.901,,False
+2026-10-30T20:13:22.459080+00:00,Austin Simmons,Missouri,QB,Arkansas,2026-10-31T23:45:00Z,15,0.71,Anytime TD,,yes,185.0,draftkings,0.134,,
+2026-10-30T20:13:22.459080+00:00,Austin Simmons,Missouri,QB,Arkansas,2026-10-31T23:45:00Z,15,0.71,Pass Touchdowns,1.5,over,-118.0,fanduel,0.5145,-4.9,False
+2026-10-30T20:13:22.459080+00:00,Austin Simmons,Missouri,QB,Arkansas,2026-10-31T23:45:00Z,15,0.71,Pass Yards,241.5,under,-115.0,hardrockbet,0.698,30.5,False
+2026-10-30T20:13:22.459080+00:00,Austin Simmons,Missouri,QB,Arkansas,2026-10-31T23:45:00Z,15,0.71,Rush Touchdowns,0.5,under,,fliff,0.832,,False
+2026-10-30T20:13:22.459080+00:00,Alante Brown,Memphis,WR,Army,2026-11-01T00:00:00Z,24,1.43,Anytime TD,,yes,750.0,draftkings,0.1479,,
+2026-10-30T20:13:22.459080+00:00,Brady Kluse,Memphis,WR,Army,2026-11-01T00:00:00Z,24,1.43,Anytime TD,,yes,600.0,draftkings,0.185,,
+2026-10-30T20:13:22.459080+00:00,Jemyri Davis,Memphis,WR,Army,2026-11-01T00:00:00Z,24,1.43,Anytime TD,,yes,250.0,draftkings,0.3345,,
+2026-10-30T20:13:22.459080+00:00,Jermane Hayes,Memphis,WR,Army,2026-11-01T00:00:00Z,24,1.43,Anytime TD,,yes,185.0,draftkings,0.3045,,
+2026-10-30T20:13:22.459080+00:00,Terrell Timmons Jr.,Memphis,WR,Army,2026-11-01T00:00:00Z,24,1.43,Anytime TD,,yes,1000.0,draftkings,0.1642,,
+2026-10-30T20:13:22.459080+00:00,Tychaun Chapman,Memphis,WR,Army,2026-11-01T00:00:00Z,24,1.43,Anytime TD,,yes,290.0,draftkings,0.2535,,
+2026-10-30T20:13:22.459080+00:00,Dylan Riley,Boise State,RB,Texas State,2026-11-01T02:00:00Z,11,1.86,Anytime TD,,yes,-700.0,draftkings,0.7082,,
+2026-10-30T20:13:22.459080+00:00,Dylan Riley,Boise State,RB,Texas State,2026-11-01T02:00:00Z,11,1.86,Reception Yards,13.5,over,-114.0,fanduel,0.404,-24.2,False
+2026-10-30T20:13:22.459080+00:00,Dylan Riley,Boise State,RB,Texas State,2026-11-01T02:00:00Z,11,1.86,Rush Yards,132.5,under,-114.0,fanduel,0.7745,45.4,True
+2026-10-30T20:13:22.459080+00:00,Harry Stewart III,Boise State,RB,Texas State,2026-11-01T02:00:00Z,11,1.86,Anytime TD,,yes,175.0,draftkings,0.2453,,
+2026-10-30T20:13:22.459080+00:00,Juelz Goff,Boise State,RB,Texas State,2026-11-01T02:00:00Z,11,1.86,Anytime TD,,yes,165.0,draftkings,0.2453,,
+2026-10-30T20:13:22.459080+00:00,Sire Gaines,Boise State,RB,Texas State,2026-11-01T02:00:00Z,11,1.86,Anytime TD,,yes,-160.0,draftkings,0.6368,,
+2026-10-30T20:13:22.459080+00:00,Sire Gaines,Boise State,RB,Texas State,2026-11-01T02:00:00Z,11,1.86,Rush Yards,73.5,over,-114.0,betonlineag,0.491,-7.8,False
+2026-10-30T20:13:22.459080+00:00,Keyan Burnett,UNLV,TE,Northern Illinois,2026-11-01T02:30:00Z,1,0.71,Anytime TD,,yes,135.0,draftkings,0.2244,,
+2026-10-30T20:13:22.459080+00:00,Matt Byrnes,UNLV,TE,Northern Illinois,2026-11-01T02:30:00Z,1,0.71,Anytime TD,,yes,550.0,draftkings,0.1597,,
+2026-10-30T20:13:22.459080+00:00,Jackson Arnold,UNLV,QB,Northern Illinois,2026-11-01T02:30:00Z,3,1.29,Anytime TD,,yes,-300.0,draftkings,0.6233,,
+2026-10-30T20:13:22.459080+00:00,Jackson Arnold,UNLV,QB,Northern Illinois,2026-11-01T02:30:00Z,3,1.29,Pass Touchdowns,1.5,over,-158.0,fanduel,0.7385,20.6,False
+2026-10-30T20:13:22.459080+00:00,Jackson Arnold,UNLV,QB,Northern Illinois,2026-11-01T02:30:00Z,3,1.29,Pass Yards,246.5,under,-114.0,fanduel,0.7845,47.3,False
+2026-10-30T20:13:22.459080+00:00,Jackson Arnold,UNLV,QB,Northern Illinois,2026-11-01T02:30:00Z,3,1.29,Rush Yards,61.5,over,-114.0,fanduel,0.439,-17.6,False
+2026-10-30T20:13:22.459080+00:00,Darrien Jones,UNLV,RB,Northern Illinois,2026-11-01T02:30:00Z,23,1.57,Anytime TD,,yes,-110.0,draftkings,0.1407,,
+2026-10-30T20:13:22.459080+00:00,Jai'Den Thomas,UNLV,RB,Northern Illinois,2026-11-01T02:30:00Z,23,1.57,Anytime TD,,yes,-350.0,draftkings,0.7073,,
+2026-10-30T20:13:22.459080+00:00,Jai'Den Thomas,UNLV,RB,Northern Illinois,2026-11-01T02:30:00Z,23,1.57,Reception Yards,18.5,over,-114.0,fanduel,0.4455,-16.4,False
+2026-10-30T20:13:22.459080+00:00,Jai'Den Thomas,UNLV,RB,Northern Illinois,2026-11-01T02:30:00Z,23,1.57,Rush Yards,98.5,under,-114.0,fanduel,0.6095,14.4,True
+2026-10-30T20:13:22.459080+00:00,Jaylon Glover,UNLV,RB,Northern Illinois,2026-11-01T02:30:00Z,23,1.57,Anytime TD,,yes,100.0,draftkings,0.3324,,
+2026-10-30T20:13:22.459080+00:00,Jayden Mandal,Fresno State,QB,Oregon State,2026-11-01T03:00:00Z,15,0.71,Anytime TD,,yes,130.0,draftkings,0.3214,,
+2026-10-30T20:13:22.459080+00:00,Jayden Mandal,Fresno State,QB,Oregon State,2026-11-01T03:00:00Z,15,0.71,Pass Touchdowns,1.5,under,-182.0,fanduel,0.7615,18.0,False
+2026-10-30T20:13:22.459080+00:00,Jayden Mandal,Fresno State,QB,Oregon State,2026-11-01T03:00:00Z,15,0.71,Pass Yards,229.5,under,-115.0,betonlineag,0.762,42.5,False
+2026-10-30T20:13:22.459080+00:00,Jayden Mandal,Fresno State,QB,Oregon State,2026-11-01T03:00:00Z,15,0.71,Rush Yards,13.5,over,-114.0,fanduel,0.582,9.3,False
+2026-10-30T20:13:22.459080+00:00,Jayden Mandal,Fresno State,QB,Oregon State,2026-11-01T03:00:00Z,15,0.71,Rush Attempts,8.5,under,-165.0,fliff,0.5685,-8.7,False
+2026-10-30T20:13:22.459080+00:00,Jayden Mandal,Fresno State,QB,Oregon State,2026-11-01T03:00:00Z,15,0.71,Rush Touchdowns,0.5,under,,fliff,0.6265,,False

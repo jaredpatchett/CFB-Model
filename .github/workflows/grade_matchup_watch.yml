@@ -1,0 +1,46 @@
+name: Grade matchup watch list
+
+# Grades a saved Defense vs Position "This week's matchups" list after the
+# games (scripts/grade_matchup_watch.py). Pushing a change to this file runs
+# it. For fun / research -- does not touch the model, dashboard or tracker.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/grade_matchup_watch.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
+      WATCH_FILE: data/clv/matchup_watch_2026-10-31.csv
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Grade
+        run: python scripts/grade_matchup_watch.py --file "$WATCH_FILE" --season 2026
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/matchup_watch_*_results.csv docs/data/matchup_watch_*_report.txt 2>/dev/null || true
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Matchup watch results [skip ci]"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git merge -X ours --no-edit origin/main -m "Merge origin/main [skip ci]" && git push origin main; then break; fi
+            sleep $((RANDOM % 10 + 5))
+          done
+# run: (set on grading day)
