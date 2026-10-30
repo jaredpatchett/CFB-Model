@@ -1,0 +1,1177 @@
+{
+  "generated_at": "2026-10-30T19:28:24.609489+00:00",
+  "buckets": {
+    "with": 67,
+    "against": 33,
+    "min_games": 3
+  },
+  "results": {
+    "info": {
+      "player_games": 159792,
+      "position_from_roster_pct": 92.1,
+      "position_any_pct": 95.8,
+      "fbs_teams": 138
+    },
+    "receptions unders 30%+ (official)": {
+      "note": "",
+      "matched_pct": 65.9,
+      "by_bucket": {
+        "2024": {
+          "with": {
+            "n": 33,
+            "record": "17-16",
+            "units": 3.0,
+            "roi": 9.1
+          },
+          "neutral": {
+            "n": 52,
+            "record": "32-20",
+            "units": 12.8,
+            "roi": 24.7
+          },
+          "against": {
+            "n": 39,
+            "record": "23-16",
+            "units": 7.0,
+            "roi": 18.0
+          },
+          "no grade": {
+            "n": 46,
+            "record": "28-18",
+            "units": 8.1,
+            "roi": 17.7
+          }
+        },
+        "2025": {
+          "with": {
+            "n": 23,
+            "record": "14-9",
+            "units": 4.9,
+            "roi": 21.2
+          },
+          "neutral": {
+            "n": 20,
+            "record": "13-7",
+            "units": 5.6,
+            "roi": 28.2
+          },
+          "against": {
+            "n": 24,
+            "record": "8-16",
+            "units": -7.9,
+            "roi": -32.9
+          },
+          "no grade": {
+            "n": 40,
+            "record": "26-14",
+            "units": 12.3,
+            "roi": 30.6
+          }
+        },
+        "2026": {
+          "with": {
+            "n": 14,
+            "record": "9-5",
+            "units": 3.4,
+            "roi": 24.6
+          },
+          "neutral": {
+            "n": 13,
+            "record": "8-5",
+            "units": 3.3,
+            "roi": 25.7
+          },
+          "against": {
+            "n": 10,
+            "record": "5-5",
+            "units": -0.7,
+            "roi": -7.2
+          },
+          "no grade": {
+            "n": 32,
+            "record": "20-12",
+            "units": 6.3,
+            "roi": 19.8
+          }
+        },
+        "all": {
+          "with": {
+            "n": 70,
+            "record": "40-30",
+            "units": 11.3,
+            "roi": 16.2
+          },
+          "neutral": {
+            "n": 85,
+            "record": "53-32",
+            "units": 21.8,
+            "roi": 25.7
+          },
+          "against": {
+            "n": 73,
+            "record": "36-37",
+            "units": -1.6,
+            "roi": -2.2
+          },
+          "no grade": {
+            "n": 118,
+            "record": "74-44",
+            "units": 26.7,
+            "roi": 22.6
+          }
+        }
+      },
+      "verdict": "fails (with minus against ROI: 2024 -8.9, 2025 +54.1)",
+      "model_miss_by_defense": {
+        "average D": {
+          "n": 85,
+          "actual_minus_proj": 0.35
+        },
+        "soft D": {
+          "n": 73,
+          "actual_minus_proj": 0.8
+        },
+        "tough D": {
+          "n": 70,
+          "actual_minus_proj": 0.59
+        }
+      }
+    },
+    "receptions overs 10-30% (watch)": {
+      "note": "",
+      "matched_pct": 74.7,
+      "by_bucket": {
+        "2024": {
+          "with": {
+            "n": 23,
+            "record": "13-10",
+            "units": 2.5,
+            "roi": 10.8
+          },
+          "neutral": {
+            "n": 28,
+            "record": "16-12",
+            "units": 4.6,
+            "roi": 16.3
+          },
+          "against": {
+            "n": 50,
+            "record": "27-23",
+            "units": 2.4,
+            "roi": 4.7
+          },
+          "no grade": {
+            "n": 15,
+            "record": "8-7",
+            "units": 0.7,
+            "roi": 4.7
+          }
+        },
+        "2025": {
+          "with": {
+            "n": 9,
+            "record": "5-4",
+            "units": 1.6,
+            "roi": 17.7
+          },
+          "neutral": {
+            "n": 17,
+            "record": "9-8",
+            "units": 1.6,
+            "roi": 9.4
+          },
+          "against": {
+            "n": 31,
+            "record": "18-13",
+            "units": 6.5,
+            "roi": 21.0
+          },
+          "no grade": {
+            "n": 23,
+            "record": "12-11",
+            "units": -0.4,
+            "roi": -1.6
+          }
+        },
+        "2026": {
+          "with": {
+            "n": 9,
+            "record": "7-2",
+            "units": 4.6,
+            "roi": 51.7
+          },
+          "neutral": {
+            "n": 8,
+            "record": "3-5",
+            "units": -2.2,
+            "roi": -26.9
+          },
+          "against": {
+            "n": 17,
+            "record": "11-6",
+            "units": 3.4,
+            "roi": 20.0
+          },
+          "no grade": {
+            "n": 27,
+            "record": "20-7",
+            "units": 12.1,
+            "roi": 44.8
+          }
+        },
+        "all": {
+          "with": {
+            "n": 41,
+            "record": "25-16",
+            "units": 8.7,
+            "roi": 21.3
+          },
+          "neutral": {
+            "n": 53,
+            "record": "28-25",
+            "units": 4.0,
+            "roi": 7.5
+          },
+          "against": {
+            "n": 98,
+            "record": "56-42",
+            "units": 12.3,
+            "roi": 12.5
+          },
+          "no grade": {
+            "n": 65,
+            "record": "40-25",
+            "units": 12.5,
+            "roi": 19.2
+          }
+        }
+      },
+      "verdict": "PASSES (with minus against ROI: 2024 +6.1)",
+      "model_miss_by_defense": {
+        "average D": {
+          "n": 52,
+          "actual_minus_proj": -0.39
+        },
+        "soft D": {
+          "n": 41,
+          "actual_minus_proj": -0.03
+        },
+        "tough D": {
+          "n": 98,
+          "actual_minus_proj": -0.2
+        }
+      }
+    },
+    "receptions, every 0%+ edge": {
+      "note": "",
+      "matched_pct": 79.0,
+      "by_bucket": {
+        "2024": {
+          "with": {
+            "n": 311,
+            "record": "176-135",
+            "units": 24.4,
+            "roi": 7.9
+          },
+          "neutral": {
+            "n": 347,
+            "record": "191-156",
+            "units": 12.0,
+            "roi": 3.5
+          },
+          "against": {
+            "n": 314,
+            "record": "177-137",
+            "units": 17.9,
+            "roi": 5.7
+          },
+          "no grade": {
+            "n": 151,
+            "record": "79-72",
+            "units": -3.4,
+            "roi": -2.2
+          }
+        },
+        "2025": {
+          "with": {
+            "n": 197,
+            "record": "109-88",
+            "units": 9.1,
+            "roi": 4.6
+          },
+          "neutral": {
+            "n": 171,
+            "record": "92-79",
+            "units": 5.6,
+            "roi": 3.3
+          },
+          "against": {
+            "n": 179,
+            "record": "95-84",
+            "units": 7.3,
+            "roi": 4.1
+          },
+          "no grade": {
+            "n": 191,
+            "record": "95-96",
+            "units": -9.3,
+            "roi": -4.9
+          }
+        },
+        "2026": {
+          "with": {
+            "n": 112,
+            "record": "73-39",
+            "units": 22.5,
+            "roi": 20.1
+          },
+          "neutral": {
+            "n": 117,
+            "record": "62-55",
+            "units": -4.1,
+            "roi": -3.5
+          },
+          "against": {
+            "n": 104,
+            "record": "53-51",
+            "units": -6.3,
+            "roi": -6.0
+          },
+          "no grade": {
+            "n": 150,
+            "record": "94-56",
+            "units": 25.2,
+            "roi": 16.8
+          }
+        },
+        "all": {
+          "with": {
+            "n": 620,
+            "record": "358-262",
+            "units": 56.1,
+            "roi": 9.0
+          },
+          "neutral": {
+            "n": 635,
+            "record": "345-290",
+            "units": 13.5,
+            "roi": 2.1
+          },
+          "against": {
+            "n": 597,
+            "record": "325-272",
+            "units": 18.9,
+            "roi": 3.2
+          },
+          "no grade": {
+            "n": 492,
+            "record": "268-224",
+            "units": 12.5,
+            "roi": 2.5
+          }
+        }
+      },
+      "verdict": "PASSES (with minus against ROI: 2024 +2.2, 2025 +0.5, 2026 +26.1)",
+      "model_miss_by_defense": {
+        "average D": {
+          "n": 630,
+          "actual_minus_proj": 0.22
+        },
+        "soft D": {
+          "n": 463,
+          "actual_minus_proj": 0.34
+        },
+        "tough D": {
+          "n": 745,
+          "actual_minus_proj": 0.08
+        }
+      }
+    },
+    "rec yds overs 15%+ (official, Sept 2026)": {
+      "note": "",
+      "matched_pct": 74.2,
+      "by_bucket": {
+        "Sept 2026": {
+          "with": {
+            "n": 13,
+            "record": "8-5",
+            "units": 2.3,
+            "roi": 17.6
+          },
+          "neutral": {
+            "n": 19,
+            "record": "11-8",
+            "units": 1.6,
+            "roi": 8.5
+          },
+          "against": {
+            "n": 14,
+            "record": "5-9",
+            "units": -4.7,
+            "roi": -33.2
+          },
+          "no grade": {
+            "n": 16,
+            "record": "10-6",
+            "units": 2.7,
+            "roi": 16.7
+          }
+        },
+        "all": {
+          "with": {
+            "n": 13,
+            "record": "8-5",
+            "units": 2.3,
+            "roi": 17.6
+          },
+          "neutral": {
+            "n": 19,
+            "record": "11-8",
+            "units": 1.6,
+            "roi": 8.5
+          },
+          "against": {
+            "n": 14,
+            "record": "5-9",
+            "units": -4.7,
+            "roi": -33.2
+          },
+          "no grade": {
+            "n": 16,
+            "record": "10-6",
+            "units": 2.7,
+            "roi": 16.7
+          }
+        }
+      },
+      "verdict": "not enough bets to test",
+      "model_miss_by_defense": {
+        "average D": {
+          "n": 19,
+          "actual_minus_proj": -0.37
+        },
+        "soft D": {
+          "n": 13,
+          "actual_minus_proj": 6.51
+        },
+        "tough D": {
+          "n": 14,
+          "actual_minus_proj": -23.98
+        }
+      }
+    },
+    "rec yds, every 0%+ edge (Sept 2026)": {
+      "note": "",
+      "matched_pct": 64.7,
+      "by_bucket": {
+        "Sept 2026": {
+          "with": {
+            "n": 79,
+            "record": "45-34",
+            "units": 5.7,
+            "roi": 7.2
+          },
+          "neutral": {
+            "n": 101,
+            "record": "53-48",
+            "units": -2.0,
+            "roi": -2.0
+          },
+          "against": {
+            "n": 69,
+            "record": "41-28",
+            "units": 8.1,
+            "roi": 11.7
+          },
+          "no grade": {
+            "n": 136,
+            "record": "76-60",
+            "units": 6.5,
+            "roi": 4.8
+          }
+        },
+        "all": {
+          "with": {
+            "n": 79,
+            "record": "45-34",
+            "units": 5.7,
+            "roi": 7.2
+          },
+          "neutral": {
+            "n": 101,
+            "record": "53-48",
+            "units": -2.0,
+            "roi": -2.0
+          },
+          "against": {
+            "n": 69,
+            "record": "41-28",
+            "units": 8.1,
+            "roi": 11.7
+          },
+          "no grade": {
+            "n": 136,
+            "record": "76-60",
+            "units": 6.5,
+            "roi": 4.8
+          }
+        }
+      },
+      "verdict": "fails (with minus against ROI: Sept 2026 -4.5)",
+      "model_miss_by_defense": {
+        "average D": {
+          "n": 101,
+          "actual_minus_proj": 9.07
+        },
+        "soft D": {
+          "n": 53,
+          "actual_minus_proj": 6.43
+        },
+        "tough D": {
+          "n": 95,
+          "actual_minus_proj": -0.65
+        }
+      }
+    },
+    "rush yds unders 0%+ (official, Sept 2026)": {
+      "note": "",
+      "matched_pct": 63.9,
+      "by_bucket": {
+        "Sept 2026": {
+          "with": {
+            "n": 64,
+            "record": "45-19",
+            "units": 20.1,
+            "roi": 31.5
+          },
+          "neutral": {
+            "n": 54,
+            "record": "32-22",
+            "units": 5.2,
+            "roi": 9.7
+          },
+          "against": {
+            "n": 36,
+            "record": "24-12",
+            "units": 8.7,
+            "roi": 24.0
+          },
+          "no grade": {
+            "n": 87,
+            "record": "41-46",
+            "units": -10.4,
+            "roi": -11.9
+          }
+        },
+        "all": {
+          "with": {
+            "n": 64,
+            "record": "45-19",
+            "units": 20.1,
+            "roi": 31.5
+          },
+          "neutral": {
+            "n": 54,
+            "record": "32-22",
+            "units": 5.2,
+            "roi": 9.7
+          },
+          "against": {
+            "n": 36,
+            "record": "24-12",
+            "units": 8.7,
+            "roi": 24.0
+          },
+          "no grade": {
+            "n": 87,
+            "record": "41-46",
+            "units": -10.4,
+            "roi": -11.9
+          }
+        }
+      },
+      "verdict": "PASSES (with minus against ROI: Sept 2026 +7.5)",
+      "model_miss_by_defense": {
+        "average D": {
+          "n": 54,
+          "actual_minus_proj": 10.33
+        },
+        "soft D": {
+          "n": 36,
+          "actual_minus_proj": 8.76
+        },
+        "tough D": {
+          "n": 64,
+          "actual_minus_proj": -1.91
+        }
+      }
+    },
+    "rush yds, every 0%+ edge (Sept 2026)": {
+      "note": "",
+      "matched_pct": 64.4,
+      "by_bucket": {
+        "Sept 2026": {
+          "with": {
+            "n": 73,
+            "record": "50-23",
+            "units": 20.5,
+            "roi": 28.1
+          },
+          "neutral": {
+            "n": 72,
+            "record": "40-32",
+            "units": 2.1,
+            "roi": 3.0
+          },
+          "against": {
+            "n": 59,
+            "record": "34-25",
+            "units": 4.4,
+            "roi": 7.5
+          },
+          "no grade": {
+            "n": 113,
+            "record": "54-59",
+            "units": -12.0,
+            "roi": -10.6
+          }
+        },
+        "all": {
+          "with": {
+            "n": 73,
+            "record": "50-23",
+            "units": 20.5,
+            "roi": 28.1
+          },
+          "neutral": {
+            "n": 72,
+            "record": "40-32",
+            "units": 2.1,
+            "roi": 3.0
+          },
+          "against": {
+            "n": 59,
+            "record": "34-25",
+            "units": 4.4,
+            "roi": 7.5
+          },
+          "no grade": {
+            "n": 113,
+            "record": "54-59",
+            "units": -12.0,
+            "roi": -10.6
+          }
+        }
+      },
+      "verdict": "PASSES (with minus against ROI: Sept 2026 +20.6)",
+      "model_miss_by_defense": {
+        "average D": {
+          "n": 72,
+          "actual_minus_proj": 8.65
+        },
+        "soft D": {
+          "n": 45,
+          "actual_minus_proj": 7.57
+        },
+        "tough D": {
+          "n": 87,
+          "actual_minus_proj": -4.58
+        }
+      }
+    },
+    "LIVE receptions unders 30%+": {
+      "note": "",
+      "matched_pct": 100.0,
+      "by_bucket": {
+        "live Oct 2026": {
+          "with": {
+            "n": 22,
+            "record": "13-9",
+            "units": 2.4,
+            "roi": 10.7
+          },
+          "neutral": {
+            "n": 12,
+            "record": "6-6",
+            "units": -0.5,
+            "roi": -4.5
+          },
+          "against": {
+            "n": 19,
+            "record": "10-9",
+            "units": 0.9,
+            "roi": 4.5
+          },
+          "no grade": {
+            "n": 0
+          }
+        },
+        "all": {
+          "with": {
+            "n": 22,
+            "record": "13-9",
+            "units": 2.4,
+            "roi": 10.7
+          },
+          "neutral": {
+            "n": 12,
+            "record": "6-6",
+            "units": -0.5,
+            "roi": -4.5
+          },
+          "against": {
+            "n": 19,
+            "record": "10-9",
+            "units": 0.9,
+            "roi": 4.5
+          },
+          "no grade": {
+            "n": 0
+          }
+        }
+      },
+      "verdict": "not enough bets to test"
+    },
+    "LIVE rec yds overs 15%+": {
+      "note": "",
+      "matched_pct": 100.0,
+      "by_bucket": {
+        "live Oct 2026": {
+          "with": {
+            "n": 15,
+            "record": "7-8",
+            "units": -1.8,
+            "roi": -12.1
+          },
+          "neutral": {
+            "n": 34,
+            "record": "25-9",
+            "units": 13.0,
+            "roi": 38.2
+          },
+          "against": {
+            "n": 26,
+            "record": "18-8",
+            "units": 7.8,
+            "roi": 30.1
+          },
+          "no grade": {
+            "n": 0
+          }
+        },
+        "all": {
+          "with": {
+            "n": 15,
+            "record": "7-8",
+            "units": -1.8,
+            "roi": -12.1
+          },
+          "neutral": {
+            "n": 34,
+            "record": "25-9",
+            "units": 13.0,
+            "roi": 38.2
+          },
+          "against": {
+            "n": 26,
+            "record": "18-8",
+            "units": 7.8,
+            "roi": 30.1
+          },
+          "no grade": {
+            "n": 0
+          }
+        }
+      },
+      "verdict": "not enough bets to test"
+    },
+    "LIVE rush yds unders 0%+": {
+      "note": "",
+      "matched_pct": 100.0,
+      "by_bucket": {
+        "live Oct 2026": {
+          "with": {
+            "n": 95,
+            "record": "56-39",
+            "units": 9.0,
+            "roi": 9.5
+          },
+          "neutral": {
+            "n": 76,
+            "record": "43-33",
+            "units": 4.0,
+            "roi": 5.3
+          },
+          "against": {
+            "n": 54,
+            "record": "25-29",
+            "units": -8.3,
+            "roi": -15.3
+          },
+          "no grade": {
+            "n": 0
+          }
+        },
+        "all": {
+          "with": {
+            "n": 95,
+            "record": "56-39",
+            "units": 9.0,
+            "roi": 9.5
+          },
+          "neutral": {
+            "n": 76,
+            "record": "43-33",
+            "units": 4.0,
+            "roi": 5.3
+          },
+          "against": {
+            "n": 54,
+            "record": "25-29",
+            "units": -8.3,
+            "roi": -15.3
+          },
+          "no grade": {
+            "n": 0
+          }
+        }
+      },
+      "verdict": "PASSES (with minus against ROI: live Oct 2026 +24.8)"
+    },
+    "LIVE every graded rec/rec yds/rush yds prop": {
+      "note": "",
+      "matched_pct": 100.0,
+      "by_bucket": {
+        "live Oct 2026": {
+          "with": {
+            "n": 423,
+            "record": "239-184",
+            "units": 11.9,
+            "roi": 2.8
+          },
+          "neutral": {
+            "n": 470,
+            "record": "280-190",
+            "units": 45.2,
+            "roi": 9.6
+          },
+          "against": {
+            "n": 449,
+            "record": "222-227",
+            "units": -39.1,
+            "roi": -8.7
+          },
+          "no grade": {
+            "n": 0
+          }
+        },
+        "all": {
+          "with": {
+            "n": 423,
+            "record": "239-184",
+            "units": 11.9,
+            "roi": 2.8
+          },
+          "neutral": {
+            "n": 470,
+            "record": "280-190",
+            "units": 45.2,
+            "roi": 9.6
+          },
+          "against": {
+            "n": 449,
+            "record": "222-227",
+            "units": -39.1,
+            "roi": -8.7
+          },
+          "no grade": {
+            "n": 0
+          }
+        }
+      },
+      "verdict": "PASSES (with minus against ROI: live Oct 2026 +11.5)"
+    },
+    "anytime TD": {
+      "calibration_by_bucket": {
+        "against": {
+          "n": 5963,
+          "actual": 25.6,
+          "model": 26.3,
+          "dk_implied": 32.3
+        },
+        "neutral": {
+          "n": 5352,
+          "actual": 27.9,
+          "model": 28.2,
+          "dk_implied": 35.1
+        },
+        "with": {
+          "n": 4460,
+          "actual": 29.6,
+          "model": 29.0,
+          "dk_implied": 36.7
+        }
+      },
+      "calibration_by_position": {
+        "qb": {
+          "against": {
+            "n": 766,
+            "actual": 29.0,
+            "model": 25.9
+          },
+          "neutral": {
+            "n": 636,
+            "actual": 31.1,
+            "model": 28.5
+          },
+          "with": {
+            "n": 583,
+            "actual": 32.4,
+            "model": 28.3
+          }
+        },
+        "rb": {
+          "against": {
+            "n": 1783,
+            "actual": 29.6,
+            "model": 31.3
+          },
+          "neutral": {
+            "n": 1615,
+            "actual": 33.3,
+            "model": 34.6
+          },
+          "with": {
+            "n": 1234,
+            "actual": 39.1,
+            "model": 36.8
+          }
+        },
+        "te": {
+          "against": {
+            "n": 882,
+            "actual": 21.4,
+            "model": 20.4
+          },
+          "neutral": {
+            "n": 779,
+            "actual": 21.4,
+            "model": 20.4
+          },
+          "with": {
+            "n": 683,
+            "actual": 21.4,
+            "model": 21.4
+          }
+        },
+        "wr": {
+          "against": {
+            "n": 2532,
+            "actual": 23.1,
+            "model": 24.8
+          },
+          "neutral": {
+            "n": 2322,
+            "actual": 25.4,
+            "model": 26.3
+          },
+          "with": {
+            "n": 1960,
+            "actual": 25.8,
+            "model": 26.9
+          }
+        }
+      },
+      "yes_10plus_dk": {
+        "2024": {
+          "with": {
+            "n": 110,
+            "record": "22-88",
+            "units": 7.3,
+            "roi": 6.7
+          },
+          "neutral": {
+            "n": 163,
+            "record": "26-137",
+            "units": -2.9,
+            "roi": -1.8
+          },
+          "against": {
+            "n": 224,
+            "record": "19-205",
+            "units": -103.6,
+            "roi": -46.2
+          },
+          "no grade": {
+            "n": 0
+          }
+        },
+        "2025": {
+          "with": {
+            "n": 258,
+            "record": "48-210",
+            "units": 25.9,
+            "roi": 10.0
+          },
+          "neutral": {
+            "n": 288,
+            "record": "56-232",
+            "units": 10.1,
+            "roi": 3.5
+          },
+          "against": {
+            "n": 376,
+            "record": "70-306",
+            "units": 49.8,
+            "roi": 13.3
+          },
+          "no grade": {
+            "n": 0
+          }
+        },
+        "2026": {
+          "with": {
+            "n": 139,
+            "record": "23-116",
+            "units": -21.1,
+            "roi": -15.2
+          },
+          "neutral": {
+            "n": 204,
+            "record": "40-164",
+            "units": 36.9,
+            "roi": 18.1
+          },
+          "against": {
+            "n": 217,
+            "record": "33-184",
+            "units": 5.3,
+            "roi": 2.4
+          },
+          "no grade": {
+            "n": 0
+          }
+        },
+        "all": {
+          "with": {
+            "n": 507,
+            "record": "93-414",
+            "units": 12.1,
+            "roi": 2.4
+          },
+          "neutral": {
+            "n": 655,
+            "record": "122-533",
+            "units": 44.1,
+            "roi": 6.7
+          },
+          "against": {
+            "n": 817,
+            "record": "122-695",
+            "units": -48.5,
+            "roi": -5.9
+          },
+          "no grade": {
+            "n": 0
+          }
+        }
+      },
+      "verdict_10plus": "fails (with minus against ROI: 2024 +52.9, 2025 -3.3, 2026 -17.6)",
+      "yes_all_dk": {
+        "2024": {
+          "with": {
+            "n": 1726,
+            "record": "526-1200",
+            "units": -341.4,
+            "roi": -19.8
+          },
+          "neutral": {
+            "n": 2128,
+            "record": "603-1525",
+            "units": -463.0,
+            "roi": -21.8
+          },
+          "against": {
+            "n": 2419,
+            "record": "609-1810",
+            "units": -616.5,
+            "roi": -25.5
+          },
+          "no grade": {
+            "n": 0
+          }
+        },
+        "2025": {
+          "with": {
+            "n": 1633,
+            "record": "494-1139",
+            "units": -246.7,
+            "roi": -15.1
+          },
+          "neutral": {
+            "n": 2028,
+            "record": "572-1456",
+            "units": -351.0,
+            "roi": -17.3
+          },
+          "against": {
+            "n": 2373,
+            "record": "626-1747",
+            "units": -374.7,
+            "roi": -15.8
+          },
+          "no grade": {
+            "n": 0
+          }
+        },
+        "2026": {
+          "with": {
+            "n": 1101,
+            "record": "302-799",
+            "units": -261.7,
+            "roi": -23.8
+          },
+          "neutral": {
+            "n": 1196,
+            "record": "317-879",
+            "units": -159.8,
+            "roi": -13.4
+          },
+          "against": {
+            "n": 1171,
+            "record": "290-881",
+            "units": -216.6,
+            "roi": -18.5
+          },
+          "no grade": {
+            "n": 0
+          }
+        },
+        "all": {
+          "with": {
+            "n": 4460,
+            "record": "1322-3138",
+            "units": -849.7,
+            "roi": -19.1
+          },
+          "neutral": {
+            "n": 5352,
+            "record": "1492-3860",
+            "units": -973.8,
+            "roi": -18.2
+          },
+          "against": {
+            "n": 5963,
+            "record": "1525-4438",
+            "units": -1207.8,
+            "roi": -20.3
+          },
+          "no grade": {
+            "n": 0
+          }
+        }
+      },
+      "verdict_all": "fails (with minus against ROI: 2024 +5.7, 2025 +0.7, 2026 -5.3)"
+    }
+  }
+}

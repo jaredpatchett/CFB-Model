@@ -1,0 +1,83 @@
+========================================================================
+MATCHUP LAB -- does the matchup grade help?
+with = grade supports the pick (>= 67), against = grade opposes it (<= 33)
+========================================================================
+
+receptions unders 30%+ (official)   [fails (with minus against ROI: 2024 -8.9, 2025 +54.1)]  graded 65.9%
+  2024          with: 17-16 +9.1%  neutral: 32-20 +24.7%  against: 23-16 +18.0%  no grade: 28-18 +17.7%
+  2025          with: 14-9 +21.2%  neutral: 13-7 +28.2%  against: 8-16 -32.9%  no grade: 26-14 +30.6%
+  2026          with: 9-5 +24.6%  neutral: 8-5 +25.7%  against: 5-5 -7.2%  no grade: 20-12 +19.8%
+  all           with: 40-30 +16.2%  neutral: 53-32 +25.7%  against: 36-37 -2.2%  no grade: 74-44 +22.6%
+  model miss (actual - projection): average D +0.35 (n=85), soft D +0.80 (n=73), tough D +0.59 (n=70)
+
+receptions overs 10-30% (watch)   [PASSES (with minus against ROI: 2024 +6.1)]  graded 74.7%
+  2024          with: 13-10 +10.8%  neutral: 16-12 +16.3%  against: 27-23 +4.7%  no grade: 8-7 +4.7%
+  2025          with: 5-4 +17.7%  neutral: 9-8 +9.4%  against: 18-13 +21.0%  no grade: 12-11 -1.6%
+  2026          with: 7-2 +51.7%  neutral: 3-5 -26.9%  against: 11-6 +20.0%  no grade: 20-7 +44.8%
+  all           with: 25-16 +21.3%  neutral: 28-25 +7.5%  against: 56-42 +12.5%  no grade: 40-25 +19.2%
+  model miss (actual - projection): average D -0.39 (n=52), soft D -0.03 (n=41), tough D -0.20 (n=98)
+
+receptions, every 0%+ edge   [PASSES (with minus against ROI: 2024 +2.2, 2025 +0.5, 2026 +26.1)]  graded 79.0%
+  2024          with: 176-135 +7.9%  neutral: 191-156 +3.5%  against: 177-137 +5.7%  no grade: 79-72 -2.2%
+  2025          with: 109-88 +4.6%  neutral: 92-79 +3.3%  against: 95-84 +4.1%  no grade: 95-96 -4.9%
+  2026          with: 73-39 +20.1%  neutral: 62-55 -3.5%  against: 53-51 -6.0%  no grade: 94-56 +16.8%
+  all           with: 358-262 +9.0%  neutral: 345-290 +2.1%  against: 325-272 +3.2%  no grade: 268-224 +2.5%
+  model miss (actual - projection): average D +0.22 (n=630), soft D +0.34 (n=463), tough D +0.08 (n=745)
+
+rec yds overs 15%+ (official, Sept 2026)   [not enough bets to test]  graded 74.2%
+  Sept 2026     with: 8-5 +17.6%  neutral: 11-8 +8.5%  against: 5-9 -33.2%  no grade: 10-6 +16.7%
+  all           with: 8-5 +17.6%  neutral: 11-8 +8.5%  against: 5-9 -33.2%  no grade: 10-6 +16.7%
+  model miss (actual - projection): average D -0.37 (n=19), soft D +6.51 (n=13), tough D -23.98 (n=14)
+
+rec yds, every 0%+ edge (Sept 2026)   [fails (with minus against ROI: Sept 2026 -4.5)]  graded 64.7%
+  Sept 2026     with: 45-34 +7.2%  neutral: 53-48 -2.0%  against: 41-28 +11.7%  no grade: 76-60 +4.8%
+  all           with: 45-34 +7.2%  neutral: 53-48 -2.0%  against: 41-28 +11.7%  no grade: 76-60 +4.8%
+  model miss (actual - projection): average D +9.07 (n=101), soft D +6.43 (n=53), tough D -0.65 (n=95)
+
+rush yds unders 0%+ (official, Sept 2026)   [PASSES (with minus against ROI: Sept 2026 +7.5)]  graded 63.9%
+  Sept 2026     with: 45-19 +31.5%  neutral: 32-22 +9.7%  against: 24-12 +24.0%  no grade: 41-46 -11.9%
+  all           with: 45-19 +31.5%  neutral: 32-22 +9.7%  against: 24-12 +24.0%  no grade: 41-46 -11.9%
+  model miss (actual - projection): average D +10.33 (n=54), soft D +8.76 (n=36), tough D -1.91 (n=64)
+
+rush yds, every 0%+ edge (Sept 2026)   [PASSES (with minus against ROI: Sept 2026 +20.6)]  graded 64.4%
+  Sept 2026     with: 50-23 +28.1%  neutral: 40-32 +3.0%  against: 34-25 +7.5%  no grade: 54-59 -10.6%
+  all           with: 50-23 +28.1%  neutral: 40-32 +3.0%  against: 34-25 +7.5%  no grade: 54-59 -10.6%
+  model miss (actual - projection): average D +8.65 (n=72), soft D +7.57 (n=45), tough D -4.58 (n=87)
+
+LIVE receptions unders 30%+   [not enough bets to test]  graded 100.0%
+  live Oct 2026 with: 13-9 +10.7%  neutral: 6-6 -4.5%  against: 10-9 +4.5%
+  all           with: 13-9 +10.7%  neutral: 6-6 -4.5%  against: 10-9 +4.5%
+
+LIVE rec yds overs 15%+   [not enough bets to test]  graded 100.0%
+  live Oct 2026 with: 7-8 -12.1%  neutral: 25-9 +38.2%  against: 18-8 +30.1%
+  all           with: 7-8 -12.1%  neutral: 25-9 +38.2%  against: 18-8 +30.1%
+
+LIVE rush yds unders 0%+   [PASSES (with minus against ROI: live Oct 2026 +24.8)]  graded 100.0%
+  live Oct 2026 with: 56-39 +9.5%  neutral: 43-33 +5.3%  against: 25-29 -15.3%
+  all           with: 56-39 +9.5%  neutral: 43-33 +5.3%  against: 25-29 -15.3%
+
+LIVE every graded rec/rec yds/rush yds prop   [PASSES (with minus against ROI: live Oct 2026 +11.5)]  graded 100.0%
+  live Oct 2026 with: 239-184 +2.8%  neutral: 280-190 +9.6%  against: 222-227 -8.7%
+  all           with: 239-184 +2.8%  neutral: 280-190 +9.6%  against: 222-227 -8.7%
+
+ANYTIME TD (DraftKings Yes, direct_cal model)
+  against  n=5963   scored 25.6%  model 26.3%  DK implied 32.3%
+  neutral  n=5352   scored 27.9%  model 28.2%  DK implied 35.1%
+  with     n=4460   scored 29.6%  model 29.0%  DK implied 36.7%
+  QB  against: 29.0% vs model 25.9% (n=766)  neutral: 31.1% vs model 28.5% (n=636)  with: 32.4% vs model 28.3% (n=583)
+  RB  against: 29.6% vs model 31.3% (n=1783)  neutral: 33.3% vs model 34.6% (n=1615)  with: 39.1% vs model 36.8% (n=1234)
+  TE  against: 21.4% vs model 20.4% (n=882)  neutral: 21.4% vs model 20.4% (n=779)  with: 21.4% vs model 21.4% (n=683)
+  WR  against: 23.1% vs model 24.8% (n=2532)  neutral: 25.4% vs model 26.3% (n=2322)  with: 25.8% vs model 26.9% (n=1960)
+  Yes 10%+ edge: fails (with minus against ROI: 2024 +52.9, 2025 -3.3, 2026 -17.6)
+  2024    with: 22-88 +6.7%  neutral: 26-137 -1.8%  against: 19-205 -46.2%
+  2025    with: 48-210 +10.0%  neutral: 56-232 +3.5%  against: 70-306 +13.3%
+  2026    with: 23-116 -15.2%  neutral: 40-164 +18.1%  against: 33-184 +2.4%
+  all     with: 93-414 +2.4%  neutral: 122-533 +6.7%  against: 122-695 -5.9%
+
+MOST TDs ALLOWED PER GAME BY POSITION, 2026 (FBS defenses, box scores)
+  QB: Florida Atlantic 1.75, Tulsa 1.38, Northern Illinois 1.29, Virginia 1.12, Georgia State 1.00, Temple 1.00, Louisiana Tech 1.00, UTSA 0.88, Sacramento State 0.88, North Texas 0.88
+  RB: Colorado State 2.86, Stanford 2.50, California 2.12, Charlotte 2.00, Syracuse 2.00, South Alabama 2.00, Arkansas 2.00, Maryland 2.00, San Diego State 1.88, Arkansas State 1.88
+  WR: North Texas 2.00, Rice 2.00, Marshall 1.86, Navy 1.86, Troy 1.75, Ball State 1.75, Akron 1.75, Florida 1.71, Charlotte 1.71, South Carolina 1.71
+  TE: Maryland 0.71, BYU 0.71, Notre Dame 0.71, Northern Illinois 0.71, South Alabama 0.71, Wake Forest 0.71, California 0.62, Kentucky 0.62, Arkansas State 0.62, USC 0.62
+
+info: {'player_games': 159792, 'position_from_roster_pct': np.float64(92.1), 'position_any_pct': np.float64(95.8), 'fbs_teams': 138}
