@@ -116,7 +116,11 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 
 .rate-grid { grid-template-columns: 26px 1fr 56px 1fr 100px; }
 .tda-grid { grid-template-columns: 30px minmax(130px,1fr) minmax(150px,1.1fr) 40px 104px 74px 74px 74px 74px; }
-.tdaw-grid { grid-template-columns: minmax(150px,1.1fr) minmax(190px,1.3fr) 92px 92px 92px 2.2fr; gap: 6px; }
+.tdaw-grid { grid-template-columns: minmax(150px,1.1fr) minmax(190px,1.3fr) 92px 92px 140px 2.1fr; gap: 6px; }
+.tda-atd { text-align: right; line-height: 1.35; padding-right: 14px; }
+.tda-atd-book { font-size: 9.5px; color: var(--muted-3); letter-spacing: .05em; }
+.tda-atd-best { font-size: 9.5px; color: var(--green); }
+.tda-atd-sub { font-size: 9.5px; color: var(--muted-3); }
 .tda-row { cursor: pointer; }
 .tda-row:hover { background: var(--chip); }
 .tda-row.is-open { background: var(--chip); }
@@ -1672,7 +1676,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       seg('tdaTop', '10', top, 'Opp top 10') + seg('tdaTop', '25', top, 'Top 25') + seg('tdaTop', '50', top, 'Top 50') + seg('tdaTop', 'all', top, 'Everyone') +
       '<span style="width:12px"></span>' + seg('tdaWbasis', 'pg', basis, 'Per game') + seg('tdaWbasis', 'adj', basis, 'vs usual') + '</div>';
     var odds = function (x) { if (x == null || isNaN(x)) return '&ndash;'; x = Math.round(Number(x)); return (x > 0 ? '+' : '') + x; };
-    var thead = '<div class="thead tdaw-grid"><div>Player</div><div>Matchup</div><div class="num">Opp TDs to pos</div><div class="num">Opp yds to pos</div><div class="num">Anytime TD</div><div>Props (line &middot; model lean)</div></div>';
+    var thead = '<div class="thead tdaw-grid"><div>Player</div><div>Matchup</div><div class="num">Opp TDs to pos</div><div class="num">Opp yds to pos</div><div class="num">Anytime TD odds</div><div>Props (line &middot; model lean)</div></div>';
     var body = rows.slice(0, 300).map(function (e) {
       // One chip per market: the official play if there is one, else the line with the biggest model edge.
       var best = {};
@@ -1690,8 +1694,20 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
           (lean ? ' <span style="color:' + col + '">' + (lean === 'over' ? 'over' : 'under') + (ev != null ? ' ' + (ev > 0 ? '+' : '') + Math.round(ev) + '%' : '') + '</span>' : '') + '</span>';
       }).join('');
       var a = e.atd;
-      var atd = a ? '<span title="DraftKings ' + odds(a.dk_price) + ', best ' + odds(a.best_price) + ' (' + esc(a.best_book_label || '') + ')">' + odds(a.dk_price != null ? a.dk_price : a.best_price) + '</span>' +
-        (a.model_prob != null ? '<span class="tda-rk" style="font-size:9.5px">model ' + Math.round(a.model_prob * 100) + '%</span>' : '') : '<span style="color:var(--muted-4)">&ndash;</span>';
+      var atd = '<span style="color:var(--muted-4)">&ndash;</span>';
+      if (a) {
+        var px = a.dk_price != null ? a.dk_price : a.best_price;
+        var bk = a.dk_price != null ? 'DK' : (a.best_book_label || 'Best');
+        var impl = px == null ? null : (px > 0 ? 100 / (px + 100) : -px / (-px + 100));
+        var mp = a.model_prob;
+        var better = a.best_price != null && a.dk_price != null && a.best_price > a.dk_price;
+        atd = '<div class="tda-atd" title="' + esc('Best price: ' + odds(a.best_price) + ' (' + (a.best_book_label || '') + ')') + '">' +
+          '<div><span class="tda-atd-book">' + esc(bk) + '</span> <b>' + odds(px) + '</b>' +
+          (better ? ' <span class="tda-atd-best">best ' + odds(a.best_price) + '</span>' : '') + '</div>' +
+          '<div class="tda-atd-sub">book ' + (impl == null ? '&ndash;' : Math.round(impl * 100) + '%') +
+          ' &middot; model <span style="color:' + (mp != null && impl != null && mp > impl ? 'var(--green)' : 'var(--muted-2)') + '">' +
+          (mp == null ? '&ndash;' : Math.round(mp * 100) + '%') + '</span></div></div>';
+      }
       return '<div class="row"><div class="row-body tdaw-grid" style="padding:8px 14px;font-size:12px">' +
         '<div style="overflow:hidden;white-space:nowrap"><b>' + esc(e.name) + '</b> <span style="color:var(--muted-3);font-size:10px">' + esc(e.pos) + '</span></div>' +
         '<div style="overflow:hidden;white-space:nowrap;font-size:11px">' + esc(e.team) + ' <span style="color:var(--muted-4)">vs</span> <span data-atd-set="tdaJump" data-atd-val="' + esc(e.opp) + '" style="cursor:pointer;text-decoration:underline dotted">' + esc(e.opp) + '</span>' +
@@ -1703,7 +1719,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
         '</div></div>';
     }).join('');
     var foot = '<div class="table-foot"><span>Every player with a prop or anytime TD price this week whose opponent ranks in the chosen top group for giving up TDs (or yards) to his position. ' +
-      'Yards = receiving yards for WRs/TEs, rush yards for RBs/QBs. Prop chips show the line and the model&rsquo;s lean and edge (green = 10%+); \u2605 = official play. Anytime TD = DraftKings price (hover for best book) and the model&rsquo;s chance. ' +
+      'Yards = receiving yards for WRs/TEs, rush yards for RBs/QBs. Prop chips show the line and the model&rsquo;s lean and edge (green = 10%+); \u2605 = official play. Anytime TD odds = DraftKings price (or the best book if DK has none, plus the best price when another book beats DK); &ldquo;book&rdquo; = the chance that price implies, &ldquo;model&rdquo; = the model&rsquo;s chance he scores (green when the model is higher than the book). ' +
       'Click an opponent to open its breakdown. For fun / research &mdash; a soft matchup is not itself a tested edge.' +
       (rows.length > 300 ? ' Showing 300 of ' + rows.length + '.' : '') + '</span></div>';
     return filters + thead + (body || '<div class="empty-state">No players match. Props usually post a day or two before kickoff.</div>') + foot;
