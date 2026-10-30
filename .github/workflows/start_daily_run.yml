@@ -23,4 +23,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run manual_run.yml --repo "${{ github.repository }}" --ref main
-# last started: 2026-10-24 (Anytime TD tab)
+# last started: 2026-10-30 (Defense vs Position tab)

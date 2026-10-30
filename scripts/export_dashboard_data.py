@@ -1523,9 +1523,14 @@ def main(year: int):
         from src.features import td_allowed as _tda
         _stats = locals().get("player_stats_long_current")
         if _stats is not None:
-            td_allowed_out, td_allowed_note = _tda.build(
+            td_allowed_out, td_allowed_note, _pos_of = _tda.build(
                 _stats, schedule_df, season_year,
                 pool=set(teams_df["school"].dropna()) if "school" in teams_df.columns else None)
+            # Position on each prop / anytime TD row, for the tab's "This week" view.
+            for _row in list(props_out or []) + list(anytime_td_out or []):
+                _p = _pos_of(_row.get("team"), _row.get("player_name"))
+                if _p:
+                    _row["pos"] = _p
         else:
             td_allowed_note = "no box scores pulled this run"
     except Exception as e:

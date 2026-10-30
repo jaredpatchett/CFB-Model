@@ -717,8 +717,21 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .num { text-align: right; }
 
 .rate-grid { grid-template-columns: 26px 1fr 56px 1fr 100px; }
-.tda-grid { grid-template-columns: 30px 1fr 52px 78px 64px 46px 46px 46px 46px; }
-.tda-grid .num.is-sel { color: var(--text); font-weight: 700; }
+.tda-grid { grid-template-columns: 30px minmax(130px,1fr) minmax(150px,1.1fr) 40px 104px 74px 74px 74px 74px; }
+.tdaw-grid { grid-template-columns: minmax(150px,1.1fr) minmax(190px,1.3fr) 92px 92px 92px 2.2fr; gap: 6px; }
+.tda-row { cursor: pointer; }
+.tda-row:hover { background: var(--chip); }
+.tda-row.is-open { background: var(--chip); }
+.tda-rk { display: inline-block; min-width: 18px; margin-left: 4px; font-size: 9px; color: var(--muted-4); text-align: left; }
+.tda-big { display: inline-block; min-width: 52px; text-align: center; padding: 2px 6px; border-radius: 3px; color: #0B0F15; font-weight: 800; }
+.tda-search { background: var(--chip); border: 1px solid var(--rule-faint); color: var(--text); font-size: 11px; padding: 5px 9px; border-radius: 3px; width: 150px; }
+.tda-detail { background: var(--panel-deep); border-bottom: 1px solid var(--rule); padding: 12px 18px 16px 44px; font-size: 11.5px; }
+.tda-detail-title { font-family: var(--font-display); font-weight: 700; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-2); margin: 10px 0 6px; }
+.tda-detail-grid { display: grid; grid-template-columns: 40px repeat(8, 1fr); gap: 4px; padding: 3px 0; border-bottom: 1px solid var(--rule-faint); }
+.tda-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+.tda-log { display: grid; grid-template-columns: 44px 1.4fr 1fr 1.2fr; gap: 8px; padding: 3px 0; border-bottom: 1px solid var(--rule-faint); }
+.tda-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.tda-chip { background: var(--chip); border-radius: 3px; padding: 2px 6px; font-size: 10.5px; white-space: nowrap; }
 .fantasy-grid { grid-template-columns: 26px 1fr 120px 90px; }
 .card-row  { grid-template-columns: 1fr 58px 68px 46px 58px; }
 
@@ -2097,51 +2110,238 @@ RENDERER_JS = """<script>
   // tracked -- see scripts/anytime_td.py for how the chance is worked out and
   // what the backtest found.
   // ---- TDs Allowed page (10/30/2026, display only) ----
-  // Rushing + receiving TDs each FBS defense has given up to each position
-  // this season (src/features/td_allowed.py). Plain box-score counts.
+  // What each FBS defense has given up to QBs / RBs / WRs / TEs this season
+  // (src/features/td_allowed.py): TDs, catches, rec yds, rush yds -- per game
+  // and vs what those offenses usually get. "This week" lines up this week's
+  // props and anytime TD prices against the opponent's numbers.
+  var TDA_STATS = [['td', 'TDs'], ['rec', 'Catches'], ['recyds', 'Rec yds'], ['rushyds', 'Rush yds']];
+  var TDA_POS = [['qb', 'QB'], ['rb', 'RB'], ['wr', 'WR'], ['te', 'TE']];
+  function tdaVal(r, stat, pos, basis) {
+    if (pos === 'all') {
+      if (basis === 'adj') return null;
+      return TDA_POS.reduce(function (t, p) { return t + (r[stat + '_' + p[0] + '_pg'] || 0); }, 0);
+    }
+    return basis === 'adj' ? r[stat + '_' + pos + '_adj'] : r[stat + '_' + pos + '_pg'];
+  }
+  function tdaRanks(all) {
+    // rank 1 = allows the MOST of that stat to that position (per game and vs usual)
+    if (D._tdaRanks) return D._tdaRanks;
+    var out = {};
+    ['pg', 'adj'].forEach(function (b) {
+      TDA_STATS.forEach(function (s) {
+        TDA_POS.concat([['all', 'All']]).forEach(function (p) {
+          var k = s[0] + '_' + p[0] + '_' + b;
+          var vals = all.map(function (r) { return [r.team, tdaVal(r, s[0], p[0], b === 'adj' ? 'adj' : 'pg')]; })
+            .filter(function (x) { return x[1] != null; })
+            .sort(function (a, c) { return c[1] - a[1]; });
+          out[k] = {};
+          vals.forEach(function (x, i) { out[k][x[0]] = i > 0 && vals[i - 1][1] === x[1] ? out[k][vals[i - 1][0]] : i + 1; });
+        });
+      });
+    });
+    D._tdaRanks = out;
+    return out;
+  }
+  function tdaHeat(rank, n) {
+    // green = gives up a lot (good for overs / TDs), red = stingy
+    if (rank == null) return 'var(--muted-3)';
+    var f = rank / n;
+    if (f <= 0.15) return 'var(--green)';
+    if (f <= 0.33) return '#7FD8A4';
+    if (f >= 0.85) return 'var(--red)';
+    if (f >= 0.67) return '#FF9C9C';
+    return 'var(--muted-2)';
+  }
+  function tdaFmt(v, stat, basis) {
+    if (v == null) return '&ndash;';
+    if (basis === 'adj') { var p = Math.round((v - 1) * 100); return (p > 0 ? '+' : '') + p + '%'; }
+    return stat === 'td' || stat === 'rec' ? Number(v).toFixed(2) : Number(v).toFixed(1);
+  }
+  function tdaKick(t) {
+    if (!t) return '';
+    var d = new Date(t);
+    if (isNaN(d)) return '';
+    return d.toLocaleString(undefined, { weekday: 'short', hour: 'numeric', minute: '2-digit' });
+  }
+
   function renderTdAllowed() {
     var all = D.tdAllowed || [];
-    var head = '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>TDs Allowed by Position</h2></div>' +
-      '<div style="font-size:10px;color:var(--muted-3)">FBS defenses &middot; rushing + receiving TDs &middot; this season</div></div>';
-    if (!all.length) {
-      return head + '<div class="empty-state">No numbers yet' + (D.tdAllowedNote ? ' (' + esc(D.tdAllowedNote) + ')' : '') + '.</div>';
-    }
-    var POS = [['qb', 'QB'], ['rb', 'RB'], ['wr', 'WR'], ['te', 'TE'], ['all', 'All']];
-    var sel = ['qb', 'rb', 'wr', 'te', 'all'].indexOf(state.tdaPos) === -1 ? 'rb' : state.tdaPos;
-    var dir = state.tdaDir === 'least' ? 'least' : 'most';
+    var view = state.tdaView === 'week' ? 'week' : 'rank';
     var seg = function (key, val, cur, label) {
       return '<button class="tab tab--prop' + (cur === val ? ' is-active' : '') + '" data-atd-set="' + key + '" data-atd-val="' + val + '"><span>' + label + '</span></button>';
     };
-    var filters = '<div class="prop-tabs" style="margin:12px 0 8px">' +
-      POS.map(function (p) { return seg('tdaPos', p[0], sel, p[1]); }).join('') +
-      '<span style="display:inline-block;width:14px"></span>' +
-      seg('tdaDir', 'most', dir, 'Most allowed') + seg('tdaDir', 'least', dir, 'Fewest allowed') +
+    var head = '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Defense vs Position</h2></div>' +
+      '<div style="font-size:10px;color:var(--muted-3)">FBS defenses &middot; this season &middot; display only, not official plays</div></div>' +
+      '<div class="prop-tabs" style="margin:12px 0 4px">' + seg('tdaView', 'rank', view, 'Defense rankings') + seg('tdaView', 'week', view, 'This week\\u2019s matchups') + '</div>';
+    if (!all.length) {
+      return head + '<div class="empty-state">No numbers yet' + (D.tdAllowedNote ? ' (' + esc(D.tdAllowedNote) + ')' : '') + '.</div>';
+    }
+    return head + (view === 'week' ? renderTdaWeek(all, seg) : renderTdaRank(all, seg));
+  }
+
+  function renderTdaRank(all, seg) {
+    var n = all.length, R = tdaRanks(all);
+    var pos = ['qb', 'rb', 'wr', 'te', 'all'].indexOf(state.tdaPos) === -1 ? 'rb' : state.tdaPos;
+    var stat = ['td', 'rec', 'recyds', 'rushyds'].indexOf(state.tdaStat) === -1 ? 'td' : state.tdaStat;
+    var basis = state.tdaBasis === 'adj' && pos !== 'all' ? 'adj' : 'pg';
+    var dir = state.tdaDir === 'least' ? 'least' : 'most';
+    var q = (state.tdaQ || '').toLowerCase();
+    var filters = '<div class="prop-tabs" style="margin:10px 0 6px">' +
+      TDA_POS.concat([['all', 'All']]).map(function (p) { return seg('tdaPos', p[0], pos, p[1]); }).join('') +
+      '<span style="width:12px"></span>' +
+      TDA_STATS.map(function (s) { return seg('tdaStat', s[0], stat, s[1]); }).join('') + '</div>' +
+      '<div class="prop-tabs" style="margin:0 0 8px">' +
+      seg('tdaBasis', 'pg', basis, 'Per game') + (pos !== 'all' ? seg('tdaBasis', 'adj', basis, 'vs usual (schedule-adjusted)') : '') +
+      '<span style="width:12px"></span>' + seg('tdaDir', 'most', dir, 'Most allowed') + seg('tdaDir', 'least', dir, 'Fewest allowed') +
+      '<span style="width:12px"></span><input class="tda-search" placeholder="Find a team" value="' + esc(state.tdaQ || '') + '" oninput="window.__cfbTdaQ(this.value)">' +
       '</div>';
-    var rows = all.slice().sort(function (a, b) {
-      var d = (b[sel + '_pg'] - a[sel + '_pg']) || (b[sel] - a[sel]);
-      return dir === 'least' ? -d : d;
-    });
-    var label = sel === 'all' ? 'All' : sel.toUpperCase();
-    var thead = '<div class="thead tda-grid"><div>#</div><div>Defense</div><div class="num">Gms</div>' +
-      '<div class="num">' + label + ' TD/gm</div><div class="num">' + label + ' TDs</div>' +
-      '<div class="num">QB</div><div class="num">RB</div><div class="num">WR</div><div class="num">TE</div></div>';
-    var cell = function (r, g) {
-      return '<div class="num' + (g === sel ? ' is-sel' : '') + '" style="color:var(--muted-3)" title="' + r[g] + ' total">' + Number(r[g + '_pg']).toFixed(2) + '</div>';
+    var rows = all.filter(function (r) { return !q || r.team.toLowerCase().indexOf(q) !== -1 || (r.next && (r.next.opp || '').toLowerCase().indexOf(q) !== -1); })
+      .sort(function (a, b) {
+        var va = tdaVal(a, stat, pos, basis), vb = tdaVal(b, stat, pos, basis);
+        var d = (vb == null ? -1e9 : vb) - (va == null ? -1e9 : va);
+        return dir === 'least' ? -d : d;
+      });
+    var label = (pos === 'all' ? 'All' : pos.toUpperCase()) + ' ' + TDA_STATS.filter(function (s) { return s[0] === stat; })[0][1] + (basis === 'adj' ? ' vs usual' : '/gm');
+    var p2 = pos === 'all' ? 'all' : pos;
+    var thead = '<div class="thead tda-grid"><div>#</div><div>Defense</div><div>Next</div><div class="num">Gms</div>' +
+      '<div class="num">' + esc(label) + '</div>' +
+      TDA_STATS.map(function (s) { return '<div class="num">' + s[1] + '</div>'; }).join('') + '</div>';
+    var cell = function (r, s) {
+      var b = basis === 'adj' ? 'adj' : 'pg';
+      var v = tdaVal(r, s, p2, b), rk = (R[s + '_' + p2 + '_' + b] || {})[r.team];
+      return '<div class="num" title="' + (rk ? '#' + rk + ' of ' + n + ' in allowing' : '') + '"><span style="color:' + tdaHeat(rk, n) + (s === stat ? ';font-weight:700' : '') + '">' + tdaFmt(v, s, b) + '</span>' +
+        (rk ? '<span class="tda-rk">' + rk + '</span>' : '') + '</div>';
     };
     var body = rows.map(function (r, i) {
-      return '<div class="row"><div class="row-body tda-grid" style="padding:8px 14px;font-size:12px">' +
+      var open = state.tdaOpen === r.team;
+      var v = tdaVal(r, stat, pos, basis), rk = (R[stat + '_' + p2 + '_' + (basis === 'adj' ? 'adj' : 'pg')] || {})[r.team];
+      var nx = r.next ? '<span style="color:var(--muted-2)">' + esc(r.next.opp) + '</span> <span style="color:var(--muted-4);font-size:9.5px">' + esc(tdaKick(r.next.start)) + '</span>' : '<span style="color:var(--muted-4)">&ndash;</span>';
+      return '<div class="row tda-row' + (open ? ' is-open' : '') + '" data-atd-set="tdaOpen" data-atd-val="' + (open ? '' : esc(r.team)) + '">' +
+        '<div class="row-body tda-grid" style="padding:8px 14px;font-size:12px">' +
         '<div style="color:var(--muted-4)">' + (i + 1) + '</div>' +
-        '<div style="overflow:hidden;white-space:nowrap;font-weight:600">' + esc(r.team) + '</div>' +
+        '<div style="overflow:hidden;white-space:nowrap;font-weight:600">' + (open ? '\\u25BE ' : '\\u25B8 ') + esc(r.team) + '</div>' +
+        '<div style="overflow:hidden;white-space:nowrap;font-size:11px">' + nx + '</div>' +
         '<div class="num" style="color:var(--muted-3)">' + r.games + '</div>' +
-        '<div class="num" style="font-weight:700">' + Number(r[sel + '_pg']).toFixed(2) + '</div>' +
-        '<div class="num">' + r[sel] + '</div>' +
-        cell(r, 'qb') + cell(r, 'rb') + cell(r, 'wr') + cell(r, 'te') +
+        '<div class="num"><span class="tda-big" style="background:' + tdaHeat(rk, n) + '">' + tdaFmt(v, stat, basis) + '</span></div>' +
+        TDA_STATS.map(function (s) { return cell(r, s[0]); }).join('') +
+        '</div></div>' + (open ? tdaDetail(r, R, n) : '');
+    }).join('');
+    var foot = '<div class="table-foot"><span>Green = gives up a lot to that position (friendly for overs and TDs), red = stingy. Small number = national rank in allowing (1 = most). ' +
+      '&ldquo;vs usual&rdquo; compares what a defense allowed with what those same offenses get against everyone else, so a soft schedule doesn&rsquo;t flatter it (+25% = 25% more than usual). ' +
+      'TDs = rushing + receiving (QB = QB rushing TDs; passing TDs count for the receiver). Positions from CFBD rosters. Click a defense for its full breakdown.' +
+      (D.tdAllowedNote ? ' ' + esc(D.tdAllowedNote) + '.' : '') + '</span></div>';
+    return filters + thead + (body || '<div class="empty-state">No defenses match.</div>') + foot;
+  }
+
+  function tdaDetail(r, R, n) {
+    var grid = '<div class="tda-detail-grid"><div></div>' + TDA_STATS.map(function (s) { return '<div class="num">' + s[1] + '/gm</div><div class="num">vs usual</div>'; }).join('') + '</div>' +
+      TDA_POS.map(function (p) {
+        return '<div class="tda-detail-grid"><div style="font-weight:700">' + p[1] + '</div>' + TDA_STATS.map(function (s) {
+          var k = s[0] + '_' + p[0];
+          var r1 = (R[k + '_pg'] || {})[r.team], r2 = (R[k + '_adj'] || {})[r.team];
+          return '<div class="num"><span style="color:' + tdaHeat(r1, n) + '">' + tdaFmt(r[k + '_pg'], s[0], 'pg') + '</span><span class="tda-rk">' + (r1 || '') + '</span></div>' +
+            '<div class="num"><span style="color:' + tdaHeat(r2, n) + '">' + tdaFmt(r[k + '_adj'], s[0], 'adj') + '</span><span class="tda-rk">' + (r2 || '') + '</span></div>';
+        }).join('') + '</div>';
+      }).join('');
+    var log = (r.log || []).map(function (g) {
+      var tds = TDA_POS.map(function (p) { return g[p[0]] ? p[1] + ' ' + g[p[0]] : ''; }).filter(Boolean).join(', ') || 'no rush/rec TDs';
+      return '<div class="tda-log"><span style="color:var(--muted-4)">Wk ' + g.wk + '</span><span>vs ' + esc(g.vs) + '</span><span>' + tds + '</span>' +
+        '<span style="color:var(--muted-3)">' + g.recyds + ' rec yds &middot; ' + g.rushyds + ' rush yds</span></div>';
+    }).join('');
+    var sc = (r.scorers || []).map(function (s) {
+      var how = [s.rush ? s.rush + ' rush' : '', s.rec ? s.rec + ' rec' : ''].filter(Boolean).join(', ');
+      return '<div class="tda-log"><span style="color:var(--muted-4)">Wk ' + s.wk + '</span><span><b>' + esc(s.player) + '</b> <span style="color:var(--muted-3)">' + esc(s.pos) + ', ' + esc(s.team) + '</span></span><span>' + how + ' TD</span><span></span></div>';
+    }).join('');
+    return '<div class="tda-detail">' +
+      '<div class="tda-detail-title">' + esc(r.team) + ' defense by position</div>' + grid +
+      '<div class="tda-cols"><div><div class="tda-detail-title">Game log (allowed)</div>' + (log || '<div style="color:var(--muted-3)">&ndash;</div>') + '</div>' +
+      '<div><div class="tda-detail-title">Most recent TDs allowed</div>' + (sc || '<div style="color:var(--muted-3)">None yet.</div>') + '</div></div>' +
+      '</div>';
+  }
+
+  function renderTdaWeek(all, seg) {
+    var n = all.length, R = tdaRanks(all);
+    var byTeam = {};
+    all.forEach(function (r) { byTeam[r.team] = r; });
+    var MK = { 'Receptions': 'Rec', 'Reception Yards': 'Rec yds', 'Rush Yards': 'Rush yds', 'Reception Touchdowns': 'Rec TD', 'Rush Touchdowns': 'Rush TD', 'Rush Attempts': 'Carries', 'Pass Touchdowns': 'Pass TD', 'Pass Yards': 'Pass yds' };
+    var players = {};
+    var key = function (x) { return (x.team || '') + '|' + (x.player_name || ''); };
+    (D.propsLive || []).forEach(function (p) {
+      if (!p.pos || !MK[p.market_name]) return;
+      var k = key(p);
+      var e = players[k] || (players[k] = { name: p.player_name, team: p.team, opp: p.opponent, pos: p.pos, start: p.start_time, props: [], atd: null });
+      e.props.push(p);
+    });
+    (D.anytimeTd || []).forEach(function (a) {
+      if (!a.pos) return;
+      var k = key(a);
+      var e = players[k] || (players[k] = { name: a.player_name, team: a.team, opp: a.opponent, pos: a.pos, start: a.start_time, props: [], atd: null });
+      e.atd = a;
+    });
+    var pos = ['qb', 'rb', 'wr', 'te', 'all'].indexOf(state.tdaWpos) === -1 ? 'all' : state.tdaWpos;
+    var top = ['10', '25', '50', 'all'].indexOf(state.tdaTop) === -1 ? '25' : state.tdaTop;
+    var sortBy = ['td', 'yds', 'kick'].indexOf(state.tdaWsort) === -1 ? 'td' : state.tdaWsort;
+    var basis = state.tdaWbasis === 'adj' ? 'adj' : 'pg';
+    var ydsOf = function (p) { return p === 'WR' || p === 'TE' ? 'recyds' : 'rushyds'; };
+    var list = Object.keys(players).map(function (k) { return players[k]; }).filter(function (e) { return byTeam[e.opp]; });
+    list.forEach(function (e) {
+      var pp = e.pos.toLowerCase(), o = byTeam[e.opp];
+      e.tdRk = (R['td_' + pp + '_' + basis] || {})[e.opp];
+      e.ydRk = (R[ydsOf(e.pos) + '_' + pp + '_' + basis] || {})[e.opp];
+      e.tdV = o['td_' + pp + '_' + basis]; e.ydV = o[ydsOf(e.pos) + '_' + pp + '_' + basis];
+    });
+    var lim = top === 'all' ? 1e9 : Number(top);
+    var rows = list.filter(function (e) {
+      if (pos !== 'all' && e.pos.toLowerCase() !== pos) return false;
+      var rk = sortBy === 'yds' ? e.ydRk : e.tdRk;
+      return rk != null && rk <= lim;
+    }).sort(function (a, b) {
+      if (sortBy === 'kick') return (a.start || '') < (b.start || '') ? -1 : 1;
+      var ka = sortBy === 'yds' ? a.ydRk : a.tdRk, kb = sortBy === 'yds' ? b.ydRk : b.tdRk;
+      return (ka - kb) || ((b.atd && b.atd.model_prob || 0) - (a.atd && a.atd.model_prob || 0));
+    });
+    var filters = '<div class="prop-tabs" style="margin:10px 0 6px">' +
+      [['all', 'All']].concat(TDA_POS).map(function (p) { return seg('tdaWpos', p[0], pos, p[1]); }).join('') +
+      '<span style="width:12px"></span>' + seg('tdaWsort', 'td', sortBy, 'Opp rank: TDs') + seg('tdaWsort', 'yds', sortBy, 'Opp rank: yards') + seg('tdaWsort', 'kick', sortBy, 'Kickoff') + '</div>' +
+      '<div class="prop-tabs" style="margin:0 0 8px">' +
+      seg('tdaTop', '10', top, 'Opp top 10') + seg('tdaTop', '25', top, 'Top 25') + seg('tdaTop', '50', top, 'Top 50') + seg('tdaTop', 'all', top, 'Everyone') +
+      '<span style="width:12px"></span>' + seg('tdaWbasis', 'pg', basis, 'Per game') + seg('tdaWbasis', 'adj', basis, 'vs usual') + '</div>';
+    var odds = function (x) { if (x == null || isNaN(x)) return '&ndash;'; x = Math.round(Number(x)); return (x > 0 ? '+' : '') + x; };
+    var thead = '<div class="thead tdaw-grid"><div>Player</div><div>Matchup</div><div class="num">Opp TDs to pos</div><div class="num">Opp yds to pos</div><div class="num">Anytime TD</div><div>Props (line &middot; model lean)</div></div>';
+    var body = rows.slice(0, 300).map(function (e) {
+      // One chip per market: the official play if there is one, else the line with the biggest model edge.
+      var best = {};
+      e.props.forEach(function (p) {
+        var c = best[p.market_name];
+        var score = function (x) { return (x.is_official_play ? 1e6 : 0) + (x.model_ev == null ? -1e5 : x.model_ev); };
+        if (!c || score(p) > score(c)) best[p.market_name] = p;
+      });
+      var order = ['Receptions', 'Reception Yards', 'Reception Touchdowns', 'Rush Yards', 'Rush Attempts', 'Rush Touchdowns', 'Pass Yards', 'Pass Touchdowns'];
+      var chips = order.filter(function (m) { return best[m]; }).map(function (m) { return best[m]; }).map(function (p) {
+        var ev = p.model_ev, lean = p.model_lean;
+        var col = ev == null ? 'var(--muted-3)' : (ev >= 10 ? 'var(--green)' : (ev > 0 ? 'var(--text)' : 'var(--muted-3)'));
+        return '<span class="tda-chip" title="' + esc(p.market_name + ' ' + p.line + ' (' + (p.book_used || '') + ')' + (p.is_official_play ? ' -- official play' : '')) + '">' +
+          (p.is_official_play ? '\\u2605 ' : '') + MK[p.market_name] + ' ' + p.line +
+          (lean ? ' <span style="color:' + col + '">' + (lean === 'over' ? 'over' : 'under') + (ev != null ? ' ' + (ev > 0 ? '+' : '') + Math.round(ev) + '%' : '') + '</span>' : '') + '</span>';
+      }).join('');
+      var a = e.atd;
+      var atd = a ? '<span title="DraftKings ' + odds(a.dk_price) + ', best ' + odds(a.best_price) + ' (' + esc(a.best_book_label || '') + ')">' + odds(a.dk_price != null ? a.dk_price : a.best_price) + '</span>' +
+        (a.model_prob != null ? '<span class="tda-rk" style="font-size:9.5px">model ' + Math.round(a.model_prob * 100) + '%</span>' : '') : '<span style="color:var(--muted-4)">&ndash;</span>';
+      return '<div class="row"><div class="row-body tdaw-grid" style="padding:8px 14px;font-size:12px">' +
+        '<div style="overflow:hidden;white-space:nowrap"><b>' + esc(e.name) + '</b> <span style="color:var(--muted-3);font-size:10px">' + esc(e.pos) + '</span></div>' +
+        '<div style="overflow:hidden;white-space:nowrap;font-size:11px">' + esc(e.team) + ' <span style="color:var(--muted-4)">vs</span> <span data-atd-set="tdaJump" data-atd-val="' + esc(e.opp) + '" style="cursor:pointer;text-decoration:underline dotted">' + esc(e.opp) + '</span>' +
+          ' <span style="color:var(--muted-4);font-size:9.5px">' + esc(tdaKick(e.start)) + '</span></div>' +
+        '<div class="num"><span style="color:' + tdaHeat(e.tdRk, n) + ';font-weight:700">' + tdaFmt(e.tdV, 'td', basis) + '</span><span class="tda-rk">#' + e.tdRk + '</span></div>' +
+        '<div class="num"><span style="color:' + tdaHeat(e.ydRk, n) + ';font-weight:700">' + tdaFmt(e.ydV, 'recyds', basis) + '</span><span class="tda-rk">#' + (e.ydRk || '') + '</span></div>' +
+        '<div class="num">' + atd + '</div>' +
+        '<div class="tda-chips">' + (chips || '<span style="color:var(--muted-4)">no yardage/TD props posted</span>') + '</div>' +
         '</div></div>';
     }).join('');
-    var foot = '<div class="table-foot"><span>Rushing and receiving touchdowns scored against each defense by position (QB = QB rushing TDs; passing TDs are counted for the receiver). ' +
-      'Positions from CFBD rosters. Plain counts, not adjusted for the offenses each defense has faced. Last four columns are TDs per game.' +
-      (D.tdAllowedNote ? ' ' + esc(D.tdAllowedNote) + '.' : '') + '</span></div>';
-    return head + filters + thead + body + foot;
+    var foot = '<div class="table-foot"><span>Every player with a prop or anytime TD price this week whose opponent ranks in the chosen top group for giving up TDs (or yards) to his position. ' +
+      'Yards = receiving yards for WRs/TEs, rush yards for RBs/QBs. Prop chips show the line and the model&rsquo;s lean and edge (green = 10%+); \\u2605 = official play. Anytime TD = DraftKings price (hover for best book) and the model&rsquo;s chance. ' +
+      'Click an opponent to open its breakdown. For fun / research &mdash; a soft matchup is not itself a tested edge.' +
+      (rows.length > 300 ? ' Showing 300 of ' + rows.length + '.' : '') + '</span></div>';
+    return filters + thead + (body || '<div class="empty-state">No players match. Props usually post a day or two before kickoff.</div>') + foot;
   }
 
   function renderAnytime() {
@@ -4904,6 +5104,11 @@ RENDERER_JS = """<script>
   // so the cursor fell out of it after every single letter typed.
   window.__cfbSearch = function (v) { state.search = v; renderKeep(); };
   window.__cfbAtdGame = function (v) { state.atdGame = v; render(); };
+  window.__cfbTdaQ = function (v) {
+    state.tdaQ = v; render();
+    var el = document.querySelector('.tda-search');
+    if (el) { el.focus(); el.setSelectionRange(v.length, v.length); }
+  };
   window.__cfbPropGame = function (v) { state.propGame = v; state.propPresetMsg = ''; render(); };
   window.__cfbPropQ = function (v) { state.propQ = v; state.propPresetMsg = ''; renderKeep(); };
   window.__cfbPropReset = function () {
@@ -5001,6 +5206,11 @@ RENDERER_JS = """<script>
     var is = e.target.closest('[data-inj-scope]');
     if (is) { state.injScope = is.dataset.injScope; return render(); }
     var atd = e.target.closest('[data-atd-set]');
+    if (atd && atd.dataset.atdSet === 'tdaJump') {
+      e.stopPropagation();
+      state.tdaView = 'rank'; state.tdaOpen = atd.dataset.atdVal; state.tdaQ = atd.dataset.atdVal;
+      render(); window.scrollTo(0, 0); return;
+    }
     if (atd) { state[atd.dataset.atdSet] = atd.dataset.atdVal; return render(); }
   });
 
