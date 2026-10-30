@@ -359,6 +359,8 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
         "fantasy": fantasy_out,
         "anytimeTd": data.get("anytime_td") or [],
         "anytimeTdNote": data.get("anytime_td_note"),
+        "tdAllowed": data.get("td_allowed") or [],
+        "tdAllowedNote": data.get("td_allowed_note"),
         "backtest": backtest_out,
         "injuries": data.get("injuries") or [],
     }
@@ -715,6 +717,8 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .num { text-align: right; }
 
 .rate-grid { grid-template-columns: 26px 1fr 56px 1fr 100px; }
+.tda-grid { grid-template-columns: 30px 1fr 52px 78px 64px 46px 46px 46px 46px; }
+.tda-grid .num.is-sel { color: var(--text); font-weight: 700; }
 .fantasy-grid { grid-template-columns: 26px 1fr 120px 90px; }
 .card-row  { grid-template-columns: 1fr 58px 68px 46px 58px; }
 
@@ -1663,6 +1667,7 @@ RENDERER_JS = """<script>
     { id: 'ratings', label: 'Power Ratings' },
     { id: 'props', label: 'Player Props' },
     { id: 'anytime', label: 'Anytime TD' },
+    { id: 'tdallowed', label: 'TDs Allowed' },
     { id: 'fantasy', label: 'Fantasy' },
     { id: 'injuries', label: 'Injury Report' },
     { id: 'tracker', label: 'My Tracker' },
@@ -2091,6 +2096,54 @@ RENDERER_JS = """<script>
   // and every book's price next to it. Nothing here is an official play or
   // tracked -- see scripts/anytime_td.py for how the chance is worked out and
   // what the backtest found.
+  // ---- TDs Allowed page (10/30/2026, display only) ----
+  // Rushing + receiving TDs each FBS defense has given up to each position
+  // this season (src/features/td_allowed.py). Plain box-score counts.
+  function renderTdAllowed() {
+    var all = D.tdAllowed || [];
+    var head = '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>TDs Allowed by Position</h2></div>' +
+      '<div style="font-size:10px;color:var(--muted-3)">FBS defenses &middot; rushing + receiving TDs &middot; this season</div></div>';
+    if (!all.length) {
+      return head + '<div class="empty-state">No numbers yet' + (D.tdAllowedNote ? ' (' + esc(D.tdAllowedNote) + ')' : '') + '.</div>';
+    }
+    var POS = [['qb', 'QB'], ['rb', 'RB'], ['wr', 'WR'], ['te', 'TE'], ['all', 'All']];
+    var sel = ['qb', 'rb', 'wr', 'te', 'all'].indexOf(state.tdaPos) === -1 ? 'rb' : state.tdaPos;
+    var dir = state.tdaDir === 'least' ? 'least' : 'most';
+    var seg = function (key, val, cur, label) {
+      return '<button class="tab tab--prop' + (cur === val ? ' is-active' : '') + '" data-atd-set="' + key + '" data-atd-val="' + val + '"><span>' + label + '</span></button>';
+    };
+    var filters = '<div class="prop-tabs" style="margin:12px 0 8px">' +
+      POS.map(function (p) { return seg('tdaPos', p[0], sel, p[1]); }).join('') +
+      '<span style="display:inline-block;width:14px"></span>' +
+      seg('tdaDir', 'most', dir, 'Most allowed') + seg('tdaDir', 'least', dir, 'Fewest allowed') +
+      '</div>';
+    var rows = all.slice().sort(function (a, b) {
+      var d = (b[sel + '_pg'] - a[sel + '_pg']) || (b[sel] - a[sel]);
+      return dir === 'least' ? -d : d;
+    });
+    var label = sel === 'all' ? 'All' : sel.toUpperCase();
+    var thead = '<div class="thead tda-grid"><div>#</div><div>Defense</div><div class="num">Gms</div>' +
+      '<div class="num">' + label + ' TD/gm</div><div class="num">' + label + ' TDs</div>' +
+      '<div class="num">QB</div><div class="num">RB</div><div class="num">WR</div><div class="num">TE</div></div>';
+    var cell = function (r, g) {
+      return '<div class="num' + (g === sel ? ' is-sel' : '') + '" style="color:var(--muted-3)" title="' + r[g] + ' total">' + Number(r[g + '_pg']).toFixed(2) + '</div>';
+    };
+    var body = rows.map(function (r, i) {
+      return '<div class="row"><div class="row-body tda-grid" style="padding:8px 14px;font-size:12px">' +
+        '<div style="color:var(--muted-4)">' + (i + 1) + '</div>' +
+        '<div style="overflow:hidden;white-space:nowrap;font-weight:600">' + esc(r.team) + '</div>' +
+        '<div class="num" style="color:var(--muted-3)">' + r.games + '</div>' +
+        '<div class="num" style="font-weight:700">' + Number(r[sel + '_pg']).toFixed(2) + '</div>' +
+        '<div class="num">' + r[sel] + '</div>' +
+        cell(r, 'qb') + cell(r, 'rb') + cell(r, 'wr') + cell(r, 'te') +
+        '</div></div>';
+    }).join('');
+    var foot = '<div class="table-foot"><span>Rushing and receiving touchdowns scored against each defense by position (QB = QB rushing TDs; passing TDs are counted for the receiver). ' +
+      'Positions from CFBD rosters. Plain counts, not adjusted for the offenses each defense has faced. Last four columns are TDs per game.' +
+      (D.tdAllowedNote ? ' ' + esc(D.tdAllowedNote) + '.' : '') + '</span></div>';
+    return head + filters + thead + body + foot;
+  }
+
   function renderAnytime() {
     var all = D.anytimeTd || [];
     // Tag from the player's role (also set by the export; recomputed here so
@@ -4811,6 +4864,7 @@ RENDERER_JS = """<script>
       case 'ratings': return renderRatings();
       case 'props': return renderProps();
       case 'anytime': return renderAnytime();
+      case 'tdallowed': return renderTdAllowed();
       case 'fantasy': return renderFantasy();
       case 'injuries': return renderInjuries();
       case 'tracker': return renderTracker();

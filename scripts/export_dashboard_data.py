@@ -1517,6 +1517,21 @@ def main(year: int):
         anytime_td_note = f"skipped ({type(e).__name__}: {e})"
     print(f"  anytime TD: {anytime_td_note}")
 
+    # ---- TDs allowed by position (10/30/2026, display only -- src/features/td_allowed.py) ----
+    td_allowed_out, td_allowed_note = [], "not built this run"
+    try:
+        from src.features import td_allowed as _tda
+        _stats = locals().get("player_stats_long_current")
+        if _stats is not None:
+            td_allowed_out, td_allowed_note = _tda.build(
+                _stats, schedule_df, season_year,
+                pool=set(teams_df["school"].dropna()) if "school" in teams_df.columns else None)
+        else:
+            td_allowed_note = "no box scores pulled this run"
+    except Exception as e:
+        td_allowed_note = f"skipped ({type(e).__name__}: {e})"
+    print(f"  TDs allowed: {td_allowed_note}")
+
     teams_out = build_teams_export(games_out, team_lookup, sp_lookup, sp_splits_lookup, pace_returning_lookup)
 
     output = {
@@ -1537,6 +1552,8 @@ def main(year: int):
         "fantasy": fantasy_out,
         "anytime_td": anytime_td_out,
         "anytime_td_note": anytime_td_note,
+        "td_allowed": td_allowed_out,
+        "td_allowed_note": td_allowed_note,
         "injuries": injuries,
         "injuries_as_of": injuries_asof,
     }
