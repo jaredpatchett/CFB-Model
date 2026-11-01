@@ -43,4 +43,4 @@ jobs:
             if git merge -X ours --no-edit origin/main -m "Merge origin/main [skip ci]" && git push origin main; then break; fi
             sleep $((RANDOM % 10 + 5))
           done
-# run: (set on grading day)
+# run: 2026-11-01
