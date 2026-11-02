@@ -1,323 +1,323 @@
-key,tag,player,team,opponent,market,side,start_time,line,price,pff_week,played
-57ad14afc7db1843fd56f5971dadb058|tk keyes|Reception Yards,group,TK Keyes,Troy,Southern Miss,Reception Yards,over,2026-10-07T00:00:00Z,49.5,-114.0,6,yes
-9aa0a267b153a6cc0d6c3e5746e78213|jojo stone|Receptions,group,JoJo Stone,Florida International,New Mexico State,Receptions,over,2026-10-07T23:30:00Z,3.5,136.0,6,yes
-9aa0a267b153a6cc0d6c3e5746e78213|tyson carter|Reception Yards,group,Tyson Carter,Florida International,New Mexico State,Reception Yards,under,2026-10-07T23:30:00Z,34.5,-114.0,6,yes
-9aa0a267b153a6cc0d6c3e5746e78213|tyson carter|Receptions,group,Tyson Carter,Florida International,New Mexico State,Receptions,over,2026-10-07T23:30:00Z,1.5,-150.0,6,yes
-561884d0d63e91b022e96bc6c415accd|rodney tisdale jr|Pass Yards,group,Rodney Tisdale Jr.,Western Kentucky,Missouri State,Pass Yards,under,2026-10-08T23:00:00Z,278.5,-115.0,6,no
-52f2d012fe3e686087077b0d7083159a|anthony eager|Reception Yards,group,Anthony Eager,South Alabama,Arkansas State,Reception Yards,over,2026-10-08T23:30:00Z,49.5,-119.0,6,yes
-52f2d012fe3e686087077b0d7083159a|anthony eager|Reception Yards,rec_yds_over,Anthony Eager,South Alabama,Arkansas State,Reception Yards,over,2026-10-08T23:30:00Z,45.5,-114.0,6,yes
-52f2d012fe3e686087077b0d7083159a|anthony eager|Receptions,group,Anthony Eager,South Alabama,Arkansas State,Receptions,under,2026-10-08T23:30:00Z,3.5,-122.0,6,yes
-52f2d012fe3e686087077b0d7083159a|everett hunter|Reception Yards,group,Everett Hunter,South Alabama,Arkansas State,Reception Yards,over,2026-10-08T23:30:00Z,6.5,-103.0,6,yes
-52f2d012fe3e686087077b0d7083159a|everett hunter|Reception Yards,rec_yds_over,Everett Hunter,South Alabama,Arkansas State,Reception Yards,over,2026-10-08T23:30:00Z,6.5,-103.0,6,yes
-52f2d012fe3e686087077b0d7083159a|everett hunter|Reception Yards,rec_yds_play,Everett Hunter,South Alabama,Arkansas State,Reception Yards,over,2026-10-08T23:30:00Z,6.5,-103.0,6,yes
-52f2d012fe3e686087077b0d7083159a|everett hunter|Receptions,group,Everett Hunter,South Alabama,Arkansas State,Receptions,over,2026-10-08T23:30:00Z,0.5,-235.0,6,yes
-52f2d012fe3e686087077b0d7083159a|everett hunter|Receptions,official,Everett Hunter,South Alabama,Arkansas State,Receptions,over,2026-10-08T23:30:00Z,0.5,-235.0,6,yes
-7556739cc30a38511b7f631581a416e4|keyjuan brown|Rush Yards,group,Keyjuan Brown,Louisville,Florida State,Rush Yards,under,2026-10-09T23:00:00Z,61.5,-114.0,6,no
-7556739cc30a38511b7f631581a416e4|keyjuan brown|Rush Yards,rush_under_play,Keyjuan Brown,Louisville,Florida State,Rush Yards,under,2026-10-09T23:00:00Z,61.5,-114.0,6,no
-55d9636153ca5741d460ef2f78b663d9|cody jackson|Reception Yards,group,Cody Jackson,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,21.5,-114.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|cody jackson|Reception Yards,rec_yds_over,Cody Jackson,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,21.5,-114.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|cody jackson|Reception Yards,rec_yds_play,Cody Jackson,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,21.5,-114.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|cody jackson|Receptions,capped,Cody Jackson,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,2.5,124.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|cody jackson|Receptions,group,Cody Jackson,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,2.5,124.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|cody jackson|Receptions,official,Cody Jackson,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,2.5,100.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|dominic overby|Reception Yards,group,Dominic Overby,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,24.5,-116.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|dominic overby|Reception Yards,rec_yds_over,Dominic Overby,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,24.5,-116.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|dominic overby|Reception Yards,rec_yds_play,Dominic Overby,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,24.5,-116.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|dominic overby|Receptions,group,Dominic Overby,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,1.5,-192.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|dominic overby|Receptions,official,Dominic Overby,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,1.5,-192.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|vince benetti|Reception Yards,group,Vince Benetti,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,11.5,-106.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|vince benetti|Reception Yards,rec_yds_over,Vince Benetti,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,11.5,-106.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|vince benetti|Reception Yards,rec_yds_play,Vince Benetti,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,11.5,-106.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|vince benetti|Receptions,group,Vince Benetti,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,1.5,-105.0,6,yes
-55d9636153ca5741d460ef2f78b663d9|vince benetti|Receptions,official,Vince Benetti,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,1.5,-105.0,6,yes
-416ce0307b7b9d97f5365a29c1729339|antonio meeks|Reception Yards,group,Antonio Meeks,Wake Forest,NC State,Reception Yards,over,2026-10-10T16:00:00Z,25.5,-112.0,6,yes
-416ce0307b7b9d97f5365a29c1729339|antonio meeks|Receptions,group,Antonio Meeks,Wake Forest,NC State,Receptions,over,2026-10-10T16:00:00Z,1.5,-169.0,6,yes
-416ce0307b7b9d97f5365a29c1729339|joshisa trader|Reception Yards,group,Joshisa Trader,NC State,Wake Forest,Reception Yards,under,2026-10-10T16:00:00Z,40.5,-118.0,6,no
-5d7901b0ad44ffe1b92e18fc8d511a7e|caleb smith|Reception Yards,group,Caleb Smith,Arizona,West Virginia,Reception Yards,under,2026-10-10T16:00:00Z,39.5,-114.0,6,yes
-5d7901b0ad44ffe1b92e18fc8d511a7e|jaden bray|Reception Yards,group,Jaden Bray,West Virginia,Arizona,Reception Yards,over,2026-10-10T16:00:00Z,24.5,-118.0,6,yes
-5d7901b0ad44ffe1b92e18fc8d511a7e|tyler powell|Reception Yards,group,Tyler Powell,Arizona,West Virginia,Reception Yards,under,2026-10-10T16:00:00Z,29.5,-114.0,6,yes
-690e2edaba34c383d2ebfa8f8394f973|carson kolb|Reception Yards,group,Carson Kolb,Oklahoma State,UCF,Reception Yards,over,2026-10-10T16:00:00Z,14.5,-120.0,6,yes
-690e2edaba34c383d2ebfa8f8394f973|carson kolb|Reception Yards,rec_yds_over,Carson Kolb,Oklahoma State,UCF,Reception Yards,over,2026-10-10T16:00:00Z,13.5,-112.0,6,yes
-9e243e91f8f94e6431da5cc5c3cc8fda|donovan olugbode|Receptions,group,Donovan Olugbode,Missouri,Texas A&M,Receptions,over,2026-10-10T16:00:00Z,4.5,-145.0,6,yes
-9383cbbbb905d9ee50a3341f6945eae7|brady hunt|Reception Yards,group,Brady Hunt,South Carolina,Florida,Reception Yards,under,2026-10-10T16:45:00Z,24.5,-140.0,6,yes
-9383cbbbb905d9ee50a3341f6945eae7|vernell brown iii|Reception Yards,group,Vernell Brown III,Florida,South Carolina,Reception Yards,under,2026-10-10T16:45:00Z,51.5,-114.0,6,no
-9383cbbbb905d9ee50a3341f6945eae7|vernell brown iii|Receptions,group,Vernell Brown III,Florida,South Carolina,Receptions,under,2026-10-10T16:45:00Z,4.5,-160.0,6,no
-373204ebaf557738961c85f37a72fe10|derrick salley jr|Reception Touchdowns,group,Derrick Salley Jr.,Kansas State,Houston,Reception Touchdowns,over,2026-10-10T19:30:00Z,0.5,335.0,6,yes
-496f20b5a45e727fdc2d07915ab0f865|cooper flanagan|Reception Yards,group,Cooper Flanagan,Notre Dame,Stanford,Reception Yards,over,2026-10-10T19:30:00Z,19.5,-114.0,6,yes
-496f20b5a45e727fdc2d07915ab0f865|cooper flanagan|Reception Yards,rec_yds_over,Cooper Flanagan,Notre Dame,Stanford,Reception Yards,over,2026-10-10T19:30:00Z,18.5,-111.0,6,yes
-82b83ec87fc2be5faa2e9f26ac50edef|emaree winston|Reception Yards,group,Emaree Winston,Texas,Oklahoma,Reception Yards,over,2026-10-10T19:30:00Z,15.5,-120.0,6,yes
-82b83ec87fc2be5faa2e9f26ac50edef|emaree winston|Reception Yards,rec_yds_over,Emaree Winston,Texas,Oklahoma,Reception Yards,over,2026-10-10T19:30:00Z,11.5,-120.0,6,yes
-82b83ec87fc2be5faa2e9f26ac50edef|emaree winston|Receptions,group,Emaree Winston,Texas,Oklahoma,Receptions,over,2026-10-10T19:30:00Z,1.5,-110.0,6,yes
-82b83ec87fc2be5faa2e9f26ac50edef|mackenzie alleyne|Reception Yards,group,Mackenzie Alleyne,Oklahoma,Texas,Reception Yards,over,2026-10-10T19:30:00Z,12.5,-114.0,6,yes
-9f633922d2cc5fa338aa22d1fcb83099|jaronkeawe sagapolutele|Pass Touchdowns,group,Jaron-Keawe Sagapolutele,California,Virginia Tech,Pass Touchdowns,under,2026-10-10T19:30:00Z,1.5,-125.0,6,no
-9f633922d2cc5fa338aa22d1fcb83099|jaronkeawe sagapolutele|Pass Yards,group,Jaron-Keawe Sagapolutele,California,Virginia Tech,Pass Yards,under,2026-10-10T19:30:00Z,262.5,-114.0,6,no
-031164b8d704599d8023a3e104f9a6c0|brandon inniss|Reception Yards,group,Brandon Inniss,Ohio State,Maryland,Reception Yards,over,2026-10-10T20:15:00Z,18.5,-114.0,6,no
-031164b8d704599d8023a3e104f9a6c0|brandon inniss|Reception Yards,rec_yds_over,Brandon Inniss,Ohio State,Maryland,Reception Yards,over,2026-10-10T20:15:00Z,18.5,-114.0,6,no
-031164b8d704599d8023a3e104f9a6c0|brandon inniss|Receptions,group,Brandon Inniss,Ohio State,Maryland,Receptions,over,2026-10-10T20:15:00Z,1.5,-116.0,6,no
-031164b8d704599d8023a3e104f9a6c0|brandon inniss|Receptions,official,Brandon Inniss,Ohio State,Maryland,Receptions,over,2026-10-10T20:15:00Z,1.5,-116.0,6,no
-031164b8d704599d8023a3e104f9a6c0|devin mccuin|Reception Yards,group,Devin McCuin,Ohio State,Maryland,Reception Yards,under,2026-10-10T20:15:00Z,42.5,-120.0,6,no
-031164b8d704599d8023a3e104f9a6c0|devin mccuin|Receptions,group,Devin McCuin,Ohio State,Maryland,Receptions,under,2026-10-10T20:15:00Z,3.5,-112.0,6,no
-0dd06b09349f56ce8dfc2d61d5fcd042|radarious jackson|Reception Yards,group,Radarious Jackson,Tennessee,Arkansas,Reception Yards,over,2026-10-10T20:15:00Z,19.5,-114.0,6,yes
-0dd06b09349f56ce8dfc2d61d5fcd042|radarious jackson|Receptions,group,Radarious Jackson,Tennessee,Arkansas,Receptions,under,2026-10-10T20:15:00Z,2.5,-217.0,6,yes
-4462f1fa168ab2a5a25fe2807ebec8ac|mark bowman|Reception Yards,group,Mark Bowman,USC,Penn State,Reception Yards,over,2026-10-10T23:30:00Z,39.5,115.0,6,no
-4462f1fa168ab2a5a25fe2807ebec8ac|mark bowman|Reception Yards,rec_yds_over,Mark Bowman,USC,Penn State,Reception Yards,over,2026-10-10T23:30:00Z,27.5,-108.0,6,no
-4462f1fa168ab2a5a25fe2807ebec8ac|mark bowman|Receptions,group,Mark Bowman,USC,Penn State,Receptions,over,2026-10-10T23:30:00Z,3.5,115.0,6,no
-59f8c98dee8ce77cc17c5b4958e4f325|nate frazier|Rush Yards,group,Nate Frazier,Georgia,Alabama,Rush Yards,under,2026-10-10T23:30:00Z,49.5,-114.0,6,no
-59f8c98dee8ce77cc17c5b4958e4f325|nate frazier|Rush Yards,rush_under_play,Nate Frazier,Georgia,Alabama,Rush Yards,under,2026-10-10T23:30:00Z,49.5,-114.0,6,no
-f7b49f43b10f581d991954dae86b9aa5|amari odom|Pass Touchdowns,group,Amari Odom,Syracuse,Virginia,Pass Touchdowns,under,2026-10-10T23:30:00Z,1.5,-244.0,6,no
-f7b49f43b10f581d991954dae86b9aa5|amari odom|Pass Yards,group,Amari Odom,Syracuse,Virginia,Pass Yards,under,2026-10-10T23:30:00Z,221.5,-118.0,6,no
-f7b49f43b10f581d991954dae86b9aa5|jacquon gibson|Reception Yards,group,Jacquon Gibson,Virginia,Syracuse,Reception Yards,over,2026-10-10T23:30:00Z,16.5,-110.0,6,yes
-f7b49f43b10f581d991954dae86b9aa5|jacquon gibson|Receptions,group,Jacquon Gibson,Virginia,Syracuse,Receptions,over,2026-10-10T23:30:00Z,1.5,-125.0,6,yes
-616eba68e65fe65023aa2335e81096c8|keaton kubecka|Reception Yards,group,Keaton Kubecka,Kansas,Utah,Reception Yards,over,2026-10-11T02:15:00Z,21.5,-110.0,6,yes
-616eba68e65fe65023aa2335e81096c8|keaton kubecka|Reception Yards,rec_yds_over,Keaton Kubecka,Kansas,Utah,Reception Yards,over,2026-10-11T02:15:00Z,16.5,-114.0,6,yes
-66f521c79ea8a970ed062bfed392abfb|jojo stone|Reception Yards,group,JoJo Stone,Florida International,Jacksonville State,Reception Yards,over,2026-10-14T00:00:00Z,24.5,-103.0,7,yes
-66f521c79ea8a970ed062bfed392abfb|jojo stone|Reception Yards,rec_yds_over,JoJo Stone,Florida International,Jacksonville State,Reception Yards,over,2026-10-14T00:00:00Z,24.5,-103.0,7,yes
-66f521c79ea8a970ed062bfed392abfb|jojo stone|Reception Yards,rec_yds_play,JoJo Stone,Florida International,Jacksonville State,Reception Yards,over,2026-10-14T00:00:00Z,24.5,-103.0,7,yes
-66f521c79ea8a970ed062bfed392abfb|jojo stone|Receptions,group,JoJo Stone,Florida International,Jacksonville State,Receptions,over,2026-10-14T00:00:00Z,2.5,-120.0,7,yes
-66f521c79ea8a970ed062bfed392abfb|jojo stone|Receptions,official,JoJo Stone,Florida International,Jacksonville State,Receptions,over,2026-10-14T00:00:00Z,2.5,-120.0,7,yes
-7ebcab7b97620342a9205b32139222d1|brayden munroe|Reception Yards,group,Brayden Munroe,Kennesaw State,Missouri State,Reception Yards,under,2026-10-14T23:30:00Z,58.5,-114.0,7,yes
-7ebcab7b97620342a9205b32139222d1|brayden munroe|Receptions,group,Brayden Munroe,Kennesaw State,Missouri State,Receptions,under,2026-10-14T23:30:00Z,4.5,-180.0,7,yes
-7ebcab7b97620342a9205b32139222d1|skyler locklear|Pass Touchdowns,group,Skyler Locklear,Missouri State,Kennesaw State,Pass Touchdowns,under,2026-10-14T23:30:00Z,1.5,-220.0,7,no
-7ebcab7b97620342a9205b32139222d1|skyler locklear|Pass Yards,group,Skyler Locklear,Missouri State,Kennesaw State,Pass Yards,under,2026-10-14T23:30:00Z,204.5,-114.0,7,no
-2bbbf3488a5d57c9c13ae578bad17a9d|lofton howard|Reception Yards,group,Lofton Howard,Western Kentucky,Sam Houston,Reception Yards,under,2026-10-15T00:00:00Z,24.5,-155.0,7,yes
-2bbbf3488a5d57c9c13ae578bad17a9d|lofton howard|Receptions,group,Lofton Howard,Western Kentucky,Sam Houston,Receptions,under,2026-10-15T00:00:00Z,2.5,-180.0,7,yes
-2bbbf3488a5d57c9c13ae578bad17a9d|lofton howard|Receptions,under_lean,Lofton Howard,Western Kentucky,Sam Houston,Receptions,under,2026-10-15T00:00:00Z,2.5,-180.0,7,yes
-f00195614a0c305207222ba2044a9c24|kylen evans|Reception Yards,group,Kylen Evans,Texas State,Colorado State,Reception Yards,over,2026-10-16T00:00:00Z,25.5,-114.0,7,yes
-f00195614a0c305207222ba2044a9c24|kylen evans|Reception Yards,rec_yds_over,Kylen Evans,Texas State,Colorado State,Reception Yards,over,2026-10-16T00:00:00Z,21.5,-118.0,7,yes
-55f376873e3cd0c2bb7cc9aa26e47235|kadin semonza|Pass Attempts,group,Kadin Semonza,Tulane,Memphis,Pass Attempts,over,2026-10-16T23:30:00Z,23.5,100.0,7,no
-55f376873e3cd0c2bb7cc9aa26e47235|kadin semonza|Pass Touchdowns,group,Kadin Semonza,Tulane,Memphis,Pass Touchdowns,under,2026-10-16T23:30:00Z,1.5,-200.0,7,no
-55f376873e3cd0c2bb7cc9aa26e47235|kadin semonza|Pass Yards,group,Kadin Semonza,Tulane,Memphis,Pass Yards,under,2026-10-16T23:30:00Z,172.5,-115.0,7,no
-55f376873e3cd0c2bb7cc9aa26e47235|tychaun chapman|Reception Yards,group,Tychaun Chapman,Memphis,Tulane,Reception Yards,under,2026-10-16T23:30:00Z,34.5,-105.0,7,yes
-55f376873e3cd0c2bb7cc9aa26e47235|tychaun chapman|Receptions,group,Tychaun Chapman,Memphis,Tulane,Receptions,under,2026-10-16T23:30:00Z,2.5,-220.0,7,yes
-0372910f02d1b4d9cbfef5b35bbfe439|holden geriner|Pass Touchdowns,group,Holden Geriner,Pittsburgh,Boston College,Pass Touchdowns,under,2026-10-17T16:00:00Z,1.5,-180.0,7,no
-0372910f02d1b4d9cbfef5b35bbfe439|holden geriner|Pass Yards,group,Holden Geriner,Pittsburgh,Boston College,Pass Yards,under,2026-10-17T16:00:00Z,205.5,-114.0,7,no
-0372910f02d1b4d9cbfef5b35bbfe439|jaedn skeete|Reception Yards,group,Jaedn Skeete,Boston College,Pittsburgh,Reception Yards,under,2026-10-17T16:00:00Z,33.5,-115.0,7,no
-04c740fce71d3f3b8a4bdc4ea69f1281|jayce brown|Reception Yards,group,Jayce Brown,LSU,Mississippi State,Reception Yards,over,2026-10-17T16:00:00Z,13.5,-114.0,7,no
-04c740fce71d3f3b8a4bdc4ea69f1281|jayce brown|Reception Yards,rec_yds_over,Jayce Brown,LSU,Mississippi State,Reception Yards,over,2026-10-17T16:00:00Z,13.5,-114.0,7,no
-04c740fce71d3f3b8a4bdc4ea69f1281|jayce brown|Reception Yards,rec_yds_play,Jayce Brown,LSU,Mississippi State,Reception Yards,over,2026-10-17T16:00:00Z,13.5,-114.0,7,no
-04c740fce71d3f3b8a4bdc4ea69f1281|jayce brown|Receptions,group,Jayce Brown,LSU,Mississippi State,Receptions,over,2026-10-17T16:00:00Z,1.5,126.0,7,no
-04c740fce71d3f3b8a4bdc4ea69f1281|jayce brown|Receptions,official,Jayce Brown,LSU,Mississippi State,Receptions,over,2026-10-17T16:00:00Z,1.5,126.0,7,no
-04c740fce71d3f3b8a4bdc4ea69f1281|sam west|Reception Yards,group,Sam West,Mississippi State,LSU,Reception Yards,over,2026-10-17T16:00:00Z,13.5,-108.0,7,yes
-04c740fce71d3f3b8a4bdc4ea69f1281|sam west|Reception Yards,rec_yds_over,Sam West,Mississippi State,LSU,Reception Yards,over,2026-10-17T16:00:00Z,11.5,-114.0,7,yes
-0763e3ed7ed8d646756e5849bac67b8d|kameron courtney|Reception Yards,group,Kameron Courtney,Virginia,SMU,Reception Yards,over,2026-10-17T16:00:00Z,30.5,-116.0,7,no
-0763e3ed7ed8d646756e5849bac67b8d|kameron courtney|Receptions,group,Kameron Courtney,Virginia,SMU,Receptions,over,2026-10-17T16:00:00Z,3.5,120.0,7,no
-490b66058b6c826a08589c471698ce50|aaron philo|Pass Attempts,group,Aaron Philo,Florida,Texas,Pass Attempts,under,2026-10-17T16:00:00Z,29.5,-125.0,7,no
-490b66058b6c826a08589c471698ce50|aaron philo|Pass Completions,group,Aaron Philo,Florida,Texas,Pass Completions,under,2026-10-17T16:00:00Z,17.5,-115.0,7,no
-490b66058b6c826a08589c471698ce50|aaron philo|Pass Interceptions,group,Aaron Philo,Florida,Texas,Pass Interceptions,over,2026-10-17T16:00:00Z,0.5,-150.0,7,no
-490b66058b6c826a08589c471698ce50|aaron philo|Pass Touchdowns,group,Aaron Philo,Florida,Texas,Pass Touchdowns,under,2026-10-17T16:00:00Z,1.5,-238.0,7,no
-490b66058b6c826a08589c471698ce50|aaron philo|Pass Yards,group,Aaron Philo,Florida,Texas,Pass Yards,under,2026-10-17T16:00:00Z,197.5,-118.0,7,no
-490b66058b6c826a08589c471698ce50|amir jackson|Reception Yards,group,Amir Jackson,Florida,Texas,Reception Yards,over,2026-10-17T16:00:00Z,7.5,-114.0,7,yes
-490b66058b6c826a08589c471698ce50|amir jackson|Reception Yards,rec_yds_over,Amir Jackson,Florida,Texas,Reception Yards,over,2026-10-17T16:00:00Z,7.5,-114.0,7,yes
-490b66058b6c826a08589c471698ce50|amir jackson|Reception Yards,rec_yds_play,Amir Jackson,Florida,Texas,Reception Yards,over,2026-10-17T16:00:00Z,7.5,-114.0,7,yes
-685a8722f297502fa85e4cd8c7e54b1c|jakobi jackson|Rush Attempts,group,Ja'Kobi Jackson,Ohio State,Indiana,Rush Attempts,over,2026-10-17T16:00:00Z,8.5,-105.0,7,no
-685a8722f297502fa85e4cd8c7e54b1c|jakobi jackson|Rush Yards,group,Ja'Kobi Jackson,Ohio State,Indiana,Rush Yards,over,2026-10-17T16:00:00Z,30.5,-112.0,7,no
-9e8578b415e664eea71185131401e537|garrett oakley|Reception Yards,group,Garrett Oakley,Kansas State,Kansas,Reception Yards,under,2026-10-17T16:00:00Z,39.5,-114.0,7,no
-9e8578b415e664eea71185131401e537|nahzae cox|Reception Yards,group,Nahzae Cox,Kansas,Kansas State,Reception Yards,over,2026-10-17T16:00:00Z,25.5,-114.0,7,yes
-9e8578b415e664eea71185131401e537|nahzae cox|Reception Yards,rec_yds_over,Nahzae Cox,Kansas,Kansas State,Reception Yards,over,2026-10-17T16:00:00Z,25.5,-114.0,7,yes
-5d09c85c1d67e8f9db8db560cb038027|brett norfleet|Reception Yards,group,Brett Norfleet,Missouri,Ole Miss,Reception Yards,over,2026-10-17T19:30:00Z,12.5,-115.0,7,no
-33f259d8951535f271a8df5c790a832e|micahi danzy|Reception Yards,group,Micahi Danzy,Florida State,Miami,Reception Yards,under,2026-10-17T23:00:00Z,48.5,-125.0,7,yes
-33f259d8951535f271a8df5c790a832e|micahi danzy|Receptions,group,Micahi Danzy,Florida State,Miami,Receptions,over,2026-10-17T23:00:00Z,3.5,-115.0,7,yes
-c92acc311e3c969f78faf7c2ec5ef5b1|jayvontay conner|Reception Yards,group,Jayvontay Conner,Vanderbilt,Arkansas,Reception Yards,over,2026-10-17T23:00:00Z,20.5,-114.0,7,yes
-c92acc311e3c969f78faf7c2ec5ef5b1|jayvontay conner|Reception Yards,rec_yds_over,Jayvontay Conner,Vanderbilt,Arkansas,Reception Yards,over,2026-10-17T23:00:00Z,20.5,-114.0,7,yes
-c92acc311e3c969f78faf7c2ec5ef5b1|jayvontay conner|Reception Yards,rec_yds_play,Jayvontay Conner,Vanderbilt,Arkansas,Reception Yards,over,2026-10-17T23:00:00Z,20.5,-114.0,7,yes
-c92acc311e3c969f78faf7c2ec5ef5b1|jayvontay conner|Receptions,capped,Jayvontay Conner,Vanderbilt,Arkansas,Receptions,over,2026-10-17T23:00:00Z,1.5,-119.0,7,yes
-c92acc311e3c969f78faf7c2ec5ef5b1|jayvontay conner|Receptions,group,Jayvontay Conner,Vanderbilt,Arkansas,Receptions,over,2026-10-17T23:00:00Z,2.5,130.0,7,yes
-0728226f9c1e3aace0f64536109f4d05|henry boyer|Reception Yards,group,Henry Boyer,Kentucky,Oklahoma,Reception Yards,over,2026-10-17T23:30:00Z,7.5,-116.0,7,yes
-0728226f9c1e3aace0f64536109f4d05|henry boyer|Reception Yards,rec_yds_over,Henry Boyer,Kentucky,Oklahoma,Reception Yards,over,2026-10-17T23:30:00Z,7.5,-116.0,7,yes
-0728226f9c1e3aace0f64536109f4d05|henry boyer|Reception Yards,rec_yds_play,Henry Boyer,Kentucky,Oklahoma,Reception Yards,over,2026-10-17T23:30:00Z,7.5,-116.0,7,yes
-bd2d52fadefed8a6174e73c84cca9ce3|cooper flanagan|Reception Yards,group,Cooper Flanagan,Notre Dame,BYU,Reception Yards,over,2026-10-17T23:30:00Z,13.5,-108.0,7,no
-bd2d52fadefed8a6174e73c84cca9ce3|cooper flanagan|Reception Yards,rec_yds_over,Cooper Flanagan,Notre Dame,BYU,Reception Yards,over,2026-10-17T23:30:00Z,13.5,-108.0,7,no
-bd2d52fadefed8a6174e73c84cca9ce3|cooper flanagan|Reception Yards,rec_yds_play,Cooper Flanagan,Notre Dame,BYU,Reception Yards,over,2026-10-17T23:30:00Z,13.5,-108.0,7,no
-b5e637cf502d6d5f408af440ea2d591d|carlos hernandez|Reception Yards,group,Carlos Hernandez,Wake Forest,California,Reception Yards,under,2026-10-18T02:30:00Z,99.5,-115.0,7,yes
-b5e637cf502d6d5f408af440ea2d591d|carlos hernandez|Receptions,group,Carlos Hernandez,Wake Forest,California,Receptions,under,2026-10-18T02:30:00Z,7.5,102.0,7,yes
-b5e637cf502d6d5f408af440ea2d591d|carlos hernandez|Receptions,under_lean,Carlos Hernandez,Wake Forest,California,Receptions,under,2026-10-18T02:30:00Z,7.5,102.0,7,yes
-b5e637cf502d6d5f408af440ea2d591d|ian strong|Reception Yards,group,Ian Strong,California,Wake Forest,Reception Yards,under,2026-10-18T02:30:00Z,67.5,-118.0,7,no
-5d147fefd2182aa2f5573ac03700a775|evan stewart|Receptions,group,Evan Stewart,Oregon,Nebraska,Receptions,over,2026-10-18T03:00:00Z,4.5,-130.0,7,no
-c85512046e05e5ed845e60dd5d6d5e1e|greg gaines iii|Receptions,group,Greg Gaines III,Florida International,Middle Tennessee,Receptions,under,2026-10-20T23:00:00Z,2.5,-159.0,8,yes
-c85512046e05e5ed845e60dd5d6d5e1e|greg gaines iii|Receptions,under_lean,Greg Gaines III,Florida International,Middle Tennessee,Receptions,under,2026-10-20T23:00:00Z,2.5,-159.0,8,yes
-c85512046e05e5ed845e60dd5d6d5e1e|jackson verdugo|Reception Yards,group,Jackson Verdugo,Florida International,Middle Tennessee,Reception Yards,over,2026-10-20T23:00:00Z,9.5,-106.0,8,yes
-c85512046e05e5ed845e60dd5d6d5e1e|jackson verdugo|Reception Yards,rec_yds_over,Jackson Verdugo,Florida International,Middle Tennessee,Reception Yards,over,2026-10-20T23:00:00Z,9.5,-106.0,8,yes
-c85512046e05e5ed845e60dd5d6d5e1e|koraun perdue|Reception Yards,group,Koraun Perdue,Middle Tennessee,Florida International,Reception Yards,over,2026-10-20T23:00:00Z,17.5,-114.0,8,yes
-c85512046e05e5ed845e60dd5d6d5e1e|koraun perdue|Reception Yards,rec_yds_over,Koraun Perdue,Middle Tennessee,Florida International,Reception Yards,over,2026-10-20T23:00:00Z,13.5,-117.0,8,yes
-a493efd6ef737f676a45aacc0eaf7be8|jayden moore|Reception Yards,group,Jayden Moore,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,14.5,-110.0,8,no
-a493efd6ef737f676a45aacc0eaf7be8|jayden moore|Reception Yards,rec_yds_over,Jayden Moore,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,14.5,-110.0,8,no
-a493efd6ef737f676a45aacc0eaf7be8|jayden moore|Receptions,group,Jayden Moore,Duke,Virginia,Receptions,over,2026-10-23T23:00:00Z,1.5,-110.0,8,no
-a493efd6ef737f676a45aacc0eaf7be8|jayden moore|Receptions,official,Jayden Moore,Duke,Virginia,Receptions,over,2026-10-23T23:00:00Z,1.5,-105.0,8,no
-a493efd6ef737f676a45aacc0eaf7be8|jeremiah hasley|Reception Yards,group,Jeremiah Hasley,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,26.5,-115.0,8,yes
-a493efd6ef737f676a45aacc0eaf7be8|jeremiah hasley|Reception Yards,rec_yds_over,Jeremiah Hasley,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,26.5,-115.0,8,yes
-a493efd6ef737f676a45aacc0eaf7be8|jeremiah hasley|Reception Yards,rec_yds_play,Jeremiah Hasley,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,26.5,-115.0,8,yes
-a493efd6ef737f676a45aacc0eaf7be8|nate kurisky|Reception Yards,group,Nate Kurisky,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,6.5,-118.0,8,yes
-a493efd6ef737f676a45aacc0eaf7be8|nate kurisky|Reception Yards,rec_yds_over,Nate Kurisky,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,6.5,-118.0,8,yes
-a493efd6ef737f676a45aacc0eaf7be8|nate kurisky|Reception Yards,rec_yds_play,Nate Kurisky,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,6.5,-118.0,8,yes
-a493efd6ef737f676a45aacc0eaf7be8|nate kurisky|Receptions,group,Nate Kurisky,Duke,Virginia,Receptions,over,2026-10-23T23:00:00Z,1.5,150.0,8,yes
-027c66400a752f72c7a21ce15a3b1743|jordan onovughe|Reception Yards,group,Jordan Onovughe,Stanford,NC State,Reception Yards,under,2026-10-24T02:30:00Z,30.5,-112.0,8,yes
-027c66400a752f72c7a21ce15a3b1743|joshisa trader|Reception Yards,group,Joshisa Trader,NC State,Stanford,Reception Yards,under,2026-10-24T02:30:00Z,38.5,-120.0,8,no
-1067cba701eaa40c3724cceda30524c6|dj epps|Reception Yards,group,DJ Epps,West Virginia,TCU,Reception Yards,under,2026-10-24T16:00:00Z,55.5,-115.0,8,yes
-2d125f14eca5c6eb1417f126cafde7c0|jakyrian turner|Rush Yards,group,Ja'Kyrian Turner,Pittsburgh,Miami,Rush Yards,under,2026-10-24T16:00:00Z,43.5,-114.0,8,no
-2d125f14eca5c6eb1417f126cafde7c0|jakyrian turner|Rush Yards,rush_under_play,Ja'Kyrian Turner,Pittsburgh,Miami,Rush Yards,under,2026-10-24T16:00:00Z,43.5,-114.0,8,no
-0f773ec5cb1e5b41f52f2bf8dbc4f182|hudson clement|Reception Yards,group,Hudson Clement,Illinois,Oregon,Reception Yards,under,2026-10-24T19:00:00Z,59.5,-156.0,8,yes
-0f773ec5cb1e5b41f52f2bf8dbc4f182|hudson clement|Receptions,group,Hudson Clement,Illinois,Oregon,Receptions,under,2026-10-24T19:00:00Z,4.5,-137.0,8,yes
-0f773ec5cb1e5b41f52f2bf8dbc4f182|jalen lott|Reception Yards,group,Jalen Lott,Oregon,Illinois,Reception Yards,under,2026-10-24T19:00:00Z,24.5,-115.0,8,no
-0f773ec5cb1e5b41f52f2bf8dbc4f182|jalen lott|Receptions,group,Jalen Lott,Oregon,Illinois,Receptions,under,2026-10-24T19:00:00Z,2.5,-192.0,8,no
-0f773ec5cb1e5b41f52f2bf8dbc4f182|messiah hampton|Reception Yards,group,Messiah Hampton,Oregon,Illinois,Reception Yards,over,2026-10-24T19:00:00Z,29.5,-109.0,8,no
-0f773ec5cb1e5b41f52f2bf8dbc4f182|messiah hampton|Receptions,group,Messiah Hampton,Oregon,Illinois,Receptions,over,2026-10-24T19:00:00Z,2.5,-111.0,8,no
-0f773ec5cb1e5b41f52f2bf8dbc4f182|messiah hampton|Receptions,official,Messiah Hampton,Oregon,Illinois,Receptions,over,2026-10-24T19:00:00Z,2.5,-111.0,8,no
-129a012809e96238263d1a6d0a7430fa|dawson pough|Reception Yards,group,Dawson Pough,Boston College,Georgia Tech,Reception Yards,over,2026-10-24T19:30:00Z,20.5,-114.0,8,yes
-129a012809e96238263d1a6d0a7430fa|dawson pough|Reception Yards,rec_yds_over,Dawson Pough,Boston College,Georgia Tech,Reception Yards,over,2026-10-24T19:30:00Z,20.5,-114.0,8,yes
-129a012809e96238263d1a6d0a7430fa|dawson pough|Reception Yards,rec_yds_play,Dawson Pough,Boston College,Georgia Tech,Reception Yards,over,2026-10-24T19:30:00Z,20.5,-114.0,8,yes
-129a012809e96238263d1a6d0a7430fa|dawson pough|Receptions,group,Dawson Pough,Boston College,Georgia Tech,Receptions,over,2026-10-24T19:30:00Z,1.5,-154.0,8,yes
-129a012809e96238263d1a6d0a7430fa|dawson pough|Receptions,official,Dawson Pough,Boston College,Georgia Tech,Receptions,over,2026-10-24T19:30:00Z,1.5,-154.0,8,yes
-173057d32ff5946d42566a0d164de287|derek meadows|Reception Yards,group,Derek Meadows,Alabama,Texas A&M,Reception Yards,over,2026-10-24T19:30:00Z,14.5,-112.0,8,yes
-173057d32ff5946d42566a0d164de287|derek meadows|Reception Yards,rec_yds_over,Derek Meadows,Alabama,Texas A&M,Reception Yards,over,2026-10-24T19:30:00Z,14.5,-112.0,8,yes
-173057d32ff5946d42566a0d164de287|derek meadows|Reception Yards,rec_yds_play,Derek Meadows,Alabama,Texas A&M,Reception Yards,over,2026-10-24T19:30:00Z,14.5,-112.0,8,yes
-173057d32ff5946d42566a0d164de287|tk norman|Reception Yards,group,TK Norman,Texas A&M,Alabama,Reception Yards,over,2026-10-24T19:30:00Z,17.5,-125.0,8,yes
-173057d32ff5946d42566a0d164de287|tk norman|Reception Yards,rec_yds_over,TK Norman,Texas A&M,Alabama,Reception Yards,over,2026-10-24T19:30:00Z,17.5,-125.0,8,yes
-173057d32ff5946d42566a0d164de287|tk norman|Reception Yards,rec_yds_play,TK Norman,Texas A&M,Alabama,Reception Yards,over,2026-10-24T19:30:00Z,17.5,-125.0,8,yes
-173057d32ff5946d42566a0d164de287|tk norman|Receptions,group,TK Norman,Texas A&M,Alabama,Receptions,over,2026-10-24T19:30:00Z,2.5,-138.0,8,yes
-173057d32ff5946d42566a0d164de287|tk norman|Receptions,official,TK Norman,Texas A&M,Alabama,Receptions,over,2026-10-24T19:30:00Z,1.5,-160.0,8,yes
-1e9caefb58095e7560167dff561c9ff7|nyck harbor|Reception Yards,group,Nyck Harbor,South Carolina,Tennessee,Reception Yards,under,2026-10-24T19:30:00Z,48.5,-115.0,8,yes
-6dab7d3b6ae25bd042a24a6e550a4f23|evan james|Reception Yards,group,Evan James,Iowa,Minnesota,Reception Yards,over,2026-10-24T19:30:00Z,13.5,-108.0,8,yes
-6dab7d3b6ae25bd042a24a6e550a4f23|evan james|Reception Yards,rec_yds_over,Evan James,Iowa,Minnesota,Reception Yards,over,2026-10-24T19:30:00Z,12.5,-110.0,8,yes
-6dab7d3b6ae25bd042a24a6e550a4f23|evan james|Reception Yards,rec_yds_play,Evan James,Iowa,Minnesota,Reception Yards,over,2026-10-24T19:30:00Z,11.5,-112.0,8,yes
-6dab7d3b6ae25bd042a24a6e550a4f23|evan james|Receptions,group,Evan James,Iowa,Minnesota,Receptions,over,2026-10-24T19:30:00Z,1.5,-115.0,8,yes
-6dab7d3b6ae25bd042a24a6e550a4f23|evan james|Receptions,official,Evan James,Iowa,Minnesota,Receptions,over,2026-10-24T19:30:00Z,1.5,-105.0,8,yes
-95bc14af9668222d8528934b43d65566|alessio milivojevic|Pass Attempts,group,Alessio Milivojevic,Michigan State,UCLA,Pass Attempts,over,2026-10-24T19:30:00Z,26.5,-120.0,8,no
-95bc14af9668222d8528934b43d65566|alessio milivojevic|Pass Completions,group,Alessio Milivojevic,Michigan State,UCLA,Pass Completions,over,2026-10-24T19:30:00Z,14.5,-145.0,8,no
-95bc14af9668222d8528934b43d65566|alessio milivojevic|Pass Interceptions,group,Alessio Milivojevic,Michigan State,UCLA,Pass Interceptions,over,2026-10-24T19:30:00Z,0.5,-170.0,8,no
-95bc14af9668222d8528934b43d65566|alessio milivojevic|Pass Touchdowns,group,Alessio Milivojevic,Michigan State,UCLA,Pass Touchdowns,over,2026-10-24T19:30:00Z,0.5,-158.0,8,no
-95bc14af9668222d8528934b43d65566|alessio milivojevic|Pass Yards,group,Alessio Milivojevic,Michigan State,UCLA,Pass Yards,under,2026-10-24T19:30:00Z,167.5,-114.0,8,no
-95bc14af9668222d8528934b43d65566|jaziun patterson|Reception Yards,group,Jaziun Patterson,Michigan State,UCLA,Reception Yards,under,2026-10-24T19:30:00Z,14.5,-120.0,8,no
-95bc14af9668222d8528934b43d65566|jaziun patterson|Receptions,group,Jaziun Patterson,Michigan State,UCLA,Receptions,under,2026-10-24T19:30:00Z,2.5,-123.0,8,no
-95bc14af9668222d8528934b43d65566|jaziun patterson|Receptions,under_play,Jaziun Patterson,Michigan State,UCLA,Receptions,under,2026-10-24T19:30:00Z,2.5,-123.0,8,no
-95bc14af9668222d8528934b43d65566|jaziun patterson|Rush Attempts,group,Jaziun Patterson,Michigan State,UCLA,Rush Attempts,under,2026-10-24T19:30:00Z,16.5,-130.0,8,no
-95bc14af9668222d8528934b43d65566|jaziun patterson|Rush Yards,group,Jaziun Patterson,Michigan State,UCLA,Rush Yards,under,2026-10-24T19:30:00Z,58.5,-114.0,8,no
-95bc14af9668222d8528934b43d65566|jaziun patterson|Rush Yards,rush_under_play,Jaziun Patterson,Michigan State,UCLA,Rush Yards,under,2026-10-24T19:30:00Z,58.5,-114.0,8,no
-95bc14af9668222d8528934b43d65566|rodney bullard jr|Reception Yards,group,Rodney Bullard Jr.,Michigan State,UCLA,Reception Yards,over,2026-10-24T19:30:00Z,29.5,-114.0,8,yes
-95bc14af9668222d8528934b43d65566|rodney bullard jr|Reception Yards,rec_yds_over,Rodney Bullard Jr.,Michigan State,UCLA,Reception Yards,over,2026-10-24T19:30:00Z,24.5,-120.0,8,yes
-95bc14af9668222d8528934b43d65566|rodney bullard jr|Reception Yards,rec_yds_play,Rodney Bullard Jr.,Michigan State,UCLA,Reception Yards,over,2026-10-24T19:30:00Z,24.5,-125.0,8,yes
-95bc14af9668222d8528934b43d65566|rodney bullard jr|Receptions,group,Rodney Bullard Jr.,Michigan State,UCLA,Receptions,over,2026-10-24T19:30:00Z,2.5,-108.0,8,yes
-95bc14af9668222d8528934b43d65566|rodney bullard jr|Receptions,official,Rodney Bullard Jr.,Michigan State,UCLA,Receptions,over,2026-10-24T19:30:00Z,2.5,-108.0,8,yes
-f417c5ab864e0751355921f5d22f4b25|avery johnson|Pass Touchdowns,group,Avery Johnson,Kansas State,Arizona State,Pass Touchdowns,over,2026-10-24T19:45:00Z,1.5,122.0,8,no
-f417c5ab864e0751355921f5d22f4b25|avery johnson|Pass Yards,group,Avery Johnson,Kansas State,Arizona State,Pass Yards,over,2026-10-24T19:45:00Z,201.5,-110.0,8,no
-f417c5ab864e0751355921f5d22f4b25|jason brown jr|Rush Yards,group,Jason Brown Jr.,Arizona State,Kansas State,Rush Yards,under,2026-10-24T19:45:00Z,39.5,-130.0,8,no
-f417c5ab864e0751355921f5d22f4b25|jason brown jr|Rush Yards,rush_under_play,Jason Brown Jr.,Arizona State,Kansas State,Rush Yards,under,2026-10-24T19:45:00Z,39.5,-130.0,8,no
-a28a6841bdc11350063d5e6d57fbd577|carson kolb|Reception Yards,group,Carson Kolb,Oklahoma State,Colorado,Reception Yards,over,2026-10-24T23:00:00Z,17.5,100.0,8,yes
-440de8df25b4cca8ebcecb7431bbb5c0|mark bowman|Reception Yards,group,Mark Bowman,USC,Wisconsin,Reception Yards,over,2026-10-24T23:30:00Z,30.5,-114.0,8,no
-cc78a514047b7ed0d2c5a3acdf3cdc1e|nic anderson|Reception Yards,group,Nic Anderson,Kentucky,Vanderbilt,Reception Yards,under,2026-10-24T23:30:00Z,35.5,-125.0,8,no
-cc78a514047b7ed0d2c5a3acdf3cdc1e|nic anderson|Receptions,group,Nic Anderson,Kentucky,Vanderbilt,Receptions,under,2026-10-24T23:30:00Z,3.5,-128.0,8,no
-cc78a514047b7ed0d2c5a3acdf3cdc1e|nic anderson|Receptions,under_play,Nic Anderson,Kentucky,Vanderbilt,Receptions,under,2026-10-24T23:30:00Z,3.5,-128.0,8,no
-d73ad8085e6fe1f88a0f79d9538083d6|cj sadler|Reception Yards,group,C.J. Sadler,North Carolina,Syracuse,Reception Yards,over,2026-10-24T23:30:00Z,17.5,-114.0,8,no
-df510525b83238b6e856c80c353bb32a|caleb cunningham|Reception Yards,group,Caleb Cunningham,Ole Miss,Texas,Reception Yards,over,2026-10-24T23:30:00Z,18.5,-114.0,8,yes
-df510525b83238b6e856c80c353bb32a|caleb cunningham|Reception Yards,rec_yds_over,Caleb Cunningham,Ole Miss,Texas,Reception Yards,over,2026-10-24T23:30:00Z,18.5,-114.0,8,yes
-df510525b83238b6e856c80c353bb32a|caleb cunningham|Reception Yards,rec_yds_play,Caleb Cunningham,Ole Miss,Texas,Reception Yards,over,2026-10-24T23:30:00Z,18.5,-114.0,8,yes
-47595bd2a188e4dab8a27dce97c5b45d|ricky johnson|Reception Yards,group,Ricky Johnson,Utah,Houston,Reception Yards,over,2026-10-25T02:15:00Z,24.5,-114.0,8,yes
-47595bd2a188e4dab8a27dce97c5b45d|ricky johnson|Reception Yards,rec_yds_over,Ricky Johnson,Utah,Houston,Reception Yards,over,2026-10-25T02:15:00Z,24.5,-114.0,8,yes
-47595bd2a188e4dab8a27dce97c5b45d|ricky johnson|Reception Yards,rec_yds_play,Ricky Johnson,Utah,Houston,Reception Yards,over,2026-10-25T02:15:00Z,24.5,-114.0,8,yes
-47595bd2a188e4dab8a27dce97c5b45d|ricky johnson|Receptions,group,Ricky Johnson,Utah,Houston,Receptions,over,2026-10-25T02:15:00Z,2.5,116.0,8,yes
-47595bd2a188e4dab8a27dce97c5b45d|ricky johnson|Receptions,official,Ricky Johnson,Utah,Houston,Receptions,over,2026-10-25T02:15:00Z,2.5,116.0,8,yes
-0540f5758ac50f3bb60beb36755f7a1e|george pettaway|Rush Touchdowns,group,George Pettaway,James Madison,Troy,Rush Touchdowns,over,2026-10-29T23:30:00Z,0.5,-200.0,9,no
-0540f5758ac50f3bb60beb36755f7a1e|george pettaway|Rush Yards,group,George Pettaway,James Madison,Troy,Rush Yards,under,2026-10-29T23:30:00Z,94.5,-118.0,9,no
-0540f5758ac50f3bb60beb36755f7a1e|george pettaway|Rush Yards,rush_under_play,George Pettaway,James Madison,Troy,Rush Yards,under,2026-10-29T23:30:00Z,94.5,-118.0,9,no
-8916ba5e623a0a1d97dd0e7f50e4a205|ardell banks|Reception Yards,group,Ardell Banks,Kent State,Sacramento State,Reception Yards,under,2026-10-31T02:30:00Z,33.5,-112.0,9,yes
-8916ba5e623a0a1d97dd0e7f50e4a205|ardell banks|Receptions,group,Ardell Banks,Kent State,Sacramento State,Receptions,over,2026-10-31T02:30:00Z,1.5,-179.0,9,yes
-8916ba5e623a0a1d97dd0e7f50e4a205|darealyst clark|Reception Yards,group,Da'Realyst Clark,Kent State,Sacramento State,Reception Yards,under,2026-10-31T02:30:00Z,30.5,-114.0,9,no
-8916ba5e623a0a1d97dd0e7f50e4a205|darealyst clark|Receptions,group,Da'Realyst Clark,Kent State,Sacramento State,Receptions,over,2026-10-31T02:30:00Z,1.5,-185.0,9,no
-07da1e37f1e37363a71d35f2298f01d9|christian abney|Reception Yards,group,Christian Abney,Illinois,Maryland,Reception Yards,over,2026-10-31T16:00:00Z,5.5,-125.0,9,yes
-07da1e37f1e37363a71d35f2298f01d9|christian abney|Reception Yards,rec_yds_over,Christian Abney,Illinois,Maryland,Reception Yards,over,2026-10-31T16:00:00Z,5.5,-125.0,9,yes
-07da1e37f1e37363a71d35f2298f01d9|christian abney|Reception Yards,rec_yds_play,Christian Abney,Illinois,Maryland,Reception Yards,over,2026-10-31T16:00:00Z,5.5,-125.0,9,yes
-07da1e37f1e37363a71d35f2298f01d9|christian abney|Receptions,group,Christian Abney,Illinois,Maryland,Receptions,over,2026-10-31T16:00:00Z,0.5,-235.0,9,yes
-07da1e37f1e37363a71d35f2298f01d9|christian abney|Receptions,official,Christian Abney,Illinois,Maryland,Receptions,over,2026-10-31T16:00:00Z,0.5,-235.0,9,yes
-07da1e37f1e37363a71d35f2298f01d9|michael clayton ii|Pass Attempts,group,Michael Clayton II,Illinois,Maryland,Pass Attempts,under,2026-10-31T16:00:00Z,27.5,-120.0,9,no
-07da1e37f1e37363a71d35f2298f01d9|michael clayton ii|Pass Completions,group,Michael Clayton II,Illinois,Maryland,Pass Completions,under,2026-10-31T16:00:00Z,17.5,-120.0,9,no
-07da1e37f1e37363a71d35f2298f01d9|michael clayton ii|Pass Interceptions,group,Michael Clayton II,Illinois,Maryland,Pass Interceptions,over,2026-10-31T16:00:00Z,0.5,-130.0,9,no
-07da1e37f1e37363a71d35f2298f01d9|michael clayton ii|Pass Touchdowns,group,Michael Clayton II,Illinois,Maryland,Pass Touchdowns,under,2026-10-31T16:00:00Z,1.5,-155.0,9,no
-07da1e37f1e37363a71d35f2298f01d9|michael clayton ii|Pass Yards,group,Michael Clayton II,Illinois,Maryland,Pass Yards,under,2026-10-31T16:00:00Z,189.5,-125.0,9,no
-07da1e37f1e37363a71d35f2298f01d9|michael clayton ii|Rush Attempts,group,Michael Clayton II,Illinois,Maryland,Rush Attempts,under,2026-10-31T16:00:00Z,5.5,-105.0,9,no
-07da1e37f1e37363a71d35f2298f01d9|ty robinson|Reception Yards,group,Ty Robinson,Illinois,Maryland,Reception Yards,over,2026-10-31T16:00:00Z,4.5,-130.0,9,yes
-07da1e37f1e37363a71d35f2298f01d9|ty robinson|Reception Yards,rec_yds_over,Ty Robinson,Illinois,Maryland,Reception Yards,over,2026-10-31T16:00:00Z,4.5,-130.0,9,yes
-07da1e37f1e37363a71d35f2298f01d9|ty robinson|Reception Yards,rec_yds_play,Ty Robinson,Illinois,Maryland,Reception Yards,over,2026-10-31T16:00:00Z,4.5,-130.0,9,yes
-07da1e37f1e37363a71d35f2298f01d9|ty robinson|Receptions,capped,Ty Robinson,Illinois,Maryland,Receptions,over,2026-10-31T16:00:00Z,0.5,-170.0,9,yes
-07da1e37f1e37363a71d35f2298f01d9|ty robinson|Receptions,group,Ty Robinson,Illinois,Maryland,Receptions,over,2026-10-31T16:00:00Z,0.5,-170.0,9,yes
-2d5a76d917c23b2f5036eb774608d1c9|will hammond|Pass Interceptions,group,Will Hammond,Texas Tech,Arizona,Pass Interceptions,over,2026-10-31T16:00:00Z,0.5,-140.0,9,no
-2d5a76d917c23b2f5036eb774608d1c9|will hammond|Pass Touchdowns,group,Will Hammond,Texas Tech,Arizona,Pass Touchdowns,under,2026-10-31T16:00:00Z,1.5,-141.0,9,no
-2d5a76d917c23b2f5036eb774608d1c9|will hammond|Pass Yards,group,Will Hammond,Texas Tech,Arizona,Pass Yards,over,2026-10-31T16:00:00Z,215.5,-110.0,9,no
-2d5a76d917c23b2f5036eb774608d1c9|will hammond|Rush Yards,group,Will Hammond,Texas Tech,Arizona,Rush Yards,under,2026-10-31T16:00:00Z,18.5,-118.0,9,no
-2d5a76d917c23b2f5036eb774608d1c9|will hammond|Rush Yards,rush_under_play,Will Hammond,Texas Tech,Arizona,Rush Yards,under,2026-10-31T16:00:00Z,18.5,-118.0,9,no
-2f219378e527cf1f695b814a0a4ad63c|justus rosssimmons|Reception Yards,group,Justus Ross-Simmons,Syracuse,SMU,Reception Yards,over,2026-10-31T16:00:00Z,14.5,-112.0,9,yes
-2f219378e527cf1f695b814a0a4ad63c|justus rosssimmons|Reception Yards,rec_yds_over,Justus Ross-Simmons,Syracuse,SMU,Reception Yards,over,2026-10-31T16:00:00Z,14.5,-112.0,9,yes
-2f219378e527cf1f695b814a0a4ad63c|justus rosssimmons|Reception Yards,rec_yds_play,Justus Ross-Simmons,Syracuse,SMU,Reception Yards,over,2026-10-31T16:00:00Z,14.5,-112.0,9,yes
-929937ced936976088a9562342ba0b90|addison ostrenga|Reception Yards,group,Addison Ostrenga,Iowa,Wisconsin,Reception Yards,over,2026-10-31T16:00:00Z,9.5,-112.0,9,yes
-929937ced936976088a9562342ba0b90|addison ostrenga|Reception Yards,rec_yds_over,Addison Ostrenga,Iowa,Wisconsin,Reception Yards,over,2026-10-31T16:00:00Z,9.5,-112.0,9,yes
-929937ced936976088a9562342ba0b90|addison ostrenga|Reception Yards,rec_yds_play,Addison Ostrenga,Iowa,Wisconsin,Reception Yards,over,2026-10-31T16:00:00Z,9.5,-112.0,9,yes
-929937ced936976088a9562342ba0b90|addison ostrenga|Receptions,group,Addison Ostrenga,Iowa,Wisconsin,Receptions,over,2026-10-31T16:00:00Z,1.5,100.0,9,yes
-dea96094c29a9f24d7dc07a5d848afd7|ben black|Reception Yards,group,Ben Black,Rutgers,Michigan,Reception Yards,over,2026-10-31T16:30:00Z,19.5,110.0,9,yes
-dea96094c29a9f24d7dc07a5d848afd7|ben black|Reception Yards,rec_yds_over,Ben Black,Rutgers,Michigan,Reception Yards,over,2026-10-31T16:30:00Z,19.5,110.0,9,yes
-dea96094c29a9f24d7dc07a5d848afd7|ben black|Receptions,group,Ben Black,Rutgers,Michigan,Receptions,over,2026-10-31T16:30:00Z,1.5,-114.0,9,yes
-dea96094c29a9f24d7dc07a5d848afd7|vernon allen iii|Reception Yards,group,Vernon Allen III,Rutgers,Michigan,Reception Yards,over,2026-10-31T16:30:00Z,11.5,-110.0,9,yes
-dea96094c29a9f24d7dc07a5d848afd7|vernon allen iii|Reception Yards,rec_yds_over,Vernon Allen III,Rutgers,Michigan,Reception Yards,over,2026-10-31T16:30:00Z,11.5,-110.0,9,yes
-dea96094c29a9f24d7dc07a5d848afd7|vernon allen iii|Reception Yards,rec_yds_play,Vernon Allen III,Rutgers,Michigan,Reception Yards,over,2026-10-31T16:30:00Z,11.5,-110.0,9,yes
-3f36c41ee29e9339f71fada56d832914|johntay cook ii|Reception Yards,group,Johntay Cook II,Ole Miss,Auburn,Reception Yards,over,2026-10-31T16:45:00Z,13.5,-125.0,9,no
-3f36c41ee29e9339f71fada56d832914|johntay cook ii|Reception Yards,rec_yds_over,Johntay Cook II,Ole Miss,Auburn,Reception Yards,over,2026-10-31T16:45:00Z,12.5,-112.0,9,no
-3f36c41ee29e9339f71fada56d832914|johntay cook ii|Reception Yards,rec_yds_play,Johntay Cook II,Ole Miss,Auburn,Reception Yards,over,2026-10-31T16:45:00Z,12.5,-112.0,9,no
-3f36c41ee29e9339f71fada56d832914|johntay cook ii|Receptions,group,Johntay Cook II,Ole Miss,Auburn,Receptions,over,2026-10-31T16:45:00Z,1.5,125.0,9,no
-3f36c41ee29e9339f71fada56d832914|johntay cook ii|Receptions,official,Johntay Cook II,Ole Miss,Auburn,Receptions,over,2026-10-31T16:45:00Z,1.5,125.0,9,no
-183676bbb63b1716e2248ec6c6d205a9|lawayne mccoy|Reception Yards,group,Lawayne McCoy,Louisville,Stanford,Reception Yards,under,2026-10-31T19:15:00Z,67.5,-120.0,9,no
-183676bbb63b1716e2248ec6c6d205a9|lawayne mccoy|Receptions,group,Lawayne McCoy,Louisville,Stanford,Receptions,under,2026-10-31T19:15:00Z,4.5,-130.0,9,no
-183676bbb63b1716e2248ec6c6d205a9|lawayne mccoy|Receptions,under_lean,Lawayne McCoy,Louisville,Stanford,Receptions,under,2026-10-31T19:15:00Z,4.5,-130.0,9,no
-581c12d11a86412432fe89645cbe80b2|vernell brown iii|Receptions,group,Vernell Brown III,Florida,Georgia,Receptions,under,2026-10-31T19:30:00Z,4.5,-141.0,9,no
-7bac3aae16527dd33a224a2f81792033|hayden eligon ii|Reception Yards,group,Hayden Eligon II,Northwestern,Oregon,Reception Yards,over,2026-10-31T19:30:00Z,17.5,-114.0,9,yes
-7bac3aae16527dd33a224a2f81792033|hayden eligon ii|Reception Yards,rec_yds_over,Hayden Eligon II,Northwestern,Oregon,Reception Yards,over,2026-10-31T19:30:00Z,17.5,-114.0,9,yes
-7bac3aae16527dd33a224a2f81792033|hayden eligon ii|Reception Yards,rec_yds_play,Hayden Eligon II,Northwestern,Oregon,Reception Yards,over,2026-10-31T19:30:00Z,16.5,-114.0,9,yes
-7bac3aae16527dd33a224a2f81792033|hayden eligon ii|Receptions,group,Hayden Eligon II,Northwestern,Oregon,Receptions,over,2026-10-31T19:30:00Z,1.5,-116.0,9,yes
-7bac3aae16527dd33a224a2f81792033|hayden eligon ii|Receptions,official,Hayden Eligon II,Northwestern,Oregon,Receptions,over,2026-10-31T19:30:00Z,1.5,-116.0,9,yes
-7bac3aae16527dd33a224a2f81792033|messiah hampton|Reception Yards,group,Messiah Hampton,Oregon,Northwestern,Reception Yards,over,2026-10-31T19:30:00Z,24.5,-114.0,9,no
-7bac3aae16527dd33a224a2f81792033|messiah hampton|Reception Yards,rec_yds_over,Messiah Hampton,Oregon,Northwestern,Reception Yards,over,2026-10-31T19:30:00Z,21.5,-114.0,9,no
-7bac3aae16527dd33a224a2f81792033|messiah hampton|Receptions,capped,Messiah Hampton,Oregon,Northwestern,Receptions,over,2026-10-31T19:30:00Z,2.5,120.0,9,no
-7bac3aae16527dd33a224a2f81792033|messiah hampton|Receptions,group,Messiah Hampton,Oregon,Northwestern,Receptions,over,2026-10-31T19:30:00Z,2.5,120.0,9,no
-7e3a5a0dcece26ded8c9d1a64dc6cee5|isaiah marshall|Pass Attempts,group,Isaiah Marshall,Kansas,TCU,Pass Attempts,under,2026-10-31T19:30:00Z,26.5,-115.0,9,no
-7e3a5a0dcece26ded8c9d1a64dc6cee5|isaiah marshall|Pass Completions,group,Isaiah Marshall,Kansas,TCU,Pass Completions,over,2026-10-31T19:30:00Z,13.5,-150.0,9,no
-7e3a5a0dcece26ded8c9d1a64dc6cee5|isaiah marshall|Pass Touchdowns,group,Isaiah Marshall,Kansas,TCU,Pass Touchdowns,over,2026-10-31T19:30:00Z,0.5,-227.0,9,no
-7e3a5a0dcece26ded8c9d1a64dc6cee5|isaiah marshall|Pass Yards,group,Isaiah Marshall,Kansas,TCU,Pass Yards,under,2026-10-31T19:30:00Z,181.5,-118.0,9,no
-7e3a5a0dcece26ded8c9d1a64dc6cee5|isaiah marshall|Rush Yards,group,Isaiah Marshall,Kansas,TCU,Rush Yards,over,2026-10-31T19:30:00Z,24.5,-114.0,9,no
-7e3a5a0dcece26ded8c9d1a64dc6cee5|nik mcmillan|Reception Yards,group,Nik McMillan,Kansas,TCU,Reception Yards,over,2026-10-31T19:30:00Z,38.5,-112.0,9,yes
-7e3a5a0dcece26ded8c9d1a64dc6cee5|nik mcmillan|Receptions,group,Nik McMillan,Kansas,TCU,Receptions,over,2026-10-31T19:30:00Z,2.5,-132.0,9,yes
-7e3a5a0dcece26ded8c9d1a64dc6cee5|nik mcmillan|Receptions,official,Nik McMillan,Kansas,TCU,Receptions,over,2026-10-31T19:30:00Z,2.5,-132.0,9,yes
-b0f68c9265402a825cbbf7954b726339|jojo phillips|Reception Yards,group,Jojo Phillips,BYU,Arizona State,Reception Yards,over,2026-10-31T19:30:00Z,21.5,-114.0,9,yes
-09f66e3676ec3112e24cd6b9e97feb41|dominick barry|Reception Yards,group,Dominick Barry,Wake Forest,Virginia,Reception Yards,over,2026-10-31T19:45:00Z,20.5,-114.0,9,yes
-09f66e3676ec3112e24cd6b9e97feb41|dominick barry|Reception Yards,rec_yds_over,Dominick Barry,Wake Forest,Virginia,Reception Yards,over,2026-10-31T19:45:00Z,14.5,-114.0,9,yes
-09f66e3676ec3112e24cd6b9e97feb41|dominick barry|Reception Yards,rec_yds_play,Dominick Barry,Wake Forest,Virginia,Reception Yards,over,2026-10-31T19:45:00Z,14.5,-114.0,9,yes
-09f66e3676ec3112e24cd6b9e97feb41|jekail middlebrook|Rush Yards,group,Jekail Middlebrook,Virginia,Wake Forest,Rush Yards,under,2026-10-31T19:45:00Z,68.5,-118.0,9,no
-09f66e3676ec3112e24cd6b9e97feb41|jekail middlebrook|Rush Yards,rush_under_play,Jekail Middlebrook,Virginia,Wake Forest,Rush Yards,under,2026-10-31T19:45:00Z,68.5,-118.0,9,no
-8480c989381049fc30c8d714be95db35|noah bennee|Reception Yards,group,Noah Bennee,Utah,Cincinnati,Reception Yards,over,2026-10-31T19:45:00Z,29.5,110.0,9,no
-8480c989381049fc30c8d714be95db35|noah bennee|Reception Yards,rec_yds_over,Noah Bennee,Utah,Cincinnati,Reception Yards,over,2026-10-31T19:45:00Z,29.5,110.0,9,no
-8480c989381049fc30c8d714be95db35|noah bennee|Reception Yards,rec_yds_play,Noah Bennee,Utah,Cincinnati,Reception Yards,over,2026-10-31T19:45:00Z,29.5,110.0,9,no
-8480c989381049fc30c8d714be95db35|noah bennee|Receptions,group,Noah Bennee,Utah,Cincinnati,Receptions,under,2026-10-31T19:45:00Z,3.5,-154.0,9,no
-630ed6c8993fda8943e528a465e55518|gary givens iii|Reception Yards,group,Gary Givens III,Nevada,UCLA,Reception Yards,under,2026-10-31T20:15:00Z,42.5,-118.0,9,yes
-630ed6c8993fda8943e528a465e55518|gary givens iii|Receptions,group,Gary Givens III,Nevada,UCLA,Receptions,under,2026-10-31T20:15:00Z,3.5,110.0,9,yes
-630ed6c8993fda8943e528a465e55518|gary givens iii|Receptions,under_lean,Gary Givens III,Nevada,UCLA,Receptions,under,2026-10-31T20:15:00Z,3.5,110.0,9,yes
-7fd2d018fdc5930fd62188de968a901c|chase sowell|Reception Yards,group,Chase Sowell,Penn State,Purdue,Reception Yards,under,2026-10-31T20:15:00Z,69.5,-116.0,9,no
-7fd2d018fdc5930fd62188de968a901c|chase sowell|Receptions,group,Chase Sowell,Penn State,Purdue,Receptions,under,2026-10-31T20:15:00Z,5.5,-130.0,9,no
-7fd2d018fdc5930fd62188de968a901c|chase sowell|Receptions,under_lean,Chase Sowell,Penn State,Purdue,Receptions,under,2026-10-31T20:15:00Z,5.5,-130.0,9,no
-7fd2d018fdc5930fd62188de968a901c|chauncey magwood|Receptions,group,Chauncey Magwood,Purdue,Penn State,Receptions,under,2026-10-31T20:15:00Z,3.5,-180.0,9,yes
-7fd2d018fdc5930fd62188de968a901c|james peoples|Rush Yards,group,James Peoples,Penn State,Purdue,Rush Yards,over,2026-10-31T20:15:00Z,31.5,-115.0,9,yes
-bd73558e7eb5bee08962bfb1f5ef6c9a|brandon inniss|Reception Yards,group,Brandon Inniss,Ohio State,USC,Reception Yards,over,2026-10-31T23:30:00Z,15.5,-120.0,9,no
-bd73558e7eb5bee08962bfb1f5ef6c9a|brandon inniss|Reception Yards,rec_yds_over,Brandon Inniss,Ohio State,USC,Reception Yards,over,2026-10-31T23:30:00Z,15.5,-120.0,9,no
-bd73558e7eb5bee08962bfb1f5ef6c9a|brandon inniss|Reception Yards,rec_yds_play,Brandon Inniss,Ohio State,USC,Reception Yards,over,2026-10-31T23:30:00Z,15.5,-120.0,9,no
-bd73558e7eb5bee08962bfb1f5ef6c9a|brandon inniss|Receptions,group,Brandon Inniss,Ohio State,USC,Receptions,over,2026-10-31T23:30:00Z,1.5,-120.0,9,no
-bd73558e7eb5bee08962bfb1f5ef6c9a|brandon inniss|Receptions,official,Brandon Inniss,Ohio State,USC,Receptions,over,2026-10-31T23:30:00Z,1.5,-105.0,9,no
-bd73558e7eb5bee08962bfb1f5ef6c9a|nate roberts|Reception Yards,group,Nate Roberts,Ohio State,USC,Reception Yards,over,2026-10-31T23:30:00Z,13.5,-120.0,9,yes
-bd73558e7eb5bee08962bfb1f5ef6c9a|nate roberts|Reception Yards,rec_yds_over,Nate Roberts,Ohio State,USC,Reception Yards,over,2026-10-31T23:30:00Z,13.5,-120.0,9,yes
-bd73558e7eb5bee08962bfb1f5ef6c9a|nate roberts|Reception Yards,rec_yds_play,Nate Roberts,Ohio State,USC,Reception Yards,over,2026-10-31T23:30:00Z,13.5,-120.0,9,yes
-bd73558e7eb5bee08962bfb1f5ef6c9a|nate roberts|Receptions,group,Nate Roberts,Ohio State,USC,Receptions,over,2026-10-31T23:30:00Z,1.5,-115.0,9,yes
-bd73558e7eb5bee08962bfb1f5ef6c9a|tanook hines|Reception Yards,group,Tanook Hines,USC,Ohio State,Reception Yards,over,2026-10-31T23:30:00Z,37.5,-115.0,9,yes
-bd73558e7eb5bee08962bfb1f5ef6c9a|tanook hines|Receptions,group,Tanook Hines,USC,Ohio State,Receptions,over,2026-10-31T23:30:00Z,3.5,120.0,9,yes
-e2ffa742b36678caf388ca70fdd4878c|sam west|Reception Yards,group,Sam West,Mississippi State,Texas,Reception Yards,over,2026-10-31T23:30:00Z,6.5,-125.0,9,yes
-e2ffa742b36678caf388ca70fdd4878c|sam west|Reception Yards,rec_yds_over,Sam West,Mississippi State,Texas,Reception Yards,over,2026-10-31T23:30:00Z,6.5,-125.0,9,yes
-e2ffa742b36678caf388ca70fdd4878c|sam west|Reception Yards,rec_yds_play,Sam West,Mississippi State,Texas,Reception Yards,over,2026-10-31T23:30:00Z,6.5,-125.0,9,yes
-e2ffa742b36678caf388ca70fdd4878c|sam west|Receptions,capped,Sam West,Mississippi State,Texas,Receptions,over,2026-10-31T23:30:00Z,1.5,155.0,9,yes
-e2ffa742b36678caf388ca70fdd4878c|sam west|Receptions,group,Sam West,Mississippi State,Texas,Receptions,over,2026-10-31T23:30:00Z,1.5,155.0,9,yes
-c6533cfcdfb0860d723a5fd9b9381098|chris marshall|Reception Yards,group,Chris Marshall,Arkansas,Missouri,Reception Yards,under,2026-10-31T23:45:00Z,74.5,-114.0,9,no
-c6533cfcdfb0860d723a5fd9b9381098|chris marshall|Receptions,group,Chris Marshall,Arkansas,Missouri,Receptions,under,2026-10-31T23:45:00Z,6.5,-152.0,9,no
-c6533cfcdfb0860d723a5fd9b9381098|chris marshall|Receptions,under_play,Chris Marshall,Arkansas,Missouri,Receptions,under,2026-10-31T23:45:00Z,6.5,-152.0,9,no
-877d5834acad37b6142a835438c23001|baron naone|Reception Yards,group,Baron Naone,Washington,Nebraska,Reception Yards,over,2026-11-01T00:00:00Z,20.5,-114.0,9,yes
-877d5834acad37b6142a835438c23001|baron naone|Receptions,group,Baron Naone,Washington,Nebraska,Receptions,under,2026-11-01T00:00:00Z,2.5,-125.0,9,yes
+key,tag,player,team,opponent,market,side,start_time,line,price,pff_week,played,team_box_players
+57ad14afc7db1843fd56f5971dadb058|tk keyes|Reception Yards,group,TK Keyes,Troy,Southern Miss,Reception Yards,over,2026-10-07T00:00:00Z,49.5,-114.0,6,yes,10
+9aa0a267b153a6cc0d6c3e5746e78213|jojo stone|Receptions,group,JoJo Stone,Florida International,New Mexico State,Receptions,over,2026-10-07T23:30:00Z,3.5,136.0,6,yes,13
+9aa0a267b153a6cc0d6c3e5746e78213|tyson carter|Reception Yards,group,Tyson Carter,Florida International,New Mexico State,Reception Yards,under,2026-10-07T23:30:00Z,34.5,-114.0,6,yes,13
+9aa0a267b153a6cc0d6c3e5746e78213|tyson carter|Receptions,group,Tyson Carter,Florida International,New Mexico State,Receptions,over,2026-10-07T23:30:00Z,1.5,-150.0,6,yes,13
+561884d0d63e91b022e96bc6c415accd|rodney tisdale jr|Pass Yards,group,Rodney Tisdale Jr.,Western Kentucky,Missouri State,Pass Yards,under,2026-10-08T23:00:00Z,278.5,-115.0,6,no,12
+52f2d012fe3e686087077b0d7083159a|anthony eager|Reception Yards,group,Anthony Eager,South Alabama,Arkansas State,Reception Yards,over,2026-10-08T23:30:00Z,49.5,-119.0,6,yes,9
+52f2d012fe3e686087077b0d7083159a|anthony eager|Reception Yards,rec_yds_over,Anthony Eager,South Alabama,Arkansas State,Reception Yards,over,2026-10-08T23:30:00Z,45.5,-114.0,6,yes,9
+52f2d012fe3e686087077b0d7083159a|anthony eager|Receptions,group,Anthony Eager,South Alabama,Arkansas State,Receptions,under,2026-10-08T23:30:00Z,3.5,-122.0,6,yes,9
+52f2d012fe3e686087077b0d7083159a|everett hunter|Reception Yards,group,Everett Hunter,South Alabama,Arkansas State,Reception Yards,over,2026-10-08T23:30:00Z,6.5,-103.0,6,yes,9
+52f2d012fe3e686087077b0d7083159a|everett hunter|Reception Yards,rec_yds_over,Everett Hunter,South Alabama,Arkansas State,Reception Yards,over,2026-10-08T23:30:00Z,6.5,-103.0,6,yes,9
+52f2d012fe3e686087077b0d7083159a|everett hunter|Reception Yards,rec_yds_play,Everett Hunter,South Alabama,Arkansas State,Reception Yards,over,2026-10-08T23:30:00Z,6.5,-103.0,6,yes,9
+52f2d012fe3e686087077b0d7083159a|everett hunter|Receptions,group,Everett Hunter,South Alabama,Arkansas State,Receptions,over,2026-10-08T23:30:00Z,0.5,-235.0,6,yes,9
+52f2d012fe3e686087077b0d7083159a|everett hunter|Receptions,official,Everett Hunter,South Alabama,Arkansas State,Receptions,over,2026-10-08T23:30:00Z,0.5,-235.0,6,yes,9
+7556739cc30a38511b7f631581a416e4|keyjuan brown|Rush Yards,group,Keyjuan Brown,Louisville,Florida State,Rush Yards,under,2026-10-09T23:00:00Z,61.5,-114.0,6,no,10
+7556739cc30a38511b7f631581a416e4|keyjuan brown|Rush Yards,rush_under_play,Keyjuan Brown,Louisville,Florida State,Rush Yards,under,2026-10-09T23:00:00Z,61.5,-114.0,6,no,10
+55d9636153ca5741d460ef2f78b663d9|cody jackson|Reception Yards,group,Cody Jackson,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,21.5,-114.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|cody jackson|Reception Yards,rec_yds_over,Cody Jackson,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,21.5,-114.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|cody jackson|Reception Yards,rec_yds_play,Cody Jackson,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,21.5,-114.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|cody jackson|Receptions,capped,Cody Jackson,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,2.5,124.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|cody jackson|Receptions,group,Cody Jackson,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,2.5,124.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|cody jackson|Receptions,official,Cody Jackson,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,2.5,100.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|dominic overby|Reception Yards,group,Dominic Overby,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,24.5,-116.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|dominic overby|Reception Yards,rec_yds_over,Dominic Overby,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,24.5,-116.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|dominic overby|Reception Yards,rec_yds_play,Dominic Overby,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,24.5,-116.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|dominic overby|Receptions,group,Dominic Overby,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,1.5,-192.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|dominic overby|Receptions,official,Dominic Overby,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,1.5,-192.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|vince benetti|Reception Yards,group,Vince Benetti,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,11.5,-106.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|vince benetti|Reception Yards,rec_yds_over,Vince Benetti,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,11.5,-106.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|vince benetti|Reception Yards,rec_yds_play,Vince Benetti,Iowa State,BYU,Reception Yards,over,2026-10-10T02:15:00Z,11.5,-106.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|vince benetti|Receptions,group,Vince Benetti,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,1.5,-105.0,6,yes,9
+55d9636153ca5741d460ef2f78b663d9|vince benetti|Receptions,official,Vince Benetti,Iowa State,BYU,Receptions,over,2026-10-10T02:15:00Z,1.5,-105.0,6,yes,9
+416ce0307b7b9d97f5365a29c1729339|antonio meeks|Reception Yards,group,Antonio Meeks,Wake Forest,NC State,Reception Yards,over,2026-10-10T16:00:00Z,25.5,-112.0,6,yes,10
+416ce0307b7b9d97f5365a29c1729339|antonio meeks|Receptions,group,Antonio Meeks,Wake Forest,NC State,Receptions,over,2026-10-10T16:00:00Z,1.5,-169.0,6,yes,10
+416ce0307b7b9d97f5365a29c1729339|joshisa trader|Reception Yards,group,Joshisa Trader,NC State,Wake Forest,Reception Yards,under,2026-10-10T16:00:00Z,40.5,-118.0,6,no,13
+5d7901b0ad44ffe1b92e18fc8d511a7e|caleb smith|Reception Yards,group,Caleb Smith,Arizona,West Virginia,Reception Yards,under,2026-10-10T16:00:00Z,39.5,-114.0,6,yes,12
+5d7901b0ad44ffe1b92e18fc8d511a7e|jaden bray|Reception Yards,group,Jaden Bray,West Virginia,Arizona,Reception Yards,over,2026-10-10T16:00:00Z,24.5,-118.0,6,yes,9
+5d7901b0ad44ffe1b92e18fc8d511a7e|tyler powell|Reception Yards,group,Tyler Powell,Arizona,West Virginia,Reception Yards,under,2026-10-10T16:00:00Z,29.5,-114.0,6,yes,12
+690e2edaba34c383d2ebfa8f8394f973|carson kolb|Reception Yards,group,Carson Kolb,Oklahoma State,UCF,Reception Yards,over,2026-10-10T16:00:00Z,14.5,-120.0,6,yes,10
+690e2edaba34c383d2ebfa8f8394f973|carson kolb|Reception Yards,rec_yds_over,Carson Kolb,Oklahoma State,UCF,Reception Yards,over,2026-10-10T16:00:00Z,13.5,-112.0,6,yes,10
+9e243e91f8f94e6431da5cc5c3cc8fda|donovan olugbode|Receptions,group,Donovan Olugbode,Missouri,Texas A&M,Receptions,over,2026-10-10T16:00:00Z,4.5,-145.0,6,yes,9
+9383cbbbb905d9ee50a3341f6945eae7|brady hunt|Reception Yards,group,Brady Hunt,South Carolina,Florida,Reception Yards,under,2026-10-10T16:45:00Z,24.5,-140.0,6,yes,11
+9383cbbbb905d9ee50a3341f6945eae7|vernell brown iii|Reception Yards,group,Vernell Brown III,Florida,South Carolina,Reception Yards,under,2026-10-10T16:45:00Z,51.5,-114.0,6,no,12
+9383cbbbb905d9ee50a3341f6945eae7|vernell brown iii|Receptions,group,Vernell Brown III,Florida,South Carolina,Receptions,under,2026-10-10T16:45:00Z,4.5,-160.0,6,no,12
+373204ebaf557738961c85f37a72fe10|derrick salley jr|Reception Touchdowns,group,Derrick Salley Jr.,Kansas State,Houston,Reception Touchdowns,over,2026-10-10T19:30:00Z,0.5,335.0,6,yes,7
+496f20b5a45e727fdc2d07915ab0f865|cooper flanagan|Reception Yards,group,Cooper Flanagan,Notre Dame,Stanford,Reception Yards,over,2026-10-10T19:30:00Z,19.5,-114.0,6,yes,18
+496f20b5a45e727fdc2d07915ab0f865|cooper flanagan|Reception Yards,rec_yds_over,Cooper Flanagan,Notre Dame,Stanford,Reception Yards,over,2026-10-10T19:30:00Z,18.5,-111.0,6,yes,18
+82b83ec87fc2be5faa2e9f26ac50edef|emaree winston|Reception Yards,group,Emaree Winston,Texas,Oklahoma,Reception Yards,over,2026-10-10T19:30:00Z,15.5,-120.0,6,yes,9
+82b83ec87fc2be5faa2e9f26ac50edef|emaree winston|Reception Yards,rec_yds_over,Emaree Winston,Texas,Oklahoma,Reception Yards,over,2026-10-10T19:30:00Z,11.5,-120.0,6,yes,9
+82b83ec87fc2be5faa2e9f26ac50edef|emaree winston|Receptions,group,Emaree Winston,Texas,Oklahoma,Receptions,over,2026-10-10T19:30:00Z,1.5,-110.0,6,yes,9
+82b83ec87fc2be5faa2e9f26ac50edef|mackenzie alleyne|Reception Yards,group,Mackenzie Alleyne,Oklahoma,Texas,Reception Yards,over,2026-10-10T19:30:00Z,12.5,-114.0,6,yes,10
+9f633922d2cc5fa338aa22d1fcb83099|jaronkeawe sagapolutele|Pass Touchdowns,group,Jaron-Keawe Sagapolutele,California,Virginia Tech,Pass Touchdowns,under,2026-10-10T19:30:00Z,1.5,-125.0,6,no,11
+9f633922d2cc5fa338aa22d1fcb83099|jaronkeawe sagapolutele|Pass Yards,group,Jaron-Keawe Sagapolutele,California,Virginia Tech,Pass Yards,under,2026-10-10T19:30:00Z,262.5,-114.0,6,no,11
+031164b8d704599d8023a3e104f9a6c0|brandon inniss|Reception Yards,group,Brandon Inniss,Ohio State,Maryland,Reception Yards,over,2026-10-10T20:15:00Z,18.5,-114.0,6,no,10
+031164b8d704599d8023a3e104f9a6c0|brandon inniss|Reception Yards,rec_yds_over,Brandon Inniss,Ohio State,Maryland,Reception Yards,over,2026-10-10T20:15:00Z,18.5,-114.0,6,no,10
+031164b8d704599d8023a3e104f9a6c0|brandon inniss|Receptions,group,Brandon Inniss,Ohio State,Maryland,Receptions,over,2026-10-10T20:15:00Z,1.5,-116.0,6,no,10
+031164b8d704599d8023a3e104f9a6c0|brandon inniss|Receptions,official,Brandon Inniss,Ohio State,Maryland,Receptions,over,2026-10-10T20:15:00Z,1.5,-116.0,6,no,10
+031164b8d704599d8023a3e104f9a6c0|devin mccuin|Reception Yards,group,Devin McCuin,Ohio State,Maryland,Reception Yards,under,2026-10-10T20:15:00Z,42.5,-120.0,6,no,10
+031164b8d704599d8023a3e104f9a6c0|devin mccuin|Receptions,group,Devin McCuin,Ohio State,Maryland,Receptions,under,2026-10-10T20:15:00Z,3.5,-112.0,6,no,10
+0dd06b09349f56ce8dfc2d61d5fcd042|radarious jackson|Reception Yards,group,Radarious Jackson,Tennessee,Arkansas,Reception Yards,over,2026-10-10T20:15:00Z,19.5,-114.0,6,yes,8
+0dd06b09349f56ce8dfc2d61d5fcd042|radarious jackson|Receptions,group,Radarious Jackson,Tennessee,Arkansas,Receptions,under,2026-10-10T20:15:00Z,2.5,-217.0,6,yes,8
+4462f1fa168ab2a5a25fe2807ebec8ac|mark bowman|Reception Yards,group,Mark Bowman,USC,Penn State,Reception Yards,over,2026-10-10T23:30:00Z,39.5,115.0,6,no,10
+4462f1fa168ab2a5a25fe2807ebec8ac|mark bowman|Reception Yards,rec_yds_over,Mark Bowman,USC,Penn State,Reception Yards,over,2026-10-10T23:30:00Z,27.5,-108.0,6,no,10
+4462f1fa168ab2a5a25fe2807ebec8ac|mark bowman|Receptions,group,Mark Bowman,USC,Penn State,Receptions,over,2026-10-10T23:30:00Z,3.5,115.0,6,no,10
+59f8c98dee8ce77cc17c5b4958e4f325|nate frazier|Rush Yards,group,Nate Frazier,Georgia,Alabama,Rush Yards,under,2026-10-10T23:30:00Z,49.5,-114.0,6,no,13
+59f8c98dee8ce77cc17c5b4958e4f325|nate frazier|Rush Yards,rush_under_play,Nate Frazier,Georgia,Alabama,Rush Yards,under,2026-10-10T23:30:00Z,49.5,-114.0,6,no,13
+f7b49f43b10f581d991954dae86b9aa5|amari odom|Pass Touchdowns,group,Amari Odom,Syracuse,Virginia,Pass Touchdowns,under,2026-10-10T23:30:00Z,1.5,-244.0,6,no,13
+f7b49f43b10f581d991954dae86b9aa5|amari odom|Pass Yards,group,Amari Odom,Syracuse,Virginia,Pass Yards,under,2026-10-10T23:30:00Z,221.5,-118.0,6,no,13
+f7b49f43b10f581d991954dae86b9aa5|jacquon gibson|Reception Yards,group,Jacquon Gibson,Virginia,Syracuse,Reception Yards,over,2026-10-10T23:30:00Z,16.5,-110.0,6,yes,12
+f7b49f43b10f581d991954dae86b9aa5|jacquon gibson|Receptions,group,Jacquon Gibson,Virginia,Syracuse,Receptions,over,2026-10-10T23:30:00Z,1.5,-125.0,6,yes,12
+616eba68e65fe65023aa2335e81096c8|keaton kubecka|Reception Yards,group,Keaton Kubecka,Kansas,Utah,Reception Yards,over,2026-10-11T02:15:00Z,21.5,-110.0,6,yes,8
+616eba68e65fe65023aa2335e81096c8|keaton kubecka|Reception Yards,rec_yds_over,Keaton Kubecka,Kansas,Utah,Reception Yards,over,2026-10-11T02:15:00Z,16.5,-114.0,6,yes,8
+66f521c79ea8a970ed062bfed392abfb|jojo stone|Reception Yards,group,JoJo Stone,Florida International,Jacksonville State,Reception Yards,over,2026-10-14T00:00:00Z,24.5,-103.0,7,yes,11
+66f521c79ea8a970ed062bfed392abfb|jojo stone|Reception Yards,rec_yds_over,JoJo Stone,Florida International,Jacksonville State,Reception Yards,over,2026-10-14T00:00:00Z,24.5,-103.0,7,yes,11
+66f521c79ea8a970ed062bfed392abfb|jojo stone|Reception Yards,rec_yds_play,JoJo Stone,Florida International,Jacksonville State,Reception Yards,over,2026-10-14T00:00:00Z,24.5,-103.0,7,yes,11
+66f521c79ea8a970ed062bfed392abfb|jojo stone|Receptions,group,JoJo Stone,Florida International,Jacksonville State,Receptions,over,2026-10-14T00:00:00Z,2.5,-120.0,7,yes,11
+66f521c79ea8a970ed062bfed392abfb|jojo stone|Receptions,official,JoJo Stone,Florida International,Jacksonville State,Receptions,over,2026-10-14T00:00:00Z,2.5,-120.0,7,yes,11
+7ebcab7b97620342a9205b32139222d1|brayden munroe|Reception Yards,group,Brayden Munroe,Kennesaw State,Missouri State,Reception Yards,under,2026-10-14T23:30:00Z,58.5,-114.0,7,yes,11
+7ebcab7b97620342a9205b32139222d1|brayden munroe|Receptions,group,Brayden Munroe,Kennesaw State,Missouri State,Receptions,under,2026-10-14T23:30:00Z,4.5,-180.0,7,yes,11
+7ebcab7b97620342a9205b32139222d1|skyler locklear|Pass Touchdowns,group,Skyler Locklear,Missouri State,Kennesaw State,Pass Touchdowns,under,2026-10-14T23:30:00Z,1.5,-220.0,7,no,10
+7ebcab7b97620342a9205b32139222d1|skyler locklear|Pass Yards,group,Skyler Locklear,Missouri State,Kennesaw State,Pass Yards,under,2026-10-14T23:30:00Z,204.5,-114.0,7,no,10
+2bbbf3488a5d57c9c13ae578bad17a9d|lofton howard|Reception Yards,group,Lofton Howard,Western Kentucky,Sam Houston,Reception Yards,under,2026-10-15T00:00:00Z,24.5,-155.0,7,yes,13
+2bbbf3488a5d57c9c13ae578bad17a9d|lofton howard|Receptions,group,Lofton Howard,Western Kentucky,Sam Houston,Receptions,under,2026-10-15T00:00:00Z,2.5,-180.0,7,yes,13
+2bbbf3488a5d57c9c13ae578bad17a9d|lofton howard|Receptions,under_lean,Lofton Howard,Western Kentucky,Sam Houston,Receptions,under,2026-10-15T00:00:00Z,2.5,-180.0,7,yes,13
+f00195614a0c305207222ba2044a9c24|kylen evans|Reception Yards,group,Kylen Evans,Texas State,Colorado State,Reception Yards,over,2026-10-16T00:00:00Z,25.5,-114.0,7,yes,12
+f00195614a0c305207222ba2044a9c24|kylen evans|Reception Yards,rec_yds_over,Kylen Evans,Texas State,Colorado State,Reception Yards,over,2026-10-16T00:00:00Z,21.5,-118.0,7,yes,12
+55f376873e3cd0c2bb7cc9aa26e47235|kadin semonza|Pass Attempts,group,Kadin Semonza,Tulane,Memphis,Pass Attempts,over,2026-10-16T23:30:00Z,23.5,100.0,7,no,13
+55f376873e3cd0c2bb7cc9aa26e47235|kadin semonza|Pass Touchdowns,group,Kadin Semonza,Tulane,Memphis,Pass Touchdowns,under,2026-10-16T23:30:00Z,1.5,-200.0,7,no,13
+55f376873e3cd0c2bb7cc9aa26e47235|kadin semonza|Pass Yards,group,Kadin Semonza,Tulane,Memphis,Pass Yards,under,2026-10-16T23:30:00Z,172.5,-115.0,7,no,13
+55f376873e3cd0c2bb7cc9aa26e47235|tychaun chapman|Reception Yards,group,Tychaun Chapman,Memphis,Tulane,Reception Yards,under,2026-10-16T23:30:00Z,34.5,-105.0,7,yes,9
+55f376873e3cd0c2bb7cc9aa26e47235|tychaun chapman|Receptions,group,Tychaun Chapman,Memphis,Tulane,Receptions,under,2026-10-16T23:30:00Z,2.5,-220.0,7,yes,9
+0372910f02d1b4d9cbfef5b35bbfe439|holden geriner|Pass Touchdowns,group,Holden Geriner,Pittsburgh,Boston College,Pass Touchdowns,under,2026-10-17T16:00:00Z,1.5,-180.0,7,no,9
+0372910f02d1b4d9cbfef5b35bbfe439|holden geriner|Pass Yards,group,Holden Geriner,Pittsburgh,Boston College,Pass Yards,under,2026-10-17T16:00:00Z,205.5,-114.0,7,no,9
+0372910f02d1b4d9cbfef5b35bbfe439|jaedn skeete|Reception Yards,group,Jaedn Skeete,Boston College,Pittsburgh,Reception Yards,under,2026-10-17T16:00:00Z,33.5,-115.0,7,no,11
+04c740fce71d3f3b8a4bdc4ea69f1281|jayce brown|Reception Yards,group,Jayce Brown,LSU,Mississippi State,Reception Yards,over,2026-10-17T16:00:00Z,13.5,-114.0,7,no,13
+04c740fce71d3f3b8a4bdc4ea69f1281|jayce brown|Reception Yards,rec_yds_over,Jayce Brown,LSU,Mississippi State,Reception Yards,over,2026-10-17T16:00:00Z,13.5,-114.0,7,no,13
+04c740fce71d3f3b8a4bdc4ea69f1281|jayce brown|Reception Yards,rec_yds_play,Jayce Brown,LSU,Mississippi State,Reception Yards,over,2026-10-17T16:00:00Z,13.5,-114.0,7,no,13
+04c740fce71d3f3b8a4bdc4ea69f1281|jayce brown|Receptions,group,Jayce Brown,LSU,Mississippi State,Receptions,over,2026-10-17T16:00:00Z,1.5,126.0,7,no,13
+04c740fce71d3f3b8a4bdc4ea69f1281|jayce brown|Receptions,official,Jayce Brown,LSU,Mississippi State,Receptions,over,2026-10-17T16:00:00Z,1.5,126.0,7,no,13
+04c740fce71d3f3b8a4bdc4ea69f1281|sam west|Reception Yards,group,Sam West,Mississippi State,LSU,Reception Yards,over,2026-10-17T16:00:00Z,13.5,-108.0,7,yes,8
+04c740fce71d3f3b8a4bdc4ea69f1281|sam west|Reception Yards,rec_yds_over,Sam West,Mississippi State,LSU,Reception Yards,over,2026-10-17T16:00:00Z,11.5,-114.0,7,yes,8
+0763e3ed7ed8d646756e5849bac67b8d|kameron courtney|Reception Yards,group,Kameron Courtney,Virginia,SMU,Reception Yards,over,2026-10-17T16:00:00Z,30.5,-116.0,7,no,8
+0763e3ed7ed8d646756e5849bac67b8d|kameron courtney|Receptions,group,Kameron Courtney,Virginia,SMU,Receptions,over,2026-10-17T16:00:00Z,3.5,120.0,7,no,8
+490b66058b6c826a08589c471698ce50|aaron philo|Pass Attempts,group,Aaron Philo,Florida,Texas,Pass Attempts,under,2026-10-17T16:00:00Z,29.5,-125.0,7,no,11
+490b66058b6c826a08589c471698ce50|aaron philo|Pass Completions,group,Aaron Philo,Florida,Texas,Pass Completions,under,2026-10-17T16:00:00Z,17.5,-115.0,7,no,11
+490b66058b6c826a08589c471698ce50|aaron philo|Pass Interceptions,group,Aaron Philo,Florida,Texas,Pass Interceptions,over,2026-10-17T16:00:00Z,0.5,-150.0,7,no,11
+490b66058b6c826a08589c471698ce50|aaron philo|Pass Touchdowns,group,Aaron Philo,Florida,Texas,Pass Touchdowns,under,2026-10-17T16:00:00Z,1.5,-238.0,7,no,11
+490b66058b6c826a08589c471698ce50|aaron philo|Pass Yards,group,Aaron Philo,Florida,Texas,Pass Yards,under,2026-10-17T16:00:00Z,197.5,-118.0,7,no,11
+490b66058b6c826a08589c471698ce50|amir jackson|Reception Yards,group,Amir Jackson,Florida,Texas,Reception Yards,over,2026-10-17T16:00:00Z,7.5,-114.0,7,yes,11
+490b66058b6c826a08589c471698ce50|amir jackson|Reception Yards,rec_yds_over,Amir Jackson,Florida,Texas,Reception Yards,over,2026-10-17T16:00:00Z,7.5,-114.0,7,yes,11
+490b66058b6c826a08589c471698ce50|amir jackson|Reception Yards,rec_yds_play,Amir Jackson,Florida,Texas,Reception Yards,over,2026-10-17T16:00:00Z,7.5,-114.0,7,yes,11
+685a8722f297502fa85e4cd8c7e54b1c|jakobi jackson|Rush Attempts,group,Ja'Kobi Jackson,Ohio State,Indiana,Rush Attempts,over,2026-10-17T16:00:00Z,8.5,-105.0,7,no,13
+685a8722f297502fa85e4cd8c7e54b1c|jakobi jackson|Rush Yards,group,Ja'Kobi Jackson,Ohio State,Indiana,Rush Yards,over,2026-10-17T16:00:00Z,30.5,-112.0,7,no,13
+9e8578b415e664eea71185131401e537|garrett oakley|Reception Yards,group,Garrett Oakley,Kansas State,Kansas,Reception Yards,under,2026-10-17T16:00:00Z,39.5,-114.0,7,no,9
+9e8578b415e664eea71185131401e537|nahzae cox|Reception Yards,group,Nahzae Cox,Kansas,Kansas State,Reception Yards,over,2026-10-17T16:00:00Z,25.5,-114.0,7,yes,9
+9e8578b415e664eea71185131401e537|nahzae cox|Reception Yards,rec_yds_over,Nahzae Cox,Kansas,Kansas State,Reception Yards,over,2026-10-17T16:00:00Z,25.5,-114.0,7,yes,9
+5d09c85c1d67e8f9db8db560cb038027|brett norfleet|Reception Yards,group,Brett Norfleet,Missouri,Ole Miss,Reception Yards,over,2026-10-17T19:30:00Z,12.5,-115.0,7,no,9
+33f259d8951535f271a8df5c790a832e|micahi danzy|Reception Yards,group,Micahi Danzy,Florida State,Miami,Reception Yards,under,2026-10-17T23:00:00Z,48.5,-125.0,7,yes,10
+33f259d8951535f271a8df5c790a832e|micahi danzy|Receptions,group,Micahi Danzy,Florida State,Miami,Receptions,over,2026-10-17T23:00:00Z,3.5,-115.0,7,yes,10
+c92acc311e3c969f78faf7c2ec5ef5b1|jayvontay conner|Reception Yards,group,Jayvontay Conner,Vanderbilt,Arkansas,Reception Yards,over,2026-10-17T23:00:00Z,20.5,-114.0,7,yes,10
+c92acc311e3c969f78faf7c2ec5ef5b1|jayvontay conner|Reception Yards,rec_yds_over,Jayvontay Conner,Vanderbilt,Arkansas,Reception Yards,over,2026-10-17T23:00:00Z,20.5,-114.0,7,yes,10
+c92acc311e3c969f78faf7c2ec5ef5b1|jayvontay conner|Reception Yards,rec_yds_play,Jayvontay Conner,Vanderbilt,Arkansas,Reception Yards,over,2026-10-17T23:00:00Z,20.5,-114.0,7,yes,10
+c92acc311e3c969f78faf7c2ec5ef5b1|jayvontay conner|Receptions,capped,Jayvontay Conner,Vanderbilt,Arkansas,Receptions,over,2026-10-17T23:00:00Z,1.5,-119.0,7,yes,10
+c92acc311e3c969f78faf7c2ec5ef5b1|jayvontay conner|Receptions,group,Jayvontay Conner,Vanderbilt,Arkansas,Receptions,over,2026-10-17T23:00:00Z,2.5,130.0,7,yes,10
+0728226f9c1e3aace0f64536109f4d05|henry boyer|Reception Yards,group,Henry Boyer,Kentucky,Oklahoma,Reception Yards,over,2026-10-17T23:30:00Z,7.5,-116.0,7,yes,9
+0728226f9c1e3aace0f64536109f4d05|henry boyer|Reception Yards,rec_yds_over,Henry Boyer,Kentucky,Oklahoma,Reception Yards,over,2026-10-17T23:30:00Z,7.5,-116.0,7,yes,9
+0728226f9c1e3aace0f64536109f4d05|henry boyer|Reception Yards,rec_yds_play,Henry Boyer,Kentucky,Oklahoma,Reception Yards,over,2026-10-17T23:30:00Z,7.5,-116.0,7,yes,9
+bd2d52fadefed8a6174e73c84cca9ce3|cooper flanagan|Reception Yards,group,Cooper Flanagan,Notre Dame,BYU,Reception Yards,over,2026-10-17T23:30:00Z,13.5,-108.0,7,no,9
+bd2d52fadefed8a6174e73c84cca9ce3|cooper flanagan|Reception Yards,rec_yds_over,Cooper Flanagan,Notre Dame,BYU,Reception Yards,over,2026-10-17T23:30:00Z,13.5,-108.0,7,no,9
+bd2d52fadefed8a6174e73c84cca9ce3|cooper flanagan|Reception Yards,rec_yds_play,Cooper Flanagan,Notre Dame,BYU,Reception Yards,over,2026-10-17T23:30:00Z,13.5,-108.0,7,no,9
+b5e637cf502d6d5f408af440ea2d591d|carlos hernandez|Reception Yards,group,Carlos Hernandez,Wake Forest,California,Reception Yards,under,2026-10-18T02:30:00Z,99.5,-115.0,7,yes,14
+b5e637cf502d6d5f408af440ea2d591d|carlos hernandez|Receptions,group,Carlos Hernandez,Wake Forest,California,Receptions,under,2026-10-18T02:30:00Z,7.5,102.0,7,yes,14
+b5e637cf502d6d5f408af440ea2d591d|carlos hernandez|Receptions,under_lean,Carlos Hernandez,Wake Forest,California,Receptions,under,2026-10-18T02:30:00Z,7.5,102.0,7,yes,14
+b5e637cf502d6d5f408af440ea2d591d|ian strong|Reception Yards,group,Ian Strong,California,Wake Forest,Reception Yards,under,2026-10-18T02:30:00Z,67.5,-118.0,7,no,10
+5d147fefd2182aa2f5573ac03700a775|evan stewart|Receptions,group,Evan Stewart,Oregon,Nebraska,Receptions,over,2026-10-18T03:00:00Z,4.5,-130.0,7,no,10
+c85512046e05e5ed845e60dd5d6d5e1e|greg gaines iii|Receptions,group,Greg Gaines III,Florida International,Middle Tennessee,Receptions,under,2026-10-20T23:00:00Z,2.5,-159.0,8,yes,11
+c85512046e05e5ed845e60dd5d6d5e1e|greg gaines iii|Receptions,under_lean,Greg Gaines III,Florida International,Middle Tennessee,Receptions,under,2026-10-20T23:00:00Z,2.5,-159.0,8,yes,11
+c85512046e05e5ed845e60dd5d6d5e1e|jackson verdugo|Reception Yards,group,Jackson Verdugo,Florida International,Middle Tennessee,Reception Yards,over,2026-10-20T23:00:00Z,9.5,-106.0,8,yes,11
+c85512046e05e5ed845e60dd5d6d5e1e|jackson verdugo|Reception Yards,rec_yds_over,Jackson Verdugo,Florida International,Middle Tennessee,Reception Yards,over,2026-10-20T23:00:00Z,9.5,-106.0,8,yes,11
+c85512046e05e5ed845e60dd5d6d5e1e|koraun perdue|Reception Yards,group,Koraun Perdue,Middle Tennessee,Florida International,Reception Yards,over,2026-10-20T23:00:00Z,17.5,-114.0,8,yes,8
+c85512046e05e5ed845e60dd5d6d5e1e|koraun perdue|Reception Yards,rec_yds_over,Koraun Perdue,Middle Tennessee,Florida International,Reception Yards,over,2026-10-20T23:00:00Z,13.5,-117.0,8,yes,8
+a493efd6ef737f676a45aacc0eaf7be8|jayden moore|Reception Yards,group,Jayden Moore,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,14.5,-110.0,8,no,10
+a493efd6ef737f676a45aacc0eaf7be8|jayden moore|Reception Yards,rec_yds_over,Jayden Moore,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,14.5,-110.0,8,no,10
+a493efd6ef737f676a45aacc0eaf7be8|jayden moore|Receptions,group,Jayden Moore,Duke,Virginia,Receptions,over,2026-10-23T23:00:00Z,1.5,-110.0,8,no,10
+a493efd6ef737f676a45aacc0eaf7be8|jayden moore|Receptions,official,Jayden Moore,Duke,Virginia,Receptions,over,2026-10-23T23:00:00Z,1.5,-105.0,8,no,10
+a493efd6ef737f676a45aacc0eaf7be8|jeremiah hasley|Reception Yards,group,Jeremiah Hasley,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,26.5,-115.0,8,yes,10
+a493efd6ef737f676a45aacc0eaf7be8|jeremiah hasley|Reception Yards,rec_yds_over,Jeremiah Hasley,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,26.5,-115.0,8,yes,10
+a493efd6ef737f676a45aacc0eaf7be8|jeremiah hasley|Reception Yards,rec_yds_play,Jeremiah Hasley,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,26.5,-115.0,8,yes,10
+a493efd6ef737f676a45aacc0eaf7be8|nate kurisky|Reception Yards,group,Nate Kurisky,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,6.5,-118.0,8,yes,10
+a493efd6ef737f676a45aacc0eaf7be8|nate kurisky|Reception Yards,rec_yds_over,Nate Kurisky,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,6.5,-118.0,8,yes,10
+a493efd6ef737f676a45aacc0eaf7be8|nate kurisky|Reception Yards,rec_yds_play,Nate Kurisky,Duke,Virginia,Reception Yards,over,2026-10-23T23:00:00Z,6.5,-118.0,8,yes,10
+a493efd6ef737f676a45aacc0eaf7be8|nate kurisky|Receptions,group,Nate Kurisky,Duke,Virginia,Receptions,over,2026-10-23T23:00:00Z,1.5,150.0,8,yes,10
+027c66400a752f72c7a21ce15a3b1743|jordan onovughe|Reception Yards,group,Jordan Onovughe,Stanford,NC State,Reception Yards,under,2026-10-24T02:30:00Z,30.5,-112.0,8,yes,9
+027c66400a752f72c7a21ce15a3b1743|joshisa trader|Reception Yards,group,Joshisa Trader,NC State,Stanford,Reception Yards,under,2026-10-24T02:30:00Z,38.5,-120.0,8,no,10
+1067cba701eaa40c3724cceda30524c6|dj epps|Reception Yards,group,DJ Epps,West Virginia,TCU,Reception Yards,under,2026-10-24T16:00:00Z,55.5,-115.0,8,yes,8
+2d125f14eca5c6eb1417f126cafde7c0|jakyrian turner|Rush Yards,group,Ja'Kyrian Turner,Pittsburgh,Miami,Rush Yards,under,2026-10-24T16:00:00Z,43.5,-114.0,8,no,13
+2d125f14eca5c6eb1417f126cafde7c0|jakyrian turner|Rush Yards,rush_under_play,Ja'Kyrian Turner,Pittsburgh,Miami,Rush Yards,under,2026-10-24T16:00:00Z,43.5,-114.0,8,no,13
+0f773ec5cb1e5b41f52f2bf8dbc4f182|hudson clement|Reception Yards,group,Hudson Clement,Illinois,Oregon,Reception Yards,under,2026-10-24T19:00:00Z,59.5,-156.0,8,yes,10
+0f773ec5cb1e5b41f52f2bf8dbc4f182|hudson clement|Receptions,group,Hudson Clement,Illinois,Oregon,Receptions,under,2026-10-24T19:00:00Z,4.5,-137.0,8,yes,10
+0f773ec5cb1e5b41f52f2bf8dbc4f182|jalen lott|Reception Yards,group,Jalen Lott,Oregon,Illinois,Reception Yards,under,2026-10-24T19:00:00Z,24.5,-115.0,8,no,8
+0f773ec5cb1e5b41f52f2bf8dbc4f182|jalen lott|Receptions,group,Jalen Lott,Oregon,Illinois,Receptions,under,2026-10-24T19:00:00Z,2.5,-192.0,8,no,8
+0f773ec5cb1e5b41f52f2bf8dbc4f182|messiah hampton|Reception Yards,group,Messiah Hampton,Oregon,Illinois,Reception Yards,over,2026-10-24T19:00:00Z,29.5,-109.0,8,no,8
+0f773ec5cb1e5b41f52f2bf8dbc4f182|messiah hampton|Receptions,group,Messiah Hampton,Oregon,Illinois,Receptions,over,2026-10-24T19:00:00Z,2.5,-111.0,8,no,8
+0f773ec5cb1e5b41f52f2bf8dbc4f182|messiah hampton|Receptions,official,Messiah Hampton,Oregon,Illinois,Receptions,over,2026-10-24T19:00:00Z,2.5,-111.0,8,no,8
+129a012809e96238263d1a6d0a7430fa|dawson pough|Reception Yards,group,Dawson Pough,Boston College,Georgia Tech,Reception Yards,over,2026-10-24T19:30:00Z,20.5,-114.0,8,yes,11
+129a012809e96238263d1a6d0a7430fa|dawson pough|Reception Yards,rec_yds_over,Dawson Pough,Boston College,Georgia Tech,Reception Yards,over,2026-10-24T19:30:00Z,20.5,-114.0,8,yes,11
+129a012809e96238263d1a6d0a7430fa|dawson pough|Reception Yards,rec_yds_play,Dawson Pough,Boston College,Georgia Tech,Reception Yards,over,2026-10-24T19:30:00Z,20.5,-114.0,8,yes,11
+129a012809e96238263d1a6d0a7430fa|dawson pough|Receptions,group,Dawson Pough,Boston College,Georgia Tech,Receptions,over,2026-10-24T19:30:00Z,1.5,-154.0,8,yes,11
+129a012809e96238263d1a6d0a7430fa|dawson pough|Receptions,official,Dawson Pough,Boston College,Georgia Tech,Receptions,over,2026-10-24T19:30:00Z,1.5,-154.0,8,yes,11
+173057d32ff5946d42566a0d164de287|derek meadows|Reception Yards,group,Derek Meadows,Alabama,Texas A&M,Reception Yards,over,2026-10-24T19:30:00Z,14.5,-112.0,8,yes,10
+173057d32ff5946d42566a0d164de287|derek meadows|Reception Yards,rec_yds_over,Derek Meadows,Alabama,Texas A&M,Reception Yards,over,2026-10-24T19:30:00Z,14.5,-112.0,8,yes,10
+173057d32ff5946d42566a0d164de287|derek meadows|Reception Yards,rec_yds_play,Derek Meadows,Alabama,Texas A&M,Reception Yards,over,2026-10-24T19:30:00Z,14.5,-112.0,8,yes,10
+173057d32ff5946d42566a0d164de287|tk norman|Reception Yards,group,TK Norman,Texas A&M,Alabama,Reception Yards,over,2026-10-24T19:30:00Z,17.5,-125.0,8,yes,9
+173057d32ff5946d42566a0d164de287|tk norman|Reception Yards,rec_yds_over,TK Norman,Texas A&M,Alabama,Reception Yards,over,2026-10-24T19:30:00Z,17.5,-125.0,8,yes,9
+173057d32ff5946d42566a0d164de287|tk norman|Reception Yards,rec_yds_play,TK Norman,Texas A&M,Alabama,Reception Yards,over,2026-10-24T19:30:00Z,17.5,-125.0,8,yes,9
+173057d32ff5946d42566a0d164de287|tk norman|Receptions,group,TK Norman,Texas A&M,Alabama,Receptions,over,2026-10-24T19:30:00Z,2.5,-138.0,8,yes,9
+173057d32ff5946d42566a0d164de287|tk norman|Receptions,official,TK Norman,Texas A&M,Alabama,Receptions,over,2026-10-24T19:30:00Z,1.5,-160.0,8,yes,9
+1e9caefb58095e7560167dff561c9ff7|nyck harbor|Reception Yards,group,Nyck Harbor,South Carolina,Tennessee,Reception Yards,under,2026-10-24T19:30:00Z,48.5,-115.0,8,yes,9
+6dab7d3b6ae25bd042a24a6e550a4f23|evan james|Reception Yards,group,Evan James,Iowa,Minnesota,Reception Yards,over,2026-10-24T19:30:00Z,13.5,-108.0,8,yes,13
+6dab7d3b6ae25bd042a24a6e550a4f23|evan james|Reception Yards,rec_yds_over,Evan James,Iowa,Minnesota,Reception Yards,over,2026-10-24T19:30:00Z,12.5,-110.0,8,yes,13
+6dab7d3b6ae25bd042a24a6e550a4f23|evan james|Reception Yards,rec_yds_play,Evan James,Iowa,Minnesota,Reception Yards,over,2026-10-24T19:30:00Z,11.5,-112.0,8,yes,13
+6dab7d3b6ae25bd042a24a6e550a4f23|evan james|Receptions,group,Evan James,Iowa,Minnesota,Receptions,over,2026-10-24T19:30:00Z,1.5,-115.0,8,yes,13
+6dab7d3b6ae25bd042a24a6e550a4f23|evan james|Receptions,official,Evan James,Iowa,Minnesota,Receptions,over,2026-10-24T19:30:00Z,1.5,-105.0,8,yes,13
+95bc14af9668222d8528934b43d65566|alessio milivojevic|Pass Attempts,group,Alessio Milivojevic,Michigan State,UCLA,Pass Attempts,over,2026-10-24T19:30:00Z,26.5,-120.0,8,no,13
+95bc14af9668222d8528934b43d65566|alessio milivojevic|Pass Completions,group,Alessio Milivojevic,Michigan State,UCLA,Pass Completions,over,2026-10-24T19:30:00Z,14.5,-145.0,8,no,13
+95bc14af9668222d8528934b43d65566|alessio milivojevic|Pass Interceptions,group,Alessio Milivojevic,Michigan State,UCLA,Pass Interceptions,over,2026-10-24T19:30:00Z,0.5,-170.0,8,no,13
+95bc14af9668222d8528934b43d65566|alessio milivojevic|Pass Touchdowns,group,Alessio Milivojevic,Michigan State,UCLA,Pass Touchdowns,over,2026-10-24T19:30:00Z,0.5,-158.0,8,no,13
+95bc14af9668222d8528934b43d65566|alessio milivojevic|Pass Yards,group,Alessio Milivojevic,Michigan State,UCLA,Pass Yards,under,2026-10-24T19:30:00Z,167.5,-114.0,8,no,13
+95bc14af9668222d8528934b43d65566|jaziun patterson|Reception Yards,group,Jaziun Patterson,Michigan State,UCLA,Reception Yards,under,2026-10-24T19:30:00Z,14.5,-120.0,8,no,13
+95bc14af9668222d8528934b43d65566|jaziun patterson|Receptions,group,Jaziun Patterson,Michigan State,UCLA,Receptions,under,2026-10-24T19:30:00Z,2.5,-123.0,8,no,13
+95bc14af9668222d8528934b43d65566|jaziun patterson|Receptions,under_play,Jaziun Patterson,Michigan State,UCLA,Receptions,under,2026-10-24T19:30:00Z,2.5,-123.0,8,no,13
+95bc14af9668222d8528934b43d65566|jaziun patterson|Rush Attempts,group,Jaziun Patterson,Michigan State,UCLA,Rush Attempts,under,2026-10-24T19:30:00Z,16.5,-130.0,8,no,13
+95bc14af9668222d8528934b43d65566|jaziun patterson|Rush Yards,group,Jaziun Patterson,Michigan State,UCLA,Rush Yards,under,2026-10-24T19:30:00Z,58.5,-114.0,8,no,13
+95bc14af9668222d8528934b43d65566|jaziun patterson|Rush Yards,rush_under_play,Jaziun Patterson,Michigan State,UCLA,Rush Yards,under,2026-10-24T19:30:00Z,58.5,-114.0,8,no,13
+95bc14af9668222d8528934b43d65566|rodney bullard jr|Reception Yards,group,Rodney Bullard Jr.,Michigan State,UCLA,Reception Yards,over,2026-10-24T19:30:00Z,29.5,-114.0,8,yes,13
+95bc14af9668222d8528934b43d65566|rodney bullard jr|Reception Yards,rec_yds_over,Rodney Bullard Jr.,Michigan State,UCLA,Reception Yards,over,2026-10-24T19:30:00Z,24.5,-120.0,8,yes,13
+95bc14af9668222d8528934b43d65566|rodney bullard jr|Reception Yards,rec_yds_play,Rodney Bullard Jr.,Michigan State,UCLA,Reception Yards,over,2026-10-24T19:30:00Z,24.5,-125.0,8,yes,13
+95bc14af9668222d8528934b43d65566|rodney bullard jr|Receptions,group,Rodney Bullard Jr.,Michigan State,UCLA,Receptions,over,2026-10-24T19:30:00Z,2.5,-108.0,8,yes,13
+95bc14af9668222d8528934b43d65566|rodney bullard jr|Receptions,official,Rodney Bullard Jr.,Michigan State,UCLA,Receptions,over,2026-10-24T19:30:00Z,2.5,-108.0,8,yes,13
+f417c5ab864e0751355921f5d22f4b25|avery johnson|Pass Touchdowns,group,Avery Johnson,Kansas State,Arizona State,Pass Touchdowns,over,2026-10-24T19:45:00Z,1.5,122.0,8,no,10
+f417c5ab864e0751355921f5d22f4b25|avery johnson|Pass Yards,group,Avery Johnson,Kansas State,Arizona State,Pass Yards,over,2026-10-24T19:45:00Z,201.5,-110.0,8,no,10
+f417c5ab864e0751355921f5d22f4b25|jason brown jr|Rush Yards,group,Jason Brown Jr.,Arizona State,Kansas State,Rush Yards,under,2026-10-24T19:45:00Z,39.5,-130.0,8,no,12
+f417c5ab864e0751355921f5d22f4b25|jason brown jr|Rush Yards,rush_under_play,Jason Brown Jr.,Arizona State,Kansas State,Rush Yards,under,2026-10-24T19:45:00Z,39.5,-130.0,8,no,12
+a28a6841bdc11350063d5e6d57fbd577|carson kolb|Reception Yards,group,Carson Kolb,Oklahoma State,Colorado,Reception Yards,over,2026-10-24T23:00:00Z,17.5,100.0,8,yes,13
+440de8df25b4cca8ebcecb7431bbb5c0|mark bowman|Reception Yards,group,Mark Bowman,USC,Wisconsin,Reception Yards,over,2026-10-24T23:30:00Z,30.5,-114.0,8,no,12
+cc78a514047b7ed0d2c5a3acdf3cdc1e|nic anderson|Reception Yards,group,Nic Anderson,Kentucky,Vanderbilt,Reception Yards,under,2026-10-24T23:30:00Z,35.5,-125.0,8,no,10
+cc78a514047b7ed0d2c5a3acdf3cdc1e|nic anderson|Receptions,group,Nic Anderson,Kentucky,Vanderbilt,Receptions,under,2026-10-24T23:30:00Z,3.5,-128.0,8,no,10
+cc78a514047b7ed0d2c5a3acdf3cdc1e|nic anderson|Receptions,under_play,Nic Anderson,Kentucky,Vanderbilt,Receptions,under,2026-10-24T23:30:00Z,3.5,-128.0,8,no,10
+d73ad8085e6fe1f88a0f79d9538083d6|cj sadler|Reception Yards,group,C.J. Sadler,North Carolina,Syracuse,Reception Yards,over,2026-10-24T23:30:00Z,17.5,-114.0,8,no,9
+df510525b83238b6e856c80c353bb32a|caleb cunningham|Reception Yards,group,Caleb Cunningham,Ole Miss,Texas,Reception Yards,over,2026-10-24T23:30:00Z,18.5,-114.0,8,yes,10
+df510525b83238b6e856c80c353bb32a|caleb cunningham|Reception Yards,rec_yds_over,Caleb Cunningham,Ole Miss,Texas,Reception Yards,over,2026-10-24T23:30:00Z,18.5,-114.0,8,yes,10
+df510525b83238b6e856c80c353bb32a|caleb cunningham|Reception Yards,rec_yds_play,Caleb Cunningham,Ole Miss,Texas,Reception Yards,over,2026-10-24T23:30:00Z,18.5,-114.0,8,yes,10
+47595bd2a188e4dab8a27dce97c5b45d|ricky johnson|Reception Yards,group,Ricky Johnson,Utah,Houston,Reception Yards,over,2026-10-25T02:15:00Z,24.5,-114.0,8,yes,10
+47595bd2a188e4dab8a27dce97c5b45d|ricky johnson|Reception Yards,rec_yds_over,Ricky Johnson,Utah,Houston,Reception Yards,over,2026-10-25T02:15:00Z,24.5,-114.0,8,yes,10
+47595bd2a188e4dab8a27dce97c5b45d|ricky johnson|Reception Yards,rec_yds_play,Ricky Johnson,Utah,Houston,Reception Yards,over,2026-10-25T02:15:00Z,24.5,-114.0,8,yes,10
+47595bd2a188e4dab8a27dce97c5b45d|ricky johnson|Receptions,group,Ricky Johnson,Utah,Houston,Receptions,over,2026-10-25T02:15:00Z,2.5,116.0,8,yes,10
+47595bd2a188e4dab8a27dce97c5b45d|ricky johnson|Receptions,official,Ricky Johnson,Utah,Houston,Receptions,over,2026-10-25T02:15:00Z,2.5,116.0,8,yes,10
+0540f5758ac50f3bb60beb36755f7a1e|george pettaway|Rush Touchdowns,group,George Pettaway,James Madison,Troy,Rush Touchdowns,over,2026-10-29T23:30:00Z,0.5,-200.0,9,no,11
+0540f5758ac50f3bb60beb36755f7a1e|george pettaway|Rush Yards,group,George Pettaway,James Madison,Troy,Rush Yards,under,2026-10-29T23:30:00Z,94.5,-118.0,9,no,11
+0540f5758ac50f3bb60beb36755f7a1e|george pettaway|Rush Yards,rush_under_play,George Pettaway,James Madison,Troy,Rush Yards,under,2026-10-29T23:30:00Z,94.5,-118.0,9,no,11
+8916ba5e623a0a1d97dd0e7f50e4a205|ardell banks|Reception Yards,group,Ardell Banks,Kent State,Sacramento State,Reception Yards,under,2026-10-31T02:30:00Z,33.5,-112.0,9,yes,8
+8916ba5e623a0a1d97dd0e7f50e4a205|ardell banks|Receptions,group,Ardell Banks,Kent State,Sacramento State,Receptions,over,2026-10-31T02:30:00Z,1.5,-179.0,9,yes,8
+8916ba5e623a0a1d97dd0e7f50e4a205|darealyst clark|Reception Yards,group,Da'Realyst Clark,Kent State,Sacramento State,Reception Yards,under,2026-10-31T02:30:00Z,30.5,-114.0,9,no,8
+8916ba5e623a0a1d97dd0e7f50e4a205|darealyst clark|Receptions,group,Da'Realyst Clark,Kent State,Sacramento State,Receptions,over,2026-10-31T02:30:00Z,1.5,-185.0,9,no,8
+07da1e37f1e37363a71d35f2298f01d9|christian abney|Reception Yards,group,Christian Abney,Illinois,Maryland,Reception Yards,over,2026-10-31T16:00:00Z,5.5,-125.0,9,yes,9
+07da1e37f1e37363a71d35f2298f01d9|christian abney|Reception Yards,rec_yds_over,Christian Abney,Illinois,Maryland,Reception Yards,over,2026-10-31T16:00:00Z,5.5,-125.0,9,yes,9
+07da1e37f1e37363a71d35f2298f01d9|christian abney|Reception Yards,rec_yds_play,Christian Abney,Illinois,Maryland,Reception Yards,over,2026-10-31T16:00:00Z,5.5,-125.0,9,yes,9
+07da1e37f1e37363a71d35f2298f01d9|christian abney|Receptions,group,Christian Abney,Illinois,Maryland,Receptions,over,2026-10-31T16:00:00Z,0.5,-235.0,9,yes,9
+07da1e37f1e37363a71d35f2298f01d9|christian abney|Receptions,official,Christian Abney,Illinois,Maryland,Receptions,over,2026-10-31T16:00:00Z,0.5,-235.0,9,yes,9
+07da1e37f1e37363a71d35f2298f01d9|michael clayton ii|Pass Attempts,group,Michael Clayton II,Illinois,Maryland,Pass Attempts,under,2026-10-31T16:00:00Z,27.5,-120.0,9,no,9
+07da1e37f1e37363a71d35f2298f01d9|michael clayton ii|Pass Completions,group,Michael Clayton II,Illinois,Maryland,Pass Completions,under,2026-10-31T16:00:00Z,17.5,-120.0,9,no,9
+07da1e37f1e37363a71d35f2298f01d9|michael clayton ii|Pass Interceptions,group,Michael Clayton II,Illinois,Maryland,Pass Interceptions,over,2026-10-31T16:00:00Z,0.5,-130.0,9,no,9
+07da1e37f1e37363a71d35f2298f01d9|michael clayton ii|Pass Touchdowns,group,Michael Clayton II,Illinois,Maryland,Pass Touchdowns,under,2026-10-31T16:00:00Z,1.5,-155.0,9,no,9
+07da1e37f1e37363a71d35f2298f01d9|michael clayton ii|Pass Yards,group,Michael Clayton II,Illinois,Maryland,Pass Yards,under,2026-10-31T16:00:00Z,189.5,-125.0,9,no,9
+07da1e37f1e37363a71d35f2298f01d9|michael clayton ii|Rush Attempts,group,Michael Clayton II,Illinois,Maryland,Rush Attempts,under,2026-10-31T16:00:00Z,5.5,-105.0,9,no,9
+07da1e37f1e37363a71d35f2298f01d9|ty robinson|Reception Yards,group,Ty Robinson,Illinois,Maryland,Reception Yards,over,2026-10-31T16:00:00Z,4.5,-130.0,9,yes,9
+07da1e37f1e37363a71d35f2298f01d9|ty robinson|Reception Yards,rec_yds_over,Ty Robinson,Illinois,Maryland,Reception Yards,over,2026-10-31T16:00:00Z,4.5,-130.0,9,yes,9
+07da1e37f1e37363a71d35f2298f01d9|ty robinson|Reception Yards,rec_yds_play,Ty Robinson,Illinois,Maryland,Reception Yards,over,2026-10-31T16:00:00Z,4.5,-130.0,9,yes,9
+07da1e37f1e37363a71d35f2298f01d9|ty robinson|Receptions,capped,Ty Robinson,Illinois,Maryland,Receptions,over,2026-10-31T16:00:00Z,0.5,-170.0,9,yes,9
+07da1e37f1e37363a71d35f2298f01d9|ty robinson|Receptions,group,Ty Robinson,Illinois,Maryland,Receptions,over,2026-10-31T16:00:00Z,0.5,-170.0,9,yes,9
+2d5a76d917c23b2f5036eb774608d1c9|will hammond|Pass Interceptions,group,Will Hammond,Texas Tech,Arizona,Pass Interceptions,over,2026-10-31T16:00:00Z,0.5,-140.0,9,no,10
+2d5a76d917c23b2f5036eb774608d1c9|will hammond|Pass Touchdowns,group,Will Hammond,Texas Tech,Arizona,Pass Touchdowns,under,2026-10-31T16:00:00Z,1.5,-141.0,9,no,10
+2d5a76d917c23b2f5036eb774608d1c9|will hammond|Pass Yards,group,Will Hammond,Texas Tech,Arizona,Pass Yards,over,2026-10-31T16:00:00Z,215.5,-110.0,9,no,10
+2d5a76d917c23b2f5036eb774608d1c9|will hammond|Rush Yards,group,Will Hammond,Texas Tech,Arizona,Rush Yards,under,2026-10-31T16:00:00Z,18.5,-118.0,9,no,10
+2d5a76d917c23b2f5036eb774608d1c9|will hammond|Rush Yards,rush_under_play,Will Hammond,Texas Tech,Arizona,Rush Yards,under,2026-10-31T16:00:00Z,18.5,-118.0,9,no,10
+2f219378e527cf1f695b814a0a4ad63c|justus rosssimmons|Reception Yards,group,Justus Ross-Simmons,Syracuse,SMU,Reception Yards,over,2026-10-31T16:00:00Z,14.5,-112.0,9,yes,10
+2f219378e527cf1f695b814a0a4ad63c|justus rosssimmons|Reception Yards,rec_yds_over,Justus Ross-Simmons,Syracuse,SMU,Reception Yards,over,2026-10-31T16:00:00Z,14.5,-112.0,9,yes,10
+2f219378e527cf1f695b814a0a4ad63c|justus rosssimmons|Reception Yards,rec_yds_play,Justus Ross-Simmons,Syracuse,SMU,Reception Yards,over,2026-10-31T16:00:00Z,14.5,-112.0,9,yes,10
+929937ced936976088a9562342ba0b90|addison ostrenga|Reception Yards,group,Addison Ostrenga,Iowa,Wisconsin,Reception Yards,over,2026-10-31T16:00:00Z,9.5,-112.0,9,yes,10
+929937ced936976088a9562342ba0b90|addison ostrenga|Reception Yards,rec_yds_over,Addison Ostrenga,Iowa,Wisconsin,Reception Yards,over,2026-10-31T16:00:00Z,9.5,-112.0,9,yes,10
+929937ced936976088a9562342ba0b90|addison ostrenga|Reception Yards,rec_yds_play,Addison Ostrenga,Iowa,Wisconsin,Reception Yards,over,2026-10-31T16:00:00Z,9.5,-112.0,9,yes,10
+929937ced936976088a9562342ba0b90|addison ostrenga|Receptions,group,Addison Ostrenga,Iowa,Wisconsin,Receptions,over,2026-10-31T16:00:00Z,1.5,100.0,9,yes,10
+dea96094c29a9f24d7dc07a5d848afd7|ben black|Reception Yards,group,Ben Black,Rutgers,Michigan,Reception Yards,over,2026-10-31T16:30:00Z,19.5,110.0,9,yes,6
+dea96094c29a9f24d7dc07a5d848afd7|ben black|Reception Yards,rec_yds_over,Ben Black,Rutgers,Michigan,Reception Yards,over,2026-10-31T16:30:00Z,19.5,110.0,9,yes,6
+dea96094c29a9f24d7dc07a5d848afd7|ben black|Receptions,group,Ben Black,Rutgers,Michigan,Receptions,over,2026-10-31T16:30:00Z,1.5,-114.0,9,yes,6
+dea96094c29a9f24d7dc07a5d848afd7|vernon allen iii|Reception Yards,group,Vernon Allen III,Rutgers,Michigan,Reception Yards,over,2026-10-31T16:30:00Z,11.5,-110.0,9,yes,6
+dea96094c29a9f24d7dc07a5d848afd7|vernon allen iii|Reception Yards,rec_yds_over,Vernon Allen III,Rutgers,Michigan,Reception Yards,over,2026-10-31T16:30:00Z,11.5,-110.0,9,yes,6
+dea96094c29a9f24d7dc07a5d848afd7|vernon allen iii|Reception Yards,rec_yds_play,Vernon Allen III,Rutgers,Michigan,Reception Yards,over,2026-10-31T16:30:00Z,11.5,-110.0,9,yes,6
+3f36c41ee29e9339f71fada56d832914|johntay cook ii|Reception Yards,group,Johntay Cook II,Ole Miss,Auburn,Reception Yards,over,2026-10-31T16:45:00Z,13.5,-125.0,9,no,14
+3f36c41ee29e9339f71fada56d832914|johntay cook ii|Reception Yards,rec_yds_over,Johntay Cook II,Ole Miss,Auburn,Reception Yards,over,2026-10-31T16:45:00Z,12.5,-112.0,9,no,14
+3f36c41ee29e9339f71fada56d832914|johntay cook ii|Reception Yards,rec_yds_play,Johntay Cook II,Ole Miss,Auburn,Reception Yards,over,2026-10-31T16:45:00Z,12.5,-112.0,9,no,14
+3f36c41ee29e9339f71fada56d832914|johntay cook ii|Receptions,group,Johntay Cook II,Ole Miss,Auburn,Receptions,over,2026-10-31T16:45:00Z,1.5,125.0,9,no,14
+3f36c41ee29e9339f71fada56d832914|johntay cook ii|Receptions,official,Johntay Cook II,Ole Miss,Auburn,Receptions,over,2026-10-31T16:45:00Z,1.5,125.0,9,no,14
+183676bbb63b1716e2248ec6c6d205a9|lawayne mccoy|Reception Yards,group,Lawayne McCoy,Louisville,Stanford,Reception Yards,under,2026-10-31T19:15:00Z,67.5,-120.0,9,no,12
+183676bbb63b1716e2248ec6c6d205a9|lawayne mccoy|Receptions,group,Lawayne McCoy,Louisville,Stanford,Receptions,under,2026-10-31T19:15:00Z,4.5,-130.0,9,no,12
+183676bbb63b1716e2248ec6c6d205a9|lawayne mccoy|Receptions,under_lean,Lawayne McCoy,Louisville,Stanford,Receptions,under,2026-10-31T19:15:00Z,4.5,-130.0,9,no,12
+581c12d11a86412432fe89645cbe80b2|vernell brown iii|Receptions,group,Vernell Brown III,Florida,Georgia,Receptions,under,2026-10-31T19:30:00Z,4.5,-141.0,9,no,13
+7bac3aae16527dd33a224a2f81792033|hayden eligon ii|Reception Yards,group,Hayden Eligon II,Northwestern,Oregon,Reception Yards,over,2026-10-31T19:30:00Z,17.5,-114.0,9,yes,9
+7bac3aae16527dd33a224a2f81792033|hayden eligon ii|Reception Yards,rec_yds_over,Hayden Eligon II,Northwestern,Oregon,Reception Yards,over,2026-10-31T19:30:00Z,17.5,-114.0,9,yes,9
+7bac3aae16527dd33a224a2f81792033|hayden eligon ii|Reception Yards,rec_yds_play,Hayden Eligon II,Northwestern,Oregon,Reception Yards,over,2026-10-31T19:30:00Z,16.5,-114.0,9,yes,9
+7bac3aae16527dd33a224a2f81792033|hayden eligon ii|Receptions,group,Hayden Eligon II,Northwestern,Oregon,Receptions,over,2026-10-31T19:30:00Z,1.5,-116.0,9,yes,9
+7bac3aae16527dd33a224a2f81792033|hayden eligon ii|Receptions,official,Hayden Eligon II,Northwestern,Oregon,Receptions,over,2026-10-31T19:30:00Z,1.5,-116.0,9,yes,9
+7bac3aae16527dd33a224a2f81792033|messiah hampton|Reception Yards,group,Messiah Hampton,Oregon,Northwestern,Reception Yards,over,2026-10-31T19:30:00Z,24.5,-114.0,9,no,10
+7bac3aae16527dd33a224a2f81792033|messiah hampton|Reception Yards,rec_yds_over,Messiah Hampton,Oregon,Northwestern,Reception Yards,over,2026-10-31T19:30:00Z,21.5,-114.0,9,no,10
+7bac3aae16527dd33a224a2f81792033|messiah hampton|Receptions,capped,Messiah Hampton,Oregon,Northwestern,Receptions,over,2026-10-31T19:30:00Z,2.5,120.0,9,no,10
+7bac3aae16527dd33a224a2f81792033|messiah hampton|Receptions,group,Messiah Hampton,Oregon,Northwestern,Receptions,over,2026-10-31T19:30:00Z,2.5,120.0,9,no,10
+7e3a5a0dcece26ded8c9d1a64dc6cee5|isaiah marshall|Pass Attempts,group,Isaiah Marshall,Kansas,TCU,Pass Attempts,under,2026-10-31T19:30:00Z,26.5,-115.0,9,no,11
+7e3a5a0dcece26ded8c9d1a64dc6cee5|isaiah marshall|Pass Completions,group,Isaiah Marshall,Kansas,TCU,Pass Completions,over,2026-10-31T19:30:00Z,13.5,-150.0,9,no,11
+7e3a5a0dcece26ded8c9d1a64dc6cee5|isaiah marshall|Pass Touchdowns,group,Isaiah Marshall,Kansas,TCU,Pass Touchdowns,over,2026-10-31T19:30:00Z,0.5,-227.0,9,no,11
+7e3a5a0dcece26ded8c9d1a64dc6cee5|isaiah marshall|Pass Yards,group,Isaiah Marshall,Kansas,TCU,Pass Yards,under,2026-10-31T19:30:00Z,181.5,-118.0,9,no,11
+7e3a5a0dcece26ded8c9d1a64dc6cee5|isaiah marshall|Rush Yards,group,Isaiah Marshall,Kansas,TCU,Rush Yards,over,2026-10-31T19:30:00Z,24.5,-114.0,9,no,11
+7e3a5a0dcece26ded8c9d1a64dc6cee5|nik mcmillan|Reception Yards,group,Nik McMillan,Kansas,TCU,Reception Yards,over,2026-10-31T19:30:00Z,38.5,-112.0,9,yes,11
+7e3a5a0dcece26ded8c9d1a64dc6cee5|nik mcmillan|Receptions,group,Nik McMillan,Kansas,TCU,Receptions,over,2026-10-31T19:30:00Z,2.5,-132.0,9,yes,11
+7e3a5a0dcece26ded8c9d1a64dc6cee5|nik mcmillan|Receptions,official,Nik McMillan,Kansas,TCU,Receptions,over,2026-10-31T19:30:00Z,2.5,-132.0,9,yes,11
+b0f68c9265402a825cbbf7954b726339|jojo phillips|Reception Yards,group,Jojo Phillips,BYU,Arizona State,Reception Yards,over,2026-10-31T19:30:00Z,21.5,-114.0,9,yes,9
+09f66e3676ec3112e24cd6b9e97feb41|dominick barry|Reception Yards,group,Dominick Barry,Wake Forest,Virginia,Reception Yards,over,2026-10-31T19:45:00Z,20.5,-114.0,9,yes,12
+09f66e3676ec3112e24cd6b9e97feb41|dominick barry|Reception Yards,rec_yds_over,Dominick Barry,Wake Forest,Virginia,Reception Yards,over,2026-10-31T19:45:00Z,14.5,-114.0,9,yes,12
+09f66e3676ec3112e24cd6b9e97feb41|dominick barry|Reception Yards,rec_yds_play,Dominick Barry,Wake Forest,Virginia,Reception Yards,over,2026-10-31T19:45:00Z,14.5,-114.0,9,yes,12
+09f66e3676ec3112e24cd6b9e97feb41|jekail middlebrook|Rush Yards,group,Jekail Middlebrook,Virginia,Wake Forest,Rush Yards,under,2026-10-31T19:45:00Z,68.5,-118.0,9,no,15
+09f66e3676ec3112e24cd6b9e97feb41|jekail middlebrook|Rush Yards,rush_under_play,Jekail Middlebrook,Virginia,Wake Forest,Rush Yards,under,2026-10-31T19:45:00Z,68.5,-118.0,9,no,15
+8480c989381049fc30c8d714be95db35|noah bennee|Reception Yards,group,Noah Bennee,Utah,Cincinnati,Reception Yards,over,2026-10-31T19:45:00Z,29.5,110.0,9,no,12
+8480c989381049fc30c8d714be95db35|noah bennee|Reception Yards,rec_yds_over,Noah Bennee,Utah,Cincinnati,Reception Yards,over,2026-10-31T19:45:00Z,29.5,110.0,9,no,12
+8480c989381049fc30c8d714be95db35|noah bennee|Reception Yards,rec_yds_play,Noah Bennee,Utah,Cincinnati,Reception Yards,over,2026-10-31T19:45:00Z,29.5,110.0,9,no,12
+8480c989381049fc30c8d714be95db35|noah bennee|Receptions,group,Noah Bennee,Utah,Cincinnati,Receptions,under,2026-10-31T19:45:00Z,3.5,-154.0,9,no,12
+630ed6c8993fda8943e528a465e55518|gary givens iii|Reception Yards,group,Gary Givens III,Nevada,UCLA,Reception Yards,under,2026-10-31T20:15:00Z,42.5,-118.0,9,yes,10
+630ed6c8993fda8943e528a465e55518|gary givens iii|Receptions,group,Gary Givens III,Nevada,UCLA,Receptions,under,2026-10-31T20:15:00Z,3.5,110.0,9,yes,10
+630ed6c8993fda8943e528a465e55518|gary givens iii|Receptions,under_lean,Gary Givens III,Nevada,UCLA,Receptions,under,2026-10-31T20:15:00Z,3.5,110.0,9,yes,10
+7fd2d018fdc5930fd62188de968a901c|chase sowell|Reception Yards,group,Chase Sowell,Penn State,Purdue,Reception Yards,under,2026-10-31T20:15:00Z,69.5,-116.0,9,no,11
+7fd2d018fdc5930fd62188de968a901c|chase sowell|Receptions,group,Chase Sowell,Penn State,Purdue,Receptions,under,2026-10-31T20:15:00Z,5.5,-130.0,9,no,11
+7fd2d018fdc5930fd62188de968a901c|chase sowell|Receptions,under_lean,Chase Sowell,Penn State,Purdue,Receptions,under,2026-10-31T20:15:00Z,5.5,-130.0,9,no,11
+7fd2d018fdc5930fd62188de968a901c|chauncey magwood|Receptions,group,Chauncey Magwood,Purdue,Penn State,Receptions,under,2026-10-31T20:15:00Z,3.5,-180.0,9,yes,6
+7fd2d018fdc5930fd62188de968a901c|james peoples|Rush Yards,group,James Peoples,Penn State,Purdue,Rush Yards,over,2026-10-31T20:15:00Z,31.5,-115.0,9,yes,11
+bd73558e7eb5bee08962bfb1f5ef6c9a|brandon inniss|Reception Yards,group,Brandon Inniss,Ohio State,USC,Reception Yards,over,2026-10-31T23:30:00Z,15.5,-120.0,9,no,9
+bd73558e7eb5bee08962bfb1f5ef6c9a|brandon inniss|Reception Yards,rec_yds_over,Brandon Inniss,Ohio State,USC,Reception Yards,over,2026-10-31T23:30:00Z,15.5,-120.0,9,no,9
+bd73558e7eb5bee08962bfb1f5ef6c9a|brandon inniss|Reception Yards,rec_yds_play,Brandon Inniss,Ohio State,USC,Reception Yards,over,2026-10-31T23:30:00Z,15.5,-120.0,9,no,9
+bd73558e7eb5bee08962bfb1f5ef6c9a|brandon inniss|Receptions,group,Brandon Inniss,Ohio State,USC,Receptions,over,2026-10-31T23:30:00Z,1.5,-120.0,9,no,9
+bd73558e7eb5bee08962bfb1f5ef6c9a|brandon inniss|Receptions,official,Brandon Inniss,Ohio State,USC,Receptions,over,2026-10-31T23:30:00Z,1.5,-105.0,9,no,9
+bd73558e7eb5bee08962bfb1f5ef6c9a|nate roberts|Reception Yards,group,Nate Roberts,Ohio State,USC,Reception Yards,over,2026-10-31T23:30:00Z,13.5,-120.0,9,yes,9
+bd73558e7eb5bee08962bfb1f5ef6c9a|nate roberts|Reception Yards,rec_yds_over,Nate Roberts,Ohio State,USC,Reception Yards,over,2026-10-31T23:30:00Z,13.5,-120.0,9,yes,9
+bd73558e7eb5bee08962bfb1f5ef6c9a|nate roberts|Reception Yards,rec_yds_play,Nate Roberts,Ohio State,USC,Reception Yards,over,2026-10-31T23:30:00Z,13.5,-120.0,9,yes,9
+bd73558e7eb5bee08962bfb1f5ef6c9a|nate roberts|Receptions,group,Nate Roberts,Ohio State,USC,Receptions,over,2026-10-31T23:30:00Z,1.5,-115.0,9,yes,9
+bd73558e7eb5bee08962bfb1f5ef6c9a|tanook hines|Reception Yards,group,Tanook Hines,USC,Ohio State,Reception Yards,over,2026-10-31T23:30:00Z,37.5,-115.0,9,yes,9
+bd73558e7eb5bee08962bfb1f5ef6c9a|tanook hines|Receptions,group,Tanook Hines,USC,Ohio State,Receptions,over,2026-10-31T23:30:00Z,3.5,120.0,9,yes,9
+e2ffa742b36678caf388ca70fdd4878c|sam west|Reception Yards,group,Sam West,Mississippi State,Texas,Reception Yards,over,2026-10-31T23:30:00Z,6.5,-125.0,9,yes,9
+e2ffa742b36678caf388ca70fdd4878c|sam west|Reception Yards,rec_yds_over,Sam West,Mississippi State,Texas,Reception Yards,over,2026-10-31T23:30:00Z,6.5,-125.0,9,yes,9
+e2ffa742b36678caf388ca70fdd4878c|sam west|Reception Yards,rec_yds_play,Sam West,Mississippi State,Texas,Reception Yards,over,2026-10-31T23:30:00Z,6.5,-125.0,9,yes,9
+e2ffa742b36678caf388ca70fdd4878c|sam west|Receptions,capped,Sam West,Mississippi State,Texas,Receptions,over,2026-10-31T23:30:00Z,1.5,155.0,9,yes,9
+e2ffa742b36678caf388ca70fdd4878c|sam west|Receptions,group,Sam West,Mississippi State,Texas,Receptions,over,2026-10-31T23:30:00Z,1.5,155.0,9,yes,9
+c6533cfcdfb0860d723a5fd9b9381098|chris marshall|Reception Yards,group,Chris Marshall,Arkansas,Missouri,Reception Yards,under,2026-10-31T23:45:00Z,74.5,-114.0,9,no,12
+c6533cfcdfb0860d723a5fd9b9381098|chris marshall|Receptions,group,Chris Marshall,Arkansas,Missouri,Receptions,under,2026-10-31T23:45:00Z,6.5,-152.0,9,no,12
+c6533cfcdfb0860d723a5fd9b9381098|chris marshall|Receptions,under_play,Chris Marshall,Arkansas,Missouri,Receptions,under,2026-10-31T23:45:00Z,6.5,-152.0,9,no,12
+877d5834acad37b6142a835438c23001|baron naone|Reception Yards,group,Baron Naone,Washington,Nebraska,Reception Yards,over,2026-11-01T00:00:00Z,20.5,-114.0,9,yes,11
+877d5834acad37b6142a835438c23001|baron naone|Receptions,group,Baron Naone,Washington,Nebraska,Receptions,under,2026-11-01T00:00:00Z,2.5,-125.0,9,yes,11
