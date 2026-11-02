@@ -41,8 +41,9 @@ How it works
        price at the same book updated.
     3. every logged prop whose game is over is graded from the CFBD box
        score: win, loss or push, and units at the price it was logged at.
-       A player with no box-score line is left ungraded (he may not have
-       played, and books void those).
+       A player with no box-score line is checked against PFF offensive
+       snaps (11/2026): took a snap -> graded as 0 (books only void a player
+       with no snaps); no snaps -> VOID, left out of the record.
   The log lives in data/clv/prop_flags.csv and is committed with the
   dashboard. The summary goes to docs/data/props_clv.json.
 
@@ -333,6 +334,7 @@ def grade_state(state, now):
         return 0
     window = pd.Timedelta(hours=MATCH_HOURS)
     graded = 0
+    no_line = []                 # (row, season, kick, teammates) with no box-score line
     for season in sorted({_season_of(r["start_time"]) for r in todo}):
         recs = [r for r in todo if _season_of(r["start_time"]) == season]
         try:
@@ -368,17 +370,46 @@ def grade_state(state, now):
             if team and (rows["team"] == team).any():
                 rows = rows[rows["team"] == team]
             if rows.empty:
-                # Game is final but he has no box-score line -> can't tell a
-                # zero from a DNP. Mark NA once the game is clearly over.
-                if not final.empty or now - _ts(r["start_time"]) > timedelta(days=10):
-                    r["result"] = "NA"
+                # Game is final but he has no box-score line: either he sat
+                # (books void) or played without recording a stat (actual 0).
+                # Settled below with PFF offensive snaps.
+                if not final.empty:
+                    mates = wide[(wide["team"] == (team or "")) & ((wide["kick"] - kick).abs() <= window)]["player"]
+                    no_line.append((r, season, kick, list(mates.unique())))
+                elif now - _ts(r["start_time"]) > timedelta(days=10):
+                    r["result"] = "VOID"
                 continue
-            actual = float(rows.iloc[0][stat])
-            line, price, side = float(r["line"]), float(r["price"]), _side(r)
-            res = "P" if actual == line else ("W" if (actual > line) == (side == "over") else "L")
-            r.update({"actual": actual, "result": res, "units": round(payout(price) if res == "W" else (-1.0 if res == "L" else 0.0), 4)})
+            _settle(r, float(rows.iloc[0][stat]))
             graded += 1
+
+    # No box-score line: PFF says whether he took a snap (11/2026). Books void
+    # only a player with zero snaps, so played + no stat = 0.
+    if no_line:
+        try:
+            from src.data.pff_played import played_status
+        except Exception as e:
+            played_status = None
+            print(f"  [note] PFF played check skipped ({e})")
+        for season in sorted({x[1] for x in no_line}):
+            grp = [x for x in no_line if x[1] == season]
+            status = (played_status(season, [{"player": r["player"], "kick": k, "teammates": m} for r, _, k, m in grp])
+                      if played_status else ["pending"] * len(grp))
+            counts = {}
+            for (r, _, k, _m), st in zip(grp, status):
+                counts[st] = counts.get(st, 0) + 1
+                if st == "yes":
+                    _settle(r, 0.0)
+                    graded += 1
+                elif st == "no" or now - _ts(r["start_time"]) > timedelta(days=10):
+                    r["result"] = "VOID"           # didn't play (or PFF never charted it)
+            print(f"  no box-score line, PFF snaps: {counts}")
     return graded
+
+
+def _settle(r, actual):
+    line, price, side = float(r["line"]), float(r["price"]), _side(r)
+    res = "P" if actual == line else ("W" if (actual > line) == (side == "over") else "L")
+    r.update({"actual": actual, "result": res, "units": round(payout(price) if res == "W" else (-1.0 if res == "L" else 0.0), 4)})
 
 
 def measure(r):
