@@ -182,6 +182,11 @@ def played_zero_rows(wide: pd.DataFrame, games: pd.DataFrame, pff: pd.DataFrame)
     c["gameId"] = pd.to_numeric(c["gameId"], errors="coerce").astype("int64")
     have = set(zip(wide["gameId"], wide["athleteId"]))
     c = c[[(gid, aid) not in have for gid, aid in zip(c["gameId"], c["athleteId"])]]
+    # Only where CFBD HAS a box score for his team that game (3+ teammates
+    # listed). A game with no box score at all is missing data, not zeros.
+    team_rows = wide.groupby(["gameId", "team"])["athleteId"].nunique()
+    boxed = set(team_rows[team_rows >= 3].index)
+    c = c[[(gid, t) in boxed for gid, t in zip(c["gameId"], c["team"])]]
     c = c.drop_duplicates(["gameId", "athleteId"])
     if c.empty:
         return wide.iloc[0:0]

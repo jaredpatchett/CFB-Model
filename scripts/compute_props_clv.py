@@ -374,8 +374,11 @@ def grade_state(state, now):
                 # (books void) or played without recording a stat (actual 0).
                 # Settled below with PFF offensive snaps.
                 if not final.empty:
-                    mates = wide[(wide["team"] == (team or "")) & ((wide["kick"] - kick).abs() <= window)]["player"]
-                    no_line.append((r, season, kick, list(mates.unique())))
+                    mates = wide[(wide["team"] == (team or "")) & ((wide["kick"] - kick).abs() <= window)]["player"].unique()
+                    if len(mates) >= 3:            # his team's box score is in; otherwise wait for it
+                        no_line.append((r, season, kick, list(mates)))
+                    elif now - _ts(r["start_time"]) > timedelta(days=10):
+                        r["result"] = "VOID"
                 elif now - _ts(r["start_time"]) > timedelta(days=10):
                     r["result"] = "VOID"
                 continue
