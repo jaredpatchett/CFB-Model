@@ -468,6 +468,9 @@ def build_prop_tracking(history, path: str = PROPS_TRACK_PATH, max_results: int 
         return {"asOf": log.get("generated_at"), "overall": agg(plays), "official": official,
                 "underPlay": live.get("under_play"), "underLean": live.get("under_lean"),
                 "recYdsPlay": live.get("rec_yds_play"), "rushUnderPlay": live.get("rush_under_play"), "byKind": by_kind,
+                # 11/2/2026 receiving-model retrain: those rules' live records restart.
+                "recYdsPlayNew": live.get("rec_yds_play_since_update"), "recYdsPlayPrev": live.get("rec_yds_play_prev"),
+                "underPlayNew": live.get("under_play_since_update"), "underPlayPrev": live.get("under_play_prev"),
                 "results": [slim(p) for p in results[:max_results]], "nResults": len(results),
                 "upcoming": [slim(p) for p in upcoming[:max_upcoming]], "nUpcoming": len(upcoming)}
     except Exception as e:
@@ -520,9 +523,13 @@ def attach_prop_first_flags(props, path: str = PROP_FLAGS_PATH):
 
 
 PROPS_LAB3_PATH = "docs/data/props_lab3.json"
+# 11/2026: backtests rerun with played-zero games (ran routes, no box-score
+# line) in training and grading. Used when present.
+PROPS_LAB3_PZ_PATH = "docs/data/props_lab3_pz.json"
+PROPS_LAB2_PZ_DETAIL = "docs/data/props_lab2_detail_pz.csv"
 
 
-def build_prop_rules(path: str = PROPS_LAB3_PATH):
+def build_prop_rules(path: str = None):
     """How each receptions RULE did over every season graded in props lab 3
     (this season's saved lines plus the past seasons pulled), for the Props
     tab's Track record column: {'rec_over': official overs, 10% to 30% edge;
@@ -530,6 +537,7 @@ def build_prop_rules(path: str = PROPS_LAB3_PATH):
     each {record, units, roi, n, seasons}. None if the lab file is not there.
     Never raises -- a display extra."""
     try:
+        path = path or (PROPS_LAB3_PZ_PATH if os.path.exists(PROPS_LAB3_PZ_PATH) else PROPS_LAB3_PATH)
         if not os.path.exists(path):
             return None
         with open(path) as f:
@@ -570,6 +578,28 @@ def build_prop_rules(path: str = PROPS_LAB3_PATH):
             out["rush_under"] = from_hist("Rush Yards", "under", 0)
         except Exception as e:
             print(f"  [note] new prop rules' backtest skipped ({e})")
+        # Rec yds overs 15%+ on the retrained (played-zeros) model, this
+        # season's lines -- the model now live.
+        try:
+            if os.path.exists(PROPS_LAB2_PZ_DETAIL):
+                import pandas as pd
+                d = pd.read_csv(PROPS_LAB2_PZ_DETAIL, low_memory=False)
+                d = d[(d["version"] == "pff") & (d["stat"] == "rec_yds") & (d["over_ev"] >= 0.15) & d["over_res"].isin(["W", "L", "P"])]
+                if len(d):
+                    u = float(d["over_units"].sum())
+                    out["rec_yds_over"] = {"record": f"{int((d['over_res'] == 'W').sum())}-{int((d['over_res'] == 'L').sum())}",
+                                           "units": round(u, 1), "roi": round(u / len(d) * 100, 1), "n": int(len(d)), "seasons": 1}
+        except Exception as e:
+            print(f"  [note] retrained rec yds backtest not read ({e})")
+        # The three official rules together.
+        parts = [out.get(k) for k in ("rec_yds_over", "rush_under", "rec_under")]
+        if all(parts):
+            w = sum(int(x["record"].split("-")[0]) for x in parts)
+            l = sum(int(x["record"].split("-")[1]) for x in parts)
+            n = sum(x["n"] for x in parts)
+            u = sum(x["units"] for x in parts)
+            out["official_total"] = {"record": f"{w}-{l}", "units": round(u, 1), "roi": round(u / n * 100, 1), "n": n,
+                                     "seasons": max(x["seasons"] for x in parts)}
         return {k: v for k, v in out.items() if v} or None
     except Exception as e:
         print(f"  [note] could not read {path} ({e}) -- receptions rules will show the single-season track record")
@@ -3030,7 +3060,7 @@ RENDERER_JS = """<script>
         '<b style="color:' + tone(o.units) + '">' + signed(o.units, 2) + 'u</b><span class="pp-rec-n">' + o.graded + ' graded</span></span>';
     };
     var strip = '<div class="pp-recline">' +
-      (T ? recBit('Rec yds overs', T.recYdsPlay) + recBit('Rush yds unders', T.rushUnderPlay) + recBit('Rec unders', T.underPlay) + recBit('Rec overs (watch)', T.official) + recBit('All auto-tracked', T.overall) : '') +
+      (T ? recBit('Rec yds overs', T.recYdsPlayNew || T.recYdsPlay) + recBit('Rush yds unders', T.rushUnderPlay) + recBit('Rec unders', T.underPlayNew || T.underPlay) + recBit('Rec overs (watch)', T.official) + recBit('All auto-tracked', T.overall) : '') +
       '<span class="pp-key"><b>Edge</b> is the model&rsquo;s hit chance against the price. <b>Track record</b> is how plays at that edge size did in the backtest.</span>' +
     '</div>';
 
@@ -4852,11 +4882,24 @@ RENDERER_JS = """<script>
           '<div class="num" style="color:var(--muted-3);font-size:10.5px">' + (bt ? sg(bt.roi, 0) + '% &middot; ' + sg(bt.units, 1) + 'u &middot; ' + esc(bt.record) : '&mdash;') + '</div>' +
         '</div></div>';
     };
+    // Receiving rules' live record restarts at the Nov 2, 2026 model retrain;
+    // the old model's record stays visible underneath.
+    var prevNote = function (prev, now) {
+      if (!now) return '';
+      return '<div style="font-size:9.5px;color:var(--muted-3);font-weight:400;margin-top:2px">live since Nov 2 model update' +
+        (prev && prev.graded ? ' &middot; old model: ' + esc(prev.record) + ', ' + sg(prev.units, 1) + 'u' : '') + '</div>';
+    };
     var btLabel = function (bt) { return bt ? ' <span style="color:var(--muted-3);font-weight:400">(' + bt.seasons + ' season' + (bt.seasons === 1 ? '' : 's') + ')</span>' : ''; };
     var rules = '<div class="thead" style="display:grid;' + kc + 'margin-top:14px"><div>Official rules</div><div class="num">Record</div><div class="num">Units</div><div class="num">ROI</div><div class="num">Graded</div><div class="num">Backtest</div></div>' +
-      ruleRow('Receiving yards overs, 15%+ edge' + btLabel(R.rec_yds_over), T.recYdsPlay, R.rec_yds_over) +
+      ruleRow('Receiving yards overs, 15%+ edge' + btLabel(R.rec_yds_over) + prevNote(T.recYdsPlayPrev, T.recYdsPlayNew), T.recYdsPlayNew || T.recYdsPlay, R.rec_yds_over) +
       ruleRow('Rush yards unders, any edge' + btLabel(R.rush_under), T.rushUnderPlay, R.rush_under) +
-      ruleRow('Receptions unders, 30%+ edge' + btLabel(R.rec_under), T.underPlay, R.rec_under) +
+      ruleRow('Receptions unders, 30%+ edge' + btLabel(R.rec_under) + prevNote(T.underPlayPrev, T.underPlayNew), T.underPlayNew || T.underPlay, R.rec_under) +
+      (R.official_total ? '<div class="row"><div class="row-accent" style="background:var(--rule)"></div>' +
+        '<div class="row-body" style="' + kc + 'padding:8px 14px;font-size:11.5px">' +
+          '<div style="font-weight:700">Official rules, backtest total</div><div></div><div></div><div></div><div></div>' +
+          '<div class="num" style="font-weight:700;color:' + col(R.official_total.units) + '">' + sg(R.official_total.roi, 0) + '% &middot; ' +
+            sg(R.official_total.units, 1) + 'u &middot; ' + esc(R.official_total.record) + '</div>' +
+        '</div></div>' : '') +
       '<div class="thead" style="display:grid;' + kc + 'margin-top:10px"><div>Watch rules</div><div></div><div></div><div></div><div></div><div></div></div>' +
       ruleRow('Receptions overs, 10% to 30% edge' + btLabel(R.rec_over), T.official, R.rec_over) +
       ruleRow('Receptions under leans, 10% to 30% edge' + btLabel(R.rec_under_lean), T.underLean, R.rec_under_lean);
