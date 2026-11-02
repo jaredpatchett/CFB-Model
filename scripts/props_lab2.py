@@ -360,6 +360,23 @@ def score_rows(pools, pred, actual, rows, tier, blend):
     return best
 
 
+def role_bucket(f, kind):
+    """How involved he is in the passing game going in: share of the team's
+    pass plays he ran a route on (PFF), over his last 2 earlier games or the
+    season so far. Saved only as a coarse bucket -- PFF numbers stay out of
+    the public repo. Uses the true-dropback version when it exists."""
+    for col in (f"{kind}_pff_route_part_db", f"{kind}_pff_route_part"):
+        v = f.get(col)
+        try:
+            v = float(v)
+        except (TypeError, ValueError):
+            continue
+        if v != v or v < 0:          # NaN / missing sentinel
+            continue
+        return "<40%" if v < 0.40 else "40-60%" if v < 0.60 else "60-80%" if v < 0.80 else "80%+"
+    return None
+
+
 def evaluate_props(name, gbm, cols, pools, stat, feats, props, usable, blend=False):
     sub = [p for p in props if p["stat"] == stat and p["idx"] in usable]
     if not sub:
@@ -385,6 +402,7 @@ def evaluate_props(name, gbm, cols, pools, stat, feats, props, usable, blend=Fal
                "team": f.get("team"), "opponent": f.get("opponent"), "gp": int(f["games_played_prior"]),
                "rec_share": f.get("roll_rec_share"), "team_spread": f.get("team_spread"),
                "pff_matched": int(f.get("pff_matched", 0) == 1), "stability": tier if tiered else None,
+               "role_last2": role_bucket(f, "last2"), "role_season": role_bucket(f, "roll"),
                "pred": round(pred, 2), "actual": actual, "ref_line": ref["line"], "ref_p_over": ref_over, "ref_market_over": mkt}
         for side in ("over", "under"):
             s = sides.get(side)

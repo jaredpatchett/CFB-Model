@@ -74,4 +74,4 @@ jobs:
             [ "$i" -eq 5 ] && echo "::error::Could not push results" && exit 1
             sleep $((RANDOM % 10 + 5))
           done
-# run: 2026-11-02
+# run: 2026-11-02 role buckets
