@@ -11,7 +11,8 @@ voids both. That flatters overs and hurts unders.
 
 Output: docs/data/played_check.csv -- one row per ungraded prop with
   played = yes      offensive snaps > 0 that week (bet had action; 0 stat)
-           no       listed by PFF in other weeks but no offensive snaps this week
+           no       his team's game is charted but he has no offensive snaps
+           pending  his team's game isn't charted by PFF yet -- re-run later
            unknown  name never found in PFF's 2026 offense data
 No PFF numbers are written (public repo): only yes / no / unknown.
 Special-teams-only snaps are not covered (PFF special summary is empty), so a
@@ -100,12 +101,17 @@ def main():
         wk = next((w for w, ks in weeks.items() if any(abs(k - r["st"]) <= MATCH for k in ks)), None)
         n = norm(r["player"])
         rows = s[(s["n"] == n) & (s["week"] == wk)] if wk is not None else s.iloc[0:0]
+        mine = s[s["n"] == n]
+        pteam = mine["team"].mode().iloc[0] if not mine.empty else None
+        charted = wk is not None and pteam is not None and ((s["week"] == wk) & (s["team"] == pteam)).any()
         if not rows.empty and rows["snaps"].max() > 0:
             played = "yes"
-        elif n in ever:
-            played = "no"
-        else:
+        elif n not in ever:
             played = "unknown"
+        elif not charted:
+            played = "pending"
+        else:
+            played = "no"
         out.append({"key": r["key"], "tag": r["tag"], "player": r["player"], "team": r["team"],
                     "opponent": r["opponent"], "market": r["market"], "side": r["side"],
                     "start_time": r["start_time"], "line": r["line"], "price": r["price"],
