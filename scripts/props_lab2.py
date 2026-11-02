@@ -68,8 +68,13 @@ from src.features.player_features import (
 from src.models.props_model import PlayerStatModel
 
 STATS = ["receptions", "rec_yds"]
-OUT_JSON = "docs/data/props_lab2.json"
-OUT_CSV = "docs/data/props_lab2_detail.csv"
+# PLAYED_ZEROS=1 (11/2026): count players who played with no box-score line
+# as zeros (see build_frame); results go to *_pz files.
+PLAYED_ZEROS = os.environ.get("PLAYED_ZEROS") == "1"
+PLAYED_ZERO_INFO = {}
+_SFX = "_pz" if PLAYED_ZEROS else ""
+OUT_JSON = f"docs/data/props_lab2{_SFX}.json"
+OUT_CSV = f"docs/data/props_lab2_detail{_SFX}.csv"
 MIN_EDGE, BIG_EDGE = 0.10, 0.30
 ROLE_MIN_CATCHES = 1.5
 MIN_TIER_ROWS = 300                 # a stability tier smaller than this falls back to the standard misses
@@ -178,6 +183,17 @@ def build_frame(years, season):
         lines = lines.assign(id=pd.to_numeric(lines["id"], errors="coerce")).dropna(subset=["id"])
         lines["id"] = lines["id"].astype("int64")
     print(f"  {len(wide)} player-games")
+    if PLAYED_ZEROS:
+        # 11/2026: add a zero row for every player-game PFF shows him running
+        # routes but CFBD has no box-score line (played, caught nothing). Books
+        # only void a player with no snaps, so these are real zeros.
+        out_dir = os.environ.get("PFF_DATA_DIR") or os.path.join(tempfile.gettempdir(), "pff_lab2")
+        recv0, pgames0 = pff.fetch_receiving_seasons(list(years) + [season], out_dir)
+        zeros = pf.played_zero_rows(wide, games, pf.prepare_pff_rows(recv0, pgames0))
+        print(f"  played-zero rows added: {len(zeros)} ({len(zeros) / max(len(wide), 1) * 100:.1f}% of player-games)")
+        PLAYED_ZERO_INFO["rows_added"] = int(len(zeros))
+        PLAYED_ZERO_INFO["by_season"] = {int(k): int(v) for k, v in zeros["season"].value_counts().items()}
+        wide = pd.concat([wide, zeros], ignore_index=True).sort_values(["athleteId", "season", "week"]).reset_index(drop=True)
     feats = build_rolling_player_features(attach_game_environment(add_usage_features(wide), lines))
     feats = lab.add_extra_features(feats).reset_index(drop=True)
     feats["_rid"] = np.arange(len(feats))
@@ -212,6 +228,8 @@ def build_frame(years, season):
         slim = slim[["_rid"] + ROUTE_PART_COLS].rename(columns={c: c + "_db" for c in ROUTE_PART_COLS})
         feats = feats.merge(slim, on="_rid", how="left")
         feats = add_interactions(feats, "_db")
+    if PLAYED_ZEROS:
+        info["played_zeros"] = PLAYED_ZERO_INFO
     print(f"  PFF: {info}")
     starts = games.drop_duplicates("id").set_index("id")["startDate"] if "startDate" in games.columns else pd.Series(dtype=str)
     feats["start"] = feats["gameId"].map(starts)

@@ -77,8 +77,9 @@ from src.features import pff_features as pf
 from src.features.live_player_features import _normalize_name
 
 STAT = "receptions"
-OUT_JSON = "docs/data/props_lab3.json"
-OUT_CSV = "docs/data/props_lab3_detail.csv"
+_SFX = "_pz" if os.environ.get("PLAYED_ZEROS") == "1" else ""      # see props_lab2.PLAYED_ZEROS
+OUT_JSON = f"docs/data/props_lab3{_SFX}.json"
+OUT_CSV = f"docs/data/props_lab3_detail{_SFX}.csv"
 HIST_DIR = "data/props_history"         # past-season lines, saved by pull_props_history.py
 MIN_ROWS = 200
 SHRINK_GAMES = 3                    # a defense's number is pulled toward 1.00 as if it had 3 average games behind it
