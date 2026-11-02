@@ -21,6 +21,7 @@ jobs:
     timeout-minutes: 30
     env:
       PFF_API_KEY: ${{ secrets.PFF_API_KEY || secrets.CFB_API_KEY }}
+      CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -43,4 +44,4 @@ jobs:
             if git merge -X ours --no-edit origin/main -m "Merge origin/main [skip ci]" && git push origin main; then break; fi
             sleep $((RANDOM % 10 + 5))
           done
-# run: 2026-11-02b
+# run: 2026-11-02c

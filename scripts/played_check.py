@@ -57,6 +57,36 @@ def pull(path, season, week):
     return pd.DataFrame()
 
 
+def add_box_check(res, season):
+    """team_box_players = how many of his teammates CFBD lists in that game's
+    box score. A low count means CFBD's box score is missing/incomplete for
+    the team (e.g. Iowa State vs BYU, Oct 9), so a 'yes' there is NOT a
+    confirmed zero."""
+    res["team_box_players"] = None
+    if res.empty or not os.environ.get("CFBD_API_KEY"):
+        return res
+    try:
+        from src.data import cfbd_client as cfbd
+        from src.features.player_features import pivot_player_game_stats
+        games = cfbd.get_games(season)
+        games = games.assign(kick=pd.to_datetime(games["startDate"], utc=True, errors="coerce"))
+        st = pd.to_datetime(res["start_time"], utc=True)
+        near = games[games["kick"].apply(lambda k: pd.notna(k) and any(abs(k - x) <= MATCH for x in st.unique()))]
+        weeks = sorted(int(w) for w in near["week"].dropna().unique())
+        parts = [cfbd.get_player_game_stats(season, w) for w in weeks]
+        wide = pivot_player_game_stats(pd.concat([p for p in parts if p is not None and not p.empty]), games)
+        wide = wide.merge(games[["id", "kick"]].rename(columns={"id": "gameId"}), on="gameId", how="inner")
+    except Exception as e:
+        print(f"  [warn] CFBD box check skipped ({type(e).__name__}: {e})")
+        return res
+    counts = []
+    for t, k in zip(res["team"], st):
+        rows = wide[(wide["team"] == t) & ((wide["kick"] - k).abs() <= MATCH)]
+        counts.append(int(rows["player"].nunique()))
+    res["team_box_players"] = counts
+    return res
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--since", default="2026-10-07")
@@ -117,6 +147,7 @@ def main():
                     "start_time": r["start_time"], "line": r["line"], "price": r["price"],
                     "pff_week": wk, "played": played})
     res = pd.DataFrame(out)
+    res = add_box_check(res, a.season)
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     res.to_csv(OUT, index=False)
     if not res.empty:
