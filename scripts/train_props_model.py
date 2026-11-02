@@ -11,7 +11,9 @@ that had the lowest projection error on 12,000+ unseen 2025 player-games in
 the props lab. They are trained exactly as tested there:
   - only on players who already have a catch that season,
   - hit chances from the latest season, projected by a model that never saw
-    it (not from a random split).
+    it (not from a random split),
+  - (11/2026) including games a player ran routes but caught nothing, which
+    CFBD box scores leave out (see pff_features.played_zero_rows).
 A box-score-only version of each is always saved next to it as
 <stat>_base.joblib; the live export falls back to it if PFF cannot be
 reached, so props are still scored during an outage.
@@ -56,6 +58,36 @@ def load_pff_frame(df: pd.DataFrame):
         return None
 
 
+def receiving_frame_with_zeros(df: pd.DataFrame):
+    """11/2026: the training frame for the receiving models rebuilt from the
+    raw box scores PLUS a zero row for every game a player ran routes (PFF)
+    but has no CFBD line -- played, caught nothing. Trained without those,
+    the model over-projected backups (only ever saw their games with a
+    catch). Same steps as build_features.py's player features. Returns
+    None (with the reason printed) if it can't be built; the caller then
+    falls back to the frame without zeros."""
+    from src.features.player_features import (pivot_player_game_stats, attach_opponent_defense,
+                                              add_usage_features, attach_game_environment,
+                                              build_rolling_player_features)
+    try:
+        seasons = sorted(int(s) for s in df["season"].dropna().unique())
+        load = lambda name: pd.concat([pd.read_csv(f"{config.DATA_RAW_DIR}/{name}_{y}.csv") for y in seasons
+                                       if os.path.exists(f"{config.DATA_RAW_DIR}/{name}_{y}.csv")] or [pd.DataFrame()],
+                                      ignore_index=True)
+        games, stats, adv, lines = load("games"), load("player_game_stats"), load("adv_stats"), load("lines")
+        wide = pivot_player_game_stats(stats, games)
+        wide = pf.add_played_zeros(wide, games, seasons)
+        wide = attach_opponent_defense(wide, adv)
+        wide = attach_game_environment(add_usage_features(wide), lines)
+        feats = build_rolling_player_features(wide)
+        frame, info = pf.training_frame(feats, games, seasons)
+        print(f"  receiving frame with played-zero games: {len(frame)} rows | PFF {info}")
+        return frame
+    except Exception as e:
+        print(f"  [warn] played-zero receiving frame not built ({type(e).__name__}: {e}) -- using the frame without zeros")
+        return None
+
+
 def fit_with_pff(stat: str, frame: pd.DataFrame) -> tuple:
     """The props-lab 'pff' version. Returns (model, metrics)."""
     cols = list(ROLLING_FEATURE_COLUMNS) + list(pf.PFF_FEATURE_COLUMNS)
@@ -92,6 +124,10 @@ if __name__ == "__main__":
     stats_to_model = sorted(set(STAT_MAP.values()))
     print("Checking for PFF routes/targets data...")
     pff_frame = load_pff_frame(df)
+    if pff_frame is not None:
+        zframe = receiving_frame_with_zeros(df)
+        if zframe is not None:
+            pff_frame = zframe
 
     for stat in stats_to_model:
         print(f"\nTraining model for {stat}...")

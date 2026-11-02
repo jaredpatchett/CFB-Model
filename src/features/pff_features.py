@@ -294,6 +294,27 @@ def training_frame(feats: pd.DataFrame, games: pd.DataFrame, seasons: list, out_
     return add_pff_features(feats, matched), info
 
 
+def add_played_zeros(wide: pd.DataFrame, games: pd.DataFrame, seasons: list, out_dir: str = None) -> pd.DataFrame:
+    """`wide` (pivoted box scores) plus a zero row for every player-game PFF
+    shows him running routes but CFBD has no line (11/2026; see
+    played_zero_rows). Used for the receiving models only."""
+    from src.data import pff_client as pff
+    out_dir = out_dir or os.environ.get("PFF_DATA_DIR") or os.path.join(tempfile.gettempdir(), "pff_train")
+    recv, pgames = pff.fetch_receiving_seasons(list(seasons), out_dir, verbose=False)
+    if recv.empty:
+        raise RuntimeError("PFF returned no receiving rows")
+    for c in ("athleteId", "gameId", "season", "week"):
+        wide[c] = pd.to_numeric(wide[c], errors="coerce")
+    wide = wide.dropna(subset=["athleteId", "gameId", "season", "week"])
+    for c in ("athleteId", "gameId", "season", "week"):
+        wide[c] = wide[c].astype("int64")
+    g = games.assign(id=pd.to_numeric(games["id"], errors="coerce")).dropna(subset=["id"])
+    g["id"] = g["id"].astype("int64")
+    zeros = played_zero_rows(wide, g, prepare_pff_rows(recv, pgames))
+    print(f"  played-zero rows added: {len(zeros)} ({len(zeros) / max(len(wide), 1) * 100:.1f}% of player-games)")
+    return pd.concat([wide, zeros], ignore_index=True).sort_values(["athleteId", "season", "week"]).reset_index(drop=True)
+
+
 def live_snapshot(player_stats_long: pd.DataFrame, games: pd.DataFrame, season: int):
     """(athleteId -> PFF features for the next game, match info) for the
     current season. Always pulls fresh -- a new temp folder each call."""
@@ -310,7 +331,40 @@ def live_snapshot(player_stats_long: pd.DataFrame, games: pd.DataFrame, season: 
     info["cfbd_games"] = int(wide["gameId"].nunique())
     info["games_charted_by_pff"] = int(charted.loc[charted["c"].notna(), "gameId"].nunique())
     info["pff_incomplete"] = pff.fetch_issues()
-    return current_pff_snapshot(wide, matched), info
+    snap = current_pff_snapshot(wide, matched)
+    # 11/2026: the receiving models are trained with played-zero games
+    # (ran routes, no box-score line), so they score on averages that
+    # include them too. Kept per player under "recv"; other stats untouched.
+    try:
+        from src.features.player_features import add_usage_features, current_feature_snapshot
+        g = games.assign(id=pd.to_numeric(games["id"], errors="coerce")).dropna(subset=["id"])
+        g["id"] = g["id"].astype("int64")
+        w = wide.copy()
+        for c in ("athleteId", "gameId", "season", "week"):
+            w[c] = pd.to_numeric(w[c], errors="coerce")
+        w = w.dropna(subset=["athleteId", "gameId", "season", "week"])
+        for c in ("athleteId", "gameId", "season", "week"):
+            w[c] = w[c].astype("int64")
+        zeros = played_zero_rows(w, g, prepare_pff_rows(recv, pgames))
+        wz = pd.concat([w, zeros], ignore_index=True).sort_values(["athleteId", "season", "week"])
+        mz, _ = match_pff_to_cfbd(wz, g, prepare_pff_rows(recv, pgames))
+        form = current_feature_snapshot(add_usage_features(wz))
+        psnap = current_pff_snapshot(wz, mz)
+        form = {int(k): v for k, v in form.items()}
+        psnap = {int(k): v for k, v in psnap.items()}
+        for aid, e in snap.items():
+            try:
+                k = int(aid)
+            except (TypeError, ValueError):
+                continue
+            r = dict(form.get(k) or {})
+            r.update(psnap.get(k) or {})
+            if r:
+                e["recv"] = r
+        info["played_zero_rows"] = int(len(zeros))
+    except Exception as e:
+        info["played_zero_rows"] = f"not added ({type(e).__name__}: {e})"
+    return snap, info
 
 
 def apply_live_pff(player_form: dict, prop_models: dict, player_stats_long: pd.DataFrame,

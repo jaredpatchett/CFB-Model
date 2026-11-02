@@ -309,6 +309,10 @@ def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
         return None
 
     entry = player_form.get(_normalize_name(player_name))
+    if entry and stat in ("receptions", "rec_yds") and entry.get("recv"):
+        # 11/2026: receiving models score on averages that include games he
+        # played without a catch (see pff_features.live_snapshot).
+        entry = {**entry, **entry["recv"]}
     if not entry or entry["games_played_prior"] < MIN_GAMES_FOR_PROP_MODEL:
         return None
 
