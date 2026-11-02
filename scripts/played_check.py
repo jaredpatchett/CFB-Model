@@ -79,11 +79,17 @@ def add_box_check(res, season):
     except Exception as e:
         print(f"  [warn] CFBD box check skipped ({type(e).__name__}: {e})")
         return res
-    counts = []
-    for t, k in zip(res["team"], st):
+    from src.features.live_player_features import market_name_to_stat
+    wide["n"] = wide["player"].map(norm)
+    counts, now_stat = [], []
+    for t, k, pl, mk in zip(res["team"], st, res["player"], res["market"]):
         rows = wide[(wide["team"] == t) & ((wide["kick"] - k).abs() <= MATCH)]
         counts.append(int(rows["player"].nunique()))
+        me = rows[rows["n"] == norm(pl)]
+        stat = market_name_to_stat(mk)
+        now_stat.append(float(me.iloc[0][stat]) if not me.empty and stat in me.columns and pd.notna(me.iloc[0][stat]) else None)
     res["team_box_players"] = counts
+    res["box_stat_now"] = now_stat   # CFBD stat if he's in the box score NOW (tracker's void may be stale)
     return res
 
 
