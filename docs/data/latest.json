@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T21:12:20.644873+00:00",
+  "generated_at": "2026-11-02T21:49:20.007082+00:00",
   "team_metadata_year": 2025,
   "current_season_year": 2026,
   "preseason_prior": {
@@ -2430,10 +2430,10 @@
       "book_used": "draftkings",
       "moneyline_home": 400.0,
       "moneyline_away": -535.0,
-      "spread_home": 13.5,
-      "spread_away": -13.5,
-      "spread_price_home": -108.0,
-      "spread_price_away": -112.0,
+      "spread_home": 14.0,
+      "spread_away": -14.0,
+      "spread_price_home": -115.0,
+      "spread_price_away": -105.0,
       "total_over": 51.5,
       "total_under": 51.5,
       "home_unmatched": false,
@@ -5487,8 +5487,8 @@
       "moneyline_away": null,
       "spread_home": -48.5,
       "spread_away": 48.5,
-      "spread_price_home": -106.0,
-      "spread_price_away": -114.0,
+      "spread_price_home": -102.0,
+      "spread_price_away": -120.0,
       "total_over": 59.5,
       "total_under": 59.5,
       "home_unmatched": false,
@@ -8516,44 +8516,6 @@
     {
       "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
       "start_time": "2026-11-04T00:00:00Z",
-      "player_name": "Brayden Roggow",
-      "market_name": "Pass Yards",
-      "line": 205.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 171.2,
-      "model_edge": -34.3,
-      "model_lean": "under",
-      "model_confidence": "normal",
-      "team": "Akron",
-      "opponent": "Ohio",
-      "games_played": 8,
-      "rec_share": 0.0,
-      "carry_share": 0.1423050140881023,
-      "model_over_probability": 0.223,
-      "model_under_probability": 0.777,
-      "model_push_probability": 0.0,
-      "game_log_key": "5146903|pass_yds",
-      "model_stat": "pass_yds",
-      "model_projection_raw": 171.23222,
-      "model_ev": 45.9,
-      "model_lean_probability": 0.777,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "C",
-      "mu_score": 41,
-      "mu_rank": 81,
-      "mu_of": 136,
-      "mu_vs": "the pass",
-      "mu_def": "average",
-      "mu_allowed": {
-        "pass yds": 1
-      }
-    },
-    {
-      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
-      "start_time": "2026-11-04T00:00:00Z",
       "player_name": "Nick Poulos",
       "market_name": "Pass Yards",
       "line": 202.5,
@@ -8587,6 +8549,44 @@
       "mu_def": "soft",
       "mu_allowed": {
         "pass yds": 6
+      }
+    },
+    {
+      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
+      "start_time": "2026-11-04T00:00:00Z",
+      "player_name": "Brayden Roggow",
+      "market_name": "Pass Yards",
+      "line": 205.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 171.2,
+      "model_edge": -34.3,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Akron",
+      "opponent": "Ohio",
+      "games_played": 8,
+      "rec_share": 0.0,
+      "carry_share": 0.1423050140881023,
+      "model_over_probability": 0.223,
+      "model_under_probability": 0.777,
+      "model_push_probability": 0.0,
+      "game_log_key": "5146903|pass_yds",
+      "model_stat": "pass_yds",
+      "model_projection_raw": 171.23222,
+      "model_ev": 45.9,
+      "model_lean_probability": 0.777,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "C",
+      "mu_score": 41,
+      "mu_rank": 81,
+      "mu_of": 136,
+      "mu_vs": "the pass",
+      "mu_def": "average",
+      "mu_allowed": {
+        "pass yds": 1
       }
     },
     {
@@ -8668,8 +8668,8 @@
       "over_price": -114,
       "under_price": -114.0,
       "book_used": "fanduel",
-      "model_predicted_value": 46.7,
-      "model_edge": 10.2,
+      "model_predicted_value": 47.0,
+      "model_edge": 10.5,
       "model_lean": "over",
       "model_confidence": "normal",
       "team": "Ohio",
@@ -8677,14 +8677,14 @@
       "games_played": 8,
       "rec_share": 0.14818454571744044,
       "carry_share": 0.0075,
-      "model_over_probability": 0.5425,
-      "model_under_probability": 0.4575,
+      "model_over_probability": 0.5475,
+      "model_under_probability": 0.4525,
       "model_push_probability": 0.0,
       "game_log_key": "5193110|rec_yds",
       "model_stat": "rec_yds",
-      "model_projection_raw": 46.680031,
-      "model_ev": 1.8,
-      "model_lean_probability": 0.5425,
+      "model_projection_raw": 46.990033,
+      "model_ev": 2.8,
+      "model_lean_probability": 0.5475,
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "A",
@@ -8713,8 +8713,8 @@
       "over_price": -114,
       "under_price": -114.0,
       "book_used": "fanduel",
-      "model_predicted_value": 63.0,
-      "model_edge": 6.5,
+      "model_predicted_value": 63.6,
+      "model_edge": 7.1,
       "model_lean": "over",
       "model_confidence": "normal",
       "team": "Ohio",
@@ -8722,14 +8722,14 @@
       "games_played": 8,
       "rec_share": 0.32067986837723683,
       "carry_share": 0.0,
-      "model_over_probability": 0.504,
-      "model_under_probability": 0.496,
+      "model_over_probability": 0.51,
+      "model_under_probability": 0.49,
       "model_push_probability": 0.0,
       "game_log_key": "5228764|rec_yds",
       "model_stat": "rec_yds",
-      "model_projection_raw": 62.983934,
-      "model_ev": -5.4,
-      "model_lean_probability": 0.504,
+      "model_projection_raw": 63.614215,
+      "model_ev": -4.3,
+      "model_lean_probability": 0.51,
       "is_official_play": false,
       "is_watch_play": false,
       "injury_status": "Questionable",
@@ -8750,8 +8750,8 @@
       "over_price": -118,
       "under_price": -114.0,
       "book_used": "fanduel",
-      "model_predicted_value": 35.8,
-      "model_edge": 4.3,
+      "model_predicted_value": 36.1,
+      "model_edge": 4.6,
       "model_lean": "over",
       "model_confidence": "normal",
       "team": "Ohio",
@@ -8759,14 +8759,14 @@
       "games_played": 8,
       "rec_share": 0.1338072563401511,
       "carry_share": 0.020986730660643705,
-      "model_over_probability": 0.4615,
-      "model_under_probability": 0.5385,
+      "model_over_probability": 0.4665,
+      "model_under_probability": 0.5335,
       "model_push_probability": 0.0,
       "game_log_key": "5211691|rec_yds",
       "model_stat": "rec_yds",
-      "model_projection_raw": 35.799024,
-      "model_ev": -14.7,
-      "model_lean_probability": 0.4615,
+      "model_projection_raw": 36.109026,
+      "model_ev": -13.8,
+      "model_lean_probability": 0.4665,
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "A",
@@ -8934,8 +8934,8 @@
       "over_price": -114,
       "under_price": -114.0,
       "book_used": "fanduel",
-      "model_predicted_value": 76.8,
-      "model_edge": -8.7,
+      "model_predicted_value": 74.4,
+      "model_edge": -11.1,
       "model_lean": "under",
       "model_confidence": "normal",
       "team": "Akron",
@@ -8943,14 +8943,14 @@
       "games_played": 8,
       "rec_share": 0.10366055513114336,
       "carry_share": 0.4633184463147698,
-      "model_over_probability": 0.3555,
-      "model_under_probability": 0.6445,
+      "model_over_probability": 0.335,
+      "model_under_probability": 0.665,
       "model_push_probability": 0.0,
       "game_log_key": "5084582|rush_yds",
       "model_stat": "rush_yds",
-      "model_projection_raw": 76.80807,
-      "model_ev": 21.0,
-      "model_lean_probability": 0.6445,
+      "model_projection_raw": 74.408604,
+      "model_ev": 24.8,
+      "model_lean_probability": 0.665,
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "D",
@@ -9044,12 +9044,12 @@
       "start_time": "2026-11-04T00:00:00Z",
       "player_name": "Dom Dorwart",
       "market_name": "Reception Yards",
-      "line": 42.5,
-      "over_price": 110,
-      "under_price": -140.0,
+      "line": 37.5,
+      "over_price": -115,
+      "under_price": -115.0,
       "book_used": "espnbet",
-      "model_predicted_value": 46.7,
-      "model_edge": 4.2,
+      "model_predicted_value": 47.0,
+      "model_edge": 9.5,
       "model_lean": "over",
       "model_confidence": "normal",
       "team": "Ohio",
@@ -9057,14 +9057,14 @@
       "games_played": 8,
       "rec_share": 0.14818454571744044,
       "carry_share": 0.0075,
-      "model_over_probability": 0.4755,
-      "model_under_probability": 0.5245,
+      "model_over_probability": 0.5335,
+      "model_under_probability": 0.4665,
       "model_push_probability": 0.0,
       "game_log_key": "5193110|rec_yds",
       "model_stat": "rec_yds",
-      "model_projection_raw": 46.680031,
-      "model_ev": -0.1,
-      "model_lean_probability": 0.4755,
+      "model_projection_raw": 46.990033,
+      "model_ev": -0.3,
+      "model_lean_probability": 0.5335,
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "A",
@@ -9118,8 +9118,8 @@
       "over_price": -125,
       "under_price": -105.0,
       "book_used": "espnbet",
-      "model_predicted_value": 76.8,
-      "model_edge": -7.7,
+      "model_predicted_value": 74.4,
+      "model_edge": -10.1,
       "model_lean": "under",
       "model_confidence": "normal",
       "team": "Akron",
@@ -9127,14 +9127,14 @@
       "games_played": 8,
       "rec_share": 0.10366055513114336,
       "carry_share": 0.4633184463147698,
-      "model_over_probability": 0.364,
-      "model_under_probability": 0.636,
+      "model_over_probability": 0.3425,
+      "model_under_probability": 0.6575,
       "model_push_probability": 0.0,
       "game_log_key": "5084582|rush_yds",
       "model_stat": "rush_yds",
-      "model_projection_raw": 76.80807,
-      "model_ev": 24.2,
-      "model_lean_probability": 0.636,
+      "model_projection_raw": 74.408604,
+      "model_ev": 28.4,
+      "model_lean_probability": 0.6575,
       "is_official_play": true,
       "is_watch_play": false,
       "play_kind": "rush_under",
@@ -10226,8 +10226,8 @@
       "player_name": "Bear Bachmeier",
       "market_name": "Pass Touchdowns",
       "line": 0.5,
-      "over_price": -192,
-      "under_price": 142.0,
+      "over_price": -200,
+      "under_price": 148.0,
       "book_used": "fanduel",
       "model_predicted_value": 1.2,
       "model_edge": 0.7,
@@ -10244,7 +10244,7 @@
       "game_log_key": "5141367|pass_tds",
       "model_stat": "pass_tds",
       "model_projection_raw": 1.229361,
-      "model_ev": 29.7,
+      "model_ev": 28.0,
       "model_lean_probability": 0.853,
       "is_official_play": false,
       "is_watch_play": false,
@@ -10264,8 +10264,8 @@
       "player_name": "Devon Dampier",
       "market_name": "Pass Touchdowns",
       "line": 1.5,
-      "over_price": 120,
-      "under_price": -160.0,
+      "over_price": 118,
+      "under_price": -158.0,
       "book_used": "fanduel",
       "model_predicted_value": 1.5,
       "model_edge": -0.0,
@@ -10282,7 +10282,7 @@
       "game_log_key": "5105849|pass_tds",
       "model_stat": "pass_tds",
       "model_projection_raw": 1.486936,
-      "model_ev": 21.4,
+      "model_ev": 22.0,
       "model_lean_probability": 0.747,
       "is_official_play": false,
       "is_watch_play": false,
@@ -11786,44 +11786,6 @@
     {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
       "start_time": "2026-11-07T20:30:00Z",
-      "player_name": "Keelon Russell",
-      "market_name": "Pass Yards",
-      "line": 237.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 219.0,
-      "model_edge": -18.5,
-      "model_lean": "under",
-      "model_confidence": "normal",
-      "team": "Alabama",
-      "opponent": "LSU",
-      "games_played": 8,
-      "rec_share": 0.006578947368421052,
-      "carry_share": 0.250661447459477,
-      "model_over_probability": 0.267,
-      "model_under_probability": 0.733,
-      "model_push_probability": 0.0,
-      "game_log_key": "5141629|pass_yds",
-      "model_stat": "pass_yds",
-      "model_projection_raw": 218.994972,
-      "model_ev": 37.6,
-      "model_lean_probability": 0.733,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "A+",
-      "mu_score": 99,
-      "mu_rank": 3,
-      "mu_of": 136,
-      "mu_vs": "the pass",
-      "mu_def": "tough",
-      "mu_allowed": {
-        "pass yds": -18
-      }
-    },
-    {
-      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
-      "start_time": "2026-11-07T20:30:00Z",
       "player_name": "Sam Leavitt",
       "market_name": "Pass Yards",
       "line": 261.5,
@@ -11857,6 +11819,44 @@
       "mu_def": "average",
       "mu_allowed": {
         "pass yds": 0
+      }
+    },
+    {
+      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
+      "start_time": "2026-11-07T20:30:00Z",
+      "player_name": "Keelon Russell",
+      "market_name": "Pass Yards",
+      "line": 237.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 219.0,
+      "model_edge": -18.5,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Alabama",
+      "opponent": "LSU",
+      "games_played": 8,
+      "rec_share": 0.006578947368421052,
+      "carry_share": 0.250661447459477,
+      "model_over_probability": 0.267,
+      "model_under_probability": 0.733,
+      "model_push_probability": 0.0,
+      "game_log_key": "5141629|pass_yds",
+      "model_stat": "pass_yds",
+      "model_projection_raw": 218.994972,
+      "model_ev": 37.6,
+      "model_lean_probability": 0.733,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "A+",
+      "mu_score": 99,
+      "mu_rank": 3,
+      "mu_of": 136,
+      "mu_vs": "the pass",
+      "mu_def": "tough",
+      "mu_allowed": {
+        "pass yds": -18
       }
     },
     {
@@ -13199,12 +13199,12 @@
       "start_time": "2026-11-08T00:30:00Z",
       "player_name": "Gunner Stockton",
       "market_name": "Rush Yards",
-      "line": 19.5,
+      "line": 22.5,
       "over_price": -114,
       "under_price": -114.0,
       "book_used": "fanduel",
       "model_predicted_value": 26.9,
-      "model_edge": 7.4,
+      "model_edge": 4.4,
       "model_lean": "over",
       "model_confidence": "normal",
       "team": "Georgia",
@@ -13212,14 +13212,14 @@
       "games_played": 8,
       "rec_share": 0.0,
       "carry_share": 0.16930214393449688,
-      "model_over_probability": 0.5065,
-      "model_under_probability": 0.4935,
+      "model_over_probability": 0.438,
+      "model_under_probability": 0.562,
       "model_push_probability": 0.0,
       "game_log_key": "4685578|rush_yds",
       "model_stat": "rush_yds",
       "model_projection_raw": 26.862912,
-      "model_ev": -4.9,
-      "model_lean_probability": 0.5065,
+      "model_ev": -17.8,
+      "model_lean_probability": 0.438,
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "C",
@@ -13237,12 +13237,12 @@
       "start_time": "2026-11-08T00:30:00Z",
       "player_name": "Makhi Frazier",
       "market_name": "Rush Yards",
-      "line": 39.5,
+      "line": 41.5,
       "over_price": -114,
       "under_price": -114.0,
       "book_used": "fanduel",
       "model_predicted_value": 47.3,
-      "model_edge": 7.8,
+      "model_edge": 5.8,
       "model_lean": "over",
       "model_confidence": "normal",
       "team": "Ole Miss",
@@ -13250,14 +13250,14 @@
       "games_played": 7,
       "rec_share": 0.04792207792207793,
       "carry_share": 0.2662093608558202,
-      "model_over_probability": 0.512,
-      "model_under_probability": 0.488,
+      "model_over_probability": 0.4925,
+      "model_under_probability": 0.5075,
       "model_push_probability": 0.0,
       "game_log_key": "5084286|rush_yds",
       "model_stat": "rush_yds",
       "model_projection_raw": 47.271415,
-      "model_ev": -3.9,
-      "model_lean_probability": 0.512,
+      "model_ev": -7.5,
+      "model_lean_probability": 0.4925,
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "F",
@@ -13312,6 +13312,44 @@
     {
       "fixture_id": "4aac00e6cc06b8905659f911419540d2",
       "start_time": "2026-11-08T00:30:00Z",
+      "player_name": "CJ Carr",
+      "market_name": "Pass Touchdowns",
+      "line": 1.5,
+      "over_price": -162,
+      "under_price": 122.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 1.9,
+      "model_edge": 0.4,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Notre Dame",
+      "opponent": "Miami",
+      "games_played": 8,
+      "rec_share": 0.004629629629629629,
+      "carry_share": 0.08628185333926719,
+      "model_over_probability": 0.76,
+      "model_under_probability": 0.24,
+      "model_push_probability": 0.0,
+      "game_log_key": "5079369|pass_tds",
+      "model_stat": "pass_tds",
+      "model_projection_raw": 1.927432,
+      "model_ev": 22.9,
+      "model_lean_probability": 0.76,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "B+",
+      "mu_score": 76,
+      "mu_rank": 104,
+      "mu_of": 136,
+      "mu_vs": "the pass",
+      "mu_def": "soft",
+      "mu_allowed": {
+        "pass yds": 9
+      }
+    },
+    {
+      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
+      "start_time": "2026-11-08T00:30:00Z",
       "player_name": "Darian Mensah",
       "market_name": "Pass Touchdowns",
       "line": 1.5,
@@ -13345,44 +13383,6 @@
       "mu_def": "tough",
       "mu_allowed": {
         "pass yds": -17
-      }
-    },
-    {
-      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
-      "start_time": "2026-11-08T00:30:00Z",
-      "player_name": "CJ Carr",
-      "market_name": "Pass Touchdowns",
-      "line": 1.5,
-      "over_price": -160,
-      "under_price": 120.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 1.9,
-      "model_edge": 0.4,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "Notre Dame",
-      "opponent": "Miami",
-      "games_played": 8,
-      "rec_share": 0.004629629629629629,
-      "carry_share": 0.08628185333926719,
-      "model_over_probability": 0.76,
-      "model_under_probability": 0.24,
-      "model_push_probability": 0.0,
-      "game_log_key": "5079369|pass_tds",
-      "model_stat": "pass_tds",
-      "model_projection_raw": 1.927432,
-      "model_ev": 23.5,
-      "model_lean_probability": 0.76,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "B+",
-      "mu_score": 76,
-      "mu_rank": 104,
-      "mu_of": 136,
-      "mu_vs": "the pass",
-      "mu_def": "soft",
-      "mu_allowed": {
-        "pass yds": 9
       }
     },
     {
@@ -13595,8 +13595,8 @@
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "D",
-      "mu_score": 36,
-      "mu_rank": 50,
+      "mu_score": 37,
+      "mu_rank": 51,
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "average"
@@ -13630,8 +13630,8 @@
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "D",
-      "mu_score": 36,
-      "mu_rank": 50,
+      "mu_score": 37,
+      "mu_rank": 51,
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "average"
@@ -13665,8 +13665,8 @@
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "B",
-      "mu_score": 64,
-      "mu_rank": 50,
+      "mu_score": 63,
+      "mu_rank": 51,
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "average"
@@ -13771,9 +13771,8 @@
       "model_projection_raw": 54.119183,
       "model_ev": 7.8,
       "model_lean_probability": 0.5695,
-      "is_official_play": true,
+      "is_official_play": false,
       "is_watch_play": false,
-      "play_kind": "rush_under",
       "mu_grade": "A+",
       "mu_score": 98,
       "mu_rank": 4,
@@ -13895,8 +13894,8 @@
       "player_name": "CJ Carr",
       "market_name": "Pass Attempts",
       "line": 30.5,
-      "over_price": -130,
-      "under_price": -120.0,
+      "over_price": -125,
+      "under_price": -125.0,
       "book_used": "fliff",
       "model_predicted_value": 30.9,
       "model_edge": 0.4,
@@ -13913,7 +13912,7 @@
       "game_log_key": "5079369|pass_att",
       "model_stat": "pass_att",
       "model_projection_raw": 30.938502,
-      "model_ev": 11.3,
+      "model_ev": 13.2,
       "model_lean_probability": 0.629,
       "is_official_play": false,
       "is_watch_play": false
@@ -14001,7 +14000,7 @@
       "market_name": "Pass Interceptions",
       "line": 0.5,
       "over_price": -145,
-      "under_price": -105.0,
+      "under_price": -110.0,
       "book_used": "fliff",
       "model_predicted_value": 1.2,
       "model_edge": 0.7,
@@ -14075,31 +14074,31 @@
       "start_time": "2026-11-08T00:30:00Z",
       "player_name": "Darian Mensah",
       "market_name": "Pass Yards",
-      "line": 263.5,
+      "line": 261.5,
       "over_price": -125,
       "under_price": -125.0,
       "book_used": "fliff",
       "model_predicted_value": 261.6,
-      "model_edge": -1.9,
-      "model_lean": "under",
+      "model_edge": 0.1,
+      "model_lean": "over",
       "model_confidence": "normal",
       "team": "Miami",
       "opponent": "Notre Dame",
       "games_played": 8,
       "rec_share": 0.0,
       "carry_share": 0.0820610608753991,
-      "model_over_probability": 0.3145,
-      "model_under_probability": 0.6855,
+      "model_over_probability": 0.322,
+      "model_under_probability": 0.678,
       "model_push_probability": 0.0,
       "game_log_key": "5121169|pass_yds",
       "model_stat": "pass_yds",
       "model_projection_raw": 261.611008,
-      "model_ev": 23.4,
-      "model_lean_probability": 0.6855,
+      "model_ev": -42.0,
+      "model_lean_probability": 0.322,
       "is_official_play": false,
       "is_watch_play": false,
-      "mu_grade": "A",
-      "mu_score": 90,
+      "mu_grade": "F",
+      "mu_score": 10,
       "mu_rank": 15,
       "mu_of": 136,
       "mu_vs": "the pass",
@@ -14184,41 +14183,6 @@
     {
       "fixture_id": "4aac00e6cc06b8905659f911419540d2",
       "start_time": "2026-11-08T00:30:00Z",
-      "player_name": "Micah Gilbert",
-      "market_name": "Reception Touchdowns",
-      "line": 0.5,
-      "over_price": 190,
-      "under_price": NaN,
-      "book_used": "fliff",
-      "model_predicted_value": 0.4,
-      "model_edge": -0.1,
-      "model_lean": "under",
-      "model_confidence": "normal",
-      "team": "Notre Dame",
-      "opponent": "Miami",
-      "games_played": 8,
-      "rec_share": 0.15174237677527153,
-      "carry_share": 0.0,
-      "model_over_probability": 0.3395,
-      "model_under_probability": 0.6605,
-      "model_push_probability": 0.0,
-      "game_log_key": "5079475|rec_tds",
-      "model_stat": "rec_tds",
-      "model_projection_raw": 0.366806,
-      "model_ev": null,
-      "model_lean_probability": 0.6605,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "F",
-      "mu_score": 12,
-      "mu_rank": 121,
-      "mu_of": 136,
-      "mu_vs": "WRs",
-      "mu_def": "soft"
-    },
-    {
-      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
-      "start_time": "2026-11-08T00:30:00Z",
       "player_name": "Jaden Greathouse",
       "market_name": "Reception Touchdowns",
       "line": 0.5,
@@ -14254,10 +14218,45 @@
     {
       "fixture_id": "4aac00e6cc06b8905659f911419540d2",
       "start_time": "2026-11-08T00:30:00Z",
+      "player_name": "Micah Gilbert",
+      "market_name": "Reception Touchdowns",
+      "line": 0.5,
+      "over_price": 195,
+      "under_price": NaN,
+      "book_used": "fliff",
+      "model_predicted_value": 0.4,
+      "model_edge": -0.1,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Notre Dame",
+      "opponent": "Miami",
+      "games_played": 8,
+      "rec_share": 0.15174237677527153,
+      "carry_share": 0.0,
+      "model_over_probability": 0.3395,
+      "model_under_probability": 0.6605,
+      "model_push_probability": 0.0,
+      "game_log_key": "5079475|rec_tds",
+      "model_stat": "rec_tds",
+      "model_projection_raw": 0.366806,
+      "model_ev": null,
+      "model_lean_probability": 0.6605,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "F",
+      "mu_score": 12,
+      "mu_rank": 121,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "soft"
+    },
+    {
+      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
+      "start_time": "2026-11-08T00:30:00Z",
       "player_name": "Cooper Barkate",
       "market_name": "Reception Touchdowns",
       "line": 0.5,
-      "over_price": 215,
+      "over_price": 220,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.3,
@@ -14280,8 +14279,8 @@
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "B",
-      "mu_score": 64,
-      "mu_rank": 50,
+      "mu_score": 63,
+      "mu_rank": 51,
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "average"
@@ -14292,7 +14291,7 @@
       "player_name": "Elija Lofton",
       "market_name": "Reception Touchdowns",
       "line": 0.5,
-      "over_price": 265,
+      "over_price": 260,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.2,
@@ -14327,7 +14326,7 @@
       "player_name": "Daylyn Upshaw",
       "market_name": "Reception Touchdowns",
       "line": 0.5,
-      "over_price": 275,
+      "over_price": 270,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.2,
@@ -14350,8 +14349,8 @@
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "B",
-      "mu_score": 64,
-      "mu_rank": 50,
+      "mu_score": 63,
+      "mu_rank": 51,
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "average"
@@ -14362,7 +14361,7 @@
       "player_name": "Nolan James Jr.",
       "market_name": "Reception Touchdowns",
       "line": 0.5,
-      "over_price": 515,
+      "over_price": 545,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.1,
@@ -14397,7 +14396,7 @@
       "player_name": "Mark Fletcher Jr.",
       "market_name": "Reception Touchdowns",
       "line": 0.5,
-      "over_price": 770,
+      "over_price": 765,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.0,
@@ -14432,7 +14431,7 @@
       "player_name": "Gavin Mueller",
       "market_name": "Reception Touchdowns",
       "line": 0.5,
-      "over_price": 820,
+      "over_price": 810,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.2,
@@ -14467,7 +14466,7 @@
       "player_name": "Aneyas Williams",
       "market_name": "Reception Touchdowns",
       "line": 0.5,
-      "over_price": 880,
+      "over_price": 935,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.1,
@@ -14502,7 +14501,7 @@
       "player_name": "Javian Mallory",
       "market_name": "Reception Touchdowns",
       "line": 0.5,
-      "over_price": 1005,
+      "over_price": 1020,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.0,
@@ -14534,45 +14533,10 @@
     {
       "fixture_id": "4aac00e6cc06b8905659f911419540d2",
       "start_time": "2026-11-08T00:30:00Z",
-      "player_name": "Israel Briggs",
-      "market_name": "Reception Touchdowns",
-      "line": 0.5,
-      "over_price": 1045,
-      "under_price": NaN,
-      "book_used": "fliff",
-      "model_predicted_value": 0.1,
-      "model_edge": -0.4,
-      "model_lean": "under",
-      "model_confidence": "low",
-      "team": "Miami",
-      "opponent": "Notre Dame",
-      "games_played": 2,
-      "rec_share": 0.03464755077658303,
-      "carry_share": 0.0,
-      "model_over_probability": 0.099,
-      "model_under_probability": 0.901,
-      "model_push_probability": 0.0,
-      "game_log_key": "5245125|rec_tds",
-      "model_stat": "rec_tds",
-      "model_projection_raw": 0.114956,
-      "model_ev": null,
-      "model_lean_probability": 0.901,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "B+",
-      "mu_score": 74,
-      "mu_rank": 36,
-      "mu_of": 136,
-      "mu_vs": "TEs",
-      "mu_def": "tough"
-    },
-    {
-      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
-      "start_time": "2026-11-08T00:30:00Z",
       "player_name": "Jonaz Walton",
       "market_name": "Reception Touchdowns",
       "line": 0.5,
-      "over_price": 1105,
+      "over_price": 1085,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.0,
@@ -14607,9 +14571,79 @@
       "player_name": "Vandrevius Jacobs",
       "market_name": "Reception Touchdowns",
       "line": 0.5,
-      "over_price": 1105,
+      "over_price": 1095,
       "under_price": NaN,
       "book_used": "fliff"
+    },
+    {
+      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "player_name": "Israel Briggs",
+      "market_name": "Reception Touchdowns",
+      "line": 0.5,
+      "over_price": 1105,
+      "under_price": NaN,
+      "book_used": "fliff",
+      "model_predicted_value": 0.1,
+      "model_edge": -0.4,
+      "model_lean": "under",
+      "model_confidence": "low",
+      "team": "Miami",
+      "opponent": "Notre Dame",
+      "games_played": 2,
+      "rec_share": 0.03464755077658303,
+      "carry_share": 0.0,
+      "model_over_probability": 0.099,
+      "model_under_probability": 0.901,
+      "model_push_probability": 0.0,
+      "game_log_key": "5245125|rec_tds",
+      "model_stat": "rec_tds",
+      "model_projection_raw": 0.114956,
+      "model_ev": null,
+      "model_lean_probability": 0.901,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "B+",
+      "mu_score": 74,
+      "mu_rank": 36,
+      "mu_of": 136,
+      "mu_vs": "TEs",
+      "mu_def": "tough"
+    },
+    {
+      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "player_name": "Somourian Wingo",
+      "market_name": "Reception Touchdowns",
+      "line": 0.5,
+      "over_price": 1540,
+      "under_price": NaN,
+      "book_used": "fliff",
+      "model_predicted_value": 0.2,
+      "model_edge": -0.3,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Miami",
+      "opponent": "Notre Dame",
+      "games_played": 4,
+      "rec_share": 0.06983273596176821,
+      "carry_share": 0.0,
+      "model_over_probability": 0.184,
+      "model_under_probability": 0.816,
+      "model_push_probability": 0.0,
+      "game_log_key": "5200381|rec_tds",
+      "model_stat": "rec_tds",
+      "model_projection_raw": 0.215537,
+      "model_ev": null,
+      "model_lean_probability": 0.816,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "B",
+      "mu_score": 63,
+      "mu_rank": 51,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "average"
     },
     {
       "fixture_id": "4aac00e6cc06b8905659f911419540d2",
@@ -14652,8 +14686,8 @@
       "player_name": "Cooper Barkate",
       "market_name": "Reception Yards",
       "line": 47.5,
-      "over_price": -125,
-      "under_price": -125.0,
+      "over_price": -120,
+      "under_price": -130.0,
       "book_used": "fliff",
       "model_predicted_value": 36.4,
       "model_edge": -11.1,
@@ -14670,13 +14704,13 @@
       "game_log_key": "4804878|rec_yds",
       "model_stat": "rec_yds",
       "model_projection_raw": 36.448507,
-      "model_ev": 29.7,
+      "model_ev": 27.5,
       "model_lean_probability": 0.7205,
       "is_official_play": false,
       "is_watch_play": true,
       "mu_grade": "B",
-      "mu_score": 64,
-      "mu_rank": 50,
+      "mu_score": 63,
+      "mu_rank": 51,
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "average"
@@ -14687,7 +14721,7 @@
       "player_name": "Jaden Greathouse",
       "market_name": "Reception Yards",
       "line": 39.5,
-      "over_price": -125,
+      "over_price": -120,
       "under_price": -125.0,
       "book_used": "fliff",
       "model_predicted_value": 40.3,
@@ -14705,7 +14739,7 @@
       "game_log_key": "4870768|rec_yds",
       "model_stat": "rec_yds",
       "model_projection_raw": 40.255108,
-      "model_ev": -21.5,
+      "model_ev": -20.1,
       "model_lean_probability": 0.436,
       "is_official_play": false,
       "is_watch_play": false,
@@ -14721,12 +14755,12 @@
       "start_time": "2026-11-08T00:30:00Z",
       "player_name": "Daylyn Upshaw",
       "market_name": "Reception Yards",
-      "line": 37.5,
-      "over_price": -130,
-      "under_price": -120.0,
+      "line": 38.5,
+      "over_price": -125,
+      "under_price": -125.0,
       "book_used": "fliff",
       "model_predicted_value": 32.7,
-      "model_edge": -4.8,
+      "model_edge": -5.8,
       "model_lean": "under",
       "model_confidence": "normal",
       "team": "Miami",
@@ -14734,19 +14768,19 @@
       "games_played": 8,
       "rec_share": 0.1107379899981583,
       "carry_share": 0.0,
-      "model_over_probability": 0.3325,
-      "model_under_probability": 0.6675,
+      "model_over_probability": 0.324,
+      "model_under_probability": 0.676,
       "model_push_probability": 0.0,
       "game_log_key": "5164365|rec_yds",
       "model_stat": "rec_yds",
       "model_projection_raw": 32.661362,
-      "model_ev": 22.4,
-      "model_lean_probability": 0.6675,
+      "model_ev": 21.7,
+      "model_lean_probability": 0.676,
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "B",
-      "mu_score": 64,
-      "mu_rank": 50,
+      "mu_score": 63,
+      "mu_rank": 51,
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "average"
@@ -14756,12 +14790,12 @@
       "start_time": "2026-11-08T00:30:00Z",
       "player_name": "Micah Gilbert",
       "market_name": "Reception Yards",
-      "line": 35.5,
-      "over_price": -130,
-      "under_price": -120.0,
+      "line": 36.5,
+      "over_price": -125,
+      "under_price": -125.0,
       "book_used": "fliff",
       "model_predicted_value": 44.9,
-      "model_edge": 9.4,
+      "model_edge": 8.4,
       "model_lean": "over",
       "model_confidence": "normal",
       "team": "Notre Dame",
@@ -14769,14 +14803,14 @@
       "games_played": 8,
       "rec_share": 0.15174237677527153,
       "carry_share": 0.0,
-      "model_over_probability": 0.5325,
-      "model_under_probability": 0.4675,
+      "model_over_probability": 0.522,
+      "model_under_probability": 0.478,
       "model_push_probability": 0.0,
       "game_log_key": "5079475|rec_yds",
       "model_stat": "rec_yds",
       "model_projection_raw": 44.933704,
-      "model_ev": -5.8,
-      "model_lean_probability": 0.5325,
+      "model_ev": -6.0,
+      "model_lean_probability": 0.522,
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "A",
@@ -14792,8 +14826,8 @@
       "player_name": "Elija Lofton",
       "market_name": "Reception Yards",
       "line": 26.5,
-      "over_price": -130,
-      "under_price": -120.0,
+      "over_price": -120,
+      "under_price": -130.0,
       "book_used": "fliff",
       "model_predicted_value": 26.5,
       "model_edge": 0.0,
@@ -14810,7 +14844,7 @@
       "game_log_key": "5079503|rec_yds",
       "model_stat": "rec_yds",
       "model_projection_raw": 26.54512,
-      "model_ev": -29.8,
+      "model_ev": -27.3,
       "model_lean_probability": 0.3965,
       "is_official_play": false,
       "is_watch_play": false,
@@ -14903,7 +14937,7 @@
       "player_name": "Nolan James Jr.",
       "market_name": "Rush Attempts",
       "line": 13.5,
-      "over_price": -140,
+      "over_price": -145,
       "under_price": -110.0,
       "book_used": "fliff",
       "model_predicted_value": 12.8,
@@ -14932,8 +14966,8 @@
       "player_name": "CJ Carr",
       "market_name": "Rush Attempts",
       "line": 4.5,
-      "over_price": -140,
-      "under_price": -115.0,
+      "over_price": -130,
+      "under_price": -120.0,
       "book_used": "fliff",
       "model_predicted_value": 5.3,
       "model_edge": 0.8,
@@ -14950,7 +14984,7 @@
       "game_log_key": "5079369|rush_att",
       "model_stat": "rush_att",
       "model_projection_raw": 5.319239,
-      "model_ev": -14.4,
+      "model_ev": -11.6,
       "model_lean_probability": 0.4995,
       "is_official_play": false,
       "is_watch_play": false
@@ -14961,7 +14995,7 @@
       "player_name": "Nolan James Jr.",
       "market_name": "Rush Touchdowns",
       "line": 0.5,
-      "over_price": -120,
+      "over_price": -115,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.6,
@@ -14979,7 +15013,7 @@
       "game_log_key": "5189515|rush_tds",
       "model_stat": "rush_tds",
       "model_projection_raw": 0.60284,
-      "model_ev": -28.3,
+      "model_ev": -26.9,
       "model_lean_probability": 0.391,
       "is_official_play": false,
       "is_watch_play": false,
@@ -14999,7 +15033,7 @@
       "player_name": "Mark Fletcher Jr.",
       "market_name": "Rush Touchdowns",
       "line": 0.5,
-      "over_price": -105,
+      "over_price": 100,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.5,
@@ -15017,7 +15051,7 @@
       "game_log_key": "4870736|rush_tds",
       "model_stat": "rush_tds",
       "model_projection_raw": 0.524008,
-      "model_ev": -24.7,
+      "model_ev": -22.9,
       "model_lean_probability": 0.3855,
       "is_official_play": false,
       "is_watch_play": false,
@@ -15113,7 +15147,7 @@
       "player_name": "CJ Carr",
       "market_name": "Rush Touchdowns",
       "line": 0.5,
-      "over_price": 205,
+      "over_price": 215,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.3,
@@ -15151,7 +15185,7 @@
       "player_name": "Aneyas Williams",
       "market_name": "Rush Touchdowns",
       "line": 0.5,
-      "over_price": 240,
+      "over_price": 220,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.4,
@@ -15227,7 +15261,7 @@
       "player_name": "Jordan Lyle",
       "market_name": "Rush Touchdowns",
       "line": 0.5,
-      "over_price": 550,
+      "over_price": 555,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.2,
@@ -15265,7 +15299,7 @@
       "player_name": "Girard Pringle Jr.",
       "market_name": "Rush Touchdowns",
       "line": 0.5,
-      "over_price": 685,
+      "over_price": 780,
       "under_price": NaN,
       "book_used": "fliff",
       "model_predicted_value": 0.2,
@@ -15302,12 +15336,12 @@
       "start_time": "2026-11-08T00:30:00Z",
       "player_name": "Nolan James Jr.",
       "market_name": "Rush Yards",
-      "line": 71.5,
+      "line": 70.5,
       "over_price": -125,
       "under_price": -125.0,
       "book_used": "fliff",
       "model_predicted_value": 64.7,
-      "model_edge": -6.8,
+      "model_edge": -5.8,
       "model_lean": "under",
       "model_confidence": "normal",
       "team": "Notre Dame",
@@ -15315,14 +15349,14 @@
       "games_played": 8,
       "rec_share": 0.08067094820384293,
       "carry_share": 0.31076191014463084,
-      "model_over_probability": 0.3725,
-      "model_under_probability": 0.6275,
+      "model_over_probability": 0.3775,
+      "model_under_probability": 0.6225,
       "model_push_probability": 0.0,
       "game_log_key": "5189515|rush_yds",
       "model_stat": "rush_yds",
       "model_projection_raw": 64.67143,
-      "model_ev": 12.9,
-      "model_lean_probability": 0.6275,
+      "model_ev": 12.1,
+      "model_lean_probability": 0.6225,
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "A",
@@ -15341,8 +15375,8 @@
       "player_name": "Mark Fletcher Jr.",
       "market_name": "Rush Yards",
       "line": 58.5,
-      "over_price": -120,
-      "under_price": -130.0,
+      "over_price": -125,
+      "under_price": -125.0,
       "book_used": "fliff",
       "model_predicted_value": 54.1,
       "model_edge": -4.4,
@@ -15359,10 +15393,11 @@
       "game_log_key": "4870736|rush_yds",
       "model_stat": "rush_yds",
       "model_projection_raw": 54.119183,
-      "model_ev": 7.8,
+      "model_ev": 9.7,
       "model_lean_probability": 0.6095,
-      "is_official_play": false,
+      "is_official_play": true,
       "is_watch_play": false,
+      "play_kind": "rush_under",
       "mu_grade": "A+",
       "mu_score": 98,
       "mu_rank": 4,
@@ -15418,7 +15453,7 @@
       "market_name": "Rush Yards",
       "line": 38.5,
       "over_price": -125,
-      "under_price": -120.0,
+      "under_price": -125.0,
       "book_used": "fliff",
       "model_predicted_value": 45.9,
       "model_edge": 7.4,
@@ -15455,8 +15490,8 @@
       "player_name": "CJ Carr",
       "market_name": "Rush Yards",
       "line": 5.5,
-      "over_price": -130,
-      "under_price": -120.0,
+      "over_price": -120,
+      "under_price": -130.0,
       "book_used": "fliff",
       "model_predicted_value": 14.7,
       "model_edge": 9.2,
@@ -15473,7 +15508,7 @@
       "game_log_key": "5079369|rush_yds",
       "model_stat": "rush_yds",
       "model_projection_raw": 14.744152,
-      "model_ev": 2.0,
+      "model_ev": 5.7,
       "model_lean_probability": 0.5765,
       "is_official_play": false,
       "is_watch_play": false,
@@ -15558,6 +15593,33 @@
         0
       ]
     ],
+    "5228762|pass_yds": [
+      [
+        1,
+        "Nebraska",
+        164
+      ],
+      [
+        2,
+        "Jacksonville State",
+        16
+      ],
+      [
+        6,
+        "Central Michigan",
+        158
+      ],
+      [
+        7,
+        "Sacramento State",
+        165
+      ],
+      [
+        8,
+        "Eastern Michigan",
+        266
+      ]
+    ],
     "5146903|pass_yds": [
       [
         1,
@@ -15598,33 +15660,6 @@
         8,
         "Kent State",
         275
-      ]
-    ],
-    "5228762|pass_yds": [
-      [
-        1,
-        "Nebraska",
-        164
-      ],
-      [
-        2,
-        "Jacksonville State",
-        16
-      ],
-      [
-        6,
-        "Central Michigan",
-        158
-      ],
-      [
-        7,
-        "Sacramento State",
-        165
-      ],
-      [
-        8,
-        "Eastern Michigan",
-        266
       ]
     ],
     "5084582|rec_yds": [
@@ -18471,48 +18506,6 @@
         3
       ]
     ],
-    "5141629|pass_yds": [
-      [
-        1,
-        "East Carolina",
-        256
-      ],
-      [
-        2,
-        "Kentucky",
-        188
-      ],
-      [
-        3,
-        "Florida State",
-        320
-      ],
-      [
-        4,
-        "South Carolina",
-        365
-      ],
-      [
-        5,
-        "Mississippi State",
-        285
-      ],
-      [
-        6,
-        "Georgia",
-        185
-      ],
-      [
-        7,
-        "Tennessee",
-        147
-      ],
-      [
-        8,
-        "Texas A&M",
-        311
-      ]
-    ],
     "5078810|pass_yds": [
       [
         1,
@@ -18553,6 +18546,48 @@
         8,
         "Auburn",
         387
+      ]
+    ],
+    "5141629|pass_yds": [
+      [
+        1,
+        "East Carolina",
+        256
+      ],
+      [
+        2,
+        "Kentucky",
+        188
+      ],
+      [
+        3,
+        "Florida State",
+        320
+      ],
+      [
+        4,
+        "South Carolina",
+        365
+      ],
+      [
+        5,
+        "Mississippi State",
+        285
+      ],
+      [
+        6,
+        "Georgia",
+        185
+      ],
+      [
+        7,
+        "Tennessee",
+        147
+      ],
+      [
+        8,
+        "Texas A&M",
+        311
       ]
     ],
     "5141394|rec_yds": [
@@ -20031,48 +20066,6 @@
         65
       ]
     ],
-    "5121169|pass_tds": [
-      [
-        1,
-        "Stanford",
-        5
-      ],
-      [
-        2,
-        "Florida A&M",
-        3
-      ],
-      [
-        3,
-        "Wake Forest",
-        3
-      ],
-      [
-        4,
-        "Central Michigan",
-        3
-      ],
-      [
-        5,
-        "Clemson",
-        1
-      ],
-      [
-        7,
-        "Florida State",
-        3
-      ],
-      [
-        8,
-        "Pittsburgh",
-        4
-      ],
-      [
-        9,
-        "North Carolina",
-        3
-      ]
-    ],
     "5079369|pass_tds": [
       [
         1,
@@ -20113,6 +20106,48 @@
         9,
         "Navy",
         2
+      ]
+    ],
+    "5121169|pass_tds": [
+      [
+        1,
+        "Stanford",
+        5
+      ],
+      [
+        2,
+        "Florida A&M",
+        3
+      ],
+      [
+        3,
+        "Wake Forest",
+        3
+      ],
+      [
+        4,
+        "Central Michigan",
+        3
+      ],
+      [
+        5,
+        "Clemson",
+        1
+      ],
+      [
+        7,
+        "Florida State",
+        3
+      ],
+      [
+        8,
+        "Pittsburgh",
+        4
+      ],
+      [
+        9,
+        "North Carolina",
+        3
       ]
     ],
     "5121169|pass_yds": [
@@ -20940,6 +20975,43 @@
         0
       ]
     ],
+    "4870768|rec_tds": [
+      [
+        1,
+        "Wisconsin",
+        0
+      ],
+      [
+        2,
+        "Rice",
+        0
+      ],
+      [
+        4,
+        "Purdue",
+        0
+      ],
+      [
+        5,
+        "North Carolina",
+        1
+      ],
+      [
+        6,
+        "Stanford",
+        1
+      ],
+      [
+        7,
+        "BYU",
+        0
+      ],
+      [
+        9,
+        "Navy",
+        0
+      ]
+    ],
     "5079475|rec_tds": [
       [
         1,
@@ -20980,43 +21052,6 @@
         9,
         "Navy",
         1
-      ]
-    ],
-    "4870768|rec_tds": [
-      [
-        1,
-        "Wisconsin",
-        0
-      ],
-      [
-        2,
-        "Rice",
-        0
-      ],
-      [
-        4,
-        "Purdue",
-        0
-      ],
-      [
-        5,
-        "North Carolina",
-        1
-      ],
-      [
-        6,
-        "Stanford",
-        1
-      ],
-      [
-        7,
-        "BYU",
-        0
-      ],
-      [
-        9,
-        "Navy",
-        0
       ]
     ],
     "4804878|rec_tds": [
@@ -21325,18 +21360,6 @@
         0
       ]
     ],
-    "5245125|rec_tds": [
-      [
-        2,
-        "Florida A&M",
-        0
-      ],
-      [
-        8,
-        "Pittsburgh",
-        0
-      ]
-    ],
     "5159087|rec_tds": [
       [
         2,
@@ -21371,6 +21394,40 @@
       [
         9,
         "Navy",
+        0
+      ]
+    ],
+    "5245125|rec_tds": [
+      [
+        2,
+        "Florida A&M",
+        0
+      ],
+      [
+        8,
+        "Pittsburgh",
+        0
+      ]
+    ],
+    "5200381|rec_tds": [
+      [
+        1,
+        "Stanford",
+        0
+      ],
+      [
+        2,
+        "Florida A&M",
+        1
+      ],
+      [
+        4,
+        "Central Michigan",
+        0
+      ],
+      [
+        8,
+        "Pittsburgh",
         0
       ]
     ],
@@ -113602,8 +113659,8 @@
       ]
     }
   },
-  "props_receiving_inputs": "PFF routes and targets (4171 of 5905 players matched, 1146 of 1153 games charted)",
-  "props_matchups": "matchup labels for 316 defenses (328 tough / 331 average / 289 soft position matchups), 4139 players with a position",
+  "props_receiving_inputs": "PFF routes and targets (4173 of 5905 players matched, 1146 of 1153 games charted)",
+  "props_matchups": "matchup labels for 316 defenses (328 tough / 332 average / 288 soft position matchups), 4141 players with a position",
   "props_matchup_grades": "matchup grades for 136 FBS defenses",
   "prop_market_catalog": [
     "Pass Attempts",
@@ -114452,7 +114509,7 @@
         "pass_tds": 1.4,
         "pass_yds": 185.4,
         "rec_tds": 0.0,
-        "rec_yds": 5.1,
+        "rec_yds": 5.3,
         "receptions": 0.3,
         "rush_att": 8.7,
         "rush_tds": 0.6,
@@ -116560,27 +116617,6 @@
       }
     },
     {
-      "player_name": "Jordan Gant",
-      "team": "Akron",
-      "games_played_prior": 8,
-      "opponent": "Ohio",
-      "position": "RB",
-      "projected_points": 15.6,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.1,
-        "rec_yds": 17.8,
-        "receptions": 2.2,
-        "rush_att": 17.5,
-        "rush_tds": 0.6,
-        "rush_yds": 76.8
-      }
-    },
-    {
       "player_name": "Cayden Lee",
       "team": "Missouri",
       "games_played_prior": 8,
@@ -116767,6 +116803,27 @@
         "rush_att": 8.3,
         "rush_tds": 0.4,
         "rush_yds": 28.9
+      }
+    },
+    {
+      "player_name": "Jordan Gant",
+      "team": "Akron",
+      "games_played_prior": 8,
+      "opponent": "Ohio",
+      "position": "RB",
+      "projected_points": 15.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 17.8,
+        "receptions": 2.2,
+        "rush_att": 17.4,
+        "rush_tds": 0.6,
+        "rush_yds": 74.4
       }
     },
     {
@@ -117778,6 +117835,27 @@
       }
     },
     {
+      "player_name": "Riley Neer",
+      "team": "Ohio",
+      "games_played_prior": 8,
+      "opponent": "Akron",
+      "position": "WR/TE",
+      "projected_points": 14.1,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.5,
+        "rec_yds": 63.6,
+        "receptions": 4.6,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.7
+      }
+    },
+    {
       "player_name": "Turner Helton",
       "team": "Georgia Southern",
       "games_played_prior": 2,
@@ -117796,27 +117874,6 @@
         "rush_att": 3.1,
         "rush_tds": 0.1,
         "rush_yds": 7.2
-      }
-    },
-    {
-      "player_name": "Riley Neer",
-      "team": "Ohio",
-      "games_played_prior": 8,
-      "opponent": "Akron",
-      "position": "WR/TE",
-      "projected_points": 14.0,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.5,
-        "rec_yds": 63.0,
-        "receptions": 4.6,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.7
       }
     },
     {
@@ -119597,7 +119654,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.1,
-        "rec_yds": 7.8,
+        "rec_yds": 7.9,
         "receptions": 0.9,
         "rush_att": 11.9,
         "rush_tds": 0.7,
@@ -119912,7 +119969,7 @@
         "pass_tds": 0.7,
         "pass_yds": 83.2,
         "rec_tds": 0.0,
-        "rec_yds": 5.1,
+        "rec_yds": 5.3,
         "receptions": 0.3,
         "rush_att": 5.8,
         "rush_tds": 0.4,
@@ -121726,27 +121783,6 @@
       }
     },
     {
-      "player_name": "Brayden Roggow",
-      "team": "Akron",
-      "games_played_prior": 8,
-      "opponent": "Ohio",
-      "position": "QB",
-      "projected_points": 11.0,
-      "stat_breakdown": {
-        "pass_att": 26.1,
-        "pass_comp": 14.9,
-        "pass_int": 0.9,
-        "pass_tds": 1.1,
-        "pass_yds": 171.2,
-        "rec_tds": 0.0,
-        "rec_yds": 4.7,
-        "receptions": 0.4,
-        "rush_att": 4.5,
-        "rush_tds": 0.1,
-        "rush_yds": 0.0
-      }
-    },
-    {
       "player_name": "Zion Turner",
       "team": "Marshall",
       "games_played_prior": 6,
@@ -121831,6 +121867,27 @@
       }
     },
     {
+      "player_name": "Brayden Roggow",
+      "team": "Akron",
+      "games_played_prior": 8,
+      "opponent": "Ohio",
+      "position": "QB",
+      "projected_points": 10.9,
+      "stat_breakdown": {
+        "pass_att": 26.1,
+        "pass_comp": 14.9,
+        "pass_int": 0.9,
+        "pass_tds": 1.1,
+        "pass_yds": 171.2,
+        "rec_tds": 0.0,
+        "rec_yds": 4.7,
+        "receptions": 0.4,
+        "rush_att": 4.5,
+        "rush_tds": 0.1,
+        "rush_yds": 0.0
+      }
+    },
+    {
       "player_name": "Ty Clark III",
       "team": "Wake Forest",
       "games_played_prior": 8,
@@ -121849,27 +121906,6 @@
         "rush_att": 8.4,
         "rush_tds": 0.7,
         "rush_yds": 50.5
-      }
-    },
-    {
-      "player_name": "Cibastian Broughton",
-      "team": "Akron",
-      "games_played_prior": 4,
-      "opponent": "Ohio",
-      "position": "QB",
-      "projected_points": 10.9,
-      "stat_breakdown": {
-        "pass_att": 13.7,
-        "pass_comp": 8.4,
-        "pass_int": 0.5,
-        "pass_tds": 0.7,
-        "pass_yds": 100.2,
-        "rec_tds": 0.0,
-        "rec_yds": 4.7,
-        "receptions": 0.4,
-        "rush_att": 6.8,
-        "rush_tds": 0.3,
-        "rush_yds": 26.4
       }
     },
     {
@@ -122038,6 +122074,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 1.3
+      }
+    },
+    {
+      "player_name": "Cibastian Broughton",
+      "team": "Akron",
+      "games_played_prior": 4,
+      "opponent": "Ohio",
+      "position": "QB",
+      "projected_points": 10.8,
+      "stat_breakdown": {
+        "pass_att": 13.7,
+        "pass_comp": 8.4,
+        "pass_int": 0.5,
+        "pass_tds": 0.7,
+        "pass_yds": 100.2,
+        "rec_tds": 0.0,
+        "rec_yds": 4.7,
+        "receptions": 0.4,
+        "rush_att": 6.7,
+        "rush_tds": 0.3,
+        "rush_yds": 26.4
       }
     },
     {
@@ -122852,7 +122909,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.3,
-        "rec_yds": 46.7,
+        "rec_yds": 47.0,
         "receptions": 2.8,
         "rush_att": 0.5,
         "rush_tds": 0.0,
@@ -123902,8 +123959,8 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.0,
-        "rec_yds": 6.0,
-        "receptions": 0.8,
+        "rec_yds": 6.2,
+        "receptions": 0.7,
         "rush_att": 8.9,
         "rush_tds": 0.6,
         "rush_yds": 47.8
@@ -126905,7 +126962,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 35.8,
+        "rec_yds": 36.1,
         "receptions": 2.8,
         "rush_att": 1.0,
         "rush_tds": 0.1,
@@ -127010,7 +127067,7 @@
         "pass_tds": 0.4,
         "pass_yds": 55.5,
         "rec_tds": 0.0,
-        "rec_yds": 5.6,
+        "rec_yds": 5.8,
         "receptions": 0.3,
         "rush_att": 4.9,
         "rush_tds": 0.3,
@@ -129706,6 +129763,27 @@
       }
     },
     {
+      "player_name": "Eian Pugh",
+      "team": "Ohio",
+      "games_played_prior": 1,
+      "opponent": "Akron",
+      "position": "WR/TE",
+      "projected_points": 7.4,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 37.3,
+        "receptions": 2.4,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 1.0
+      }
+    },
+    {
       "player_name": "Richard Young",
       "team": "Colorado",
       "games_played_prior": 5,
@@ -130123,27 +130201,6 @@
         "rush_att": 3.4,
         "rush_tds": 0.1,
         "rush_yds": 2.4
-      }
-    },
-    {
-      "player_name": "Eian Pugh",
-      "team": "Ohio",
-      "games_played_prior": 1,
-      "opponent": "Akron",
-      "position": "WR/TE",
-      "projected_points": 7.3,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 37.1,
-        "receptions": 2.4,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 1.0
       }
     },
     {
@@ -132008,7 +132065,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.3,
         "rec_tds": 0.0,
-        "rec_yds": 3.5,
+        "rec_yds": 3.7,
         "receptions": 0.4,
         "rush_att": 6.2,
         "rush_tds": 0.3,
@@ -138457,7 +138514,7 @@
         "rec_tds": 0.0,
         "rec_yds": 7.5,
         "receptions": 1.1,
-        "rush_att": 5.4,
+        "rush_att": 5.3,
         "rush_tds": 0.1,
         "rush_yds": 24.4
       }
@@ -141710,7 +141767,7 @@
         "pass_tds": 0.0,
         "pass_yds": 1.3,
         "rec_tds": 0.0,
-        "rec_yds": 6.5,
+        "rec_yds": 6.7,
         "receptions": 0.6,
         "rush_att": 4.4,
         "rush_tds": 0.2,
@@ -141736,6 +141793,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.5
+      }
+    },
+    {
+      "player_name": "Jake Furtney",
+      "team": "Ohio",
+      "games_played_prior": 6,
+      "opponent": "Akron",
+      "position": "WR/TE",
+      "projected_points": 4.9,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 18.7,
+        "receptions": 1.6,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.7
       }
     },
     {
@@ -142621,27 +142699,6 @@
       }
     },
     {
-      "player_name": "Jake Furtney",
-      "team": "Ohio",
-      "games_played_prior": 6,
-      "opponent": "Akron",
-      "position": "WR/TE",
-      "projected_points": 4.8,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 18.6,
-        "receptions": 1.6,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.7
-      }
-    },
-    {
       "player_name": "Jeron Askren",
       "team": "Missouri State",
       "games_played_prior": 5,
@@ -142697,7 +142754,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 18.0,
+        "rec_yds": 18.3,
         "receptions": 1.5,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -144532,27 +144589,6 @@
       }
     },
     {
-      "player_name": "Brandon Hills",
-      "team": "Akron",
-      "games_played_prior": 4,
-      "opponent": "Ohio",
-      "position": "WR/TE",
-      "projected_points": 4.5,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 18.6,
-        "receptions": 1.6,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.3
-      }
-    },
-    {
       "player_name": "Jonathan Paylor",
       "team": "NC State",
       "games_played_prior": 1,
@@ -145327,6 +145363,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.9
+      }
+    },
+    {
+      "player_name": "Brandon Hills",
+      "team": "Akron",
+      "games_played_prior": 4,
+      "opponent": "Ohio",
+      "position": "WR/TE",
+      "projected_points": 4.4,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 18.6,
+        "receptions": 1.6,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
       }
     },
     {
@@ -148661,7 +148718,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 14.9,
+        "rec_yds": 15.0,
         "receptions": 1.3,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -151504,6 +151561,27 @@
       }
     },
     {
+      "player_name": "Will Hryszko",
+      "team": "Ohio",
+      "games_played_prior": 1,
+      "opponent": "Akron",
+      "position": "RB",
+      "projected_points": 3.7,
+      "stat_breakdown": {
+        "pass_att": 0.2,
+        "pass_comp": 0.1,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 1.3,
+        "rec_tds": 0.0,
+        "rec_yds": 12.7,
+        "receptions": 0.9,
+        "rush_att": 2.4,
+        "rush_tds": 0.1,
+        "rush_yds": 7.7
+      }
+    },
+    {
       "player_name": "Damian Henderson II",
       "team": "Colorado",
       "games_played_prior": 6,
@@ -152609,32 +152687,11 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 14.3,
+        "rec_yds": 14.5,
         "receptions": 1.1,
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.7
-      }
-    },
-    {
-      "player_name": "Will Hryszko",
-      "team": "Ohio",
-      "games_played_prior": 1,
-      "opponent": "Akron",
-      "position": "RB",
-      "projected_points": 3.6,
-      "stat_breakdown": {
-        "pass_att": 0.2,
-        "pass_comp": 0.1,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 1.3,
-        "rec_tds": 0.0,
-        "rec_yds": 12.6,
-        "receptions": 0.9,
-        "rush_att": 2.4,
-        "rush_tds": 0.1,
-        "rush_yds": 7.7
       }
     },
     {
@@ -153163,6 +153220,27 @@
       }
     },
     {
+      "player_name": "Blake Guffey",
+      "team": "Ohio",
+      "games_played_prior": 1,
+      "opponent": "Akron",
+      "position": "WR/TE",
+      "projected_points": 3.6,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 13.3,
+        "receptions": 1.1,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.7
+      }
+    },
+    {
       "player_name": "D'Angelo Hagans Jr.",
       "team": "Colorado State",
       "games_played_prior": 1,
@@ -153449,7 +153527,7 @@
         "pass_tds": 0.0,
         "pass_yds": 1.3,
         "rec_tds": 0.0,
-        "rec_yds": 12.5,
+        "rec_yds": 12.6,
         "receptions": 0.9,
         "rush_att": 2.1,
         "rush_tds": 0.1,
@@ -154213,27 +154291,6 @@
       }
     },
     {
-      "player_name": "Blake Guffey",
-      "team": "Ohio",
-      "games_played_prior": 1,
-      "opponent": "Akron",
-      "position": "WR/TE",
-      "projected_points": 3.5,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 12.7,
-        "receptions": 1.1,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.7
-      }
-    },
-    {
       "player_name": "Decorian Thompson",
       "team": "UTEP",
       "games_played_prior": 1,
@@ -154693,6 +154750,27 @@
         "rush_att": 1.3,
         "rush_tds": 0.1,
         "rush_yds": 0.0
+      }
+    },
+    {
+      "player_name": "Andrew Metzger",
+      "team": "Ohio",
+      "games_played_prior": 4,
+      "opponent": "Akron",
+      "position": "WR/TE",
+      "projected_points": 3.4,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.2,
+        "rec_yds": 12.2,
+        "receptions": 1.0,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.7
       }
     },
     {
@@ -155701,27 +155779,6 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.0
-      }
-    },
-    {
-      "player_name": "Andrew Metzger",
-      "team": "Ohio",
-      "games_played_prior": 4,
-      "opponent": "Akron",
-      "position": "WR/TE",
-      "projected_points": 3.3,
-      "stat_breakdown": {
-        "pass_att": 0.0,
-        "pass_comp": 0.0,
-        "pass_int": 0.0,
-        "pass_tds": 0.0,
-        "pass_yds": 0.2,
-        "rec_tds": 0.2,
-        "rec_yds": 12.1,
-        "receptions": 1.0,
-        "rush_att": 0.1,
-        "rush_tds": 0.0,
-        "rush_yds": 0.7
       }
     },
     {
@@ -156809,7 +156866,7 @@
         "pass_tds": 0.0,
         "pass_yds": 0.2,
         "rec_tds": 0.2,
-        "rec_yds": 11.2,
+        "rec_yds": 11.6,
         "receptions": 1.0,
         "rush_att": 0.1,
         "rush_tds": 0.0,
@@ -161912,7 +161969,7 @@
         "pass_tds": 0.0,
         "pass_yds": 1.3,
         "rec_tds": 0.0,
-        "rec_yds": 12.5,
+        "rec_yds": 12.6,
         "receptions": 0.9,
         "rush_att": 1.6,
         "rush_tds": 0.0,
@@ -163585,7 +163642,7 @@
         {
           "book": "fliff",
           "label": "Fliff",
-          "price": 1280.0,
+          "price": 1285.0,
           "offshore": false
         },
         {
@@ -163603,9 +163660,9 @@
       ],
       "best_book": "fliff",
       "best_book_label": "Fliff",
-      "best_price": 1280.0,
+      "best_price": 1285.0,
       "dk_price": 800.0,
-      "market_implied": 0.0725,
+      "market_implied": 0.0722,
       "team": "Miami",
       "role": "Minor role",
       "opponent": "Notre Dame",
@@ -163614,7 +163671,7 @@
       "rec_td_proj": 0.216,
       "model_prob": 0.1939,
       "fair_odds": 416,
-      "edge_best": 167.6,
+      "edge_best": 168.5,
       "edge_dk": 74.5,
       "tag": "longshot"
     },
@@ -163653,12 +163710,12 @@
       "role": "Main receiver",
       "opponent": "Ohio",
       "games_played": 2,
-      "rush_td_proj": 0.004,
+      "rush_td_proj": 0.001,
       "rec_td_proj": 0.215,
-      "model_prob": 0.1968,
-      "fair_odds": 408,
-      "edge_best": 155.8,
-      "edge_dk": 155.8,
+      "model_prob": 0.1942,
+      "fair_odds": 415,
+      "edge_best": 152.5,
+      "edge_dk": 152.5,
       "tag": "value"
     },
     {
@@ -163771,12 +163828,12 @@
       "role": "Minor role",
       "opponent": "Ohio",
       "games_played": 3,
-      "rush_td_proj": 0.002,
+      "rush_td_proj": 0.0,
       "rec_td_proj": 0.134,
-      "model_prob": 0.1268,
-      "fair_odds": 688,
-      "edge_best": 128.3,
-      "edge_dk": 128.3,
+      "model_prob": 0.1254,
+      "fair_odds": 697,
+      "edge_best": 125.8,
+      "edge_dk": 125.8,
       "tag": "longshot"
     },
     {
@@ -164946,49 +165003,6 @@
       "tag": "longshot"
     },
     {
-      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
-      "start_time": "2026-11-04T00:00:00Z",
-      "home_team": "Akron Zips",
-      "away_team": "Ohio Bobcats",
-      "player_name": "Brandon Hills",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 850.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 850.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 825.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 850.0,
-      "dk_price": 850.0,
-      "market_implied": 0.1053,
-      "team": "Akron",
-      "role": "Minor role",
-      "opponent": "Ohio",
-      "games_played": 4,
-      "rush_td_proj": 0.004,
-      "rec_td_proj": 0.161,
-      "model_prob": 0.1516,
-      "fair_odds": 560,
-      "edge_best": 44.0,
-      "edge_dk": 44.0,
-      "tag": "longshot"
-    },
-    {
       "fixture_id": "45fdbdbe6ed3d9922fa8b26b8a885f0e",
       "start_time": "2026-11-07T02:00:00Z",
       "home_team": "Nevada Wolf Pack",
@@ -165064,6 +165078,49 @@
       "tag": "caution"
     },
     {
+      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
+      "start_time": "2026-11-04T00:00:00Z",
+      "home_team": "Akron Zips",
+      "away_team": "Ohio Bobcats",
+      "player_name": "Brandon Hills",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 850.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 850.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 825.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": 850.0,
+      "dk_price": 850.0,
+      "market_implied": 0.1053,
+      "team": "Akron",
+      "role": "Minor role",
+      "opponent": "Ohio",
+      "games_played": 4,
+      "rush_td_proj": 0.001,
+      "rec_td_proj": 0.161,
+      "model_prob": 0.1494,
+      "fair_odds": 569,
+      "edge_best": 41.9,
+      "edge_dk": 41.9,
+      "tag": "longshot"
+    },
+    {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
       "start_time": "2026-11-07T20:30:00Z",
       "home_team": "LSU Tigers",
@@ -165116,7 +165173,7 @@
         {
           "book": "fliff",
           "label": "Fliff",
-          "price": 810.0,
+          "price": 800.0,
           "offshore": false
         }
       ],
@@ -165250,12 +165307,6 @@
           "offshore": false
         },
         {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 600.0,
-          "offshore": true
-        },
-        {
           "book": "fanduel",
           "label": "FanDuel",
           "price": 460.0,
@@ -165313,7 +165364,7 @@
         {
           "book": "fliff",
           "label": "Fliff",
-          "price": 190.0,
+          "price": 185.0,
           "offshore": false
         }
       ],
@@ -165376,85 +165427,42 @@
       "start_time": "2026-11-08T00:30:00Z",
       "home_team": "Notre Dame Fighting Irish",
       "away_team": "Miami Hurricanes",
-      "player_name": "Jordan Lyle",
+      "player_name": "Girard Pringle Jr.",
       "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 600.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 600.0,
-          "offshore": false
-        },
         {
           "book": "fliff",
           "label": "Fliff",
-          "price": 520.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 600.0,
-      "dk_price": 600.0,
-      "market_implied": 0.1429,
-      "team": "Miami",
-      "role": "Backup RB",
-      "opponent": "Notre Dame",
-      "games_played": 4,
-      "rush_td_proj": 0.191,
-      "rec_td_proj": 0.028,
-      "model_prob": 0.1967,
-      "fair_odds": 408,
-      "edge_best": 37.7,
-      "edge_dk": 37.7,
-      "tag": "longshot"
-    },
-    {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
-      "home_team": "Utah Utes",
-      "away_team": "BYU Cougars",
-      "player_name": "Hunter Andrews",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 600.0,
+          "price": 745.0,
           "offshore": false
         },
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 425.0,
+          "price": 450.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 425.0,
+          "price": 450.0,
           "offshore": false
         }
       ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 600.0,
-      "dk_price": 425.0,
-      "market_implied": 0.1429,
-      "team": "Utah",
-      "role": "Minor role",
-      "opponent": "BYU",
+      "best_book": "fliff",
+      "best_book_label": "Fliff",
+      "best_price": 745.0,
+      "dk_price": 450.0,
+      "market_implied": 0.1183,
+      "team": "Miami",
+      "role": "Backup RB",
+      "opponent": "Notre Dame",
       "games_played": 7,
-      "rush_td_proj": 0.033,
-      "rec_td_proj": 0.184,
-      "model_prob": 0.1949,
-      "fair_odds": 413,
-      "edge_best": 36.4,
-      "edge_dk": 2.3,
+      "rush_td_proj": 0.151,
+      "rec_td_proj": 0.027,
+      "model_prob": 0.1632,
+      "fair_odds": 513,
+      "edge_best": 37.9,
+      "edge_dk": -10.2,
       "tag": "longshot"
     },
     {
@@ -165606,6 +165614,37 @@
       "tag": "caution"
     },
     {
+      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "home_team": "Notre Dame Fighting Irish",
+      "away_team": "Miami Hurricanes",
+      "player_name": "Israel Briggs",
+      "books": [
+        {
+          "book": "fliff",
+          "label": "Fliff",
+          "price": 1095.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fliff",
+      "best_book_label": "Fliff",
+      "best_price": 1095.0,
+      "dk_price": null,
+      "market_implied": 0.0837,
+      "team": "Miami",
+      "role": "Minor role",
+      "opponent": "Notre Dame",
+      "games_played": 2,
+      "rush_td_proj": 0.0,
+      "rec_td_proj": 0.115,
+      "model_prob": 0.1088,
+      "fair_odds": 819,
+      "edge_best": 30.0,
+      "edge_dk": null,
+      "tag": "longshot"
+    },
+    {
       "fixture_id": "e5c8c0aaad6dc26e9ede547783d854d2",
       "start_time": "2026-11-05T00:30:00Z",
       "home_team": "Eastern Michigan Eagles",
@@ -165686,90 +165725,90 @@
       "tag": "longshot"
     },
     {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
-      "home_team": "Utah Utes",
-      "away_team": "BYU Cougars",
-      "player_name": "Legend Glasker",
+      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "home_team": "Notre Dame Fighting Irish",
+      "away_team": "Miami Hurricanes",
+      "player_name": "Jordan Lyle",
       "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 240.0,
-          "offshore": false
-        },
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 150.0,
+          "price": 550.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 150.0,
+          "price": 550.0,
+          "offshore": false
+        },
+        {
+          "book": "fliff",
+          "label": "Fliff",
+          "price": 520.0,
           "offshore": false
         }
       ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 240.0,
-      "dk_price": 150.0,
-      "market_implied": 0.2941,
-      "team": "BYU",
-      "role": "Main receiver",
-      "opponent": "Utah",
-      "games_played": 8,
-      "rush_td_proj": 0.079,
-      "rec_td_proj": 0.395,
-      "model_prob": 0.3779,
-      "fair_odds": 165,
-      "edge_best": 28.5,
-      "edge_dk": -5.5,
-      "tag": "value"
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": 550.0,
+      "dk_price": 550.0,
+      "market_implied": 0.1538,
+      "team": "Miami",
+      "role": "Backup RB",
+      "opponent": "Notre Dame",
+      "games_played": 4,
+      "rush_td_proj": 0.191,
+      "rec_td_proj": 0.028,
+      "model_prob": 0.1967,
+      "fair_odds": 408,
+      "edge_best": 27.9,
+      "edge_dk": 27.9,
+      "tag": "longshot"
     },
     {
       "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
       "start_time": "2026-11-07T17:00:00Z",
       "home_team": "Utah Utes",
       "away_team": "BYU Cougars",
-      "player_name": "Kyler Kasper",
+      "player_name": "Hunter Andrews",
       "books": [
         {
           "book": "fanduel",
           "label": "FanDuel",
-          "price": 280.0,
+          "price": 550.0,
           "offshore": false
         },
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 190.0,
+          "price": 425.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 190.0,
+          "price": 425.0,
           "offshore": false
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
-      "best_price": 280.0,
-      "dk_price": 190.0,
-      "market_implied": 0.2632,
-      "team": "BYU",
-      "role": "Main receiver",
-      "opponent": "Utah",
-      "games_played": 8,
-      "rush_td_proj": 0.011,
-      "rec_td_proj": 0.397,
-      "model_prob": 0.3345,
-      "fair_odds": 199,
-      "edge_best": 27.1,
-      "edge_dk": -3.0,
-      "tag": "value"
+      "best_price": 550.0,
+      "dk_price": 425.0,
+      "market_implied": 0.1538,
+      "team": "Utah",
+      "role": "Minor role",
+      "opponent": "BYU",
+      "games_played": 7,
+      "rush_td_proj": 0.033,
+      "rec_td_proj": 0.184,
+      "model_prob": 0.1949,
+      "fair_odds": 413,
+      "edge_best": 26.7,
+      "edge_dk": 2.3,
+      "tag": "longshot"
     },
     {
       "fixture_id": "59047d3be974c2ec05c7e6282752287b",
@@ -165809,6 +165848,92 @@
       "tag": "longshot"
     },
     {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "home_team": "Utah Utes",
+      "away_team": "BYU Cougars",
+      "player_name": "Legend Glasker",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 230.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 150.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 150.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 230.0,
+      "dk_price": 150.0,
+      "market_implied": 0.303,
+      "team": "BYU",
+      "role": "Main receiver",
+      "opponent": "Utah",
+      "games_played": 8,
+      "rush_td_proj": 0.079,
+      "rec_td_proj": 0.395,
+      "model_prob": 0.3779,
+      "fair_odds": 165,
+      "edge_best": 24.7,
+      "edge_dk": -5.5,
+      "tag": "value"
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "home_team": "Utah Utes",
+      "away_team": "BYU Cougars",
+      "player_name": "Kyler Kasper",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 270.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 190.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 190.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 270.0,
+      "dk_price": 190.0,
+      "market_implied": 0.2703,
+      "team": "BYU",
+      "role": "Main receiver",
+      "opponent": "Utah",
+      "games_played": 8,
+      "rush_td_proj": 0.011,
+      "rec_td_proj": 0.397,
+      "model_prob": 0.3345,
+      "fair_odds": 199,
+      "edge_best": 23.8,
+      "edge_dk": -3.0,
+      "tag": "value"
+    },
+    {
       "fixture_id": "4aac00e6cc06b8905659f911419540d2",
       "start_time": "2026-11-08T00:30:00Z",
       "home_team": "Notre Dame Fighting Irish",
@@ -165836,7 +165961,7 @@
         {
           "book": "fliff",
           "label": "Fliff",
-          "price": 190.0,
+          "price": 195.0,
           "offshore": false
         }
       ],
@@ -165856,80 +165981,6 @@
       "edge_best": 23.3,
       "edge_dk": 7.9,
       "tag": "value"
-    },
-    {
-      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
-      "start_time": "2026-11-08T00:30:00Z",
-      "home_team": "Notre Dame Fighting Irish",
-      "away_team": "Miami Hurricanes",
-      "player_name": "Israel Briggs",
-      "books": [
-        {
-          "book": "fliff",
-          "label": "Fliff",
-          "price": 1030.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fliff",
-      "best_book_label": "Fliff",
-      "best_price": 1030.0,
-      "dk_price": null,
-      "market_implied": 0.0885,
-      "team": "Miami",
-      "role": "Minor role",
-      "opponent": "Notre Dame",
-      "games_played": 2,
-      "rush_td_proj": 0.0,
-      "rec_td_proj": 0.115,
-      "model_prob": 0.1088,
-      "fair_odds": 819,
-      "edge_best": 23.0,
-      "edge_dk": null,
-      "tag": "longshot"
-    },
-    {
-      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
-      "start_time": "2026-11-08T00:30:00Z",
-      "home_team": "Notre Dame Fighting Irish",
-      "away_team": "Miami Hurricanes",
-      "player_name": "Girard Pringle Jr.",
-      "books": [
-        {
-          "book": "fliff",
-          "label": "Fliff",
-          "price": 650.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 450.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 450.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fliff",
-      "best_book_label": "Fliff",
-      "best_price": 650.0,
-      "dk_price": 450.0,
-      "market_implied": 0.1333,
-      "team": "Miami",
-      "role": "Backup RB",
-      "opponent": "Notre Dame",
-      "games_played": 7,
-      "rush_td_proj": 0.151,
-      "rec_td_proj": 0.027,
-      "model_prob": 0.1632,
-      "fair_odds": 513,
-      "edge_best": 22.4,
-      "edge_dk": -10.2,
-      "tag": "longshot"
     },
     {
       "fixture_id": "7db0ce3fddd5c735e599b1085c9b5cef",
@@ -166081,49 +166132,6 @@
       "tag": "longshot"
     },
     {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
-      "home_team": "Utah Utes",
-      "away_team": "BYU Cougars",
-      "player_name": "Ricky Johnson",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 500.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 350.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 350.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 500.0,
-      "dk_price": 350.0,
-      "market_implied": 0.1667,
-      "team": "Utah",
-      "role": "Minor role",
-      "opponent": "BYU",
-      "games_played": 7,
-      "rush_td_proj": 0.0,
-      "rec_td_proj": 0.222,
-      "model_prob": 0.1988,
-      "fair_odds": 403,
-      "edge_best": 19.3,
-      "edge_dk": -10.5,
-      "tag": "longshot"
-    },
-    {
       "fixture_id": "e5c8c0aaad6dc26e9ede547783d854d2",
       "start_time": "2026-11-05T00:30:00Z",
       "home_team": "Eastern Michigan Eagles",
@@ -166228,6 +166236,49 @@
       "edge_dk": 18.1,
       "injury_status": "Questionable",
       "tag": "caution"
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "home_team": "Utah Utes",
+      "away_team": "BYU Cougars",
+      "player_name": "Ricky Johnson",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 490.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 350.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 350.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 490.0,
+      "dk_price": 350.0,
+      "market_implied": 0.1695,
+      "team": "Utah",
+      "role": "Minor role",
+      "opponent": "BYU",
+      "games_played": 7,
+      "rush_td_proj": 0.0,
+      "rec_td_proj": 0.222,
+      "model_prob": 0.1988,
+      "fair_odds": 403,
+      "edge_best": 17.3,
+      "edge_dk": -10.5,
+      "tag": "longshot"
     },
     {
       "fixture_id": "c93b343bc3151a39a9541c0af3b22123",
@@ -166462,49 +166513,6 @@
       "tag": "longshot"
     },
     {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
-      "home_team": "Utah Utes",
-      "away_team": "BYU Cougars",
-      "player_name": "Jojo Phillips",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 700.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 475.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 475.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 700.0,
-      "dk_price": 475.0,
-      "market_implied": 0.125,
-      "team": "BYU",
-      "role": "Minor role",
-      "opponent": "Utah",
-      "games_played": 7,
-      "rush_td_proj": 0.0,
-      "rec_td_proj": 0.155,
-      "model_prob": 0.1434,
-      "fair_odds": 598,
-      "edge_best": 14.7,
-      "edge_dk": -17.6,
-      "tag": "longshot"
-    },
-    {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
       "start_time": "2026-11-07T20:30:00Z",
       "home_team": "LSU Tigers",
@@ -166680,49 +166688,6 @@
       "fair_odds": 253,
       "edge_best": 13.4,
       "edge_dk": 13.4
-    },
-    {
-      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
-      "start_time": "2026-11-08T00:30:00Z",
-      "home_team": "Notre Dame Fighting Irish",
-      "away_team": "Miami Hurricanes",
-      "player_name": "Jerome Bettis Jr.",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 360.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 290.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 290.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 360.0,
-      "dk_price": 290.0,
-      "market_implied": 0.2174,
-      "team": "Notre Dame",
-      "role": "Minor role",
-      "opponent": "Miami",
-      "games_played": 4,
-      "rush_td_proj": 0.002,
-      "rec_td_proj": 0.281,
-      "model_prob": 0.2463,
-      "fair_odds": 306,
-      "edge_best": 13.3,
-      "edge_dk": -3.9,
-      "tag": "longshot"
     },
     {
       "fixture_id": "5172093e8533ea39f59c5d2c63c743b9",
@@ -167190,46 +167155,47 @@
       "tag": "longshot"
     },
     {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
-      "home_team": "Utah Utes",
-      "away_team": "BYU Cougars",
-      "player_name": "Noah Bennee",
+      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "home_team": "Notre Dame Fighting Irish",
+      "away_team": "Miami Hurricanes",
+      "player_name": "Jerome Bettis Jr.",
       "books": [
         {
           "book": "fanduel",
           "label": "FanDuel",
-          "price": 330.0,
+          "price": 350.0,
           "offshore": false
         },
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 250.0,
+          "price": 285.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 250.0,
+          "price": 285.0,
           "offshore": false
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
-      "best_price": 330.0,
-      "dk_price": 250.0,
-      "market_implied": 0.2326,
-      "team": "Utah",
-      "role": "Main receiver",
-      "opponent": "BYU",
-      "games_played": 6,
-      "rush_td_proj": 0.0,
-      "rec_td_proj": 0.297,
-      "model_prob": 0.2571,
-      "fair_odds": 289,
-      "edge_best": 10.6,
-      "edge_dk": -10.0
+      "best_price": 350.0,
+      "dk_price": 285.0,
+      "market_implied": 0.2222,
+      "team": "Notre Dame",
+      "role": "Minor role",
+      "opponent": "Miami",
+      "games_played": 4,
+      "rush_td_proj": 0.002,
+      "rec_td_proj": 0.281,
+      "model_prob": 0.2463,
+      "fair_odds": 306,
+      "edge_best": 10.8,
+      "edge_dk": -5.2,
+      "tag": "longshot"
     },
     {
       "fixture_id": "657053f4734af94664beb750813257bb",
@@ -167446,6 +167412,48 @@
       "tag": "longshot"
     },
     {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "home_team": "Utah Utes",
+      "away_team": "BYU Cougars",
+      "player_name": "Noah Bennee",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 320.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 250.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 250.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 320.0,
+      "dk_price": 250.0,
+      "market_implied": 0.2381,
+      "team": "Utah",
+      "role": "Main receiver",
+      "opponent": "BYU",
+      "games_played": 6,
+      "rush_td_proj": 0.0,
+      "rec_td_proj": 0.297,
+      "model_prob": 0.2571,
+      "fair_odds": 289,
+      "edge_best": 8.0,
+      "edge_dk": -10.0
+    },
+    {
       "fixture_id": "722ed661705df150a38e7786949ce241",
       "start_time": "2026-11-07T03:15:00Z",
       "home_team": "Arizona Wildcats",
@@ -167523,42 +167531,42 @@
       "start_time": "2026-11-07T17:00:00Z",
       "home_team": "Utah Utes",
       "away_team": "BYU Cougars",
-      "player_name": "Daniel Bray",
+      "player_name": "Jojo Phillips",
       "books": [
         {
           "book": "fanduel",
           "label": "FanDuel",
-          "price": 320.0,
+          "price": 650.0,
           "offshore": false
         },
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 195.0,
+          "price": 475.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 195.0,
+          "price": 475.0,
           "offshore": false
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
-      "best_price": 320.0,
-      "dk_price": 195.0,
-      "market_implied": 0.2381,
-      "team": "Utah",
-      "role": "Backup RB",
-      "opponent": "BYU",
-      "games_played": 8,
-      "rush_td_proj": 0.232,
-      "rec_td_proj": 0.064,
-      "model_prob": 0.2559,
-      "fair_odds": 291,
+      "best_price": 650.0,
+      "dk_price": 475.0,
+      "market_implied": 0.1333,
+      "team": "BYU",
+      "role": "Minor role",
+      "opponent": "Utah",
+      "games_played": 7,
+      "rush_td_proj": 0.0,
+      "rec_td_proj": 0.155,
+      "model_prob": 0.1434,
+      "fair_odds": 598,
       "edge_best": 7.5,
-      "edge_dk": -24.5,
+      "edge_dk": -17.6,
       "tag": "longshot"
     },
     {
@@ -167867,6 +167875,49 @@
       "tag": "longshot"
     },
     {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "home_team": "Utah Utes",
+      "away_team": "BYU Cougars",
+      "player_name": "Daniel Bray",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 310.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 195.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 195.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 310.0,
+      "dk_price": 195.0,
+      "market_implied": 0.2439,
+      "team": "Utah",
+      "role": "Backup RB",
+      "opponent": "BYU",
+      "games_played": 8,
+      "rush_td_proj": 0.232,
+      "rec_td_proj": 0.064,
+      "model_prob": 0.2559,
+      "fair_odds": 291,
+      "edge_best": 4.9,
+      "edge_dk": -24.5,
+      "tag": "longshot"
+    },
+    {
       "fixture_id": "722ed661705df150a38e7786949ce241",
       "start_time": "2026-11-07T03:15:00Z",
       "home_team": "Arizona Wildcats",
@@ -168168,103 +168219,6 @@
       "tag": "longshot"
     },
     {
-      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
-      "start_time": "2026-11-08T00:30:00Z",
-      "home_team": "Notre Dame Fighting Irish",
-      "away_team": "Miami Hurricanes",
-      "player_name": "Cooper Barkate",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 280.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 245.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 245.0,
-          "offshore": false
-        },
-        {
-          "book": "fliff",
-          "label": "Fliff",
-          "price": 210.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 280.0,
-      "dk_price": 245.0,
-      "market_implied": 0.2632,
-      "team": "Miami",
-      "role": "Main receiver",
-      "opponent": "Notre Dame",
-      "games_played": 8,
-      "rush_td_proj": 0.0,
-      "rec_td_proj": 0.308,
-      "model_prob": 0.2647,
-      "fair_odds": 278,
-      "edge_best": 0.6,
-      "edge_dk": -8.7
-    },
-    {
-      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
-      "start_time": "2026-11-08T00:30:00Z",
-      "home_team": "Notre Dame Fighting Irish",
-      "away_team": "Miami Hurricanes",
-      "player_name": "Daylyn Upshaw",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 370.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 310.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 310.0,
-          "offshore": false
-        },
-        {
-          "book": "fliff",
-          "label": "Fliff",
-          "price": 275.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 370.0,
-      "dk_price": 310.0,
-      "market_implied": 0.2128,
-      "team": "Miami",
-      "role": "Minor role",
-      "opponent": "Notre Dame",
-      "games_played": 8,
-      "rush_td_proj": 0.0,
-      "rec_td_proj": 0.241,
-      "model_prob": 0.2139,
-      "fair_odds": 367,
-      "edge_best": 0.6,
-      "edge_dk": -12.3,
-      "tag": "longshot"
-    },
-    {
       "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
       "start_time": "2026-11-08T00:30:00Z",
       "home_team": "Ole Miss Rebels",
@@ -168346,13 +168300,13 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 160.0,
+          "price": 155.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 160.0,
+          "price": 155.0,
           "offshore": false
         },
         {
@@ -168365,7 +168319,7 @@
       "best_book": "fliff",
       "best_book_label": "Fliff",
       "best_price": 165.0,
-      "dk_price": 160.0,
+      "dk_price": 155.0,
       "market_implied": 0.3774,
       "team": "Miami",
       "role": "Lead RB",
@@ -168376,7 +168330,7 @@
       "model_prob": 0.3757,
       "fair_odds": 166,
       "edge_best": -0.5,
-      "edge_dk": -2.3,
+      "edge_dk": -4.2,
       "tag": "caution"
     },
     {
@@ -168413,7 +168367,7 @@
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 300.0,
+          "price": 270.0,
           "offshore": true
         }
       ],
@@ -168546,6 +168500,55 @@
       "tag": "longshot"
     },
     {
+      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "home_team": "Notre Dame Fighting Irish",
+      "away_team": "Miami Hurricanes",
+      "player_name": "Daylyn Upshaw",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 360.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 310.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 310.0,
+          "offshore": false
+        },
+        {
+          "book": "fliff",
+          "label": "Fliff",
+          "price": 270.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 360.0,
+      "dk_price": 310.0,
+      "market_implied": 0.2174,
+      "team": "Miami",
+      "role": "Minor role",
+      "opponent": "Notre Dame",
+      "games_played": 8,
+      "rush_td_proj": 0.0,
+      "rec_td_proj": 0.241,
+      "model_prob": 0.2139,
+      "fair_odds": 367,
+      "edge_best": -1.6,
+      "edge_dk": -12.3,
+      "tag": "longshot"
+    },
+    {
       "fixture_id": "657053f4734af94664beb750813257bb",
       "start_time": "2026-11-04T01:00:00Z",
       "home_team": "Miami (OH) RedHawks",
@@ -168598,6 +168601,54 @@
       "fair_odds": 206,
       "edge_best": -1.8,
       "edge_dk": -10.0
+    },
+    {
+      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "home_team": "Notre Dame Fighting Irish",
+      "away_team": "Miami Hurricanes",
+      "player_name": "Cooper Barkate",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 270.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 245.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 245.0,
+          "offshore": false
+        },
+        {
+          "book": "fliff",
+          "label": "Fliff",
+          "price": 220.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 270.0,
+      "dk_price": 245.0,
+      "market_implied": 0.2703,
+      "team": "Miami",
+      "role": "Main receiver",
+      "opponent": "Notre Dame",
+      "games_played": 8,
+      "rush_td_proj": 0.0,
+      "rec_td_proj": 0.308,
+      "model_prob": 0.2647,
+      "fair_odds": 278,
+      "edge_best": -2.1,
+      "edge_dk": -8.7
     },
     {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
@@ -168807,49 +168858,6 @@
       "tag": "caution"
     },
     {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
-      "home_team": "Utah Utes",
-      "away_team": "BYU Cougars",
-      "player_name": "Devon Dampier",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 110.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": -105.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": -105.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 110.0,
-      "dk_price": -105.0,
-      "market_implied": 0.4762,
-      "team": "Utah",
-      "role": "QB",
-      "opponent": "BYU",
-      "games_played": 8,
-      "rush_td_proj": 0.613,
-      "rec_td_proj": 0.003,
-      "model_prob": 0.46,
-      "fair_odds": 117,
-      "edge_best": -3.4,
-      "edge_dk": -10.2,
-      "tag": "caution"
-    },
-    {
       "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
       "start_time": "2026-11-04T00:00:00Z",
       "home_team": "Akron Zips",
@@ -168924,15 +168932,15 @@
           "offshore": false
         },
         {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 185.0,
+          "book": "fliff",
+          "label": "Fliff",
+          "price": 190.0,
           "offshore": false
         },
         {
-          "book": "fliff",
-          "label": "Fliff",
-          "price": 185.0,
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 180.0,
           "offshore": false
         }
       ],
@@ -169156,7 +169164,7 @@
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 120.0,
+          "price": 160.0,
           "offshore": true
         }
       ],
@@ -169197,6 +169205,12 @@
           "offshore": false
         },
         {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 500.0,
+          "offshore": true
+        },
+        {
           "book": "fanduel",
           "label": "FanDuel",
           "price": 330.0,
@@ -169225,48 +169239,6 @@
       "edge_best": -4.9,
       "edge_dk": -4.9,
       "tag": "longshot"
-    },
-    {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
-      "home_team": "Utah Utes",
-      "away_team": "BYU Cougars",
-      "player_name": "Walker Lyons",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 390.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 295.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 295.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 390.0,
-      "dk_price": 295.0,
-      "market_implied": 0.2041,
-      "team": "BYU",
-      "role": "Main receiver",
-      "opponent": "Utah",
-      "games_played": 8,
-      "rush_td_proj": 0.0,
-      "rec_td_proj": 0.216,
-      "model_prob": 0.1941,
-      "fair_odds": 415,
-      "edge_best": -4.9,
-      "edge_dk": -23.3
     },
     {
       "fixture_id": "59047d3be974c2ec05c7e6282752287b",
@@ -169306,53 +169278,53 @@
       "tag": "longshot"
     },
     {
-      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
-      "start_time": "2026-11-04T00:00:00Z",
-      "home_team": "Akron Zips",
-      "away_team": "Ohio Bobcats",
-      "player_name": "Marquese Williams",
+      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "home_team": "Notre Dame Fighting Irish",
+      "away_team": "Miami Hurricanes",
+      "player_name": "Darian Mensah",
       "books": [
+        {
+          "book": "fliff",
+          "label": "Fliff",
+          "price": 345.0,
+          "offshore": false
+        },
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 220.0,
+          "offshore": false
+        },
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 700.0,
+          "price": 220.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 700.0,
+          "price": 220.0,
           "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 700.0,
-          "offshore": true
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 700.0,
-          "offshore": true
         }
       ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 700.0,
-      "dk_price": 700.0,
-      "market_implied": 0.125,
-      "team": "Akron",
-      "role": "Minor role",
-      "opponent": "Ohio",
-      "games_played": 7,
-      "rush_td_proj": 0.107,
-      "rec_td_proj": 0.018,
-      "model_prob": 0.1182,
-      "fair_odds": 746,
-      "edge_best": -5.4,
-      "edge_dk": -5.4,
-      "tag": "longshot"
+      "best_book": "fliff",
+      "best_book_label": "Fliff",
+      "best_price": 345.0,
+      "dk_price": 220.0,
+      "market_implied": 0.2247,
+      "team": "Miami",
+      "role": "QB",
+      "opponent": "Notre Dame",
+      "games_played": 8,
+      "rush_td_proj": 0.237,
+      "rec_td_proj": 0.003,
+      "model_prob": 0.2134,
+      "fair_odds": 369,
+      "edge_best": -5.0,
+      "edge_dk": -31.7,
+      "tag": "caution"
     },
     {
       "fixture_id": "722ed661705df150a38e7786949ce241",
@@ -169457,55 +169429,6 @@
       "fair_odds": 283,
       "edge_best": -5.9,
       "edge_dk": null
-    },
-    {
-      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
-      "start_time": "2026-11-08T00:30:00Z",
-      "home_team": "Notre Dame Fighting Irish",
-      "away_team": "Miami Hurricanes",
-      "player_name": "Darian Mensah",
-      "books": [
-        {
-          "book": "fliff",
-          "label": "Fliff",
-          "price": 340.0,
-          "offshore": false
-        },
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 230.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 225.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 225.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fliff",
-      "best_book_label": "Fliff",
-      "best_price": 340.0,
-      "dk_price": 225.0,
-      "market_implied": 0.2273,
-      "team": "Miami",
-      "role": "QB",
-      "opponent": "Notre Dame",
-      "games_played": 8,
-      "rush_td_proj": 0.237,
-      "rec_td_proj": 0.003,
-      "model_prob": 0.2134,
-      "fair_odds": 369,
-      "edge_best": -6.1,
-      "edge_dk": -30.6,
-      "tag": "caution"
     },
     {
       "fixture_id": "5af84fe49ccd4f304f9af0dce0a0db56",
@@ -169660,6 +169583,48 @@
       "edge_dk": -6.7
     },
     {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "home_team": "Utah Utes",
+      "away_team": "BYU Cougars",
+      "player_name": "Walker Lyons",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 380.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 295.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 295.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 380.0,
+      "dk_price": 295.0,
+      "market_implied": 0.2083,
+      "team": "BYU",
+      "role": "Main receiver",
+      "opponent": "Utah",
+      "games_played": 8,
+      "rush_td_proj": 0.0,
+      "rec_td_proj": 0.216,
+      "model_prob": 0.1941,
+      "fair_odds": 415,
+      "edge_best": -6.8,
+      "edge_dk": -23.3
+    },
+    {
       "fixture_id": "5172093e8533ea39f59c5d2c63c743b9",
       "start_time": "2026-11-07T00:30:00Z",
       "home_team": "East Carolina Pirates",
@@ -169694,6 +169659,55 @@
       "fair_odds": 492,
       "edge_best": -7.1,
       "edge_dk": -7.1,
+      "tag": "longshot"
+    },
+    {
+      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
+      "start_time": "2026-11-04T00:00:00Z",
+      "home_team": "Akron Zips",
+      "away_team": "Ohio Bobcats",
+      "player_name": "Marquese Williams",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 700.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 700.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 700.0,
+          "offshore": true
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 700.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": 700.0,
+      "dk_price": 700.0,
+      "market_implied": 0.125,
+      "team": "Akron",
+      "role": "Minor role",
+      "opponent": "Ohio",
+      "games_played": 7,
+      "rush_td_proj": 0.105,
+      "rec_td_proj": 0.018,
+      "model_prob": 0.1159,
+      "fair_odds": 762,
+      "edge_best": -7.2,
+      "edge_dk": -7.2,
       "tag": "longshot"
     },
     {
@@ -169812,49 +169826,6 @@
       "edge_dk": -13.2
     },
     {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
-      "home_team": "Utah Utes",
-      "away_team": "BYU Cougars",
-      "player_name": "Creed Whittemore",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 360.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 290.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 290.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 360.0,
-      "dk_price": 290.0,
-      "market_implied": 0.2174,
-      "team": "Utah",
-      "role": "Minor role",
-      "opponent": "BYU",
-      "games_played": 8,
-      "rush_td_proj": 0.0,
-      "rec_td_proj": 0.225,
-      "model_prob": 0.2013,
-      "fair_odds": 397,
-      "edge_best": -7.4,
-      "edge_dk": -21.5,
-      "tag": "longshot"
-    },
-    {
       "fixture_id": "657053f4734af94664beb750813257bb",
       "start_time": "2026-11-04T01:00:00Z",
       "home_team": "Miami (OH) RedHawks",
@@ -169910,62 +169881,6 @@
       "tag": "longshot"
     },
     {
-      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
-      "start_time": "2026-11-04T00:00:00Z",
-      "home_team": "Akron Zips",
-      "away_team": "Ohio Bobcats",
-      "player_name": "Sean Patrick",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 430.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 370.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 370.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 370.0,
-          "offshore": true
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 350.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 430.0,
-      "dk_price": 370.0,
-      "market_implied": 0.1887,
-      "team": "Akron",
-      "role": "Backup RB",
-      "opponent": "Ohio",
-      "games_played": 7,
-      "rush_td_proj": 0.142,
-      "rec_td_proj": 0.049,
-      "model_prob": 0.1737,
-      "fair_odds": 476,
-      "edge_best": -7.9,
-      "edge_dk": -18.3,
-      "injury_status": "Questionable",
-      "tag": "longshot"
-    },
-    {
       "fixture_id": "59047d3be974c2ec05c7e6282752287b",
       "start_time": "2026-11-07T01:00:00Z",
       "home_team": "Illinois Fighting Illini",
@@ -170000,6 +169915,49 @@
       "fair_odds": 269,
       "edge_best": -7.9,
       "edge_dk": -7.9
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "home_team": "Utah Utes",
+      "away_team": "BYU Cougars",
+      "player_name": "Devon Dampier",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 100.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": -105.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": -105.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 100.0,
+      "dk_price": -105.0,
+      "market_implied": 0.5,
+      "team": "Utah",
+      "role": "QB",
+      "opponent": "BYU",
+      "games_played": 8,
+      "rush_td_proj": 0.613,
+      "rec_td_proj": 0.003,
+      "model_prob": 0.46,
+      "fair_odds": 117,
+      "edge_best": -8.0,
+      "edge_dk": -10.2,
+      "tag": "caution"
     },
     {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
@@ -170118,6 +170076,49 @@
       "tag": "longshot"
     },
     {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "home_team": "Utah Utes",
+      "away_team": "BYU Cougars",
+      "player_name": "Creed Whittemore",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 350.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 290.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 290.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 350.0,
+      "dk_price": 290.0,
+      "market_implied": 0.2222,
+      "team": "Utah",
+      "role": "Minor role",
+      "opponent": "BYU",
+      "games_played": 8,
+      "rush_td_proj": 0.0,
+      "rec_td_proj": 0.225,
+      "model_prob": 0.2013,
+      "fair_odds": 397,
+      "edge_best": -9.4,
+      "edge_dk": -21.5,
+      "tag": "longshot"
+    },
+    {
       "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
       "start_time": "2026-11-08T00:30:00Z",
       "home_team": "Ole Miss Rebels",
@@ -170146,6 +170147,62 @@
       "fair_odds": 149,
       "edge_best": -9.7,
       "edge_dk": null
+    },
+    {
+      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
+      "start_time": "2026-11-04T00:00:00Z",
+      "home_team": "Akron Zips",
+      "away_team": "Ohio Bobcats",
+      "player_name": "Sean Patrick",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 430.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 370.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 370.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 370.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 350.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 430.0,
+      "dk_price": 370.0,
+      "market_implied": 0.1887,
+      "team": "Akron",
+      "role": "Backup RB",
+      "opponent": "Ohio",
+      "games_played": 7,
+      "rush_td_proj": 0.138,
+      "rec_td_proj": 0.049,
+      "model_prob": 0.1701,
+      "fair_odds": 488,
+      "edge_best": -9.8,
+      "edge_dk": -20.0,
+      "injury_status": "Questionable",
+      "tag": "longshot"
     },
     {
       "fixture_id": "722ed661705df150a38e7786949ce241",
@@ -170221,6 +170278,37 @@
       "edge_dk": -10.4
     },
     {
+      "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "home_team": "Ole Miss Rebels",
+      "away_team": "Georgia Bulldogs",
+      "player_name": "Dwight Phillips Jr.",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 155.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 155.0,
+      "dk_price": null,
+      "market_implied": 0.3922,
+      "team": "Georgia",
+      "role": "Backup RB",
+      "opponent": "Ole Miss",
+      "games_played": 8,
+      "rush_td_proj": 0.361,
+      "rec_td_proj": 0.07,
+      "model_prob": 0.3504,
+      "fair_odds": 185,
+      "edge_best": -10.6,
+      "edge_dk": null,
+      "tag": "longshot"
+    },
+    {
       "fixture_id": "4aac00e6cc06b8905659f911419540d2",
       "start_time": "2026-11-08T00:30:00Z",
       "home_team": "Notre Dame Fighting Irish",
@@ -170242,13 +170330,13 @@
         {
           "book": "fanduel",
           "label": "FanDuel",
-          "price": 100.0,
+          "price": -105.0,
           "offshore": false
         },
         {
           "book": "fliff",
           "label": "Fliff",
-          "price": -120.0,
+          "price": -115.0,
           "offshore": false
         }
       ],
@@ -170267,61 +170355,6 @@
       "fair_odds": 130,
       "edge_best": -10.8,
       "edge_dk": -10.8,
-      "tag": "caution"
-    },
-    {
-      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
-      "start_time": "2026-11-04T00:00:00Z",
-      "home_team": "Akron Zips",
-      "away_team": "Ohio Bobcats",
-      "player_name": "Jordan Gant",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": -120.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": -120.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": -122.0,
-          "offshore": true
-        },
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": -125.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": -167.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": -120.0,
-      "dk_price": -120.0,
-      "market_implied": 0.5455,
-      "team": "Akron",
-      "role": "Lead RB",
-      "opponent": "Ohio",
-      "games_played": 8,
-      "rush_td_proj": 0.587,
-      "rec_td_proj": 0.077,
-      "model_prob": 0.4852,
-      "fair_odds": 106,
-      "edge_best": -11.0,
-      "edge_dk": -11.0,
       "tag": "caution"
     },
     {
@@ -170428,35 +170461,59 @@
       "edge_dk": -12.0
     },
     {
-      "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
-      "start_time": "2026-11-08T00:30:00Z",
-      "home_team": "Ole Miss Rebels",
-      "away_team": "Georgia Bulldogs",
-      "player_name": "Dwight Phillips Jr.",
+      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
+      "start_time": "2026-11-04T00:00:00Z",
+      "home_team": "Akron Zips",
+      "away_team": "Ohio Bobcats",
+      "player_name": "Jordan Gant",
       "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": -120.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": -120.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": -122.0,
+          "offshore": true
+        },
         {
           "book": "fanduel",
           "label": "FanDuel",
-          "price": 150.0,
+          "price": -125.0,
           "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": -167.0,
+          "offshore": true
         }
       ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 150.0,
-      "dk_price": null,
-      "market_implied": 0.4,
-      "team": "Georgia",
-      "role": "Backup RB",
-      "opponent": "Ole Miss",
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": -120.0,
+      "dk_price": -120.0,
+      "market_implied": 0.5455,
+      "team": "Akron",
+      "role": "Lead RB",
+      "opponent": "Ohio",
       "games_played": 8,
-      "rush_td_proj": 0.361,
-      "rec_td_proj": 0.07,
-      "model_prob": 0.3504,
-      "fair_odds": 185,
-      "edge_best": -12.4,
-      "edge_dk": null,
-      "tag": "longshot"
+      "rush_td_proj": 0.576,
+      "rec_td_proj": 0.077,
+      "model_prob": 0.4796,
+      "fair_odds": 109,
+      "edge_best": -12.1,
+      "edge_dk": -12.1,
+      "tag": "caution"
     },
     {
       "fixture_id": "e5c8c0aaad6dc26e9ede547783d854d2",
@@ -170705,6 +170762,55 @@
       "tag": "caution"
     },
     {
+      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "home_team": "Notre Dame Fighting Irish",
+      "away_team": "Miami Hurricanes",
+      "player_name": "CJ Carr",
+      "books": [
+        {
+          "book": "fliff",
+          "label": "Fliff",
+          "price": 205.0,
+          "offshore": false
+        },
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 175.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 170.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 170.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fliff",
+      "best_book_label": "Fliff",
+      "best_price": 205.0,
+      "dk_price": 170.0,
+      "market_implied": 0.3279,
+      "team": "Notre Dame",
+      "role": "QB",
+      "opponent": "Miami",
+      "games_played": 8,
+      "rush_td_proj": 0.321,
+      "rec_td_proj": 0.009,
+      "model_prob": 0.2808,
+      "fair_odds": 256,
+      "edge_best": -14.3,
+      "edge_dk": -24.2,
+      "tag": "caution"
+    },
+    {
       "fixture_id": "5172093e8533ea39f59c5d2c63c743b9",
       "start_time": "2026-11-07T00:30:00Z",
       "home_team": "East Carolina Pirates",
@@ -170851,97 +170957,6 @@
       "edge_dk": -15.2
     },
     {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
-      "home_team": "Utah Utes",
-      "away_team": "BYU Cougars",
-      "player_name": "Braden Pegan",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 150.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 115.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 115.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 150.0,
-      "dk_price": 115.0,
-      "market_implied": 0.4,
-      "team": "Utah",
-      "role": "Main receiver",
-      "opponent": "BYU",
-      "games_played": 8,
-      "rush_td_proj": 0.003,
-      "rec_td_proj": 0.411,
-      "model_prob": 0.339,
-      "fair_odds": 195,
-      "edge_best": -15.2,
-      "edge_dk": -27.1
-    },
-    {
-      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
-      "start_time": "2026-11-08T00:30:00Z",
-      "home_team": "Notre Dame Fighting Irish",
-      "away_team": "Miami Hurricanes",
-      "player_name": "CJ Carr",
-      "books": [
-        {
-          "book": "fliff",
-          "label": "Fliff",
-          "price": 200.0,
-          "offshore": false
-        },
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 175.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 170.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 170.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fliff",
-      "best_book_label": "Fliff",
-      "best_price": 200.0,
-      "dk_price": 170.0,
-      "market_implied": 0.3333,
-      "team": "Notre Dame",
-      "role": "QB",
-      "opponent": "Miami",
-      "games_played": 8,
-      "rush_td_proj": 0.321,
-      "rec_td_proj": 0.009,
-      "model_prob": 0.2808,
-      "fair_odds": 256,
-      "edge_best": -15.8,
-      "edge_dk": -24.2,
-      "tag": "caution"
-    },
-    {
       "fixture_id": "7db0ce3fddd5c735e599b1085c9b5cef",
       "start_time": "2026-11-05T00:00:00Z",
       "home_team": "Sacramento State Hornets",
@@ -171031,26 +171046,26 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 295.0,
+          "price": 290.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 295.0,
+          "price": 290.0,
           "offshore": false
         },
         {
           "book": "fliff",
           "label": "Fliff",
-          "price": 260.0,
+          "price": 255.0,
           "offshore": false
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 330.0,
-      "dk_price": 295.0,
+      "dk_price": 290.0,
       "market_implied": 0.2326,
       "team": "Miami",
       "role": "Minor role",
@@ -171061,8 +171076,57 @@
       "model_prob": 0.1946,
       "fair_odds": 414,
       "edge_best": -16.3,
-      "edge_dk": -23.1,
+      "edge_dk": -24.1,
       "tag": "longshot"
+    },
+    {
+      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "home_team": "Notre Dame Fighting Irish",
+      "away_team": "Miami Hurricanes",
+      "player_name": "Nolan James Jr.",
+      "books": [
+        {
+          "book": "fliff",
+          "label": "Fliff",
+          "price": -145.0,
+          "offshore": false
+        },
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": -155.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": -195.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": -195.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fliff",
+      "best_book_label": "Fliff",
+      "best_price": -145.0,
+      "dk_price": -195.0,
+      "market_implied": 0.5918,
+      "team": "Notre Dame",
+      "role": "Lead RB",
+      "opponent": "Miami",
+      "games_played": 8,
+      "rush_td_proj": 0.603,
+      "rec_td_proj": 0.08,
+      "model_prob": 0.4946,
+      "fair_odds": 102,
+      "edge_best": -16.4,
+      "edge_dk": -25.2,
+      "tag": "caution"
     },
     {
       "fixture_id": "5af84fe49ccd4f304f9af0dce0a0db56",
@@ -171174,6 +171238,48 @@
       "edge_best": -16.9,
       "edge_dk": -16.9,
       "tag": "caution"
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "home_team": "Utah Utes",
+      "away_team": "BYU Cougars",
+      "player_name": "Braden Pegan",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 145.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 115.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 115.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 145.0,
+      "dk_price": 115.0,
+      "market_implied": 0.4082,
+      "team": "Utah",
+      "role": "Main receiver",
+      "opponent": "BYU",
+      "games_played": 8,
+      "rush_td_proj": 0.003,
+      "rec_td_proj": 0.411,
+      "model_prob": 0.339,
+      "fair_odds": 195,
+      "edge_best": -16.9,
+      "edge_dk": -27.1
     },
     {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
@@ -171290,55 +171396,6 @@
       "edge_best": -17.2,
       "edge_dk": -17.2,
       "tag": "longshot"
-    },
-    {
-      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
-      "start_time": "2026-11-08T00:30:00Z",
-      "home_team": "Notre Dame Fighting Irish",
-      "away_team": "Miami Hurricanes",
-      "player_name": "Nolan James Jr.",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": -150.0,
-          "offshore": false
-        },
-        {
-          "book": "fliff",
-          "label": "Fliff",
-          "price": -155.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": -195.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": -195.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": -150.0,
-      "dk_price": -195.0,
-      "market_implied": 0.6,
-      "team": "Notre Dame",
-      "role": "Lead RB",
-      "opponent": "Miami",
-      "games_played": 8,
-      "rush_td_proj": 0.603,
-      "rec_td_proj": 0.08,
-      "model_prob": 0.4946,
-      "fair_odds": 102,
-      "edge_best": -17.6,
-      "edge_dk": -25.2,
-      "tag": "caution"
     },
     {
       "fixture_id": "722ed661705df150a38e7786949ce241",
@@ -171480,115 +171537,6 @@
       "edge_best": -18.0,
       "edge_dk": -18.0,
       "tag": "caution"
-    },
-    {
-      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
-      "start_time": "2026-11-04T00:00:00Z",
-      "home_team": "Akron Zips",
-      "away_team": "Ohio Bobcats",
-      "player_name": "Miles Burris",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 390.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 390.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 390.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 390.0,
-          "offshore": true
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 350.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 390.0,
-      "dk_price": 390.0,
-      "market_implied": 0.2041,
-      "team": "Akron",
-      "role": "Minor role",
-      "opponent": "Ohio",
-      "games_played": 8,
-      "rush_td_proj": 0.004,
-      "rec_td_proj": 0.179,
-      "model_prob": 0.167,
-      "fair_odds": 499,
-      "edge_best": -18.2,
-      "edge_dk": -18.2,
-      "tag": "longshot"
-    },
-    {
-      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
-      "start_time": "2026-11-04T00:00:00Z",
-      "home_team": "Akron Zips",
-      "away_team": "Ohio Bobcats",
-      "player_name": "Kyan Mason",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 330.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 295.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 295.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 295.0,
-          "offshore": true
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 290.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 330.0,
-      "dk_price": 295.0,
-      "market_implied": 0.2326,
-      "team": "Akron",
-      "role": "Main receiver",
-      "opponent": "Ohio",
-      "games_played": 8,
-      "rush_td_proj": 0.007,
-      "rec_td_proj": 0.203,
-      "model_prob": 0.1897,
-      "fair_odds": 427,
-      "edge_best": -18.4,
-      "edge_dk": -25.1
     },
     {
       "fixture_id": "e5c8c0aaad6dc26e9ede547783d854d2",
@@ -171760,6 +171708,61 @@
       "start_time": "2026-11-04T00:00:00Z",
       "home_team": "Akron Zips",
       "away_team": "Ohio Bobcats",
+      "player_name": "Miles Burris",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 390.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 390.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 390.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 390.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 350.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 390.0,
+      "dk_price": 390.0,
+      "market_implied": 0.2041,
+      "team": "Akron",
+      "role": "Minor role",
+      "opponent": "Ohio",
+      "games_played": 8,
+      "rush_td_proj": 0.001,
+      "rec_td_proj": 0.179,
+      "model_prob": 0.1649,
+      "fair_odds": 507,
+      "edge_best": -19.2,
+      "edge_dk": -19.2,
+      "tag": "longshot"
+    },
+    {
+      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
+      "start_time": "2026-11-04T00:00:00Z",
+      "home_team": "Akron Zips",
+      "away_team": "Ohio Bobcats",
       "player_name": "Victor Rosa",
       "books": [
         {
@@ -171809,6 +171812,60 @@
       "edge_best": -19.3,
       "edge_dk": -19.3,
       "tag": "caution"
+    },
+    {
+      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
+      "start_time": "2026-11-04T00:00:00Z",
+      "home_team": "Akron Zips",
+      "away_team": "Ohio Bobcats",
+      "player_name": "Kyan Mason",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 330.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 295.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 295.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 295.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 270.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 330.0,
+      "dk_price": 295.0,
+      "market_implied": 0.2326,
+      "team": "Akron",
+      "role": "Main receiver",
+      "opponent": "Ohio",
+      "games_played": 8,
+      "rush_td_proj": 0.004,
+      "rec_td_proj": 0.203,
+      "model_prob": 0.1876,
+      "fair_odds": 433,
+      "edge_best": -19.3,
+      "edge_dk": -25.9
     },
     {
       "fixture_id": "c93b343bc3151a39a9541c0af3b22123",
@@ -172539,7 +172596,7 @@
         {
           "book": "fanduel",
           "label": "FanDuel",
-          "price": -120.0,
+          "price": -125.0,
           "offshore": false
         }
       ],
@@ -172814,7 +172871,7 @@
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": -250.0,
+          "price": -143.0,
           "offshore": true
         }
       ],
@@ -172951,54 +173008,6 @@
       "edge_best": -24.6,
       "edge_dk": -24.6,
       "tag": "caution"
-    },
-    {
-      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
-      "start_time": "2026-11-08T00:30:00Z",
-      "home_team": "Notre Dame Fighting Irish",
-      "away_team": "Miami Hurricanes",
-      "player_name": "Jordan Faison",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 115.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 100.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 100.0,
-          "offshore": false
-        },
-        {
-          "book": "fliff",
-          "label": "Fliff",
-          "price": -120.0,
-          "offshore": false
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 115.0,
-      "dk_price": 100.0,
-      "market_implied": 0.4651,
-      "team": "Notre Dame",
-      "role": "Main receiver",
-      "opponent": "Miami",
-      "games_played": 8,
-      "rush_td_proj": 0.002,
-      "rec_td_proj": 0.429,
-      "model_prob": 0.3502,
-      "fair_odds": 186,
-      "edge_best": -24.7,
-      "edge_dk": -30.0
     },
     {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
@@ -173141,6 +173150,54 @@
       "edge_best": -26.4,
       "edge_dk": -26.4,
       "tag": "caution"
+    },
+    {
+      "fixture_id": "4aac00e6cc06b8905659f911419540d2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "home_team": "Notre Dame Fighting Irish",
+      "away_team": "Miami Hurricanes",
+      "player_name": "Jordan Faison",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 110.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 100.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 100.0,
+          "offshore": false
+        },
+        {
+          "book": "fliff",
+          "label": "Fliff",
+          "price": -115.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 110.0,
+      "dk_price": 100.0,
+      "market_implied": 0.4762,
+      "team": "Notre Dame",
+      "role": "Main receiver",
+      "opponent": "Miami",
+      "games_played": 8,
+      "rush_td_proj": 0.002,
+      "rec_td_proj": 0.429,
+      "model_prob": 0.3502,
+      "fair_odds": 186,
+      "edge_best": -26.5,
+      "edge_dk": -30.0
     },
     {
       "fixture_id": "59047d3be974c2ec05c7e6282752287b",
@@ -173986,7 +174043,7 @@
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 140.0,
+          "price": 160.0,
           "offshore": true
         }
       ],
@@ -174168,61 +174225,6 @@
       "edge_dk": -34.7
     },
     {
-      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
-      "start_time": "2026-11-04T00:00:00Z",
-      "home_team": "Akron Zips",
-      "away_team": "Ohio Bobcats",
-      "player_name": "Elijah Alexander",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 300.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 290.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 290.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 290.0,
-          "offshore": true
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 220.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 300.0,
-      "dk_price": 290.0,
-      "market_implied": 0.25,
-      "team": "Akron",
-      "role": "Minor role",
-      "opponent": "Ohio",
-      "games_played": 8,
-      "rush_td_proj": 0.004,
-      "rec_td_proj": 0.174,
-      "model_prob": 0.1626,
-      "fair_odds": 515,
-      "edge_best": -35.0,
-      "edge_dk": -36.6,
-      "tag": "longshot"
-    },
-    {
       "fixture_id": "e5c8c0aaad6dc26e9ede547783d854d2",
       "start_time": "2026-11-05T00:30:00Z",
       "home_team": "Eastern Michigan Eagles",
@@ -174263,6 +174265,61 @@
       "fair_odds": 552,
       "edge_best": -35.6,
       "edge_dk": -35.6,
+      "tag": "longshot"
+    },
+    {
+      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
+      "start_time": "2026-11-04T00:00:00Z",
+      "home_team": "Akron Zips",
+      "away_team": "Ohio Bobcats",
+      "player_name": "Elijah Alexander",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 300.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 290.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 290.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 290.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 270.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 300.0,
+      "dk_price": 290.0,
+      "market_implied": 0.25,
+      "team": "Akron",
+      "role": "Minor role",
+      "opponent": "Ohio",
+      "games_played": 8,
+      "rush_td_proj": 0.001,
+      "rec_td_proj": 0.174,
+      "model_prob": 0.1604,
+      "fair_odds": 523,
+      "edge_best": -35.8,
+      "edge_dk": -37.4,
       "tag": "longshot"
     },
     {
@@ -174434,20 +174491,20 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": -185.0,
+          "price": -190.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": -185.0,
+          "price": -190.0,
           "offshore": false
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": -175.0,
-      "dk_price": -185.0,
+      "dk_price": -190.0,
       "market_implied": 0.6364,
       "team": "Miami",
       "role": "Main receiver",
@@ -174458,7 +174515,7 @@
       "model_prob": 0.3956,
       "fair_odds": 153,
       "edge_best": -37.8,
-      "edge_dk": -39.1
+      "edge_dk": -39.6
     },
     {
       "fixture_id": "5af84fe49ccd4f304f9af0dce0a0db56",
@@ -174669,61 +174726,6 @@
       "edge_best": -41.8,
       "edge_dk": -41.8,
       "tag": "longshot"
-    },
-    {
-      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
-      "start_time": "2026-11-04T00:00:00Z",
-      "home_team": "Akron Zips",
-      "away_team": "Ohio Bobcats",
-      "player_name": "Brayden Roggow",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 430.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 400.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 400.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 400.0,
-          "offshore": true
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 400.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 430.0,
-      "dk_price": 400.0,
-      "market_implied": 0.1887,
-      "team": "Akron",
-      "role": "QB",
-      "opponent": "Ohio",
-      "games_played": 8,
-      "rush_td_proj": 0.106,
-      "rec_td_proj": 0.001,
-      "model_prob": 0.1019,
-      "fair_odds": 881,
-      "edge_best": -46.0,
-      "edge_dk": -49.0,
-      "tag": "caution"
     },
     {
       "fixture_id": "59047d3be974c2ec05c7e6282752287b",
@@ -174973,6 +174975,61 @@
       "tag": "longshot"
     },
     {
+      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
+      "start_time": "2026-11-04T00:00:00Z",
+      "home_team": "Akron Zips",
+      "away_team": "Ohio Bobcats",
+      "player_name": "Brayden Roggow",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 430.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 400.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 400.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 400.0,
+          "offshore": true
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 400.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 430.0,
+      "dk_price": 400.0,
+      "market_implied": 0.1887,
+      "team": "Akron",
+      "role": "QB",
+      "opponent": "Ohio",
+      "games_played": 8,
+      "rush_td_proj": 0.095,
+      "rec_td_proj": 0.001,
+      "model_prob": 0.0923,
+      "fair_odds": 983,
+      "edge_best": -51.1,
+      "edge_dk": -53.8,
+      "tag": "caution"
+    },
+    {
       "fixture_id": "7db0ce3fddd5c735e599b1085c9b5cef",
       "start_time": "2026-11-05T00:00:00Z",
       "home_team": "Sacramento State Hornets",
@@ -175216,15 +175273,15 @@
           "offshore": false
         },
         {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 750.0,
-          "offshore": true
-        },
-        {
           "book": "bovada",
           "label": "Bovada",
           "price": 725.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 600.0,
           "offshore": true
         }
       ],
@@ -175264,21 +175321,21 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 360.0,
+          "price": 370.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 360.0,
+          "price": 370.0,
           "offshore": true
         }
       ],
       "best_book": "draftkings",
       "best_book_label": "DraftKings",
-      "best_price": 360.0,
-      "dk_price": 360.0,
-      "market_implied": 0.2174
+      "best_price": 370.0,
+      "dk_price": 370.0,
+      "market_implied": 0.2128
     },
     {
       "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
@@ -175460,7 +175517,7 @@
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 240.0,
+          "price": 290.0,
           "offshore": true
         }
       ],
@@ -177136,7 +177193,7 @@
         {
           "book": "fanduel",
           "label": "FanDuel",
-          "price": 950.0,
+          "price": 900.0,
           "offshore": false
         },
         {
@@ -177154,9 +177211,9 @@
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
-      "best_price": 950.0,
+      "best_price": 900.0,
       "dk_price": 550.0,
-      "market_implied": 0.0952
+      "market_implied": 0.1
     },
     {
       "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
@@ -177458,15 +177515,15 @@
         {
           "book": "fanduel",
           "label": "FanDuel",
-          "price": 450.0,
+          "price": 440.0,
           "offshore": false
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
-      "best_price": 450.0,
+      "best_price": 440.0,
       "dk_price": null,
-      "market_implied": 0.1818
+      "market_implied": 0.1852
     },
     {
       "fixture_id": "4aac00e6cc06b8905659f911419540d2",
@@ -177498,15 +177555,15 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 600.0,
+          "price": 550.0,
           "offshore": false
         }
       ],
       "best_book": "draftkings",
       "best_book_label": "DraftKings",
-      "best_price": 600.0,
-      "dk_price": 600.0,
-      "market_implied": 0.1429
+      "best_price": 550.0,
+      "dk_price": 550.0,
+      "market_implied": 0.1538
     },
     {
       "fixture_id": "4aac00e6cc06b8905659f911419540d2",
@@ -177518,7 +177575,7 @@
         {
           "book": "fliff",
           "label": "Fliff",
-          "price": 1100.0,
+          "price": 1085.0,
           "offshore": false
         },
         {
@@ -177536,9 +177593,9 @@
       ],
       "best_book": "fliff",
       "best_book_label": "Fliff",
-      "best_price": 1100.0,
+      "best_price": 1085.0,
       "dk_price": 650.0,
-      "market_implied": 0.0833
+      "market_implied": 0.0844
     }
   ],
   "anytime_td_note": "380 player(s) with anytime TD lines, 283 priced by the model",
@@ -182847,5 +182904,5 @@
       "note": "Hasselbeck has been out of commission due to knee injury, and he is likely to miss the remainder of the season."
     }
   ],
-  "injuries_as_of": "2026-11-02T21:05:14.457866+00:00"
+  "injuries_as_of": "2026-11-02T21:44:15.109308+00:00"
 }
