@@ -199,7 +199,10 @@ def played_zero_rows(wide: pd.DataFrame, games: pd.DataFrame, pff: pd.DataFrame)
             out[col] = 0.0 if pd.api.types.is_numeric_dtype(wide[col]) else np.nan
     out = out.dropna(subset=["player"])
     for col in ("athleteId", "gameId", "season", "week"):
-        out[col] = out[col].astype(wide[col].dtype)
+        try:
+            out[col] = out[col].astype(wide[col].dtype)
+        except (TypeError, ValueError):
+            pass
     return out[wide.columns]
 
 
@@ -294,6 +297,21 @@ def training_frame(feats: pd.DataFrame, games: pd.DataFrame, seasons: list, out_
     return add_pff_features(feats, matched), info
 
 
+def _id_types(wide: pd.DataFrame) -> pd.DataFrame:
+    """Numeric gameId/athleteId (needed to line up with games and PFF).
+    Rows are never dropped: one missing season/week (a game the schedule
+    join didn't place) stays in, exactly as the box-score-only path keeps it."""
+    for c in ("athleteId", "gameId", "season", "week"):
+        wide[c] = pd.to_numeric(wide[c], errors="coerce")
+    ok = wide["athleteId"].notna() & wide["gameId"].notna()
+    out = wide[ok].copy()
+    for c in ("athleteId", "gameId"):
+        out[c] = out[c].astype("int64")
+    if not ok.all():
+        print(f"  [note] {int((~ok).sum())} box-score rows without a game/player id left out")
+    return out
+
+
 def add_played_zeros(wide: pd.DataFrame, games: pd.DataFrame, seasons: list, out_dir: str = None) -> pd.DataFrame:
     """`wide` (pivoted box scores) plus a zero row for every player-game PFF
     shows him running routes but CFBD has no line (11/2026; see
@@ -303,11 +321,7 @@ def add_played_zeros(wide: pd.DataFrame, games: pd.DataFrame, seasons: list, out
     recv, pgames = pff.fetch_receiving_seasons(list(seasons), out_dir, verbose=False)
     if recv.empty:
         raise RuntimeError("PFF returned no receiving rows")
-    for c in ("athleteId", "gameId", "season", "week"):
-        wide[c] = pd.to_numeric(wide[c], errors="coerce")
-    wide = wide.dropna(subset=["athleteId", "gameId", "season", "week"])
-    for c in ("athleteId", "gameId", "season", "week"):
-        wide[c] = wide[c].astype("int64")
+    wide = _id_types(wide)
     g = games.assign(id=pd.to_numeric(games["id"], errors="coerce")).dropna(subset=["id"])
     g["id"] = g["id"].astype("int64")
     zeros = played_zero_rows(wide, g, prepare_pff_rows(recv, pgames))
@@ -339,12 +353,7 @@ def live_snapshot(player_stats_long: pd.DataFrame, games: pd.DataFrame, season: 
         from src.features.player_features import add_usage_features, current_feature_snapshot
         g = games.assign(id=pd.to_numeric(games["id"], errors="coerce")).dropna(subset=["id"])
         g["id"] = g["id"].astype("int64")
-        w = wide.copy()
-        for c in ("athleteId", "gameId", "season", "week"):
-            w[c] = pd.to_numeric(w[c], errors="coerce")
-        w = w.dropna(subset=["athleteId", "gameId", "season", "week"])
-        for c in ("athleteId", "gameId", "season", "week"):
-            w[c] = w[c].astype("int64")
+        w = _id_types(wide.copy())
         zeros = played_zero_rows(w, g, prepare_pff_rows(recv, pgames))
         wz = pd.concat([w, zeros], ignore_index=True).sort_values(["athleteId", "season", "week"])
         mz, _ = match_pff_to_cfbd(wz, g, prepare_pff_rows(recv, pgames))
