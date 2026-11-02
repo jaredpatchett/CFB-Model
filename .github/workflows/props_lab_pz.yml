@@ -1,0 +1,77 @@
+name: Props labs 2+3 with played-zeros (11/2026)
+
+# Re-runs props lab 2 (receptions + receiving yards, 2026 lines) and lab 3
+# (receptions, 2024-26 lines) with PLAYED_ZEROS=1: a player PFF shows running
+# routes but with no CFBD box-score line is counted as a 0 (books only void a
+# player with no snaps). Results go to docs/data/props_lab{2,3}*_pz.* so they
+# can be compared with the originals. PFF data stays in a temp folder.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/props_lab_pz.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  lab:
+    strategy:
+      fail-fast: false
+      matrix:
+        lab: [props_lab2, props_lab3]
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
+      ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+      ODDSPAPI_API_KEY: ${{ secrets.PRIZEPICKS_API }}
+      # The PFF key, under whichever of these two names it was saved.
+      PFF_API_KEY: ${{ secrets.PFF_API_KEY || secrets.CFB_API_KEY }}
+      YEARS: "2022 2023 2024 2025"
+      PLAYED_ZEROS: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history -- the saved prop lines live in past commits
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore cached historical CFBD data
+        uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: cfbd-raw-${{ env.YEARS }}-${{ github.run_id }}
+          restore-keys: |
+            cfbd-raw-${{ env.YEARS }}-
+            cfbd-raw-
+
+      - name: Fetch historical data
+        run: python scripts/fetch_historical_data.py --years ${{ env.YEARS }}
+
+      - name: Run ${{ matrix.lab }} (played-zeros)
+        run: python scripts/${{ matrix.lab }}.py --years ${{ env.YEARS }} --season 2026
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/${{ matrix.lab }}_pz.json docs/data/${{ matrix.lab }}_detail_pz.csv
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "${{ matrix.lab }} played-zeros results [skip ci]"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git merge -X ours --no-edit origin/main -m "Merge origin/main [skip ci]" && git push origin main; then
+              echo "Pushed on attempt $i"; break
+            fi
+            [ "$i" -eq 5 ] && echo "::error::Could not push results" && exit 1
+            sleep $((RANDOM % 10 + 5))
+          done
+# run: 2026-11-02

@@ -99,7 +99,7 @@ def _same_game(pairs: pd.DataFrame) -> pd.Series:
     return by_time | by_week
 
 
-def match_pff_to_cfbd(wide: pd.DataFrame, games: pd.DataFrame, pff: pd.DataFrame):
+def match_pff_to_cfbd(wide: pd.DataFrame, games: pd.DataFrame, pff: pd.DataFrame, full: bool = False):
     """Returns (matched, info). `matched` has one row per CFBD player-game
     that found its PFF row: gameId, athleteId and the pff_* game values.
 
@@ -138,7 +138,8 @@ def match_pff_to_cfbd(wide: pd.DataFrame, games: pd.DataFrame, pff: pd.DataFrame
 
     m = pd.concat([a, b], ignore_index=True)
     if m.empty:
-        return pd.DataFrame(columns=["gameId", "athleteId"] + GAME_COLS), {"matched_rows": 0}
+        empty = pd.DataFrame(columns=["gameId", "athleteId"] + GAME_COLS)
+        return (empty, {"matched_rows": 0}, m, school) if full else (empty, {"matched_rows": 0})
     # One PFF row per CFBD player-game and vice versa (closest kickoff, then most routes).
     m["gap"] = (m["kick_pff"] - m["kick_cfbd"]).abs().dt.total_seconds().fillna(0)
     m = m.sort_values(["gap", "pff_routes"], ascending=[True, False])
@@ -149,7 +150,52 @@ def match_pff_to_cfbd(wide: pd.DataFrame, games: pd.DataFrame, pff: pd.DataFrame
         "franchises_mapped_to_school": int(len(best)),
         "pct_kickoff_known": round(float(pf["kick_pff"].notna().mean()) * 100, 1),
     }
+    if full:
+        return m[["gameId", "athleteId"] + GAME_COLS], info, m, school
     return m[["gameId", "athleteId"] + GAME_COLS], info
+
+
+def played_zero_rows(wide: pd.DataFrame, games: pd.DataFrame, pff: pd.DataFrame) -> pd.DataFrame:
+    """Box-score rows of zeros for player-games where PFF has the player
+    running routes but CFBD has no box-score line (11/2026).
+
+    CFBD lists only players who recorded a stat, so a receiver who played
+    and caught nothing simply vanishes -- from the training data and from
+    graded prop lines. Books void a prop only when the player takes no
+    snaps, so these are real zeros (over loses, under wins). `pff` is the
+    prepare_pff_rows() frame. Returns rows shaped like `wide`."""
+    _, _, m, school = match_pff_to_cfbd(wide, games, pff, full=True)
+    if m.empty:
+        return wide.iloc[0:0]
+    ids = (m.groupby(["season", "player_id"])["athleteId"]
+             .agg(lambda s: s.value_counts().index[0]).rename("athleteId").reset_index())
+    cand = pff[(pff["pff_routes"] > 0) & pff["kick"].notna()].merge(ids, on=["season", "player_id"])
+    cand["team"] = [school.get((s, f)) for s, f in zip(cand["season"], cand["franchise_id"])]
+    cand = cand.dropna(subset=["team"])
+    g = games.drop_duplicates("id").copy()
+    g["kick"] = pd.to_datetime(g["startDate"], utc=True, errors="coerce")
+    long = pd.concat([g[["id", "season", "week", "kick", "homeTeam"]].rename(columns={"homeTeam": "team"}).assign(opponent=g["awayTeam"]),
+                      g[["id", "season", "week", "kick", "awayTeam"]].rename(columns={"awayTeam": "team"}).assign(opponent=g["homeTeam"])])
+    c = cand.merge(long, on=["season", "team"], suffixes=("_pff", "_cfbd"))
+    c = c[(c["kick_pff"] - c["kick_cfbd"]).abs() <= MATCH_WINDOW]
+    c = c.rename(columns={"id": "gameId", "week_cfbd": "week"})
+    c["gameId"] = pd.to_numeric(c["gameId"], errors="coerce").astype("int64")
+    have = set(zip(wide["gameId"], wide["athleteId"]))
+    c = c[[(gid, aid) not in have for gid, aid in zip(c["gameId"], c["athleteId"])]]
+    c = c.drop_duplicates(["gameId", "athleteId"])
+    if c.empty:
+        return wide.iloc[0:0]
+    names = wide.drop_duplicates("athleteId", keep="last").set_index("athleteId")["player"]
+    out = pd.DataFrame({"gameId": c["gameId"].values, "athleteId": c["athleteId"].values,
+                        "player": c["athleteId"].map(names).values, "team": c["team"].values,
+                        "season": c["season"].values, "week": c["week"].values, "opponent": c["opponent"].values})
+    for col in wide.columns:
+        if col not in out.columns:
+            out[col] = 0.0 if pd.api.types.is_numeric_dtype(wide[col]) else np.nan
+    out = out.dropna(subset=["player"])
+    for col in ("athleteId", "gameId", "season", "week"):
+        out[col] = out[col].astype(wide[col].dtype)
+    return out[wide.columns]
 
 
 def _last2_charted(s: pd.Series) -> pd.Series:
