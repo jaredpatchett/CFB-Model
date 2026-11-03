@@ -2204,15 +2204,41 @@ RENDERER_JS = """<script>
     var bt = D.backtest || {}, c = D.clv || {};
     var sg = function (x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); };
     var col = function (x) { return x > 0 ? 'var(--neon)' : (x < 0 ? 'var(--red)' : 'var(--muted)'); };
-    var perf = (bt.overall || []).map(function (r) {
-      return '<div class="ep-row"><span>' + esc(r.group) + '</span><b>' + esc(r.record) + '</b><b style="color:' + col(r.units) + '">' + sg(r.units, 1) + 'u</b><b style="color:' + col(r.roi) + '">' + sg(r.roi * 100, 1) + '%</b></div>';
-    }).join('');
-    var weeks = (c.byWeek || []).map(function (w) { return w.avg; });
-    var cum = [], t = 0; weeks.forEach(function (v) { t += v; cum.push(t); });
-    var p1 = '<div class="ep-card"><div class="ep-head">' + icon('performance') + '<span>Model performance</span><em>backtest ' + esc((bt.seasonsCovered || []).join('–')) + ', spreads at -110</em></div>' +
-      (perf ? '<div class="ep-row ep-th"><span></span><span>Record</span><span>Units</span><span>ROI</span></div>' + perf : '<div class="ep-empty">No backtest file this run.</div>') +
-      (c.nGames ? '<div class="ep-clv"><div><div class="ep-k">Avg CLV, live picks</div><div class="ep-v" style="color:' + col(c.avgClvPoints) + '">' + sg(c.avgClvPoints, 2) + ' pts</div>' +
-        '<div class="ep-k2">' + (c.pctPositiveClv * 100).toFixed(0) + '% beat the close · ' + c.nGames + ' picks</div></div>' + spark(cum) + '</div>' : '') + '</div>';
+    // Live record from My Tracker (11/3/2026): game-line plays only, official
+    // only (unofficial plays -- moneylines, 20+ spreads -- are left out),
+    // 1 unit a play, the same way the tracker's Units record counts them.
+    var trk = loadTrk().filter(function (it) { return it.type !== 'Prop' && !it.unofficial && it.status && it.price != null; });
+    var when = function (it) {
+      var t = Date.parse(it.kickoffIso || '');
+      if (isNaN(t)) { var m = /^t(\d{13})/.exec(it.id || ''); t = m ? Number(m[1]) : 0; }
+      return t;
+    };
+    trk.sort(function (x, y) { return when(x) - when(y); });
+    var unitOf = function (it) { return it.status === 'win' ? americanToDecimal(it.price) - 1 : (it.status === 'loss' ? -1 : 0); };
+    var tally = function (list) {
+      var w = 0, l = 0, pu = 0, u = 0;
+      list.forEach(function (it) { if (it.status === 'win') w++; else if (it.status === 'loss') l++; else if (it.status === 'push') pu++; u += unitOf(it); });
+      return { n: list.length, rec: w + '-' + l + '-' + pu, units: u, roi: list.length ? u / list.length * 100 : 0 };
+    };
+    var line = function (label, t) {
+      return '<div class="ep-row"><span>' + esc(label) + '</span><b>' + esc(t.rec) + '</b><b style="color:' + col(t.units) + '">' + sg(t.units, 2) + 'u</b><b style="color:' + col(t.roi) + '">' + sg(t.roi, 1) + '%</b></div>';
+    };
+    var perf = '';
+    if (trk.length) {
+      perf = line('All official plays', tally(trk));
+      var bc = trk.filter(function (it) { return it.betCard; });
+      if (bc.length) perf += line('Bet Card plays', tally(bc));
+      var sp = trk.filter(function (it) { return it.type === 'Spread'; });
+      if (sp.length && sp.length !== trk.length) perf += line('Spreads', tally(sp));
+    }
+    var cum = [], run = 0; trk.forEach(function (it) { run += unitOf(it); cum.push(run); });
+    var totU = trk.length ? tally(trk).units : 0;
+    var p1 = '<div class="ep-card"><div class="ep-head">' + icon('performance') + '<span>Model performance</span><em>live &middot; My Tracker, official plays, 1u each</em></div>' +
+      (perf ? '<div class="ep-row ep-th"><span></span><span>Record</span><span>Units</span><span>ROI</span></div>' + perf
+            : '<div class="ep-empty">No graded official plays in My Tracker in this browser yet.</div>') +
+      (trk.length ? '<div class="ep-clv"><div><div class="ep-k">Units, season</div><div class="ep-v" style="color:' + col(totU) + '">' + sg(totU, 2) + 'u</div>' +
+        '<div class="ep-k2">' + trk.length + ' graded official plays' + (c.nGames ? ' &middot; avg CLV ' + sg(c.avgClvPoints, 2) + ' pts' : '') + '</div></div>' + spark(cum) + '</div>' : '') +
+      '<div class="ep-foot" style="color:var(--muted-3)">Moneylines and other unofficial plays are not counted. Backtest is on the Model Performance tab.</div></div>';
     var recent = (c.recent || []).map(function (g) {
       var side = g.side === 'home' ? g.home : g.away, ln = g.side === 'home' ? g.line : -g.line;
       var d = new Date(g.date), ds = isNaN(d) ? '' : (d.getMonth() + 1) + '/' + d.getDate();
