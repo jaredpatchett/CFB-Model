@@ -90,6 +90,9 @@ UNDER_PLAY_EDGE = 30.0             # a receptions under at this edge or more is 
 UNDER_TAGS = {"under_play": "play", "under_lean": "lean"}
 RECV_MODEL_UPDATE = datetime(2026, 11, 2, 20, 51, tzinfo=timezone.utc)   # receiving models retrained with played-zeros
 RECV_MODEL_TAGS = ("rec_yds_play", "under_play")
+# Rush yds unders official only vs tough run defenses from this run on (11/3/2026).
+RUSH_RULE_UPDATE = datetime(2026, 11, 3, 18, 15, tzinfo=timezone.utc)
+RULE_RESTARTS = {"rec_yds_play": RECV_MODEL_UPDATE, "under_play": RECV_MODEL_UPDATE, "rush_under_play": RUSH_RULE_UPDATE}
 GRADE_AFTER_HOURS = 5              # don't look for a box score until the game has had time to finish
 MATCH_HOURS = 36                   # a logged kickoff and CFBD's kickoff for the same game
 COLS = ["key", "tag", "player", "team", "opponent", "market", "start_time", "flagged_at", "book", "line", "price",
@@ -493,11 +496,11 @@ def summarize(state, now):
     # The receptions / receiving-yards models were retrained with played-zero
     # games on Nov 2, 2026. Those rules' live records restart there; the old
     # model's record is kept as "<tag>_prev".
-    for t in RECV_MODEL_TAGS:
+    for t, since in RULE_RESTARTS.items():
         rows = [r for (k, tag), r in state.items() if tag == t]
-        new_rows = [r for r in rows if _ts(r["flagged_at"]) >= RECV_MODEL_UPDATE]
-        results[f"{t}_prev"] = _record_units([r for r in rows if _ts(r["flagged_at"]) < RECV_MODEL_UPDATE])
-        results[f"{t}_since_update"] = dict(_record_units(new_rows), since=RECV_MODEL_UPDATE.isoformat())
+        new_rows = [r for r in rows if _ts(r["flagged_at"]) >= since]
+        results[f"{t}_prev"] = _record_units([r for r in rows if _ts(r["flagged_at"]) < since])
+        results[f"{t}_since_update"] = dict(_record_units(new_rows), since=since.isoformat())
     groups = {}
     for (k, t), r in state.items():
         if t == "group" and r.get("group"):

@@ -471,6 +471,7 @@ def build_prop_tracking(history, path: str = PROPS_TRACK_PATH, max_results: int 
                 # 11/2/2026 receiving-model retrain: those rules' live records restart.
                 "recYdsPlayNew": live.get("rec_yds_play_since_update"), "recYdsPlayPrev": live.get("rec_yds_play_prev"),
                 "underPlayNew": live.get("under_play_since_update"), "underPlayPrev": live.get("under_play_prev"),
+                "rushUnderPlayNew": live.get("rush_under_play_since_update"), "rushUnderPlayPrev": live.get("rush_under_play_prev"),
                 "results": [slim(p) for p in results[:max_results]], "nResults": len(results),
                 "upcoming": [slim(p) for p in upcoming[:max_upcoming]], "nUpcoming": len(upcoming)}
     except Exception as e:
@@ -600,7 +601,9 @@ def build_prop_rules(path: str = None):
             if os.path.exists(RUSH_LAB_PATH):
                 with open(RUSH_LAB_PATH) as f:
                     rl = json.load(f)
-                a = (((rl.get("results") or {}).get("current") or {}).get("all")) or {}
+                cur = ((rl.get("results") or {}).get("current") or {})
+                # 11/3/2026 rule: unders vs tough run defenses only.
+                a = ((cur.get("by_run_defense") or {}).get("tough")) or {}
                 if a.get("n"):
                     out["rush_under"] = {"record": a["record"], "units": a["units"], "roi": a["roi"], "n": a["n"],
                                          "seasons": len(rl.get("seasons") or [])}
@@ -3085,7 +3088,7 @@ RENDERER_JS = """<script>
         : '<span style="color:var(--red)">' + nRecvNew + ' of ' + nRecv + ' on the retrained model, the rest on the box-score fallback</span>')) +
       ' &middot; rush yds and other props &mdash; unchanged model</div>';
     var strip = '<div class="pp-recline">' +
-      (T ? recBit('Rec yds overs', T.recYdsPlayNew || T.recYdsPlay) + recBit('Rush yds unders', T.rushUnderPlay) + recBit('Rec unders', T.underPlayNew || T.underPlay) + recBit('Rec overs (watch)', T.official) + recBit('All auto-tracked', T.overall) : '') +
+      (T ? recBit('Rec yds overs', T.recYdsPlayNew || T.recYdsPlay) + recBit('Rush yds unders', T.rushUnderPlayNew || T.rushUnderPlay) + recBit('Rec unders', T.underPlayNew || T.underPlay) + recBit('Rec overs (watch)', T.official) + recBit('All auto-tracked', T.overall) : '') +
       '<span class="pp-key"><b>Edge</b> is the model&rsquo;s hit chance against the price. <b>Track record</b> is how plays at that edge size did in the backtest.</span>' +
       modelLine +
     '</div>';
@@ -3192,7 +3195,7 @@ RENDERER_JS = """<script>
       var sname = SORTS.filter(function (x) { return x[0] === sort1; })[0][1];
       if (shown.length) groups.push({ key: 'sorted|' + view + '|' + sort1, name: 'Sorted by ' + sname + (state.propSortRev ? ' (reversed)' : ''), note: '', cap: 60, rows: shown.slice().sort(cmp) });
     } else if (view === 'all') {
-      [['official', 'Official plays', 'Receiving yards overs with a 15% to 30% edge on a line of 25.5+, rush yards unders with any edge, and receptions unders with a 30%+ edge. The only props the rules call bets.', 0],
+      [['official', 'Official plays', 'Receiving yards overs with a 15% to 30% edge on a line of 25.5+, rush yards unders with any edge against a tough run defense, and receptions unders with a 30%+ edge. The only props the rules call bets.', 0],
        ['underlean', 'Under leans', 'Receptions unders with a 10% to 30% edge. Winners in all three seasons tested, by a thin margin. Graded on their own line.', 12],
        ['watch', 'Watch', 'Receptions overs with a 10%+ edge, or a 10%+ edge on a secondary-role player. Tracked, not bet.', 12],
        ['tracked', 'Auto-tracked', 'Has an edge and its kind of play is up in the backtest. Logged and graded automatically.', 12],
@@ -3390,7 +3393,8 @@ RENDERER_JS = """<script>
       if (r.play_kind === 'rec_under') flags.push('<span class="pp-tag is-official" title="A receptions under with a 30%+ edge. An official play.">Under play</span>');
       else if (r.play_kind === 'rec_yds_over') flags.push('<span class="pp-tag is-official" title="A receiving yards over with a 15% to 30% edge on a line of 25.5+. An official play.">Rec yds play</span>');
       else if (r.play_kind === 'rec_yds_watch') flags.push('<span class="pp-tag is-watch" title="A receiving yards over with a 15%+ edge, but ' + esc(r.rec_yds_watch_reason || 'outside the rule') + ' -- official only at 15% to 30% on a line of 25.5+ (a player with a real role). Watch only.">Rec yds watch &middot; ' + esc(r.rec_yds_watch_reason || '') + '</span>');
-      else if (r.play_kind === 'rush_under') flags.push('<span class="pp-tag is-official" title="A rush yards under with an edge. An official play.">Rush under play</span>');
+      else if (r.play_kind === 'rush_under') flags.push('<span class="pp-tag is-official" title="A rush yards under with an edge, against a tough run defense (top third). An official play.">Rush under play</span>');
+      else if (r.play_kind === 'rush_under_watch') flags.push('<span class="pp-tag is-watch" title="A rush yards under with an edge, but the run defense is ' + esc(r.run_def || 'not graded') + ' -- official only vs a tough run defense (top third). Watch only.">Rush under watch &middot; ' + esc(r.run_def || 'no grade') + ' run D</span>');
       else if (r.play_kind === 'rec_over' && !r.is_official_play && !r.edge_capped) flags.push('<span class="pp-tag is-watch" title="A receptions over with a 10% to 30% edge. Watch only since 10/23/2026.">Rec over watch</span>');
       else if (r.is_under_lean) flags.push('<span class="pp-tag is-watch" title="A receptions under with a 10% to 30% edge. A lean, graded on its own line.">Under lean</span>');
       var mu = matchupOf(r);
@@ -3485,7 +3489,7 @@ RENDERER_JS = """<script>
 
     // 5) The fine print, folded away until wanted.
     var help = '<details class="pp-help"><summary>How to read this page</summary><div class="pp-help-body">' +
-      '<p><b>Official</b> plays are the only props the rules call bets: receiving yards overs with a 15% to 30% edge on a line of 25.5+ (a player with a real role), rush yards unders with any edge, and receptions unders with a 30%+ edge, at the best price across books. Receptions overs moved to Watch on 10/23/2026. ' +
+      '<p><b>Official</b> plays are the only props the rules call bets: receiving yards overs with a 15% to 30% edge on a line of 25.5+ (a player with a real role), rush yards unders with any edge against a tough run defense, and receptions unders with a 30%+ edge, at the best price across books. Receptions overs moved to Watch on 10/23/2026. ' +
         '<b>Under leans</b> are receptions unders with a 10% to 30% edge: they won in all three seasons tested, but by a thin margin, so they are graded on their own line. ' +
         'An under is a play or a lean by its edge at the best price right now, so it can move between the two; the record grades each one once, at the price and label it was first flagged with. ' +
         '<b>Watch</b> plays are logged to see whether they hold up, not bet. <b>All props</b> lists everything the model has a read on.</p>' +
@@ -4917,15 +4921,16 @@ RENDERER_JS = """<script>
     };
     // Receiving rules' live record restarts at the Nov 2, 2026 model retrain;
     // the old model's record stays visible underneath.
-    var prevNote = function (prev, now) {
+    var prevNote = function (prev, now, what) {
       if (!now) return '';
-      return '<div style="font-size:9.5px;color:var(--muted-3);font-weight:400;margin-top:2px">live since Nov 2 model update' +
-        (prev && prev.graded ? ' &middot; old model: ' + esc(prev.record) + ', ' + sg(prev.units, 1) + 'u' : '') + '</div>';
+      var rule = what === 'Nov 3 rule change';
+      return '<div style="font-size:9.5px;color:var(--muted-3);font-weight:400;margin-top:2px">live since ' + (what || 'Nov 2 model update') +
+        (prev && prev.graded ? ' &middot; ' + (rule ? 'old rule' : 'old model') + ': ' + esc(prev.record) + ', ' + sg(prev.units, 1) + 'u' : '') + '</div>';
     };
     var btLabel = function (bt) { return bt ? ' <span style="color:var(--muted-3);font-weight:400">(' + bt.seasons + ' season' + (bt.seasons === 1 ? '' : 's') + ')</span>' : ''; };
     var rules = '<div class="thead" style="display:grid;' + kc + 'margin-top:14px"><div>Official rules</div><div class="num">Record</div><div class="num">Units</div><div class="num">ROI</div><div class="num">Graded</div><div class="num">Backtest</div></div>' +
       ruleRow('Receiving yards overs, 15% to 30% edge, line 25.5+' + btLabel(R.rec_yds_over) + prevNote(T.recYdsPlayPrev, T.recYdsPlayNew), T.recYdsPlayNew || T.recYdsPlay, R.rec_yds_over) +
-      ruleRow('Rush yards unders, any edge' + btLabel(R.rush_under), T.rushUnderPlay, R.rush_under) +
+      ruleRow('Rush yards unders, any edge, vs a tough run defense' + btLabel(R.rush_under) + prevNote(T.rushUnderPlayPrev, T.rushUnderPlayNew, 'Nov 3 rule change'), T.rushUnderPlayNew || T.rushUnderPlay, R.rush_under) +
       ruleRow('Receptions unders, 30%+ edge' + btLabel(R.rec_under) + prevNote(T.underPlayPrev, T.underPlayNew), T.underPlayNew || T.underPlay, R.rec_under) +
       (R.official_total ? '<div class="row"><div class="row-accent" style="background:var(--rule)"></div>' +
         '<div class="row-body" style="' + kc + 'padding:8px 14px;font-size:11.5px">' +

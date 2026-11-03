@@ -1061,6 +1061,7 @@ def main(year: int):
         max_completed_week = int(completed_weeks.max()) if not completed_weeks.empty else 0
 
     player_form = {}
+    run_def_lookup = {}
     player_game_logs = {}     # athleteId -> this season's games (box score), for the Props details panel
     prop_game_logs_out = {}   # "<athleteId>|<stat>" -> [[week, opponent, value], ...]
     opp_allowed_lookup = {}
@@ -1085,6 +1086,14 @@ def main(year: int):
                 print(f"  [warn] week {wk} player stats fetch failed: {e}")
         if all_player_stats:
             player_stats_long_current = pd.concat(all_player_stats, ignore_index=True)
+            # Run-defense toughness for each defense's next game (11/3/2026
+            # rush yds unders rule). Never blocks the export.
+            try:
+                from src.features import run_defense as rdef
+                run_def_lookup = rdef.current_grades(pivot_player_game_stats(player_stats_long_current, schedule_df))
+                print(f"  run-defense grades: {len(run_def_lookup)} defenses with 3+ games")
+            except Exception as e:
+                print(f"  [warn] run-defense grades not built ({type(e).__name__}: {e}) -- no rush yds unders are official this run")
             player_form = build_current_player_form(player_stats_long_current, schedule_df)
             player_game_logs = build_player_game_logs(player_stats_long_current, schedule_df)
             opp_allowed_lookup = build_current_defense_allowed(player_stats_long_current, schedule_df)
@@ -1403,10 +1412,23 @@ def main(year: int):
                                       and p.get("model_lean") == "under"
                                       and _valid_price(p.get("under_price"))],
                                      lambda p: (p.get("fixture_id"), p.get("player_name")))
+        # 11/3/2026: official only vs a TOUGH run defense (top third by rush
+        # yds allowed vs what those offenses usually gain, earlier games).
+        # 2024-26 backtest: tough 442-341 +6.8% (positive every season),
+        # soft 90-101 -11.2%. Average / soft / not yet graded -> watch.
+        from src.features import run_defense as rdef
         for p in rush_under_plays:
-            p["is_official_play"] = True
-            p["is_watch_play"] = False
-            p["play_kind"] = "rush_under"
+            t = run_def_lookup.get(p.get("opponent"))
+            p["run_def_tough"] = round(float(t), 0) if t is not None else None
+            p["run_def"] = rdef.bucket(t)
+            if p["run_def"] == "tough":
+                p["is_official_play"] = True
+                p["is_watch_play"] = False
+                p["play_kind"] = "rush_under"
+            else:
+                p["is_official_play"] = False
+                p["is_watch_play"] = True
+                p["play_kind"] = "rush_under_watch"
 
         # ---- Matchup label on every receptions prop (10/2026) ----
         try:

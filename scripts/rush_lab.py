@@ -105,42 +105,7 @@ def frames(years, season):
     return fb, fz, wide, {"player_games": int(len(wide)), "played_zero_rows": int(len(zeros))}
 
 
-SHRINK_YDS, MIN_DEF_GAMES = 3, 3       # same as the Oct 30 matchup lab
-
-
-def run_defense(wide):
-    """(season, week, defense) -> run-defense toughness percentile (100 =
-    allows the fewest rush yards vs what those offenses usually get), from
-    that season's games BEFORE that week only. Same method as the matchup
-    lab (10/30/2026)."""
-    og = wide.groupby(["season", "week", "gameId", "team", "opponent"])["rush_yds"].sum().reset_index()
-    og["rush_yds"] = pd.to_numeric(og["rush_yds"], errors="coerce").fillna(0.0)
-    rows = []
-    for (s, wk) in sorted(set(zip(og["season"], og["week"])) | {(s, w + 1) for s, w in zip(og["season"], og["week"])}):
-        prior = og[(og["season"] == s) & (og["week"] < wk)]
-        if prior.empty:
-            continue
-        off = prior.groupby("team")["rush_yds"].agg(["sum", "count"])
-        league = prior["rush_yds"].mean()
-        s_, n_ = prior["team"].map(off["sum"]), prior["team"].map(off["count"])
-        exp = np.where(n_ > 1, (s_ - prior["rush_yds"]) / (n_ - 1).replace(0, np.nan), league)
-        t = pd.DataFrame({"games": prior.groupby("opponent").size(),
-                          "allowed": prior.groupby("opponent")["rush_yds"].sum(),
-                          "expected": pd.Series(exp, index=prior.index).groupby(prior["opponent"]).sum()})
-        t = t[t["games"] >= MIN_DEF_GAMES]
-        if len(t) < 20:
-            continue
-        r = (t["allowed"] / t["expected"].replace(0, np.nan)).fillna(1.0)
-        ratio = (t["games"] * r + SHRINK_YDS) / (t["games"] + SHRINK_YDS)
-        tough = (-ratio).rank(pct=True) * 100
-        rows.append(pd.DataFrame({"season": s, "week": wk, "opponent": tough.index, "run_def_tough": tough.values}))
-    return pd.concat(rows, ignore_index=True) if rows else pd.DataFrame(columns=["season", "week", "opponent", "run_def_tough"])
-
-
-def matchup_bucket(x):
-    if x is None or (isinstance(x, float) and np.isnan(x)):
-        return "no grade"
-    return "tough" if x >= 67 else ("soft" if x <= 33 else "average")
+from src.features.run_defense import run_defense, bucket as matchup_bucket   # shared with the live board (11/3/2026)
 
 
 def train(frame, before):
