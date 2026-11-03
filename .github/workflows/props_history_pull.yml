@@ -15,6 +15,10 @@ name: Props history pull (past-season receptions lines)
 on:
   workflow_dispatch:
     inputs:
+      market:
+        description: "Market: receptions, rush_yds or anytime_td"
+        required: false
+        default: "receptions"
       seasons:
         description: "Seasons to pull (space separated)"
         required: false
@@ -54,6 +58,7 @@ jobs:
       - name: Pull past-season receptions lines
         run: >
           python scripts/pull_props_history.py
+          --market ${{ github.event.inputs.market || 'receptions' }}
           --seasons ${{ github.event.inputs.seasons || '2024 2025' }}
           --max-credits ${{ github.event.inputs.max_credits || '20000' }}
           --reserve ${{ github.event.inputs.reserve || '25000' }}

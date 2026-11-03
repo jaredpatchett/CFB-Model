@@ -2,8 +2,9 @@
 """
 Pull past-season prop lines from The Odds API (added 10/2026).
 
-Markets (--market): "receptions" (the default, as before) and "anytime_td"
-(added 10/2026 for the anytime-touchdown lab). An anytime TD line is a
+Markets (--market): "receptions" (the default, as before), "anytime_td"
+(added 10/2026 for the anytime-touchdown lab) and "rush_yds" (11/2026, saved
+as rush_yds_<season>.csv). An anytime TD line is a
 yes/no bet; it is saved in the same layout with line 0.5, the "Yes" price
 in the over column and the "No" price (when a book posts one) in under.
 
@@ -48,7 +49,8 @@ import requests
 import config
 
 OUT_DIR = "data/props_history"
-MARKETS = {"receptions": "player_receptions", "anytime_td": "player_anytime_td"}
+MARKETS = {"receptions": "player_receptions", "anytime_td": "player_anytime_td",
+           "rush_yds": "player_rush_yds"}             # rush_yds added 11/2026 (rush yds unders backtest)
 MARKET_NAME = "receptions"                           # set from --market in main()
 MARKET = MARKETS[MARKET_NAME]
 SIDES = {"over": "over", "under": "under", "yes": "over", "no": "under"}
