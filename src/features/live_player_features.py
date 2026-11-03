@@ -309,7 +309,8 @@ def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
         return None
 
     entry = player_form.get(_normalize_name(player_name))
-    if entry and stat in ("receptions", "rec_yds") and entry.get("recv"):
+    recv_form = bool(entry and stat in ("receptions", "rec_yds") and entry.get("recv"))
+    if recv_form:
         # 11/2026: receiving models score on averages that include games he
         # played without a catch (see pff_features.live_snapshot).
         entry = {**entry, **entry["recv"]}
@@ -343,6 +344,10 @@ def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
         # props, which had no team info anywhere in their tracked
         # description before this.
         "team": entry.get("team"),
+        # 11/2026: which model scored it, for the Props tab's model tag. Set
+        # only when the retrained receiving model scored on the averages that
+        # include his 0-catch games (not the box-score fallback).
+        "model_version": getattr(model, "model_version", None) if recv_form else None,
         # Opponent and sample size (added 10/2026) for the props table's
         # game context and confidence rating -- a projection built on 2
         # games deserves less trust than one built on 5.

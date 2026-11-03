@@ -1111,6 +1111,9 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .pp-tag { font-family: var(--font-display); font-weight: 800; font-size: 11px; letter-spacing: 0.07em; padding: 3px 9px; border-radius: 4px; }
 .pp-tag.is-official { background: rgba(23,194,107,0.16); color: var(--green); }
 .pp-tag.is-watch { background: rgba(91,164,255,0.16); color: var(--blue-light); }
+.pp-tag.is-newmodel { background: rgba(45,212,191,0.14); color: #2dd4bf; }
+.pp-model { flex-basis: 100%; font-size: 11px; color: var(--muted); margin-top: 6px; }
+.pp-model b { color: #2dd4bf; }
 .pp-tag.is-track { background: transparent; color: var(--green); border: 1px solid rgba(23,194,107,0.4); }
 .pp-tag.is-lean { background: var(--chip); color: var(--muted); }
 .pp-tag.is-inj { background: rgba(224,180,74,0.16); color: var(--amber); }
@@ -3041,6 +3044,7 @@ RENDERER_JS = """<script>
 
     // Prop type badge: color by family (receiving teal, rushing orange,
     // passing purple) so the kind of prop reads at a glance.
+    var isRecvModel = function (r) { return r.market_name === 'Receptions' || r.market_name === 'Reception Yards'; };
     var mktCat = function (m) { m = m || ''; return /pass/i.test(m) ? 'pass' : (/rush/i.test(m) ? 'rush' : (/recep/i.test(m) ? 'rec' : 'other')); };
     var MKT_SHORT = { 'Receptions': 'REC', 'Reception Yards': 'REC YDS', 'Reception Touchdowns': 'REC TD', 'Rush Yards': 'RUSH YDS', 'Rush Attempts': 'RUSH ATT',
       'Rush Touchdowns': 'RUSH TD', 'Pass Yards': 'PASS YDS', 'Pass Touchdowns': 'PASS TD', 'Pass Attempts': 'PASS ATT', 'Pass Completions': 'COMP', 'Pass Interceptions': 'INT' };
@@ -3059,9 +3063,16 @@ RENDERER_JS = """<script>
       return '<span class="pp-rec"><span class="pp-rec-label">' + label + '</span><b>' + esc(o.record) + '</b>' +
         '<b style="color:' + tone(o.units) + '">' + signed(o.units, 2) + 'u</b><span class="pp-rec-n">' + o.graded + ' graded</span></span>';
     };
+    var nRecv = 0, nRecvNew = 0, recvVer = null;
+    rows.forEach(function (r) { if (isRecvModel(r) && r.model_ev != null) { nRecv++; if (r.model_version) { nRecvNew++; recvVer = r.model_version; } } });
+    var modelLine = '<div class="pp-model">Model: receptions &amp; rec yds props &mdash; ' +
+      (!nRecv ? 'none scored yet' : (nRecvNew === nRecv ? '<b>' + esc(recvVer) + '</b>, all ' + nRecv + ' scored by it'
+        : '<span style="color:var(--red)">' + nRecvNew + ' of ' + nRecv + ' on the retrained model, the rest on the box-score fallback</span>')) +
+      ' &middot; rush yds and other props &mdash; unchanged model</div>';
     var strip = '<div class="pp-recline">' +
       (T ? recBit('Rec yds overs', T.recYdsPlayNew || T.recYdsPlay) + recBit('Rush yds unders', T.rushUnderPlay) + recBit('Rec unders', T.underPlayNew || T.underPlay) + recBit('Rec overs (watch)', T.official) + recBit('All auto-tracked', T.overall) : '') +
       '<span class="pp-key"><b>Edge</b> is the model&rsquo;s hit chance against the price. <b>Track record</b> is how plays at that edge size did in the backtest.</span>' +
+      modelLine +
     '</div>';
 
     // 2) Controls: which plays, then the Sort & Filter panel.
@@ -3355,6 +3366,12 @@ RENDERER_JS = """<script>
         : '<div class="pp-track" style="color:' + tone(h.roi) + '">' + signed(h.roi, 0) + '% ROI &middot; ' + signed(h.units, 1) + 'u</div>' +
           '<div class="pp-sub">' + esc(h.record) + ' at this edge size</div>';
       var flags = [];
+      // 11/2026: which model scored a receiving prop. "New model" = the
+      // receptions / rec yds model retrained Nov 2 with games a player had no
+      // catch; "Fallback" = the box-score backup used when PFF is down.
+      if (isRecvModel(r) && r.model_ev != null) flags.push(r.model_version
+        ? '<span class="pp-tag is-newmodel" title="Scored by the ' + esc(r.model_version) + ' model: trained on, and averaging in, games where he played with no catch.">New model</span>'
+        : '<span class="pp-tag is-inj" title="Scored by the box-score backup model (PFF unavailable this run), not the retrained model.">Fallback model</span>');
       if (r.play_kind === 'rec_under') flags.push('<span class="pp-tag is-official" title="A receptions under with a 30%+ edge. An official play.">Under play</span>');
       else if (r.play_kind === 'rec_yds_over') flags.push('<span class="pp-tag is-official" title="A receiving yards over with a 15%+ edge. An official play.">Rec yds play</span>');
       else if (r.play_kind === 'rush_under') flags.push('<span class="pp-tag is-official" title="A rush yards under with an edge. An official play.">Rush under play</span>');

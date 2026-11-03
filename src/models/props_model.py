@@ -232,7 +232,8 @@ class PlayerStatModel:
                      "residual_bin_edges": getattr(self, "residual_bin_edges", []),
                      "residual_bin_stds": getattr(self, "residual_bin_stds", []),
                      "residual_bin_samples": getattr(self, "residual_bin_samples", []),
-                     "feature_columns": self.feature_columns, "stat_name": self.stat_name}, path)
+                     "feature_columns": self.feature_columns, "stat_name": self.stat_name,
+                     "model_version": getattr(self, "model_version", None)}, path)
 
     @classmethod
     def load(cls, path: str) -> "PlayerStatModel":
@@ -244,4 +245,6 @@ class PlayerStatModel:
         instance.residual_bin_stds = payload.get("residual_bin_stds", [])
         instance.residual_bin_samples = payload.get("residual_bin_samples", [])
         instance.feature_columns = payload["feature_columns"]
+        # e.g. "retrained 2026-11-02 (played-zeros)" -- shown on the Props tab.
+        instance.model_version = payload.get("model_version")
         return instance

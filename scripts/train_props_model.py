@@ -124,10 +124,12 @@ if __name__ == "__main__":
     stats_to_model = sorted(set(STAT_MAP.values()))
     print("Checking for PFF routes/targets data...")
     pff_frame = load_pff_frame(df)
+    zframe = None
     if pff_frame is not None:
         zframe = receiving_frame_with_zeros(df)
         if zframe is not None:
             pff_frame = zframe
+    RECV_VERSION = "retrained 2026-11-02 (played-zeros)" if (pff_frame is not None and zframe is not None) else None
 
     for stat in stats_to_model:
         print(f"\nTraining model for {stat}...")
@@ -141,6 +143,7 @@ if __name__ == "__main__":
                 if pff_frame is not None:
                     try:
                         model, metrics = fit_with_pff(stat, pff_frame)
+                        model.model_version = RECV_VERSION
                     except Exception as e:
                         print(f"  [warn] PFF version of {stat} not trained ({e}) -- using the box-score version")
             model.save(out_path)
