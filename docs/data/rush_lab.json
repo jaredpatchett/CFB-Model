@@ -1,0 +1,180 @@
+{
+  "generated_at": "2026-11-03T17:11:43.872874+00:00",
+  "seasons": [
+    2024,
+    2025,
+    2026
+  ],
+  "info": {
+    "player_games": 162120,
+    "played_zero_rows": 12666
+  },
+  "lines": {
+    "2024": {
+      "players_with_a_line": 1386,
+      "current": {
+        "no_match": 161,
+        "few_games": 129,
+        "not_under": 583
+      },
+      "played_zeros": {
+        "no_match": 161,
+        "few_games": 128,
+        "not_under": 583
+      }
+    },
+    "2025": {
+      "players_with_a_line": 1464,
+      "current": {
+        "no_match": 125,
+        "few_games": 159,
+        "not_under": 604
+      },
+      "played_zeros": {
+        "no_match": 125,
+        "few_games": 158,
+        "not_under": 600
+      }
+    },
+    "2026": {
+      "players_with_a_line": 1375,
+      "current": {
+        "no_match": 132,
+        "few_games": 270,
+        "not_under": 513
+      },
+      "played_zeros": {
+        "no_match": 131,
+        "few_games": 270,
+        "not_under": 533
+      }
+    }
+  },
+  "results": {
+    "current": {
+      "all": {
+        "n": 1535,
+        "record": "835-700",
+        "units": 44.1,
+        "roi": 2.9
+      },
+      "by_season": {
+        "2024": {
+          "n": 501,
+          "record": "268-233",
+          "units": 8.4,
+          "roi": 1.7
+        },
+        "2025": {
+          "n": 575,
+          "record": "309-266",
+          "units": 9.1,
+          "roi": 1.6
+        },
+        "2026": {
+          "n": 459,
+          "record": "258-201",
+          "units": 26.7,
+          "roi": 5.8
+        }
+      },
+      "by_edge": {
+        "0-10%": {
+          "n": 85,
+          "record": "54-31",
+          "units": 15.1,
+          "roi": 17.8
+        },
+        "10-20%": {
+          "n": 465,
+          "record": "248-217",
+          "units": 1.0,
+          "roi": 0.2
+        },
+        "20-30%": {
+          "n": 493,
+          "record": "274-219",
+          "units": 24.1,
+          "roi": 4.9
+        },
+        "30-999%": {
+          "n": 492,
+          "record": "259-233",
+          "units": 3.9,
+          "roi": 0.8
+        }
+      },
+      "zero_row_bets": 0
+    },
+    "played_zeros": {
+      "all": {
+        "n": 1527,
+        "record": "833-694",
+        "units": 48.5,
+        "roi": 3.2
+      },
+      "by_season": {
+        "2024": {
+          "n": 506,
+          "record": "269-237",
+          "units": 5.7,
+          "roi": 1.1
+        },
+        "2025": {
+          "n": 580,
+          "record": "319-261",
+          "units": 22.4,
+          "roi": 3.9
+        },
+        "2026": {
+          "n": 441,
+          "record": "245-196",
+          "units": 20.3,
+          "roi": 4.6
+        }
+      },
+      "by_edge": {
+        "0-10%": {
+          "n": 36,
+          "record": "21-15",
+          "units": 1.9,
+          "roi": 5.2
+        },
+        "10-20%": {
+          "n": 498,
+          "record": "275-223",
+          "units": 19.1,
+          "roi": 3.8
+        },
+        "20-30%": {
+          "n": 457,
+          "record": "245-212",
+          "units": 5.7,
+          "roi": 1.3
+        },
+        "30-999%": {
+          "n": 536,
+          "record": "292-244",
+          "units": 21.8,
+          "roi": 4.1
+        }
+      },
+      "zero_row_bets": 1
+    },
+    "common_lines_bet_by_both": {
+      "current": {
+        "n": 1353,
+        "record": "732-621",
+        "units": 32.0,
+        "roi": 2.4
+      },
+      "played_zeros": {
+        "n": 1353,
+        "record": "733-620",
+        "units": 34.5,
+        "roi": 2.5
+      }
+    }
+  },
+  "rule": "rush yards under, best-EV book, edge 0%+, 2+ games played; graded at that book's line and price"
+}
