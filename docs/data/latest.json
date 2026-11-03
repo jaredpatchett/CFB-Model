@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T15:59:55.719234+00:00",
+  "generated_at": "2026-11-03T16:14:56.188973+00:00",
   "team_metadata_year": 2025,
   "current_season_year": 2026,
   "preseason_prior": {
@@ -8596,6 +8596,80 @@
     {
       "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
       "start_time": "2026-11-04T00:00:00Z",
+      "player_name": "Riley Neer",
+      "market_name": "Reception Yards",
+      "line": 56.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 63.7,
+      "model_edge": 7.2,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Ohio",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Akron",
+      "games_played": 8,
+      "rec_share": 0.32067986837723683,
+      "carry_share": 0.0,
+      "model_over_probability": 0.511,
+      "model_under_probability": 0.489,
+      "model_push_probability": 0.0,
+      "game_log_key": "5228764|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 63.744258,
+      "model_ev": -4.1,
+      "model_lean_probability": 0.511,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "injury_status": "Questionable",
+      "injury_detail": "Undisclosed",
+      "mu_grade": "A",
+      "mu_score": 85,
+      "mu_rank": 116,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "soft"
+    },
+    {
+      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
+      "start_time": "2026-11-04T00:00:00Z",
+      "player_name": "Miles Burris",
+      "market_name": "Reception Yards",
+      "line": 31.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 32.2,
+      "model_edge": 0.7,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Akron",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Ohio",
+      "games_played": 8,
+      "rec_share": 0.13055449452508275,
+      "carry_share": 0.0,
+      "model_over_probability": 0.403,
+      "model_under_probability": 0.597,
+      "model_push_probability": 0.0,
+      "game_log_key": "5193102|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 32.189874,
+      "model_ev": -24.3,
+      "model_lean_probability": 0.403,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "F",
+      "mu_score": 18,
+      "mu_rank": 26,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "tough"
+    },
+    {
+      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
+      "start_time": "2026-11-04T00:00:00Z",
       "player_name": "Jordan Gant",
       "market_name": "Reception Yards",
       "line": 11.5,
@@ -8714,44 +8788,6 @@
     {
       "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
       "start_time": "2026-11-04T00:00:00Z",
-      "player_name": "Riley Neer",
-      "market_name": "Reception Yards",
-      "line": 56.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 63.7,
-      "model_edge": 7.2,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "Ohio",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "Akron",
-      "games_played": 8,
-      "rec_share": 0.32067986837723683,
-      "carry_share": 0.0,
-      "model_over_probability": 0.511,
-      "model_under_probability": 0.489,
-      "model_push_probability": 0.0,
-      "game_log_key": "5228764|rec_yds",
-      "model_stat": "rec_yds",
-      "model_projection_raw": 63.744258,
-      "model_ev": -4.1,
-      "model_lean_probability": 0.511,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "injury_status": "Questionable",
-      "injury_detail": "Undisclosed",
-      "mu_grade": "A",
-      "mu_score": 85,
-      "mu_rank": 116,
-      "mu_of": 136,
-      "mu_vs": "WRs",
-      "mu_def": "soft"
-    },
-    {
-      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
-      "start_time": "2026-11-04T00:00:00Z",
       "player_name": "Preston Bowman",
       "market_name": "Reception Yards",
       "line": 31.5,
@@ -8784,42 +8820,6 @@
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "soft"
-    },
-    {
-      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
-      "start_time": "2026-11-04T00:00:00Z",
-      "player_name": "Miles Burris",
-      "market_name": "Reception Yards",
-      "line": 31.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 32.2,
-      "model_edge": 0.7,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "Akron",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "Ohio",
-      "games_played": 8,
-      "rec_share": 0.13055449452508275,
-      "carry_share": 0.0,
-      "model_over_probability": 0.403,
-      "model_under_probability": 0.597,
-      "model_push_probability": 0.0,
-      "game_log_key": "5193102|rec_yds",
-      "model_stat": "rec_yds",
-      "model_projection_raw": 32.189874,
-      "model_ev": -24.3,
-      "model_lean_probability": 0.403,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "F",
-      "mu_score": 18,
-      "mu_rank": 26,
-      "mu_of": 136,
-      "mu_vs": "WRs",
-      "mu_def": "tough"
     },
     {
       "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
@@ -10030,44 +10030,6 @@
     {
       "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
       "start_time": "2026-11-04T00:00:00Z",
-      "player_name": "Preston Bowman",
-      "market_name": "Receptions",
-      "line": 3.5,
-      "over_price": 152,
-      "under_price": -200.0,
-      "book_used": "betonlineag",
-      "model_predicted_value": 2.8,
-      "model_edge": -0.7,
-      "model_lean": "under",
-      "model_confidence": "normal",
-      "team": "Ohio",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "Akron",
-      "games_played": 8,
-      "rec_share": 0.1338072563401511,
-      "carry_share": 0.020986730660643705,
-      "model_over_probability": 0.3,
-      "model_under_probability": 0.7,
-      "model_push_probability": 0.0,
-      "game_log_key": "5211691|receptions",
-      "model_stat": "receptions",
-      "model_projection_raw": 2.750212,
-      "model_ev": 5.0,
-      "model_lean_probability": 0.7,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "matchup": "average",
-      "matchup_vs": "WR",
-      "mu_grade": "F",
-      "mu_score": 15,
-      "mu_rank": 116,
-      "mu_of": 136,
-      "mu_vs": "WRs",
-      "mu_def": "soft"
-    },
-    {
-      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
-      "start_time": "2026-11-04T00:00:00Z",
       "player_name": "Jake Furtney",
       "market_name": "Receptions",
       "line": 2.5,
@@ -10154,6 +10116,44 @@
       "mu_of": 136,
       "mu_vs": "TEs",
       "mu_def": "average"
+    },
+    {
+      "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
+      "start_time": "2026-11-04T00:00:00Z",
+      "player_name": "Preston Bowman",
+      "market_name": "Receptions",
+      "line": 2.5,
+      "over_price": -130,
+      "under_price": 100.0,
+      "book_used": "betonlineag",
+      "model_predicted_value": 2.8,
+      "model_edge": 0.3,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Ohio",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Akron",
+      "games_played": 8,
+      "rec_share": 0.1338072563401511,
+      "carry_share": 0.020986730660643705,
+      "model_over_probability": 0.5,
+      "model_under_probability": 0.5,
+      "model_push_probability": 0.0,
+      "game_log_key": "5211691|receptions",
+      "model_stat": "receptions",
+      "model_projection_raw": 2.750212,
+      "model_ev": -11.5,
+      "model_lean_probability": 0.5,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "matchup": "average",
+      "matchup_vs": "WR",
+      "mu_grade": "A",
+      "mu_score": 85,
+      "mu_rank": 116,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "soft"
     },
     {
       "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
@@ -14119,9 +14119,10 @@
       "model_projection_raw": 55.057098,
       "model_ev": 32.0,
       "model_lean_probability": 0.709,
-      "is_official_play": true,
-      "is_watch_play": false,
-      "play_kind": "rec_yds_over",
+      "is_official_play": false,
+      "is_watch_play": true,
+      "play_kind": "rec_yds_watch",
+      "rec_yds_watch_reason": "edge 30%+",
       "mu_grade": "D",
       "mu_score": 39,
       "mu_rank": 54,
@@ -15368,6 +15369,42 @@
     {
       "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
       "start_time": "2026-11-07T17:00:00Z",
+      "player_name": "Jojo Phillips",
+      "market_name": "Reception Yards",
+      "line": 18.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 26.3,
+      "model_edge": 7.8,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "BYU",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Utah",
+      "games_played": 7,
+      "rec_share": 0.11772663610898905,
+      "carry_share": 0.004608294930875576,
+      "model_over_probability": 0.5175,
+      "model_under_probability": 0.4825,
+      "model_push_probability": 0.0,
+      "game_log_key": "5160955|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 26.34674,
+      "model_ev": -2.9,
+      "model_lean_probability": 0.5175,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "D",
+      "mu_score": 35,
+      "mu_rank": 48,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "average"
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
       "player_name": "Wayshawn Parker",
       "market_name": "Reception Yards",
       "line": 21.5,
@@ -15512,42 +15549,6 @@
     {
       "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
       "start_time": "2026-11-07T17:00:00Z",
-      "player_name": "Jojo Phillips",
-      "market_name": "Reception Yards",
-      "line": 18.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 26.3,
-      "model_edge": 7.8,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "BYU",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "Utah",
-      "games_played": 7,
-      "rec_share": 0.11772663610898905,
-      "carry_share": 0.004608294930875576,
-      "model_over_probability": 0.5175,
-      "model_under_probability": 0.4825,
-      "model_push_probability": 0.0,
-      "game_log_key": "5160955|rec_yds",
-      "model_stat": "rec_yds",
-      "model_projection_raw": 26.34674,
-      "model_ev": -2.9,
-      "model_lean_probability": 0.5175,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "D",
-      "mu_score": 35,
-      "mu_rank": 48,
-      "mu_of": 136,
-      "mu_vs": "WRs",
-      "mu_def": "average"
-    },
-    {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
       "player_name": "Creed Whittemore",
       "market_name": "Reception Yards",
       "line": 38.5,
@@ -15660,44 +15661,6 @@
     {
       "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
       "start_time": "2026-11-07T17:00:00Z",
-      "player_name": "Wayshawn Parker",
-      "market_name": "Receptions",
-      "line": 2.5,
-      "over_price": -138,
-      "under_price": 104.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 2.7,
-      "model_edge": 0.2,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "Utah",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "BYU",
-      "games_played": 8,
-      "rec_share": 0.16294650468883204,
-      "carry_share": 0.3528755977151293,
-      "model_over_probability": 0.47,
-      "model_under_probability": 0.53,
-      "model_push_probability": 0.0,
-      "game_log_key": "5173431|receptions",
-      "model_stat": "receptions",
-      "model_projection_raw": 2.653988,
-      "model_ev": -18.9,
-      "model_lean_probability": 0.47,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "matchup": "soft",
-      "matchup_vs": "RB",
-      "mu_grade": "B+",
-      "mu_score": 74,
-      "mu_rank": 101,
-      "mu_of": 136,
-      "mu_vs": "RBs",
-      "mu_def": "soft"
-    },
-    {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
       "player_name": "Ricky Johnson",
       "market_name": "Receptions",
       "line": 1.5,
@@ -15732,6 +15695,82 @@
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "tough"
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "player_name": "Noah Bennee",
+      "market_name": "Receptions",
+      "line": 2.5,
+      "over_price": -128,
+      "under_price": -104.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 3.0,
+      "model_edge": 0.5,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Utah",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "BYU",
+      "games_played": 6,
+      "rec_share": 0.14961873638344228,
+      "carry_share": 0.0,
+      "model_over_probability": 0.5605,
+      "model_under_probability": 0.4395,
+      "model_push_probability": 0.0,
+      "game_log_key": "4900351|receptions",
+      "model_stat": "receptions",
+      "model_projection_raw": 3.03739,
+      "model_ev": -0.2,
+      "model_lean_probability": 0.5605,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "matchup": "soft",
+      "matchup_vs": "TE",
+      "mu_grade": "B",
+      "mu_score": 65,
+      "mu_rank": 89,
+      "mu_of": 136,
+      "mu_vs": "TEs",
+      "mu_def": "average"
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "player_name": "Wayshawn Parker",
+      "market_name": "Receptions",
+      "line": 2.5,
+      "over_price": -138,
+      "under_price": 104.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 2.7,
+      "model_edge": 0.2,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Utah",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "BYU",
+      "games_played": 8,
+      "rec_share": 0.16294650468883204,
+      "carry_share": 0.3528755977151293,
+      "model_over_probability": 0.47,
+      "model_under_probability": 0.53,
+      "model_push_probability": 0.0,
+      "game_log_key": "5173431|receptions",
+      "model_stat": "receptions",
+      "model_projection_raw": 2.653988,
+      "model_ev": -18.9,
+      "model_lean_probability": 0.47,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "matchup": "soft",
+      "matchup_vs": "RB",
+      "mu_grade": "B+",
+      "mu_score": 74,
+      "mu_rank": 101,
+      "mu_of": 136,
+      "mu_vs": "RBs",
+      "mu_def": "soft"
     },
     {
       "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
@@ -15886,44 +15925,6 @@
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "tough"
-    },
-    {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
-      "player_name": "Noah Bennee",
-      "market_name": "Receptions",
-      "line": 2.5,
-      "over_price": -128,
-      "under_price": -104.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 3.0,
-      "model_edge": 0.5,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "Utah",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "BYU",
-      "games_played": 6,
-      "rec_share": 0.14961873638344228,
-      "carry_share": 0.0,
-      "model_over_probability": 0.5605,
-      "model_under_probability": 0.4395,
-      "model_push_probability": 0.0,
-      "game_log_key": "4900351|receptions",
-      "model_stat": "receptions",
-      "model_projection_raw": 3.03739,
-      "model_ev": -0.2,
-      "model_lean_probability": 0.5605,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "matchup": "soft",
-      "matchup_vs": "TE",
-      "mu_grade": "B",
-      "mu_score": 65,
-      "mu_rank": 89,
-      "mu_of": 136,
-      "mu_vs": "TEs",
-      "mu_def": "average"
     },
     {
       "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
@@ -16098,8 +16099,8 @@
       "player_name": "Braden Pegan",
       "market_name": "Reception Yards",
       "line": 59.5,
-      "over_price": -116,
-      "under_price": -111.0,
+      "over_price": -110,
+      "under_price": -118.0,
       "book_used": "betonlineag",
       "model_predicted_value": 59.3,
       "model_edge": -0.2,
@@ -16117,7 +16118,7 @@
       "game_log_key": "4869422|rec_yds",
       "model_stat": "rec_yds",
       "model_projection_raw": 59.339284,
-      "model_ev": 8.4,
+      "model_ev": 5.4,
       "model_lean_probability": 0.5705,
       "is_official_play": false,
       "is_watch_play": false,
@@ -16960,9 +16961,10 @@
       "model_projection_raw": 9.167522,
       "model_ev": 43.8,
       "model_lean_probability": 0.799,
-      "is_official_play": true,
-      "is_watch_play": false,
-      "play_kind": "rec_yds_over",
+      "is_official_play": false,
+      "is_watch_play": true,
+      "play_kind": "rec_yds_watch",
+      "rec_yds_watch_reason": "edge 30%+",
       "mu_grade": "B+",
       "mu_score": 74,
       "mu_rank": 101,
@@ -17345,45 +17347,6 @@
     {
       "fixture_id": "5b05bf2ff27508703418dcf70079a22f",
       "start_time": "2026-11-07T17:00:00Z",
-      "player_name": "Ty Dieffenbach",
-      "market_name": "Pass Yards",
-      "line": 159.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 188.2,
-      "model_edge": 28.7,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "UCLA",
-      "model_version": null,
-      "opponent": "Minnesota",
-      "games_played": 4,
-      "rec_share": 0.0,
-      "carry_share": 0.12234156157257772,
-      "model_over_probability": 0.753,
-      "model_under_probability": 0.247,
-      "model_push_probability": 0.0,
-      "game_log_key": "5092275|pass_yds",
-      "model_stat": "pass_yds",
-      "model_projection_raw": 188.193587,
-      "model_ev": 41.4,
-      "model_lean_probability": 0.753,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "F",
-      "mu_score": 21,
-      "mu_rank": 30,
-      "mu_of": 136,
-      "mu_vs": "the pass",
-      "mu_def": "tough",
-      "mu_allowed": {
-        "pass yds": -16
-      }
-    },
-    {
-      "fixture_id": "5b05bf2ff27508703418dcf70079a22f",
-      "start_time": "2026-11-07T17:00:00Z",
       "player_name": "Drake Lindsey",
       "market_name": "Pass Yards",
       "line": 189.5,
@@ -17418,6 +17381,45 @@
       "mu_def": "tough",
       "mu_allowed": {
         "pass yds": -17
+      }
+    },
+    {
+      "fixture_id": "5b05bf2ff27508703418dcf70079a22f",
+      "start_time": "2026-11-07T17:00:00Z",
+      "player_name": "Ty Dieffenbach",
+      "market_name": "Pass Yards",
+      "line": 159.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 188.2,
+      "model_edge": 28.7,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "UCLA",
+      "model_version": null,
+      "opponent": "Minnesota",
+      "games_played": 4,
+      "rec_share": 0.0,
+      "carry_share": 0.12234156157257772,
+      "model_over_probability": 0.753,
+      "model_under_probability": 0.247,
+      "model_push_probability": 0.0,
+      "game_log_key": "5092275|pass_yds",
+      "model_stat": "pass_yds",
+      "model_projection_raw": 188.193587,
+      "model_ev": 41.4,
+      "model_lean_probability": 0.753,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "F",
+      "mu_score": 21,
+      "mu_rank": 30,
+      "mu_of": 136,
+      "mu_vs": "the pass",
+      "mu_def": "tough",
+      "mu_allowed": {
+        "pass yds": -16
       }
     },
     {
@@ -19047,16 +19049,6 @@
     {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
       "start_time": "2026-11-07T20:30:00Z",
-      "player_name": "Eugene Wilson III",
-      "market_name": "Reception Yards",
-      "line": 30.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel"
-    },
-    {
-      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
-      "start_time": "2026-11-07T20:30:00Z",
       "player_name": "Lotzeir Brooks",
       "market_name": "Reception Yards",
       "line": 44.5,
@@ -19089,52 +19081,6 @@
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "tough"
-    },
-    {
-      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
-      "start_time": "2026-11-07T20:30:00Z",
-      "player_name": "Kaleb Edwards",
-      "market_name": "Reception Yards",
-      "line": 13.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 21.5,
-      "model_edge": 8.0,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "Alabama",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "LSU",
-      "games_played": 7,
-      "rec_share": 0.10161110592215528,
-      "carry_share": 0.0,
-      "model_over_probability": 0.5425,
-      "model_under_probability": 0.4575,
-      "model_push_probability": 0.0,
-      "game_log_key": "5142591|rec_yds",
-      "model_stat": "rec_yds",
-      "model_projection_raw": 21.479528,
-      "model_ev": 1.8,
-      "model_lean_probability": 0.5425,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "F",
-      "mu_score": 3,
-      "mu_rank": 5,
-      "mu_of": 136,
-      "mu_vs": "TEs",
-      "mu_def": "tough"
-    },
-    {
-      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
-      "start_time": "2026-11-07T20:30:00Z",
-      "player_name": "Winston Watkins Jr.",
-      "market_name": "Reception Yards",
-      "line": 42.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel"
     },
     {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
@@ -19249,52 +19195,6 @@
     {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
       "start_time": "2026-11-07T20:30:00Z",
-      "player_name": "Jackson Harris",
-      "market_name": "Reception Yards",
-      "line": 62.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 66.2,
-      "model_edge": 3.7,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "LSU",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "Alabama",
-      "games_played": 8,
-      "rec_share": 0.17582583862084575,
-      "carry_share": 0.0,
-      "model_over_probability": 0.4705,
-      "model_under_probability": 0.5295,
-      "model_push_probability": 0.0,
-      "game_log_key": "5114311|rec_yds",
-      "model_stat": "rec_yds",
-      "model_projection_raw": 66.176759,
-      "model_ev": -11.7,
-      "model_lean_probability": 0.4705,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "D",
-      "mu_score": 40,
-      "mu_rank": 55,
-      "mu_of": 136,
-      "mu_vs": "WRs",
-      "mu_def": "average"
-    },
-    {
-      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
-      "start_time": "2026-11-07T20:30:00Z",
-      "player_name": "Ryan Coleman-Williams",
-      "market_name": "Reception Yards",
-      "line": 52.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel"
-    },
-    {
-      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
-      "start_time": "2026-11-07T20:30:00Z",
       "player_name": "Marshall Pritchett",
       "market_name": "Reception Yards",
       "line": 19.5,
@@ -19368,20 +19268,102 @@
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
       "start_time": "2026-11-07T20:30:00Z",
       "player_name": "Eugene Wilson III",
-      "market_name": "Receptions",
-      "line": 3.5,
-      "over_price": 120,
-      "under_price": -160.0,
+      "market_name": "Reception Yards",
+      "line": 30.5,
+      "over_price": -114,
+      "under_price": -114.0,
       "book_used": "fanduel"
     },
     {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
       "start_time": "2026-11-07T20:30:00Z",
+      "player_name": "Kaleb Edwards",
+      "market_name": "Reception Yards",
+      "line": 13.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 21.5,
+      "model_edge": 8.0,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Alabama",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "LSU",
+      "games_played": 7,
+      "rec_share": 0.10161110592215528,
+      "carry_share": 0.0,
+      "model_over_probability": 0.5425,
+      "model_under_probability": 0.4575,
+      "model_push_probability": 0.0,
+      "game_log_key": "5142591|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 21.479528,
+      "model_ev": 1.8,
+      "model_lean_probability": 0.5425,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "F",
+      "mu_score": 3,
+      "mu_rank": 5,
+      "mu_of": 136,
+      "mu_vs": "TEs",
+      "mu_def": "tough"
+    },
+    {
+      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
+      "start_time": "2026-11-07T20:30:00Z",
       "player_name": "Winston Watkins Jr.",
-      "market_name": "Receptions",
-      "line": 3.5,
-      "over_price": -130,
-      "under_price": -102.0,
+      "market_name": "Reception Yards",
+      "line": 42.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel"
+    },
+    {
+      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
+      "start_time": "2026-11-07T20:30:00Z",
+      "player_name": "Jackson Harris",
+      "market_name": "Reception Yards",
+      "line": 62.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 66.2,
+      "model_edge": 3.7,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "LSU",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Alabama",
+      "games_played": 8,
+      "rec_share": 0.17582583862084575,
+      "carry_share": 0.0,
+      "model_over_probability": 0.4705,
+      "model_under_probability": 0.5295,
+      "model_push_probability": 0.0,
+      "game_log_key": "5114311|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 66.176759,
+      "model_ev": -11.7,
+      "model_lean_probability": 0.4705,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "D",
+      "mu_score": 40,
+      "mu_rank": 55,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "average"
+    },
+    {
+      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
+      "start_time": "2026-11-07T20:30:00Z",
+      "player_name": "Ryan Coleman-Williams",
+      "market_name": "Reception Yards",
+      "line": 52.5,
+      "over_price": -114,
+      "under_price": -114.0,
       "book_used": "fanduel"
     },
     {
@@ -19475,6 +19457,102 @@
     {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
       "start_time": "2026-11-07T20:30:00Z",
+      "player_name": "Lotzeir Brooks",
+      "market_name": "Receptions",
+      "line": 3.5,
+      "over_price": 120,
+      "under_price": -160.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 3.4,
+      "model_edge": -0.1,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Alabama",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "LSU",
+      "games_played": 8,
+      "rec_share": 0.19047987949947331,
+      "carry_share": 0.010483712715855574,
+      "model_over_probability": 0.43,
+      "model_under_probability": 0.57,
+      "model_push_probability": 0.0,
+      "game_log_key": "5141394|receptions",
+      "model_stat": "receptions",
+      "model_projection_raw": 3.389604,
+      "model_ev": -7.4,
+      "model_lean_probability": 0.57,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "matchup": "tough",
+      "matchup_vs": "WR",
+      "mu_grade": "A",
+      "mu_score": 88,
+      "mu_rank": 18,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "tough"
+    },
+    {
+      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
+      "start_time": "2026-11-07T20:30:00Z",
+      "player_name": "Marshall Pritchett",
+      "market_name": "Receptions",
+      "line": 2.5,
+      "over_price": 102,
+      "under_price": -136.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 2.1,
+      "model_edge": -0.4,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Alabama",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "LSU",
+      "games_played": 8,
+      "rec_share": 0.11931124232683157,
+      "carry_share": 0.006503378378378379,
+      "model_over_probability": 0.376,
+      "model_under_probability": 0.624,
+      "model_push_probability": 0.0,
+      "game_log_key": "5164343|receptions",
+      "model_stat": "receptions",
+      "model_projection_raw": 2.12552,
+      "model_ev": 8.3,
+      "model_lean_probability": 0.624,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "matchup": "tough",
+      "matchup_vs": "TE",
+      "mu_grade": "A+",
+      "mu_score": 97,
+      "mu_rank": 5,
+      "mu_of": 136,
+      "mu_vs": "TEs",
+      "mu_def": "tough"
+    },
+    {
+      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
+      "start_time": "2026-11-07T20:30:00Z",
+      "player_name": "Eugene Wilson III",
+      "market_name": "Receptions",
+      "line": 3.5,
+      "over_price": 120,
+      "under_price": -160.0,
+      "book_used": "fanduel"
+    },
+    {
+      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
+      "start_time": "2026-11-07T20:30:00Z",
+      "player_name": "Winston Watkins Jr.",
+      "market_name": "Receptions",
+      "line": 3.5,
+      "over_price": -130,
+      "under_price": -102.0,
+      "book_used": "fanduel"
+    },
+    {
+      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
+      "start_time": "2026-11-07T20:30:00Z",
       "player_name": "Dilin Jones",
       "market_name": "Receptions",
       "line": 3.5,
@@ -19514,44 +19592,6 @@
     {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
       "start_time": "2026-11-07T20:30:00Z",
-      "player_name": "Lotzeir Brooks",
-      "market_name": "Receptions",
-      "line": 3.5,
-      "over_price": 120,
-      "under_price": -160.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 3.4,
-      "model_edge": -0.1,
-      "model_lean": "under",
-      "model_confidence": "normal",
-      "team": "Alabama",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "LSU",
-      "games_played": 8,
-      "rec_share": 0.19047987949947331,
-      "carry_share": 0.010483712715855574,
-      "model_over_probability": 0.43,
-      "model_under_probability": 0.57,
-      "model_push_probability": 0.0,
-      "game_log_key": "5141394|receptions",
-      "model_stat": "receptions",
-      "model_projection_raw": 3.389604,
-      "model_ev": -7.4,
-      "model_lean_probability": 0.57,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "matchup": "tough",
-      "matchup_vs": "WR",
-      "mu_grade": "A",
-      "mu_score": 88,
-      "mu_rank": 18,
-      "mu_of": 136,
-      "mu_vs": "WRs",
-      "mu_def": "tough"
-    },
-    {
-      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
-      "start_time": "2026-11-07T20:30:00Z",
       "player_name": "Jackson Harris",
       "market_name": "Receptions",
       "line": 4.5,
@@ -19586,44 +19626,6 @@
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "average"
-    },
-    {
-      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
-      "start_time": "2026-11-07T20:30:00Z",
-      "player_name": "Marshall Pritchett",
-      "market_name": "Receptions",
-      "line": 2.5,
-      "over_price": 102,
-      "under_price": -136.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 2.1,
-      "model_edge": -0.4,
-      "model_lean": "under",
-      "model_confidence": "normal",
-      "team": "Alabama",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "LSU",
-      "games_played": 8,
-      "rec_share": 0.11931124232683157,
-      "carry_share": 0.006503378378378379,
-      "model_over_probability": 0.376,
-      "model_under_probability": 0.624,
-      "model_push_probability": 0.0,
-      "game_log_key": "5164343|receptions",
-      "model_stat": "receptions",
-      "model_projection_raw": 2.12552,
-      "model_ev": 8.3,
-      "model_lean_probability": 0.624,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "matchup": "tough",
-      "matchup_vs": "TE",
-      "mu_grade": "A+",
-      "mu_score": 97,
-      "mu_rank": 5,
-      "mu_of": 136,
-      "mu_vs": "TEs",
-      "mu_def": "tough"
     },
     {
       "fixture_id": "00f194290bfcdfebb1d8456057b20614",
@@ -21471,50 +21473,11 @@
     {
       "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
       "start_time": "2026-11-07T23:15:00Z",
-      "player_name": "Kenny Minchey",
-      "market_name": "Pass Touchdowns",
-      "line": 1.5,
-      "over_price": 188,
-      "under_price": -260.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 1.3,
-      "model_edge": -0.2,
-      "model_lean": "under",
-      "model_confidence": "normal",
-      "team": "Kentucky",
-      "model_version": null,
-      "opponent": "Tennessee",
-      "games_played": 8,
-      "rec_share": 0.0,
-      "carry_share": 0.16439836177887648,
-      "model_over_probability": 0.228,
-      "model_under_probability": 0.772,
-      "model_push_probability": 0.0,
-      "game_log_key": "4918099|pass_tds",
-      "model_stat": "pass_tds",
-      "model_projection_raw": 1.330761,
-      "model_ev": 6.9,
-      "model_lean_probability": 0.772,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "A+",
-      "mu_score": 96,
-      "mu_rank": 6,
-      "mu_of": 136,
-      "mu_vs": "the pass",
-      "mu_def": "tough",
-      "mu_allowed": {
-        "pass yds": -22
-      }
-    },
-    {
-      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
-      "start_time": "2026-11-07T23:15:00Z",
       "player_name": "George MacIntyre",
       "market_name": "Pass Touchdowns",
       "line": 1.5,
-      "over_price": 158,
-      "under_price": -215.0,
+      "over_price": 154,
+      "under_price": -210.0,
       "book_used": "fanduel",
       "model_predicted_value": 1.2,
       "model_edge": -0.3,
@@ -21532,8 +21495,86 @@
       "game_log_key": "5141571|pass_tds",
       "model_stat": "pass_tds",
       "model_projection_raw": 1.174048,
-      "model_ev": 16.5,
+      "model_ev": 17.4,
       "model_lean_probability": 0.795,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "C",
+      "mu_score": 54,
+      "mu_rank": 64,
+      "mu_of": 136,
+      "mu_vs": "the pass",
+      "mu_def": "average",
+      "mu_allowed": {
+        "pass yds": 1
+      }
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "player_name": "Kenny Minchey",
+      "market_name": "Pass Touchdowns",
+      "line": 1.5,
+      "over_price": 194,
+      "under_price": -270.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 1.3,
+      "model_edge": -0.2,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Kentucky",
+      "model_version": null,
+      "opponent": "Tennessee",
+      "games_played": 8,
+      "rec_share": 0.0,
+      "carry_share": 0.16439836177887648,
+      "model_over_probability": 0.228,
+      "model_under_probability": 0.772,
+      "model_push_probability": 0.0,
+      "game_log_key": "4918099|pass_tds",
+      "model_stat": "pass_tds",
+      "model_projection_raw": 1.330761,
+      "model_ev": 5.8,
+      "model_lean_probability": 0.772,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "A+",
+      "mu_score": 96,
+      "mu_rank": 6,
+      "mu_of": 136,
+      "mu_vs": "the pass",
+      "mu_def": "tough",
+      "mu_allowed": {
+        "pass yds": -22
+      }
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "player_name": "George MacIntyre",
+      "market_name": "Pass Yards",
+      "line": 199.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 179.4,
+      "model_edge": -20.1,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Tennessee",
+      "model_version": null,
+      "opponent": "Kentucky",
+      "games_played": 6,
+      "rec_share": 0.0,
+      "carry_share": 0.04817646349005234,
+      "model_over_probability": 0.26,
+      "model_under_probability": 0.74,
+      "model_push_probability": 0.0,
+      "game_log_key": "5141571|pass_yds",
+      "model_stat": "pass_yds",
+      "model_projection_raw": 179.418541,
+      "model_ev": 38.9,
+      "model_lean_probability": 0.74,
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "C",
@@ -21588,41 +21629,38 @@
     {
       "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
       "start_time": "2026-11-07T23:15:00Z",
-      "player_name": "George MacIntyre",
-      "market_name": "Pass Yards",
-      "line": 199.5,
+      "player_name": "Willie Rodriguez",
+      "market_name": "Reception Yards",
+      "line": 38.5,
       "over_price": -114,
       "under_price": -114.0,
       "book_used": "fanduel",
-      "model_predicted_value": 179.4,
-      "model_edge": -20.1,
-      "model_lean": "under",
+      "model_predicted_value": 43.6,
+      "model_edge": 5.1,
+      "model_lean": "over",
       "model_confidence": "normal",
-      "team": "Tennessee",
-      "model_version": null,
-      "opponent": "Kentucky",
-      "games_played": 6,
-      "rec_share": 0.0,
-      "carry_share": 0.04817646349005234,
-      "model_over_probability": 0.26,
-      "model_under_probability": 0.74,
+      "team": "Kentucky",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Tennessee",
+      "games_played": 8,
+      "rec_share": 0.24744265555192327,
+      "carry_share": 0.013868134961884961,
+      "model_over_probability": 0.483,
+      "model_under_probability": 0.517,
       "model_push_probability": 0.0,
-      "game_log_key": "5141571|pass_yds",
-      "model_stat": "pass_yds",
-      "model_projection_raw": 179.418541,
-      "model_ev": 38.9,
-      "model_lean_probability": 0.74,
+      "game_log_key": "5136838|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 43.605919,
+      "model_ev": -9.3,
+      "model_lean_probability": 0.483,
       "is_official_play": false,
       "is_watch_play": false,
-      "mu_grade": "C",
-      "mu_score": 54,
-      "mu_rank": 64,
+      "mu_grade": "B",
+      "mu_score": 70,
+      "mu_rank": 96,
       "mu_of": 136,
-      "mu_vs": "the pass",
-      "mu_def": "average",
-      "mu_allowed": {
-        "pass yds": 1
-      }
+      "mu_vs": "TEs",
+      "mu_def": "soft"
     },
     {
       "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
@@ -21699,114 +21737,6 @@
     {
       "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
       "start_time": "2026-11-07T23:15:00Z",
-      "player_name": "Mike Matthews",
-      "market_name": "Reception Yards",
-      "line": 61.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 62.9,
-      "model_edge": 1.4,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "Tennessee",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "Kentucky",
-      "games_played": 8,
-      "rec_share": 0.2583265692640693,
-      "carry_share": 0.012691637630662021,
-      "model_over_probability": 0.4435,
-      "model_under_probability": 0.5565,
-      "model_push_probability": 0.0,
-      "game_log_key": "5079580|rec_yds",
-      "model_stat": "rec_yds",
-      "model_projection_raw": 62.93687,
-      "model_ev": -16.7,
-      "model_lean_probability": 0.4435,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "B+",
-      "mu_score": 75,
-      "mu_rank": 103,
-      "mu_of": 136,
-      "mu_vs": "WRs",
-      "mu_def": "soft"
-    },
-    {
-      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
-      "start_time": "2026-11-07T23:15:00Z",
-      "player_name": "DJ Miller",
-      "market_name": "Reception Yards",
-      "line": 37.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 37.4,
-      "model_edge": -0.1,
-      "model_lean": "under",
-      "model_confidence": "normal",
-      "team": "Kentucky",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "Tennessee",
-      "games_played": 7,
-      "rec_share": 0.14066999797630722,
-      "carry_share": 0.0,
-      "model_over_probability": 0.4295,
-      "model_under_probability": 0.5705,
-      "model_push_probability": 0.0,
-      "game_log_key": "5294137|rec_yds",
-      "model_stat": "rec_yds",
-      "model_projection_raw": 37.353468,
-      "model_ev": 7.1,
-      "model_lean_probability": 0.5705,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "A+",
-      "mu_score": 94,
-      "mu_rank": 9,
-      "mu_of": 136,
-      "mu_vs": "WRs",
-      "mu_def": "tough"
-    },
-    {
-      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
-      "start_time": "2026-11-07T23:15:00Z",
-      "player_name": "Willie Rodriguez",
-      "market_name": "Reception Yards",
-      "line": 38.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 43.6,
-      "model_edge": 5.1,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "Kentucky",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "Tennessee",
-      "games_played": 8,
-      "rec_share": 0.24744265555192327,
-      "carry_share": 0.013868134961884961,
-      "model_over_probability": 0.483,
-      "model_under_probability": 0.517,
-      "model_push_probability": 0.0,
-      "game_log_key": "5136838|rec_yds",
-      "model_stat": "rec_yds",
-      "model_projection_raw": 43.605919,
-      "model_ev": -9.3,
-      "model_lean_probability": 0.483,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "B",
-      "mu_score": 70,
-      "mu_rank": 96,
-      "mu_of": 136,
-      "mu_vs": "TEs",
-      "mu_def": "soft"
-    },
-    {
-      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
-      "start_time": "2026-11-07T23:15:00Z",
       "player_name": "DeSean Bishop",
       "market_name": "Reception Yards",
       "line": 9.5,
@@ -21838,6 +21768,42 @@
       "mu_rank": 93,
       "mu_of": 136,
       "mu_vs": "RBs",
+      "mu_def": "soft"
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "player_name": "Mike Matthews",
+      "market_name": "Reception Yards",
+      "line": 61.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 62.9,
+      "model_edge": 1.4,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Tennessee",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Kentucky",
+      "games_played": 8,
+      "rec_share": 0.2583265692640693,
+      "carry_share": 0.012691637630662021,
+      "model_over_probability": 0.4435,
+      "model_under_probability": 0.5565,
+      "model_push_probability": 0.0,
+      "game_log_key": "5079580|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 62.93687,
+      "model_ev": -16.7,
+      "model_lean_probability": 0.4435,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "B+",
+      "mu_score": 75,
+      "mu_rank": 103,
+      "mu_of": 136,
+      "mu_vs": "WRs",
       "mu_def": "soft"
     },
     {
@@ -21875,6 +21841,42 @@
       "mu_of": 136,
       "mu_vs": "TEs",
       "mu_def": "average"
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "player_name": "DJ Miller",
+      "market_name": "Reception Yards",
+      "line": 37.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 37.4,
+      "model_edge": -0.1,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Kentucky",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Tennessee",
+      "games_played": 7,
+      "rec_share": 0.14066999797630722,
+      "carry_share": 0.0,
+      "model_over_probability": 0.4295,
+      "model_under_probability": 0.5705,
+      "model_push_probability": 0.0,
+      "game_log_key": "5294137|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 37.353468,
+      "model_ev": 7.1,
+      "model_lean_probability": 0.5705,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "A+",
+      "mu_score": 94,
+      "mu_rank": 9,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "tough"
     },
     {
       "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
@@ -21959,6 +21961,44 @@
     {
       "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
       "start_time": "2026-11-07T23:15:00Z",
+      "player_name": "Kenny Darby",
+      "market_name": "Receptions",
+      "line": 4.5,
+      "over_price": -110,
+      "under_price": -120.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 4.2,
+      "model_edge": -0.3,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Kentucky",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Tennessee",
+      "games_played": 8,
+      "rec_share": 0.2245377937597617,
+      "carry_share": 0.003676470588235294,
+      "model_over_probability": 0.4105,
+      "model_under_probability": 0.5895,
+      "model_push_probability": 0.0,
+      "game_log_key": "5215172|receptions",
+      "model_stat": "receptions",
+      "model_projection_raw": 4.23194,
+      "model_ev": 8.1,
+      "model_lean_probability": 0.5895,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "matchup": "tough",
+      "matchup_vs": "WR",
+      "mu_grade": "A+",
+      "mu_score": 94,
+      "mu_rank": 9,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "tough"
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
       "player_name": "DJ Miller",
       "market_name": "Receptions",
       "line": 3.5,
@@ -22033,44 +22073,6 @@
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "soft"
-    },
-    {
-      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
-      "start_time": "2026-11-07T23:15:00Z",
-      "player_name": "Kenny Darby",
-      "market_name": "Receptions",
-      "line": 4.5,
-      "over_price": -110,
-      "under_price": -120.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 4.2,
-      "model_edge": -0.3,
-      "model_lean": "under",
-      "model_confidence": "normal",
-      "team": "Kentucky",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "Tennessee",
-      "games_played": 8,
-      "rec_share": 0.2245377937597617,
-      "carry_share": 0.003676470588235294,
-      "model_over_probability": 0.4105,
-      "model_under_probability": 0.5895,
-      "model_push_probability": 0.0,
-      "game_log_key": "5215172|receptions",
-      "model_stat": "receptions",
-      "model_projection_raw": 4.23194,
-      "model_ev": 8.1,
-      "model_lean_probability": 0.5895,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "matchup": "tough",
-      "matchup_vs": "WR",
-      "mu_grade": "A+",
-      "mu_score": 94,
-      "mu_rank": 9,
-      "mu_of": 136,
-      "mu_vs": "WRs",
-      "mu_def": "tough"
     },
     {
       "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
@@ -22179,6 +22181,228 @@
       "model_projection_raw": 117.55184,
       "model_ev": 18.4,
       "model_lean_probability": 0.6305,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "B+",
+      "mu_score": 71,
+      "mu_rank": 41,
+      "mu_of": 136,
+      "mu_vs": "the run",
+      "mu_def": "tough",
+      "mu_allowed": {
+        "rush yds": -26
+      }
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "player_name": "Kenny Minchey",
+      "market_name": "Pass Yards",
+      "line": 205.5,
+      "over_price": -115,
+      "under_price": -115.0,
+      "book_used": "espnbet",
+      "model_predicted_value": 187.7,
+      "model_edge": -17.8,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Kentucky",
+      "model_version": null,
+      "opponent": "Tennessee",
+      "games_played": 8,
+      "rec_share": 0.0,
+      "carry_share": 0.16439836177887648,
+      "model_over_probability": 0.268,
+      "model_under_probability": 0.732,
+      "model_push_probability": 0.0,
+      "game_log_key": "4918099|pass_yds",
+      "model_stat": "pass_yds",
+      "model_projection_raw": 187.653485,
+      "model_ev": 36.9,
+      "model_lean_probability": 0.732,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "A+",
+      "mu_score": 96,
+      "mu_rank": 6,
+      "mu_of": 136,
+      "mu_vs": "the pass",
+      "mu_def": "tough",
+      "mu_allowed": {
+        "pass yds": -22
+      }
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "player_name": "Mike Matthews",
+      "market_name": "Reception Yards",
+      "line": 62.5,
+      "over_price": -115,
+      "under_price": -115.0,
+      "book_used": "espnbet",
+      "model_predicted_value": 62.9,
+      "model_edge": 0.4,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Tennessee",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Kentucky",
+      "games_played": 8,
+      "rec_share": 0.2583265692640693,
+      "carry_share": 0.012691637630662021,
+      "model_over_probability": 0.434,
+      "model_under_probability": 0.566,
+      "model_push_probability": 0.0,
+      "game_log_key": "5079580|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 62.93687,
+      "model_ev": -18.9,
+      "model_lean_probability": 0.434,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "B+",
+      "mu_score": 75,
+      "mu_rank": 103,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "soft"
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "player_name": "DJ Miller",
+      "market_name": "Reception Yards",
+      "line": 39.5,
+      "over_price": -110,
+      "under_price": -120.0,
+      "book_used": "espnbet",
+      "model_predicted_value": 37.4,
+      "model_edge": -2.1,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Kentucky",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Tennessee",
+      "games_played": 7,
+      "rec_share": 0.14066999797630722,
+      "carry_share": 0.0,
+      "model_over_probability": 0.411,
+      "model_under_probability": 0.589,
+      "model_push_probability": 0.0,
+      "game_log_key": "5294137|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 37.353468,
+      "model_ev": 8.0,
+      "model_lean_probability": 0.589,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "A+",
+      "mu_score": 94,
+      "mu_rank": 9,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "tough"
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "player_name": "Braylon Staley",
+      "market_name": "Reception Yards",
+      "line": 39.5,
+      "over_price": -120,
+      "under_price": -110.0,
+      "book_used": "espnbet",
+      "model_predicted_value": 46.8,
+      "model_edge": 7.3,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Tennessee",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Kentucky",
+      "games_played": 8,
+      "rec_share": 0.24227543290043288,
+      "carry_share": 0.0,
+      "model_over_probability": 0.511,
+      "model_under_probability": 0.489,
+      "model_push_probability": 0.0,
+      "game_log_key": "5132629|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 46.801154,
+      "model_ev": -6.3,
+      "model_lean_probability": 0.511,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "B+",
+      "mu_score": 75,
+      "mu_rank": 103,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "soft"
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "player_name": "Willie Rodriguez",
+      "market_name": "Reception Yards",
+      "line": 39.5,
+      "over_price": -115,
+      "under_price": -115.0,
+      "book_used": "espnbet",
+      "model_predicted_value": 43.6,
+      "model_edge": 4.1,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Kentucky",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Tennessee",
+      "games_played": 8,
+      "rec_share": 0.24744265555192327,
+      "carry_share": 0.013868134961884961,
+      "model_over_probability": 0.4745,
+      "model_under_probability": 0.5255,
+      "model_push_probability": 0.0,
+      "game_log_key": "5136838|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 43.605919,
+      "model_ev": -11.3,
+      "model_lean_probability": 0.4745,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "B",
+      "mu_score": 70,
+      "mu_rank": 96,
+      "mu_of": 136,
+      "mu_vs": "TEs",
+      "mu_def": "soft"
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "player_name": "DeSean Bishop",
+      "market_name": "Rush Yards",
+      "line": 125.5,
+      "over_price": -115,
+      "under_price": -115.0,
+      "book_used": "espnbet",
+      "model_predicted_value": 117.6,
+      "model_edge": -7.9,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Tennessee",
+      "model_version": null,
+      "opponent": "Kentucky",
+      "games_played": 8,
+      "rec_share": 0.06594742063492062,
+      "carry_share": 0.48363143484344084,
+      "model_over_probability": 0.362,
+      "model_under_probability": 0.638,
+      "model_push_probability": 0.0,
+      "game_log_key": "4921108|rush_yds",
+      "model_stat": "rush_yds",
+      "model_projection_raw": 117.55184,
+      "model_ev": 19.3,
+      "model_lean_probability": 0.638,
       "is_official_play": true,
       "is_watch_play": false,
       "play_kind": "rush_under",
@@ -22190,6 +22414,45 @@
       "mu_def": "tough",
       "mu_allowed": {
         "rush yds": -26
+      }
+    },
+    {
+      "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "player_name": "Gunner Stockton",
+      "market_name": "Pass Touchdowns",
+      "line": 1.5,
+      "over_price": 110,
+      "under_price": -146.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 1.6,
+      "model_edge": 0.1,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Georgia",
+      "model_version": null,
+      "opponent": "Ole Miss",
+      "games_played": 8,
+      "rec_share": 0.0,
+      "carry_share": 0.16930214393449688,
+      "model_over_probability": 0.588,
+      "model_under_probability": 0.412,
+      "model_push_probability": 0.0,
+      "game_log_key": "4685578|pass_tds",
+      "model_stat": "pass_tds",
+      "model_projection_raw": 1.572424,
+      "model_ev": 23.5,
+      "model_lean_probability": 0.588,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "B",
+      "mu_score": 68,
+      "mu_rank": 93,
+      "mu_of": 136,
+      "mu_vs": "the pass",
+      "mu_def": "soft",
+      "mu_allowed": {
+        "pass yds": -4
       }
     },
     {
@@ -22235,13 +22498,13 @@
       "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
       "start_time": "2026-11-08T00:30:00Z",
       "player_name": "Gunner Stockton",
-      "market_name": "Pass Touchdowns",
-      "line": 1.5,
-      "over_price": 110,
-      "under_price": -146.0,
+      "market_name": "Pass Yards",
+      "line": 206.5,
+      "over_price": -114,
+      "under_price": -114.0,
       "book_used": "fanduel",
-      "model_predicted_value": 1.6,
-      "model_edge": 0.1,
+      "model_predicted_value": 219.1,
+      "model_edge": 12.6,
       "model_lean": "over",
       "model_confidence": "normal",
       "team": "Georgia",
@@ -22250,14 +22513,14 @@
       "games_played": 8,
       "rec_share": 0.0,
       "carry_share": 0.16930214393449688,
-      "model_over_probability": 0.588,
-      "model_under_probability": 0.412,
+      "model_over_probability": 0.667,
+      "model_under_probability": 0.333,
       "model_push_probability": 0.0,
-      "game_log_key": "4685578|pass_tds",
-      "model_stat": "pass_tds",
-      "model_projection_raw": 1.572424,
-      "model_ev": 23.5,
-      "model_lean_probability": 0.588,
+      "game_log_key": "4685578|pass_yds",
+      "model_stat": "pass_yds",
+      "model_projection_raw": 219.082433,
+      "model_ev": 25.2,
+      "model_lean_probability": 0.667,
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "B",
@@ -22312,41 +22575,110 @@
     {
       "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
       "start_time": "2026-11-08T00:30:00Z",
-      "player_name": "Gunner Stockton",
-      "market_name": "Pass Yards",
-      "line": 206.5,
+      "player_name": "Caleb Odom",
+      "market_name": "Reception Yards",
+      "line": 34.5,
       "over_price": -114,
       "under_price": -114.0,
       "book_used": "fanduel",
-      "model_predicted_value": 219.1,
-      "model_edge": 12.6,
+      "model_predicted_value": 42.1,
+      "model_edge": 7.6,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Ole Miss",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Georgia",
+      "games_played": 7,
+      "rec_share": 0.16283240568954854,
+      "carry_share": 0.0,
+      "model_over_probability": 0.5135,
+      "model_under_probability": 0.4865,
+      "model_push_probability": 0.0,
+      "game_log_key": "5079647|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 42.136035,
+      "model_ev": -3.6,
+      "model_lean_probability": 0.5135,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "C",
+      "mu_score": 46,
+      "mu_rank": 64,
+      "mu_of": 136,
+      "mu_vs": "TEs",
+      "mu_def": "average"
+    },
+    {
+      "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "player_name": "Deuce Alexander",
+      "market_name": "Reception Yards",
+      "line": 66.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 68.1,
+      "model_edge": 1.6,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Ole Miss",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Georgia",
+      "games_played": 8,
+      "rec_share": 0.24672318422318423,
+      "carry_share": 0.015289115646258504,
+      "model_over_probability": 0.4455,
+      "model_under_probability": 0.5545,
+      "model_push_probability": 0.0,
+      "game_log_key": "5152158|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 68.123733,
+      "model_ev": -16.4,
+      "model_lean_probability": 0.4455,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "D",
+      "mu_score": 26,
+      "mu_rank": 36,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "tough"
+    },
+    {
+      "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
+      "start_time": "2026-11-08T00:30:00Z",
+      "player_name": "Talyn Taylor",
+      "market_name": "Reception Yards",
+      "line": 35.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 36.1,
+      "model_edge": 0.6,
       "model_lean": "over",
       "model_confidence": "normal",
       "team": "Georgia",
-      "model_version": null,
+      "model_version": "retrained 2026-11-02 (played-zeros)",
       "opponent": "Ole Miss",
-      "games_played": 8,
-      "rec_share": 0.0,
-      "carry_share": 0.16930214393449688,
-      "model_over_probability": 0.667,
-      "model_under_probability": 0.333,
+      "games_played": 7,
+      "rec_share": 0.1588827838827839,
+      "carry_share": 0.008692365835222978,
+      "model_over_probability": 0.4015,
+      "model_under_probability": 0.5985,
       "model_push_probability": 0.0,
-      "game_log_key": "4685578|pass_yds",
-      "model_stat": "pass_yds",
-      "model_projection_raw": 219.082433,
-      "model_ev": 25.2,
-      "model_lean_probability": 0.667,
+      "game_log_key": "5141671|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 36.062543,
+      "model_ev": -24.6,
+      "model_lean_probability": 0.4015,
       "is_official_play": false,
       "is_watch_play": false,
-      "mu_grade": "B",
-      "mu_score": 68,
-      "mu_rank": 93,
+      "mu_grade": "C",
+      "mu_score": 59,
+      "mu_rank": 81,
       "mu_of": 136,
-      "mu_vs": "the pass",
-      "mu_def": "soft",
-      "mu_allowed": {
-        "pass yds": -4
-      }
+      "mu_vs": "WRs",
+      "mu_def": "average"
     },
     {
       "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
@@ -22387,66 +22719,30 @@
     {
       "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
       "start_time": "2026-11-08T00:30:00Z",
-      "player_name": "Caleb Odom",
+      "player_name": "London Humphreys",
       "market_name": "Reception Yards",
-      "line": 34.5,
+      "line": 25.5,
       "over_price": -114,
       "under_price": -114.0,
       "book_used": "fanduel",
-      "model_predicted_value": 42.1,
-      "model_edge": 7.6,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "Ole Miss",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "Georgia",
-      "games_played": 7,
-      "rec_share": 0.16283240568954854,
-      "carry_share": 0.0,
-      "model_over_probability": 0.5135,
-      "model_under_probability": 0.4865,
-      "model_push_probability": 0.0,
-      "game_log_key": "5079647|rec_yds",
-      "model_stat": "rec_yds",
-      "model_projection_raw": 42.136035,
-      "model_ev": -3.6,
-      "model_lean_probability": 0.5135,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "C",
-      "mu_score": 46,
-      "mu_rank": 64,
-      "mu_of": 136,
-      "mu_vs": "TEs",
-      "mu_def": "average"
-    },
-    {
-      "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
-      "start_time": "2026-11-08T00:30:00Z",
-      "player_name": "Talyn Taylor",
-      "market_name": "Reception Yards",
-      "line": 35.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 36.1,
-      "model_edge": 0.6,
+      "model_predicted_value": 31.1,
+      "model_edge": 5.6,
       "model_lean": "over",
       "model_confidence": "normal",
       "team": "Georgia",
       "model_version": "retrained 2026-11-02 (played-zeros)",
       "opponent": "Ole Miss",
-      "games_played": 7,
-      "rec_share": 0.1588827838827839,
-      "carry_share": 0.008692365835222978,
-      "model_over_probability": 0.4015,
-      "model_under_probability": 0.5985,
+      "games_played": 6,
+      "rec_share": 0.1298076923076923,
+      "carry_share": 0.004901960784313725,
+      "model_over_probability": 0.4825,
+      "model_under_probability": 0.5175,
       "model_push_probability": 0.0,
-      "game_log_key": "5141671|rec_yds",
+      "game_log_key": "5078453|rec_yds",
       "model_stat": "rec_yds",
-      "model_projection_raw": 36.062543,
-      "model_ev": -24.6,
-      "model_lean_probability": 0.4015,
+      "model_projection_raw": 31.080633,
+      "model_ev": -9.4,
+      "model_lean_probability": 0.4825,
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "C",
@@ -22531,42 +22827,6 @@
     {
       "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
       "start_time": "2026-11-08T00:30:00Z",
-      "player_name": "Deuce Alexander",
-      "market_name": "Reception Yards",
-      "line": 66.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 68.1,
-      "model_edge": 1.6,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "Ole Miss",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "Georgia",
-      "games_played": 8,
-      "rec_share": 0.24672318422318423,
-      "carry_share": 0.015289115646258504,
-      "model_over_probability": 0.4455,
-      "model_under_probability": 0.5545,
-      "model_push_probability": 0.0,
-      "game_log_key": "5152158|rec_yds",
-      "model_stat": "rec_yds",
-      "model_projection_raw": 68.123733,
-      "model_ev": -16.4,
-      "model_lean_probability": 0.4455,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "D",
-      "mu_score": 26,
-      "mu_rank": 36,
-      "mu_of": 136,
-      "mu_vs": "WRs",
-      "mu_def": "tough"
-    },
-    {
-      "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
-      "start_time": "2026-11-08T00:30:00Z",
       "player_name": "Horatio Fields",
       "market_name": "Reception Yards",
       "line": 39.5,
@@ -22599,42 +22859,6 @@
       "mu_of": 136,
       "mu_vs": "WRs",
       "mu_def": "tough"
-    },
-    {
-      "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
-      "start_time": "2026-11-08T00:30:00Z",
-      "player_name": "London Humphreys",
-      "market_name": "Reception Yards",
-      "line": 25.5,
-      "over_price": -114,
-      "under_price": -114.0,
-      "book_used": "fanduel",
-      "model_predicted_value": 31.1,
-      "model_edge": 5.6,
-      "model_lean": "over",
-      "model_confidence": "normal",
-      "team": "Georgia",
-      "model_version": "retrained 2026-11-02 (played-zeros)",
-      "opponent": "Ole Miss",
-      "games_played": 6,
-      "rec_share": 0.1298076923076923,
-      "carry_share": 0.004901960784313725,
-      "model_over_probability": 0.4825,
-      "model_under_probability": 0.5175,
-      "model_push_probability": 0.0,
-      "game_log_key": "5078453|rec_yds",
-      "model_stat": "rec_yds",
-      "model_projection_raw": 31.080633,
-      "model_ev": -9.4,
-      "model_lean_probability": 0.4825,
-      "is_official_play": false,
-      "is_watch_play": false,
-      "mu_grade": "C",
-      "mu_score": 59,
-      "mu_rank": 81,
-      "mu_of": 136,
-      "mu_vs": "WRs",
-      "mu_def": "average"
     },
     {
       "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
@@ -26718,6 +26942,90 @@
         266
       ]
     ],
+    "5228764|rec_yds": [
+      [
+        1,
+        "Nebraska",
+        104
+      ],
+      [
+        2,
+        "Jacksonville State",
+        38
+      ],
+      [
+        3,
+        "South Alabama",
+        61
+      ],
+      [
+        4,
+        "Stonehill",
+        113
+      ],
+      [
+        5,
+        "Kent State",
+        21
+      ],
+      [
+        6,
+        "Central Michigan",
+        59
+      ],
+      [
+        7,
+        "Sacramento State",
+        44
+      ],
+      [
+        8,
+        "Eastern Michigan",
+        56
+      ]
+    ],
+    "5193102|rec_yds": [
+      [
+        1,
+        "Wake Forest",
+        7
+      ],
+      [
+        2,
+        "Robert Morris",
+        0
+      ],
+      [
+        3,
+        "Minnesota",
+        16
+      ],
+      [
+        4,
+        "UNLV",
+        15
+      ],
+      [
+        5,
+        "Central Michigan",
+        35
+      ],
+      [
+        6,
+        "Eastern Michigan",
+        42
+      ],
+      [
+        7,
+        "Miami (OH)",
+        54
+      ],
+      [
+        8,
+        "Kent State",
+        72
+      ]
+    ],
     "5084582|rec_yds": [
       [
         1,
@@ -26844,48 +27152,6 @@
         125
       ]
     ],
-    "5228764|rec_yds": [
-      [
-        1,
-        "Nebraska",
-        104
-      ],
-      [
-        2,
-        "Jacksonville State",
-        38
-      ],
-      [
-        3,
-        "South Alabama",
-        61
-      ],
-      [
-        4,
-        "Stonehill",
-        113
-      ],
-      [
-        5,
-        "Kent State",
-        21
-      ],
-      [
-        6,
-        "Central Michigan",
-        59
-      ],
-      [
-        7,
-        "Sacramento State",
-        44
-      ],
-      [
-        8,
-        "Eastern Michigan",
-        56
-      ]
-    ],
     "5211691|rec_yds": [
       [
         1,
@@ -26926,48 +27192,6 @@
         8,
         "Eastern Michigan",
         27
-      ]
-    ],
-    "5193102|rec_yds": [
-      [
-        1,
-        "Wake Forest",
-        7
-      ],
-      [
-        2,
-        "Robert Morris",
-        0
-      ],
-      [
-        3,
-        "Minnesota",
-        16
-      ],
-      [
-        4,
-        "UNLV",
-        15
-      ],
-      [
-        5,
-        "Central Michigan",
-        35
-      ],
-      [
-        6,
-        "Eastern Michigan",
-        42
-      ],
-      [
-        7,
-        "Miami (OH)",
-        54
-      ],
-      [
-        8,
-        "Kent State",
-        72
       ]
     ],
     "4873234|rush_yds": [
@@ -27355,48 +27579,6 @@
         1
       ]
     ],
-    "5211691|receptions": [
-      [
-        1,
-        "Nebraska",
-        0
-      ],
-      [
-        2,
-        "Jacksonville State",
-        1
-      ],
-      [
-        3,
-        "South Alabama",
-        3
-      ],
-      [
-        4,
-        "Stonehill",
-        2
-      ],
-      [
-        5,
-        "Kent State",
-        1
-      ],
-      [
-        6,
-        "Central Michigan",
-        2
-      ],
-      [
-        7,
-        "Sacramento State",
-        3
-      ],
-      [
-        8,
-        "Eastern Michigan",
-        4
-      ]
-    ],
     "5221306|receptions": [
       [
         2,
@@ -27469,6 +27651,48 @@
         8,
         "Kent State",
         1
+      ]
+    ],
+    "5211691|receptions": [
+      [
+        1,
+        "Nebraska",
+        0
+      ],
+      [
+        2,
+        "Jacksonville State",
+        1
+      ],
+      [
+        3,
+        "South Alabama",
+        3
+      ],
+      [
+        4,
+        "Stonehill",
+        2
+      ],
+      [
+        5,
+        "Kent State",
+        1
+      ],
+      [
+        6,
+        "Central Michigan",
+        2
+      ],
+      [
+        7,
+        "Sacramento State",
+        3
+      ],
+      [
+        8,
+        "Eastern Michigan",
+        4
       ]
     ],
     "5228762|pass_att": [
@@ -31749,6 +31973,43 @@
         49
       ]
     ],
+    "5160955|rec_yds": [
+      [
+        1,
+        "Utah Tech",
+        16
+      ],
+      [
+        2,
+        "Arizona",
+        5
+      ],
+      [
+        3,
+        "Colorado State",
+        18
+      ],
+      [
+        5,
+        "TCU",
+        6
+      ],
+      [
+        6,
+        "Iowa State",
+        21
+      ],
+      [
+        7,
+        "Notre Dame",
+        25
+      ],
+      [
+        8,
+        "UCF",
+        39
+      ]
+    ],
     "5173431|rec_yds": [
       [
         1,
@@ -31907,43 +32168,6 @@
         57
       ]
     ],
-    "5160955|rec_yds": [
-      [
-        1,
-        "Utah Tech",
-        16
-      ],
-      [
-        2,
-        "Arizona",
-        5
-      ],
-      [
-        3,
-        "Colorado State",
-        18
-      ],
-      [
-        5,
-        "TCU",
-        6
-      ],
-      [
-        6,
-        "Iowa State",
-        21
-      ],
-      [
-        7,
-        "Notre Dame",
-        25
-      ],
-      [
-        8,
-        "UCF",
-        39
-      ]
-    ],
     "4871040|rec_yds": [
       [
         1,
@@ -32065,6 +32289,75 @@
         5
       ]
     ],
+    "5132652|receptions": [
+      [
+        1,
+        "Idaho",
+        2
+      ],
+      [
+        2,
+        "Arkansas",
+        1
+      ],
+      [
+        3,
+        "Utah State",
+        4
+      ],
+      [
+        4,
+        "Iowa State",
+        2
+      ],
+      [
+        6,
+        "Kansas",
+        5
+      ],
+      [
+        7,
+        "Colorado",
+        2
+      ],
+      [
+        9,
+        "Cincinnati",
+        1
+      ]
+    ],
+    "4900351|receptions": [
+      [
+        1,
+        "Idaho",
+        1
+      ],
+      [
+        2,
+        "Arkansas",
+        4
+      ],
+      [
+        4,
+        "Iowa State",
+        2
+      ],
+      [
+        6,
+        "Kansas",
+        2
+      ],
+      [
+        7,
+        "Colorado",
+        4
+      ],
+      [
+        8,
+        "Houston",
+        5
+      ]
+    ],
     "5173431|receptions": [
       [
         1,
@@ -32105,43 +32398,6 @@
         9,
         "Cincinnati",
         3
-      ]
-    ],
-    "5132652|receptions": [
-      [
-        1,
-        "Idaho",
-        2
-      ],
-      [
-        2,
-        "Arkansas",
-        1
-      ],
-      [
-        3,
-        "Utah State",
-        4
-      ],
-      [
-        4,
-        "Iowa State",
-        2
-      ],
-      [
-        6,
-        "Kansas",
-        5
-      ],
-      [
-        7,
-        "Colorado",
-        2
-      ],
-      [
-        9,
-        "Cincinnati",
-        1
       ]
     ],
     "5221043|receptions": [
@@ -32310,38 +32566,6 @@
         9,
         "Cincinnati",
         2
-      ]
-    ],
-    "4900351|receptions": [
-      [
-        1,
-        "Idaho",
-        1
-      ],
-      [
-        2,
-        "Arkansas",
-        4
-      ],
-      [
-        4,
-        "Iowa State",
-        2
-      ],
-      [
-        6,
-        "Kansas",
-        2
-      ],
-      [
-        7,
-        "Colorado",
-        4
-      ],
-      [
-        8,
-        "Houston",
-        5
       ]
     ],
     "5105849|rush_yds": [
@@ -33438,28 +33662,6 @@
         1
       ]
     ],
-    "5092275|pass_yds": [
-      [
-        6,
-        "Oregon",
-        43
-      ],
-      [
-        7,
-        "Wisconsin",
-        264
-      ],
-      [
-        8,
-        "Michigan State",
-        198
-      ],
-      [
-        9,
-        "Nevada",
-        178
-      ]
-    ],
     "5144959|pass_yds": [
       [
         1,
@@ -33500,6 +33702,28 @@
         9,
         "Indiana",
         120
+      ]
+    ],
+    "5092275|pass_yds": [
+      [
+        6,
+        "Oregon",
+        43
+      ],
+      [
+        7,
+        "Wisconsin",
+        264
+      ],
+      [
+        8,
+        "Michigan State",
+        198
+      ],
+      [
+        9,
+        "Nevada",
+        178
       ]
     ],
     "5209464|rec_yds": [
@@ -35184,43 +35408,6 @@
         73
       ]
     ],
-    "5142591|rec_yds": [
-      [
-        1,
-        "East Carolina",
-        21
-      ],
-      [
-        3,
-        "Florida State",
-        34
-      ],
-      [
-        4,
-        "South Carolina",
-        44
-      ],
-      [
-        5,
-        "Mississippi State",
-        32
-      ],
-      [
-        6,
-        "Georgia",
-        9
-      ],
-      [
-        7,
-        "Tennessee",
-        8
-      ],
-      [
-        8,
-        "Texas A&M",
-        24
-      ]
-    ],
     "5079420|rec_yds": [
       [
         1,
@@ -35327,48 +35514,6 @@
         17
       ]
     ],
-    "5114311|rec_yds": [
-      [
-        1,
-        "Clemson",
-        32
-      ],
-      [
-        2,
-        "Louisiana Tech",
-        80
-      ],
-      [
-        3,
-        "Ole Miss",
-        5
-      ],
-      [
-        4,
-        "Texas A&M",
-        163
-      ],
-      [
-        5,
-        "McNeese",
-        37
-      ],
-      [
-        6,
-        "Kentucky",
-        54
-      ],
-      [
-        7,
-        "Mississippi State",
-        85
-      ],
-      [
-        8,
-        "Auburn",
-        178
-      ]
-    ],
     "5164343|rec_yds": [
       [
         2,
@@ -35448,6 +35593,85 @@
         27
       ]
     ],
+    "5142591|rec_yds": [
+      [
+        1,
+        "East Carolina",
+        21
+      ],
+      [
+        3,
+        "Florida State",
+        34
+      ],
+      [
+        4,
+        "South Carolina",
+        44
+      ],
+      [
+        5,
+        "Mississippi State",
+        32
+      ],
+      [
+        6,
+        "Georgia",
+        9
+      ],
+      [
+        7,
+        "Tennessee",
+        8
+      ],
+      [
+        8,
+        "Texas A&M",
+        24
+      ]
+    ],
+    "5114311|rec_yds": [
+      [
+        1,
+        "Clemson",
+        32
+      ],
+      [
+        2,
+        "Louisiana Tech",
+        80
+      ],
+      [
+        3,
+        "Ole Miss",
+        5
+      ],
+      [
+        4,
+        "Texas A&M",
+        163
+      ],
+      [
+        5,
+        "McNeese",
+        37
+      ],
+      [
+        6,
+        "Kentucky",
+        54
+      ],
+      [
+        7,
+        "Mississippi State",
+        85
+      ],
+      [
+        8,
+        "Auburn",
+        178
+      ]
+    ],
     "5079714|receptions": [
       [
         1,
@@ -35512,48 +35736,6 @@
         5
       ]
     ],
-    "5079482|receptions": [
-      [
-        1,
-        "Clemson",
-        1
-      ],
-      [
-        2,
-        "Louisiana Tech",
-        3
-      ],
-      [
-        3,
-        "Ole Miss",
-        2
-      ],
-      [
-        4,
-        "Texas A&M",
-        3
-      ],
-      [
-        5,
-        "McNeese",
-        2
-      ],
-      [
-        6,
-        "Kentucky",
-        7
-      ],
-      [
-        7,
-        "Mississippi State",
-        8
-      ],
-      [
-        8,
-        "Auburn",
-        4
-      ]
-    ],
     "5141394|receptions": [
       [
         1,
@@ -35596,6 +35778,85 @@
         3
       ]
     ],
+    "5164343|receptions": [
+      [
+        2,
+        "Kentucky",
+        1
+      ],
+      [
+        3,
+        "Florida State",
+        2
+      ],
+      [
+        4,
+        "South Carolina",
+        2
+      ],
+      [
+        5,
+        "Mississippi State",
+        2
+      ],
+      [
+        6,
+        "Georgia",
+        2
+      ],
+      [
+        7,
+        "Tennessee",
+        6
+      ],
+      [
+        8,
+        "Texas A&M",
+        3
+      ]
+    ],
+    "5079482|receptions": [
+      [
+        1,
+        "Clemson",
+        1
+      ],
+      [
+        2,
+        "Louisiana Tech",
+        3
+      ],
+      [
+        3,
+        "Ole Miss",
+        2
+      ],
+      [
+        4,
+        "Texas A&M",
+        3
+      ],
+      [
+        5,
+        "McNeese",
+        2
+      ],
+      [
+        6,
+        "Kentucky",
+        7
+      ],
+      [
+        7,
+        "Mississippi State",
+        8
+      ],
+      [
+        8,
+        "Auburn",
+        4
+      ]
+    ],
     "5114311|receptions": [
       [
         1,
@@ -35636,43 +35897,6 @@
         8,
         "Auburn",
         9
-      ]
-    ],
-    "5164343|receptions": [
-      [
-        2,
-        "Kentucky",
-        1
-      ],
-      [
-        3,
-        "Florida State",
-        2
-      ],
-      [
-        4,
-        "South Carolina",
-        2
-      ],
-      [
-        5,
-        "Mississippi State",
-        2
-      ],
-      [
-        6,
-        "Georgia",
-        2
-      ],
-      [
-        7,
-        "Tennessee",
-        6
-      ],
-      [
-        8,
-        "Texas A&M",
-        3
       ]
     ],
     "5078810|rush_yds": [
@@ -37150,6 +37374,38 @@
         0
       ]
     ],
+    "5141571|pass_tds": [
+      [
+        1,
+        "Furman",
+        1
+      ],
+      [
+        4,
+        "Texas",
+        0
+      ],
+      [
+        5,
+        "Auburn",
+        0
+      ],
+      [
+        6,
+        "Arkansas",
+        1
+      ],
+      [
+        7,
+        "Alabama",
+        0
+      ],
+      [
+        8,
+        "South Carolina",
+        0
+      ]
+    ],
     "4918099|pass_tds": [
       [
         1,
@@ -37192,36 +37448,36 @@
         1
       ]
     ],
-    "5141571|pass_tds": [
+    "5141571|pass_yds": [
       [
         1,
         "Furman",
-        1
+        56
       ],
       [
         4,
         "Texas",
-        0
+        6
       ],
       [
         5,
         "Auburn",
-        0
+        86
       ],
       [
         6,
         "Arkansas",
-        1
+        247
       ],
       [
         7,
         "Alabama",
-        0
+        197
       ],
       [
         8,
         "South Carolina",
-        0
+        136
       ]
     ],
     "4918099|pass_yds": [
@@ -37266,36 +37522,46 @@
         203
       ]
     ],
-    "5141571|pass_yds": [
+    "5136838|rec_yds": [
       [
         1,
-        "Furman",
-        56
+        "Youngstown State",
+        48
+      ],
+      [
+        2,
+        "Alabama",
+        49
+      ],
+      [
+        3,
+        "Texas A&M",
+        22
       ],
       [
         4,
-        "Texas",
-        6
+        "South Alabama",
+        18
       ],
       [
         5,
-        "Auburn",
-        86
+        "South Carolina",
+        57
       ],
       [
         6,
-        "Arkansas",
-        247
+        "LSU",
+        25
       ],
       [
         7,
-        "Alabama",
-        197
+        "Oklahoma",
+        38
       ],
       [
         8,
-        "South Carolina",
-        136
+        "Vanderbilt",
+        67
       ]
     ],
     "5215172|rec_yds": [
@@ -37382,112 +37648,6 @@
         56
       ]
     ],
-    "5079580|rec_yds": [
-      [
-        1,
-        "Furman",
-        132
-      ],
-      [
-        2,
-        "Georgia Tech",
-        16
-      ],
-      [
-        3,
-        "Kennesaw State",
-        41
-      ],
-      [
-        4,
-        "Texas",
-        72
-      ],
-      [
-        5,
-        "Auburn",
-        57
-      ],
-      [
-        6,
-        "Arkansas",
-        78
-      ],
-      [
-        7,
-        "Alabama",
-        85
-      ],
-      [
-        8,
-        "South Carolina",
-        47
-      ]
-    ],
-    "5294137|rec_yds": [
-      [
-        3,
-        "Texas A&M",
-        96
-      ],
-      [
-        6,
-        "LSU",
-        54
-      ],
-      [
-        7,
-        "Oklahoma",
-        28
-      ],
-      [
-        8,
-        "Vanderbilt",
-        43
-      ]
-    ],
-    "5136838|rec_yds": [
-      [
-        1,
-        "Youngstown State",
-        48
-      ],
-      [
-        2,
-        "Alabama",
-        49
-      ],
-      [
-        3,
-        "Texas A&M",
-        22
-      ],
-      [
-        4,
-        "South Alabama",
-        18
-      ],
-      [
-        5,
-        "South Carolina",
-        57
-      ],
-      [
-        6,
-        "LSU",
-        25
-      ],
-      [
-        7,
-        "Oklahoma",
-        38
-      ],
-      [
-        8,
-        "Vanderbilt",
-        67
-      ]
-    ],
     "4921108|rec_yds": [
       [
         1,
@@ -37530,6 +37690,48 @@
         10
       ]
     ],
+    "5079580|rec_yds": [
+      [
+        1,
+        "Furman",
+        132
+      ],
+      [
+        2,
+        "Georgia Tech",
+        16
+      ],
+      [
+        3,
+        "Kennesaw State",
+        41
+      ],
+      [
+        4,
+        "Texas",
+        72
+      ],
+      [
+        5,
+        "Auburn",
+        57
+      ],
+      [
+        6,
+        "Arkansas",
+        78
+      ],
+      [
+        7,
+        "Alabama",
+        85
+      ],
+      [
+        8,
+        "South Carolina",
+        47
+      ]
+    ],
     "5141391|rec_yds": [
       [
         2,
@@ -37560,6 +37762,28 @@
         8,
         "South Carolina",
         12
+      ]
+    ],
+    "5294137|rec_yds": [
+      [
+        3,
+        "Texas A&M",
+        96
+      ],
+      [
+        6,
+        "LSU",
+        54
+      ],
+      [
+        7,
+        "Oklahoma",
+        28
+      ],
+      [
+        8,
+        "Vanderbilt",
+        43
       ]
     ],
     "5136838|receptions": [
@@ -37646,6 +37870,48 @@
         6
       ]
     ],
+    "5215172|receptions": [
+      [
+        1,
+        "Youngstown State",
+        3
+      ],
+      [
+        2,
+        "Alabama",
+        5
+      ],
+      [
+        3,
+        "Texas A&M",
+        2
+      ],
+      [
+        4,
+        "South Alabama",
+        3
+      ],
+      [
+        5,
+        "South Carolina",
+        12
+      ],
+      [
+        6,
+        "LSU",
+        4
+      ],
+      [
+        7,
+        "Oklahoma",
+        5
+      ],
+      [
+        8,
+        "Vanderbilt",
+        4
+      ]
+    ],
     "5294137|receptions": [
       [
         3,
@@ -37708,48 +37974,6 @@
         8,
         "South Carolina",
         5
-      ]
-    ],
-    "5215172|receptions": [
-      [
-        1,
-        "Youngstown State",
-        3
-      ],
-      [
-        2,
-        "Alabama",
-        5
-      ],
-      [
-        3,
-        "Texas A&M",
-        2
-      ],
-      [
-        4,
-        "South Alabama",
-        3
-      ],
-      [
-        5,
-        "South Carolina",
-        12
-      ],
-      [
-        6,
-        "LSU",
-        4
-      ],
-      [
-        7,
-        "Oklahoma",
-        5
-      ],
-      [
-        8,
-        "Vanderbilt",
-        4
       ]
     ],
     "5141391|receptions": [
@@ -37868,48 +38092,6 @@
         120
       ]
     ],
-    "4911529|pass_tds": [
-      [
-        1,
-        "Louisville",
-        3
-      ],
-      [
-        2,
-        "Charlotte",
-        2
-      ],
-      [
-        3,
-        "LSU",
-        2
-      ],
-      [
-        4,
-        "Florida",
-        1
-      ],
-      [
-        6,
-        "Vanderbilt",
-        3
-      ],
-      [
-        7,
-        "Missouri",
-        3
-      ],
-      [
-        8,
-        "Texas",
-        2
-      ],
-      [
-        9,
-        "Auburn",
-        2
-      ]
-    ],
     "4685578|pass_tds": [
       [
         1,
@@ -37952,46 +38134,46 @@
         0
       ]
     ],
-    "4911529|pass_yds": [
+    "4911529|pass_tds": [
       [
         1,
         "Louisville",
-        336
+        3
       ],
       [
         2,
         "Charlotte",
-        225
+        2
       ],
       [
         3,
         "LSU",
-        363
+        2
       ],
       [
         4,
         "Florida",
-        298
+        1
       ],
       [
         6,
         "Vanderbilt",
-        213
+        3
       ],
       [
         7,
         "Missouri",
-        241
+        3
       ],
       [
         8,
         "Texas",
-        250
+        2
       ],
       [
         9,
         "Auburn",
-        263
+        2
       ]
     ],
     "4685578|pass_yds": [
@@ -38036,41 +38218,46 @@
         101
       ]
     ],
-    "4870874|rec_yds": [
+    "4911529|pass_yds": [
+      [
+        1,
+        "Louisville",
+        336
+      ],
       [
         2,
-        "Western Kentucky",
-        4
+        "Charlotte",
+        225
       ],
       [
         3,
-        "Arkansas",
-        59
+        "LSU",
+        363
       ],
       [
         4,
-        "Oklahoma",
-        5
-      ],
-      [
-        5,
-        "Vanderbilt",
-        43
+        "Florida",
+        298
       ],
       [
         6,
-        "Alabama",
-        32
+        "Vanderbilt",
+        213
       ],
       [
         7,
-        "Auburn",
-        41
+        "Missouri",
+        241
+      ],
+      [
+        8,
+        "Texas",
+        250
       ],
       [
         9,
-        "Florida",
-        13
+        "Auburn",
+        263
       ]
     ],
     "5079647|rec_yds": [
@@ -38110,6 +38297,48 @@
         34
       ]
     ],
+    "5152158|rec_yds": [
+      [
+        1,
+        "Louisville",
+        159
+      ],
+      [
+        2,
+        "Charlotte",
+        76
+      ],
+      [
+        3,
+        "LSU",
+        60
+      ],
+      [
+        4,
+        "Florida",
+        134
+      ],
+      [
+        6,
+        "Vanderbilt",
+        74
+      ],
+      [
+        7,
+        "Missouri",
+        20
+      ],
+      [
+        8,
+        "Texas",
+        87
+      ],
+      [
+        9,
+        "Auburn",
+        59
+      ]
+    ],
     "5141671|rec_yds": [
       [
         1,
@@ -38145,6 +38374,75 @@
         9,
         "Florida",
         3
+      ]
+    ],
+    "4870874|rec_yds": [
+      [
+        2,
+        "Western Kentucky",
+        4
+      ],
+      [
+        3,
+        "Arkansas",
+        59
+      ],
+      [
+        4,
+        "Oklahoma",
+        5
+      ],
+      [
+        5,
+        "Vanderbilt",
+        43
+      ],
+      [
+        6,
+        "Alabama",
+        32
+      ],
+      [
+        7,
+        "Auburn",
+        41
+      ],
+      [
+        9,
+        "Florida",
+        13
+      ]
+    ],
+    "5078453|rec_yds": [
+      [
+        2,
+        "Western Kentucky",
+        11
+      ],
+      [
+        4,
+        "Oklahoma",
+        12
+      ],
+      [
+        5,
+        "Vanderbilt",
+        19
+      ],
+      [
+        6,
+        "Alabama",
+        43
+      ],
+      [
+        7,
+        "Auburn",
+        35
+      ],
+      [
+        9,
+        "Florida",
+        16
       ]
     ],
     "5224178|rec_yds": [
@@ -38216,48 +38514,6 @@
         39
       ]
     ],
-    "5152158|rec_yds": [
-      [
-        1,
-        "Louisville",
-        159
-      ],
-      [
-        2,
-        "Charlotte",
-        76
-      ],
-      [
-        3,
-        "LSU",
-        60
-      ],
-      [
-        4,
-        "Florida",
-        134
-      ],
-      [
-        6,
-        "Vanderbilt",
-        74
-      ],
-      [
-        7,
-        "Missouri",
-        20
-      ],
-      [
-        8,
-        "Texas",
-        87
-      ],
-      [
-        9,
-        "Auburn",
-        59
-      ]
-    ],
     "4711408|rec_yds": [
       [
         1,
@@ -38298,38 +38554,6 @@
         9,
         "Auburn",
         73
-      ]
-    ],
-    "5078453|rec_yds": [
-      [
-        2,
-        "Western Kentucky",
-        11
-      ],
-      [
-        4,
-        "Oklahoma",
-        12
-      ],
-      [
-        5,
-        "Vanderbilt",
-        19
-      ],
-      [
-        6,
-        "Alabama",
-        43
-      ],
-      [
-        7,
-        "Auburn",
-        35
-      ],
-      [
-        9,
-        "Florida",
-        16
       ]
     ],
     "5079561|rush_yds": [
@@ -133033,8 +133257,8 @@
       ]
     }
   },
-  "props_receiving_inputs": "PFF routes and targets (4177 of 5905 players matched, 1151 of 1153 games charted)",
-  "props_matchups": "matchup labels for 316 defenses (329 tough / 334 average / 285 soft position matchups), 4145 players with a position",
+  "props_receiving_inputs": "PFF routes and targets (4178 of 5905 players matched, 1151 of 1153 games charted)",
+  "props_matchups": "matchup labels for 316 defenses (330 tough / 333 average / 285 soft position matchups), 4146 players with a position",
   "props_matchup_grades": "matchup grades for 136 FBS defenses",
   "prop_market_catalog": [
     "Pass Attempts",
@@ -183624,24 +183848,24 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 400.0,
+          "price": 425.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 400.0,
+          "price": 425.0,
           "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 400.0,
-          "offshore": true
         },
         {
           "book": "bovada",
           "label": "Bovada",
+          "price": 420.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
           "price": 400.0,
           "offshore": true
         }
@@ -183649,7 +183873,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 850.0,
-      "dk_price": 400.0,
+      "dk_price": 425.0,
       "market_implied": 0.1053,
       "team": "Illinois",
       "role": "Backup RB",
@@ -183660,7 +183884,7 @@
       "model_prob": 0.2057,
       "fair_odds": 386,
       "edge_best": 95.4,
-      "edge_dk": 2.8,
+      "edge_dk": 8.0,
       "tag": "longshot"
     },
     {
@@ -183963,55 +184187,6 @@
       "edge_best": 77.5,
       "edge_dk": 10.9,
       "tag": "caution"
-    },
-    {
-      "fixture_id": "59047d3be974c2ec05c7e6282752287b",
-      "start_time": "2026-11-07T01:00:00Z",
-      "home_team": "Illinois Fighting Illini",
-      "away_team": "Nebraska Cornhuskers",
-      "player_name": "Davin Stoffel",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 1300.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 1300.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 1300.0,
-          "offshore": true
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 1300.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 1300.0,
-      "dk_price": 1300.0,
-      "market_implied": 0.0714,
-      "team": "Illinois",
-      "role": "Minor role",
-      "opponent": "Nebraska",
-      "games_played": 3,
-      "rush_td_proj": 0.003,
-      "rec_td_proj": 0.131,
-      "model_prob": 0.1246,
-      "fair_odds": 702,
-      "edge_best": 74.5,
-      "edge_dk": 74.5,
-      "tag": "longshot"
     },
     {
       "fixture_id": "722ed661705df150a38e7786949ce241",
@@ -184433,6 +184608,55 @@
       "tag": "longshot"
     },
     {
+      "fixture_id": "59047d3be974c2ec05c7e6282752287b",
+      "start_time": "2026-11-07T01:00:00Z",
+      "home_team": "Illinois Fighting Illini",
+      "away_team": "Nebraska Cornhuskers",
+      "player_name": "Davin Stoffel",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 1200.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 1200.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 1200.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 1100.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": 1200.0,
+      "dk_price": 1200.0,
+      "market_implied": 0.0769,
+      "team": "Illinois",
+      "role": "Minor role",
+      "opponent": "Nebraska",
+      "games_played": 3,
+      "rush_td_proj": 0.003,
+      "rec_td_proj": 0.131,
+      "model_prob": 0.1246,
+      "fair_odds": 702,
+      "edge_best": 62.0,
+      "edge_dk": 62.0,
+      "tag": "longshot"
+    },
+    {
       "fixture_id": "61cf0b043d9d95f0a73d0838ff08a24b",
       "start_time": "2026-11-08T00:30:00Z",
       "home_team": "Northwestern Wildcats",
@@ -184601,19 +184825,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 900.0,
+          "price": 850.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 900.0,
+          "price": 850.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 900.0,
+          "price": 825.0,
           "offshore": true
         },
         {
@@ -184626,7 +184850,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 1000.0,
-      "dk_price": 900.0,
+      "dk_price": 850.0,
       "market_implied": 0.0909,
       "team": "Illinois",
       "role": "Minor role",
@@ -184637,7 +184861,7 @@
       "model_prob": 0.1458,
       "fair_odds": 586,
       "edge_best": 60.4,
-      "edge_dk": 45.8,
+      "edge_dk": 38.5,
       "tag": "longshot"
     },
     {
@@ -184843,53 +185067,60 @@
       "tag": "longshot"
     },
     {
-      "fixture_id": "59047d3be974c2ec05c7e6282752287b",
-      "start_time": "2026-11-07T01:00:00Z",
-      "home_team": "Illinois Fighting Illini",
-      "away_team": "Nebraska Cornhuskers",
-      "player_name": "Janiran Bonner",
+      "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
+      "start_time": "2026-11-07T00:00:00Z",
+      "home_team": "SMU Mustangs",
+      "away_team": "Virginia Tech Hokies",
+      "player_name": "Dramekco Green",
       "books": [
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 1500.0,
+          "price": 295.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 1500.0,
+          "price": 295.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 1500.0,
+          "price": 295.0,
           "offshore": true
+        },
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 135.0,
+          "offshore": false
         },
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 1100.0,
+          "price": 130.0,
           "offshore": true
         }
       ],
       "best_book": "draftkings",
       "best_book_label": "DraftKings",
-      "best_price": 1500.0,
-      "dk_price": 1500.0,
-      "market_implied": 0.0625,
-      "team": "Nebraska",
-      "role": "Minor role",
-      "opponent": "Illinois",
-      "games_played": 3,
-      "rush_td_proj": 0.002,
-      "rec_td_proj": 0.099,
-      "model_prob": 0.0961,
-      "fair_odds": 940,
-      "edge_best": 53.8,
-      "edge_dk": 53.8,
-      "tag": "longshot"
+      "best_price": 295.0,
+      "dk_price": 295.0,
+      "market_implied": 0.2532,
+      "team": "SMU",
+      "role": "Lead RB",
+      "opponent": "Virginia Tech",
+      "games_played": 4,
+      "rush_td_proj": 0.391,
+      "rec_td_proj": 0.105,
+      "model_prob": 0.391,
+      "fair_odds": 156,
+      "edge_best": 54.5,
+      "edge_dk": 54.5,
+      "injury_status": "Out",
+      "tag": "caution"
     },
     {
       "fixture_id": "5b05bf2ff27508703418dcf70079a22f",
@@ -184982,55 +185213,6 @@
       "edge_best": 52.0,
       "edge_dk": 52.0,
       "tag": "value"
-    },
-    {
-      "fixture_id": "45fdbdbe6ed3d9922fa8b26b8a885f0e",
-      "start_time": "2026-11-07T02:00:00Z",
-      "home_team": "Nevada Wolf Pack",
-      "away_team": "New Mexico Lobos",
-      "player_name": "Bailen George",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 425.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 425.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 420.0,
-          "offshore": true
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 300.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 425.0,
-      "dk_price": 425.0,
-      "market_implied": 0.1905,
-      "team": "New Mexico",
-      "role": "Minor role",
-      "opponent": "Nevada",
-      "games_played": 6,
-      "rush_td_proj": 0.02,
-      "rec_td_proj": 0.318,
-      "model_prob": 0.2869,
-      "fair_odds": 249,
-      "edge_best": 50.6,
-      "edge_dk": 50.6,
-      "tag": "longshot"
     },
     {
       "fixture_id": "657053f4734af94664beb750813257bb",
@@ -185215,32 +185397,32 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 700.0,
+          "price": 600.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 700.0,
+          "price": 600.0,
           "offshore": false
         },
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 700.0,
+          "price": 600.0,
           "offshore": true
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 700.0,
+          "price": 600.0,
           "offshore": true
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 750.0,
-      "dk_price": 700.0,
+      "dk_price": 600.0,
       "market_implied": 0.1176,
       "team": "Virginia Tech",
       "role": "Minor role",
@@ -185251,7 +185433,7 @@
       "model_prob": 0.1762,
       "fair_odds": 468,
       "edge_best": 49.7,
-      "edge_dk": 40.9,
+      "edge_dk": 23.3,
       "tag": "longshot"
     },
     {
@@ -185384,12 +185566,6 @@
           "offshore": false
         },
         {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 325.0,
-          "offshore": true
-        },
-        {
           "book": "draftkings",
           "label": "DraftKings",
           "price": 320.0,
@@ -185405,6 +185581,12 @@
           "book": "bovada",
           "label": "Bovada",
           "price": 320.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 300.0,
           "offshore": true
         }
       ],
@@ -185647,6 +185829,55 @@
       "tag": "longshot"
     },
     {
+      "fixture_id": "59047d3be974c2ec05c7e6282752287b",
+      "start_time": "2026-11-07T01:00:00Z",
+      "home_team": "Illinois Fighting Illini",
+      "away_team": "Nebraska Cornhuskers",
+      "player_name": "Janiran Bonner",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 1400.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 1400.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 1400.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 1100.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": 1400.0,
+      "dk_price": 1400.0,
+      "market_implied": 0.0667,
+      "team": "Nebraska",
+      "role": "Minor role",
+      "opponent": "Illinois",
+      "games_played": 3,
+      "rush_td_proj": 0.002,
+      "rec_td_proj": 0.099,
+      "model_prob": 0.0961,
+      "fair_odds": 940,
+      "edge_best": 44.2,
+      "edge_dk": 44.2,
+      "tag": "longshot"
+    },
+    {
       "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
       "start_time": "2026-11-07T00:00:00Z",
       "home_team": "SMU Mustangs",
@@ -185739,6 +185970,55 @@
       "tag": "longshot"
     },
     {
+      "fixture_id": "45fdbdbe6ed3d9922fa8b26b8a885f0e",
+      "start_time": "2026-11-07T02:00:00Z",
+      "home_team": "Nevada Wolf Pack",
+      "away_team": "New Mexico Lobos",
+      "player_name": "Bailen George",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 400.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 400.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 400.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 300.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": 400.0,
+      "dk_price": 400.0,
+      "market_implied": 0.2,
+      "team": "New Mexico",
+      "role": "Minor role",
+      "opponent": "Nevada",
+      "games_played": 6,
+      "rush_td_proj": 0.02,
+      "rec_td_proj": 0.318,
+      "model_prob": 0.2869,
+      "fair_odds": 249,
+      "edge_best": 43.5,
+      "edge_dk": 43.5,
+      "tag": "longshot"
+    },
+    {
       "fixture_id": "4aac00e6cc06b8905659f911419540d2",
       "start_time": "2026-11-08T00:30:00Z",
       "home_team": "Notre Dame Fighting Irish",
@@ -185786,62 +186066,6 @@
       "edge_best": 41.0,
       "edge_dk": null,
       "tag": "longshot"
-    },
-    {
-      "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
-      "start_time": "2026-11-07T00:00:00Z",
-      "home_team": "SMU Mustangs",
-      "away_team": "Virginia Tech Hokies",
-      "player_name": "Dramekco Green",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 260.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 260.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 260.0,
-          "offshore": true
-        },
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 135.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 130.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 260.0,
-      "dk_price": 260.0,
-      "market_implied": 0.2778,
-      "team": "SMU",
-      "role": "Lead RB",
-      "opponent": "Virginia Tech",
-      "games_played": 4,
-      "rush_td_proj": 0.391,
-      "rec_td_proj": 0.105,
-      "model_prob": 0.391,
-      "fair_odds": 156,
-      "edge_best": 40.8,
-      "edge_dk": 40.8,
-      "injury_status": "Out",
-      "tag": "caution"
     },
     {
       "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
@@ -186287,19 +186511,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 400.0,
+          "price": 380.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 400.0,
+          "price": 380.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 400.0,
+          "price": 380.0,
           "offshore": true
         },
         {
@@ -186312,7 +186536,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 600.0,
-      "dk_price": 400.0,
+      "dk_price": 380.0,
       "market_implied": 0.1429,
       "team": "Illinois",
       "role": "Minor role",
@@ -186323,7 +186547,7 @@
       "model_prob": 0.1924,
       "fair_odds": 420,
       "edge_best": 34.7,
-      "edge_dk": -3.8,
+      "edge_dk": -7.6,
       "tag": "longshot"
     },
     {
@@ -186994,32 +187218,32 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 550.0,
+          "price": 500.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 550.0,
+          "price": 500.0,
           "offshore": false
         },
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 550.0,
+          "price": 500.0,
           "offshore": true
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 525.0,
+          "price": 500.0,
           "offshore": true
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 700.0,
-      "dk_price": 550.0,
+      "dk_price": 500.0,
       "market_implied": 0.125,
       "team": "Virginia Tech",
       "role": "Minor role",
@@ -187030,7 +187254,7 @@
       "model_prob": 0.1572,
       "fair_odds": 536,
       "edge_best": 25.8,
-      "edge_dk": 2.2,
+      "edge_dk": -5.7,
       "tag": "longshot"
     },
     {
@@ -187101,58 +187325,52 @@
       "tag": "value"
     },
     {
-      "fixture_id": "59047d3be974c2ec05c7e6282752287b",
-      "start_time": "2026-11-07T01:00:00Z",
-      "home_team": "Illinois Fighting Illini",
-      "away_team": "Nebraska Cornhuskers",
-      "player_name": "Quinn Clark",
+      "fixture_id": "c93b343bc3151a39a9541c0af3b22123",
+      "start_time": "2026-11-06T01:00:00Z",
+      "home_team": "Southern Mississippi Golden Eagles",
+      "away_team": "James Madison Dukes",
+      "player_name": "Noah Grevious",
       "books": [
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 650.0,
+          "price": 450.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 650.0,
+          "price": 450.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 625.0,
+          "price": 440.0,
           "offshore": true
-        },
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 550.0,
-          "offshore": false
         },
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 500.0,
+          "price": 400.0,
           "offshore": true
         }
       ],
       "best_book": "draftkings",
       "best_book_label": "DraftKings",
-      "best_price": 650.0,
-      "dk_price": 650.0,
-      "market_implied": 0.1333,
-      "team": "Nebraska",
+      "best_price": 450.0,
+      "dk_price": 450.0,
+      "market_implied": 0.1818,
+      "team": "James Madison",
       "role": "Minor role",
-      "opponent": "Illinois",
-      "games_played": 4,
-      "rush_td_proj": 0.002,
-      "rec_td_proj": 0.18,
-      "model_prob": 0.1663,
-      "fair_odds": 501,
-      "edge_best": 24.7,
-      "edge_dk": 24.7,
+      "opponent": "Southern Miss",
+      "games_played": 7,
+      "rush_td_proj": 0.007,
+      "rec_td_proj": 0.246,
+      "model_prob": 0.2233,
+      "fair_odds": 348,
+      "edge_best": 22.8,
+      "edge_dk": 22.8,
       "tag": "longshot"
     },
     {
@@ -187826,28 +188044,28 @@
           "offshore": false
         },
         {
-          "book": "fliff",
-          "label": "Fliff",
-          "price": 335.0,
-          "offshore": false
-        },
-        {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 330.0,
+          "price": 340.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 330.0,
+          "price": 340.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 330.0,
+          "price": 340.0,
           "offshore": true
+        },
+        {
+          "book": "fliff",
+          "label": "Fliff",
+          "price": 335.0,
+          "offshore": false
         },
         {
           "book": "betonlineag",
@@ -187859,7 +188077,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 490.0,
-      "dk_price": 330.0,
+      "dk_price": 340.0,
       "market_implied": 0.1695,
       "team": "Utah",
       "role": "Minor role",
@@ -187870,56 +188088,7 @@
       "model_prob": 0.1988,
       "fair_odds": 403,
       "edge_best": 17.3,
-      "edge_dk": -14.5,
-      "tag": "longshot"
-    },
-    {
-      "fixture_id": "c93b343bc3151a39a9541c0af3b22123",
-      "start_time": "2026-11-06T01:00:00Z",
-      "home_team": "Southern Mississippi Golden Eagles",
-      "away_team": "James Madison Dukes",
-      "player_name": "Noah Grevious",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 425.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 425.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 420.0,
-          "offshore": true
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 400.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 425.0,
-      "dk_price": 425.0,
-      "market_implied": 0.1905,
-      "team": "James Madison",
-      "role": "Minor role",
-      "opponent": "Southern Miss",
-      "games_played": 7,
-      "rush_td_proj": 0.007,
-      "rec_td_proj": 0.246,
-      "model_prob": 0.2233,
-      "fair_odds": 348,
-      "edge_best": 17.2,
-      "edge_dk": 17.2,
+      "edge_dk": -12.5,
       "tag": "longshot"
     },
     {
@@ -187975,6 +188144,61 @@
       "fair_odds": 345,
       "edge_best": 17.0,
       "edge_dk": 12.5,
+      "tag": "longshot"
+    },
+    {
+      "fixture_id": "59047d3be974c2ec05c7e6282752287b",
+      "start_time": "2026-11-07T01:00:00Z",
+      "home_team": "Illinois Fighting Illini",
+      "away_team": "Nebraska Cornhuskers",
+      "player_name": "Quinn Clark",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 600.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 600.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 600.0,
+          "offshore": true
+        },
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 550.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 500.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": 600.0,
+      "dk_price": 600.0,
+      "market_implied": 0.1429,
+      "team": "Nebraska",
+      "role": "Minor role",
+      "opponent": "Illinois",
+      "games_played": 4,
+      "rush_td_proj": 0.002,
+      "rec_td_proj": 0.18,
+      "model_prob": 0.1663,
+      "fair_odds": 501,
+      "edge_best": 16.4,
+      "edge_dk": 16.4,
       "tag": "longshot"
     },
     {
@@ -188060,6 +188284,43 @@
       "fair_odds": 548,
       "edge_best": 15.7,
       "edge_dk": 15.7,
+      "tag": "longshot"
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "home_team": "Tennessee Volunteers",
+      "away_team": "Kentucky Wildcats",
+      "player_name": "Mikkel Skinner",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 750.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 700.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 750.0,
+      "dk_price": null,
+      "market_implied": 0.1176,
+      "team": "Kentucky",
+      "role": "Minor role",
+      "opponent": "Tennessee",
+      "games_played": 5,
+      "rush_td_proj": 0.055,
+      "rec_td_proj": 0.091,
+      "model_prob": 0.136,
+      "fair_odds": 635,
+      "edge_best": 15.6,
+      "edge_dk": null,
       "tag": "longshot"
     },
     {
@@ -188154,34 +188415,34 @@
           "offshore": false
         },
         {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 150.0,
-          "offshore": true
-        },
-        {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 145.0,
+          "price": 180.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 145.0,
+          "price": 180.0,
           "offshore": false
         },
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 140.0,
+          "price": 180.0,
+          "offshore": true
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 180.0,
           "offshore": true
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 260.0,
-      "dk_price": 145.0,
+      "dk_price": 180.0,
       "market_implied": 0.2778,
       "team": "SMU",
       "role": "QB",
@@ -188192,7 +188453,7 @@
       "model_prob": 0.3181,
       "fair_odds": 214,
       "edge_best": 14.5,
-      "edge_dk": -22.1,
+      "edge_dk": -10.9,
       "tag": "caution"
     },
     {
@@ -188407,32 +188668,32 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 145.0,
+          "price": 150.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 145.0,
+          "price": 150.0,
           "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 145.0,
-          "offshore": true
         },
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 140.0,
+          "price": 150.0,
+          "offshore": true
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 150.0,
           "offshore": true
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 200.0,
-      "dk_price": 145.0,
+      "dk_price": 150.0,
       "market_implied": 0.3333,
       "team": "BYU",
       "role": "Main receiver",
@@ -188443,7 +188704,7 @@
       "model_prob": 0.3779,
       "fair_odds": 165,
       "edge_best": 13.4,
-      "edge_dk": -7.4
+      "edge_dk": -5.5
     },
     {
       "fixture_id": "208e919ada4f5cf6d27af719879d1880",
@@ -188490,40 +188751,40 @@
       "player_name": "Kaden Feagin",
       "books": [
         {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 700.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 700.0,
-          "offshore": false
-        },
-        {
           "book": "fanduel",
           "label": "FanDuel",
           "price": 700.0,
           "offshore": false
         },
         {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 650.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 650.0,
+          "offshore": false
+        },
+        {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 700.0,
+          "price": 650.0,
           "offshore": true
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 700.0,
+          "price": 625.0,
           "offshore": true
         }
       ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
       "best_price": 700.0,
-      "dk_price": 700.0,
+      "dk_price": 650.0,
       "market_implied": 0.125,
       "team": "Illinois",
       "role": "Minor role",
@@ -188534,7 +188795,7 @@
       "model_prob": 0.1413,
       "fair_odds": 608,
       "edge_best": 13.0,
-      "edge_dk": 13.0,
+      "edge_dk": 5.9,
       "tag": "longshot"
     },
     {
@@ -189374,19 +189635,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 285.0,
+          "price": 265.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 285.0,
+          "price": 265.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 285.0,
+          "price": 265.0,
           "offshore": true
         },
         {
@@ -189399,7 +189660,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 370.0,
-      "dk_price": 285.0,
+      "dk_price": 265.0,
       "market_implied": 0.2128,
       "team": "SMU",
       "role": "Minor role",
@@ -189410,7 +189671,7 @@
       "model_prob": 0.2343,
       "fair_odds": 327,
       "edge_best": 10.1,
-      "edge_dk": -9.8,
+      "edge_dk": -14.5,
       "tag": "longshot"
     },
     {
@@ -189587,43 +189848,6 @@
       "tag": "longshot"
     },
     {
-      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
-      "start_time": "2026-11-07T23:15:00Z",
-      "home_team": "Tennessee Volunteers",
-      "away_team": "Kentucky Wildcats",
-      "player_name": "Mikkel Skinner",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 700.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 700.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 700.0,
-      "dk_price": null,
-      "market_implied": 0.125,
-      "team": "Kentucky",
-      "role": "Minor role",
-      "opponent": "Tennessee",
-      "games_played": 5,
-      "rush_td_proj": 0.055,
-      "rec_td_proj": 0.091,
-      "model_prob": 0.136,
-      "fair_odds": 635,
-      "edge_best": 8.8,
-      "edge_dk": null,
-      "tag": "longshot"
-    },
-    {
       "fixture_id": "208e919ada4f5cf6d27af719879d1880",
       "start_time": "2026-11-07T20:00:00Z",
       "home_team": "South Carolina Gamecocks",
@@ -189766,19 +189990,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 390.0,
+          "price": 380.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 390.0,
+          "price": 380.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 390.0,
+          "price": 380.0,
           "offshore": true
         },
         {
@@ -189791,7 +190015,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 430.0,
-      "dk_price": 390.0,
+      "dk_price": 380.0,
       "market_implied": 0.1887,
       "team": "Utah",
       "role": "Backup RB",
@@ -189802,7 +190026,7 @@
       "model_prob": 0.2041,
       "fair_odds": 390,
       "edge_best": 8.2,
-      "edge_dk": -0.0,
+      "edge_dk": -2.0,
       "tag": "longshot"
     },
     {
@@ -190212,32 +190436,32 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 140.0,
+          "price": 135.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 140.0,
+          "price": 135.0,
           "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 140.0,
-          "offshore": true
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 140.0,
+          "price": 135.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 130.0,
           "offshore": true
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 160.0,
-      "dk_price": 140.0,
+      "dk_price": 135.0,
       "market_implied": 0.3846,
       "team": "Virginia Tech",
       "role": "Main receiver",
@@ -190248,7 +190472,7 @@
       "model_prob": 0.4033,
       "fair_odds": 148,
       "edge_best": 4.9,
-      "edge_dk": -3.2
+      "edge_dk": -5.2
     },
     {
       "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
@@ -190266,19 +190490,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 210.0,
+          "price": 200.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 210.0,
+          "price": 200.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 210.0,
+          "price": 200.0,
           "offshore": true
         },
         {
@@ -190297,7 +190521,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 310.0,
-      "dk_price": 210.0,
+      "dk_price": 200.0,
       "market_implied": 0.2439,
       "team": "Utah",
       "role": "Backup RB",
@@ -190308,7 +190532,7 @@
       "model_prob": 0.2559,
       "fair_odds": 291,
       "edge_best": 4.9,
-      "edge_dk": -20.7,
+      "edge_dk": -23.2,
       "tag": "longshot"
     },
     {
@@ -190408,60 +190632,6 @@
       "edge_best": 4.6,
       "edge_dk": -14.4,
       "tag": "longshot"
-    },
-    {
-      "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
-      "start_time": "2026-11-07T00:00:00Z",
-      "home_team": "SMU Mustangs",
-      "away_team": "Virginia Tech Hokies",
-      "player_name": "Yannick Smith",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 240.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 240.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 240.0,
-          "offshore": true
-        },
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 230.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 230.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 240.0,
-      "dk_price": 240.0,
-      "market_implied": 0.2941,
-      "team": "SMU",
-      "role": "Main receiver",
-      "opponent": "Virginia Tech",
-      "games_played": 7,
-      "rush_td_proj": 0.002,
-      "rec_td_proj": 0.364,
-      "model_prob": 0.3061,
-      "fair_odds": 227,
-      "edge_best": 4.1,
-      "edge_dk": 4.1
     },
     {
       "fixture_id": "722ed661705df150a38e7786949ce241",
@@ -190812,110 +190982,6 @@
       "edge_dk": -15.8
     },
     {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
-      "home_team": "Utah Utes",
-      "away_team": "BYU Cougars",
-      "player_name": "Preston Rex",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 370.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 370.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 370.0,
-          "offshore": true
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 350.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 370.0,
-      "dk_price": 370.0,
-      "market_implied": 0.2128,
-      "team": "BYU",
-      "role": "Backup RB",
-      "opponent": "Utah",
-      "games_played": 7,
-      "rush_td_proj": 0.198,
-      "rec_td_proj": 0.049,
-      "model_prob": 0.219,
-      "fair_odds": 357,
-      "edge_best": 2.9,
-      "edge_dk": 2.9,
-      "tag": "longshot"
-    },
-    {
-      "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
-      "start_time": "2026-11-07T00:00:00Z",
-      "home_team": "SMU Mustangs",
-      "away_team": "Virginia Tech Hokies",
-      "player_name": "Ayden Greene",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 380.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 370.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 370.0,
-          "offshore": true
-        },
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 320.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 300.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 380.0,
-      "dk_price": 380.0,
-      "market_implied": 0.2083,
-      "team": "Virginia Tech",
-      "role": "Minor role",
-      "opponent": "SMU",
-      "games_played": 7,
-      "rush_td_proj": 0.001,
-      "rec_td_proj": 0.24,
-      "model_prob": 0.2141,
-      "fair_odds": 367,
-      "edge_best": 2.8,
-      "edge_dk": 2.8,
-      "tag": "longshot"
-    },
-    {
       "fixture_id": "59047d3be974c2ec05c7e6282752287b",
       "start_time": "2026-11-07T01:00:00Z",
       "home_team": "Illinois Fighting Illini",
@@ -190931,24 +190997,24 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 100.0,
+          "price": 105.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 100.0,
+          "price": 105.0,
           "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 100.0,
-          "offshore": true
         },
         {
           "book": "bovada",
           "label": "Bovada",
+          "price": 105.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
           "price": 100.0,
           "offshore": true
         }
@@ -190956,7 +191022,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 140.0,
-      "dk_price": 100.0,
+      "dk_price": 105.0,
       "market_implied": 0.4167,
       "team": "Nebraska",
       "role": "Lead RB",
@@ -190967,7 +191033,7 @@
       "model_prob": 0.4282,
       "fair_odds": 134,
       "edge_best": 2.8,
-      "edge_dk": -14.4,
+      "edge_dk": -12.2,
       "injury_status": "Questionable",
       "tag": "caution"
     },
@@ -191393,34 +191459,34 @@
           "offshore": false
         },
         {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 150.0,
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 165.0,
           "offshore": false
         },
         {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 145.0,
+          "book": "courtside",
+          "label": "courtside",
+          "price": 165.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 145.0,
+          "price": 165.0,
           "offshore": true
         },
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 140.0,
+          "price": 150.0,
           "offshore": true
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 230.0,
-      "dk_price": 145.0,
+      "dk_price": 165.0,
       "market_implied": 0.303,
       "team": "Virginia Tech",
       "role": "QB",
@@ -191431,7 +191497,7 @@
       "model_prob": 0.3092,
       "fair_odds": 223,
       "edge_best": 2.0,
-      "edge_dk": -24.3,
+      "edge_dk": -18.1,
       "tag": "caution"
     },
     {
@@ -191639,32 +191705,32 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 140.0,
+          "price": 120.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 140.0,
+          "price": 120.0,
           "offshore": false
         },
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 140.0,
+          "price": 120.0,
           "offshore": true
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 140.0,
+          "price": 120.0,
           "offshore": true
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 200.0,
-      "dk_price": 140.0,
+      "dk_price": 120.0,
       "market_implied": 0.3333,
       "team": "SMU",
       "role": "Main receiver",
@@ -191675,7 +191741,7 @@
       "model_prob": 0.3388,
       "fair_odds": 195,
       "edge_best": 1.6,
-      "edge_dk": -18.7
+      "edge_dk": -25.5
     },
     {
       "fixture_id": "4aac00e6cc06b8905659f911419540d2",
@@ -191890,6 +191956,109 @@
       "edge_best": 1.3,
       "edge_dk": null,
       "injury_status": "Questionable"
+    },
+    {
+      "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
+      "start_time": "2026-11-07T00:00:00Z",
+      "home_team": "SMU Mustangs",
+      "away_team": "Virginia Tech Hokies",
+      "player_name": "Yannick Smith",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 230.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 215.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 215.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 215.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 210.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 230.0,
+      "dk_price": 215.0,
+      "market_implied": 0.303,
+      "team": "SMU",
+      "role": "Main receiver",
+      "opponent": "Virginia Tech",
+      "games_played": 7,
+      "rush_td_proj": 0.002,
+      "rec_td_proj": 0.364,
+      "model_prob": 0.3061,
+      "fair_odds": 227,
+      "edge_best": 1.0,
+      "edge_dk": -3.6
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "home_team": "Utah Utes",
+      "away_team": "BYU Cougars",
+      "player_name": "Preston Rex",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 360.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 360.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 360.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 350.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": 360.0,
+      "dk_price": 360.0,
+      "market_implied": 0.2174,
+      "team": "BYU",
+      "role": "Backup RB",
+      "opponent": "Utah",
+      "games_played": 7,
+      "rush_td_proj": 0.198,
+      "rec_td_proj": 0.049,
+      "model_prob": 0.219,
+      "fair_odds": 357,
+      "edge_best": 0.7,
+      "edge_dk": 0.7,
+      "tag": "longshot"
     },
     {
       "fixture_id": "c0ddb68355a79fb70194e95b75c037ca",
@@ -192356,6 +192525,61 @@
       "tag": "caution"
     },
     {
+      "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
+      "start_time": "2026-11-07T00:00:00Z",
+      "home_team": "SMU Mustangs",
+      "away_team": "Virginia Tech Hokies",
+      "player_name": "Ayden Greene",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 360.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 360.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 360.0,
+          "offshore": true
+        },
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 320.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 300.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": 360.0,
+      "dk_price": 360.0,
+      "market_implied": 0.2174,
+      "team": "Virginia Tech",
+      "role": "Minor role",
+      "opponent": "SMU",
+      "games_played": 7,
+      "rush_td_proj": 0.001,
+      "rec_td_proj": 0.24,
+      "model_prob": 0.2141,
+      "fair_odds": 367,
+      "edge_best": -1.5,
+      "edge_dk": -1.5,
+      "tag": "longshot"
+    },
+    {
       "fixture_id": "c2784b24d84fa71e7368fd775914c37d",
       "start_time": "2026-11-07T20:30:00Z",
       "home_team": "Ohio State Buckeyes",
@@ -192626,32 +192850,32 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 240.0,
+          "price": 200.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 240.0,
+          "price": 200.0,
           "offshore": false
         },
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 240.0,
+          "price": 200.0,
           "offshore": true
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 240.0,
+          "price": 200.0,
           "offshore": true
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 270.0,
-      "dk_price": 240.0,
+      "dk_price": 200.0,
       "market_implied": 0.2703,
       "team": "SMU",
       "role": "Main receiver",
@@ -192662,7 +192886,7 @@
       "model_prob": 0.2634,
       "fair_odds": 280,
       "edge_best": -2.5,
-      "edge_dk": -10.4
+      "edge_dk": -21.0
     },
     {
       "fixture_id": "5172093e8533ea39f59c5d2c63c743b9",
@@ -192994,6 +193218,67 @@
       "injury_status": "Questionable"
     },
     {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "home_team": "Utah Utes",
+      "away_team": "BYU Cougars",
+      "player_name": "Wayshawn Parker",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": -150.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": -150.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": -152.0,
+          "offshore": true
+        },
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": -165.0,
+          "offshore": false
+        },
+        {
+          "book": "fliff",
+          "label": "Fliff",
+          "price": -170.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": -200.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": -150.0,
+      "dk_price": -150.0,
+      "market_implied": 0.6,
+      "team": "Utah",
+      "role": "Lead RB",
+      "opponent": "BYU",
+      "games_played": 8,
+      "rush_td_proj": 0.654,
+      "rec_td_proj": 0.217,
+      "model_prob": 0.5816,
+      "fair_odds": -139,
+      "edge_best": -3.1,
+      "edge_dk": -3.1,
+      "tag": "caution"
+    },
+    {
       "fixture_id": "0842fcd69fdf5061f6751f876ead09f2",
       "start_time": "2026-11-08T00:30:00Z",
       "home_team": "Ole Miss Rebels",
@@ -193279,67 +193564,6 @@
       "edge_best": -4.0,
       "edge_dk": null,
       "injury_status": "Questionable",
-      "tag": "caution"
-    },
-    {
-      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
-      "start_time": "2026-11-07T17:00:00Z",
-      "home_team": "Utah Utes",
-      "away_team": "BYU Cougars",
-      "player_name": "Wayshawn Parker",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": -155.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": -155.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": -157.0,
-          "offshore": true
-        },
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": -165.0,
-          "offshore": false
-        },
-        {
-          "book": "fliff",
-          "label": "Fliff",
-          "price": -170.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": -200.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": -155.0,
-      "dk_price": -155.0,
-      "market_implied": 0.6078,
-      "team": "Utah",
-      "role": "Lead RB",
-      "opponent": "BYU",
-      "games_played": 8,
-      "rush_td_proj": 0.654,
-      "rec_td_proj": 0.217,
-      "model_prob": 0.5816,
-      "fair_odds": -139,
-      "edge_best": -4.3,
-      "edge_dk": -4.3,
       "tag": "caution"
     },
     {
@@ -195501,32 +195725,32 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 220.0,
+          "price": 195.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 220.0,
+          "price": 195.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 220.0,
+          "price": 195.0,
           "offshore": true
         },
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": 200.0,
+          "price": 190.0,
           "offshore": true
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 260.0,
-      "dk_price": 220.0,
+      "dk_price": 195.0,
       "market_implied": 0.2778,
       "team": "SMU",
       "role": "Minor role",
@@ -195537,7 +195761,7 @@
       "model_prob": 0.2517,
       "fair_odds": 297,
       "edge_best": -9.4,
-      "edge_dk": -19.4,
+      "edge_dk": -25.7,
       "tag": "longshot"
     },
     {
@@ -195562,19 +195786,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 280.0,
+          "price": 270.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 280.0,
+          "price": 270.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 280.0,
+          "price": 270.0,
           "offshore": true
         },
         {
@@ -195587,7 +195811,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 350.0,
-      "dk_price": 280.0,
+      "dk_price": 270.0,
       "market_implied": 0.2222,
       "team": "Utah",
       "role": "Minor role",
@@ -195598,7 +195822,7 @@
       "model_prob": 0.2013,
       "fair_odds": 397,
       "edge_best": -9.4,
-      "edge_dk": -23.5,
+      "edge_dk": -25.5,
       "tag": "longshot"
     },
     {
@@ -195861,43 +196085,6 @@
       "tag": "caution"
     },
     {
-      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
-      "start_time": "2026-11-07T23:15:00Z",
-      "home_team": "Tennessee Volunteers",
-      "away_team": "Kentucky Wildcats",
-      "player_name": "Javin Gordon",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 280.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 270.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 280.0,
-      "dk_price": null,
-      "market_implied": 0.2632,
-      "team": "Tennessee",
-      "role": "Backup RB",
-      "opponent": "Kentucky",
-      "games_played": 4,
-      "rush_td_proj": 0.216,
-      "rec_td_proj": 0.051,
-      "model_prob": 0.2341,
-      "fair_odds": 327,
-      "edge_best": -11.0,
-      "edge_dk": null,
-      "tag": "longshot"
-    },
-    {
       "fixture_id": "18f974d07f56507b33b9e50119c88e28",
       "start_time": "2026-11-07T20:30:00Z",
       "home_team": "Houston Cougars",
@@ -196114,6 +196301,61 @@
       "tag": "caution"
     },
     {
+      "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
+      "start_time": "2026-11-07T00:00:00Z",
+      "home_team": "SMU Mustangs",
+      "away_team": "Virginia Tech Hokies",
+      "player_name": "Kendrick Raphael",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": -235.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": -235.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": -240.0,
+          "offshore": true
+        },
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": -270.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": -500.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": -235.0,
+      "dk_price": -235.0,
+      "market_implied": 0.7015,
+      "team": "SMU",
+      "role": "Lead RB",
+      "opponent": "Virginia Tech",
+      "games_played": 8,
+      "rush_td_proj": 0.884,
+      "rec_td_proj": 0.081,
+      "model_prob": 0.6191,
+      "fair_odds": -163,
+      "edge_best": -11.7,
+      "edge_dk": -11.7,
+      "tag": "caution"
+    },
+    {
       "fixture_id": "5172093e8533ea39f59c5d2c63c743b9",
       "start_time": "2026-11-07T00:30:00Z",
       "home_team": "East Carolina Pirates",
@@ -196300,19 +196542,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 205.0,
+          "price": 220.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 205.0,
+          "price": 220.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 205.0,
+          "price": 220.0,
           "offshore": true
         },
         {
@@ -196325,7 +196567,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 270.0,
-      "dk_price": 205.0,
+      "dk_price": 220.0,
       "market_implied": 0.2703,
       "team": "Nebraska",
       "role": "Backup RB",
@@ -196336,7 +196578,7 @@
       "model_prob": 0.2362,
       "fair_odds": 323,
       "edge_best": -12.6,
-      "edge_dk": -28.0,
+      "edge_dk": -24.4,
       "injury_status": "Out",
       "tag": "longshot"
     },
@@ -196898,19 +197140,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 105.0,
+          "price": 110.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 105.0,
+          "price": 110.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 105.0,
+          "price": 110.0,
           "offshore": true
         },
         {
@@ -196923,7 +197165,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 115.0,
-      "dk_price": 105.0,
+      "dk_price": 110.0,
       "market_implied": 0.4651,
       "team": "Nebraska",
       "role": "QB",
@@ -196934,8 +197176,45 @@
       "model_prob": 0.4027,
       "fair_odds": 148,
       "edge_best": -13.4,
-      "edge_dk": -17.5,
+      "edge_dk": -15.4,
       "tag": "caution"
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "home_team": "Tennessee Volunteers",
+      "away_team": "Kentucky Wildcats",
+      "player_name": "Javin Gordon",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 270.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 270.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 270.0,
+      "dk_price": null,
+      "market_implied": 0.2703,
+      "team": "Tennessee",
+      "role": "Backup RB",
+      "opponent": "Kentucky",
+      "games_played": 4,
+      "rush_td_proj": 0.216,
+      "rec_td_proj": 0.051,
+      "model_prob": 0.2341,
+      "fair_odds": 327,
+      "edge_best": -13.4,
+      "edge_dk": null,
+      "tag": "longshot"
     },
     {
       "fixture_id": "eca05dc53fc3a8dd74622a4b7657bc3b",
@@ -197332,6 +197611,55 @@
       "tag": "caution"
     },
     {
+      "fixture_id": "c93b343bc3151a39a9541c0af3b22123",
+      "start_time": "2026-11-06T01:00:00Z",
+      "home_team": "Southern Mississippi Golden Eagles",
+      "away_team": "James Madison Dukes",
+      "player_name": "Cole Keller",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 180.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 180.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 180.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 160.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": 180.0,
+      "dk_price": 180.0,
+      "market_implied": 0.3571,
+      "team": "James Madison",
+      "role": "Minor role",
+      "opponent": "Southern Miss",
+      "games_played": 9,
+      "rush_td_proj": 0.007,
+      "rec_td_proj": 0.356,
+      "model_prob": 0.3045,
+      "fair_odds": 228,
+      "edge_best": -14.7,
+      "edge_dk": -14.7,
+      "tag": "longshot"
+    },
+    {
       "fixture_id": "5af84fe49ccd4f304f9af0dce0a0db56",
       "start_time": "2026-11-06T00:30:00Z",
       "home_team": "Florida Atlantic Owls",
@@ -197480,32 +197808,32 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": -145.0,
+          "price": -130.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": -145.0,
+          "price": -130.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": -148.0,
+          "price": -132.0,
           "offshore": true
         },
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": -167.0,
+          "price": -143.0,
           "offshore": true
         }
       ],
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": -125.0,
-      "dk_price": -145.0,
+      "dk_price": -130.0,
       "market_implied": 0.5556,
       "team": "Virginia Tech",
       "role": "Lead RB",
@@ -197516,7 +197844,7 @@
       "model_prob": 0.4716,
       "fair_odds": 112,
       "edge_best": -15.1,
-      "edge_dk": -20.3,
+      "edge_dk": -16.6,
       "tag": "caution"
     },
     {
@@ -197548,61 +197876,6 @@
       "fair_odds": 159,
       "edge_best": -15.1,
       "edge_dk": null
-    },
-    {
-      "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
-      "start_time": "2026-11-07T00:00:00Z",
-      "home_team": "SMU Mustangs",
-      "away_team": "Virginia Tech Hokies",
-      "player_name": "Kendrick Raphael",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": -270.0,
-          "offshore": false
-        },
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": -290.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": -290.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": -295.0,
-          "offshore": true
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": -500.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": -270.0,
-      "dk_price": -290.0,
-      "market_implied": 0.7297,
-      "team": "SMU",
-      "role": "Lead RB",
-      "opponent": "Virginia Tech",
-      "games_played": 8,
-      "rush_td_proj": 0.884,
-      "rec_td_proj": 0.081,
-      "model_prob": 0.6191,
-      "fair_odds": -163,
-      "edge_best": -15.2,
-      "edge_dk": -16.7,
-      "tag": "caution"
     },
     {
       "fixture_id": "4aac00e6cc06b8905659f911419540d2",
@@ -197773,26 +198046,26 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 100.0,
+          "price": -105.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 100.0,
+          "price": -105.0,
           "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 100.0,
-          "offshore": true
         },
         {
           "book": "fanduel",
           "label": "FanDuel",
           "price": -110.0,
           "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": -110.0,
+          "offshore": true
         },
         {
           "book": "betonlineag",
@@ -197804,7 +198077,7 @@
       "best_book": "fliff",
       "best_book_label": "Fliff",
       "best_price": 110.0,
-      "dk_price": 100.0,
+      "dk_price": -105.0,
       "market_implied": 0.4762,
       "team": "BYU",
       "role": "QB",
@@ -197815,7 +198088,7 @@
       "model_prob": 0.402,
       "fair_odds": 149,
       "edge_best": -15.6,
-      "edge_dk": -19.6,
+      "edge_dk": -21.5,
       "tag": "caution"
     },
     {
@@ -197849,6 +198122,42 @@
       "edge_dk": null,
       "injury_status": "Questionable",
       "tag": "caution"
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "home_team": "Tennessee Volunteers",
+      "away_team": "Kentucky Wildcats",
+      "player_name": "Willie Rodriguez",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 220.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 190.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 220.0,
+      "dk_price": null,
+      "market_implied": 0.3125,
+      "team": "Kentucky",
+      "role": "Main receiver",
+      "opponent": "Tennessee",
+      "games_played": 8,
+      "rush_td_proj": 0.008,
+      "rec_td_proj": 0.298,
+      "model_prob": 0.2638,
+      "fair_odds": 279,
+      "edge_best": -15.6,
+      "edge_dk": null
     },
     {
       "fixture_id": "6ce85b1067e9e85cd0d8b3242905ecd7",
@@ -197897,19 +198206,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": -115.0,
+          "price": -120.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": -115.0,
+          "price": -120.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": -117.0,
+          "price": -122.0,
           "offshore": true
         },
         {
@@ -197922,7 +198231,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 150.0,
-      "dk_price": -115.0,
+      "dk_price": -120.0,
       "market_implied": 0.4,
       "team": "Virginia Tech",
       "role": "Main receiver",
@@ -197933,7 +198242,7 @@
       "model_prob": 0.3359,
       "fair_odds": 198,
       "edge_best": -16.0,
-      "edge_dk": -37.2
+      "edge_dk": -38.4
     },
     {
       "fixture_id": "722ed661705df150a38e7786949ce241",
@@ -197991,55 +198300,6 @@
       "tag": "caution"
     },
     {
-      "fixture_id": "c93b343bc3151a39a9541c0af3b22123",
-      "start_time": "2026-11-06T01:00:00Z",
-      "home_team": "Southern Mississippi Golden Eagles",
-      "away_team": "James Madison Dukes",
-      "player_name": "Cole Keller",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 175.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 175.0,
-          "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 175.0,
-          "offshore": true
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 160.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 175.0,
-      "dk_price": 175.0,
-      "market_implied": 0.3636,
-      "team": "James Madison",
-      "role": "Minor role",
-      "opponent": "Southern Miss",
-      "games_played": 9,
-      "rush_td_proj": 0.007,
-      "rec_td_proj": 0.356,
-      "model_prob": 0.3045,
-      "fair_odds": 228,
-      "edge_best": -16.3,
-      "edge_dk": -16.3,
-      "tag": "longshot"
-    },
-    {
       "fixture_id": "d4334cec8f2060f3b8491ca9c7325892",
       "start_time": "2026-11-08T03:30:00Z",
       "home_team": "Oregon State Beavers",
@@ -198086,24 +198346,24 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": -120.0,
+          "price": -125.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": -120.0,
+          "price": -125.0,
           "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": -122.0,
-          "offshore": true
         },
         {
           "book": "betonlineag",
           "label": "BetOnline",
+          "price": -125.0,
+          "offshore": true
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
           "price": -125.0,
           "offshore": true
         }
@@ -198111,7 +198371,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 105.0,
-      "dk_price": -120.0,
+      "dk_price": -125.0,
       "market_implied": 0.4878,
       "team": "Illinois",
       "role": "Main receiver",
@@ -198122,7 +198382,7 @@
       "model_prob": 0.407,
       "fair_odds": 146,
       "edge_best": -16.6,
-      "edge_dk": -25.4
+      "edge_dk": -26.7
     },
     {
       "fixture_id": "5af84fe49ccd4f304f9af0dce0a0db56",
@@ -198288,26 +198548,26 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 105.0,
+          "price": 110.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 105.0,
+          "price": 110.0,
           "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 110.0,
+          "offshore": true
         },
         {
           "book": "fliff",
           "label": "Fliff",
           "price": 105.0,
           "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 105.0,
-          "offshore": true
         },
         {
           "book": "betonlineag",
@@ -198319,7 +198579,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 145.0,
-      "dk_price": 105.0,
+      "dk_price": 110.0,
       "market_implied": 0.4082,
       "team": "Utah",
       "role": "Main receiver",
@@ -198330,7 +198590,7 @@
       "model_prob": 0.339,
       "fair_odds": 195,
       "edge_best": -16.9,
-      "edge_dk": -30.5
+      "edge_dk": -28.8
     },
     {
       "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
@@ -198929,19 +199189,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 105.0,
+          "price": 115.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 105.0,
+          "price": 115.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 105.0,
+          "price": 115.0,
           "offshore": true
         },
         {
@@ -198954,7 +199214,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 140.0,
-      "dk_price": 105.0,
+      "dk_price": 115.0,
       "market_implied": 0.4167,
       "team": "Virginia Tech",
       "role": "Lead RB",
@@ -198965,7 +199225,7 @@
       "model_prob": 0.3416,
       "fair_odds": 193,
       "edge_best": -18.0,
-      "edge_dk": -30.0,
+      "edge_dk": -26.6,
       "tag": "caution"
     },
     {
@@ -199027,42 +199287,6 @@
       "model_prob": 0.3413,
       "fair_odds": 193,
       "edge_best": -18.1,
-      "edge_dk": null
-    },
-    {
-      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
-      "start_time": "2026-11-07T23:15:00Z",
-      "home_team": "Tennessee Volunteers",
-      "away_team": "Kentucky Wildcats",
-      "player_name": "Willie Rodriguez",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 210.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 190.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 210.0,
-      "dk_price": null,
-      "market_implied": 0.3226,
-      "team": "Kentucky",
-      "role": "Main receiver",
-      "opponent": "Tennessee",
-      "games_played": 8,
-      "rush_td_proj": 0.008,
-      "rec_td_proj": 0.298,
-      "model_prob": 0.2638,
-      "fair_odds": 279,
-      "edge_best": -18.2,
       "edge_dk": null
     },
     {
@@ -199135,24 +199359,24 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 280.0,
+          "price": 285.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 280.0,
+          "price": 285.0,
           "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 280.0,
-          "offshore": true
         },
         {
           "book": "bovada",
           "label": "Bovada",
+          "price": 285.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
           "price": 280.0,
           "offshore": true
         }
@@ -199160,7 +199384,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 320.0,
-      "dk_price": 280.0,
+      "dk_price": 285.0,
       "market_implied": 0.2381,
       "team": "BYU",
       "role": "Main receiver",
@@ -199171,7 +199395,7 @@
       "model_prob": 0.1941,
       "fair_odds": 415,
       "edge_best": -18.5,
-      "edge_dk": -26.2
+      "edge_dk": -25.3
     },
     {
       "fixture_id": "eca05dc53fc3a8dd74622a4b7657bc3b",
@@ -200693,19 +200917,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 340.0,
+          "price": 330.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 340.0,
+          "price": 330.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 340.0,
+          "price": 330.0,
           "offshore": true
         },
         {
@@ -200718,7 +200942,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 380.0,
-      "dk_price": 340.0,
+      "dk_price": 330.0,
       "market_implied": 0.2083,
       "team": "Nebraska",
       "role": "Minor role",
@@ -200729,7 +200953,7 @@
       "model_prob": 0.1621,
       "fair_odds": 517,
       "edge_best": -22.2,
-      "edge_dk": -28.7,
+      "edge_dk": -30.3,
       "tag": "longshot"
     },
     {
@@ -201127,6 +201351,55 @@
       "tag": "longshot"
     },
     {
+      "fixture_id": "45fdbdbe6ed3d9922fa8b26b8a885f0e",
+      "start_time": "2026-11-07T02:00:00Z",
+      "home_team": "Nevada Wolf Pack",
+      "away_team": "New Mexico Lobos",
+      "player_name": "Herschel Turner",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 205.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 205.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 205.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 200.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": 205.0,
+      "dk_price": 205.0,
+      "market_implied": 0.3279,
+      "team": "Nevada",
+      "role": "Lead RB",
+      "opponent": "New Mexico",
+      "games_played": 8,
+      "rush_td_proj": 0.241,
+      "rec_td_proj": 0.049,
+      "model_prob": 0.2514,
+      "fair_odds": 298,
+      "edge_best": -23.3,
+      "edge_dk": -23.3,
+      "tag": "caution"
+    },
+    {
       "fixture_id": "c2784b24d84fa71e7368fd775914c37d",
       "start_time": "2026-11-07T20:30:00Z",
       "home_team": "Ohio State Buckeyes",
@@ -201345,6 +201618,43 @@
       "edge_best": -23.8,
       "edge_dk": null,
       "injury_status": "Questionable",
+      "tag": "caution"
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "home_team": "Tennessee Volunteers",
+      "away_team": "Kentucky Wildcats",
+      "player_name": "Kenny Minchey",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 280.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 260.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 280.0,
+      "dk_price": null,
+      "market_implied": 0.2632,
+      "team": "Kentucky",
+      "role": "QB",
+      "opponent": "Tennessee",
+      "games_played": 8,
+      "rush_td_proj": 0.221,
+      "rec_td_proj": 0.003,
+      "model_prob": 0.2006,
+      "fair_odds": 399,
+      "edge_best": -23.8,
+      "edge_dk": null,
       "tag": "caution"
     },
     {
@@ -201686,55 +201996,6 @@
       "tag": "longshot"
     },
     {
-      "fixture_id": "45fdbdbe6ed3d9922fa8b26b8a885f0e",
-      "start_time": "2026-11-07T02:00:00Z",
-      "home_team": "Nevada Wolf Pack",
-      "away_team": "New Mexico Lobos",
-      "player_name": "Herschel Turner",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 200.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 200.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 200.0,
-          "offshore": true
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 200.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 200.0,
-      "dk_price": 200.0,
-      "market_implied": 0.3333,
-      "team": "Nevada",
-      "role": "Lead RB",
-      "opponent": "New Mexico",
-      "games_played": 8,
-      "rush_td_proj": 0.241,
-      "rec_td_proj": 0.049,
-      "model_prob": 0.2514,
-      "fair_odds": 298,
-      "edge_best": -24.6,
-      "edge_dk": -24.6,
-      "tag": "caution"
-    },
-    {
       "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
       "start_time": "2026-11-07T23:15:00Z",
       "home_team": "Tennessee Volunteers",
@@ -201884,19 +202145,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 225.0,
+          "price": 210.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 225.0,
+          "price": 210.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 225.0,
+          "price": 210.0,
           "offshore": true
         },
         {
@@ -201909,7 +202170,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 260.0,
-      "dk_price": 225.0,
+      "dk_price": 210.0,
       "market_implied": 0.2778,
       "team": "Nebraska",
       "role": "Main receiver",
@@ -201920,7 +202181,7 @@
       "model_prob": 0.2073,
       "fair_odds": 382,
       "edge_best": -25.4,
-      "edge_dk": -32.6
+      "edge_dk": -35.7
     },
     {
       "fixture_id": "43a67a478177d0dc6ef141aacf2bfd2a",
@@ -201990,40 +202251,40 @@
       "player_name": "Aidan Laughery",
       "books": [
         {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": -105.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": -105.0,
+          "offshore": false
+        },
+        {
           "book": "fanduel",
           "label": "FanDuel",
           "price": -105.0,
           "offshore": false
         },
         {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": -115.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": -115.0,
-          "offshore": false
-        },
-        {
           "book": "bovada",
           "label": "Bovada",
-          "price": -117.0,
+          "price": -110.0,
           "offshore": true
         },
         {
           "book": "betonlineag",
           "label": "BetOnline",
-          "price": -125.0,
+          "price": -111.0,
           "offshore": true
         }
       ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
       "best_price": -105.0,
-      "dk_price": -115.0,
+      "dk_price": -105.0,
       "market_implied": 0.5122,
       "team": "Illinois",
       "role": "Lead RB",
@@ -202034,7 +202295,7 @@
       "model_prob": 0.3811,
       "fair_odds": 162,
       "edge_best": -25.6,
-      "edge_dk": -28.8,
+      "edge_dk": -25.6,
       "tag": "caution"
     },
     {
@@ -202068,43 +202329,6 @@
       "edge_dk": null,
       "injury_status": "Out",
       "tag": "longshot"
-    },
-    {
-      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
-      "start_time": "2026-11-07T23:15:00Z",
-      "home_team": "Tennessee Volunteers",
-      "away_team": "Kentucky Wildcats",
-      "player_name": "Kenny Minchey",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 270.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 260.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 270.0,
-      "dk_price": null,
-      "market_implied": 0.2703,
-      "team": "Kentucky",
-      "role": "QB",
-      "opponent": "Tennessee",
-      "games_played": 8,
-      "rush_td_proj": 0.221,
-      "rec_td_proj": 0.003,
-      "model_prob": 0.2006,
-      "fair_odds": 399,
-      "edge_best": -25.8,
-      "edge_dk": null,
-      "tag": "caution"
     },
     {
       "fixture_id": "b5f8faa111f5c25846fcfc22f1b664a1",
@@ -202720,6 +202944,54 @@
       "tag": "caution"
     },
     {
+      "fixture_id": "45fdbdbe6ed3d9922fa8b26b8a885f0e",
+      "start_time": "2026-11-07T02:00:00Z",
+      "home_team": "Nevada Wolf Pack",
+      "away_team": "New Mexico Lobos",
+      "player_name": "Gary Givens III",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 265.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 265.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 265.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 260.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": 265.0,
+      "dk_price": 265.0,
+      "market_implied": 0.274,
+      "team": "Nevada",
+      "role": "Main receiver",
+      "opponent": "New Mexico",
+      "games_played": 6,
+      "rush_td_proj": 0.0,
+      "rec_td_proj": 0.221,
+      "model_prob": 0.1984,
+      "fair_odds": 404,
+      "edge_best": -27.6,
+      "edge_dk": -27.6
+    },
+    {
       "fixture_id": "43a67a478177d0dc6ef141aacf2bfd2a",
       "start_time": "2026-11-07T17:00:00Z",
       "home_team": "Missouri Tigers",
@@ -202877,54 +203149,6 @@
       "edge_best": -28.5,
       "edge_dk": null,
       "tag": "longshot"
-    },
-    {
-      "fixture_id": "45fdbdbe6ed3d9922fa8b26b8a885f0e",
-      "start_time": "2026-11-07T02:00:00Z",
-      "home_team": "Nevada Wolf Pack",
-      "away_team": "New Mexico Lobos",
-      "player_name": "Gary Givens III",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 260.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 260.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 260.0,
-          "offshore": true
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 260.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 260.0,
-      "dk_price": 260.0,
-      "market_implied": 0.2778,
-      "team": "Nevada",
-      "role": "Main receiver",
-      "opponent": "New Mexico",
-      "games_played": 6,
-      "rush_td_proj": 0.0,
-      "rec_td_proj": 0.221,
-      "model_prob": 0.1984,
-      "fair_odds": 404,
-      "edge_best": -28.6,
-      "edge_dk": -28.6
     },
     {
       "fixture_id": "028ce5ee2c58281cf935f06edc90d671",
@@ -205441,19 +205665,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 210.0,
+          "price": 235.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 210.0,
+          "price": 235.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 210.0,
+          "price": 235.0,
           "offshore": true
         },
         {
@@ -205466,7 +205690,7 @@
       "best_book": "fanduel",
       "best_book_label": "FanDuel",
       "best_price": 260.0,
-      "dk_price": 210.0,
+      "dk_price": 235.0,
       "market_implied": 0.2778,
       "team": "Illinois",
       "role": "QB",
@@ -205477,7 +205701,7 @@
       "model_prob": 0.1723,
       "fair_odds": 480,
       "edge_best": -38.0,
-      "edge_dk": -46.6,
+      "edge_dk": -42.3,
       "tag": "caution"
     },
     {
@@ -207654,6 +207878,55 @@
       "edge_dk": null
     },
     {
+      "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
+      "start_time": "2026-11-07T00:00:00Z",
+      "home_team": "SMU Mustangs",
+      "away_team": "Virginia Tech Hokies",
+      "player_name": "Derrick McFall",
+      "books": [
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 160.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 160.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 160.0,
+          "offshore": true
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 160.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "draftkings",
+      "best_book_label": "DraftKings",
+      "best_price": 160.0,
+      "dk_price": 160.0,
+      "market_implied": 0.3846,
+      "team": "SMU",
+      "role": "Minor role",
+      "opponent": "Virginia Tech",
+      "games_played": 8,
+      "rush_td_proj": 0.077,
+      "rec_td_proj": 0.108,
+      "model_prob": 0.1693,
+      "fair_odds": 491,
+      "edge_best": -56.0,
+      "edge_dk": -56.0,
+      "tag": "longshot"
+    },
+    {
       "fixture_id": "b5f8faa111f5c25846fcfc22f1b664a1",
       "start_time": "2026-11-07T21:00:00Z",
       "home_team": "Florida International Panthers",
@@ -207719,55 +207992,6 @@
       "fair_odds": 368,
       "edge_best": -56.2,
       "edge_dk": null,
-      "tag": "longshot"
-    },
-    {
-      "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
-      "start_time": "2026-11-07T00:00:00Z",
-      "home_team": "SMU Mustangs",
-      "away_team": "Virginia Tech Hokies",
-      "player_name": "Derrick McFall",
-      "books": [
-        {
-          "book": "draftkings",
-          "label": "DraftKings",
-          "price": 140.0,
-          "offshore": false
-        },
-        {
-          "book": "courtside",
-          "label": "courtside",
-          "price": 140.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 140.0,
-          "offshore": true
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 140.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "draftkings",
-      "best_book_label": "DraftKings",
-      "best_price": 140.0,
-      "dk_price": 140.0,
-      "market_implied": 0.4167,
-      "team": "SMU",
-      "role": "Minor role",
-      "opponent": "Virginia Tech",
-      "games_played": 8,
-      "rush_td_proj": 0.077,
-      "rec_td_proj": 0.108,
-      "model_prob": 0.1693,
-      "fair_odds": 491,
-      "edge_best": -59.4,
-      "edge_dk": -59.4,
       "tag": "longshot"
     },
     {
@@ -207882,43 +208106,6 @@
       "tag": "caution"
     },
     {
-      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
-      "start_time": "2026-11-07T23:15:00Z",
-      "home_team": "Tennessee Volunteers",
-      "away_team": "Kentucky Wildcats",
-      "player_name": "George MacIntyre",
-      "books": [
-        {
-          "book": "fanduel",
-          "label": "FanDuel",
-          "price": 185.0,
-          "offshore": false
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 140.0,
-          "offshore": true
-        }
-      ],
-      "best_book": "fanduel",
-      "best_book_label": "FanDuel",
-      "best_price": 185.0,
-      "dk_price": null,
-      "market_implied": 0.3509,
-      "team": "Tennessee",
-      "role": "QB",
-      "opponent": "Kentucky",
-      "games_played": 6,
-      "rush_td_proj": 0.118,
-      "rec_td_proj": 0.008,
-      "model_prob": 0.1189,
-      "fair_odds": 741,
-      "edge_best": -66.1,
-      "edge_dk": null,
-      "tag": "caution"
-    },
-    {
       "fixture_id": "c2784b24d84fa71e7368fd775914c37d",
       "start_time": "2026-11-07T20:30:00Z",
       "home_team": "Ohio State Buckeyes",
@@ -207946,6 +208133,43 @@
       "model_prob": 0.1462,
       "fair_odds": 584,
       "edge_best": -66.4,
+      "edge_dk": null,
+      "tag": "caution"
+    },
+    {
+      "fixture_id": "72cab2217ae57cbb00928eab05eb244e",
+      "start_time": "2026-11-07T23:15:00Z",
+      "home_team": "Tennessee Volunteers",
+      "away_team": "Kentucky Wildcats",
+      "player_name": "George MacIntyre",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 180.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 140.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 180.0,
+      "dk_price": null,
+      "market_implied": 0.3571,
+      "team": "Tennessee",
+      "role": "QB",
+      "opponent": "Kentucky",
+      "games_played": 6,
+      "rush_td_proj": 0.118,
+      "rec_td_proj": 0.008,
+      "model_prob": 0.1189,
+      "fair_odds": 741,
+      "edge_best": -66.7,
       "edge_dk": null,
       "tag": "caution"
     },
@@ -208440,12 +208664,6 @@
           "offshore": false
         },
         {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 210.0,
-          "offshore": true
-        },
-        {
           "book": "draftkings",
           "label": "DraftKings",
           "price": 205.0,
@@ -208461,6 +208679,12 @@
           "book": "bovada",
           "label": "Bovada",
           "price": 205.0,
+          "offshore": true
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 200.0,
           "offshore": true
         }
       ],
@@ -208916,15 +209140,15 @@
           "offshore": false
         },
         {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 440.0,
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 450.0,
           "offshore": true
         },
         {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": 400.0,
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 440.0,
           "offshore": true
         }
       ],
@@ -210066,19 +210290,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 170.0,
+          "price": 145.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 170.0,
+          "price": 145.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 170.0,
+          "price": 145.0,
           "offshore": true
         },
         {
@@ -210096,9 +210320,9 @@
       ],
       "best_book": "draftkings",
       "best_book_label": "DraftKings",
-      "best_price": 170.0,
-      "dk_price": 170.0,
-      "market_implied": 0.3704
+      "best_price": 145.0,
+      "dk_price": 145.0,
+      "market_implied": 0.4082
     },
     {
       "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
@@ -210110,15 +210334,15 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 400.0,
+          "price": 450.0,
           "offshore": false
         }
       ],
       "best_book": "draftkings",
       "best_book_label": "DraftKings",
-      "best_price": 400.0,
-      "dk_price": 400.0,
-      "market_implied": 0.2
+      "best_price": 450.0,
+      "dk_price": 450.0,
+      "market_implied": 0.1818
     },
     {
       "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
@@ -210130,21 +210354,21 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 500.0,
+          "price": 550.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 500.0,
+          "price": 525.0,
           "offshore": true
         }
       ],
       "best_book": "draftkings",
       "best_book_label": "DraftKings",
-      "best_price": 500.0,
-      "dk_price": 500.0,
-      "market_implied": 0.1667
+      "best_price": 550.0,
+      "dk_price": 550.0,
+      "market_implied": 0.1538
     },
     {
       "fixture_id": "11da04c7d3fba48caf11a5d8b66b8ccd",
@@ -210402,19 +210626,19 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 270.0,
+          "price": 290.0,
           "offshore": false
         },
         {
           "book": "courtside",
           "label": "courtside",
-          "price": 270.0,
+          "price": 290.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 270.0,
+          "price": 290.0,
           "offshore": true
         },
         {
@@ -210432,9 +210656,9 @@
       ],
       "best_book": "draftkings",
       "best_book_label": "DraftKings",
-      "best_price": 270.0,
-      "dk_price": 270.0,
-      "market_implied": 0.2703
+      "best_price": 290.0,
+      "dk_price": 290.0,
+      "market_implied": 0.2564
     },
     {
       "fixture_id": "59047d3be974c2ec05c7e6282752287b",
@@ -210446,21 +210670,21 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 425.0,
+          "price": 450.0,
           "offshore": false
         },
         {
           "book": "bovada",
           "label": "Bovada",
-          "price": 420.0,
+          "price": 440.0,
           "offshore": true
         }
       ],
       "best_book": "draftkings",
       "best_book_label": "DraftKings",
-      "best_price": 425.0,
-      "dk_price": 425.0,
-      "market_implied": 0.1905
+      "best_price": 450.0,
+      "dk_price": 450.0,
+      "market_implied": 0.1818
     },
     {
       "fixture_id": "59047d3be974c2ec05c7e6282752287b",
@@ -210800,15 +211024,15 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 360.0,
+          "price": 350.0,
           "offshore": false
         }
       ],
       "best_book": "draftkings",
       "best_book_label": "DraftKings",
-      "best_price": 360.0,
-      "dk_price": 360.0,
-      "market_implied": 0.2174
+      "best_price": 350.0,
+      "dk_price": 350.0,
+      "market_implied": 0.2222
     },
     {
       "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
@@ -210820,21 +211044,15 @@
         {
           "book": "draftkings",
           "label": "DraftKings",
-          "price": 500.0,
+          "price": 475.0,
           "offshore": false
-        },
-        {
-          "book": "bovada",
-          "label": "Bovada",
-          "price": 500.0,
-          "offshore": true
         }
       ],
       "best_book": "draftkings",
       "best_book_label": "DraftKings",
-      "best_price": 500.0,
-      "dk_price": 500.0,
-      "market_implied": 0.1667
+      "best_price": 475.0,
+      "dk_price": 475.0,
+      "market_implied": 0.1739
     },
     {
       "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
@@ -217438,5 +217656,5 @@
       "note": "Hasselbeck has been out of commission due to knee injury, and he is likely to miss the remainder of the season."
     }
   ],
-  "injuries_as_of": "2026-11-03T15:52:48.077314+00:00"
+  "injuries_as_of": "2026-11-03T16:09:52.847917+00:00"
 }
