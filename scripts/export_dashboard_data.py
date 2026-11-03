@@ -1062,6 +1062,7 @@ def main(year: int):
 
     player_form = {}
     run_def_lookup = {}
+    team_matchup_out, team_matchup_meta = {}, {}
     player_game_logs = {}     # athleteId -> this season's games (box score), for the Props details panel
     prop_game_logs_out = {}   # "<athleteId>|<stat>" -> [[week, opponent, value], ...]
     opp_allowed_lookup = {}
@@ -1113,6 +1114,28 @@ def main(year: int):
                 grade_profiles, props_matchup_grades = defense_grades.live_profiles(
                     season_year, pool=set(teams_df["school"].dropna()) if "school" in teams_df.columns else None)
             print(f"  matchup grades: {props_matchup_grades}")
+            # Team-vs-team ranks for the Matchup Projector (11/2026). Never
+            # blocks the export; PFF categories drop out if PFF is down.
+            try:
+                from src.features import team_matchup as tmu
+                pff_frames = {}
+                try:
+                    pff_frames = tmu.fetch_pff_frames(season_year)
+                except Exception as e:
+                    print(f"  [note] team matchup: no PFF grades ({type(e).__name__})")
+                try:
+                    season_stats_df = cfbd.get_team_season_stats(season_year)
+                except Exception:
+                    season_stats_df = None
+                last = getattr(matchup_features, "LAST", {}) if matchup_features is not None else {}
+                team_matchup_out, team_matchup_meta, tm_status = tmu.build(
+                    season_year, adv=adv_stats_df, wide=last.get("wide") if last.get("wide") is not None else pivot_player_game_stats(player_stats_long_current, schedule_df),
+                    schedule=schedule_df, season_stats=season_stats_df, pff_frames=pff_frames, school_of=last.get("school") or {},
+                    pool=set(teams_df["school"].dropna()) if "school" in teams_df.columns else None,
+                    publish_pff=bool(getattr(config, "PUBLISH_PFF_NUMBERS", False)))
+                print(f"  {tm_status}")
+            except Exception as e:
+                print(f"  [warn] team matchup ranks not built ({type(e).__name__}: {e})")
             n_ready = sum(1 for v in player_form.values() if v["games_played_prior"] >= MIN_GAMES_FOR_PROP_MODEL)
             print(f"  {len(player_form)} player(s) matched to real {season_year} stats, "
                   f"{n_ready} of them already clear the {MIN_GAMES_FOR_PROP_MODEL}-game threshold")
@@ -1588,6 +1611,8 @@ def main(year: int):
         "props_receiving_inputs": props_receiving_inputs,
         "props_matchups": props_matchups,
         "props_matchup_grades": props_matchup_grades,
+        "team_matchup": team_matchup_out,
+        "team_matchup_meta": team_matchup_meta,
         "prop_market_catalog": prop_market_catalog,
         "fantasy": fantasy_out,
         "anytime_td": anytime_td_out,

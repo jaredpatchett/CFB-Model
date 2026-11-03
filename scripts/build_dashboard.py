@@ -258,6 +258,8 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
         games.append({
             "away": g["away_team"],
             "home": g["home_team"],
+            "awaySchool": g.get("away_school"),
+            "homeSchool": g.get("home_school"),
             "kickoff": fmt_kickoff(g.get("commence_time")),
             "kickoffIso": g.get("commence_time"),
             "book": book,
@@ -1499,6 +1501,45 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .mu-c span { font-family: var(--font-num); font-size: 11.5px; }
 .mu-c em { display: block; font-style: normal; font-size: 10px; color: var(--muted-3); }
 .mu-c.is-empty { color: var(--muted-4); font-size: 11px; }
+
+/* Team matchup */
+.tm-card { background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); padding: 14px 16px 12px; margin-top: 16px; }
+.tm-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center; }
+.tm-title { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+.tm-title svg { width: 16px; height: 16px; stroke: var(--neon); fill: none; stroke-width: 1.8; }
+.tm-title em { font-style: normal; font-weight: 600; font-size: 10.5px; letter-spacing: 0.02em; text-transform: none; color: var(--muted-3); }
+.tm-tabs { display: flex; gap: 4px; background: var(--chip); border-radius: 9px; padding: 3px; }
+.tm-tabs button { background: none; border: none; color: var(--muted); font-family: var(--font-body); font-weight: 700; font-size: 11.5px; padding: 6px 10px; border-radius: 7px; cursor: pointer; }
+.tm-tabs button.is-on { background: var(--neon); color: #04130A; }
+.tm-sum { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0 6px; }
+.tm-sum > div { background: var(--panel-deep); border: 1px solid var(--rule); border-radius: 9px; padding: 8px 10px; text-align: center; }
+.tm-sum b { display: block; font-size: 20px; font-weight: 800; }
+.tm-sum b.is-o { color: var(--neon); } .tm-sum b.is-d { color: #7FD8FF; }
+.tm-sum span { font-size: 10.5px; color: var(--muted-3); }
+.tm-row { display: grid; grid-template-columns: minmax(120px, 1.25fr) 92px minmax(70px, 1fr) 92px minmax(110px, 1.1fr) 52px; gap: 8px; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--rule-row); font-size: 12px; }
+.tm-headrow { border-bottom: 1px solid var(--rule); font-weight: 800; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+.tm-headrow .tm-lab { display: flex; align-items: center; gap: 6px; color: var(--text); }
+.tm-headrow .tm-lab.is-r { justify-content: flex-end; }
+.tm-group { font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--neon-dim); margin: 10px 0 2px; }
+.tm-lab { color: var(--text-dim); }
+.tm-lab.is-r { text-align: right; color: var(--muted); }
+.tm-src { font-size: 8.5px; font-weight: 800; letter-spacing: 0.06em; color: var(--muted-3); border: 1px solid var(--rule-strong); border-radius: 4px; padding: 0 4px; }
+.tm-v { display: flex; align-items: center; gap: 6px; font-family: var(--font-num); font-size: 11.5px; color: var(--muted); }
+.tm-v.is-r { justify-content: flex-end; }
+.tm-pill { font-family: var(--font-num); font-weight: 700; font-size: 11.5px; min-width: 40px; text-align: center; padding: 3px 5px; border-radius: 6px; background: var(--chip); color: var(--text); border: 1px solid var(--rule-strong); }
+.tm-pill.is-top { color: var(--neon); border-color: rgba(57,240,122,0.5); background: rgba(57,240,122,0.08); }
+.tm-pill.is-bot { color: var(--red); border-color: rgba(255,82,82,0.45); background: rgba(255,82,82,0.07); }
+.tm-pill.is-na { color: var(--muted-4); }
+.tm-bar { position: relative; height: 8px; background: #17201C; border-radius: 99px; }
+.tm-bar .tm-mid { position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px; background: var(--rule-strong); }
+.tm-bar b { position: absolute; top: 0; bottom: 0; border-radius: 99px; }
+.tm-bar b.is-o { background: linear-gradient(270deg, var(--neon), rgba(57,240,122,0.3)); }
+.tm-bar b.is-d { background: linear-gradient(90deg, #7FD8FF, rgba(127,216,255,0.3)); }
+.tm-e { text-align: right; }
+.tm-edge { font-size: 9.5px; font-weight: 800; letter-spacing: 0.06em; padding: 2px 6px; border-radius: 5px; color: var(--muted-3); border: 1px solid var(--rule-strong); }
+.tm-edge.is-o { color: var(--neon); border-color: rgba(57,240,122,0.45); }
+.tm-edge.is-d { color: #7FD8FF; border-color: rgba(127,216,255,0.45); }
+.tm-foot { font-size: 10.5px; color: var(--muted-3); margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -3079,6 +3120,66 @@ RENDERER_JS = """<script>
         '</div>' +
       '</div>';
   }
+
+
+  // ---- Team matchup (11/2026): every offensive and defensive category,
+  // national ranks (1 = best for that unit), one team's offense against
+  // the other's defense. PFF categories show ranks only (licensed data).
+  function tmFmt(v, fmt) {
+    if (v == null || !fmt) return '';
+    if (fmt.indexOf('%') >= 0) return (v * 100).toFixed(1) + '%';
+    var m = /\\.(\\d)f/.exec(fmt), d = m ? +m[1] : 1, txt = Number(v).toFixed(d);
+    return fmt.indexOf('+') >= 0 && v > 0 ? '+' + txt : txt;
+  }
+  function tmPill(e) {
+    if (!e) return '<span class="tm-pill is-na">—</span>';
+    var q = e.rank / e.of, cls = q <= 0.25 ? 'is-top' : (q > 0.75 ? 'is-bot' : '');
+    return '<span class="tm-pill ' + cls + '" title="' + e.rank + ' of ' + e.of + ' FBS teams">#' + e.rank + '</span>';
+  }
+  function renderTeamMatchup(p) {
+    var TM = D.teamMatchup || {}, meta = D.teamMatchupMeta || {};
+    if (!p || !meta.cats) return '';
+    var g = p.game, A = team(g.away), H = team(g.home);
+    var pa = TM[g.awaySchool], ph = TM[g.homeSchool];
+    var head = '<div class="tm-card"><div class="tm-top"><div class="tm-title">' + icon('ratings') + '<span>Team matchup</span><em>national ranks among FBS &middot; 1 = best for that unit</em></div>';
+    if (!pa || !ph) return head + '<div class="ep-empty">No season ranks for ' + esc(!pa ? A.abbr : H.abbr) + ' yet (FBS teams only).</div></div>';
+    var view = state.tmView === 'home' ? 'home' : 'away';
+    var offT = view === 'away' ? A : H, defT = view === 'away' ? H : A;
+    var offP = view === 'away' ? pa : ph, defP = view === 'away' ? ph : pa;
+    var cats = {}; meta.cats.forEach(function (c) { cats[c.key] = c; });
+    // Who wins each category: offense rank vs defense rank, as a share of the field.
+    var winsO = 0, winsD = 0, n = 0;
+    var body = (meta.groups || []).map(function (grp) {
+      var rows = grp.keys.map(function (k) {
+        var c = cats[k], o = offP.off[k], d = defP.def[k];
+        if (!c || (!o && !d)) return '';
+        var diff = (o && d) ? (d.rank - o.rank) / Math.max(o.of, d.of) : 0;   // + = offense better ranked
+        if (o && d) { n++; if (diff >= 0.2) winsO++; else if (diff <= -0.2) winsD++; }
+        var w = Math.min(50, Math.abs(diff) * 60).toFixed(1);
+        var bar = '<div class="tm-bar"><i class="tm-mid"></i>' + (o && d ? '<b class="' + (diff >= 0 ? 'is-o' : 'is-d') + '" style="' + (diff >= 0 ? 'right:50%' : 'left:50%') + ';width:' + w + '%"></b>' : '') + '</div>';
+        var edge = !(o && d) ? '' : (diff >= 0.2 ? '<span class="tm-edge is-o">' + esc(offT.abbr) + '</span>' : (diff <= -0.2 ? '<span class="tm-edge is-d">' + esc(defT.abbr) + '</span>' : '<span class="tm-edge">even</span>'));
+        return '<div class="tm-row">' +
+          '<div class="tm-lab">' + esc(c.off) + (c.src === 'pff' ? ' <span class="tm-src">PFF</span>' : '') + '</div>' +
+          '<div class="tm-v">' + tmPill(o) + '<span>' + esc(o ? tmFmt(o.value, c.fmt) : '') + '</span></div>' +
+          bar +
+          '<div class="tm-v is-r"><span>' + esc(d ? tmFmt(d.value, c.fmt) : '') + '</span>' + tmPill(d) + '</div>' +
+          '<div class="tm-lab is-r">' + esc(c.def) + '</div>' +
+          '<div class="tm-e">' + edge + '</div></div>';
+      }).join('');
+      return rows ? '<div class="tm-group">' + esc(grp.name) + '</div>' + rows : '';
+    }).join('');
+    var tabs = '<div class="tm-tabs">' +
+      '<button class="' + (view === 'away' ? 'is-on' : '') + '" onclick="window.__cfbTmView(\\'away\\')">' + esc(A.abbr) + ' offense vs ' + esc(H.abbr) + ' defense</button>' +
+      '<button class="' + (view === 'home' ? 'is-on' : '') + '" onclick="window.__cfbTmView(\\'home\\')">' + esc(H.abbr) + ' offense vs ' + esc(A.abbr) + ' defense</button></div>';
+    var sum = '<div class="tm-sum"><div><b class="is-o">' + winsO + '</b><span>' + esc(offT.abbr) + ' offense edges</span></div>' +
+      '<div><b>' + (n - winsO - winsD) + '</b><span>even</span></div>' +
+      '<div><b class="is-d">' + winsD + '</b><span>' + esc(defT.abbr) + ' defense edges</span></div></div>';
+    var cols = '<div class="tm-row tm-headrow"><div class="tm-lab">' + trkMark(offT.abbr, 20) + ' ' + esc(offT.abbr) + ' offense</div><div></div><div></div><div></div>' +
+      '<div class="tm-lab is-r">' + esc(defT.abbr) + ' defense ' + trkMark(defT.abbr, 20) + '</div><div></div></div>';
+    return head + tabs + '</div>' + sum + cols + body +
+      '<div class="tm-foot">An edge is shown when one side ranks at least 20% of the field better. Ranks are this season, games so far. PFF categories show ranks only.</div></div>';
+  }
+  window.__cfbTmView = function (v) { state.tmView = v; render(); };
 
   function renderBetCard(card) {
     return '' +
@@ -5595,7 +5696,7 @@ RENDERER_JS = """<script>
           '<div class="em-wrap">' + renderEdgeBoard(priced, card) + '</div>' +
           renderEdgePanels(priced) +
           '<div class="main em-below" id="em-projector">' +
-            '<div>' + renderProjector(sel) + '</div>' +
+            '<div>' + renderProjector(sel) + renderTeamMatchup(sel) + '</div>' +
             '<div>' + renderBetCard(card) + '</div>' +
           '</div>';
     }
@@ -5785,6 +5886,9 @@ def main():
     model_data = build_model_data(data, backtest=backtest, clv=clv)
     model_data["propEdgeHistory"] = build_prop_edge_history()
     model_data["propRules"] = build_prop_rules()
+    # Team-vs-team national ranks for the Matchup Projector (11/2026).
+    model_data["teamMatchup"] = data.get("team_matchup") or {}
+    model_data["teamMatchupMeta"] = data.get("team_matchup_meta") or {}
     attach_prop_first_flags(model_data.get("propsLive") or [])
     # Game-by-game box-score numbers for the Details panel (10/2026); absent
     # until scripts/export_dashboard_data.py writes them, and the panel just
