@@ -1191,7 +1191,9 @@ def main(year: int):
     MIN_PROP_EV_FOR_TARGETS = 10.0
     MAX_OFFICIAL_PROP_EV = 30.0
     REC_OVERS_OFFICIAL = False          # 10/23/2026: receptions overs 10-30% are Watch, not Official
-    REC_YDS_OVER_MIN_EV = 15.0          # receiving yards overs at this edge or more are Official
+    REC_YDS_OVER_MIN_EV = 15.0          # receiving yards overs at this edge or more are Official...
+    REC_YDS_OVER_MAX_EV = 30.0          # ...up to this edge (11/3/2026: 30%+ went 9-10 in the backtest, 4-9 on 10/31)
+    REC_YDS_OVER_MIN_LINE = 25.5        # ...on a line this big or more (11/3/2026: a real role; low lines = backups who often get 0)
     RUSH_UNDER_MIN_EV = 0.0             # rush yards unders at any non-negative edge are Official
     NEVER_WATCH_MARKETS = {"Pass Yards", "Pass Touchdowns", "Rush Touchdowns", "Reception Touchdowns",
                            "Pass Interceptions"}
@@ -1374,15 +1376,26 @@ def main(year: int):
         n_under_plays, n_under_leans = len(under_plays), len(under_leans)
 
         # ---- Receiving yards overs and rush yards unders (10/23/2026 rules above) ----
-        rec_yds_plays = _best_per([p for p in props_out if _eligible(p)
-                                   and p.get("market_name") == "Reception Yards"
-                                   and p.get("model_lean") == "over"
-                                   and p["model_ev"] >= REC_YDS_OVER_MIN_EV],
-                                  lambda p: (p.get("fixture_id"), p.get("player_name")))
+        # 11/3/2026 rule: 15-30% edge AND a line of 25.5+ (a player with a real
+        # role). Backtest on the retrained model 21-10, +27%; old-model live
+        # 30-11. Everything else at 15%+ is watch only, with the reason.
+        rec_yds_all = [p for p in props_out if _eligible(p)
+                       and p.get("market_name") == "Reception Yards"
+                       and p.get("model_lean") == "over"
+                       and p["model_ev"] >= REC_YDS_OVER_MIN_EV]
+        _pk = lambda p: (p.get("fixture_id"), p.get("player_name"))
+        rec_yds_plays = _best_per([p for p in rec_yds_all if p["model_ev"] < REC_YDS_OVER_MAX_EV
+                                   and float(p.get("line") or 0) >= REC_YDS_OVER_MIN_LINE], _pk)
         for p in rec_yds_plays:
             p["is_official_play"] = True
             p["is_watch_play"] = False
             p["play_kind"] = "rec_yds_over"
+        played = {_pk(p) for p in rec_yds_plays}
+        for p in _best_per([p for p in rec_yds_all if _pk(p) not in played], _pk):
+            p["is_watch_play"] = True
+            p["play_kind"] = "rec_yds_watch"
+            p["rec_yds_watch_reason"] = ("edge 30%+" if p["model_ev"] >= REC_YDS_OVER_MAX_EV
+                                         else f"line under {REC_YDS_OVER_MIN_LINE:g}")
         rush_under_plays = _best_per([p for p in props_out
                                       if p.get("model_ev") is not None and p["model_ev"] >= RUSH_UNDER_MIN_EV
                                       and p.get("injury_status") not in BLOCKING_STATUSES
@@ -1430,7 +1443,7 @@ def main(year: int):
             print(f"  {len(capped)} receptions over(s) with a {MAX_OFFICIAL_PROP_EV:.0f}%+ edge moved from Official to Watch (edge cap)")
     if props_out:
         print(f"  {n_props_scored} of {len(props_out)} posted prop line(s) scored with a real model prediction "
-              f"({n_props_official} OFFICIAL: receiving yards overs at {REC_YDS_OVER_MIN_EV:.0f}%+ EV and "
+              f"({n_props_official} OFFICIAL: receiving yards overs at {REC_YDS_OVER_MIN_EV:.0f}-{REC_YDS_OVER_MAX_EV:.0f}% EV on lines {REC_YDS_OVER_MIN_LINE:g}+ and "
               f"rush yards unders at {RUSH_UNDER_MIN_EV:.0f}%+ EV, best price; "
               f"{n_under_plays} OFFICIAL: receptions unders at {UNDER_PLAY_MIN_EV:.0f}%+ EV; "
               f"{n_under_leans} UNDER LEAN: receptions unders at {MIN_PROP_EV_FOR_TARGETS:.0f}% to {UNDER_PLAY_MIN_EV:.0f}% EV; "

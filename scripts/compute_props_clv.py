@@ -197,10 +197,33 @@ def seed_new_rule_tags(state):
             continue
         ev = _num(r.get("model_ev"))
         for market, side, lo, new_tag in NEW_RULE_SEEDS:
-            if r.get("market") == market and _side(r) == side and ev is not None and ev >= lo and (key, new_tag) not in state:
+            # History only: since the Nov 2 model update the official tags come
+            # straight from the export's play_kind (which applies the full rule).
+            if (r.get("market") == market and _side(r) == side and ev is not None and ev >= lo and (key, new_tag) not in state
+                    and _ts(r["flagged_at"]) < RECV_MODEL_UPDATE):
                 state[(key, new_tag)] = dict(r, tag=new_tag, group=None, group_up=None)
                 added += 1
     return added
+
+
+REC_YDS_RULE = (15.0, 30.0, 25.5)          # 11/3/2026: edge from / below, minimum line
+
+
+def drop_off_rule_rec_yds(state):
+    """Official rec yds plays logged since the Nov 2 model update that are
+    outside the 11/3 rule (edge 30%+ or a line under 25.5) -- logged under the
+    wider rule earlier that day -- are taken off the official record (they
+    stay tracked under 'group'). Idempotent."""
+    lo, hi, min_line = REC_YDS_RULE
+    out = 0
+    for (key, tag), r in list(state.items()):
+        if tag != "rec_yds_play" or _ts(r["flagged_at"]) < RECV_MODEL_UPDATE:
+            continue
+        ev, line = _num(r.get("model_ev")), _num(r.get("line"))
+        if ev is None or line is None or ev >= hi or line < min_line:
+            del state[(key, tag)]
+            out += 1
+    return out
 
 
 def update_state(state, props, when, history=None):
@@ -519,6 +542,9 @@ def main(backfill_since=None):
         n_seeded = seed_under_tags(state)
         if n_seeded:
             print(f"  {n_seeded} receptions under(s) already in the log given their own under_play / under_lean row")
+        n_drop = drop_off_rule_rec_yds(state)
+        if n_drop:
+            print(f"  {n_drop} rec yds play(s) since the model update dropped: outside the 11/3 rule (15-30% edge, line 25.5+)")
         n_new = seed_new_rule_tags(state)
         if n_new:
             print(f"  {n_new} play(s) already in the log given a rec_yds_play / rush_under_play row (10/23/2026 rules)")
