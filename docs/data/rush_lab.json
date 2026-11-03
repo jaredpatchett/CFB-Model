@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T17:11:43.872874+00:00",
+  "generated_at": "2026-11-03T17:54:35.730822+00:00",
   "seasons": [
     2024,
     2025,
@@ -104,7 +104,107 @@
           "roi": 0.8
         }
       },
-      "zero_row_bets": 0
+      "zero_row_bets": 0,
+      "by_run_defense": {
+        "average": {
+          "n": 357,
+          "record": "195-162",
+          "units": 10.9,
+          "roi": 3.0
+        },
+        "no grade": {
+          "n": 204,
+          "record": "108-96",
+          "units": 1.1,
+          "roi": 0.6
+        },
+        "soft": {
+          "n": 191,
+          "record": "90-101",
+          "units": -21.3,
+          "roi": -11.2
+        },
+        "tough": {
+          "n": 783,
+          "record": "442-341",
+          "units": 53.4,
+          "roi": 6.8
+        }
+      },
+      "by_run_defense_season": {
+        "average 2024": {
+          "n": 113,
+          "record": "62-51",
+          "units": 4.3,
+          "roi": 3.8
+        },
+        "average 2025": {
+          "n": 137,
+          "record": "75-62",
+          "units": 4.4,
+          "roi": 3.2
+        },
+        "average 2026": {
+          "n": 107,
+          "record": "58-49",
+          "units": 2.2,
+          "roi": 2.1
+        },
+        "no grade 2024": {
+          "n": 69,
+          "record": "30-39",
+          "units": -10.8,
+          "roi": -15.7
+        },
+        "no grade 2025": {
+          "n": 47,
+          "record": "31-16",
+          "units": 11.6,
+          "roi": 24.6
+        },
+        "no grade 2026": {
+          "n": 88,
+          "record": "47-41",
+          "units": 0.4,
+          "roi": 0.5
+        },
+        "soft 2024": {
+          "n": 67,
+          "record": "37-30",
+          "units": 2.6,
+          "roi": 3.9
+        },
+        "soft 2025": {
+          "n": 82,
+          "record": "36-46",
+          "units": -14.0,
+          "roi": -17.1
+        },
+        "soft 2026": {
+          "n": 42,
+          "record": "17-25",
+          "units": -9.9,
+          "roi": -23.7
+        },
+        "tough 2024": {
+          "n": 252,
+          "record": "139-113",
+          "units": 12.3,
+          "roi": 4.9
+        },
+        "tough 2025": {
+          "n": 309,
+          "record": "167-142",
+          "units": 7.1,
+          "roi": 2.3
+        },
+        "tough 2026": {
+          "n": 222,
+          "record": "136-86",
+          "units": 34.0,
+          "roi": 15.3
+        }
+      }
     },
     "played_zeros": {
       "all": {
@@ -159,7 +259,107 @@
           "roi": 4.1
         }
       },
-      "zero_row_bets": 1
+      "zero_row_bets": 1,
+      "by_run_defense": {
+        "average": {
+          "n": 364,
+          "record": "195-169",
+          "units": 3.6,
+          "roi": 1.0
+        },
+        "no grade": {
+          "n": 188,
+          "record": "96-92",
+          "units": -4.9,
+          "roi": -2.6
+        },
+        "soft": {
+          "n": 188,
+          "record": "94-94",
+          "units": -10.8,
+          "roi": -5.8
+        },
+        "tough": {
+          "n": 787,
+          "record": "448-339",
+          "units": 60.6,
+          "roi": 7.7
+        }
+      },
+      "by_run_defense_season": {
+        "average 2024": {
+          "n": 112,
+          "record": "59-53",
+          "units": -0.5,
+          "roi": -0.5
+        },
+        "average 2025": {
+          "n": 148,
+          "record": "81-67",
+          "units": 4.5,
+          "roi": 3.0
+        },
+        "average 2026": {
+          "n": 104,
+          "record": "55-49",
+          "units": -0.3,
+          "roi": -0.3
+        },
+        "no grade 2024": {
+          "n": 66,
+          "record": "28-38",
+          "units": -11.0,
+          "roi": -16.7
+        },
+        "no grade 2025": {
+          "n": 44,
+          "record": "29-15",
+          "units": 10.8,
+          "roi": 24.5
+        },
+        "no grade 2026": {
+          "n": 78,
+          "record": "39-39",
+          "units": -4.6,
+          "roi": -5.9
+        },
+        "soft 2024": {
+          "n": 62,
+          "record": "34-28",
+          "units": 2.0,
+          "roi": 3.3
+        },
+        "soft 2025": {
+          "n": 83,
+          "record": "42-41",
+          "units": -3.8,
+          "roi": -4.6
+        },
+        "soft 2026": {
+          "n": 43,
+          "record": "18-25",
+          "units": -9.1,
+          "roi": -21.0
+        },
+        "tough 2024": {
+          "n": 266,
+          "record": "148-118",
+          "units": 15.3,
+          "roi": 5.7
+        },
+        "tough 2025": {
+          "n": 305,
+          "record": "167-138",
+          "units": 11.0,
+          "roi": 3.6
+        },
+        "tough 2026": {
+          "n": 216,
+          "record": "133-83",
+          "units": 34.3,
+          "roi": 15.9
+        }
+      }
     },
     "common_lines_bet_by_both": {
       "current": {
