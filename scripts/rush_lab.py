@@ -102,7 +102,45 @@ def frames(years, season):
     zkeys = set(zip(zeros["gameId"], zeros["athleteId"]))
     fz["zero_row"] = [(g, a) in zkeys for g, a in zip(fz["gameId"], fz["athleteId"])]
     fb["zero_row"] = False
-    return fb, fz, {"player_games": int(len(wide)), "played_zero_rows": int(len(zeros))}
+    return fb, fz, wide, {"player_games": int(len(wide)), "played_zero_rows": int(len(zeros))}
+
+
+SHRINK_YDS, MIN_DEF_GAMES = 3, 3       # same as the Oct 30 matchup lab
+
+
+def run_defense(wide):
+    """(season, week, defense) -> run-defense toughness percentile (100 =
+    allows the fewest rush yards vs what those offenses usually get), from
+    that season's games BEFORE that week only. Same method as the matchup
+    lab (10/30/2026)."""
+    og = wide.groupby(["season", "week", "gameId", "team", "opponent"])["rush_yds"].sum().reset_index()
+    og["rush_yds"] = pd.to_numeric(og["rush_yds"], errors="coerce").fillna(0.0)
+    rows = []
+    for (s, wk) in sorted(set(zip(og["season"], og["week"])) | {(s, w + 1) for s, w in zip(og["season"], og["week"])}):
+        prior = og[(og["season"] == s) & (og["week"] < wk)]
+        if prior.empty:
+            continue
+        off = prior.groupby("team")["rush_yds"].agg(["sum", "count"])
+        league = prior["rush_yds"].mean()
+        s_, n_ = prior["team"].map(off["sum"]), prior["team"].map(off["count"])
+        exp = np.where(n_ > 1, (s_ - prior["rush_yds"]) / (n_ - 1).replace(0, np.nan), league)
+        t = pd.DataFrame({"games": prior.groupby("opponent").size(),
+                          "allowed": prior.groupby("opponent")["rush_yds"].sum(),
+                          "expected": pd.Series(exp, index=prior.index).groupby(prior["opponent"]).sum()})
+        t = t[t["games"] >= MIN_DEF_GAMES]
+        if len(t) < 20:
+            continue
+        r = (t["allowed"] / t["expected"].replace(0, np.nan)).fillna(1.0)
+        ratio = (t["games"] * r + SHRINK_YDS) / (t["games"] + SHRINK_YDS)
+        tough = (-ratio).rank(pct=True) * 100
+        rows.append(pd.DataFrame({"season": s, "week": wk, "opponent": tough.index, "run_def_tough": tough.values}))
+    return pd.concat(rows, ignore_index=True) if rows else pd.DataFrame(columns=["season", "week", "opponent", "run_def_tough"])
+
+
+def matchup_bucket(x):
+    if x is None or (isinstance(x, float) and np.isnan(x)):
+        return "no grade"
+    return "tough" if x >= 67 else ("soft" if x <= 33 else "average")
 
 
 def train(frame, before):
@@ -176,6 +214,7 @@ def season_rows(name, model, feats, raw, season):
         actual = float(row[STAT])
         res_, units = grade(actual, best["line"], best["price"])
         out.append({"version": name, "season": season, "player": player, "team": row["team"], "event_id": g["event_id"].iloc[0],
+                    "gameId": int(row["gameId"]), "week": row.get("week"), "opponent": row.get("opponent"),
                     "line": best["line"], "price": best["price"], "book": best["book"], "pred": round(best["pred"], 1),
                     "ev": round(best["ev"], 1), "actual": actual, "zero_row": bool(row.get("zero_row", False)),
                     "result": res_, "units": round(units, 4)})
@@ -192,7 +231,8 @@ def rec(df):
 
 def main(years, season):
     t0 = time.time()
-    fb, fz, info = frames(years, season)
+    fb, fz, wide, info = frames(years, season)
+    rd = run_defense(wide)
     seasons = [s for s in (2024, 2025, season) if os.path.exists(f"{HIST_DIR}/rush_yds_{s}.csv")]
     if not seasons:
         raise SystemExit("No rush yds lines in data/props_history -- run the props history pull with market rush_yds.")
@@ -207,12 +247,19 @@ def main(years, season):
             notes[s][name] = skipped
             print(f"  {s} {name}: {len(r)} unders priced, skipped {skipped}")
     det = pd.DataFrame(rows)
+    det["week"] = pd.to_numeric(det["week"], errors="coerce")
+    det = det.merge(rd, on=["season", "week", "opponent"], how="left")
+    det["run_def"] = det["run_def_tough"].map(matchup_bucket)
+    det["run_def_tough"] = det["run_def_tough"].round(0)
     bets = det[det["ev"] >= 0]
     results = {}
     for v, g in bets.groupby("version"):
         results[v] = {"all": rec(g), "by_season": {int(s): rec(x) for s, x in g.groupby("season")},
                       "by_edge": {f"{lo}-{hi}%": rec(g[(g["ev"] >= lo) & (g["ev"] < hi)]) for lo, hi in BUCKETS},
-                      "zero_row_bets": int(g["zero_row"].sum())}
+                      "zero_row_bets": int(g["zero_row"].sum()),
+                      # 11/3/2026: opposing run defense (tough = top third, earlier games only)
+                      "by_run_defense": {b: rec(x) for b, x in g.groupby("run_def")},
+                      "by_run_defense_season": {f"{b} {int(s)}": rec(x) for (b, s), x in g.groupby(["run_def", "season"])}}
     # Common lines: the same player-games priced by both versions.
     k = ["season", "event_id", "player"]
     both = set(map(tuple, bets[bets["version"] == "current"][k].values)) & set(map(tuple, bets[bets["version"] == "played_zeros"][k].values))
@@ -236,6 +283,11 @@ def main(years, season):
         for b, x in r["by_edge"].items():
             if x["n"]:
                 print(f"      edge {b}: {x.get('record')} {x.get('units'):+}u {x.get('roi'):+}% (n={x['n']})")
+        for b, x in sorted(r["by_run_defense_season"].items()):
+            if x["n"]:
+                print(f"      vs {b}: {x.get('record')} {x.get('units'):+}u {x.get('roi'):+}% (n={x['n']})")
+        for b, x in r["by_run_defense"].items():
+            print(f"      vs {b} run D, all seasons: {x.get('record')} {x.get('units'):+}u {x.get('roi'):+}% (n={x['n']})")
     print(f"  lines bet by both: {results['common_lines_bet_by_both']}")
     print(f"\nSaved {OUT_JSON} and {OUT_CSV} ({len(det)} rows) in {time.time() - t0:.0f}s")
 

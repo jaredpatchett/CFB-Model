@@ -527,6 +527,7 @@ PROPS_LAB3_PATH = "docs/data/props_lab3.json"
 # line) in training and grading. Used when present.
 PROPS_LAB3_PZ_PATH = "docs/data/props_lab3_pz.json"
 PROPS_LAB2_PZ_DETAIL = "docs/data/props_lab2_detail_pz.csv"
+RUSH_LAB_PATH = "docs/data/rush_lab.json"
 
 
 def build_prop_rules(path: str = None):
@@ -593,6 +594,18 @@ def build_prop_rules(path: str = None):
                                            "units": round(u, 1), "roi": round(u / len(d) * 100, 1), "n": int(len(d)), "seasons": 1}
         except Exception as e:
             print(f"  [note] retrained rec yds backtest not read ({e})")
+        # Rush yds unders over 2024, 2025 and 2026 lines (rush lab, 11/3/2026),
+        # the live (current) rush model, replacing the Sept-only number.
+        try:
+            if os.path.exists(RUSH_LAB_PATH):
+                with open(RUSH_LAB_PATH) as f:
+                    rl = json.load(f)
+                a = (((rl.get("results") or {}).get("current") or {}).get("all")) or {}
+                if a.get("n"):
+                    out["rush_under"] = {"record": a["record"], "units": a["units"], "roi": a["roi"], "n": a["n"],
+                                         "seasons": len(rl.get("seasons") or [])}
+        except Exception as e:
+            print(f"  [note] rush lab not read ({e})")
         # The three official rules together.
         parts = [out.get(k) for k in ("rec_yds_over", "rush_under", "rec_under")]
         if all(parts):
