@@ -92,12 +92,13 @@ RECV_MODEL_UPDATE = datetime(2026, 11, 2, 20, 51, tzinfo=timezone.utc)   # recei
 RECV_MODEL_TAGS = ("rec_yds_play", "under_play")
 # Rush yds unders official only vs tough run defenses from this run on (11/3/2026).
 RUSH_RULE_UPDATE = datetime(2026, 11, 3, 18, 15, tzinfo=timezone.utc)
+MU_SINCE = datetime(2026, 11, 3, 8, 0, tzinfo=timezone.utc)   # matchup-grade record starts with this week's games
 RULE_RESTARTS = {"rec_yds_play": RECV_MODEL_UPDATE, "under_play": RECV_MODEL_UPDATE, "rush_under_play": RUSH_RULE_UPDATE}
 GRADE_AFTER_HOURS = 5              # don't look for a box score until the game has had time to finish
 MATCH_HOURS = 36                   # a logged kickoff and CFBD's kickoff for the same game
 COLS = ["key", "tag", "player", "team", "opponent", "market", "start_time", "flagged_at", "book", "line", "price",
         "other_price", "model_prob", "model_ev", "last_seen_at", "last_line", "last_price", "last_other_price", "looks",
-        "side", "group", "group_up", "actual", "result", "units"]
+        "side", "group", "group_up", "actual", "result", "units", "mu_grade"]
 
 
 def _ts(s):
@@ -159,7 +160,10 @@ def _record(p, tag, when, side="over", group=None, group_up=None):
             "model_ev": _num(p.get("model_ev")) if p.get("model_lean") == side else None,
             "last_seen_at": when.isoformat(), "last_line": _num(p.get("line")), "last_price": _num(p.get(f"{side}_price")),
             "last_other_price": _num(p.get(f"{other}_price")), "looks": 0,
-            "side": side, "group": group, "group_up": group_up, "actual": None, "result": None, "units": None}
+            "side": side, "group": group, "group_up": group_up, "actual": None, "result": None, "units": None,
+            # 11/2026: matchup grade for this pick when first flagged (A = the
+            # defense helps the pick). Only when the grade is for our side.
+            "mu_grade": p.get("mu_grade") if p.get("model_lean") == side else None}
 
 
 def _under_tier_of_group_row(r):
@@ -257,6 +261,8 @@ def update_state(state, props, when, history=None):
         other = "under" if side == "over" else "over"
         r.update({"last_seen_at": when.isoformat(), "last_line": _num(p.get("line")), "last_price": _num(p.get(f"{side}_price")),
                   "last_other_price": _num(p.get(f"{other}_price")), "looks": int(r.get("looks") or 0) + 1})
+        if not r.get("mu_grade") and p.get("mu_grade") and p.get("model_lean") == side:
+            r["mu_grade"] = p.get("mu_grade")       # rows logged before grades were saved (11/3/2026)
 
     # 2) Log anything newly flagged.
     def add(p, tag, side="over"):
@@ -496,6 +502,17 @@ def summarize(state, now):
     # The receptions / receiving-yards models were retrained with played-zero
     # games on Nov 2, 2026. Those rules' live records restart there; the old
     # model's record is kept as "<tag>_prev".
+    # 11/3/2026: record by matchup grade (A+/A -> A, B+/B -> B, C, D, F), games from this week on.
+    by_mu = {}
+    for t in list(RESULT_TAGS) + ["group"]:
+        rows = [r for (k, tag), r in state.items() if tag == t and r.get("mu_grade") and _ts(r["start_time"]) >= MU_SINCE]
+        out_t = {}
+        for letter in ("A", "B", "C", "D", "F"):
+            g = [r for r in rows if str(r["mu_grade"]).strip().upper().startswith(letter)]
+            out_t[letter] = dict(_record_units(g), pending=sum(1 for r in g if r.get("result") not in ("W", "L", "P", "VOID")))
+        by_mu[t] = out_t
+    results["by_matchup_grade"] = by_mu
+    results["by_matchup_grade_since"] = MU_SINCE.isoformat()
     for t, since in RULE_RESTARTS.items():
         rows = [r for (k, tag), r in state.items() if tag == t]
         new_rows = [r for r in rows if _ts(r["flagged_at"]) >= since]

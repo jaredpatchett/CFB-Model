@@ -488,6 +488,7 @@ def build_prop_tracking(history, path: str = PROPS_TRACK_PATH, max_results: int 
                 "recYdsPlayNew": live.get("rec_yds_play_since_update"), "recYdsPlayPrev": live.get("rec_yds_play_prev"),
                 "underPlayNew": live.get("under_play_since_update"), "underPlayPrev": live.get("under_play_prev"),
                 "rushUnderPlayNew": live.get("rush_under_play_since_update"), "rushUnderPlayPrev": live.get("rush_under_play_prev"),
+                "byMatchup": live.get("by_matchup_grade"), "byMatchupSince": live.get("by_matchup_grade_since"),
                 "results": [slim(p) for p in results[:max_results]], "nResults": len(results),
                 "upcoming": [slim(p) for p in upcoming[:max_upcoming]], "nUpcoming": len(upcoming)}
     except Exception as e:
@@ -1487,6 +1488,17 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .pp-flags { display: flex; flex-wrap: wrap; gap: 4px; }
 .pp-tag { font-family: var(--font-body); font-size: 10px; letter-spacing: 0.03em; }
 @media (max-width: 1100px) { .pp-layout { grid-template-columns: 1fr; } .pp-side { position: static; max-height: none; } }
+
+.mu-panel { margin: 18px 0 14px; }
+.mu-grid { display: grid; grid-template-columns: minmax(170px, 1.4fr) repeat(5, minmax(90px, 1fr)); gap: 10px; align-items: center; }
+.mu-head { padding: 8px 0; border-bottom: 1px solid var(--rule); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-3); font-weight: 700; }
+.mu-head > div:not(:first-child), .mu-c { text-align: center; }
+.mu-row { padding: 9px 0; border-bottom: 1px solid var(--rule-row); font-size: 12.5px; }
+.mu-name { font-weight: 700; }
+.mu-c b { display: block; font-family: var(--font-num); font-size: 13px; }
+.mu-c span { font-family: var(--font-num); font-size: 11.5px; }
+.mu-c em { display: block; font-style: normal; font-size: 10px; color: var(--muted-3); }
+.mu-c.is-empty { color: var(--muted-4); font-size: 11px; }
 </style>
 </head>
 <body>
@@ -2210,7 +2222,7 @@ RENDERER_JS = """<script>
     var trk = loadTrk().filter(function (it) { return it.type !== 'Prop' && !it.unofficial && it.status && it.price != null; });
     var when = function (it) {
       var t = Date.parse(it.kickoffIso || '');
-      if (isNaN(t)) { var m = /^t(\d{13})/.exec(it.id || ''); t = m ? Number(m[1]) : 0; }
+      if (isNaN(t)) { var m = /^t(\\d{13})/.exec(it.id || ''); t = m ? Number(m[1]) : 0; }
       return t;
     };
     trk.sort(function (x, y) { return when(x) - when(y); });
@@ -3845,7 +3857,31 @@ RENDERER_JS = """<script>
         }).join('') +
         '<button class="pp-link" onclick="window.__cfbGoTracker()">See every result in My Tracker</button></div>';
     }
+    // Record by matchup grade (11/3/2026): each rule's graded plays split by
+    // the grade the pick had when it was first flagged, games from Nov 3 on.
+    var muPanel = '';
+    if (T && T.byMatchup) {
+      var MU_ROWS = [['rec_yds_play', 'Rec yds overs', true], ['rush_under_play', 'Rush yds unders', true], ['under_play', 'Receptions unders', true],
+                     ['official', 'Rec overs (watch)', false], ['under_lean', 'Under leans', false], ['group', 'All auto-tracked', false]];
+      var cell = function (o) {
+        if (!o || (!o.graded && !o.pending)) return '<div class="mu-c is-empty">&mdash;</div>';
+        if (!o.graded) return '<div class="mu-c is-empty">' + o.pending + ' pending</div>';
+        return '<div class="mu-c"><b>' + esc(o.record) + '</b><span style="color:' + tone(o.units) + '">' + signed(o.units, 1) + 'u</span>' +
+          (o.pending ? '<em>+' + o.pending + ' pending</em>' : '') + '</div>';
+      };
+      var since = T.byMatchupSince ? new Date(T.byMatchupSince) : null;
+      muPanel = '<div class="pp-panel mu-panel"><h3>Record by matchup grade</h3>' +
+        '<div class="pp-panel-note">Graded plays from games ' + (since && !isNaN(since) ? 'starting ' + (since.getMonth() + 1) + '/' + since.getDate() : 'this week') +
+          ' on, split by the matchup grade each pick had when it was first flagged (A = the defense helps the pick). 1 unit a play.</div>' +
+        '<div class="mu-grid mu-head"><div>Rule</div>' + ['A', 'B', 'C', 'D', 'F'].map(function (g) { return '<div><span class="pp-mu is-' + g.toLowerCase() + '">' + g + '</span></div>'; }).join('') + '</div>' +
+        MU_ROWS.map(function (r) {
+          var o = T.byMatchup[r[0]] || {};
+          return '<div class="mu-grid mu-row"><div class="mu-name">' + esc(r[1]) + (r[2] ? ' <span class="pp-tag is-official">Official</span>' : '') + '</div>' +
+            ['A', 'B', 'C', 'D', 'F'].map(function (g) { return cell(o[g]); }).join('') + '</div>';
+        }).join('') + '</div>';
+    }
     if (bucketPanel || resultsPanel) lower = '<div class="pp-lower">' + bucketPanel + resultsPanel + '</div>';
+    lower = muPanel + lower;
 
     // 5) The fine print, folded away until wanted.
     var help = '<details class="pp-help"><summary>How to read this page</summary><div class="pp-help-body">' +
