@@ -1540,6 +1540,19 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .tm-edge.is-o { color: var(--neon); border-color: rgba(57,240,122,0.45); }
 .tm-edge.is-d { color: #7FD8FF; border-color: rgba(127,216,255,0.45); }
 .tm-foot { font-size: 10.5px; color: var(--muted-3); margin-top: 10px; }
+
+.pp-grade { display: flex; gap: 3px; }
+.pp-gbtn { flex: 1; border: 1px solid var(--rule-strong); background: transparent; color: var(--muted-3); border-radius: 5px; font-family: var(--font-body); font-weight: 800; font-size: 10.5px; padding: 3px 0; cursor: pointer; }
+.pp-gbtn:hover { color: var(--text); }
+.pp-gbtn.is-win.is-on { background: rgba(57,240,122,0.16); color: var(--neon); border-color: var(--neon); }
+.pp-gbtn.is-loss.is-on { background: rgba(255,82,82,0.16); color: var(--red); border-color: var(--red); }
+.pp-gbtn.is-push.is-on { background: rgba(224,180,74,0.16); color: var(--amber); border-color: var(--amber); }
+.my-props { margin-top: 16px; }
+.my-props-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 8px; }
+.my-res { display: grid; grid-template-columns: 1fr 52px 62px; gap: 8px; font-size: 12px; padding: 6px 0; border-bottom: 1px solid var(--rule-row); align-items: center; }
+.my-res span { color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.my-res b { font-family: var(--font-num); text-align: right; font-size: 11.5px; }
+@media (max-width: 900px) { .my-props-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -3465,7 +3478,13 @@ RENDERER_JS = """<script>
     var myTrk = {};
     // flaggedDesc: a play whose line you later changed in the tracker still
     // counts as the same play here, under the line it was added at.
-    loadTrk().forEach(function (it) { if (it.type === 'Prop') { myTrk[it.description] = true; if (it.flaggedDesc) myTrk[it.flaggedDesc] = true; } });
+    var myStatus = {}, myProps = [];
+    loadTrk().forEach(function (it) {
+      if (it.type !== 'Prop') return;
+      myTrk[it.description] = true; myStatus[it.description] = it.status || null;
+      if (it.flaggedDesc) { myTrk[it.flaggedDesc] = true; myStatus[it.flaggedDesc] = it.status || null; }
+      myProps.push(it);
+    });
     var F = {
       dir: state.propDir === 'over' || state.propDir === 'under' ? state.propDir : 'all',
       minEdge: Number(state.propMinEdge) || 0,
@@ -3886,6 +3905,11 @@ RENDERER_JS = """<script>
         '<div>' + track + '</div>' +
         '<div class="pp-flags">' + flags.join('') + '</div>' +
         '<div class="pp-actions">' +
+          '<div class="pp-grade" role="group" aria-label="Grade this play">' + ['win', 'loss', 'push'].map(function (st) {
+            var on = myStatus[propTrackLabel(r)] === st;
+            return '<button class="pp-gbtn is-' + st + (on ? ' is-on' : '') + '" title="' + (on ? 'Clear the grade' : 'Mark as a ' + st + ' (adds it to your list)') + '" ' +
+              'aria-pressed="' + on + '" onclick="window.__cfbPropGrade(' + i + ',\\'' + st + '\\')">' + st.charAt(0).toUpperCase() + '</button>';
+          }).join('') + '</div>' +
           '<button class="pp-trk" aria-expanded="' + (isOpen ? 'true' : 'false') + '" onclick="window.__cfbPropDetail(' + i + ')">' + (isOpen ? 'Hide' : 'Details') + '</button>' +
           (myTrk[propTrackLabel(r)]
             ? '<span class="pp-inlist" title="Already in your own list in My Tracker">&#10003; Listed</span>'
@@ -4038,10 +4062,44 @@ RENDERER_JS = """<script>
       ['Avg hit chance', avgHit != null ? avgHit.toFixed(1) + '%' : '\u2014', 'model chance the pick wins, official plays', { icon: 'check' }],
       ['Hit rate (L30)', lw + ll ? (lw / (lw + ll) * 100).toFixed(1) + '%' : '\u2014', 'last ' + (lw + ll) + ' graded auto-tracked plays', { icon: 'trend', neon: lw > ll, spark: cum }]
     ]);
+    // My props record (11/2026): every prop in your own list you've graded,
+    // 1 unit a play at the price it was added at.
+    var u1 = function (it) { var pr = Number(it.price); if (it.status === 'win') return isNaN(pr) ? 0.909 : (pr > 0 ? pr / 100 : 100 / -pr); return it.status === 'loss' ? -1 : 0; };
+    var graded = myProps.filter(function (it) { return it.status === 'win' || it.status === 'loss' || it.status === 'push'; });
+    var mrec = function (list) {
+      var w = 0, l = 0, pu = 0, u = 0;
+      list.forEach(function (it) { if (it.status === 'win') w++; else if (it.status === 'loss') l++; else pu++; u += u1(it); });
+      return { rec: w + '-' + l + (pu ? '-' + pu : ''), units: u, roi: list.length ? u / list.length * 100 : null, n: list.length };
+    };
+    var mktOfItem = function (it) {
+      if (it.market) return it.market;
+      var m = ['Reception Yards', 'Receptions', 'Rush Yards', 'Rush Attempts', 'Pass Yards', 'Pass Touchdowns', 'Pass Attempts', 'Pass Completions', 'Pass Interceptions', 'Rush Touchdowns', 'Reception Touchdowns']
+        .filter(function (k) { return (' ' + it.description + ' ').indexOf(' ' + k + ' ') >= 0; });
+      return m[0] || 'Other';
+    };
+    var myPanel = '';
+    if (myProps.length) {
+      var all = mrec(graded), byM = {};
+      graded.forEach(function (it) { var k = mktOfItem(it) + ' ' + (/ O [\\d.]+$/.test(it.description) ? 'overs' : 'unders'); (byM[k] = byM[k] || []).push(it); });
+      var lineM = function (label, t) {
+        return '<div class="ep-row"><span>' + esc(label) + '</span><b>' + esc(t.rec) + '</b><b style="color:' + tone(t.units) + '">' + signed(t.units, 2) + 'u</b><b style="color:' + tone(t.roi || 0) + '">' + (t.roi != null ? signed(t.roi, 1) + '%' : '&mdash;') + '</b></div>';
+      };
+      var recent = graded.slice().sort(function (x, y) { return String(y.kickoffIso || y.date || '') < String(x.kickoffIso || x.date || '') ? -1 : 1; }).slice(0, 10);
+      myPanel = '<div class="pp-panel my-props"><h3>My props record</h3>' +
+        '<div class="pp-panel-note">The props you graded with W / L / P (or in My Tracker), 1 unit a play at the price you added them at. ' + (myProps.length - graded.length) + ' in your list not graded yet.</div>' +
+        '<div class="my-props-grid"><div>' +
+          '<div class="ep-row ep-th"><span></span><span>Record</span><span>Units</span><span>ROI</span></div>' +
+          (graded.length ? lineM('All my props', all) + Object.keys(byM).sort().map(function (k) { return lineM(marketName(k.split(' ').slice(0, -1).join(' ')) + ' ' + k.split(' ').pop(), mrec(byM[k])); }).join('')
+                         : '<div class="ep-empty">Nothing graded yet. Use W / L / P on any prop.</div>') +
+        '</div><div>' + recent.map(function (it) {
+          var rc = it.status === 'win' ? 'var(--neon)' : (it.status === 'loss' ? 'var(--red)' : 'var(--amber)');
+          return '<div class="my-res"><span>' + esc(it.description) + '</span><b style="color:' + rc + '">' + it.status.toUpperCase() + '</b><b style="color:' + tone(u1(it)) + '">' + signed(u1(it), 2) + 'u</b></div>';
+        }).join('') + (graded.length > 10 ? '<button class="pp-link" onclick="window.__cfbGoTracker()">See all in My Tracker</button>' : '') + '</div></div></div>';
+    }
     return hero + cats + cards +
       '<div class="pp-layout"><aside class="pp-side">' + controls + strip + '</aside>' +
       '<div class="pp-main"><div class="pp-main-head"><span>Model plays</span><em>' + shown.length + '</em></div>' + table + '</div></div>' +
-      lower + help;
+      lower + myPanel + help;
   }
 
   /* ---- Tracker (localStorage, this browser only, real bets you log) ---- */
@@ -4242,6 +4300,29 @@ RENDERER_JS = """<script>
       edge: r.model_ev, stake: 50, status: null
     });
     saveTrk(items);
+    render();
+  };
+
+  // Grade a prop straight from its row (11/2026): adds it to your own list
+  // first if it isn't there, then sets Win / Loss / Push (click again to
+  // clear). Same item and grade as the My Tracker tab.
+  window.__cfbPropGrade = function (i, st) {
+    var r = (window.__cfbPropRows || [])[i];
+    if (!r) return;
+    var desc = propTrackLabel(r);
+    var items = loadTrk();
+    var it = items.filter(function (x) { return x.type === 'Prop' && (x.description === desc || x.flaggedDesc === desc); })[0];
+    if (!it) {
+      items.unshift({
+        id: 't' + Date.now() + Math.random().toString(36).slice(2, 7),
+        description: desc, date: (r.start_time || '').slice(0, 10), kickoffIso: r.start_time || undefined, type: 'Prop',
+        price: r.model_lean === 'over' ? r.over_price : r.under_price,
+        edge: r.model_ev, stake: 50, status: st, market: r.market_name, official: !!r.is_official_play
+      });
+      saveTrk(items);
+    } else {
+      trkCommit(it.id, { status: it.status === st ? null : st });
+    }
     render();
   };
 
