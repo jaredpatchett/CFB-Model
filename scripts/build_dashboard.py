@@ -1556,6 +1556,13 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .my-res .my-d { font-style: normal; color: var(--muted-3); font-family: var(--font-num); font-size: 11px; margin-right: 4px; }
 .my-res b { font-family: var(--font-num); text-align: right; font-size: 11.5px; }
 @media (max-width: 900px) { .my-props-grid { grid-template-columns: 1fr; } }
+
+.td-grid { display: grid; grid-template-columns: minmax(190px, 1.6fr) 90px 52px 80px 96px 130px minmax(150px, 1.1fr); column-gap: 14px; align-items: center; min-width: 900px; }
+.td-controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 12px; }
+.td-note { margin-top: 16px; background: var(--panel); border: 1px solid var(--rule); border-left: 3px solid var(--amber); border-radius: var(--radius); padding: 10px 14px; font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+.td-def { display: inline-block; font-family: var(--font-num); font-weight: 700; font-size: 13px; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--rule-strong); }
+.td-def.is-soft { color: var(--neon); border-color: rgba(57,240,122,0.5); background: rgba(57,240,122,0.08); }
+.td-def.is-tough { color: var(--red); border-color: rgba(255,82,82,0.45); background: rgba(255,82,82,0.07); }
 </style>
 </head>
 <body>
@@ -3498,7 +3505,7 @@ RENDERER_JS = """<script>
     var passes = function (r, skip) {
       if (skip !== 'view' && view !== 'all' && r._sec !== view) return false;
       if (skip !== 'market' && mkt !== 'ALL' && r.market_name !== mkt) return false;
-      if (skip !== 'cat' && state.propCat && state.propCat !== 'all' && mktCat(r.market_name) !== state.propCat) return false;
+      if (skip !== 'cat' && state.propCat && state.propCat !== 'all' && state.propCat !== 'td' && mktCat(r.market_name) !== state.propCat) return false;
       if (skip !== 'game' && gameSel !== 'ALL' && r.fixture_id !== gameSel) return false;
       if (skip !== 'dir' && F.dir !== 'all' && r.model_lean !== F.dir) return false;
       if (skip !== 'edge' && F.minEdge && !(r.model_ev != null && r.model_ev >= F.minEdge)) return false;
@@ -4053,7 +4060,7 @@ RENDERER_JS = """<script>
     var cur = state.propCat || 'all';
     var cats = '<div class="pp-cats">' + CATS.map(function (c) {
       return '<button class="pp-cat' + (cur === c[0] ? ' is-on' : '') + '" data-prop-set="propCat" data-prop-val="' + c[0] + '">' + icon(c[2]) + '<span>' + c[1] + '</span><em>' + catCount(c[0]) + '</em></button>';
-    }).join('') + '<button class="pp-cat" data-page="anytime">' + icon('anytime') + '<span>Anytime TD</span></button></div>';
+    }).join('') + '<button class="pp-cat' + (cur === 'td' ? ' is-on' : '') + '" data-prop-set="propCat" data-prop-val="td">' + icon('anytime') + '<span>Anytime TD</span><em>' + (D.anytimeTd || []).filter(function (a) { return a.model_prob != null; }).length + '</em></button></div>';
     var off = rows.filter(function (r) { return r.is_official_play && r.model_ev != null; });
     var avg = function (xs) { return xs.length ? xs.reduce(function (a, b) { return a + b; }, 0) / xs.length : null; };
     var avgEv = avg(off.map(function (r) { return r.model_ev; })), avgHit = avg(off.filter(function (r) { return r._lp != null; }).map(function (r) { return r._lp * 100; }));
@@ -4101,10 +4108,95 @@ RENDERER_JS = """<script>
         '</div><div>' + (listO || '<div class="ep-empty">No official plays logged yet under the current rules.</div>') +
           (OP.length > 16 ? '<div class="ep-k2" style="margin-top:6px">Showing 16 of ' + OP.length + ' (graded first, then upcoming).</div>' : '') + '</div></div></div>';
     }
+    if (cur === 'td') return hero + cats + renderPropsTd() + help;
     return hero + cats + cards +
       '<div class="pp-layout"><aside class="pp-side">' + controls + strip + '</aside>' +
       '<div class="pp-main"><div class="pp-main-head"><span>Model plays</span><em>' + shown.length + '</em></div>' + table + '</div></div>' +
       lower + myPanel + help;
+  }
+
+
+  // ---- Anytime TD on the Player Props page (11/4/2026) -----------------
+  // Every anytime TD line with the model's chance, the price at DraftKings
+  // and the best price, and where the opposing defense ranks in TDs allowed
+  // to the player's position (1 = gives up the most). Watch only: the
+  // 10/24 backtest found no edge after the books' margin at a legal book.
+  function renderPropsTd() {
+    var all = (D.anytimeTd || []).filter(function (a) { return a.model_prob != null; });
+    var TA = D.tdAllowed || [];
+    if (!all.length) return '<div class="empty-state">No anytime TD lines with a model read right now' + (D.anytimeTdNote ? ' (' + esc(D.anytimeTdNote) + ')' : '') + '.</div>';
+    var POS = ['qb', 'rb', 'wr', 'te'];
+    // Defense ranks: TDs allowed per game to each position, and overall. Rank 1 = most allowed.
+    var def = {}, nDef = TA.length;
+    var rankBy = function (key) {
+      var srt = TA.slice().sort(function (x, y) { return (y[key] || 0) - (x[key] || 0); });
+      srt.forEach(function (r, i) { (def[r.team] = def[r.team] || { row: r })[key] = i + 1; });
+    };
+    POS.forEach(function (g) { rankBy('td_' + g + '_pg'); });
+    rankBy('td_all_pg');
+    var posOf = function (a) {
+      var p = String(a.pos || '').toLowerCase();
+      if (POS.indexOf(p) >= 0) return p;
+      var r = String(a.role || '');            // no roster position: the model's role label
+      return /\bQB\b/.test(r) ? 'qb' : (/\bRB\b/.test(r) ? 'rb' : null);
+    };
+    var tdPos = state.tdPos || 'all', tdSort = state.tdSort || 'dk';
+    var rows = all.filter(function (a) { return tdPos === 'all' || posOf(a) === tdPos; }).map(function (a) {
+      var d = def[a.opponent], g = posOf(a);
+      a._dr = d ? (g ? d['td_' + g + '_pg'] : d.td_all_pg) : null;
+      a._dpg = d ? (g ? d.row['td_' + g + '_pg'] : d.row.td_all_pg) : null;
+      a._dall = d ? d.td_all_pg : null;
+      return a;
+    });
+    var num = function (x) { return x == null || isNaN(x) ? -1e9 : Number(x); };
+    var cmp = {
+      dk: function (x, y) { return num(y.edge_dk) - num(x.edge_dk) || num(y.edge_best) - num(x.edge_best); },
+      best: function (x, y) { return num(y.edge_best) - num(x.edge_best); },
+      chance: function (x, y) { return num(y.model_prob) - num(x.model_prob); },
+      def: function (x, y) { return (x._dr || 999) - (y._dr || 999) || num(y.model_prob) - num(x.model_prob); },
+      kick: function (x, y) { return String(x.start_time) < String(y.start_time) ? -1 : 1; }
+    }[tdSort] || function () { return 0; };
+    rows.sort(cmp);
+    var cap = state.tdAll ? rows.length : 60;
+    var am = function (x) { return x == null || isNaN(x) ? '&mdash;' : (x > 0 ? '+' : '') + Math.round(x); };
+    var sg = function (x) { return x == null || isNaN(x) ? '&mdash;' : (x > 0 ? '+' : '') + Number(x).toFixed(1) + '%'; };
+    var tone = function (x) { return x > 0 ? 'var(--neon)' : (x < 0 ? 'var(--red)' : 'var(--muted-3)'); };
+    var seg = function (field, val, cur, label) { return '<button class="' + (cur === val ? 'is-on' : '') + '" data-prop-set="' + field + '" data-prop-val="' + val + '">' + label + '</button>'; };
+    var defCell = function (a) {
+      if (a._dr == null) return '<span class="pp-track is-none">&mdash;</span>';
+      var q = a._dr / nDef, cls = q <= 0.25 ? 'is-soft' : (q > 0.75 ? 'is-tough' : '');
+      var g = posOf(a);
+      return '<span class="td-def ' + cls + '" title="' + esc(a.opponent) + ' allows ' + (a._dpg != null ? a._dpg : '?') + ' TDs a game to ' + (g ? g.toUpperCase() + 's' : 'all positions') + ' (#' + a._dr + ' of ' + nDef + ', 1 = most). Overall #' + a._dall + '.">#' + a._dr + '</span>' +
+        '<div class="pp-sub">' + (a._dpg != null ? a._dpg + '/g' : '') + ' to ' + (g ? g.toUpperCase() + 's' : 'all') + ' &middot; all #' + a._dall + '</div>';
+    };
+    var ring = function (p, mk) {
+      var c = 2 * Math.PI * 16, pct = Math.max(0, Math.min(1, p || 0)), good = mk == null || p > mk;
+      return '<span class="pp-ring' + (good ? ' is-good' : '') + '"><svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="16" fill="none" stroke="#1E2924" stroke-width="3.5"/>' +
+        '<circle cx="20" cy="20" r="16" fill="none" stroke-width="3.5" stroke-linecap="round" class="v" stroke-dasharray="' + (c * pct).toFixed(1) + ' ' + c.toFixed(1) + '" transform="rotate(-90 20 20)"/></svg><b>' + Math.round(pct * 100) + '</b></span>';
+    };
+    var body = rows.slice(0, cap).map(function (a) {
+      var g = posOf(a);
+      return '<div class="td-grid pp-row">' +
+        '<div class="pp-who">' + (a.team ? trkMark(schoolAbbr(a.team), 30) : '') + '<div><div class="pp-name">' + esc(a.player_name) + '</div>' +
+          '<div class="pp-sub">' + esc(schoolAbbr(a.team) || a.team || '') + ' vs ' + esc(schoolAbbr(a.opponent) || a.opponent || '') + ' &middot; ' + esc(propKickoff(a.start_time)) + '</div></div></div>' +
+        '<div><span class="pp-mkt is-' + (g === 'qb' ? 'pass' : g === 'rb' ? 'rush' : 'rec') + '">' + esc(g ? g.toUpperCase() : '?') + '</span><div class="pp-sub">' + esc(a.role || '') + '</div></div>' +
+        '<div title="Model chance ' + (a.model_prob * 100).toFixed(1) + '%; best price implies ' + (a.market_implied != null ? (a.market_implied * 100).toFixed(1) + '%' : '?') + '">' + ring(a.model_prob, a.market_implied) + '</div>' +
+        '<div class="num pp-proj">' + am(a.fair_odds) + '</div>' +
+        '<div class="num"><span class="pp-odds">' + am(a.dk_price) + '</span><div class="pp-sub" style="color:' + tone(a.edge_dk) + '">' + sg(a.edge_dk) + '</div></div>' +
+        '<div class="num"><span class="pp-odds">' + am(a.best_price) + '</span><div class="pp-sub">' + esc(a.best_book_label || '') + (a.edge_best != null ? ' &middot; <span style="color:' + tone(a.edge_best) + '">' + sg(a.edge_best) + '</span>' : '') + '</div></div>' +
+        '<div>' + defCell(a) + '</div>' +
+      '</div>';
+    }).join('');
+    var head = '<div class="td-grid pp-head"><div>Player / matchup</div><div>Pos</div><div>Model</div><div class="num">Fair odds</div><div class="num">DraftKings</div><div class="num">Best price</div><div>Opp. D, TDs allowed</div></div>';
+    var controls = '<div class="td-controls">' +
+      '<div class="pp-seg">' + seg('tdPos', 'all', tdPos, 'All') + POS.map(function (g) { return seg('tdPos', g, tdPos, g.toUpperCase() + 's'); }).join('') + '</div>' +
+      '<div class="pp-seg">' + seg('tdSort', 'dk', tdSort, 'Edge at DK') + seg('tdSort', 'best', tdSort, 'Edge, best price') + seg('tdSort', 'chance', tdSort, 'Model chance') + seg('tdSort', 'def', tdSort, 'Softest defense') + seg('tdSort', 'kick', tdSort, 'Kickoff') + '</div>' +
+    '</div>';
+    var note = '<div class="td-note"><b>Watch only.</b> Anytime TDs are not official plays: the Oct 24 backtest found the model prices scoring well, but not by enough to beat the books&rsquo; margin at a single legal book. ' +
+      '<b>Opp. D</b> ranks every FBS defense by TDs allowed per game to that position (1 = gives up the most, green = bottom quarter of defenses, red = top quarter); &ldquo;all&rdquo; is total TDs allowed. ' +
+      'The 10/31 matchup watch found that soft TD defenses are already in the price.</div>';
+    return note + controls + '<div class="pp-table">' + head + body + '</div>' +
+      (rows.length > cap ? '<div class="pp-more"><button class="pp-link" data-prop-set="tdAll" data-prop-val="1">Show all ' + rows.length + '</button></div>' : '');
   }
 
   /* ---- Tracker (localStorage, this browser only, real bets you log) ---- */
@@ -5900,7 +5992,7 @@ RENDERER_JS = """<script>
     var ps = e.target.closest('[data-prop-set]');
     if (ps) {
       var f = ps.dataset.propSet, v = ps.dataset.propVal;
-      state[f] = (f === 'propMinEdge' || f === 'propMinMu') ? Number(v) || 0 : (f === 'propMyList' ? !!v : v);
+      state[f] = (f === 'propMinEdge' || f === 'propMinMu') ? Number(v) || 0 : ((f === 'propMyList' || f === 'tdAll') ? !!v : v);
       state.propPresetMsg = ''; return render();
     }
     var sh = e.target.closest('[data-prop-sorth]');

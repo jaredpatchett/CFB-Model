@@ -136,7 +136,7 @@ def build(player_stats_long, games, season, pool=None):
                            "recyds": int(sum(r[f"recyds_{g}"] for g in GROUPS)), "rushyds": int(sum(r[f"rushyds_{g}"] for g in GROUPS))}
                           for _, r in log.iterrows()]
             mine = sc[sc["opponent"] == team].head(12)
-            row["scorers"] = [{"wk": int(r["week"]), "player": r["player"], "team": r["team"], "pos": (r["g"] or "?").upper(),
+            row["scorers"] = [{"wk": int(r["week"]), "player": r["player"], "team": r["team"], "pos": (r["g"] if isinstance(r["g"], str) and r["g"] else "?").upper(),
                                "rush": int(r["rush_tds"]), "rec": int(r["rec_tds"])} for _, r in mine.iterrows()]
             rows.append(row)
         rows.sort(key=lambda r: -r["td_all_pg"])
