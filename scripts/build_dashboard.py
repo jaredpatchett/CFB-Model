@@ -1563,6 +1563,116 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .td-def { display: inline-block; font-family: var(--font-num); font-weight: 700; font-size: 13px; padding: 4px 8px; border-radius: 6px; border: 1px solid var(--rule-strong); }
 .td-def.is-soft { color: var(--neon); border-color: rgba(57,240,122,0.5); background: rgba(57,240,122,0.08); }
 .td-def.is-tough { color: var(--red); border-color: rgba(255,82,82,0.45); background: rgba(255,82,82,0.07); }
+
+/* ===== Phones (11/2026): bottom tab bar, cards instead of wide tables ===== */
+.navm { display: none; }
+@media (max-width: 760px) {
+  :root { --gutter: 14px; }
+  html, body { overflow-x: hidden; }
+  .page { padding-bottom: 96px; }
+  .topbar-inner { height: 56px; gap: 10px; }
+  .brand-word { font-size: 21px; }
+  .brand-mark i { height: 18px; width: 5px; }
+  .navx, .sync { display: none !important; }
+  .topbar-right { margin-left: auto; }
+  #search { width: 150px; font-size: 13px; padding: 6px 12px; }
+  .navm { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: rgba(9,12,11,0.97); backdrop-filter: blur(10px);
+          border-top: 1px solid var(--rule-strong); overflow-x: auto; scrollbar-width: none; padding: 4px 4px calc(4px + env(safe-area-inset-bottom)); }
+  .navm::-webkit-scrollbar { display: none; }
+  .navm-item { flex: 0 0 auto; min-width: 68px; display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: none; color: var(--muted);
+               font-family: var(--font-body); font-weight: 700; font-size: 10.5px; padding: 7px 6px; border-radius: 10px; cursor: pointer; }
+  .navm-item svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .navm-item.is-active { color: var(--neon); background: rgba(57,240,122,0.10); }
+
+  .main, .split, .em-below, .ep-grid, .pp-layout, .my-props-grid, .pp-lower { grid-template-columns: minmax(0, 1fr) !important; }
+  .main > div, .split > div { min-width: 0; }
+  .section-head { flex-wrap: wrap; gap: 10px; }
+  .section-head h2 { font-size: 18px; }
+  .em-sub { display: none; }
+
+  /* stat cards: two per row */
+  .kpis { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .kpi { padding: 12px 12px 10px; }
+  .kpi-value { font-size: 22px; gap: 7px; flex-wrap: wrap; }
+  .kpi-icon { width: 26px; height: 26px; border-radius: 7px; }
+  .kpi-icon svg { width: 14px; height: 14px; }
+  .kpi-sub { font-size: 10px; }
+  .kpi-spark { display: none; }
+
+  /* Edge Matrix rows as cards */
+  .em-table { overflow: visible; }
+  .em-table .thead { display: none; }
+  .em-grid { min-width: 0 !important; grid-template-columns: 1fr auto; row-gap: 8px; }
+  .em-row .row-body { padding: 12px 12px; }
+  .em-grid > .em-n, .em-grid > .cell-market, .em-grid > .cell-model { display: none; }
+  .em-grid > .em-game { grid-column: 1; grid-row: 1; }
+  .em-grid > div:nth-child(6) { grid-column: 2; grid-row: 1; }
+  .em-grid > .em-kick { grid-column: 1; grid-row: 2; }
+  .em-grid > .em-prob { grid-column: 2; grid-row: 2; min-width: 120px; }
+  .em-grid > div:nth-child(8) { grid-column: 1; grid-row: 3; min-width: 0; }
+  .em-grid > div:nth-child(10) { grid-column: 2; grid-row: 3; }
+  .em-grid > .em-tags { grid-column: 1 / -1; grid-row: 4; }
+  .em-play { max-width: 100%; }
+
+  /* projector, team matchup, bet card */
+  .proj-head { padding: 14px 12px; }
+  .proj-head-inner { gap: 8px; }
+  .tm-card { padding: 12px 10px; }
+  .tm-tabs { width: 100%; }
+  .tm-tabs button { flex: 1; font-size: 11px; padding: 7px 4px; }
+  .tm-row { grid-template-columns: 52px 1fr 52px 46px; grid-template-areas: "lab lab lab lab" "op bar dp e"; row-gap: 4px; padding: 7px 0; }
+  .tm-row > .tm-lab:first-child { grid-area: lab; }
+  .tm-row > .tm-v:not(.is-r) { grid-area: op; }
+  .tm-row > .tm-bar { grid-area: bar; }
+  .tm-row > .tm-v.is-r { grid-area: dp; }
+  .tm-row > .tm-lab.is-r { display: none; }
+  .tm-row > .tm-e { grid-area: e; }
+  .tm-v span:not(.tm-pill) { display: none; }
+  .tm-headrow { display: none; }
+
+  /* Player Props */
+  .pp-hero h1 { font-size: 30px; }
+  .pp-hero-card { width: 100%; }
+  .pp-hero-card > div { padding: 10px 12px; flex: 1; }
+  .pp-hv { font-size: 18px; }
+  .pp-cat { padding: 9px 12px; font-size: 11.5px; }
+  .pp-side { position: static; max-height: none; }
+  .pp-side .pp-filter { display: none; }
+  .pp-side.is-filters .pp-filter { display: block; }
+  .pp-ftoggle { display: inline-flex !important; }
+  .pp-table { overflow: visible; border: none; background: none; }
+  .pp-head { display: none; }
+  .pp-grid, .td-grid { min-width: 0 !important; }
+  .pp-grid.pp-row { grid-template-columns: 1fr 1fr 1fr; row-gap: 10px; column-gap: 8px; background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; margin-bottom: 10px; padding: 12px; }
+  .pp-grid.pp-row > .pp-who { grid-column: 1 / -1; }
+  .pp-grid.pp-row > div:nth-child(2) { grid-column: 1 / 3; }
+  .pp-grid.pp-row > div:nth-child(3) { grid-column: 3; text-align: right; }
+  .pp-grid.pp-row > div:nth-child(4) { grid-column: 1; text-align: left; }
+  .pp-grid.pp-row > div:nth-child(5) { grid-column: 2; text-align: center; }
+  .pp-grid.pp-row > div:nth-child(6) { grid-column: 3; text-align: right; }
+  .pp-grid.pp-row > div:nth-child(7) { grid-column: 1; }
+  .pp-grid.pp-row > div:nth-child(8) { grid-column: 2 / -1; }
+  .pp-grid.pp-row > .pp-flags { grid-column: 1 / -1; }
+  .pp-grid.pp-row > .pp-actions { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; align-items: center; }
+  .pp-actions .pp-grade { flex: 1 1 100%; }
+  .pp-actions .pp-gbtn { padding: 8px 0; font-size: 12px; }
+  .pp-actions .pp-trk { flex: 1; padding: 8px; }
+  .pp-group { padding: 10px 2px; }
+  .td-grid.pp-row { grid-template-columns: 1fr 1fr; row-gap: 10px; background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; margin-bottom: 10px; padding: 12px; }
+  .td-grid.pp-row > .pp-who { grid-column: 1 / -1; }
+  .td-grid.pp-row > div:nth-child(n+2) { text-align: left; }
+  .td-controls .pp-seg { flex-wrap: wrap; }
+  .mu-grid { grid-template-columns: 110px repeat(5, minmax(54px, 1fr)); gap: 4px; font-size: 11px; }
+  .mu-panel { overflow-x: auto; }
+  .my-res { grid-template-columns: 1fr 48px 54px; }
+
+  /* tracker and other wide tables scroll sideways inside their box */
+  .trk-table { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .trk-table .trk-g { min-width: 1080px; }
+  .trk-summary { grid-template-columns: 1fr 1fr !important; }
+  .footer { font-size: 10px; }
+}
+.pp-ftoggle { display: none; }
 </style>
 </head>
 <body>
@@ -2102,6 +2212,7 @@ RENDERER_JS = """<script>
     }).join('') + '</div>';
   }
 
+  var SHORT_LABEL = { edge: 'Edge', ratings: 'Ratings', props: 'Props', anytime: 'TDs', tdallowed: 'TDs vs D', fantasy: 'Fantasy', injuries: 'Injuries', tracker: 'Tracker', performance: 'Model' };
   function renderTopbar() {
     // Search only on the Edge Board tab.
     var searchHtml = state.page === 'edge'
@@ -2124,7 +2235,13 @@ RENDERER_JS = """<script>
       '</div></div>';
   }
 
-  function renderPageNav() { return ''; }
+  // Phones (11/2026): every tab in a bar fixed to the bottom of the screen.
+  // Rendered outside the top bar, whose blur would otherwise pin it there.
+  function renderPageNav() {
+    return '<nav class="navm" aria-label="Pages">' + PAGES.map(function (p) {
+      return '<button class="navm-item' + (p.id === state.page ? ' is-active' : '') + '" data-page="' + esc(p.id) + '">' + icon(p.id) + '<span>' + esc(SHORT_LABEL[p.id] || p.label) + '</span></button>';
+    }).join('') + '</nav>';
+  }
 
   function renderKpis(card, priced) {
     // "Qualifying edges" used to show card.length, which is capped at the
@@ -3203,6 +3320,7 @@ RENDERER_JS = """<script>
       '<div class="tm-foot">An edge is shown when one side ranks at least 20% of the field better. Ranks are this season, games so far. PFF categories show ranks only.</div></div>';
   }
   window.__cfbTmView = function (v) { state.tmView = v; render(); };
+  window.__cfbPpFilters = function () { state.ppFilters = !state.ppFilters; render(); };
 
   function renderBetCard(card) {
     return '' +
@@ -4110,7 +4228,9 @@ RENDERER_JS = """<script>
     }
     if (cur === 'td') return hero + cats + renderPropsTd() + help;
     return hero + cats + cards +
-      '<div class="pp-layout"><aside class="pp-side">' + controls + strip + '</aside>' +
+      '<div class="pp-layout"><aside class="pp-side' + (state.ppFilters ? ' is-filters' : '') + '">' +
+        '<button class="pp-btn pp-ftoggle" style="width:100%;justify-content:center;margin-bottom:10px" onclick="window.__cfbPpFilters()">' + (state.ppFilters ? 'Hide' : 'Show') + ' sort &amp; filter' + (nActive ? ' (' + nActive + ' on)' : '') + '</button>' +
+        controls + strip + '</aside>' +
       '<div class="pp-main"><div class="pp-main-head"><span>Model plays</span><em>' + shown.length + '</em></div>' + table + '</div></div>' +
       lower + myPanel + help;
   }
@@ -5976,7 +6096,7 @@ RENDERER_JS = """<script>
 
   document.addEventListener('click', function (e) {
     var p = e.target.closest('[data-page]');
-    if (p) { state.page = p.dataset.page; return render(); }
+    if (p) { var changed = state.page !== p.dataset.page; state.page = p.dataset.page; render(); if (changed) window.scrollTo(0, 0); return; }
     var g = e.target.closest('[data-game]');
     if (g) {
       state.selected = +g.dataset.game; render();
