@@ -1440,6 +1440,11 @@ def main(year: int):
         # 2024-26 backtest: tough 442-341 +6.8% (positive every season),
         # soft 90-101 -11.2%. Average / soft / not yet graded -> watch.
         from src.features import run_defense as rdef
+        for p in props_out:                      # every rush yds line carries its run-defense grade (tracker, 11/4/2026)
+            if p.get("market_name") == "Rush Yards" and p.get("opponent"):
+                t0 = run_def_lookup.get(p.get("opponent"))
+                p["run_def"] = rdef.bucket(t0)
+                p["run_def_tough"] = round(float(t0), 0) if t0 is not None else None
         for p in rush_under_plays:
             t = run_def_lookup.get(p.get("opponent"))
             p["run_def_tough"] = round(float(t), 0) if t is not None else None

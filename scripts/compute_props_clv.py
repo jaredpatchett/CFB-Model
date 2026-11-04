@@ -93,12 +93,29 @@ RECV_MODEL_TAGS = ("rec_yds_play", "under_play")
 # Rush yds unders official only vs tough run defenses from this run on (11/3/2026).
 RUSH_RULE_UPDATE = datetime(2026, 11, 3, 18, 15, tzinfo=timezone.utc)
 MU_SINCE = datetime(2026, 11, 3, 8, 0, tzinfo=timezone.utc)   # matchup-grade record starts with this week's games
+RUN_DEF_SEED = "data/clv/run_def_seed.json"   # run-defense grades from the Nov 3 boards, for rows logged before they were saved
+
+
+def in_current_rule(tag, r):
+    """Is this logged official play under the CURRENT rule? Rush yds unders:
+    games from the rule change on, against a tough run defense (also the rows
+    logged earlier that meet it). Receiving rules: flagged since the model
+    update."""
+    since = RULE_RESTARTS[tag]
+    try:
+        if tag == "rush_under_play":
+            return _ts(r["start_time"]) >= since and r.get("run_def") == "tough"
+        return _ts(r["flagged_at"]) >= since
+    except (ValueError, TypeError):
+        return False
+
+
 RULE_RESTARTS = {"rec_yds_play": RECV_MODEL_UPDATE, "under_play": RECV_MODEL_UPDATE, "rush_under_play": RUSH_RULE_UPDATE}
 GRADE_AFTER_HOURS = 5              # don't look for a box score until the game has had time to finish
 MATCH_HOURS = 36                   # a logged kickoff and CFBD's kickoff for the same game
 COLS = ["key", "tag", "player", "team", "opponent", "market", "start_time", "flagged_at", "book", "line", "price",
         "other_price", "model_prob", "model_ev", "last_seen_at", "last_line", "last_price", "last_other_price", "looks",
-        "side", "group", "group_up", "actual", "result", "units", "mu_grade"]
+        "side", "group", "group_up", "actual", "result", "units", "mu_grade", "run_def"]
 
 
 def _ts(s):
@@ -163,7 +180,9 @@ def _record(p, tag, when, side="over", group=None, group_up=None):
             "side": side, "group": group, "group_up": group_up, "actual": None, "result": None, "units": None,
             # 11/2026: matchup grade for this pick when first flagged (A = the
             # defense helps the pick). Only when the grade is for our side.
-            "mu_grade": p.get("mu_grade") if p.get("model_lean") == side else None}
+            "mu_grade": p.get("mu_grade") if p.get("model_lean") == side else None,
+            # 11/4/2026: opposing run-defense grade on rush yds props (the rush rule).
+            "run_def": p.get("run_def")}
 
 
 def _under_tier_of_group_row(r):
@@ -263,6 +282,8 @@ def update_state(state, props, when, history=None):
                   "last_other_price": _num(p.get(f"{other}_price")), "looks": int(r.get("looks") or 0) + 1})
         if not r.get("mu_grade") and p.get("mu_grade") and p.get("model_lean") == side:
             r["mu_grade"] = p.get("mu_grade")       # rows logged before grades were saved (11/3/2026)
+        if p.get("run_def"):
+            r["run_def"] = p.get("run_def")         # latest pre-kickoff run-defense grade
 
     # 2) Log anything newly flagged.
     def add(p, tag, side="over"):
@@ -515,8 +536,8 @@ def summarize(state, now):
     results["by_matchup_grade_since"] = MU_SINCE.isoformat()
     for t, since in RULE_RESTARTS.items():
         rows = [r for (k, tag), r in state.items() if tag == t]
-        new_rows = [r for r in rows if _ts(r["flagged_at"]) >= since]
-        results[f"{t}_prev"] = _record_units([r for r in rows if _ts(r["flagged_at"]) < since])
+        new_rows = [r for r in rows if in_current_rule(t, r)]
+        results[f"{t}_prev"] = _record_units([r for r in rows if _ts(r["flagged_at"]) < since and not in_current_rule(t, r)])
         results[f"{t}_since_update"] = dict(_record_units(new_rows), since=since.isoformat())
     groups = {}
     for (k, t), r in state.items():
@@ -531,7 +552,19 @@ def summarize(state, now):
     group_rows.sort(key=lambda x: (not x["up_in_backtest"], -(x["units"] or 0)))
     up_rows = [r for (k, t), r in state.items() if t == "group" and is_up(r.get("group_up"))]
     other_rows = [r for (k, t), r in state.items() if t == "group" and not is_up(r.get("group_up"))]
-    return {"generated_at": now.isoformat(), "summary": summary, "results": results,
+    # The official plays under the CURRENT rules (11/4/2026), each with its
+    # result, for the Props tab's Official record panel.
+    official_plays = []
+    for t, since in RULE_RESTARTS.items():
+        for (k, tag), r in state.items():
+            if tag == t and in_current_rule(t, r) and r.get("result") != "VOID":
+                official_plays.append({"tag": t, "player": r["player"], "team": r["team"], "opponent": r["opponent"], "market": r["market"],
+                                       "side": _side(r), "line": r["line"], "price": r["price"], "model_ev": r["model_ev"],
+                                       "start_time": r["start_time"], "result": r.get("result") or None, "units": r.get("units"),
+                                       "actual": r.get("actual"), "mu_grade": r.get("mu_grade")})
+    official_plays.sort(key=lambda x: str(x["start_time"]), reverse=True)
+    results["official_now"] = _record_units([r for (k, tag), r in state.items() if tag in RULE_RESTARTS and in_current_rule(tag, r)])
+    return {"generated_at": now.isoformat(), "summary": summary, "results": results, "official_plays": official_plays,
             "groups_up_in_backtest": dict(_record_units(up_rows), logged=len(up_rows)),
             "groups_not_up_in_backtest": dict(_record_units(other_rows), logged=len(other_rows)),
             "groups": group_rows, "plays": plays,
@@ -562,6 +595,16 @@ def main(backfill_since=None):
         n_seeded = seed_under_tags(state)
         if n_seeded:
             print(f"  {n_seeded} receptions under(s) already in the log given their own under_play / under_lean row")
+        try:
+            with open(RUN_DEF_SEED) as f:
+                seed = json.load(f)
+            for (k, t), r in state.items():
+                if not r.get("run_def") and r.get("market") == "Rush Yards":
+                    v = seed.get(f"{r['player']}|{str(r['start_time'])[:10]}")
+                    if v:
+                        r["run_def"] = v
+        except (OSError, ValueError):
+            pass
         n_drop = drop_off_rule_rec_yds(state)
         if n_drop:
             print(f"  {n_drop} rec yds play(s) since the model update dropped: outside the 11/3 rule (15-30% edge, line 25.5+)")

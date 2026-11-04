@@ -491,6 +491,7 @@ def build_prop_tracking(history, path: str = PROPS_TRACK_PATH, max_results: int 
                 "underPlayNew": live.get("under_play_since_update"), "underPlayPrev": live.get("under_play_prev"),
                 "rushUnderPlayNew": live.get("rush_under_play_since_update"), "rushUnderPlayPrev": live.get("rush_under_play_prev"),
                 "byMatchup": live.get("by_matchup_grade"), "byMatchupSince": live.get("by_matchup_grade_since"),
+                "officialNow": live.get("official_now"), "officialPlays": (log.get("official_plays") or [])[:200],
                 "results": [slim(p) for p in results[:max_results]], "nResults": len(results),
                 "upcoming": [slim(p) for p in upcoming[:max_upcoming]], "nUpcoming": len(upcoming)}
     except Exception as e:
@@ -1551,6 +1552,8 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .my-props-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 8px; }
 .my-res { display: grid; grid-template-columns: 1fr 52px 62px; gap: 8px; font-size: 12px; padding: 6px 0; border-bottom: 1px solid var(--rule-row); align-items: center; }
 .my-res span { color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.my-res em { font-style: normal; color: var(--muted-3); }
+.my-res .my-d { font-style: normal; color: var(--muted-3); font-family: var(--font-num); font-size: 11px; margin-right: 4px; }
 .my-res b { font-family: var(--font-num); text-align: right; font-size: 11.5px; }
 @media (max-width: 900px) { .my-props-grid { grid-template-columns: 1fr; } }
 </style>
@@ -4062,39 +4065,41 @@ RENDERER_JS = """<script>
       ['Avg hit chance', avgHit != null ? avgHit.toFixed(1) + '%' : '\u2014', 'model chance the pick wins, official plays', { icon: 'check' }],
       ['Hit rate (L30)', lw + ll ? (lw / (lw + ll) * 100).toFixed(1) + '%' : '\u2014', 'last ' + (lw + ll) + ' graded auto-tracked plays', { icon: 'trend', neon: lw > ll, spark: cum }]
     ]);
-    // My props record (11/2026): every prop in your own list you've graded,
-    // 1 unit a play at the price it was added at.
-    var u1 = function (it) { var pr = Number(it.price); if (it.status === 'win') return isNaN(pr) ? 0.909 : (pr > 0 ? pr / 100 : 100 / -pr); return it.status === 'loss' ? -1 : 0; };
-    var graded = myProps.filter(function (it) { return it.status === 'win' || it.status === 'loss' || it.status === 'push'; });
-    var mrec = function (list) {
-      var w = 0, l = 0, pu = 0, u = 0;
-      list.forEach(function (it) { if (it.status === 'win') w++; else if (it.status === 'loss') l++; else pu++; u += u1(it); });
-      return { rec: w + '-' + l + (pu ? '-' + pu : ''), units: u, roi: list.length ? u / list.length * 100 : null, n: list.length };
-    };
-    var mktOfItem = function (it) {
-      if (it.market) return it.market;
-      var m = ['Reception Yards', 'Receptions', 'Rush Yards', 'Rush Attempts', 'Pass Yards', 'Pass Touchdowns', 'Pass Attempts', 'Pass Completions', 'Pass Interceptions', 'Rush Touchdowns', 'Reception Touchdowns']
-        .filter(function (k) { return (' ' + it.description + ' ').indexOf(' ' + k + ' ') >= 0; });
-      return m[0] || 'Other';
-    };
+    // Official record (11/4/2026): only the plays that meet the current
+    // official rules, graded automatically from the box score, 1u each at
+    // the price they were flagged at. Your own W / L / P grades on other
+    // props stay in My Tracker and do not count here.
     var myPanel = '';
-    if (myProps.length) {
-      var all = mrec(graded), byM = {};
-      graded.forEach(function (it) { var k = mktOfItem(it) + ' ' + (/ O [\\d.]+$/.test(it.description) ? 'overs' : 'unders'); (byM[k] = byM[k] || []).push(it); });
-      var lineM = function (label, t) {
-        return '<div class="ep-row"><span>' + esc(label) + '</span><b>' + esc(t.rec) + '</b><b style="color:' + tone(t.units) + '">' + signed(t.units, 2) + 'u</b><b style="color:' + tone(t.roi || 0) + '">' + (t.roi != null ? signed(t.roi, 1) + '%' : '&mdash;') + '</b></div>';
+    if (T) {
+      var OP = T.officialPlays || [];
+      var RL = { rec_yds_play: 'Rec yds overs', rush_under_play: 'Rush yds unders', under_play: 'Receptions unders' };
+      var NEWK = { rec_yds_play: T.recYdsPlayNew, rush_under_play: T.rushUnderPlayNew, under_play: T.underPlayNew };
+      var lineO = function (label, o) {
+        var g = o && o.graded;
+        return '<div class="ep-row"><span>' + esc(label) + '</span><b>' + (g ? esc(o.record) : '&mdash;') + '</b><b style="color:' + tone(g ? o.units : 0) + '">' + (g ? signed(o.units, 2) + 'u' : '&mdash;') + '</b>' +
+          '<b style="color:' + tone(g ? o.roi : 0) + '">' + (g && o.roi != null ? signed(o.roi, 1) + '%' : '&mdash;') + '</b></div>';
       };
-      var recent = graded.slice().sort(function (x, y) { return String(y.kickoffIso || y.date || '') < String(x.kickoffIso || x.date || '') ? -1 : 1; }).slice(0, 10);
-      myPanel = '<div class="pp-panel my-props"><h3>My props record</h3>' +
-        '<div class="pp-panel-note">The props you graded with W / L / P (or in My Tracker), 1 unit a play at the price you added them at. ' + (myProps.length - graded.length) + ' in your list not graded yet.</div>' +
+      var nPend = OP.filter(function (x) { return !x.result; }).length;
+      var dOf = function (x) { var d = new Date(x.start_time || ''); return isNaN(d) ? '' : (d.getMonth() + 1) + '/' + d.getDate() + ' '; };
+      var gr = OP.filter(function (x) { return x.result; }), pe = OP.filter(function (x) { return !x.result; }).reverse();
+      OP = gr.concat(pe);
+      var listO = OP.slice(0, 16).map(function (x) {
+        var rc = x.result === 'W' ? 'var(--neon)' : (x.result === 'L' ? 'var(--red)' : (x.result === 'P' ? 'var(--amber)' : 'var(--muted-3)'));
+        var lab = x.result === 'W' ? 'WIN' : x.result === 'L' ? 'LOSS' : x.result === 'P' ? 'PUSH' : 'PENDING';
+        return '<div class="my-res"><span title="' + esc(RL[x.tag] || '') + '"><i class="my-d">' + dOf(x) + '</i>' + esc(schoolAbbr(x.team) || '') + ' ' + esc(x.player) + ' &middot; ' + esc(marketName(x.market)) + ' ' + (x.side === 'over' ? 'O' : 'U') + ' ' + esc(x.line) +
+          (x.actual != null && x.result ? ' <em>(' + Number(x.actual) + ')</em>' : '') + '</span>' +
+          '<b style="color:' + rc + '">' + lab + '</b><b style="color:' + tone(x.units || 0) + '">' + (x.result ? signed(x.units || 0, 2) + 'u' : '') + '</b></div>';
+      }).join('');
+      myPanel = '<div class="pp-panel my-props"><h3>Official record</h3>' +
+        '<div class="pp-panel-note">Only plays that meet the current official rules, graded automatically from the box score, 1 unit each at the price they were flagged at. ' +
+          'Records start when each rule last changed (rec yds overs and receptions unders Nov 2, rush yds unders Nov 3). Your W / L / P on other props stays in My Tracker and does not count here.</div>' +
         '<div class="my-props-grid"><div>' +
           '<div class="ep-row ep-th"><span></span><span>Record</span><span>Units</span><span>ROI</span></div>' +
-          (graded.length ? lineM('All my props', all) + Object.keys(byM).sort().map(function (k) { return lineM(marketName(k.split(' ').slice(0, -1).join(' ')) + ' ' + k.split(' ').pop(), mrec(byM[k])); }).join('')
-                         : '<div class="ep-empty">Nothing graded yet. Use W / L / P on any prop.</div>') +
-        '</div><div>' + recent.map(function (it) {
-          var rc = it.status === 'win' ? 'var(--neon)' : (it.status === 'loss' ? 'var(--red)' : 'var(--amber)');
-          return '<div class="my-res"><span>' + esc(it.description) + '</span><b style="color:' + rc + '">' + it.status.toUpperCase() + '</b><b style="color:' + tone(u1(it)) + '">' + signed(u1(it), 2) + 'u</b></div>';
-        }).join('') + (graded.length > 10 ? '<button class="pp-link" onclick="window.__cfbGoTracker()">See all in My Tracker</button>' : '') + '</div></div></div>';
+          lineO('All official plays', T.officialNow) +
+          ['rec_yds_play', 'rush_under_play', 'under_play'].map(function (k) { return lineO(RL[k], NEWK[k]); }).join('') +
+          '<div class="ep-k2" style="margin-top:8px">' + OP.length + ' official plays logged &middot; ' + nPend + ' still to be graded</div>' +
+        '</div><div>' + (listO || '<div class="ep-empty">No official plays logged yet under the current rules.</div>') +
+          (OP.length > 16 ? '<div class="ep-k2" style="margin-top:6px">Showing 16 of ' + OP.length + ' (graded first, then upcoming).</div>' : '') + '</div></div></div>';
     }
     return hero + cats + cards +
       '<div class="pp-layout"><aside class="pp-side">' + controls + strip + '</aside>' +
