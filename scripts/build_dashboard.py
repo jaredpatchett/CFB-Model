@@ -1918,7 +1918,13 @@ MATH_JS = """<script>
     // the Bet Card, the 20+ fade above still applies (see big_spread_lab.json).
     var sideLine = market === 'Spread' && side ? (side === game.home ? game.marketSpread : -game.marketSpread) : null;
     var bigDogWatch = bigSpread && edgeClears && sideLine != null && sideLine >= 28 && sideLine < 35;
-    var qualifies = edgeClears && priceInRange && isPositiveEV && !bigSpread;
+    // 11/2026: only games priced by the in-season trained model can be
+    // plays. A game falls back to the preseason SP+ prior when an input the
+    // trained model needs isn't out yet -- usually next week's games, which
+    // have no weather forecast until a few days out -- and that prior throws
+    // 20+ point "edges" that were crowding real plays off the Bet Card.
+    var waitingModel = edgeClears && priceInRange && isPositiveEV && !bigSpread && !isTrainedGame;
+    var qualifies = edgeClears && priceInRange && isPositiveEV && !bigSpread && isTrainedGame;
     // A moneyline pick that clears the probability-edge bar and passes the
     // price sanity check, but comes out negative on real dollar EV (or is
     // an underdog read the preseason-only model hasn't earned trust for
@@ -1954,6 +1960,7 @@ MATH_JS = """<script>
       sideProb: market === 'Moneyline' ? sideProb : coverProb,
       sideEV: market === 'Moneyline' ? sideEV : null,
       qualifies: qualifies,
+      waitingModel: waitingModel,
       isFade: isFade,
       bigSpread: bigSpread,
       bigDogWatch: bigDogWatch,
@@ -2391,6 +2398,7 @@ RENDERER_JS = """<script>
     else if (s.kind === 'dogwatch') { top = 'WATCH · BIG DOG'; cls = 'is-track'; title = '28–34.5 point underdog the model likes — watch only, track at the opening line'; }
     else if (s.kind === 'bigspread') { top = 'FADE · 20+ PT'; cls = 'is-warn'; title = '20+ point spread — faded by rule'; }
     else if (s.kind === 'fade') { top = 'FADE'; cls = 'is-warn'; }
+    else if (s.kind === 'waiting') { top = 'WAITING ON MODEL'; cls = 'is-track'; title = 'Preseason ratings only so far: ' + s.note; }
     else return '<span class="eb-noplay" title="' + esc(s.kind === 'nospread' ? 'No spread posted' : 'No play: ' + s.note) + '">—</span>';
     return '<div class="eb-pill ' + cls + '" title="' + esc(title) + '"><div class="eb-pill-top">' + top + '</div>' +
       '<div class="eb-pill-pick">' + esc(s.playText) + (cls === 'is-card' ? ' <span>· ' + esc(s.p.tier) + '</span>' : '') + '</div>' + extra + '</div>';
@@ -2406,6 +2414,7 @@ RENDERER_JS = """<script>
     if (s.kind === 'dogwatch') return ['BIG-DOG WATCH', 'is-track', '28–34.5 point underdog the model likes — watch only, at the opening line'];
     if (s.kind === 'bigspread') return ['FADE 20+', 'is-warn', '20+ point spread — faded by rule'];
     if (s.kind === 'fade') return ['FADE', 'is-warn', s.note || 'Fade'];
+    if (s.kind === 'waiting') return ['WAITING ON MODEL', '', 'Preseason ratings only so far: ' + s.note];
     return null;
   }
   function emPlay(s) {
@@ -3109,6 +3118,9 @@ RENDERER_JS = """<script>
     var s = { p: p, onCard: !!onCard, playText: playText, note: '' };
     if (market === 'Spread' && p.playLabel === 'No spread posted') {
       s.kind = 'nospread'; s.label = 'NO SPREAD POSTED'; s.color = 'var(--muted-3)'; s.playText = '—';
+    } else if (p.waitingModel) {
+      s.kind = 'waiting'; s.label = 'WAITING ON MODEL'; s.color = 'var(--muted-3)';
+      s.note = 'priced by preseason ratings only; becomes a play only if the in-season model still shows an edge once it can score this game';
     } else if (isNearEvenTarget(p)) {
       s.kind = 'target'; s.label = 'TARGET · NEAR-EVEN ML'; s.color = 'var(--green)'; s.note = 'model 65%+ at +100 to +150 — small stake';
     } else if (p.qualifies && bigDogML) {
