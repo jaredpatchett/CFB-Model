@@ -1541,6 +1541,17 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .tm-edge.is-o { color: var(--neon); border-color: rgba(57,240,122,0.45); }
 .tm-edge.is-d { color: #7FD8FF; border-color: rgba(127,216,255,0.45); }
 .tm-foot { font-size: 10.5px; color: var(--muted-3); margin-top: 10px; }
+.gb-card { margin-bottom: 14px; }
+.gb-card .tm-title { margin-bottom: 10px; }
+.gb-p { font-size: 13px; line-height: 1.6; color: var(--text, #E6EDF3); margin: 0 0 9px; }
+.gb-p b { color: #fff; }
+.gb-rk { font-family: var(--font-mono, monospace); font-size: 11px; color: var(--muted-3); white-space: nowrap; }
+.gb-playbox { background: var(--panel-deep); border: 1px solid rgba(57,240,122,0.35); border-radius: 10px; padding: 10px 12px; margin-top: 4px; }
+.gb-lab { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--neon); margin-bottom: 6px; }
+.gb-play { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; font-size: 15px; color: #fff; vertical-align: middle; }
+.gb-play.is-lean { color: var(--muted-2, #B6C2CF); }
+.gb-off { font-size: 11px; color: var(--muted-3); }
+.gb-why { font-size: 12.5px; line-height: 1.55; color: var(--muted-2, #B6C2CF); margin-top: 6px; }
 
 .pp-grade { display: flex; gap: 3px; }
 .pp-gbtn { flex: 1; border: 1px solid var(--rule-strong); background: transparent; color: var(--muted-3); border-radius: 5px; font-family: var(--font-body); font-weight: 800; font-size: 10.5px; padding: 3px 0; cursor: pointer; }
@@ -3320,6 +3331,95 @@ RENDERER_JS = """<script>
       '<div class="tm-foot">An edge is shown when one side ranks at least 20% of the field better. Ranks are this season, games so far. PFF categories show ranks only.</div></div>';
   }
   window.__cfbTmView = function (v) { state.tmView = v; render(); };
+  // ---- Game breakdown (11/2026): a plain-English read of the team
+  // matchup ranks above, both directions, ending with the model's play.
+  // Descriptive only -- the play itself still comes from the model's
+  // number against the market, not from these ranks.
+  function tmCompare(offP, defP) {
+    var meta = D.teamMatchupMeta || {}, out = [];
+    (meta.cats || []).forEach(function (c) {
+      var o = offP.off[c.key], d = defP.def[c.key];
+      if (!o || !d) return;
+      out.push({ c: c, o: o, d: d, diff: (d.rank - o.rank) / Math.max(o.of, d.of) });
+    });
+    return out;
+  }
+  function gbGroupLean(rows, keys) {
+    var r = rows.filter(function (x) { return keys.indexOf(x.c.key) >= 0; });
+    if (!r.length) return null;
+    return r.reduce(function (s, x) { return s + x.diff; }, 0) / r.length;
+  }
+  function gbList(rows, n) {
+    return rows.slice(0, n).map(function (x) {
+      return esc(x.c.off.replace(/ \\(.*\\)$/, '')) + ' <span class="gb-rk">#' + x.o.rank + ' vs #' + x.d.rank + '</span>';
+    }).join(', ');
+  }
+  function gbSide(offT, defT, rows) {
+    var oE = rows.filter(function (x) { return x.diff >= 0.2; }).sort(function (a, b) { return b.diff - a.diff; });
+    var dE = rows.filter(function (x) { return x.diff <= -0.2; }).sort(function (a, b) { return a.diff - b.diff; });
+    var meta = D.teamMatchupMeta || {}, leans = [];
+    (meta.groups || []).forEach(function (g) {
+      if (g.name.indexOf('Situational') === 0) return;
+      var v = gbGroupLean(rows, g.keys);
+      if (v != null) leans.push({ name: ({ 'Run game': 'the run game', 'Pass game': 'the pass game' })[g.name] || 'scoring and efficiency', v: v });
+    });
+    var txt = '<b>' + esc(offT.abbr) + ' offense vs ' + esc(defT.abbr) + ' defense:</b> ';
+    txt += esc(offT.abbr) + ' wins ' + oE.length + ' of ' + rows.length + ' categories, ' +
+      esc(defT.abbr) + '&rsquo;s defense wins ' + dE.length + '. ';
+    if (oE.length) txt += 'Biggest ' + esc(offT.abbr) + ' edges: ' + gbList(oE, 3) + '. ';
+    if (dE.length) txt += 'Biggest ' + esc(defT.abbr) + ' defense edges: ' + gbList(dE, 2) + '. ';
+    var best = leans.slice().sort(function (a, b) { return b.v - a.v; })[0];
+    var worst = leans.slice().sort(function (a, b) { return a.v - b.v; })[0];
+    if (best && best.v >= 0.12) txt += esc(offT.abbr) + '&rsquo;s clearest advantage is ' + esc(best.name) + '.';
+    else if (worst && worst.v <= -0.12) txt += esc(defT.abbr) + '&rsquo;s defense has the edge in ' + esc(worst.name) + '.';
+    else txt += 'No unit has a clear advantage here.';
+    // Net score for this direction: + = offense, - = defense.
+    var net = rows.reduce(function (s, x) { return s + x.diff; }, 0) / Math.max(1, rows.length);
+    return { html: txt, net: net, oE: oE.length, dE: dE.length };
+  }
+  function renderGameBreakdown(p) {
+    var TM = D.teamMatchup || {}, meta = D.teamMatchupMeta || {};
+    if (!p || !meta.cats) return '';
+    var g = p.game, A = team(g.away), H = team(g.home);
+    var pa = TM[g.awaySchool], ph = TM[g.homeSchool];
+    if (!pa || !ph) return '';
+    var aOff = gbSide(A, H, tmCompare(pa, ph)), hOff = gbSide(H, A, tmCompare(ph, pa));
+    // Matchup score per team: its offense's net edge plus its defense's net edge.
+    var aScore = aOff.net - hOff.net, hScore = -aScore;
+    var aEdges = aOff.oE + hOff.dE, hEdges = hOff.oE + aOff.dE;
+    var better = Math.abs(aScore) < 0.04 ? null : (aScore > 0 ? A : H);
+    var bottom = better
+      ? '<b>Bottom line:</b> ' + esc(better.abbr) + ' has the better matchup overall (' +
+          (better === A ? aEdges + ' to ' + hEdges : hEdges + ' to ' + aEdges) + ' in category edges across both sides of the ball).'
+      : '<b>Bottom line:</b> the units grade out close to even (' + aEdges + ' edges for ' + esc(A.abbr) + ', ' + hEdges + ' for ' + esc(H.abbr) + ').';
+    var play;
+    if (!p.side) {
+      play = 'No ' + esc(p.market === 'Moneyline' ? 'moneyline' : 'spread') + ' posted yet, so there&rsquo;s no play.';
+    } else {
+      var S = team(p.side), sideIsA = p.side === g.away;
+      var sideScore = sideIsA ? aScore : hScore;
+      var desc = p.market === 'Moneyline'
+        ? 'The model gives ' + esc(S.abbr) + ' ' + (p.sideProb * 100).toFixed(1) + '% to win at ' + (p.sideMoneyline > 0 ? '+' : '') + p.sideMoneyline + ' (moneylines are unofficial)'
+        : 'The model has ' + esc(S.abbr) + ' ' + M.signed(sideIsA ? -g.modelSpread : g.modelSpread) + ', the market ' + esc(S.abbr) + ' ' +
+          M.signed(sideIsA ? -g.marketSpread : g.marketSpread) + ', ' + (p.sideProb * 100).toFixed(1) + '% to cover';
+      var fit;
+      if (sideScore >= 0.04) fit = 'The matchup backs it: ' + esc(S.abbr) + ' has the better units.';
+      else if (sideScore <= -0.04) fit = p.market === 'Spread' && /\\+/.test(p.playLabel)
+        ? esc(S.abbr) + ' has the weaker units, so this is a points play: the model thinks the number is too big, not that ' + esc(S.abbr) + ' is the better team.'
+        : 'Heads up: the matchup leans the other way. The edge comes from the model&rsquo;s number, not the unit ranks.';
+      else fit = 'The matchup is close to even, so the play rests on the model&rsquo;s number.';
+      play = (p.qualifies
+        ? '<span class="gb-play">' + trkMark(S.abbr, 18) + ' ' + esc(p.playLabel) + '</span> <span class="tier"><span>' + esc(p.tier) + '</span></span> '
+        : '<span class="gb-play is-lean">Lean ' + esc(p.playLabel) + '</span> <em class="gb-off">not on the Bet Card (edge below threshold)</em> ') +
+        '<div class="gb-why">' + desc + '. ' + fit + '</div>';
+    }
+    return '<div class="tm-card gb-card"><div class="tm-title">' + icon('edge') + '<span>Game breakdown</span><em>' +
+      esc(A.abbr) + ' at ' + esc(H.abbr) + ' &middot; from the team matchup ranks</em></div>' +
+      '<p class="gb-p">' + aOff.html + '</p><p class="gb-p">' + hOff.html + '</p>' +
+      '<p class="gb-p">' + bottom + '</p>' +
+      '<div class="gb-playbox"><div class="gb-lab">The play</div>' + play + '</div>' +
+      '<div class="tm-foot">Written from the ranks below. The play comes from the model&rsquo;s number against the market; the matchup is context, not a second filter (not yet backtested).</div></div>';
+  }
   window.__cfbPpFilters = function () { state.ppFilters = !state.ppFilters; render(); };
 
   function renderBetCard(card) {
@@ -5994,7 +6094,7 @@ RENDERER_JS = """<script>
           '<div class="em-wrap">' + renderEdgeBoard(priced, card) + '</div>' +
           renderEdgePanels(priced) +
           '<div class="main em-below" id="em-projector">' +
-            '<div>' + renderProjector(sel) + renderTeamMatchup(sel) + '</div>' +
+            '<div>' + renderProjector(sel) + renderGameBreakdown(sel) + renderTeamMatchup(sel) + '</div>' +
             '<div>' + renderBetCard(card) + '</div>' +
           '</div>';
     }
