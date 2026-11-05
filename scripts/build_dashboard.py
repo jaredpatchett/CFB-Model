@@ -1551,6 +1551,19 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .gb-play { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; font-size: 15px; color: #fff; vertical-align: middle; }
 .gb-play.is-lean { color: var(--muted-2, #B6C2CF); }
 .gb-off { font-size: 11px; color: var(--muted-3); }
+.gb-info { font-size: 11.5px; color: var(--muted-2, #B6C2CF); background: var(--panel-deep); border: 1px solid var(--rule); border-radius: 8px; padding: 7px 10px; margin-bottom: 12px; line-height: 1.6; }
+.gb-sec { border-top: 1px solid var(--rule); padding-top: 10px; margin-bottom: 10px; }
+.gb-lab2 { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-2, #B6C2CF); margin-bottom: 7px; }
+.gb-lab2 span { text-transform: none; letter-spacing: 0; font-weight: 500; color: var(--muted-3); }
+.gb-injs { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+.gb-inj, .gb-prop { font-size: 11.5px; border: 1px solid var(--rule-strong); border-radius: 6px; padding: 3px 7px; color: var(--text, #E6EDF3); }
+.gb-inj i { font-style: normal; color: #F5B942; }
+.gb-inj.is-out i { color: #FF6B6B; }
+.gb-inj em { font-style: normal; font-weight: 800; font-size: 10px; color: #fff; background: rgba(255,107,107,0.18); border-radius: 4px; padding: 0 4px; margin-left: 2px; }
+.gb-inj.is-key { border-color: rgba(255,107,107,0.45); }
+.gb-prop { border-color: rgba(57,240,122,0.45); }
+.gb-note { font-size: 11px; color: var(--muted-3); }
+.gb-risk { font-size: 12px; color: #F5B942; margin-top: 7px; line-height: 1.5; }
 .gb-why { font-size: 12.5px; line-height: 1.55; color: var(--muted-2, #B6C2CF); margin-top: 6px; }
 
 .pp-grade { display: flex; gap: 3px; }
@@ -3377,6 +3390,96 @@ RENDERER_JS = """<script>
     var net = rows.reduce(function (s, x) { return s + x.diff; }, 0) / Math.max(1, rows.length);
     return { html: txt, net: net, oE: oE.length, dE: dE.length };
   }
+  // Game breakdown extras (11/2026): game info, injuries (with whether the
+  // player is one of the team's main producers), players to know, and any
+  // official props in the game.
+  function gbNameKey(n) {
+    var parts = String(n || '').replace(/[.]/g, ' ').trim().split(/ +/);
+    var suf = { jr: 1, sr: 1, ii: 1, iii: 1, iv: 1 };
+    while (parts.length > 1 && suf[parts[parts.length - 1].toLowerCase()]) parts.pop();
+    return (parts[0] || '').charAt(0).toLowerCase() + '|' + (parts[parts.length - 1] || '').toLowerCase();
+  }
+  function gbFantasy(school) {
+    return (D.fantasy || []).filter(function (f) { return f.team === school; })
+      .sort(function (a, b) { return (b.projected_points || 0) - (a.projected_points || 0); });
+  }
+  function gbRole(fan, inj) {
+    // Rank the injured player within his position on his team by projected points.
+    var k = gbNameKey(inj.player), pos = inj.pos;
+    var grp = (pos === 'WR' || pos === 'TE') ? 'WR/TE' : pos;
+    var same = fan.filter(function (f) { return f.position === grp; });
+    for (var i = 0; i < same.length; i++) {
+      if (gbNameKey(same[i].player_name) === k) {
+        if (grp === 'QB') return i === 0 ? 'starting QB' : 'backup QB';
+        if (grp === 'WR/TE') return i === 0 ? 'top pass catcher' : (i < 3 ? 'No. ' + (i + 1) + ' pass catcher' : null);
+        if (grp === 'RB') return i === 0 ? 'lead back' : (i === 1 ? 'No. 2 back' : null);
+        return null;
+      }
+    }
+    return null;
+  }
+  function gbInjuries(T, school, list) {
+    var fan = gbFantasy(school);
+    var rows = (list || []).slice().sort(function (a, b) {
+      return ((a.pos === 'QB') ? 0 : 1) - ((b.pos === 'QB') ? 0 : 1) || (INJ_ORDER[a.status] || 9) - (INJ_ORDER[b.status] || 9);
+    });
+    if (!rows.length) return { html: '<b>' + esc(T.abbr) + ':</b> nothing listed.', key: [] };
+    var key = [], bits = rows.map(function (i) {
+      var role = gbRole(fan, i), st = i.status || '';
+      var out = /^(Out|IR|Doubtful)/.test(st);
+      if (role || i.pos === 'QB') key.push({ player: i.player, pos: i.pos, status: st, role: role || (i.pos === 'QB' ? 'QB' : null) });
+      return '<span class="gb-inj' + (out ? ' is-out' : '') + (role ? ' is-key' : '') + '">' + esc(i.player) + ' ' + esc(i.pos || '') +
+        ' <i>' + esc(st) + (i.injury && i.injury !== 'Undisclosed' ? ', ' + esc(i.injury.toLowerCase()) : '') + '</i>' +
+        (role ? ' <em>' + esc(role) + '</em>' : '') + '</span>';
+    });
+    var nOut = rows.filter(function (i) { return /^(Out|IR|Doubtful)/.test(i.status || ''); }).length;
+    return { html: '<b>' + esc(T.abbr) + '</b> <span class="gb-rk">' + rows.length + ' listed, ' + nOut + ' out/doubtful</span><div class="gb-injs">' + bits.join('') + '</div>', key: key };
+  }
+  function gbPlayers(T, school) {
+    var fan = gbFantasy(school), pick = [], seen = {};
+    [['QB', 1], ['RB', 1], ['WR/TE', 2]].forEach(function (pp) {
+      fan.filter(function (f) { return f.position === pp[0]; }).slice(0, pp[1]).forEach(function (f) {
+        if ((f.projected_points || 0) >= 6 && !seen[f.player_name]) { seen[f.player_name] = 1; pick.push(f); }
+      });
+    });
+    if (!pick.length) return '';
+    return '<b>' + esc(T.abbr) + ':</b> ' + pick.map(function (f) {
+      var s = f.stat_breakdown || {}, line = [];
+      if (f.position === 'QB') { line.push(Math.round(s.pass_yds || 0) + ' pass yds'); if ((s.rush_yds || 0) >= 20) line.push(Math.round(s.rush_yds) + ' rush'); }
+      else if (f.position === 'RB') { line.push(Math.round(s.rush_yds || 0) + ' rush yds'); if ((s.rec_yds || 0) >= 15) line.push(Math.round(s.rec_yds) + ' rec'); }
+      else line.push((s.receptions || 0).toFixed(1) + ' rec, ' + Math.round(s.rec_yds || 0) + ' yds');
+      return esc(f.player_name) + ' <span class="gb-rk">' + esc(f.position === 'WR/TE' ? 'WR/TE' : f.position) + ' &middot; ' + line.join(', ') + '</span>';
+    }).join('; ') + '.';
+  }
+  function gbProps(g) {
+    var mine = (D.propsLive || []).filter(function (r) {
+      return r.is_official_play && (r.team === g.awaySchool || r.team === g.homeSchool) &&
+        (!g.kickoffIso || !r.start_time || Math.abs(new Date(r.start_time) - new Date(g.kickoffIso)) < 864e5);
+    });
+    var seen = {}, out = [];
+    mine.forEach(function (r) {
+      var k = r.player_name + '|' + r.market_name;
+      if (seen[k]) return; seen[k] = 1;
+      out.push('<span class="gb-prop">&#9733; ' + esc(r.player_name) + ' ' + esc(r.model_lean) + ' ' + r.line + ' ' + esc(r.market_name.toLowerCase()) +
+        ' <span class="gb-rk">proj ' + (+r.model_predicted_value).toFixed(1) + (r.model_ev != null ? ', ' + (+r.model_ev).toFixed(0) + '% edge' : '') + '</span></span>');
+    });
+    return out;
+  }
+  function gbInfo(p) {
+    var g = p.game, A = team(g.away), H = team(g.home), bits = [];
+    bits.push(esc(edgeKickoff(g)));
+    var neutral = (g.flags || []).some(function (f) { return f.text === 'Neutral site'; });
+    if (neutral) bits.push('neutral site');
+    if (g.marketTotal != null && g.marketSpread != null) {
+      var hT = (g.marketTotal - g.marketSpread) / 2, aT = g.marketTotal - hT;
+      bits.push('total ' + g.marketTotal + ' (implied ' + esc(A.abbr) + ' ' + aT.toFixed(1) + ', ' + esc(H.abbr) + ' ' + hT.toFixed(1) + ')');
+    } else if (g.marketTotal != null) bits.push('total ' + g.marketTotal);
+    var trained = (g.flags || []).some(function (f) { return f.text === 'In-season model'; });
+    bits.push(trained ? (g.modelVersion === 'upgraded' ? 'upgraded in-season model' : 'trained in-season model') : 'preseason ratings only (no in-season model yet)');
+    var hp = 1 - M.normalCdf(0, M.homeMargin(g), p.sd);
+    bits.push('model win chance ' + esc(A.abbr) + ' ' + ((1 - hp) * 100).toFixed(0) + '% / ' + esc(H.abbr) + ' ' + (hp * 100).toFixed(0) + '%');
+    return bits.join(' &middot; ');
+  }
   function renderGameBreakdown(p) {
     var TM = D.teamMatchup || {}, meta = D.teamMatchupMeta || {};
     if (!p || !meta.cats) return '';
@@ -3387,11 +3490,16 @@ RENDERER_JS = """<script>
     // Matchup score per team: its offense's net edge plus its defense's net edge.
     var aScore = aOff.net - hOff.net, hScore = -aScore;
     var aEdges = aOff.oE + hOff.dE, hEdges = hOff.oE + aOff.dE;
-    var better = Math.abs(aScore) < 0.04 ? null : (aScore > 0 ? A : H);
-    var bottom = better
-      ? '<b>Bottom line:</b> ' + esc(better.abbr) + ' has the better matchup overall (' +
-          (better === A ? aEdges + ' to ' + hEdges : hEdges + ' to ' + aEdges) + ' in category edges across both sides of the ball).'
-      : '<b>Bottom line:</b> the units grade out close to even (' + aEdges + ' edges for ' + esc(A.abbr) + ', ' + hEdges + ' for ' + esc(H.abbr) + ').';
+    var eGap = aEdges - hEdges;
+    var better = Math.abs(eGap) >= 3 ? (eGap > 0 ? A : H) : (Math.abs(aScore) >= 0.08 ? (aScore > 0 ? A : H) : null);
+    var bothOff = aOff.oE >= aOff.dE + 6 && hOff.oE >= hOff.dE + 6, bothDef = aOff.dE >= aOff.oE + 6 && hOff.dE >= hOff.oE + 6;
+    var flavor = bothOff ? ' Both offenses have the upper hand on the other&rsquo;s defense, which points to a high-scoring game.'
+      : (bothDef ? ' Both defenses grade ahead of the other&rsquo;s offense, which points to a lower-scoring game.' : '');
+    var bottom = '<b>Bottom line:</b> ' + (better
+      ? esc(better.abbr) + ' has the better matchup overall' + (Math.abs(eGap) >= 3
+          ? ' (' + (better === A ? aEdges + ' to ' + hEdges : hEdges + ' to ' + aEdges) + ' in category edges across both sides of the ball).'
+          : ': category edges are close (' + aEdges + '&ndash;' + hEdges + '), but ' + esc(better.abbr) + '&rsquo;s edges come by wider rank gaps.')
+      : 'the units grade out close to even (' + aEdges + ' edges for ' + esc(A.abbr) + ', ' + hEdges + ' for ' + esc(H.abbr) + ').') + flavor;
     var play;
     if (!p.side) {
       play = 'No ' + esc(p.market === 'Moneyline' ? 'moneyline' : 'spread') + ' posted yet, so there&rsquo;s no play.';
@@ -3403,8 +3511,8 @@ RENDERER_JS = """<script>
         : 'The model has ' + esc(S.abbr) + ' ' + M.signed(sideIsA ? -g.modelSpread : g.modelSpread) + ', the market ' + esc(S.abbr) + ' ' +
           M.signed(sideIsA ? -g.marketSpread : g.marketSpread) + ', ' + (p.sideProb * 100).toFixed(1) + '% to cover';
       var fit;
-      if (sideScore >= 0.04) fit = 'The matchup backs it: ' + esc(S.abbr) + ' has the better units.';
-      else if (sideScore <= -0.04) fit = p.market === 'Spread' && /\\+/.test(p.playLabel)
+      if (better && better.abbr === S.abbr) fit = 'The matchup backs it: ' + esc(S.abbr) + ' has the better units.';
+      else if (better) fit = p.market === 'Spread' && /\\+/.test(p.playLabel)
         ? esc(S.abbr) + ' has the weaker units, so this is a points play: the model thinks the number is too big, not that ' + esc(S.abbr) + ' is the better team.'
         : 'Heads up: the matchup leans the other way. The edge comes from the model&rsquo;s number, not the unit ranks.';
       else fit = 'The matchup is close to even, so the play rests on the model&rsquo;s number.';
@@ -3413,12 +3521,34 @@ RENDERER_JS = """<script>
         : '<span class="gb-play is-lean">Lean ' + esc(p.playLabel) + '</span> <em class="gb-off">not on the Bet Card (edge below threshold)</em> ') +
         '<div class="gb-why">' + desc + '. ' + fit + '</div>';
     }
+    var sec = function (lab, html) { return html ? '<div class="gb-sec"><div class="gb-lab2">' + lab + '</div>' + html + '</div>' : ''; };
+    var injA = gbInjuries(A, g.awaySchool, g.injAway), injH = gbInjuries(H, g.homeSchool, g.injHome);
+    var adj = (g.flags || []).filter(function (f) { return / pts: /.test(f.text); }).map(function (f) { return esc(f.text); });
+    var injNote = adj.length ? 'Model adjustment applied: ' + adj.join('; ') + '.'
+      : 'The model line does not adjust for these.';
+    var injHtml = '<p class="gb-p">' + injA.html + '</p><p class="gb-p">' + injH.html + '</p>' +
+      '<div class="gb-note">' + injNote + (D.meta.injuriesAsOf ? ' Report as of ' + esc(D.meta.injuriesAsOf) + ' (Covers.com, team and media reports).' : '') + '</div>';
+    var players = [gbPlayers(A, g.awaySchool), gbPlayers(H, g.homeSchool)].filter(Boolean);
+    var props = gbProps(g);
+    // Risk line for the play: key players listed on either side.
+    var risk = '';
+    if (p.side) {
+      var S2 = team(p.side), sideKey = p.side === g.away ? injA.key : injH.key, oppKey = p.side === g.away ? injH.key : injA.key;
+      var fmtK = function (k) { return esc(k.player) + ' (' + esc(k.role || k.pos) + ', ' + esc(k.status.toLowerCase()) + ')'; };
+      var parts = [];
+      if (sideKey.length) parts.push('the play is on ' + esc(S2.abbr) + ' with ' + sideKey.map(fmtK).join(', ') + ' on the report');
+      if (oppKey.length) parts.push('the other side has ' + oppKey.map(fmtK).join(', ') + ' listed');
+      if (parts.length) risk = '<div class="gb-risk">&#9888; Injury check: ' + parts.join('; ') + '. Confirm status before kickoff.</div>';
+    }
     return '<div class="tm-card gb-card"><div class="tm-title">' + icon('edge') + '<span>Game breakdown</span><em>' +
-      esc(A.abbr) + ' at ' + esc(H.abbr) + ' &middot; from the team matchup ranks</em></div>' +
-      '<p class="gb-p">' + aOff.html + '</p><p class="gb-p">' + hOff.html + '</p>' +
-      '<p class="gb-p">' + bottom + '</p>' +
-      '<div class="gb-playbox"><div class="gb-lab">The play</div>' + play + '</div>' +
-      '<div class="tm-foot">Written from the ranks below. The play comes from the model&rsquo;s number against the market; the matchup is context, not a second filter (not yet backtested).</div></div>';
+      esc(A.abbr) + ' at ' + esc(H.abbr) + '</em></div>' +
+      '<div class="gb-info">' + gbInfo(p) + '</div>' +
+      sec('Matchup', '<p class="gb-p">' + aOff.html + '</p><p class="gb-p">' + hOff.html + '</p><p class="gb-p">' + bottom + '</p>') +
+      sec('Injury report', injHtml) +
+      sec('Players to know <span>(model projections this week)</span>', players.length ? '<p class="gb-p">' + players.join('</p><p class="gb-p">') + '</p>' : '') +
+      sec('Official props in this game', props.length ? '<div class="gb-injs">' + props.join('') + '</div>' : '') +
+      '<div class="gb-playbox"><div class="gb-lab">The play</div>' + play + risk + '</div>' +
+      '<div class="tm-foot">Matchup text comes from the team ranks below. The play comes from the model&rsquo;s number against the market; the matchup and injuries are context, not extra filters (not yet backtested).</div></div>';
   }
   window.__cfbPpFilters = function () { state.ppFilters = !state.ppFilters; render(); };
 
