@@ -12582,6 +12582,45 @@
       "is_under_lean": true,
       "play_kind": "rec_under_lean",
       "matchup": "tough",
+      "matchup_vs": "TE",
+      "mu_grade": "C",
+      "mu_score": 49,
+      "mu_rank": 71,
+      "mu_of": 136,
+      "mu_vs": "TEs",
+      "mu_def": "average",
+      "pos": "TE"
+    },
+    {
+      "fixture_id": "c93b343bc3151a39a9541c0af3b22123",
+      "start_time": "2026-11-06T01:00:00Z",
+      "player_name": "Corey Scott",
+      "market_name": "Receptions",
+      "line": 3.5,
+      "over_price": 109,
+      "under_price": -141.0,
+      "book_used": "betonlineag",
+      "model_predicted_value": 3.3,
+      "model_edge": -0.2,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "James Madison",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Southern Miss",
+      "games_played": 8,
+      "rec_share": 0.1775642965851944,
+      "carry_share": 0.0,
+      "model_over_probability": 0.424,
+      "model_under_probability": 0.576,
+      "model_push_probability": 0.0,
+      "game_log_key": "5165803|receptions",
+      "model_stat": "receptions",
+      "model_projection_raw": 3.332809,
+      "model_ev": -1.5,
+      "model_lean_probability": 0.576,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "matchup": "tough",
       "matchup_vs": "WR",
       "mu_grade": "B+",
       "mu_score": 73,
@@ -20648,6 +20687,43 @@
     {
       "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
       "start_time": "2026-11-07T17:00:00Z",
+      "player_name": "Jojo Phillips",
+      "market_name": "Reception Yards",
+      "line": 18.5,
+      "over_price": -114,
+      "under_price": -114.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 29.0,
+      "model_edge": 10.5,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "BYU",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Utah",
+      "games_played": 7,
+      "rec_share": 0.11772663610898905,
+      "carry_share": 0.004608294930875576,
+      "model_over_probability": 0.557,
+      "model_under_probability": 0.443,
+      "model_push_probability": 0.0,
+      "game_log_key": "5160955|rec_yds",
+      "model_stat": "rec_yds",
+      "model_projection_raw": 29.044499,
+      "model_ev": 4.6,
+      "model_lean_probability": 0.557,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "D",
+      "mu_score": 35,
+      "mu_rank": 49,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "average",
+      "pos": "WR"
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
       "player_name": "Wayshawn Parker",
       "market_name": "Reception Yards",
       "line": 21.5,
@@ -21219,6 +21295,203 @@
       "mu_vs": "TEs",
       "mu_def": "average",
       "pos": "TE"
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "player_name": "Wayshawn Parker",
+      "market_name": "Receptions",
+      "line": 2.5,
+      "over_price": -138,
+      "under_price": 104.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 2.7,
+      "model_edge": 0.2,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Utah",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "BYU",
+      "games_played": 8,
+      "rec_share": 0.16294650468883204,
+      "carry_share": 0.3528755977151293,
+      "model_over_probability": 0.479,
+      "model_under_probability": 0.521,
+      "model_push_probability": 0.0,
+      "game_log_key": "5173431|receptions",
+      "model_stat": "receptions",
+      "model_projection_raw": 2.687905,
+      "model_ev": -17.4,
+      "model_lean_probability": 0.479,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "matchup": "soft",
+      "matchup_vs": "RB",
+      "mu_grade": "B+",
+      "mu_score": 74,
+      "mu_rank": 101,
+      "mu_of": 136,
+      "mu_vs": "RBs",
+      "mu_def": "soft",
+      "pos": "RB"
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "player_name": "Walker Lyons",
+      "market_name": "Receptions",
+      "line": 3.5,
+      "over_price": 116,
+      "under_price": -154.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 2.8,
+      "model_edge": -0.7,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "BYU",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Utah",
+      "games_played": 8,
+      "rec_share": 0.16549834646777373,
+      "carry_share": 0.0,
+      "model_over_probability": 0.3115,
+      "model_under_probability": 0.6885,
+      "model_push_probability": 0.0,
+      "game_log_key": "5221043|receptions",
+      "model_stat": "receptions",
+      "model_projection_raw": 2.826408,
+      "model_ev": 13.6,
+      "model_lean_probability": 0.6885,
+      "is_official_play": false,
+      "is_watch_play": true,
+      "is_under_lean": true,
+      "play_kind": "rec_under_lean",
+      "matchup": "tough",
+      "matchup_vs": "TE",
+      "mu_grade": "A",
+      "mu_score": 81,
+      "mu_rank": 27,
+      "mu_of": 136,
+      "mu_vs": "TEs",
+      "mu_def": "tough",
+      "pos": "TE"
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "player_name": "Legend Glasker",
+      "market_name": "Receptions",
+      "line": 3.5,
+      "over_price": -158,
+      "under_price": 118.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 3.7,
+      "model_edge": 0.2,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "BYU",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Utah",
+      "games_played": 8,
+      "rec_share": 0.24368711300309598,
+      "carry_share": 0.0595490546512463,
+      "model_over_probability": 0.5035,
+      "model_under_probability": 0.4965,
+      "model_push_probability": 0.0,
+      "game_log_key": "5279329|receptions",
+      "model_stat": "receptions",
+      "model_projection_raw": 3.730091,
+      "model_ev": -17.8,
+      "model_lean_probability": 0.5035,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "matchup": "average",
+      "matchup_vs": "WR",
+      "mu_grade": "D",
+      "mu_score": 35,
+      "mu_rank": 49,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "average",
+      "pos": "WR"
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "player_name": "Kyler Kasper",
+      "market_name": "Receptions",
+      "line": 3.5,
+      "over_price": -130,
+      "under_price": -102.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 4.1,
+      "model_edge": 0.6,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "BYU",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "Utah",
+      "games_played": 8,
+      "rec_share": 0.21529194811896052,
+      "carry_share": 0.0,
+      "model_over_probability": 0.57,
+      "model_under_probability": 0.43,
+      "model_push_probability": 0.0,
+      "game_log_key": "4870876|receptions",
+      "model_stat": "receptions",
+      "model_projection_raw": 4.132057,
+      "model_ev": 0.8,
+      "model_lean_probability": 0.57,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "matchup": "average",
+      "matchup_vs": "WR",
+      "mu_grade": "D",
+      "mu_score": 35,
+      "mu_rank": 49,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "average",
+      "pos": "WR"
+    },
+    {
+      "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
+      "start_time": "2026-11-07T17:00:00Z",
+      "player_name": "Creed Whittemore",
+      "market_name": "Receptions",
+      "line": 2.5,
+      "over_price": -122,
+      "under_price": -106.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 2.7,
+      "model_edge": 0.2,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "Utah",
+      "model_version": "retrained 2026-11-02 (played-zeros)",
+      "opponent": "BYU",
+      "games_played": 8,
+      "rec_share": 0.1268948920147769,
+      "carry_share": 0.0,
+      "model_over_probability": 0.4785,
+      "model_under_probability": 0.5215,
+      "model_push_probability": 0.0,
+      "game_log_key": "4871040|receptions",
+      "model_stat": "receptions",
+      "model_projection_raw": 2.686241,
+      "model_ev": -12.9,
+      "model_lean_probability": 0.4785,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "matchup": "tough",
+      "matchup_vs": "WR",
+      "mu_grade": "F",
+      "mu_score": 7,
+      "mu_rank": 10,
+      "mu_of": 136,
+      "mu_vs": "WRs",
+      "mu_def": "tough",
+      "pos": "WR"
     },
     {
       "fixture_id": "8db5a11826fc84a5a6506c9b85979e70",
@@ -25309,7 +25582,7 @@
     {
       "fixture_id": "c3e23ea05d6570fdb90c3ddb225fd3e4",
       "start_time": "2026-11-07T17:00:00Z",
-      "player_name": "Steve Angeli",
+      "player_name": "Ashton Daniels",
       "market_name": "Pass Touchdowns",
       "line": 1.5,
       "over_price": 114,
@@ -25355,6 +25628,16 @@
         "pass yds": -11
       },
       "pos": "QB"
+    },
+    {
+      "fixture_id": "c3e23ea05d6570fdb90c3ddb225fd3e4",
+      "start_time": "2026-11-07T17:00:00Z",
+      "player_name": "Steve Angeli",
+      "market_name": "Pass Touchdowns",
+      "line": 1.5,
+      "over_price": 116,
+      "under_price": -154.0,
+      "book_used": "fanduel"
     },
     {
       "fixture_id": "c3e23ea05d6570fdb90c3ddb225fd3e4",
@@ -35067,6 +35350,86 @@
       "pos": "RB"
     },
     {
+      "fixture_id": "f3d964c6b45c36f9e6009c47e64f96db",
+      "start_time": "2026-11-07T18:00:00Z",
+      "player_name": "Joe Jackson",
+      "market_name": "Rush Touchdowns",
+      "line": 0.5,
+      "over_price": 110,
+      "under_price": NaN,
+      "book_used": "fliff",
+      "model_predicted_value": 0.4,
+      "model_edge": -0.1,
+      "model_lean": "under",
+      "model_confidence": "normal",
+      "team": "Kansas State",
+      "model_version": null,
+      "opponent": "Oklahoma State",
+      "games_played": 8,
+      "rec_share": 0.08061417748917749,
+      "carry_share": 0.2683850997095799,
+      "model_over_probability": 0.375,
+      "model_under_probability": 0.625,
+      "model_push_probability": 0.0,
+      "game_log_key": "5078916|rush_tds",
+      "model_stat": "rush_tds",
+      "model_projection_raw": 0.394682,
+      "model_ev": null,
+      "model_lean_probability": 0.625,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "C",
+      "mu_score": 40,
+      "mu_rank": 82,
+      "mu_of": 136,
+      "mu_vs": "the run",
+      "mu_def": "average",
+      "mu_allowed": {
+        "rush yds": -7
+      },
+      "pos": "RB"
+    },
+    {
+      "fixture_id": "208e919ada4f5cf6d27af719879d1880",
+      "start_time": "2026-11-07T20:00:00Z",
+      "player_name": "LaNorris Sellers",
+      "market_name": "Pass Touchdowns",
+      "line": 1.5,
+      "over_price": -138,
+      "under_price": 104.0,
+      "book_used": "fanduel",
+      "model_predicted_value": 1.5,
+      "model_edge": 0.0,
+      "model_lean": "over",
+      "model_confidence": "normal",
+      "team": "South Carolina",
+      "model_version": null,
+      "opponent": "Texas A&M",
+      "games_played": 8,
+      "rec_share": 0.0,
+      "carry_share": 0.3274907077695237,
+      "model_over_probability": 0.554,
+      "model_under_probability": 0.446,
+      "model_push_probability": 0.0,
+      "game_log_key": "4875127|pass_tds",
+      "model_stat": "pass_tds",
+      "model_projection_raw": 1.533456,
+      "model_ev": -4.5,
+      "model_lean_probability": 0.554,
+      "is_official_play": false,
+      "is_watch_play": false,
+      "mu_grade": "C",
+      "mu_score": 43,
+      "mu_rank": 59,
+      "mu_of": 136,
+      "mu_vs": "the pass",
+      "mu_def": "average",
+      "mu_allowed": {
+        "pass yds": -18
+      },
+      "pos": "QB"
+    },
+    {
       "fixture_id": "208e919ada4f5cf6d27af719879d1880",
       "start_time": "2026-11-07T20:00:00Z",
       "player_name": "Marcel Reed",
@@ -35115,9 +35478,9 @@
       "over_price": -138,
       "under_price": 104.0,
       "book_used": "fanduel",
-      "model_predicted_value": 1.5,
-      "model_edge": 0.0,
-      "model_lean": "over",
+      "model_predicted_value": 209.5,
+      "model_edge": -28.0,
+      "model_lean": "under",
       "model_confidence": "normal",
       "team": "South Carolina",
       "model_version": null,
@@ -35125,8 +35488,8 @@
       "games_played": 8,
       "rec_share": 0.0,
       "carry_share": 0.3274907077695237,
-      "model_over_probability": 0.554,
-      "model_under_probability": 0.446,
+      "model_over_probability": 0.238,
+      "model_under_probability": 0.762,
       "model_push_probability": 0.0,
       "game_log_key": "4875127|pass_tds",
       "model_stat": "pass_tds",
@@ -35136,7 +35499,7 @@
       "is_official_play": false,
       "is_watch_play": false,
       "mu_grade": "C",
-      "mu_score": 43,
+      "mu_score": 57,
       "mu_rank": 59,
       "mu_of": 136,
       "mu_vs": "the pass",
@@ -55856,9 +56219,9 @@
       "injury_detail": "Undisclosed",
       "matchup": "tough",
       "matchup_vs": "TE",
-      "mu_grade": "F",
-      "mu_score": 11,
-      "mu_rank": 16,
+      "mu_grade": "B+",
+      "mu_score": 72,
+      "mu_rank": 39,
       "mu_of": 136,
       "mu_vs": "TEs",
       "mu_def": "tough",
@@ -74503,48 +74866,6 @@
         3
       ]
     ],
-    "5141367|pass_yds": [
-      [
-        1,
-        "Utah Tech",
-        198
-      ],
-      [
-        2,
-        "Arizona",
-        217
-      ],
-      [
-        3,
-        "Colorado State",
-        227
-      ],
-      [
-        5,
-        "TCU",
-        62
-      ],
-      [
-        6,
-        "Iowa State",
-        329
-      ],
-      [
-        7,
-        "Notre Dame",
-        224
-      ],
-      [
-        8,
-        "UCF",
-        257
-      ],
-      [
-        9,
-        "Arizona State",
-        236
-      ]
-    ],
     "5105849|pass_yds": [
       [
         1,
@@ -74585,6 +74906,48 @@
         9,
         "Cincinnati",
         260
+      ]
+    ],
+    "5141367|pass_yds": [
+      [
+        1,
+        "Utah Tech",
+        198
+      ],
+      [
+        2,
+        "Arizona",
+        217
+      ],
+      [
+        3,
+        "Colorado State",
+        227
+      ],
+      [
+        5,
+        "TCU",
+        62
+      ],
+      [
+        6,
+        "Iowa State",
+        329
+      ],
+      [
+        7,
+        "Notre Dame",
+        224
+      ],
+      [
+        8,
+        "UCF",
+        257
+      ],
+      [
+        9,
+        "Arizona State",
+        236
       ]
     ],
     "4869422|rec_yds": [
@@ -74706,6 +75069,43 @@
         9,
         "Arizona State",
         49
+      ]
+    ],
+    "5160955|rec_yds": [
+      [
+        1,
+        "Utah Tech",
+        16
+      ],
+      [
+        2,
+        "Arizona",
+        5
+      ],
+      [
+        3,
+        "Colorado State",
+        18
+      ],
+      [
+        5,
+        "TCU",
+        6
+      ],
+      [
+        6,
+        "Iowa State",
+        21
+      ],
+      [
+        7,
+        "Notre Dame",
+        25
+      ],
+      [
+        8,
+        "UCF",
+        39
       ]
     ],
     "5173431|rec_yds": [
@@ -74866,43 +75266,6 @@
         57
       ]
     ],
-    "5160955|rec_yds": [
-      [
-        1,
-        "Utah Tech",
-        16
-      ],
-      [
-        2,
-        "Arizona",
-        5
-      ],
-      [
-        3,
-        "Colorado State",
-        18
-      ],
-      [
-        5,
-        "TCU",
-        6
-      ],
-      [
-        6,
-        "Iowa State",
-        21
-      ],
-      [
-        7,
-        "Notre Dame",
-        25
-      ],
-      [
-        8,
-        "UCF",
-        39
-      ]
-    ],
     "4871040|rec_yds": [
       [
         1,
@@ -75024,6 +75387,75 @@
         5
       ]
     ],
+    "5132652|receptions": [
+      [
+        1,
+        "Idaho",
+        2
+      ],
+      [
+        2,
+        "Arkansas",
+        1
+      ],
+      [
+        3,
+        "Utah State",
+        4
+      ],
+      [
+        4,
+        "Iowa State",
+        2
+      ],
+      [
+        6,
+        "Kansas",
+        5
+      ],
+      [
+        7,
+        "Colorado",
+        2
+      ],
+      [
+        9,
+        "Cincinnati",
+        1
+      ]
+    ],
+    "4900351|receptions": [
+      [
+        1,
+        "Idaho",
+        1
+      ],
+      [
+        2,
+        "Arkansas",
+        4
+      ],
+      [
+        4,
+        "Iowa State",
+        2
+      ],
+      [
+        6,
+        "Kansas",
+        2
+      ],
+      [
+        7,
+        "Colorado",
+        4
+      ],
+      [
+        8,
+        "Houston",
+        5
+      ]
+    ],
     "5173431|receptions": [
       [
         1,
@@ -75064,43 +75496,6 @@
         9,
         "Cincinnati",
         3
-      ]
-    ],
-    "5132652|receptions": [
-      [
-        1,
-        "Idaho",
-        2
-      ],
-      [
-        2,
-        "Arkansas",
-        1
-      ],
-      [
-        3,
-        "Utah State",
-        4
-      ],
-      [
-        4,
-        "Iowa State",
-        2
-      ],
-      [
-        6,
-        "Kansas",
-        5
-      ],
-      [
-        7,
-        "Colorado",
-        2
-      ],
-      [
-        9,
-        "Cincinnati",
-        1
       ]
     ],
     "5221043|receptions": [
@@ -75269,38 +75664,6 @@
         9,
         "Cincinnati",
         2
-      ]
-    ],
-    "4900351|receptions": [
-      [
-        1,
-        "Idaho",
-        1
-      ],
-      [
-        2,
-        "Arkansas",
-        4
-      ],
-      [
-        4,
-        "Iowa State",
-        2
-      ],
-      [
-        6,
-        "Kansas",
-        2
-      ],
-      [
-        7,
-        "Colorado",
-        4
-      ],
-      [
-        8,
-        "Houston",
-        5
       ]
     ],
     "5105849|rush_yds": [
@@ -78040,6 +78403,28 @@
         189
       ]
     ],
+    "5159036|rec_yds": [
+      [
+        5,
+        "UConn",
+        14
+      ],
+      [
+        7,
+        "Louisville",
+        53
+      ],
+      [
+        8,
+        "North Carolina",
+        86
+      ],
+      [
+        9,
+        "SMU",
+        41
+      ]
+    ],
     "5112674|rec_yds": [
       [
         1,
@@ -78159,28 +78544,6 @@
         9,
         "SMU",
         47
-      ]
-    ],
-    "5159036|rec_yds": [
-      [
-        5,
-        "UConn",
-        14
-      ],
-      [
-        7,
-        "Louisville",
-        53
-      ],
-      [
-        8,
-        "North Carolina",
-        86
-      ],
-      [
-        9,
-        "SMU",
-        41
       ]
     ],
     "5218753|rec_yds": [
@@ -84959,43 +85322,361 @@
     "4870971|pass_tds": [
       [
         1,
-        "Missouri State",
-        2
+        "Nicholls",
+        3
       ],
       [
         2,
-        "Arizona State",
+        "Washington State",
         3
       ],
       [
         3,
-        "Kentucky",
-        1
+        "Tulane",
+        0
       ],
       [
         4,
-        "LSU",
-        0
-      ],
-      [
-        5,
-        "Arkansas",
-        0
+        "Cincinnati",
+        1
       ],
       [
         6,
-        "Missouri",
-        0
+        "Houston",
+        2
       ],
       [
         7,
-        "The Citadel",
+        "Kansas",
+        1
+      ]
+    ],
+    "4804882|rec_yds": [
+      [
+        1,
+        "Nicholls",
+        40
+      ],
+      [
+        3,
+        "Tulane",
+        27
+      ],
+      [
+        4,
+        "Cincinnati",
+        80
+      ],
+      [
+        6,
+        "Houston",
+        49
+      ],
+      [
+        9,
+        "Colorado",
+        25
+      ]
+    ],
+    "5083747|rec_tds": [
+      [
+        1,
+        "Tulsa",
+        1
+      ],
+      [
+        2,
+        "Oregon",
+        0
+      ],
+      [
+        3,
+        "Murray State",
+        2
+      ],
+      [
+        4,
+        "West Virginia",
+        1
+      ],
+      [
+        6,
+        "UCF",
+        1
+      ],
+      [
+        7,
+        "Houston",
         1
       ],
       [
         8,
-        "Alabama",
+        "Colorado",
         1
+      ],
+      [
+        9,
+        "Iowa State",
+        2
+      ]
+    ],
+    "5148787|rec_tds": [
+      [
+        1,
+        "Tulsa",
+        0
+      ],
+      [
+        2,
+        "Oregon",
+        1
+      ],
+      [
+        3,
+        "Murray State",
+        1
+      ],
+      [
+        4,
+        "West Virginia",
+        1
+      ],
+      [
+        6,
+        "UCF",
+        1
+      ],
+      [
+        7,
+        "Houston",
+        1
+      ],
+      [
+        8,
+        "Colorado",
+        1
+      ],
+      [
+        9,
+        "Iowa State",
+        2
+      ]
+    ],
+    "5078225|rec_tds": [
+      [
+        1,
+        "Nicholls",
+        1
+      ],
+      [
+        2,
+        "Washington State",
+        0
+      ],
+      [
+        3,
+        "Tulane",
+        0
+      ],
+      [
+        4,
+        "Cincinnati",
+        0
+      ],
+      [
+        6,
+        "Houston",
+        1
+      ],
+      [
+        7,
+        "Kansas",
+        1
+      ],
+      [
+        8,
+        "Arizona State",
+        1
+      ],
+      [
+        9,
+        "Colorado",
+        0
+      ]
+    ],
+    "4804882|rec_tds": [
+      [
+        1,
+        "Nicholls",
+        0
+      ],
+      [
+        3,
+        "Tulane",
+        0
+      ],
+      [
+        4,
+        "Cincinnati",
+        0
+      ],
+      [
+        6,
+        "Houston",
+        1
+      ],
+      [
+        9,
+        "Colorado",
+        1
+      ]
+    ],
+    "5384681|rec_tds": [
+      [
+        1,
+        "Nicholls",
+        0
+      ],
+      [
+        4,
+        "Cincinnati",
+        1
+      ],
+      [
+        7,
+        "Kansas",
+        0
+      ],
+      [
+        8,
+        "Arizona State",
+        0
+      ]
+    ],
+    "5149007|rec_tds": [
+      [
+        1,
+        "Tulsa",
+        0
+      ],
+      [
+        2,
+        "Oregon",
+        0
+      ],
+      [
+        3,
+        "Murray State",
+        1
+      ],
+      [
+        4,
+        "West Virginia",
+        0
+      ],
+      [
+        6,
+        "UCF",
+        0
+      ],
+      [
+        7,
+        "Houston",
+        0
+      ],
+      [
+        8,
+        "Colorado",
+        1
+      ],
+      [
+        9,
+        "Iowa State",
+        0
+      ]
+    ],
+    "5125335|rush_tds": [
+      [
+        1,
+        "Nicholls",
+        1
+      ],
+      [
+        2,
+        "Washington State",
+        1
+      ],
+      [
+        3,
+        "Tulane",
+        0
+      ],
+      [
+        4,
+        "Cincinnati",
+        2
+      ],
+      [
+        6,
+        "Houston",
+        0
+      ],
+      [
+        7,
+        "Kansas",
+        1
+      ],
+      [
+        8,
+        "Arizona State",
+        0
+      ],
+      [
+        9,
+        "Colorado",
+        0
+      ]
+    ],
+    "5078916|rush_tds": [
+      [
+        1,
+        "Nicholls",
+        1
+      ],
+      [
+        2,
+        "Washington State",
+        0
+      ],
+      [
+        3,
+        "Tulane",
+        0
+      ],
+      [
+        4,
+        "Cincinnati",
+        0
+      ],
+      [
+        6,
+        "Houston",
+        0
+      ],
+      [
+        7,
+        "Kansas",
+        1
+      ],
+      [
+        8,
+        "Arizona State",
+        0
+      ],
+      [
+        9,
+        "Colorado",
+        0
       ]
     ],
     "4875127|pass_tds": [
@@ -85040,46 +85721,46 @@
         3
       ]
     ],
-    "4870971|pass_yds": [
+    "4870971|pass_tds": [
       [
         1,
         "Missouri State",
-        233
+        2
       ],
       [
         2,
         "Arizona State",
-        163
+        3
       ],
       [
         3,
         "Kentucky",
-        236
+        1
       ],
       [
         4,
         "LSU",
-        106
+        0
       ],
       [
         5,
         "Arkansas",
-        170
+        0
       ],
       [
         6,
         "Missouri",
-        187
+        0
       ],
       [
         7,
         "The Citadel",
-        130
+        1
       ],
       [
         8,
         "Alabama",
-        163
+        1
       ]
     ],
     "4875127|pass_yds": [
@@ -85122,6 +85803,48 @@
         9,
         "Oklahoma",
         301
+      ]
+    ],
+    "4870971|pass_yds": [
+      [
+        1,
+        "Missouri State",
+        233
+      ],
+      [
+        2,
+        "Arizona State",
+        163
+      ],
+      [
+        3,
+        "Kentucky",
+        236
+      ],
+      [
+        4,
+        "LSU",
+        106
+      ],
+      [
+        5,
+        "Arkansas",
+        170
+      ],
+      [
+        6,
+        "Missouri",
+        187
+      ],
+      [
+        7,
+        "The Citadel",
+        130
+      ],
+      [
+        8,
+        "Alabama",
+        163
       ]
     ],
     "5081213|rec_yds": [
@@ -85272,6 +85995,43 @@
         34
       ]
     ],
+    "5079345|receptions": [
+      [
+        1,
+        "Missouri State",
+        5
+      ],
+      [
+        2,
+        "Arizona State",
+        3
+      ],
+      [
+        3,
+        "Kentucky",
+        11
+      ],
+      [
+        4,
+        "LSU",
+        3
+      ],
+      [
+        5,
+        "Arkansas",
+        1
+      ],
+      [
+        6,
+        "Missouri",
+        1
+      ],
+      [
+        8,
+        "Alabama",
+        6
+      ]
+    ],
     "4685383|receptions": [
       [
         1,
@@ -85349,43 +86109,6 @@
         9,
         "Oklahoma",
         3
-      ]
-    ],
-    "5079345|receptions": [
-      [
-        1,
-        "Missouri State",
-        5
-      ],
-      [
-        2,
-        "Arizona State",
-        3
-      ],
-      [
-        3,
-        "Kentucky",
-        11
-      ],
-      [
-        4,
-        "LSU",
-        3
-      ],
-      [
-        5,
-        "Arkansas",
-        1
-      ],
-      [
-        6,
-        "Missouri",
-        1
-      ],
-      [
-        8,
-        "Alabama",
-        6
       ]
     ],
     "4870971|rush_yds": [
@@ -98295,28 +99018,6 @@
         51
       ]
     ],
-    "5328488|rec_yds": [
-      [
-        1,
-        "South Dakota State",
-        41
-      ],
-      [
-        3,
-        "Colorado",
-        27
-      ],
-      [
-        4,
-        "Indiana",
-        140
-      ],
-      [
-        9,
-        "Oregon",
-        43
-      ]
-    ],
     "5300856|rec_yds": [
       [
         1,
@@ -98394,6 +99095,28 @@
         9,
         "Wisconsin",
         54
+      ]
+    ],
+    "5328488|rec_yds": [
+      [
+        1,
+        "South Dakota State",
+        41
+      ],
+      [
+        3,
+        "Colorado",
+        27
+      ],
+      [
+        4,
+        "Indiana",
+        140
+      ],
+      [
+        9,
+        "Oregon",
+        43
       ]
     ],
     "5154734|rec_yds": [
@@ -98522,48 +99245,6 @@
         5
       ]
     ],
-    "5154734|receptions": [
-      [
-        1,
-        "South Dakota State",
-        3
-      ],
-      [
-        3,
-        "Colorado",
-        5
-      ],
-      [
-        4,
-        "Indiana",
-        6
-      ],
-      [
-        5,
-        "Penn State",
-        2
-      ],
-      [
-        6,
-        "Ball State",
-        8
-      ],
-      [
-        7,
-        "Michigan State",
-        6
-      ],
-      [
-        8,
-        "Rutgers",
-        9
-      ],
-      [
-        9,
-        "Oregon",
-        5
-      ]
-    ],
     "5222752|receptions": [
       [
         1,
@@ -98641,28 +99322,6 @@
         9,
         "Wisconsin",
         5
-      ]
-    ],
-    "5328488|receptions": [
-      [
-        1,
-        "South Dakota State",
-        2
-      ],
-      [
-        3,
-        "Colorado",
-        2
-      ],
-      [
-        4,
-        "Indiana",
-        7
-      ],
-      [
-        9,
-        "Oregon",
-        3
       ]
     ],
     "5300856|receptions": [
@@ -203488,7 +204147,7 @@
           "value": 1.5
         },
         "pff_all": {
-          "rank": 76,
+          "rank": 77,
           "of": 136
         },
         "pff_pass": {
@@ -234124,6 +234783,27 @@
       }
     },
     {
+      "player_name": "Aveion Chenault",
+      "team": "Western Michigan",
+      "games_played_prior": 8,
+      "opponent": "Akron",
+      "position": "WR/TE",
+      "projected_points": 13.6,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.4,
+        "rec_yds": 68.4,
+        "receptions": 4.0,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.7
+      }
+    },
+    {
       "player_name": "EJ Archield Jr.",
       "team": "Delaware",
       "games_played_prior": 1,
@@ -244939,6 +245619,27 @@
       }
     },
     {
+      "player_name": "Ofa Mataele",
+      "team": "Western Michigan",
+      "games_played_prior": 8,
+      "opponent": "Akron",
+      "position": "RB",
+      "projected_points": 7.7,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.0,
+        "rec_yds": 7.1,
+        "receptions": 0.9,
+        "rush_att": 7.6,
+        "rush_tds": 0.3,
+        "rush_yds": 38.7
+      }
+    },
+    {
       "player_name": "Nick Herman",
       "team": "James Madison",
       "games_played_prior": 9,
@@ -250228,6 +250929,27 @@
         "rush_att": 0.1,
         "rush_tds": 0.0,
         "rush_yds": 0.7
+      }
+    },
+    {
+      "player_name": "Cole Cabana",
+      "team": "Western Michigan",
+      "games_played_prior": 6,
+      "opponent": "Akron",
+      "position": "RB",
+      "projected_points": 6.2,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.0,
+        "rec_yds": 7.2,
+        "receptions": 0.8,
+        "rush_att": 5.5,
+        "rush_tds": 0.3,
+        "rush_yds": 27.9
       }
     },
     {
@@ -262558,6 +263280,27 @@
       }
     },
     {
+      "player_name": "Jean Louis III",
+      "team": "Akron",
+      "games_played_prior": 3,
+      "opponent": "Western Michigan",
+      "position": "WR/TE",
+      "projected_points": 4.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 19.6,
+        "receptions": 1.5,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.2
+      }
+    },
+    {
       "player_name": "Luke Hutchison",
       "team": "Navy",
       "games_played_prior": 4,
@@ -270664,6 +271407,27 @@
       }
     },
     {
+      "player_name": "Semaj Beals",
+      "team": "Akron",
+      "games_played_prior": 1,
+      "opponent": "Western Michigan",
+      "position": "RB",
+      "projected_points": 3.5,
+      "stat_breakdown": {
+        "pass_att": 2.7,
+        "pass_comp": 1.3,
+        "pass_int": 0.1,
+        "pass_tds": 0.1,
+        "pass_yds": 15.6,
+        "rec_tds": 0.0,
+        "rec_yds": 13.2,
+        "receptions": 0.9,
+        "rush_att": 1.2,
+        "rush_tds": 0.0,
+        "rush_yds": 0.3
+      }
+    },
+    {
       "player_name": "Milan Parris",
       "team": "Miami",
       "games_played_prior": 2,
@@ -273307,6 +274071,27 @@
         "rush_att": 3.0,
         "rush_tds": 0.1,
         "rush_yds": 12.4
+      }
+    },
+    {
+      "player_name": "Titus Myers",
+      "team": "Akron",
+      "games_played_prior": 2,
+      "opponent": "Western Michigan",
+      "position": "WR/TE",
+      "projected_points": 3.3,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 12.8,
+        "receptions": 1.1,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.2
       }
     },
     {
@@ -278767,6 +279552,27 @@
         "rush_att": 0.2,
         "rush_tds": 0.0,
         "rush_yds": 0.0
+      }
+    },
+    {
+      "player_name": "Paul Davis",
+      "team": "Akron",
+      "games_played_prior": 1,
+      "opponent": "Western Michigan",
+      "position": "WR/TE",
+      "projected_points": 2.6,
+      "stat_breakdown": {
+        "pass_att": 0.0,
+        "pass_comp": 0.0,
+        "pass_int": 0.0,
+        "pass_tds": 0.0,
+        "pass_yds": 0.2,
+        "rec_tds": 0.1,
+        "rec_yds": 9.5,
+        "receptions": 0.9,
+        "rush_att": 0.1,
+        "rush_tds": 0.0,
+        "rush_yds": 0.2
       }
     },
     {
@@ -285199,16 +286005,16 @@
       "best_price": 850.0,
       "dk_price": 850.0,
       "market_implied": 0.1053,
-      "team": "Washington",
+      "team": "East Carolina",
       "role": "Minor role",
-      "opponent": "Penn State",
+      "opponent": "South Florida",
       "games_played": 3,
-      "rush_td_proj": 0.009,
-      "rec_td_proj": 0.165,
-      "model_prob": 0.1599,
-      "fair_odds": 525,
-      "edge_best": 51.9,
-      "edge_dk": 51.9,
+      "rush_td_proj": 0.002,
+      "rec_td_proj": 0.178,
+      "model_prob": 0.165,
+      "fair_odds": 506,
+      "edge_best": 56.7,
+      "edge_dk": 56.7,
       "tag": "longshot",
       "pos": "WR"
     },
@@ -290949,6 +291755,12 @@
           "label": "Bovada",
           "price": 625.0,
           "offshore": true
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 600.0,
+          "offshore": false
         }
       ],
       "best_book": "draftkings",
@@ -292196,6 +293008,56 @@
           "label": "BetOnline",
           "price": 300.0,
           "offshore": true
+        }
+      ],
+      "best_book": "fanduel",
+      "best_book_label": "FanDuel",
+      "best_price": 470.0,
+      "dk_price": 320.0,
+      "market_implied": 0.1754,
+      "team": "Washington",
+      "role": "Minor role",
+      "opponent": "Penn State",
+      "games_played": 7,
+      "rush_td_proj": 0.006,
+      "rec_td_proj": 0.227,
+      "model_prob": 0.2075,
+      "fair_odds": 382,
+      "edge_best": 18.3,
+      "edge_dk": -12.8,
+      "tag": "longshot",
+      "pos": "TE"
+    },
+    {
+      "fixture_id": "4f0efedf5f575715851efea9089f7ea6",
+      "start_time": "2026-11-08T00:30:00Z",
+      "home_team": "Arizona State Sun Devils",
+      "away_team": "Colorado Buffaloes",
+      "player_name": "JaQuail Smith",
+      "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 260.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 200.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 200.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 320.0,
+          "offshore": false
         }
       ],
       "best_book": "fanduel",
@@ -310104,6 +310966,130 @@
       "pos": "QB"
     },
     {
+      "fixture_id": "00f194290bfcdfebb1d8456057b20614",
+      "start_time": "2026-11-07T20:30:00Z",
+      "home_team": "LSU Tigers",
+      "away_team": "Alabama Crimson Tide",
+      "player_name": "Keelon Russell",
+      "books": [
+        {
+          "book": "hardrockbet",
+          "label": "Hard Rock",
+          "price": 190.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 170.0,
+          "offshore": false
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 170.0,
+          "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 170.0,
+          "offshore": true
+        },
+        {
+          "book": "betmgm",
+          "label": "BetMGM",
+          "price": 130.0,
+          "offshore": false
+        },
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 125.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 120.0,
+          "offshore": true
+        },
+        {
+          "book": "fliff",
+          "label": "Fliff",
+          "price": 115.0,
+          "offshore": false
+        }
+      ],
+      "best_book": "hardrockbet",
+      "best_book_label": "Hard Rock",
+      "best_price": 190.0,
+      "dk_price": 170.0,
+      "market_implied": 0.3448,
+      "team": "Alabama",
+      "role": "QB",
+      "opponent": "LSU",
+      "games_played": 8,
+      "rush_td_proj": 0.365,
+      "rec_td_proj": 0.003,
+      "model_prob": 0.3076,
+      "fair_odds": 225,
+      "edge_best": -10.8,
+      "edge_dk": -16.9,
+      "tag": "caution",
+      "pos": "QB"
+    },
+    {
+      "fixture_id": "cd61922c472fea089e42662bc725f46b",
+      "start_time": "2026-11-07T20:30:00Z",
+      "home_team": "Washington Huskies",
+      "away_team": "Penn State Nittany Lions",
+      "player_name": "James Peoples",
+      "books": [
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 270.0,
+          "offshore": true
+        },
+        {
+          "book": "courtside",
+          "label": "courtside",
+          "price": 270.0,
+          "offshore": false
+        },
+        {
+          "book": "draftkings",
+          "label": "DraftKings",
+          "price": 265.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": 260.0,
+          "offshore": true
+        }
+      ],
+      "best_book": "courtside",
+      "best_book_label": "courtside",
+      "best_price": 270.0,
+      "dk_price": 265.0,
+      "market_implied": 0.2703,
+      "team": "Penn State",
+      "role": "Lead RB",
+      "opponent": "Washington",
+      "games_played": 7,
+      "rush_td_proj": 0.254,
+      "rec_td_proj": 0.022,
+      "model_prob": 0.2409,
+      "fair_odds": 315,
+      "edge_best": -10.9,
+      "edge_dk": -12.1,
+      "tag": "caution",
+      "pos": "RB"
+    },
+    {
       "fixture_id": "4f0efedf5f575715851efea9089f7ea6",
       "start_time": "2026-11-08T00:30:00Z",
       "home_team": "Arizona State Sun Devils",
@@ -310969,6 +311955,12 @@
       "away_team": "Penn State Nittany Lions",
       "player_name": "James Peoples",
       "books": [
+        {
+          "book": "fanduel",
+          "label": "FanDuel",
+          "price": 1000.0,
+          "offshore": false
+        },
         {
           "book": "draftkings",
           "label": "DraftKings",
@@ -331182,6 +332174,12 @@
           "offshore": true
         },
         {
+          "book": "courtside",
+          "label": "courtside",
+          "price": -145.0,
+          "offshore": false
+        },
+        {
           "book": "betonlineag",
           "label": "BetOnline",
           "price": -167.0,
@@ -331232,6 +332230,18 @@
           "offshore": false
         },
         {
+          "book": "betrivers",
+          "label": "BetRivers",
+          "price": 163.0,
+          "offshore": false
+        },
+        {
+          "book": "betonlineag",
+          "label": "BetOnline",
+          "price": -143.0,
+          "offshore": true
+        },
+        {
           "book": "draftkings",
           "label": "DraftKings",
           "price": -145.0,
@@ -331247,12 +332257,6 @@
           "book": "bovada",
           "label": "Bovada",
           "price": -148.0,
-          "offshore": true
-        },
-        {
-          "book": "betonlineag",
-          "label": "BetOnline",
-          "price": -167.0,
           "offshore": true
         }
       ],
@@ -331574,6 +332578,12 @@
           "label": "courtside",
           "price": 700.0,
           "offshore": false
+        },
+        {
+          "book": "bovada",
+          "label": "Bovada",
+          "price": 700.0,
+          "offshore": true
         },
         {
           "book": "betonlineag",
@@ -339264,19 +340274,27 @@
         },
         {
           "wk": 8,
-          "player": "Javion Kinnard",
+          "player": "Jordan Napier",
+          "team": "San Diego State",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 8,
+          "player": "Jordan Napier",
           "team": "San Diego State",
           "pos": "RB",
           "rush": 2,
           "rec": 0
         },
         {
-          "wk": 8,
-          "player": "Jordan Napier",
-          "team": "San Diego State",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
+          "wk": 7,
+          "player": "Brad Jackson",
+          "team": "Texas State",
+          "pos": "QB",
+          "rush": 3,
+          "rec": 0
         },
         {
           "wk": 8,
@@ -339493,12 +340511,20 @@
           "rec": 0
         },
         {
+          "wk": 9,
+          "player": "Johnnie Daniels",
+          "team": "Tulane",
+          "pos": "RB",
+          "rush": 2,
+          "rec": 0
+        },
+        {
           "wk": 7,
-          "player": "Peter Clarke",
+          "player": "Ajani Sheppard",
           "team": "Temple",
-          "pos": "TE",
-          "rush": 0,
-          "rec": 1
+          "pos": "QB",
+          "rush": 2,
+          "rec": 0
         },
         {
           "wk": 7,
@@ -339766,6 +340792,22 @@
         },
         {
           "wk": 6,
+          "player": "Elijah Burress",
+          "team": "Notre Dame",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 6,
+          "player": "Jaden Greathouse",
+          "team": "Notre Dame",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 6,
           "player": "Nolan James Jr.",
           "team": "Notre Dame",
           "pos": "RB",
@@ -339948,11 +340990,11 @@
       "scorers": [
         {
           "wk": 9,
-          "player": "Jahiem White",
+          "player": "Justin Stevenson",
           "team": "North Texas",
-          "pos": "RB",
-          "rush": 2,
-          "rec": 0
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
         },
         {
           "wk": 9,
@@ -339972,8 +341014,24 @@
         },
         {
           "wk": 9,
-          "player": "Justin Stevenson",
+          "player": "Jahiem White",
           "team": "North Texas",
+          "pos": "RB",
+          "rush": 2,
+          "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "Gael Ochoa",
+          "team": "Rice",
+          "pos": "QB",
+          "rush": 4,
+          "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "Braylen Walker",
+          "team": "Rice",
           "pos": "WR",
           "rush": 0,
           "rec": 1
@@ -339995,19 +341053,11 @@
           "rec": 0
         },
         {
-          "wk": 8,
-          "player": "Braylen Walker",
-          "team": "Rice",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 8,
-          "player": "Gael Ochoa",
-          "team": "Rice",
+          "wk": 7,
+          "player": "Bryson Luter",
+          "team": "Army",
           "pos": "QB",
-          "rush": 4,
+          "rush": 1,
           "rec": 0
         },
         {
@@ -340188,7 +341238,7 @@
           "wk": 9,
           "player": "Keyan Burnett",
           "team": "UNLV",
-          "pos": "TE",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
@@ -340202,9 +341252,9 @@
         },
         {
           "wk": 9,
-          "player": "Kayden McGee",
+          "player": "Keyan Burnett",
           "team": "UNLV",
-          "pos": "WR",
+          "pos": "TE",
           "rush": 0,
           "rec": 1
         },
@@ -340219,6 +341269,14 @@
         {
           "wk": 8,
           "player": "TJ Fo'ilefutu",
+          "team": "Hawai'i",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "Cam Barfield",
           "team": "Hawai'i",
           "pos": "RB",
           "rush": 1,
@@ -340258,18 +341316,18 @@
         },
         {
           "wk": 7,
-          "player": "Tyler Hughes",
-          "team": "Wyoming",
-          "pos": "QB",
-          "rush": 4,
-          "rec": 0
-        },
-        {
-          "wk": 7,
           "player": "Landon Sims",
           "team": "Wyoming",
           "pos": "QB",
           "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 7,
+          "player": "Tyler Hughes",
+          "team": "Wyoming",
+          "pos": "QB",
+          "rush": 4,
           "rec": 0
         },
         {
@@ -340455,6 +341513,14 @@
           "rec": 1
         },
         {
+          "wk": 9,
+          "player": "Luke Watkins",
+          "team": "Louisiana Tech",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
           "wk": 8,
           "player": "Judah Price",
           "team": "Marshall",
@@ -340468,14 +341534,6 @@
           "team": "Marshall",
           "pos": "QB",
           "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 6,
-          "player": "Timothy Carter",
-          "team": "Arkansas State",
-          "pos": "RB",
-          "rush": 2,
           "rec": 0
         },
         {
@@ -340736,14 +341794,6 @@
         },
         {
           "wk": 6,
-          "player": "Caleb Komolafe",
-          "team": "Northwestern",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 6,
           "player": "Griffin Wilde",
           "team": "Northwestern",
           "pos": "WR",
@@ -340920,18 +341970,18 @@
       "scorers": [
         {
           "wk": 9,
-          "player": "Owen Eshelman",
-          "team": "Washington State",
-          "pos": "QB",
-          "rush": 2,
-          "rec": 0
-        },
-        {
-          "wk": 9,
           "player": "Kirby Vorhees",
           "team": "Washington State",
           "pos": "RB",
           "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 9,
+          "player": "Owen Eshelman",
+          "team": "Washington State",
+          "pos": "QB",
+          "rush": 2,
           "rec": 0
         },
         {
@@ -340976,6 +342026,22 @@
         },
         {
           "wk": 6,
+          "player": "Eddie Freauff",
+          "team": "Oregon State",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 6,
+          "player": "AJ Newberry",
+          "team": "Oregon State",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 6,
           "player": "Jake Reichle",
           "team": "Oregon State",
           "pos": "RB",
@@ -341003,14 +342069,6 @@
           "player": "Eddie Freauff",
           "team": "Oregon State",
           "pos": "WR",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 6,
-          "player": "D.C. Temple",
-          "team": "Oregon State",
-          "pos": "TE",
           "rush": 0,
           "rec": 1
         }
@@ -341158,19 +342216,19 @@
       "scorers": [
         {
           "wk": 9,
-          "player": "Easton Messer",
-          "team": "Florida Atlantic",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 3
-        },
-        {
-          "wk": 9,
           "player": "Kaden Shields-Dutton",
           "team": "Florida Atlantic",
           "pos": "RB",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 9,
+          "player": "Easton Messer",
+          "team": "Florida Atlantic",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 3
         },
         {
           "wk": 9,
@@ -341214,11 +342272,11 @@
         },
         {
           "wk": 5,
-          "player": "Damari Alston",
+          "player": "David Wells Jr.",
           "team": "Tulsa",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
+          "pos": "WR",
+          "rush": 0,
+          "rec": 2
         },
         {
           "wk": 5,
@@ -341230,17 +342288,9 @@
         },
         {
           "wk": 5,
-          "player": "David Wells Jr.",
+          "player": "Damari Alston",
           "team": "Tulsa",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 2
-        },
-        {
-          "wk": 4,
-          "player": "Maddox Kopp",
-          "team": "Houston Christian",
-          "pos": "QB",
+          "pos": "RB",
           "rush": 1,
           "rec": 0
         },
@@ -341251,6 +342301,14 @@
           "pos": "TE",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 4,
+          "player": "Maddox Kopp",
+          "team": "Houston Christian",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
         }
       ]
     },
@@ -341425,14 +342483,6 @@
           "pos": "RB",
           "rush": 1,
           "rec": 1
-        },
-        {
-          "wk": 7,
-          "player": "Sergio Snider",
-          "team": "Louisiana Tech",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
         },
         {
           "wk": 7,
@@ -341683,9 +342733,9 @@
           "rec": 1
         },
         {
-          "wk": 8,
-          "player": "EJ Kelly",
-          "team": "SMU",
+          "wk": 9,
+          "player": "Davion Gause",
+          "team": "NC State",
           "pos": "RB",
           "rush": 1,
           "rec": 0
@@ -341737,6 +342787,22 @@
           "pos": "WR",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 7,
+          "player": "Jamar Searcy",
+          "team": "Wake Forest",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 7,
+          "player": "Dominick Barry",
+          "team": "Wake Forest",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 3
         }
       ]
     },
@@ -341956,7 +343022,7 @@
           "wk": 7,
           "player": "Dorian Fleming",
           "team": "Maryland",
-          "pos": "TE",
+          "pos": "RB",
           "rush": 0,
           "rec": 1
         },
@@ -342136,11 +343202,11 @@
         },
         {
           "wk": 7,
-          "player": "Antwan Raymond",
+          "player": "Clay Thevenin",
           "team": "Rutgers",
           "pos": "RB",
           "rush": 1,
-          "rec": 0
+          "rec": 1
         },
         {
           "wk": 7,
@@ -342152,18 +343218,10 @@
         },
         {
           "wk": 7,
-          "player": "Clay Thevenin",
+          "player": "Antwan Raymond",
           "team": "Rutgers",
           "pos": "RB",
           "rush": 1,
-          "rec": 1
-        },
-        {
-          "wk": 6,
-          "player": "Bo Jackson",
-          "team": "Ohio State",
-          "pos": "RB",
-          "rush": 2,
           "rec": 0
         },
         {
@@ -342197,14 +343255,6 @@
           "pos": "RB",
           "rush": 1,
           "rec": 0
-        },
-        {
-          "wk": 5,
-          "player": "Luke Lindenmeyer",
-          "team": "Nebraska",
-          "pos": "TE",
-          "rush": 0,
-          "rec": 1
         },
         {
           "wk": 5,
@@ -342389,25 +343439,9 @@
           "rec": 1
         },
         {
-          "wk": 8,
-          "player": "Bryson Graves",
-          "team": "Delaware",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 8,
-          "player": "Nick Minicucci",
-          "team": "Delaware",
-          "pos": "QB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 8,
-          "player": "Donovan Lewis",
-          "team": "Delaware",
+          "wk": 7,
+          "player": "Dylan Gary",
+          "team": "Kennesaw State",
           "pos": "WR",
           "rush": 0,
           "rec": 1
@@ -342451,6 +343485,14 @@
           "pos": "QB",
           "rush": 1,
           "rec": 0
+        },
+        {
+          "wk": 6,
+          "player": "Jonathan Stafford Jr.",
+          "team": "Western Kentucky",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
         }
       ]
     },
@@ -342644,14 +343686,6 @@
         },
         {
           "wk": 7,
-          "player": "Brian Bonner Jr.",
-          "team": "Washington",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 1
-        },
-        {
-          "wk": 7,
           "player": "Dezmen Roebuck",
           "team": "Washington",
           "pos": "WR",
@@ -342659,11 +343693,11 @@
           "rec": 1
         },
         {
-          "wk": 6,
-          "player": "Jalen Smith",
-          "team": "Minnesota",
-          "pos": "WR",
-          "rush": 0,
+          "wk": 7,
+          "player": "Brian Bonner Jr.",
+          "team": "Washington",
+          "pos": "RB",
+          "rush": 1,
           "rec": 1
         },
         {
@@ -342834,6 +343868,14 @@
       "scorers": [
         {
           "wk": 8,
+          "player": "Caden Veltkamp",
+          "team": "Florida Atlantic",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 8,
           "player": "Easton Messer",
           "team": "Florida Atlantic",
           "pos": "WR",
@@ -342874,9 +343916,9 @@
         },
         {
           "wk": 7,
-          "player": "Oran Singleton Jr.",
+          "player": "Sevion Morrison",
           "team": "Tulsa",
-          "pos": "WR",
+          "pos": "RB",
           "rush": 0,
           "rec": 1
         },
@@ -343152,11 +344194,11 @@
         },
         {
           "wk": 3,
-          "player": "Kyle Koch",
+          "player": "Brendon Haygood",
           "team": "North Texas",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 3,
@@ -343572,7 +344614,7 @@
         },
         {
           "wk": 7,
-          "player": "Isaiah Johnson",
+          "player": "JaVonnie Gibson",
           "team": "Cincinnati",
           "pos": "WR",
           "rush": 0,
@@ -343622,9 +344664,9 @@
           "wk": 6,
           "player": "Brandon Phelps",
           "team": "Arizona",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 6,
@@ -343817,12 +344859,20 @@
           "rec": 1
         },
         {
-          "wk": 8,
-          "player": "Kyle Koch",
-          "team": "North Texas",
+          "wk": 9,
+          "player": "Micah Gilbert",
+          "team": "Notre Dame",
           "pos": "WR",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 8,
+          "player": "Justin Stevenson",
+          "team": "North Texas",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 2
         },
         {
           "wk": 8,
@@ -343834,11 +344884,19 @@
         },
         {
           "wk": 8,
-          "player": "Justin Stevenson",
+          "player": "Kyle Koch",
           "team": "North Texas",
           "pos": "WR",
           "rush": 0,
-          "rec": 2
+          "rec": 1
+        },
+        {
+          "wk": 7,
+          "player": "Brandon Young Jr.",
+          "team": "UTSA",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
         },
         {
           "wk": 7,
@@ -344027,16 +345085,24 @@
           "player": "Kaderris Roberts",
           "team": "Delaware",
           "pos": "RB",
-          "rush": 0,
-          "rec": 1
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 9,
           "player": "Viron Ellison Jr.",
           "team": "Delaware",
           "pos": "RB",
-          "rush": 1,
-          "rec": 0
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 9,
+          "player": "Sean Wilson",
+          "team": "Delaware",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 2
         },
         {
           "wk": 9,
@@ -344074,9 +345140,9 @@
           "wk": 5,
           "player": "James Jones",
           "team": "New Mexico State",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
         },
         {
           "wk": 5,
@@ -344296,14 +345362,6 @@
         },
         {
           "wk": 8,
-          "player": "Hunter Hopperton",
-          "team": "Kent State",
-          "pos": "RB",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 8,
           "player": "Dru Deshields",
           "team": "Kent State",
           "pos": "QB",
@@ -344349,6 +345407,14 @@
           "pos": "QB",
           "rush": 1,
           "rec": 0
+        },
+        {
+          "wk": 5,
+          "player": "Langston Lewis",
+          "team": "Central Michigan",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
         },
         {
           "wk": 5,
@@ -344528,9 +345594,17 @@
           "wk": 9,
           "player": "Dylan Gary",
           "team": "Kennesaw State",
+          "pos": "RB",
+          "rush": 2,
+          "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "Kyle Mcneal",
+          "team": "Florida International",
           "pos": "WR",
           "rush": 0,
-          "rec": 2
+          "rec": 1
         },
         {
           "wk": 8,
@@ -344545,14 +345619,6 @@
           "player": "Kevin Schaeffer",
           "team": "Florida International",
           "pos": "TE",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 8,
-          "player": "Kyle Mcneal",
-          "team": "Florida International",
-          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
@@ -344986,14 +346052,6 @@
       "scorers": [
         {
           "wk": 8,
-          "player": "Qwantavius Wiggins",
-          "team": "Georgia State",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 1
-        },
-        {
-          "wk": 8,
           "player": "DJ Riles",
           "team": "Georgia State",
           "pos": "WR",
@@ -345006,6 +346064,14 @@
           "team": "Georgia State",
           "pos": "WR",
           "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 8,
+          "player": "Qwantavius Wiggins",
+          "team": "Georgia State",
+          "pos": "RB",
+          "rush": 1,
           "rec": 1
         },
         {
@@ -345232,7 +346298,7 @@
         },
         {
           "wk": 9,
-          "player": "Olsen Patt-Henry",
+          "player": "Christian Bentancur",
           "team": "Clemson",
           "pos": "TE",
           "rush": 0,
@@ -345256,14 +346322,6 @@
         },
         {
           "wk": 7,
-          "player": "Mark Fletcher Jr.",
-          "team": "Miami",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 7,
           "player": "Malachi Toney",
           "team": "Miami",
           "pos": "WR",
@@ -345276,6 +346334,14 @@
           "team": "Miami",
           "pos": "RB",
           "rush": 2,
+          "rec": 0
+        },
+        {
+          "wk": 7,
+          "player": "Mark Fletcher Jr.",
+          "team": "Miami",
+          "pos": "RB",
+          "rush": 1,
           "rec": 0
         },
         {
@@ -345306,8 +346372,8 @@
           "wk": 6,
           "player": "Marquise Davis",
           "team": "Louisville",
-          "pos": "RB",
-          "rush": 1,
+          "pos": "QB",
+          "rush": 2,
           "rec": 0
         },
         {
@@ -345526,9 +346592,17 @@
         },
         {
           "wk": 7,
-          "player": "Ja'Ricous Hairston",
+          "player": "Ethan Grunkemeyer",
           "team": "Virginia Tech",
-          "pos": "TE",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 6,
+          "player": "Jared Richardson",
+          "team": "Duke",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
@@ -345547,14 +346621,6 @@
           "pos": "RB",
           "rush": 2,
           "rec": 0
-        },
-        {
-          "wk": 6,
-          "player": "Jared Richardson",
-          "team": "Duke",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
         }
       ]
     },
@@ -345732,9 +346798,9 @@
         },
         {
           "wk": 8,
-          "player": "Kedrick Reescano",
+          "player": "Sawyer Anderson",
           "team": "Arizona",
-          "pos": "RB",
+          "pos": "QB",
           "rush": 1,
           "rec": 0
         },
@@ -345779,9 +346845,9 @@
           "rec": 1
         },
         {
-          "wk": 6,
-          "player": "Journee Tonga",
-          "team": "BYU",
+          "wk": 8,
+          "player": "Quincy Craig",
+          "team": "Arizona",
           "pos": "RB",
           "rush": 1,
           "rec": 0
@@ -345993,8 +347059,24 @@
           "rec": 1
         },
         {
+          "wk": 8,
+          "player": "JJ Garner",
+          "team": "Louisiana",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "D'Wayne' Winfield",
+          "team": "Louisiana",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
           "wk": 7,
-          "player": "Timothy Carter",
+          "player": "Kenyon Clay",
           "team": "Arkansas State",
           "pos": "RB",
           "rush": 1,
@@ -346002,7 +347084,7 @@
         },
         {
           "wk": 7,
-          "player": "Kenyon Clay",
+          "player": "Timothy Carter",
           "team": "Arkansas State",
           "pos": "RB",
           "rush": 1,
@@ -346208,17 +347290,17 @@
         },
         {
           "wk": 8,
-          "player": "Trequan Jones",
+          "player": "David Wells Jr.",
           "team": "Tulsa",
-          "pos": "RB",
+          "pos": "WR",
           "rush": 1,
           "rec": 0
         },
         {
           "wk": 8,
-          "player": "David Wells Jr.",
+          "player": "Trequan Jones",
           "team": "Tulsa",
-          "pos": "WR",
+          "pos": "RB",
           "rush": 1,
           "rec": 0
         },
@@ -346234,14 +347316,6 @@
           "wk": 8,
           "player": "Jimmy Calloway",
           "team": "Tulsa",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 7,
-          "player": "Kelby Valsin",
-          "team": "Florida Atlantic",
           "pos": "WR",
           "rush": 0,
           "rec": 1
@@ -346723,6 +347797,14 @@
           "rec": 1
         },
         {
+          "wk": 5,
+          "player": "George Pettaway",
+          "team": "James Madison",
+          "pos": "RB",
+          "rush": 2,
+          "rec": 0
+        },
+        {
           "wk": 4,
           "player": "Giovanni Adopte",
           "team": "Gardner-Webb",
@@ -346740,11 +347822,11 @@
         },
         {
           "wk": 3,
-          "player": "Witt Edwards",
+          "player": "Jambres Dubar",
           "team": "Missouri State",
-          "pos": "TE",
-          "rush": 0,
-          "rec": 1
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         }
       ]
     },
@@ -346898,8 +347980,16 @@
         },
         {
           "wk": 9,
-          "player": "Easton Miller",
+          "player": "Aiden Flora",
           "team": "Iowa State",
+          "pos": "RB",
+          "rush": 2,
+          "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "Jaquail Smith",
+          "team": "Colorado",
           "pos": "RB",
           "rush": 0,
           "rec": 1
@@ -346938,14 +348028,6 @@
         },
         {
           "wk": 8,
-          "player": "Jaquail Smith",
-          "team": "Colorado",
-          "pos": "RB",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 8,
           "player": "Isaac Wilson",
           "team": "Colorado",
           "pos": "QB",
@@ -346955,6 +348037,14 @@
         {
           "wk": 7,
           "player": "Koby Young",
+          "team": "Houston",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 7,
+          "player": "Trent Walker",
           "team": "Houston",
           "pos": "WR",
           "rush": 0,
@@ -346973,14 +348063,6 @@
           "player": "Patrick Overmyer",
           "team": "Houston",
           "pos": "TE",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 7,
-          "player": "Trent Walker",
-          "team": "Houston",
-          "pos": "WR",
           "rush": 0,
           "rec": 1
         }
@@ -347162,9 +348244,9 @@
           "wk": 7,
           "player": "Conner Harrell",
           "team": "Charlotte",
-          "pos": "QB",
-          "rush": 2,
-          "rec": 0
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
         },
         {
           "wk": 7,
@@ -347173,6 +348255,14 @@
           "pos": "WR",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 7,
+          "player": "Conner Harrell",
+          "team": "Charlotte",
+          "pos": "QB",
+          "rush": 2,
+          "rec": 0
         },
         {
           "wk": 6,
@@ -347184,7 +348274,7 @@
         },
         {
           "wk": 6,
-          "player": "Trey Cornist",
+          "player": "Kenji Christian",
           "team": "UConn",
           "pos": "RB",
           "rush": 1,
@@ -347446,17 +348536,17 @@
         },
         {
           "wk": 6,
-          "player": "Michael Smith",
+          "player": "Trinidad Chambliss",
           "team": "Ole Miss",
-          "pos": "TE",
-          "rush": 0,
-          "rec": 1
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 6,
           "player": "Deuce Alexander",
           "team": "Ole Miss",
-          "pos": "WR",
+          "pos": "TE",
           "rush": 0,
           "rec": 1
         }
@@ -347702,9 +348792,9 @@
         },
         {
           "wk": 3,
-          "player": "Nate Roberts",
+          "player": "Chris Henry Jr.",
           "team": "Ohio State",
-          "pos": "TE",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         }
@@ -347929,8 +349019,8 @@
           "player": "Nakai Amachree",
           "team": "Bowling Green",
           "pos": "RB",
-          "rush": 0,
-          "rec": 1
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 5,
@@ -348370,16 +349460,24 @@
         },
         {
           "wk": 8,
-          "player": "Timothy Carter",
+          "player": "Jaylen Bonelli",
+          "team": "Arkansas State",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 8,
+          "player": "Jaylen Bonelli",
           "team": "Arkansas State",
           "pos": "RB",
           "rush": 1,
           "rec": 0
         },
         {
-          "wk": 8,
-          "player": "Jaylen Bonelli",
-          "team": "Arkansas State",
+          "wk": 7,
+          "player": "Miles Halbert",
+          "team": "James Madison",
           "pos": "WR",
           "rush": 0,
           "rec": 1
@@ -348592,11 +349690,19 @@
         },
         {
           "wk": 8,
-          "player": "Nico Brown",
+          "player": "Caden High",
           "team": "Stanford",
           "pos": "WR",
           "rush": 0,
-          "rec": 2
+          "rec": 1
+        },
+        {
+          "wk": 6,
+          "player": "Giovanni Lopez",
+          "team": "Wake Forest",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 8,
@@ -348869,12 +349975,28 @@
           "rec": 0
         },
         {
+          "wk": 7,
+          "player": "Julian Dugger",
+          "team": "Washington State",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
           "wk": 6,
           "player": "Jacob Bostick",
           "team": "San Diego State",
           "pos": "WR",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 5,
+          "player": "Durell Robinson",
+          "team": "Colorado State",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 5,
@@ -348886,7 +350008,7 @@
         },
         {
           "wk": 5,
-          "player": "Durell Robinson",
+          "player": "Jayden Brown",
           "team": "Colorado State",
           "pos": "RB",
           "rush": 1,
@@ -348899,14 +350021,6 @@
           "pos": "TE",
           "rush": 0,
           "rec": 1
-        },
-        {
-          "wk": 5,
-          "player": "Jayden Brown",
-          "team": "Colorado State",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
         }
       ]
     },
@@ -349080,14 +350194,6 @@
           "team": "North Carolina",
           "pos": "RB",
           "rush": 1,
-          "rec": 1
-        },
-        {
-          "wk": 8,
-          "player": "Jordan Shipp",
-          "team": "North Carolina",
-          "pos": "WR",
-          "rush": 0,
           "rec": 1
         },
         {
@@ -349354,7 +350460,7 @@
         },
         {
           "wk": 7,
-          "player": "Braylon Burnside",
+          "player": "Jemyri Davis",
           "team": "Memphis",
           "pos": "WR",
           "rush": 0,
@@ -349362,7 +350468,7 @@
         },
         {
           "wk": 7,
-          "player": "Jemyri Davis",
+          "player": "Braylon Burnside",
           "team": "Memphis",
           "pos": "WR",
           "rush": 0,
@@ -349378,11 +350484,11 @@
         },
         {
           "wk": 4,
-          "player": "Davis Dalton",
+          "player": "Mario Sanders II",
           "team": "Southern Miss",
           "pos": "WR",
           "rush": 0,
-          "rec": 1
+          "rec": 2
         }
       ]
     },
@@ -349584,11 +350690,11 @@
         },
         {
           "wk": 5,
-          "player": "Noah Meyers",
+          "player": "Umari Hatcher",
           "team": "Syracuse",
-          "pos": "TE",
+          "pos": "WR",
           "rush": 0,
-          "rec": 1
+          "rec": 3
         },
         {
           "wk": 5,
@@ -349607,6 +350713,14 @@
           "rec": 0
         },
         {
+          "wk": 5,
+          "player": "Noah Meyers",
+          "team": "Syracuse",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
+        },
+        {
           "wk": 4,
           "player": "David McComb",
           "team": "Miami (OH)",
@@ -349616,9 +350730,9 @@
         },
         {
           "wk": 4,
-          "player": "Scoop Smith",
+          "player": "Brendan Loftus",
           "team": "Miami (OH)",
-          "pos": "WR",
+          "pos": "TE",
           "rush": 0,
           "rec": 1
         }
@@ -349776,6 +350890,14 @@
       "scorers": [
         {
           "wk": 9,
+          "player": "Jackson Ford",
+          "team": "San Diego State",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 9,
           "player": "Javion Kinnard",
           "team": "San Diego State",
           "pos": "RB",
@@ -349783,12 +350905,12 @@
           "rec": 0
         },
         {
-          "wk": 9,
-          "player": "Jackson Ford",
-          "team": "San Diego State",
-          "pos": "TE",
-          "rush": 0,
-          "rec": 1
+          "wk": 8,
+          "player": "Dylan Riley",
+          "team": "Boise State",
+          "pos": "RB",
+          "rush": 2,
+          "rec": 0
         },
         {
           "wk": 8,
@@ -350061,10 +351183,26 @@
           "rec": 1
         },
         {
-          "wk": 8,
-          "player": "Dilin Jones",
-          "team": "LSU",
+          "wk": 9,
+          "player": "Caleb Cunningham",
+          "team": "Ole Miss",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 9,
+          "player": "Shekai Mills-Knight",
+          "team": "Ole Miss",
           "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 9,
+          "player": "William Echoles",
+          "team": "Ole Miss",
+          "pos": "?",
           "rush": 1,
           "rec": 0
         },
@@ -350075,6 +351213,14 @@
           "pos": "WR",
           "rush": 0,
           "rec": 2
+        },
+        {
+          "wk": 8,
+          "player": "Dilin Jones",
+          "team": "LSU",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 8,
@@ -350530,9 +351676,9 @@
         },
         {
           "wk": 7,
-          "player": "Cam Cook",
+          "player": "Josh Sapp",
           "team": "West Virginia",
-          "pos": "RB",
+          "pos": "TE",
           "rush": 0,
           "rec": 1
         },
@@ -350546,19 +351692,27 @@
         },
         {
           "wk": 7,
-          "player": "Josh Sapp",
-          "team": "West Virginia",
-          "pos": "TE",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 7,
           "player": "Amari Latimer",
           "team": "West Virginia",
           "pos": "RB",
           "rush": 1,
           "rec": 0
+        },
+        {
+          "wk": 7,
+          "player": "Cam Cook",
+          "team": "West Virginia",
+          "pos": "RB",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 5,
+          "player": "Tyler Powell",
+          "team": "Arizona",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
         },
         {
           "wk": 5,
@@ -350974,9 +352128,17 @@
         },
         {
           "wk": 9,
-          "player": "Micah Ford",
+          "player": "Aiden Black",
           "team": "Stanford",
-          "pos": "RB",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 7,
+          "player": "Umari Hatcher",
+          "team": "Syracuse",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
@@ -351228,7 +352390,15 @@
         },
         {
           "wk": 8,
-          "player": "Jaivian Thomas",
+          "player": "Brian Rowe Jr.",
+          "team": "UCLA",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 8,
+          "player": "Anthony Woods",
           "team": "UCLA",
           "pos": "RB",
           "rush": 1,
@@ -351260,6 +352430,14 @@
         },
         {
           "wk": 6,
+          "player": "Collin Dixon",
+          "team": "Illinois",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 6,
           "player": "Hudson Clement",
           "team": "Illinois",
           "pos": "WR",
@@ -351268,7 +352446,7 @@
         },
         {
           "wk": 6,
-          "player": "Collin Dixon",
+          "player": "Katin Houser",
           "team": "Illinois",
           "pos": "WR",
           "rush": 0,
@@ -351297,6 +352475,14 @@
           "pos": "QB",
           "rush": 1,
           "rec": 0
+        },
+        {
+          "wk": 5,
+          "player": "Malachi Coleman",
+          "team": "Wisconsin",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
         }
       ]
     },
@@ -351483,6 +352669,14 @@
           "rec": 0
         },
         {
+          "wk": 8,
+          "player": "Clint Walker",
+          "team": "Buffalo",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
+        },
+        {
           "wk": 7,
           "player": "TJ Horton",
           "team": "Ball State",
@@ -351524,17 +352718,17 @@
         },
         {
           "wk": 4,
-          "player": "Luke Kromenhoek",
+          "player": "D.J. Crowther",
           "team": "South Florida",
-          "pos": "QB",
+          "pos": "RB",
           "rush": 1,
           "rec": 0
         },
         {
           "wk": 4,
-          "player": "D.J. Crowther",
+          "player": "Luke Kromenhoek",
           "team": "South Florida",
-          "pos": "RB",
+          "pos": "QB",
           "rush": 1,
           "rec": 0
         },
@@ -351770,9 +352964,9 @@
         },
         {
           "wk": 5,
-          "player": "Hawkins Polley",
+          "player": "Jadon Porter",
           "team": "Baylor",
-          "pos": "TE",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
@@ -352218,9 +353412,9 @@
           "wk": 8,
           "player": "Wyatt Young",
           "team": "Oklahoma State",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 8,
@@ -352242,9 +353436,9 @@
           "wk": 8,
           "player": "William Mason",
           "team": "Oklahoma State",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
         },
         {
           "wk": 7,
@@ -352531,6 +353725,264 @@
       ]
     },
     {
+      "team": "Eastern Michigan",
+      "games": 10,
+      "next": {
+        "opp": "Western Michigan",
+        "start": "2026-11-18T00:00:00.000Z"
+      },
+      "td_qb": 2,
+      "td_qb_pg": 0.2,
+      "td_qb_adj": 0.67,
+      "rec_qb": 0,
+      "rec_qb_pg": 0.0,
+      "rec_qb_adj": 0.23,
+      "recyds_qb": 0,
+      "recyds_qb_pg": 0.0,
+      "recyds_qb_adj": 0.23,
+      "rushyds_qb": 150,
+      "rushyds_qb_pg": 15.0,
+      "rushyds_qb_adj": 0.62,
+      "td_rb": 14,
+      "td_rb_pg": 1.4,
+      "td_rb_adj": 1.23,
+      "rec_rb": 22,
+      "rec_rb_pg": 2.2,
+      "rec_rb_adj": 0.9,
+      "recyds_rb": 159,
+      "recyds_rb_pg": 15.9,
+      "recyds_rb_adj": 0.93,
+      "rushyds_rb": 1328,
+      "rushyds_rb_pg": 132.8,
+      "rushyds_rb_adj": 1.13,
+      "td_wr": 12,
+      "td_wr_pg": 1.2,
+      "td_wr_adj": 1.18,
+      "rec_wr": 134,
+      "rec_wr_pg": 13.4,
+      "rec_wr_adj": 1.12,
+      "recyds_wr": 1749,
+      "recyds_wr_pg": 174.9,
+      "recyds_wr_adj": 1.14,
+      "rushyds_wr": 1,
+      "rushyds_wr_pg": 0.1,
+      "rushyds_wr_adj": 0.25,
+      "td_te": 2,
+      "td_te_pg": 0.2,
+      "td_te_adj": 1.06,
+      "rec_te": 38,
+      "rec_te_pg": 3.8,
+      "rec_te_adj": 1.29,
+      "recyds_te": 437,
+      "recyds_te_pg": 43.7,
+      "recyds_te_adj": 1.61,
+      "rushyds_te": 0,
+      "rushyds_te_pg": 0.0,
+      "rushyds_te_adj": 0.23,
+      "td_all": 30,
+      "td_all_pg": 3.0,
+      "log": [
+        {
+          "wk": 10,
+          "vs": "Central Michigan",
+          "qb": 0,
+          "rb": 4,
+          "wr": 1,
+          "te": 0,
+          "recyds": 183,
+          "rushyds": 237
+        },
+        {
+          "wk": 8,
+          "vs": "Ohio",
+          "qb": 1,
+          "rb": 0,
+          "wr": 1,
+          "te": 0,
+          "recyds": 266,
+          "rushyds": 98
+        },
+        {
+          "wk": 7,
+          "vs": "Toledo",
+          "qb": 0,
+          "rb": 3,
+          "wr": 1,
+          "te": 0,
+          "recyds": 288,
+          "rushyds": 194
+        },
+        {
+          "wk": 6,
+          "vs": "Akron",
+          "qb": 0,
+          "rb": 1,
+          "wr": 2,
+          "te": 0,
+          "recyds": 229,
+          "rushyds": 143
+        },
+        {
+          "wk": 5,
+          "vs": "Massachusetts",
+          "qb": 0,
+          "rb": 1,
+          "wr": 0,
+          "te": 1,
+          "recyds": 210,
+          "rushyds": 106
+        },
+        {
+          "wk": 4,
+          "vs": "Lindenwood",
+          "qb": 0,
+          "rb": 0,
+          "wr": 0,
+          "te": 0,
+          "recyds": 55,
+          "rushyds": 137
+        },
+        {
+          "wk": 3,
+          "vs": "Wisconsin",
+          "qb": 1,
+          "rb": 1,
+          "wr": 2,
+          "te": 1,
+          "recyds": 362,
+          "rushyds": 117
+        },
+        {
+          "wk": 2,
+          "vs": "Michigan State",
+          "qb": 0,
+          "rb": 3,
+          "wr": 2,
+          "te": 0,
+          "recyds": 214,
+          "rushyds": 258
+        },
+        {
+          "wk": 1,
+          "vs": "San Jos\u00e9 State",
+          "qb": 0,
+          "rb": 0,
+          "wr": 3,
+          "te": 0,
+          "recyds": 316,
+          "rushyds": 139
+        },
+        {
+          "wk": 1,
+          "vs": "Sacramento State",
+          "qb": 0,
+          "rb": 1,
+          "wr": 0,
+          "te": 0,
+          "recyds": 222,
+          "rushyds": 50
+        }
+      ],
+      "scorers": [
+        {
+          "wk": 10,
+          "player": "Nicholas Woodford",
+          "team": "Central Michigan",
+          "pos": "RB",
+          "rush": 3,
+          "rec": 0
+        },
+        {
+          "wk": 10,
+          "player": "Nasir Williams",
+          "team": "Central Michigan",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 10,
+          "player": "Vaughn Blue",
+          "team": "Central Michigan",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "Dom Dorwart",
+          "team": "Ohio",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 8,
+          "player": "Nick Poulos",
+          "team": "Ohio",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 7,
+          "player": "Adjatay Dabbs",
+          "team": "Toledo",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 7,
+          "player": "CJ Miller",
+          "team": "Toledo",
+          "pos": "RB",
+          "rush": 2,
+          "rec": 0
+        },
+        {
+          "wk": 7,
+          "player": "Autavius Ison",
+          "team": "Toledo",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 6,
+          "player": "Marcel Williams",
+          "team": "Akron",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 2
+        },
+        {
+          "wk": 6,
+          "player": "Marquese Williams",
+          "team": "Akron",
+          "pos": "RB",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 5,
+          "player": "Max Dowling",
+          "team": "Massachusetts",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 5,
+          "player": "Curtis Kimmons IV",
+          "team": "Massachusetts",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        }
+      ]
+    },
+    {
       "team": "Hawai'i",
       "games": 8,
       "next": {
@@ -352672,19 +354124,19 @@
       "scorers": [
         {
           "wk": 8,
-          "player": "DeAree Rogers",
-          "team": "Northern Illinois",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 2
-        },
-        {
-          "wk": 8,
           "player": "Elijah Porter",
           "team": "Northern Illinois",
           "pos": "RB",
           "rush": 1,
           "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "DeAree Rogers",
+          "team": "Northern Illinois",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 2
         },
         {
           "wk": 7,
@@ -352720,14 +354172,6 @@
         },
         {
           "wk": 5,
-          "player": "Kamaehu Kopa-Kaawalauole",
-          "team": "San Jos\u00e9 State",
-          "pos": "TE",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 5,
           "player": "Carson Clark",
           "team": "San Jos\u00e9 State",
           "pos": "WR",
@@ -352735,12 +354179,12 @@
           "rec": 1
         },
         {
-          "wk": 4,
-          "player": "Markell Holman",
-          "team": "Wyoming",
-          "pos": "RB",
-          "rush": 2,
-          "rec": 0
+          "wk": 5,
+          "player": "Kamaehu Kopa-Kaawalauole",
+          "team": "San Jos\u00e9 State",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
         },
         {
           "wk": 4,
@@ -352751,11 +354195,11 @@
           "rec": 0
         },
         {
-          "wk": 2,
-          "player": "James Jones",
-          "team": "New Mexico State",
+          "wk": 4,
+          "player": "Markell Holman",
+          "team": "Wyoming",
           "pos": "RB",
-          "rush": 1,
+          "rush": 2,
           "rec": 0
         },
         {
@@ -352765,6 +354209,14 @@
           "pos": "WR",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 2,
+          "player": "James Jones",
+          "team": "New Mexico State",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         }
       ]
     },
@@ -352990,8 +354442,176 @@
         },
         {
           "wk": 6,
-          "player": "Robert Briggs",
+          "player": "A.J. Little",
           "team": "Southern Miss",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        }
+      ]
+    },
+    {
+      "team": "Central Michigan",
+      "games": 9,
+      "next": {
+        "opp": "Sacramento State",
+        "start": "2026-11-12T00:30:00.000Z"
+      },
+      "td_qb": 5,
+      "td_qb_pg": 0.56,
+      "td_qb_adj": 1.04,
+      "rec_qb": 0,
+      "rec_qb_pg": 0.0,
+      "rec_qb_adj": 0.25,
+      "recyds_qb": 0,
+      "recyds_qb_pg": 0.0,
+      "recyds_qb_adj": 0.25,
+      "rushyds_qb": 302,
+      "rushyds_qb_pg": 33.56,
+      "rushyds_qb_adj": 0.98,
+      "td_rb": 10,
+      "td_rb_pg": 1.11,
+      "td_rb_adj": 0.92,
+      "rec_rb": 23,
+      "rec_rb_pg": 2.56,
+      "rec_rb_adj": 0.96,
+      "recyds_rb": 153,
+      "recyds_rb_pg": 17.0,
+      "recyds_rb_adj": 0.85,
+      "rushyds_rb": 1170,
+      "rushyds_rb_pg": 130.0,
+      "rushyds_rb_adj": 1.02,
+      "td_wr": 10,
+      "td_wr_pg": 1.11,
+      "td_wr_adj": 0.99,
+      "rec_wr": 88,
+      "rec_wr_pg": 9.78,
+      "rec_wr_adj": 0.91,
+      "recyds_wr": 1084,
+      "recyds_wr_pg": 120.44,
+      "recyds_wr_adj": 0.87,
+      "rushyds_wr": 26,
+      "rushyds_wr_pg": 2.89,
+      "rushyds_wr_adj": 0.64,
+      "td_te": 1,
+      "td_te_pg": 0.11,
+      "td_te_adj": 0.62,
+      "rec_te": 30,
+      "rec_te_pg": 3.33,
+      "rec_te_adj": 1.0,
+      "recyds_te": 307,
+      "recyds_te_pg": 34.11,
+      "recyds_te_adj": 0.99,
+      "rushyds_te": 20,
+      "rushyds_te_pg": 2.22,
+      "rushyds_te_adj": 64.87,
+      "td_all": 26,
+      "td_all_pg": 2.89,
+      "log": [
+        {
+          "wk": 10,
+          "vs": "Eastern Michigan",
+          "qb": 0,
+          "rb": 0,
+          "wr": 1,
+          "te": 0,
+          "recyds": 103,
+          "rushyds": 74
+        },
+        {
+          "wk": 8,
+          "vs": "Miami (OH)",
+          "qb": 1,
+          "rb": 2,
+          "wr": 1,
+          "te": 0,
+          "recyds": 221,
+          "rushyds": 140
+        },
+        {
+          "wk": 7,
+          "vs": "Western Michigan",
+          "qb": 0,
+          "rb": 2,
+          "wr": 0,
+          "te": 1,
+          "recyds": 48,
+          "rushyds": 224
+        },
+        {
+          "wk": 6,
+          "vs": "Ohio",
+          "qb": 0,
+          "rb": 1,
+          "wr": 3,
+          "te": 0,
+          "recyds": 158,
+          "rushyds": 245
+        },
+        {
+          "wk": 5,
+          "vs": "Akron",
+          "qb": 0,
+          "rb": 1,
+          "wr": 1,
+          "te": 0,
+          "recyds": 180,
+          "rushyds": 160
+        },
+        {
+          "wk": 4,
+          "vs": "Miami",
+          "qb": 1,
+          "rb": 2,
+          "wr": 3,
+          "te": 0,
+          "recyds": 371,
+          "rushyds": 201
+        },
+        {
+          "wk": 3,
+          "vs": "Wyoming",
+          "qb": 0,
+          "rb": 1,
+          "wr": 0,
+          "te": 0,
+          "recyds": 180,
+          "rushyds": 164
+        },
+        {
+          "wk": 2,
+          "vs": "Colgate",
+          "qb": 1,
+          "rb": 0,
+          "wr": 0,
+          "te": 0,
+          "recyds": 124,
+          "rushyds": 105
+        },
+        {
+          "wk": 1,
+          "vs": "New Mexico",
+          "qb": 2,
+          "rb": 1,
+          "wr": 1,
+          "te": 0,
+          "recyds": 159,
+          "rushyds": 205
+        }
+      ],
+      "scorers": [
+        {
+          "wk": 10,
+          "player": "Harold Mack",
+          "team": "Eastern Michigan",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 8,
+          "player": "Rodney Nelson",
+          "team": "Miami (OH)",
           "pos": "RB",
           "rush": 1,
           "rec": 0
@@ -353445,9 +355065,9 @@
           "rec": 1
         },
         {
-          "wk": 6,
-          "player": "Carson Hansen",
-          "team": "Penn State",
+          "wk": 8,
+          "player": "Bryan Jackson",
+          "team": "Wisconsin",
           "pos": "RB",
           "rush": 1,
           "rec": 0
@@ -353644,18 +355264,18 @@
       "scorers": [
         {
           "wk": 8,
-          "player": "Wayshawn Parker",
-          "team": "Utah",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 8,
           "player": "Devon Dampier",
           "team": "Utah",
           "pos": "QB",
           "rush": 2,
+          "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "Wayshawn Parker",
+          "team": "Utah",
+          "pos": "RB",
+          "rush": 1,
           "rec": 0
         },
         {
@@ -353676,7 +355296,7 @@
         },
         {
           "wk": 7,
-          "player": "Justin Bowick",
+          "player": "Wyatt Young",
           "team": "Oklahoma State",
           "pos": "WR",
           "rush": 0,
@@ -353692,17 +355312,17 @@
         },
         {
           "wk": 6,
-          "player": "Garrett Oakley",
+          "player": "Jaron Tibbs",
           "team": "Kansas State",
-          "pos": "TE",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
         {
           "wk": 6,
-          "player": "Jaron Tibbs",
+          "player": "Garrett Oakley",
           "team": "Kansas State",
-          "pos": "WR",
+          "pos": "TE",
           "rush": 0,
           "rec": 1
         },
@@ -353956,9 +355576,9 @@
           "wk": 4,
           "player": "Ja'Kobi Jackson",
           "team": "Ohio State",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
+          "pos": "WR",
+          "rush": 0,
+          "rec": 4
         },
         {
           "wk": 3,
@@ -353970,11 +355590,11 @@
         },
         {
           "wk": 2,
-          "player": "Nate Sheppard",
+          "player": "Jonah Burton",
           "team": "Duke",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 2
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
         }
       ]
     },
@@ -354120,17 +355740,17 @@
       "scorers": [
         {
           "wk": 8,
-          "player": "Ja'Cory Thomas",
+          "player": "Jayvontay Conner",
           "team": "Vanderbilt",
-          "pos": "WR",
+          "pos": "TE",
           "rush": 0,
           "rec": 1
         },
         {
           "wk": 8,
-          "player": "Jayvontay Conner",
+          "player": "Ja'Cory Thomas",
           "team": "Vanderbilt",
-          "pos": "TE",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
@@ -354192,14 +355812,6 @@
         },
         {
           "wk": 5,
-          "player": "DJ Black",
-          "team": "South Carolina",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 5,
           "player": "Maurice Brown II",
           "team": "South Carolina",
           "pos": "TE",
@@ -354213,6 +355825,14 @@
           "pos": "WR",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 4,
+          "player": "PJ Martin",
+          "team": "South Alabama",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         }
       ]
     },
@@ -354422,6 +356042,14 @@
         },
         {
           "wk": 5,
+          "player": "Keelon Russell",
+          "team": "Alabama",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 5,
           "player": "Ryan Williams",
           "team": "Alabama",
           "pos": "WR",
@@ -354627,12 +356255,12 @@
           "rec": 0
         },
         {
-          "wk": 8,
-          "player": "AJ Williams III",
-          "team": "New Mexico State",
+          "wk": 9,
+          "player": "Isaiah Myers",
+          "team": "Missouri State",
           "pos": "WR",
           "rush": 0,
-          "rec": 2
+          "rec": 1
         },
         {
           "wk": 8,
@@ -354683,8 +356311,16 @@
           "rec": 0
         },
         {
+          "wk": 6,
+          "player": "Kam Davis",
+          "team": "Liberty",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
           "wk": 4,
-          "player": "Malcolm Simmons",
+          "player": "Coy Eakin",
           "team": "Texas Tech",
           "pos": "WR",
           "rush": 0,
@@ -354866,6 +356502,14 @@
         },
         {
           "wk": 6,
+          "player": "Bailey Stockton",
+          "team": "Florida",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 6,
           "player": "Jadan Baugh",
           "team": "Florida",
           "pos": "RB",
@@ -354873,10 +356517,10 @@
           "rec": 0
         },
         {
-          "wk": 6,
-          "player": "Bailey Stockton",
-          "team": "Florida",
-          "pos": "WR",
+          "wk": 5,
+          "player": "Henry Boyer",
+          "team": "Kentucky",
+          "pos": "TE",
           "rush": 0,
           "rec": 1
         },
@@ -354922,9 +356566,9 @@
         },
         {
           "wk": 4,
-          "player": "Lotzeir Brooks",
+          "player": "Josh Ford",
           "team": "Alabama",
-          "pos": "WR",
+          "pos": "TE",
           "rush": 0,
           "rec": 1
         }
@@ -355072,18 +356716,18 @@
       "scorers": [
         {
           "wk": 8,
-          "player": "Godspower Nwawuihe",
-          "team": "Army",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 8,
           "player": "Cale Hellums",
           "team": "Army",
           "pos": "QB",
           "rush": 3,
+          "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "Godspower Nwawuihe",
+          "team": "Army",
+          "pos": "RB",
+          "rush": 1,
           "rec": 0
         },
         {
@@ -355123,6 +356767,22 @@
           "player": "Kyle Koch",
           "team": "North Texas",
           "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 6,
+          "player": "Truman Brasfield",
+          "team": "Navy",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 5,
+          "player": "Max Reese",
+          "team": "North Texas",
+          "pos": "TE",
           "rush": 0,
           "rec": 1
         },
@@ -355563,10 +357223,10 @@
           "rec": 0
         },
         {
-          "wk": 9,
-          "player": "Kenji Christian",
-          "team": "UConn",
-          "pos": "RB",
+          "wk": 8,
+          "player": "Tyler Hughes",
+          "team": "Wyoming",
+          "pos": "QB",
           "rush": 1,
           "rec": 0
         },
@@ -355625,6 +357285,14 @@
           "pos": "WR",
           "rush": 0,
           "rec": 2
+        },
+        {
+          "wk": 7,
+          "player": "Jackson Arnold",
+          "team": "UNLV",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 7,
@@ -355858,17 +357526,17 @@
         },
         {
           "wk": 5,
-          "player": "Eli Wood",
+          "player": "Javen Jacobs",
           "team": "Utah State",
-          "pos": "WR",
+          "pos": "RB",
           "rush": 0,
           "rec": 1
         },
         {
           "wk": 5,
-          "player": "Javen Jacobs",
+          "player": "Eli Wood",
           "team": "Utah State",
-          "pos": "RB",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
@@ -356024,14 +357692,6 @@
       "scorers": [
         {
           "wk": 9,
-          "player": "Byrum Brown",
-          "team": "Auburn",
-          "pos": "QB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 9,
           "player": "Chas Nimrod",
           "team": "Auburn",
           "pos": "WR",
@@ -356048,11 +357708,11 @@
         },
         {
           "wk": 8,
-          "player": "Ryan Wingo",
+          "player": "Michael Terry III",
           "team": "Texas",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 8,
@@ -356098,7 +357758,7 @@
           "wk": 4,
           "player": "Aaron Philo",
           "team": "Florida",
-          "pos": "QB",
+          "pos": "WR",
           "rush": 1,
           "rec": 0
         },
@@ -356262,11 +357922,11 @@
       "scorers": [
         {
           "wk": 9,
-          "player": "Caden Knighten",
+          "player": "Tony Livingston",
           "team": "Baylor",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
+          "pos": "TE",
+          "rush": 0,
+          "rec": 2
         },
         {
           "wk": 9,
@@ -356294,11 +357954,11 @@
         },
         {
           "wk": 8,
-          "player": "Legend Glasker",
+          "player": "Sione I Moa",
           "team": "BYU",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 8,
@@ -356310,7 +357970,7 @@
         },
         {
           "wk": 8,
-          "player": "Sione I Moa",
+          "player": "Legend Glasker",
           "team": "BYU",
           "pos": "RB",
           "rush": 1,
@@ -356342,6 +358002,14 @@
         },
         {
           "wk": 6,
+          "player": "Drew Mestemaker",
+          "team": "Oklahoma State",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 6,
           "player": "Morgan McPhaul",
           "team": "Oklahoma State",
           "pos": "TE",
@@ -356350,7 +358018,7 @@
         },
         {
           "wk": 6,
-          "player": "Drew Mestemaker",
+          "player": "Justin Bowick",
           "team": "Oklahoma State",
           "pos": "QB",
           "rush": 1,
@@ -356564,9 +358232,9 @@
         },
         {
           "wk": 5,
-          "player": "Carson Perry-Smith",
+          "player": "Ian Strong",
           "team": "California",
-          "pos": "RB",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
@@ -356841,6 +358509,14 @@
           "pos": "TE",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 4,
+          "player": "Cole Keller",
+          "team": "James Madison",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
         }
       ]
     },
@@ -357035,9 +358711,17 @@
           "rec": 1
         },
         {
-          "wk": 8,
-          "player": "Nate Sheppard",
-          "team": "Duke",
+          "wk": 9,
+          "player": "Kyndall Mccaleb",
+          "team": "Wake Forest",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 9,
+          "player": "Jamar Searcy",
+          "team": "Wake Forest",
           "pos": "RB",
           "rush": 1,
           "rec": 0
@@ -357055,6 +358739,14 @@
           "player": "Randy Pittman",
           "team": "SMU",
           "pos": "TE",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 7,
+          "player": "Jalen Hale",
+          "team": "SMU",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
@@ -357252,9 +358944,9 @@
           "wk": 9,
           "player": "Charlie Williams",
           "team": "Colorado",
-          "pos": "TE",
-          "rush": 0,
-          "rec": 1
+          "pos": "RB",
+          "rush": 2,
+          "rec": 0
         },
         {
           "wk": 8,
@@ -357782,7 +359474,7 @@
         },
         {
           "wk": 5,
-          "player": "Samari Howard",
+          "player": "Zach Mundell",
           "team": "Army",
           "pos": "WR",
           "rush": 1,
@@ -357797,9 +359489,9 @@
           "rec": 0
         },
         {
-          "wk": 3,
-          "player": "Louis Brown",
-          "team": "Baylor",
+          "wk": 5,
+          "player": "Samari Howard",
+          "team": "Army",
           "pos": "WR",
           "rush": 0,
           "rec": 1
@@ -357956,9 +359648,17 @@
         },
         {
           "wk": 9,
-          "player": "Caden Creel",
+          "player": "Jalen Likely",
           "team": "Jacksonville State",
-          "pos": "QB",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "MJ Dowdy",
+          "team": "Sam Houston",
+          "pos": "RB",
           "rush": 1,
           "rec": 0
         },
@@ -357979,14 +359679,6 @@
           "rec": 1
         },
         {
-          "wk": 8,
-          "player": "MJ Dowdy",
-          "team": "Sam Houston",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
           "wk": 6,
           "player": "Anthony Carrie",
           "team": "Florida International",
@@ -358004,14 +359696,6 @@
         },
         {
           "wk": 4,
-          "player": "Kiefer Sibley",
-          "team": "New Mexico",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 4,
           "player": "James Laubstein",
           "team": "New Mexico",
           "pos": "QB",
@@ -358024,6 +359708,14 @@
           "team": "New Mexico",
           "pos": "RB",
           "rush": 2,
+          "rec": 0
+        },
+        {
+          "wk": 4,
+          "player": "Kiefer Sibley",
+          "team": "New Mexico",
+          "pos": "RB",
+          "rush": 1,
           "rec": 0
         },
         {
@@ -358186,6 +359878,14 @@
       "scorers": [
         {
           "wk": 9,
+          "player": "Malachi Toney",
+          "team": "Miami",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 2
+        },
+        {
+          "wk": 9,
           "player": "Mark Fletcher Jr.",
           "team": "Miami",
           "pos": "RB",
@@ -358193,12 +359893,12 @@
           "rec": 1
         },
         {
-          "wk": 9,
-          "player": "Malachi Toney",
-          "team": "Miami",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 2
+          "wk": 8,
+          "player": "Ahmad Miller",
+          "team": "Syracuse",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 8,
@@ -358262,7 +359962,7 @@
           "team": "Notre Dame",
           "pos": "WR",
           "rush": 0,
-          "rec": 2
+          "rec": 1
         },
         {
           "wk": 5,
@@ -358274,7 +359974,7 @@
         },
         {
           "wk": 5,
-          "player": "Jaden Greathouse",
+          "player": "Jordan Faison",
           "team": "Notre Dame",
           "pos": "WR",
           "rush": 0,
@@ -358474,7 +360174,7 @@
           "wk": 6,
           "player": "Tychaun Chapman",
           "team": "Memphis",
-          "pos": "WR",
+          "pos": "TE",
           "rush": 0,
           "rec": 1
         },
@@ -358488,17 +360188,17 @@
         },
         {
           "wk": 4,
-          "player": "Vic Listorti",
+          "player": "Jackson Gutierrez",
           "team": "Navy",
-          "pos": "RB",
+          "pos": "QB",
           "rush": 1,
           "rec": 0
         },
         {
           "wk": 4,
-          "player": "Jackson Gutierrez",
+          "player": "Vic Listorti",
           "team": "Navy",
-          "pos": "QB",
+          "pos": "RB",
           "rush": 1,
           "rec": 0
         },
@@ -358920,14 +360620,6 @@
       "scorers": [
         {
           "wk": 9,
-          "player": "Godspower Nwawuihe",
-          "team": "Army",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 9,
           "player": "Samari Howard",
           "team": "Army",
           "pos": "WR",
@@ -358943,9 +360635,9 @@
           "rec": 0
         },
         {
-          "wk": 8,
-          "player": "Ashton Gray",
-          "team": "East Carolina",
+          "wk": 9,
+          "player": "Godspower Nwawuihe",
+          "team": "Army",
           "pos": "RB",
           "rush": 1,
           "rec": 0
@@ -358957,6 +360649,14 @@
           "pos": "WR",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 8,
+          "player": "Ashton Gray",
+          "team": "East Carolina",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 8,
@@ -359186,9 +360886,9 @@
           "wk": 8,
           "player": "Gavin Mueller",
           "team": "Miami",
-          "pos": "TE",
+          "pos": "WR",
           "rush": 0,
-          "rec": 1
+          "rec": 3
         },
         {
           "wk": 8,
@@ -359205,6 +360905,22 @@
           "pos": "RB",
           "rush": 1,
           "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "Gavin Mueller",
+          "team": "Miami",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 7,
+          "player": "Javarius Green",
+          "team": "Boston College",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
         },
         {
           "wk": 7,
@@ -359253,14 +360969,6 @@
           "pos": "RB",
           "rush": 1,
           "rec": 0
-        },
-        {
-          "wk": 6,
-          "player": "Jelani Thurman",
-          "team": "North Carolina",
-          "pos": "TE",
-          "rush": 0,
-          "rec": 1
         }
       ]
     },
@@ -359432,11 +361140,11 @@
         },
         {
           "wk": 8,
-          "player": "Dominic Kelley",
+          "player": "Marshaun Brown",
           "team": "Nevada",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
         },
         {
           "wk": 8,
@@ -359757,6 +361465,94 @@
           "pos": "RB",
           "rush": 1,
           "rec": 0
+        },
+        {
+          "wk": 10,
+          "player": "Matthew Coleman",
+          "team": "Sacramento State",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 8,
+          "player": "Aveion Chenault",
+          "team": "Western Michigan",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 8,
+          "player": "Jalen Buckley",
+          "team": "Western Michigan",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "Broc Lowry",
+          "team": "Western Michigan",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 8,
+          "player": "Baylin Brooks",
+          "team": "Western Michigan",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 7,
+          "player": "Joshua Long",
+          "team": "Eastern Michigan",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 7,
+          "player": "Harold Mack",
+          "team": "Eastern Michigan",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 6,
+          "player": "Jason Wright",
+          "team": "Buffalo",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 6,
+          "player": "Messiah Burch",
+          "team": "Buffalo",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 5,
+          "player": "TJ Horton",
+          "team": "Ball State",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 5,
+          "player": "Alex Scherle",
+          "team": "Ball State",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
         }
       ]
     },
@@ -359920,6 +361716,22 @@
         },
         {
           "wk": 8,
+          "player": "Adjatay Dabbs",
+          "team": "Toledo",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 2
+        },
+        {
+          "wk": 8,
+          "player": "CJ Miller",
+          "team": "Toledo",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 8,
           "player": "Autavius Ison",
           "team": "Toledo",
           "pos": "RB",
@@ -359956,7 +361768,7 @@
           "team": "Toledo",
           "pos": "WR",
           "rush": 0,
-          "rec": 2
+          "rec": 1
         },
         {
           "wk": 7,
@@ -359965,14 +361777,6 @@
           "pos": "QB",
           "rush": 1,
           "rec": 0
-        },
-        {
-          "wk": 7,
-          "player": "Jaden Allen",
-          "team": "Central Michigan",
-          "pos": "TE",
-          "rush": 0,
-          "rec": 1
         },
         {
           "wk": 6,
@@ -360158,6 +361962,14 @@
         },
         {
           "wk": 8,
+          "player": "Camden Coleman",
+          "team": "James Madison",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 8,
           "player": "Cole Keller",
           "team": "James Madison",
           "pos": "TE",
@@ -360190,6 +362002,14 @@
         },
         {
           "wk": 7,
+          "player": "Tristian Gardner",
+          "team": "Coastal Carolina",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 7,
           "player": "Ben Verges",
           "team": "Coastal Carolina",
           "pos": "TE",
@@ -360216,9 +362036,9 @@
           "wk": 7,
           "player": "Robby Washington",
           "team": "Coastal Carolina",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 6,
@@ -360230,19 +362050,19 @@
         },
         {
           "wk": 4,
-          "player": "CJ Bailey",
-          "team": "NC State",
-          "pos": "QB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 4,
           "player": "Keenan Jackson",
           "team": "NC State",
           "pos": "WR",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 4,
+          "player": "Jayden Scott",
+          "team": "NC State",
+          "pos": "RB",
+          "rush": 2,
+          "rec": 0
         }
       ]
     },
@@ -360388,17 +362208,17 @@
       "scorers": [
         {
           "wk": 9,
-          "player": "Jaden Craig",
+          "player": "Ace Theus",
           "team": "TCU",
-          "pos": "QB",
+          "pos": "WR",
           "rush": 1,
           "rec": 0
         },
         {
           "wk": 9,
-          "player": "Ace Theus",
+          "player": "Jaden Craig",
           "team": "TCU",
-          "pos": "WR",
+          "pos": "QB",
           "rush": 1,
           "rec": 0
         },
@@ -360449,6 +362269,14 @@
           "pos": "RB",
           "rush": 2,
           "rec": 0
+        },
+        {
+          "wk": 6,
+          "player": "Noah Bennee",
+          "team": "Utah",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
         },
         {
           "wk": 6,
@@ -360920,17 +362748,17 @@
         },
         {
           "wk": 7,
-          "player": "Cardae Mack",
+          "player": "Raiden Vines-Bright",
           "team": "Arizona State",
-          "pos": "RB",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
         {
           "wk": 7,
-          "player": "Raiden Vines-Bright",
+          "player": "Cardae Mack",
           "team": "Arizona State",
-          "pos": "WR",
+          "pos": "RB",
           "rush": 0,
           "rec": 1
         },
@@ -361190,11 +363018,11 @@
         },
         {
           "wk": 3,
-          "player": "Chris Durr Jr.",
+          "player": "Iverson Howard",
           "team": "Maryland",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 2
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         }
       ]
     },
@@ -361374,7 +363202,7 @@
         },
         {
           "wk": 6,
-          "player": "Jayden Clerveaux",
+          "player": "Nicholas Woodford",
           "team": "Central Michigan",
           "pos": "RB",
           "rush": 1,
@@ -361382,7 +363210,7 @@
         },
         {
           "wk": 6,
-          "player": "Nicholas Woodford",
+          "player": "Jayden Clerveaux",
           "team": "Central Michigan",
           "pos": "RB",
           "rush": 1,
@@ -361434,6 +363262,14 @@
           "team": "South Alabama",
           "pos": "RB",
           "rush": 2,
+          "rec": 0
+        },
+        {
+          "wk": 3,
+          "player": "PJ Martin",
+          "team": "South Alabama",
+          "pos": "RB",
+          "rush": 1,
           "rec": 0
         },
         {
@@ -361636,19 +363472,19 @@
         },
         {
           "wk": 5,
-          "player": "Solomon Baggett",
-          "team": "Arkansas State",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 5,
           "player": "Jaylen Bonelli",
           "team": "Arkansas State",
           "pos": "WR",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 5,
+          "player": "Solomon Baggett",
+          "team": "Arkansas State",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 3,
@@ -361826,7 +363662,7 @@
       "scorers": [
         {
           "wk": 9,
-          "player": "Nick Marsh",
+          "player": "Charlie Becker",
           "team": "Indiana",
           "pos": "WR",
           "rush": 0,
@@ -361834,7 +363670,7 @@
         },
         {
           "wk": 9,
-          "player": "Charlie Becker",
+          "player": "Nick Marsh",
           "team": "Indiana",
           "pos": "WR",
           "rush": 0,
@@ -362112,17 +363948,17 @@
         },
         {
           "wk": 6,
-          "player": "Cash Cheeks",
+          "player": "Jaden Smith",
           "team": "UTEP",
-          "pos": "TE",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
         {
           "wk": 6,
-          "player": "Jaden Smith",
+          "player": "Cash Cheeks",
           "team": "UTEP",
-          "pos": "WR",
+          "pos": "TE",
           "rush": 0,
           "rec": 1
         },
@@ -362152,9 +363988,9 @@
         },
         {
           "wk": 3,
-          "player": "Koraun Perdue",
+          "player": "Cam'Ron Lacy",
           "team": "Middle Tennessee",
-          "pos": "TE",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         }
@@ -362341,6 +364177,22 @@
           "rec": 1
         },
         {
+          "wk": 9,
+          "player": "Nyck Harbor",
+          "team": "South Carolina",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 9,
+          "player": "Lanorris Sellers",
+          "team": "South Carolina",
+          "pos": "QB",
+          "rush": 2,
+          "rec": 0
+        },
+        {
           "wk": 8,
           "player": "Camden Capehart",
           "team": "Mississippi State",
@@ -362366,7 +364218,7 @@
         },
         {
           "wk": 6,
-          "player": "Jermaine Bishop Jr.",
+          "player": "Ryan Wingo",
           "team": "Texas",
           "pos": "WR",
           "rush": 0,
@@ -362374,7 +364226,7 @@
         },
         {
           "wk": 6,
-          "player": "Ryan Wingo",
+          "player": "Jermaine Bishop Jr.",
           "team": "Texas",
           "pos": "WR",
           "rush": 0,
@@ -362540,19 +364392,19 @@
       "scorers": [
         {
           "wk": 9,
-          "player": "Aidan Chiles",
-          "team": "Northwestern",
-          "pos": "QB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 9,
           "player": "Griffin Wilde",
           "team": "Northwestern",
           "pos": "WR",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 9,
+          "player": "Aidan Chiles",
+          "team": "Northwestern",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 8,
@@ -363079,14 +364931,6 @@
           "rec": 0
         },
         {
-          "wk": 3,
-          "player": "Benjamin Hall",
-          "team": "North Carolina",
-          "pos": "RB",
-          "rush": 0,
-          "rec": 1
-        },
-        {
           "wk": 2,
           "player": "Ashton Hollins",
           "team": "Georgia Southern",
@@ -363278,7 +365122,7 @@
         },
         {
           "wk": 7,
-          "player": "Roderick Robinson II",
+          "player": "Braylon McReynolds",
           "team": "UAB",
           "pos": "RB",
           "rush": 0,
@@ -363286,7 +365130,7 @@
         },
         {
           "wk": 7,
-          "player": "Braylon McReynolds",
+          "player": "Roderick Robinson II",
           "team": "UAB",
           "pos": "RB",
           "rush": 0,
@@ -363326,7 +365170,7 @@
         },
         {
           "wk": 2,
-          "player": "Treyaun Webb",
+          "player": "Jaquari Lewis",
           "team": "App State",
           "pos": "RB",
           "rush": 1,
@@ -363492,6 +365336,14 @@
       "scorers": [
         {
           "wk": 8,
+          "player": "Kaleb Edwards",
+          "team": "Alabama",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 8,
           "player": "Marshall Pritchett",
           "team": "Alabama",
           "pos": "TE",
@@ -363503,14 +365355,6 @@
           "player": "Daniel Hill",
           "team": "Alabama",
           "pos": "RB",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 8,
-          "player": "Kaleb Edwards",
-          "team": "Alabama",
-          "pos": "TE",
           "rush": 0,
           "rec": 1
         },
@@ -363540,11 +365384,11 @@
         },
         {
           "wk": 4,
-          "player": "Landen Clark",
+          "player": "Jackson Harris",
           "team": "LSU",
-          "pos": "QB",
-          "rush": 2,
-          "rec": 0
+          "pos": "WR",
+          "rush": 0,
+          "rec": 2
         },
         {
           "wk": 4,
@@ -363556,19 +365400,11 @@
         },
         {
           "wk": 4,
-          "player": "Jackson Harris",
+          "player": "Landen Clark",
           "team": "LSU",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 2
-        },
-        {
-          "wk": 3,
-          "player": "Kenny Darby",
-          "team": "Kentucky",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
+          "pos": "QB",
+          "rush": 2,
+          "rec": 0
         },
         {
           "wk": 3,
@@ -363984,6 +365820,14 @@
         },
         {
           "wk": 9,
+          "player": "J'Koby Williams",
+          "team": "Texas Tech",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 9,
           "player": "Thomas Castellanos",
           "team": "Texas Tech",
           "pos": "QB",
@@ -364032,14 +365876,6 @@
         },
         {
           "wk": 4,
-          "player": "Caden Pinnick",
-          "team": "Washington State",
-          "pos": "QB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 4,
           "player": "Branden Ganashamoorthy",
           "team": "Washington State",
           "pos": "WR",
@@ -364047,12 +365883,12 @@
           "rec": 1
         },
         {
-          "wk": 3,
-          "player": "Cam Thompson",
-          "team": "Northern Illinois",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
+          "wk": 4,
+          "player": "Caden Pinnick",
+          "team": "Washington State",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 3,
@@ -364061,6 +365897,14 @@
           "pos": "RB",
           "rush": 1,
           "rec": 0
+        },
+        {
+          "wk": 3,
+          "player": "Cam Thompson",
+          "team": "Northern Illinois",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
         }
       ]
     },
@@ -364206,6 +366050,14 @@
       "scorers": [
         {
           "wk": 9,
+          "player": "Anthony Miller Jr.",
+          "team": "Arizona State",
+          "pos": "TE",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 9,
           "player": "Omarion Miller",
           "team": "Arizona State",
           "pos": "WR",
@@ -364213,10 +366065,10 @@
           "rec": 1
         },
         {
-          "wk": 9,
-          "player": "Anthony Miller Jr.",
-          "team": "Arizona State",
-          "pos": "TE",
+          "wk": 8,
+          "player": "Joshua Derry",
+          "team": "UCF",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
@@ -364500,6 +366352,14 @@
         },
         {
           "wk": 4,
+          "player": "Max Mosey",
+          "team": "Rice",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 4,
           "player": "Jacurri Brown",
           "team": "Rice",
           "pos": "QB",
@@ -364682,14 +366542,6 @@
       "scorers": [
         {
           "wk": 7,
-          "player": "Leon Haughton Jr.",
-          "team": "Old Dominion",
-          "pos": "TE",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 7,
           "player": "TJ Johnson",
           "team": "Old Dominion",
           "pos": "WR",
@@ -364714,6 +366566,14 @@
         },
         {
           "wk": 6,
+          "player": "Jeremiah Harrison",
+          "team": "James Madison",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 6,
           "player": "Ke'Untae Mosley",
           "team": "James Madison",
           "pos": "TE",
@@ -364722,7 +366582,7 @@
         },
         {
           "wk": 5,
-          "player": "Goldie Lawrence",
+          "player": "Karmello English",
           "team": "Coastal Carolina",
           "pos": "WR",
           "rush": 0,
@@ -364730,7 +366590,7 @@
         },
         {
           "wk": 5,
-          "player": "Karmello English",
+          "player": "Goldie Lawrence",
           "team": "Coastal Carolina",
           "pos": "WR",
           "rush": 0,
@@ -364754,9 +366614,9 @@
         },
         {
           "wk": 4,
-          "player": "Traville Frederick Jr.",
+          "player": "Koby Young",
           "team": "Houston",
-          "pos": "TE",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
@@ -364952,14 +366812,6 @@
         },
         {
           "wk": 8,
-          "player": "Damon Ferguson Jr.",
-          "team": "Pittsburgh",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 8,
           "player": "Cataurus Hicks",
           "team": "Pittsburgh",
           "pos": "WR",
@@ -364968,9 +366820,25 @@
         },
         {
           "wk": 8,
+          "player": "Damon Ferguson Jr.",
+          "team": "Pittsburgh",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 8,
           "player": "Cam Sapp",
           "team": "Pittsburgh",
           "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 7,
+          "player": "Tre Wisner",
+          "team": "Florida State",
+          "pos": "RB",
           "rush": 0,
           "rec": 1
         },
@@ -365182,14 +367050,6 @@
         },
         {
           "wk": 7,
-          "player": "Caleb Odom",
-          "team": "Ole Miss",
-          "pos": "TE",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 7,
           "player": "Trinidad Chambliss",
           "team": "Ole Miss",
           "pos": "QB",
@@ -365230,7 +367090,7 @@
         },
         {
           "wk": 3,
-          "player": "TK Keyes",
+          "player": "Howard Kinchen",
           "team": "Troy",
           "pos": "WR",
           "rush": 0,
@@ -365238,7 +367098,7 @@
         },
         {
           "wk": 3,
-          "player": "Howard Kinchen",
+          "player": "TK Keyes",
           "team": "Troy",
           "pos": "WR",
           "rush": 0,
@@ -365443,14 +367303,6 @@
           "rec": 1
         },
         {
-          "wk": 7,
-          "player": "Alessio Milivojevic",
-          "team": "Michigan State",
-          "pos": "QB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
           "wk": 6,
           "player": "Jamarion McDougle",
           "team": "Ball State",
@@ -365642,6 +367494,14 @@
         },
         {
           "wk": 7,
+          "player": "Tommy Carr",
+          "team": "Michigan",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 7,
           "player": "Jordan Marshall",
           "team": "Michigan",
           "pos": "RB",
@@ -365653,14 +367513,6 @@
           "player": "Bryson Kuzdzal",
           "team": "Michigan",
           "pos": "RB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 7,
-          "player": "Tommy Carr",
-          "team": "Michigan",
-          "pos": "QB",
           "rush": 1,
           "rec": 0
         },
@@ -366118,19 +367970,19 @@
         },
         {
           "wk": 7,
-          "player": "Telly Johnson Jr.",
-          "team": "Northern Illinois",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 7,
           "player": "La'Don Bryant",
           "team": "Northern Illinois",
           "pos": "WR",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 7,
+          "player": "Telly Johnson Jr.",
+          "team": "Northern Illinois",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 6,
@@ -366190,19 +368042,19 @@
         },
         {
           "wk": 1,
-          "player": "Cedric Ross",
+          "player": "Jackson Harper",
           "team": "Colorado State",
-          "pos": "RB",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
         {
           "wk": 1,
-          "player": "Reginald Vick Jr",
+          "player": "Cedric Ross",
           "team": "Colorado State",
-          "pos": "WR",
+          "pos": "RB",
           "rush": 0,
-          "rec": 3
+          "rec": 1
         }
       ]
     },
@@ -366387,12 +368239,12 @@
           "rec": 0
         },
         {
-          "wk": 8,
-          "player": "Brody Benke",
-          "team": "Middle Tennessee",
-          "pos": "TE",
-          "rush": 0,
-          "rec": 1
+          "wk": 9,
+          "player": "Jaylon Coleman",
+          "team": "Liberty",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 8,
@@ -366403,10 +368255,10 @@
           "rec": 0
         },
         {
-          "wk": 7,
-          "player": "Deondre Johnson",
-          "team": "Jacksonville State",
-          "pos": "WR",
+          "wk": 8,
+          "player": "Brody Benke",
+          "team": "Middle Tennessee",
+          "pos": "TE",
           "rush": 0,
           "rec": 1
         },
@@ -366415,6 +368267,14 @@
           "player": "Luke Gilbert",
           "team": "Jacksonville State",
           "pos": "TE",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 7,
+          "player": "Deondre Johnson",
+          "team": "Jacksonville State",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
@@ -366602,17 +368462,17 @@
         },
         {
           "wk": 6,
-          "player": "Latrelle Murrell",
+          "player": "Rickie Collins",
           "team": "Kennesaw State",
-          "pos": "RB",
+          "pos": "QB",
           "rush": 1,
           "rec": 0
         },
         {
           "wk": 6,
-          "player": "Rickie Collins",
+          "player": "Latrelle Murrell",
           "team": "Kennesaw State",
-          "pos": "QB",
+          "pos": "RB",
           "rush": 1,
           "rec": 0
         },
@@ -366626,7 +368486,7 @@
         },
         {
           "wk": 4,
-          "player": "Markus Allen",
+          "player": "Cam'Ron Lacy",
           "team": "Middle Tennessee",
           "pos": "WR",
           "rush": 0,
@@ -366634,7 +368494,7 @@
         },
         {
           "wk": 4,
-          "player": "Cam'Ron Lacy",
+          "player": "Markus Allen",
           "team": "Middle Tennessee",
           "pos": "WR",
           "rush": 0,
@@ -366650,19 +368510,19 @@
         },
         {
           "wk": 2,
-          "player": "Riley Neer",
-          "team": "Ohio",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 2,
           "player": "Victor Rosa",
           "team": "Ohio",
           "pos": "RB",
           "rush": 1,
           "rec": 0
+        },
+        {
+          "wk": 2,
+          "player": "Riley Neer",
+          "team": "Ohio",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
         },
         {
           "wk": 1,
@@ -366898,6 +368758,14 @@
         },
         {
           "wk": 6,
+          "player": "Andre Greene Jr.",
+          "team": "Georgia Southern",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 6,
           "player": "Taeo Todd",
           "team": "Georgia Southern",
           "pos": "RB",
@@ -366913,20 +368781,12 @@
           "rec": 1
         },
         {
-          "wk": 6,
-          "player": "Andre Greene Jr.",
-          "team": "Georgia Southern",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
-        },
-        {
           "wk": 5,
-          "player": "Xayvion Turner-Bradshaw",
+          "player": "TJ Lester",
           "team": "Marshall",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         }
       ]
     },
@@ -367104,19 +368964,19 @@
         },
         {
           "wk": 5,
-          "player": "Dylan Riley",
-          "team": "Boise State",
-          "pos": "RB",
-          "rush": 2,
-          "rec": 0
-        },
-        {
-          "wk": 5,
           "player": "Matt Wagner",
           "team": "Boise State",
           "pos": "TE",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 5,
+          "player": "Dylan Riley",
+          "team": "Boise State",
+          "pos": "RB",
+          "rush": 2,
+          "rec": 0
         },
         {
           "wk": 5,
@@ -367318,6 +369178,14 @@
         },
         {
           "wk": 7,
+          "player": "Byrum Brown",
+          "team": "Auburn",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 7,
           "player": "Keshaun Singleton",
           "team": "Auburn",
           "pos": "WR",
@@ -367333,10 +369201,10 @@
           "rec": 1
         },
         {
-          "wk": 7,
-          "player": "Byrum Brown",
-          "team": "Auburn",
-          "pos": "QB",
+          "wk": 6,
+          "player": "EJ Crowell",
+          "team": "Alabama",
+          "pos": "RB",
           "rush": 1,
           "rec": 0
         },
@@ -367390,19 +369258,19 @@
         },
         {
           "wk": 3,
-          "player": "Sutton Smith",
-          "team": "Arkansas",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 3,
           "player": "Ty Lockwood",
           "team": "Arkansas",
           "pos": "TE",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 3,
+          "player": "Sutton Smith",
+          "team": "Arkansas",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         }
       ]
     },
@@ -367572,6 +369440,14 @@
         },
         {
           "wk": 7,
+          "player": "DeAndre Moore Jr.",
+          "team": "Colorado",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
+        },
+        {
+          "wk": 7,
           "player": "Dekalon Taylor",
           "team": "Colorado",
           "pos": "RB",
@@ -367587,10 +369463,10 @@
           "rec": 1
         },
         {
-          "wk": 7,
-          "player": "DeAndre Moore Jr.",
-          "team": "Colorado",
-          "pos": "WR",
+          "wk": 6,
+          "player": "Dylan Edwards",
+          "team": "Kansas",
+          "pos": "RB",
           "rush": 0,
           "rec": 1
         },
@@ -367603,10 +369479,10 @@
           "rec": 1
         },
         {
-          "wk": 6,
-          "player": "Dylan Edwards",
-          "team": "Kansas",
-          "pos": "RB",
+          "wk": 4,
+          "player": "Dominic Overby",
+          "team": "Iowa State",
+          "pos": "WR",
           "rush": 0,
           "rec": 1
         },
@@ -367625,14 +369501,6 @@
           "pos": "QB",
           "rush": 1,
           "rec": 0
-        },
-        {
-          "wk": 4,
-          "player": "Dominic Overby",
-          "team": "Iowa State",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
         },
         {
           "wk": 2,
@@ -367794,19 +369662,19 @@
         },
         {
           "wk": 7,
-          "player": "Jordan Shipp",
-          "team": "North Carolina",
-          "pos": "WR",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 7,
           "player": "Demon June",
           "team": "North Carolina",
           "pos": "RB",
           "rush": 1,
           "rec": 0
+        },
+        {
+          "wk": 7,
+          "player": "Jordan Shipp",
+          "team": "North Carolina",
+          "pos": "WR",
+          "rush": 0,
+          "rec": 1
         },
         {
           "wk": 7,
@@ -368016,18 +369884,18 @@
         },
         {
           "wk": 6,
-          "player": "CJ Baxter Jr.",
-          "team": "Kentucky",
-          "pos": "RB",
-          "rush": 2,
-          "rec": 0
-        },
-        {
-          "wk": 6,
           "player": "Kenny Minchey",
           "team": "Kentucky",
           "pos": "QB",
           "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 6,
+          "player": "CJ Baxter Jr.",
+          "team": "Kentucky",
+          "pos": "RB",
+          "rush": 2,
           "rec": 0
         },
         {
@@ -368700,6 +370568,14 @@
           "wk": 8,
           "player": "Carson Bruhn",
           "team": "Kansas",
+          "pos": "QB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 7,
+          "player": "Ka'Morreun Pimpton",
+          "team": "TCU",
           "pos": "TE",
           "rush": 0,
           "rec": 1
@@ -368709,14 +370585,6 @@
           "player": "Ed Small",
           "team": "TCU",
           "pos": "WR",
-          "rush": 0,
-          "rec": 1
-        },
-        {
-          "wk": 7,
-          "player": "Ka'Morreun Pimpton",
-          "team": "TCU",
-          "pos": "TE",
           "rush": 0,
           "rec": 1
         },
@@ -368738,6 +370606,14 @@
         },
         {
           "wk": 3,
+          "player": "Andrew Burnette",
+          "team": "Louisiana Tech",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
+        },
+        {
+          "wk": 3,
           "player": "Jalen Mickens",
           "team": "Louisiana Tech",
           "pos": "WR",
@@ -368753,9 +370629,9 @@
           "rec": 1
         },
         {
-          "wk": 3,
-          "player": "Andrew Burnette",
-          "team": "Louisiana Tech",
+          "wk": 1,
+          "player": "Jeremiah Cobb",
+          "team": "Auburn",
           "pos": "RB",
           "rush": 1,
           "rec": 0
@@ -368765,14 +370641,6 @@
           "player": "Byrum Brown",
           "team": "Auburn",
           "pos": "QB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 1,
-          "player": "Jeremiah Cobb",
-          "team": "Auburn",
-          "pos": "RB",
           "rush": 1,
           "rec": 0
         }
@@ -368920,19 +370788,19 @@
       "scorers": [
         {
           "wk": 9,
-          "player": "Clay Thevenin",
-          "team": "Rutgers",
-          "pos": "RB",
-          "rush": 1,
-          "rec": 0
-        },
-        {
-          "wk": 9,
           "player": "Jourdin Houston",
           "team": "Rutgers",
           "pos": "WR",
           "rush": 0,
           "rec": 1
+        },
+        {
+          "wk": 9,
+          "player": "Clay Thevenin",
+          "team": "Rutgers",
+          "pos": "RB",
+          "rush": 1,
+          "rec": 0
         },
         {
           "wk": 8,
@@ -370046,7 +371914,7 @@
         },
         {
           "wk": 7,
-          "player": "Wayne Knight",
+          "player": "Anthony Woods",
           "team": "UCLA",
           "pos": "RB",
           "rush": 1,
@@ -370054,7 +371922,7 @@
         },
         {
           "wk": 7,
-          "player": "Anthony Woods",
+          "player": "Wayne Knight",
           "team": "UCLA",
           "pos": "RB",
           "rush": 1,
@@ -370268,7 +372136,7 @@
         },
         {
           "wk": 6,
-          "player": "Mason James",
+          "player": "Dezmen Roebuck",
           "team": "Washington",
           "pos": "WR",
           "rush": 0,
