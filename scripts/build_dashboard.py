@@ -5374,7 +5374,7 @@ RENDERER_JS = """<script>
 
   function trkFilterState(sec) {
     state.trkF = state.trkF || {};
-    return state.trkF[sec] || (state.trkF[sec] = { q: '', status: 'all', tag: 'all', sort: 'added' });
+    return state.trkF[sec] || (state.trkF[sec] = { q: '', status: 'all', tag: 'all', sort: 'date_desc' });
   }
   function trkFiltering(f) { return !!f.q || f.status !== 'all' || f.tag !== 'all'; }
   function trkFiltered(items, f) {
@@ -5540,7 +5540,7 @@ RENDERER_JS = """<script>
         opt('all', Object.keys(tagsInUse).length ? 'All tags' : 'No tags yet', f.tag) +
         Object.keys(tagsInUse).sort().map(function (t) { return opt(t, t, f.tag); }).join('') + '</select>' +
       '<select class="trk-sel" data-trk-filter="sort" data-trk-sec="' + sec + '" aria-label="Sort plays">' +
-        [['added', 'Sort: newest added'], ['date_desc', 'Sort: latest game first'], ['date_asc', 'Sort: earliest game first'], ['edge', 'Sort: biggest edge'], ['profit', 'Sort: biggest profit']]
+        [['date_desc', 'Sort: latest game first'], ['added', 'Sort: newest added'], ['date_asc', 'Sort: earliest game first'], ['edge', 'Sort: biggest edge'], ['profit', 'Sort: biggest profit']]
           .map(function (o) { return opt(o[0], o[1], f.sort); }).join('') + '</select>' +
     '</div>';
     var banner = filtering
