@@ -372,6 +372,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
         "teamDir": build_team_dir(data, teams),
         "games": games,
         "clv": clv_out,
+        "confBaseline": _load_conf_baseline(),
         "propCatalog": props_catalog,
         "propsLive": props_live,
         "fantasy": fantasy_out,
@@ -904,6 +905,16 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .card-note { font-size: 9.5px; color: var(--muted-3); margin-top: 4px; }
 .card-price { font-size: 11px; text-align: right; color: var(--muted); }
 .card-conf { font-size: 17px; font-weight: 900; text-align: right; color: var(--green); font-family: var(--font-led); }
+.conf-tier { display: block; margin-top: 3px; font-family: var(--font-body, inherit); font-size: 9px; font-weight: 800; letter-spacing: .06em; text-align: right; }
+.conf-tier.is-high { color: var(--green); }
+.conf-tier.is-mid { color: var(--amber); }
+.conf-tier.is-low { color: var(--muted); }
+.conf-grid { display: grid; grid-template-columns: 1.1fr 1fr .8fr .8fr; gap: 2px 10px; font-size: 13px; align-items: center; }
+.conf-grid .h { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.conf-grid .r { text-align: right; font-variant-numeric: tabular-nums; }
+.conf-mkt { font-size: 12px; font-weight: 800; margin: 10px 0 4px; color: var(--text, inherit); }
+.conf-grid .conf-tier { text-align: left; margin-top: 0; font-size: 10px; }
+.conf-live { font-size: 10px; color: var(--muted); display: block; }
 .card-total { display: flex; justify-content: space-between; padding: 13px 22px; font-size: 11px; background: var(--panel-deep); }
 .card-total-label { color: var(--muted-2); font-family: var(--font-display); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; font-size: 11px; }
 
@@ -2033,6 +2044,19 @@ MATH_JS = """<script>
     };
   }
 
+  // Confidence tier (11/2026). The win % itself runs well above real hit
+  // rates (one fixed sigma -- see tierFor), so the tier is a RANKING label,
+  // not a probability or a sizing rule: every play is still 1u. Cutoffs
+  // split the weeks 4-10 Bet Card into rough thirds (see
+  // docs/data/bet_card_confidence.json); MLs sit higher because a moneyline
+  // win % is naturally bigger than the same game's cover %.
+  var CONF_CUTS = { Spread: [0.77, 0.71], Moneyline: [0.81, 0.775] };
+  function confTier(market, winProb) {
+    if (winProb == null || isNaN(winProb)) return null;
+    var c = CONF_CUTS[market === 'Moneyline' ? 'Moneyline' : 'Spread'];
+    return winProb >= c[0] ? 'High' : winProb >= c[1] ? 'Mid' : 'Low';
+  }
+
   function buildBetCard(games, opts) {
     opts = opts || {};
     var limit = opts.limit || 10;
@@ -2079,7 +2103,7 @@ MATH_JS = """<script>
     fairAmerican: fairAmerican, impliedProb: impliedProb, removeVig: removeVig,
     expectedValue: expectedValue, signed: signed, homeMargin: homeMargin,
     tierFor: tierFor, priceGame: priceGame, distribution: distribution,
-    decomposition: decomposition, buildBetCard: buildBetCard,
+    decomposition: decomposition, buildBetCard: buildBetCard, confTier: confTier, CONF_CUTS: CONF_CUTS,
     displayColor: displayColor, lighten: lighten, relativeLuminance: relativeLuminance
   };
 })(window);
@@ -2347,6 +2371,10 @@ RENDERER_JS = """<script>
       unofficial: autoUnofficial,
       betCard: betCard,
       dogWatch: !!p.bigDogWatch,
+      // Win % and its confidence tier at the moment it was tracked, so the
+      // Tracker can keep a record by tier (11/2026).
+      winProb: Math.round(p.sideProb * 1000) / 1000,
+      confTier: M.confTier(p.market, p.sideProb),
       modelSource: modelSource,
       modelVersion: g.modelVersion || null
     }));
@@ -3564,6 +3592,10 @@ RENDERER_JS = """<script>
   }
   window.__cfbPpFilters = function () { state.ppFilters = !state.ppFilters; render(); };
 
+  function confChip(t) {
+    return t ? '<span class="conf-tier is-' + t.toLowerCase() + '" title="Confidence tier: ' + t + ' (ranks the play by model win %; still 1u)">' + t.toUpperCase() + '</span>' : '';
+  }
+
   function renderBetCard(card) {
     return '' +
       '<div class="section-head mt-md"><div class="section-title"><div class="section-flag is-green"></div>' +
@@ -3610,7 +3642,7 @@ RENDERER_JS = """<script>
                 '<div class="card-note">' + esc(abbrOf(c.game.away) + ' at ' + abbrOf(c.game.home) + ' \\u00b7 ' + edgeKickoff(c.game)) +
                   ' \\u00b7 <span style="font-weight:700;color:' + (isTrainedGame ? '#2ecc71' : '#8A94A3') + '">' + (isTrainedGame ? (c.game.modelVersion === 'upgraded' ? 'UPGRADED' : 'TRAINED') : 'UNTRAINED') + '</span></div></div>' +
               '<div class="card-price">' + esc(sidePriceLabel) + '</div>' +
-              '<div class="card-conf">' + (sideProb * 100).toFixed(1) + '%</div>' +
+              '<div class="card-conf">' + (sideProb * 100).toFixed(1) + '%' + confChip(M.confTier(c.market, sideProb)) + '</div>' +
               '<div class="num"><span class="tier"><span>' + esc(c.tier) + '</span></span></div>' +
               '<div class="num"><button class="track-btn" onclick="window.__cfbTrack(' + trackPayload(c, true) + ')">+TRK</button></div>' +
               (isNearEvenTarget(c) ? '<div style="grid-column:1/-1;font-size:11px;color:var(--green);padding-top:6px;line-height:1.4">\u2605 Near-even target: +100 to +150 with the model at 65%+ \u2014 small stake</div>' : '') +
@@ -4734,6 +4766,8 @@ RENDERER_JS = """<script>
     if (play.kickoffIso) item.kickoffIso = play.kickoffIso;   // real kickoff, so the row can show it in your own time zone
     if (play.dogWatch) item.dogWatch = true;                  // big-dog watch play (28-34.5 underdog) when tracked
     if (play.betCard) item.betCard = true;                    // was on the Bet Card for its market when tracked
+    if (play.winProb != null) item.winProb = play.winProb;    // model win % when tracked
+    if (play.confTier) item.confTier = play.confTier;         // High / Mid / Low when tracked
     items.unshift(item);
     saveTrk(items);
     render();
@@ -5261,7 +5295,7 @@ RENDERER_JS = """<script>
         var tags = trkTagsOf(keep).slice();
         trkTagsOf(o).forEach(function (t) { if (!trkHasTag(tags, t)) tags.push(t); });
         if (tags.length) keep.tags = tags;
-        ['modelSource', 'modelVersion', 'kickoffIso', 'sourceId'].forEach(function (f) { if (keep[f] == null && o[f] != null) keep[f] = o[f]; });
+        ['modelSource', 'modelVersion', 'kickoffIso', 'sourceId', 'winProb', 'confTier'].forEach(function (f) { if (keep[f] == null && o[f] != null) keep[f] = o[f]; });
         gone.push(o);
       });
       // Stamped no older than any copy it absorbed, so a file exported or
@@ -6057,6 +6091,41 @@ RENDERER_JS = """<script>
   }
   window.__cfbTrkAutoUpcoming = function () { state.trkAutoShowUpcoming = !state.trkAutoShowUpcoming; render(); };
 
+  // Bet Card record by confidence tier (11/2026). Weeks 4-10 come from the
+  // rebuilt card (D.confBaseline -- this browser's tracker has no win % for
+  // plays tracked before the tier existed); everything after that is Bet
+  // Card plays tracked here with +TRK, graded, 1u each, MLs included even
+  // though they're unofficial so their tiers can be watched too.
+  function renderConfidenceRecord(items) {
+    var B = D.confBaseline || { rows: [] };
+    var live = items.filter(function (it) { return it.betCard && it.confTier && it.status && (it.type === 'Spread' || it.type === 'Moneyline'); });
+    var uOf = function (it) { return it.status === 'win' ? americanToDecimal(it.price) - 1 : (it.status === 'loss' ? -1 : 0); };
+    var sg = function (v, d) { return (v > 0 ? '+' : '') + v.toFixed(d); };
+    var col = function (v) { return v > 0.005 ? 'var(--green)' : v < -0.005 ? 'var(--red)' : 'var(--muted)'; };
+    var block = function (mkt) {
+      var cuts = M.CONF_CUTS[mkt];
+      var rows = ['High', 'Mid', 'Low'].map(function (t) {
+        var b = B.rows.filter(function (r) { return r.market === mkt && r.tier === t; })[0] || { w: 0, l: 0, p: 0, units: 0, n: 0 };
+        var lv = live.filter(function (it) { return it.type === mkt && it.confTier === t; });
+        var lw = 0, ll = 0, lp = 0, lu = 0;
+        lv.forEach(function (it) { if (it.status === 'win') lw++; else if (it.status === 'loss') ll++; else if (it.status === 'push') lp++; lu += uOf(it); });
+        var w = b.w + lw, l = b.l + ll, p = b.p + lp, u = b.units + lu, n = b.n + lv.length;
+        var roi = n ? u / n * 100 : 0;
+        var range = t === 'High' ? (cuts[0] * 100).toFixed(1).replace('.0', '') + '%+' : t === 'Mid' ? (cuts[1] * 100).toFixed(1).replace('.0', '') + '–' + (cuts[0] * 100).toFixed(1).replace('.0', '') + '%' : 'under ' + (cuts[1] * 100).toFixed(1).replace('.0', '') + '%';
+        return '<span>' + confChip(t) + '<span class="conf-live">' + range + '</span></span>' +
+          '<span class="r"><b>' + w + '-' + l + (p ? '-' + p : '') + '</b>' + (lv.length ? '<span class="conf-live">live ' + lw + '-' + ll + (lp ? '-' + lp : '') + '</span>' : '') + '</span>' +
+          '<span class="r" style="color:' + col(u) + '"><b>' + sg(u, 1) + 'u</b></span>' +
+          '<span class="r" style="color:' + col(roi) + '">' + sg(roi, 1) + '%</span>';
+      }).join('');
+      return '<div class="conf-mkt">' + (mkt === 'Spread' ? 'Spreads (official)' : 'Moneylines (unofficial)') + '</div>' +
+        '<div class="conf-grid"><span class="h">Tier</span><span class="h r">Record</span><span class="h r">Units</span><span class="h r">ROI</span>' + rows + '</div>';
+    };
+    return '<div class="ep-card" style="margin:10px 0 6px"><div class="ep-head">' + icon('performance') + '<span>Bet Card by confidence</span><em>1u each</em></div>' +
+      block('Spread') + block('Moneyline') +
+      '<div class="ep-foot" style="color:var(--muted-3);margin-top:8px">Weeks ' + esc(B.weeks || '4-10') + ' are the Bet Card rebuilt from saved runs; after that it adds the Bet Card plays you track here once they’re graded. ' +
+      'The tier ranks plays by the model’s win %, which runs high (Bet Card spreads have averaged 75% shown vs 58% actual), so it’s a ranking, not a real probability.</div></div>';
+  }
+
   function renderTracker() {
     var items = loadTrk();
     // Two separate trackers sharing one localStorage log: Game Lines
@@ -6132,7 +6201,7 @@ RENDERER_JS = """<script>
           : 'No ' + (state.trackerModelTab === 'trained_model' ? 'trained-model' : 'untrained-model') + ' plays tracked yet under this tab.',
         sectionId: 'trk-gamelines-section',
         sec: 'lines',
-        extraHtml: modelTabBar,
+        extraHtml: renderConfidenceRecord(gameLineItems) + modelTabBar,
       }) +
       renderAutoTrackedProps() +
       renderTrackerSection(propItems, {
@@ -6401,6 +6470,18 @@ RENDERER_JS = """<script>
 })();
 </script>
 """
+
+
+def _load_conf_baseline():
+    """Weeks 4-10 Bet Card record by confidence tier (rebuilt 11/10/2026).
+    Static file -- the Tracker adds live tracked Bet Card plays on top."""
+    try:
+        with open("docs/data/bet_card_confidence.json") as f:
+            b = json.load(f)
+        return {"rows": b.get("rows", []), "weeks": b.get("weeks"), "through": b.get("through"), "cutoffs": b.get("cutoffs")}
+    except Exception as e:
+        print(f"  [note] bet card confidence baseline not loaded ({e})")
+        return None
 
 
 def main():
