@@ -673,6 +673,12 @@ def capture_raw_projections(prop_models: dict) -> dict:
                     last["value"] = float(res.get("predicted_value"))
                 except Exception:
                     last.pop("value", None)
+                # 11/2026: the inputs too, for the game breakdown's "why it's
+                # a play" read on official props.
+                try:
+                    last["features"] = {k: features_row.get(k) for k in features_row.index}
+                except Exception:
+                    last.pop("features", None)
                 return res
 
             m.predict_and_compare = wrapped
@@ -680,6 +686,91 @@ def capture_raw_projections(prop_models: dict) -> dict:
         except Exception as e:
             print(f"  [note] could not capture raw projections for one props model ({e})")
     return last
+
+
+# 11/2026: the inputs behind an official prop's projection, for the game
+# breakdown's "why it's a play" read. Only the ones a person can read.
+PROP_INPUT_KEYS = {
+    "rush_yds": ["roll_rush_yds", "last2_rush_yds", "roll_rush_att", "last2_rush_att", "roll_carry_share",
+                 "last2_carry_share", "roll_team_rush_att", "opp_rush_yds_allowed_prior"],
+    "receptions": ["roll_receptions", "last2_receptions", "roll_rec_share", "last2_rec_share", "roll_team_pass_att",
+                   "opp_pass_yds_allowed_prior", "roll_pff_routes", "roll_pff_targets", "roll_pff_route_part",
+                   "last2_pff_route_part", "roll_pff_target_share", "last2_pff_target_share", "roll_pff_tprr",
+                   "roll_pff_adot", "pff_matched"],
+    "rec_yds": ["roll_rec_yds", "last2_rec_yds", "roll_receptions", "roll_rec_share", "roll_rec_yds_share",
+                "roll_team_pass_att", "opp_pass_yds_allowed_prior", "roll_pff_routes", "roll_pff_targets",
+                "roll_pff_route_part", "last2_pff_route_part", "roll_pff_target_share", "last2_pff_target_share",
+                "roll_pff_tprr", "roll_pff_adot", "pff_matched"],
+}
+PROP_INPUT_COMMON = ["games_played_prior", "team_spread", "team_implied_total"]
+
+
+def slim_prop_inputs(features: dict, stat: str) -> dict:
+    """{input: value} for the readable inputs of this stat's model; {} if none.
+    Never raises."""
+    out = {}
+    try:
+        for k in PROP_INPUT_KEYS.get(stat, []) + PROP_INPUT_COMMON:
+            v = (features or {}).get(k)
+            if v is None:
+                continue
+            v = float(v)
+            if v != v:   # NaN
+                continue
+            out[k] = round(v, 4 if abs(v) < 2 else 2)
+    except Exception:
+        return {}
+    return out
+
+
+# 11/2026: what is moving the spread model's number, for the game
+# breakdown's "why it's a play" read. Each group of inputs is set to even
+# (no difference between the teams; mild dry weather; no home field, no QB
+# out) and the game re-scored; the change is that group's push, in points
+# toward the HOME team. The model is a boosted tree, so the pushes don't add
+# up exactly to the line -- they show which inputs carry the number.
+MARGIN_DRIVER_GROUPS = [
+    ("form", "Recent form", ["ewm_adj_margin_diff"]),
+    ("eff", "Per-play efficiency", ["ewm_net_ppa_diff", "ewm_off_ppa_diff", "ewm_def_ppa_diff", "ewm_off_sr_diff", "ewm_def_sr_diff"]),
+    ("scoring", "Season scoring", ["roll_margin_diff", "roll_ppg_for_diff", "roll_ppg_against_diff"]),
+    ("ratings", "Team ratings (SP+ / CORE)", ["sp_rating_diff", "core_overall_diff"]),
+    ("returning", "Returning production", ["returning_production_diff"]),
+    ("pace", "Tempo", ["pace_diff"]),
+    ("home", "Home field", ["home_field"]),
+    ("rest", "Rest", ["rest_diff"]),
+    ("qb", "QB availability", ["home_qb_out", "away_qb_out"]),
+    ("weather", "Weather", ["temperature", "wind_speed", "precipitation"]),
+]
+_MARGIN_NEUTRAL = {"temperature": 65.0, "wind_speed": 6.0, "precipitation": 0.0}
+
+
+def margin_drivers(model, inputs: dict) -> list:
+    """[{key, label, pts, vals}] by size of push, or [] when the inputs aren't
+    complete. pts > 0 pushes toward the home team. Never raises."""
+    try:
+        cols = list(model.feature_columns)
+        base = {c: inputs.get(c) for c in cols}
+        if any(v is None for v in base.values()):
+            return []
+        full = float(model.predict_margin(pd.DataFrame([base]))[0])
+        out = []
+        for key, label, feats in MARGIN_DRIVER_GROUPS:
+            feats = [f for f in feats if f in cols]
+            if not feats:
+                continue
+            if key == "weather" and base.get("game_indoors"):
+                continue
+            alt = dict(base)
+            for f in feats:
+                alt[f] = _MARGIN_NEUTRAL.get(f, 0.0)
+            pts = full - float(model.predict_margin(pd.DataFrame([alt]))[0])
+            out.append({"key": key, "label": label, "pts": round(pts, 2),
+                        "vals": {f: (round(float(base[f]), 4) if base[f] is not None else None) for f in feats}})
+        out.sort(key=lambda d: -abs(d["pts"]))
+        return out
+    except Exception as e:
+        print(f"  [note] margin drivers skipped for one game ({e})")
+        return []
 
 
 def current_cfb_season_year(now: datetime = None) -> int:
@@ -984,6 +1075,10 @@ def main(year: int):
                     trained_residual_std=(used_model.residual_std if used_model else None),
                 )
                 game_out.update(fair_fields)
+                if used_model is not None and trained_margin is not None:
+                    drivers = margin_drivers(used_model, game_inputs)
+                    if drivers:
+                        game_out["model_drivers"] = drivers
                 if used_model is not None:
                     game_out["model_version"] = ("upgraded" if used_model is trained_model
                                                  and any(c.startswith("ewm_") for c in trained_model.feature_columns)
@@ -1275,6 +1370,7 @@ def main(year: int):
         raw_projection = capture_raw_projections(prop_models)
         for p in props_out:
             raw_projection.pop("value", None)
+            raw_projection.pop("features", None)
             result = score_prop(
                 p.get("player_name"), p.get("market_name"), p.get("line"),
                 player_form, schedule_df, opp_defense_lookup, prop_models,
@@ -1295,6 +1391,9 @@ def main(year: int):
                 p["model_stat"] = market_name_to_stat(p.get("market_name"))
                 if raw_projection.get("value") is not None:
                     p["model_projection_raw"] = round(raw_projection["value"], 6)
+                p_inputs = slim_prop_inputs(raw_projection.get("features"), p["model_stat"])
+                if p_inputs:
+                    p["model_inputs"] = p_inputs
 
                 lean = p.get("model_lean")
                 lean_price = p.get("over_price") if lean == "over" else p.get("under_price")

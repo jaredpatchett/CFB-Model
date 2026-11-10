@@ -108,6 +108,45 @@ def fmt_kickoff(iso):
         return "TBD"
 
 
+# 11/2026: the spread model's inputs for each game on the slate, from the
+# export's input log (the latest run), for the game breakdown's "why it's a
+# play" read. {(home school, away school, kickoff iso): {input: value}}.
+MODEL_INPUTS_LOG_PATH = "docs/data/model_inputs_log.csv"
+GAME_INPUT_KEYS = ("home_field", "roll_margin_diff", "roll_ppg_for_diff", "roll_ppg_against_diff", "sp_rating_diff",
+                   "pace_diff", "returning_production_diff", "core_overall_diff", "ewm_adj_margin_diff",
+                   "ewm_net_ppa_diff", "ewm_off_ppa_diff", "ewm_def_ppa_diff", "ewm_off_sr_diff", "ewm_def_sr_diff",
+                   "rest_diff", "home_qb_out", "away_qb_out", "temperature", "wind_speed", "precipitation")
+
+
+def load_game_inputs(path: str = MODEL_INPUTS_LOG_PATH) -> dict:
+    """Never raises; {} if the log is missing."""
+    import csv
+    try:
+        if not os.path.exists(path):
+            return {}
+        with open(path, newline="") as f:
+            rows = list(csv.DictReader(f))
+        out, when = {}, {}
+        for r in rows:
+            if r.get("model_source") != "trained_model":
+                continue
+            k = (r.get("home"), r.get("away"), r.get("commence_time"))
+            if r.get("run_at", "") < when.get(k, ""):
+                continue
+            vals = {}
+            for c in GAME_INPUT_KEYS:
+                try:
+                    if r.get(c) not in (None, ""):
+                        vals[c] = round(float(r[c]), 4)
+                except ValueError:
+                    pass
+            when[k], out[k] = r.get("run_at", ""), vals
+        return out
+    except Exception as e:
+        print(f"  [note] model input log not read ({e})")
+        return {}
+
+
 def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dict:
     prior = data.get("preseason_prior") or {}
     slope = prior.get("slope")
@@ -141,6 +180,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
     priced = [g for g in games_all if g.get("has_model_line")]
 
     games = []
+    game_inputs = load_game_inputs()
     for g in priced:
         sp_diff = g.get("sp_rating_diff")
         model_margin = g.get("model_predicted_margin")
@@ -277,10 +317,18 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
             "modelVersion": g.get("model_version"),
             "injHome": inj_home,
             "injAway": inj_away,
+            # 11/2026, game breakdown "why it's a play": what moves the
+            # model's number (export) and its raw inputs (input log).
+            "drivers": g.get("model_drivers"),
+            "inputs": game_inputs.get((g.get("home_school"), g.get("away_school"), g.get("commence_time"))),
         })
 
     props_catalog = data.get("prop_market_catalog", [])
     props_live = data.get("props", [])
+    # The model's inputs ride along only on official props (game breakdown).
+    for r in props_live:
+        if not r.get("is_official_play"):
+            r.pop("model_inputs", None)
     fantasy_out = data.get("fantasy", [])
 
     # backtest: real ATS win rate / margin MAE / moneyline accuracy against
@@ -1576,6 +1624,14 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .gb-note { font-size: 11px; color: var(--muted-3); }
 .gb-risk { font-size: 12px; color: #F5B942; margin-top: 7px; line-height: 1.5; }
 .gb-why { font-size: 12.5px; line-height: 1.55; color: var(--muted-2, #B6C2CF); margin-top: 6px; }
+.gb-why-card { background: var(--panel-deep); border: 1px solid rgba(57,240,122,0.25); border-radius: 9px; padding: 8px 11px; margin-bottom: 8px; }
+.gb-why-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 4px; }
+.gb-why-head .gb-prop { font-weight: 800; }
+.gb-why-list { margin: 4px 0 0; padding-left: 17px; font-size: 12.5px; line-height: 1.55; color: var(--muted-2, #B6C2CF); }
+.gb-why-list li { margin-bottom: 4px; }
+.gb-why-list b { color: #fff; }
+.gb-why-list .gb-note { display: block; }
+.gb-why-lab { margin-top: 10px; color: var(--neon); }
 
 .pp-grade { display: flex; gap: 3px; }
 .pp-gbtn { flex: 1; border: 1px solid var(--rule-strong); background: transparent; color: var(--muted-3); border-radius: 5px; font-family: var(--font-body); font-weight: 800; font-size: 10.5px; padding: 3px 0; cursor: pointer; }
@@ -3496,12 +3552,12 @@ RENDERER_JS = """<script>
       return r.is_official_play && (r.team === g.awaySchool || r.team === g.homeSchool) &&
         (!g.kickoffIso || !r.start_time || Math.abs(new Date(r.start_time) - new Date(g.kickoffIso)) < 864e5);
     });
+    // 11/2026: each official prop now carries its "why it's a play" read.
     var seen = {}, out = [];
-    mine.forEach(function (r) {
+    mine.sort(function (a, b) { return (b.model_ev || 0) - (a.model_ev || 0); }).forEach(function (r) {
       var k = r.player_name + '|' + r.market_name;
       if (seen[k]) return; seen[k] = 1;
-      out.push('<span class="gb-prop">&#9733; ' + esc(r.player_name) + ' ' + esc(r.model_lean) + ' ' + r.line + ' ' + esc(r.market_name.toLowerCase()) +
-        ' <span class="gb-rk">proj ' + (+r.model_predicted_value).toFixed(1) + (r.model_ev != null ? ', ' + (+r.model_ev).toFixed(0) + '% edge' : '') + '</span></span>');
+      out.push(gbWhyProp(r, g));
     });
     return out;
   }
@@ -3519,6 +3575,219 @@ RENDERER_JS = """<script>
     var hp = 1 - M.normalCdf(0, M.homeMargin(g), p.sd);
     bits.push('model win chance ' + esc(A.abbr) + ' ' + ((1 - hp) * 100).toFixed(0) + '% / ' + esc(H.abbr) + ' ' + (hp * 100).toFixed(0) + '%');
     return bits.join(' &middot; ');
+  }
+  // ---- "Why it's a play" (11/2026) ----
+  // For every official prop in the game and the game's Bet Card side: the
+  // rule it qualifies under and how that rule has done, the model's number
+  // against the price, what the projection or line is built on, the matchup
+  // and what could break it. Everything here is read from data the model
+  // already uses; nothing here changes which plays are official.
+  function gbOrd(n) { var s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
+  function gbSigned(x, d) { var v = Number(x).toFixed(d); if (Number(v) === 0) v = (0).toFixed(d); return (Number(v) > 0 ? '+' : '') + v; }
+  function gbPrice(x) { return x == null || isNaN(x) ? 'no price' : (x > 0 ? '+' : '') + Number(x); }
+  function gbNum(x, d) { return x == null || isNaN(x) ? '&mdash;' : Number(x).toFixed(d == null ? 1 : d); }
+  function gbRec(r) { return r ? esc(r.record) + ', ' + gbSigned(r.roi, 1) + '% ROI, ' + gbSigned(r.units, 1) + 'u' : null; }
+  var GB_RULES = {
+    rush_under: { key: 'rush_under', what: 'Rush yards unders are official at any edge, but only against a tough run defense (top third of FBS).' },
+    rec_under: { key: 'rec_under', what: 'Receptions unders are official at a 30%+ edge.' },
+    rec_yds_over: { key: 'rec_yds_over', what: 'Receiving yards overs are official at a 15% to 30% edge on a line of 25.5+ (a player with a real role in the offense).' }
+  };
+  var GB_STAT = { 'Rush Yards': 'rush yds', 'Receptions': 'catches', 'Reception Yards': 'rec yds' };
+  function gbWhyProp(r, g) {
+    var over = r.model_lean === 'over', stat = GB_STAT[r.market_name] || String(r.market_name || '').toLowerCase();
+    var oppAb = schoolAbbr(r.opponent), meAb = schoolAbbr(r.team);
+    var rule = GB_RULES[r.play_kind], ruleRec = rule ? (D.propRules || {})[rule.key] : null;
+    var price = over ? r.over_price : r.under_price, be = price != null ? M.impliedProb(Number(price)) : null;
+    var lp = r.model_lean_probability, out = [];
+    // 1) The rule.
+    if (rule) out.push('<b>The rule:</b> ' + rule.what + (ruleRec ? ' Backtest for this rule: ' + gbRec(ruleRec) +
+      ' (' + ruleRec.seasons + ' season' + (ruleRec.seasons === 1 ? '' : 's') + ').' : ''));
+    // 2) The number.
+    out.push('<b>The number:</b> the model projects ' + gbNum(r.model_predicted_value) + ' ' + stat + ' against a line of ' + r.line +
+      (lp != null ? ', a ' + (lp * 100).toFixed(1) + '% chance of the ' + (over ? 'over' : 'under') : '') +
+      (be != null ? '. At ' + gbPrice(price) + (r.book_used ? ' (' + esc(bookLabel(r.book_used)) + ')' : '') + ' it needs ' + (be * 100).toFixed(1) + '%' : '') +
+      (r.model_ev != null ? ', so the edge is ' + gbSigned(r.model_ev, 1) + '%.' : '.'));
+    // 3) What the projection is built on.
+    var gl = (D.propGameLogs || {})[r.game_log_key] || [], built = [];
+    if (gl.length) {
+      var vals = gl.map(function (x) { return Number(x[2]); });
+      var avg = vals.reduce(function (a, b) { return a + b; }, 0) / vals.length;
+      var l2 = vals.slice(-2), l2avg = l2.reduce(function (a, b) { return a + b; }, 0) / l2.length;
+      var hits = vals.filter(function (v) { return over ? v > r.line : v < r.line; }).length;
+      built.push('he&rsquo;s averaged ' + avg.toFixed(1) + ' ' + stat + ' in ' + vals.length + ' game' + (vals.length === 1 ? '' : 's') +
+        ' (' + l2avg.toFixed(1) + ' over his last ' + l2.length + ') and went ' + (over ? 'over ' : 'under ') + r.line + ' in ' + hits + ' of ' + vals.length);
+    }
+    var mi = r.model_inputs || {};
+    var isRush = r.market_name === 'Rush Yards';
+    if (isRush) {
+      var cs = mi.roll_carry_share != null ? mi.roll_carry_share : r.carry_share;
+      if (cs != null) built.push('he gets ' + (cs * 100).toFixed(0) + '% of ' + esc(meAb) + '&rsquo;s carries' +
+        (mi.last2_carry_share != null ? ' (' + (mi.last2_carry_share * 100).toFixed(0) + '% the last 2)' : '') +
+        (mi.roll_rush_att != null ? ', about ' + mi.roll_rush_att.toFixed(1) + ' a game' : ''));
+      if (mi.roll_team_rush_att != null) built.push(esc(meAb) + ' runs it ' + mi.roll_team_rush_att.toFixed(1) + ' times a game');
+    } else {
+      var rs = mi.roll_rec_share != null ? mi.roll_rec_share : r.rec_share;
+      if (rs != null) built.push('he catches ' + (rs * 100).toFixed(0) + '% of ' + esc(meAb) + '&rsquo;s receptions' +
+        (mi.last2_rec_share != null ? ' (' + (mi.last2_rec_share * 100).toFixed(0) + '% the last 2)' : ''));
+      if (mi.pff_matched === 1 && mi.roll_pff_routes != null) {
+        built.push('PFF: ' + mi.roll_pff_routes.toFixed(1) + ' routes a game' +
+          (mi.roll_pff_route_part != null ? ' (on the field for ' + (mi.roll_pff_route_part * 100).toFixed(0) + '% of pass plays' +
+            (mi.last2_pff_route_part != null ? ', ' + (mi.last2_pff_route_part * 100).toFixed(0) + '% the last 2' : '') + ')' : '') +
+          (mi.roll_pff_target_share != null ? ', ' + (mi.roll_pff_target_share * 100).toFixed(0) + '% target share' : '') +
+          (mi.roll_pff_tprr != null ? ', ' + mi.roll_pff_tprr.toFixed(2) + ' targets per route' : '') +
+          (mi.roll_pff_adot != null && r.market_name === 'Reception Yards' ? ', ' + mi.roll_pff_adot.toFixed(1) + '-yard average depth of target' : ''));
+      }
+      if (mi.roll_team_pass_att != null) built.push(esc(meAb) + ' throws ' + mi.roll_team_pass_att.toFixed(1) + ' passes a game');
+    }
+    if (mi.team_implied_total != null) built.push('the model also counts the game script: ' + esc(meAb) + ' is ' +
+      (mi.team_spread != null ? (mi.team_spread < 0 ? 'a ' + Math.abs(mi.team_spread) + '-pt favorite' : mi.team_spread > 0 ? 'a ' + mi.team_spread + '-pt underdog' : 'a pick&rsquo;em') + ' with ' : '') +
+      'an implied ' + mi.team_implied_total.toFixed(1) + ' points');
+    if (built.length) out.push('<b>Built on:</b> ' + built.join('; ') + '.');
+    // 4) Matchup.
+    var mu = [];
+    if (r.mu_grade) {
+      var allowed = Object.keys(r.mu_allowed || {}).map(function (k) {
+        var v = r.mu_allowed[k];
+        return 'allows ' + Math.abs(v) + '% ' + (v < 0 ? 'fewer' : 'more') + ' ' + esc(k) + ' than its opponents usually get';
+      });
+      mu.push(esc(oppAb) + '&rsquo;s defense ranks ' + gbOrd(r.mu_rank) + ' of ' + r.mu_of + ' against ' + esc(r.mu_vs) + ' (1st = toughest)' +
+        (allowed.length ? ' and ' + allowed.join(', ') : '') + '. Matchup grade <b>' + esc(r.mu_grade) + '</b> for this ' + (over ? 'over' : 'under'));
+      var byG = ((D.propTracking || {}).byMatchup || {}).official || {}, gr = byG[String(r.mu_grade).charAt(0)];
+      if (gr && gr.graded) mu.push('official props graded ' + esc(String(r.mu_grade).charAt(0)) + ' are ' + esc(gr.record) + ' (' + gbSigned(gr.units, 1) + 'u) since ' +
+        ((D.propTracking || {}).byMatchupSince ? esc(String(D.propTracking.byMatchupSince).slice(5, 10).replace('-', '/')) : 'tracking began') + (gr.graded < 20 ? ', a small sample' : ''));
+      if (/^[DF]/.test(r.mu_grade)) mu.push('the defense works against this pick, so the play rests on the projection, not the matchup');
+    } else if (r.matchup === 'tough' || r.matchup === 'soft') {
+      mu.push(esc(oppAb) + ' has been ' + r.matchup + ' on ' + esc(r.matchup_vs || 'his position') + (r.matchup === 'tough' && !over ? ', which fits an under (unders at 10%+ vs tough defenses went 260-164 over three seasons)' : ''));
+    }
+    if (mu.length) out.push('<b>Matchup:</b> ' + mu.join('; ') + '.');
+    // 5) What could break it.
+    var risk = [];
+    if (r.injury_status) risk.push('he&rsquo;s listed ' + esc(String(r.injury_status).toLowerCase()) + ' himself');
+    // Teammates at his position on the report: out = more work for him,
+    // questionable = his role could shrink if they play.
+    var mates = (r.team === g.awaySchool ? g.injAway : g.injHome) || [], myGrp = r.pos === 'TE' ? 'WR' : r.pos;
+    var last = (function () { var k = gbNameKey(r.player_name).split('|')[1] || ''; return k.charAt(0).toUpperCase() + k.slice(1); })();
+    var mOut = [], mQ = [];
+    mates.forEach(function (i) {
+      var grp = i.pos === 'TE' ? 'WR' : i.pos;
+      if (grp !== myGrp || gbNameKey(i.player) === gbNameKey(r.player_name)) return;
+      (/^(Out|IR|Doubtful)/.test(i.status || '') ? mOut : mQ).push(esc(i.player) + ' (' + esc(i.pos) + ')');
+    });
+    if (mOut.length) risk.push(mOut.join(', ') + (mOut.length > 1 ? ' are' : ' is') + ' out at his position, so more work for ' + esc(last) +
+      (over ? ' (helps the over)' : ' (the risk to the under)'));
+    if (mQ.length) risk.push(mQ.join(', ') + (mQ.length > 1 ? ' are' : ' is') + ' questionable at his position; if ' + (mQ.length > 1 ? 'they play' : 'he plays') + ', ' +
+      esc(last) + '&rsquo;s role could shrink' + (over ? ' (the risk to the over)' : ' (helps the under)'));
+    if (gl.length >= 4) {
+      var hr = gl.filter(function (x) { return over ? Number(x[2]) > r.line : Number(x[2]) < r.line; }).length;
+      if (hr / gl.length < 0.5) risk.push('he&rsquo;s cleared this ' + (over ? 'over' : 'under') + ' in only ' + hr + ' of ' + gl.length + ' games, so the pick leans on the model&rsquo;s read of this matchup and his recent games more than his season line');
+    }
+    var ff = r.first_flag;
+    if (ff && ff.price != null && price != null && (Number(ff.price) !== Number(price) || (ff.line != null && Number(ff.line) !== Number(r.line)))) {
+      var better = Number(price) > Number(ff.price);
+      risk.push('first logged at ' + gbPrice(Number(ff.price)) + (ff.line != null && Number(ff.line) !== Number(r.line) ? ' on ' + ff.line : '') +
+        ', now ' + gbPrice(Number(price)) + ' on ' + r.line + (better ? ' (moved away from the play)' : ' (the market has moved toward the play)'));
+    }
+    if (risk.length) out.push('<b>Watch:</b> ' + risk.join('; ') + '.');
+    return '<div class="gb-why-card"><div class="gb-why-head"><span class="gb-prop">&#9733; ' + esc(r.player_name) + ' ' + esc(r.model_lean) + ' ' + r.line + ' ' +
+      esc(String(r.market_name || '').toLowerCase()) + '</span> <span class="gb-rk">' + esc(meAb) + ' vs ' + esc(oppAb) + '</span></div>' +
+      '<ul class="gb-why-list"><li>' + out.join('</li><li>') + '</li></ul></div>';
+  }
+  // Side plays: the inputs of the spread model, in the picked team's favor
+  // (+) or against it (-). Diffs are home minus away; for defensive
+  // per-play numbers lower is better.
+  var GB_GROUPS = ['form', 'ratings', 'scoring', 'eff', 'pace', 'returning', 'home', 'rest', 'qb', 'weather'];
+  function gbInputText(key, v, S, O, sgn, vals) {
+    var x = function (k) { return vals[k] == null ? null : sgn * vals[k]; };
+    var more = function (n, u, d) { return Math.abs(n).toFixed(d) + ' ' + u + ' ' + (n >= 0 ? 'better' : 'worse'); };
+    if (key === 'form') { var f = x('ewm_adj_margin_diff'); return f == null ? null : esc(S) + '&rsquo;s opponent-adjusted scoring margin, recent games weighted most, is ' + more(f, 'pts a game', 1) + ' than ' + esc(O) + '&rsquo;s'; }
+    if (key === 'ratings') { var sp = x('sp_rating_diff'), co = x('core_overall_diff'), bits = [];
+      if (sp != null) bits.push('SP+ ' + gbSigned(sp, 1)); if (co != null) bits.push('CORE ' + gbSigned(co, 1));
+      return bits.length ? 'Team ratings, ' + esc(S) + ' minus ' + esc(O) + ': ' + bits.join(', ') : null; }
+    if (key === 'scoring') { var m = x('roll_margin_diff'), pf = x('roll_ppg_for_diff'), pa = x('roll_ppg_against_diff');
+      var sc = [];
+      if (pf != null) sc.push('scores ' + Math.abs(pf).toFixed(1) + (pf >= 0 ? ' more' : ' fewer'));
+      if (pa != null) sc.push('allows ' + Math.abs(pa).toFixed(1) + (pa <= 0 ? ' fewer' : ' more'));
+      return m == null ? null : 'Season scoring margin ' + more(m, 'pts a game', 1) + (sc.length ? ' (' + esc(S) + ' ' + sc.join(', ') + ')' : ''); }
+    if (key === 'eff') { var n = x('ewm_net_ppa_diff'), o = x('ewm_off_ppa_diff'), d = vals.ewm_def_ppa_diff == null ? null : -sgn * vals.ewm_def_ppa_diff, sr = x('ewm_off_sr_diff');
+      return n == null ? null : 'Per play (EPA, recent games weighted most): net ' + gbSigned(n, 2) + (o != null ? ', offense ' + gbSigned(o, 2) : '') + (d != null ? ', defense ' + gbSigned(d, 2) : '') +
+        (sr != null ? ', offensive success rate ' + gbSigned(sr * 100, 1) + ' pts' : '') + ' for ' + esc(S); }
+    if (key === 'pace') { var pc = x('pace_diff'); return pc == null ? null : 'Tempo (plays per drive) ' + gbSigned(pc, 2) + ' for ' + esc(S); }
+    if (key === 'returning') { var rp = x('returning_production_diff'); return rp == null ? null : 'Returning production ' + gbSigned(rp * 100, 0) + ' pts for ' + esc(S); }
+    if (key === 'home') return vals.home_field ? (sgn > 0 ? esc(S) + ' is at home' : esc(O) + ' is at home') : 'Neutral site';
+    if (key === 'rest') { var rd = x('rest_diff'); return rd == null || rd === 0 ? null : esc(S) + ' has ' + Math.abs(rd) + ' day' + (Math.abs(rd) === 1 ? '' : 's') + ' ' + (rd > 0 ? 'more' : 'less') + ' rest'; }
+    if (key === 'qb') { var mine = sgn > 0 ? vals.home_qb_out : vals.away_qb_out, theirs = sgn > 0 ? vals.away_qb_out : vals.home_qb_out;
+      return mine ? esc(S) + '&rsquo;s starting QB is out' : theirs ? esc(O) + '&rsquo;s starting QB is out' : null; }
+    if (key === 'weather') return vals.temperature != null ? 'Forecast ' + Math.round(vals.temperature) + '&deg;F, wind ' + Math.round(vals.wind_speed || 0) + ' mph' : null;
+    return null;
+  }
+  var GB_GROUP_KEYS = { form: ['ewm_adj_margin_diff'], ratings: ['sp_rating_diff', 'core_overall_diff'], scoring: ['roll_margin_diff', 'roll_ppg_for_diff', 'roll_ppg_against_diff'],
+    eff: ['ewm_net_ppa_diff', 'ewm_off_ppa_diff', 'ewm_def_ppa_diff', 'ewm_off_sr_diff', 'ewm_def_sr_diff'], pace: ['pace_diff'], returning: ['returning_production_diff'],
+    home: ['home_field'], rest: ['rest_diff'], qb: ['home_qb_out', 'away_qb_out'], weather: ['temperature', 'wind_speed', 'precipitation'] };
+  function gbSideDrivers(p) {
+    var g = p.game, sideIsHome = p.side === g.home, sgn = sideIsHome ? 1 : -1;
+    var S = team(p.side).abbr, O = team(sideIsHome ? g.away : g.home).abbr;
+    var inputs = g.inputs || {}, rows = [];
+    if (g.drivers && g.drivers.length) {
+      // Measured: each group set to even and the game re-scored (export).
+      g.drivers.forEach(function (d) {
+        var vals = {}; Object.keys(inputs).forEach(function (k) { vals[k] = inputs[k]; });
+        Object.keys(d.vals || {}).forEach(function (k) { vals[k] = d.vals[k]; });
+        var pts = sgn * d.pts, txt = gbInputText(d.key, null, S, O, sgn, vals);
+        if (Math.abs(pts) >= 0.25 && txt) rows.push({ pts: pts, txt: txt, label: d.label });
+      });
+      return { measured: true, rows: rows };
+    }
+    // Fallback (no measured pushes yet): the raw inputs, in order of how much
+    // the model leans on them, with a direction where one is clear.
+    var dir = {
+      form: function () { return inputs.ewm_adj_margin_diff == null || Math.abs(inputs.ewm_adj_margin_diff) < 1 ? 0 : sgn * inputs.ewm_adj_margin_diff; },
+      ratings: function () { return inputs.sp_rating_diff == null || Math.abs(inputs.sp_rating_diff) < 1 ? 0 : sgn * inputs.sp_rating_diff; },
+      scoring: function () { return inputs.roll_margin_diff == null || Math.abs(inputs.roll_margin_diff) < 1 ? 0 : sgn * inputs.roll_margin_diff; },
+      eff: function () { return inputs.ewm_net_ppa_diff == null || Math.abs(inputs.ewm_net_ppa_diff) < 0.03 ? 0 : sgn * inputs.ewm_net_ppa_diff; },
+      home: function () { return inputs.home_field ? sgn : 0; },
+      rest: function () { return inputs.rest_diff == null || Math.abs(inputs.rest_diff) < 2 ? 0 : sgn * inputs.rest_diff; },
+      qb: function () { return (sideIsHome ? inputs.away_qb_out : inputs.home_qb_out) ? 1 : (sideIsHome ? inputs.home_qb_out : inputs.away_qb_out) ? -1 : 0; }
+    };
+    ['form', 'ratings', 'scoring', 'eff', 'home', 'rest', 'qb'].forEach(function (k) {
+      var v = dir[k](), txt = v ? gbInputText(k, null, S, O, sgn, inputs) : null;
+      if (txt) rows.push({ pts: v > 0 ? 1 : -1, txt: txt, raw: true });
+    });
+    return { measured: false, rows: rows };
+  }
+  function gbWhySide(p, injKeyOpp) {
+    var g = p.game, S = team(p.side).abbr, sideIsHome = p.side === g.home, out = [];
+    var tier = M.confTier(p.market, p.sideProb), B = (D.confBaseline || {}).rows || [];
+    var tr = B.filter(function (x) { return x.market === p.market && x.tier === tier; })[0];
+    // 1) The number.
+    if (p.market === 'Moneyline') {
+      var be = M.impliedProb(p.sideMoneyline);
+      out.push('<b>The number:</b> the model gives ' + esc(S) + ' ' + (p.sideProb * 100).toFixed(1) + '% to win; ' + gbPrice(p.sideMoneyline) + ' needs ' + (be * 100).toFixed(1) +
+        '%, an edge of ' + gbSigned((p.sideProb - be) * 100, 1) + ' pts of win chance. Moneylines are unofficial.');
+    } else {
+      var mS = sideIsHome ? g.modelSpread : -g.modelSpread, kS = sideIsHome ? g.marketSpread : -g.marketSpread;
+      out.push('<b>The number:</b> the model makes it ' + esc(S) + ' ' + M.signed(mS) + ', the market ' + esc(S) + ' ' + M.signed(kS) +
+        ' &mdash; ' + Math.abs(mS - kS).toFixed(1) + ' pts of value, ' + (p.sideProb * 100).toFixed(1) + '% to cover where -110 needs 52.4%.');
+    }
+    if (tier) out.push('<b>Confidence:</b> ' + esc(tier) + ' tier' + (tr ? '. ' + esc(p.market) + ' plays in this tier went ' + tr.w + '-' + tr.l + (tr.p ? '-' + tr.p : '') +
+      ' (' + gbSigned(tr.units, 1) + 'u) on the rebuilt weeks 4&ndash;10 card' : '') + '.');
+    // 2) What drives the line.
+    var dv = gbSideDrivers(p), pro = dv.rows.filter(function (x) { return x.pts > 0; }), con = dv.rows.filter(function (x) { return x.pts < 0; });
+    var fmt = function (x) { return x.txt + (dv.measured ? ' <span class="gb-rk">' + gbSigned(x.pts, 1) + ' pts</span>' : ''); };
+    if (pro.length) out.push('<b>Driving the model toward ' + esc(S) + ':</b> ' + pro.slice(0, 4).map(fmt).join('; ') + '.');
+    if (con.length) out.push('<b>Working against it:</b> ' + con.slice(0, 3).map(fmt).join('; ') + '.');
+    if (!dv.rows.length) out.push('<b>Driving the model:</b> ' + esc(g.note || 'inputs not logged for this game yet.'));
+    if (dv.rows.length) out.push('<span class="gb-note">' + (dv.measured
+      ? 'Points = how far the model&rsquo;s number moves if that input were even between the teams (boosted-tree model, so they don&rsquo;t add up exactly).'
+      : 'Biggest inputs first (recent form carries about 39% of the model, team ratings 25%). Point pushes per input arrive with the next model run.') + '</span>');
+    // 3) The QB input against the injury report.
+    var inputs = g.inputs || {};
+    (injKeyOpp || []).forEach(function (k) {
+      if (k.role !== 'starting QB' || !/^(Out|IR|Doubtful)/.test(k.status || '')) return;
+      var oppHome = !sideIsHome, flag = oppHome ? inputs.home_qb_out : inputs.away_qb_out;
+      if (g.inputs && !flag) out.push('<b>QB note:</b> ' + esc(k.player) + ' is listed ' + esc(k.status.toLowerCase()) +
+        ', but the model&rsquo;s QB-out input is off for that team (it only fires when the season&rsquo;s pass-attempts leader is out), so the line does not price his absence.');
+    });
+    return '<ul class="gb-why-list">' + out.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
   }
   function renderGameBreakdown(p) {
     var TM = D.teamMatchup || {}, meta = D.teamMatchupMeta || {};
@@ -3540,6 +3809,7 @@ RENDERER_JS = """<script>
           ? ' (' + (better === A ? aEdges + ' to ' + hEdges : hEdges + ' to ' + aEdges) + ' in category edges across both sides of the ball).'
           : ': category edges are close (' + aEdges + '&ndash;' + hEdges + '), but ' + esc(better.abbr) + '&rsquo;s edges come by wider rank gaps.')
       : 'the units grade out close to even (' + aEdges + ' edges for ' + esc(A.abbr) + ', ' + hEdges + ' for ' + esc(H.abbr) + ').') + flavor;
+    var injAForWhy = gbInjuries(A, g.awaySchool, g.injAway).key, injHForWhy = gbInjuries(H, g.homeSchool, g.injHome).key;
     var play;
     if (!p.side) {
       play = 'No ' + esc(p.market === 'Moneyline' ? 'moneyline' : 'spread') + ' posted yet, so there&rsquo;s no play.';
@@ -3560,6 +3830,8 @@ RENDERER_JS = """<script>
         ? '<span class="gb-play">' + trkMark(S.abbr, 18) + ' ' + esc(p.playLabel) + '</span> <span class="tier"><span>' + esc(p.tier) + '</span></span> '
         : '<span class="gb-play is-lean">Lean ' + esc(p.playLabel) + '</span> <em class="gb-off">not on the Bet Card (edge below threshold)</em> ') +
         '<div class="gb-why">' + desc + '. ' + fit + '</div>';
+      var onCard = p.qualifies && M.buildBetCard(D.games, opts()).some(function (c) { return c.game.home === g.home && c.game.away === g.away && c.game.kickoffIso === g.kickoffIso; });
+      if (onCard) play += '<div class="gb-lab2 gb-why-lab">Why it&rsquo;s a play</div>' + gbWhySide(p, p.side === g.away ? injHForWhy : injAForWhy);
     }
     var sec = function (lab, html) { return html ? '<div class="gb-sec"><div class="gb-lab2">' + lab + '</div>' + html + '</div>' : ''; };
     var injA = gbInjuries(A, g.awaySchool, g.injAway), injH = gbInjuries(H, g.homeSchool, g.injHome);
@@ -3586,7 +3858,7 @@ RENDERER_JS = """<script>
       sec('Matchup', '<p class="gb-p">' + aOff.html + '</p><p class="gb-p">' + hOff.html + '</p><p class="gb-p">' + bottom + '</p>') +
       sec('Injury report', injHtml) +
       sec('Players to know <span>(model projections this week)</span>', players.length ? '<p class="gb-p">' + players.join('</p><p class="gb-p">') + '</p>' : '') +
-      sec('Official props in this game', props.length ? '<div class="gb-injs">' + props.join('') + '</div>' : '') +
+      sec('Official props in this game <span>(why each one is a play)</span>', props.length ? props.join('') : '') +
       '<div class="gb-playbox"><div class="gb-lab">The play</div>' + play + risk + '</div>' +
       '<div class="tm-foot">Matchup text comes from the team ranks below. The play comes from the model&rsquo;s number against the market; the matchup and injuries are context, not extra filters (not yet backtested).</div></div>';
   }
