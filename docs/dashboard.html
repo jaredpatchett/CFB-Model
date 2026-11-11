@@ -913,6 +913,12 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .gb-why-list b { color: #fff; }
 .gb-why-list .gb-note { display: block; }
 .gb-why-lab { margin-top: 10px; color: var(--neon); }
+.gb-read { font-size: 13.5px; line-height: 1.6; color: #E6EDF3; margin: 6px 0 8px; }
+.gb-read b { color: var(--neon); display: block; font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; }
+.gb-read p { margin: 4px 0 6px; }
+.gb-nums { margin-top: 4px; }
+.gb-nums summary { cursor: pointer; font-size: 11.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted-3, #8B98A5); padding: 4px 0; }
+.gb-nums[open] summary { color: #fff; }
 
 .pp-grade { display: flex; gap: 3px; }
 .pp-gbtn { flex: 1; border: 1px solid var(--rule-strong); background: transparent; color: var(--muted-3); border-radius: 5px; font-family: var(--font-body); font-weight: 800; font-size: 10.5px; padding: 3px 0; cursor: pointer; }
@@ -2938,7 +2944,8 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     if (risk.length) out.push('<b>Watch:</b> ' + risk.join('; ') + '.');
     return '<div class="gb-why-card"><div class="gb-why-head"><span class="gb-prop">&#9733; ' + esc(r.player_name) + ' ' + esc(r.model_lean) + ' ' + r.line + ' ' +
       esc(String(r.market_name || '').toLowerCase()) + '</span> <span class="gb-rk">' + esc(meAb) + ' vs ' + esc(oppAb) + '</span></div>' +
-      '<ul class="gb-why-list"><li>' + out.join('</li><li>') + '</li></ul></div>';
+      gbFootballProp(r, g) +
+      '<details class="gb-nums"><summary>The numbers behind it</summary><ul class="gb-why-list"><li>' + out.join('</li><li>') + '</li></ul></details></div>';
   }
   // Side plays: the inputs of the spread model, in the picked team's favor
   // (+) or against it (-). Diffs are home minus away; for defensive
@@ -3002,7 +3009,198 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     });
     return { measured: false, rows: rows };
   }
-  function gbWhySide(p, injKeyOpp) {
+  // ---- The football read (11/2026) ----
+  // Turns the model's inputs and the unit-vs-unit ranks into how the game
+  // should actually play out: where the edge shows up on the field, why that
+  // matters for this number, and what has to go wrong for it to lose.
+  // Plain-language only; it reads the same data, it does not change plays.
+  function gbUnits(sSchool, oSchool) {
+    var TM = D.teamMatchup || {}, sP = TM[sSchool], oP = TM[oSchool], o = {}, d = {};
+    if (!sP || !oP) return null;
+    tmCompare(sP, oP).forEach(function (x) { o[x.c.key] = x; });   // S offense vs O defense, + = S
+    tmCompare(oP, sP).forEach(function (x) { d[x.c.key] = x; });   // O offense vs S defense, + = O
+    return { o: o, d: d };
+  }
+  function gbAvg(map, keys) {
+    var xs = keys.map(function (k) { return map[k]; }).filter(Boolean);
+    if (!xs.length) return null;
+    var best = xs.slice().sort(function (a, b) { return b.diff - a.diff; })[0];
+    var worst = xs.slice().sort(function (a, b) { return a.diff - b.diff; })[0];
+    return { v: xs.reduce(function (s, x) { return s + x.diff; }, 0) / xs.length, best: best, worst: worst };
+  }
+  function gbLab(t) { return esc(String(t).replace(/ \(.*\)$/, '')); }
+  function gbCite(x) { return x ? gbLab(x.c.off) + ' #' + x.o.rank + ' vs ' + (x.c.off === x.c.def.replace(' allowed', '') || /allowed/.test(x.c.def) ? '#' + x.d.rank + ' allowed' : gbLab(x.c.def) + ' #' + x.d.rank) : ''; }
+  function gbCiteD(x) { return x ? gbLab(x.c.def) + ' #' + x.d.rank + ' vs ' + gbLab(x.c.off) + ' #' + x.o.rank : ''; }
+  var GB_KEYS = {
+    run: ['rush_epa', 'line', 'stuff', 'pff_rblk', 'rush_ypg'],
+    pass: ['pass_epa', 'pff_pass', 'pff_recv', 'pass_ypg'],
+    protect: ['pff_pblk', 'pff_pres', 'sacks', 'havoc'],
+    downs: ['pd_sr', 'third'],
+    finish: ['ppo'],
+    expl: ['expl'],
+    to: ['to']
+  };
+  // Story lines. "for" = the picked side has the edge, "risk" = the
+  // opponent has it. fav = the picked side is laying points.
+  function gbStories(u, S, O, fav) {
+    var out = [], add = function (score, kind, txt) { out.push({ s: Math.abs(score), kind: kind, txt: txt }); };
+    var a;
+    // S offense vs O defense
+    if ((a = gbAvg(u.o, GB_KEYS.run)) && a.v >= 0.2) add(a.v, 'for', esc(S) + ' should run the ball (' + gbCite(a.best) + '). A team that runs well stays ahead of the chains &mdash; 2nd-and-4 instead of 2nd-and-9 &mdash; and ' +
+      (fav ? 'can milk the clock once it has the lead, which is how favorites protect a number.' : 'shortens the game: fewer possessions means fewer chances for the favorite to pull away.'));
+    if ((a = gbAvg(u.o, GB_KEYS.pass)) && a.v >= 0.2) add(a.v, 'for', esc(S) + '&rsquo;s passing game should find room (' + gbCite(a.best) + '). That&rsquo;s where explosive plays and quick scores come from.');
+    if ((a = gbAvg(u.o, GB_KEYS.protect)) && a.v >= 0.25) add(a.v * 0.9, 'for', esc(S) + '&rsquo;s line should keep its QB clean (' + gbCite(a.best) + '), so the offense can get through its reads instead of throwing it away or taking drive-killing sacks.');
+    if ((a = gbAvg(u.o, GB_KEYS.finish)) && a.v >= 0.25) add(a.v * 0.9, 'for', esc(S) + ' finishes drives (' + gbCite(a.best) + '). Touchdowns instead of field goals inside the 40 is a 4-point swing every trip, and that&rsquo;s how covers get decided.');
+    if ((a = gbAvg(u.o, GB_KEYS.downs)) && a.v >= 0.25) add(a.v * 0.8, 'for', esc(S) + ' converts on passing downs and third down (' + gbCite(a.best) + '), which keeps drives alive and keeps the other offense on the sideline.');
+    // O offense vs S defense (low diff = S defense wins)
+    if ((a = gbAvg(u.d, GB_KEYS.run)) && a.v <= -0.2) add(a.v, 'for', esc(S) + '&rsquo;s front should take away ' + esc(O) + '&rsquo;s run game (' + gbCiteD(a.worst) + '). Once ' + esc(O) +
+      ' can&rsquo;t run, it&rsquo;s throwing on 2nd and 3rd-and-long, the downs where offenses stall and turn it over.');
+    if ((a = gbAvg(u.d, GB_KEYS.protect)) && a.v <= -0.25) add(a.v, 'for', esc(S) + '&rsquo;s pass rush against ' + esc(O) + '&rsquo;s protection (' + gbCiteD(a.worst) + ') is the drive-killer. Pressure means sacks, hurried throws and turnovers, and one sack usually ends a college drive.');
+    if ((a = gbAvg(u.d, GB_KEYS.pass)) && a.v <= -0.2) add(a.v, 'for', esc(S) + '&rsquo;s secondary should hold up (' + gbCiteD(a.worst) + '), so ' + esc(O) + ' has to string together long drives instead of hitting shots.');
+    if ((a = gbAvg(u.d, GB_KEYS.downs)) && a.v <= -0.25) add(a.v * 0.8, 'for', esc(S) + '&rsquo;s defense gets off the field on passing downs and third down (' + gbCiteD(a.worst) + '), which ends drives before they reach scoring range.');
+    if ((a = gbAvg(u.o, GB_KEYS.to)) && a.v >= 0.3 && u.d.to) add(a.v * 0.5, 'for', 'Turnovers lean ' + esc(S) + '&rsquo;s way on paper, but they&rsquo;re the noisiest stat in football, so treat it as a bonus, not the reason.');
+    // Risks: O has the edge
+    if ((a = gbAvg(u.d, GB_KEYS.run)) && a.v >= 0.2) add(a.v, 'risk', esc(O) + ' can run on ' + esc(S) + ' (' + gbCite(a.best) + '). If ' + esc(O) + ' controls the ball on the ground, ' +
+      (fav ? 'it shortens the game and keeps ' + esc(S) + '&rsquo;s offense on the sideline &mdash; the classic way an underdog stays inside the number.' : 'it can protect a lead and run the clock out on ' + esc(S) + '.'));
+    if ((a = gbAvg(u.o, GB_KEYS.protect)) && a.v <= -0.25) add(a.v, 'risk', esc(O) + '&rsquo;s pass rush against ' + esc(S) + '&rsquo;s protection (' + gbCiteD(a.worst) + '). If ' + esc(S) + '&rsquo;s QB is running for his life, drives stall and turnovers follow.');
+    if ((a = gbAvg(u.d, GB_KEYS.pass)) && a.v >= 0.2) add(a.v, 'risk', esc(O) + ' can throw on ' + esc(S) + '&rsquo;s secondary (' + gbCite(a.best) + '). Big plays through the air are ' +
+      (fav ? 'how an underdog hangs around and steals a backdoor cover.' : 'how a favorite pulls away fast.'));
+    if ((a = gbAvg(u.o, GB_KEYS.run)) && a.v <= -0.2) add(a.v * 0.8, 'risk', esc(O) + '&rsquo;s front can stuff ' + esc(S) + '&rsquo;s run game (' + gbCiteD(a.worst) + '), so ' + esc(S) + ' may have to win by throwing it.');
+    if ((a = gbAvg(u.d, GB_KEYS.expl)) && a.v >= 0.3) add(a.v * 0.7, 'risk', esc(O) + ' hits big plays (' + gbCite(a.best) + ') &mdash; one or two explosives can flip a game ' + esc(S) + ' is controlling.');
+    return out.sort(function (x, y) { return y.s - x.s; });
+  }
+  // What kind of bet this is, in football terms: the number itself.
+  function gbNumberTalk(S, O, spr, model, total) {
+    var t = '', a = Math.abs(spr), need = a % 1 === 0 ? a + 1 : Math.ceil(a), push = a % 1 === 0 && spr !== 0 ? ' (a ' + a + '-point win is a push)' : '';
+    if (spr < 0) {
+      if (a <= 3) t = 'At ' + M.signed(spr) + ' this is close to a pick-the-winner bet: ' + esc(S) + ' just has to win' + (a > 1 ? ' by ' + Math.ceil(a) + '+' : '') + '.';
+      else if (a <= 7.5) t = esc(S) + ' has to win by ' + need + '+' + (need > 3 ? ' &mdash; more than a field goal' + (need > 7 ? ' and more than a touchdown' : '') : '') + push + '.';
+      else if (a <= 17) t = 'Laying ' + a + ' means ' + esc(S) + ' has to win by ' + need + '+' + push + ', so it needs to keep scoring in the second half instead of sitting on a lead.';
+      else t = 'Laying ' + a + ' is a lot: ' + esc(S) + ' has to keep its foot down, and a late score against the backups is the classic backdoor risk.';
+      if (a === 2.5 || a === 6.5) t += ' The line sits just under a key number (' + (a + 0.5) + '), so a ' + (a + 0.5) + '-point win still cashes.';
+      if (a === 3.5 || a === 7.5) t += ' Heads up: it&rsquo;s a hook past a key number, so a ' + (a - 0.5) + '-point win &mdash; one of the most common margins &mdash; loses.';
+    } else if (spr > 0) {
+      t = esc(S) + ' can lose by up to ' + Math.floor(spr) + ' and still cash' + (model < 0 ? ', and the model has ' + esc(S) + ' winning outright, so the points are a cushion, not the bet.' : '.');
+      if (spr === 3.5 || spr === 7.5) t += ' Getting the hook past a key number (' + (spr - 0.5) + ') is worth a lot.';
+    } else t = 'A pick&rsquo;em: ' + esc(S) + ' just has to win.';
+    if (total != null && total <= 44) t += ' The total is low (' + total + '), so possessions and points are scarce &mdash; every point of the spread matters more.';
+    else if (total != null && total >= 62) t += ' The total is ' + total + ', a shootout look: lots of possessions, so expect swings.';
+    return t;
+  }
+  function gbFootballSide(p, injOpp, injOwn) {
+    var g = p.game, sideIsHome = p.side === g.home, sgn = sideIsHome ? 1 : -1;
+    var S = team(p.side).abbr, O = team(sideIsHome ? g.away : g.home).abbr;
+    var sSch = sideIsHome ? g.homeSchool : g.awaySchool, oSch = sideIsHome ? g.awaySchool : g.homeSchool;
+    var inp = g.inputs || {}, x = function (k) { return inp[k] == null ? null : sgn * inp[k]; };
+    var spr = p.market === 'Spread' ? (sideIsHome ? g.marketSpread : -g.marketSpread) : null;
+    var model = sideIsHome ? g.modelSpread : -g.modelSpread;
+    var fav = spr != null ? spr < 0 : p.sideMoneyline < 0;
+    var parts = [];
+    // 1) What kind of team edge this is.
+    var pf = x('roll_ppg_for_diff'), pa = inp.roll_ppg_against_diff == null ? null : -sgn * inp.roll_ppg_against_diff;
+    var sp = x('sp_rating_diff'), recent = x('ewm_adj_margin_diff'), season = x('roll_margin_diff');
+    if (pf != null && pa != null) {
+      if (pa >= 4 && pa >= pf + 3) parts.push('This is a defense-first edge. The offenses are ' + (Math.abs(pf) < 3 ? 'about even' : (pf > 0 ? esc(S) + '&rsquo;s by ' + pf.toFixed(0) + ' a game' : esc(O) + '&rsquo;s by ' + (-pf).toFixed(0) + ' a game')) +
+        ', but ' + esc(S) + ' gives up about ' + pa.toFixed(0) + ' fewer points a game. Good defense tends to travel and doesn&rsquo;t have off nights the way offenses do.');
+      else if (pf >= 4 && pf >= pa + 3) parts.push('This is an offense-first edge: ' + esc(S) + ' scores about ' + pf.toFixed(0) + ' more points a game' + (pa > 2 ? ' and allows ' + pa.toFixed(0) + ' fewer' : '') + '.');
+      else if (pf >= 3 && pa >= 3) parts.push(esc(S) + ' is better on both sides: about ' + pf.toFixed(0) + ' more points scored and ' + pa.toFixed(0) + ' fewer allowed a game.');
+    }
+    if (sp != null && recent != null) {
+      if (sp >= 8 && recent <= -3) parts.push('The roster says ' + esc(S) + ' (SP+ has it ' + sp.toFixed(0) + ' points better, and SP+ adjusts for schedule), but recent results say ' + esc(O) +
+        '. The model is betting the talent gap shows up &mdash; a slump against a lesser team tends to snap back toward talent.');
+      else if (sp >= 8) parts.push('There&rsquo;s a real talent gap: SP+, which adjusts for who each team has played, rates ' + esc(S) + ' about ' + sp.toFixed(0) + ' points better, so this isn&rsquo;t just stats padded against bad teams.');
+      else if (recent != null && season != null && recent - season >= 4) parts.push(esc(S) + ' is trending up &mdash; it&rsquo;s been playing better lately than its season numbers show, and the market tends to price the season reputation.');
+      else if (sp <= -5 && recent >= 3) parts.push('On paper ' + esc(O) + ' has more talent, but ' + esc(S) + ' has been the better team lately. The model is backing current form over preseason reputation.');
+    }
+    // 2) How it plays out on the field.
+    var u = gbUnits(sSch, oSch), st = u ? gbStories(u, S, O, fav) : [];
+    var pro = st.filter(function (s) { return s.kind === 'for'; }).slice(0, 2), con = st.filter(function (s) { return s.kind === 'risk'; }).slice(0, 1);
+    if (pro.length) parts.push('On the field: ' + pro.map(function (s) { return s.txt; }).join(' '));
+    // 3) The QB situation.
+    var qbO = (injOpp || []).filter(function (k) { return k.role === 'starting QB' && /^(Out|IR|Doubtful)/.test(k.status || ''); })[0];
+    var qbS = (injOwn || []).filter(function (k) { return k.role === 'starting QB' && /^(Out|IR|Doubtful|Questionable)/.test(k.status || ''); })[0];
+    if (qbO) parts.push(esc(O) + ' is likely without its starting QB (' + esc(qbO.player) + '). Backups usually mean a smaller playbook, fewer shots downfield and more mistakes &mdash; a real edge if the line hasn&rsquo;t fully moved for it.');
+    // 4) The number.
+    if (spr != null) parts.push(gbNumberTalk(S, O, spr, model, g.marketTotal));
+    // 5) Weather.
+    if (inp.wind_speed != null && inp.wind_speed >= 15) parts.push('Wind around ' + Math.round(inp.wind_speed) + ' mph hurts the deep ball and the kickers, which favors the team that can run it and keeps scoring down.');
+    // 6) What beats it.
+    var risk = [];
+    if (con.length) risk.push(con[0].txt);
+    else if (u) {
+      // No clear opposing edge: name the opponent's best shot anyway.
+      var shots = [];
+      Object.keys(u.d).forEach(function (k) { var y = u.d[k]; if (y.diff > 0) shots.push({ s: y.diff, txt: gbCite(y), off: true }); });
+      Object.keys(u.o).forEach(function (k) { var y = u.o[k]; if (y.diff < 0) shots.push({ s: -y.diff, txt: gbCiteD(y), off: false }); });
+      shots.sort(function (a2, b2) { return b2.s - a2.s; });
+      if (shots.length) risk.push('No unit of ' + esc(O) + '&rsquo;s clearly beats ' + esc(S) + '&rsquo;s. Its best shot is ' + (shots[0].off ? 'its offense: ' : 'its defense: ') + shots[0].txt +
+        '. If ' + esc(S) + ' loses that battle early, the game stays close.');
+    }
+    if (qbS) risk.push(esc(S) + '&rsquo;s own starting QB (' + esc(qbS.player) + ') is ' + esc(String(qbS.status).toLowerCase()) + ' &mdash; the whole read assumes he plays.');
+    var html = '<div class="gb-read"><b>The football read</b>' + parts.map(function (t) { return '<p>' + t + '</p>'; }).join('') + '</div>';
+    if (risk.length) html += '<div class="gb-read"><b>What beats it</b><p>' + risk.join(' ') + '</p></div>';
+    return html;
+  }
+  // Props: the position-specific football logic behind each official rule.
+  function gbFootballProp(r, g) {
+    var over = r.model_lean === 'over', me = schoolAbbr(r.team), opp = schoolAbbr(r.opponent);
+    var u = gbUnits(r.team, r.opponent) || { o: {}, d: {} }, mi = r.model_inputs || {};
+    var tSpr = r.team === g.homeSchool ? g.marketSpread : -g.marketSpread;   // < 0 = his team favored
+    var last = (function () { var k = gbNameKey(r.player_name).split('|')[1] || ''; return k.charAt(0).toUpperCase() + k.slice(1); })();
+    var parts = [], risk = [], o = u.o;
+    var script = tSpr == null || isNaN(tSpr) ? null : tSpr <= -7 ? 'bigfav' : tSpr < 0 ? 'fav' : tSpr >= 7 ? 'bigdog' : 'dog';
+    if (r.market_name === 'Rush Yards' && r.pos === 'QB') {
+      var prs = gbAvg(u.o, ['pff_pres', 'sacks', 'havoc']);
+      parts.push('QB rushing yards are a weird stat in college: sacks count against them. ' + esc(last) + '&rsquo;s total is scrambles and designed runs minus every sack.' +
+        (prs && prs.v <= -0.1 ? ' ' + esc(opp) + ' gets after the passer (' + gbCiteD(prs.worst) + '), so a couple of sacks can erase a scramble &mdash; that&rsquo;s built-in help for the under.' : ''));
+      if (o.rush_epa && o.rush_epa.diff <= -0.15) parts.push(esc(opp) + ' also tackles well against the run (' + gbCiteD(o.rush_epa) + '), which limits how far his scrambles go.');
+      risk.push('one long scramble or a broken designed run can cover the under by itself');
+      if (script === 'dog' || script === 'bigdog') risk.push('if ' + esc(me) + ' falls behind, QBs tend to take off more when they&rsquo;re pressing');
+    } else if (r.market_name === 'Rush Yards') {
+      var front = gbAvg(u.o, ['line', 'stuff', 'pff_rblk', 'rush_epa']);
+      parts.push((front && front.v <= -0.1 ? esc(opp) + '&rsquo;s front wins at the line of scrimmage (' + gbCiteD(front.worst) + '), so backs get hit at or behind the line instead of getting to the second level. '
+        : esc(opp) + ' is tough against the run. ') + 'Backs usually beat a rushing under with one or two chunk runs; a defense that keeps everything in front of it takes those away.');
+      if (mi.roll_carry_share != null || r.carry_share != null) {
+        var cs = mi.roll_carry_share != null ? mi.roll_carry_share : r.carry_share;
+        if (cs < 0.45) parts.push('He&rsquo;s in a committee (' + (cs * 100).toFixed(0) + '% of the carries), so his volume isn&rsquo;t guaranteed &mdash; fewer carries means fewer chances to break one.');
+        else parts.push('He&rsquo;s the lead back (' + (cs * 100).toFixed(0) + '% of the carries), so the under is about efficiency, not volume.');
+      }
+      if (script === 'dog' || script === 'bigdog') parts.push(esc(me) + ' is the underdog: if it falls behind, it throws more and his carries dry up in the second half.');
+      if (script === 'bigfav') risk.push(esc(me) + ' is a big favorite, so he could get a pile of 4th-quarter carries running out the clock &mdash; the main risk to the under');
+      else if (script === 'fav') risk.push('if ' + esc(me) + ' gets an early lead he&rsquo;ll get clock-killing carries late');
+      risk.push('a single long run can blow up any rushing under');
+    } else if (r.market_name === 'Receptions') {
+      var glR = ((D.propGameLogs || {})[r.game_log_key] || []).map(function (q) { return Number(q[2]); });
+      var avgR = glR.length ? glR.reduce(function (a2, b2) { return a2 + b2; }, 0) / glR.length : null;
+      parts.push('Receptions are a pure volume stat: no targets, no catches. ' + (mi.roll_team_pass_att != null ? esc(me) + ' throws about ' + mi.roll_team_pass_att.toFixed(0) + ' times a game' +
+        (r.rec_share != null ? ' and ' + esc(last) + ' catches about ' + (r.rec_share * 100).toFixed(0) + '% of the team&rsquo;s receptions' : '') + '. ' : '') +
+        (avgR == null ? '' : over
+          ? 'That&rsquo;s worked out to ' + avgR.toFixed(1) + ' catches a game.'
+          : avgR < r.line ? 'That&rsquo;s worked out to ' + avgR.toFixed(1) + ' catches a game, so getting past ' + r.line + ' takes a bigger role than he usually gets.'
+          : 'He&rsquo;s averaged ' + avgR.toFixed(1) + ' catches, above the line, so this under is the model saying this game shrinks his usual share (it projects ' + gbNum(r.model_predicted_value) + ').'));
+      var cov = gbAvg(u.o, ['pass_epa', 'pff_pass', 'pff_recv', 'pd_sr']);
+      if (cov && cov.v <= -0.15) parts.push(esc(opp) + '&rsquo;s coverage is good (' + gbCiteD(cov.worst) + '), which squeezes the windows and spreads the ball around.');
+      if (script === 'fav' || script === 'bigfav') parts.push(esc(me) + ' is favored, and teams playing with a lead run it more in the second half &mdash; fewer late targets.');
+      if (script === 'dog' || script === 'bigdog') risk.push(esc(me) + ' is the underdog; if it&rsquo;s chasing points, the volume goes up for everyone');
+      risk.push('a short-area, quick-game plan can pile up catches even against good coverage');
+    } else if (r.market_name === 'Reception Yards') {
+      var aDot = mi.pff_matched === 1 ? mi.roll_pff_adot : null;
+      parts.push(aDot != null && aDot >= 12 ? 'He&rsquo;s a downfield target (' + aDot.toFixed(1) + '-yard average depth), so one catch can get him halfway to ' + r.line + '.'
+        : aDot != null && aDot < 8 ? 'He works underneath (' + aDot.toFixed(1) + '-yard average depth), so this over is built on volume and yards after the catch.'
+        : 'He&rsquo;s a real part of the passing game, which is the point of the 25.5+ line rule: no part-time players.');
+      if (mi.roll_pff_route_part != null) parts.push('He&rsquo;s running a route on ' + (mi.roll_pff_route_part * 100).toFixed(0) + '% of dropbacks &mdash; an every-down role, not a rotation guy.');
+      var weak = gbAvg(u.o, ['pass_epa', 'pff_pass', 'pff_recv', 'expl']);
+      if (weak && weak.v >= 0.15) parts.push(esc(opp) + '&rsquo;s pass defense is soft (' + gbCite(weak.best) + '), so the targets should come with yards.');
+      else if (weak && weak.v <= -0.15) risk.push(esc(opp) + '&rsquo;s coverage is good (' + gbCiteD(weak.worst) + ') &mdash; the projection is betting on his role, not the matchup');
+      if (script === 'dog' || script === 'bigdog') parts.push(esc(me) + ' is the underdog, so it should be throwing to catch up &mdash; more targets.');
+      if (script === 'bigfav') risk.push(esc(me) + ' is a big favorite; if it&rsquo;s a blowout, the starters sit and the ball stays on the ground');
+      risk.push('one quiet half or a game plan built around someone else');
+    }
+    var html = '<div class="gb-read"><b>The football read</b><p>' + parts.join(' ') + '</p></div>';
+    if (risk.length) html += '<div class="gb-read"><b>What beats it</b><p>' + risk.join('; ').replace(/^./, function (c) { return c.toUpperCase(); }) + '.</p></div>';
+    return html;
+  }
+  function gbWhySide(p, injKeyOpp, injKeyOwn) {
     var g = p.game, S = team(p.side).abbr, sideIsHome = p.side === g.home, out = [];
     var tier = M.confTier(p.market, p.sideProb), B = (D.confBaseline || {}).rows || [];
     var tr = B.filter(function (x) { return x.market === p.market && x.tier === tier; })[0];
@@ -3035,7 +3233,8 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       if (g.inputs && !flag) out.push('<b>QB note:</b> ' + esc(k.player) + ' is listed ' + esc(k.status.toLowerCase()) +
         ', but the model&rsquo;s QB-out input is off for that team (it only fires when the season&rsquo;s pass-attempts leader is out), so the line does not price his absence.');
     });
-    return '<ul class="gb-why-list">' + out.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
+    return gbFootballSide(p, injKeyOpp, injKeyOwn) +
+      '<details class="gb-nums"><summary>The numbers behind it</summary><ul class="gb-why-list">' + out.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></details>';
   }
   function renderGameBreakdown(p) {
     var TM = D.teamMatchup || {}, meta = D.teamMatchupMeta || {};
@@ -3079,7 +3278,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
         : '<span class="gb-play is-lean">Lean ' + esc(p.playLabel) + '</span> <em class="gb-off">not on the Bet Card (edge below threshold)</em> ') +
         '<div class="gb-why">' + desc + '. ' + fit + '</div>';
       var onCard = p.qualifies && M.buildBetCard(D.games, opts()).some(function (c) { return c.game.home === g.home && c.game.away === g.away && c.game.kickoffIso === g.kickoffIso; });
-      if (onCard) play += '<div class="gb-lab2 gb-why-lab">Why it&rsquo;s a play</div>' + gbWhySide(p, p.side === g.away ? injHForWhy : injAForWhy);
+      if (onCard) play += '<div class="gb-lab2 gb-why-lab">Why it&rsquo;s a play</div>' + gbWhySide(p, p.side === g.away ? injHForWhy : injAForWhy, p.side === g.away ? injAForWhy : injHForWhy);
     }
     var sec = function (lab, html) { return html ? '<div class="gb-sec"><div class="gb-lab2">' + lab + '</div>' + html + '</div>' : ''; };
     var injA = gbInjuries(A, g.awaySchool, g.injAway), injH = gbInjuries(H, g.homeSchool, g.injHome);
