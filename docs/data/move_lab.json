@@ -1,0 +1,706 @@
+{
+  "generated_at": "2026-11-12T20:57:45.151045+00:00",
+  "seasons_graded": [
+    2024,
+    2025,
+    2026
+  ],
+  "method": "walk-forward upgraded model; both teams 2+ games; flagged vs the opener (1.9+, under 20); -110",
+  "results": {
+    "flagged_at_open": {
+      "all": {
+        "at_open": {
+          "n": 1044,
+          "record": "553-474-17",
+          "units": 28.7,
+          "roi": 2.8
+        },
+        "at_close": {
+          "n": 1044,
+          "record": "527-497-20",
+          "units": -17.9,
+          "roi": -1.7
+        },
+        "fade_at_close": {
+          "n": 1044,
+          "record": "497-527-20",
+          "units": -75.2,
+          "roi": -7.2
+        }
+      },
+      "toward": {
+        "at_open": {
+          "n": 551,
+          "record": "318-226-7",
+          "units": 63.1,
+          "roi": 11.5
+        },
+        "at_close": {
+          "n": 551,
+          "record": "275-266-10",
+          "units": -16.0,
+          "roi": -2.9
+        },
+        "fade_at_close": {
+          "n": 551,
+          "record": "266-275-10",
+          "units": -33.2,
+          "roi": -6.0
+        }
+      },
+      "none": {
+        "at_open": {
+          "n": 137,
+          "record": "63-69-5",
+          "units": -11.7,
+          "roi": -8.6
+        },
+        "at_close": {
+          "n": 137,
+          "record": "63-69-5",
+          "units": -11.7,
+          "roi": -8.6
+        },
+        "fade_at_close": {
+          "n": 137,
+          "record": "69-63-5",
+          "units": -0.3,
+          "roi": -0.2
+        }
+      },
+      "away": {
+        "at_open": {
+          "n": 356,
+          "record": "172-179-5",
+          "units": -22.6,
+          "roi": -6.4
+        },
+        "at_close": {
+          "n": 356,
+          "record": "189-162-5",
+          "units": 9.8,
+          "roi": 2.8
+        },
+        "fade_at_close": {
+          "n": 356,
+          "record": "162-189-5",
+          "units": -41.7,
+          "roi": -11.7
+        }
+      },
+      "toward 0.5-1": {
+        "at_open": {
+          "n": 155,
+          "record": "77-76-2",
+          "units": -6.0,
+          "roi": -3.9
+        },
+        "at_close": {
+          "n": 155,
+          "record": "72-79-4",
+          "units": -13.5,
+          "roi": -8.7
+        },
+        "fade_at_close": {
+          "n": 155,
+          "record": "79-72-4",
+          "units": -0.2,
+          "roi": -0.1
+        }
+      },
+      "toward 1.5-2.5": {
+        "at_open": {
+          "n": 164,
+          "record": "102-58-4",
+          "units": 34.7,
+          "roi": 21.2
+        },
+        "at_close": {
+          "n": 164,
+          "record": "92-68-4",
+          "units": 15.6,
+          "roi": 9.5
+        },
+        "fade_at_close": {
+          "n": 164,
+          "record": "68-92-4",
+          "units": -30.2,
+          "roi": -18.4
+        }
+      },
+      "toward 3+": {
+        "at_open": {
+          "n": 232,
+          "record": "139-92-1",
+          "units": 34.4,
+          "roi": 14.8
+        },
+        "at_close": {
+          "n": 232,
+          "record": "111-119-2",
+          "units": -18.1,
+          "roi": -7.8
+        },
+        "fade_at_close": {
+          "n": 232,
+          "record": "119-111-2",
+          "units": -2.8,
+          "roi": -1.2
+        }
+      },
+      "away 0.5-1": {
+        "at_open": {
+          "n": 128,
+          "record": "68-58-2",
+          "units": 3.8,
+          "roi": 3.0
+        },
+        "at_close": {
+          "n": 128,
+          "record": "72-56",
+          "units": 9.5,
+          "roi": 7.4
+        },
+        "fade_at_close": {
+          "n": 128,
+          "record": "56-72",
+          "units": -21.1,
+          "roi": -16.5
+        }
+      },
+      "away 1.5-2.5": {
+        "at_open": {
+          "n": 131,
+          "record": "63-67-1",
+          "units": -9.7,
+          "roi": -7.4
+        },
+        "at_close": {
+          "n": 131,
+          "record": "69-60-2",
+          "units": 2.7,
+          "roi": 2.1
+        },
+        "fade_at_close": {
+          "n": 131,
+          "record": "60-69-2",
+          "units": -14.5,
+          "roi": -11.0
+        }
+      },
+      "away 3+": {
+        "at_open": {
+          "n": 97,
+          "record": "41-54-2",
+          "units": -16.7,
+          "roi": -17.2
+        },
+        "at_close": {
+          "n": 97,
+          "record": "48-46-3",
+          "units": -2.4,
+          "roi": -2.4
+        },
+        "fade_at_close": {
+          "n": 97,
+          "record": "46-48-3",
+          "units": -6.2,
+          "roi": -6.4
+        }
+      }
+    },
+    "bet_card": {
+      "all": {
+        "at_open": {
+          "n": 318,
+          "record": "172-138-8",
+          "units": 18.4,
+          "roi": 5.8
+        },
+        "at_close": {
+          "n": 318,
+          "record": "160-152-6",
+          "units": -6.5,
+          "roi": -2.1
+        },
+        "fade_at_close": {
+          "n": 318,
+          "record": "152-160-6",
+          "units": -21.8,
+          "roi": -6.9
+        }
+      },
+      "toward": {
+        "at_open": {
+          "n": 180,
+          "record": "105-69-6",
+          "units": 26.5,
+          "roi": 14.7
+        },
+        "at_close": {
+          "n": 180,
+          "record": "88-88-4",
+          "units": -8.0,
+          "roi": -4.4
+        },
+        "fade_at_close": {
+          "n": 180,
+          "record": "88-88-4",
+          "units": -8.0,
+          "roi": -4.4
+        }
+      },
+      "none": {
+        "at_open": {
+          "n": 44,
+          "record": "23-20-1",
+          "units": 0.9,
+          "roi": 2.1
+        },
+        "at_close": {
+          "n": 44,
+          "record": "23-20-1",
+          "units": 0.9,
+          "roi": 2.1
+        },
+        "fade_at_close": {
+          "n": 44,
+          "record": "20-23-1",
+          "units": -4.8,
+          "roi": -11.0
+        }
+      },
+      "away": {
+        "at_open": {
+          "n": 94,
+          "record": "44-49-1",
+          "units": -9.0,
+          "roi": -9.6
+        },
+        "at_close": {
+          "n": 94,
+          "record": "49-44-1",
+          "units": 0.5,
+          "roi": 0.6
+        },
+        "fade_at_close": {
+          "n": 94,
+          "record": "44-49-1",
+          "units": -9.0,
+          "roi": -9.6
+        }
+      },
+      "toward 0.5-1": {
+        "at_open": {
+          "n": 45,
+          "record": "22-22-1",
+          "units": -2.0,
+          "roi": -4.4
+        },
+        "at_close": {
+          "n": 45,
+          "record": "21-24",
+          "units": -4.9,
+          "roi": -10.9
+        },
+        "fade_at_close": {
+          "n": 45,
+          "record": "24-21",
+          "units": 0.8,
+          "roi": 1.8
+        }
+      },
+      "toward 1.5-2.5": {
+        "at_open": {
+          "n": 46,
+          "record": "26-16-4",
+          "units": 7.6,
+          "roi": 16.6
+        },
+        "at_close": {
+          "n": 46,
+          "record": "22-22-2",
+          "units": -2.0,
+          "roi": -4.3
+        },
+        "fade_at_close": {
+          "n": 46,
+          "record": "22-22-2",
+          "units": -2.0,
+          "roi": -4.3
+        }
+      },
+      "toward 3+": {
+        "at_open": {
+          "n": 89,
+          "record": "57-31-1",
+          "units": 20.8,
+          "roi": 23.4
+        },
+        "at_close": {
+          "n": 89,
+          "record": "45-42-2",
+          "units": -1.1,
+          "roi": -1.2
+        },
+        "fade_at_close": {
+          "n": 89,
+          "record": "42-45-2",
+          "units": -6.8,
+          "roi": -7.7
+        }
+      },
+      "away 0.5-1": {
+        "at_open": {
+          "n": 39,
+          "record": "19-20",
+          "units": -2.7,
+          "roi": -7.0
+        },
+        "at_close": {
+          "n": 39,
+          "record": "21-18",
+          "units": 1.1,
+          "roi": 2.8
+        },
+        "fade_at_close": {
+          "n": 39,
+          "record": "18-21",
+          "units": -4.6,
+          "roi": -11.9
+        }
+      },
+      "away 1.5-2.5": {
+        "at_open": {
+          "n": 32,
+          "record": "19-13",
+          "units": 4.3,
+          "roi": 13.4
+        },
+        "at_close": {
+          "n": 32,
+          "record": "20-11-1",
+          "units": 7.2,
+          "roi": 22.4
+        },
+        "fade_at_close": {
+          "n": 32,
+          "record": "11-20-1",
+          "units": -10.0,
+          "roi": -31.2
+        }
+      },
+      "away 3+": {
+        "at_open": {
+          "n": 23,
+          "record": "6-16-1",
+          "units": -10.5,
+          "roi": -45.8
+        },
+        "at_close": {
+          "n": 23,
+          "record": "8-15",
+          "units": -7.7,
+          "roi": -33.6
+        },
+        "fade_at_close": {
+          "n": 23,
+          "record": "15-8",
+          "units": 5.6,
+          "roi": 24.5
+        }
+      }
+    },
+    "bet_card_by_season": {
+      "2024": {
+        "toward": {
+          "at_open": {
+            "n": 62,
+            "record": "44-17-1",
+            "units": 23.0,
+            "roi": 37.1
+          },
+          "at_close": {
+            "n": 62,
+            "record": "38-23-1",
+            "units": 11.5,
+            "roi": 18.6
+          },
+          "fade_at_close": {
+            "n": 62,
+            "record": "23-38-1",
+            "units": -17.1,
+            "roi": -27.6
+          }
+        },
+        "none": {
+          "at_open": {
+            "n": 17,
+            "record": "9-8",
+            "units": 0.2,
+            "roi": 1.1
+          },
+          "at_close": {
+            "n": 17,
+            "record": "9-8",
+            "units": 0.2,
+            "roi": 1.1
+          },
+          "fade_at_close": {
+            "n": 17,
+            "record": "8-9",
+            "units": -1.7,
+            "roi": -10.2
+          }
+        },
+        "away": {
+          "at_open": {
+            "n": 37,
+            "record": "18-19",
+            "units": -2.6,
+            "roi": -7.1
+          },
+          "at_close": {
+            "n": 37,
+            "record": "20-17",
+            "units": 1.2,
+            "roi": 3.2
+          },
+          "fade_at_close": {
+            "n": 37,
+            "record": "17-20",
+            "units": -4.5,
+            "roi": -12.3
+          }
+        },
+        "all": {
+          "at_open": {
+            "n": 116,
+            "record": "71-44-1",
+            "units": 20.5,
+            "roi": 17.7
+          },
+          "at_close": {
+            "n": 116,
+            "record": "67-48-1",
+            "units": 12.9,
+            "roi": 11.1
+          },
+          "fade_at_close": {
+            "n": 116,
+            "record": "48-67-1",
+            "units": -23.4,
+            "roi": -20.1
+          }
+        }
+      },
+      "2025": {
+        "toward": {
+          "at_open": {
+            "n": 76,
+            "record": "37-38-1",
+            "units": -4.4,
+            "roi": -5.7
+          },
+          "at_close": {
+            "n": 76,
+            "record": "30-44-2",
+            "units": -16.7,
+            "roi": -22.0
+          },
+          "fade_at_close": {
+            "n": 76,
+            "record": "44-30-2",
+            "units": 10.0,
+            "roi": 13.2
+          }
+        },
+        "none": {
+          "at_open": {
+            "n": 13,
+            "record": "7-5-1",
+            "units": 1.4,
+            "roi": 10.5
+          },
+          "at_close": {
+            "n": 13,
+            "record": "7-5-1",
+            "units": 1.4,
+            "roi": 10.5
+          },
+          "fade_at_close": {
+            "n": 13,
+            "record": "5-7-1",
+            "units": -2.5,
+            "roi": -18.9
+          }
+        },
+        "away": {
+          "at_open": {
+            "n": 28,
+            "record": "13-14-1",
+            "units": -2.2,
+            "roi": -7.8
+          },
+          "at_close": {
+            "n": 28,
+            "record": "14-13-1",
+            "units": -0.3,
+            "roi": -1.0
+          },
+          "fade_at_close": {
+            "n": 28,
+            "record": "13-14-1",
+            "units": -2.2,
+            "roi": -7.8
+          }
+        },
+        "all": {
+          "at_open": {
+            "n": 117,
+            "record": "57-57-3",
+            "units": -5.2,
+            "roi": -4.4
+          },
+          "at_close": {
+            "n": 117,
+            "record": "51-62-4",
+            "units": -15.6,
+            "roi": -13.4
+          },
+          "fade_at_close": {
+            "n": 117,
+            "record": "62-51-4",
+            "units": 5.4,
+            "roi": 4.6
+          }
+        }
+      },
+      "2026": {
+        "toward": {
+          "at_open": {
+            "n": 42,
+            "record": "24-14-4",
+            "units": 7.8,
+            "roi": 18.6
+          },
+          "at_close": {
+            "n": 42,
+            "record": "20-21-1",
+            "units": -2.8,
+            "roi": -6.7
+          },
+          "fade_at_close": {
+            "n": 42,
+            "record": "21-20-1",
+            "units": -0.9,
+            "roi": -2.2
+          }
+        },
+        "none": {
+          "at_open": {
+            "n": 14,
+            "record": "7-7",
+            "units": -0.6,
+            "roi": -4.5
+          },
+          "at_close": {
+            "n": 14,
+            "record": "7-7",
+            "units": -0.6,
+            "roi": -4.5
+          },
+          "fade_at_close": {
+            "n": 14,
+            "record": "7-7",
+            "units": -0.6,
+            "roi": -4.5
+          }
+        },
+        "away": {
+          "at_open": {
+            "n": 29,
+            "record": "13-16",
+            "units": -4.2,
+            "roi": -14.4
+          },
+          "at_close": {
+            "n": 29,
+            "record": "15-14",
+            "units": -0.4,
+            "roi": -1.3
+          },
+          "fade_at_close": {
+            "n": 29,
+            "record": "14-15",
+            "units": -2.3,
+            "roi": -7.8
+          }
+        },
+        "all": {
+          "at_open": {
+            "n": 85,
+            "record": "44-37-4",
+            "units": 3.0,
+            "roi": 3.5
+          },
+          "at_close": {
+            "n": 85,
+            "record": "42-42-1",
+            "units": -3.8,
+            "roi": -4.5
+          },
+          "fade_at_close": {
+            "n": 85,
+            "record": "42-42-1",
+            "units": -3.8,
+            "roi": -4.5
+          }
+        }
+      }
+    },
+    "strategies_bet_card": {
+      "bet everything at the open": {
+        "n": 318,
+        "record": "172-138-8",
+        "units": 18.4,
+        "roi": 5.8
+      },
+      "bet everything at the close": {
+        "n": 318,
+        "record": "160-152-6",
+        "units": -6.5,
+        "roi": -2.1
+      },
+      "bet at the open, but pass when the line moved away": {
+        "n": 224,
+        "record": "128-89-7",
+        "units": 27.4,
+        "roi": 12.2
+      },
+      "wait, bet at the close only if it moved toward us": {
+        "n": 180,
+        "record": "88-88-4",
+        "units": -8.0,
+        "roi": -4.4
+      },
+      "wait, bet at the close unless it moved away": {
+        "n": 224,
+        "record": "111-108-5",
+        "units": -7.1,
+        "roi": -3.2
+      },
+      "fade at the close when it moved away": {
+        "n": 94,
+        "record": "44-49-1",
+        "units": -9.0,
+        "roi": -9.6
+      }
+    },
+    "move_mix_bet_card": {
+      "toward": 180,
+      "away": 94,
+      "none": 44
+    }
+  }
+}
