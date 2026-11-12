@@ -882,6 +882,11 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .tm-edge.is-d { color: #7FD8FF; border-color: rgba(127,216,255,0.45); }
 .tm-foot { font-size: 10.5px; color: var(--muted-3); margin-top: 10px; }
 .gb-card { margin-bottom: 14px; }
+.bc-note { border: 1px solid rgba(57,240,122,0.35); background: rgba(57,240,122,0.05); border-radius: 10px; padding: 10px 12px; margin: 8px 0 10px; font-size: 12.5px; line-height: 1.5; color: var(--muted-2, #B6C2CF); }
+.bc-note-h { font-weight: 800; color: var(--neon); margin-bottom: 4px; letter-spacing: 0.02em; }
+.bc-note p { margin: 4px 0; }
+.bc-note b { color: #fff; }
+.bc-note .bc-note-s { font-size: 11px; color: var(--muted-3, #8B98A5); }
 .lm-warn { font-size: 12px; line-height: 1.45; color: #F5B83D; background: rgba(245,184,61,0.08); border: 1px solid rgba(245,184,61,0.4); border-radius: 8px; padding: 6px 9px; margin-top: 6px; }
 .lm-warn b { color: #FFD27A; }
 .lm-good { font-size: 11.5px; color: var(--neon); margin-top: 6px; }
@@ -3812,6 +3817,12 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     return '' +
       '<div class="section-head mt-md"><div class="section-title"><div class="section-flag is-green"></div>' +
       '<h2>Bet Card</h2></div></div>' +
+      // 11/12/2026: timing and line-move notes (trust lab + rebuilt-card check).
+      '<div class="bc-note"><div class="bc-note-h">&#9201; Bet early &mdash; and how to read line moves</div>' +
+        '<p><b>Timing matters more than anything else we&rsquo;ve tested.</b> 2024&ndash;26 backtest of this card: <b>+5.8%</b> at the opening line, <b>&minus;3.0%</b> at the closing line. The edge is biggest when the model first flags a play, before the market moves.</p>' +
+        '<p><b>&#9888; Worse number now</b> (e.g. IU &minus;7.5 &rarr; &minus;8.5): the market moved toward our side &mdash; it&rsquo;s agreeing with the model. Not a fade. 2026: <b>16-4</b>.</p>' +
+        '<p><b>&#10003; Better number now</b> (e.g. SJSU +10.5 &rarr; +12.5): the market moved away from our side &mdash; it disagrees. Not a reason to bet more. 2026: <b>17-15</b>.</p>' +
+        '<p class="bc-note-s">2026 records: rebuilt card, weeks 4&ndash;10, graded at the locked line, 68 plays &mdash; a small sample, not a rule yet.</p></div>' +
       '<div class="projector">' +
         (card.length ? card.map(function (c) {
           var col = c.side ? M.displayColor(team(c.side).primary) : 'var(--blue)';
