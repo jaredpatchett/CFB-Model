@@ -882,6 +882,9 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .tm-edge.is-d { color: #7FD8FF; border-color: rgba(127,216,255,0.45); }
 .tm-foot { font-size: 10.5px; color: var(--muted-3); margin-top: 10px; }
 .gb-card { margin-bottom: 14px; }
+.gb-back { display: inline-block; margin-bottom: 10px; background: transparent; border: 1px solid rgba(57,240,122,0.45); color: var(--neon); border-radius: 999px; font: inherit; font-size: 12px; font-weight: 700; padding: 5px 12px; cursor: pointer; }
+.pp-gotobd { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.pp-gobtn { background: var(--neon); color: #06120A; border: 0; border-radius: 999px; font: inherit; font-size: 13px; font-weight: 800; padding: 7px 14px; cursor: pointer; }
 .gb-card .tm-title { margin-bottom: 10px; }
 .gb-p { font-size: 13px; line-height: 1.6; color: var(--text, #E6EDF3); margin: 0 0 9px; }
 .gb-p b { color: #fff; }
@@ -3359,6 +3362,17 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     return gbFootballSide(p, injKeyOpp, injKeyOwn) +
       '<details class="gb-nums"><summary>The numbers behind it</summary><ul class="gb-why-list">' + out.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></details>';
   }
+  // The Edge Board game a prop belongs to (index into D.games), or -1.
+  function gameIndexForProp(r) {
+    var t = r.start_time ? Date.parse(r.start_time) : NaN, best = -1, bestGap = Infinity;
+    (D.games || []).forEach(function (g, i) {
+      var sides = [g.homeSchool, g.awaySchool];
+      if (sides.indexOf(r.team) < 0 || (r.opponent && sides.indexOf(r.opponent) < 0)) return;
+      var gap = isNaN(t) ? 0 : Math.abs(Date.parse(g.kickoffIso) - t);
+      if (gap < bestGap) { best = i; bestGap = gap; }
+    });
+    return bestGap <= 36 * 3600 * 1000 ? best : -1;
+  }
   function renderGameBreakdown(p) {
     var TM = D.teamMatchup || {}, meta = D.teamMatchupMeta || {};
     if (!p || !meta.cats) return '';
@@ -3422,7 +3436,8 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       if (oppKey.length) parts.push('the other side has ' + oppKey.map(fmtK).join(', ') + ' listed');
       if (parts.length) risk = '<div class="gb-risk">&#9888; Injury check: ' + parts.join('; ') + '. Confirm status before kickoff.</div>';
     }
-    return '<div class="tm-card gb-card"><div class="tm-title">' + icon('edge') + '<span>Game breakdown</span><em>' +
+    var back = state.bdFrom ? '<button type="button" class="gb-back" onclick="window.__cfbBackToProps()">&larr; Back to Player Props</button>' : '';
+    return '<div class="tm-card gb-card">' + back + '<div class="tm-title">' + icon('edge') + '<span>Game breakdown</span><em>' +
       esc(A.abbr) + ' at ' + esc(H.abbr) + '</em></div>' +
       '<div class="gb-info">' + gbInfo(p) + '</div>' +
       sec('Matchup', '<p class="gb-p">' + aOff.html + '</p><p class="gb-p">' + hOff.html + '</p><p class="gb-p">' + bottom + '</p>') +
@@ -4034,7 +4049,12 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       else if (r.market_name === 'Receptions' && r.matchup === 'average') cells.push(dcell('Matchup', 'Average defense against ' + (MATCHUP_GROUPS[r.matchup_vs] || 'his position'), 'It has allowed about what its opponents usually get.'));
       if (r.mu_grade) cells.push(muDetail(r));
       cells.push(whatIfCell(r));
-      return '<div class="pp-detail">' + cells.join('') + '</div>';
+      // 11/2026: jump to this game's breakdown on the Edge Board.
+      var gi = gameIndexForProp(r);
+      var go = gi < 0 ? '' : '<div class="pp-dcell is-wide pp-gotobd"><button type="button" class="pp-gobtn" onclick="window.__cfbGoBreakdown(' + gi + ', ' + JSON.stringify(keyOf(r)).replace(/"/g, '&quot;') + ')">' +
+        'Game breakdown: ' + esc(schoolAbbr(r.team) || '') + ' vs ' + esc(schoolAbbr(r.opponent) || '') + ' &rarr;</button>' +
+        '<span class="pp-sub">Matchup, injuries, and why each play in this game is a play.</span></div>';
+      return '<div class="pp-detail">' + go + cells.join('') + '</div>';
     };
     // Matchup marker on receptions props (10/2026). The export labels the
     // opposing defense tough, average or soft against this player's position
@@ -6244,6 +6264,23 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     window.__cfbWhatIfSide(x.model_lean === 'under' ? 1 : 0);
   };
   window.__cfbGoTracker = function () { state.page = 'tracker'; render(); window.scrollTo(0, 0); };
+  // 11/2026: Player Props -> this game's breakdown on the Edge Board, and back.
+  window.__cfbGoBreakdown = function (gi, propKey) {
+    state.selected = gi;
+    state.page = 'edge';
+    state.bdFrom = { key: propKey, y: window.scrollY };
+    render();
+    var el = document.querySelector('.gb-card') || document.getElementById('em-projector');
+    if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' });
+  };
+  window.__cfbBackToProps = function () {
+    var from = state.bdFrom || {};
+    state.page = 'props';
+    if (from.key) state.propDetail = from.key;
+    state.bdFrom = null;
+    render();
+    window.scrollTo(0, from.y || 0);
+  };
   window.__cfbPropOpen = function (i) {
     var k = ['official', 'watch', 'tracked', 'lean'][i];
     state.propOpen = state.propOpen || {};
@@ -6253,10 +6290,10 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
 
   document.addEventListener('click', function (e) {
     var p = e.target.closest('[data-page]');
-    if (p) { var changed = state.page !== p.dataset.page; state.page = p.dataset.page; render(); if (changed) window.scrollTo(0, 0); return; }
+    if (p) { var changed = state.page !== p.dataset.page; state.page = p.dataset.page; state.bdFrom = null; render(); if (changed) window.scrollTo(0, 0); return; }
     var g = e.target.closest('[data-game]');
     if (g) {
-      state.selected = +g.dataset.game; render();
+      state.selected = +g.dataset.game; state.bdFrom = null; render();
       var pj = document.getElementById('em-projector');
       if (pj && g.classList.contains('em-row')) pj.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
