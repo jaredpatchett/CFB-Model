@@ -147,6 +147,42 @@ def load_game_inputs(path: str = MODEL_INPUTS_LOG_PATH) -> dict:
         return {}
 
 
+# 11/2026: line movement on flagged spread plays. The export logs the line
+# every time a game qualifies as a flagged spread play (data/clv/
+# line_snapshots.csv, also used for CLV). The first snapshot is the line
+# when the model first flagged it; the Bet Card warns when the current line
+# has moved against the pick since then.
+LINE_SNAPSHOTS_PATH = "data/clv/line_snapshots.csv"
+
+
+def load_line_history(path: str = LINE_SNAPSHOTS_PATH) -> dict:
+    """{(home_team, away_team, commence_time): {first, at, side, edge, path}}.
+    path = the line each time it changed. Never raises."""
+    import csv
+    try:
+        if not os.path.exists(path):
+            return {}
+        with open(path, newline="") as f:
+            rows = sorted(csv.DictReader(f), key=lambda r: r.get("captured_at", ""))
+        out = {}
+        for r in rows:
+            try:
+                k = (r["home_team"], r["away_team"], r["commence_time"])
+                line = float(r["spread_home_at_capture"])
+            except (KeyError, ValueError, TypeError):
+                continue
+            e = out.get(k)
+            if e is None:
+                e = out[k] = {"first": line, "at": r.get("captured_at"), "side": r.get("side"),
+                              "edge": round(float(r.get("edge_points_at_capture") or 0), 2), "path": []}
+            if not e["path"] or e["path"][-1][1] != line:
+                e["path"].append([r.get("captured_at"), line])
+        return out
+    except Exception as ex:
+        print(f"  [note] line history not read ({ex})")
+        return {}
+
+
 def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dict:
     prior = data.get("preseason_prior") or {}
     slope = prior.get("slope")
@@ -181,6 +217,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
 
     games = []
     game_inputs = load_game_inputs()
+    line_hist = load_line_history()
     for g in priced:
         sp_diff = g.get("sp_rating_diff")
         model_margin = g.get("model_predicted_margin")
@@ -320,6 +357,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
             "evHomePct": g.get("ev_home_pct"),
             "evAwayPct": g.get("ev_away_pct"),
             "modelVersion": g.get("model_version"),
+            "flagLine": line_hist.get((g.get("home_team"), g.get("away_team"), g.get("commence_time"))),
             "injHome": inj_home,
             "injAway": inj_away,
             # 11/2026, game breakdown "why it's a play": what moves the
@@ -1606,6 +1644,9 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .tm-edge.is-d { color: #7FD8FF; border-color: rgba(127,216,255,0.45); }
 .tm-foot { font-size: 10.5px; color: var(--muted-3); margin-top: 10px; }
 .gb-card { margin-bottom: 14px; }
+.lm-warn { font-size: 12px; line-height: 1.45; color: #F5B83D; background: rgba(245,184,61,0.08); border: 1px solid rgba(245,184,61,0.4); border-radius: 8px; padding: 6px 9px; margin-top: 6px; }
+.lm-warn b { color: #FFD27A; }
+.lm-good { font-size: 11.5px; color: var(--neon); margin-top: 6px; }
 /* Player card (11/2026) */
 .pp-namebtn, .pc-open { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-align: left; text-decoration: underline; text-decoration-color: rgba(57,240,122,0.45); text-underline-offset: 3px; }
 #pc-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.72); display: none; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 18px 10px 90px; }
@@ -2707,6 +2748,8 @@ RENDERER_JS = """<script>
       var tags = [];
       var st = emStatus(s);
       if (st) tags.push('<span class="em-tag ' + st[1] + '" title="' + esc(st[2]) + '">' + st[0] + '</span>');
+      var lm = state.market === 'Spread' && p.qualifies ? lineMove(p) : null;
+      if (lm && lm.worse > 0) tags.push('<span class="em-tag is-inj" title="Line moved ' + lm.worse.toFixed(1) + ' against the pick since first flagged">LINE &#8595;' + lm.worse.toFixed(1) + '</span>');
       if (qb.length) tags.push('<span class="em-tag is-inj" title="' + esc(qb.map(function (f) { return abbrOf(f.team) + ' ' + f.text; }).join(' · ')) + '">INJURY</span>');
       tags.push('<span class="em-tag is-src' + (isTrainedGame ? ' is-trained' : '') + '" title="Which model priced this game">' + modelSrcLabel + '</span>');
       // Edge heat: brighter green the bigger a qualifying edge.
@@ -4489,6 +4532,7 @@ RENDERER_JS = """<script>
         ? '<span class="gb-play">' + trkMark(S.abbr, 18) + ' ' + esc(p.playLabel) + '</span> <span class="tier"><span>' + esc(p.tier) + '</span></span> '
         : '<span class="gb-play is-lean">Lean ' + esc(p.playLabel) + '</span> <em class="gb-off">not on the Bet Card (edge below threshold)</em> ') +
         '<div class="gb-why">' + desc + '. ' + fit + '</div>';
+      play += lineMoveHtml(p, false);
       var onCard = p.qualifies && M.buildBetCard(D.games, opts()).some(function (c) { return c.game.home === g.home && c.game.away === g.away && c.game.kickoffIso === g.kickoffIso; });
       if (onCard) play += '<div class="gb-lab2 gb-why-lab">Why it&rsquo;s a play</div>' + gbWhySide(p, p.side === g.away ? injHForWhy : injAForWhy, p.side === g.away ? injAForWhy : injHForWhy);
     }
@@ -4528,6 +4572,32 @@ RENDERER_JS = """<script>
     return t ? '<span class="conf-tier is-' + t.toLowerCase() + '" title="Confidence tier: ' + t + ' (ranks the play by model win %; still 1u)">' + t.toUpperCase() + '</span>' : '';
   }
 
+  // ---- Line movement since first flagged (11/2026) ----
+  // From the export's line snapshots: the spread when the model first
+  // flagged the game vs the spread now, from the picked side's view.
+  function lineMove(c) {
+    var g = c.game, fl = g.flagLine;
+    if (!fl || c.market !== 'Spread' || g.marketSpread == null || !c.side) return null;
+    var home = c.side === g.home, ab = abbrOf(c.side);
+    var first = home ? fl.first : -fl.first, now = home ? g.marketSpread : -g.marketSpread;
+    var worse = first - now;            // + = the number got worse for the pick
+    if (Math.abs(worse) < 0.25) return null;
+    var lo = Math.min(Math.abs(first), Math.abs(now)), hi = Math.max(Math.abs(first), Math.abs(now));
+    var keys = [3, 7, 10, 14].filter(function (k) { return k > lo && k < hi + 0.01 && (first < 0) === (now < 0); });
+    var d = fl.at ? new Date(fl.at) : null;
+    var when = d ? ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getDay()] + ' ' + (d.getMonth() + 1) + '/' + d.getDate() : '';
+    var fmt = function (v) { return (v > 0 ? '+' : '') + v; };
+    return { worse: worse, first: first, now: now, keys: keys, when: when, ab: ab,
+      txt: esc(ab) + ' ' + fmt(first) + ' &rarr; ' + fmt(now) + (when ? ' since first flagged ' + when : '') };
+  }
+  function lineMoveHtml(c, compact) {
+    var m = lineMove(c);
+    if (!m) return '';
+    if (m.worse > 0) return '<div class="lm-warn">&#9888; Line moved ' + m.worse.toFixed(1) + ' against you: ' + m.txt + '.' +
+      (m.keys.length ? ' <b>It crossed ' + (m.keys.length > 1 ? 'key numbers ' : 'the key number ') + m.keys.join(' and ') + '</b>, so a ' + m.keys[0] + '-point ' + (m.now < 0 ? 'win' : 'loss') + ' that used to cash no longer does.' : '') +
+      (compact ? '' : ' The market is moving toward the other side &mdash; shop for the old number, or bet it smaller.') + '</div>';
+    return '<div class="lm-good">&#10003; Line moved ' + (-m.worse).toFixed(1) + ' your way: ' + m.txt + '.</div>';
+  }
   function renderBetCard(card) {
     return '' +
       '<div class="section-head mt-md"><div class="section-title"><div class="section-flag is-green"></div>' +
@@ -4577,6 +4647,7 @@ RENDERER_JS = """<script>
               '<div class="card-conf">' + (sideProb * 100).toFixed(1) + '%' + confChip(M.confTier(c.market, sideProb)) + '</div>' +
               '<div class="num"><span class="tier"><span>' + esc(c.tier) + '</span></span></div>' +
               '<div class="num"><button class="track-btn" onclick="window.__cfbTrack(' + trackPayload(c, true) + ')">+TRK</button></div>' +
+              (lineMoveHtml(c, true) ? '<div style="grid-column:1/-1;padding-top:6px">' + lineMoveHtml(c, true) + '</div>' : '') +
               (isNearEvenTarget(c) ? '<div style="grid-column:1/-1;font-size:11px;color:var(--green);padding-top:6px;line-height:1.4">\u2605 Near-even target: +100 to +150 with the model at 65%+ \u2014 small stake</div>' : '') +
               (qbFlags.length ? '<div style="grid-column:1/-1;font-size:11px;color:var(--amber);padding-top:6px;line-height:1.4">\u26a0 Injury: ' +
                 qbFlags.map(function (f) { return esc(abbrOf(f.team)) + ' ' + esc(f.text); }).join(' \u00b7 ') +
