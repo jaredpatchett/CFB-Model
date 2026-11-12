@@ -183,6 +183,60 @@ def load_line_history(path: str = LINE_SNAPSHOTS_PATH) -> dict:
         return {}
 
 
+# 11/2026: how props have actually done, by edge size, from the live tracker
+# log (data/clv/prop_flags.csv: every flagged prop the pipeline logged and
+# graded from the box score). One row per play (player + market + kickoff +
+# side); "official" = it carried an official tag when logged.
+PROP_FLAGS_PATH = "data/clv/prop_flags.csv"
+EDGE_BUCKETS = [(0, 5), (5, 10), (10, 15), (15, 20), (20, 30), (30, 50), (50, 999)]
+OFFICIAL_TAGS = {"official", "under_play", "rec_yds_play", "rush_under_play"}
+
+
+def build_props_by_edge(path: str = PROP_FLAGS_PATH):
+    import csv
+    try:
+        if not os.path.exists(path):
+            return None
+        plays = {}
+        with open(path, newline="") as f:
+            for r in csv.DictReader(f):
+                if r.get("result") not in ("W", "L", "P"):
+                    continue
+                try:
+                    ev = float(r.get("model_ev"))
+                    units = float(r.get("units") or 0)
+                except (TypeError, ValueError):
+                    continue
+                k = (r.get("player"), r.get("market"), r.get("start_time"), r.get("side"))
+                e = plays.get(k)
+                if e is None:
+                    e = plays[k] = {"m": r.get("market"), "s": r.get("side"), "ev": ev, "res": r["result"], "u": units,
+                                    "off": False, "at": r.get("flagged_at") or ""}
+                if r.get("tag") in OFFICIAL_TAGS:
+                    e["off"] = True
+        def agg(lst):
+            w = sum(1 for x in lst if x["res"] == "W"); l = sum(1 for x in lst if x["res"] == "L")
+            u = sum(x["u"] for x in lst)
+            return {"n": len(lst), "w": w, "l": l, "units": round(u, 2), "roi": round(u / len(lst) * 100, 1) if lst else None}
+        groups = {}
+        for x in plays.values():
+            groups.setdefault(f"{x['m']}|{x['s']}", []).append(x)
+        out = {}
+        for key, lst in groups.items():
+            if len(lst) < 30:
+                continue
+            row = {"all": agg(lst), "official": agg([x for x in lst if x["off"]]), "buckets": []}
+            for lo, hi in EDGE_BUCKETS:
+                b = [x for x in lst if lo <= x["ev"] < hi]
+                row["buckets"].append({"lo": lo, "hi": hi, "all": agg(b), "official": agg([x for x in b if x["off"]])})
+            out[key] = row
+        since = min((x["at"] for x in plays.values() if x["at"]), default=None)
+        return {"since": since, "n": len(plays), "groups": out}
+    except Exception as e:
+        print(f"  [note] props-by-edge not built ({e})")
+        return None
+
+
 def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dict:
     prior = data.get("preseason_prior") or {}
     slope = prior.get("slope")
@@ -1655,6 +1709,30 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .tm-edge.is-d { color: #7FD8FF; border-color: rgba(127,216,255,0.45); }
 .tm-foot { font-size: 10.5px; color: var(--muted-3); margin-top: 10px; }
 .gb-card { margin-bottom: 14px; }
+.pbe-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.pbe-chip { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--muted-2, #B6C2CF); border-radius: 999px; font: inherit; font-size: 11.5px; padding: 4px 10px; cursor: pointer; }
+.pbe-chip.is-rule { border-color: rgba(57,240,122,0.45); }
+.pbe-chip.is-on { background: var(--neon); color: #06120A; border-color: var(--neon); font-weight: 800; }
+.pbe-tog { display: inline-flex; border: 1px solid rgba(57,240,122,0.4); border-radius: 999px; overflow: hidden; margin-bottom: 8px; }
+.pbe-tog button { background: transparent; border: 0; color: var(--muted-2, #B6C2CF); font: inherit; font-size: 11.5px; font-weight: 700; padding: 5px 11px; cursor: pointer; }
+.pbe-tog button.is-on { background: var(--neon); color: #06120A; }
+.pbe-tog button:disabled { opacity: 0.35; cursor: default; }
+.pbe-total { font-size: 13px; color: var(--muted-2, #B6C2CF); margin: 4px 0 10px; }
+.pbe-total span { font-family: var(--font-display); font-weight: 900; font-size: 22px; margin-right: 4px; }
+.pbe .is-good { color: var(--neon); } .pbe .is-bad { color: #FF7A59; }
+.pbe-axis { display: grid; grid-template-columns: 70px 1fr 150px; font-size: 10px; color: var(--muted-3, #8B98A5); }
+.pbe-axis { gap: 8px; padding: 0 4px; } .pbe-ax { display: flex; justify-content: space-between; } .pbe-ax i { font-style: normal; }
+.pbe-row { display: grid; grid-template-columns: 70px 1fr 150px; align-items: center; gap: 8px; padding: 5px 4px; border-radius: 6px; font-size: 12px; }
+.pbe-row.is-rule { outline: 1px solid rgba(57,240,122,0.5); background: rgba(57,240,122,0.05); }
+.pbe-row.is-small { opacity: 0.55; }
+.pbe-row.is-empty { opacity: 0.35; }
+.pbe-lab { color: #fff; font-weight: 700; } .pbe-lab span { font-size: 9.5px; color: var(--neon); font-weight: 800; text-transform: uppercase; }
+.pbe-track { position: relative; height: 12px; background: rgba(255,255,255,0.05); border-radius: 999px; }
+.pbe-mid { position: absolute; left: 50%; top: -3px; bottom: -3px; width: 2px; background: rgba(255,255,255,0.6); }
+.pbe-bar { position: absolute; top: 0; bottom: 0; border-radius: 999px; }
+.pbe-bar.is-good { background: linear-gradient(90deg, #22b35e, var(--neon)); } .pbe-bar.is-bad { background: linear-gradient(90deg, #FF7A59, #d9603f); }
+.pbe-val { color: var(--muted-2, #B6C2CF); font-size: 11.5px; } .pbe-val b { font-size: 13px; }
+@media (max-width: 600px) { .pbe-row, .pbe-axis { grid-template-columns: 56px 1fr 118px; } .pbe-val { font-size: 10.5px; } }
 .bc-new { margin-left: 8px; font-size: 10px; font-weight: 900; letter-spacing: 0.06em; color: #06120A; background: var(--neon); border-radius: 999px; padding: 2px 7px; vertical-align: middle; }
 .bc-dropped { border: 1px solid rgba(255,122,89,0.45); background: rgba(255,122,89,0.06); border-radius: 10px; padding: 10px 12px; margin-top: 10px; font-size: 12.5px; color: var(--muted-2, #B6C2CF); }
 .bc-dropped .bc-note-h { color: #FF7A59; }
@@ -4853,6 +4931,45 @@ RENDERER_JS = """<script>
     return (isNaN(n) || Math.abs(n) < 100) ? null : n;
   }
 
+  // ---- Props by edge (11/2026): live tracked results, by edge size ----
+  var PBE_NAMES = { 'Reception Yards': 'Rec yds', 'Receptions': 'Receptions', 'Rush Yards': 'Rush yds', 'Rush Attempts': 'Rush att', 'Pass Yards': 'Pass yds',
+    'Pass Attempts': 'Pass att', 'Pass Completions': 'Completions', 'Pass Touchdowns': 'Pass TDs', 'Pass Interceptions': 'INTs', 'Rush Touchdowns': 'Rush TDs' };
+  var PBE_RULE = { 'Rush Yards|under': [0, 999, 'any edge, vs a tough run D'], 'Receptions|under': [30, 999, '30%+'], 'Reception Yards|over': [15, 30, '15&ndash;30%, line 25.5+'] };
+  function renderPropsByEdge() {
+    var P = D.propsByEdge;
+    if (!P || !P.groups) return '';
+    var keys = Object.keys(P.groups).sort(function (a, b) {
+      var ra = PBE_RULE[a] ? 0 : 1, rb = PBE_RULE[b] ? 0 : 1;
+      return ra - rb || P.groups[b].all.n - P.groups[a].all.n;
+    });
+    var key = P.groups[state.pbeKey] ? state.pbeKey : keys[0];
+    var off = !!state.pbeOfficial && P.groups[key].official.n > 0;
+    var G = P.groups[key], tot = off ? G.official : G.all, rule = PBE_RULE[key];
+    var lab = function (k) { var p = k.split('|'); return (PBE_NAMES[p[0]] || p[0]) + ' ' + p[1] + 's'; };
+    var sg = function (x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); };
+    var chips = keys.map(function (k) {
+      return '<button class="pbe-chip' + (k === key ? ' is-on' : '') + (PBE_RULE[k] ? ' is-rule' : '') + '" data-pbe-key="' + esc(k) + '">' + esc(lab(k)) + (PBE_RULE[k] ? ' &#9733;' : '') + '</button>';
+    }).join('');
+    var bars = G.buckets.map(function (b) {
+      var o = off ? b.official : b.all;
+      var name = b.hi >= 999 ? b.lo + '%+' : b.lo + '&ndash;' + b.hi + '%';
+      var inRule = rule && b.lo >= rule[0] && b.hi <= Math.max(rule[1], b.hi) && b.lo < rule[1];
+      if (!o.n) return '<div class="pbe-row is-empty"><div class="pbe-lab">' + name + '</div><div class="pbe-track"></div><div class="pbe-val">no plays</div></div>';
+      var w = Math.min(50, Math.abs(o.roi) / 40 * 50), good = o.roi >= 0;
+      return '<div class="pbe-row' + (o.n < 15 ? ' is-small' : '') + (inRule ? ' is-rule' : '') + '"><div class="pbe-lab">' + name + (inRule ? ' <span>rule</span>' : '') + '</div>' +
+        '<div class="pbe-track"><div class="pbe-mid"></div><div class="pbe-bar ' + (good ? 'is-good' : 'is-bad') + '" style="' + (good ? 'left:50%' : 'right:50%') + ';width:' + w.toFixed(1) + '%"></div></div>' +
+        '<div class="pbe-val"><b class="' + (good ? 'is-good' : 'is-bad') + '">' + sg(o.roi, 0) + '%</b> ' + o.w + '-' + o.l + ' &middot; ' + sg(o.units, 1) + 'u' + (o.n < 15 ? ' &middot; small' : '') + '</div></div>';
+    }).join('');
+    var since = P.since ? new Date(P.since) : null;
+    return '<div class="pp-panel pbe"><h3>How props have done, by edge</h3>' +
+      '<div class="pp-panel-note">Every prop the model flagged and the tracker graded from the box score' + (since ? ', since ' + (since.getMonth() + 1) + '/' + since.getDate() : '') +
+        '. 1 unit a play at the logged price. &#9733; = an official rule; the outlined rows are the rule&rsquo;s edge range. &ldquo;small&rdquo; = under 15 plays.</div>' +
+      '<div class="pbe-chips">' + chips + '</div>' +
+      '<div class="pbe-tog"><button class="' + (!off ? 'is-on' : '') + '" data-pbe-off="">Every flagged play</button><button class="' + (off ? 'is-on' : '') + '" data-pbe-off="1"' + (G.official.n ? '' : ' disabled') + '>Official plays only</button></div>' +
+      '<div class="pbe-total"><span class="' + ((tot.roi || 0) >= 0 ? 'is-good' : 'is-bad') + '">' + sg(tot.roi || 0, 1) + '%</span> ' + esc(lab(key)) + ': ' + tot.w + '-' + tot.l + ', ' + sg(tot.units, 1) + 'u over ' + tot.n + ' plays' +
+        (rule ? ' &middot; official rule: ' + rule[2] : '') + '</div>' +
+      '<div class="pbe-axis"><span></span><span class="pbe-ax"><i>&minus;40% ROI</i><i>break-even</i><i>+40%</i></span><span></span></div>' + bars + '</div>';
+  }
   function renderProps() {
     var live = D.propsLive || [];
     var head = '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Player Props</h2></div></div>';
@@ -5476,7 +5593,7 @@ RENDERER_JS = """<script>
         }).join('') + '</div>';
     }
     if (bucketPanel || resultsPanel) lower = '<div class="pp-lower">' + bucketPanel + resultsPanel + '</div>';
-    lower = muPanel + lower;
+    lower = renderPropsByEdge() + muPanel + lower;
 
     // 5) The fine print, folded away until wanted.
     var help = '<details class="pp-help"><summary>How to read this page</summary><div class="pp-help-body">' +
@@ -7504,6 +7621,10 @@ RENDERER_JS = """<script>
     var m = e.target.closest('[data-market]');
     if (m) { state.market = m.dataset.market; return render(); }
     if (e.target.closest('[data-edge-clear]')) { state.edgeShow = 'all'; state.edgeConf = 'ALL'; state.search = ''; return render(); }
+    var pk = e.target.closest('[data-pbe-key]');
+    if (pk) { state.pbeKey = pk.dataset.pbeKey; return render(); }
+    var po = e.target.closest('[data-pbe-off]');
+    if (po && !po.disabled) { state.pbeOfficial = !!po.dataset.pbeOff; return render(); }
     var pm = e.target.closest('[data-prop-market]');
     if (pm) { state.propMarket = pm.dataset.propMarket; state.propPresetMsg = ''; return render(); }
     var ps = e.target.closest('[data-prop-set]');
@@ -7592,6 +7713,7 @@ def main():
 
     model_data = build_model_data(data, backtest=backtest, clv=clv)
     model_data["propEdgeHistory"] = build_prop_edge_history()
+    model_data["propsByEdge"] = build_props_by_edge()
     model_data["propRules"] = build_prop_rules()
     # Team-vs-team national ranks for the Matchup Projector (11/2026).
     model_data["teamMatchup"] = data.get("team_matchup") or {}
