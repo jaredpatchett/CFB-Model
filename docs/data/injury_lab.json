@@ -1,0 +1,464 @@
+{
+  "generated_at": "2026-11-12T16:00:01.110255+00:00",
+  "train_years": [
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "season": 2026,
+  "note": "In training, a teammate is 'missing' when he has no box-score row; live it would be the injury report.",
+  "results": {
+    "rush_yds": {
+      "rule": "under, edge 0%+, 2+ games, vs a tough run defense",
+      "official": {
+        "current": {
+          "official": {
+            "n": 785,
+            "record": "444-341",
+            "units": 55.2,
+            "roi": 7.0
+          },
+          "official_teammate_missing": {
+            "n": 353,
+            "record": "190-163",
+            "units": 4.5,
+            "roi": 1.3
+          },
+          "official_no_one_missing": {
+            "n": 432,
+            "record": "254-178",
+            "units": 50.7,
+            "roi": 11.7
+          },
+          "by_season": {
+            "2024": {
+              "n": 252,
+              "record": "139-113",
+              "units": 12.3,
+              "roi": 4.9
+            },
+            "2025": {
+              "n": 309,
+              "record": "167-142",
+              "units": 7.1,
+              "roi": 2.3
+            },
+            "2026": {
+              "n": 224,
+              "record": "138-86",
+              "units": 35.7,
+              "roi": 15.9
+            }
+          },
+          "only_this_version": {
+            "n": 76,
+            "record": "43-33",
+            "units": 4.5,
+            "roi": 5.9
+          }
+        },
+        "injury": {
+          "official": {
+            "n": 776,
+            "record": "438-338",
+            "units": 53.4,
+            "roi": 6.9
+          },
+          "official_teammate_missing": {
+            "n": 319,
+            "record": "179-140",
+            "units": 18.0,
+            "roi": 5.6
+          },
+          "official_no_one_missing": {
+            "n": 457,
+            "record": "259-198",
+            "units": 35.4,
+            "roi": 7.7
+          },
+          "by_season": {
+            "2024": {
+              "n": 249,
+              "record": "135-114",
+              "units": 7.8,
+              "roi": 3.1
+            },
+            "2025": {
+              "n": 305,
+              "record": "164-141",
+              "units": 6.0,
+              "roi": 2.0
+            },
+            "2026": {
+              "n": 222,
+              "record": "139-83",
+              "units": 39.6,
+              "roi": 17.8
+            }
+          },
+          "only_this_version": {
+            "n": 67,
+            "record": "37-30",
+            "units": 2.7,
+            "roi": 4.0
+          }
+        }
+      },
+      "all_unders_0plus": {
+        "current": {
+          "official": {
+            "n": 1539,
+            "record": "837-702",
+            "units": 43.9,
+            "roi": 2.9
+          },
+          "official_teammate_missing": {
+            "n": 619,
+            "record": "330-289",
+            "units": 2.5,
+            "roi": 0.4
+          },
+          "official_no_one_missing": {
+            "n": 920,
+            "record": "507-413",
+            "units": 41.4,
+            "roi": 4.5
+          },
+          "by_season": {
+            "2024": {
+              "n": 501,
+              "record": "268-233",
+              "units": 8.4,
+              "roi": 1.7
+            },
+            "2025": {
+              "n": 575,
+              "record": "309-266",
+              "units": 9.1,
+              "roi": 1.6
+            },
+            "2026": {
+              "n": 463,
+              "record": "260-203",
+              "units": 26.4,
+              "roi": 5.7
+            }
+          },
+          "only_this_version": {
+            "n": 120,
+            "record": "67-53",
+            "units": 5.9,
+            "roi": 4.9
+          }
+        },
+        "injury": {
+          "official": {
+            "n": 1563,
+            "record": "849-714",
+            "units": 43.2,
+            "roi": 2.8
+          },
+          "official_teammate_missing": {
+            "n": 569,
+            "record": "308-261",
+            "units": 11.0,
+            "roi": 1.9
+          },
+          "official_no_one_missing": {
+            "n": 994,
+            "record": "541-453",
+            "units": 32.2,
+            "roi": 3.2
+          },
+          "by_season": {
+            "2024": {
+              "n": 515,
+              "record": "272-243",
+              "units": 2.6,
+              "roi": 0.5
+            },
+            "2025": {
+              "n": 590,
+              "record": "315-275",
+              "units": 5.6,
+              "roi": 0.9
+            },
+            "2026": {
+              "n": 458,
+              "record": "262-196",
+              "units": 35.1,
+              "roi": 7.7
+            }
+          },
+          "only_this_version": {
+            "n": 144,
+            "record": "79-65",
+            "units": 4.7,
+            "roi": 3.2
+          }
+        }
+      },
+      "projection_error_last_season": {
+        "current": {
+          "all": {
+            "n": 9155,
+            "mae": 25.768
+          },
+          "teammate_missing": {
+            "n": 4142,
+            "mae": 25.687
+          },
+          "no_one_missing": {
+            "n": 5013,
+            "mae": 25.836
+          }
+        },
+        "injury": {
+          "all": {
+            "n": 9155,
+            "mae": 25.698
+          },
+          "teammate_missing": {
+            "n": 4142,
+            "mae": 25.773
+          },
+          "no_one_missing": {
+            "n": 5013,
+            "mae": 25.636
+          }
+        }
+      }
+    },
+    "receptions": {
+      "rule": "under, edge 30%+",
+      "official": {
+        "current": {
+          "official": {
+            "n": 375,
+            "record": "218-157",
+            "units": 45.4,
+            "roi": 12.1
+          },
+          "official_teammate_missing": {
+            "n": 125,
+            "record": "67-58",
+            "units": 6.7,
+            "roi": 5.4
+          },
+          "official_no_one_missing": {
+            "n": 250,
+            "record": "151-99",
+            "units": 38.7,
+            "roi": 15.5
+          },
+          "by_season": {
+            "2024": {
+              "n": 137,
+              "record": "79-58",
+              "units": 15.9,
+              "roi": 11.6
+            },
+            "2025": {
+              "n": 83,
+              "record": "48-35",
+              "units": 10.1,
+              "roi": 12.1
+            },
+            "2026": {
+              "n": 155,
+              "record": "91-64",
+              "units": 19.5,
+              "roi": 12.6
+            }
+          },
+          "only_this_version": {
+            "n": 42,
+            "record": "27-15",
+            "units": 10.1,
+            "roi": 24.0
+          }
+        },
+        "injury": {
+          "official": {
+            "n": 368,
+            "record": "209-159",
+            "units": 33.8,
+            "roi": 9.2
+          },
+          "official_teammate_missing": {
+            "n": 114,
+            "record": "60-54",
+            "units": 3.6,
+            "roi": 3.1
+          },
+          "official_no_one_missing": {
+            "n": 254,
+            "record": "149-105",
+            "units": 30.2,
+            "roi": 11.9
+          },
+          "by_season": {
+            "2024": {
+              "n": 119,
+              "record": "68-51",
+              "units": 13.1,
+              "roi": 11.0
+            },
+            "2025": {
+              "n": 81,
+              "record": "45-36",
+              "units": 6.2,
+              "roi": 7.7
+            },
+            "2026": {
+              "n": 168,
+              "record": "96-72",
+              "units": 14.5,
+              "roi": 8.6
+            }
+          },
+          "only_this_version": {
+            "n": 35,
+            "record": "18-17",
+            "units": -1.6,
+            "roi": -4.5
+          }
+        }
+      },
+      "projection_error_last_season": {
+        "current": {
+          "all": {
+            "n": 12294,
+            "mae": 1.478
+          },
+          "teammate_missing": {
+            "n": 4323,
+            "mae": 1.485
+          },
+          "no_one_missing": {
+            "n": 7971,
+            "mae": 1.475
+          }
+        },
+        "injury": {
+          "all": {
+            "n": 12294,
+            "mae": 1.477
+          },
+          "teammate_missing": {
+            "n": 4323,
+            "mae": 1.485
+          },
+          "no_one_missing": {
+            "n": 7971,
+            "mae": 1.473
+          }
+        }
+      }
+    },
+    "rec_yds": {
+      "rule": "over, edge 15-30%, line 25.5+ (2026 lines only)",
+      "official": {
+        "current": {
+          "official": {
+            "n": 30,
+            "record": "20-10",
+            "units": 7.6,
+            "roi": 25.2
+          },
+          "official_teammate_missing": {
+            "n": 4,
+            "record": "2-2",
+            "units": -0.2,
+            "roi": -6.1
+          },
+          "official_no_one_missing": {
+            "n": 26,
+            "record": "18-8",
+            "units": 7.8,
+            "roi": 30.1
+          },
+          "by_season": {
+            "2026": {
+              "n": 30,
+              "record": "20-10",
+              "units": 7.6,
+              "roi": 25.2
+            }
+          },
+          "only_this_version": {
+            "n": 5,
+            "record": "3-2",
+            "units": 0.6,
+            "roi": 12.9
+          }
+        },
+        "injury": {
+          "official": {
+            "n": 28,
+            "record": "19-9",
+            "units": 7.7,
+            "roi": 27.4
+          },
+          "official_teammate_missing": {
+            "n": 4,
+            "record": "2-2",
+            "units": -0.2,
+            "roi": -6.1
+          },
+          "official_no_one_missing": {
+            "n": 24,
+            "record": "17-7",
+            "units": 7.9,
+            "roi": 33.0
+          },
+          "by_season": {
+            "2026": {
+              "n": 28,
+              "record": "19-9",
+              "units": 7.7,
+              "roi": 27.4
+            }
+          },
+          "only_this_version": {
+            "n": 3,
+            "record": "2-1",
+            "units": 0.8,
+            "roi": 25.1
+          }
+        }
+      },
+      "projection_error_last_season": {
+        "current": {
+          "all": {
+            "n": 12294,
+            "mae": 22.58
+          },
+          "teammate_missing": {
+            "n": 4323,
+            "mae": 22.725
+          },
+          "no_one_missing": {
+            "n": 7971,
+            "mae": 22.501
+          }
+        },
+        "injury": {
+          "all": {
+            "n": 12294,
+            "mae": 22.584
+          },
+          "teammate_missing": {
+            "n": 4323,
+            "mae": 22.802
+          },
+          "no_one_missing": {
+            "n": 7971,
+            "mae": 22.465
+          }
+        }
+      }
+    }
+  }
+}
