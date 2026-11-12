@@ -5243,7 +5243,7 @@ RENDERER_JS = """<script>
 
     // Sorting: a main sort and a tiebreaker. Clicking a column header sets
     // the main sort; clicking it again flips the direction.
-    var SORTS = [['kickoff', 'Kickoff'], ['edge', 'Highest edge'], ['hit', 'Hit chance'], ['roi', 'Track record ROI'], ['matchup', 'Matchup grade'], ['player', 'Player A-Z'], ['market', 'Market']];
+    var SORTS = [['kickoff', 'Kickoff'], ['grade', 'Play grade (A first)'], ['edge', 'Highest edge'], ['hit', 'Hit chance'], ['roi', 'Track record ROI'], ['matchup', 'Matchup grade'], ['player', 'Player A-Z'], ['market', 'Market']];
     var sortOk = function (k) { return SORTS.some(function (x) { return x[0] === k; }); };
     var sort1 = sortOk(state.propSort) ? state.propSort : 'kickoff';
     var sort2 = sortOk(state.propSort2) ? state.propSort2 : 'edge';
@@ -5255,6 +5255,12 @@ RENDERER_JS = """<script>
     var num = function (x) { return x == null || isNaN(x) ? -1e9 : Number(x); };
     var cmpOf = function (k) {
       switch (k) {
+        // 11/2026: play grade A > B > C (non-official props last), then the
+        // matchup score inside a grade.
+        case 'grade': return function (a, b) {
+          var gv = function (r) { var g = playGrade(r); return g ? { A: 3, B: 2, C: 1 }[g.g] : 0; };
+          return (gv(b) - gv(a)) || (num(b.mu_score) - num(a.mu_score));
+        };
         case 'edge': return function (a, b) { return num(b.model_ev) - num(a.model_ev); };
         case 'hit': return function (a, b) { return num(b._lp) - num(a._lp); };
         case 'roi': return function (a, b) { return trackRoi(b) - trackRoi(a); };
@@ -5330,6 +5336,8 @@ RENDERER_JS = """<script>
         seg(2, 'all', 'All props', nSec.official + nSec.underlean + nSec.watch + nSec.tracked + nSec.lean) +
       '</div>' +
       (view === 'all' ? '<button class="pp-chip' + (state.propShowPass ? ' is-on' : '') + '" onclick="window.__cfbPropShowPass()">Show passes (' + nPass + ')</button>' : '') +
+      '<button class="pp-chip pg-sortchip' + (sort1 === 'grade' ? ' is-on' : '') + '" onclick="window.__cfbPropSortGrade()" title="List official props A first, then B, then C">' +
+        (sort1 === 'grade' ? '&#10003; Sorted by play grade' : '&#128293; Sort by play grade') + '</button>' +
     '</div>' +
     '<div class="pp-filter">' +
       '<div class="pp-ftop"><span class="pp-ftitle">Sort &amp; Filter</span>' +
@@ -7743,6 +7751,11 @@ RENDERER_JS = """<script>
     lineEl.value = x.line;
     priceEl.value = (p == null || isNaN(p)) ? '' : (p > 0 ? '+' : '') + Number(p);
     window.__cfbWhatIfSide(x.model_lean === 'under' ? 1 : 0);
+  };
+  window.__cfbPropSortGrade = function () {
+    if (state.propSort === 'grade') { state.propSort = 'kickoff'; state.propSort2 = 'edge'; }
+    else { state.propSort = 'grade'; state.propSort2 = 'kickoff'; }
+    state.propSortRev = false; render();
   };
   window.__cfbGoTracker = function () { state.page = 'tracker'; render(); window.scrollTo(0, 0); };
   // 11/2026: Player Props -> this game's breakdown on the Edge Board, and back.
