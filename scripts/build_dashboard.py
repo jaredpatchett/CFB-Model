@@ -274,6 +274,11 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
         flags = []
         inj_home = g.get("injuries_home") or []
         inj_away = g.get("injuries_away") or []
+        # 11/2026: when each player first showed up on the report, so the
+        # prop breakdown can tell which of a teammate's games came after.
+        _since = {(i.get("school"), i.get("player")): i.get("reported") for i in (data.get("injuries") or [])}
+        inj_home = [dict(i, since=_since.get((g.get("home_school"), i.get("player")))) for i in inj_home]
+        inj_away = [dict(i, since=_since.get((g.get("away_school"), i.get("player")))) for i in inj_away]
         # QB injuries are the ones that move a line most, so they get a
         # visible warning chip; the full list is on the Injury Report page.
         for team_name, lst in ((g["home_team"], inj_home), (g["away_team"], inj_away)):
@@ -1635,6 +1640,7 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .gb-read { font-size: 13.5px; line-height: 1.6; color: #E6EDF3; margin: 6px 0 8px; }
 .gb-read b { color: var(--neon); display: block; font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; }
 .gb-read p { margin: 4px 0 6px; }
+.gb-read.is-risk b { color: #F5B83D; }
 .gb-nums { margin-top: 4px; }
 .gb-nums summary { cursor: pointer; font-size: 11.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted-3, #8B98A5); padding: 4px 0; }
 .gb-nums[open] summary { color: #fff; }
@@ -3679,7 +3685,7 @@ RENDERER_JS = """<script>
       if (grp !== myGrp || gbNameKey(i.player) === gbNameKey(r.player_name)) return;
       (/^(Out|IR|Doubtful)/.test(i.status || '') ? mOut : mQ).push(esc(i.player) + ' (' + esc(i.pos) + ')');
     });
-    if (mOut.length) risk.push(mOut.join(', ') + (mOut.length > 1 ? ' are' : ' is') + ' out at his position, so more work for ' + esc(last) +
+    if (mOut.length && !gbRoleChange(r, g)) risk.push(mOut.join(', ') + (mOut.length > 1 ? ' are' : ' is') + ' out at his position, so more work for ' + esc(last) +
       (over ? ' (helps the over)' : ' (the risk to the under)'));
     if (mQ.length) risk.push(mQ.join(', ') + (mQ.length > 1 ? ' are' : ' is') + ' questionable at his position; if ' + (mQ.length > 1 ? 'they play' : 'he plays') + ', ' +
       esc(last) + '&rsquo;s role could shrink' + (over ? ' (the risk to the over)' : ' (helps the under)'));
@@ -3894,6 +3900,68 @@ RENDERER_JS = """<script>
     return html;
   }
   // Props: the position-specific football logic behind each official rule.
+  // Role change from injuries (11/2026). The props model has no injury
+  // input: it only sees a teammate's absence through the player's last-2-
+  // game inputs, while its season inputs still include games the teammate
+  // played. This reads the report against his game log to say how much of
+  // his line came after the teammate went out, and whether the projection
+  // sits closer to his old role or his new one.
+  var GB_MON = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
+  function gbSinceWeek(since, season) {
+    var m = /([A-Z][a-z]{2}) (\\d{1,2})/.exec(String(since || ''));
+    if (!m || GB_MON[m[1]] == null) return null;
+    var dt = Date.UTC(season, GB_MON[m[1]], +m[2]);
+    if (GB_MON[m[1]] < 6) dt = Date.UTC(season + 1, GB_MON[m[1]], +m[2]);
+    // Week 1 Saturday ~ the last Saturday of August; weeks run Sun-Sat.
+    var w1 = Date.UTC(season, 7, 29);
+    return Math.floor((dt - w1) / (7 * 86400000)) + 2;   // first week played after the report date
+  }
+  function gbRoleChange(r, g) {
+    var mates = (r.team === g.awaySchool ? g.injAway : g.injHome) || [], over = r.model_lean === 'over';
+    var myGrp = r.pos === 'TE' ? 'WR' : r.pos, isRush = r.market_name === 'Rush Yards';
+    var gone = mates.filter(function (i) {
+      var grp = i.pos === 'TE' ? 'WR' : i.pos;
+      return /^(Out|IR|Doubtful)/.test(i.status || '') && gbNameKey(i.player) !== gbNameKey(r.player_name) &&
+        (grp === myGrp || (isRush && r.pos === 'QB' && i.pos === 'RB' && gbRole(gbFantasy(r.team), i) === 'lead back'));
+    });
+    if (!gone.length) return null;
+    var season = new Date(g.kickoffIso).getUTCFullYear(), fan = gbFantasy(r.team);
+    var names = gone.map(function (i) { var role = gbRole(fan, i); return esc(i.player) + (role ? ' (' + role + ')' : ' (' + esc(i.pos) + ')'); });
+    var starts = gone.map(function (i) { return gbSinceWeek(i.since, season); }).filter(function (w) { return w != null; });
+    var gl = (D.propGameLogs || {})[r.game_log_key] || [], mi = r.model_inputs || {};
+    var last = (function () { var k = gbNameKey(r.player_name).split('|')[1] || ''; return k.charAt(0).toUpperCase() + k.slice(1); })();
+    var txt = names.join(', ') + (gone.length > 1 ? ' are' : ' is') + ' out', after = [], before = [];
+    if (starts.length && gl.length) {
+      var wk = Math.max.apply(null, starts);   // the most recent loss is the current role
+      gl.forEach(function (x) { (x[0] >= wk ? after : before).push(Number(x[2])); });
+      var since = gone.filter(function (i) { return gbSinceWeek(i.since, season) === wk; })[0].since;
+      txt += ' (on the report since ' + esc(String(since).replace(/^[A-Za-z]+, /, '')) + ').';
+    } else txt += '.';
+    var avg = function (a) { return a.reduce(function (s2, v) { return s2 + v; }, 0) / a.length; };
+    var proj = Number(r.model_predicted_value), unit = isRush ? 'rush yds' : r.market_name === 'Receptions' ? 'catches' : 'rec yds';
+    var shareK = isRush ? ['roll_carry_share', 'last2_carry_share', 'carries'] : ['roll_rec_share', 'last2_rec_share', 'catches'];
+    var s0 = mi[shareK[0]], s2 = mi[shareK[1]];
+    var role = s0 != null && s2 != null && s2 - s0 >= 0.05;
+    if (after.length) {
+      txt += ' Since then ' + esc(last) + ' has ' + after.length + ' game' + (after.length === 1 ? '' : 's') + ': ' + after.map(function (v) { return v; }).join(', ') + ' ' + unit +
+        ' (' + avg(after).toFixed(1) + ' a game' + (before.length ? ', vs ' + avg(before).toFixed(1) + ' before' : '') + ').';
+    }
+    if (role) txt += ' His share of the ' + shareK[2] + ' is up to ' + (s2 * 100).toFixed(0) + '% the last 2 games from ' + (s0 * 100).toFixed(0) + '% on the season' +
+      (isRush && mi.last2_rush_att != null && mi.roll_rush_att != null ? ' (' + mi.last2_rush_att.toFixed(0) + ' carries a game, up from ' + mi.roll_rush_att.toFixed(0) + ')' : '') + '.';
+    // Does the new role cut for or against this pick?
+    var newAvg = after.length ? avg(after) : null, oldAvg = before.length ? avg(before) : null;
+    var grew = newAvg != null && oldAvg != null && Math.abs(newAvg - oldAvg) >= Math.max(3, 0.2 * Math.max(newAvg, oldAvg)) ? newAvg > oldAvg : (role ? true : null);
+    var lean = grew == null ? null : (grew === over ? 'help' : 'risk');
+    txt += ' The model has no injury input &mdash; it only sees this through his last-2-games numbers, while his season numbers still include games ' +
+      (gone.length > 1 ? 'they' : 'he') + ' played. ';
+    if (lean === 'risk') txt += grew
+      ? 'His role has grown, and the projection (' + gbNum(proj) + ')' + (newAvg != null ? ' is ' + (proj < newAvg ? 'below' : 'near') + ' his ' + newAvg.toFixed(1) + ' a game since' : ' still leans on his season numbers') +
+        ' &mdash; the model may be underrating his new workload. That&rsquo;s the biggest risk to this under' + (after.length && after.length <= 2 ? ' (only ' + after.length + ' game' + (after.length === 1 ? '' : 's') + ' of the new role, so it&rsquo;s still a small read)' : '') + '.'
+      : 'His production has dropped since, which works against this over.';
+    else if (lean === 'help') txt += grew ? 'The bigger role points the same way as this over.' : 'His numbers have dropped since' + (newAvg != null ? ' (' + newAvg.toFixed(1) + ' a game)' : '') + ', which backs this under.';
+    else txt += 'His numbers haven&rsquo;t moved much since, so the injuries don&rsquo;t change the read.';
+    return { html: txt, lean: lean };
+  }
   function gbFootballProp(r, g) {
     var over = r.model_lean === 'over', me = schoolAbbr(r.team), opp = schoolAbbr(r.opponent);
     var u = gbUnits(r.team, r.opponent) || { o: {}, d: {} }, mi = r.model_inputs || {};
@@ -3914,7 +3982,9 @@ RENDERER_JS = """<script>
         : esc(opp) + ' is tough against the run. ') + 'Backs usually beat a rushing under with one or two chunk runs; a defense that keeps everything in front of it takes those away.');
       if (mi.roll_carry_share != null || r.carry_share != null) {
         var cs = mi.roll_carry_share != null ? mi.roll_carry_share : r.carry_share;
-        if (cs < 0.45) parts.push('He&rsquo;s in a committee (' + (cs * 100).toFixed(0) + '% of the carries), so his volume isn&rsquo;t guaranteed &mdash; fewer carries means fewer chances to break one.');
+        var cs2 = mi.last2_carry_share;
+        if (cs2 != null && cs2 - cs >= 0.05) parts.push('His workload has grown lately (' + (cs2 * 100).toFixed(0) + '% of the carries the last 2 games, up from ' + (cs * 100).toFixed(0) + '% on the season), so this under has to beat a bigger role than his season numbers show.');
+        else if (cs < 0.45) parts.push('He&rsquo;s in a committee (' + (cs * 100).toFixed(0) + '% of the carries), so his volume isn&rsquo;t guaranteed &mdash; fewer carries means fewer chances to break one.');
         else parts.push('He&rsquo;s the lead back (' + (cs * 100).toFixed(0) + '% of the carries), so the under is about efficiency, not volume.');
       }
       if (script === 'dog' || script === 'bigdog') parts.push(esc(me) + ' is the underdog: if it falls behind, it throws more and his carries dry up in the second half.');
@@ -3949,6 +4019,8 @@ RENDERER_JS = """<script>
       risk.push('one quiet half or a game plan built around someone else');
     }
     var html = '<div class="gb-read"><b>The football read</b><p>' + parts.join(' ') + '</p></div>';
+    var rc = gbRoleChange(r, g);
+    if (rc) html += '<div class="gb-read' + (rc.lean === 'risk' ? ' is-risk' : '') + '"><b>Injuries at his position</b><p>' + rc.html + '</p></div>';
     if (risk.length) html += '<div class="gb-read"><b>What beats it</b><p>' + risk.join('; ').replace(/^./, function (c) { return c.toUpperCase(); }) + '.</p></div>';
     return html;
   }
