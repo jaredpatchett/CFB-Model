@@ -922,6 +922,7 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .lm-warn { font-size: 12px; line-height: 1.45; color: #F5B83D; background: rgba(245,184,61,0.08); border: 1px solid rgba(245,184,61,0.4); border-radius: 8px; padding: 6px 9px; margin-top: 6px; }
 .lm-warn b { color: #FFD27A; }
 .lm-good { font-size: 11.5px; color: var(--neon); margin-top: 6px; }
+.lm-warn.is-away { color: #FF9A7A; border-color: rgba(255,122,89,0.45); background: rgba(255,122,89,0.07); }
 /* Player card (11/2026) */
 .pp-namebtn, .pc-open { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-align: left; text-decoration: underline; text-decoration-color: rgba(57,240,122,0.45); text-underline-offset: 3px; }
 #pc-overlay { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.72); display: none; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 18px 10px 90px; }
@@ -3842,8 +3843,8 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     // warning, not a reason to fade. Small sample; revisit as weeks grade.
     if (m.worse > 0) return '<div class="lm-warn">&#9888; Worse number now: ' + m.txt + ' (' + m.worse.toFixed(1) + ' pts).' +
       (m.keys.length ? ' <b>It crossed ' + (m.keys.length > 1 ? 'key numbers ' : 'the key number ') + m.keys.join(' and ') + '</b>, so a ' + m.keys[0] + '-point ' + (m.now < 0 ? 'win' : 'loss') + ' that used to cash no longer does.' : '') +
-      ' The market has moved toward ' + esc(m.ab) + ', the same way the model leans &mdash; that&rsquo;s the market agreeing, not a reason to fade (2026: plays like this went 16-4). Shop for the best number left.' + '</div>';
-    return '<div class="lm-good">&#10003; Better number now: ' + m.txt + ' (' + (-m.worse).toFixed(1) + ' pts). Heads up: that means the market moved away from the model’s side (2026: plays like this went 17-15).</div>';
+      ' The market moved toward ' + esc(m.ab) + ' &mdash; it agrees with the model, so never fade it. If you bet it when it was flagged, that&rsquo;s the good spot (backtest +14.7%). If you haven&rsquo;t, most of the value is gone at this number (&minus;4.4%): bet it smaller or skip.' + '</div>';
+    return '<div class="lm-warn is-away">&#9888; Line moved away from ' + esc(m.ab) + ': ' + m.txt + ' (' + (-m.worse).toFixed(1) + ' pts). The market disagrees with the model. If you haven&rsquo;t bet it, pass &mdash; don&rsquo;t fade it (backtest: &minus;9.6% at the flag, fading it also lost).</div>';
   }
   // 11/2026: what changed since the last model run (spread card only).
   function cardKey(g) { return g.home + '|' + g.away + '|' + g.kickoffIso; }
@@ -3872,9 +3873,10 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       // 11/12/2026: timing and line-move notes (trust lab + rebuilt-card check).
       '<div class="bc-note"><div class="bc-note-h">&#9201; Bet early &mdash; and how to read line moves</div>' +
         '<p><b>Timing matters more than anything else we&rsquo;ve tested.</b> 2024&ndash;26 backtest of this card: <b>+5.8%</b> at the opening line, <b>&minus;3.0%</b> at the closing line. The edge is biggest when the model first flags a play, before the market moves.</p>' +
-        '<p><b>&#9888; Worse number now</b> (e.g. IU &minus;7.5 &rarr; &minus;8.5): the market moved toward our side &mdash; it&rsquo;s agreeing with the model. Not a fade. 2026: <b>16-4</b>.</p>' +
-        '<p><b>&#10003; Better number now</b> (e.g. SJSU +10.5 &rarr; +12.5): the market moved away from our side &mdash; it disagrees. Not a reason to bet more. 2026: <b>17-15</b>.</p>' +
-        '<p class="bc-note-s">2026 records: rebuilt card, weeks 4&ndash;10, graded at the locked line, 68 plays &mdash; a small sample, not a rule yet.</p>' +
+        '<p><b>The simple rule:</b> bet a play when it&rsquo;s flagged. If the line moves away from our side before you bet, <b>pass</b>. Never fade a Bet Card play.</p>' +
+        '<p><b>Line moved toward our side</b> (e.g. IU &minus;7.5 &rarr; &minus;8.5, the market agreeing): <b>+14.7%</b> bet at the flag, <b>&minus;4.4%</b> if you wait and take the moved number.</p>' +
+        '<p><b>Line moved away</b> (e.g. SJSU +10.5 &rarr; +12.5, the market disagreeing): <b>&minus;9.6%</b> at the flag; fading it also lost (&minus;9.6%).</p>' +
+        '<p class="bc-note-s">Line-move backtest: Bet Card 2024&ndash;26, flagged against the opener, 318 plays (toward 180, away 94, no move 44). Bet at the open, passing the ones that moved away, would have gone 128-89 (+12.2%).</p>' +
         '<p><b>Every play on this card is still a bet at the line shown</b> &mdash; the card is rebuilt from the current line every run. If a play stops being a bet, it drops off and shows up below the card.</p></div>' +
       '<div class="projector">' +
         (card.length ? card.map(function (c) {
