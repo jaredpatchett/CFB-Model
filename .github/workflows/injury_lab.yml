@@ -1,0 +1,72 @@
+name: Injury lab (props models with vs without injury inputs)
+
+# Backtests the live props models against the same models with injury /
+# absence inputs (src/features/injury_features.py) on real posted lines,
+# with each official prop rule. Does NOT touch the live model or the
+# dashboard. PFF data stays in a temp folder; results hold model results only.
+# Runs on demand, or when this file changes on main.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/injury_lab.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      CFBD_API_KEY: ${{ secrets.CFBDATA_API_KEY }}
+      ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+      ODDSPAPI_API_KEY: ${{ secrets.PRIZEPICKS_API }}
+      # The PFF key, under whichever of these two names it was saved.
+      PFF_API_KEY: ${{ secrets.PFF_API_KEY || secrets.CFB_API_KEY }}
+      YEARS: "2022 2023 2024 2025"
+      PLAYED_ZEROS: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history -- this season's saved prop lines live in past commits
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore cached historical CFBD data
+        uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: cfbd-raw-${{ env.YEARS }}-${{ github.run_id }}
+          restore-keys: |
+            cfbd-raw-${{ env.YEARS }}-
+            cfbd-raw-
+
+      - name: Fetch historical data
+        run: python scripts/fetch_historical_data.py --years ${{ env.YEARS }}
+
+      - name: Run injury lab
+        run: python scripts/injury_lab.py --years ${{ env.YEARS }} --season 2026
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/data/injury_lab.json docs/data/injury_lab_detail.csv
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Injury lab results [skip ci]"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git merge -X ours --no-edit origin/main -m "Merge origin/main [skip ci]" && git push origin main; then
+              echo "Pushed on attempt $i"; break
+            fi
+            [ "$i" -eq 5 ] && echo "::error::Could not push results" && exit 1
+            sleep $((RANDOM % 10 + 5))
+          done
