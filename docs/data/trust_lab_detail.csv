@@ -1,0 +1,1117 @@
+season,week,awayTeam,homeTeam,market_spread_home,m,margin,edge,cover_prob,rank,trust,trust_key,result,units
+2024,3,Arizona State,Texas State,2.0,23.711,-3.0,25.711,0.944,1.0,solid,,L,-1.0
+2024,3,UNLV,Kansas,-7.0,-7.069,-3.0,-14.069,0.808,4.0,mixed,,W,0.909
+2024,3,Arizona,Kansas State,-7.0,11.45,24.0,4.45,0.608,21.0,one_input,form,W,0.909
+2024,3,Memphis,Florida State,-7.0,2.852,-8.0,-4.148,0.601,23.0,one_input,eff,W,0.909
+2024,3,LSU,South Carolina,7.0,-3.934,-3.0,3.066,0.575,24.0,mixed,,W,0.909
+2024,3,Alabama,Wisconsin,15.5,-21.305,-32.0,-5.805,0.64,15.0,solid,,W,0.909
+2024,3,Coastal Carolina,Temple,17.5,-13.137,-8.0,4.363,0.606,22.0,situational,,W,0.909
+2024,3,Oregon,Oregon State,16.0,-0.049,-35.0,15.951,0.838,3.0,thin,,L,-1.0
+2024,3,Washington State,Washington,-4.0,9.334,-5.0,5.334,0.629,19.0,solid,,L,-1.0
+2024,3,West Virginia,Pittsburgh,2.5,-11.555,4.0,-9.055,0.712,7.0,solid,,L,-1.0
+2024,3,Tulane,Oklahoma,-13.5,4.582,15.0,-8.918,0.709,8.0,thin,,L,-1.0
+2024,3,Texas A&M,Florida,4.5,-9.673,-13.0,-5.173,0.625,20.0,solid,,W,0.909
+2024,3,Nevada,Minnesota,-16.0,22.191,27.0,6.191,0.649,12.0,solid,,W,0.909
+2024,3,App State,East Carolina,2.5,3.215,-2.0,5.715,0.638,17.0,one_input,scoring,W,0.909
+2024,3,Virginia Tech,Old Dominion,14.0,-3.335,-20.0,10.665,0.745,6.0,thin,,L,-1.0
+2024,3,UConn,Duke,-17.0,9.842,5.0,-7.158,0.671,10.0,situational,,W,0.909
+2024,3,Florida International,Florida Atlantic,-6.0,0.47,18.0,-5.53,0.634,18.0,thin,,L,-1.0
+2024,3,Vanderbilt,Georgia State,10.0,-12.17,4.0,-2.17,0.553,25.0,one_input,scoring,L,-1.0
+2024,3,UCF,TCU,-1.5,-5.677,-1.0,-7.177,0.671,9.0,one_input,form,W,0.909
+2024,3,Toledo,Mississippi State,-13.0,-0.51,-24.0,-13.51,0.798,5.0,ratings_vs_results,,W,0.909
+2024,3,Colorado,Colorado State,7.5,-1.556,-19.0,5.944,0.643,14.0,one_input,form,L,-1.0
+2024,3,Air Force,Baylor,-15.5,8.611,28.0,-6.889,0.665,11.0,one_input,ratings,L,-1.0
+2024,3,Rice,Houston,-5.0,-17.001,26.0,-22.001,0.913,2.0,solid,,L,-1.0
+2024,3,Maryland,Virginia,2.0,4.179,-14.0,6.179,0.649,13.0,solid,,L,-1.0
+2024,3,BYU,Wyoming,10.0,-15.793,-20.0,-5.793,0.64,16.0,one_input,scoring,W,0.909
+2024,4,South Alabama,App State,-8.0,-12.719,-34.0,-20.719,0.9,3.0,solid,,W,0.909
+2024,4,Stanford,Syracuse,-9.5,4.023,-2.0,-5.477,0.632,21.0,thin,,W,0.909
+2024,4,San José State,Washington State,-13.0,17.889,2.0,4.889,0.619,22.0,one_input,form,L,-1.0
+2024,4,James Madison,North Carolina,-11.0,7.829,-20.0,-3.171,0.578,26.0,ratings_vs_results,,W,0.909
+2024,4,Kansas,West Virginia,-1.0,-1.031,4.0,-2.031,0.55,30.0,situational,,L,-1.0
+2024,4,NC State,Clemson,-17.0,13.9,24.0,-3.1,0.576,27.0,situational,,L,-1.0
+2024,4,Rice,Army,-7.5,-0.595,23.0,-8.095,0.691,13.0,situational,,L,-1.0
+2024,4,Tulane,Louisiana,1.5,15.705,-8.0,17.205,0.856,4.0,solid,,L,-1.0
+2024,4,Utah State,Temple,6.5,-12.745,16.0,-6.245,0.65,18.0,one_input,form,L,-1.0
+2024,4,Virginia,Coastal Carolina,3.5,0.067,-19.0,3.567,0.587,25.0,mixed,,L,-1.0
+2024,4,Memphis,Navy,9.5,-3.602,12.0,5.898,0.642,20.0,thin,,W,0.909
+2024,4,Arizona State,Texas Tech,-4.5,16.819,8.0,12.319,0.777,8.0,one_input,ratings,W,0.909
+2024,4,Rutgers,Virginia Tech,-3.0,-6.391,-3.0,-9.391,0.719,11.0,one_input,scoring,W,0.909
+2024,4,USC,Michigan,4.0,18.379,3.0,22.379,0.917,2.0,one_input,ratings,W,0.909
+2024,4,Georgia Tech,Louisville,-9.5,11.514,12.0,2.014,0.549,32.0,solid,,W,0.909
+2024,4,Arkansas,Auburn,-2.5,-1.229,-10.0,-3.729,0.591,24.0,situational,,W,0.909
+2024,4,Duke,Middle Tennessee,14.5,-11.415,-28.0,3.085,0.576,28.0,thin,,L,-1.0
+2024,4,Vanderbilt,Missouri,-17.5,11.206,3.0,-6.294,0.651,17.0,situational,,W,0.909
+2024,4,TCU,SMU,1.0,-12.008,24.0,-11.008,0.752,9.0,one_input,weather,L,-1.0
+2024,4,UTEP,Colorado State,-8.5,0.993,10.0,-7.507,0.679,15.0,thin,,L,-1.0
+2024,4,East Carolina,Liberty,-7.5,22.484,11.0,14.984,0.823,5.0,solid,,W,0.909
+2024,4,Tulsa,Louisiana Tech,-3.0,-1.584,-3.0,-4.584,0.611,23.0,situational,,W,0.909
+2024,4,California,Florida State,-3.0,11.938,5.0,8.938,0.71,12.0,one_input,ratings,W,0.909
+2024,4,Toledo,Western Kentucky,2.0,-16.075,5.0,-14.075,0.808,6.0,solid,,L,-1.0
+2024,4,Wyoming,North Texas,-7.0,13.133,27.0,6.133,0.648,19.0,solid,,W,0.909
+2024,4,Florida Atlantic,UConn,-1.0,14.486,34.0,13.486,0.798,7.0,one_input,form,W,0.909
+2024,4,Miami,South Florida,17.0,-24.739,-35.0,-7.739,0.684,14.0,solid,,W,0.909
+2024,4,Iowa,Minnesota,3.0,3.925,-17.0,6.925,0.666,16.0,solid,,L,-1.0
+2024,4,Tennessee,Oklahoma,6.0,-8.172,-10.0,-2.172,0.553,29.0,one_input,scoring,W,0.909
+2024,4,Michigan State,Boston College,-4.5,42.157,4.0,37.657,0.99,1.0,solid,,L,-1.0
+2024,4,Purdue,Oregon State,-1.5,11.101,17.0,9.601,0.723,10.0,solid,,W,0.909
+2024,4,Kansas State,BYU,7.5,-9.528,29.0,-2.028,0.55,31.0,solid,,L,-1.0
+2024,5,Army,Temple,11.0,-8.555,-28.0,2.445,0.56,31.0,thin,,L,-1.0
+2024,5,Virginia Tech,Miami,-17.5,5.482,4.0,-12.018,0.771,5.0,situational,,W,0.909
+2024,5,Washington,Rutgers,-1.0,3.692,3.0,2.692,0.566,30.0,solid,,W,0.909
+2024,5,Maryland,Indiana,-7.5,16.923,14.0,9.423,0.72,10.0,solid,,W,0.909
+2024,5,Buffalo,UConn,-6.0,11.893,44.0,5.893,0.642,17.0,solid,,W,0.909
+2024,5,Northern Illinois,NC State,-7.0,12.331,7.0,5.331,0.629,20.0,one_input,ratings,P,0.0
+2024,5,Oklahoma State,Kansas State,-6.0,4.029,22.0,-1.971,0.548,34.0,thin,,L,-1.0
+2024,5,BYU,Baylor,-3.0,-4.355,-6.0,-7.355,0.675,13.0,one_input,form,W,0.909
+2024,5,Navy,UAB,4.5,-1.586,-23.0,2.914,0.571,27.0,thin,,L,-1.0
+2024,5,Kentucky,Ole Miss,-15.0,12.284,-3.0,-2.716,0.567,29.0,situational,,W,0.909
+2024,5,South Florida,Tulane,-4.0,9.661,35.0,5.661,0.637,18.0,solid,,W,0.909
+2024,5,Wisconsin,USC,-14.0,2.576,17.0,-11.424,0.76,6.0,ratings_vs_results,,L,-1.0
+2024,5,Arkansas,Texas A&M,-6.5,9.898,4.0,3.398,0.583,26.0,one_input,ratings,L,-1.0
+2024,5,Louisiana,Wake Forest,-3.0,-6.052,-3.0,-9.052,0.712,11.0,one_input,form,W,0.909
+2024,5,San Diego State,Central Michigan,-2.5,-1.271,1.0,-3.771,0.592,23.0,ratings_vs_results,,W,0.909
+2024,5,Colorado,UCF,-12.5,1.849,-27.0,-10.651,0.745,7.0,one_input,returning,W,0.909
+2024,5,TCU,Kansas,-1.5,-5.757,-11.0,-7.257,0.673,16.0,mixed,,W,0.909
+2024,5,Akron,Ohio,-8.5,18.401,20.0,9.901,0.73,9.0,solid,,W,0.909
+2024,5,Massachusetts,Miami (OH),-15.5,18.269,3.0,2.769,0.568,28.0,solid,,L,-1.0
+2024,5,Louisville,Notre Dame,-6.5,4.085,7.0,-2.415,0.559,32.0,thin,,L,-1.0
+2024,5,Eastern Michigan,Kent State,14.0,-18.51,-19.0,-4.51,0.61,21.0,solid,,W,0.909
+2024,5,North Carolina,Duke,1.0,-4.52,1.0,-3.52,0.586,24.0,situational,,L,-1.0
+2024,5,UTSA,East Carolina,-2.0,-5.317,10.0,-7.317,0.674,14.0,mixed,,L,-1.0
+2024,5,Old Dominion,Bowling Green,-11.0,7.578,-3.0,-3.422,0.584,25.0,situational,,W,0.909
+2024,5,Charlotte,Rice,-4.0,18.625,-1.0,14.625,0.817,3.0,solid,,L,-1.0
+2024,5,UL Monroe,Troy,-6.0,21.641,-4.0,15.641,0.833,2.0,solid,,L,-1.0
+2024,5,Illinois,Penn State,-19.5,14.063,14.0,-5.437,0.631,19.0,situational,,W,0.909
+2024,5,Georgia,Alabama,2.0,10.895,7.0,12.895,0.787,4.0,solid,,W,0.909
+2024,5,Cincinnati,Texas Tech,-3.0,13.007,3.0,10.007,0.732,8.0,one_input,ratings,P,0.0
+2024,5,Florida State,SMU,-6.0,1.577,26.0,-4.423,0.608,22.0,ratings_vs_results,,L,-1.0
+2024,5,New Mexico,New Mexico State,9.5,7.931,-10.0,17.431,0.859,1.0,one_input,ratings,L,-1.0
+2024,5,Air Force,Wyoming,4.0,-6.27,12.0,-2.27,0.556,33.0,one_input,ratings,L,-1.0
+2024,5,Washington State,Boise State,-6.5,14.721,21.0,8.221,0.694,12.0,one_input,eff,W,0.909
+2024,5,Arizona,Utah,-7.5,0.213,-13.0,-7.287,0.674,15.0,situational,,W,0.909
+2024,6,Texas State,Troy,14.5,5.891,-21.0,20.391,0.896,1.0,one_input,ratings,L,-1.0
+2024,6,Houston,TCU,-16.5,29.164,-11.0,12.664,0.783,5.0,solid,,L,-1.0
+2024,6,Missouri,Texas A&M,-3.0,-3.942,31.0,-6.942,0.666,13.0,solid,,L,-1.0
+2024,6,Army,Tulsa,13.5,-4.389,-42.0,9.111,0.713,9.0,situational,,L,-1.0
+2024,6,Pittsburgh,North Carolina,2.5,-0.528,-10.0,1.972,0.548,30.0,one_input,ratings,L,-1.0
+2024,6,Boston College,Virginia,-2.0,5.312,10.0,3.312,0.581,26.0,situational,,W,0.909
+2024,6,Massachusetts,Northern Illinois,-14.0,17.519,14.0,3.519,0.586,25.0,solid,,P,0.0
+2024,6,Navy,Air Force,10.0,2.652,-27.0,12.652,0.783,6.0,one_input,ratings,L,-1.0
+2024,6,Tulane,UAB,19.5,-13.733,-51.0,5.767,0.639,17.0,situational,,L,-1.0
+2024,6,Western Michigan,Ball State,10.0,-2.724,-3.0,7.276,0.673,11.0,ratings_vs_results,,W,0.909
+2024,6,Temple,UConn,-17.5,13.346,9.0,-4.154,0.601,22.0,situational,,W,0.909
+2024,6,Virginia Tech,Stanford,9.5,-4.838,-24.0,4.662,0.613,19.0,situational,,L,-1.0
+2024,6,Ole Miss,South Carolina,10.0,-3.643,-24.0,6.357,0.653,14.0,situational,,L,-1.0
+2024,6,Iowa,Ohio State,-17.0,21.001,28.0,4.001,0.598,23.0,solid,,W,0.909
+2024,6,Bowling Green,Akron,17.0,-19.265,-7.0,-2.265,0.556,29.0,solid,,L,-1.0
+2024,6,Miami (OH),Toledo,-4.5,10.331,10.0,5.831,0.641,16.0,solid,,W,0.909
+2024,6,Rutgers,Nebraska,-7.0,0.713,7.0,-6.287,0.651,15.0,situational,,P,0.0
+2024,6,Colorado State,Oregon State,-10.0,24.166,8.0,14.166,0.809,4.0,solid,,L,-1.0
+2024,6,Clemson,Florida State,16.5,-9.295,-16.0,7.205,0.672,12.0,thin,,W,0.909
+2024,6,James Madison,UL Monroe,16.5,-26.887,2.0,-10.387,0.739,8.0,solid,,L,-1.0
+2024,6,South Alabama,Arkansas State,2.5,-19.425,2.0,-16.925,0.852,3.0,solid,,L,-1.0
+2024,6,Old Dominion,Coastal Carolina,-4.0,-1.158,8.0,-5.158,0.625,18.0,one_input,returning,L,-1.0
+2024,6,Louisiana,Southern Miss,17.5,-14.974,-10.0,2.526,0.562,27.0,situational,,W,0.909
+2024,6,Tennessee,Arkansas,14.0,-17.935,5.0,-3.935,0.596,24.0,solid,,L,-1.0
+2024,6,Michigan,Washington,-1.5,-2.905,10.0,-4.405,0.607,20.0,ratings_vs_results,,L,-1.0
+2024,6,USC,Minnesota,8.5,-16.025,7.0,-7.525,0.679,10.0,solid,,L,-1.0
+2024,6,Nevada,San José State,-7.0,9.466,4.0,2.466,0.561,28.0,solid,,L,-1.0
+2024,6,UCF,Florida,1.0,17.322,11.0,18.322,0.871,2.0,solid,,W,0.909
+2024,6,Kansas,Arizona State,-2.5,-1.834,4.0,-4.334,0.606,21.0,one_input,weather,L,-1.0
+2024,6,Hawai'i,San Diego State,-1.5,-10.168,3.0,-11.668,0.764,7.0,one_input,form,L,-1.0
+2024,7,Florida International,Liberty,-15.5,27.887,7.0,12.387,0.778,2.0,solid,,L,-1.0
+2024,7,Coastal Carolina,James Madison,-7.0,22.319,32.0,15.319,0.828,1.0,solid,,W,0.909
+2024,7,Middle Tennessee,Louisiana Tech,-5.0,-1.918,27.0,-6.918,0.665,12.0,situational,,L,-1.0
+2024,7,UTEP,Western Kentucky,-19.0,22.412,27.0,3.412,0.583,23.0,solid,,W,0.909
+2024,7,UNLV,Utah State,19.0,-9.865,-16.0,9.135,0.714,4.0,situational,,W,0.909
+2024,7,Toledo,Buffalo,10.5,-16.086,15.0,-5.586,0.635,15.0,solid,,L,-1.0
+2024,7,Washington,Iowa,-2.5,-0.279,24.0,-2.779,0.568,28.0,mixed,,L,-1.0
+2024,7,Wisconsin,Rutgers,-1.0,-1.853,-35.0,-2.853,0.57,27.0,mixed,,W,0.909
+2024,7,Miami (OH),Eastern Michigan,3.0,-0.431,-24.0,2.569,0.563,30.0,solid,,L,-1.0
+2024,7,Northern Illinois,Bowling Green,-3.0,-0.652,-10.0,-3.652,0.589,22.0,solid,,W,0.909
+2024,7,Akron,Western Michigan,-9.5,13.761,10.0,4.261,0.604,20.0,solid,,W,0.909
+2024,7,San José State,Colorado State,-2.5,-5.196,7.0,-7.696,0.683,9.0,solid,,L,-1.0
+2024,7,California,Pittsburgh,-3.5,11.128,2.0,7.628,0.681,10.0,solid,,L,-1.0
+2024,7,Memphis,South Florida,10.0,-14.183,-18.0,-4.183,0.602,21.0,solid,,W,0.909
+2024,7,Cincinnati,UCF,-2.0,-4.704,-6.0,-6.704,0.661,13.0,thin,,W,0.909
+2024,7,San Diego State,Wyoming,-1.5,7.53,-3.0,6.03,0.645,14.0,solid,,L,-1.0
+2024,7,Texas,Oklahoma,17.0,-12.279,-31.0,4.721,0.615,19.0,situational,,L,-1.0
+2024,7,Old Dominion,Georgia State,-3.0,-5.126,-7.0,-8.126,0.692,8.0,situational,,W,0.909
+2024,7,Louisville,Virginia,7.0,-15.24,-4.0,-8.24,0.695,7.0,solid,,L,-1.0
+2024,7,Arizona,BYU,-3.0,-0.13,22.0,-3.13,0.577,24.0,ratings_vs_results,,L,-1.0
+2024,7,Ohio,Central Michigan,3.0,2.009,-2.0,5.009,0.621,18.0,thin,,W,0.909
+2024,7,Southern Miss,UL Monroe,-4.5,-4.28,17.0,-8.78,0.706,6.0,situational,,L,-1.0
+2024,7,UTSA,Rice,3.5,6.09,2.0,9.59,0.723,3.0,solid,,W,0.909
+2024,7,North Texas,Florida Atlantic,5.5,-10.825,-4.0,-5.325,0.629,16.0,solid,,L,-1.0
+2024,7,Florida,Tennessee,-14.0,8.847,6.0,-5.153,0.625,17.0,thin,,W,0.909
+2024,7,Arkansas State,Texas State,-13.5,5.945,32.0,-7.555,0.68,11.0,situational,,L,-1.0
+2024,7,Ohio State,Oregon,3.5,-6.506,1.0,-3.006,0.574,26.0,solid,,L,-1.0
+2024,7,App State,Louisiana,-10.0,7.383,10.0,-2.617,0.564,29.0,thin,,P,0.0
+2024,7,Vanderbilt,Kentucky,-12.5,15.588,-7.0,3.088,0.576,25.0,one_input,ratings,L,-1.0
+2024,7,Minnesota,UCLA,3.5,-12.566,-4.0,-9.066,0.712,5.0,one_input,scoring,W,0.909
+2024,8,Louisiana Tech,New Mexico State,12.5,7.632,3.0,20.132,0.893,1.0,one_input,ratings,W,0.909
+2024,8,Florida International,UTEP,7.0,6.262,9.0,13.262,0.794,4.0,one_input,pace,W,0.909
+2024,8,Georgia State,Marshall,-9.5,16.066,15.0,6.566,0.657,24.0,solid,,W,0.909
+2024,8,Boston College,Virginia Tech,-8.5,19.876,21.0,11.376,0.759,9.0,solid,,W,0.909
+2024,8,Florida State,Duke,-2.5,5.475,7.0,2.975,0.573,35.0,solid,,W,0.909
+2024,8,Fresno State,Nevada,3.0,-0.978,-3.0,2.022,0.55,40.0,thin,,P,0.0
+2024,8,UCLA,Rutgers,-4.0,1.783,-3.0,-2.217,0.554,39.0,ratings_vs_results,,W,0.909
+2024,8,Nebraska,Indiana,-6.5,10.107,49.0,3.607,0.588,32.0,solid,,W,0.909
+2024,8,Wake Forest,UConn,2.5,8.851,-3.0,11.351,0.758,10.0,solid,,L,-1.0
+2024,8,Arizona State,Cincinnati,-5.5,0.917,10.0,-4.583,0.611,29.0,situational,,L,-1.0
+2024,8,Auburn,Missouri,-3.5,10.836,4.0,7.336,0.675,22.0,solid,,W,0.909
+2024,8,East Carolina,Army,-17.5,9.631,17.0,-7.869,0.686,20.0,thin,,W,0.909
+2024,8,Louisiana,Coastal Carolina,6.0,-8.49,-10.0,-2.49,0.561,37.0,solid,,W,0.909
+2024,8,South Carolina,Oklahoma,1.0,13.366,-26.0,14.366,0.813,2.0,one_input,ratings,L,-1.0
+2024,8,Central Michigan,Eastern Michigan,-3.5,12.468,4.0,8.968,0.71,14.0,solid,,W,0.909
+2024,8,Tulsa,Temple,-3.5,-9.676,10.0,-13.176,0.792,5.0,solid,,L,-1.0
+2024,8,Michigan,Illinois,6.0,-0.002,14.0,5.998,0.644,26.0,mixed,,W,0.909
+2024,8,Texas State,Old Dominion,10.5,-7.212,10.0,3.288,0.58,33.0,situational,,W,0.909
+2024,8,Alabama,Tennessee,3.5,-1.071,7.0,2.429,0.56,38.0,mixed,,W,0.909
+2024,8,Toledo,Northern Illinois,-3.0,-3.311,-7.0,-6.311,0.652,25.0,ratings_vs_results,,W,0.909
+2024,8,Hawai'i,Washington State,-18.5,27.352,32.0,8.852,0.708,16.0,solid,,W,0.909
+2024,8,UAB,South Florida,-14.0,5.357,10.0,-8.643,0.703,17.0,situational,,W,0.909
+2024,8,NC State,California,-9.5,1.176,-1.0,-8.324,0.696,18.0,situational,,W,0.909
+2024,8,Notre Dame,Georgia Tech,14.0,-5.068,-18.0,8.932,0.709,15.0,thin,,L,-1.0
+2024,8,Houston,Kansas,-4.5,-1.113,28.0,-5.613,0.636,27.0,one_input,returning,L,-1.0
+2024,8,Florida Atlantic,UTSA,-4.0,11.828,14.0,7.828,0.686,21.0,solid,,W,0.909
+2024,8,Baylor,Texas Tech,-4.5,18.704,-24.0,14.204,0.81,3.0,solid,,L,-1.0
+2024,8,Wyoming,San José State,-13.0,6.325,10.0,-6.675,0.66,23.0,situational,,W,0.909
+2024,8,New Mexico,Utah State,1.0,1.803,-5.0,2.803,0.569,36.0,ratings_vs_results,,L,-1.0
+2024,8,James Madison,Georgia Southern,9.5,-20.77,14.0,-11.27,0.757,11.0,solid,,L,-1.0
+2024,8,Arkansas State,Southern Miss,7.0,-11.449,-16.0,-4.449,0.608,30.0,solid,,W,0.909
+2024,8,LSU,Arkansas,3.0,0.165,-24.0,3.165,0.577,34.0,mixed,,L,-1.0
+2024,8,Kansas State,West Virginia,2.5,5.623,-27.0,8.123,0.692,19.0,situational,,L,-1.0
+2024,8,North Texas,Memphis,-10.5,-1.837,8.0,-12.337,0.777,8.0,situational,,W,0.909
+2024,8,UCF,Iowa State,-13.0,8.746,3.0,-4.254,0.604,31.0,situational,,W,0.909
+2024,8,Kentucky,Florida,2.5,2.107,28.0,4.607,0.612,28.0,solid,,W,0.909
+2024,8,SMU,Stanford,16.5,-27.5,-30.0,-11.0,0.752,12.0,solid,,W,0.909
+2024,8,Colorado State,Air Force,6.0,6.562,-8.0,12.562,0.781,7.0,one_input,ratings,L,-1.0
+2024,8,UNLV,Oregon State,6.5,4.487,-8.0,10.987,0.751,13.0,one_input,ratings,L,-1.0
+2024,8,TCU,Utah,-3.0,-9.761,-6.0,-12.761,0.785,6.0,one_input,returning,W,0.909
+2024,9,UTEP,Louisiana Tech,-6.5,9.731,4.0,3.231,0.579,32.0,solid,,L,-1.0
+2024,9,North Carolina,Virginia,-3.5,0.494,-27.0,-3.006,0.574,34.0,situational,,W,0.909
+2024,9,Buffalo,Ohio,-4.0,11.725,31.0,7.725,0.683,16.0,solid,,W,0.909
+2024,9,Tulane,North Texas,7.0,-12.841,-8.0,-5.841,0.641,21.0,solid,,W,0.909
+2024,9,Georgia Tech,Virginia Tech,-11.0,-0.097,15.0,-11.097,0.753,6.0,thin,,L,-1.0
+2024,9,Washington,Indiana,-5.5,14.251,14.0,8.751,0.706,13.0,solid,,W,0.909
+2024,9,Charlotte,Memphis,-17.0,31.197,5.0,14.197,0.81,3.0,solid,,L,-1.0
+2024,9,Notre Dame,Navy,11.5,-1.555,-37.0,9.945,0.73,8.0,one_input,eff,L,-1.0
+2024,9,Oklahoma,Ole Miss,-19.0,8.421,12.0,-10.579,0.743,7.0,situational,,W,0.909
+2024,9,Arkansas,Mississippi State,7.5,-4.899,-33.0,2.601,0.564,37.0,situational,,L,-1.0
+2024,9,Georgia State,App State,-7.5,9.486,7.0,1.986,0.549,41.0,one_input,ratings,L,-1.0
+2024,9,Temple,East Carolina,-8.5,10.922,22.0,2.422,0.559,38.0,solid,,W,0.909
+2024,9,Central Michigan,Miami (OH),-10.5,16.464,39.0,5.964,0.644,20.0,solid,,W,0.909
+2024,9,Missouri,Alabama,-16.0,4.847,34.0,-11.153,0.755,5.0,situational,,L,-1.0
+2024,9,Maryland,Minnesota,-6.0,15.437,25.0,9.437,0.72,11.0,solid,,W,0.909
+2024,9,Northwestern,Iowa,-16.5,18.876,26.0,2.376,0.558,39.0,solid,,W,0.909
+2024,9,Rice,UConn,-6.5,10.309,7.0,3.809,0.593,27.0,solid,,W,0.909
+2024,9,Bowling Green,Toledo,-2.0,9.51,-15.0,7.51,0.679,17.0,solid,,L,-1.0
+2024,9,Wake Forest,Stanford,3.0,1.427,-3.0,4.427,0.608,23.0,situational,,P,0.0
+2024,9,Oklahoma State,Baylor,-7.0,2.504,10.0,-4.496,0.609,22.0,thin,,L,-1.0
+2024,9,UTSA,Tulsa,9.5,-13.251,1.0,-3.751,0.592,29.0,one_input,form,L,-1.0
+2024,9,Texas Tech,TCU,-5.0,0.667,1.0,-4.333,0.605,24.0,thin,,W,0.909
+2024,9,BYU,UCF,-2.5,-1.696,-13.0,-4.196,0.602,26.0,thin,,W,0.909
+2024,9,Kent State,Western Michigan,-19.0,16.082,31.0,-2.918,0.572,35.0,thin,,L,-1.0
+2024,9,Oregon State,California,-13.0,3.806,37.0,-9.194,0.715,12.0,thin,,L,-1.0
+2024,9,Texas,Vanderbilt,17.0,-7.309,-3.0,9.691,0.725,9.0,situational,,W,0.909
+2024,9,New Mexico,Colorado State,-4.0,-3.949,11.0,-7.949,0.688,15.0,one_input,returning,L,-1.0
+2024,9,UL Monroe,South Alabama,-7.0,23.731,29.0,16.731,0.849,2.0,solid,,W,0.909
+2024,9,Utah State,Wyoming,2.0,4.617,-2.0,6.617,0.659,18.0,solid,,P,0.0
+2024,9,Troy,Arkansas State,-8.5,0.253,3.0,-8.247,0.695,14.0,solid,,W,0.909
+2024,9,West Virginia,Arizona,-5.5,-13.449,-5.0,-18.949,0.879,1.0,one_input,weather,W,0.909
+2024,9,Michigan State,Michigan,-3.5,7.307,7.0,3.807,0.593,28.0,one_input,ratings,W,0.909
+2024,9,LSU,Texas A&M,-2.0,-1.664,15.0,-3.664,0.59,30.0,situational,,L,-1.0
+2024,9,Penn State,Wisconsin,6.5,-0.416,-15.0,6.084,0.646,19.0,situational,,L,-1.0
+2024,9,Auburn,Kentucky,-2.0,-0.901,-14.0,-2.901,0.571,36.0,mixed,,W,0.909
+2024,9,SMU,Duke,11.5,-7.257,-1.0,4.243,0.603,25.0,thin,,W,0.909
+2024,9,San José State,Fresno State,-6.5,-4.824,23.0,-11.324,0.758,4.0,mixed,,L,-1.0
+2024,9,Kansas,Kansas State,-10.0,6.951,2.0,-3.049,0.575,33.0,situational,,W,0.909
+2024,9,Cincinnati,Colorado,-6.0,8.131,11.0,2.131,0.552,40.0,solid,,W,0.909
+2024,9,Washington State,San Diego State,17.0,-7.414,-3.0,9.586,0.723,10.0,situational,,W,0.909
+2024,9,Nevada,Hawai'i,-2.5,-1.092,21.0,-3.592,0.588,31.0,solid,,L,-1.0
+2024,10,Louisiana,Texas State,-4.0,-5.161,-6.0,-9.161,0.714,10.0,situational,,W,0.909
+2024,10,Tulane,Charlotte,14.5,-23.161,-31.0,-8.661,0.704,13.0,solid,,W,0.909
+2024,10,Ole Miss,Arkansas,8.0,-10.447,-32.0,-2.447,0.56,27.0,solid,,W,0.909
+2024,10,Toledo,Eastern Michigan,10.0,-5.762,-1.0,4.238,0.603,20.0,situational,,W,0.909
+2024,10,Stanford,NC State,-10.0,13.694,31.0,3.694,0.59,26.0,solid,,W,0.909
+2024,10,Air Force,Army,-18.0,9.082,17.0,-8.918,0.709,11.0,one_input,ratings,W,0.909
+2024,10,Memphis,UTSA,7.0,-13.808,8.0,-6.808,0.663,18.0,solid,,L,-1.0
+2024,10,Buffalo,Akron,-1.0,-2.804,-11.0,-3.804,0.593,24.0,mixed,,W,0.909
+2024,10,Virginia Tech,Syracuse,3.5,-11.012,7.0,-7.512,0.679,15.0,one_input,form,L,-1.0
+2024,10,Minnesota,Illinois,2.5,-4.849,-8.0,-2.349,0.558,28.0,solid,,W,0.909
+2024,10,Northwestern,Purdue,-3.0,-3.877,-6.0,-6.877,0.664,17.0,solid,,W,0.909
+2024,10,Old Dominion,App State,2.5,6.224,8.0,8.724,0.705,12.0,one_input,ratings,W,0.909
+2024,10,North Carolina,Florida State,2.5,7.2,-24.0,9.7,0.725,9.0,one_input,ratings,L,-1.0
+2024,10,Texas Tech,Iowa State,-13.5,9.463,-1.0,-4.037,0.598,22.0,thin,,W,0.909
+2024,10,UCLA,Nebraska,-7.5,3.728,-7.0,-3.772,0.592,25.0,ratings_vs_results,,W,0.909
+2024,10,Kansas State,Houston,12.5,-10.179,5.0,2.321,0.557,29.0,situational,,W,0.909
+2024,10,Arizona State,Oklahoma State,5.0,9.182,-21.0,14.182,0.809,5.0,one_input,ratings,L,-1.0
+2024,10,Oregon,Michigan,14.5,-4.665,-21.0,9.835,0.728,8.0,thin,,L,-1.0
+2024,10,Indiana,Michigan State,7.5,-15.023,-37.0,-7.523,0.679,14.0,solid,,W,0.909
+2024,10,Navy,Rice,12.5,4.307,14.0,16.807,0.85,1.0,ratings_vs_results,,W,0.909
+2024,10,Coastal Carolina,Troy,4.0,7.124,14.0,11.124,0.754,6.0,one_input,ratings,W,0.909
+2024,10,Wyoming,New Mexico,-7.5,13.707,-4.0,6.207,0.649,19.0,solid,,L,-1.0
+2024,10,Massachusetts,Mississippi State,-19.5,5.038,25.0,-14.462,0.814,4.0,thin,,L,-1.0
+2024,10,USC,Washington,2.0,-4.127,5.0,-2.127,0.552,30.0,mixed,,L,-1.0
+2024,10,Wisconsin,Iowa,-2.5,-1.354,32.0,-3.854,0.594,23.0,thin,,L,-1.0
+2024,10,Texas A&M,South Carolina,3.0,1.177,24.0,4.177,0.602,21.0,situational,,W,0.909
+2024,10,Georgia Southern,South Alabama,-5.5,21.215,-4.0,15.715,0.834,2.0,solid,,L,-1.0
+2024,10,Kentucky,Tennessee,-17.5,7.307,10.0,-10.193,0.735,7.0,situational,,W,0.909
+2024,10,Pittsburgh,SMU,-7.0,-0.116,23.0,-7.116,0.67,16.0,situational,,L,-1.0
+2024,10,Colorado State,Nevada,2.0,-16.82,-17.0,-14.82,0.82,3.0,solid,,W,0.909
+2024,11,Bowling Green,Central Michigan,15.5,-9.991,-10.0,5.509,0.633,17.0,situational,,W,0.909
+2024,11,Miami (OH),Ball State,13.0,-8.795,-6.0,4.205,0.602,25.0,situational,,W,0.909
+2024,11,Northern Illinois,Western Michigan,2.0,-0.058,-14.0,1.942,0.548,31.0,mixed,,L,-1.0
+2024,11,Florida Atlantic,East Carolina,-7.5,12.484,35.0,4.984,0.621,19.0,solid,,W,0.909
+2024,11,California,Wake Forest,7.0,-14.141,-10.0,-7.141,0.67,9.0,one_input,form,W,0.909
+2024,11,Iowa,UCLA,6.5,-10.721,3.0,-4.221,0.603,24.0,mixed,,L,-1.0
+2024,11,Rice,Memphis,-7.0,13.105,7.0,6.105,0.647,13.0,solid,,P,0.0
+2024,11,New Mexico,San Diego State,-1.5,6.388,-5.0,4.888,0.619,21.0,solid,,L,-1.0
+2024,11,Minnesota,Rutgers,6.5,-1.721,7.0,4.779,0.616,23.0,ratings_vs_results,,W,0.909
+2024,11,Navy,South Florida,4.5,7.525,-21.0,12.025,0.771,2.0,ratings_vs_results,,L,-1.0
+2024,11,West Virginia,Cincinnati,-5.5,-3.671,-7.0,-9.171,0.714,5.0,thin,,W,0.909
+2024,11,Miami,Georgia Tech,9.5,-4.545,5.0,4.955,0.62,20.0,thin,,W,0.909
+2024,11,Liberty,Middle Tennessee,12.5,-15.66,-20.0,-3.16,0.577,28.0,solid,,W,0.909
+2024,11,Marshall,Southern Miss,13.5,-4.639,-34.0,8.861,0.708,7.0,situational,,L,-1.0
+2024,11,San José State,Oregon State,-3.0,4.907,-11.0,1.907,0.547,32.0,one_input,ratings,L,-1.0
+2024,11,Army,North Texas,6.5,-0.644,-11.0,5.856,0.641,16.0,situational,,L,-1.0
+2024,11,Georgia,Ole Miss,2.5,8.002,18.0,10.502,0.742,4.0,mixed,,W,0.909
+2024,11,Georgia State,James Madison,-14.5,20.822,31.0,6.322,0.652,10.0,solid,,W,0.909
+2024,11,Michigan,Indiana,-14.5,9.324,5.0,-5.176,0.625,18.0,thin,,W,0.909
+2024,11,Iowa State,Kansas,2.5,0.242,9.0,2.742,0.567,29.0,situational,,W,0.909
+2024,11,Clemson,Virginia Tech,5.5,-11.663,-10.0,-6.163,0.648,11.0,one_input,form,W,0.909
+2024,11,Colorado,Texas Tech,4.5,3.048,-14.0,7.548,0.679,8.0,one_input,ratings,L,-1.0
+2024,11,South Carolina,Vanderbilt,6.0,-3.705,-21.0,2.295,0.556,30.0,situational,,L,-1.0
+2024,11,Arkansas State,Louisiana,-14.0,22.862,36.0,8.862,0.708,6.0,solid,,W,0.909
+2024,11,Western Kentucky,New Mexico State,18.0,-4.978,-13.0,13.022,0.789,1.0,ratings_vs_results,,W,0.909
+2024,11,UCF,Arizona State,-2.5,-3.548,4.0,-6.048,0.646,14.0,mixed,,L,-1.0
+2024,11,Oklahoma State,TCU,-10.5,4.393,25.0,-6.107,0.647,12.0,situational,,L,-1.0
+2024,11,Oklahoma,Missouri,3.5,8.153,7.0,11.653,0.764,3.0,solid,,W,0.909
+2024,11,Washington,Penn State,-13.5,8.68,29.0,-4.82,0.617,22.0,situational,,L,-1.0
+2024,11,Virginia,Pittsburgh,-7.5,11.168,-5.0,3.668,0.59,26.0,solid,,L,-1.0
+2024,11,Fresno State,Air Force,10.0,-6.734,8.0,3.266,0.58,27.0,ratings_vs_results,,W,0.909
+2024,11,BYU,Utah,3.0,2.916,-1.0,5.916,0.643,15.0,one_input,ratings,W,0.909
+2024,12,Ball State,Buffalo,-3.5,-2.063,3.0,-5.563,0.634,20.0,situational,,W,0.909
+2024,12,Central Michigan,Toledo,-15.0,19.569,27.0,4.569,0.611,22.0,solid,,W,0.909
+2024,12,Eastern Michigan,Ohio,-10.5,18.72,25.0,8.22,0.694,16.0,solid,,W,0.909
+2024,12,Akron,Northern Illinois,-14.0,22.407,13.0,8.407,0.698,13.0,solid,,L,-1.0
+2024,12,East Carolina,Tulsa,16.0,0.57,-7.0,16.57,0.847,2.0,situational,,W,0.909
+2024,12,UCLA,Washington,-4.5,-6.462,12.0,-10.962,0.751,8.0,mixed,,L,-1.0
+2024,12,Houston,Arizona,-1.0,21.611,24.0,20.611,0.898,1.0,one_input,ratings,W,0.909
+2024,12,Liberty,Massachusetts,17.0,-5.0,-1.0,12.0,0.771,7.0,situational,,W,0.909
+2024,12,Clemson,Pittsburgh,12.0,-6.235,-4.0,5.765,0.639,19.0,situational,,W,0.909
+2024,12,Tulane,Navy,7.5,-11.38,-35.0,-3.88,0.595,25.0,one_input,form,W,0.909
+2024,12,Louisiana Tech,Western Kentucky,-11.5,18.176,-5.0,6.676,0.66,17.0,solid,,L,-1.0
+2024,12,Texas,Arkansas,13.0,-2.513,-10.0,10.487,0.741,9.0,one_input,rest,W,0.909
+2024,12,Florida Atlantic,Temple,-2.0,-7.092,3.0,-9.092,0.713,12.0,solid,,L,-1.0
+2024,12,Michigan State,Illinois,-2.0,16.878,22.0,14.878,0.821,4.0,solid,,W,0.909
+2024,12,Hawai'i,Utah State,2.5,0.176,45.0,2.676,0.566,28.0,ratings_vs_results,,W,0.909
+2024,12,LSU,Florida,3.0,2.821,11.0,5.821,0.64,18.0,solid,,W,0.909
+2024,12,South Florida,Charlotte,-1.5,-6.783,-35.0,-8.283,0.696,14.0,solid,,W,0.909
+2024,12,Troy,Georgia Southern,-7.0,1.785,-8.0,-5.215,0.626,21.0,solid,,W,0.909
+2024,12,Baylor,West Virginia,2.0,10.391,-14.0,12.391,0.778,6.0,solid,,L,-1.0
+2024,12,Missouri,South Carolina,-10.5,7.335,4.0,-3.165,0.577,27.0,ratings_vs_results,,W,0.909
+2024,12,Arkansas State,Georgia State,-2.5,-10.244,-7.0,-12.744,0.784,5.0,solid,,W,0.909
+2024,12,Rutgers,Maryland,-4.5,1.296,-14.0,-3.204,0.578,26.0,thin,,W,0.909
+2024,12,Arizona State,Kansas State,-7.5,11.947,-10.0,4.447,0.608,24.0,solid,,L,-1.0
+2024,12,South Alabama,Louisiana,-6.5,2.001,-2.0,-4.499,0.609,23.0,solid,,W,0.909
+2024,12,Boise State,San José State,14.5,-5.015,-21.0,9.485,0.721,11.0,situational,,L,-1.0
+2024,12,Oregon,Wisconsin,13.5,-11.14,-3.0,2.36,0.558,29.0,situational,,W,0.909
+2024,12,Wake Forest,North Carolina,-10.5,20.124,7.0,9.624,0.724,10.0,solid,,L,-1.0
+2024,12,UAB,Memphis,-16.0,24.255,35.0,8.255,0.695,15.0,solid,,W,0.909
+2024,12,Cincinnati,Iowa State,-7.0,23.276,17.0,16.276,0.843,3.0,solid,,W,0.909
+2024,12,Washington State,New Mexico,10.5,-12.787,3.0,-2.287,0.556,30.0,solid,,L,-1.0
+2024,13,Akron,Kent State,10.5,-15.212,-21.0,-4.712,0.614,25.0,solid,,W,0.909
+2024,13,Western Michigan,Central Michigan,6.0,-1.608,2.0,4.392,0.607,26.0,situational,,W,0.909
+2024,13,Northern Illinois,Miami (OH),-1.5,10.622,11.0,9.122,0.713,11.0,solid,,W,0.909
+2024,13,Buffalo,Eastern Michigan,-1.0,-1.134,-17.0,-2.134,0.552,35.0,situational,,W,0.909
+2024,13,Temple,UTSA,-16.5,26.261,24.0,9.761,0.727,8.0,solid,,W,0.909
+2024,13,Purdue,Michigan State,-14.0,7.445,7.0,-6.555,0.657,18.0,thin,,W,0.909
+2024,13,UNLV,San José State,7.5,-4.539,-11.0,2.961,0.573,31.0,situational,,L,-1.0
+2024,13,Ole Miss,Florida,13.0,-17.851,7.0,-4.851,0.618,23.0,solid,,L,-1.0
+2024,13,North Carolina,Boston College,2.0,-12.343,20.0,-10.343,0.739,5.0,solid,,L,-1.0
+2024,13,Indiana,Ohio State,-10.5,20.504,23.0,10.004,0.732,7.0,solid,,W,0.909
+2024,13,UConn,Syracuse,-10.0,6.012,7.0,-3.988,0.597,28.0,thin,,W,0.909
+2024,13,Illinois,Rutgers,-2.0,-1.177,-7.0,-3.177,0.578,30.0,situational,,W,0.909
+2024,13,Western Kentucky,Liberty,-1.0,3.339,17.0,2.339,0.557,33.0,solid,,W,0.909
+2024,13,Bowling Green,Ball State,12.5,-18.784,-25.0,-6.284,0.651,20.0,solid,,W,0.909
+2024,13,James Madison,App State,7.5,-24.706,14.0,-17.206,0.856,1.0,solid,,L,-1.0
+2024,13,Charlotte,Florida Atlantic,3.0,10.653,-12.0,13.653,0.8,2.0,solid,,L,-1.0
+2024,13,Arizona,TCU,-10.5,5.257,21.0,-5.243,0.627,21.0,one_input,returning,L,-1.0
+2024,13,UL Monroe,Arkansas State,-3.0,13.346,7.0,10.346,0.739,4.0,solid,,W,0.909
+2024,13,BYU,Arizona State,-3.5,-3.8,5.0,-7.3,0.674,17.0,situational,,L,-1.0
+2024,13,Stanford,California,-15.0,21.38,3.0,6.38,0.653,19.0,solid,,L,-1.0
+2024,13,San Diego State,Utah State,-5.0,15.103,21.0,10.103,0.734,6.0,solid,,W,0.909
+2024,13,Tulsa,South Florida,-17.5,12.736,33.0,-4.764,0.616,24.0,situational,,L,-1.0
+2024,13,UCF,West Virginia,3.0,-8.058,10.0,-5.058,0.623,22.0,solid,,L,-1.0
+2024,13,Northwestern,Michigan,-10.5,18.052,44.0,7.552,0.68,14.0,solid,,W,0.909
+2024,13,Penn State,Minnesota,11.0,-8.884,-1.0,2.116,0.552,36.0,situational,,W,0.909
+2024,13,East Carolina,North Texas,-2.5,-4.856,-12.0,-7.356,0.675,15.0,solid,,W,0.909
+2024,13,Missouri,Mississippi State,9.5,2.599,-19.0,12.099,0.773,3.0,one_input,rest,L,-1.0
+2024,13,Troy,Louisiana,-7.5,9.669,21.0,2.169,0.553,34.0,solid,,W,0.909
+2024,13,Army,Notre Dame,-14.5,7.176,35.0,-7.324,0.674,16.0,thin,,L,-1.0
+2024,13,Washington State,Oregon State,11.0,-1.312,3.0,9.688,0.725,9.0,ratings_vs_results,,W,0.909
+2024,13,Alabama,Oklahoma,14.0,-4.784,21.0,9.216,0.715,10.0,situational,,W,0.909
+2024,13,Iowa State,Utah,6.5,-14.825,-3.0,-8.325,0.696,12.0,one_input,form,L,-1.0
+2024,13,Texas A&M,Auburn,2.5,-6.622,2.0,-4.122,0.6,27.0,one_input,form,L,-1.0
+2024,13,Marshall,Old Dominion,-3.0,5.726,-7.0,2.726,0.567,32.0,situational,,L,-1.0
+2024,13,Cincinnati,Kansas State,-7.5,15.665,26.0,8.165,0.693,13.0,one_input,ratings,W,0.909
+2024,13,Air Force,Nevada,-3.0,-0.181,-3.0,-3.181,0.578,29.0,one_input,ratings,W,0.909
+2024,14,Oregon State,Boise State,-17.5,13.117,16.0,-4.383,0.607,30.0,thin,,W,0.909
+2024,14,Ball State,Ohio,-18.0,21.58,21.0,3.58,0.587,33.0,solid,,W,0.909
+2024,14,Miami (OH),Bowling Green,-3.0,-3.444,-16.0,-6.444,0.655,21.0,thin,,W,0.909
+2024,14,Oklahoma State,Colorado,-15.0,6.092,52.0,-8.908,0.709,17.0,thin,,L,-1.0
+2024,14,Minnesota,Wisconsin,2.0,-7.087,-17.0,-5.087,0.623,26.0,solid,,W,0.909
+2024,14,Texas State,South Alabama,2.5,0.155,-7.0,2.655,0.565,44.0,solid,,L,-1.0
+2024,14,Utah State,Colorado State,-5.0,-6.267,5.0,-11.267,0.757,6.0,thin,,P,0.0
+2024,14,Stanford,San José State,-2.5,5.889,3.0,3.389,0.583,35.0,solid,,W,0.909
+2024,14,Georgia Tech,Georgia,-17.0,23.293,2.0,6.293,0.651,23.0,solid,,L,-1.0
+2024,14,Nebraska,Iowa,-3.0,-2.403,3.0,-5.403,0.631,25.0,one_input,weather,P,0.0
+2024,14,Utah,UCF,-10.0,20.629,-14.0,10.629,0.744,9.0,solid,,L,-1.0
+2024,14,Tennessee,Vanderbilt,9.5,-18.819,-13.0,-9.319,0.718,14.0,solid,,W,0.909
+2024,14,Kansas,Baylor,1.5,-4.566,28.0,-3.066,0.575,39.0,ratings_vs_results,,L,-1.0
+2024,14,UTSA,Army,-6.0,3.69,5.0,-2.31,0.557,47.0,ratings_vs_results,,W,0.909
+2024,14,West Virginia,Texas Tech,-2.5,-3.913,37.0,-6.413,0.654,22.0,thin,,L,-1.0
+2024,14,North Texas,Temple,12.0,-9.414,-7.0,2.586,0.563,45.0,situational,,W,0.909
+2024,14,Duke,Wake Forest,3.5,-14.349,-6.0,-10.849,0.749,8.0,one_input,form,W,0.909
+2024,14,UConn,Massachusetts,8.0,-13.501,-5.0,-5.501,0.633,24.0,solid,,L,-1.0
+2024,14,Michigan,Ohio State,-19.5,14.804,-3.0,-4.696,0.614,28.0,thin,,W,0.909
+2024,14,Illinois,Northwestern,9.0,-20.163,-10.0,-11.163,0.755,7.0,one_input,form,W,0.909
+2024,14,Eastern Michigan,Western Michigan,-6.0,-4.12,8.0,-10.12,0.734,11.0,one_input,weather,L,-1.0
+2024,14,Southern Miss,Troy,-17.5,26.845,32.0,9.345,0.718,13.0,solid,,W,0.909
+2024,14,Coastal Carolina,Georgia State,-1.0,4.325,-21.0,3.325,0.581,36.0,one_input,eff,L,-1.0
+2024,14,South Florida,Rice,5.5,-2.667,7.0,2.833,0.569,43.0,situational,,W,0.909
+2024,14,Pittsburgh,Boston College,-3.5,24.969,11.0,21.469,0.908,2.0,solid,,W,0.909
+2024,14,Old Dominion,Arkansas State,5.5,-9.069,-8.0,-3.569,0.587,34.0,solid,,W,0.909
+2024,14,California,SMU,-12.5,15.812,32.0,3.312,0.581,37.0,solid,,W,0.909
+2024,14,Central Michigan,Northern Illinois,-13.5,17.757,8.0,4.257,0.604,31.0,solid,,L,-1.0
+2024,14,Arkansas,Missouri,-3.0,5.879,7.0,2.879,0.571,42.0,one_input,ratings,W,0.909
+2024,14,Miami,Syracuse,12.0,-15.058,4.0,-3.058,0.575,40.0,solid,,L,-1.0
+2024,14,Rutgers,Michigan State,-1.5,-10.031,-27.0,-11.531,0.762,5.0,solid,,W,0.909
+2024,14,Fresno State,UCLA,-7.5,2.784,7.0,-4.716,0.615,27.0,thin,,W,0.909
+2024,14,Notre Dame,USC,7.0,-14.03,-14.0,-7.03,0.668,20.0,solid,,W,0.909
+2024,14,NC State,North Carolina,-2.0,-2.578,-5.0,-4.578,0.611,29.0,thin,,W,0.909
+2024,14,Auburn,Alabama,-11.0,20.119,14.0,9.119,0.713,15.0,solid,,W,0.909
+2024,14,Arizona State,Arizona,7.5,6.294,-42.0,13.794,0.803,4.0,one_input,ratings,L,-1.0
+2024,14,UTEP,New Mexico State,-3.5,11.477,-7.0,7.977,0.689,19.0,solid,,L,-1.0
+2024,14,App State,Georgia Southern,-2.5,-0.032,9.0,-2.532,0.562,46.0,thin,,L,-1.0
+2024,14,TCU,Cincinnati,2.5,-11.444,-7.0,-8.944,0.71,16.0,one_input,form,W,0.909
+2024,14,Wyoming,Washington State,-18.5,15.323,-1.0,-3.177,0.578,38.0,situational,,W,0.909
+2024,14,Oklahoma,LSU,-6.0,-4.221,20.0,-10.221,0.736,10.0,one_input,form,L,-1.0
+2024,14,Florida,Florida State,17.0,9.941,-20.0,26.941,0.952,1.0,one_input,ratings,L,-1.0
+2024,14,Texas,Texas A&M,4.5,-6.775,-10.0,-2.275,0.556,48.0,one_input,form,W,0.909
+2024,14,Virginia,Virginia Tech,-4.5,22.673,20.0,18.173,0.869,3.0,solid,,W,0.909
+2024,14,Marshall,James Madison,-4.0,6.977,-2.0,2.977,0.573,41.0,solid,,L,-1.0
+2024,14,Houston,BYU,-12.5,8.273,12.0,-4.227,0.603,32.0,one_input,weather,W,0.909
+2024,14,Air Force,San Diego State,6.0,-15.946,-11.0,-9.946,0.73,12.0,solid,,W,0.909
+2024,14,New Mexico,Hawai'i,6.5,-14.981,8.0,-8.481,0.7,18.0,one_input,form,L,-1.0
+2024,15,Tulane,Army,5.0,-14.03,21.0,-9.03,0.711,1.0,solid,,L,-1.0
+2024,15,Iowa State,Arizona State,1.5,6.408,26.0,7.908,0.687,2.0,one_input,form,W,0.909
+2024,16,Navy,Army,-6.5,12.158,-18.0,5.658,0.637,1.0,solid,,L,-1.0
+2025,2,Sam Houston,Hawai'i,-7.0,0.515,17.0,-6.485,0.646,1.0,thin,,L,-1.0
+2025,3,NC State,Wake Forest,7.5,-2.948,-10.0,4.552,0.604,16.0,one_input,form,L,-1.0
+2025,3,Colorado,Houston,-4.0,-8.079,16.0,-12.079,0.757,6.0,one_input,ratings,L,-1.0
+2025,3,Kansas State,Arizona,1.5,8.125,6.0,9.625,0.711,9.0,solid,,W,0.909
+2025,3,New Mexico,UCLA,-15.5,9.419,-25.0,-6.081,0.637,13.0,thin,,W,0.909
+2025,3,Clemson,Georgia Tech,3.0,10.663,3.0,13.663,0.785,4.0,solid,,W,0.909
+2025,3,Wisconsin,Alabama,-17.5,21.741,24.0,4.241,0.597,18.0,solid,,W,0.909
+2025,3,Memphis,Troy,4.5,-13.489,-21.0,-8.989,0.698,10.0,solid,,W,0.909
+2025,3,Georgia,Tennessee,3.5,13.002,-3.0,16.502,0.83,2.0,solid,,W,0.909
+2025,3,Washington State,North Texas,-6.5,12.49,49.0,5.99,0.635,14.0,solid,,W,0.909
+2025,3,Liberty,Bowling Green,6.0,-3.63,10.0,2.37,0.554,22.0,situational,,W,0.909
+2025,3,Middle Tennessee,Nevada,-9.5,12.264,-1.0,2.764,0.563,21.0,solid,,L,-1.0
+2025,3,Old Dominion,Virginia Tech,-5.5,9.482,-19.0,3.982,0.591,19.0,one_input,ratings,L,-1.0
+2025,3,Arkansas,Ole Miss,-3.5,6.362,6.0,2.862,0.566,20.0,one_input,ratings,W,0.909
+2025,3,App State,Southern Miss,3.0,-9.724,16.0,-6.724,0.651,11.0,solid,,L,-1.0
+2025,3,Jacksonville State,Georgia Southern,-3.0,-10.876,7.0,-13.876,0.789,3.0,solid,,L,-1.0
+2025,3,East Carolina,Coastal Carolina,7.0,-11.476,-38.0,-4.476,0.602,17.0,solid,,W,0.909
+2025,3,Vanderbilt,South Carolina,-3.0,-7.716,-24.0,-10.716,0.732,8.0,one_input,eff,W,0.909
+2025,3,Duke,Tulane,-1.5,-5.142,7.0,-6.642,0.649,12.0,one_input,pace,L,-1.0
+2025,3,Akron,UAB,-12.5,-0.708,3.0,-13.208,0.777,5.0,situational,,W,0.909
+2025,3,Texas State,Arizona State,-18.5,-1.305,19.0,-19.805,0.874,1.0,thin,,L,-1.0
+2025,3,Minnesota,California,3.0,-7.719,13.0,-4.719,0.607,15.0,solid,,L,-1.0
+2025,3,Boston College,Stanford,14.0,-2.813,10.0,11.187,0.741,7.0,situational,,W,0.909
+2025,4,Rice,Charlotte,1.5,-3.873,-11.0,-2.373,0.555,30.0,solid,,W,0.909
+2025,4,Tulsa,Oklahoma State,-10.0,4.379,-7.0,-5.621,0.627,14.0,thin,,W,0.909
+2025,4,Iowa,Rutgers,2.5,23.668,-10.0,26.168,0.935,1.0,solid,,L,-1.0
+2025,4,SMU,TCU,-6.5,9.633,11.0,3.133,0.572,26.0,solid,,W,0.909
+2025,4,Maryland,Wisconsin,-10.5,3.021,-17.0,-7.479,0.667,11.0,thin,,W,0.909
+2025,4,North Texas,Army,2.5,-5.681,-7.0,-3.181,0.573,25.0,mixed,,W,0.909
+2025,4,Syracuse,Clemson,-17.5,-2.296,-13.0,-19.796,0.874,2.0,mixed,,W,0.909
+2025,4,Arkansas,Memphis,7.0,-4.359,1.0,2.641,0.561,29.0,situational,,W,0.909
+2025,4,UNLV,Miami (OH),2.5,-8.026,-3.0,-5.526,0.625,15.0,solid,,W,0.909
+2025,4,Tulane,Ole Miss,-12.5,19.712,35.0,7.212,0.662,12.0,solid,,W,0.909
+2025,4,Troy,Buffalo,-5.5,8.697,-4.0,3.197,0.573,24.0,solid,,L,-1.0
+2025,4,Louisiana,Eastern Michigan,2.5,-5.332,3.0,-2.832,0.565,28.0,one_input,ratings,L,-1.0
+2025,4,Toledo,Western Michigan,13.5,-17.09,1.0,-3.59,0.582,20.0,solid,,L,-1.0
+2025,4,James Madison,Liberty,7.5,-5.2,-18.0,2.3,0.553,31.0,thin,,L,-1.0
+2025,4,Michigan,Nebraska,1.5,16.831,-3.0,18.331,0.855,4.0,solid,,L,-1.0
+2025,4,North Carolina,UCF,-7.0,18.846,25.0,11.846,0.753,7.0,solid,,W,0.909
+2025,4,Auburn,Oklahoma,-6.5,0.628,7.0,-5.872,0.633,13.0,thin,,L,-1.0
+2025,4,NC State,Duke,-3.0,-0.539,12.0,-3.539,0.581,21.0,thin,,L,-1.0
+2025,4,Nevada,Western Kentucky,-8.5,27.092,15.0,18.592,0.859,3.0,solid,,W,0.909
+2025,4,Marshall,Middle Tennessee,2.5,-15.439,-14.0,-12.939,0.773,6.0,solid,,W,0.909
+2025,4,South Carolina,Missouri,-10.0,0.35,9.0,-9.65,0.711,8.0,one_input,returning,W,0.909
+2025,4,Boise State,Air Force,10.5,-7.519,-12.0,2.981,0.568,27.0,one_input,home,L,-1.0
+2025,4,Arizona State,Baylor,-3.0,8.264,-3.0,5.264,0.62,16.0,solid,,L,-1.0
+2025,4,Southern Miss,Louisiana Tech,-3.0,12.282,10.0,9.282,0.704,10.0,one_input,ratings,W,0.909
+2025,4,Illinois,Indiana,-7.0,16.632,53.0,9.632,0.711,9.0,solid,,W,0.909
+2025,4,BYU,East Carolina,6.5,-10.264,-21.0,-3.764,0.586,19.0,one_input,scoring,W,0.909
+2025,4,Florida,Miami,-8.5,26.279,19.0,17.779,0.848,5.0,solid,,W,0.909
+2025,4,Stanford,Virginia,-16.5,14.274,28.0,-2.226,0.551,32.0,thin,,L,-1.0
+2025,4,UL Monroe,UTEP,-5.5,10.633,-6.0,5.133,0.617,17.0,solid,,L,-1.0
+2025,4,UTSA,Colorado State,4.5,-1.267,-1.0,3.233,0.574,22.0,situational,,W,0.909
+2025,4,California,San Diego State,14.0,-10.772,34.0,3.228,0.574,23.0,situational,,W,0.909
+2025,4,Fresno State,Hawai'i,2.5,-6.299,-2.0,-3.799,0.587,18.0,solid,,L,-1.0
+2025,5,Florida State,Virginia,7.0,-9.048,8.0,-2.048,0.547,34.0,solid,,L,-1.0
+2025,5,TCU,Arizona State,-3.0,-7.668,3.0,-10.668,0.731,4.0,one_input,eff,P,0.0
+2025,5,Cincinnati,Kansas,-5.5,-1.071,-3.0,-6.571,0.648,12.0,thin,,W,0.909
+2025,5,Rutgers,Minnesota,-3.5,-0.958,3.0,-4.458,0.602,25.0,thin,,W,0.909
+2025,5,UCF,Kansas State,-6.0,-8.338,14.0,-14.338,0.796,3.0,one_input,eff,L,-1.0
+2025,5,Duke,Syracuse,4.0,15.189,-35.0,19.189,0.866,1.0,solid,,L,-1.0
+2025,5,Louisville,Pittsburgh,3.0,4.19,-7.0,7.19,0.661,10.0,mixed,,L,-1.0
+2025,5,Notre Dame,Arkansas,5.5,2.634,-43.0,8.134,0.681,8.0,mixed,,L,-1.0
+2025,5,Bowling Green,Ohio,-7.5,12.95,15.0,5.45,0.624,18.0,solid,,W,0.909
+2025,5,Georgia Tech,Wake Forest,13.5,-4.583,-1.0,8.917,0.697,6.0,situational,,W,0.909
+2025,5,Eastern Michigan,Central Michigan,-3.0,-1.035,11.0,-4.035,0.592,27.0,thin,,L,-1.0
+2025,5,Georgia Southern,James Madison,-14.5,5.779,25.0,-8.721,0.693,7.0,thin,,L,-1.0
+2025,5,Arkansas State,UL Monroe,-1.5,-0.611,12.0,-2.111,0.549,33.0,thin,,L,-1.0
+2025,5,Rice,Navy,-14.0,20.285,8.0,6.285,0.642,13.0,solid,,L,-1.0
+2025,5,Ohio State,Washington,9.5,-3.635,-18.0,5.865,0.633,16.0,one_input,home,L,-1.0
+2025,5,California,Boston College,-6.0,10.952,-4.0,4.952,0.613,19.0,solid,,L,-1.0
+2025,5,Auburn,Texas A&M,-6.5,10.041,6.0,3.541,0.581,28.0,solid,,L,-1.0
+2025,5,Utah,West Virginia,13.5,-9.18,-34.0,4.32,0.599,26.0,situational,,L,-1.0
+2025,5,San Diego State,Northern Illinois,1.5,-4.679,-3.0,-3.179,0.573,30.0,mixed,,W,0.909
+2025,5,LSU,Ole Miss,-2.5,6.991,5.0,4.491,0.602,24.0,one_input,ratings,W,0.909
+2025,5,New Mexico State,New Mexico,-16.5,5.884,18.0,-10.616,0.73,5.0,one_input,weather,L,-1.0
+2025,5,Tulane,Tulsa,14.5,-9.01,-17.0,5.49,0.624,17.0,thin,,L,-1.0
+2025,5,Hawai'i,Air Force,-7.0,4.829,-9.0,-2.171,0.55,32.0,thin,,W,0.909
+2025,5,Tennessee,Mississippi State,7.5,-2.75,-7.0,4.75,0.608,23.0,mixed,,W,0.909
+2025,5,Liberty,Old Dominion,-14.5,9.742,14.0,-4.758,0.608,22.0,thin,,W,0.909
+2025,5,Jacksonville State,Southern Miss,-4.5,-12.992,17.0,-17.492,0.844,2.0,solid,,L,-1.0
+2025,5,Virginia Tech,NC State,-10.0,5.159,-2.0,-4.841,0.61,21.0,ratings_vs_results,,W,0.909
+2025,5,App State,Boise State,-16.5,19.91,33.0,3.41,0.578,29.0,solid,,W,0.909
+2025,5,Washington State,Colorado State,-4.5,6.823,-17.0,2.323,0.553,31.0,solid,,L,-1.0
+2025,5,San José State,Stanford,-3.0,-3.712,1.0,-6.712,0.651,11.0,solid,,W,0.909
+2025,5,Oregon,Penn State,-3.5,-1.416,-6.0,-4.916,0.612,20.0,one_input,eff,W,0.909
+2025,5,Kentucky,South Carolina,-5.5,-0.513,22.0,-6.013,0.636,15.0,one_input,eff,L,-1.0
+2025,5,Louisiana Tech,UTEP,3.5,-9.622,-19.0,-6.122,0.638,14.0,solid,,W,0.909
+2025,5,BYU,Colorado,6.5,-13.714,-3.0,-7.214,0.662,9.0,solid,,L,-1.0
+2025,6,New Mexico,San José State,-1.5,-2.608,7.0,-4.108,0.594,20.0,thin,,L,-1.0
+2025,6,West Virginia,BYU,-19.5,21.852,14.0,2.352,0.554,26.0,solid,,L,-1.0
+2025,6,Air Force,Navy,-13.5,17.974,3.0,4.474,0.602,17.0,solid,,L,-1.0
+2025,6,Clemson,North Carolina,15.5,-0.806,-28.0,14.694,0.802,1.0,situational,,L,-1.0
+2025,6,Iowa State,Cincinnati,-1.5,7.683,8.0,6.183,0.64,9.0,solid,,W,0.909
+2025,6,Wisconsin,Michigan,-17.5,13.101,14.0,-4.399,0.6,19.0,thin,,W,0.909
+2025,6,Army,UAB,6.5,0.824,-18.0,7.324,0.664,5.0,one_input,home,L,-1.0
+2025,6,Ohio,Ball State,14.0,-9.596,6.0,4.404,0.6,18.0,thin,,W,0.909
+2025,6,Boston College,Pittsburgh,-7.0,4.144,41.0,-2.856,0.566,23.0,thin,,L,-1.0
+2025,6,Kansas State,Baylor,-4.5,-0.015,1.0,-4.515,0.603,16.0,ratings_vs_results,,W,0.909
+2025,6,Wake Forest,Virginia Tech,-4.5,10.457,-7.0,5.957,0.635,10.0,one_input,ratings,L,-1.0
+2025,6,Texas,Florida,4.5,-11.628,8.0,-7.128,0.66,6.0,solid,,L,-1.0
+2025,6,Miami (OH),Northern Illinois,4.5,-6.888,-11.0,-2.388,0.555,25.0,solid,,W,0.909
+2025,6,Oregon State,App State,-1.5,-1.12,4.0,-2.62,0.56,24.0,solid,,L,-1.0
+2025,6,Eastern Michigan,Buffalo,-9.5,4.557,1.0,-4.943,0.612,15.0,thin,,W,0.909
+2025,6,Vanderbilt,Alabama,-13.5,5.262,16.0,-8.238,0.683,3.0,thin,,L,-1.0
+2025,6,Virginia,Louisville,-6.5,11.515,-3.0,5.015,0.614,14.0,one_input,ratings,L,-1.0
+2025,6,Florida International,UConn,-7.0,14.468,41.0,7.468,0.667,4.0,mixed,,W,0.909
+2025,6,Texas State,Arkansas State,14.0,-18.018,1.0,-4.018,0.592,21.0,solid,,L,-1.0
+2025,6,Michigan State,Nebraska,-12.5,10.282,11.0,-2.218,0.551,27.0,one_input,weather,W,0.909
+2025,6,Coastal Carolina,Old Dominion,-18.5,15.29,40.0,-3.21,0.574,22.0,thin,,L,-1.0
+2025,6,Texas Tech,Houston,13.5,-7.754,-24.0,5.746,0.63,11.0,situational,,L,-1.0
+2025,6,South Alabama,Troy,2.5,2.579,7.0,5.079,0.615,13.0,one_input,form,W,0.909
+2025,6,UNLV,Wyoming,4.5,-10.905,-14.0,-6.405,0.644,8.0,solid,,W,0.909
+2025,6,Mississippi State,Texas A&M,-17.5,4.15,22.0,-13.35,0.78,2.0,thin,,L,-1.0
+2025,6,Kansas,UCF,4.0,1.455,-7.0,5.455,0.624,12.0,one_input,form,L,-1.0
+2025,6,Nevada,Fresno State,-12.5,19.366,3.0,6.866,0.654,7.0,solid,,L,-1.0
+2025,7,Liberty,UTEP,1.5,-8.309,-11.0,-6.809,0.653,17.0,one_input,ratings,W,0.909
+2025,7,East Carolina,Tulane,-7.0,-7.155,7.0,-14.155,0.793,5.0,solid,,P,0.0
+2025,7,Jacksonville State,Sam Houston,7.0,-14.007,-2.0,-7.007,0.657,15.0,solid,,L,-1.0
+2025,7,South Florida,North Texas,-2.5,16.409,-27.0,13.909,0.789,6.0,solid,,L,-1.0
+2025,7,Fresno State,Colorado State,5.5,-7.468,28.0,-1.968,0.545,39.0,solid,,L,-1.0
+2025,7,Rutgers,Washington,-9.5,6.922,19.0,-2.578,0.559,33.0,situational,,L,-1.0
+2025,7,Pittsburgh,Florida State,-10.5,3.335,-3.0,-7.165,0.661,14.0,ratings_vs_results,,W,0.909
+2025,7,Houston,Oklahoma State,14.5,-6.862,-22.0,7.638,0.671,13.0,ratings_vs_results,,L,-1.0
+2025,7,Charlotte,Army,-17.5,21.022,17.0,3.522,0.581,30.0,solid,,L,-1.0
+2025,7,Ohio State,Illinois,14.5,-18.262,-18.0,-3.762,0.586,27.0,solid,,W,0.909
+2025,7,Louisiana,James Madison,-18.5,4.629,10.0,-13.871,0.789,7.0,situational,,W,0.909
+2025,7,Alabama,Missouri,3.0,14.417,-3.0,17.417,0.843,1.0,solid,,P,0.0
+2025,7,Miami (OH),Akron,11.5,-13.94,-13.0,-2.44,0.556,35.0,solid,,W,0.909
+2025,7,Northern Illinois,Eastern Michigan,1.5,4.046,6.0,5.546,0.626,21.0,one_input,home,W,0.909
+2025,7,Massachusetts,Kent State,-1.5,-12.991,36.0,-14.491,0.799,4.0,solid,,L,-1.0
+2025,7,Ball State,Western Michigan,-9.5,14.44,42.0,4.94,0.612,23.0,solid,,W,0.909
+2025,7,Old Dominion,Marshall,14.5,-6.347,24.0,8.153,0.681,11.0,ratings_vs_results,,W,0.909
+2025,7,App State,Georgia State,3.0,-5.276,-21.0,-2.276,0.552,38.0,one_input,scoring,W,0.909
+2025,7,Iowa State,Colorado,3.0,-8.164,7.0,-5.164,0.617,22.0,solid,,L,-1.0
+2025,7,Oklahoma,Texas,-2.5,10.677,17.0,8.177,0.682,10.0,one_input,ratings,W,0.909
+2025,7,Indiana,Oregon,-7.0,-2.123,-10.0,-9.123,0.701,8.0,solid,,W,0.909
+2025,7,Wake Forest,Oregon State,1.5,-7.205,-25.0,-5.705,0.629,20.0,solid,,W,0.909
+2025,7,Navy,Temple,10.0,-13.438,-1.0,-3.438,0.579,31.0,solid,,L,-1.0
+2025,7,Arkansas,Tennessee,-10.0,18.517,3.0,8.517,0.689,9.0,solid,,L,-1.0
+2025,7,UAB,Florida Atlantic,-4.5,2.074,20.0,-2.426,0.556,36.0,thin,,L,-1.0
+2025,7,UL Monroe,Coastal Carolina,3.0,0.634,15.0,3.634,0.583,28.0,ratings_vs_results,,W,0.909
+2025,7,San José State,Wyoming,1.5,1.669,7.0,3.169,0.573,32.0,solid,,W,0.909
+2025,7,Florida,Texas A&M,-7.0,10.582,17.0,3.582,0.582,29.0,solid,,W,0.909
+2025,7,Iowa,Wisconsin,5.5,-9.747,-37.0,-4.247,0.597,26.0,solid,,W,0.909
+2025,7,Kansas,Texas Tech,-13.5,8.999,25.0,-4.501,0.603,25.0,thin,,L,-1.0
+2025,7,Rice,UTSA,-8.5,15.207,48.0,6.707,0.651,18.0,solid,,W,0.909
+2025,7,Clemson,Boston College,14.0,1.289,-31.0,15.289,0.812,3.0,one_input,home,L,-1.0
+2025,7,Georgia,Auburn,4.5,-2.141,-10.0,2.359,0.554,37.0,situational,,L,-1.0
+2025,7,South Carolina,LSU,-8.5,13.199,10.0,4.699,0.607,24.0,solid,,W,0.909
+2025,7,BYU,Arizona,2.5,-8.606,-6.0,-6.106,0.638,19.0,solid,,W,0.909
+2025,7,Troy,Texas State,-7.5,15.523,-7.0,8.023,0.679,12.0,solid,,L,-1.0
+2025,7,Arizona State,Utah,-9.5,-7.635,32.0,-17.135,0.839,2.0,one_input,pace,L,-1.0
+2025,7,San Diego State,Nevada,6.5,-13.487,-34.0,-6.987,0.657,16.0,solid,,W,0.909
+2025,7,Utah State,Hawai'i,1.5,-3.957,18.0,-2.457,0.556,34.0,mixed,,L,-1.0
+2025,8,New Mexico State,Liberty,-10.5,7.569,3.0,-2.931,0.567,31.0,thin,,W,0.909
+2025,8,Florida International,Western Kentucky,-10.0,13.944,-19.0,3.944,0.59,24.0,solid,,L,-1.0
+2025,8,UTEP,Sam Houston,3.5,8.665,-18.0,12.165,0.759,1.0,one_input,ratings,L,-1.0
+2025,8,Tulsa,East Carolina,-16.5,19.47,14.0,2.97,0.568,30.0,solid,,L,-1.0
+2025,8,Louisville,Miami,-10.5,6.286,-3.0,-4.214,0.596,22.0,situational,,W,0.909
+2025,8,Nebraska,Minnesota,7.0,-4.71,18.0,2.29,0.553,37.0,ratings_vs_results,,W,0.909
+2025,8,San José State,Utah State,-3.0,7.965,5.0,4.965,0.613,19.0,solid,,W,0.909
+2025,8,Army,Tulane,-10.0,7.816,7.0,-2.184,0.55,38.0,thin,,W,0.909
+2025,8,Georgia Tech,Duke,-3.5,-0.418,-9.0,-3.918,0.59,26.0,one_input,pace,W,0.909
+2025,8,Central Michigan,Bowling Green,-3.0,8.163,-21.0,5.163,0.617,16.0,mixed,,L,-1.0
+2025,8,UConn,Boston College,2.5,-11.72,-15.0,-9.22,0.703,5.0,solid,,W,0.909
+2025,8,LSU,Vanderbilt,-1.5,-2.102,7.0,-3.602,0.582,27.0,one_input,ratings,L,-1.0
+2025,8,Eastern Michigan,Miami (OH),-12.5,15.186,14.0,2.686,0.562,33.0,one_input,ratings,W,0.909
+2025,8,Washington,Michigan,-4.0,-6.009,17.0,-10.009,0.719,4.0,mixed,,L,-1.0
+2025,8,West Virginia,UCF,-6.5,12.246,32.0,5.746,0.63,13.0,solid,,W,0.909
+2025,8,Troy,UL Monroe,4.5,-6.942,-23.0,-2.442,0.556,36.0,solid,,W,0.909
+2025,8,Texas A&M,Arkansas,7.5,-0.022,-3.0,7.478,0.667,8.0,situational,,W,0.909
+2025,8,SMU,Clemson,-3.5,-2.324,-11.0,-5.824,0.632,12.0,mixed,,W,0.909
+2025,8,Northern Illinois,Ohio,-10.5,13.106,27.0,2.606,0.56,34.0,solid,,W,0.909
+2025,8,Texas State,Marshall,3.0,2.307,3.0,5.307,0.62,15.0,solid,,W,0.909
+2025,8,Akron,Ball State,2.5,-7.515,14.0,-5.015,0.614,18.0,solid,,L,-1.0
+2025,8,Temple,Charlotte,10.0,-2.553,-35.0,7.447,0.667,9.0,ratings_vs_results,,L,-1.0
+2025,8,Coastal Carolina,App State,-10.5,2.227,-8.0,-8.273,0.684,6.0,thin,,W,0.909
+2025,8,Ole Miss,Georgia,-7.5,1.789,8.0,-5.711,0.629,14.0,thin,,L,-1.0
+2025,8,Old Dominion,James Madison,-3.0,8.899,36.0,5.899,0.633,11.0,one_input,ratings,W,0.909
+2025,8,UTSA,North Texas,-4.0,7.937,38.0,3.937,0.59,25.0,solid,,W,0.909
+2025,8,UNLV,Boise State,-12.5,1.863,25.0,-10.637,0.731,3.0,situational,,L,-1.0
+2025,8,Mississippi State,Florida,-9.5,1.87,2.0,-7.63,0.67,7.0,mixed,,W,0.909
+2025,8,Oregon,Rutgers,17.5,-14.104,-46.0,3.396,0.578,29.0,situational,,L,-1.0
+2025,8,Washington State,Virginia,-16.5,12.375,2.0,-4.125,0.594,23.0,thin,,W,0.909
+2025,8,Georgia State,Georgia Southern,-6.5,18.644,17.0,12.144,0.759,2.0,solid,,W,0.909
+2025,8,Maryland,UCLA,-4.0,-1.057,3.0,-5.057,0.615,17.0,mixed,,W,0.909
+2025,8,Penn State,Iowa,-3.0,5.564,1.0,2.564,0.559,35.0,solid,,L,-1.0
+2025,8,USC,Notre Dame,-10.5,13.316,10.0,2.816,0.565,32.0,solid,,L,-1.0
+2025,8,Tennessee,Alabama,-8.5,2.209,17.0,-6.291,0.642,10.0,situational,,L,-1.0
+2025,8,Missouri,Auburn,1.5,-6.143,-6.0,-4.643,0.606,20.0,solid,,W,0.909
+2025,8,Nevada,New Mexico,-14.0,10.502,2.0,-3.498,0.58,28.0,situational,,W,0.909
+2025,8,Florida State,Stanford,17.5,-13.0,7.0,4.5,0.603,21.0,situational,,W,0.909
+2025,9,Western Kentucky,Louisiana Tech,-5.5,-4.24,-1.0,-9.74,0.713,5.0,thin,,W,0.909
+2025,9,South Alabama,Georgia State,6.0,-10.66,-7.0,-4.66,0.606,19.0,solid,,W,0.909
+2025,9,California,Virginia Tech,-6.0,1.577,8.0,-4.423,0.601,23.0,thin,,L,-1.0
+2025,9,Ole Miss,Oklahoma,-5.5,0.729,-8.0,-4.771,0.609,17.0,ratings_vs_results,,W,0.909
+2025,9,SMU,Wake Forest,5.5,-11.559,1.0,-6.059,0.637,15.0,solid,,L,-1.0
+2025,9,Kansas State,Kansas,-3.5,1.589,-25.0,-1.911,0.544,37.0,one_input,ratings,W,0.909
+2025,9,Virginia,North Carolina,11.5,-3.75,-1.0,7.75,0.673,7.0,ratings_vs_results,,W,0.909
+2025,9,Ohio,Eastern Michigan,11.5,-14.966,-7.0,-3.466,0.579,27.0,solid,,L,-1.0
+2025,9,Syracuse,Georgia Tech,-17.5,11.248,25.0,-6.252,0.641,13.0,situational,,L,-1.0
+2025,9,Bowling Green,Kent State,7.5,-10.124,3.0,-2.624,0.56,33.0,solid,,L,-1.0
+2025,9,South Florida,Memphis,3.5,9.906,3.0,13.406,0.781,1.0,ratings_vs_results,,W,0.909
+2025,9,Rutgers,Purdue,-2.5,-7.762,-3.0,-10.262,0.723,2.0,mixed,,W,0.909
+2025,9,Auburn,Arkansas,-2.5,9.703,-9.0,7.203,0.661,8.0,one_input,home,L,-1.0
+2025,9,Akron,Buffalo,-10.0,20.149,-8.0,10.149,0.721,4.0,solid,,L,-1.0
+2025,9,UConn,Rice,10.5,-8.461,3.0,2.039,0.547,35.0,situational,,W,0.909
+2025,9,Utah State,New Mexico,-3.0,-3.829,19.0,-6.829,0.653,10.0,solid,,L,-1.0
+2025,9,BYU,Iowa State,-2.5,0.455,-14.0,-2.045,0.547,34.0,thin,,W,0.909
+2025,9,Alabama,South Carolina,11.5,-4.829,-7.0,6.671,0.65,11.0,situational,,W,0.909
+2025,9,Missouri,Vanderbilt,-3.0,-0.153,7.0,-3.153,0.572,29.0,one_input,ratings,L,-1.0
+2025,9,Temple,Tulsa,4.5,-7.642,-1.0,-3.142,0.572,30.0,solid,,L,-1.0
+2025,9,Western Michigan,Miami (OH),-2.5,9.145,9.0,6.645,0.65,12.0,solid,,W,0.909
+2025,9,UL Monroe,Southern Miss,-14.0,9.47,28.0,-4.53,0.603,20.0,ratings_vs_results,,L,-1.0
+2025,9,Ball State,Northern Illinois,-6.5,10.938,14.0,4.438,0.601,22.0,one_input,ratings,W,0.909
+2025,9,Toledo,Washington State,1.5,-5.877,21.0,-4.377,0.6,25.0,mixed,,L,-1.0
+2025,9,Minnesota,Iowa,-7.5,12.191,38.0,4.691,0.607,18.0,solid,,W,0.909
+2025,9,NC State,Pittsburgh,-4.5,8.985,19.0,4.485,0.602,21.0,solid,,W,0.909
+2025,9,Florida Atlantic,Navy,-14.5,17.808,10.0,3.308,0.576,28.0,solid,,L,-1.0
+2025,9,Baylor,Cincinnati,-3.5,10.646,21.0,7.146,0.66,9.0,solid,,W,0.909
+2025,9,Texas,Mississippi State,8.5,-2.308,-7.0,6.192,0.64,14.0,thin,,W,0.909
+2025,9,TCU,West Virginia,16.5,-8.152,-6.0,8.348,0.685,6.0,situational,,W,0.909
+2025,9,Louisiana,Troy,-7.0,11.807,12.0,4.807,0.609,16.0,solid,,W,0.909
+2025,9,Colorado State,Wyoming,-5.5,2.6,28.0,-2.9,0.567,32.0,thin,,L,-1.0
+2025,9,Michigan,Michigan State,13.5,-10.42,-11.0,3.08,0.571,31.0,situational,,W,0.909
+2025,9,Texas A&M,LSU,1.5,-3.533,-24.0,-2.033,0.547,36.0,solid,,W,0.909
+2025,9,Tennessee,Kentucky,7.5,-11.155,-22.0,-3.655,0.584,26.0,one_input,ratings,W,0.909
+2025,9,Houston,Arizona State,-7.0,11.42,-8.0,4.42,0.601,24.0,ratings_vs_results,,L,-1.0
+2025,9,Colorado,Utah,-14.0,3.807,46.0,-10.193,0.722,3.0,one_input,weather,L,-1.0
+2025,10,James Madison,Texas State,7.0,3.178,-32.0,10.178,0.722,3.0,solid,,L,-1.0
+2025,10,Jacksonville State,Middle Tennessee,4.0,-13.855,-3.0,-9.855,0.716,4.0,one_input,ratings,L,-1.0
+2025,10,Tulane,UTSA,6.0,3.536,22.0,9.536,0.709,6.0,situational,,W,0.909
+2025,10,Memphis,Rice,14.0,-16.493,-24.0,-2.493,0.557,28.0,solid,,W,0.909
+2025,10,North Carolina,Syracuse,-1.5,5.729,-17.0,4.229,0.597,21.0,one_input,home,L,-1.0
+2025,10,Sam Houston,Louisiana Tech,-16.5,11.294,41.0,-5.206,0.618,16.0,thin,,L,-1.0
+2025,10,Buffalo,Bowling Green,-2.5,-3.058,-25.0,-5.558,0.626,14.0,mixed,,W,0.909
+2025,10,Navy,North Texas,-6.5,4.267,14.0,-2.233,0.551,31.0,one_input,ratings,L,-1.0
+2025,10,West Virginia,Houston,-13.5,-0.269,-10.0,-13.769,0.787,2.0,one_input,pace,W,0.909
+2025,10,Rutgers,Illinois,-13.5,9.358,22.0,-4.142,0.595,22.0,situational,,L,-1.0
+2025,10,UAB,UConn,-10.0,16.921,19.0,6.921,0.655,8.0,solid,,W,0.909
+2025,10,Penn State,Ohio State,-17.5,13.099,24.0,-4.401,0.6,20.0,situational,,L,-1.0
+2025,10,Army,Air Force,1.5,0.416,-3.0,1.916,0.544,32.0,one_input,home,L,-1.0
+2025,10,Arizona State,Iowa State,-7.5,12.782,-5.0,5.282,0.62,15.0,solid,,L,-1.0
+2025,10,East Carolina,Temple,5.5,-2.255,-31.0,3.245,0.574,25.0,situational,,L,-1.0
+2025,10,Louisville,Virginia Tech,10.5,-3.68,-12.0,6.82,0.653,9.0,situational,,L,-1.0
+2025,10,Pittsburgh,Stanford,13.5,-10.952,-15.0,2.548,0.559,27.0,situational,,L,-1.0
+2025,10,New Mexico State,Western Kentucky,-7.5,17.261,19.0,9.761,0.714,5.0,solid,,W,0.909
+2025,10,Louisiana,South Alabama,-3.5,7.585,-9.0,4.085,0.593,23.0,solid,,L,-1.0
+2025,10,Texas Tech,Kansas State,7.5,-5.136,-23.0,2.364,0.554,30.0,ratings_vs_results,,L,-1.0
+2025,10,Michigan State,Minnesota,-4.5,13.97,3.0,9.47,0.708,7.0,solid,,L,-1.0
+2025,10,Old Dominion,UL Monroe,16.5,-13.819,-25.0,2.681,0.562,26.0,situational,,L,-1.0
+2025,10,Virginia,California,6.5,-0.525,-10.0,5.975,0.635,12.0,ratings_vs_results,,L,-1.0
+2025,10,Mississippi State,Arkansas,-5.5,8.795,-3.0,3.295,0.576,24.0,one_input,ratings,L,-1.0
+2025,10,Arizona,Colorado,4.0,-6.413,-35.0,-2.413,0.555,29.0,solid,,W,0.909
+2025,10,South Carolina,Ole Miss,-12.5,18.133,16.0,5.633,0.628,13.0,solid,,W,0.909
+2025,10,Wake Forest,Florida State,-12.5,6.108,35.0,-6.392,0.644,10.0,thin,,L,-1.0
+2025,10,Washington State,Oregon State,3.5,0.938,3.0,4.438,0.601,19.0,situational,,W,0.909
+2025,10,Kentucky,Auburn,-11.5,6.409,-7.0,-5.091,0.616,17.0,thin,,W,0.909
+2025,10,Oklahoma,Tennessee,-3.0,16.984,-6.0,13.984,0.79,1.0,solid,,L,-1.0
+2025,10,Arkansas State,Troy,-7.5,12.353,-13.0,4.853,0.61,18.0,solid,,L,-1.0
+2025,10,Cincinnati,Utah,-11.5,5.108,31.0,-6.392,0.644,11.0,thin,,L,-1.0
+2025,11,Miami (OH),Ohio,-2.5,6.087,4.0,3.587,0.582,23.0,situational,,W,0.909
+2025,11,Kent State,Ball State,-3.0,9.801,4.0,6.801,0.653,12.0,solid,,W,0.909
+2025,11,UTSA,South Florida,-14.0,7.486,32.0,-6.514,0.647,13.0,ratings_vs_results,,L,-1.0
+2025,11,Houston,UCF,-1.5,14.796,-3.0,13.296,0.779,1.0,solid,,L,-1.0
+2025,11,Tulane,Memphis,-3.0,9.064,-6.0,6.064,0.637,17.0,solid,,L,-1.0
+2025,11,Northwestern,USC,-14.5,18.438,21.0,3.938,0.59,22.0,solid,,W,0.909
+2025,11,Southern Miss,Arkansas State,6.5,-3.569,-6.0,2.931,0.567,27.0,one_input,ratings,W,0.909
+2025,11,Indiana,Penn State,14.5,-8.238,-3.0,6.262,0.641,16.0,ratings_vs_results,,W,0.909
+2025,11,Colorado,West Virginia,-6.5,4.455,7.0,-2.045,0.547,31.0,one_input,ratings,L,-1.0
+2025,11,James Madison,Marshall,13.5,-10.024,-12.0,3.476,0.58,25.0,situational,,W,0.909
+2025,11,SMU,Boston College,10.5,-12.411,-32.0,-1.911,0.544,32.0,solid,,W,0.909
+2025,11,BYU,Texas Tech,-13.5,2.398,22.0,-11.102,0.739,3.0,ratings_vs_results,,L,-1.0
+2025,11,Bowling Green,Eastern Michigan,-3.0,11.007,6.0,8.007,0.678,6.0,solid,,W,0.909
+2025,11,Maryland,Rutgers,-1.5,7.88,15.0,6.38,0.644,14.0,solid,,W,0.909
+2025,11,Tulsa,Florida Atlantic,-4.5,15.571,19.0,11.071,0.739,4.0,solid,,W,0.909
+2025,11,Jacksonville State,UTEP,1.5,-13.619,-3.0,-12.119,0.758,2.0,one_input,ratings,W,0.909
+2025,11,Texas A&M,Missouri,7.0,-3.618,-21.0,3.382,0.577,26.0,situational,,L,-1.0
+2025,11,Duke,UConn,7.5,-0.549,3.0,6.951,0.656,11.0,situational,,W,0.909
+2025,11,Oregon,Iowa,4.5,-2.448,-2.0,2.052,0.547,30.0,situational,,W,0.909
+2025,11,Iowa State,TCU,-7.5,13.463,-3.0,5.963,0.635,18.0,solid,,L,-1.0
+2025,11,Auburn,Vanderbilt,-6.0,1.685,7.0,-4.315,0.598,21.0,one_input,ratings,L,-1.0
+2025,11,Georgia State,Coastal Carolina,-7.0,9.054,13.0,2.054,0.547,29.0,solid,,W,0.909
+2025,11,Washington,Wisconsin,10.5,-8.414,3.0,2.086,0.548,28.0,thin,,W,0.909
+2025,11,Stanford,North Carolina,-8.5,15.955,5.0,7.455,0.667,7.0,one_input,ratings,L,-1.0
+2025,11,Air Force,San José State,-6.0,-0.32,-10.0,-6.32,0.643,15.0,thin,,W,0.909
+2025,11,California,Louisville,-18.5,14.92,-3.0,-3.58,0.582,24.0,situational,,W,0.909
+2025,11,Florida State,Clemson,-1.5,6.41,14.0,4.91,0.612,19.0,one_input,ratings,W,0.909
+2025,11,Wake Forest,Virginia,-7.0,14.152,-7.0,7.152,0.66,10.0,solid,,L,-1.0
+2025,11,LSU,Alabama,-10.0,17.23,11.0,7.23,0.662,9.0,solid,,W,0.909
+2025,11,Florida,Kentucky,4.5,-9.164,31.0,-4.664,0.606,20.0,solid,,L,-1.0
+2025,11,Nebraska,UCLA,-1.5,-5.926,-7.0,-7.426,0.666,8.0,one_input,scoring,W,0.909
+2025,11,San Diego State,Hawai'i,6.5,3.328,32.0,9.828,0.715,5.0,ratings_vs_results,,W,0.909
+2025,12,Kent State,Akron,-7.5,24.804,-7.0,17.304,0.841,3.0,solid,,L,-1.0
+2025,12,Ohio,Western Michigan,-1.5,-5.359,4.0,-6.859,0.654,14.0,mixed,,L,-1.0
+2025,12,Northern Illinois,Massachusetts,9.5,-12.67,-42.0,-3.17,0.573,28.0,solid,,W,0.909
+2025,12,Troy,Old Dominion,-9.5,7.559,33.0,-1.941,0.545,37.0,situational,,L,-1.0
+2025,12,Clemson,Louisville,-1.5,11.492,-1.0,9.992,0.718,7.0,solid,,L,-1.0
+2025,12,Arizona,Cincinnati,-5.5,7.447,-6.0,1.947,0.545,36.0,solid,,L,-1.0
+2025,12,Michigan,Northwestern,10.0,-13.963,-2.0,-3.963,0.591,24.0,solid,,L,-1.0
+2025,12,South Carolina,Texas A&M,-16.5,13.502,1.0,-2.998,0.569,31.0,situational,,W,0.909
+2025,12,Notre Dame,Pittsburgh,12.5,-6.691,-22.0,5.809,0.631,20.0,situational,,L,-1.0
+2025,12,Air Force,UConn,-7.5,13.228,10.0,5.728,0.63,21.0,solid,,W,0.909
+2025,12,South Florida,Navy,9.5,-3.426,3.0,6.074,0.637,18.0,ratings_vs_results,,W,0.909
+2025,12,UTSA,Charlotte,16.5,-10.206,-21.0,6.294,0.642,16.0,situational,,L,-1.0
+2025,12,Arkansas,LSU,-4.0,0.65,1.0,-3.35,0.577,26.0,situational,,W,0.909
+2025,12,Oregon State,Tulsa,-1.5,-17.055,17.0,-18.555,0.858,1.0,solid,,L,-1.0
+2025,12,West Virginia,Arizona State,-10.0,7.678,2.0,-2.322,0.553,34.0,thin,,W,0.909
+2025,12,Marshall,Georgia State,9.5,-11.854,-12.0,-2.354,0.554,33.0,solid,,W,0.909
+2025,12,North Texas,UAB,17.5,-8.055,-29.0,9.445,0.707,8.0,thin,,L,-1.0
+2025,12,Colorado State,New Mexico,-15.5,11.877,3.0,-3.623,0.583,25.0,thin,,W,0.909
+2025,12,Penn State,Michigan State,7.0,-13.268,-18.0,-6.268,0.641,17.0,solid,,W,0.909
+2025,12,Iowa,USC,-6.5,-6.658,5.0,-13.158,0.776,5.0,mixed,,W,0.909
+2025,12,NC State,Miami,-16.5,8.65,34.0,-7.85,0.675,11.0,one_input,pace,L,-1.0
+2025,12,South Alabama,UL Monroe,4.0,-10.419,-12.0,-6.419,0.645,15.0,solid,,W,0.909
+2025,12,Virginia,Duke,-5.5,10.349,-17.0,4.849,0.61,23.0,solid,,L,-1.0
+2025,12,Georgia Tech,Boston College,16.5,-13.371,-2.0,3.129,0.572,29.0,situational,,W,0.909
+2025,12,Middle Tennessee,Western Kentucky,-13.5,18.695,16.0,5.195,0.618,22.0,solid,,W,0.909
+2025,12,San José State,Nevada,10.0,-12.123,45.0,-2.123,0.549,35.0,solid,,L,-1.0
+2025,12,Oklahoma,Alabama,-6.5,14.729,-2.0,8.229,0.683,9.0,solid,,L,-1.0
+2025,12,Texas State,Southern Miss,-3.0,-14.365,-27.0,-17.365,0.842,2.0,one_input,ratings,W,0.909
+2025,12,North Carolina,Wake Forest,-3.5,-2.347,16.0,-5.847,0.632,19.0,ratings_vs_results,,L,-1.0
+2025,12,Coastal Carolina,Georgia Southern,-3.0,5.381,5.0,2.381,0.555,32.0,situational,,W,0.909
+2025,12,Florida,Ole Miss,-10.5,17.57,10.0,7.07,0.659,12.0,solid,,L,-1.0
+2025,12,Purdue,Washington,-14.5,17.733,36.0,3.233,0.574,27.0,solid,,W,0.909
+2025,12,Texas,Georgia,-3.5,11.712,25.0,8.212,0.682,10.0,solid,,W,0.909
+2025,12,Mississippi State,Missouri,-7.5,10.54,22.0,3.04,0.57,30.0,one_input,ratings,W,0.909
+2025,12,Louisiana Tech,Washington State,-10.0,3.088,25.0,-6.912,0.655,13.0,thin,,L,-1.0
+2025,12,Boise State,San Diego State,-1.5,-12.39,10.0,-13.89,0.789,4.0,solid,,L,-1.0
+2025,12,Wyoming,Fresno State,-3.0,15.968,21.0,12.968,0.773,6.0,solid,,W,0.909
+2025,13,Miami (OH),Buffalo,2.5,-0.337,-17.0,2.163,0.55,29.0,situational,,L,-1.0
+2025,13,Louisiana,Arkansas State,-2.5,-9.044,-4.0,-11.544,0.748,3.0,one_input,ratings,W,0.909
+2025,13,Florida State,NC State,7.0,-10.146,10.0,-3.146,0.572,24.0,solid,,L,-1.0
+2025,13,Tulsa,Army,-10.0,18.681,-1.0,8.681,0.692,6.0,solid,,L,-1.0
+2025,13,Minnesota,Northwestern,-4.0,-4.479,3.0,-8.479,0.688,7.0,one_input,ratings,W,0.909
+2025,13,Miami,Virginia Tech,17.5,-10.666,-17.0,6.834,0.654,10.0,thin,,W,0.909
+2025,13,Old Dominion,Georgia Southern,10.0,1.772,-35.0,11.772,0.752,2.0,ratings_vs_results,,L,-1.0
+2025,13,Nevada,Wyoming,-6.0,-1.696,-6.0,-7.696,0.672,8.0,thin,,W,0.909
+2025,13,Marshall,App State,4.0,-6.504,2.0,-2.504,0.558,26.0,solid,,L,-1.0
+2025,13,Liberty,Louisiana Tech,1.5,-3.602,6.0,-2.102,0.548,30.0,mixed,,L,-1.0
+2025,13,UConn,Florida Atlantic,6.0,-10.729,-3.0,-4.729,0.608,17.0,solid,,L,-1.0
+2025,13,Sam Houston,Middle Tennessee,-6.5,2.691,14.0,-3.809,0.587,20.0,one_input,ratings,L,-1.0
+2025,13,Southern Miss,South Alabama,2.5,2.462,7.0,4.962,0.613,15.0,one_input,ratings,W,0.909
+2025,13,East Carolina,UTSA,1.5,-5.349,34.0,-3.849,0.588,19.0,mixed,,L,-1.0
+2025,13,Michigan State,Iowa,-17.5,19.86,3.0,2.36,0.554,27.0,solid,,L,-1.0
+2025,13,Arkansas,Texas,-8.5,11.478,15.0,2.978,0.568,25.0,one_input,ratings,W,0.909
+2025,13,USC,Oregon,-10.5,18.041,15.0,7.541,0.669,9.0,one_input,ratings,W,0.909
+2025,13,Tulane,Temple,7.5,-3.756,-24.0,3.744,0.586,21.0,mixed,,L,-1.0
+2025,13,Michigan,Maryland,14.0,-9.136,-25.0,4.864,0.611,16.0,situational,,L,-1.0
+2025,13,TCU,Houston,1.5,2.217,-3.0,3.717,0.585,22.0,situational,,L,-1.0
+2025,13,Kansas State,Utah,-17.5,12.287,4.0,-5.213,0.618,14.0,ratings_vs_results,,W,0.909
+2025,13,Nebraska,Penn State,-7.0,15.816,27.0,8.816,0.695,5.0,one_input,ratings,W,0.909
+2025,13,Pittsburgh,Georgia Tech,-2.5,6.841,-14.0,4.341,0.599,18.0,situational,,L,-1.0
+2025,13,New Mexico,Air Force,3.5,2.233,-17.0,5.733,0.63,13.0,situational,,L,-1.0
+2025,13,California,Stanford,4.5,-10.325,21.0,-5.825,0.632,12.0,solid,,L,-1.0
+2025,13,North Texas,Rice,18.5,-5.873,-32.0,12.627,0.767,1.0,situational,,L,-1.0
+2025,13,Tennessee,Florida,3.5,-6.755,-20.0,-3.255,0.575,23.0,solid,,W,0.909
+2025,13,Arizona State,Colorado,7.0,-4.728,-25.0,2.272,0.552,28.0,situational,,L,-1.0
+2025,13,San José State,San Diego State,-10.0,0.884,22.0,-9.116,0.701,4.0,ratings_vs_results,,L,-1.0
+2025,13,Washington,UCLA,10.5,-17.116,-34.0,-6.616,0.649,11.0,solid,,W,0.909
+2025,14,Western Michigan,Eastern Michigan,10.0,-6.021,-10.0,3.979,0.591,26.0,situational,,P,0.0
+2025,14,Navy,Memphis,-4.0,11.873,-11.0,7.873,0.675,8.0,solid,,L,-1.0
+2025,14,Utah,Kansas,10.0,-14.264,-10.0,-4.264,0.597,23.0,solid,,P,0.0
+2025,14,Iowa,Nebraska,5.5,-0.892,-24.0,4.608,0.605,19.0,situational,,L,-1.0
+2025,14,Kent State,Northern Illinois,-4.5,8.981,-4.0,4.481,0.602,21.0,solid,,L,-1.0
+2025,14,Ole Miss,Mississippi State,7.5,-20.258,-19.0,-12.758,0.77,2.0,solid,,W,0.909
+2025,14,San Diego State,New Mexico,1.5,4.749,6.0,6.249,0.641,13.0,one_input,eff,W,0.909
+2025,14,Boise State,Utah State,1.5,-5.001,-1.0,-3.501,0.58,30.0,one_input,ratings,L,-1.0
+2025,14,Texas A&M,Texas,2.5,-5.349,10.0,-2.849,0.565,35.0,thin,,L,-1.0
+2025,14,Arizona,Arizona State,1.5,-5.845,-16.0,-4.345,0.599,22.0,solid,,W,0.909
+2025,14,Miami,Pittsburgh,6.5,-16.934,-31.0,-10.434,0.727,4.0,solid,,W,0.909
+2025,14,Ohio State,Michigan,9.5,-19.832,-18.0,-10.332,0.725,5.0,solid,,W,0.909
+2025,14,Clemson,South Carolina,-2.5,-4.516,-14.0,-7.016,0.657,10.0,mixed,,W,0.909
+2025,14,Kentucky,Louisville,1.5,1.889,41.0,3.389,0.578,31.0,solid,,W,0.909
+2025,14,Iowa State,Oklahoma State,14.0,-19.264,-7.0,-5.264,0.62,16.0,solid,,L,-1.0
+2025,14,Colorado,Kansas State,-16.5,11.501,10.0,-4.999,0.614,17.0,thin,,W,0.909
+2025,14,UCF,BYU,-17.5,20.663,20.0,3.163,0.573,32.0,solid,,W,0.909
+2025,14,Florida International,Sam Houston,10.5,-13.384,-40.0,-2.884,0.566,34.0,solid,,W,0.909
+2025,14,Western Kentucky,Jacksonville State,1.5,0.456,3.0,1.956,0.545,37.0,mixed,,W,0.909
+2025,14,UAB,Tulsa,-9.5,-4.779,-7.0,-14.279,0.795,1.0,one_input,weather,W,0.909
+2025,14,UL Monroe,Louisiana,-11.5,17.181,3.0,5.681,0.629,15.0,solid,,L,-1.0
+2025,14,Boston College,Syracuse,3.0,-7.141,-22.0,-4.141,0.595,25.0,solid,,W,0.909
+2025,14,Middle Tennessee,New Mexico State,-3.0,-3.231,-7.0,-6.231,0.641,14.0,mixed,,W,0.909
+2025,14,Oregon,Washington,6.5,-12.996,-12.0,-6.496,0.646,11.0,solid,,W,0.909
+2025,14,Vanderbilt,Tennessee,-2.5,12.534,-21.0,10.034,0.719,6.0,one_input,ratings,L,-1.0
+2025,14,Penn State,Rutgers,14.0,-20.431,-4.0,-6.431,0.645,12.0,solid,,L,-1.0
+2025,14,Wake Forest,Duke,-2.5,7.43,17.0,4.93,0.612,18.0,ratings_vs_results,,W,0.909
+2025,14,Cincinnati,TCU,-3.0,-1.581,22.0,-4.581,0.604,20.0,thin,,L,-1.0
+2025,14,Wisconsin,Minnesota,2.5,5.1,10.0,7.6,0.67,9.0,solid,,W,0.909
+2025,14,LSU,Oklahoma,-11.5,2.923,4.0,-8.577,0.69,7.0,one_input,weather,W,0.909
+2025,14,Troy,Southern Miss,-7.0,3.861,-10.0,-3.139,0.572,33.0,one_input,ratings,W,0.909
+2025,14,Oregon State,Washington State,-14.0,3.083,24.0,-10.917,0.736,3.0,situational,,L,-1.0
+2025,14,Virginia Tech,Virginia,-8.5,4.292,20.0,-4.208,0.596,24.0,ratings_vs_results,,L,-1.0
+2025,14,Alabama,Auburn,7.0,-9.604,-7.0,-2.604,0.56,36.0,solid,,P,0.0
+2025,14,Northwestern,Illinois,-7.0,10.536,7.0,3.536,0.581,29.0,mixed,,P,0.0
+2025,14,UNLV,Nevada,7.5,-11.336,-25.0,-3.836,0.588,27.0,solid,,W,0.909
+2025,14,Wyoming,Hawai'i,-8.5,4.87,20.0,-3.63,0.583,28.0,thin,,L,-1.0
+2025,15,UNLV,Boise State,-6.0,-3.664,17.0,-9.664,0.712,1.0,mixed,,L,-1.0
+2025,15,North Texas,Tulane,1.5,-3.521,13.0,-2.021,0.547,6.0,mixed,,L,-1.0
+2025,15,Miami (OH),Western Michigan,-2.5,-6.289,10.0,-8.789,0.694,2.0,ratings_vs_results,,L,-1.0
+2025,15,BYU,Texas Tech,-12.5,4.78,27.0,-7.72,0.672,3.0,ratings_vs_results,,L,-1.0
+2025,15,Indiana,Ohio State,-3.5,0.741,-3.0,-2.759,0.563,5.0,thin,,W,0.909
+2025,15,Duke,Virginia,-3.5,-1.328,-7.0,-4.828,0.61,4.0,situational,,W,0.909
+2025,16,Army,Navy,-6.0,-12.81,1.0,-18.81,0.861,1.0,one_input,pace,W,0.909
+2026,2,New Mexico State,Hawai'i,-7.5,2.62,10.0,-4.88,0.623,1.0,thin,,L,-1.0
+2026,3,Syracuse,Pittsburgh,-10.5,13.004,14.0,2.504,0.564,27.0,one_input,ratings,W,0.909
+2026,3,Houston,Texas Tech,-7.5,2.692,2.0,-4.808,0.621,20.0,thin,,W,0.909
+2026,3,North Texas,Texas State,-3.0,-13.282,14.0,-16.282,0.853,4.0,solid,,L,-1.0
+2026,3,Arizona State,Kansas,5.5,0.374,-7.0,5.874,0.647,16.0,thin,,L,-1.0
+2026,3,North Carolina,Clemson,-3.0,-7.616,8.0,-10.616,0.753,9.0,mixed,,L,-1.0
+2026,3,NC State,Vanderbilt,-3.0,7.407,4.0,4.407,0.612,22.0,one_input,ratings,W,0.909
+2026,3,Temple,Toledo,-4.5,21.064,1.0,16.564,0.857,3.0,solid,,L,-1.0
+2026,3,Kentucky,Texas A&M,-16.5,29.436,-10.0,12.936,0.797,5.0,solid,,L,-1.0
+2026,3,SMU,Louisville,-3.0,10.955,10.0,7.955,0.696,12.0,solid,,W,0.909
+2026,3,Stanford,Duke,-9.5,22.386,28.0,12.886,0.796,6.0,solid,,W,0.909
+2026,3,Ball State,Liberty,-14.5,6.47,36.0,-8.03,0.697,11.0,thin,,L,-1.0
+2026,3,Mississippi State,South Carolina,-3.0,9.327,-7.0,6.327,0.658,15.0,one_input,form,L,-1.0
+2026,3,Florida International,Florida Atlantic,-5.5,-0.214,6.0,-5.714,0.643,17.0,solid,,L,-1.0
+2026,3,East Carolina,Old Dominion,-2.5,8.057,-3.0,5.557,0.64,18.0,mixed,,L,-1.0
+2026,3,Charlotte,App State,-16.5,33.709,5.0,17.209,0.866,2.0,solid,,L,-1.0
+2026,3,Georgia Southern,Jacksonville State,-3.5,6.895,4.0,3.395,0.586,25.0,ratings_vs_results,,W,0.909
+2026,3,Nevada,Middle Tennessee,3.5,14.133,7.0,17.633,0.872,1.0,one_input,weather,W,0.909
+2026,3,Western Michigan,Rice,8.5,-10.787,-7.0,-2.287,0.558,28.0,solid,,L,-1.0
+2026,3,UConn,Southern Miss,3.5,0.766,-28.0,4.266,0.608,23.0,situational,,L,-1.0
+2026,3,Ohio,South Alabama,-7.0,11.867,5.0,4.867,0.623,19.0,one_input,form,L,-1.0
+2026,3,Georgia State,UCF,-17.5,21.927,14.0,4.427,0.612,21.0,solid,,L,-1.0
+2026,3,West Virginia,Virginia,-10.5,22.527,-11.0,12.027,0.78,7.0,solid,,L,-1.0
+2026,3,Virginia Tech,Maryland,2.5,0.698,-9.0,3.198,0.581,26.0,ratings_vs_results,,L,-1.0
+2026,3,BYU,Colorado State,17.5,-13.245,-18.0,4.255,0.608,24.0,situational,,L,-1.0
+2026,3,LSU,Ole Miss,3.0,4.398,8.0,7.398,0.683,13.0,one_input,ratings,W,0.909
+2026,3,UAB,Louisiana,-7.0,13.867,7.0,6.867,0.671,14.0,one_input,form,P,0.0
+2026,3,James Madison,San Diego State,-3.0,-7.668,-13.0,-10.668,0.754,8.0,solid,,W,0.909
+2026,3,Purdue,UCLA,-13.5,4.082,14.0,-9.418,0.728,10.0,thin,,L,-1.0
+2026,4,Army,Temple,4.0,-7.266,-4.0,-3.266,0.583,30.0,mixed,,P,0.0
+2026,4,Navy,UAB,6.5,-11.807,4.0,-5.307,0.634,20.0,solid,,L,-1.0
+2026,4,Clemson,California,2.5,10.8,-14.0,13.3,0.804,3.0,one_input,form,L,-1.0
+2026,4,UNLV,Akron,13.5,-0.267,-28.0,13.233,0.803,4.0,thin,,L,-1.0
+2026,4,Virginia Tech,Boston College,14.5,-3.933,-7.0,10.567,0.752,8.0,ratings_vs_results,,W,0.909
+2026,4,Colorado State,UTSA,-14.5,6.274,14.0,-8.226,0.702,14.0,thin,,W,0.909
+2026,4,Ball State,Kent State,-2.5,0.037,13.0,-2.463,0.563,34.0,mixed,,L,-1.0
+2026,4,Texas,Tennessee,5.5,3.682,-3.0,9.182,0.723,12.0,mixed,,W,0.909
+2026,4,San Diego State,Toledo,-2.5,6.06,25.0,3.56,0.591,28.0,mixed,,W,0.909
+2026,4,Wake Forest,Louisville,-11.5,13.431,-3.0,1.931,0.549,38.0,solid,,L,-1.0
+2026,4,UCLA,Maryland,2.5,8.034,-51.0,10.534,0.751,10.0,solid,,L,-1.0
+2026,4,UConn,Miami (OH),-2.5,-11.481,3.0,-13.981,0.816,2.0,solid,,L,-1.0
+2026,4,Boise State,Western Michigan,8.5,-3.641,-25.0,4.859,0.623,22.0,situational,,L,-1.0
+2026,4,Utah,Iowa State,7.5,-5.15,-14.0,2.35,0.56,35.0,situational,,L,-1.0
+2026,4,Oklahoma,Georgia,-11.5,18.064,28.0,6.564,0.664,18.0,solid,,W,0.909
+2026,4,Iowa,Michigan,-4.5,-9.951,-1.0,-14.451,0.824,1.0,solid,,W,0.909
+2026,4,Houston,Georgia Southern,17.5,-14.059,-14.0,3.441,0.588,29.0,situational,,W,0.909
+2026,4,Vanderbilt,Auburn,-10.0,-0.56,6.0,-10.56,0.752,9.0,solid,,W,0.909
+2026,4,Nebraska,Michigan State,6.0,-9.978,-18.0,-3.978,0.601,26.0,solid,,W,0.909
+2026,4,Wisconsin,Penn State,-9.5,16.817,-4.0,7.317,0.681,17.0,solid,,L,-1.0
+2026,4,South Florida,Bowling Green,17.5,-25.903,-8.0,-8.403,0.706,13.0,solid,,L,-1.0
+2026,4,James Madison,Old Dominion,7.0,-14.843,-26.0,-7.843,0.693,15.0,solid,,W,0.909
+2026,4,Louisiana,Charlotte,9.5,-16.907,-27.0,-7.407,0.683,16.0,solid,,W,0.909
+2026,4,South Carolina,Alabama,-12.5,15.632,31.0,3.132,0.58,32.0,solid,,W,0.909
+2026,4,Kansas State,Cincinnati,6.0,-8.126,5.0,-2.126,0.554,37.0,solid,,L,-1.0
+2026,4,Southern Miss,Tulane,-17.5,11.343,3.0,-6.157,0.654,19.0,thin,,W,0.909
+2026,4,Oklahoma State,West Virginia,-1.5,5.564,-17.0,4.064,0.603,25.0,mixed,,L,-1.0
+2026,4,Middle Tennessee,Jacksonville State,-7.0,3.829,10.0,-3.171,0.581,31.0,thin,,L,-1.0
+2026,4,Kennesaw State,Arkansas State,-6.5,8.679,3.0,2.179,0.556,36.0,one_input,form,L,-1.0
+2026,4,Arizona,Washington State,11.5,-1.643,-10.0,9.857,0.737,11.0,situational,,W,0.909
+2026,4,Oregon,USC,3.5,-6.515,-14.0,-3.015,0.577,33.0,solid,,W,0.909
+2026,4,App State,NC State,-12.5,8.789,10.0,-3.711,0.594,27.0,one_input,returning,W,0.909
+2026,4,Troy,Utah State,-3.0,-1.988,11.0,-4.988,0.626,21.0,solid,,L,-1.0
+2026,4,Florida Atlantic,UL Monroe,11.5,-6.837,-28.0,4.663,0.618,23.0,situational,,L,-1.0
+2026,4,Oregon State,UTEP,11.5,-6.98,-26.0,4.52,0.614,24.0,situational,,L,-1.0
+2026,4,Rice,Fresno State,-12.5,23.969,14.0,11.469,0.77,7.0,solid,,W,0.909
+2026,4,Air Force,Nevada,4.5,7.881,-3.0,12.381,0.787,5.0,one_input,pace,W,0.909
+2026,4,Georgia Tech,Stanford,3.0,-14.904,7.0,-11.904,0.778,6.0,solid,,L,-1.0
+2026,5,Western Kentucky,New Mexico State,-1.5,-4.0,21.0,-5.5,0.638,19.0,one_input,ratings,L,-1.0
+2026,5,North Texas,Tulsa,3.0,-5.365,-1.0,-2.365,0.56,36.0,solid,,L,-1.0
+2026,5,Pittsburgh,Virginia Tech,-1.5,-7.991,-2.0,-9.491,0.729,10.0,solid,,W,0.909
+2026,5,Penn State,Northwestern,3.0,-0.354,21.0,2.646,0.568,35.0,thin,,W,0.909
+2026,5,Memphis,Charlotte,18.5,-15.076,-51.0,3.424,0.587,30.0,situational,,L,-1.0
+2026,5,Stanford,Wake Forest,-14.5,18.905,54.0,4.405,0.612,23.0,solid,,W,0.909
+2026,5,Michigan,Minnesota,6.5,2.621,6.0,9.121,0.721,11.0,thin,,W,0.909
+2026,5,West Virginia,Iowa State,-3.0,13.562,3.0,10.562,0.752,6.0,solid,,P,0.0
+2026,5,Syracuse,UConn,6.5,6.626,-1.0,13.126,0.801,5.0,one_input,ratings,W,0.909
+2026,5,UCF,Houston,-10.5,7.184,10.0,-3.316,0.584,31.0,one_input,returning,W,0.909
+2026,5,Michigan State,Wisconsin,-8.5,13.643,28.0,5.143,0.63,20.0,solid,,W,0.909
+2026,5,Western Michigan,Buffalo,13.5,-7.086,-3.0,6.414,0.66,16.0,situational,,W,0.909
+2026,5,California,UNLV,-1.5,4.451,8.0,2.951,0.575,33.0,ratings_vs_results,,W,0.909
+2026,5,Old Dominion,Georgia State,-1.5,-24.969,32.0,-26.469,0.956,1.0,one_input,ratings,L,-1.0
+2026,5,Akron,Central Michigan,-6.5,2.599,24.0,-3.901,0.599,28.0,thin,,L,-1.0
+2026,5,Louisville,NC State,5.5,-2.226,3.0,3.274,0.583,32.0,situational,,W,0.909
+2026,5,Auburn,Tennessee,-6.0,13.996,10.0,7.996,0.697,14.0,solid,,W,0.909
+2026,5,Bowling Green,Miami (OH),-10.5,14.873,-4.0,4.373,0.611,24.0,one_input,form,L,-1.0
+2026,5,Ohio,Kent State,3.5,-9.271,-3.0,-5.771,0.645,17.0,solid,,L,-1.0
+2026,5,Ohio State,Iowa,14.5,-4.087,-17.0,10.413,0.749,7.0,situational,,L,-1.0
+2026,5,Virginia,Florida State,1.5,-9.378,31.0,-7.878,0.694,15.0,solid,,L,-1.0
+2026,5,Marshall,James Madison,-14.5,36.552,28.0,22.052,0.922,2.0,solid,,W,0.909
+2026,5,Kentucky,South Carolina,-2.5,7.524,-1.0,5.024,0.627,21.0,one_input,weather,L,-1.0
+2026,5,Purdue,Illinois,-9.5,19.8,-7.0,10.3,0.746,8.0,solid,,L,-1.0
+2026,5,Oregon State,Colorado State,7.0,1.223,-30.0,8.223,0.702,13.0,situational,,L,-1.0
+2026,5,UL Monroe,South Alabama,-12.5,16.404,17.0,3.904,0.599,27.0,solid,,W,0.909
+2026,5,UTSA,Rice,11.5,-1.429,-2.0,10.071,0.741,9.0,one_input,weather,W,0.909
+2026,5,Arkansas,Texas A&M,-13.5,9.68,27.0,-3.82,0.597,29.0,thin,,L,-1.0
+2026,5,Washington,USC,-7.5,11.789,4.0,4.289,0.609,25.0,solid,,L,-1.0
+2026,5,Army,Louisiana Tech,-1.5,3.797,2.0,2.297,0.559,37.0,situational,,W,0.909
+2026,5,Texas Tech,Colorado,13.5,-9.396,-22.0,4.104,0.604,26.0,thin,,L,-1.0
+2026,5,Utah State,Boise State,-19.5,13.94,19.0,-5.56,0.64,18.0,thin,,W,0.909
+2026,5,Temple,South Florida,-5.5,22.962,-4.0,17.462,0.869,3.0,solid,,L,-1.0
+2026,5,Miami,Clemson,14.0,-28.87,-28.0,-14.87,0.831,4.0,solid,,W,0.909
+2026,5,Arkansas State,Louisiana,-4.5,7.202,3.0,2.702,0.569,34.0,solid,,L,-1.0
+2026,5,Texas State,San Diego State,10.0,-1.009,2.0,8.991,0.719,12.0,thin,,W,0.909
+2026,5,Baylor,Arizona State,-3.5,8.19,-36.0,4.69,0.619,22.0,solid,,L,-1.0
+2026,6,Southern Miss,Troy,-9.5,1.88,21.0,-7.62,0.688,10.0,thin,,L,-1.0
+2026,6,New Mexico State,Florida International,-7.0,3.876,19.0,-3.124,0.58,28.0,thin,,L,-1.0
+2026,6,Sam Houston,Liberty,-13.5,8.083,32.0,-5.417,0.636,18.0,thin,,L,-1.0
+2026,6,South Florida,UTSA,-5.5,-4.239,7.0,-9.739,0.735,4.0,solid,,L,-1.0
+2026,6,Washington State,Utah State,-4.0,-0.149,1.0,-4.149,0.605,24.0,solid,,W,0.909
+2026,6,Wyoming,San José State,-4.5,10.856,-3.0,6.356,0.659,15.0,solid,,L,-1.0
+2026,6,Iowa,Washington,-3.0,-0.861,-17.0,-3.861,0.598,25.0,solid,,W,0.909
+2026,6,Tulane,Army,-5.5,11.491,3.0,5.991,0.65,17.0,one_input,form,L,-1.0
+2026,6,Indiana,Nebraska,9.5,-13.108,-3.0,-3.608,0.592,27.0,one_input,ratings,L,-1.0
+2026,6,Texas A&M,Missouri,-4.5,8.235,21.0,3.735,0.595,26.0,mixed,,W,0.909
+2026,6,Wake Forest,NC State,4.0,-1.0,-24.0,3.0,0.577,30.0,situational,,L,-1.0
+2026,6,Arizona,West Virginia,3.5,-8.809,-21.0,-5.309,0.634,19.0,solid,,W,0.909
+2026,6,North Carolina,Pittsburgh,-3.5,12.798,-4.0,9.298,0.725,5.0,solid,,L,-1.0
+2026,6,Rice,East Carolina,-10.0,25.584,16.0,15.584,0.842,2.0,solid,,W,0.909
+2026,6,Kent State,Western Michigan,-13.5,20.118,31.0,6.618,0.665,14.0,solid,,W,0.909
+2026,6,Virginia Tech,California,11.5,-2.699,5.0,8.801,0.714,6.0,thin,,W,0.909
+2026,6,Illinois,Michigan State,2.5,-10.26,-1.0,-7.76,0.691,9.0,solid,,L,-1.0
+2026,6,Ole Miss,Vanderbilt,9.5,-2.881,-35.0,6.619,0.665,13.0,thin,,L,-1.0
+2026,6,Texas,Oklahoma,7.5,-2.242,3.0,5.258,0.632,20.0,ratings_vs_results,,W,0.909
+2026,6,UCLA,Oregon,-10.0,26.637,-2.0,16.637,0.858,1.0,one_input,ratings,L,-1.0
+2026,6,Central Michigan,Ohio,-2.5,5.097,17.0,2.597,0.566,32.0,mixed,,W,0.909
+2026,6,San Diego State,Oregon State,-14.5,6.575,52.0,-7.925,0.695,8.0,one_input,ratings,L,-1.0
+2026,6,Nevada,UTEP,10.0,-12.41,-17.0,-2.41,0.562,33.0,solid,,W,0.909
+2026,6,UAB,Memphis,-15.5,23.059,25.0,7.559,0.687,11.0,solid,,W,0.909
+2026,6,Coastal Carolina,Marshall,-4.5,-0.238,-6.0,-4.738,0.62,22.0,mixed,,W,0.909
+2026,6,Georgia,Alabama,-2.5,-3.526,-3.0,-6.026,0.651,16.0,solid,,W,0.909
+2026,6,James Madison,Georgia Southern,7.0,-20.123,-3.0,-13.123,0.801,3.0,solid,,L,-1.0
+2026,6,Air Force,Northern Illinois,7.0,-14.067,-21.0,-7.067,0.675,12.0,solid,,W,0.909
+2026,6,Syracuse,Virginia,-14.0,9.096,3.0,-4.904,0.624,21.0,situational,,W,0.909
+2026,6,Louisiana,Louisiana Tech,-3.0,6.03,1.0,3.03,0.577,29.0,thin,,L,-1.0
+2026,6,Kansas,Utah,-15.5,18.442,17.0,2.942,0.575,31.0,solid,,W,0.909
+2026,6,Minnesota,Purdue,2.5,-11.269,28.0,-8.769,0.714,7.0,solid,,L,-1.0
+2026,6,Boise State,Fresno State,8.5,-3.925,-7.0,4.575,0.616,23.0,situational,,W,0.909
+2026,7,Florida International,Jacksonville State,-3.0,-0.644,3.0,-3.644,0.593,27.0,solid,,P,0.0
+2026,7,Western Kentucky,Sam Houston,1.5,-9.165,-13.0,-7.665,0.689,6.0,one_input,ratings,W,0.909
+2026,7,East Carolina,UAB,5.5,-11.491,13.0,-5.991,0.65,14.0,solid,,L,-1.0
+2026,7,Georgia Southern,Old Dominion,3.0,1.539,-8.0,4.539,0.615,21.0,one_input,ratings,L,-1.0
+2026,7,Colorado State,Texas State,-15.5,18.948,39.0,3.448,0.588,29.0,solid,,W,0.909
+2026,7,Washington,Purdue,-3.0,-1.974,-12.0,-4.974,0.626,19.0,one_input,ratings,W,0.909
+2026,7,App State,Coastal Carolina,1.5,-4.304,-3.0,-2.804,0.572,37.0,mixed,,W,0.909
+2026,7,Pittsburgh,Boston College,6.5,-13.334,6.0,-6.834,0.67,9.0,solid,,L,-1.0
+2026,7,Virginia,SMU,-10.0,6.895,10.0,-3.105,0.579,34.0,thin,,P,0.0
+2026,7,Cincinnati,West Virginia,-1.5,-3.956,3.0,-5.456,0.637,16.0,solid,,L,-1.0
+2026,7,Florida,Texas,-13.5,7.744,-3.0,-5.756,0.644,15.0,thin,,W,0.909
+2026,7,Ohio State,Indiana,3.0,1.281,-4.0,4.281,0.608,25.0,thin,,L,-1.0
+2026,7,Ball State,Bowling Green,-6.0,13.216,-1.0,7.216,0.679,8.0,solid,,L,-1.0
+2026,7,Mississippi State,LSU,-17.5,13.894,31.0,-3.606,0.592,28.0,situational,,L,-1.0
+2026,7,Georgia State,James Madison,-7.5,27.435,27.0,19.935,0.9,1.0,one_input,ratings,W,0.909
+2026,7,Northwestern,Michigan State,7.5,-2.445,-3.0,5.055,0.627,18.0,situational,,W,0.909
+2026,7,Rutgers,Maryland,-5.5,-2.063,-7.0,-7.563,0.687,7.0,mixed,,W,0.909
+2026,7,Charlotte,Temple,-17.5,25.337,-7.0,7.837,0.693,4.0,solid,,L,-1.0
+2026,7,Missouri,Ole Miss,-4.0,0.584,28.0,-3.416,0.587,30.0,solid,,L,-1.0
+2026,7,Alabama,Tennessee,7.5,-5.005,16.0,2.495,0.564,41.0,situational,,W,0.909
+2026,7,UNLV,Air Force,-1.5,4.005,10.0,2.505,0.564,40.0,mixed,,W,0.909
+2026,7,Northern Illinois,Wyoming,-7.0,9.283,18.0,2.283,0.558,42.0,one_input,form,W,0.909
+2026,7,Akron,Miami (OH),-9.5,12.824,20.0,3.324,0.585,32.0,solid,,W,0.909
+2026,7,Georgia Tech,Virginia Tech,-8.5,0.731,10.0,-7.769,0.691,5.0,one_input,ratings,L,-1.0
+2026,7,North Carolina,Duke,-3.0,14.47,-4.0,11.47,0.77,3.0,solid,,L,-1.0
+2026,7,Penn State,Michigan,-6.0,1.38,3.0,-4.62,0.617,20.0,thin,,W,0.909
+2026,7,Auburn,Georgia,-19.5,16.864,-3.0,-2.636,0.567,39.0,situational,,W,0.909
+2026,7,Troy,Louisiana,-3.0,-0.377,27.0,-3.377,0.586,31.0,solid,,L,-1.0
+2026,7,Washington State,Oregon State,-18.5,3.252,18.0,-15.248,0.837,2.0,one_input,ratings,W,0.909
+2026,7,Arkansas,Vanderbilt,-5.5,11.552,-10.0,6.052,0.651,12.0,solid,,L,-1.0
+2026,7,TCU,Baylor,-3.5,9.917,-11.0,6.417,0.66,11.0,one_input,form,L,-1.0
+2026,7,Arkansas State,Southern Miss,5.5,-1.075,-10.0,4.425,0.612,23.0,situational,,L,-1.0
+2026,7,Kentucky,Oklahoma,-7.0,10.232,-8.0,3.232,0.582,33.0,one_input,ratings,L,-1.0
+2026,7,Notre Dame,BYU,10.5,-4.031,4.0,6.469,0.661,10.0,situational,,W,0.909
+2026,7,Louisville,Syracuse,14.5,-8.45,-8.0,6.05,0.651,13.0,situational,,W,0.909
+2026,7,Wisconsin,UCLA,-1.5,5.928,10.0,4.428,0.612,22.0,mixed,,W,0.909
+2026,7,Oklahoma State,Houston,-4.0,7.065,3.0,3.065,0.578,35.0,one_input,ratings,L,-1.0
+2026,7,Navy,UTSA,-5.5,9.816,4.0,4.316,0.609,24.0,solid,,L,-1.0
+2026,7,San José State,UTEP,6.5,-10.594,-13.0,-4.094,0.604,26.0,solid,,W,0.909
+2026,7,Utah,Colorado,15.5,-18.273,-3.0,-2.773,0.571,38.0,solid,,L,-1.0
+2026,7,New Mexico,Hawai'i,14.5,-9.124,-11.0,5.376,0.635,17.0,situational,,W,0.909
+2026,7,Fresno State,San Diego State,6.5,-4.585,3.0,1.915,0.549,43.0,ratings_vs_results,,W,0.909
+2026,7,Wake Forest,California,10.0,-6.972,-34.0,3.028,0.577,36.0,situational,,L,-1.0
+2026,8,South Alabama,Marshall,1.5,-3.838,7.0,-2.338,0.56,33.0,solid,,L,-1.0
+2026,8,New Mexico State,Sam Houston,3.0,-0.846,-6.0,2.154,0.555,35.0,situational,,L,-1.0
+2026,8,Liberty,Kennesaw State,8.5,-6.291,-28.0,2.209,0.556,34.0,ratings_vs_results,,L,-1.0
+2026,8,James Madison,App State,12.5,-4.742,3.0,7.758,0.691,7.0,thin,,W,0.909
+2026,8,Massachusetts,UConn,-12.5,41.191,19.0,28.691,0.968,1.0,one_input,ratings,W,0.909
+2026,8,Duke,Virginia,-2.5,0.065,-3.0,-2.435,0.562,31.0,mixed,,W,0.909
+2026,8,Army,Tulsa,1.5,-5.563,-3.0,-4.063,0.603,19.0,solid,,W,0.909
+2026,8,NC State,Stanford,7.5,-10.875,3.0,-3.375,0.586,27.0,solid,,L,-1.0
+2026,8,Rice,Florida Atlantic,-9.5,13.85,2.0,4.35,0.61,18.0,solid,,L,-1.0
+2026,8,California,SMU,-18.5,21.768,39.0,3.268,0.583,29.0,solid,,W,0.909
+2026,8,Western Michigan,Toledo,-2.5,10.343,7.0,7.843,0.693,6.0,solid,,W,0.909
+2026,8,Akron,Kent State,-3.0,-0.299,15.0,-3.299,0.584,28.0,thin,,L,-1.0
+2026,8,Oregon,Illinois,10.5,-6.907,11.0,3.593,0.591,24.0,situational,,W,0.909
+2026,8,Michigan State,UCLA,-16.5,13.033,18.0,-3.467,0.588,25.0,ratings_vs_results,,L,-1.0
+2026,8,Oklahoma,Mississippi State,1.5,-4.934,-8.0,-3.434,0.587,26.0,one_input,ratings,W,0.909
+2026,8,Texas A&M,Alabama,-13.5,6.041,11.0,-7.459,0.684,8.0,ratings_vs_results,,W,0.909
+2026,8,Tennessee,South Carolina,-2.5,-2.034,3.0,-4.534,0.615,16.0,mixed,,L,-1.0
+2026,8,BYU,UCF,7.5,-13.714,8.0,-6.214,0.655,12.0,solid,,L,-1.0
+2026,8,Boston College,Georgia Tech,-6.5,8.877,-22.0,2.377,0.561,32.0,one_input,ratings,L,-1.0
+2026,8,Hawai'i,Northern Illinois,3.0,-11.242,-35.0,-8.242,0.702,5.0,solid,,W,0.909
+2026,8,Iowa,Minnesota,7.5,-11.392,3.0,-3.892,0.599,20.0,solid,,L,-1.0
+2026,8,Bowling Green,Buffalo,-3.0,7.405,7.0,4.405,0.612,17.0,mixed,,W,0.909
+2026,8,North Texas,Navy,3.0,-6.87,-10.0,-3.87,0.598,21.0,solid,,W,0.909
+2026,8,Kansas State,Arizona State,1.5,-8.082,11.0,-6.582,0.664,9.0,one_input,scoring,L,-1.0
+2026,8,Eastern Michigan,Ohio,-11.5,16.132,4.0,4.632,0.617,15.0,solid,,L,-1.0
+2026,8,UL Monroe,Troy,-13.5,18.693,-7.0,5.193,0.631,14.0,solid,,L,-1.0
+2026,8,Louisiana,Southern Miss,11.5,-1.398,4.0,10.102,0.742,2.0,ratings_vs_results,,W,0.909
+2026,8,Boise State,Washington State,14.5,-5.963,-21.0,8.537,0.709,4.0,situational,,L,-1.0
+2026,8,San Diego State,Colorado State,1.5,-5.334,7.0,-3.834,0.597,22.0,one_input,ratings,L,-1.0
+2026,8,Georgia State,Arkansas State,2.5,3.481,6.0,5.981,0.65,13.0,one_input,ratings,W,0.909
+2026,8,Virginia Tech,Clemson,-3.0,6.75,-4.0,3.75,0.595,23.0,one_input,ratings,L,-1.0
+2026,8,Utah State,Texas State,-14.5,17.516,3.0,3.016,0.577,30.0,solid,,L,-1.0
+2026,8,USC,Wisconsin,1.5,-11.518,17.0,-10.018,0.74,3.0,one_input,ratings,L,-1.0
+2026,8,Ole Miss,Texas,-3.0,-3.439,7.0,-6.439,0.661,11.0,mixed,,L,-1.0
+2026,8,Houston,Utah,-6.5,12.993,8.0,6.493,0.662,10.0,solid,,W,0.909
+2026,9,Kennesaw State,Middle Tennessee,1.5,4.865,-16.0,6.365,0.659,13.0,thin,,L,-1.0
+2026,9,Troy,James Madison,-17.5,24.149,-3.0,6.649,0.666,12.0,solid,,L,-1.0
+2026,9,Florida Atlantic,North Texas,-15.5,21.374,7.0,5.874,0.647,14.0,solid,,L,-1.0
+2026,9,Tulane,Charlotte,8.5,-10.774,-7.0,-2.274,0.558,37.0,mixed,,L,-1.0
+2026,9,Baylor,UCF,2.5,2.454,-32.0,4.954,0.625,20.0,situational,,L,-1.0
+2026,9,SMU,Syracuse,8.5,-12.001,3.0,-3.501,0.589,26.0,solid,,L,-1.0
+2026,9,UAB,South Florida,-7.5,15.998,20.0,8.498,0.708,8.0,one_input,ratings,W,0.909
+2026,9,California,NC State,-9.5,14.441,21.0,4.941,0.625,21.0,solid,,W,0.909
+2026,9,Illinois,Maryland,3.0,-6.323,-3.0,-3.323,0.585,27.0,solid,,P,0.0
+2026,9,Boston College,Duke,-7.0,14.262,45.0,7.262,0.68,10.0,solid,,W,0.909
+2026,9,Wisconsin,Iowa,-2.5,14.919,30.0,12.419,0.788,2.0,one_input,ratings,W,0.909
+2026,9,Bowling Green,Western Michigan,-14.0,16.917,13.0,2.917,0.574,32.0,solid,,L,-1.0
+2026,9,Michigan,Rutgers,16.5,-7.362,-7.0,9.138,0.722,7.0,situational,,W,0.909
+2026,9,Auburn,Ole Miss,-10.5,15.206,30.0,4.706,0.619,23.0,solid,,W,0.909
+2026,9,Marshall,Old Dominion,3.0,-0.578,-13.0,2.422,0.562,36.0,ratings_vs_results,,L,-1.0
+2026,9,Coastal Carolina,Georgia State,-3.5,7.704,-11.0,4.204,0.607,24.0,one_input,form,L,-1.0
+2026,9,Kansas State,Colorado,-3.0,-6.929,3.0,-9.929,0.739,4.0,solid,,P,0.0
+2026,9,Temple,East Carolina,-4.0,6.962,8.0,2.962,0.576,31.0,one_input,ratings,W,0.909
+2026,9,Louisiana Tech,South Alabama,6.0,-9.072,-15.0,-3.072,0.578,29.0,solid,,W,0.909
+2026,9,Florida International,Liberty,-13.5,11.287,39.0,-2.213,0.557,38.0,thin,,L,-1.0
+2026,9,Kansas,TCU,-6.5,3.48,6.0,-3.02,0.577,30.0,situational,,W,0.909
+2026,9,Northwestern,Oregon,-4.0,6.87,8.0,2.87,0.573,33.0,one_input,ratings,W,0.909
+2026,9,Florida,Georgia,-11.5,20.866,19.0,9.366,0.727,6.0,solid,,W,0.909
+2026,9,Colorado State,Utah State,-9.5,3.689,17.0,-5.811,0.646,15.0,thin,,L,-1.0
+2026,9,Southern Miss,UL Monroe,3.5,-6.206,-14.0,-2.706,0.569,35.0,solid,,W,0.909
+2026,9,Arizona State,BYU,-17.5,12.393,7.0,-5.107,0.629,19.0,thin,,W,0.909
+2026,9,Utah,Cincinnati,7.0,-14.142,-24.0,-7.142,0.677,11.0,solid,,W,0.909
+2026,9,New Mexico,San José State,15.5,-18.325,-5.0,-2.825,0.572,34.0,solid,,L,-1.0
+2026,9,App State,Georgia Southern,-6.0,2.681,16.0,-3.319,0.585,28.0,mixed,,L,-1.0
+2026,9,Clemson,Florida State,-4.5,12.121,-12.0,7.621,0.688,9.0,solid,,L,-1.0
+2026,9,Oklahoma State,Iowa State,10.0,8.247,2.0,18.247,0.88,1.0,one_input,ratings,W,0.909
+2026,9,Mississippi State,Texas,-19.5,13.937,28.0,-5.563,0.64,17.0,thin,,L,-1.0
+2026,9,Ohio State,USC,6.5,-12.193,12.0,-5.693,0.643,16.0,solid,,L,-1.0
+2026,9,Georgia Tech,Pittsburgh,-9.5,13.118,23.0,3.618,0.592,25.0,one_input,form,W,0.909
+2026,9,Missouri,Arkansas,10.5,-5.35,-24.0,5.15,0.63,18.0,situational,,L,-1.0
+2026,9,Washington,Nebraska,-7.5,-3.08,-7.0,-10.58,0.752,3.0,one_input,ratings,W,0.909
+2026,9,Army,Memphis,-6.0,1.065,27.0,-4.935,0.625,22.0,thin,,L,-1.0
+2026,9,Oregon State,Fresno State,6.0,3.881,16.0,9.881,0.738,5.0,one_input,ratings,W,0.909
+2026,10,Central Michigan,Eastern Michigan,2.5,2.978,-28.0,5.478,0.638,20.0,mixed,,L,-1.0
+2026,10,UTSA,Florida Atlantic,7.0,-5.036,31.0,1.964,0.55,43.0,thin,,W,0.909
+2026,10,James Madison,Southern Miss,13.5,-9.981,-31.0,3.519,0.59,31.0,thin,,L,-1.0
+2026,10,Virginia Tech,SMU,-6.0,13.266,23.0,7.266,0.68,11.0,one_input,ratings,W,0.909
+2026,10,South Florida,East Carolina,-1.5,-5.365,3.0,-6.865,0.671,13.0,solid,,L,-1.0
+2026,10,Nebraska,Illinois,4.5,-0.538,11.0,3.962,0.601,29.0,ratings_vs_results,,W,0.909
+2026,10,TCU,Arizona,-6.0,14.562,1.0,8.562,0.709,9.0,solid,,L,-1.0
+2026,10,Texas,Missouri,2.5,0.995,-14.0,3.495,0.589,32.0,situational,,L,-1.0
+2026,10,BYU,Utah,-4.0,13.057,8.0,9.057,0.72,7.0,solid,,W,0.909
+2026,10,North Carolina,UConn,7.5,9.097,-17.0,16.597,0.857,1.0,mixed,,L,-1.0
+2026,10,Tulsa,Tulane,3.0,2.548,-50.0,5.548,0.639,19.0,one_input,ratings,L,-1.0
+2026,10,Maryland,Purdue,-5.5,10.295,-5.0,4.795,0.621,26.0,one_input,form,L,-1.0
+2026,10,Duke,NC State,4.5,-6.563,-38.0,-2.063,0.553,41.0,solid,,W,0.909
+2026,10,Arkansas,Auburn,-10.5,8.418,3.0,-2.082,0.553,40.0,situational,,W,0.909
+2026,10,Oklahoma State,Kansas State,7.0,5.979,-38.0,12.979,0.798,2.0,one_input,ratings,L,-1.0
+2026,10,Old Dominion,Coastal Carolina,-6.5,-3.629,-13.0,-10.129,0.743,4.0,one_input,ratings,W,0.909
+2026,10,Georgia State,App State,-6.5,8.711,-16.0,2.211,0.557,38.0,one_input,ratings,L,-1.0
+2026,10,Texas A&M,South Carolina,-6.5,4.199,8.0,-2.301,0.559,35.0,one_input,ratings,L,-1.0
+2026,10,Western Kentucky,Middle Tennessee,1.5,-3.794,9.0,-2.294,0.559,36.0,one_input,ratings,L,-1.0
+2026,10,Cincinnati,Houston,-10.0,4.703,7.0,-5.297,0.633,21.0,mixed,,W,0.909
+2026,10,Penn State,Washington,-2.5,4.75,-3.0,2.25,0.558,37.0,mixed,,L,-1.0
+2026,10,Marshall,Georgia Southern,-7.0,2.078,36.0,-4.922,0.624,25.0,ratings_vs_results,,L,-1.0
+2026,10,Charlotte,UAB,-7.5,13.168,11.0,5.668,0.642,18.0,solid,,W,0.909
+2026,10,Oregon,Ohio State,-7.5,14.212,-13.0,6.712,0.667,14.0,solid,,L,-1.0
+2026,10,UCF,Kansas,-6.0,10.982,-1.0,4.982,0.626,23.0,one_input,form,L,-1.0
+2026,10,Rice,North Texas,-14.5,23.56,29.0,9.06,0.72,6.0,solid,,W,0.909
+2026,10,Louisiana Tech,Troy,7.0,-3.279,-24.0,3.721,0.595,30.0,situational,,L,-1.0
+2026,10,Rutgers,Wisconsin,-19.5,10.892,21.0,-8.608,0.71,8.0,ratings_vs_results,,L,-1.0
+2026,10,South Alabama,Louisiana,-7.0,4.354,2.0,-2.646,0.568,34.0,thin,,W,0.909
+2026,10,Boise State,Colorado State,15.5,-13.405,-26.0,2.095,0.554,39.0,situational,,L,-1.0
+2026,10,Sam Houston,Jacksonville State,-17.5,22.436,33.0,4.936,0.625,24.0,solid,,W,0.909
+2026,10,Georgia,Ole Miss,3.5,-0.736,-35.0,2.764,0.571,33.0,situational,,L,-1.0
+2026,10,Iowa,Northwestern,3.0,0.988,-14.0,3.988,0.601,28.0,thin,,L,-1.0
+2026,10,Louisville,Georgia Tech,14.5,-8.822,-27.0,5.678,0.643,17.0,situational,,L,-1.0
+2026,10,Michigan State,Michigan,-14.0,19.201,-9.0,5.201,0.631,22.0,solid,,L,-1.0
+2026,10,Miami,Notre Dame,-7.5,5.492,7.0,-2.008,0.551,42.0,thin,,W,0.909
+2026,10,Air Force,Army,-3.5,13.612,-3.0,10.112,0.742,5.0,solid,,L,-1.0
+2026,10,Colorado,Arizona State,-3.0,10.559,10.0,7.559,0.687,10.0,thin,,W,0.909
+2026,10,Oklahoma,Florida,-4.0,-2.123,-16.0,-6.123,0.653,16.0,ratings_vs_results,,W,0.909
+2026,10,Liberty,New Mexico State,14.5,-10.12,-16.0,4.38,0.611,27.0,situational,,L,-1.0
+2026,10,West Virginia,Texas Tech,-16.5,23.584,5.0,7.084,0.676,12.0,one_input,ratings,L,-1.0
+2026,10,Hawai'i,UTEP,7.0,-13.391,-3.0,-6.391,0.66,15.0,solid,,L,-1.0
+2026,10,Wyoming,UNLV,-3.0,13.216,-6.0,10.216,0.744,3.0,one_input,ratings,L,-1.0
+2026,11,Western Michigan,Akron,15.5,-9.254,-28.0,6.246,0.656,2.0,situational,,L,-1.0
+2026,11,Kent State,Bowling Green,-3.5,9.494,5.0,5.994,0.65,3.0,solid,,W,0.909
+2026,11,Massachusetts,Toledo,-14.0,48.017,24.0,34.017,0.986,1.0,one_input,ratings,W,0.909
+2026,11,Buffalo,Ball State,1.5,-4.847,-21.0,-3.347,0.585,4.0,solid,,W,0.909

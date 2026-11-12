@@ -1,0 +1,595 @@
+{
+  "generated_at": "2026-11-12T20:24:02.979794+00:00",
+  "seasons_graded": [
+    2024,
+    2025,
+    2026
+  ],
+  "method": "walk-forward upgraded model; games with both teams 2+ games; flagged = 1.9+ off the line, spreads under 20; -110",
+  "results": {
+    "closing": {
+      "flagged": {
+        "all": {
+          "n": 1116,
+          "record": "565-526-25",
+          "units": -12.4,
+          "roi": -1.1
+        },
+        "one_input": {
+          "n": 213,
+          "record": "104-104-5",
+          "units": -9.5,
+          "roi": -4.4
+        },
+        "situational": {
+          "n": 176,
+          "record": "92-81-3",
+          "units": 2.6,
+          "roi": 1.5
+        },
+        "ratings_vs_results": {
+          "n": 65,
+          "record": "38-27",
+          "units": 7.5,
+          "roi": 11.6
+        },
+        "solid": {
+          "n": 451,
+          "record": "232-208-11",
+          "units": 2.9,
+          "roi": 0.6
+        },
+        "mixed": {
+          "n": 70,
+          "record": "35-33-2",
+          "units": -1.2,
+          "roi": -1.7
+        },
+        "thin": {
+          "n": 141,
+          "record": "64-73-4",
+          "units": -14.8,
+          "roi": -10.5
+        },
+        "weak (one_input + situational + ratings_vs_results + thin)": {
+          "n": 595,
+          "record": "298-285-12",
+          "units": -14.1,
+          "roi": -2.4
+        },
+        "strong (solid + mixed)": {
+          "n": 521,
+          "record": "267-241-13",
+          "units": 1.7,
+          "roi": 0.3
+        },
+        "one_input: eff": {
+          "n": 10,
+          "record": "5-4-1",
+          "units": 0.5,
+          "roi": 5.5
+        },
+        "one_input: form": {
+          "n": 39,
+          "record": "16-22-1",
+          "units": -7.5,
+          "roi": -19.1
+        },
+        "one_input: home": {
+          "n": 8,
+          "record": "1-7",
+          "units": -6.1,
+          "roi": -76.1
+        },
+        "one_input: pace": {
+          "n": 8,
+          "record": "5-3",
+          "units": 1.5,
+          "roi": 19.3
+        },
+        "one_input: ratings": {
+          "n": 113,
+          "record": "56-55-2",
+          "units": -4.1,
+          "roi": -3.6
+        },
+        "one_input: rest": {
+          "n": 2,
+          "record": "1-1",
+          "units": -0.1,
+          "roi": -4.5
+        },
+        "one_input: returning": {
+          "n": 9,
+          "record": "5-4",
+          "units": 0.5,
+          "roi": 6.1
+        },
+        "one_input: scoring": {
+          "n": 10,
+          "record": "8-2",
+          "units": 5.3,
+          "roi": 52.7
+        },
+        "one_input: weather": {
+          "n": 14,
+          "record": "7-6-1",
+          "units": 0.4,
+          "roi": 2.6
+        }
+      },
+      "bet_card": {
+        "all": {
+          "n": 336,
+          "record": "167-162-7",
+          "units": -10.2,
+          "roi": -3.0
+        },
+        "one_input": {
+          "n": 86,
+          "record": "47-37-2",
+          "units": 5.7,
+          "roi": 6.7
+        },
+        "situational": {
+          "n": 36,
+          "record": "23-13",
+          "units": 7.9,
+          "roi": 22.0
+        },
+        "ratings_vs_results": {
+          "n": 19,
+          "record": "10-9",
+          "units": 0.1,
+          "roi": 0.5
+        },
+        "solid": {
+          "n": 150,
+          "record": "69-77-4",
+          "units": -14.3,
+          "roi": -9.5
+        },
+        "mixed": {
+          "n": 18,
+          "record": "9-9",
+          "units": -0.8,
+          "roi": -4.5
+        },
+        "thin": {
+          "n": 27,
+          "record": "9-17-1",
+          "units": -8.8,
+          "roi": -32.7
+        },
+        "weak (one_input + situational + ratings_vs_results + thin)": {
+          "n": 168,
+          "record": "89-76-3",
+          "units": 4.9,
+          "roi": 2.9
+        },
+        "strong (solid + mixed)": {
+          "n": 168,
+          "record": "78-86-4",
+          "units": -15.1,
+          "roi": -9.0
+        },
+        "one_input: eff": {
+          "n": 4,
+          "record": "1-2-1",
+          "units": -1.1,
+          "roi": -27.3
+        },
+        "one_input: form": {
+          "n": 9,
+          "record": "6-3",
+          "units": 2.5,
+          "roi": 27.3
+        },
+        "one_input: home": {
+          "n": 3,
+          "record": "0-3",
+          "units": -3.0,
+          "roi": -100.0
+        },
+        "one_input: pace": {
+          "n": 5,
+          "record": "4-1",
+          "units": 2.6,
+          "roi": 52.7
+        },
+        "one_input: ratings": {
+          "n": 49,
+          "record": "25-23-1",
+          "units": -0.3,
+          "roi": -0.6
+        },
+        "one_input: rest": {
+          "n": 2,
+          "record": "1-1",
+          "units": -0.1,
+          "roi": -4.5
+        },
+        "one_input: returning": {
+          "n": 3,
+          "record": "3-0",
+          "units": 2.7,
+          "roi": 90.9
+        },
+        "one_input: scoring": {
+          "n": 3,
+          "record": "2-1",
+          "units": 0.8,
+          "roi": 27.3
+        },
+        "one_input: weather": {
+          "n": 8,
+          "record": "5-3",
+          "units": 1.5,
+          "roi": 19.3
+        }
+      },
+      "bet_card_by_season": {
+        "2024": {
+          "all": {
+            "n": 123,
+            "record": "62-59-2",
+            "units": -2.6,
+            "roi": -2.1
+          },
+          "weak": {
+            "n": 64,
+            "record": "35-27-2",
+            "units": 4.8,
+            "roi": 7.5
+          },
+          "strong": {
+            "n": 59,
+            "record": "27-32",
+            "units": -7.5,
+            "roi": -12.6
+          }
+        },
+        "2025": {
+          "all": {
+            "n": 128,
+            "record": "63-62-3",
+            "units": -4.7,
+            "roi": -3.7
+          },
+          "weak": {
+            "n": 64,
+            "record": "31-32-1",
+            "units": -3.8,
+            "roi": -6.0
+          },
+          "strong": {
+            "n": 64,
+            "record": "32-30-2",
+            "units": -0.9,
+            "roi": -1.4
+          }
+        },
+        "2026": {
+          "all": {
+            "n": 85,
+            "record": "42-41-2",
+            "units": -2.8,
+            "roi": -3.3
+          },
+          "weak": {
+            "n": 40,
+            "record": "23-17",
+            "units": 3.9,
+            "roi": 9.8
+          },
+          "strong": {
+            "n": 45,
+            "record": "19-24-2",
+            "units": -6.7,
+            "roi": -14.9
+          }
+        }
+      },
+      "bet_card_mix": {
+        "solid": 150,
+        "one_input": 86,
+        "situational": 36,
+        "thin": 27,
+        "ratings_vs_results": 19,
+        "mixed": 18
+      }
+    },
+    "opening": {
+      "flagged": {
+        "all": {
+          "n": 1044,
+          "record": "553-474-17",
+          "units": 28.7,
+          "roi": 2.8
+        },
+        "one_input": {
+          "n": 185,
+          "record": "94-86-5",
+          "units": -0.5,
+          "roi": -0.3
+        },
+        "situational": {
+          "n": 141,
+          "record": "72-68-1",
+          "units": -2.5,
+          "roi": -1.8
+        },
+        "ratings_vs_results": {
+          "n": 59,
+          "record": "35-22-2",
+          "units": 9.8,
+          "roi": 16.6
+        },
+        "solid": {
+          "n": 444,
+          "record": "237-200-7",
+          "units": 15.5,
+          "roi": 3.5
+        },
+        "mixed": {
+          "n": 81,
+          "record": "47-33-1",
+          "units": 9.7,
+          "roi": 12.0
+        },
+        "thin": {
+          "n": 134,
+          "record": "68-65-1",
+          "units": -3.2,
+          "roi": -2.4
+        },
+        "weak (one_input + situational + ratings_vs_results + thin)": {
+          "n": 519,
+          "record": "269-241-9",
+          "units": 3.5,
+          "roi": 0.7
+        },
+        "strong (solid + mixed)": {
+          "n": 525,
+          "record": "284-233-8",
+          "units": 25.2,
+          "roi": 4.8
+        },
+        "one_input: eff": {
+          "n": 9,
+          "record": "4-5",
+          "units": -1.4,
+          "roi": -15.2
+        },
+        "one_input: form": {
+          "n": 38,
+          "record": "22-15-1",
+          "units": 5.0,
+          "roi": 13.2
+        },
+        "one_input: home": {
+          "n": 7,
+          "record": "2-5",
+          "units": -3.2,
+          "roi": -45.5
+        },
+        "one_input: pace": {
+          "n": 8,
+          "record": "6-2",
+          "units": 3.5,
+          "roi": 43.2
+        },
+        "one_input: ratings": {
+          "n": 90,
+          "record": "43-44-3",
+          "units": -4.9,
+          "roi": -5.5
+        },
+        "one_input: rest": {
+          "n": 3,
+          "record": "2-1",
+          "units": 0.8,
+          "roi": 27.3
+        },
+        "one_input: returning": {
+          "n": 9,
+          "record": "4-5",
+          "units": -1.4,
+          "roi": -15.2
+        },
+        "one_input: scoring": {
+          "n": 10,
+          "record": "5-4-1",
+          "units": 0.5,
+          "roi": 5.5
+        },
+        "one_input: weather": {
+          "n": 11,
+          "record": "6-5",
+          "units": 0.5,
+          "roi": 4.1
+        }
+      },
+      "bet_card": {
+        "all": {
+          "n": 318,
+          "record": "172-138-8",
+          "units": 18.4,
+          "roi": 5.8
+        },
+        "one_input": {
+          "n": 76,
+          "record": "41-31-4",
+          "units": 6.3,
+          "roi": 8.3
+        },
+        "situational": {
+          "n": 27,
+          "record": "15-12",
+          "units": 1.6,
+          "roi": 6.1
+        },
+        "ratings_vs_results": {
+          "n": 11,
+          "record": "5-5-1",
+          "units": -0.5,
+          "roi": -4.1
+        },
+        "solid": {
+          "n": 159,
+          "record": "85-71-3",
+          "units": 6.3,
+          "roi": 3.9
+        },
+        "mixed": {
+          "n": 21,
+          "record": "12-9",
+          "units": 1.9,
+          "roi": 9.1
+        },
+        "thin": {
+          "n": 24,
+          "record": "14-10",
+          "units": 2.7,
+          "roi": 11.4
+        },
+        "weak (one_input + situational + ratings_vs_results + thin)": {
+          "n": 138,
+          "record": "75-58-5",
+          "units": 10.2,
+          "roi": 7.4
+        },
+        "strong (solid + mixed)": {
+          "n": 180,
+          "record": "97-80-3",
+          "units": 8.2,
+          "roi": 4.5
+        },
+        "one_input: eff": {
+          "n": 5,
+          "record": "2-3",
+          "units": -1.2,
+          "roi": -23.6
+        },
+        "one_input: form": {
+          "n": 12,
+          "record": "7-4-1",
+          "units": 2.4,
+          "roi": 19.7
+        },
+        "one_input: home": {
+          "n": 4,
+          "record": "0-4",
+          "units": -4.0,
+          "roi": -100.0
+        },
+        "one_input: pace": {
+          "n": 3,
+          "record": "2-1",
+          "units": 0.8,
+          "roi": 27.3
+        },
+        "one_input: ratings": {
+          "n": 37,
+          "record": "20-15-2",
+          "units": 3.2,
+          "roi": 8.6
+        },
+        "one_input: rest": {
+          "n": 2,
+          "record": "1-1",
+          "units": -0.1,
+          "roi": -4.5
+        },
+        "one_input: returning": {
+          "n": 3,
+          "record": "2-1",
+          "units": 0.8,
+          "roi": 27.3
+        },
+        "one_input: scoring": {
+          "n": 5,
+          "record": "3-1-1",
+          "units": 1.7,
+          "roi": 34.5
+        },
+        "one_input: weather": {
+          "n": 5,
+          "record": "4-1",
+          "units": 2.6,
+          "roi": 52.7
+        }
+      },
+      "bet_card_by_season": {
+        "2024": {
+          "all": {
+            "n": 116,
+            "record": "71-44-1",
+            "units": 20.5,
+            "roi": 17.7
+          },
+          "weak": {
+            "n": 54,
+            "record": "33-20-1",
+            "units": 10.0,
+            "roi": 18.5
+          },
+          "strong": {
+            "n": 62,
+            "record": "38-24",
+            "units": 10.5,
+            "roi": 17.0
+          }
+        },
+        "2025": {
+          "all": {
+            "n": 117,
+            "record": "57-57-3",
+            "units": -5.2,
+            "roi": -4.4
+          },
+          "weak": {
+            "n": 48,
+            "record": "21-25-2",
+            "units": -5.9,
+            "roi": -12.3
+          },
+          "strong": {
+            "n": 69,
+            "record": "36-32-1",
+            "units": 0.7,
+            "roi": 1.1
+          }
+        },
+        "2026": {
+          "all": {
+            "n": 85,
+            "record": "44-37-4",
+            "units": 3.0,
+            "roi": 3.5
+          },
+          "weak": {
+            "n": 36,
+            "record": "21-13-2",
+            "units": 6.1,
+            "roi": 16.9
+          },
+          "strong": {
+            "n": 49,
+            "record": "23-24-2",
+            "units": -3.1,
+            "roi": -6.3
+          }
+        }
+      },
+      "bet_card_mix": {
+        "solid": 159,
+        "one_input": 76,
+        "situational": 27,
+        "thin": 24,
+        "mixed": 21,
+        "ratings_vs_results": 11
+      }
+    }
+  }
+}
