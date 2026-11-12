@@ -882,6 +882,8 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .tm-edge.is-d { color: #7FD8FF; border-color: rgba(127,216,255,0.45); }
 .tm-foot { font-size: 10.5px; color: var(--muted-3); margin-top: 10px; }
 .gb-card { margin-bottom: 14px; }
+.pp-live { font-size: 11px; color: var(--muted-2, #B6C2CF); margin-top: 3px; }
+.pp-live b { font-weight: 800; }
 .pbe-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
 .pbe-chip { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--muted-2, #B6C2CF); border-radius: 999px; font: inherit; font-size: 11.5px; padding: 4px 10px; cursor: pointer; }
 .pbe-chip.is-rule { border-color: rgba(57,240,122,0.45); }
@@ -4075,6 +4077,20 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
   var PBE_NAMES = { 'Reception Yards': 'Rec yds', 'Receptions': 'Receptions', 'Rush Yards': 'Rush yds', 'Rush Attempts': 'Rush att', 'Pass Yards': 'Pass yds',
     'Pass Attempts': 'Pass att', 'Pass Completions': 'Completions', 'Pass Touchdowns': 'Pass TDs', 'Pass Interceptions': 'INTs', 'Rush Touchdowns': 'Rush TDs' };
   var PBE_RULE = { 'Rush Yards|under': [0, 999, 'any edge, vs a tough run D'], 'Receptions|under': [30, 999, '30%+'], 'Reception Yards|over': [15, 30, '15&ndash;30%, line 25.5+'] };
+  // Live tracked bucket for a prop row: official plays' own record when the
+  // prop is official and that bucket has 10+ official plays, else every flagged play.
+  function liveBucket(r) {
+    var P = D.propsByEdge, ev = r.model_ev;
+    if (!P || ev == null || (r.model_lean !== 'over' && r.model_lean !== 'under')) return null;
+    var G = P.groups[r.market_name + '|' + r.model_lean];
+    if (!G) return null;
+    var b = G.buckets.filter(function (x) { return ev >= x.lo && ev < x.hi; })[0];
+    if (!b) return null;
+    var useOff = r.is_official_play && b.official && b.official.n >= 10;
+    var o = useOff ? b.official : b.all;
+    if (!o || !o.n) return null;
+    return { o: o, official: useOff, name: b.hi >= 999 ? b.lo + '%+' : b.lo + '&ndash;' + b.hi + '%' };
+  }
   function renderPropsByEdge() {
     var P = D.propsByEdge;
     if (!P || !P.groups) return '';
@@ -4593,6 +4609,11 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
         : h.small ? '<div class="pp-track is-none">Small sample</div><div class="pp-sub">' + esc(h.record) + ' at this edge size</div>'
         : '<div class="pp-track" style="color:' + tone(h.roi) + '">' + signed(h.roi, 0) + '% ROI &middot; ' + signed(h.units, 1) + 'u</div>' +
           '<div class="pp-sub">' + esc(h.record) + ' at this edge size</div>';
+      // 11/2026: how live-tracked plays at this edge size have done (the
+      // "How props have done, by edge" chart), so the row answers it directly.
+      var lb = liveBucket(r);
+      if (lb) track += '<div class="pp-live" title="Live tracked results since 10/6 for ' + esc(r.market_name) + ' ' + esc(r.model_lean) + 's at a ' + lb.name + ' edge' +
+        (lb.official ? ' (official plays only)' : '') + '">Live at ' + lb.name + ': <b style="color:' + tone(lb.o.roi) + '">' + signed(lb.o.roi, 0) + '%</b> ' + lb.o.w + '-' + lb.o.l + (lb.o.n < 15 ? ' (small)' : '') + '</div>';
       var flags = [];
       // 11/2026: which model scored a receiving prop. "New model" = the
       // receptions / rec yds model retrained Nov 2 with games a player had no
