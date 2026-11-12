@@ -1434,6 +1434,26 @@ def main(year: int):
                         model_ev = round(fo.ev_percent(lean_prob, float(lean_price)), 1)
                 p["model_ev"] = model_ev
                 p["model_lean_probability"] = round(lean_prob, 4) if lean_prob is not None else None
+                # 11/2026: the regular model's read on injury-adjusted rush
+                # props, same price and math, for the breakdown's toggle.
+                ni = p.get("no_injury")
+                if ni:
+                    try:
+                        n_lean = ni["model_lean"]
+                        n_price = p.get("over_price") if n_lean == "over" else p.get("under_price")
+                        n_over, n_push = ni.get("model_over_probability"), ni.get("model_push_probability") or 0.0
+                        n_can_push = n_push > 0 and ni.get("model_under_probability") is not None
+                        n_under = ni.get("model_under_probability") if n_can_push else (1 - n_over if n_over is not None else None)
+                        n_lp = n_over if n_lean == "over" else n_under
+                        n_op = n_under if n_lean == "over" else n_over
+                        if n_lp is not None and _valid_price(n_price):
+                            if n_can_push:
+                                ni["model_ev"] = round((n_lp * (fo.american_to_decimal(float(n_price)) - 1) - n_op) * 100, 1)
+                            else:
+                                ni["model_ev"] = round(fo.ev_percent(n_lp, float(n_price)), 1)
+                        ni["model_lean_probability"] = round(n_lp, 4) if n_lp is not None else None
+                    except Exception:
+                        pass
                 p["is_official_play"] = False
                 p["is_watch_play"] = False
 

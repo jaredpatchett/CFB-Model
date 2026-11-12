@@ -393,8 +393,29 @@ def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
             return None  # a required feature is unavailable -- don't guess
         row[c] = val
 
+    # 11/2026: injury-adjusted props also carry what the regular model says
+    # (the breakdown's "without injuries" view). Scored FIRST so the export's
+    # raw-projection capture keeps the injury-aware numbers, which come last.
+    no_injury = None
+    if injury_out is not None and models.get(stat) is not None:
+        try:
+            base_model = models[stat]
+            brow = {c: _feature_value(c, entry, opponent, opp_def, env_lookup, opp_allowed_lookup) for c in base_model.feature_columns}
+            if all(v is not None and not (isinstance(v, float) and pd.isna(v)) for v in brow.values()):
+                b = base_model.predict_and_compare(pd.Series(brow), float(prop_line))
+                no_injury = {
+                    "model_predicted_value": round(b["predicted_value"], 1),
+                    "model_lean": b["lean"],
+                    "model_over_probability": round(b["over_probability"], 4) if b["over_probability"] is not None else None,
+                    "model_under_probability": round(b["under_probability"], 4) if b.get("under_probability") is not None else None,
+                    "model_push_probability": round(b.get("push_probability") or 0.0, 4),
+                }
+        except Exception:
+            no_injury = None
+
     result = model.predict_and_compare(pd.Series(row), float(prop_line))
     return {
+        "no_injury": no_injury,
         "model_predicted_value": round(result["predicted_value"], 1),
         "model_edge": round(result["edge"], 1),
         "model_lean": result["lean"],

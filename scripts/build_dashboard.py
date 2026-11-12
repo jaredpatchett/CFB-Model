@@ -1640,6 +1640,16 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .gb-read { font-size: 13.5px; line-height: 1.6; color: #E6EDF3; margin: 6px 0 8px; }
 .gb-read b { color: var(--neon); display: block; font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; }
 .gb-read p { margin: 4px 0 6px; }
+.gb-inj { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 8px 10px; margin: 6px 0 8px; }
+.gb-inj-tog { display: inline-flex; border: 1px solid rgba(57,240,122,0.4); border-radius: 999px; overflow: hidden; margin-bottom: 6px; }
+.gb-inj-tog button { background: transparent; color: var(--muted-2, #B6C2CF); border: 0; font: inherit; font-size: 12px; font-weight: 700; padding: 5px 12px; cursor: pointer; }
+.gb-inj-tog button.is-on { background: var(--neon); color: #06120A; }
+.gb-inj-pane { display: none; }
+.gb-inj-pane.is-on { display: block; }
+.gb-inj-row { font-size: 13px; color: #E6EDF3; margin: 2px 0; }
+.gb-inj-row b { color: #fff; }
+.gb-inj-big { font-size: 20px; font-weight: 800; color: #fff; }
+.gb-inj-note { font-size: 11.5px; color: var(--muted-3, #8B98A5); margin-top: 3px; }
 .gb-read b.gb-inline { display: inline; font-size: inherit; text-transform: none; letter-spacing: 0; color: #fff; }
 .gb-read.is-risk b { color: #F5B83D; }
 .gb-nums { margin-top: 4px; }
@@ -3606,6 +3616,37 @@ RENDERER_JS = """<script>
     rec_yds_over: { key: 'rec_yds_over', what: 'Receiving yards overs are official at a 15% to 30% edge on a line of 25.5+ (a player with a real role in the offense).' }
   };
   var GB_STAT = { 'Rush Yards': 'rush yds', 'Receptions': 'catches', 'Reception Yards': 'rec yds' };
+  // 11/2026: injury-adjusted rush props carry both models' reads. The
+  // toggle switches the card between them; the official play is always the
+  // injury-aware read (the live rule).
+  function gbInjToggle(r) {
+    var ni = r.no_injury;
+    if (!ni || !(r.injury_adjusted && r.injury_adjusted.length)) return '';
+    var unit = r.market_name === 'Rush Yards' ? 'rush yds' : String(r.market_name || '').toLowerCase();
+    var tough = r.play_kind === 'rush_under' || r.run_def === 'tough';
+    function pane(v, isInj, on) {
+      var lean = v.model_lean, lp = v.model_lean_probability, ev = v.model_ev;
+      var play = lean === 'under' && ev != null && ev >= 0 && tough;
+      var verdict = isInj ? (r.is_official_play ? 'Official play' : 'Not a play')
+        : play ? (lean === r.model_lean ? 'Would also be a play' : 'Would be a play') : lean !== r.model_lean ? 'Would lean the other way (' + esc(lean) + ')' : 'Would not be a play';
+      return '<div class="gb-inj-pane' + (on ? ' is-on' : '') + '" data-pane="' + (isInj ? 'inj' : 'base') + '">' +
+        '<div class="gb-inj-row"><span class="gb-inj-big">' + gbNum(v.model_predicted_value) + '</span> <span class="gb-rk">' + esc(unit) + ' projected vs ' + r.line + '</span></div>' +
+        '<div class="gb-inj-row">' + esc(lean) + ' ' + (lp != null ? (lp * 100).toFixed(1) + '%' : '&mdash;') + ' &middot; edge ' + (ev != null ? gbSigned(ev, 1) + '%' : '&mdash;') +
+        ' &middot; <b>' + verdict + '</b></div>' +
+        '<div class="gb-inj-note">' + (isInj ? 'Accounts for ' + esc(r.injury_adjusted.join(', ')) + ' being out: uses his share of the carries in the games without them.'
+          : 'The regular model: season and last-2-game averages, including games those teammates played.') + '</div></div>';
+    }
+    var injV = { model_predicted_value: r.model_predicted_value, model_lean: r.model_lean, model_lean_probability: r.model_lean_probability, model_ev: r.model_ev };
+    return '<div class="gb-inj"><div class="gb-inj-tog"><button type="button" class="is-on" data-pane="inj">With injuries</button><button type="button" data-pane="base">Without injuries</button></div>' +
+      pane(injV, true, true) + pane(ni, false, false) + '</div>';
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target && e.target.closest ? e.target.closest('.gb-inj-tog button') : null;
+    if (!b) return;
+    var box = b.closest('.gb-inj'), want = b.getAttribute('data-pane');
+    box.querySelectorAll('.gb-inj-tog button').forEach(function (x) { x.classList.toggle('is-on', x === b); });
+    box.querySelectorAll('.gb-inj-pane').forEach(function (x) { x.classList.toggle('is-on', x.getAttribute('data-pane') === want); });
+  });
   function gbWhyProp(r, g) {
     var over = r.model_lean === 'over', stat = GB_STAT[r.market_name] || String(r.market_name || '').toLowerCase();
     var oppAb = schoolAbbr(r.opponent), meAb = schoolAbbr(r.team);
@@ -3703,6 +3744,7 @@ RENDERER_JS = """<script>
     if (risk.length) out.push('<b>Watch:</b> ' + risk.join('; ') + '.');
     return '<div class="gb-why-card"><div class="gb-why-head"><span class="gb-prop">&#9733; ' + esc(r.player_name) + ' ' + esc(r.model_lean) + ' ' + r.line + ' ' +
       esc(String(r.market_name || '').toLowerCase()) + '</span> <span class="gb-rk">' + esc(meAb) + ' vs ' + esc(oppAb) + '</span></div>' +
+      gbInjToggle(r) +
       gbFootballProp(r, g) +
       '<details class="gb-nums"><summary>The numbers behind it</summary><ul class="gb-why-list"><li>' + out.join('</li><li>') + '</li></ul></details></div>';
   }
