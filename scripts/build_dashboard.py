@@ -4114,10 +4114,13 @@ RENDERER_JS = """<script>
     if (paths.lose.length) sec.push(['How it loses', paths.lose.slice(0, 2).map(function (x) { return x.t; }).join(' ')]);
     // 4) Injuries: new, or already in the numbers?
     var injTxt = [];
+    var allInj = (g.injAway || []).concat(g.injHome || []);
     var qbLine = function (k, who) {
+      if (!k.since) { var m0 = allInj.filter(function (x) { return x.player === k.player; })[0]; if (m0) k = Object.assign({}, k, { since: m0.since }); }
       var wk = gbWeeksSince(k.since, g.kickoffIso);
       return esc(who) + '&rsquo;s ' + (k.role === 'starting QB' ? 'starting QB ' : 'QB ') + esc(k.player) + ' is ' + esc(String(k.status).toLowerCase()) +
-        (wk != null && wk >= 2 ? ' &mdash; on the report since ' + esc(String(k.since).replace(/^[A-Za-z]+, /, '')) + ', so about ' + wk + ' weeks of ' + esc(who) + '&rsquo;s numbers already come without him. Not new information; both the market and the model mostly have it.'
+        (/^Questionable/.test(k.status || '') ? (wk != null && wk >= 2 ? ' (listed since ' + esc(String(k.since).replace(/^[A-Za-z]+, /, '')) + ')' : '') + '. If he sits, that&rsquo;s not in the model&rsquo;s line &mdash; check his status before kickoff.'
+        : wk != null && wk >= 2 ? ' &mdash; on the report since ' + esc(String(k.since).replace(/^[A-Za-z]+, /, '')) + ', so about ' + wk + ' weeks of ' + esc(who) + '&rsquo;s numbers already come without him. Not new information; both the market and the model mostly have it.'
           : wk != null ? ' &mdash; a new injury. The model&rsquo;s numbers still include games he played, so this one isn&rsquo;t fully in its line.' : '.');
     };
     (injOpp || []).concat([]).forEach(function (k) { if (/QB/.test(k.pos || '') || k.role === 'starting QB') { if (/^(Out|IR|Doubtful)/.test(k.status || '')) injTxt.push(qbLine(k, O)); } });
