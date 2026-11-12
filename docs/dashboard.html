@@ -882,6 +882,12 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .tm-edge.is-d { color: #7FD8FF; border-color: rgba(127,216,255,0.45); }
 .tm-foot { font-size: 10.5px; color: var(--muted-3); margin-top: 10px; }
 .gb-card { margin-bottom: 14px; }
+.pgr-t { display: grid; grid-template-columns: 1.6fr 1.4fr 0.8fr 0.7fr; gap: 8px; align-items: center; padding: 10px 6px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 14px; color: #E6EDF3; }
+.pgr-h { border-top: 0; font-size: 12px; font-weight: 700; color: var(--muted-2, #B6C2CF); }
+.pgr-g { font-weight: 700; }
+.pgr-t .pgr-roi { font-family: inherit; font-size: 15px; font-weight: 800; margin: 0; }
+.pgr-pend { font-size: 11px; color: var(--muted-3, #8B98A5); }
+@media (max-width: 600px) { .pgr-t { font-size: 12.5px; grid-template-columns: 1.5fr 1.4fr 0.8fr 0.6fr; } }
 .pgr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
 @media (max-width: 600px) { .pgr-grid { grid-template-columns: 1fr; } }
 .pgr-tile { border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px 12px; }
@@ -4156,21 +4162,20 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
   function renderPlayGradeRecord() {
     var P = D.playGradeRecord;
     if (!P || !P.grades) return '';
-    var meta = { A: ['&#128293;', 'Bet first', 'is-a'], B: ['&#9989;', 'Standard 1u', 'is-b'], C: ['&#9888;&#65039;', 'Bet last or skip', 'is-c'] };
+    var meta = { A: ['&#128293;', 'A, bet first', 'is-a'], B: ['&#9989;', 'B, standard 1u', 'is-b'], C: ['&#9888;&#65039;', 'C, bet last or skip', 'is-c'] };
     var since = P.since ? new Date(P.since) : null;
     var sg = function (x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); };
-    return '<div class="pp-panel pgr"><h3>Record by play grade</h3>' +
+    return '<div class="pp-panel pgr"><h3>How props have done, by play grade</h3>' +
       '<div class="pp-panel-note">Official props' + (since ? ' from games since ' + (since.getMonth() + 1) + '/' + since.getDate() : '') +
-        ', graded from the box score, 1 unit a play. Updates every run.</div><div class="pgr-grid">' +
+        ', graded from the box score, 1 unit a play. Updates every run.</div>' +
+      '<div class="pgr-t pgr-h"><div>Grade</div><div>Record</div><div>ROI</div><div>Hit rate</div></div>' +
       ['A', 'B', 'C'].map(function (g) {
-        var o = P.grades[g] || {}, m = meta[g];
-        var roi = o.roi == null ? null : o.roi;
-        return '<div class="pgr-tile ' + m[2] + '"><div class="pgr-top"><span class="pg-badge ' + m[2] + ' is-big">' + m[0] + ' ' + g + '</span><span class="pgr-note">' + m[1] + '</span></div>' +
-          '<div class="pgr-roi ' + (roi == null ? '' : roi >= 0 ? 'is-good' : 'is-bad') + '">' + (roi == null ? '&mdash;' : sg(roi, 1) + '%') + '</div>' +
-          '<div class="pgr-rec">' + (o.graded ? o.w + '-' + o.l + ' &middot; ' + sg(o.units, 1) + 'u' : 'no graded plays yet') + (o.pending ? ' &middot; ' + o.pending + ' pending' : '') + '</div>' +
-          '<div class="pgr-bar"><div style="width:' + (o.graded ? (o.w / Math.max(1, o.w + o.l) * 100).toFixed(0) : 0) + '%"></div><i style="left:52.4%"></i></div>' +
-          '<div class="pgr-sub">' + (o.graded ? (o.w / Math.max(1, o.w + o.l) * 100).toFixed(0) + '% hit rate (tick = 52.4% break-even at -110)' : '') + '</div></div>';
-      }).join('') + '</div></div>';
+        var o = P.grades[g] || {}, m = meta[g], n = (o.w || 0) + (o.l || 0);
+        return '<div class="pgr-t ' + m[2] + '"><div class="pgr-g">' + m[0] + ' ' + m[1] + '</div>' +
+          '<div>' + (o.graded ? o.w + '-' + o.l + ', ' + sg(o.units, 1) + 'u' : '&mdash;') + (o.pending ? ' <span class="pgr-pend">' + o.pending + ' pending</span>' : '') + '</div>' +
+          '<div class="pgr-roi ' + (o.roi == null ? '' : o.roi >= 0 ? 'is-good' : 'is-bad') + '">' + (o.roi == null ? '&mdash;' : sg(o.roi, 1) + '%') + '</div>' +
+          '<div>' + (n ? Math.round(o.w / n * 100) + '%' : '&mdash;') + '</div></div>';
+      }).join('') + '</div>';
   }
   function renderPropsByEdge() {
     var P = D.propsByEdge;
@@ -4692,7 +4697,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
           '<div class="pp-sub">' + esc(h.record) + ' at this edge size</div>';
       // 11/2026: how live-tracked plays at this edge size have done (the
       // "How props have done, by edge" chart), so the row answers it directly.
-      var lb = liveBucket(r);
+      var lb = null;
       if (lb) track += '<div class="pp-live" title="Live tracked results since 10/6 for ' + esc(r.market_name) + ' ' + esc(r.model_lean) + 's at a ' + lb.name + ' edge' +
         (lb.official ? ' (official plays only)' : '') + '">Live at ' + lb.name + ': <b style="color:' + tone(lb.o.roi) + '">' + signed(lb.o.roi, 0) + '%</b> ' + lb.o.w + '-' + lb.o.l + (lb.o.n < 15 ? ' (small)' : '') + '</div>';
       var flags = [];
@@ -4835,7 +4840,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
         }).join('') + '</div>';
     }
     if (bucketPanel || resultsPanel) lower = '<div class="pp-lower">' + bucketPanel + resultsPanel + '</div>';
-    lower = renderPlayGradeRecord() + renderPropsByEdge() + muPanel + lower;
+    lower = renderPlayGradeRecord() + muPanel + lower;
 
     // 5) The fine print, folded away until wanted.
     var help = '<details class="pp-help"><summary>How to read this page</summary><div class="pp-help-body">' +
@@ -6728,7 +6733,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       case 'fantasy': return renderFantasy();
       case 'injuries': return renderInjuries();
       case 'tracker': return renderTracker();
-      case 'performance': return '<div class="perf-props">' + renderPlayGradeRecord() + renderPropsByEdge() + '</div>' + renderBacktest() + renderClv();
+      case 'performance': return '<div class="perf-props">' + renderPlayGradeRecord() + '</div>' + renderBacktest() + renderClv();
       case 'edge':
       default:
         return renderKpis(card, priced) +
