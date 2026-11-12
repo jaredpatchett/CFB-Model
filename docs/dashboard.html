@@ -882,6 +882,14 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .tm-edge.is-d { color: #7FD8FF; border-color: rgba(127,216,255,0.45); }
 .tm-foot { font-size: 10.5px; color: var(--muted-3); margin-top: 10px; }
 .gb-card { margin-bottom: 14px; }
+.pg-badge { display: inline-flex; align-items: center; gap: 4px; font-weight: 900; font-size: 12px; border-radius: 999px; padding: 2px 8px; white-space: nowrap; vertical-align: middle; margin-left: 4px; }
+.pg-badge.is-a { background: rgba(57,240,122,0.18); color: var(--neon); border: 1px solid rgba(57,240,122,0.7); }
+.pg-badge.is-b { background: rgba(127,216,255,0.12); color: #7FD8FF; border: 1px solid rgba(127,216,255,0.55); }
+.pg-badge.is-c { background: rgba(245,184,61,0.12); color: #F5B83D; border: 1px solid rgba(245,184,61,0.6); }
+.pg-badge.is-big { font-size: 22px; padding: 6px 14px; }
+.pg-why { display: block; font-size: 10.5px; color: var(--muted-2, #B6C2CF); margin: 3px 0 4px; line-height: 1.35; }
+.pc-pg { display: flex; align-items: center; gap: 12px; margin: 6px 0 10px; font-size: 13px; color: var(--muted-2, #B6C2CF); }
+.pc-pg b { color: #fff; } .pc-pg span { font-size: 12px; }
 .pp-live { font-size: 11px; color: var(--muted-2, #B6C2CF); margin-top: 3px; }
 .pp-live b { font-weight: 800; }
 .pbe-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
@@ -3091,7 +3099,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     }
     if (risk.length) out.push('<b>Watch:</b> ' + risk.join('; ') + '.');
     return '<div class="gb-why-card"><div class="gb-why-head"><span class="gb-prop">&#9733; <button type="button" class="pc-open"' + pcOpenAttr(r) + 'title="Open the player card">' + esc(r.player_name) + '</button> ' + esc(r.model_lean) + ' ' + r.line + ' ' +
-      esc(String(r.market_name || '').toLowerCase()) + '</span> <span class="gb-rk">' + esc(meAb) + ' vs ' + esc(oppAb) + '</span></div>' +
+      esc(String(r.market_name || '').toLowerCase()) + '</span> ' + playGradeBadge(r) + ' <span class="gb-rk">' + esc(meAb) + ' vs ' + esc(oppAb) + '</span></div>' +
       gbInjToggle(r) +
       gbFootballProp(r, g) +
       '<details class="gb-nums"><summary>The numbers behind it</summary><ul class="gb-why-list"><li>' + out.join('</li><li>') + '</li></ul></details></div>';
@@ -3657,7 +3665,10 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     html += '<div class="pc-pick"><span class="pc-side ' + (under ? 'is-under' : 'is-over') + '">' + side.toUpperCase() + '</span><span class="pc-pickline">' + line + ' ' + esc(unit) + '</span>' +
       (price != null ? '<span class="pc-price">' + (price > 0 ? '+' : '') + Number(price) + (r.book_used ? ' &middot; ' + esc(bookLabel(r.book_used)) : '') + '</span>' : '') +
       (r.is_official_play ? '<span class="pc-off">&#9733; Official</span>' : '') + '</div>';
-    if (r.mu_grade) html += '<div class="pc-mu">Matchup <b>' + esc(r.mu_grade) + '</b>' + (r.mu_score != null ? ' &middot; ' + r.mu_score + '/100' : '') + ' for the ' + side.toLowerCase() + '</div>';
+    var pgc = playGrade(r);
+    if (pgc) html += '<div class="pc-pg">' + playGradeBadge(r, true) + '<div><b>Play grade ' + pgc.g + '</b> &middot; ' + pgc.note + '<br><span>' + pgc.why + '</span></div></div>';
+    if (r.mu_grade) html += '<div class="pc-mu">Matchup <b>' + esc(r.mu_grade) + '</b>' + (r.mu_score != null ? ' &middot; ' + r.mu_score + '/100' : '') + ' for the ' + side.toLowerCase() +
+      (r.mu_rank ? ' &middot; ' + esc(schoolAbbr(r.opponent)) + ' ' + gbOrd(r.mu_rank) + ' of ' + r.mu_of + ' vs ' + esc(r.mu_vs || '') : '') + '</div>';
     // Projection
     if (!isNaN(proj)) {
       var d1 = proj - line;
@@ -4092,6 +4103,41 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     var o = useOff ? b.official : b.all;
     if (!o || !o.n) return null;
     return { o: o, official: useOff, name: b.hi >= 999 ? b.lo + '%+' : b.lo + '&ndash;' + b.hi + '%' };
+  }
+  // ---- Play grade for official props (11/12/2026) ----
+  // Two inputs, both tested on the tracker's graded official props (games
+  // from 11/3, when matchup grades started; 126 plays):
+  //   matchup grade   A +2, B +1, C 0, D/F -1   (A 32-9, B 17-11, C 13-12, D/F 10-22)
+  //   line since first flagged   moved our way +1, away -1, none 0
+  // Score 2+ = A, 0-1 = B, below 0 = C. Backtest: A 35-13 (+35.6%),
+  // B 25-21 (+3.2%), C 12-20 (-29.3%). Edge size didn't sort winners, so
+  // it is left out. In-sample and still small: re-check as weeks grade.
+  var PG_MU = { A: 2, B: 1, C: 0, D: -1, F: -1 };
+  function propLineMove(r) {
+    var ff = r.first_flag;
+    if (!ff || ff.line == null || r.line == null) return 0;
+    var d = Number(r.line) - Number(ff.line);
+    if (!d) return 0;
+    return (r.model_lean === 'under' ? d < 0 : d > 0) ? 1 : -1;
+  }
+  function playGrade(r) {
+    if (!r || !r.is_official_play) return null;
+    var mu = r.mu_grade ? PG_MU[String(r.mu_grade).charAt(0)] : null;
+    var mv = propLineMove(r), score = (mu == null ? 0 : mu) + mv;
+    var g = score >= 2 ? 'A' : score >= 0 ? 'B' : 'C';
+    var why = [];
+    if (r.mu_grade) why.push(esc(r.mu_grade) + ' matchup' + (r.mu_rank ? ' (' + esc(schoolAbbr(r.opponent)) + ' ' + gbOrd(r.mu_rank) + ' vs ' + esc(r.mu_vs || '') + ')' : ''));
+    else why.push('no matchup grade yet');
+    if (mv > 0) why.push('line moved our way');
+    else if (mv < 0) why.push('line moved against us');
+    return { g: g, emoji: g === 'A' ? '&#128293;' : g === 'B' ? '&#9989;' : '&#9888;&#65039;', why: why.join(' &middot; '),
+      note: g === 'A' ? 'Bet first' : g === 'B' ? 'Standard 1u' : 'Bet last or skip' };
+  }
+  function playGradeBadge(r, big) {
+    var pg = playGrade(r);
+    if (!pg) return '';
+    return '<span class="pg-badge is-' + pg.g.toLowerCase() + (big ? ' is-big' : '') + '" title="Play grade ' + pg.g + ': ' + pg.why.replace(/<[^>]+>/g, '') + '. ' + pg.note + '.">' +
+      pg.emoji + ' ' + pg.g + '</span>';
   }
   function renderPropsByEdge() {
     var P = D.propsByEdge;
@@ -4643,7 +4689,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       if (started) flags.push('<span class="pp-tag is-lean" title="This game has kicked off.">Started</span>');
       var ev = r.model_ev, evHeat = ev != null && ev > 0 ? Math.min(0.5, 0.1 + ev / 80) : 0;
       return '<div class="pp-grid pp-row' + (isOpen ? ' is-open' : '') + (r.is_official_play ? ' is-official' : '') + '">' +
-        '<div class="pp-who">' + (r.team ? trkMark(schoolAbbr(r.team), 30) : '') + '<div><div class="pp-name"><button type="button" class="pp-namebtn"' + pcOpenAttr(r) + 'title="Open the player card">' + esc(r.player_name) + '</button></div>' +
+        '<div class="pp-who">' + (r.team ? trkMark(schoolAbbr(r.team), 30) : '') + '<div><div class="pp-name"><button type="button" class="pp-namebtn"' + pcOpenAttr(r) + 'title="Open the player card">' + esc(r.player_name) + '</button> ' + playGradeBadge(r) + '</div>' +
           '<div class="pp-sub">' + esc(schoolAbbr(r.team) || '') + (r.opponent ? ' vs ' + esc(schoolAbbr(r.opponent)) : '') + ' &middot; ' + esc(withDay ? propKickoff(r.start_time) : kickTime(r.start_time)) + '</div></div></div>' +
         '<div title="' + esc(marketName(r.market_name)) + '"><div class="pp-pick">' + mktBadge(r.market_name) + '</div>' +
           '<div class="pp-ou">' + (isOver ? 'Over' : 'Under') + ' ' + esc(r.line) + '</div></div>' +
@@ -4760,6 +4806,9 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
 
     // 5) The fine print, folded away until wanted.
     var help = '<details class="pp-help"><summary>How to read this page</summary><div class="pp-help-body">' +
+      '<p><b>Play grade</b> (official props): &#128293; <b>A</b> bet first &middot; &#9989; <b>B</b> standard 1u &middot; &#9888;&#65039; <b>C</b> bet last or skip. ' +
+        'It adds the matchup grade (A +2, B +1, C 0, D/F &minus;1) and which way the line moved since the play was first flagged (our way +1, against &minus;1): 2+ is A, 0&ndash;1 is B, below 0 is C. ' +
+        'On official props from 11/3 on: A 35-13 (+36%), B 25-21 (+3%), C 12-20 (&minus;29%). A small sample, re-checked as weeks grade. The matchup grade and the defense&rsquo;s rank still show on their own in the Matchup column.</p>' +
       '<p><b>Official</b> plays are the only props the rules call bets: receiving yards overs with a 15% to 30% edge on a line of 25.5+ (a player with a real role), rush yards unders with any edge against a tough run defense, and receptions unders with a 30%+ edge, at the best price across books. Receptions overs moved to Watch on 10/23/2026. ' +
         '<b>Under leans</b> are receptions unders with a 10% to 30% edge: they won in all three seasons tested, but by a thin margin, so they are graded on their own line. ' +
         'An under is a play or a lean by its edge at the best price right now, so it can move between the two; the record grades each one once, at the price and label it was first flagged with. ' +
