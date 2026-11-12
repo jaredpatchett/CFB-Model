@@ -368,6 +368,16 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
 
     props_catalog = data.get("prop_market_catalog", [])
     props_live = data.get("props", [])
+    # 11/2026: the spread Bet Card the previous run logged (scripts/card_watch.py),
+    # so the card can tag NEW plays and list ones that dropped off.
+    card_prev = None
+    try:
+        if os.path.exists("docs/data/card_log.json"):
+            _runs = (json.load(open("docs/data/card_log.json")).get("runs") or [])
+            if _runs:
+                card_prev = {"at": _runs[-1].get("at"), "plays": _runs[-1].get("plays") or []}
+    except Exception as e:
+        print(f"  [note] card log not read ({e})")
     # The model's inputs ride along only on official props (game breakdown).
     for r in props_live:
         if not r.get("is_official_play"):
@@ -466,6 +476,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
         "confBaseline": _load_conf_baseline(),
         "propCatalog": props_catalog,
         "propsLive": props_live,
+        "cardPrev": card_prev,
         "fantasy": fantasy_out,
         "anytimeTd": data.get("anytime_td") or [],
         "anytimeTdNote": data.get("anytime_td_note"),
@@ -1644,6 +1655,12 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .tm-edge.is-d { color: #7FD8FF; border-color: rgba(127,216,255,0.45); }
 .tm-foot { font-size: 10.5px; color: var(--muted-3); margin-top: 10px; }
 .gb-card { margin-bottom: 14px; }
+.bc-new { margin-left: 8px; font-size: 10px; font-weight: 900; letter-spacing: 0.06em; color: #06120A; background: var(--neon); border-radius: 999px; padding: 2px 7px; vertical-align: middle; }
+.bc-dropped { border: 1px solid rgba(255,122,89,0.45); background: rgba(255,122,89,0.06); border-radius: 10px; padding: 10px 12px; margin-top: 10px; font-size: 12.5px; color: var(--muted-2, #B6C2CF); }
+.bc-dropped .bc-note-h { color: #FF7A59; }
+.bc-drop-row { margin: 4px 0; }
+.bc-drop-row b { color: #fff; }
+.bc-drop-row em { color: #FF7A59; font-style: normal; font-weight: 700; }
 .bc-note { border: 1px solid rgba(57,240,122,0.35); background: rgba(57,240,122,0.05); border-radius: 10px; padding: 10px 12px; margin: 8px 0 10px; font-size: 12.5px; line-height: 1.5; color: var(--muted-2, #B6C2CF); }
 .bc-note-h { font-weight: 800; color: var(--neon); margin-bottom: 4px; letter-spacing: 0.02em; }
 .bc-note p { margin: 4px 0; }
@@ -4608,7 +4625,27 @@ RENDERER_JS = """<script>
       ' The market has moved toward ' + esc(m.ab) + ', the same way the model leans &mdash; that&rsquo;s the market agreeing, not a reason to fade (2026: plays like this went 16-4). Shop for the best number left.' + '</div>';
     return '<div class="lm-good">&#10003; Better number now: ' + m.txt + ' (' + (-m.worse).toFixed(1) + ' pts). Heads up: that means the market moved away from the model’s side (2026: plays like this went 17-15).</div>';
   }
+  // 11/2026: what changed since the last model run (spread card only).
+  function cardKey(g) { return g.home + '|' + g.away + '|' + g.kickoffIso; }
+  function cardChanges(card) {
+    var prev = D.cardPrev;
+    if (state.market !== 'Spread' || !prev || !prev.plays) return null;
+    var now = {}, pk = {};
+    card.forEach(function (c) { now[cardKey(c.game)] = c; });
+    prev.plays.forEach(function (p) { pk[p.key] = p; });
+    var byKey = {};
+    D.games.forEach(function (g) { byKey[cardKey(g)] = g; });
+    var dropped = prev.plays.filter(function (p) { return !now[p.key] && new Date(p.kickoff) > new Date(); }).map(function (p) {
+      var g = byKey[p.key], pr = g ? M.priceGame(g, opts()) : null;
+      return { p: p, why: !pr ? 'no line posted now' : pr.qualifies ? 'still a play, ranked out of the top 10' : 'edge at the current line is under ' + D.meta.minEdge.toFixed(1) + ' pts' +
+        (g ? ' (' + esc(abbrOf(p.side === abbrOf(g.home) ? g.home : g.away)) + ' now ' + (function () { var v = p.side === abbrOf(g.home) ? g.marketSpread : -g.marketSpread; return (v > 0 ? '+' : '') + v; })() + ')' : '') };
+    });
+    var d = new Date(prev.at);
+    return { isNew: function (c) { return !pk[cardKey(c.game)]; }, dropped: dropped,
+      since: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getDay()] + ' ' + (d.getMonth() + 1) + '/' + d.getDate() + ' ' + d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) };
+  }
   function renderBetCard(card) {
+    var chg = cardChanges(card);
     return '' +
       '<div class="section-head mt-md"><div class="section-title"><div class="section-flag is-green"></div>' +
       '<h2>Bet Card</h2></div></div>' +
@@ -4617,7 +4654,8 @@ RENDERER_JS = """<script>
         '<p><b>Timing matters more than anything else we&rsquo;ve tested.</b> 2024&ndash;26 backtest of this card: <b>+5.8%</b> at the opening line, <b>&minus;3.0%</b> at the closing line. The edge is biggest when the model first flags a play, before the market moves.</p>' +
         '<p><b>&#9888; Worse number now</b> (e.g. IU &minus;7.5 &rarr; &minus;8.5): the market moved toward our side &mdash; it&rsquo;s agreeing with the model. Not a fade. 2026: <b>16-4</b>.</p>' +
         '<p><b>&#10003; Better number now</b> (e.g. SJSU +10.5 &rarr; +12.5): the market moved away from our side &mdash; it disagrees. Not a reason to bet more. 2026: <b>17-15</b>.</p>' +
-        '<p class="bc-note-s">2026 records: rebuilt card, weeks 4&ndash;10, graded at the locked line, 68 plays &mdash; a small sample, not a rule yet.</p></div>' +
+        '<p class="bc-note-s">2026 records: rebuilt card, weeks 4&ndash;10, graded at the locked line, 68 plays &mdash; a small sample, not a rule yet.</p>' +
+        '<p><b>Every play on this card is still a bet at the line shown</b> &mdash; the card is rebuilt from the current line every run. If a play stops being a bet, it drops off and shows up below the card.</p></div>' +
       '<div class="projector">' +
         (card.length ? card.map(function (c) {
           var col = c.side ? M.displayColor(team(c.side).primary) : 'var(--blue)';
@@ -4656,7 +4694,7 @@ RENDERER_JS = """<script>
           var qbFlags = (c.game.flags || []).filter(function (f) { return f.qb; });
           return '<div class="row"><div class="row-accent" style="background:' + esc(col) + '"></div>' +
             '<div class="row-body card-row">' +
-              '<div><div class="card-play">' + (c.side ? trkMark(abbrOf(c.side), 22) : '') + '<span>' + esc(c.playLabel) + '</span></div>' +
+              '<div><div class="card-play">' + (c.side ? trkMark(abbrOf(c.side), 22) : '') + '<span>' + esc(c.playLabel) + '</span>' + (chg && chg.isNew(c) ? '<span class="bc-new">NEW</span>' : '') + '</div>' +
                 '<div class="card-note">' + esc(abbrOf(c.game.away) + ' at ' + abbrOf(c.game.home) + ' \\u00b7 ' + edgeKickoff(c.game)) +
                   ' \\u00b7 <span style="font-weight:700;color:' + (isTrainedGame ? '#2ecc71' : '#8A94A3') + '">' + (isTrainedGame ? (c.game.modelVersion === 'upgraded' ? 'UPGRADED' : 'TRAINED') : 'UNTRAINED') + '</span></div></div>' +
               '<div class="card-price">' + esc(sidePriceLabel) + '</div>' +
@@ -4672,7 +4710,9 @@ RENDERER_JS = """<script>
                 '\u26a0 Large model/market gap on a preseason-only estimate (no in-season data yet for this game) \u2014 likely reflects the model\u2019s limits, not a confirmed edge. Extra caution advised.</div>' : '') +
             '</div></div>';
         }).join('') : '<div class="empty-state">No plays clear the ' + D.meta.minEdge.toFixed(1) + '-pt threshold on ' + state.market + ' right now.</div>') +
-      '</div>';
+      '</div>' +
+      (chg && chg.dropped.length ? '<div class="bc-dropped"><div class="bc-note-h">Dropped off since the last run (' + esc(chg.since) + ')</div>' +
+        chg.dropped.map(function (x) { return '<div class="bc-drop-row"><b>' + esc(x.p.label) + '</b> <span>' + esc(x.p.away) + ' at ' + esc(x.p.home) + '</span> &mdash; ' + x.why + '. <em>Not a bet now.</em></div>'; }).join('') + '</div>' : '');
   }
 
   var PROP_BOOK_LABELS = {

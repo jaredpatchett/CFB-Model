@@ -238,6 +238,11 @@ jobs:
       - name: Build dashboard HTML
         run: python scripts/build_dashboard.py
 
+      # 11/2026: log the spread Bet Card and what changed since the last run
+      # (NEW / DROPPED). Never fails the run.
+      - name: Card watch
+        run: python scripts/card_watch.py || true
+
       - name: Commit dashboard back to repo
         run: |
           git config user.name "github-actions[bot]"
@@ -248,6 +253,7 @@ jobs:
           # `git add` on a not-yet-existing path fails the whole step, so guard it rather
           # than assuming the file is already there this early in the season.
           [ -f data/clv/line_snapshots.csv ] && git add data/clv/line_snapshots.csv
+          [ -f docs/data/card_log.json ] && git add docs/data/card_log.json
           [ -f docs/data/props_clv.json ] && git add docs/data/props_clv.json
           [ -f data/clv/prop_flags.csv ] && git add data/clv/prop_flags.csv
           [ -f docs/data/model_inputs_log.csv ] && git add docs/data/model_inputs_log.csv
