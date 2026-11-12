@@ -2749,7 +2749,7 @@ RENDERER_JS = """<script>
       var st = emStatus(s);
       if (st) tags.push('<span class="em-tag ' + st[1] + '" title="' + esc(st[2]) + '">' + st[0] + '</span>');
       var lm = state.market === 'Spread' && p.qualifies ? lineMove(p) : null;
-      if (lm && lm.worse > 0) tags.push('<span class="em-tag is-inj" title="Line moved ' + lm.worse.toFixed(1) + ' against the pick since first flagged">LINE &#8595;' + lm.worse.toFixed(1) + '</span>');
+      if (lm && lm.worse > 0) tags.push('<span class="em-tag is-inj" title="Worse number than when first flagged: the market moved ' + lm.worse.toFixed(1) + ' toward the model\u2019s side">LINE ' + lm.worse.toFixed(1) + ' WORSE</span>');
       if (qb.length) tags.push('<span class="em-tag is-inj" title="' + esc(qb.map(function (f) { return abbrOf(f.team) + ' ' + f.text; }).join(' · ')) + '">INJURY</span>');
       tags.push('<span class="em-tag is-src' + (isTrainedGame ? ' is-trained' : '') + '" title="Which model priced this game">' + modelSrcLabel + '</span>');
       // Edge heat: brighter green the bigger a qualifying edge.
@@ -4593,10 +4593,15 @@ RENDERER_JS = """<script>
   function lineMoveHtml(c, compact) {
     var m = lineMove(c);
     if (!m) return '';
-    if (m.worse > 0) return '<div class="lm-warn">&#9888; Line moved ' + m.worse.toFixed(1) + ' against you: ' + m.txt + '.' +
+    // 11/12/2026 check (rebuilt 2026 card, weeks 4-10, graded at the locked
+    // line): plays whose line moved TOWARD the picked team after it was
+    // flagged went 16-4 (+10.5u); lines that moved away went 17-15 (+0.5u).
+    // A worse number here means the market came to the model -- a price
+    // warning, not a reason to fade. Small sample; revisit as weeks grade.
+    if (m.worse > 0) return '<div class="lm-warn">&#9888; Worse number now: ' + m.txt + ' (' + m.worse.toFixed(1) + ' pts).' +
       (m.keys.length ? ' <b>It crossed ' + (m.keys.length > 1 ? 'key numbers ' : 'the key number ') + m.keys.join(' and ') + '</b>, so a ' + m.keys[0] + '-point ' + (m.now < 0 ? 'win' : 'loss') + ' that used to cash no longer does.' : '') +
-      (compact ? '' : ' The market is moving toward the other side &mdash; shop for the old number, or bet it smaller.') + '</div>';
-    return '<div class="lm-good">&#10003; Line moved ' + (-m.worse).toFixed(1) + ' your way: ' + m.txt + '.</div>';
+      ' The market has moved toward ' + esc(m.ab) + ', the same way the model leans &mdash; that&rsquo;s the market agreeing, not a reason to fade (2026: plays like this went 16-4). Shop for the best number left.' + '</div>';
+    return '<div class="lm-good">&#10003; Better number now: ' + m.txt + ' (' + (-m.worse).toFixed(1) + ' pts). Heads up: that means the market moved away from the model’s side (2026: plays like this went 17-15).</div>';
   }
   function renderBetCard(card) {
     return '' +
