@@ -237,6 +237,57 @@ def build_props_by_edge(path: str = PROP_FLAGS_PATH):
         return None
 
 
+# 11/2026: record by play grade (official props), from the tracker log. The
+# same scoring as the dashboard's playGrade(): matchup grade (A +2, B +1,
+# C 0, D/F -1) + line move since first flagged (our way +1, against -1);
+# 2+ = A, 0-1 = B, below 0 = C. Graded official props with a matchup grade.
+PG_MU = {"A": 2, "B": 1, "C": 0, "D": -1, "F": -1}
+
+
+def build_play_grade_record(path: str = PROP_FLAGS_PATH):
+    import csv
+    try:
+        if not os.path.exists(path):
+            return None
+        rows = []
+        with open(path, newline="") as f:
+            rows = [r for r in csv.DictReader(f)]
+        off_keys = {(r.get("player"), r.get("market"), r.get("start_time"), r.get("side"))
+                    for r in rows if r.get("tag") in OFFICIAL_TAGS}
+        seen, plays = set(), []
+        # Graded rows first (a play can be logged under several tags, and only
+        # some rows carry the result), then earliest flag.
+        for r in sorted(rows, key=lambda r: (r.get("result") not in ("W", "L", "P"), r.get("flagged_at") or "")):
+            k = (r.get("player"), r.get("market"), r.get("start_time"), r.get("side"))
+            if k in seen or k not in off_keys:
+                continue
+            seen.add(k)
+            mu = (r.get("mu_grade") or "")[:1]
+            if mu not in PG_MU:
+                continue
+            try:
+                d = float(r.get("last_line")) - float(r.get("line"))
+            except (TypeError, ValueError):
+                d = 0.0
+            mv = 0 if not d else (1 if ((r.get("side") == "under") == (d < 0)) else -1)
+            score = PG_MU[mu] + mv
+            g = "A" if score >= 2 else ("B" if score >= 0 else "C")
+            plays.append({"g": g, "res": r.get("result"), "u": r.get("units"), "start": r.get("start_time") or ""})
+        out = {}
+        for g in ("A", "B", "C"):
+            lst = [x for x in plays if x["g"] == g]
+            done = [x for x in lst if x["res"] in ("W", "L", "P")]
+            u = sum(float(x["u"] or 0) for x in done)
+            out[g] = {"graded": len(done), "w": sum(1 for x in done if x["res"] == "W"), "l": sum(1 for x in done if x["res"] == "L"),
+                      "units": round(u, 2), "roi": round(u / len(done) * 100, 1) if done else None,
+                      "pending": len(lst) - len(done)}
+        since = min((x["start"] for x in plays), default=None)
+        return {"since": since, "grades": out}
+    except Exception as e:
+        print(f"  [note] play-grade record not built ({e})")
+        return None
+
+
 def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dict:
     prior = data.get("preseason_prior") or {}
     slope = prior.get("slope")
@@ -1709,6 +1760,20 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .tm-edge.is-d { color: #7FD8FF; border-color: rgba(127,216,255,0.45); }
 .tm-foot { font-size: 10.5px; color: var(--muted-3); margin-top: 10px; }
 .gb-card { margin-bottom: 14px; }
+.pgr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+@media (max-width: 600px) { .pgr-grid { grid-template-columns: 1fr; } }
+.pgr-tile { border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px 12px; }
+.pgr-tile.is-a { border-color: rgba(57,240,122,0.45); } .pgr-tile.is-b { border-color: rgba(127,216,255,0.4); } .pgr-tile.is-c { border-color: rgba(245,184,61,0.45); }
+.pgr-top { display: flex; align-items: center; gap: 8px; } .pgr-top .pg-badge { margin-left: 0; font-size: 16px; padding: 3px 10px; }
+.pgr-note { font-size: 12px; color: var(--muted-2, #B6C2CF); }
+.pgr-roi { font-family: var(--font-display); font-weight: 900; font-size: 30px; margin: 6px 0 2px; color: #fff; }
+.pgr-roi.is-good { color: var(--neon); } .pgr-roi.is-bad { color: #FF7A59; }
+.pgr-rec { font-size: 12.5px; color: #E6EDF3; }
+.pgr-bar { position: relative; height: 7px; background: rgba(255,255,255,0.07); border-radius: 999px; margin: 8px 0 4px; }
+.pgr-bar div { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #22b35e, var(--neon)); }
+.pgr-bar i { position: absolute; top: -3px; bottom: -3px; width: 2px; background: #fff; }
+.pgr-sub { font-size: 10.5px; color: var(--muted-3, #8B98A5); }
+.perf-props { margin-bottom: 16px; }
 .pg-badge { display: inline-flex; align-items: center; gap: 4px; font-weight: 900; font-size: 12px; border-radius: 999px; padding: 2px 8px; white-space: nowrap; vertical-align: middle; margin-left: 4px; }
 .pg-badge.is-a { background: rgba(57,240,122,0.18); color: var(--neon); border: 1px solid rgba(57,240,122,0.7); }
 .pg-badge.is-b { background: rgba(127,216,255,0.12); color: #7FD8FF; border: 1px solid rgba(127,216,255,0.55); }
@@ -4999,6 +5064,25 @@ RENDERER_JS = """<script>
     return '<span class="pg-badge is-' + pg.g.toLowerCase() + (big ? ' is-big' : '') + '" title="Play grade ' + pg.g + ': ' + pg.why.replace(/<[^>]+>/g, '') + '. ' + pg.note + '.">' +
       pg.emoji + ' ' + pg.g + '</span>';
   }
+  function renderPlayGradeRecord() {
+    var P = D.playGradeRecord;
+    if (!P || !P.grades) return '';
+    var meta = { A: ['&#128293;', 'Bet first', 'is-a'], B: ['&#9989;', 'Standard 1u', 'is-b'], C: ['&#9888;&#65039;', 'Bet last or skip', 'is-c'] };
+    var since = P.since ? new Date(P.since) : null;
+    var sg = function (x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); };
+    return '<div class="pp-panel pgr"><h3>Record by play grade</h3>' +
+      '<div class="pp-panel-note">Official props' + (since ? ' from games since ' + (since.getMonth() + 1) + '/' + since.getDate() : '') +
+        ', graded from the box score, 1 unit a play. Updates every run.</div><div class="pgr-grid">' +
+      ['A', 'B', 'C'].map(function (g) {
+        var o = P.grades[g] || {}, m = meta[g];
+        var roi = o.roi == null ? null : o.roi;
+        return '<div class="pgr-tile ' + m[2] + '"><div class="pgr-top"><span class="pg-badge ' + m[2] + ' is-big">' + m[0] + ' ' + g + '</span><span class="pgr-note">' + m[1] + '</span></div>' +
+          '<div class="pgr-roi ' + (roi == null ? '' : roi >= 0 ? 'is-good' : 'is-bad') + '">' + (roi == null ? '&mdash;' : sg(roi, 1) + '%') + '</div>' +
+          '<div class="pgr-rec">' + (o.graded ? o.w + '-' + o.l + ' &middot; ' + sg(o.units, 1) + 'u' : 'no graded plays yet') + (o.pending ? ' &middot; ' + o.pending + ' pending' : '') + '</div>' +
+          '<div class="pgr-bar"><div style="width:' + (o.graded ? (o.w / Math.max(1, o.w + o.l) * 100).toFixed(0) : 0) + '%"></div><i style="left:52.4%"></i></div>' +
+          '<div class="pgr-sub">' + (o.graded ? (o.w / Math.max(1, o.w + o.l) * 100).toFixed(0) + '% hit rate (tick = 52.4% break-even at -110)' : '') + '</div></div>';
+      }).join('') + '</div></div>';
+  }
   function renderPropsByEdge() {
     var P = D.propsByEdge;
     if (!P || !P.groups) return '';
@@ -5662,7 +5746,7 @@ RENDERER_JS = """<script>
         }).join('') + '</div>';
     }
     if (bucketPanel || resultsPanel) lower = '<div class="pp-lower">' + bucketPanel + resultsPanel + '</div>';
-    lower = renderPropsByEdge() + muPanel + lower;
+    lower = renderPlayGradeRecord() + renderPropsByEdge() + muPanel + lower;
 
     // 5) The fine print, folded away until wanted.
     var help = '<details class="pp-help"><summary>How to read this page</summary><div class="pp-help-body">' +
@@ -7555,7 +7639,7 @@ RENDERER_JS = """<script>
       case 'fantasy': return renderFantasy();
       case 'injuries': return renderInjuries();
       case 'tracker': return renderTracker();
-      case 'performance': return renderBacktest() + renderClv();
+      case 'performance': return '<div class="perf-props">' + renderPlayGradeRecord() + renderPropsByEdge() + '</div>' + renderBacktest() + renderClv();
       case 'edge':
       default:
         return renderKpis(card, priced) +
@@ -7786,6 +7870,7 @@ def main():
     model_data = build_model_data(data, backtest=backtest, clv=clv)
     model_data["propEdgeHistory"] = build_prop_edge_history()
     model_data["propsByEdge"] = build_props_by_edge()
+    model_data["playGradeRecord"] = build_play_grade_record()
     model_data["propRules"] = build_prop_rules()
     # Team-vs-team national ranks for the Matchup Projector (11/2026).
     model_data["teamMatchup"] = data.get("team_matchup") or {}
