@@ -150,3 +150,21 @@ if __name__ == "__main__":
             print(f"  saved to {out_path} | {metrics}")
         except ValueError as e:
             print(f"  [skip] {e}")
+
+    # 11/2026: the injury-aware rush yds model (injury lab 2026-11-12). Used
+    # live ONLY when a regular rusher on the player's team is out; every
+    # other rush prop still scores on rush_yds.joblib. Never blocks training.
+    print("\nTraining the injury-aware rush_yds model...")
+    try:
+        from src.features.injury_features import add_absence_features, INJURY_FEATURE_COLUMNS
+        dfi = add_absence_features(df)
+        inj_model = PlayerStatModel("rush_yds")
+        inj_model.feature_columns = list(ROLLING_FEATURE_COLUMNS) + INJURY_FEATURE_COLUMNS["carry_share"]
+        metrics = inj_model.fit(dfi)
+        inj_model.model_version = "injury-aware (11/2026)"
+        inj_path = f"{config.MODELS_DIR}/props/rush_yds_injury.joblib"
+        inj_model.save(inj_path)
+        print(f"  saved to {inj_path} | {metrics}")
+    except Exception as e:
+        print(f"  [warn] injury-aware rush_yds model not trained ({type(e).__name__}: {e}) -- "
+              f"rush props score on the regular model only")

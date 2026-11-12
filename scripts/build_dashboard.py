@@ -1640,6 +1640,7 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .gb-read { font-size: 13.5px; line-height: 1.6; color: #E6EDF3; margin: 6px 0 8px; }
 .gb-read b { color: var(--neon); display: block; font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; }
 .gb-read p { margin: 4px 0 6px; }
+.gb-read b.gb-inline { display: inline; font-size: inherit; text-transform: none; letter-spacing: 0; color: #fff; }
 .gb-read.is-risk b { color: #F5B83D; }
 .gb-nums { margin-top: 4px; }
 .gb-nums summary { cursor: pointer; font-size: 11.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted-3, #8B98A5); padding: 4px 0; }
@@ -3952,6 +3953,19 @@ RENDERER_JS = """<script>
     var newAvg = after.length ? avg(after) : null, oldAvg = before.length ? avg(before) : null;
     var grew = newAvg != null && oldAvg != null && Math.abs(newAvg - oldAvg) >= Math.max(3, 0.2 * Math.max(newAvg, oldAvg)) ? newAvg > oldAvg : (role ? true : null);
     var lean = grew == null ? null : (grew === over ? 'help' : 'risk');
+    var adj = r.injury_adjusted && r.injury_adjusted.length;
+    if (adj) {
+      var nw = mi.n_without_carry_share, sw = mi.carry_share_without, vac = mi.vac_carry_share;
+      txt += ' <b class="gb-inline">The model accounts for it.</b> With ' + esc(r.injury_adjusted.join(', ')) + ' out' +
+        (vac != null ? ' (' + (vac * 100).toFixed(0) + '% of the carries freed up)' : '') + ', this projection comes from the injury-aware model, built on ' +
+        (nw ? 'his ' + (sw * 100).toFixed(0) + '% share of the carries in the ' + nw + ' game' + (nw === 1 ? '' : 's') + ' he&rsquo;s played without them'
+            : 'his season share, since he hasn&rsquo;t played a game without them yet') + ': ' + gbNum(proj) + ' ' + unit + '.';
+      if (newAvg != null && after.length) txt += (Math.abs(proj - newAvg) <= Math.max(5, 0.15 * newAvg)
+        ? ' That lines up with what he&rsquo;s done since.' : proj < newAvg
+        ? ' Still below his ' + newAvg.toFixed(1) + ' a game since, so the under is betting that number comes down' + (after.length <= 2 ? ' (only ' + after.length + ' game' + (after.length === 1 ? '' : 's') + ' to go on)' : '') + '.'
+        : ' Above his ' + newAvg.toFixed(1) + ' a game since.');
+      return { html: txt, lean: (newAvg != null && proj < newAvg * 0.8 && !over) ? 'risk' : null };
+    }
     txt += ' The model has no injury input &mdash; it only sees this through his last-2-games numbers, while his season numbers still include games ' +
       (gone.length > 1 ? 'they' : 'he') + ' played. ';
     if (lean === 'risk') txt += grew
@@ -4822,6 +4836,10 @@ RENDERER_JS = """<script>
       if (isRecvModel(r) && r.model_ev != null) flags.push(r.model_version
         ? '<span class="pp-tag is-newmodel" title="Scored by the ' + esc(r.model_version) + ' model: trained on, and averaging in, games where he played with no catch.">New model</span>'
         : '<span class="pp-tag is-inj" title="Scored by the box-score backup model (PFF unavailable this run), not the retrained model.">Fallback model</span>');
+      // 11/2026: a regular rusher on his team is out, so this rush prop was
+      // scored by the injury-aware model (his share without that teammate).
+      if (r.injury_adjusted && r.injury_adjusted.length) flags.push('<span class="pp-tag is-newmodel" title="' + esc(r.injury_adjusted.join(', ')) +
+        ' out: scored by the injury-aware rush yds model, using his share of the carries in the games without them.">Injury-adjusted</span>');
       if (r.play_kind === 'rec_under') flags.push('<span class="pp-tag is-official" title="A receptions under with a 30%+ edge. An official play.">Under play</span>');
       else if (r.play_kind === 'rec_yds_over') flags.push('<span class="pp-tag is-official" title="A receiving yards over with a 15% to 30% edge on a line of 25.5+. An official play.">Rec yds play</span>');
       else if (r.play_kind === 'rec_yds_watch') flags.push('<span class="pp-tag is-watch" title="A receiving yards over with a 15%+ edge, but ' + esc(r.rec_yds_watch_reason || 'outside the rule') + ' -- official only at 15% to 30% on a line of 25.5+ (a player with a real role). Watch only.">Rec yds watch &middot; ' + esc(r.rec_yds_watch_reason || '') + '</span>');

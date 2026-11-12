@@ -39,7 +39,7 @@ from src.features.live_features import (
 from src.features.live_player_features import (
     build_current_player_form, score_prop, MIN_GAMES_FOR_PROP_MODEL,
     project_player_fantasy, MIN_GAMES_FOR_FANTASY, build_current_defense_allowed,
-    market_name_to_stat, _normalize_name,
+    market_name_to_stat, _normalize_name, add_live_absences,
 )
 from src.features.player_features import STAT_MAP, pivot_player_game_stats
 from src.features import pff_features
@@ -692,7 +692,8 @@ def capture_raw_projections(prop_models: dict) -> dict:
 # breakdown's "why it's a play" read. Only the ones a person can read.
 PROP_INPUT_KEYS = {
     "rush_yds": ["roll_rush_yds", "last2_rush_yds", "roll_rush_att", "last2_rush_att", "roll_carry_share",
-                 "last2_carry_share", "roll_team_rush_att", "opp_rush_yds_allowed_prior"],
+                 "last2_carry_share", "roll_team_rush_att", "opp_rush_yds_allowed_prior",
+                 "vac_carry_share", "carry_share_without", "n_without_carry_share"],
     "receptions": ["roll_receptions", "last2_receptions", "roll_rec_share", "last2_rec_share", "roll_team_pass_att",
                    "opp_pass_yds_allowed_prior", "roll_pff_routes", "roll_pff_targets", "roll_pff_route_part",
                    "last2_pff_route_part", "roll_pff_target_share", "last2_pff_target_share", "roll_pff_tprr",
@@ -1145,6 +1146,14 @@ def main(year: int):
                 prop_models[stat] = PlayerStatModel.load(p)
             except Exception as e:
                 print(f"  [warn] could not load {p}: {e}")
+    # 11/2026: the injury-aware rush yds model (used only when a regular
+    # rusher on the player's team is out -- see live_player_features).
+    _inj_path = f"{config.MODELS_DIR}/props/rush_yds_injury.joblib"
+    if prop_models and os.path.exists(_inj_path):
+        try:
+            prop_models["rush_yds_injury"] = PlayerStatModel.load(_inj_path)
+        except Exception as e:
+            print(f"  [warn] could not load {_inj_path}: {e}")
     if not prop_models:
         print(f"  [warn] no trained props models found in {config.MODELS_DIR}/props/ — "
               f"props/fantasy will be unavailable (expected before "
@@ -1191,6 +1200,11 @@ def main(year: int):
             except Exception as e:
                 print(f"  [warn] run-defense grades not built ({type(e).__name__}: {e}) -- no rush yds unders are official this run")
             player_form = build_current_player_form(player_stats_long_current, schedule_df)
+            if "rush_yds_injury" in prop_models:
+                inj_info = add_live_absences(player_form, player_stats_long_current, schedule_df,
+                                             injury_index, BLOCKING_STATUSES)
+                print(f"  injury-aware rush yds: {inj_info['players']} player(s) on {inj_info['teams']} team(s) "
+                      f"with a regular rusher out")
             player_game_logs = build_player_game_logs(player_stats_long_current, schedule_df)
             opp_allowed_lookup = build_current_defense_allowed(player_stats_long_current, schedule_df)
             # PFF routes run and targets for the receiving models (10/2026).

@@ -152,6 +152,63 @@ def build_current_player_form(player_stats_long_current: pd.DataFrame, games_cur
     return by_name
 
 
+# 11/2026: who is out, for the injury-aware rush yds model (injury lab
+# 2026-11-12). A teammate counts as out for the upcoming game if the injury
+# report lists him Out / Doubtful / IR, or he has missed the team's last two
+# games (in training, "out" was simply no box-score row, so a regular who
+# has stopped appearing counts the same way). The inputs are built by the
+# same code as training (injury_features.add_absence_features), on this
+# season's box scores plus one "next game" row per team holding everyone
+# who is NOT out.
+def add_live_absences(player_form: dict, player_stats_long_current: pd.DataFrame, games_current: pd.DataFrame,
+                      injury_index: dict, blocking: set) -> dict:
+    """Sets entry['inj_rush'] = {vac_carry_share, carry_share_without,
+    n_without_carry_share, out: [names]} on players whose team has a
+    regular rusher out. Returns a small summary; never raises."""
+    from src.features.injury_features import add_absence_features, SHARES
+    from src.data.injury_report import match_player
+    try:
+        wide = add_usage_features(pivot_player_game_stats(player_stats_long_current, games_current))
+        if wide.empty:
+            return {"teams": 0, "players": 0}
+        wide = wide[["team", "season", "week", "gameId", "athleteId", "player", "carry_share", "rec_share"]].copy()
+        season = int(wide["season"].max())
+        wide = wide[wide["season"] == season]
+        phantom, out_names = [], {}
+        for team, tg in wide.groupby("team"):
+            games = tg[["week", "gameId"]].drop_duplicates().sort_values(["week", "gameId"])
+            last2 = set(games["gameId"].tail(2))
+            for a, pg in tg.groupby("athleteId"):
+                name = pg["player"].iloc[-1]
+                inj = match_player(injury_index or {}, team, name)
+                listed_out = bool(inj and inj.get("status") in blocking)
+                gone = len(games) >= 3 and not (set(pg["gameId"]) & last2)
+                if listed_out or gone:
+                    shares = pg["carry_share"].astype(float)
+                    if len(pg) >= 2 and shares.mean() >= SHARES["carry_share"]:
+                        out_names.setdefault(team, []).append(name)
+                    continue
+                phantom.append({"team": team, "season": season, "week": int(games["week"].max()) + 1,
+                                "gameId": -1, "athleteId": a, "player": name, "carry_share": 0.0, "rec_share": 0.0})
+        if not phantom:
+            return {"teams": 0, "players": 0}
+        frame = add_absence_features(pd.concat([wide, pd.DataFrame(phantom)], ignore_index=True))
+        nxt = frame[(frame["gameId"] == -1) & (frame["vac_carry_share"] > 0)]
+        by_id = {e.get("athlete_id"): e for e in player_form.values()}
+        n = 0
+        for r in nxt.itertuples():
+            e = by_id.get(r.athleteId)
+            if e is None or pd.isna(r.carry_share_without):
+                continue
+            e["inj_rush"] = {"vac_carry_share": float(r.vac_carry_share), "carry_share_without": float(r.carry_share_without),
+                             "n_without_carry_share": float(r.n_without_carry_share), "out": out_names.get(r.team, [])}
+            n += 1
+        return {"teams": len(out_names), "players": n}
+    except Exception as e:
+        print(f"  [warn] injury inputs not built ({type(e).__name__}: {e}) -- rush props score on the regular model")
+        return {"teams": 0, "players": 0}
+
+
 def build_current_defense_allowed(player_stats_long_current: pd.DataFrame, games_current: pd.DataFrame) -> dict:
     """team -> {opp_pass_yds_allowed_prior, opp_rush_yds_allowed_prior}: yards
     that team's defense has allowed per game so far this season. Used as the
@@ -309,6 +366,13 @@ def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
         return None
 
     entry = player_form.get(_normalize_name(player_name))
+    # 11/2026: a regular rusher on his team is out -> the injury-aware rush
+    # yds model, fed his share in the games that teammate also missed.
+    injury_out = None
+    if stat == "rush_yds" and entry and entry.get("inj_rush") and models.get("rush_yds_injury") is not None:
+        model = models["rush_yds_injury"]
+        injury_out = list(entry["inj_rush"].get("out") or [])
+        entry = {**entry, **{k: v for k, v in entry["inj_rush"].items() if k != "out"}}
     recv_form = bool(entry and stat in ("receptions", "rec_yds") and entry.get("recv"))
     if recv_form:
         # 11/2026: receiving models score on averages that include games he
@@ -347,7 +411,10 @@ def score_prop(player_name: str, market_name: str, prop_line, player_form: dict,
         # 11/2026: which model scored it, for the Props tab's model tag. Set
         # only when the retrained receiving model scored on the averages that
         # include his 0-catch games (not the box-score fallback).
-        "model_version": getattr(model, "model_version", None) if recv_form else None,
+        "model_version": getattr(model, "model_version", None) if (recv_form or injury_out is not None) else None,
+        # 11/2026: the teammates out that switched this prop to the
+        # injury-aware rush yds model (None = regular model).
+        "injury_adjusted": injury_out,
         # Opponent and sample size (added 10/2026) for the props table's
         # game context and confidence rating -- a projection built on 2
         # games deserves less trust than one built on 5.
