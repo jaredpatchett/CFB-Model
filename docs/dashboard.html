@@ -3328,20 +3328,24 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       var situ = c.pro.length && c.pro.every(function (x) { return /^(home|weather|rest|pace)$/.test(x.k); }) && c.on <= 0;
       if (top && top.pts >= 5 && top.pts >= 0.6 * c.sp) {
         verdict = '<b class="gb-inline">One-input play.</b> ' + gbSigned(top.pts, 1) + ' of the model&rsquo;s ' + gbSigned(c.sp, 1) + ' pts toward ' + esc(S) + ' comes from one thing: ' + top.w.split(':')[0] + '. ' +
-          (top.k === 'pace' ? 'That&rsquo;s last season&rsquo;s plays per drive, and the model can overreact to an extreme offense (option teams like the service academies run very long drives). Treat this edge as suspect.'
+          (top.k === 'pace' ? 'That&rsquo;s last season&rsquo;s plays per drive, and the model can overreact to an extreme offense (option teams like the service academies run very long drives).'
            : top.k === 'ratings' ? 'The roster ratings see a big gap' + (c.on < 0 ? ' that this season&rsquo;s results don&rsquo;t back up' : '') + '. If the ratings are stale, so is the edge.'
-           : top.k === 'weather' ? 'That&rsquo;s a weather effect the model learned, not a football mismatch. Treat it as suspect.'
+           : top.k === 'weather' ? 'That&rsquo;s a weather effect the model learned, not a football mismatch.'
            : 'If that one read is wrong, there&rsquo;s nothing else holding the play up.');
       } else if (situ) verdict = '<b class="gb-inline">Situational only.</b> The lean comes from ' + c.pro.map(function (x) { return x.w.split(' (')[0].split(':')[0]; }).join(' and ') +
-        ', not from ' + esc(S) + ' being the better team &mdash; the on-field numbers favor ' + esc(O) + '. Lower conviction.';
+        ', not from ' + esc(S) + ' being the better team &mdash; the on-field numbers favor ' + esc(O) + '.';
       else if (c.rat >= 1 && c.on <= -1) verdict = '<b class="gb-inline">Ratings vs results.</b> The model is siding with the roster ratings (SP+ / CORE), which like ' + esc(S) + ', over this season&rsquo;s results, which favor ' + esc(O) +
         '. This is a bet that the results so far understate ' + esc(S) + ' &mdash; it loses if ' + esc(O) + '&rsquo;s season is the real version of these teams.';
       else if (c.sp >= 2 * c.sc) verdict = '<b class="gb-inline">Solid.</b> The model&rsquo;s inputs mostly agree with each other on ' + esc(S) + '.';
       else if (c.sp >= c.sc) verdict = '<b class="gb-inline">Mixed.</b> More of the model&rsquo;s inputs point to ' + esc(S) + ' than away, but there&rsquo;s real pushback.';
       else verdict = '<b class="gb-inline">Thin.</b> Most of what the model measures points to ' + esc(O) + ' (' + c.sc.toFixed(1) + ' pts of push vs ' + c.sp.toFixed(1) + ' for ' + esc(S) + '). ' +
         'The play rests on ' + (c.pro[0] ? c.pro[0].w.split(':')[0] : 'a few inputs') + (c.pro[1] ? ' and ' + c.pro[1].w.split(':')[0] : '') +
-        ', while what&rsquo;s happened on the field says ' + esc(O) + '. Treat it as a lower-conviction 1u.';
-      sec.push(['Trust check', verdict + ' <span class="gb-rk">pts = how far the model&rsquo;s line moves if that input were even between the teams</span>']);
+        ', while what&rsquo;s happened on the field says ' + esc(O) + '.';
+      // 11/12/2026 trust lab (2024-26, walk-forward): these labels did NOT
+      // sort Bet Card winners from losers (weak labels +2.9% vs strong -9.0%
+      // at the close; +7.4% vs +4.5% at the open; flips by season). So the
+      // label explains what the bet rests on; it is not a grade.
+      sec.push(['What the bet rests on', verdict + ' <span class="gb-rk">This describes the case, it doesn&rsquo;t grade it: in the 2024&ndash;26 backtest these labels didn&rsquo;t separate winners from losers. pts = how far the model&rsquo;s line moves if that input were even.</span>']);
     }
     // 3) How it cashes / how it loses.
     var paths = gbPaths(S, O, sSch, oSch, dog, spr, g.marketTotal);
