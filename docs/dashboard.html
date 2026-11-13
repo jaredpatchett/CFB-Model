@@ -891,7 +891,7 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .pgr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
 @media (max-width: 600px) { .pgr-grid { grid-template-columns: 1fr; } }
 .pgr-tile { border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px 12px; }
-.pgr-tile.is-a { border-color: rgba(57,240,122,0.45); } .pgr-tile.is-b { border-color: rgba(127,216,255,0.4); } .pgr-tile.is-c { border-color: rgba(245,184,61,0.45); }
+.pgr-tile.is-a { border-color: rgba(57,240,122,0.45); } .pgr-tile.is-b { border-color: rgba(196,140,255,0.4); } .pgr-tile.is-c { border-color: rgba(255,90,90,0.45); }
 .pgr-top { display: flex; align-items: center; gap: 8px; } .pgr-top .pg-badge { margin-left: 0; font-size: 16px; padding: 3px 10px; }
 .pgr-note { font-size: 12px; color: var(--muted-2, #B6C2CF); }
 .pgr-roi { font-family: var(--font-display); font-weight: 900; font-size: 30px; margin: 6px 0 2px; color: #fff; }
@@ -904,8 +904,8 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .perf-props { margin-bottom: 16px; }
 .pg-badge { display: inline-flex; align-items: center; gap: 4px; font-weight: 900; font-size: 12px; border-radius: 999px; padding: 2px 8px; white-space: nowrap; vertical-align: middle; margin-left: 4px; }
 .pg-badge.is-a { background: rgba(57,240,122,0.18); color: var(--neon); border: 1px solid rgba(57,240,122,0.7); }
-.pg-badge.is-b { background: rgba(127,216,255,0.12); color: #7FD8FF; border: 1px solid rgba(127,216,255,0.55); }
-.pg-badge.is-c { background: rgba(245,184,61,0.12); color: #F5B83D; border: 1px solid rgba(245,184,61,0.6); }
+.pg-badge.is-b { background: rgba(196,140,255,0.12); color: #C48CFF; border: 1px solid rgba(196,140,255,0.5); }
+.pg-badge.is-c { background: rgba(255,90,90,0.12); color: #FF6B6B; border: 1px solid rgba(255,90,90,0.55); }
 .pg-badge.is-big { font-size: 22px; padding: 6px 14px; }
 .pg-why { display: block; font-size: 10.5px; color: var(--muted-2, #B6C2CF); margin: 3px 0 4px; line-height: 1.35; }
 .pc-pg { display: flex; align-items: center; gap: 12px; margin: 6px 0 10px; font-size: 13px; color: var(--muted-2, #B6C2CF); }
@@ -4150,8 +4150,9 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     else why.push('no matchup grade yet');
     if (mv > 0) why.push('line moved our way');
     else if (mv < 0) why.push('line moved against us');
-    return { g: g, emoji: g === 'A' ? '&#128293;' : g === 'B' ? '&#9989;' : '&#9888;&#65039;', why: why.join(' &middot; '),
-      note: g === 'A' ? 'Bet first' : g === 'B' ? 'Standard 1u' : 'Bet last or skip' };
+    // 11/13/2026 (Rod): bet A's only. B = degen play (not a bet), C = don't play.
+    return { g: g, emoji: g === 'A' ? '&#128293;' : g === 'B' ? '&#127922;' : '&#128683;', why: why.join(' &middot; '),
+      note: g === 'A' ? 'Bet it' : g === 'B' ? 'Degen play &mdash; not a bet' : 'Don&rsquo;t play' };
   }
   function playGradeBadge(r, big) {
     var pg = playGrade(r);
@@ -4162,7 +4163,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
   function renderPlayGradeRecord() {
     var P = D.playGradeRecord;
     if (!P || !P.grades) return '';
-    var meta = { A: ['&#128293;', 'A, bet first', 'is-a'], B: ['&#9989;', 'B, standard 1u', 'is-b'], C: ['&#9888;&#65039;', 'C, bet last or skip', 'is-c'] };
+    var meta = { A: ['&#128293;', 'A, bet it', 'is-a'], B: ['&#127922;', 'B, degen play', 'is-b'], C: ['&#128683;', 'C, don&rsquo;t play', 'is-c'] };
     var since = P.since ? new Date(P.since) : null;
     var sg = function (x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); };
     return '<div class="pp-panel pgr"><h3>How props have done, by play grade</h3>' +
@@ -4426,7 +4427,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       '</div>' +
       (view === 'all' ? '<button class="pp-chip' + (state.propShowPass ? ' is-on' : '') + '" onclick="window.__cfbPropShowPass()">Show passes (' + nPass + ')</button>' : '') +
       '<button class="pp-chip pg-sortchip' + (sort1 === 'grade' ? ' is-on' : '') + '" onclick="window.__cfbPropSortGrade()" title="List official props A first, then B, then C">' +
-        (sort1 === 'grade' ? '&#10003; Sorted by play grade' : '&#128293; Sort by play grade') + '</button>' +
+        (sort1 === 'grade' ? '&#10003; Sorted by play grade (A&rsquo;s first)' : '&#128293; Sort by play grade') + '</button>' +
     '</div>' +
     '<div class="pp-filter">' +
       '<div class="pp-ftop"><span class="pp-ftitle">Sort &amp; Filter</span>' +
@@ -4852,7 +4853,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
 
     // 5) The fine print, folded away until wanted.
     var help = '<details class="pp-help"><summary>How to read this page</summary><div class="pp-help-body">' +
-      '<p><b>Play grade</b> (official props): &#128293; <b>A</b> bet first &middot; &#9989; <b>B</b> standard 1u &middot; &#9888;&#65039; <b>C</b> bet last or skip. ' +
+      '<p><b>Play grade</b> (official props): &#128293; <b>A</b> bet it &middot; &#127922; <b>B</b> degen play, not a bet &middot; &#128683; <b>C</b> don&rsquo;t play. We only bet A&rsquo;s. ' +
         'It adds the matchup grade (A +2, B +1, C 0, D/F &minus;1) and which way the line moved since the play was first flagged (our way +1, against &minus;1): 2+ is A, 0&ndash;1 is B, below 0 is C. ' +
         'On official props from 11/3 on: A 35-13 (+36%), B 25-21 (+3%), C 12-20 (&minus;29%). A small sample, re-checked as weeks grade. The matchup grade and the defense&rsquo;s rank still show on their own in the Matchup column.</p>' +
       '<p><b>Official</b> plays are the only props the rules call bets: receiving yards overs with a 15% to 30% edge on a line of 25.5+ (a player with a real role), rush yards unders with any edge against a tough run defense, and receptions unders with a 30%+ edge, at the best price across books. Receptions overs moved to Watch on 10/23/2026. ' +
