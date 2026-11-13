@@ -3,90 +3,114 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CFB Model — How to Use It</title>
+<title>CFB Edge — How-To</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700;800&family=Azeret+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:ital,wght@0,600;0,700;0,800;1,800;1,900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
+/* Matches the dashboard's 11/2026 neon reskin (scripts/build_dashboard.py). */
 :root {
-  --bg: #0A0D12; --panel: #101722; --panel-deep: #0C121B; --chip: #161E28;
-  --rule: #212B39; --rule-strong: #2A3543;
-  --text: #EDF2F8; --text-dim: #C4CFDC; --muted: #7E8C9E; --muted-2: #61707F;
-  --blue: #2E7BFF; --blue-link: #6BA6FF; --green: #17C26B; --red: #FF5252; --amber: #E0B44A;
+  --bg: #07090A; --panel: #0E1311; --panel-deep: #0A0E0C; --chip: #141B18;
+  --rule: #1C2621; --rule-strong: #26332C;
+  --text: #F1F5F2; --text-dim: #C9D3CD; --muted: #8B9A92; --muted-2: #6E7D75; --muted-3: #64736B;
+  --neon: #39F07A; --neon-glow: rgba(57,240,122,0.35); --link: #6CF2A4;
+  --amber: #FFB84D; --red: #FF5252; --sky: #8FD3FF;
   --font-display: 'Saira Condensed', 'Arial Narrow', sans-serif;
-  --font-data: 'Azeret Mono', ui-monospace, Menlo, monospace;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-num: 'JetBrains Mono', ui-monospace, monospace;
+  --radius: 12px; --radius-sm: 8px;
 }
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
-a { color: var(--blue-link); text-decoration: none; }
-a:hover { text-decoration: underline; }
-.topbar { position: sticky; top: 0; z-index: 10; background: rgba(10,13,18,.94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--rule); }
-.topbar-in { max-width: 920px; margin: 0 auto; padding: 0 20px; height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.brand { font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: .06em; text-transform: uppercase; }
-.brand b { color: var(--blue); }
-.back { font-family: var(--font-data); font-size: 13px; }
-.wrap { max-width: 920px; margin: 0 auto; padding: 0 20px 80px; }
-.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 8px; }
-.toc a { font-family: var(--font-data); font-size: 12px; padding: 6px 10px; background: var(--chip); border: 1px solid var(--rule); color: var(--text-dim); border-radius: 4px; }
-.toc a:hover { color: var(--text); text-decoration: none; border-color: var(--rule-strong); }
-h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 7vw, 52px); line-height: 1; text-transform: uppercase; letter-spacing: .02em; margin: 36px 0 10px; }
-.lede { color: var(--text-dim); font-size: 18px; max-width: 680px; margin: 0; }
-h2 { font-family: var(--font-display); font-weight: 800; font-size: 28px; text-transform: uppercase; letter-spacing: .04em; margin: 56px 0 6px; padding-top: 10px; scroll-margin-top: 70px; }
-h2 .n { color: var(--blue); margin-right: 10px; }
-h3 { font-family: var(--font-display); font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: .04em; margin: 28px 0 6px; }
+html, body { margin: 0; padding: 0; color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+  background: radial-gradient(1200px 500px at 20% -10%, rgba(57,240,122,0.06), transparent 60%), var(--bg); background-attachment: fixed; }
+::selection { background: rgba(57,240,122,0.3); }
+a { color: var(--link); text-decoration: none; }
+a:hover { color: #B6FFD3; text-decoration: underline; }
+
+/* top bar, same as the dashboard */
+.topbar { position: sticky; top: 0; z-index: 10; background: rgba(7,9,10,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); }
+.topbar-in { max-width: 960px; margin: 0 auto; padding: 0 20px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--text); }
+.brand:hover { text-decoration: none; color: var(--text); }
+.brand-mark { display: inline-flex; gap: 3px; transform: skewX(-18deg); }
+.brand-mark i { display: block; width: 6px; height: 22px; background: var(--neon); border-radius: 1px; box-shadow: 0 0 12px var(--neon-glow); }
+.brand-mark i:nth-child(2) { opacity: 0.55; }
+.brand-word { font-family: var(--font-display); font-style: italic; font-weight: 900; font-size: 26px; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1; }
+.brand-word b { color: var(--neon); font-weight: 900; }
+.brand-sub { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-3); padding-left: 10px; border-left: 1px solid var(--rule-strong); }
+.back { font-family: var(--font-body); font-size: 12.5px; font-weight: 700; color: var(--neon); border: 1px solid rgba(57,240,122,0.45); background: rgba(57,240,122,0.08); padding: 7px 14px; border-radius: 999px; white-space: nowrap; }
+.back:hover { text-decoration: none; background: rgba(57,240,122,0.16); color: var(--neon); }
+
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 20px 80px; }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 8px; }
+.toc a { font-size: 12px; font-weight: 600; padding: 6px 12px; background: var(--chip); border: 1px solid var(--rule-strong); color: var(--muted); border-radius: 999px; }
+.toc a:hover { color: var(--neon); text-decoration: none; border-color: rgba(57,240,122,0.45); }
+h1 { font-family: var(--font-display); font-style: italic; font-weight: 900; font-size: clamp(36px, 7vw, 56px); line-height: 1; text-transform: uppercase; letter-spacing: 0.02em; margin: 38px 0 12px; }
+h1 b { color: var(--neon); font-weight: 900; }
+.lede { color: var(--text-dim); font-size: 17px; max-width: 680px; margin: 0; }
+h2 { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-style: italic; font-weight: 900; font-size: 26px; text-transform: uppercase; letter-spacing: 0.02em;
+  margin: 56px 0 8px; padding: 10px 0 10px; border-bottom: 1px solid var(--rule); scroll-margin-top: 76px; }
+h2::before { content: ""; width: 4px; height: 22px; background: var(--neon); border-radius: 1px; box-shadow: 0 0 10px var(--neon-glow); flex-shrink: 0; }
+h2 .n { color: var(--neon); }
+h3 { font-family: var(--font-display); font-style: italic; font-weight: 900; font-size: 19px; text-transform: uppercase; letter-spacing: 0.02em; margin: 28px 0 6px; }
 p { margin: 10px 0; }
-.sub { color: var(--muted); margin-top: 0; }
-.num { font-family: var(--font-data); font-weight: 500; }
-.pos { color: var(--green); } .neg { color: var(--red); }
-.panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px; margin: 16px 0; }
-.panel.blue { border-left: 3px solid var(--blue); }
-.panel.amber { border-left: 3px solid var(--amber); }
-.panel.red { border-left: 3px solid var(--red); }
-.panel.green { border-left: 3px solid var(--green); }
+.sub { color: var(--muted); margin-top: 8px; font-size: 14.5px; }
+.num { font-family: var(--font-num); font-weight: 500; font-size: 0.94em; }
+.pos { color: var(--neon); } .neg { color: var(--red); }
+
+.panel { background: linear-gradient(180deg, #111814, #0C110F); border: 1px solid var(--rule); border-radius: var(--radius); padding: 18px 20px; margin: 16px 0; position: relative; overflow: hidden; }
+.panel::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: transparent; }
+.panel.blue::before, .panel.green::before { background: var(--neon); box-shadow: 0 0 10px var(--neon-glow); }
+.panel.amber::before { background: var(--amber); }
+.panel.red::before { background: var(--red); }
 .panel h3 { margin-top: 0; }
-.steps { list-style: none; counter-reset: s; padding: 0; margin: 12px 0 0; }
-.steps li { counter-increment: s; position: relative; padding: 0 0 14px 44px; }
-.steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 30px; height: 30px; display: grid; place-items: center; background: var(--blue); color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 17px; transform: skewX(-11deg); }
+.steps { list-style: none; counter-reset: s; padding: 0; margin: 4px 0 0; }
+.steps li { counter-increment: s; position: relative; padding: 4px 0 14px 46px; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 9px;
+  background: rgba(57,240,122,0.1); border: 1px solid rgba(57,240,122,0.3); color: var(--neon); font-family: var(--font-num); font-weight: 700; font-size: 15px; }
 .steps b { color: var(--text); }
-.check { list-style: none; padding: 0; margin: 10px 0 0; }
-.check > li { position: relative; padding: 8px 0 8px 32px; border-top: 1px solid var(--rule); }
+.check { list-style: none; padding: 0; margin: 4px 0 0; }
+.check > li { position: relative; padding: 10px 0 10px 32px; border-top: 1px solid var(--rule); }
 .check > li:first-child { border-top: 0; }
-.check > li::before { content: ""; position: absolute; left: 2px; top: 13px; width: 16px; height: 16px; border: 2px solid var(--muted); border-radius: 3px; }
+.check > li::before { content: ""; position: absolute; left: 2px; top: 15px; width: 15px; height: 15px; border: 2px solid var(--neon); border-radius: 4px; opacity: 0.8; }
 ul.plain { padding-left: 20px; margin: 8px 0; }
 ul.plain li { margin: 4px 0; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 16px 0; }
-.card { background: var(--panel-deep); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; }
-.card .t { font-family: var(--font-display); font-weight: 700; font-size: 18px; text-transform: uppercase; letter-spacing: .04em; }
-.card .k { font-family: var(--font-data); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
-.card p { font-size: 14.5px; color: var(--text-dim); margin: 6px 0 0; }
-.tag { display: inline-block; font-family: var(--font-data); font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 3px; background: var(--chip); border: 1px solid var(--rule-strong); color: var(--text-dim); white-space: nowrap; }
-.tag.g { color: var(--green); border-color: rgba(23,194,107,.4); }
-.tag.a { color: var(--amber); border-color: rgba(224,180,74,.4); }
-.tag.r { color: var(--red); border-color: rgba(255,82,82,.4); }
-.tag.b { color: var(--blue-link); border-color: rgba(46,123,255,.45); }
-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14.5px; }
-th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
-th { font-family: var(--font-data); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
-.tbl { overflow-x: auto; }
-.big { font-family: var(--font-display); font-weight: 800; font-size: 22px; }
+ul.plain li::marker { color: var(--muted-2); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin: 16px 0; }
+.card { background: linear-gradient(180deg, #111814, #0C110F); border: 1px solid var(--rule); border-radius: var(--radius); padding: 16px 18px 14px; }
+.card .t { font-family: var(--font-display); font-style: italic; font-weight: 900; font-size: 19px; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.15; margin-top: 2px; }
+.card .k { font-size: 10.5px; font-weight: 700; color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.12em; }
+.card p { font-size: 14.5px; color: var(--text-dim); margin: 8px 0 0; }
+.tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.07em; padding: 2px 7px; border-radius: 5px; border: 1px solid var(--rule-strong); color: var(--muted); white-space: nowrap; vertical-align: 1px; }
+.tag.g { color: var(--neon); border-color: rgba(57,240,122,0.45); background: rgba(57,240,122,0.08); }
+.tag.a { color: var(--amber); border-color: rgba(255,184,77,0.45); background: rgba(255,184,77,0.07); }
+.tag.r { color: var(--red); border-color: rgba(255,82,82,0.45); background: rgba(255,82,82,0.07); }
+.tag.b { color: var(--sky); border-color: rgba(143,211,255,0.35); }
+.tbl { overflow-x: auto; background: linear-gradient(180deg, #111814, #0C110F); border: 1px solid var(--rule); border-radius: var(--radius); margin: 14px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted-2); }
 .foot { margin-top: 60px; padding-top: 18px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 13.5px; }
 @media (max-width: 600px) {
-  .topbar-in, .wrap { padding-left: 16px; padding-right: 16px; }
-  h2 { font-size: 24px; margin-top: 44px; }
+  .topbar-in { height: 56px; padding: 0 14px; }
+  .wrap { padding-left: 16px; padding-right: 16px; }
+  .brand-word { font-size: 21px; } .brand-mark i { height: 18px; width: 5px; }
+  .brand-sub { display: none; }
+  h2 { font-size: 22px; margin-top: 44px; }
   .panel { padding: 16px; }
-  th, td { padding: 8px 6px; }
+  th, td { padding: 9px 10px; }
 }
 </style>
 </head>
 <body>
 <div class="topbar"><div class="topbar-in">
-  <div class="brand">CFB Model <b>How-To</b></div>
-  <a class="back" href="dashboard.html">&larr; Dashboard</a>
+  <a class="brand" href="dashboard.html"><span class="brand-mark"><i></i><i></i></span><span class="brand-word">CFB <b>Edge</b></span><span class="brand-sub">How-To</span></a>
+  <a class="back" href="dashboard.html">&larr; Back to the model</a>
 </div></div>
 
 <div class="wrap">
-  <h1>How to use the model</h1>
+  <h1>How to use <b>the model</b></h1>
   <p class="lede">Where the plays are, what the grades mean, and the checks to run before you bet. The model gives you the starting list. You still decide what to bet.</p>
 
   <nav class="toc">
