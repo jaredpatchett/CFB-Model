@@ -972,6 +972,24 @@ body.pc-lock { overflow: hidden; }
 .pc-off { font-size: 11px; font-weight: 800; color: #06120A; background: var(--neon); border-radius: 999px; padding: 2px 8px; }
 .pc-mu { display: inline-block; font-family: var(--font-data); font-size: 13px; color: var(--neon); border: 1px solid rgba(57,240,122,0.55); border-radius: 10px; padding: 5px 10px; margin-bottom: 10px; }
 .pc-mu b { color: #fff; }
+.ag-chip { display: inline-flex; align-items: center; gap: 4px; font-weight: 800; font-size: 11px; border-radius: 999px; padding: 2px 8px; white-space: nowrap; vertical-align: middle; margin-left: 4px; border: 1px solid; }
+.ag-chip.is-agree { color: var(--neon); border-color: rgba(57,240,122,0.55); background: rgba(57,240,122,0.10); }
+.ag-chip.is-check { color: #FFB84D; border-color: rgba(255,184,77,0.55); background: rgba(255,184,77,0.08); }
+.ag-chip.is-conflict { color: #FF5252; border-color: rgba(255,82,82,0.55); background: rgba(255,82,82,0.08); }
+.ag-chip.is-mixed { color: #8FD3FF; border-color: rgba(143,211,255,0.45); background: rgba(143,211,255,0.06); }
+.ag-chip.is-neutral { color: #8B9A92; border-color: #26332C; background: rgba(255,255,255,0.03); }
+.ag-box { border: 1px solid #26332C; border-left: 3px solid #8B9A92; border-radius: 10px; padding: 10px 12px; margin: 0 0 12px; background: rgba(255,255,255,0.02); font-size: 13px; }
+.ag-box.is-agree { border-left-color: var(--neon); } .ag-box.is-check { border-left-color: #FFB84D; } .ag-box.is-conflict { border-left-color: #FF5252; } .ag-box.is-mixed { border-left-color: #8FD3FF; }
+.ag-top { display: flex; align-items: center; gap: 8px; }
+.ag-top .ag-chip { margin-left: 0; font-size: 12px; }
+.ag-lab { font-weight: 800; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8B9A92; }
+.ag-note { margin: 6px 0 2px; color: #F1F5F2; font-weight: 600; }
+.ag-list { list-style: none; padding: 0; margin: 6px 0 0; }
+.ag-list li { position: relative; padding: 2px 0 2px 16px; color: #C9D3CD; line-height: 1.45; }
+.ag-list li::before { content: ""; position: absolute; left: 2px; top: 9px; width: 7px; height: 7px; border-radius: 50%; background: #8B9A92; }
+.ag-list li.is-for::before { background: var(--neon); } .ag-list li.is-check::before { background: #FFB84D; } .ag-list li.is-against::before { background: #FF5252; } .ag-list li.is-mixed::before { background: #8FD3FF; }
+.ag-foot { margin-top: 6px; font-size: 11px; color: #6E7D75; }
+.gb-why-card .ag-box { margin: 6px 0 8px; }
 .pc-tile { border: 1px solid rgba(57,240,122,0.22); border-radius: 12px; padding: 12px; margin-top: 10px; background: rgba(255,255,255,0.015); }
 .pc-lab { font-family: var(--font-data); font-size: 12px; color: var(--muted-2, #B6C2CF); letter-spacing: 0.03em; }
 .pc-lab em { font-style: normal; color: var(--neon); margin-left: 6px; font-size: 11px; }
@@ -3124,6 +3142,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     if (risk.length) out.push('<b>Watch:</b> ' + risk.join('; ') + '.');
     return '<div class="gb-why-card"><div class="gb-why-head"><span class="gb-prop">&#9733; <button type="button" class="pc-open"' + pcOpenAttr(r) + 'title="Open the player card">' + esc(r.player_name) + '</button> ' + esc(r.model_lean) + ' ' + r.line + ' ' +
       esc(String(r.market_name || '').toLowerCase()) + '</span> ' + playGradeBadge(r) + ' <span class="gb-rk">' + esc(meAb) + ' vs ' + esc(oppAb) + '</span></div>' +
+      propAgreeBox(r) +
       gbInjToggle(r) +
       gbFootballProp(r, g) +
       '<details class="gb-nums"><summary>The numbers behind it</summary><ul class="gb-why-list"><li>' + out.join('</li><li>') + '</li></ul></details></div>';
@@ -3693,6 +3712,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     if (pgc) html += '<div class="pc-pg">' + playGradeBadge(r, true) + '<div><b>Play grade ' + pgc.g + '</b> &middot; ' + pgc.note + '<br><span>' + pgc.why + '</span></div></div>';
     if (r.mu_grade) html += '<div class="pc-mu">Matchup <b>' + esc(r.mu_grade) + '</b>' + (r.mu_score != null ? ' &middot; ' + r.mu_score + '/100' : '') + ' for the ' + side.toLowerCase() +
       (r.mu_rank ? ' &middot; ' + esc(schoolAbbr(r.opponent)) + ' ' + gbOrd(r.mu_rank) + ' of ' + r.mu_of + ' vs ' + esc(r.mu_vs || '') : '') + '</div>';
+    html += propAgreeBox(r);
     // Projection
     if (!isNaN(proj)) {
       var d1 = proj - line;
@@ -4163,6 +4183,69 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     if (!pg) return '';
     return '<span class="pg-badge is-' + pg.g.toLowerCase() + (big ? ' is-big' : '') + '" title="Play grade ' + pg.g + ': ' + pg.why.replace(/<[^>]+>/g, '') + '. ' + pg.note + '.">' +
       pg.emoji + ' ' + pg.g + '</span>';
+  }
+  // ---- Breakdown check (11/2026, draft) ----
+  // Does the game breakdown (unit matchup + injury report) point the same
+  // way as an official prop? Display only: it does not change the play
+  // grade or which props are official. Logged to see if it sorts winners.
+  function propAgree(r) {
+    if (!r || !r.is_official_play) return null;
+    var gi = gameIndexForProp(r), g = gi >= 0 ? (D.games || [])[gi] : null;
+    if (!g) return null;
+    var over = r.model_lean === 'over', isRush = r.market_name === 'Rush Yards';
+    var me = schoolAbbr(r.team), opp = schoolAbbr(r.opponent);
+    var own = (r.team === g.awaySchool ? g.injAway : g.injHome) || [], fan = gbFantasy(r.team);
+    var isOut = function (s) { return /^(Out|IR|Doubtful)/.test(s || ''); }, isQ = function (s) { return /^Questionable/.test(s || ''); };
+    var sig = [];
+    // 1) The player himself.
+    var selfInj = own.filter(function (i) { return gbNameKey(i.player) === gbNameKey(r.player_name); })[0];
+    var selfSt = (selfInj && selfInj.status) || r.injury_status || '';
+    if (isOut(selfSt)) sig.push({ k: 'against', t: 'He&rsquo;s listed ' + esc(selfSt.toLowerCase()) + '.' });
+    else if (isQ(selfSt)) sig.push({ k: 'check', t: 'He&rsquo;s listed questionable. Make sure he plays.' });
+    // 2) His starting QB (passing-game props and rushing props alike).
+    if (r.pos !== 'QB') own.forEach(function (i) {
+      if (i.pos !== 'QB' || gbRole(fan, i) !== 'starting QB') return;
+      var st = i.status || '';
+      if (isOut(st)) {
+        if (isRush) sig.push({ k: 'check', t: esc(me) + '&rsquo;s starting QB ' + esc(i.player) + ' is ' + esc(st.toLowerCase()) + '. The game plan may change with the backup.' });
+        else sig.push({ k: over ? 'against' : 'for', t: esc(me) + '&rsquo;s starting QB ' + esc(i.player) + ' is ' + esc(st.toLowerCase()) + (over ? ', so a backup is throwing to him. That works against this over.' : ', so a backup is throwing. That backs this under.') });
+      } else if (isQ(st)) sig.push({ k: 'check', t: esc(me) + '&rsquo;s starting QB ' + esc(i.player) + ' is questionable. Wait for his status: if the backup starts, this is a different bet.' });
+    });
+    // 3) Teammates out at his position (same read as "Injuries at his position").
+    var rc = gbRoleChange(r, g);
+    if (rc && r.injury_adjusted && r.injury_adjusted.length) sig.push({ k: 'for', t: 'Teammates out at his position, and the model already accounts for it.' });
+    else if (rc && rc.lean === 'help') sig.push({ k: 'for', t: 'Teammates out at his position, and his role change points the same way as this ' + (over ? 'over' : 'under') + '.' });
+    else if (rc && rc.lean === 'risk') sig.push({ k: 'check', t: 'Teammates out at his position, and his role change cuts against this ' + (over ? 'over' : 'under') + '. See the breakdown.' });
+    // 4) The unit matchup in the breakdown: his offense's run or pass game vs their defense.
+    var u = gbUnits(r.team, r.opponent), unit = isRush ? 'run game' : 'pass game';
+    var lean = u ? gbAvg(u.o, isRush ? GB_KEYS.run : GB_KEYS.pass) : null;
+    if (lean && lean.v >= 0.12) sig.push({ k: over ? 'for' : 'mixed', t: 'The breakdown gives ' + esc(me) + '&rsquo;s ' + unit + ' the edge (' + gbCite(lean.best) + ')' + (over ? '.' : ', which works against an under.') });
+    else if (lean && lean.v <= -0.12) sig.push({ k: over ? 'mixed' : 'for', t: 'The breakdown gives ' + esc(opp) + '&rsquo;s defense the edge against the ' + unit + ' (' + gbCiteD(lean.worst) + ')' + (over ? ', which works against an over.' : '.') });
+    else if (lean) sig.push({ k: 'even', t: 'The breakdown has ' + esc(me) + '&rsquo;s ' + unit + ' vs ' + esc(opp) + '&rsquo;s defense about even.' });
+    var has = function (k) { return sig.some(function (s) { return s.k === k; }); };
+    var v = has('against') ? 'conflict' : has('check') ? 'check' : has('mixed') ? 'mixed' : has('for') ? 'agree' : 'neutral';
+    var order = { against: 0, check: 1, mixed: 2, 'for': 3, even: 4 };
+    sig.sort(function (a, b) { return order[a.k] - order[b.k]; });
+    return { v: v, sig: sig,
+      label: { agree: 'Agrees', check: 'Check first', mixed: 'Mixed', conflict: 'Conflicts', neutral: 'No lean' }[v],
+      icon: { agree: '&#9989;', check: '&#9888;&#65039;', mixed: '&#8596;&#65039;', conflict: '&#128683;', neutral: '&#10134;' }[v],
+      note: { agree: 'The matchup and the injury report back this play.', check: 'Something on the injury report could change this play. Check it before you bet.',
+        conflict: 'The injury report works against this play. Look hard before betting, or skip it.',
+        mixed: 'The injury report is clear, but the unit matchup leans the other way. The play rests on the player&rsquo;s role, not the matchup.', neutral: 'The breakdown doesn&rsquo;t lean either way, so the play rests on the model&rsquo;s number.' }[v] };
+  }
+  function propAgreeChip(r) {
+    var a = propAgree(r);
+    if (!a) return '';
+    return '<span class="ag-chip is-' + a.v + '" title="Breakdown check: ' + a.label + '. ' + a.sig.map(function (s) { return s.t.replace(/<[^>]+>/g, ''); }).join(' ').replace(/&rsquo;/g, "'") + '">' + a.icon + ' ' + a.label + '</span>';
+  }
+  function propAgreeBox(r) {
+    var a = propAgree(r);
+    if (!a) return '';
+    var dot = { against: 'is-against', check: 'is-check', mixed: 'is-mixed', 'for': 'is-for', even: 'is-even' };
+    return '<div class="ag-box is-' + a.v + '"><div class="ag-top"><span class="ag-lab">Breakdown check</span><span class="ag-chip is-' + a.v + '">' + a.icon + ' ' + a.label + '</span></div>' +
+      '<div class="ag-note">' + a.note + '</div>' +
+      (a.sig.length ? '<ul class="ag-list">' + a.sig.map(function (s) { return '<li class="' + dot[s.k] + '">' + s.t + '</li>'; }).join('') + '</ul>' : '') +
+      '<div class="ag-foot">Not part of the play grade. Tracking it to see if it matters.</div></div>';
   }
   function renderPlayGradeRecord() {
     var P = D.playGradeRecord;
@@ -4740,7 +4823,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       if (started) flags.push('<span class="pp-tag is-lean" title="This game has kicked off.">Started</span>');
       var ev = r.model_ev, evHeat = ev != null && ev > 0 ? Math.min(0.5, 0.1 + ev / 80) : 0;
       return '<div class="pp-grid pp-row' + (isOpen ? ' is-open' : '') + (r.is_official_play ? ' is-official' : '') + '">' +
-        '<div class="pp-who">' + (r.team ? trkMark(schoolAbbr(r.team), 30) : '') + '<div><div class="pp-name"><button type="button" class="pp-namebtn"' + pcOpenAttr(r) + 'title="Open the player card">' + esc(r.player_name) + '</button> ' + playGradeBadge(r) + '</div>' +
+        '<div class="pp-who">' + (r.team ? trkMark(schoolAbbr(r.team), 30) : '') + '<div><div class="pp-name"><button type="button" class="pp-namebtn"' + pcOpenAttr(r) + 'title="Open the player card">' + esc(r.player_name) + '</button> ' + playGradeBadge(r) + propAgreeChip(r) + '</div>' +
           '<div class="pp-sub">' + esc(schoolAbbr(r.team) || '') + (r.opponent ? ' vs ' + esc(schoolAbbr(r.opponent)) : '') + ' &middot; ' + esc(withDay ? propKickoff(r.start_time) : kickTime(r.start_time)) + '</div></div></div>' +
         '<div title="' + esc(marketName(r.market_name)) + '"><div class="pp-pick">' + mktBadge(r.market_name) + '</div>' +
           '<div class="pp-ou">' + (isOver ? 'Over' : 'Under') + ' ' + esc(r.line) + '</div></div>' +
