@@ -91,6 +91,19 @@ table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
 th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
 tr:last-child td { border-bottom: 0; }
 th { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted-2); }
+.shot { margin: 18px 0 8px; }
+.shot img { display: block; width: 100%; height: auto; border: 1px solid var(--rule-strong); border-radius: var(--radius); background: var(--panel-deep); }
+.shot.narrow img { max-width: 440px; }
+.shot figcaption { font-size: 13.5px; color: var(--muted); margin-top: 8px; }
+.walk { list-style: none; counter-reset: w; padding: 0; margin: 0; }
+.walk > li { counter-increment: w; position: relative; padding: 0 0 6px 46px; margin-top: 26px; }
+.walk > li::before { content: counter(w); position: absolute; left: 0; top: 0; width: 32px; height: 32px; display: grid; place-items: center; border-radius: 9px;
+  background: rgba(57,240,122,0.1); border: 1px solid rgba(57,240,122,0.3); color: var(--neon); font-family: var(--font-num); font-weight: 700; font-size: 15px; }
+.walk > li > b:first-child { font-size: 17px; }
+.look { background: rgba(57,240,122,0.06); border: 1px solid rgba(57,240,122,0.25); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 14.5px; color: var(--text-dim); margin: 10px 0; }
+.look.warn { background: rgba(255,184,77,0.06); border-color: rgba(255,184,77,0.35); }
+.look b { color: var(--text); }
+@media (max-width: 600px) { .walk > li { padding-left: 0; padding-top: 42px; } }
 .foot { margin-top: 60px; padding-top: 18px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 13.5px; }
 @media (max-width: 600px) {
   .topbar-in { height: 56px; padding: 0 14px; }
@@ -118,9 +131,10 @@ th { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spac
     <a href="#where">2 · Where the plays are</a>
     <a href="#grades">3 · Reading the grades</a>
     <a href="#check">4 · Before you bet</a>
-    <a href="#smart">5 · Betting smart</a>
-    <a href="#skip">6 · When to skip</a>
-    <a href="#words">7 · Terms</a>
+    <a href="#walk">5 · See it on the site</a>
+    <a href="#smart">6 · Betting smart</a>
+    <a href="#skip">7 · When to skip</a>
+    <a href="#words">8 · Terms</a>
   </nav>
 
   <!-- 1 -->
@@ -178,7 +192,7 @@ th { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spac
 
   <div class="panel amber">
     <h3>An A is where you start, not a green light</h3>
-    <p>The grade comes from numbers. Numbers can't see a starter ruled out this morning, a backup QB, or a coach who plans to sit guys. An A tells you the play is worth checking. The checks in section 4 tell you whether to bet it.</p>
+    <p>The grade comes from numbers. Numbers can't see a starter ruled out this morning, a backup QB, or a coach who plans to sit guys. An A tells you the play is worth checking. The checks in section 4 (and the walkthrough in section 5) tell you whether to bet it.</p>
   </div>
 
   <!-- 4 -->
@@ -212,7 +226,34 @@ th { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spac
   </div>
 
   <!-- 5 -->
-  <h2 id="smart"><span class="n">5</span>Betting smart</h2>
+  <h2 id="walk"><span class="n">5</span>See it on the site</h2>
+  <p class="sub">Real screenshots from the Nov 13 slate. Your plays will be different, but the screens look the same. Tap any picture to open it full size.</p>
+
+  <h3>A prop: checking an 🔥 A</h3>
+  <ol class="walk">
+    <li><b>Click the player's name.</b> On Player Props, every name is a link. This one is Cataurus Hicks, an 🔥 A on his receiving yards over.
+      <figure class="shot"><a href="img/howto/props-table.jpg" target="_blank" rel="noopener"><img src="img/howto/props-table.jpg" alt="Player Props table with the player's name highlighted" loading="lazy" width="1900" height="720"></a><figcaption>Click the name, not the row.</figcaption></figure></li>
+    <li><b>Read the player card.</b> The top has the bet, the play grade and the matchup. The <b>game by game</b> bars show every game this season against today's line: green means the over hit, and the dashed line is the line.
+      <figure class="shot narrow"><a href="img/howto/player-card.jpg" target="_blank" rel="noopener"><img src="img/howto/player-card.jpg" alt="Player card with play grade, projection, season average and game-by-game bars" loading="lazy" width="1040" height="1634"></a><figcaption>Five-second read: are most bars clearly over the dashed line?</figcaption></figure>
+      <div class="look"><b>What to look for:</b> lots of bars well past the line is a good sign. Watch for an average propped up by one or two monster games. Hicks averages 73, but two big games (135, 149) pull that up. His typical game is in the 60s, and two of his "overs" (50, 49) cleared by a yard or two. Still a good play, just not as safe as the average makes it look.</div></li>
+    <li><b>Scroll to the bottom and hit Game breakdown.</b>
+      <figure class="shot narrow"><a href="img/howto/card-breakdown-btn.jpg" target="_blank" rel="noopener"><img src="img/howto/card-breakdown-btn.jpg" alt="Game breakdown button at the bottom of the player card" loading="lazy" width="1040" height="494"></a></figure></li>
+    <li><b>Check the injury report in the breakdown.</b> It lists both teams and marks the players who matter: starting QB, lead back, No. 2 back.
+      <figure class="shot"><a href="img/howto/game-breakdown.jpg" target="_blank" rel="noopener"><img src="img/howto/game-breakdown.jpg" alt="Game breakdown with matchup summary and injury report" loading="lazy" width="2488" height="1054"></a><figcaption>"The model line does not adjust for these." That's your job.</figcaption></figure>
+      <div class="look warn"><b>This is why you check, even on an A:</b> Hicks plays for PITT, and PITT's <b>starting QB is questionable</b>. If the backup starts, a WR over is a different bet. Wait for the QB news before betting, and pass if he's out.</div></li>
+  </ol>
+
+  <h3>A spread: reading the Bet Card</h3>
+  <figure class="shot"><a href="img/howto/bet-card.jpg" target="_blank" rel="noopener"><img src="img/howto/bet-card.jpg" alt="Bet Card rows with line-move and injury warnings" loading="lazy" width="2504" height="858"></a><figcaption>The warning boxes under a play are the checklist done for you. Read them every time.</figcaption></figure>
+  <ul class="plain">
+    <li><b>TTU +3.5</b>: no warnings. Run the normal checks and bet it.</li>
+    <li><b>SJSU +12.5</b>: red box, the line <b>moved away</b> (+10.5 → +12.5). Pass. Both QBs are also on the injury report.</li>
+    <li><b>OHIO -8.5</b>: <span class="tag g">NEW</span> on the card, but the QB is questionable. Wait for his status.</li>
+    <li><b>IU -8.5</b>: amber box, the line moved <b>our way</b>, so the market agrees. If you got it at -7.5, great. At -8.5 most of the value is gone, so bet smaller or skip.</li>
+  </ul>
+
+  <!-- 6 -->
+  <h2 id="smart"><span class="n">6</span>Betting smart</h2>
   <div class="grid">
     <div class="card"><div class="t">Flat units</div><p>Bet the same amount on every play. A common size is 1–2% of what you've set aside for betting. Don't bet bigger because a play "looks great."</p></div>
     <div class="card"><div class="t">A's only</div><p>Bet card spreads and 🔥 A props. B's and C's are there so you can see them, not so you bet them.</p></div>
@@ -223,8 +264,8 @@ th { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spac
   </div>
   <p>For context: Bet Card spreads are <span class="num pos">52-31, +16.28u</span> in My Tracker this season. At $100 a unit, that's <span class="num pos">+$1,628</span>. That's a strong start, but there will still be losing weekends. Treat it as a long-run grind, not a sure thing.</p>
 
-  <!-- 6 -->
-  <h2 id="skip"><span class="n">6</span>When to skip — even an A</h2>
+  <!-- 7 -->
+  <h2 id="skip"><span class="n">7</span>When to skip — even an A</h2>
   <div class="panel red">
     <ul class="plain">
       <li>The starting QB (or the player himself, on a prop) is out, doubtful or questionable and you can't confirm he's playing.</li>
@@ -236,8 +277,8 @@ th { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spac
     </ul>
   </div>
 
-  <!-- 7 -->
-  <h2 id="words"><span class="n">7</span>Terms</h2>
+  <!-- 8 -->
+  <h2 id="words"><span class="n">8</span>Terms</h2>
   <div class="tbl"><table>
     <tr><th>Term</th><th>Meaning</th></tr>
     <tr><td>Spread / line</td><td>The points a team gets or gives. IU −8.5 means IU has to win by 9 or more.</td></tr>
