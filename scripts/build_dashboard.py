@@ -956,6 +956,8 @@ a:hover { color: #A8C9FF; text-decoration: underline; }
 .topbar-label { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #6D7C8E; }
 .divider-v { width: 1px; height: 26px; background: var(--rule); }
 .sync { display: flex; align-items: center; gap: 7px; color: #6D7C8E; }
+.howto-link { font-family: var(--font-data); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim); border: 1px solid var(--rule-strong); padding: 5px 9px; border-radius: 3px; white-space: nowrap; }
+.howto-link:hover { color: var(--text); border-color: var(--blue); text-decoration: none; }
 .sync-dot { width: 7px; height: 7px; background: var(--green); display: inline-block; box-shadow: 0 0 8px var(--green); border-radius: 50%; }
 #search { background: var(--chip); border: 1px solid var(--rule); color: var(--text); font-family: var(--font-data); font-size: 12px; padding: 6px 10px; border-radius: 3px; outline: none; width: 170px; }
 #search::placeholder { color: var(--muted-3); }
@@ -1973,8 +1975,9 @@ body.pc-lock { overflow: hidden; }
   .brand-word { font-size: 21px; }
   .brand-mark i { height: 18px; width: 5px; }
   .navx, .sync { display: none !important; }
-  .topbar-right { margin-left: auto; }
-  #search { width: 150px; font-size: 13px; padding: 6px 12px; }
+  .topbar-right { margin-left: auto; flex-wrap: nowrap; gap: 8px; }
+  .howto-link { padding: 5px 7px; }
+  #search { width: 128px; font-size: 13px; padding: 6px 12px; }
   .navm { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: rgba(9,12,11,0.97); backdrop-filter: blur(10px);
           border-top: 1px solid var(--rule-strong); overflow-x: auto; scrollbar-width: none; padding: 4px 4px calc(4px + env(safe-area-inset-bottom)); }
   .navm::-webkit-scrollbar { display: none; }
@@ -2649,6 +2652,7 @@ RENDERER_JS = """<script>
         }).join('') + '</nav>' +
         '<div class="topbar-right">' +
           searchHtml +
+          '<a class="howto-link" href="how-to.html">How-To</a>' +
           '<div class="sync"><span class="sync-dot"></span><span>' + esc(D.meta.dataAsOf) + '</span></div>' +
         '</div>' +
       '</div></div>';

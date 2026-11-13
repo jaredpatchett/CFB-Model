@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CFB Model — How to Use It</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700;800&family=Azeret+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0D12; --panel: #101722; --panel-deep: #0C121B; --chip: #161E28;
+  --rule: #212B39; --rule-strong: #2A3543;
+  --text: #EDF2F8; --text-dim: #C4CFDC; --muted: #7E8C9E; --muted-2: #61707F;
+  --blue: #2E7BFF; --blue-link: #6BA6FF; --green: #17C26B; --red: #FF5252; --amber: #E0B44A;
+  --font-display: 'Saira Condensed', 'Arial Narrow', sans-serif;
+  --font-data: 'Azeret Mono', ui-monospace, Menlo, monospace;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+a { color: var(--blue-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.topbar { position: sticky; top: 0; z-index: 10; background: rgba(10,13,18,.94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--rule); }
+.topbar-in { max-width: 920px; margin: 0 auto; padding: 0 20px; height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: .06em; text-transform: uppercase; }
+.brand b { color: var(--blue); }
+.back { font-family: var(--font-data); font-size: 13px; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 20px 80px; }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 8px; }
+.toc a { font-family: var(--font-data); font-size: 12px; padding: 6px 10px; background: var(--chip); border: 1px solid var(--rule); color: var(--text-dim); border-radius: 4px; }
+.toc a:hover { color: var(--text); text-decoration: none; border-color: var(--rule-strong); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 7vw, 52px); line-height: 1; text-transform: uppercase; letter-spacing: .02em; margin: 36px 0 10px; }
+.lede { color: var(--text-dim); font-size: 18px; max-width: 680px; margin: 0; }
+h2 { font-family: var(--font-display); font-weight: 800; font-size: 28px; text-transform: uppercase; letter-spacing: .04em; margin: 56px 0 6px; padding-top: 10px; scroll-margin-top: 70px; }
+h2 .n { color: var(--blue); margin-right: 10px; }
+h3 { font-family: var(--font-display); font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: .04em; margin: 28px 0 6px; }
+p { margin: 10px 0; }
+.sub { color: var(--muted); margin-top: 0; }
+.num { font-family: var(--font-data); font-weight: 500; }
+.pos { color: var(--green); } .neg { color: var(--red); }
+.panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 20px; margin: 16px 0; }
+.panel.blue { border-left: 3px solid var(--blue); }
+.panel.amber { border-left: 3px solid var(--amber); }
+.panel.red { border-left: 3px solid var(--red); }
+.panel.green { border-left: 3px solid var(--green); }
+.panel h3 { margin-top: 0; }
+.steps { list-style: none; counter-reset: s; padding: 0; margin: 12px 0 0; }
+.steps li { counter-increment: s; position: relative; padding: 0 0 14px 44px; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 30px; height: 30px; display: grid; place-items: center; background: var(--blue); color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 17px; transform: skewX(-11deg); }
+.steps b { color: var(--text); }
+.check { list-style: none; padding: 0; margin: 10px 0 0; }
+.check > li { position: relative; padding: 8px 0 8px 32px; border-top: 1px solid var(--rule); }
+.check > li:first-child { border-top: 0; }
+.check > li::before { content: ""; position: absolute; left: 2px; top: 13px; width: 16px; height: 16px; border: 2px solid var(--muted); border-radius: 3px; }
+ul.plain { padding-left: 20px; margin: 8px 0; }
+ul.plain li { margin: 4px 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 16px 0; }
+.card { background: var(--panel-deep); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; }
+.card .t { font-family: var(--font-display); font-weight: 700; font-size: 18px; text-transform: uppercase; letter-spacing: .04em; }
+.card .k { font-family: var(--font-data); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.card p { font-size: 14.5px; color: var(--text-dim); margin: 6px 0 0; }
+.tag { display: inline-block; font-family: var(--font-data); font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 3px; background: var(--chip); border: 1px solid var(--rule-strong); color: var(--text-dim); white-space: nowrap; }
+.tag.g { color: var(--green); border-color: rgba(23,194,107,.4); }
+.tag.a { color: var(--amber); border-color: rgba(224,180,74,.4); }
+.tag.r { color: var(--red); border-color: rgba(255,82,82,.4); }
+.tag.b { color: var(--blue-link); border-color: rgba(46,123,255,.45); }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14.5px; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--font-data); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.tbl { overflow-x: auto; }
+.big { font-family: var(--font-display); font-weight: 800; font-size: 22px; }
+.foot { margin-top: 60px; padding-top: 18px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 13.5px; }
+@media (max-width: 600px) {
+  .topbar-in, .wrap { padding-left: 16px; padding-right: 16px; }
+  h2 { font-size: 24px; margin-top: 44px; }
+  .panel { padding: 16px; }
+  th, td { padding: 8px 6px; }
+}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-in">
+  <div class="brand">CFB Model <b>How-To</b></div>
+  <a class="back" href="dashboard.html">&larr; Dashboard</a>
+</div></div>
+
+<div class="wrap">
+  <h1>How to use the model</h1>
+  <p class="lede">Where the plays are, what the grades mean, and the checks to run before you bet. The model gives you the starting list. You still decide what to bet.</p>
+
+  <nav class="toc">
+    <a href="#quick">1 · Quick routine</a>
+    <a href="#where">2 · Where the plays are</a>
+    <a href="#grades">3 · Reading the grades</a>
+    <a href="#check">4 · Before you bet</a>
+    <a href="#smart">5 · Betting smart</a>
+    <a href="#skip">6 · When to skip</a>
+    <a href="#words">7 · Terms</a>
+  </nav>
+
+  <!-- 1 -->
+  <h2 id="quick"><span class="n">1</span>The quick routine</h2>
+  <p class="sub">If you only read one section, read this one.</p>
+  <div class="panel blue">
+    <ol class="steps">
+      <li><b>Open the Bet Card</b> (Edge Board tab, below the Matchup Projector). These are the spread plays. Every play on it is still a bet at the line shown.</li>
+      <li><b>For props, open Player Props</b> and look at the Official plays with a <span class="tag g">🔥 A</span>. We only bet A's.</li>
+      <li><b>Open the Game breakdown</b> for every play before you bet. Check the injuries most of all. <b>The spread model does not adjust for injuries.</b></li>
+      <li><b>Check the line.</b> Bet when a play is first flagged. If the line has moved away from our side, pass.</li>
+      <li><b>Bet one flat unit and hit +TRK</b> so it shows up in My Tracker.</li>
+    </ol>
+  </div>
+
+  <!-- 2 -->
+  <h2 id="where"><span class="n">2</span>Where the plays are</h2>
+  <p class="sub">Only two places on the site give you bets. Everything else is there to help you check them.</p>
+
+  <div class="grid">
+    <div class="card"><div class="k">Bets · spreads</div><div class="t">Edge Board → Bet Card</div>
+      <p>The top 10 spread plays from the in-season model. It's rebuilt every run. Plays marked <span class="tag b">NEW</span> just showed up. Plays that dropped off are listed under the card with the reason. <b>Don't bet the dropped ones.</b></p></div>
+    <div class="card"><div class="k">Bets · props</div><div class="t">Player Props → Official</div>
+      <p>The only props the rules count as bets. Each has a play grade: <span class="tag g">🔥 A</span> bet it, <span class="tag a">🎲 B</span> degen play (not a bet), <span class="tag r">🚫 C</span> don't play.</p></div>
+    <div class="card"><div class="k">Check · every play</div><div class="t">Game breakdown</div>
+      <p>On the Edge Board, pick a game in the Edge Matrix. You can also use the "Game breakdown →" button on a prop. It shows the matchup, the injury report, players to know, and the props in that game.</p></div>
+    <div class="card"><div class="k">Check · injuries</div><div class="t">Injury Report tab</div>
+      <p>Every listed injury for this week's teams. It shows when the report was pulled. Make sure it's recent, then confirm news from the last few hours yourself.</p></div>
+    <div class="card"><div class="k">Track</div><div class="t">My Tracker</div>
+      <p>Where your bets go after you hit +TRK. It grades them, keeps your record, and shows units won or lost.</p></div>
+    <div class="card"><div class="k">Is it working?</div><div class="t">Model Performance</div>
+      <p>The model's record against the closing line and in backtests. Look at this every few weeks, not every day.</p></div>
+  </div>
+  <p>Power Ratings, Anytime TD, TDs Allowed and Fantasy are reference pages. They're good for context, but nothing on them is an official bet.</p>
+
+  <!-- 3 -->
+  <h2 id="grades"><span class="n">3</span>Reading the grades</h2>
+
+  <h3>Spread plays (Bet Card)</h3>
+  <ul class="plain">
+    <li><b>Win %</b> is the model's chance the play covers. Use it to <b>rank</b> plays, not as a real chance. It has run about 17–27 points too high. Bet Card plays have really hit around 60%, whatever win % they show.</li>
+    <li><b>High / Mid / Low</b> are win % tiers (77%+, 71–77%, under 71%). High has done best so far, but the sample is small. Treat all three tiers as bets.</li>
+    <li><span class="tag g">TRAINED</span> / <span class="tag g">UPGRADED</span> means the in-season model priced the game. That's what you want. <span class="tag">UNTRAINED</span> means preseason numbers only, so be skeptical.</li>
+    <li>A <span class="tag r">⚠ Injury</span> line on a play means a QB is on the report and the model doesn't know about it. Check his status before you bet. Always.</li>
+  </ul>
+
+  <h3>Prop plays (play grade)</h3>
+  <div class="tbl"><table>
+    <tr><th>Grade</th><th>What to do</th><th>Record (official props since 11/3)</th></tr>
+    <tr><td><span class="tag g">🔥 A</span></td><td>Bet it</td><td class="num"><span class="pos">35-13 · +36%</span></td></tr>
+    <tr><td><span class="tag a">🎲 B</span></td><td>Degen play: not a bet. Skip it, or use money you're fine losing.</td><td class="num">25-21 · +3%</td></tr>
+    <tr><td><span class="tag r">🚫 C</span></td><td>Don't play</td><td class="num"><span class="neg">12-20 · −29%</span></td></tr>
+  </table></div>
+  <p>The grade combines two things: how good the matchup is, and whether the line has moved our way since the play was flagged. It's a small sample and gets re-checked as more weeks are graded.</p>
+
+  <div class="panel amber">
+    <h3>An A is where you start, not a green light</h3>
+    <p>The grade comes from numbers. Numbers can't see a starter ruled out this morning, a backup QB, or a coach who plans to sit guys. An A tells you the play is worth checking. The checks in section 4 tell you whether to bet it.</p>
+  </div>
+
+  <!-- 4 -->
+  <h2 id="check"><span class="n">4</span>Before you bet: the checklist</h2>
+  <p class="sub">About two minutes a play. Run it on every play, A's included.</p>
+
+  <div class="panel">
+    <ul class="check">
+      <li><b>Injuries — the big one.</b> Open the Game breakdown's injury report.
+        <ul class="plain">
+          <li><b>Spreads:</b> the model line doesn't adjust for injuries at all. A starting QB who's out or questionable can wipe out the whole edge. Wait for his status, or pass.</li>
+          <li><b>Props:</b> check the player himself and the guys around him. If a key teammate is out, the player's role can grow or shrink. Rush props adjust when a regular running back is out. Receiving props don't.</li>
+          <li>Look at the time the report was pulled. If news broke after that, it isn't on the site yet.</li>
+        </ul></li>
+      <li><b>Read the Game breakdown.</b> Does the matchup story agree with the pick? If the breakdown strongly favors the other side, slow down and look for why. Bet smaller or skip it. Never flip to the other side.</li>
+      <li><b>Line move.</b> Bet at or near the line where the play was flagged.
+        <ul class="plain">
+          <li>Line moved <b>toward</b> our side (the market agrees): bet it.</li>
+          <li>Line moved <b>away</b> from our side (the market disagrees): <b>pass</b>. Don't bet the other side either.</li>
+        </ul></li>
+      <li><b>Price.</b> Compare a couple of books and take the best number. Half a point matters, especially around 3 and 7.</li>
+      <li><b>Tags on the play.</b> <span class="tag a">Check</span> on a prop means the model is far from the market, which usually means it's missing an injury or a role change. <span class="tag r">Pass</span> means pass. Big edges on preseason-only (UNTRAINED) games are more likely model error than a gift.</li>
+      <li><b>Anything the model can't see.</b> Bad weather, a team resting starters, a coaching change, a rivalry or letdown spot. You don't need to dig for these, but if you know one, factor it in.</li>
+    </ul>
+  </div>
+
+  <div class="panel green">
+    <h3>Why timing matters so much</h3>
+    <p>2024–26 backtest of the Bet Card: <span class="num pos">+5.8%</span> betting at the opening line and <span class="num neg">−3.0%</span> at the closing line. Same picks. The only difference is when they were bet.</p>
+    <p>When the line moved our way, betting at the flag returned <span class="num pos">+14.7%</span>. Waiting and taking the worse number returned <span class="num neg">−4.4%</span>. When the line moved away, the play lost <span class="num neg">−9.6%</span>, and fading it lost the same.</p>
+  </div>
+
+  <!-- 5 -->
+  <h2 id="smart"><span class="n">5</span>Betting smart</h2>
+  <div class="grid">
+    <div class="card"><div class="t">Flat units</div><p>Bet the same amount on every play. A common size is 1–2% of what you've set aside for betting. Don't bet bigger because a play "looks great."</p></div>
+    <div class="card"><div class="t">A's only</div><p>Bet card spreads and 🔥 A props. B's and C's are there so you can see them, not so you bet them.</p></div>
+    <div class="card"><div class="t">Never chase</div><p>A losing Saturday is normal. Even winning 6 of every 10 bets, you still lose the other 4. Don't add bets or raise stakes to win it back.</p></div>
+    <div class="card"><div class="t">Track everything</div><p>Hit +TRK on every bet so your record in My Tracker is real. Judge the model over weeks, not one game.</p></div>
+    <div class="card"><div class="t">Don't fade it</div><p>If you don't like a play, skip it. Betting against the model's plays has lost money.</p></div>
+    <div class="card"><div class="t">Fewer is fine</div><p>If the checks knock a card down to 4 bets, bet 4. Passing costs you nothing.</p></div>
+  </div>
+  <p>For context: Bet Card spreads are <span class="num pos">52-31, +16.28u</span> in My Tracker this season. At $100 a unit, that's <span class="num pos">+$1,628</span>. That's a strong start, but there will still be losing weekends. Treat it as a long-run grind, not a sure thing.</p>
+
+  <!-- 6 -->
+  <h2 id="skip"><span class="n">6</span>When to skip — even an A</h2>
+  <div class="panel red">
+    <ul class="plain">
+      <li>The starting QB (or the player himself, on a prop) is out, doubtful or questionable and you can't confirm he's playing.</li>
+      <li>The line has moved away from our side since the play was flagged.</li>
+      <li>The play dropped off the Bet Card, or the prop is marked Pass.</li>
+      <li>The game has already kicked off.</li>
+      <li>The Game breakdown and the injury news both point the other way, and you can't find a reason the model would still be right.</li>
+      <li>You're betting to get back losses, or you're over your weekly budget.</li>
+    </ul>
+  </div>
+
+  <!-- 7 -->
+  <h2 id="words"><span class="n">7</span>Terms</h2>
+  <div class="tbl"><table>
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>Spread / line</td><td>The points a team gets or gives. IU −8.5 means IU has to win by 9 or more.</td></tr>
+    <tr><td>Edge</td><td>How far the model's number is from the market's. Bigger isn't always better. Huge edges often mean the model is missing something.</td></tr>
+    <tr><td>Unit (u)</td><td>Your standard bet size. +6.5u means up 6.5 standard bets.</td></tr>
+    <tr><td>Flagged</td><td>When the model first put the play on the board. That line is the one to beat.</td></tr>
+    <tr><td>Line move</td><td>How the line has changed since it was flagged. Moving toward our side is good. Moving away means pass.</td></tr>
+    <tr><td>Closing line</td><td>The last line before kickoff. Getting a better number than the close is the best long-run sign the model is working.</td></tr>
+    <tr><td>Official</td><td>A play the rules count as a bet. Watch and Track Only plays are logged to see how they do, not bet.</td></tr>
+  </table></div>
+
+  <div class="foot">
+    The records on this page are as of mid-November 2026 and come from small samples. The live numbers are on the dashboard. This is a model, not a guarantee. Only bet what you can afford to lose. If gambling stops being fun, call 1-800-GAMBLER.
+  </div>
+</div>
+</body>
+</html>
