@@ -942,6 +942,35 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .bc-dropped { border: 1px solid rgba(255,122,89,0.45); background: rgba(255,122,89,0.06); border-radius: 10px; padding: 10px 12px; margin-top: 10px; font-size: 12.5px; color: var(--muted-2, #B6C2CF); }
 .bc-dropped .bc-note-h { color: #FF7A59; }
 .bc-drop-row { margin: 4px 0; }
+.bc-sum { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); margin: 10px 0 4px; }
+.bc-sum b { color: #fff; font-size: 15px; margin-right: 6px; }
+.bc-sum-rm { color: #FF7A59; font-weight: 700; }
+.bc-pill { display: inline-block; font-size: 10.5px; font-weight: 900; letter-spacing: 0.08em; border-radius: 999px; padding: 2px 9px; border: 1px solid; vertical-align: middle; }
+.bc-pill.is-bet { color: #06120A; background: var(--neon); border-color: var(--neon); }
+.bc-pill.is-small { color: var(--neon); background: rgba(57,240,122,0.1); border-color: rgba(57,240,122,0.6); }
+.bc-pill.is-wait { color: #FFB84D; background: rgba(255,184,77,0.1); border-color: rgba(255,184,77,0.6); }
+.bc-pill.is-pass { color: #FF7A59; background: rgba(255,122,89,0.08); border-color: rgba(255,122,89,0.55); }
+.bc-group { margin-top: 14px; }
+.bc-group-h { font-size: 12.5px; font-weight: 700; color: var(--muted); margin: 0 0 6px; display: flex; align-items: center; gap: 8px; }
+.bc-group-h em { font-style: normal; color: var(--muted-3, #64736B); }
+.bc-group.is-pass .bc-row { opacity: 0.72; }
+.bc-group.is-pass .bc-row:hover { opacity: 1; }
+.bc-verdict { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: 12px; line-height: 1.45; padding-top: 7px; color: var(--muted-2, #B6C2CF); }
+.bc-verdict .bc-pill { flex-shrink: 0; }
+.bc-why { flex: 1 1 260px; }
+.bc-act { font-weight: 800; white-space: nowrap; }
+.bc-act.is-add { color: var(--neon); } .bc-act.is-keep { color: #C9D3CD; } .bc-act.is-remove { color: #FF7A59; } .bc-act.is-none { color: var(--muted); }
+@media (max-width: 760px) { .bc-act { white-space: normal; } }
+.bc-extra { grid-column: 1 / -1; font-size: 11px; color: var(--amber); padding-top: 6px; line-height: 1.4; }
+.bc-extra.is-green { color: var(--green); }
+.track-btn.bc-add { color: #06120A; background: var(--neon); border-color: var(--neon); }
+.track-btn.bc-rm { color: #FF7A59; border-color: rgba(255,122,89,0.55); }
+.bc-in { font-size: 10.5px; font-weight: 800; letter-spacing: 0.05em; color: var(--neon); white-space: nowrap; }
+details.bc-note { margin-top: 12px; }
+details.bc-note summary { cursor: pointer; list-style: none; }
+details.bc-note summary::-webkit-details-marker { display: none; }
+details.bc-note summary::before { content: "+ "; }
+details.bc-note[open] summary::before { content: "\2013 "; }
 .bc-drop-row b { color: #fff; }
 .bc-drop-row em { color: #FF7A59; font-style: normal; font-weight: 700; }
 .bc-note { border: 1px solid rgba(57,240,122,0.35); background: rgba(57,240,122,0.05); border-radius: 10px; padding: 10px 12px; margin: 8px 0 10px; font-size: 12.5px; line-height: 1.5; color: var(--muted-2, #B6C2CF); }
@@ -3920,76 +3949,131 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     return { isNew: function (c) { return !pk[cardKey(c.game)]; }, dropped: dropped,
       since: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getDay()] + ' ' + (d.getMonth() + 1) + '/' + d.getDate() + ' ' + d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) };
   }
+  // 11/2026 (Rod): one clear call per Bet Card play -- BET, WAIT or PASS --
+  // plus what to do with it in My Tracker. Uses the same rules the card's
+  // notes already state: bet at the flag; pass if the line moved away;
+  // a number that moved our way is a keep if you already have it and a pass
+  // if you don't (backtest +14.7% at the flag vs -4.4% at the moved number);
+  // a starting QB on our side who is questionable is a wait, out (and new to
+  // the report) is a pass because the line doesn't price it.
+  function bcTracked(c) {
+    var g = c.game, ab = abbrOf(c.side), tail = ' ' + abbrOf(g.away) + ' at ' + abbrOf(g.home);
+    return loadTrk().filter(function (it) {
+      var d = String(it.description || '');
+      return it.type === c.market && d.indexOf(ab + ' ') === 0 && d.slice(-tail.length) === tail &&
+        (!it.kickoffIso || !g.kickoffIso || it.kickoffIso === g.kickoffIso);
+    })[0] || null;
+  }
+  function bcTrackedLine(it) {
+    var d = String(it.description || '').split(' ');
+    return d.length > 1 ? d[1] : '';
+  }
+  function cardVerdict(c) {
+    var g = c.game, sideHome = c.side === g.home;
+    var school = sideHome ? g.homeSchool : g.awaySchool, own = (sideHome ? g.injHome : g.injAway) || [];
+    var fan = gbFantasy(school), m0 = lineMove(c), tr = bcTracked(c), why = [], v = 'bet';
+    // Moves under a full point are noise (11/2026, Rod): only 1+ pt moves change the call.
+    var m = m0 && Math.abs(m0.worse) >= 1 ? m0 : null;
+    var fmt = function (x) { return (x > 0 ? '+' : '') + x; };
+    // Our starting QB.
+    own.forEach(function (i) {
+      if (i.pos !== 'QB' || gbRole(fan, i) !== 'starting QB') return;
+      var st = i.status || '', wk = gbWeeksSince(i.since, g.kickoffIso);
+      if (/^(Out|IR|Doubtful)/.test(st)) {
+        if (wk != null && wk >= 2) return;   // been out a while: already in the numbers
+        v = 'pass'; why.push(esc(abbrOf(c.side)) + '&rsquo;s starting QB ' + esc(i.player) + ' is ' + esc(st.toLowerCase()) + ', and the line doesn&rsquo;t price it');
+      } else if (/^(Questionable|Game-Time)/.test(st) && v !== 'pass') {
+        v = 'wait'; why.push(esc(abbrOf(c.side)) + '&rsquo;s starting QB ' + esc(i.player) + ' is questionable' + '{{QBQ}}');
+      }
+    });
+    // Line move since first flagged.
+    if (m && m.worse < 0) { v = 'pass'; why.unshift('Line moved away: ' + m.txt + '. The market disagrees, so pass (don&rsquo;t fade it)'); }
+    else if (m && m.worse > 0) {
+      if (tr) why.unshift('Line moved our way (' + m.txt + '). You have it at ' + esc(bcTrackedLine(tr)) + ', the better number');
+      else { if (v === 'bet') v = 'small'; why.unshift('Line moved our way (' + m.txt + '). The market agrees, but the best number (' + esc(abbrOf(c.side)) + ' ' + fmt(m.first) + ') is gone. Bet it smaller at ' + fmt(m.now)); }
+    }
+    else if (m0) why.push('Line moved only ' + Math.abs(m0.worse).toFixed(1) + ' pts (' + m0.txt + '), not enough to matter');
+    why = why.map(function (w) { return w.split('{{QBQ}}').join(v === 'wait' ? '. Bet only if he plays' : ' too'); });
+    if (!why.length) why.push('No line move and no QB news on our side. Good to go');
+    else if (v === 'bet' && !m && why.length === 1 && m0) why.push('No QB news on our side. Good to go');
+    var act;
+    if (v === 'pass') act = tr ? { k: 'remove', txt: 'In your tracker. Take it off if you haven&rsquo;t placed it.' } : { k: 'none', txt: 'Don&rsquo;t add it.' };
+    else if (v === 'wait') act = tr ? { k: 'keep', txt: 'In your tracker. Keep it only if he plays.' } : { k: 'add', txt: 'Add it only if he plays.' };
+    else if (v === 'small') act = { k: 'add', txt: 'Add it at a smaller stake (half a unit).' };
+    else act = tr ? { k: 'keep', txt: 'In your tracker. Keep it.' } : { k: 'add', txt: 'Add it to your tracker.' };
+    return { v: v, why: why, tr: tr, act: act };
+  }
+  function bcDroppedTracked(p) {
+    var tail = ' ' + p.away + ' at ' + p.home;
+    return loadTrk().filter(function (it) {
+      var d = String(it.description || '');
+      return it.type === 'Spread' && d.indexOf(p.side + ' ') === 0 && d.slice(-tail.length) === tail;
+    })[0] || null;
+  }
   function renderBetCard(card) {
     var chg = cardChanges(card);
+    var rows = card.map(function (c) { return { c: c, vd: cardVerdict(c) }; });
+    var groups = [['bet', 'Bet', 'Still a bet at the line shown'], ['small', 'Bet small', 'Line moved our way, so the best number is gone'], ['wait', 'Wait', 'Waiting on QB news'], ['pass', 'Pass', 'Not a bet right now']];
+    var nOf = function (k) { return rows.filter(function (x) { return x.vd.v === k; }).length; };
+    var nRemove = rows.filter(function (x) { return x.vd.act.k === 'remove'; }).length +
+      (chg ? chg.dropped.filter(function (x) { return bcDroppedTracked(x.p); }).length : 0);
+    var rowHtml = function (x) {
+      var c = x.c, vd = x.vd;
+      var col = c.side ? M.displayColor(team(c.side).primary) : 'var(--blue)';
+      var sidePrice = c.market === 'Moneyline' ? c.sideMoneyline : -110;
+      var sideProb = c.market === 'Moneyline' ? c.sideProb : c.coverProb;
+      var ev = M.expectedValue(sideProb, sidePrice) * 100;
+      var sidePriceLabel = c.market === 'Moneyline' ? ((sidePrice > 0 ? '+' : '') + sidePrice) : '-110';
+      var isTrainedGame = (c.game.flags || []).some(function (f) { return f.text === 'In-season model'; });
+      var showCaveat = c.market === 'Moneyline' && !isTrainedGame && Math.abs(ev) >= 50;
+      var trkBtn = vd.act.k === 'remove'
+        ? '<button class="track-btn bc-rm" onclick="window.__cfbTrkRemove(' + esc(JSON.stringify(vd.tr.id)) + ')">Remove</button>'
+        : vd.tr ? '<span class="bc-in" title="Already in My Tracker">&#10003; TRK</span>'
+        : '<button class="track-btn' + (vd.v === 'bet' || vd.v === 'small' ? ' bc-add' : '') + '" onclick="window.__cfbTrack(' + trackPayload(c, true) + ')">+TRK</button>';
+      return '<div class="row bc-row is-' + vd.v + '"><div class="row-accent" style="background:' + esc(col) + '"></div>' +
+        '<div class="row-body card-row">' +
+          '<div><div class="card-play">' + (c.side ? trkMark(abbrOf(c.side), 22) : '') + '<span>' + esc(c.playLabel) + '</span>' + (chg && chg.isNew(c) ? '<span class="bc-new">NEW</span>' : '') + '</div>' +
+            '<div class="card-note">' + esc(abbrOf(c.game.away) + ' at ' + abbrOf(c.game.home)) + ' &middot; ' + esc(edgeKickoff(c.game)) +
+              ' &middot; <span style="font-weight:700;color:' + (isTrainedGame ? '#2ecc71' : '#8A94A3') + '">' + (isTrainedGame ? (c.game.modelVersion === 'upgraded' ? 'UPGRADED' : 'TRAINED') : 'UNTRAINED') + '</span></div></div>' +
+          '<div class="card-price">' + esc(sidePriceLabel) + '</div>' +
+          '<div class="card-conf">' + (sideProb * 100).toFixed(1) + '%' + confChip(M.confTier(c.market, sideProb)) + '</div>' +
+          '<div class="num"><span class="tier"><span>' + esc(c.tier) + '</span></span></div>' +
+          '<div class="num">' + trkBtn + '</div>' +
+          '<div class="bc-verdict is-' + vd.v + '"><span class="bc-pill is-' + vd.v + '">' + (vd.v === 'small' ? 'BET SMALL' : vd.v.toUpperCase()) + '</span>' +
+            '<span class="bc-why">' + vd.why.join('. ') + '.</span>' +
+            '<span class="bc-act is-' + vd.act.k + '">' + vd.act.txt + '</span></div>' +
+          (isNearEvenTarget(c) ? '<div class="bc-extra is-green">&#9733; Near-even target: +100 to +150 with the model at 65%+ &mdash; small stake</div>' : '') +
+          (showCaveat ? '<div class="bc-extra">&#9888; Large model/market gap on a preseason-only estimate (no in-season data yet for this game) &mdash; likely reflects the model&rsquo;s limits, not a confirmed edge.</div>' : '') +
+        '</div></div>';
+    };
+    var body = card.length ? groups.map(function (gp) {
+      var list = rows.filter(function (x) { return x.vd.v === gp[0]; });
+      if (!list.length) return '';
+      return '<div class="bc-group is-' + gp[0] + '"><div class="bc-group-h"><span class="bc-pill is-' + gp[0] + '">' + gp[1].toUpperCase() + '</span> ' + gp[2] + ' <em>' + list.length + '</em></div>' +
+        '<div class="projector">' + list.map(rowHtml).join('') + '</div></div>';
+    }).join('') : '<div class="empty-state">No plays clear the ' + D.meta.minEdge.toFixed(1) + '-pt threshold on ' + state.market + ' right now.</div>';
+    var summary = card.length ? '<div class="bc-sum">' +
+      '<span class="bc-pill is-bet">BET</span> <b>' + nOf('bet') + '</b>' +
+      (nOf('small') ? ' &nbsp; <span class="bc-pill is-small">BET SMALL</span> <b>' + nOf('small') + '</b>' : '') +
+      (nOf('wait') ? ' &nbsp; <span class="bc-pill is-wait">WAIT</span> <b>' + nOf('wait') + '</b>' : '') +
+      ' &nbsp; <span class="bc-pill is-pass">PASS</span> <b>' + nOf('pass') + '</b>' +
+      (nRemove ? ' &nbsp;&middot;&nbsp; <span class="bc-sum-rm">' + nRemove + ' in your tracker to take off</span>' : '') + '</div>' : '';
     return '' +
       '<div class="section-head mt-md"><div class="section-title"><div class="section-flag is-green"></div>' +
-      '<h2>Bet Card</h2></div></div>' +
-      // 11/12/2026: timing and line-move notes (trust lab + rebuilt-card check).
-      '<div class="bc-note"><div class="bc-note-h">&#9201; Bet early &mdash; and how to read line moves</div>' +
-        '<p><b>Timing matters more than anything else we&rsquo;ve tested.</b> 2024&ndash;26 backtest of this card: <b>+5.8%</b> at the opening line, <b>&minus;3.0%</b> at the closing line. The edge is biggest when the model first flags a play, before the market moves.</p>' +
-        '<p><b>The simple rule:</b> bet a play when it&rsquo;s flagged. If the line moves away from our side before you bet, <b>pass</b>. Never fade a Bet Card play.</p>' +
-        '<p><b>Line moved toward our side</b> (e.g. IU &minus;7.5 &rarr; &minus;8.5, the market agreeing): <b>+14.7%</b> bet at the flag, <b>&minus;4.4%</b> if you wait and take the moved number.</p>' +
-        '<p><b>Line moved away</b> (e.g. SJSU +10.5 &rarr; +12.5, the market disagreeing): <b>&minus;9.6%</b> at the flag; fading it also lost (&minus;9.6%).</p>' +
-        '<p class="bc-note-s">Line-move backtest: Bet Card 2024&ndash;26, flagged against the opener, 318 plays (toward 180, away 94, no move 44). Bet at the open, passing the ones that moved away, would have gone 128-89 (+12.2%).</p>' +
-        '<p><b>Every play on this card is still a bet at the line shown</b> &mdash; the card is rebuilt from the current line every run. If a play stops being a bet, it drops off and shows up below the card.</p></div>' +
-      '<div class="projector">' +
-        (card.length ? card.map(function (c) {
-          var col = c.side ? M.displayColor(team(c.side).primary) : 'var(--blue)';
-          // Bug fix: this used to always read c.coverProb / c.game.marketMoneyline
-          // here, which are HOME-team numbers regardless of which side c.playLabel
-          // actually names (see priceGame's Moneyline branch comment) -- for any
-          // row recommending the AWAY side, that silently showed the home team's
-          // price next to the away team's name and computed "EV" from the home
-          // team's win probability against the home team's price, producing a
-          // real number that had nothing to do with the labeled bet (this is what
-          // produced things like a 4-figure "-6500" price next to a 20+ point
-          // underdog, and absurd +200%/+300% "edges" on the other end). c.sideProb
-          // and c.sideMoneyline are the picked-side-correct versions; c.coverProb
-          // stays correct as-is for Spread, where home/away are just a sign flip
-          // of the same number.
-          var sidePrice = c.market === 'Moneyline' ? c.sideMoneyline : -110;
-          var sideProb  = c.market === 'Moneyline' ? c.sideProb : c.coverProb;
-          var ev = M.expectedValue(sideProb, sidePrice) * 100;
-          var sidePriceLabel = c.market === 'Moneyline' ? ((sidePrice > 0 ? '+' : '') + sidePrice) : '-110';
-          // Fixing the price/EV attribution bug above (see priceGame's
-          // Moneyline branch) revealed a SEPARATE, real issue underneath:
-          // several preseason-only picks still show implausibly large EV
-          // (100%+) once the price is correctly attributed. That's not a
-          // display bug -- it's the preseason estimator (last season's SP+
-          // diff run through one fixed, league-wide sigma, no in-season
-          // data yet) disagreeing wildly with a much better-informed
-          // market. A real, durable edge that size doesn't exist in CFB
-          // betting, so this is far more likely the crude preseason
-          // estimate being wrong than a hidden opportunity -- flagged
-          // in-place (per user decision) rather than hidden, since it's
-          // still possible, just something to treat with real skepticism
-          // until the in-season trained model (real rolling data, already
-          // validated via backtest) takes over for that specific game.
-          var isTrainedGame = (c.game.flags || []).some(function (f) { return f.text === 'In-season model'; });
-          var showCaveat = c.market === 'Moneyline' && !isTrainedGame && Math.abs(ev) >= 50;
-          var qbFlags = (c.game.flags || []).filter(function (f) { return f.qb; });
-          return '<div class="row"><div class="row-accent" style="background:' + esc(col) + '"></div>' +
-            '<div class="row-body card-row">' +
-              '<div><div class="card-play">' + (c.side ? trkMark(abbrOf(c.side), 22) : '') + '<span>' + esc(c.playLabel) + '</span>' + (chg && chg.isNew(c) ? '<span class="bc-new">NEW</span>' : '') + '</div>' +
-                '<div class="card-note">' + esc(abbrOf(c.game.away) + ' at ' + abbrOf(c.game.home) + ' \u00b7 ' + edgeKickoff(c.game)) +
-                  ' \u00b7 <span style="font-weight:700;color:' + (isTrainedGame ? '#2ecc71' : '#8A94A3') + '">' + (isTrainedGame ? (c.game.modelVersion === 'upgraded' ? 'UPGRADED' : 'TRAINED') : 'UNTRAINED') + '</span></div></div>' +
-              '<div class="card-price">' + esc(sidePriceLabel) + '</div>' +
-              '<div class="card-conf">' + (sideProb * 100).toFixed(1) + '%' + confChip(M.confTier(c.market, sideProb)) + '</div>' +
-              '<div class="num"><span class="tier"><span>' + esc(c.tier) + '</span></span></div>' +
-              '<div class="num"><button class="track-btn" onclick="window.__cfbTrack(' + trackPayload(c, true) + ')">+TRK</button></div>' +
-              (lineMoveHtml(c, true) ? '<div style="grid-column:1/-1;padding-top:6px">' + lineMoveHtml(c, true) + '</div>' : '') +
-              (isNearEvenTarget(c) ? '<div style="grid-column:1/-1;font-size:11px;color:var(--green);padding-top:6px;line-height:1.4">★ Near-even target: +100 to +150 with the model at 65%+ — small stake</div>' : '') +
-              (qbFlags.length ? '<div style="grid-column:1/-1;font-size:11px;color:var(--amber);padding-top:6px;line-height:1.4">⚠ Injury: ' +
-                qbFlags.map(function (f) { return esc(abbrOf(f.team)) + ' ' + esc(f.text); }).join(' · ') +
-                ' — the model doesn’t account for this. Check the latest status before betting.</div>' : '') +
-              (showCaveat ? '<div style="grid-column:1/-1;font-size:11px;color:var(--amber);padding-top:6px;line-height:1.4">' +
-                '⚠ Large model/market gap on a preseason-only estimate (no in-season data yet for this game) — likely reflects the model’s limits, not a confirmed edge. Extra caution advised.</div>' : '') +
-            '</div></div>';
-        }).join('') : '<div class="empty-state">No plays clear the ' + D.meta.minEdge.toFixed(1) + '-pt threshold on ' + state.market + ' right now.</div>') +
-      '</div>' +
-      (chg && chg.dropped.length ? '<div class="bc-dropped"><div class="bc-note-h">Dropped off since the last run (' + esc(chg.since) + ')</div>' +
-        chg.dropped.map(function (x) { return '<div class="bc-drop-row"><b>' + esc(x.p.label) + '</b> <span>' + esc(x.p.away) + ' at ' + esc(x.p.home) + '</span> &mdash; ' + x.why + '. <em>Not a bet now.</em></div>'; }).join('') + '</div>' : '');
+      '<h2>Bet Card</h2></div></div>' + summary + body +
+      (chg && chg.dropped.length ? '<div class="bc-dropped"><div class="bc-note-h">Dropped off since the last run (' + esc(chg.since) + ') &mdash; not a bet now</div>' +
+        chg.dropped.map(function (x) {
+          var t = bcDroppedTracked(x.p);
+          return '<div class="bc-drop-row"><span class="bc-pill is-pass">PASS</span> <b>' + esc(x.p.label) + '</b> <span>' + esc(x.p.away) + ' at ' + esc(x.p.home) + '</span> &mdash; ' + x.why + '.' +
+            (t ? ' <span class="bc-act is-remove">In your tracker. Take it off if you haven&rsquo;t placed it.</span> <button class="track-btn bc-rm" onclick="window.__cfbTrkRemove(' + esc(JSON.stringify(t.id)) + ')">Remove</button>' : '') + '</div>';
+        }).join('') + '</div>' : '') +
+      '<details class="bc-note"><summary class="bc-note-h">How BET / WAIT / PASS is decided</summary>' +
+        '<p><b>BET:</b> the line hasn&rsquo;t moved a full point since the model flagged it, and no QB news on our side. Add it to your tracker. Moves under a point are ignored.</p>' +
+        '<p><b>BET SMALL:</b> the line moved our way by a point or more and you don&rsquo;t have it yet. The market agrees with the model, but the best number is gone (+14.7% at the flag, &minus;4.4% at the moved number in the backtest), so bet half a unit. Already have it? It&rsquo;s a keep.</p>' +
+        '<p><b>WAIT:</b> our starting QB is questionable. Bet it only if he plays.</p>' +
+        '<p><b>PASS:</b> the line moved away from us by a point or more (the market disagrees: &minus;9.6% in the backtest, and fading it lost too), or our starting QB is newly out. Never bet the other side.</p>' +
+        '<p><b>Already in your tracker?</b> Keep the bets. If a pass is in there and you haven&rsquo;t placed it, take it off.</p>' +
+        '<p class="bc-note-s">Timing backtest 2024&ndash;26: +5.8% at the opening line, &minus;3.0% at the close. Line-move backtest: 318 Bet Card plays; bet at the open, passing the ones that moved away: 128-89 (+12.2%).</p></details>';
   }
 
   var PROP_BOOK_LABELS = {
