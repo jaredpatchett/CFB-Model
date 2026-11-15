@@ -855,7 +855,7 @@ def build_prop_tracking(history, path: str = PROPS_TRACK_PATH, max_results: int 
                 "underPlayNew": live.get("under_play_since_update"), "underPlayPrev": live.get("under_play_prev"),
                 "rushUnderPlayNew": live.get("rush_under_play_since_update"), "rushUnderPlayPrev": live.get("rush_under_play_prev"),
                 "byMatchup": live.get("by_matchup_grade"), "byMatchupSince": live.get("by_matchup_grade_since"),
-                "officialNow": live.get("official_now"), "officialPlays": (log.get("official_plays") or [])[:200],
+                "officialNow": live.get("official_now"), "officialPlays": (log.get("official_plays") or [])[:1000],
                 "results": [slim(p) for p in results[:max_results]], "nResults": len(results),
                 "upcoming": [slim(p) for p in upcoming[:max_upcoming]], "nUpcoming": len(upcoming)}
     except Exception as e:
@@ -1967,6 +1967,8 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .gt-wc b { color: #fff; margin-right: 6px; } .gt-wc span.is-good { color: var(--neon); } .gt-wc span.is-bad { color: #FF6B6B; }
 .gt-wc em { display: block; font-style: normal; font-size: 10.5px; color: var(--muted-3); }
 .gt-cum { background: rgba(57,240,122,0.04); }
+.off-wk { margin: 14px 0 0; }
+.off-wk .pp-tag { margin-left: 4px; vertical-align: middle; }
 .gt-wk-tip { display: none; font-size: 11px; color: var(--muted-3); padding: 4px 0 6px; }
 @media (max-width: 600px) { .gt-wt .gt-tc { display: none; } .gt-wt { min-width: 0; } .gt-wk-tip { display: block; } }
 .gt-empty { color: var(--muted); font-size: 13px; padding: 14px 4px; }
@@ -6405,7 +6407,32 @@ RENDERER_JS = """<script>
           (x.actual != null && x.result ? ' <em>(' + Number(x.actual) + ')</em>' : '') + '</span>' +
           '<b style="color:' + rc + '">' + lab + '</b><b style="color:' + tone(x.units || 0) + '">' + (x.result ? signed(x.units || 0, 2) + 'u' : '') + '</b></div>';
       }).join('');
-      myPanel = '<div class="pp-panel my-props"><h3>Official record</h3>' +
+      // By weekend (11/2026, Rod): each official rule that weekend, the
+      // weekend total and the running total, newest weekend first.
+      var RK = ['rec_yds_play', 'rush_under_play', 'under_play'];
+      var orec = function (xs) {
+        var g = xs.filter(function (x) { return /^[WLP]$/.test(x.result || ''); }), w = 0, l = 0, p = 0, u = 0;
+        g.forEach(function (x) { if (x.result === 'W') w++; else if (x.result === 'L') l++; else p++; u += Number(x.units || 0); });
+        return { n: g.length, w: w, l: l, p: p, u: u, roi: g.length ? u / g.length * 100 : null, pend: xs.length - g.length };
+      };
+      var ocell = function (o, cls) {
+        if (!o.n) return '<td class="gt-wc' + (cls || '') + '">' + (o.pend ? '<em>' + o.pend + ' pending</em>' : '&mdash;') + '</td>';
+        return '<td class="gt-wc' + (cls || '') + '"><b>' + o.w + '-' + o.l + (o.p ? '-' + o.p : '') + '</b><span class="' + (o.u >= 0 ? 'is-good' : 'is-bad') + '">' + signed(o.u, 1) + 'u</span>' +
+          (o.pend ? '<em>' + o.pend + ' pending</em>' : '') + '</td>';
+      };
+      var owk = {};
+      OP.forEach(function (x) { var k = gtWeek(x.start_time); if (k) (owk[k] = owk[k] || []).push(x); });
+      var oacc = [], oruns = Object.keys(owk).sort().map(function (k) { oacc = oacc.concat(owk[k]); return { k: k, xs: owk[k], cum: orec(oacc) }; });
+      var oWeekly = oruns.length ? '<div class="gt-wk off-wk"><div class="gt-wk-h">By weekend &middot; official rules</div><div class="gt-wk-scroll"><table class="gt-wt"><thead><tr><th>Weekend</th>' +
+          RK.map(function (k) { return '<th class="gt-tc">' + RL[k] + ' <span class="pp-tag is-official">Official</span></th>'; }).join('') + '<th>Weekend total</th><th>Running total</th></tr></thead><tbody>' +
+          oruns.slice().reverse().map(function (w) {
+            var p = w.k.split('-');
+            return '<tr><td class="gt-wl">Sat ' + Number(p[1]) + '/' + Number(p[2]) + '</td>' +
+              RK.map(function (k) { return ocell(orec(w.xs.filter(function (x) { return x.tag === k; })), ' gt-tc'); }).join('') +
+              ocell(orec(w.xs)) + '<td class="gt-wc gt-cum"><b>' + w.cum.w + '-' + w.cum.l + (w.cum.p ? '-' + w.cum.p : '') + '</b><span class="' + (w.cum.u >= 0 ? 'is-good' : 'is-bad') + '">' + signed(w.cum.u, 1) + 'u' +
+                (w.cum.roi != null ? ' &middot; ' + signed(w.cum.roi, 0) + '%' : '') + '</span></td></tr>';
+          }).join('') + '</tbody></table></div><div class="gt-wk-tip">On a phone, the per-rule columns are hidden; the rule totals are listed above.</div></div>' : '';
+      myPanel = '<div class="pp-panel my-props" id="official-record"><h3>Official record</h3>' +
         '<div class="pp-panel-note">Only plays that meet the current official rules, graded automatically from the box score, 1 unit each at the price they were flagged at. ' +
           'Records start when each rule last changed (rec yds overs and receptions unders Nov 2, rush yds unders Nov 3). Your W / L / P on other props stays in My Tracker and does not count here.</div>' +
         '<div class="my-props-grid"><div>' +
@@ -6414,7 +6441,7 @@ RENDERER_JS = """<script>
           ['rec_yds_play', 'rush_under_play', 'under_play'].map(function (k) { return lineO(RL[k], NEWK[k]); }).join('') +
           '<div class="ep-k2" style="margin-top:8px">' + OP.length + ' official plays logged &middot; ' + nPend + ' still to be graded</div>' +
         '</div><div>' + (listO || '<div class="ep-empty">No official plays logged yet under the current rules.</div>') +
-          (OP.length > 16 ? '<div class="ep-k2" style="margin-top:6px">Showing 16 of ' + OP.length + ' (graded first, then upcoming).</div>' : '') + '</div></div></div>';
+          (OP.length > 16 ? '<div class="ep-k2" style="margin-top:6px">Showing 16 of ' + OP.length + ' (graded first, then upcoming).</div>' : '') + '</div></div>' + oWeekly + '</div>';
     }
     if (cur === 'td') return hero + cats + renderPropsTd() + help;
     return hero + cats + cards +
