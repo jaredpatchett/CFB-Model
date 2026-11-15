@@ -320,7 +320,8 @@ def _seed_prop_grade_log(log, flags_path=PROP_FLAGS_PATH):
     if not os.path.exists(flags_path):
         return
     with open(flags_path, newline="") as f:
-        rows = [r for r in csv.DictReader(f) if r.get("tag") in OFFICIAL_TAGS]
+        # "official" is the old receptions-overs tag (Watch since 10/23/2026), not a current rule.
+        rows = [r for r in csv.DictReader(f) if r.get("tag") in OFFICIAL_TAGS and r.get("tag") != "official"]
     for r in sorted(rows, key=lambda r: r.get("flagged_at") or ""):
         side = "under" if r.get("side") == "under" else "over"
         pid = f"{r.get('key')}|{side}"
@@ -1954,6 +1955,20 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .gt-gb { margin-top: 4px; width: 96px; }
 .gt-you { color: var(--neon) !important; font-weight: 700; }
 .gt-diff { color: #FFB84D !important; font-weight: 700; }
+.gt-types .pp-seg { flex-wrap: wrap; }
+.gt-wk { border: 1px solid var(--rule); border-radius: 10px; padding: 8px 12px 4px; margin-bottom: 12px; background: rgba(255,255,255,0.015); }
+.gt-wk-h { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.gt-wk-scroll { overflow-x: auto; }
+.gt-wt { width: 100%; border-collapse: collapse; font-size: 12.5px; min-width: 520px; }
+.gt-wt th { text-align: left; font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted-3); padding: 6px 8px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+.gt-wt td { padding: 7px 8px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.gt-wt tr:last-child td { border-bottom: 0; }
+.gt-wl { color: #fff; font-weight: 700; white-space: nowrap; }
+.gt-wc b { color: #fff; margin-right: 6px; } .gt-wc span.is-good { color: var(--neon); } .gt-wc span.is-bad { color: #FF6B6B; }
+.gt-wc em { display: block; font-style: normal; font-size: 10.5px; color: var(--muted-3); }
+.gt-cum { background: rgba(57,240,122,0.04); }
+.gt-wk-tip { display: none; font-size: 11px; color: var(--muted-3); padding: 4px 0 6px; }
+@media (max-width: 600px) { .gt-wt .gt-tc { display: none; } .gt-wt { min-width: 0; } .gt-wk-tip { display: block; } }
 .gt-empty { color: var(--muted); font-size: 13px; padding: 14px 4px; }
 .gt-more { margin-top: 10px; background: var(--chip); border: 1px solid var(--rule-strong); color: var(--text-dim); border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 700; cursor: pointer; }
 @media (max-width: 760px) {
@@ -5500,6 +5515,22 @@ RENDERER_JS = """<script>
     saveTrk(items);
     render();
   };
+  // Play type (11/2026): the three official rules, by market and side.
+  var GT_TYPES = [['recyds', 'Rec yds overs'], ['rush', 'Rush yds unders'], ['rec', 'Receptions unders'], ['other', 'Other']];
+  function gtType(x) {
+    if (x.market === 'Reception Yards' && x.side === 'over') return 'recyds';
+    if (x.market === 'Rush Yards' && x.side === 'under') return 'rush';
+    if (x.market === 'Receptions' && x.side === 'under') return 'rec';
+    return 'other';
+  }
+  // The Saturday a game belongs to (Tue-Fri games roll forward, Sun/Mon back).
+  function gtWeek(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return '';
+    var day = d.getDay(), off = day === 0 ? -1 : day === 1 ? -2 : 6 - day;
+    var s = new Date(d.getFullYear(), d.getMonth(), d.getDate() + off);
+    return s.getFullYear() + '-' + (s.getMonth() < 9 ? '0' : '') + (s.getMonth() + 1) + '-' + (s.getDate() < 10 ? '0' : '') + s.getDate();
+  }
   function renderGradeTracker() {
     var L = D.propGradeLog;
     if (!L || !L.plays || !L.plays.length) return '';
@@ -5515,6 +5546,10 @@ RENDERER_JS = """<script>
       }
     });
     window.__cfbGtRows = [];
+    var tf = state.gtType || '', typeN = {};
+    rows.forEach(function (r) { r.t = gtType(r.x); typeN[r.t] = (typeN[r.t] || 0) + 1; });
+    var allRows = rows;
+    if (tf) rows = rows.filter(function (r) { return r.t === tf; });
     var up = rows.filter(function (r) { return !r.i.kicked; }), done = rows.filter(function (r) { return r.i.kicked; });
     var view = state.gtView || (up.length ? 'upcoming' : 'graded'), gf = state.gtGrade || '';
     var sg = function (v, d) { return (v > 0 ? '+' : '') + Number(v).toFixed(d); };
@@ -5535,8 +5570,28 @@ RENDERER_JS = """<script>
       '<div class="gt-sum-r"><div class="gt-sum-l">By <b>final</b> grade</div>' + ['A', 'B', 'C'].map(function (g) { return recCell(rec(byFinal(g))); }).join('') +
         recCell(rec(done.filter(function (r) { return r.i.off; }))) + '</div>' +
       '<div class="gt-sum-r is-dim"><div class="gt-sum-l">By first grade</div>' + ['A', 'B', 'C'].map(function (g) { return recCell(rec(byFirst(g))); }).join('') + '<div></div></div></div>';
+    var byGrade = function (r) { return !gf || (gf === 'X' ? r.i.off : (!r.i.off && r.i.cur === gf)); };
+    // By weekend: each play type that weekend, the weekend total, and the running total.
+    var types = GT_TYPES.filter(function (t) { return (tf ? t[0] === tf : typeN[t[0]]); });
+    var wk = {};
+    done.filter(byGrade).forEach(function (r) { var k = gtWeek(r.x.start); if (k) (wk[k] = wk[k] || []).push(r); });
+    var weeks = Object.keys(wk).sort(), run = [], acc = [];
+    weeks.forEach(function (k) { acc = acc.concat(wk[k]); run.push({ k: k, rows: wk[k], tot: rec(wk[k]), cum: rec(acc) }); });
+    var wcell = function (o) {
+      if (!o.n) return '<td class="gt-wc">' + (o.pend ? '<em>' + o.pend + ' pending</em>' : '&mdash;') + '</td>';
+      return '<td class="gt-wc"><b>' + o.w + '-' + o.l + (o.p ? '-' + o.p : '') + '</b><span class="' + (o.u >= 0 ? 'is-good' : 'is-bad') + '">' + sg(o.u, 1) + 'u</span>' + (o.pend ? '<em>' + o.pend + ' pending</em>' : '') + '</td>';
+    };
+    var wlab = function (k) { var p = k.split('-'); return 'Sat ' + Number(p[1]) + '/' + Number(p[2]); };
+    var weekly = run.length ? '<div class="gt-wk"><div class="gt-wk-h">By weekend' + (gf ? ' &middot; ' + (gf === 'X' ? 'off at kickoff' : 'final grade ' + gf) : ' &middot; every final grade') + '</div><div class="gt-wk-scroll"><table class="gt-wt"><thead><tr><th>Weekend</th>' +
+        (types.length > 1 ? types.map(function (t) { return '<th class="gt-tc">' + t[1] + '</th>'; }).join('') : '') + '<th>Weekend total</th><th>Running total</th></tr></thead><tbody>' +
+        run.slice().reverse().map(function (w) {
+          return '<tr><td class="gt-wl">' + wlab(w.k) + '</td>' +
+            (types.length > 1 ? types.map(function (t) { return wcell(rec(w.rows.filter(function (r) { return r.t === t[0]; }))).replace('<td class="gt-wc"', '<td class="gt-wc gt-tc"'); }).join('') : '') +
+            wcell(w.tot) + '<td class="gt-wc gt-cum"><b>' + w.cum.w + '-' + w.cum.l + (w.cum.p ? '-' + w.cum.p : '') + '</b><span class="' + (w.cum.u >= 0 ? 'is-good' : 'is-bad') + '">' + sg(w.cum.u, 1) + 'u' +
+              (w.cum.roi != null ? ' &middot; ' + sg(w.cum.roi, 0) + '%' : '') + '</span></td></tr>';
+        }).join('') + '</tbody></table></div>' + (types.length > 1 ? '<div class="gt-wk-tip">On a phone, pick a play type above to see each one&rsquo;s weekends.</div>' : '') + '</div>' : '';
     var list = view === 'graded' ? done : view === 'all' ? rows : up;
-    if (gf) list = list.filter(function (r) { return gf === 'X' ? r.i.off : (!r.i.off && r.i.cur === gf); });
+    list = list.filter(byGrade);
     if (view === 'upcoming') list = list.slice().sort(function (a, b) { return String(a.x.start).localeCompare(String(b.x.start)); });
     var cap = state.gtAll ? list.length : 40;
     var seg = function (field, val, cur, label) { return '<button class="' + (cur === val ? 'is-on' : '') + '" data-prop-set="' + field + '" data-prop-val="' + val + '">' + label + '</button>'; };
@@ -5568,7 +5623,9 @@ RENDERER_JS = """<script>
       '<div class="pp-panel-note">Every official prop, with the play grade it had each time the model ran. The <b>final grade</b> is its grade at the last run before kickoff. ' +
         'Results come from the box score, 1 unit a play at the price first logged. Use W / L / P to grade a play yourself: it counts until the box score comes in, and it also shows in My Tracker. &ldquo;Off&rdquo; means it wasn&rsquo;t an official play at that run (the edge moved out of the rule, or the book pulled the line). Hover a grade for its line and price.' +
         (seeded ? ' Plays from before 11/15 show only their first and last grade (rebuilt from the flag log); every run is logged from here on.' : '') + '</div>' +
-      summary +
+      '<div class="gt-ctl gt-types"><div class="pp-seg">' + seg('gtType', '', tf, 'All play types (' + allRows.length + ')') +
+        GT_TYPES.filter(function (t) { return typeN[t[0]]; }).map(function (t) { return seg('gtType', t[0], tf, t[1] + ' (' + typeN[t[0]] + ')'); }).join('') + '</div></div>' +
+      summary + weekly +
       '<div class="gt-ctl"><div class="pp-seg">' + seg('gtView', 'upcoming', view, 'Upcoming (' + up.length + ')') + seg('gtView', 'graded', view, 'Kicked off (' + done.length + ')') + seg('gtView', 'all', view, 'All') + '</div>' +
         '<div class="pp-seg">' + seg('gtGrade', '', gf, 'Any grade') + seg('gtGrade', 'A', gf, '&#128293; A') + seg('gtGrade', 'B', gf, '&#127922; B') + seg('gtGrade', 'C', gf, '&#128683; C') + seg('gtGrade', 'X', gf, 'Off') + '</div></div>' +
       '<div class="gt-head"><div>Player &middot; prop</div><div>Grade each run</div><div>' + (view === 'upcoming' ? 'Now' : 'Final') + '</div><div>Result</div></div>' +
