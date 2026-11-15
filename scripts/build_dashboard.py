@@ -1951,6 +1951,9 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .gt-fin small, .gt-out small { font-size: 10.5px; color: var(--muted-3); }
 .gt-res { font-weight: 900; font-size: 12px; border-radius: 5px; padding: 1px 7px; }
 .gt-res.is-w { color: #06120A; background: var(--neon); } .gt-res.is-l { color: #fff; background: #C93A3A; } .gt-res.is-p { color: #fff; background: #555; }
+.gt-gb { margin-top: 4px; width: 96px; }
+.gt-you { color: var(--neon) !important; font-weight: 700; }
+.gt-diff { color: #FFB84D !important; font-weight: 700; }
 .gt-empty { color: var(--muted); font-size: 13px; padding: 14px 4px; }
 .gt-more { margin-top: 10px; background: var(--chip); border: 1px solid var(--rule-strong); color: var(--text-dim); border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 700; cursor: pointer; }
 @media (max-width: 760px) {
@@ -5458,7 +5461,7 @@ RENDERER_JS = """<script>
     var dist = {}; graded.forEach(function (e) { dist[e[1]] = 1; });
     return { h: h, first: graded[0] ? graded[0][1] : null, cur: lastG ? lastG[1] : null, off: off, kicked: kicked,
       changed: Object.keys(dist).length > 1, seeded: h.some(function (e) { return e[6] === 's'; }),
-      res: x.res && /^[WLP]$/.test(x.res.r || '') ? x.res : null };
+      res: x.res && /^[WLP]$/.test(x.res.r || '') ? x.res : null, mine: null };
   }
   function gtBadge(g, big) {
     if (!g) return '<span class="gt-g is-none">&mdash;</span>';
@@ -5466,10 +5469,52 @@ RENDERER_JS = """<script>
     var e = g === 'A' ? '&#128293;' : g === 'B' ? '&#127922;' : '&#128683;';
     return '<span class="gt-g is-' + g.toLowerCase() + (big ? ' is-big' : '') + '">' + e + ' ' + g + '</span>';
   }
+  // Manual W/L/P on a tracker row (11/2026, Rod): stored as the same Prop
+  // item My Tracker and the Props-row buttons use, so a grade set in one
+  // place shows in all three. Matched by player, market, side and kickoff,
+  // not the exact line (lines move during the week).
+  function gtTrkPrefix(x) { return (x.team ? schoolAbbr(x.team) + ' ' : '') + x.player + ' ' + x.market + ' ' + (x.side === 'over' ? 'O' : 'U') + ' '; }
+  function gtTrkFind(x, items) {
+    var pre = gtTrkPrefix(x), day = String(x.start || '').slice(0, 10);
+    return (items || loadTrk()).filter(function (it) {
+      return it.type === 'Prop' && (String(it.description || '').indexOf(pre) === 0 || String(it.flaggedDesc || '').indexOf(pre) === 0) &&
+        (it.kickoffIso ? it.kickoffIso === x.start : (!it.date || it.date === day));
+    })[0] || null;
+  }
+  function gtUnits(st, price) {
+    if (st === 'loss') return -1;
+    if (st !== 'win') return 0;
+    var p = Number(price);
+    return !p ? 0.91 : p > 0 ? p / 100 : 100 / -p;
+  }
+  window.__cfbGtGrade = function (i, st) {
+    var r = (window.__cfbGtRows || [])[i];
+    if (!r) return;
+    var x = r.x, items = loadTrk(), it = gtTrkFind(x, items);
+    if (it) { trkCommit(it.id, { status: it.status === st ? null : st }); return render(); }
+    var line = (r.i.h.filter(function (e) { return e[2] != null; }).slice(-1)[0] || [])[2];
+    var price = (x.res && x.res.price != null) ? x.res.price : ((r.i.h.filter(function (e) { return e[3] != null; })[0] || [])[3]);
+    items.unshift({ id: 't' + Date.now() + Math.random().toString(36).slice(2, 7), description: gtTrkPrefix(x) + (line != null ? line : ''),
+      date: String(x.start || '').slice(0, 10), kickoffIso: x.start || undefined, type: 'Prop', price: price, stake: 50, status: st,
+      market: x.market, official: true });
+    saveTrk(items);
+    render();
+  };
   function renderGradeTracker() {
     var L = D.propGradeLog;
     if (!L || !L.plays || !L.plays.length) return '';
+    var trk = loadTrk(), MAP = { win: 'W', loss: 'L', push: 'P' };
     var rows = L.plays.map(function (x) { return { x: x, i: gtInfo(x) }; }).filter(function (r) { return r.i.cur; });
+    rows.forEach(function (r) {
+      var it = gtTrkFind(r.x, trk);
+      if (it && MAP[it.status]) {
+        var hp = (r.i.h.filter(function (e) { return e[3] != null; })[0] || [])[3];
+        var price = (r.x.res && r.x.res.price != null) ? r.x.res.price : (hp != null ? hp : it.price);
+        r.i.mine = { st: it.status, r: MAP[it.status], u: gtUnits(it.status, price) };
+        if (!r.i.res) r.i.res = { r: r.i.mine.r, u: r.i.mine.u, a: null, manual: true };
+      }
+    });
+    window.__cfbGtRows = [];
     var up = rows.filter(function (r) { return !r.i.kicked; }), done = rows.filter(function (r) { return r.i.kicked; });
     var view = state.gtView || (up.length ? 'upcoming' : 'graded'), gf = state.gtGrade || '';
     var sg = function (v, d) { return (v > 0 ? '+' : '') + Number(v).toFixed(d); };
@@ -5496,6 +5541,7 @@ RENDERER_JS = """<script>
     var cap = state.gtAll ? list.length : 40;
     var seg = function (field, val, cur, label) { return '<button class="' + (cur === val ? 'is-on' : '') + '" data-prop-set="' + field + '" data-prop-val="' + val + '">' + label + '</button>'; };
     var tbl = list.slice(0, cap).map(function (r) {
+      var gi = window.__cfbGtRows.push(r) - 1;
       var x = r.x, i = r.i, mk = GT_MKT[x.market] || String(x.market || '').toLowerCase();
       var line = (i.h.filter(function (e) { return e[2] != null; }).slice(-1)[0] || [])[2];
       var hist = i.h.map(function (e, k) {
@@ -5507,13 +5553,20 @@ RENDERER_JS = """<script>
         : (i.off ? gtBadge('X', true) + '<small>now</small>' : gtBadge(i.cur, true) + '<small>now</small>');
       var res = i.res ? '<span class="gt-res is-' + i.res.r.toLowerCase() + '">' + i.res.r + '</span>' + (i.res.a != null ? '<small>' + i.res.a + ' vs ' + (i.res.line != null ? i.res.line : line) + '</small>' : '') + '<small class="' + (Number(i.res.u) >= 0 ? 'is-good' : 'is-bad') + '">' + sg(Number(i.res.u || 0), 2) + 'u</small>'
         : i.kicked ? '<small>grading</small>' : '<small>' + esc(propKickoff(x.start)) + '</small>';
+      if (i.res && i.res.manual) res = res.replace('</span>', '</span><small class="gt-you">your grade</small>');
+      else if (i.res && i.mine && i.mine.r !== i.res.r) res += '<small class="gt-diff">you marked ' + i.mine.r + '</small>';
+      res += '<div class="pp-grade gt-gb" role="group" aria-label="Grade this play yourself">' + ['win', 'loss', 'push'].map(function (st) {
+        var on = i.mine && i.mine.st === st;
+        return '<button class="pp-gbtn is-' + st + (on ? ' is-on' : '') + '" title="' + (on ? 'Clear your grade' : 'Mark as a ' + st) + '" aria-pressed="' + (on ? 'true' : 'false') + '" ' +
+          'onclick="window.__cfbGtGrade(' + gi + ',\\'' + st + '\\')">' + st.charAt(0).toUpperCase() + '</button>';
+      }).join('') + '</div>';
       return '<div class="gt-row' + (i.changed ? ' is-changed' : '') + '"><div class="gt-who"><b>' + esc(x.player) + '</b><span>' + esc(x.side) + ' ' + (line != null ? line : '') + ' ' + esc(mk) + '</span><small>' + esc(schoolAbbr(x.team)) + ' vs ' + esc(schoolAbbr(x.opponent)) + '</small></div>' +
         '<div class="gt-hist">' + hist + (i.changed ? '<span class="gt-chg">changed</span>' : '') + '</div><div class="gt-fin">' + fin + '</div><div class="gt-out">' + res + '</div></div>';
     }).join('');
     var seeded = rows.some(function (r) { return r.i.seeded; });
     return '<div class="pp-panel gt-panel" id="grade-tracker"><h3>Prop grade tracker</h3>' +
       '<div class="pp-panel-note">Every official prop, with the play grade it had each time the model ran. The <b>final grade</b> is its grade at the last run before kickoff. ' +
-        'Results come from the box score, 1 unit a play at the price first logged. &ldquo;Off&rdquo; means it wasn&rsquo;t an official play at that run (the edge moved out of the rule, or the book pulled the line). Hover a grade for its line and price.' +
+        'Results come from the box score, 1 unit a play at the price first logged. Use W / L / P to grade a play yourself: it counts until the box score comes in, and it also shows in My Tracker. &ldquo;Off&rdquo; means it wasn&rsquo;t an official play at that run (the edge moved out of the rule, or the book pulled the line). Hover a grade for its line and price.' +
         (seeded ? ' Plays from before 11/15 show only their first and last grade (rebuilt from the flag log); every run is logged from here on.' : '') + '</div>' +
       summary +
       '<div class="gt-ctl"><div class="pp-seg">' + seg('gtView', 'upcoming', view, 'Upcoming (' + up.length + ')') + seg('gtView', 'graded', view, 'Kicked off (' + done.length + ')') + seg('gtView', 'all', view, 'All') + '</div>' +
