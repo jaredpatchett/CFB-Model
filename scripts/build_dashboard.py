@@ -288,6 +288,161 @@ def build_play_grade_record(path: str = PROP_FLAGS_PATH):
         return None
 
 
+# 11/2026 (Rod): prop grade tracker. Every official prop's play grade at
+# every model run, so the Player Props tab can show how a grade moved during
+# the week and the grade it had at the last run before kickoff (its final
+# grade), graded from the box score. Same scoring as the dashboard's
+# playGrade(): matchup grade (A +2, B +1, C 0, D/F -1, none 0) + line move
+# since first flagged (our way +1, against -1); 2+ A, 0-1 B, below 0 C.
+PROP_GRADE_LOG_PATH = "docs/data/prop_grade_log.json"
+PROP_GRADE_KEEP_DAYS = 150
+
+
+def _prop_grade(p):
+    mu = PG_MU.get(str(p.get("mu_grade") or "")[:1], 0) if p.get("mu_grade") else 0
+    ff, mv = p.get("first_flag") or {}, 0
+    try:
+        d = float(p.get("line")) - float(ff.get("line"))
+        if d:
+            mv = 1 if ((p.get("model_lean") == "under") == (d < 0)) else -1
+    except (TypeError, ValueError):
+        mv = 0
+    s = mu + mv
+    return ("A" if s >= 2 else ("B" if s >= 0 else "C")), mv
+
+
+def _seed_prop_grade_log(log, flags_path=PROP_FLAGS_PATH):
+    """First run only: rebuild each official prop's first and last grade from
+    the flag log (first flagged at its first line, last seen at its last line)
+    so the tracker isn't empty. Marked 's' (seeded): grades in between weren't
+    logged before this tracker existed."""
+    import csv
+    if not os.path.exists(flags_path):
+        return
+    with open(flags_path, newline="") as f:
+        rows = [r for r in csv.DictReader(f) if r.get("tag") in OFFICIAL_TAGS]
+    for r in sorted(rows, key=lambda r: r.get("flagged_at") or ""):
+        side = "under" if r.get("side") == "under" else "over"
+        pid = f"{r.get('key')}|{side}"
+        if pid in log["plays"] or not r.get("key"):
+            continue
+        mu = (r.get("mu_grade") or "")[:1]
+        if mu not in PG_MU:
+            continue   # before matchup grades (11/3) there was no play grade
+        mu_pts = PG_MU[mu]
+        try:
+            d = float(r.get("last_line")) - float(r.get("line"))
+        except (TypeError, ValueError):
+            d = 0.0
+        mv = 0 if not d else (1 if ((side == "under") == (d < 0)) else -1)
+        g0 = "A" if mu_pts >= 2 else ("B" if mu_pts >= 0 else "C")
+        g1 = "A" if mu_pts + mv >= 2 else ("B" if mu_pts + mv >= 0 else "C")
+        h = [[r.get("flagged_at"), g0, _num_or_none(r.get("line")), _num_or_none(r.get("price")), mu or None, 0, "s"]]
+        if r.get("last_seen_at") and r.get("last_seen_at") != r.get("flagged_at"):
+            h.append([r.get("last_seen_at"), g1, _num_or_none(r.get("last_line")), _num_or_none(r.get("last_price")), mu or None, mv, "s"])
+        log["plays"][pid] = {"player": r.get("player"), "team": r.get("team"), "opponent": r.get("opponent"),
+                             "market": r.get("market"), "side": side, "start": r.get("start_time"), "kind": r.get("tag"), "h": h}
+
+
+def _num_or_none(x):
+    try:
+        return float(x)
+    except (TypeError, ValueError):
+        return None
+
+
+def update_prop_grade_log(props, run_at, path=PROP_GRADE_LOG_PATH):
+    """Adds this run's grade for every official prop that hasn't kicked off.
+    A prop on the log that is no longer official (and hasn't kicked off) gets
+    an 'X' entry (off the board). Re-running on the same data replaces that
+    run's entries instead of adding new ones. Never raises."""
+    try:
+        import compute_props_clv as pclv
+        from datetime import timedelta, timezone
+        log = {"plays": {}}
+        if os.path.exists(path):
+            with open(path) as f:
+                log = json.load(f)
+        if not log.get("plays"):
+            log["plays"] = {}
+            _seed_prop_grade_log(log)
+        if not run_at:
+            return log
+        now = datetime.fromisoformat(str(run_at).replace("Z", "+00:00"))
+
+        def started(iso):
+            try:
+                return datetime.fromisoformat(str(iso).replace("Z", "+00:00")) <= now
+            except Exception:
+                return True
+
+        def put(entry, h):
+            if h and h[-1][0] == entry[0]:
+                h[-1] = entry
+            else:
+                h.append(entry)
+
+        seen = set()
+        for p in props or []:
+            if not p.get("is_official_play") or p.get("model_lean") not in ("over", "under") or started(p.get("start_time")):
+                continue
+            pid = f"{pclv.prop_key(p)}|{p['model_lean']}"
+            if pid in seen:
+                continue
+            seen.add(pid)
+            g, mv = _prop_grade(p)
+            price = p.get(f"{p['model_lean']}_price")
+            rec = log["plays"].setdefault(pid, {"player": p.get("player_name"), "team": p.get("team"), "opponent": p.get("opponent"),
+                                                "market": p.get("market_name"), "side": p["model_lean"], "start": p.get("start_time"), "h": []})
+            rec["start"] = p.get("start_time") or rec.get("start")
+            rec["kind"] = p.get("play_kind") or rec.get("kind")
+            put([run_at, g, _num_or_none(p.get("line")), _num_or_none(price), (p.get("mu_grade") or None), mv], rec["h"])
+        for pid, rec in log["plays"].items():
+            if pid in seen or started(rec.get("start")) or not rec.get("h"):
+                continue
+            if rec["h"][-1][1] != "X" or rec["h"][-1][0] == run_at:
+                put([run_at, "X", None, None, None, 0], rec["h"])
+        cutoff = now - timedelta(days=PROP_GRADE_KEEP_DAYS)
+        log["plays"] = {k: v for k, v in log["plays"].items()
+                        if not v.get("start") or datetime.fromisoformat(str(v["start"]).replace("Z", "+00:00")) >= cutoff}
+        log["updated"] = run_at
+        with open(path, "w") as f:
+            json.dump(log, f, separators=(",", ":"))
+        return log
+    except Exception as e:
+        print(f"  [note] prop grade log not updated ({e})")
+        return None
+
+
+def build_prop_grade_tracker(log, flags_path=PROP_FLAGS_PATH):
+    """The log for the page, with each play's box-score result from the flag
+    log (official rows). Never raises."""
+    if not log or not log.get("plays"):
+        return None
+    try:
+        import csv
+        res = {}
+        if os.path.exists(flags_path):
+            with open(flags_path, newline="") as f:
+                for r in csv.DictReader(f):
+                    if r.get("tag") not in OFFICIAL_TAGS:
+                        continue
+                    pid = f"{r.get('key')}|{'under' if r.get('side') == 'under' else 'over'}"
+                    if r.get("result") in ("W", "L", "P") or pid not in res:
+                        res[pid] = {"r": r.get("result") or None, "a": _num_or_none(r.get("actual")), "u": _num_or_none(r.get("units")),
+                                    "line": _num_or_none(r.get("line")), "price": _num_or_none(r.get("price"))}
+        plays = []
+        for pid, rec in log["plays"].items():
+            x = dict(rec)
+            x["res"] = res.get(pid)
+            plays.append(x)
+        plays.sort(key=lambda x: str(x.get("start") or ""), reverse=True)
+        return {"updated": log.get("updated"), "plays": plays}
+    except Exception as e:
+        print(f"  [note] prop grade tracker not built ({e})")
+        return None
+
+
 def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dict:
     prior = data.get("preseason_prior") or {}
     slope = prior.get("slope")
@@ -1765,6 +1920,47 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .pgr-t { display: grid; grid-template-columns: 1.6fr 1.4fr 0.8fr 0.7fr; gap: 8px; align-items: center; padding: 10px 6px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 14px; color: #E6EDF3; }
 .pgr-h { border-top: 0; font-size: 12px; font-weight: 700; color: var(--muted-2, #B6C2CF); }
 .pgr-g { font-weight: 700; }
+.gt-panel { margin-top: 16px; }
+.gt-g { display: inline-flex; align-items: center; gap: 3px; font-weight: 900; font-size: 11px; border-radius: 999px; padding: 1px 7px; white-space: nowrap; border: 1px solid; }
+.gt-g.is-a { background: rgba(57,240,122,0.16); color: var(--neon); border-color: rgba(57,240,122,0.6); }
+.gt-g.is-b { background: rgba(196,140,255,0.12); color: #C48CFF; border-color: rgba(196,140,255,0.5); }
+.gt-g.is-c { background: rgba(255,82,82,0.1); color: #FF6B6B; border-color: rgba(255,82,82,0.5); }
+.gt-g.is-x { background: rgba(255,255,255,0.04); color: var(--muted); border-color: var(--rule-strong); font-weight: 700; }
+.gt-g.is-none { border: 0; color: var(--muted); }
+.gt-g.is-big { font-size: 13px; padding: 3px 10px; }
+.gt-sum { border: 1px solid var(--rule); border-radius: 10px; padding: 8px 12px; margin-bottom: 12px; background: rgba(255,255,255,0.015); }
+.gt-sum-h, .gt-sum-r { display: grid; grid-template-columns: 1.1fr 1fr 1fr 1fr 1fr; gap: 8px; align-items: center; padding: 6px 0; }
+.gt-sum-r { border-top: 1px solid var(--rule); font-size: 13px; }
+.gt-sum-r.is-dim { color: var(--muted); font-size: 12px; }
+.gt-sum-l { color: var(--muted); font-size: 12px; } .gt-sum-l b { color: #fff; }
+.gt-rc b { color: #fff; } .gt-rc em { font-style: normal; color: var(--muted-3); font-size: 11px; display: block; }
+.gt-rc .is-good, .gt-out .is-good { color: var(--neon); } .gt-rc .is-bad, .gt-out .is-bad { color: #FF6B6B; }
+.gt-sum-r.is-dim .gt-rc b { color: var(--text-dim); }
+.gt-ctl { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.gt-head, .gt-row { display: grid; grid-template-columns: minmax(170px, 1.2fr) 2fr 90px 110px; gap: 10px; align-items: center; }
+.gt-head { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-3); padding: 6px 4px; border-bottom: 1px solid var(--rule); }
+.gt-row { padding: 9px 4px; border-bottom: 1px solid var(--rule); font-size: 13px; }
+.gt-row.is-changed { background: rgba(255,184,77,0.03); }
+.gt-who b { display: block; color: #fff; } .gt-who span { display: block; color: var(--text-dim); font-size: 12px; } .gt-who small { color: var(--muted-3); font-size: 11px; }
+.gt-hist { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.gt-step { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; cursor: default; }
+.gt-step small { font-size: 9.5px; color: var(--muted-3); white-space: nowrap; }
+.gt-arr { color: var(--muted-3); font-style: normal; margin: 0 1px 12px; }
+.gt-chg { font-size: 10px; font-weight: 800; color: #FFB84D; border: 1px solid rgba(255,184,77,0.45); border-radius: 999px; padding: 1px 6px; margin-left: 4px; margin-bottom: 12px; }
+.gt-fin, .gt-out { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+.gt-fin small, .gt-out small { font-size: 10.5px; color: var(--muted-3); }
+.gt-res { font-weight: 900; font-size: 12px; border-radius: 5px; padding: 1px 7px; }
+.gt-res.is-w { color: #06120A; background: var(--neon); } .gt-res.is-l { color: #fff; background: #C93A3A; } .gt-res.is-p { color: #fff; background: #555; }
+.gt-empty { color: var(--muted); font-size: 13px; padding: 14px 4px; }
+.gt-more { margin-top: 10px; background: var(--chip); border: 1px solid var(--rule-strong); color: var(--text-dim); border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 700; cursor: pointer; }
+@media (max-width: 760px) {
+  .gt-head { display: none; }
+  .gt-row { grid-template-columns: 1fr auto; grid-template-areas: "who fin" "hist hist" "out out"; row-gap: 6px; }
+  .gt-who { grid-area: who; } .gt-fin { grid-area: fin; align-items: flex-end; } .gt-hist { grid-area: hist; } .gt-out { grid-area: out; flex-direction: row; gap: 8px; align-items: center; }
+  .gt-sum-h, .gt-sum-r { grid-template-columns: 0.9fr 1fr 1fr 1fr; }
+  .gt-sum-h > div:last-child, .gt-sum-r > div:last-child { display: none; }
+  .gt-rc { font-size: 12px; }
+}
 .pgr-t .pgr-roi { font-family: inherit; font-size: 15px; font-weight: 800; margin: 0; }
 .pgr-pend { font-size: 11px; color: var(--muted-3, #8B98A5); }
 @media (max-width: 600px) { .pgr-t { font-size: 12.5px; grid-template-columns: 1.5fr 1.4fr 0.8fr 0.6fr; } }
@@ -5242,6 +5438,90 @@ RENDERER_JS = """<script>
       (a.sig.length ? '<ul class="ag-list">' + a.sig.map(function (s) { return '<li class="' + dot[s.k] + '">' + s.t + '</li>'; }).join('') + '</ul>' : '') +
       '<div class="ag-foot">Not part of the play grade. Tracking it to see if it matters.</div></div>';
   }
+  // ---- Prop grade tracker (11/2026, Rod) ----
+  // Every official prop with the play grade it had at each model run, its
+  // final grade (the last run before kickoff) and the box-score result.
+  // From docs/data/prop_grade_log.json via build_prop_grade_tracker().
+  var GT_MKT = { 'Reception Yards': 'rec yds', 'Receptions': 'rec', 'Rush Yards': 'rush yds' };
+  function gtWhen(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return '';
+    var h = d.getHours(), m = d.getMinutes();
+    return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getDay()] + ' ' + (d.getMonth() + 1) + '/' + d.getDate() + ' ' + ((h % 12) || 12) + (m ? ':' + (m < 10 ? '0' : '') + m : '') + (h < 12 ? 'a' : 'p');
+  }
+  function gtInfo(x) {
+    var h = (x.h || []).filter(function (e) { return e[0] && (!x.start || e[0] < x.start || Date.parse(e[0]) < Date.parse(x.start)); });
+    var graded = h.filter(function (e) { return e[1] !== 'X'; });
+    var last = h[h.length - 1] || null, lastG = graded[graded.length - 1] || null;
+    var kicked = x.start ? Date.parse(x.start) <= Date.now() : false;
+    var off = !!(last && last[1] === 'X');
+    var dist = {}; graded.forEach(function (e) { dist[e[1]] = 1; });
+    return { h: h, first: graded[0] ? graded[0][1] : null, cur: lastG ? lastG[1] : null, off: off, kicked: kicked,
+      changed: Object.keys(dist).length > 1, seeded: h.some(function (e) { return e[6] === 's'; }),
+      res: x.res && /^[WLP]$/.test(x.res.r || '') ? x.res : null };
+  }
+  function gtBadge(g, big) {
+    if (!g) return '<span class="gt-g is-none">&mdash;</span>';
+    if (g === 'X') return '<span class="gt-g is-x' + (big ? ' is-big' : '') + '">Off</span>';
+    var e = g === 'A' ? '&#128293;' : g === 'B' ? '&#127922;' : '&#128683;';
+    return '<span class="gt-g is-' + g.toLowerCase() + (big ? ' is-big' : '') + '">' + e + ' ' + g + '</span>';
+  }
+  function renderGradeTracker() {
+    var L = D.propGradeLog;
+    if (!L || !L.plays || !L.plays.length) return '';
+    var rows = L.plays.map(function (x) { return { x: x, i: gtInfo(x) }; }).filter(function (r) { return r.i.cur; });
+    var up = rows.filter(function (r) { return !r.i.kicked; }), done = rows.filter(function (r) { return r.i.kicked; });
+    var view = state.gtView || (up.length ? 'upcoming' : 'graded'), gf = state.gtGrade || '';
+    var sg = function (v, d) { return (v > 0 ? '+' : '') + Number(v).toFixed(d); };
+    // Record by final grade (and by first grade, to see whether the move matters).
+    var rec = function (list) {
+      var g = list.filter(function (r) { return r.i.res; }), w = 0, l = 0, p = 0, u = 0;
+      g.forEach(function (r) { var o = r.i.res; if (o.r === 'W') w++; else if (o.r === 'L') l++; else p++; u += Number(o.u || 0); });
+      return { n: g.length, w: w, l: l, p: p, u: u, roi: g.length ? u / g.length * 100 : null, pend: list.length - g.length };
+    };
+    var recCell = function (o) {
+      if (!o.n) return '<div class="gt-rc">&mdash;' + (o.pend ? ' <em>' + o.pend + ' pending</em>' : '') + '</div>';
+      return '<div class="gt-rc"><b>' + o.w + '-' + o.l + (o.p ? '-' + o.p : '') + '</b> <span class="' + (o.u >= 0 ? 'is-good' : 'is-bad') + '">' + sg(o.u, 1) + 'u &middot; ' + sg(o.roi, 0) + '%</span>' +
+        (o.pend ? ' <em>' + o.pend + ' pending</em>' : '') + '</div>';
+    };
+    var byFinal = function (g) { return done.filter(function (r) { return !r.i.off && r.i.cur === g; }); };
+    var byFirst = function (g) { return done.filter(function (r) { return r.i.first === g; }); };
+    var summary = '<div class="gt-sum"><div class="gt-sum-h"><div></div><div>' + gtBadge('A') + '</div><div>' + gtBadge('B') + '</div><div>' + gtBadge('C') + '</div><div><span class="gt-g is-x">Off at kickoff</span></div></div>' +
+      '<div class="gt-sum-r"><div class="gt-sum-l">By <b>final</b> grade</div>' + ['A', 'B', 'C'].map(function (g) { return recCell(rec(byFinal(g))); }).join('') +
+        recCell(rec(done.filter(function (r) { return r.i.off; }))) + '</div>' +
+      '<div class="gt-sum-r is-dim"><div class="gt-sum-l">By first grade</div>' + ['A', 'B', 'C'].map(function (g) { return recCell(rec(byFirst(g))); }).join('') + '<div></div></div></div>';
+    var list = view === 'graded' ? done : view === 'all' ? rows : up;
+    if (gf) list = list.filter(function (r) { return gf === 'X' ? r.i.off : (!r.i.off && r.i.cur === gf); });
+    if (view === 'upcoming') list = list.slice().sort(function (a, b) { return String(a.x.start).localeCompare(String(b.x.start)); });
+    var cap = state.gtAll ? list.length : 40;
+    var seg = function (field, val, cur, label) { return '<button class="' + (cur === val ? 'is-on' : '') + '" data-prop-set="' + field + '" data-prop-val="' + val + '">' + label + '</button>'; };
+    var tbl = list.slice(0, cap).map(function (r) {
+      var x = r.x, i = r.i, mk = GT_MKT[x.market] || String(x.market || '').toLowerCase();
+      var line = (i.h.filter(function (e) { return e[2] != null; }).slice(-1)[0] || [])[2];
+      var hist = i.h.map(function (e, k) {
+        var t = gtWhen(e[0]) + (e[1] === 'X' ? ': off the board' : ': grade ' + e[1] + (e[2] != null ? ', line ' + e[2] : '') + (e[3] != null ? ' at ' + (e[3] > 0 ? '+' : '') + e[3] : '') + (e[4] ? ', matchup ' + e[4] : '') +
+          (e[5] > 0 ? ', line moved our way' : e[5] < 0 ? ', line moved against us' : '')) + (e[6] === 's' ? ' (rebuilt from the flag log)' : '');
+        return (k ? '<i class="gt-arr">&rsaquo;</i>' : '') + '<span class="gt-step" title="' + esc(t) + '">' + gtBadge(e[1]) + '<small>' + esc(gtWhen(e[0]).replace(/ \\d+\\/\\d+/, '')) + '</small></span>';
+      }).join('');
+      var fin = i.kicked ? (i.off ? gtBadge('X', true) + '<small>last ' + (i.cur || '&mdash;') + '</small>' : gtBadge(i.cur, true) + '<small>final</small>')
+        : (i.off ? gtBadge('X', true) + '<small>now</small>' : gtBadge(i.cur, true) + '<small>now</small>');
+      var res = i.res ? '<span class="gt-res is-' + i.res.r.toLowerCase() + '">' + i.res.r + '</span>' + (i.res.a != null ? '<small>' + i.res.a + ' vs ' + (i.res.line != null ? i.res.line : line) + '</small>' : '') + '<small class="' + (Number(i.res.u) >= 0 ? 'is-good' : 'is-bad') + '">' + sg(Number(i.res.u || 0), 2) + 'u</small>'
+        : i.kicked ? '<small>grading</small>' : '<small>' + esc(propKickoff(x.start)) + '</small>';
+      return '<div class="gt-row' + (i.changed ? ' is-changed' : '') + '"><div class="gt-who"><b>' + esc(x.player) + '</b><span>' + esc(x.side) + ' ' + (line != null ? line : '') + ' ' + esc(mk) + '</span><small>' + esc(schoolAbbr(x.team)) + ' vs ' + esc(schoolAbbr(x.opponent)) + '</small></div>' +
+        '<div class="gt-hist">' + hist + (i.changed ? '<span class="gt-chg">changed</span>' : '') + '</div><div class="gt-fin">' + fin + '</div><div class="gt-out">' + res + '</div></div>';
+    }).join('');
+    var seeded = rows.some(function (r) { return r.i.seeded; });
+    return '<div class="pp-panel gt-panel" id="grade-tracker"><h3>Prop grade tracker</h3>' +
+      '<div class="pp-panel-note">Every official prop, with the play grade it had each time the model ran. The <b>final grade</b> is its grade at the last run before kickoff. ' +
+        'Results come from the box score, 1 unit a play at the price first logged. &ldquo;Off&rdquo; means it wasn&rsquo;t an official play at that run (the edge moved out of the rule, or the book pulled the line). Hover a grade for its line and price.' +
+        (seeded ? ' Plays from before 11/15 show only their first and last grade (rebuilt from the flag log); every run is logged from here on.' : '') + '</div>' +
+      summary +
+      '<div class="gt-ctl"><div class="pp-seg">' + seg('gtView', 'upcoming', view, 'Upcoming (' + up.length + ')') + seg('gtView', 'graded', view, 'Kicked off (' + done.length + ')') + seg('gtView', 'all', view, 'All') + '</div>' +
+        '<div class="pp-seg">' + seg('gtGrade', '', gf, 'Any grade') + seg('gtGrade', 'A', gf, '&#128293; A') + seg('gtGrade', 'B', gf, '&#127922; B') + seg('gtGrade', 'C', gf, '&#128683; C') + seg('gtGrade', 'X', gf, 'Off') + '</div></div>' +
+      '<div class="gt-head"><div>Player &middot; prop</div><div>Grade each run</div><div>' + (view === 'upcoming' ? 'Now' : 'Final') + '</div><div>Result</div></div>' +
+      (tbl || '<div class="gt-empty">Nothing here yet.</div>') +
+      (list.length > cap ? '<button class="gt-more" data-prop-set="gtAll" data-prop-val="1">Show all ' + list.length + '</button>' : '') + '</div>';
+  }
   function renderPlayGradeRecord() {
     var P = D.playGradeRecord;
     if (!P || !P.grades) return '';
@@ -6032,7 +6312,7 @@ RENDERER_JS = """<script>
         '<button class="pp-btn pp-ftoggle" style="width:100%;justify-content:center;margin-bottom:10px" onclick="window.__cfbPpFilters()">' + (state.ppFilters ? 'Hide' : 'Show') + ' sort &amp; filter' + (nActive ? ' (' + nActive + ' on)' : '') + '</button>' +
         controls + strip + '</aside>' +
       '<div class="pp-main"><div class="pp-main-head"><span>Model plays</span><em>' + shown.length + '</em></div>' + table + '</div></div>' +
-      lower + myPanel + help;
+      lower + myPanel + renderGradeTracker() + help;
   }
 
 
@@ -8066,6 +8346,7 @@ def main():
     model_data["teamMatchup"] = data.get("team_matchup") or {}
     model_data["teamMatchupMeta"] = data.get("team_matchup_meta") or {}
     attach_prop_first_flags(model_data.get("propsLive") or [])
+    model_data["propGradeLog"] = build_prop_grade_tracker(update_prop_grade_log(model_data.get("propsLive") or [], data.get("generated_at")))
     # Game-by-game box-score numbers for the Details panel (10/2026); absent
     # until scripts/export_dashboard_data.py writes them, and the panel just
     # leaves that part out.
