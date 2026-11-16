@@ -444,6 +444,64 @@ def build_prop_grade_tracker(log, flags_path=PROP_FLAGS_PATH):
         return None
 
 
+# 11/2026 (Rod): rush yds unders by position. A player's position, kept
+# across runs in docs/data/player_positions.json so past plays keep theirs
+# after the player's team drops off the slate. Sources, best first: the
+# props feed's own position, this week's fantasy projections (CFBD roster),
+# then the TD lab's 2026 usage roles (QB, or a rusher -> RB) as a fallback.
+PLAYER_POS_PATH = "docs/data/player_positions.json"
+TD_LAB_DETAIL_PATH = "docs/data/td_lab_detail.csv"
+
+
+def _name_key(n):
+    import re
+    parts = re.sub(r"[.]", " ", str(n or "")).split()
+    while len(parts) > 1 and parts[-1].lower() in ("jr", "sr", "ii", "iii", "iv"):
+        parts.pop()
+    return ((parts[0][:1].lower() if parts else "") + "|" + (parts[-1].lower() if parts else ""))
+
+
+def update_player_positions(data, path=PLAYER_POS_PATH):
+    """{"<team>|<f>|<last>": "QB" | "RB" | "WR" | "TE"}. Never raises."""
+    try:
+        pos = {}
+        if os.path.exists(path):
+            with open(path) as f:
+                pos = json.load(f) or {}
+        norm = lambda p: {"WR/TE": "WR"}.get(str(p or "").upper(), str(p or "").upper())
+        if not pos and os.path.exists(TD_LAB_DETAIL_PATH):
+            import csv
+            with open(TD_LAB_DETAIL_PATH, newline="") as f:
+                for r in csv.DictReader(f):
+                    if r.get("season") != "2026":
+                        continue
+                    role = r.get("role") or ""
+                    p = "QB" if role == "QB" else ("RB" if "rusher" in role else None)
+                    if p:
+                        pos.setdefault(f"{r.get('team')}|{_name_key(r.get('player'))}", p)
+        for f in data.get("fantasy") or []:
+            p = norm(f.get("position"))
+            if p in ("QB", "RB", "WR", "TE") and f.get("team"):
+                pos[f"{f['team']}|{_name_key(f.get('player_name'))}"] = p
+        for p in data.get("props") or []:
+            q = norm(p.get("pos"))
+            if q in ("QB", "RB", "WR", "TE") and p.get("team"):
+                pos[f"{p['team']}|{_name_key(p.get('player_name'))}"] = q
+        with open(path, "w") as f:
+            json.dump(pos, f, separators=(",", ":"), sort_keys=True)
+        return pos
+    except Exception as e:
+        print(f"  [note] player positions not updated ({e})")
+        return {}
+
+
+def attach_positions(rows, pos, player_key="player"):
+    for r in rows or []:
+        p = pos.get(f"{r.get('team')}|{_name_key(r.get(player_key))}")
+        if p:
+            r["pos"] = p
+
+
 def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dict:
     prior = data.get("preseason_prior") or {}
     slope = prior.get("slope")
@@ -1968,6 +2026,9 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .gt-wc em { display: block; font-style: normal; font-size: 10.5px; color: var(--muted-3); }
 .gt-cum { background: rgba(57,240,122,0.04); }
 .off-wk { margin: 14px 0 0; }
+.pp-empty-rec { margin-top: 16px; }
+.gt-pos { display: block; font-style: normal; font-size: 10.5px; color: var(--text-dim); margin-top: 2px; white-space: nowrap; }
+.ep-row.ep-sub span { color: var(--muted); font-size: 0.92em; }
 .off-wk .pp-tag { margin-left: 4px; vertical-align: middle; }
 .gt-wk-tip { display: none; font-size: 11px; color: var(--muted-3); padding: 4px 0 6px; }
 @media (max-width: 600px) { .gt-wt .gt-tc { display: none; } .gt-wt { min-width: 0; } .gt-wk-tip { display: block; } }
@@ -5552,6 +5613,9 @@ RENDERER_JS = """<script>
     rows.forEach(function (r) { r.t = gtType(r.x); typeN[r.t] = (typeN[r.t] || 0) + 1; });
     var allRows = rows;
     if (tf) rows = rows.filter(function (r) { return r.t === tf; });
+    var pf = tf === 'rush' ? (state.gtPos || '') : '', posN = {};
+    rows.forEach(function (r) { posN[r.x.pos || '?'] = (posN[r.x.pos || '?'] || 0) + 1; });
+    if (pf) rows = rows.filter(function (r) { return r.x.pos === pf; });
     var up = rows.filter(function (r) { return !r.i.kicked; }), done = rows.filter(function (r) { return r.i.kicked; });
     var view = state.gtView || (up.length ? 'upcoming' : 'graded'), gf = state.gtGrade || '';
     var sg = function (v, d) { return (v > 0 ? '+' : '') + Number(v).toFixed(d); };
@@ -5575,6 +5639,8 @@ RENDERER_JS = """<script>
     var byGrade = function (r) { return !gf || (gf === 'X' ? r.i.off : (!r.i.off && r.i.cur === gf)); };
     // By weekend: each play type that weekend, the weekend total, and the running total.
     var types = GT_TYPES.filter(function (t) { return (tf ? t[0] === tf : typeN[t[0]]); });
+    // Rush yds unders: split the weekend columns by position instead.
+    if (tf === 'rush' && !pf) { types = [['pQB', 'QBs'], ['pRB', 'RBs']]; rows.forEach(function (r) { r.t2 = 'p' + (r.x.pos || '?'); }); }
     var wk = {};
     done.filter(byGrade).forEach(function (r) { var k = gtWeek(r.x.start); if (k) (wk[k] = wk[k] || []).push(r); });
     var weeks = Object.keys(wk).sort(), run = [], acc = [];
@@ -5588,7 +5654,7 @@ RENDERER_JS = """<script>
         (types.length > 1 ? types.map(function (t) { return '<th class="gt-tc">' + t[1] + '</th>'; }).join('') : '') + '<th>Weekend total</th><th>Running total</th></tr></thead><tbody>' +
         run.slice().reverse().map(function (w) {
           return '<tr><td class="gt-wl">' + wlab(w.k) + '</td>' +
-            (types.length > 1 ? types.map(function (t) { return wcell(rec(w.rows.filter(function (r) { return r.t === t[0]; }))).replace('<td class="gt-wc"', '<td class="gt-wc gt-tc"'); }).join('') : '') +
+            (types.length > 1 ? types.map(function (t) { return wcell(rec(w.rows.filter(function (r) { return (t[0].charAt(0) === 'p' ? r.t2 : r.t) === t[0]; }))).replace('<td class="gt-wc"', '<td class="gt-wc gt-tc"'); }).join('') : '') +
             wcell(w.tot) + '<td class="gt-wc gt-cum"><b>' + w.cum.w + '-' + w.cum.l + (w.cum.p ? '-' + w.cum.p : '') + '</b><span class="' + (w.cum.u >= 0 ? 'is-good' : 'is-bad') + '">' + sg(w.cum.u, 1) + 'u' +
               (w.cum.roi != null ? ' &middot; ' + sg(w.cum.roi, 0) + '%' : '') + '</span></td></tr>';
         }).join('') + '</tbody></table></div>' + (types.length > 1 ? '<div class="gt-wk-tip">On a phone, pick a play type above to see each one&rsquo;s weekends.</div>' : '') + '</div>' : '';
@@ -5626,7 +5692,8 @@ RENDERER_JS = """<script>
         'Results come from the box score, 1 unit a play at the price first logged. Use W / L / P to grade a play yourself: it counts until the box score comes in, and it also shows in My Tracker. &ldquo;Off&rdquo; means it wasn&rsquo;t an official play at that run (the edge moved out of the rule, or the book pulled the line). Hover a grade for its line and price.' +
         (seeded ? ' Plays from before 11/15 show only their first and last grade (rebuilt from the flag log); every run is logged from here on.' : '') + '</div>' +
       '<div class="gt-ctl gt-types"><div class="pp-seg">' + seg('gtType', '', tf, 'All play types (' + allRows.length + ')') +
-        GT_TYPES.filter(function (t) { return typeN[t[0]]; }).map(function (t) { return seg('gtType', t[0], tf, t[1] + ' (' + typeN[t[0]] + ')'); }).join('') + '</div></div>' +
+        GT_TYPES.filter(function (t) { return typeN[t[0]]; }).map(function (t) { return seg('gtType', t[0], tf, t[1] + ' (' + typeN[t[0]] + ')'); }).join('') + '</div>' +
+        (tf === 'rush' ? '<div class="pp-seg">' + seg('gtPos', '', pf, 'QBs + RBs') + ['QB', 'RB'].filter(function (p) { return posN[p]; }).map(function (p) { return seg('gtPos', p, pf, p + 's (' + posN[p] + ')'); }).join('') + '</div>' : '') + '</div>' +
       summary + weekly +
       '<div class="gt-ctl"><div class="pp-seg">' + seg('gtView', 'upcoming', view, 'Upcoming (' + up.length + ')') + seg('gtView', 'graded', view, 'Kicked off (' + done.length + ')') + seg('gtView', 'all', view, 'All') + '</div>' +
         '<div class="pp-seg">' + seg('gtGrade', '', gf, 'Any grade') + seg('gtGrade', 'A', gf, '&#128293; A') + seg('gtGrade', 'B', gf, '&#127922; B') + seg('gtGrade', 'C', gf, '&#128683; C') + seg('gtGrade', 'X', gf, 'Off') + '</div></div>' +
@@ -5687,6 +5754,81 @@ RENDERER_JS = """<script>
         (rule ? ' &middot; official rule: ' + rule[2] : '') + '</div>' +
       '<div class="pbe-axis"><span></span><span class="pbe-ax"><i>&minus;40% ROI</i><i>break-even</i><i>+40%</i></span><span></span></div>' + bars + '</div>';
   }
+  function renderOfficialRecord() {
+    var T = D.propTracking, myPanel = '';
+    var signed = function (x, d) { var v = Number(x).toFixed(d); if (Number(v) === 0) v = (0).toFixed(d); return (Number(v) > 0 ? '+' : '') + v; };
+    var tone = function (x) { return x > 0 ? 'var(--neon)' : (x < 0 ? 'var(--red)' : 'var(--muted-3)'); };
+    var marketName = function (m) { return m === 'Reception Yards' ? 'Receiving Yards' : m; };
+    if (T) {
+      var OP = T.officialPlays || [];
+      var RL = { rec_yds_play: 'Rec yds overs', rush_under_play: 'Rush yds unders', under_play: 'Receptions unders' };
+      var NEWK = { rec_yds_play: T.recYdsPlayNew, rush_under_play: T.rushUnderPlayNew, under_play: T.underPlayNew };
+      var lineO = function (label, o) {
+        var g = o && o.graded;
+        return '<div class="ep-row"><span>' + esc(label) + '</span><b>' + (g ? esc(o.record) : '&mdash;') + '</b><b style="color:' + tone(g ? o.units : 0) + '">' + (g ? signed(o.units, 2) + 'u' : '&mdash;') + '</b>' +
+          '<b style="color:' + tone(g ? o.roi : 0) + '">' + (g && o.roi != null ? signed(o.roi, 1) + '%' : '&mdash;') + '</b></div>';
+      };
+      var nPend = OP.filter(function (x) { return !x.result; }).length;
+      var dOf = function (x) { var d = new Date(x.start_time || ''); return isNaN(d) ? '' : (d.getMonth() + 1) + '/' + d.getDate() + ' '; };
+      var gr = OP.filter(function (x) { return x.result; }), pe = OP.filter(function (x) { return !x.result; }).reverse();
+      OP = gr.concat(pe);
+      var listO = OP.slice(0, 16).map(function (x) {
+        var rc = x.result === 'W' ? 'var(--neon)' : (x.result === 'L' ? 'var(--red)' : (x.result === 'P' ? 'var(--amber)' : 'var(--muted-3)'));
+        var lab = x.result === 'W' ? 'WIN' : x.result === 'L' ? 'LOSS' : x.result === 'P' ? 'PUSH' : 'PENDING';
+        return '<div class="my-res"><span title="' + esc(RL[x.tag] || '') + '"><i class="my-d">' + dOf(x) + '</i>' + esc(schoolAbbr(x.team) || '') + ' ' + esc(x.player) + ' &middot; ' + esc(marketName(x.market)) + ' ' + (x.side === 'over' ? 'O' : 'U') + ' ' + esc(x.line) +
+          (x.actual != null && x.result ? ' <em>(' + Number(x.actual) + ')</em>' : '') + '</span>' +
+          '<b style="color:' + rc + '">' + lab + '</b><b style="color:' + tone(x.units || 0) + '">' + (x.result ? signed(x.units || 0, 2) + 'u' : '') + '</b></div>';
+      }).join('');
+      // By weekend (11/2026, Rod): each official rule that weekend, the
+      // weekend total and the running total, newest weekend first.
+      var RK = ['rec_yds_play', 'rush_under_play', 'under_play'];
+      var orec = function (xs) {
+        var g = xs.filter(function (x) { return /^[WLP]$/.test(x.result || ''); }), w = 0, l = 0, p = 0, u = 0;
+        g.forEach(function (x) { if (x.result === 'W') w++; else if (x.result === 'L') l++; else p++; u += Number(x.units || 0); });
+        return { n: g.length, w: w, l: l, p: p, u: u, roi: g.length ? u / g.length * 100 : null, pend: xs.length - g.length };
+      };
+      var ocell = function (o, cls) {
+        if (!o.n) return '<td class="gt-wc' + (cls || '') + '">' + (o.pend ? '<em>' + o.pend + ' pending</em>' : '&mdash;') + '</td>';
+        return '<td class="gt-wc' + (cls || '') + '"><b>' + o.w + '-' + o.l + (o.p ? '-' + o.p : '') + '</b><span class="' + (o.u >= 0 ? 'is-good' : 'is-bad') + '">' + signed(o.u, 1) + 'u</span>' +
+          (o.pend ? '<em>' + o.pend + ' pending</em>' : '') + '</td>';
+      };
+      var owk = {};
+      OP.forEach(function (x) { var k = gtWeek(x.start_time); if (k) (owk[k] = owk[k] || []).push(x); });
+      var oacc = [], oruns = Object.keys(owk).sort().map(function (k) { oacc = oacc.concat(owk[k]); return { k: k, xs: owk[k], cum: orec(oacc) }; });
+      var oWeekly = oruns.length ? '<div class="gt-wk off-wk"><div class="gt-wk-h">By weekend &middot; official rules</div><div class="gt-wk-scroll"><table class="gt-wt"><thead><tr><th>Weekend</th>' +
+          RK.map(function (k) { return '<th class="gt-tc">' + RL[k] + ' <span class="pp-tag is-official">Official</span></th>'; }).join('') + '<th>Weekend total</th><th>Running total</th></tr></thead><tbody>' +
+          oruns.slice().reverse().map(function (w) {
+            var p = w.k.split('-');
+            return '<tr><td class="gt-wl">Sat ' + Number(p[1]) + '/' + Number(p[2]) + '</td>' +
+              RK.map(function (k) {
+                var c = ocell(orec(w.xs.filter(function (x) { return x.tag === k; })), ' gt-tc');
+                if (k !== 'rush_under_play') return c;
+                var sub = ['QB', 'RB'].map(function (ps) { var o = orec(w.xs.filter(function (x) { return x.tag === k && x.pos === ps; })); return o.n ? ps + ' ' + o.w + '-' + o.l + (o.p ? '-' + o.p : '') + ' ' + signed(o.u, 1) + 'u' : ''; }).filter(Boolean).join(' &middot; ');
+                return sub ? c.replace('</td>', '<i class="gt-pos">' + sub + '</i></td>') : c;
+              }).join('') +
+              ocell(orec(w.xs)) + '<td class="gt-wc gt-cum"><b>' + w.cum.w + '-' + w.cum.l + (w.cum.p ? '-' + w.cum.p : '') + '</b><span class="' + (w.cum.u >= 0 ? 'is-good' : 'is-bad') + '">' + signed(w.cum.u, 1) + 'u' +
+                (w.cum.roi != null ? ' &middot; ' + signed(w.cum.roi, 0) + '%' : '') + '</span></td></tr>';
+          }).join('') + '</tbody></table></div><div class="gt-wk-tip">On a phone, the per-rule columns are hidden; the rule totals are listed above.</div></div>' : '';
+      myPanel = '<div class="pp-panel my-props" id="official-record"><h3>Official record</h3>' +
+        '<div class="pp-panel-note">Only plays that meet the current official rules, graded automatically from the box score, 1 unit each at the price they were flagged at. ' +
+          'Records start when each rule last changed (rec yds overs and receptions unders Nov 2, rush yds unders Nov 3). Your W / L / P on other props stays in My Tracker and does not count here.</div>' +
+        '<div class="my-props-grid"><div>' +
+          '<div class="ep-row ep-th"><span></span><span>Record</span><span>Units</span><span>ROI</span></div>' +
+          lineO('All official plays', T.officialNow) +
+          ['rec_yds_play', 'rush_under_play', 'under_play'].map(function (k) {
+            var h = lineO(RL[k], NEWK[k]);
+            if (k === 'rush_under_play') ['QB', 'RB'].forEach(function (ps) {
+              var o = orec(OP.filter(function (x) { return x.tag === k && x.pos === ps; }));
+              h += lineO('\u2003\u21b3 ' + ps + 's', o.n ? { graded: o.n, record: o.w + '-' + o.l + (o.p ? '-' + o.p : ''), units: o.u, roi: o.roi } : null).replace('class="ep-row"', 'class="ep-row ep-sub"');
+            });
+            return h;
+          }).join('') +
+          '<div class="ep-k2" style="margin-top:8px">' + OP.length + ' official plays logged &middot; ' + nPend + ' still to be graded</div>' +
+        '</div><div>' + (listO || '<div class="ep-empty">No official plays logged yet under the current rules.</div>') +
+          (OP.length > 16 ? '<div class="ep-k2" style="margin-top:6px">Showing 16 of ' + OP.length + ' (graded first, then upcoming).</div>' : '') + '</div></div>' + oWeekly + '</div>';
+    }
+    return myPanel;
+  }
   function renderProps() {
     var live = D.propsLive || [];
     var head = '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Player Props</h2></div></div>';
@@ -5694,7 +5836,8 @@ RENDERER_JS = """<script>
     if (!scored.length) {
       return head + '<div class="empty-state">' + (live.length
         ? live.length + ' prop lines are posted, but none have a model read yet (usually players without enough games this season).'
-        : 'No player props posted right now. Books usually post most of the slate by Thursday or Friday.') + '</div>';
+        : 'No player props posted right now. Books usually post most of the slate by Thursday or Friday.') + '</div>' +
+        '<div class="pp-empty-rec">' + renderOfficialRecord() + renderGradeTracker() + '</div>';
     }
     // Best line per player + market + game, by the model's hit chance on its side.
     var best = {}, counts = {}, alts = {};
@@ -6386,63 +6529,7 @@ RENDERER_JS = """<script>
     // official rules, graded automatically from the box score, 1u each at
     // the price they were flagged at. Your own W / L / P grades on other
     // props stay in My Tracker and do not count here.
-    var myPanel = '';
-    if (T) {
-      var OP = T.officialPlays || [];
-      var RL = { rec_yds_play: 'Rec yds overs', rush_under_play: 'Rush yds unders', under_play: 'Receptions unders' };
-      var NEWK = { rec_yds_play: T.recYdsPlayNew, rush_under_play: T.rushUnderPlayNew, under_play: T.underPlayNew };
-      var lineO = function (label, o) {
-        var g = o && o.graded;
-        return '<div class="ep-row"><span>' + esc(label) + '</span><b>' + (g ? esc(o.record) : '&mdash;') + '</b><b style="color:' + tone(g ? o.units : 0) + '">' + (g ? signed(o.units, 2) + 'u' : '&mdash;') + '</b>' +
-          '<b style="color:' + tone(g ? o.roi : 0) + '">' + (g && o.roi != null ? signed(o.roi, 1) + '%' : '&mdash;') + '</b></div>';
-      };
-      var nPend = OP.filter(function (x) { return !x.result; }).length;
-      var dOf = function (x) { var d = new Date(x.start_time || ''); return isNaN(d) ? '' : (d.getMonth() + 1) + '/' + d.getDate() + ' '; };
-      var gr = OP.filter(function (x) { return x.result; }), pe = OP.filter(function (x) { return !x.result; }).reverse();
-      OP = gr.concat(pe);
-      var listO = OP.slice(0, 16).map(function (x) {
-        var rc = x.result === 'W' ? 'var(--neon)' : (x.result === 'L' ? 'var(--red)' : (x.result === 'P' ? 'var(--amber)' : 'var(--muted-3)'));
-        var lab = x.result === 'W' ? 'WIN' : x.result === 'L' ? 'LOSS' : x.result === 'P' ? 'PUSH' : 'PENDING';
-        return '<div class="my-res"><span title="' + esc(RL[x.tag] || '') + '"><i class="my-d">' + dOf(x) + '</i>' + esc(schoolAbbr(x.team) || '') + ' ' + esc(x.player) + ' &middot; ' + esc(marketName(x.market)) + ' ' + (x.side === 'over' ? 'O' : 'U') + ' ' + esc(x.line) +
-          (x.actual != null && x.result ? ' <em>(' + Number(x.actual) + ')</em>' : '') + '</span>' +
-          '<b style="color:' + rc + '">' + lab + '</b><b style="color:' + tone(x.units || 0) + '">' + (x.result ? signed(x.units || 0, 2) + 'u' : '') + '</b></div>';
-      }).join('');
-      // By weekend (11/2026, Rod): each official rule that weekend, the
-      // weekend total and the running total, newest weekend first.
-      var RK = ['rec_yds_play', 'rush_under_play', 'under_play'];
-      var orec = function (xs) {
-        var g = xs.filter(function (x) { return /^[WLP]$/.test(x.result || ''); }), w = 0, l = 0, p = 0, u = 0;
-        g.forEach(function (x) { if (x.result === 'W') w++; else if (x.result === 'L') l++; else p++; u += Number(x.units || 0); });
-        return { n: g.length, w: w, l: l, p: p, u: u, roi: g.length ? u / g.length * 100 : null, pend: xs.length - g.length };
-      };
-      var ocell = function (o, cls) {
-        if (!o.n) return '<td class="gt-wc' + (cls || '') + '">' + (o.pend ? '<em>' + o.pend + ' pending</em>' : '&mdash;') + '</td>';
-        return '<td class="gt-wc' + (cls || '') + '"><b>' + o.w + '-' + o.l + (o.p ? '-' + o.p : '') + '</b><span class="' + (o.u >= 0 ? 'is-good' : 'is-bad') + '">' + signed(o.u, 1) + 'u</span>' +
-          (o.pend ? '<em>' + o.pend + ' pending</em>' : '') + '</td>';
-      };
-      var owk = {};
-      OP.forEach(function (x) { var k = gtWeek(x.start_time); if (k) (owk[k] = owk[k] || []).push(x); });
-      var oacc = [], oruns = Object.keys(owk).sort().map(function (k) { oacc = oacc.concat(owk[k]); return { k: k, xs: owk[k], cum: orec(oacc) }; });
-      var oWeekly = oruns.length ? '<div class="gt-wk off-wk"><div class="gt-wk-h">By weekend &middot; official rules</div><div class="gt-wk-scroll"><table class="gt-wt"><thead><tr><th>Weekend</th>' +
-          RK.map(function (k) { return '<th class="gt-tc">' + RL[k] + ' <span class="pp-tag is-official">Official</span></th>'; }).join('') + '<th>Weekend total</th><th>Running total</th></tr></thead><tbody>' +
-          oruns.slice().reverse().map(function (w) {
-            var p = w.k.split('-');
-            return '<tr><td class="gt-wl">Sat ' + Number(p[1]) + '/' + Number(p[2]) + '</td>' +
-              RK.map(function (k) { return ocell(orec(w.xs.filter(function (x) { return x.tag === k; })), ' gt-tc'); }).join('') +
-              ocell(orec(w.xs)) + '<td class="gt-wc gt-cum"><b>' + w.cum.w + '-' + w.cum.l + (w.cum.p ? '-' + w.cum.p : '') + '</b><span class="' + (w.cum.u >= 0 ? 'is-good' : 'is-bad') + '">' + signed(w.cum.u, 1) + 'u' +
-                (w.cum.roi != null ? ' &middot; ' + signed(w.cum.roi, 0) + '%' : '') + '</span></td></tr>';
-          }).join('') + '</tbody></table></div><div class="gt-wk-tip">On a phone, the per-rule columns are hidden; the rule totals are listed above.</div></div>' : '';
-      myPanel = '<div class="pp-panel my-props" id="official-record"><h3>Official record</h3>' +
-        '<div class="pp-panel-note">Only plays that meet the current official rules, graded automatically from the box score, 1 unit each at the price they were flagged at. ' +
-          'Records start when each rule last changed (rec yds overs and receptions unders Nov 2, rush yds unders Nov 3). Your W / L / P on other props stays in My Tracker and does not count here.</div>' +
-        '<div class="my-props-grid"><div>' +
-          '<div class="ep-row ep-th"><span></span><span>Record</span><span>Units</span><span>ROI</span></div>' +
-          lineO('All official plays', T.officialNow) +
-          ['rec_yds_play', 'rush_under_play', 'under_play'].map(function (k) { return lineO(RL[k], NEWK[k]); }).join('') +
-          '<div class="ep-k2" style="margin-top:8px">' + OP.length + ' official plays logged &middot; ' + nPend + ' still to be graded</div>' +
-        '</div><div>' + (listO || '<div class="ep-empty">No official plays logged yet under the current rules.</div>') +
-          (OP.length > 16 ? '<div class="ep-k2" style="margin-top:6px">Showing 16 of ' + OP.length + ' (graded first, then upcoming).</div>' : '') + '</div></div>' + oWeekly + '</div>';
-    }
+    var myPanel = renderOfficialRecord();
     if (cur === 'td') return hero + cats + renderPropsTd() + help;
     return hero + cats + cards +
       '<div class="pp-layout"><aside class="pp-side' + (state.ppFilters ? ' is-filters' : '') + '">' +
@@ -8492,6 +8579,9 @@ def main():
     # not have (10/2026); same story -- absent until the export writes it.
     model_data["propDists"] = data.get("prop_distributions") or {}
     model_data["propTracking"] = build_prop_tracking(model_data["propEdgeHistory"])
+    _pos = update_player_positions(data)
+    attach_positions((model_data.get("propTracking") or {}).get("officialPlays"), _pos)
+    attach_positions((model_data.get("propGradeLog") or {}).get("plays"), _pos)
     data_script = "<script>\nwindow.MODEL_DATA = " + json.dumps(model_data) + ";\n</script>\n"
 
     html_out = HEAD_HTML + data_script + MATH_JS + RENDERER_JS + TAIL_HTML
