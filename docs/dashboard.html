@@ -934,6 +934,7 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .gt-wc em { display: block; font-style: normal; font-size: 10.5px; color: var(--muted-3); }
 .gt-cum { background: rgba(57,240,122,0.04); }
 .off-wk { margin: 14px 0 0; }
+.off-pos { margin: 8px 0 4px; }
 .pp-empty-rec { margin-top: 16px; }
 .gt-pos { display: block; font-style: normal; font-size: 10.5px; color: var(--text-dim); margin-top: 2px; white-space: nowrap; }
 .ep-row.ep-sub span { color: var(--muted); font-size: 0.92em; }
@@ -4488,8 +4489,9 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     rows.forEach(function (r) { r.t = gtType(r.x); typeN[r.t] = (typeN[r.t] || 0) + 1; });
     var allRows = rows;
     if (tf) rows = rows.filter(function (r) { return r.t === tf; });
-    var pf = tf === 'rush' ? (state.gtPos || '') : '', posN = {};
-    rows.forEach(function (r) { posN[r.x.pos || '?'] = (posN[r.x.pos || '?'] || 0) + 1; });
+    var GPOS = { QB: 'QBs', RB: 'RBs', WR: 'WRs', TE: 'TEs' }, posN = {};
+    rows.forEach(function (r) { if (GPOS[r.x.pos]) posN[r.x.pos] = (posN[r.x.pos] || 0) + 1; });
+    var pf = GPOS[state.gtPos] && posN[state.gtPos] ? state.gtPos : '';
     if (pf) rows = rows.filter(function (r) { return r.x.pos === pf; });
     var up = rows.filter(function (r) { return !r.i.kicked; }), done = rows.filter(function (r) { return r.i.kicked; });
     var view = state.gtView || (up.length ? 'upcoming' : 'graded'), gf = state.gtGrade || '';
@@ -4513,9 +4515,10 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       '<div class="gt-sum-r is-dim"><div class="gt-sum-l">By first grade</div>' + ['A', 'B', 'C'].map(function (g) { return recCell(rec(byFirst(g))); }).join('') + '<div></div></div></div>';
     var byGrade = function (r) { return !gf || (gf === 'X' ? r.i.off : (!r.i.off && r.i.cur === gf)); };
     // By weekend: each play type that weekend, the weekend total, and the running total.
-    var types = GT_TYPES.filter(function (t) { return (tf ? t[0] === tf : typeN[t[0]]); });
-    // Rush yds unders: split the weekend columns by position instead.
-    if (tf === 'rush' && !pf) { types = [['pQB', 'QBs'], ['pRB', 'RBs']]; rows.forEach(function (r) { r.t2 = 'p' + (r.x.pos || '?'); }); }
+    var types = GT_TYPES.filter(function (t) { return (tf ? t[0] === tf : rows.some(function (r) { return r.t === t[0]; })); });
+    // One play type picked: split the weekend columns by position instead.
+    var posList = ['QB', 'RB', 'WR', 'TE'].filter(function (p) { return posN[p]; });
+    if (tf && !pf && posList.length > 1) { types = posList.map(function (p) { return ['p' + p, GPOS[p]]; }); rows.forEach(function (r) { r.t2 = 'p' + (r.x.pos || '?'); }); }
     var wk = {};
     done.filter(byGrade).forEach(function (r) { var k = gtWeek(r.x.start); if (k) (wk[k] = wk[k] || []).push(r); });
     var weeks = Object.keys(wk).sort(), run = [], acc = [];
@@ -4568,7 +4571,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
         (seeded ? ' Plays from before 11/15 show only their first and last grade (rebuilt from the flag log); every run is logged from here on.' : '') + '</div>' +
       '<div class="gt-ctl gt-types"><div class="pp-seg">' + seg('gtType', '', tf, 'All play types (' + allRows.length + ')') +
         GT_TYPES.filter(function (t) { return typeN[t[0]]; }).map(function (t) { return seg('gtType', t[0], tf, t[1] + ' (' + typeN[t[0]] + ')'); }).join('') + '</div>' +
-        (tf === 'rush' ? '<div class="pp-seg">' + seg('gtPos', '', pf, 'QBs + RBs') + ['QB', 'RB'].filter(function (p) { return posN[p]; }).map(function (p) { return seg('gtPos', p, pf, p + 's (' + posN[p] + ')'); }).join('') + '</div>' : '') + '</div>' +
+        (Object.keys(posN).length > 1 ? '<div class="pp-seg">' + seg('gtPos', '', pf, 'All positions') + ['QB', 'RB', 'WR', 'TE'].filter(function (p) { return posN[p]; }).map(function (p) { return seg('gtPos', p, pf, GPOS[p] + ' (' + posN[p] + ')'); }).join('') + '</div>' : '') + '</div>' +
       summary + weekly +
       '<div class="gt-ctl"><div class="pp-seg">' + seg('gtView', 'upcoming', view, 'Upcoming (' + up.length + ')') + seg('gtView', 'graded', view, 'Kicked off (' + done.length + ')') + seg('gtView', 'all', view, 'All') + '</div>' +
         '<div class="pp-seg">' + seg('gtGrade', '', gf, 'Any grade') + seg('gtGrade', 'A', gf, '&#128293; A') + seg('gtGrade', 'B', gf, '&#127922; B') + seg('gtGrade', 'C', gf, '&#128683; C') + seg('gtGrade', 'X', gf, 'Off') + '</div></div>' +
@@ -4636,8 +4639,26 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     var marketName = function (m) { return m === 'Reception Yards' ? 'Receiving Yards' : m; };
     if (T) {
       var OP = T.officialPlays || [];
+      // Position toggle (11/2026, Rod): filters the whole panel.
+      var OPOS = { QB: 'QBs', RB: 'RBs', WR: 'WRs', TE: 'TEs' }, opN = {};
+      OP.forEach(function (x) { if (OPOS[x.pos]) opN[x.pos] = (opN[x.pos] || 0) + 1; });
+      var opf = OPOS[state.offPos] && opN[state.offPos] ? state.offPos : '';
+      if (opf) OP = OP.filter(function (x) { return x.pos === opf; });
+      var oseg = function (v, label) { return '<button class="' + (opf === v ? 'is-on' : '') + '" data-prop-set="offPos" data-prop-val="' + v + '">' + label + '</button>'; };
+      var posBar = Object.keys(opN).length > 1 ? '<div class="gt-ctl off-pos"><div class="pp-seg">' + oseg('', 'All positions') +
+        ['QB', 'RB', 'WR', 'TE'].filter(function (p) { return opN[p]; }).map(function (p) { return oseg(p, OPOS[p] + ' (' + opN[p] + ')'); }).join('') + '</div></div>' : '';
       var RL = { rec_yds_play: 'Rec yds overs', rush_under_play: 'Rush yds unders', under_play: 'Receptions unders' };
       var NEWK = { rec_yds_play: T.recYdsPlayNew, rush_under_play: T.rushUnderPlayNew, under_play: T.underPlayNew };
+      var orecP = function (xs) {
+        var g = xs.filter(function (x) { return /^[WLP]$/.test(x.result || ''); }), w = 0, l = 0, p = 0, u = 0;
+        g.forEach(function (x) { if (x.result === 'W') w++; else if (x.result === 'L') l++; else p++; u += Number(x.units || 0); });
+        return g.length ? { graded: g.length, record: w + '-' + l + (p ? '-' + p : ''), units: u, roi: u / g.length * 100 } : null;
+      };
+      if (opf) {   // with a position picked, every line comes from that position's plays
+        NEWK = { rec_yds_play: orecP(OP.filter(function (x) { return x.tag === 'rec_yds_play'; })), rush_under_play: orecP(OP.filter(function (x) { return x.tag === 'rush_under_play'; })),
+          under_play: orecP(OP.filter(function (x) { return x.tag === 'under_play'; })) };
+      }
+      var allO = opf ? orecP(OP) : T.officialNow;
       var lineO = function (label, o) {
         var g = o && o.graded;
         return '<div class="ep-row"><span>' + esc(label) + '</span><b>' + (g ? esc(o.record) : '&mdash;') + '</b><b style="color:' + tone(g ? o.units : 0) + '">' + (g ? signed(o.units, 2) + 'u' : '&mdash;') + '</b>' +
@@ -4677,22 +4698,22 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
             return '<tr><td class="gt-wl">Sat ' + Number(p[1]) + '/' + Number(p[2]) + '</td>' +
               RK.map(function (k) {
                 var c = ocell(orec(w.xs.filter(function (x) { return x.tag === k; })), ' gt-tc');
-                if (k !== 'rush_under_play') return c;
+                if (k !== 'rush_under_play' || opf) return c;
                 var sub = ['QB', 'RB'].map(function (ps) { var o = orec(w.xs.filter(function (x) { return x.tag === k && x.pos === ps; })); return o.n ? ps + ' ' + o.w + '-' + o.l + (o.p ? '-' + o.p : '') + ' ' + signed(o.u, 1) + 'u' : ''; }).filter(Boolean).join(' &middot; ');
                 return sub ? c.replace('</td>', '<i class="gt-pos">' + sub + '</i></td>') : c;
               }).join('') +
               ocell(orec(w.xs)) + '<td class="gt-wc gt-cum"><b>' + w.cum.w + '-' + w.cum.l + (w.cum.p ? '-' + w.cum.p : '') + '</b><span class="' + (w.cum.u >= 0 ? 'is-good' : 'is-bad') + '">' + signed(w.cum.u, 1) + 'u' +
                 (w.cum.roi != null ? ' &middot; ' + signed(w.cum.roi, 0) + '%' : '') + '</span></td></tr>';
           }).join('') + '</tbody></table></div><div class="gt-wk-tip">On a phone, the per-rule columns are hidden; the rule totals are listed above.</div></div>' : '';
-      myPanel = '<div class="pp-panel my-props" id="official-record"><h3>Official record</h3>' +
+      myPanel = '<div class="pp-panel my-props" id="official-record"><h3>Official record</h3>' + posBar +
         '<div class="pp-panel-note">Only plays that meet the current official rules, graded automatically from the box score, 1 unit each at the price they were flagged at. ' +
           'Records start when each rule last changed (rec yds overs and receptions unders Nov 2, rush yds unders Nov 3). Your W / L / P on other props stays in My Tracker and does not count here.</div>' +
         '<div class="my-props-grid"><div>' +
           '<div class="ep-row ep-th"><span></span><span>Record</span><span>Units</span><span>ROI</span></div>' +
-          lineO('All official plays', T.officialNow) +
+          lineO(opf ? 'All official plays (' + OPOS[opf] + ')' : 'All official plays', allO) +
           ['rec_yds_play', 'rush_under_play', 'under_play'].map(function (k) {
             var h = lineO(RL[k], NEWK[k]);
-            if (k === 'rush_under_play') ['QB', 'RB'].forEach(function (ps) {
+            if (k === 'rush_under_play' && !opf) ['QB', 'RB'].forEach(function (ps) {
               var o = orec(OP.filter(function (x) { return x.tag === k && x.pos === ps; }));
               h += lineO(' ↳ ' + ps + 's', o.n ? { graded: o.n, record: o.w + '-' + o.l + (o.p ? '-' + o.p : ''), units: o.u, roi: o.roi } : null).replace('class="ep-row"', 'class="ep-row ep-sub"');
             });
