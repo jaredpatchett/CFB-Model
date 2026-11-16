@@ -5837,7 +5837,7 @@ RENDERER_JS = """<script>
       return head + '<div class="empty-state">' + (live.length
         ? live.length + ' prop lines are posted, but none have a model read yet (usually players without enough games this season).'
         : 'No player props posted right now. Books usually post most of the slate by Thursday or Friday.') + '</div>' +
-        '<div class="pp-empty-rec">' + renderOfficialRecord() + renderGradeTracker() + '</div>';
+        '<div class="pp-empty-rec">' + renderGradeTracker() + renderOfficialRecord() + '</div>';
     }
     // Best line per player + market + game, by the model's hit chance on its side.
     var best = {}, counts = {}, alts = {};
