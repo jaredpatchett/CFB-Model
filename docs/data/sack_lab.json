@@ -1,0 +1,552 @@
+{
+  "generated_at": "2026-11-16T17:09:40.174627+00:00",
+  "seasons": [
+    2024,
+    2025,
+    2026
+  ],
+  "sacks_per_team_game": {
+    "2022": 1.18,
+    "2023": 1.2,
+    "2024": 1.08,
+    "2025": 1.07,
+    "2026": 1.94
+  },
+  "opp_pass_rush_tercile_cuts_sacks_per_game": [
+    1.75,
+    2.45
+  ],
+  "lines": {
+    "2024": {
+      "current": {
+        "no_match": 161,
+        "few_games": 129,
+        "not_under": 583
+      },
+      "sacks": {
+        "no_match": 161,
+        "few_games": 129,
+        "not_under": 583
+      }
+    },
+    "2025": {
+      "current": {
+        "no_match": 125,
+        "few_games": 159,
+        "not_under": 604
+      },
+      "sacks": {
+        "no_match": 125,
+        "few_games": 159,
+        "not_under": 606
+      }
+    },
+    "2026": {
+      "current": {
+        "no_match": 123,
+        "few_games": 270,
+        "not_under": 518
+      },
+      "sacks": {
+        "no_match": 123,
+        "few_games": 270,
+        "not_under": 525
+      }
+    }
+  },
+  "sack_input_importance": {
+    "2024": {
+      "opp_def_sacks_prior": 0.0001,
+      "team_sacks_taken_prior": 0.0006,
+      "rank_of_opp_def_sacks_prior": 31,
+      "rank_of_team_sacks_taken_prior": 27,
+      "n_inputs": 32
+    },
+    "2025": {
+      "opp_def_sacks_prior": 0.0,
+      "team_sacks_taken_prior": 0.0004,
+      "rank_of_opp_def_sacks_prior": 29,
+      "rank_of_team_sacks_taken_prior": 21,
+      "n_inputs": 32
+    },
+    "2026": {
+      "opp_def_sacks_prior": 0.0001,
+      "team_sacks_taken_prior": 0.0002,
+      "rank_of_opp_def_sacks_prior": 26,
+      "rank_of_team_sacks_taken_prior": 22,
+      "n_inputs": 32
+    }
+  },
+  "results": {
+    "current": {
+      "all": {
+        "n": 1539,
+        "record": "837-702",
+        "units": 43.9,
+        "roi": 2.9
+      },
+      "by_season": {
+        "2024": {
+          "n": 501,
+          "record": "268-233",
+          "units": 8.4,
+          "roi": 1.7
+        },
+        "2025": {
+          "n": 575,
+          "record": "309-266",
+          "units": 9.1,
+          "roi": 1.6
+        },
+        "2026": {
+          "n": 463,
+          "record": "260-203",
+          "units": 26.4,
+          "roi": 5.7
+        }
+      },
+      "QB": {
+        "n": 519,
+        "record": "272-247",
+        "units": -4.5,
+        "roi": -0.9
+      },
+      "QB vs tough run D": {
+        "n": 277,
+        "record": "152-125",
+        "units": 10.7,
+        "roi": 3.9
+      },
+      "QB vs other run D": {
+        "n": 242,
+        "record": "120-122",
+        "units": -15.2,
+        "roi": -6.3
+      },
+      "QB vs tough run D by season": {
+        "2024": {
+          "n": 93,
+          "record": "54-39",
+          "units": 8.9,
+          "roi": 9.6
+        },
+        "2025": {
+          "n": 111,
+          "record": "59-52",
+          "units": 1.3,
+          "roi": 1.2
+        },
+        "2026": {
+          "n": 73,
+          "record": "39-34",
+          "units": 0.5,
+          "roi": 0.6
+        }
+      },
+      "non-QB": {
+        "n": 1020,
+        "record": "565-455",
+        "units": 48.4,
+        "roi": 4.7
+      },
+      "non-QB vs tough run D": {
+        "n": 508,
+        "record": "292-216",
+        "units": 44.5,
+        "roi": 8.8
+      },
+      "non-QB vs other run D": {
+        "n": 512,
+        "record": "273-239",
+        "units": 3.9,
+        "roi": 0.8
+      },
+      "non-QB vs tough run D by season": {
+        "2024": {
+          "n": 159,
+          "record": "85-74",
+          "units": 3.4,
+          "roi": 2.1
+        },
+        "2025": {
+          "n": 198,
+          "record": "108-90",
+          "units": 5.8,
+          "roi": 2.9
+        },
+        "2026": {
+          "n": 151,
+          "record": "99-52",
+          "units": 35.3,
+          "roi": 23.4
+        }
+      }
+    },
+    "sacks": {
+      "all": {
+        "n": 1536,
+        "record": "839-697",
+        "units": 50.4,
+        "roi": 3.3
+      },
+      "by_season": {
+        "2024": {
+          "n": 506,
+          "record": "274-232",
+          "units": 14.4,
+          "roi": 2.8
+        },
+        "2025": {
+          "n": 573,
+          "record": "309-264",
+          "units": 11.5,
+          "roi": 2.0
+        },
+        "2026": {
+          "n": 457,
+          "record": "256-201",
+          "units": 24.5,
+          "roi": 5.4
+        }
+      },
+      "QB": {
+        "n": 513,
+        "record": "268-245",
+        "units": -6.0,
+        "roi": -1.2
+      },
+      "QB vs tough run D": {
+        "n": 275,
+        "record": "151-124",
+        "units": 10.8,
+        "roi": 3.9
+      },
+      "QB vs other run D": {
+        "n": 238,
+        "record": "117-121",
+        "units": -16.9,
+        "roi": -7.1
+      },
+      "QB vs tough run D by season": {
+        "2024": {
+          "n": 93,
+          "record": "54-39",
+          "units": 8.9,
+          "roi": 9.6
+        },
+        "2025": {
+          "n": 110,
+          "record": "59-51",
+          "units": 2.4,
+          "roi": 2.2
+        },
+        "2026": {
+          "n": 72,
+          "record": "38-34",
+          "units": -0.5,
+          "roi": -0.6
+        }
+      },
+      "non-QB": {
+        "n": 1023,
+        "record": "571-452",
+        "units": 56.4,
+        "roi": 5.5
+      },
+      "non-QB vs tough run D": {
+        "n": 516,
+        "record": "298-218",
+        "units": 47.8,
+        "roi": 9.3
+      },
+      "non-QB vs other run D": {
+        "n": 507,
+        "record": "273-234",
+        "units": 8.6,
+        "roi": 1.7
+      },
+      "non-QB vs tough run D by season": {
+        "2024": {
+          "n": 166,
+          "record": "91-75",
+          "units": 7.6,
+          "roi": 4.6
+        },
+        "2025": {
+          "n": 198,
+          "record": "107-91",
+          "units": 4.3,
+          "roi": 2.2
+        },
+        "2026": {
+          "n": 152,
+          "record": "100-52",
+          "units": 35.9,
+          "roi": 23.6
+        }
+      }
+    },
+    "common_lines_bet_by_both": {
+      "current": {
+        "all": {
+          "n": 1509,
+          "record": "825-684",
+          "units": 51.3,
+          "roi": 3.4
+        },
+        "by_season": {
+          "2024": {
+            "n": 493,
+            "record": "266-227",
+            "units": 12.6,
+            "roi": 2.6
+          },
+          "2025": {
+            "n": 560,
+            "record": "304-256",
+            "units": 14.8,
+            "roi": 2.6
+          },
+          "2026": {
+            "n": 456,
+            "record": "255-201",
+            "units": 24.0,
+            "roi": 5.3
+          }
+        },
+        "QB": {
+          "n": 508,
+          "record": "266-242",
+          "units": -4.8,
+          "roi": -0.9
+        },
+        "QB vs tough run D": {
+          "n": 271,
+          "record": "149-122",
+          "units": 11.1,
+          "roi": 4.1
+        },
+        "QB vs other run D": {
+          "n": 237,
+          "record": "117-120",
+          "units": -15.9,
+          "roi": -6.7
+        },
+        "QB vs tough run D by season": {
+          "2024": {
+            "n": 92,
+            "record": "54-38",
+            "units": 9.9,
+            "roi": 10.8
+          },
+          "2025": {
+            "n": 107,
+            "record": "57-50",
+            "units": 1.6,
+            "roi": 1.5
+          },
+          "2026": {
+            "n": 72,
+            "record": "38-34",
+            "units": -0.4,
+            "roi": -0.6
+          }
+        },
+        "non-QB": {
+          "n": 1001,
+          "record": "559-442",
+          "units": 56.1,
+          "roi": 5.6
+        },
+        "non-QB vs tough run D": {
+          "n": 501,
+          "record": "289-212",
+          "units": 45.9,
+          "roi": 9.2
+        },
+        "non-QB vs other run D": {
+          "n": 500,
+          "record": "270-230",
+          "units": 10.2,
+          "roi": 2.0
+        },
+        "non-QB vs tough run D by season": {
+          "2024": {
+            "n": 158,
+            "record": "85-73",
+            "units": 4.4,
+            "roi": 2.8
+          },
+          "2025": {
+            "n": 192,
+            "record": "105-87",
+            "units": 6.2,
+            "roi": 3.2
+          },
+          "2026": {
+            "n": 151,
+            "record": "99-52",
+            "units": 35.3,
+            "roi": 23.4
+          }
+        }
+      },
+      "sacks": {
+        "all": {
+          "n": 1509,
+          "record": "825-684",
+          "units": 51.6,
+          "roi": 3.4
+        },
+        "by_season": {
+          "2024": {
+            "n": 493,
+            "record": "266-227",
+            "units": 12.7,
+            "roi": 2.6
+          },
+          "2025": {
+            "n": 560,
+            "record": "304-256",
+            "units": 15.0,
+            "roi": 2.7
+          },
+          "2026": {
+            "n": 456,
+            "record": "255-201",
+            "units": 23.8,
+            "roi": 5.2
+          }
+        },
+        "QB": {
+          "n": 508,
+          "record": "266-242",
+          "units": -4.8,
+          "roi": -0.9
+        },
+        "QB vs tough run D": {
+          "n": 271,
+          "record": "149-122",
+          "units": 11.1,
+          "roi": 4.1
+        },
+        "QB vs other run D": {
+          "n": 237,
+          "record": "117-120",
+          "units": -15.9,
+          "roi": -6.7
+        },
+        "QB vs tough run D by season": {
+          "2024": {
+            "n": 92,
+            "record": "54-38",
+            "units": 9.9,
+            "roi": 10.8
+          },
+          "2025": {
+            "n": 107,
+            "record": "57-50",
+            "units": 1.6,
+            "roi": 1.5
+          },
+          "2026": {
+            "n": 72,
+            "record": "38-34",
+            "units": -0.5,
+            "roi": -0.6
+          }
+        },
+        "non-QB": {
+          "n": 1001,
+          "record": "559-442",
+          "units": 56.4,
+          "roi": 5.6
+        },
+        "non-QB vs tough run D": {
+          "n": 501,
+          "record": "289-212",
+          "units": 46.1,
+          "roi": 9.2
+        },
+        "non-QB vs other run D": {
+          "n": 500,
+          "record": "270-230",
+          "units": 10.3,
+          "roi": 2.1
+        },
+        "non-QB vs tough run D by season": {
+          "2024": {
+            "n": 158,
+            "record": "85-73",
+            "units": 4.4,
+            "roi": 2.8
+          },
+          "2025": {
+            "n": 192,
+            "record": "105-87",
+            "units": 6.5,
+            "roi": 3.4
+          },
+          "2026": {
+            "n": 151,
+            "record": "99-52",
+            "units": 35.2,
+            "roi": 23.3
+          }
+        }
+      }
+    },
+    "qb_only_current": {
+      "n": 11,
+      "record": "6-5",
+      "units": 0.3,
+      "roi": 2.6
+    },
+    "qb_only_sacks": {
+      "n": 5,
+      "record": "2-3",
+      "units": -1.2,
+      "roi": -24.4
+    },
+    "current_qb_by_opp_pass_rush": {
+      "light rush": {
+        "n": 175,
+        "record": "89-86",
+        "units": -7.0,
+        "roi": -4.0
+      },
+      "light rush + tough run D": {
+        "n": 64,
+        "record": "39-25",
+        "units": 9.5,
+        "roi": 14.8
+      },
+      "average rush": {
+        "n": 167,
+        "record": "90-77",
+        "units": 2.8,
+        "roi": 1.6
+      },
+      "average rush + tough run D": {
+        "n": 92,
+        "record": "49-43",
+        "units": 0.8,
+        "roi": 0.9
+      },
+      "heavy rush": {
+        "n": 177,
+        "record": "93-84",
+        "units": -0.2,
+        "roi": -0.1
+      },
+      "heavy rush + tough run D": {
+        "n": 121,
+        "record": "64-57",
+        "units": 0.4,
+        "roi": 0.3
+      }
+    }
+  },
+  "qb_rule": "roll_pass_att >= 5",
+  "rule": "rush yards under, best-EV book, edge 0%+, 2+ games played; graded at that book's line and price"
+}
