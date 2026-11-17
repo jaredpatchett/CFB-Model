@@ -681,6 +681,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
             "evAwayPct": g.get("ev_away_pct"),
             "modelVersion": g.get("model_version"),
             "bowl": g.get("bowl"),
+            "weather": g.get("weather"),
             "flagLine": line_hist.get((g.get("home_team"), g.get("away_team"), g.get("commence_time"))),
             "injHome": inj_home,
             "injAway": inj_away,
@@ -5450,6 +5451,34 @@ RENDERER_JS = """<script>
     if (!name) return '';
     return '<span class="bc-bowl" title="' + esc(name) + ': the model is built on regular-season games and can not see who is opting out, entering the transfer portal, or which coaches have left. Check the depth chart before betting.">&#127944; Bowl &middot; check opt-outs</span>';
   }
+  // 11/2026: bad-weather chip on props (forecast wind 15+ mph, rain/snow, or
+  // under 35F, outdoors). Info only -- the props weather lab (2024-26) found
+  // no rule change worth making. Rec yds overs get the warning version:
+  // every rec yds over in bad weather went 23-22 (-4%) vs +8% otherwise
+  // (45 plays, a small sample).
+  var _wxTeams = null;
+  function weatherChip(r) {
+    if (!r || !r.team) return '';
+    if (!_wxTeams) {
+      _wxTeams = {};
+      ((window.MODEL_DATA || {}).games || []).forEach(function (g) {
+        if (!g || !g.weather) return;
+        [g.home, g.away, g.homeSchool, g.awaySchool].forEach(function (t) { if (t) _wxTeams[t] = g.weather; });
+      });
+    }
+    var w = _wxTeams[r.team];
+    if (!w || w.game_indoors) return '';
+    var bits = [];
+    if (w.wind_speed != null && w.wind_speed >= 15) bits.push('&#128168; ' + Math.round(w.wind_speed) + ' mph');
+    if (w.precipitation != null && w.precipitation > 0) bits.push('&#127783; rain/snow');
+    if (w.temperature != null && w.temperature < 35) bits.push('&#129398; ' + Math.round(w.temperature) + '&deg;F');
+    if (!bits.length) return '';
+    var recYdsOver = r.market_name === 'Reception Yards' && r.model_lean === 'over';
+    var title = recYdsOver
+      ? 'Bad weather forecast. Past seasons: rec yds overs in wind/rain/cold went 23-22 (-4%) vs +8% in good weather. Small sample, so no rule change, but think twice.'
+      : 'Bad weather forecast. Past seasons showed no real effect on this kind of play, so it is info only.';
+    return '<span class="pp-tag ' + (recYdsOver ? 'is-inj' : 'is-watch') + '" title="' + title + '">' + bits.join(' &middot; ') + '</span>';
+  }
   var _bowlTeams = null;
   function bowlOfTeam(team) {
     if (!team) return null;
@@ -6392,6 +6421,8 @@ RENDERER_JS = """<script>
       else if (r.is_under_lean) flags.push('<span class="pp-tag is-watch" title="A receptions under with a 10% to 30% edge. A lean, graded on its own line.">Under lean</span>');
       var bw = bowlOfTeam(r.team);
       if (bw) flags.push(bowlTag(bw));
+      var wx = weatherChip(r);
+      if (wx) flags.push(wx);
       var mu = matchupOf(r);
       if (mu) flags.push('<span class="pp-tag ' + mu.cls + '" title="' + esc(mu.title) + '">' + mu.text + '</span>');
       if (r.injury_status) flags.push('<span class="pp-tag is-inj" title="' + esc(r.injury_detail || 'On the injury report') + '">' + esc(r.injury_status) + '</span>');

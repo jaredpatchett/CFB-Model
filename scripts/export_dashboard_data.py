@@ -1104,6 +1104,10 @@ def main(year: int):
             # on CFBD's postseason schedule (see match_bowl).
             bowl = match_bowl(home_meta.get("school"), away_meta.get("school"), g.get("commence_time"), bowl_lookup)
             game_out["bowl"] = bowl["name"] if bowl else None
+            # 11/2026: the game's forecast, for the weather chip on props (the
+            # props weather lab found no rule change worth making; it's info).
+            game_out["weather"] = match_weather(home_meta.get("school"), away_meta.get("school"),
+                                                bowl_weather_lookup if bowl else weather_lookup) or None
 
             if prior is not None:
                 home_rating = match_sp_rating(g.get("home_team"), sp_lookup)
