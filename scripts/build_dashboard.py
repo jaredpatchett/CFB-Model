@@ -5810,7 +5810,7 @@ RENDERER_JS = """<script>
     catch (e) { return iso || ''; }
   }
   function totRec(o) {
-    if (!o || !(o.w + o.l)) return '&mdash;';
+    if (!o || !(o.w + o.l)) return '0-0';
     return o.w + '-' + o.l + (o.p ? '-' + o.p : '');
   }
   function totSigned(x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); }
