@@ -1183,6 +1183,51 @@ def main(year: int):
     else:
         print(f"  [warn] {game_lines_path} not found, skipping games")
 
+    # ---- Game totals (11/2026): official overs/unders + play grade + weather.
+    # See src/analysis/totals_live.py for the rules. Never blocks the export.
+    totals_out, totals_record, totals_backtest = [], None, None
+    try:
+        from src.analysis import totals_live as tl
+        from src.models.totals_model import TotalsModel
+        tpath = f"{config.MODELS_DIR}/totals_model.joblib"
+        tlog = tl.load_log()
+        if os.path.exists(tpath):
+            tmodel = TotalsModel.load(tpath)
+            prior_inputs = tl.prior_season_team_inputs(year)
+            now_dt = datetime.now(timezone.utc)
+            scored = []
+            for go in games_out:
+                line = go.get("total_over")
+                k = pd.to_datetime(go.get("commence_time"), utc=True, errors="coerce")
+                if line is None or pd.isna(line) or pd.isna(k) or k <= now_dt:
+                    continue
+                hs, as_ = go.get("home_school"), go.get("away_school")
+                neutral = go.get("neutral_site")
+                if neutral is None:
+                    neutral = bool(match_neutral_site(hs, as_, neutral_site_lookup))
+                row = tl.game_inputs(hs, as_, current_season_form, v2_lookup, prior_inputs,
+                                     go.get("weather"), neutral, qb_out)
+                if row is None:
+                    continue
+                pred = float(tmodel.predict(pd.DataFrame([row]))[0])
+                scored.append({"home": go.get("home_team"), "away": go.get("away_team"), "home_school": hs,
+                               "away_school": as_, "kickoff": go.get("commence_time"), "line": float(line),
+                               "pred": pred, "weather": go.get("weather"), "book": go.get("book_used")})
+                go["model_total"] = round(pred, 1)
+            totals_out = tl.run(scored, tlog, now_dt.isoformat())
+            print(f"  Totals: {len(scored)} games scored, {len(totals_out)} official "
+                  f"({sum(1 for r in totals_out if r['grade'] == 'A')} A)")
+        else:
+            print(f"  [note] no totals model at {tpath} -- no totals this run")
+        n_tg = tl.grade_results(tlog, schedule_df, _normalize_team_name)
+        if n_tg:
+            print(f"  Totals: graded {n_tg} finished play(s)")
+        tl.save_log(tlog)
+        totals_record = tl.record(tlog)
+        totals_backtest = tl.backtest_by_grade()
+    except Exception as e:
+        print(f"  [warn] totals skipped ({type(e).__name__}: {e})")
+
     props_out = []
     if os.path.exists(props_path):
         # An empty file is normal late in a slate (books have stopped posting
@@ -1815,6 +1860,9 @@ def main(year: int):
         "teams": teams_out,
         "team_directory": build_team_directory(team_lookup),
         "games": games_out,
+        "totals": totals_out,
+        "totals_record": totals_record,
+        "totals_backtest": totals_backtest,
         "props": props_out,
         "prop_game_logs": prop_game_logs_out,
         "prop_distributions": prop_dists_out,
