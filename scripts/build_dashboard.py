@@ -237,6 +237,41 @@ def build_props_by_edge(path: str = PROP_FLAGS_PATH):
         return None
 
 
+# 11/2026 (Rod): the totals edge key. How each edge size of the official
+# totals did in the 2023-26 totals lab, against opening totals, by season.
+# Same filters as the official rules (unders on totals 50+, overs with no
+# 10+ mph wind; see src/analysis/totals_live.py).
+TOTALS_TIERS = [("under", 3, 5, "3-5 pts under"), ("under", 5, 7, "5-7 pts under"), ("under", 7, 99, "7+ pts under"),
+                ("over", 7, 10, "7-10 pts over"), ("over", 10, 99, "10+ pts over")]
+
+
+def build_totals_tiers(path: str = "docs/data/totals_lab_detail.csv"):
+    try:
+        import numpy as np
+        import pandas as pd
+        d = pd.read_csv(path)
+        d = d[(d.version == "model") & (d.vs == "open")].copy()
+        d["ae"] = d.edge.abs()
+        indoor = d.game_indoors.fillna(0).astype(bool)
+        d["w"] = np.where(indoor, 0.0, d.wind_speed.fillna(0))
+        out = []
+        for side, lo, hi, label in TOTALS_TIERS:
+            s = d[(d.side == side) & (d.ae >= lo) & (d.ae < hi)]
+            s = s[s.line >= 50] if side == "under" else s[s.w < 10]
+            if s.empty:
+                continue
+            seasons = {str(int(k)): round(float(g.units.mean()) * 100, 1) for k, g in s.groupby("season")}
+            out.append({"side": side, "lo": lo, "hi": hi, "label": label,
+                        "w": int((s.result == "W").sum()), "l": int((s.result == "L").sum()),
+                        "roi": round(float(s.units.mean()) * 100, 1), "seasons": seasons,
+                        "every": all(v >= 0 for v in seasons.values()),
+                        "down": [k for k, v in seasons.items() if v < 0]})
+        return out
+    except Exception as e:
+        print(f"  [note] totals edge key not built ({e})")
+        return []
+
+
 # 11/2026: record by play grade (official props), from the tracker log. The
 # same scoring as the dashboard's playGrade(): matchup grade (A +2, B +1,
 # C 0, D/F -1) + line move since first flagged (our way +1, against -1);
@@ -2082,6 +2117,24 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .tot-drv-note { font-size: 10px; color: var(--muted-3, #8A94A3); margin-top: 4px; }
 .tot-row { cursor: pointer; } .tot-row:hover { border-color: rgba(255,255,255,0.2); }
 @media (max-width: 760px) { .tot-drv-r { grid-template-columns: 110px 1fr 40px; } .tot-res { grid-template-columns: 24px 80px 1fr; } .tot-rt { display: none; } }
+.tot-tier { font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 999px; white-space: nowrap; border: 1px solid rgba(255,255,255,0.15); }
+.tot-tier.is-top { color: #FFD24A; background: rgba(255,210,74,0.12); border-color: rgba(255,210,74,0.6); }
+.tot-tier.is-ok { color: var(--neon); background: rgba(57,240,122,0.08); border-color: rgba(57,240,122,0.4); }
+.tot-tier.is-mixed { color: #AEB6C2; }
+.tot-keyp h3 span { font-size: 11px; font-weight: 600; color: var(--muted-3, #8A94A3); text-transform: none; letter-spacing: 0; margin-left: 6px; }
+.tot-krow { display: grid; grid-template-columns: 130px 1fr 60px 56px auto; gap: 10px; align-items: center; padding: 6px 8px; border-radius: 8px; font-size: 13px; }
+.tot-krow.is-top { background: rgba(255,210,74,0.08); border: 1px solid rgba(255,210,74,0.4); }
+.tot-krow b { text-align: right; color: var(--neon); } .tot-krec { color: var(--muted-2, #AEB6C2); font-size: 12px; }
+.tot-kbar { height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden; } .tot-kbar i { display: block; height: 100%; background: var(--neon); border-radius: 5px; }
+.tot-krow.is-top .tot-kbar i { background: #FFD24A; }
+.tot-kdots { display: flex; gap: 3px; } .tot-dot { font-style: normal; font-size: 9px; font-weight: 800; width: 20px; height: 18px; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; }
+.tot-dot.is-up { background: rgba(57,240,122,0.2); color: var(--neon); } .tot-dot.is-dn { background: rgba(255,90,90,0.2); color: #FF6B6B; }
+.tot-n b small { font-size: 11px; font-weight: 700; color: var(--muted-3, #8A94A3); }
+.tot-open { grid-column: 1 / -1; cursor: default; } .tot-open .tot-gb { margin-top: 4px; }
+.tot-row.is-open { border-color: rgba(255,255,255,0.25); }
+@media (max-width: 760px) {
+  .tot-krow { grid-template-columns: 1fr 52px 48px; gap: 6px; } .tot-kbar { display: none; } .tot-kdots { grid-column: 1 / -1; }
+}
 .tot-list { display: grid; gap: 10px; }
 .tot-row { display: grid; grid-template-columns: 110px 1fr 230px; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 12px; background: var(--panel, rgba(255,255,255,0.03)); border: 1px solid rgba(255,255,255,0.08); border-left: 4px solid #C48CFF; }
 .tot-row.is-a { border-left-color: var(--neon); }
@@ -5834,6 +5887,37 @@ RENDERER_JS = """<script>
     return o.w + '-' + o.l + (o.p ? '-' + o.p : '');
   }
   function totSigned(x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); }
+  // ---- Edge tiers (11/2026, Rod): how each edge size did in the backtest ----
+  function totTier(r) {
+    var T = D.totalsTiers || [], a = Math.abs(r.edge);
+    for (var i = 0; i < T.length; i++) if (T[i].side === r.side && a >= T[i].lo && a < T[i].hi) return T[i];
+    return null;
+  }
+  function totTierChip(r) {
+    var t = totTier(r);
+    if (!t) return '';
+    var top = t.every && t.roi >= 20 && Object.keys(t.seasons).length >= 4;
+    return '<span class="tot-tier' + (top ? ' is-top' : t.every ? ' is-ok' : ' is-mixed') + '" title="Backtest ' + t.w + '-' + t.l + ' at this edge size, vs opening totals">' +
+      (top ? '&#127942; ' : t.every ? '&#10003; ' : '') + esc(t.label) + ' &middot; ' + totSigned(t.roi, 1) + '%' +
+      (t.every ? (Object.keys(t.seasons).length >= 4 ? ' &middot; up every season' : ' &middot; up every season played (' + Object.keys(t.seasons).length + ' of 4)') : ' &middot; lost ' + t.down.join(', ')) + '</span>';
+  }
+  function renderTotalsKey() {
+    var T = D.totalsTiers || [];
+    if (!T.length) return '';
+    var mx = Math.max.apply(null, T.map(function (t) { return Math.abs(t.roi); }).concat([1]));
+    return '<div class="pp-panel tot-keyp"><h3>Edge key <span>how each edge size did, 2023&ndash;26 vs opening totals</span></h3>' +
+      T.map(function (t) {
+        var top = t.every && t.roi >= 20 && Object.keys(t.seasons).length >= 4;
+        var dots = Object.keys(t.seasons).sort().map(function (y) {
+          var v = t.seasons[y];
+          return '<i class="tot-dot ' + (v >= 0 ? 'is-up' : 'is-dn') + '" title="' + y + ': ' + totSigned(v, 1) + '%">' + String(y).slice(2) + '</i>';
+        }).join('');
+        return '<div class="tot-krow' + (top ? ' is-top' : '') + '"><span class="tot-klab">' + (top ? '&#127942; ' : '') + esc(t.label) + '</span>' +
+          '<span class="tot-kbar"><i style="width:' + (Math.max(0, t.roi) / mx * 100).toFixed(0) + '%"></i></span>' +
+          '<b>' + totSigned(t.roi, 1) + '%</b><span class="tot-krec">' + t.w + '-' + t.l + '</span><span class="tot-kdots">' + dots + '</span></div>';
+      }).join('') +
+      '<div class="pp-panel-note">Green season = made money that year, red = lost. &#127942; = profitable in all four seasons and +20% or better. A missing season means no plays that year. Bigger under edges did better, and 7+ unders were up every season. That edge showed up at the opening line and was mostly gone by the close, so bet early.</div></div>';
+  }
   function renderTotals() {
     var rows = D.totals || [], R = D.totalsRecord || {}, B = D.totalsBacktest || {};
     var show = state.totShow === 'all' ? 'all' : 'a';
@@ -5851,7 +5935,8 @@ RENDERER_JS = """<script>
         ['Live record (all official)', totRec(all), all.units != null && (all.w + all.l) ? totSigned(all.units, 1) + 'u, ' + totSigned(all.roi, 1) + '%' : 'starts this week', { icon: 'bars' }],
         ['Backtest A / B', bt(B.A), 'B ' + bt(B.B), { icon: 'trend' }]
       ]) +
-      '<div class="prop-tabs" style="margin:14px 0 8px">' + seg('a', '&#128293; A plays') + seg('all', 'All official') + '</div>';
+      '<div class="prop-tabs" style="margin:14px 0 8px">' + seg('a', '&#128293; A plays') + seg('all', 'All official') + '</div>'
+    head += renderTotalsKey();
     if (!rows.length) return head + '<div class="empty-state">No official totals right now. They show up once both teams have played 2+ games and the model is 3+ under (total 50+) or 7+ over (no 10+ mph wind).</div>' + totFoot(R, B);
     if (!list.length) return head + '<div class="empty-state">No &#128293; A totals right now. ' + rows.length + ' official B/C play' + (rows.length === 1 ? '' : 's') + ' under &ldquo;All official&rdquo;.</div>' + totFoot(R, B);
     var body = '<div class="tot-list">' + list.map(function (r) {
@@ -5859,19 +5944,21 @@ RENDERER_JS = """<script>
       var mv = r.move > 0 ? '<span class="tot-mv is-good">line moved our way</span>' : r.move < 0 ? '<span class="tot-mv is-bad">line moved against us</span>' : '';
       var flagged = r.first_line != null && Number(r.first_line) !== Number(r.line) ? 'Flagged at ' + r.first_line + ' &middot; ' : '';
       var edgeAbs = Math.abs(r.edge), pct = Math.min(100, edgeAbs / 12 * 100);
-      return '<div class="tot-row ' + m[2] + '"' + totOpenAttr(r) + '>' +
+      var ri = rows.indexOf(r), open = state.totOpen === ri;
+      var gi = totGameIndex(r), gobj = gi >= 0 ? D.games[gi] : { home: r.home, away: r.away, kickoffIso: r.kickoff };
+      return '<div class="tot-row ' + m[2] + (open ? ' is-open' : '') + '" onclick="window.__cfbTotToggle(' + ri + ')">' +
         '<div class="tot-grade"><span class="pg-badge ' + m[2] + ' is-big">' + m[0] + ' ' + r.grade + '</span><div class="tot-gnote">' + m[1] + '</div></div>' +
         '<div class="tot-main">' +
           '<div class="tot-play">' + (r.side === 'under' ? 'UNDER ' : 'OVER ') + r.line + (r.new ? '<span class="bc-new">NEW</span>' : '') + '</div>' +
           '<div class="tot-game">' + trkMark(abbrOf(r.away), 18) + esc(abbrOf(r.away)) + ' at ' + trkMark(abbrOf(r.home), 18) + esc(abbrOf(r.home)) + ' &middot; ' + esc(totKick(r.kickoff)) + (r.book ? ' &middot; ' + esc(r.book) : '') + '</div>' +
-          '<div class="tot-tags">' + totWeather(r.weather, r.side) + mv + '</div>' +
+          '<div class="tot-tags">' + totTierChip(r) + totWeather(r.weather, r.side) + mv + '</div>' +
         '</div>' +
         '<div class="tot-nums">' +
           '<div class="tot-n"><span>Model</span><b>' + Number(r.pred).toFixed(1) + '</b></div>' +
-          '<div class="tot-n"><span>Edge</span><b class="' + (r.side === 'under' ? 'is-under' : 'is-over') + '">' + totSigned(r.edge, 1) + '</b>' +
+          '<div class="tot-n"><span>Edge</span><b class="' + (r.side === 'under' ? 'is-under' : 'is-over') + '">' + Math.abs(r.edge).toFixed(1) + ' <small>pts ' + r.side + '</small></b>' +
             '<i class="tot-bar"><i style="width:' + pct.toFixed(0) + '%"></i></i></div>' +
-          '<div class="tot-sub">' + flagged + 'Backtest ' + r.grade + ': ' + bt(bo) + ' &middot; <u>breakdown &rsaquo;</u></div>' +
-        '</div></div>';
+          '<div class="tot-sub">' + flagged + 'Backtest ' + r.grade + ': ' + bt(bo) + ' &middot; <u>' + (open ? 'hide breakdown &#9652;' : 'breakdown &#9662;') + '</u></div>' +
+        '</div>' + (open ? '<div class="tot-open" onclick="event.stopPropagation()">' + renderTotalBreakdown(r, gobj) + '</div>' : '') + '</div>';
     }).join('') + '</div>';
     return head + body + totFoot(R, B);
   }
@@ -5919,7 +6006,7 @@ RENDERER_JS = """<script>
         '<span class="pg-badge ' + m[2] + '">' + m[0] + ' ' + r.grade + '</span>' +
         '<div class="tot-bc-main"><div class="card-play"><span>' + (r.side === 'under' ? 'UNDER ' : 'OVER ') + r.line + '</span>' + (r.new ? '<span class="bc-new">NEW</span>' : '') + '</div>' +
         '<div class="card-note">' + esc(abbrOf(r.away) + ' at ' + abbrOf(r.home)) + ' &middot; ' + esc(totKick(r.kickoff)) + ' &middot; model ' + Number(r.pred).toFixed(1) + '</div>' +
-        '<div class="tot-tags">' + totWeather(r.weather, r.side) + '</div></div>' +
+        '<div class="tot-tags">' + totTierChip(r) + totWeather(r.weather, r.side) + '</div></div>' +
         '<div class="tot-bc-edge ' + (r.side === 'under' ? 'is-under' : 'is-over') + '">' + totSigned(r.edge, 1) + '<span>breakdown &rsaquo;</span></div>' +
         '</div></div>';
     }).join('') + '</div></div>';
@@ -5970,6 +6057,7 @@ RENDERER_JS = """<script>
       '<div><span class="pg-badge ' + m[2] + '">' + m[0] + ' ' + r.grade + '</span> <span class="gb-play">' + (under ? 'UNDER ' : 'OVER ') + r.line + '</span> ' +
       '<span class="tot-gb-sub">model ' + Number(r.pred).toFixed(1) + ' &middot; edge ' + totSigned(r.edge, 1) + '</span></div>' +
       (parts ? '<div class="tot-gb-grade">Grade: ' + parts + ' = ' + r.grade + ' (' + m[1] + ')</div>' : '') +
+      (totTier(r) ? '<div class="tot-gb-grade">Edge size: ' + totTierChip(r) + '</div>' : '') +
       '<div class="gb-lab2 gb-why-lab">Why it&rsquo;s a play</div>' + p.map(function (x) { return '<p class="gb-p">' + x + '</p>'; }).join('') +
       '<div class="gb-lab2">What moves the model&rsquo;s number</div>' + bars +
       (r.first_line != null && Number(r.first_line) !== Number(r.line) ? '<div class="gb-note">Flagged at ' + r.first_line + ', now ' + r.line + (r.move > 0 ? ': the market has moved toward us.' : r.move < 0 ? ': the market has moved against us.' : '.') + '</div>' : '') +
@@ -8682,6 +8770,7 @@ RENDERER_JS = """<script>
   window.__cfbAtdGame = function (v) { state.atdGame = v; render(); };
   window.__cfbTotShow = function (v) { state.totShow = v; render(); };
   window.__cfbTotHist = function (v) { state.totHist = v; render(); };
+  window.__cfbTotToggle = function (i) { state.totOpen = state.totOpen === i ? null : i; render(); };
   window.__cfbTdaQ = function (v) {
     state.tdaQ = v; render();
     var el = document.querySelector('.tda-search');
@@ -8884,6 +8973,7 @@ def main():
     model_data["totals"] = data.get("totals") or []
     model_data["totalsRecord"] = data.get("totals_record") or {}
     model_data["totalsBacktest"] = data.get("totals_backtest") or {}
+    model_data["totalsTiers"] = build_totals_tiers()
     model_data["propRules"] = build_prop_rules()
     # Team-vs-team national ranks for the Matchup Projector (11/2026).
     model_data["teamMatchup"] = data.get("team_matchup") or {}
