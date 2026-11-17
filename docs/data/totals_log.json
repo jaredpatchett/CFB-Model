@@ -1,0 +1,215 @@
+{
+ "plays": {
+  "Kent State Golden Flashes|Miami (OH) RedHawks|2026-11-18T00:00:00Z|over": {
+   "home": "Kent State Golden Flashes",
+   "away": "Miami (OH) RedHawks",
+   "home_school": "Kent State",
+   "away_school": "Miami (OH)",
+   "kickoff": "2026-11-18T00:00:00Z",
+   "side": "over",
+   "first": {
+    "at": "2026-11-17T21:34:15.409898+00:00",
+    "line": 44.5,
+    "pred": 51.7
+   },
+   "h": [
+    [
+     "2026-11-17T21:34:15.409898+00:00",
+     44.5,
+     51.7,
+     7.2,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 41.2,
+    "wind_speed": 4.2,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "Georgia Tech Yellow Jackets|Wake Forest Demon Deacons|2026-11-21T17:00:00Z|under": {
+   "home": "Georgia Tech Yellow Jackets",
+   "away": "Wake Forest Demon Deacons",
+   "home_school": "Georgia Tech",
+   "away_school": "Wake Forest",
+   "kickoff": "2026-11-21T17:00:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-17T21:34:15.409898+00:00",
+    "line": 56.5,
+    "pred": 53.0
+   },
+   "h": [
+    [
+     "2026-11-17T21:34:15.409898+00:00",
+     56.5,
+     53.0,
+     -3.5,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 65.5,
+    "wind_speed": 11.5,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "Navy Midshipmen|Memphis Tigers|2026-11-21T17:00:00Z|under": {
+   "home": "Navy Midshipmen",
+   "away": "Memphis Tigers",
+   "home_school": "Navy",
+   "away_school": "Memphis",
+   "kickoff": "2026-11-21T17:00:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-17T21:34:15.409898+00:00",
+    "line": 67.5,
+    "pred": 64.3
+   },
+   "h": [
+    [
+     "2026-11-17T21:34:15.409898+00:00",
+     67.5,
+     64.3,
+     -3.2,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 62.4,
+    "wind_speed": 5.8,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "West Virginia Mountaineers|Houston Cougars|2026-11-21T18:00:00Z|under": {
+   "home": "West Virginia Mountaineers",
+   "away": "Houston Cougars",
+   "home_school": "West Virginia",
+   "away_school": "Houston",
+   "kickoff": "2026-11-21T18:00:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-17T21:34:15.409898+00:00",
+    "line": 70.5,
+    "pred": 65.6
+   },
+   "h": [
+    [
+     "2026-11-17T21:34:15.409898+00:00",
+     70.5,
+     65.6,
+     -4.9,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 67.1,
+    "wind_speed": 5.3,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "Florida Atlantic Owls|South Florida Bulls|2026-11-21T19:30:00Z|under": {
+   "home": "Florida Atlantic Owls",
+   "away": "South Florida Bulls",
+   "home_school": "Florida Atlantic",
+   "away_school": "South Florida",
+   "kickoff": "2026-11-21T19:30:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-17T21:34:15.409898+00:00",
+    "line": 64.5,
+    "pred": 60.1
+   },
+   "h": [
+    [
+     "2026-11-17T21:34:15.409898+00:00",
+     64.5,
+     60.1,
+     -4.4,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 79.3,
+    "wind_speed": 7.1,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "Baylor Bears|Texas Tech Red Raiders|2026-11-21T20:30:00Z|under": {
+   "home": "Baylor Bears",
+   "away": "Texas Tech Red Raiders",
+   "home_school": "Baylor",
+   "away_school": "Texas Tech",
+   "kickoff": "2026-11-21T20:30:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-17T21:34:15.409898+00:00",
+    "line": 55.5,
+    "pred": 48.1
+   },
+   "h": [
+    [
+     "2026-11-17T21:34:15.409898+00:00",
+     55.5,
+     48.1,
+     -7.4,
+     "A",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 70.5,
+    "wind_speed": 9.4,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "California Golden Bears|Stanford Cardinal|2026-11-22T00:30:00Z|under": {
+   "home": "California Golden Bears",
+   "away": "Stanford Cardinal",
+   "home_school": "California",
+   "away_school": "Stanford",
+   "kickoff": "2026-11-22T00:30:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-17T21:34:15.409898+00:00",
+    "line": 56.5,
+    "pred": 52.2
+   },
+   "h": [
+    [
+     "2026-11-17T21:34:15.409898+00:00",
+     56.5,
+     52.2,
+     -4.3,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 55.6,
+    "wind_speed": 5.8,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  }
+ },
+ "updated": "2026-11-17T21:34:15.409898+00:00"
+}
