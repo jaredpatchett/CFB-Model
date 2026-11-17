@@ -2135,6 +2135,7 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 @media (max-width: 760px) {
   .tot-krow { grid-template-columns: 1fr 52px 48px; gap: 6px; } .tot-kbar { display: none; } .tot-kdots { grid-column: 1 / -1; }
 }
+.tot-mv.is-small { color: #FFB020; border-color: rgba(255,176,32,0.5); }
 .tot-list { display: grid; gap: 10px; }
 .tot-row { display: grid; grid-template-columns: 110px 1fr 230px; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 12px; background: var(--panel, rgba(255,255,255,0.03)); border: 1px solid rgba(255,255,255,0.08); border-left: 4px solid #C48CFF; }
 .tot-row.is-a { border-left-color: var(--neon); }
@@ -5941,7 +5942,7 @@ RENDERER_JS = """<script>
     if (!list.length) return head + '<div class="empty-state">No &#128293; A totals right now. ' + rows.length + ' official B/C play' + (rows.length === 1 ? '' : 's') + ' under &ldquo;All official&rdquo;.</div>' + totFoot(R, B);
     var body = '<div class="tot-list">' + list.map(function (r) {
       var m = TOT_META[r.grade] || TOT_META.B, bo = B[r.grade];
-      var mv = r.move > 0 ? '<span class="tot-mv is-good">line moved our way</span>' : r.move < 0 ? '<span class="tot-mv is-bad">line moved against us</span>' : '';
+      var mv = r.move > 0 ? '<span class="tot-mv is-small" title="The market moved toward us after the model flagged it, so the best number is gone. Spreads at the moved number lost 4.4% in the backtest. Bet half a unit, or keep it if you already bet it.">line moved our way &middot; bet small</span>' : r.move < 0 ? '<span class="tot-mv is-bad">line moved against us</span>' : '';
       var flagged = r.first_line != null && Number(r.first_line) !== Number(r.line) ? 'Flagged at ' + r.first_line + ' &middot; ' : '';
       var edgeAbs = Math.abs(r.edge), pct = Math.min(100, edgeAbs / 12 * 100);
       var ri = rows.indexOf(r), open = state.totOpen === ri;
@@ -5974,7 +5975,7 @@ RENDERER_JS = """<script>
     }).join('') + '</div>';
     return res + '<div class="pp-panel tot-key"><h3>How totals become official</h3>' +
       '<div class="pp-panel-note"><b>Unders:</b> model 3+ points under the line, on a total of 50+. <b>Overs:</b> model 7+ points over, with no 10+ mph wind (an over needs a forecast first). The edge is always against the line shown now, so every play here is still a bet at that number.<br>' +
-      '<b>Grade:</b> unders 7+ under = A; 5-7 under = B (A with 10+ mph wind); 3-5 under = B; overs = B. Line move after it&rsquo;s flagged: our way bumps it up a grade, against us drops it.<br>' +
+      '<b>Grade:</b> unders 7+ under = A; 5-7 under = B (A with 10+ mph wind); 3-5 under = B; overs = B. If the line moves against us after it&rsquo;s flagged, the grade drops a step. If it moves our way the grade stays the same and the play gets a &ldquo;bet small&rdquo; tag: the best number is gone.<br>' +
       '<b>Backtest</b> (' + esc((B.seasons || []).join(', ')) + ', vs opening totals): unders ' + (B.under ? B.under.w + '-' + B.under.l + ' (' + totSigned(B.under.roi, 1) + '%)' : '&mdash;') +
       ', overs ' + (B.over ? B.over.w + '-' + B.over.l + ' (' + totSigned(B.over.roi, 1) + '%)' : '&mdash;') +
       '. The rules were picked on that same backtest, so expect the live record to be lower. The edge showed up against opening lines and was gone by the close: bet them early.</div></div>';
@@ -6006,7 +6007,7 @@ RENDERER_JS = """<script>
         '<span class="pg-badge ' + m[2] + '">' + m[0] + ' ' + r.grade + '</span>' +
         '<div class="tot-bc-main"><div class="card-play"><span>' + (r.side === 'under' ? 'UNDER ' : 'OVER ') + r.line + '</span>' + (r.new ? '<span class="bc-new">NEW</span>' : '') + '</div>' +
         '<div class="card-note">' + esc(abbrOf(r.away) + ' at ' + abbrOf(r.home)) + ' &middot; ' + esc(totKick(r.kickoff)) + ' &middot; model ' + Number(r.pred).toFixed(1) + '</div>' +
-        '<div class="tot-tags">' + totTierChip(r) + totWeather(r.weather, r.side) + '</div></div>' +
+        '<div class="tot-tags">' + totTierChip(r) + totWeather(r.weather, r.side) + (r.move > 0 ? '<span class="tot-mv is-small">line moved our way &middot; bet small</span>' : '') + '</div></div>' +
         '<div class="tot-bc-edge ' + (r.side === 'under' ? 'is-under' : 'is-over') + '">' + totSigned(r.edge, 1) + '<span>breakdown &rsaquo;</span></div>' +
         '</div></div>';
     }).join('') + '</div></div>';
@@ -6060,7 +6061,7 @@ RENDERER_JS = """<script>
       (totTier(r) ? '<div class="tot-gb-grade">Edge size: ' + totTierChip(r) + '</div>' : '') +
       '<div class="gb-lab2 gb-why-lab">Why it&rsquo;s a play</div>' + p.map(function (x) { return '<p class="gb-p">' + x + '</p>'; }).join('') +
       '<div class="gb-lab2">What moves the model&rsquo;s number</div>' + bars +
-      (r.first_line != null && Number(r.first_line) !== Number(r.line) ? '<div class="gb-note">Flagged at ' + r.first_line + ', now ' + r.line + (r.move > 0 ? ': the market has moved toward us.' : r.move < 0 ? ': the market has moved against us.' : '.') + '</div>' : '') +
+      (r.first_line != null && Number(r.first_line) !== Number(r.line) ? '<div class="gb-note">Flagged at ' + r.first_line + ', now ' + r.line + (r.move > 0 ? ': the market has moved toward us, so the best number is gone. Bet small, or keep it if you already have it.' : r.move < 0 ? ': the market has moved against us (drops the grade a step).' : '.') + '</div>' : '') +
       '</div>';
   }
   function renderTotalsRecord() {

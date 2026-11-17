@@ -20,6 +20,10 @@ on:
         default: false
   schedule:
     - cron: "0 12 * * *"
+    # 11/2026 (Rod): Sunday evening run (~7pm Arizona) so the first alerts on
+    # next week's opening lines (totals, spreads) come in close to when the
+    # lines post, not Monday morning.
+    - cron: "7 2 * * 1"
 
 permissions:
   contents: write
@@ -138,7 +142,8 @@ jobs:
               if [ ! -s "$f" ]; then train=true; why="saved models are incomplete (missing $f)"; fi
             done
           fi
-          if [ "$EVENT" = "schedule" ] && [ "$(date -u +%u)" = "1" ]; then
+          # Only the Monday 12:00 UTC run, not the Sunday evening one (02:07 UTC Monday).
+          if [ "$EVENT" = "schedule" ] && [ "$(date -u +%u)" = "1" ] && [ "$(date -u +%H)" -ge 10 ]; then
             train=true; why="weekly from-scratch run (scheduled run on a Monday)"
           fi
           if [ "$RETRAIN" = "true" ]; then

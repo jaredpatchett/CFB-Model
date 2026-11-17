@@ -18,8 +18,14 @@ scripts/totals_lab.py -- see docs: new-features-2026-11-17):
 PLAY GRADE (same scale as the props play grade; bet A's):
   under  edge 3-5 = 0, 5-7 = +1, 7+ = +2; +1 for a 10+ mph wind (outdoors)
   over   +1
-  both   line move since first flagged: toward our side +1, against -1
+  both   line moved against us since first flagged: -1
   2+ = A (🔥 bet it), 0-1 = B, below 0 = C
+  A line that moved OUR way no longer raises the grade (11/17/2026, Rod):
+  the edge is already priced in at the moved number. Your spread backtest:
+  +14.7% at the flagged line, -4.4% at the moved one. Those plays get a
+  "bet small" tag instead (move = +1 in the row), like the Bet Card's
+  BET SMALL. So an A is always an A on its edge (7+ under, or 5-7 under in
+  10+ mph wind), and overs top out at B.
   Backtest without the line move: A 74-40 (+23.7%), B 216-140 (+15.8%).
   The rules and grade cut-offs were picked on that same backtest, so expect
   the live record to come in below it.
@@ -194,7 +200,7 @@ def grade(side, edge, weather, line_now, first_line):
     if first_line is not None and line_now is not None and float(line_now) != float(first_line):
         d = float(line_now) - float(first_line)
         move = 1 if ((side == "under") == (d < 0)) else -1
-    score += move
+    score += min(move, 0)      # only a move against us counts (see module docstring)
     g = "A" if score >= 2 else ("B" if score >= 0 else "C")
     return g, move
 
@@ -210,8 +216,8 @@ def grade_parts(side, edge, weather, move):
             parts.append([f"{wind:.0f} mph wind", 1])
     else:
         parts.append([f"{edge:.1f} pts over the line (7+)", 1])
-    if move:
-        parts.append(["line moved our way" if move > 0 else "line moved against us", move])
+    if move < 0:
+        parts.append(["line moved against us", -1])
     return parts
 
 
