@@ -172,7 +172,7 @@ def get_core_ratings(year: int) -> pd.DataFrame:
     return pd.json_normalize(data)
 
 
-def get_weather(year: int, week: int = None) -> pd.DataFrame:
+def get_weather(year: int, week: int = None, season_type: str = None) -> pd.DataFrame:
     """Per-GAME weather (temperature, wind speed, precipitation, snowfall,
     indoor flag, etc.) via GET /games/weather -- CFBD Tier 1+ only. CFBD
     documents this as covering both historical AND upcoming/forecast games.
@@ -190,6 +190,8 @@ def get_weather(year: int, week: int = None) -> pd.DataFrame:
     params = {"year": year}
     if week is not None:
         params["week"] = week
+    if season_type:
+        params["seasonType"] = season_type
     data = _get("/games/weather", params)
     return pd.json_normalize(data)
 

@@ -291,6 +291,15 @@ jobs:
             sleep $((RANDOM % 10 + 5))
           done
 
+      # 11/2026: push what changed (new/dropped Bet Card spreads, new or lost
+      # 🔥 A-grade props) to Rod's phone via ntfy. Runs after the commit so
+      # the dashboard already has this run's data when he taps the alert.
+      # Needs the NTFY_TOPIC secret; without it, prints and sends nothing.
+      - name: Phone alerts
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python scripts/push_alerts.py || true
+
       - name: Upload results as artifact
         uses: actions/upload-artifact@v4
         with:

@@ -441,6 +441,21 @@ def match_weather(home_school: str, away_school: str, lookup: dict) -> dict:
     return lookup.get(key) or {}
 
 
+def build_bowl_lookup(post_df: pd.DataFrame) -> dict:
+    """frozenset({home, away}) -> the game's name ('Rose Bowl', 'CFP
+    Quarterfinal', ...) for CFBD postseason games (11/2026). Same unordered
+    team-pair keying as the neutral-site lookup."""
+    out = {}
+    for _, row in post_df.iterrows():
+        home, away = row.get("homeTeam"), row.get("awayTeam")
+        if not home or not away or pd.isna(home) or pd.isna(away):
+            continue
+        note = row.get("notes")
+        name = str(note).strip() if note is not None and not pd.isna(note) and str(note).strip() else "Bowl game"
+        out[frozenset({_normalize_team_name(str(home)), _normalize_team_name(str(away))})] = name
+    return out
+
+
 def match_neutral_site(home_school: str, away_school: str, lookup: dict):
     """Returns True/False if this matchup is found in CFBD's schedule,
     None if unknown (falls back to 'assume normal home game' at the call
@@ -822,6 +837,19 @@ def main(year: int):
         print(f"  [warn] could not fetch {season_year} schedule for neutral-site flags: {e}")
         schedule_df = pd.DataFrame()
         neutral_site_lookup = {}
+    # 11/2026: bowl games are CFBD "postseason", not in the regular schedule
+    # above -- without this they'd get no neutral-site flag (so a home-field
+    # edge the bowl doesn't have) and no bowl tag on the dashboard. Only
+    # schedule/neutral flags come from these rows; nothing else changes.
+    bowl_lookup = {}
+    try:
+        post_df = cfbd.get_games(season_year, season_type="postseason")
+        if post_df is not None and not post_df.empty:
+            neutral_site_lookup.update(build_neutral_site_lookup(post_df))
+            bowl_lookup = build_bowl_lookup(post_df)
+            print(f"  {len(bowl_lookup)} postseason (bowl/playoff) matchup(s) on CFBD's schedule")
+    except Exception as e:
+        print(f"  [note] no postseason schedule yet ({e})")
 
     print("Loading manual injury/starter-availability overrides (config/injury_overrides.csv)...")
     injury_overrides = load_injury_overrides()
@@ -985,6 +1013,11 @@ def main(year: int):
         weather_df = cfbd.get_weather(season_year)
         weather_lookup = build_weather_lookup(weather_df)
         print(f"  {len(weather_lookup)} scheduled matchup(s) with a weather forecast/reading on file")
+        if bowl_lookup:   # 11/2026: bowl games' forecasts are under postseason
+            try:
+                weather_lookup.update(build_weather_lookup(cfbd.get_weather(season_year, season_type="postseason")))
+            except Exception as e:
+                print(f"  [note] no postseason weather yet ({e})")
     except Exception as e:
         print(f"  [warn] weather fetch failed: {e} — the trained-model switchover will stay on the "
               f"preseason prior for every game until this is available (needs CFBD Tier 1+)")
@@ -1048,6 +1081,8 @@ def main(year: int):
             }
             game_out["injuries_home"] = team_injury_summary(injuries, home_meta.get("school"))
             game_out["injuries_away"] = team_injury_summary(injuries, away_meta.get("school"))
+            # 11/2026: bowl/playoff game name (None in the regular season).
+            game_out["bowl"] = match_neutral_site(home_meta.get("school"), away_meta.get("school"), bowl_lookup)
 
             if prior is not None:
                 home_rating = match_sp_rating(g.get("home_team"), sp_lookup)

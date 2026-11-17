@@ -645,6 +645,10 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
             flags.append({"text": "In-season model", "level": 2})
         if is_neutral:
             flags.append({"text": "Neutral site", "level": 0})
+        # 11/2026: bowl games. The model is built on regular-season games and
+        # doesn't know who's opting out, entering the portal, or coaching.
+        if g.get("bowl"):
+            flags.append({"text": f"{esc_plain(g['bowl'])}: check opt-outs, portal and coaching changes before betting", "level": 1, "bowl": True})
         if home_inj_pts:
             flags.append({
                 "text": f"{esc_plain(g['home_team'])} {home_inj_pts:+.1f} pts: {'; '.join(home_inj_notes) or 'manual override'}",
@@ -676,6 +680,7 @@ def build_model_data(data: dict, backtest: dict = None, clv: dict = None) -> dic
             "evHomePct": g.get("ev_home_pct"),
             "evAwayPct": g.get("ev_away_pct"),
             "modelVersion": g.get("model_version"),
+            "bowl": g.get("bowl"),
             "flagLine": line_hist.get((g.get("home_team"), g.get("away_team"), g.get("commence_time"))),
             "injHome": inj_home,
             "injAway": inj_away,
@@ -2094,6 +2099,7 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .pbe-bar.is-good { background: linear-gradient(90deg, #22b35e, var(--neon)); } .pbe-bar.is-bad { background: linear-gradient(90deg, #FF7A59, #d9603f); }
 .pbe-val { color: var(--muted-2, #B6C2CF); font-size: 11.5px; } .pbe-val b { font-size: 13px; }
 @media (max-width: 600px) { .pbe-row, .pbe-axis { grid-template-columns: 56px 1fr 118px; } .pbe-val { font-size: 10.5px; } }
+.bc-bowl { margin-left: 8px; font-size: 10px; font-weight: 800; color: #FFB020; border: 1px solid rgba(255,176,32,0.5); border-radius: 999px; padding: 1px 7px; vertical-align: middle; white-space: nowrap; cursor: help; }
 .bc-new { margin-left: 8px; font-size: 10px; font-weight: 900; letter-spacing: 0.06em; color: #06120A; background: var(--neon); border-radius: 999px; padding: 2px 7px; vertical-align: middle; }
 .bc-dropped { border: 1px solid rgba(255,122,89,0.45); background: rgba(255,122,89,0.06); border-radius: 10px; padding: 10px 12px; margin-top: 10px; font-size: 12.5px; color: var(--muted-2, #B6C2CF); }
 .bc-dropped .bc-note-h { color: #FF7A59; }
@@ -5221,7 +5227,7 @@ RENDERER_JS = """<script>
         : '<button class="track-btn' + (vd.v === 'bet' || vd.v === 'small' ? ' bc-add' : '') + '" onclick="window.__cfbTrack(' + trackPayload(c, true) + ')">+TRK</button>';
       return '<div class="row bc-row is-' + vd.v + '"><div class="row-accent" style="background:' + esc(col) + '"></div>' +
         '<div class="row-body card-row">' +
-          '<div><div class="card-play">' + (c.side ? trkMark(abbrOf(c.side), 22) : '') + '<span>' + esc(c.playLabel) + '</span>' + (chg && chg.isNew(c) ? '<span class="bc-new">NEW</span>' : '') + '</div>' +
+          '<div><div class="card-play">' + (c.side ? trkMark(abbrOf(c.side), 22) : '') + '<span>' + esc(c.playLabel) + '</span>' + (chg && chg.isNew(c) ? '<span class="bc-new">NEW</span>' : '') + bowlTag(c.game.bowl) + '</div>' +
             '<div class="card-note">' + esc(abbrOf(c.game.away) + ' at ' + abbrOf(c.game.home)) + ' &middot; ' + esc(edgeKickoff(c.game)) +
               ' &middot; <span style="font-weight:700;color:' + (isTrainedGame ? '#2ecc71' : '#8A94A3') + '">' + (isTrainedGame ? (c.game.modelVersion === 'upgraded' ? 'UPGRADED' : 'TRAINED') : 'UNTRAINED') + '</span></div></div>' +
           '<div class="card-price">' + esc(sidePriceLabel) + '</div>' +
@@ -5436,6 +5442,25 @@ RENDERER_JS = """<script>
     var d = Number(r.line) - Number(ff.line);
     if (!d) return 0;
     return (r.model_lean === 'under' ? d < 0 : d > 0) ? 1 : -1;
+  }
+  // 11/2026: bowl games (CFBD postseason). A warning, not a model change: the
+  // model is built on regular-season games and can't see opt-outs, transfer
+  // portal moves or coaching changes.
+  function bowlTag(name) {
+    if (!name) return '';
+    return '<span class="bc-bowl" title="' + esc(name) + ': the model is built on regular-season games and can not see who is opting out, entering the transfer portal, or which coaches have left. Check the depth chart before betting.">&#127944; Bowl &middot; check opt-outs</span>';
+  }
+  var _bowlTeams = null;
+  function bowlOfTeam(team) {
+    if (!team) return null;
+    if (!_bowlTeams) {
+      _bowlTeams = {};
+      ((window.MODEL_DATA || {}).games || []).forEach(function (g) {
+        if (!g || !g.bowl) return;
+        [g.home, g.away, g.homeSchool, g.awaySchool].forEach(function (t) { if (t) _bowlTeams[t] = g.bowl; });
+      });
+    }
+    return _bowlTeams[team] || null;
   }
   function playGrade(r) {
     if (!r || !r.is_official_play) return null;
@@ -6365,6 +6390,8 @@ RENDERER_JS = """<script>
       else if (r.play_kind === 'rush_under_watch') flags.push('<span class="pp-tag is-watch" title="A rush yards under with an edge, but the run defense is ' + esc(r.run_def || 'not graded') + ' -- official only vs a tough run defense (top third). Watch only.">Rush under watch &middot; ' + esc(r.run_def || 'no grade') + ' run D</span>');
       else if (r.play_kind === 'rec_over' && !r.is_official_play && !r.edge_capped) flags.push('<span class="pp-tag is-watch" title="A receptions over with a 10% to 30% edge. Watch only since 10/23/2026.">Rec over watch</span>');
       else if (r.is_under_lean) flags.push('<span class="pp-tag is-watch" title="A receptions under with a 10% to 30% edge. A lean, graded on its own line.">Under lean</span>');
+      var bw = bowlOfTeam(r.team);
+      if (bw) flags.push(bowlTag(bw));
       var mu = matchupOf(r);
       if (mu) flags.push('<span class="pp-tag ' + mu.cls + '" title="' + esc(mu.title) + '">' + mu.text + '</span>');
       if (r.injury_status) flags.push('<span class="pp-tag is-inj" title="' + esc(r.injury_detail || 'On the injury report') + '">' + esc(r.injury_status) + '</span>');

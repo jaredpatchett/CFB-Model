@@ -1,0 +1,26 @@
+name: Phone alerts test
+
+# Sends one test notification to the ntfy topic in the NTFY_TOPIC secret, so
+# you can check alerts reach your phone. Actions tab -> "Phone alerts test"
+# -> Run workflow.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Send a test alert
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |
+          if [ -z "$NTFY_TOPIC" ]; then echo "::error::Add the NTFY_TOPIC secret first (Settings -> Secrets and variables -> Actions)"; exit 1; fi
+          python scripts/push_alerts.py --test
