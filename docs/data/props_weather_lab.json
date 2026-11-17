@@ -1,0 +1,717 @@
+{
+  "generated_at": "2026-11-17T20:10:44.826248+00:00",
+  "source": "docs/data/injury_lab_detail.csv",
+  "graded_props_matched": 5054,
+  "results": {
+    "rec_yds_overs": {
+      "official": {
+        "all": {
+          "group": "Rec yds overs (official): all",
+          "n": 30,
+          "record": "20-10-0",
+          "hit_rate": 0.667,
+          "units": 7.57,
+          "roi": 0.252,
+          "z": 1.53,
+          "roi_by_period": {
+            "2026": 0.252
+          }
+        },
+        "indoors": {
+          "group": "Rec yds overs (official): indoors",
+          "n": 2,
+          "record": "2-0-0",
+          "hit_rate": 1.0,
+          "units": 1.75,
+          "roi": 0.877,
+          "z": 0.0,
+          "roi_by_period": {
+            "2026": 0.877
+          }
+        },
+        "wind_under_10": {
+          "group": "Rec yds overs (official): wind <10",
+          "n": 27,
+          "record": "17-10-0",
+          "hit_rate": 0.63,
+          "units": 4.94,
+          "roi": 0.183,
+          "z": 1.03,
+          "roi_by_period": {
+            "2026": 0.183
+          }
+        },
+        "wind_10_15": {
+          "group": "Rec yds overs (official): wind 10-15",
+          "n": 1,
+          "record": "1-0-0",
+          "hit_rate": 1.0,
+          "units": 0.88,
+          "roi": 0.877,
+          "z": 0.0,
+          "roi_by_period": {
+            "2026": 0.877
+          }
+        },
+        "wind_15_plus": {
+          "group": "Rec yds overs (official): wind 15+",
+          "n": 0
+        },
+        "rain_snow": {
+          "group": "Rec yds overs (official): rain/snow",
+          "n": 3,
+          "record": "2-1-0",
+          "hit_rate": 0.667,
+          "units": 0.75,
+          "roi": 0.251,
+          "z": 0.4,
+          "roi_by_period": {
+            "2026": 0.251
+          }
+        },
+        "cold_under_35F": {
+          "group": "Rec yds overs (official): under 35F",
+          "n": 0
+        },
+        "any_bad_weather": {
+          "group": "Rec yds overs (official): any bad weather",
+          "n": 3,
+          "record": "2-1-0",
+          "hit_rate": 0.667,
+          "units": 0.75,
+          "roi": 0.251,
+          "z": 0.4,
+          "roi_by_period": {
+            "2026": 0.251
+          }
+        },
+        "good_weather": {
+          "group": "Rec yds overs (official): good weather/indoors",
+          "n": 27,
+          "record": "18-9-0",
+          "hit_rate": 0.667,
+          "units": 6.82,
+          "roi": 0.252,
+          "z": 1.45,
+          "roi_by_period": {
+            "2026": 0.252
+          }
+        }
+      },
+      "every_edge": {
+        "all": {
+          "group": "Rec yds overs (every 0%+ edge): all",
+          "n": 421,
+          "record": "239-182-0",
+          "hit_rate": 0.568,
+          "units": 28.26,
+          "roi": 0.067,
+          "z": 1.48,
+          "roi_by_period": {
+            "2026": 0.067
+          }
+        },
+        "indoors": {
+          "group": "Rec yds overs (every 0%+ edge): indoors",
+          "n": 8,
+          "record": "5-3-0",
+          "hit_rate": 0.625,
+          "units": 1.42,
+          "roi": 0.177,
+          "z": 0.51,
+          "roi_by_period": {
+            "2026": 0.177
+          }
+        },
+        "wind_under_10": {
+          "group": "Rec yds overs (every 0%+ edge): wind <10",
+          "n": 400,
+          "record": "229-171-0",
+          "hit_rate": 0.573,
+          "units": 30.38,
+          "roi": 0.076,
+          "z": 1.63,
+          "roi_by_period": {
+            "2026": 0.076
+          }
+        },
+        "wind_10_15": {
+          "group": "Rec yds overs (every 0%+ edge): wind 10-15",
+          "n": 9,
+          "record": "3-6-0",
+          "hit_rate": 0.333,
+          "units": -3.29,
+          "roi": -0.366,
+          "z": -1.15,
+          "roi_by_period": {
+            "2026": -0.366
+          }
+        },
+        "wind_15_plus": {
+          "group": "Rec yds overs (every 0%+ edge): wind 15+",
+          "n": 4,
+          "record": "2-2-0",
+          "hit_rate": 0.5,
+          "units": -0.25,
+          "roi": -0.061,
+          "z": -0.11,
+          "roi_by_period": {
+            "2026": -0.061
+          }
+        },
+        "rain_snow": {
+          "group": "Rec yds overs (every 0%+ edge): rain/snow",
+          "n": 41,
+          "record": "21-20-0",
+          "hit_rate": 0.512,
+          "units": -1.68,
+          "roi": -0.041,
+          "z": -0.28,
+          "roi_by_period": {
+            "2026": -0.041
+          }
+        },
+        "cold_under_35F": {
+          "group": "Rec yds overs (every 0%+ edge): under 35F",
+          "n": 0
+        },
+        "any_bad_weather": {
+          "group": "Rec yds overs (every 0%+ edge): any bad weather",
+          "n": 45,
+          "record": "23-22-0",
+          "hit_rate": 0.511,
+          "units": -1.92,
+          "roi": -0.043,
+          "z": -0.3,
+          "roi_by_period": {
+            "2026": -0.043
+          }
+        },
+        "good_weather": {
+          "group": "Rec yds overs (every 0%+ edge): good weather/indoors",
+          "n": 376,
+          "record": "216-160-0",
+          "hit_rate": 0.574,
+          "units": 30.18,
+          "roi": 0.08,
+          "z": 1.67,
+          "roi_by_period": {
+            "2026": 0.08
+          }
+        }
+      }
+    },
+    "rush_yds_unders": {
+      "official": {
+        "all": {
+          "group": "Rush yds unders (official): all",
+          "n": 781,
+          "record": "442-339-0",
+          "hit_rate": 0.566,
+          "units": 55.41,
+          "roi": 0.071,
+          "z": 2.11,
+          "roi_by_period": {
+            "2024": 0.051,
+            "2025": 0.023,
+            "2026": 0.159
+          }
+        },
+        "indoors": {
+          "group": "Rush yds unders (official): indoors",
+          "n": 30,
+          "record": "17-13-0",
+          "hit_rate": 0.567,
+          "units": 1.86,
+          "roi": 0.062,
+          "z": 0.36,
+          "roi_by_period": {
+            "2024": -0.057,
+            "2025": 0.332,
+            "2026": -0.527
+          }
+        },
+        "wind_under_10": {
+          "group": "Rush yds unders (official): wind <10",
+          "n": 608,
+          "record": "345-263-0",
+          "hit_rate": 0.567,
+          "units": 45.18,
+          "roi": 0.074,
+          "z": 1.95,
+          "roi_by_period": {
+            "2024": 0.056,
+            "2025": 0.008,
+            "2026": 0.162
+          }
+        },
+        "wind_10_15": {
+          "group": "Rush yds unders (official): wind 10-15",
+          "n": 96,
+          "record": "54-42-0",
+          "hit_rate": 0.562,
+          "units": 6.45,
+          "roi": 0.067,
+          "z": 0.69,
+          "roi_by_period": {
+            "2024": 0.095,
+            "2025": -0.059,
+            "2026": 0.504
+          }
+        },
+        "wind_15_plus": {
+          "group": "Rush yds unders (official): wind 15+",
+          "n": 47,
+          "record": "26-21-0",
+          "hit_rate": 0.553,
+          "units": 1.92,
+          "roi": 0.041,
+          "z": 0.3,
+          "roi_by_period": {
+            "2024": -0.018,
+            "2025": 0.145,
+            "2026": -1.0
+          }
+        },
+        "rain_snow": {
+          "group": "Rush yds unders (official): rain/snow",
+          "n": 59,
+          "record": "37-22-0",
+          "hit_rate": 0.627,
+          "units": 10.84,
+          "roi": 0.184,
+          "z": 1.52,
+          "roi_by_period": {
+            "2024": 0.622,
+            "2025": -0.346,
+            "2026": 0.381
+          }
+        },
+        "cold_under_35F": {
+          "group": "Rush yds unders (official): under 35F",
+          "n": 19,
+          "record": "10-9-0",
+          "hit_rate": 0.526,
+          "units": -0.23,
+          "roi": -0.012,
+          "z": -0.05,
+          "roi_by_period": {
+            "2024": -0.06,
+            "2025": 0.071
+          }
+        },
+        "any_bad_weather": {
+          "group": "Rush yds unders (official): any bad weather",
+          "n": 121,
+          "record": "71-50-0",
+          "hit_rate": 0.587,
+          "units": 12.9,
+          "roi": 0.107,
+          "z": 1.25,
+          "roi_by_period": {
+            "2024": 0.12,
+            "2025": -0.041,
+            "2026": 0.332
+          }
+        },
+        "good_weather": {
+          "group": "Rush yds unders (official): good weather/indoors",
+          "n": 660,
+          "record": "371-289-0",
+          "hit_rate": 0.562,
+          "units": 42.51,
+          "roi": 0.064,
+          "z": 1.76,
+          "roi_by_period": {
+            "2024": 0.035,
+            "2025": 0.035,
+            "2026": 0.135
+          }
+        }
+      },
+      "every_edge": {
+        "all": {
+          "group": "Rush yds unders (every 0%+ edge): all",
+          "n": 1529,
+          "record": "830-699-0",
+          "hit_rate": 0.543,
+          "units": 40.7,
+          "roi": 0.027,
+          "z": 1.1,
+          "roi_by_period": {
+            "2024": 0.01,
+            "2025": 0.016,
+            "2026": 0.057
+          }
+        },
+        "indoors": {
+          "group": "Rush yds unders (every 0%+ edge): indoors",
+          "n": 44,
+          "record": "25-19-0",
+          "hit_rate": 0.568,
+          "units": 2.86,
+          "roi": 0.065,
+          "z": 0.46,
+          "roi_by_period": {
+            "2024": 0.056,
+            "2025": 0.28,
+            "2026": -0.373
+          }
+        },
+        "wind_under_10": {
+          "group": "Rush yds unders (every 0%+ edge): wind <10",
+          "n": 1200,
+          "record": "650-550-0",
+          "hit_rate": 0.542,
+          "units": 29.61,
+          "roi": 0.025,
+          "z": 0.91,
+          "roi_by_period": {
+            "2024": 0.008,
+            "2025": 0.005,
+            "2026": 0.057
+          }
+        },
+        "wind_10_15": {
+          "group": "Rush yds unders (every 0%+ edge): wind 10-15",
+          "n": 203,
+          "record": "113-90-0",
+          "hit_rate": 0.557,
+          "units": 10.92,
+          "roi": 0.054,
+          "z": 0.81,
+          "roi_by_period": {
+            "2024": 0.03,
+            "2025": 0.009,
+            "2026": 0.347
+          }
+        },
+        "wind_15_plus": {
+          "group": "Rush yds unders (every 0%+ edge): wind 15+",
+          "n": 82,
+          "record": "42-40-0",
+          "hit_rate": 0.512,
+          "units": -2.7,
+          "roi": -0.033,
+          "z": -0.31,
+          "roi_by_period": {
+            "2024": -0.035,
+            "2025": 0.022,
+            "2026": -0.523
+          }
+        },
+        "rain_snow": {
+          "group": "Rush yds unders (every 0%+ edge): rain/snow",
+          "n": 122,
+          "record": "70-52-0",
+          "hit_rate": 0.574,
+          "units": 9.98,
+          "roi": 0.082,
+          "z": 0.96,
+          "roi_by_period": {
+            "2024": 0.279,
+            "2025": -0.209,
+            "2026": 0.182
+          }
+        },
+        "cold_under_35F": {
+          "group": "Rush yds unders (every 0%+ edge): under 35F",
+          "n": 38,
+          "record": "15-23-0",
+          "hit_rate": 0.395,
+          "units": -9.75,
+          "roi": -0.257,
+          "z": -1.69,
+          "roi_by_period": {
+            "2024": -0.227,
+            "2025": -0.281
+          }
+        },
+        "any_bad_weather": {
+          "group": "Rush yds unders (every 0%+ edge): any bad weather",
+          "n": 233,
+          "record": "124-109-0",
+          "hit_rate": 0.532,
+          "units": 1.01,
+          "roi": 0.004,
+          "z": 0.07,
+          "roi_by_period": {
+            "2024": 0.019,
+            "2025": -0.098,
+            "2026": 0.136
+          }
+        },
+        "good_weather": {
+          "group": "Rush yds unders (every 0%+ edge): good weather/indoors",
+          "n": 1296,
+          "record": "706-590-0",
+          "hit_rate": 0.545,
+          "units": 39.69,
+          "roi": 0.031,
+          "z": 1.17,
+          "roi_by_period": {
+            "2024": 0.009,
+            "2025": 0.037,
+            "2026": 0.045
+          }
+        }
+      }
+    },
+    "receptions_unders": {
+      "official": {
+        "all": {
+          "group": "Receptions unders (official): all",
+          "n": 370,
+          "record": "215-155-0",
+          "hit_rate": 0.581,
+          "units": 44.18,
+          "roi": 0.119,
+          "z": 2.38,
+          "roi_by_period": {
+            "2024": 0.118,
+            "2025": 0.11,
+            "2026": 0.126
+          }
+        },
+        "indoors": {
+          "group": "Receptions unders (official): indoors",
+          "n": 13,
+          "record": "9-4-0",
+          "hit_rate": 0.692,
+          "units": 4.63,
+          "roi": 0.356,
+          "z": 1.36,
+          "roi_by_period": {
+            "2024": 0.658,
+            "2025": -0.374,
+            "2026": 0.38
+          }
+        },
+        "wind_under_10": {
+          "group": "Receptions unders (official): wind <10",
+          "n": 303,
+          "record": "174-129-0",
+          "hit_rate": 0.574,
+          "units": 32.66,
+          "roi": 0.108,
+          "z": 1.94,
+          "roi_by_period": {
+            "2024": 0.106,
+            "2025": 0.08,
+            "2026": 0.12
+          }
+        },
+        "wind_10_15": {
+          "group": "Receptions unders (official): wind 10-15",
+          "n": 36,
+          "record": "20-16-0",
+          "hit_rate": 0.556,
+          "units": 2.29,
+          "roi": 0.064,
+          "z": 0.39,
+          "roi_by_period": {
+            "2024": -0.199,
+            "2025": 0.257,
+            "2026": 0.139
+          }
+        },
+        "wind_15_plus": {
+          "group": "Receptions unders (official): wind 15+",
+          "n": 18,
+          "record": "12-6-0",
+          "hit_rate": 0.667,
+          "units": 4.61,
+          "roi": 0.256,
+          "z": 1.16,
+          "roi_by_period": {
+            "2024": 0.222,
+            "2025": 0.833
+          }
+        },
+        "rain_snow": {
+          "group": "Receptions unders (official): rain/snow",
+          "n": 37,
+          "record": "19-18-0",
+          "hit_rate": 0.514,
+          "units": -1.48,
+          "roi": -0.04,
+          "z": -0.25,
+          "roi_by_period": {
+            "2024": 0.129,
+            "2025": -0.267,
+            "2026": -0.065
+          }
+        },
+        "cold_under_35F": {
+          "group": "Receptions unders (official): under 35F",
+          "n": 11,
+          "record": "7-4-0",
+          "hit_rate": 0.636,
+          "units": 1.98,
+          "roi": 0.18,
+          "z": 0.62,
+          "roi_by_period": {
+            "2024": 0.118,
+            "2025": 0.347
+          }
+        },
+        "any_bad_weather": {
+          "group": "Receptions unders (official): any bad weather",
+          "n": 62,
+          "record": "34-28-0",
+          "hit_rate": 0.548,
+          "units": 1.9,
+          "roi": 0.031,
+          "z": 0.25,
+          "roi_by_period": {
+            "2024": 0.09,
+            "2025": 0.06,
+            "2026": -0.065
+          }
+        },
+        "good_weather": {
+          "group": "Receptions unders (official): good weather/indoors",
+          "n": 308,
+          "record": "181-127-0",
+          "hit_rate": 0.588,
+          "units": 42.28,
+          "roi": 0.137,
+          "z": 2.49,
+          "roi_by_period": {
+            "2024": 0.126,
+            "2025": 0.116,
+            "2026": 0.157
+          }
+        }
+      },
+      "every_edge": {
+        "all": {
+          "group": "Receptions unders (every 0%+ edge): all",
+          "n": 1776,
+          "record": "1038-738-0",
+          "hit_rate": 0.584,
+          "units": 77.75,
+          "roi": 0.044,
+          "z": 2.07,
+          "roi_by_period": {
+            "2024": 0.041,
+            "2025": 0.054,
+            "2026": 0.041
+          }
+        },
+        "indoors": {
+          "group": "Receptions unders (every 0%+ edge): indoors",
+          "n": 44,
+          "record": "29-15-0",
+          "hit_rate": 0.659,
+          "units": 8.12,
+          "roi": 0.184,
+          "z": 1.4,
+          "roi_by_period": {
+            "2024": 0.199,
+            "2025": 0.184,
+            "2026": 0.156
+          }
+        },
+        "wind_under_10": {
+          "group": "Receptions unders (every 0%+ edge): wind <10",
+          "n": 1458,
+          "record": "840-618-0",
+          "hit_rate": 0.576,
+          "units": 41.7,
+          "roi": 0.029,
+          "z": 1.22,
+          "roi_by_period": {
+            "2024": 0.014,
+            "2025": 0.042,
+            "2026": 0.032
+          }
+        },
+        "wind_10_15": {
+          "group": "Receptions unders (every 0%+ edge): wind 10-15",
+          "n": 203,
+          "record": "120-83-0",
+          "hit_rate": 0.591,
+          "units": 10.68,
+          "roi": 0.053,
+          "z": 0.84,
+          "roi_by_period": {
+            "2024": 0.024,
+            "2025": 0.032,
+            "2026": 0.222
+          }
+        },
+        "wind_15_plus": {
+          "group": "Receptions unders (every 0%+ edge): wind 15+",
+          "n": 71,
+          "record": "49-22-0",
+          "hit_rate": 0.69,
+          "units": 17.24,
+          "roi": 0.243,
+          "z": 2.39,
+          "roi_by_period": {
+            "2024": 0.218,
+            "2025": 0.305,
+            "2026": 0.917
+          }
+        },
+        "rain_snow": {
+          "group": "Receptions unders (every 0%+ edge): rain/snow",
+          "n": 155,
+          "record": "93-62-0",
+          "hit_rate": 0.6,
+          "units": 8.47,
+          "roi": 0.055,
+          "z": 0.78,
+          "roi_by_period": {
+            "2024": 0.028,
+            "2025": -0.18,
+            "2026": 0.13
+          }
+        },
+        "cold_under_35F": {
+          "group": "Receptions unders (every 0%+ edge): under 35F",
+          "n": 41,
+          "record": "26-15-0",
+          "hit_rate": 0.634,
+          "units": 6.56,
+          "roi": 0.16,
+          "z": 1.13,
+          "roi_by_period": {
+            "2024": 0.264,
+            "2025": -0.02
+          }
+        },
+        "any_bad_weather": {
+          "group": "Receptions unders (every 0%+ edge): any bad weather",
+          "n": 254,
+          "record": "159-95-0",
+          "hit_rate": 0.626,
+          "units": 28.91,
+          "roi": 0.114,
+          "z": 2.07,
+          "roi_by_period": {
+            "2024": 0.15,
+            "2025": -0.006,
+            "2026": 0.139
+          }
+        },
+        "good_weather": {
+          "group": "Receptions unders (every 0%+ edge): good weather/indoors",
+          "n": 1522,
+          "record": "879-643-0",
+          "hit_rate": 0.578,
+          "units": 48.83,
+          "roi": 0.032,
+          "z": 1.4,
+          "roi_by_period": {
+            "2024": 0.017,
+            "2025": 0.062,
+            "2026": 0.027
+          }
+        }
+      }
+    }
+  },
+  "notes": "actual game-day weather from CFBD; indoors = dome games; wind in mph; -price as bet"
+}

@@ -1,0 +1,1214 @@
+{
+  "generated_at": "2026-11-17T20:10:44.278927+00:00",
+  "seasons_graded": [
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "games": 5165,
+  "join_strategy": "id",
+  "results": {
+    "formula": {
+      "n_games": 5165,
+      "avg_miss_pts": 13.09,
+      "market_close_avg_miss": 12.62,
+      "vs_closing": {
+        "every_game": {
+          "group": "formula vs close: every game",
+          "n": 5117,
+          "record": "2607-2480-30",
+          "hit_rate": 0.512,
+          "units": -110.0,
+          "roi": -0.021,
+          "z": -1.62,
+          "roi_by_period": {
+            "2023": -0.015,
+            "2024": -0.009,
+            "2025": -0.045,
+            "2026": -0.014
+          }
+        },
+        "edge_3_plus": {
+          "group": "formula vs close: 3+ pts off",
+          "n": 2524,
+          "record": "1305-1202-17",
+          "hit_rate": 0.521,
+          "units": -15.64,
+          "roi": -0.006,
+          "z": -0.33,
+          "roi_by_period": {
+            "2023": -0.041,
+            "2024": 0.015,
+            "2025": -0.048,
+            "2026": 0.042
+          }
+        },
+        "edge_5_plus": {
+          "group": "formula vs close: 5+ pts off",
+          "n": 1386,
+          "record": "727-648-11",
+          "hit_rate": 0.529,
+          "units": 12.91,
+          "roi": 0.009,
+          "z": 0.37,
+          "roi_by_period": {
+            "2023": -0.047,
+            "2024": 0.035,
+            "2025": -0.061,
+            "2026": 0.083
+          }
+        },
+        "edge_7_plus": {
+          "group": "formula vs close: 7+ pts off",
+          "n": 757,
+          "record": "381-369-7",
+          "hit_rate": 0.508,
+          "units": -22.64,
+          "roi": -0.03,
+          "z": -0.87,
+          "roi_by_period": {
+            "2023": -0.15,
+            "2024": 0.013,
+            "2025": -0.152,
+            "2026": 0.117
+          }
+        },
+        "top5_per_week": {
+          "group": "formula vs close: top 5 a week",
+          "n": 286,
+          "record": "131-148-7",
+          "hit_rate": 0.47,
+          "units": -28.91,
+          "roi": -0.101,
+          "z": -1.81,
+          "roi_by_period": {
+            "2023": -0.245,
+            "2024": 0.016,
+            "2025": -0.141,
+            "2026": -0.028
+          }
+        },
+        "overs_3_plus": {
+          "group": "formula vs close: overs 3+",
+          "n": 1554,
+          "record": "810-732-12",
+          "hit_rate": 0.525,
+          "units": 4.36,
+          "roi": 0.003,
+          "z": 0.12,
+          "roi_by_period": {
+            "2023": -0.078,
+            "2024": 0.053,
+            "2025": -0.014,
+            "2026": 0.034
+          }
+        },
+        "unders_3_plus": {
+          "group": "formula vs close: unders 3+",
+          "n": 970,
+          "record": "495-470-5",
+          "hit_rate": 0.513,
+          "units": -20.0,
+          "roi": -0.021,
+          "z": -0.67,
+          "roi_by_period": {
+            "2023": 0.016,
+            "2024": -0.038,
+            "2025": -0.095,
+            "2026": 0.06
+          }
+        }
+      },
+      "vs_closing_3plus_games": {
+        "every_game": {
+          "group": "formula vs close, wk 4+: every game",
+          "n": 4128,
+          "record": "2079-2022-27",
+          "hit_rate": 0.507,
+          "units": -132.0,
+          "roi": -0.032,
+          "z": -2.16,
+          "roi_by_period": {
+            "2023": -0.021,
+            "2024": 0.003,
+            "2025": -0.044,
+            "2026": -0.07
+          }
+        },
+        "edge_3_plus": {
+          "group": "formula vs close, wk 4+: 3+ pts off",
+          "n": 1793,
+          "record": "900-877-16",
+          "hit_rate": 0.506,
+          "units": -58.82,
+          "roi": -0.033,
+          "z": -1.46,
+          "roi_by_period": {
+            "2023": -0.073,
+            "2024": 0.014,
+            "2025": -0.037,
+            "2026": -0.039
+          }
+        },
+        "edge_5_plus": {
+          "group": "formula vs close, wk 4+: 5+ pts off",
+          "n": 817,
+          "record": "410-396-11",
+          "hit_rate": 0.509,
+          "units": -23.27,
+          "roi": -0.028,
+          "z": -0.86,
+          "roi_by_period": {
+            "2023": -0.093,
+            "2024": 0.021,
+            "2025": -0.016,
+            "2026": -0.021
+          }
+        },
+        "edge_7_plus": {
+          "group": "formula vs close, wk 4+: 7+ pts off",
+          "n": 335,
+          "record": "157-171-7",
+          "hit_rate": 0.479,
+          "units": -28.27,
+          "roi": -0.084,
+          "z": -1.63,
+          "roi_by_period": {
+            "2023": -0.247,
+            "2024": 0.035,
+            "2025": -0.132,
+            "2026": 0.018
+          }
+        },
+        "top5_per_week": {
+          "group": "formula vs close, wk 4+: top 5 a week",
+          "n": 232,
+          "record": "100-125-7",
+          "hit_rate": 0.444,
+          "units": -34.09,
+          "roi": -0.147,
+          "z": -2.39,
+          "roi_by_period": {
+            "2023": -0.383,
+            "2024": -0.043,
+            "2025": -0.161,
+            "2026": 0.018
+          }
+        },
+        "overs_3_plus": {
+          "group": "formula vs close, wk 4+: overs 3+",
+          "n": 1217,
+          "record": "616-590-11",
+          "hit_rate": 0.511,
+          "units": -30.0,
+          "roi": -0.025,
+          "z": -0.9,
+          "roi_by_period": {
+            "2023": -0.109,
+            "2024": 0.08,
+            "2025": -0.052,
+            "2026": -0.023
+          }
+        },
+        "unders_3_plus": {
+          "group": "formula vs close, wk 4+: unders 3+",
+          "n": 576,
+          "record": "284-287-5",
+          "hit_rate": 0.497,
+          "units": -28.82,
+          "roi": -0.05,
+          "z": -1.26,
+          "roi_by_period": {
+            "2023": -0.007,
+            "2024": -0.099,
+            "2025": -0.006,
+            "2026": -0.091
+          }
+        }
+      },
+      "vs_opening": {
+        "every_game": {
+          "group": "formula vs open: every game",
+          "n": 1910,
+          "record": "995-904-11",
+          "hit_rate": 0.524,
+          "units": 0.55,
+          "roi": 0.0,
+          "z": 0.01,
+          "roi_by_period": {
+            "2023": -0.051,
+            "2024": -0.065,
+            "2025": 0.023,
+            "2026": 0.025
+          }
+        },
+        "edge_3_plus": {
+          "group": "formula vs open: 3+ pts off",
+          "n": 1072,
+          "record": "583-483-6",
+          "hit_rate": 0.547,
+          "units": 47.0,
+          "roi": 0.044,
+          "z": 1.51,
+          "roi_by_period": {
+            "2023": -0.037,
+            "2024": 0.035,
+            "2025": 0.082,
+            "2026": 0.071
+          }
+        },
+        "edge_5_plus": {
+          "group": "formula vs open: 5+ pts off",
+          "n": 667,
+          "record": "364-299-4",
+          "hit_rate": 0.549,
+          "units": 31.91,
+          "roi": 0.048,
+          "z": 1.3,
+          "roi_by_period": {
+            "2023": -0.132,
+            "2024": 0.095,
+            "2025": -0.008,
+            "2026": 0.126
+          }
+        },
+        "edge_7_plus": {
+          "group": "formula vs open: 7+ pts off",
+          "n": 408,
+          "record": "228-177-3",
+          "hit_rate": 0.563,
+          "units": 30.27,
+          "roi": 0.074,
+          "z": 1.59,
+          "roi_by_period": {
+            "2023": -0.235,
+            "2024": 0.117,
+            "2025": -0.014,
+            "2026": 0.187
+          }
+        },
+        "top5_per_week": {
+          "group": "formula vs open: top 5 a week",
+          "n": 187,
+          "record": "101-84-2",
+          "hit_rate": 0.546,
+          "units": 7.82,
+          "roi": 0.042,
+          "z": 0.6,
+          "roi_by_period": {
+            "2023": -0.156,
+            "2024": -0.073,
+            "2025": 0.317,
+            "2026": 0.215
+          }
+        },
+        "overs_3_plus": {
+          "group": "formula vs open: overs 3+",
+          "n": 643,
+          "record": "347-294-2",
+          "hit_rate": 0.541,
+          "units": 21.45,
+          "roi": 0.033,
+          "z": 0.89,
+          "roi_by_period": {
+            "2023": -0.058,
+            "2024": -0.006,
+            "2025": 0.399,
+            "2026": 0.046
+          }
+        },
+        "unders_3_plus": {
+          "group": "formula vs open: unders 3+",
+          "n": 429,
+          "record": "236-189-4",
+          "hit_rate": 0.555,
+          "units": 25.55,
+          "roi": 0.06,
+          "z": 1.3,
+          "roi_by_period": {
+            "2023": -0.004,
+            "2024": 0.068,
+            "2025": -0.045,
+            "2026": 0.123
+          }
+        }
+      }
+    },
+    "model": {
+      "n_games": 5165,
+      "avg_miss_pts": 12.9,
+      "market_close_avg_miss": 12.62,
+      "vs_closing": {
+        "every_game": {
+          "group": "model vs close: every game",
+          "n": 5165,
+          "record": "2691-2444-30",
+          "hit_rate": 0.524,
+          "units": 2.36,
+          "roi": 0.0,
+          "z": 0.03,
+          "roi_by_period": {
+            "2023": 0.021,
+            "2024": 0.003,
+            "2025": -0.018,
+            "2026": -0.0
+          }
+        },
+        "edge_3_plus": {
+          "group": "model vs close: 3+ pts off",
+          "n": 2450,
+          "record": "1294-1139-17",
+          "hit_rate": 0.532,
+          "units": 37.36,
+          "roi": 0.015,
+          "z": 0.8,
+          "roi_by_period": {
+            "2023": 0.021,
+            "2024": 0.024,
+            "2025": -0.009,
+            "2026": 0.024
+          }
+        },
+        "edge_5_plus": {
+          "group": "model vs close: 5+ pts off",
+          "n": 1271,
+          "record": "685-576-10",
+          "hit_rate": 0.543,
+          "units": 46.73,
+          "roi": 0.037,
+          "z": 1.38,
+          "roi_by_period": {
+            "2023": 0.044,
+            "2024": 0.042,
+            "2025": -0.031,
+            "2026": 0.084
+          }
+        },
+        "edge_7_plus": {
+          "group": "model vs close: 7+ pts off",
+          "n": 623,
+          "record": "329-287-7",
+          "hit_rate": 0.534,
+          "units": 12.09,
+          "roi": 0.019,
+          "z": 0.51,
+          "roi_by_period": {
+            "2023": -0.016,
+            "2024": 0.025,
+            "2025": -0.098,
+            "2026": 0.151
+          }
+        },
+        "top5_per_week": {
+          "group": "model vs close: top 5 a week",
+          "n": 286,
+          "record": "149-134-3",
+          "hit_rate": 0.527,
+          "units": 1.45,
+          "roi": 0.005,
+          "z": 0.09,
+          "roi_by_period": {
+            "2023": 0.01,
+            "2024": 0.026,
+            "2025": 0.026,
+            "2026": -0.063
+          }
+        },
+        "overs_3_plus": {
+          "group": "model vs close: overs 3+",
+          "n": 1627,
+          "record": "859-757-11",
+          "hit_rate": 0.532,
+          "units": 23.91,
+          "roi": 0.015,
+          "z": 0.62,
+          "roi_by_period": {
+            "2023": -0.022,
+            "2024": 0.041,
+            "2025": 0.033,
+            "2026": 0.01
+          }
+        },
+        "unders_3_plus": {
+          "group": "model vs close: unders 3+",
+          "n": 823,
+          "record": "435-382-6",
+          "hit_rate": 0.532,
+          "units": 13.45,
+          "roi": 0.016,
+          "z": 0.49,
+          "roi_by_period": {
+            "2023": 0.104,
+            "2024": -0.008,
+            "2025": -0.087,
+            "2026": 0.061
+          }
+        }
+      },
+      "vs_closing_3plus_games": {
+        "every_game": {
+          "group": "model vs close, wk 4+: every game",
+          "n": 4165,
+          "record": "2139-1999-27",
+          "hit_rate": 0.517,
+          "units": -54.45,
+          "roi": -0.013,
+          "z": -0.89,
+          "roi_by_period": {
+            "2023": 0.01,
+            "2024": -0.005,
+            "2025": -0.019,
+            "2026": -0.038
+          }
+        },
+        "edge_3_plus": {
+          "group": "model vs close, wk 4+: 3+ pts off",
+          "n": 1853,
+          "record": "950-888-15",
+          "hit_rate": 0.517,
+          "units": -24.36,
+          "roi": -0.013,
+          "z": -0.6,
+          "roi_by_period": {
+            "2023": -0.003,
+            "2024": 0.017,
+            "2025": -0.01,
+            "2026": -0.067
+          }
+        },
+        "edge_5_plus": {
+          "group": "model vs close, wk 4+: 5+ pts off",
+          "n": 886,
+          "record": "463-415-8",
+          "hit_rate": 0.527,
+          "units": 5.91,
+          "roi": 0.007,
+          "z": 0.21,
+          "roi_by_period": {
+            "2023": 0.042,
+            "2024": 0.013,
+            "2025": -0.045,
+            "2026": -0.004
+          }
+        },
+        "edge_7_plus": {
+          "group": "model vs close, wk 4+: 7+ pts off",
+          "n": 392,
+          "record": "202-184-6",
+          "hit_rate": 0.523,
+          "units": -0.36,
+          "roi": -0.001,
+          "z": -0.02,
+          "roi_by_period": {
+            "2023": 0.021,
+            "2024": -0.027,
+            "2025": -0.09,
+            "2026": 0.066
+          }
+        },
+        "top5_per_week": {
+          "group": "model vs close, wk 4+: top 5 a week",
+          "n": 233,
+          "record": "114-116-3",
+          "hit_rate": 0.496,
+          "units": -12.36,
+          "roi": -0.053,
+          "z": -0.85,
+          "roi_by_period": {
+            "2023": -0.128,
+            "2024": -0.119,
+            "2025": 0.054,
+            "2026": -0.024
+          }
+        },
+        "overs_3_plus": {
+          "group": "model vs close, wk 4+: overs 3+",
+          "n": 1336,
+          "record": "682-645-9",
+          "hit_rate": 0.514,
+          "units": -25.0,
+          "roi": -0.019,
+          "z": -0.72,
+          "roi_by_period": {
+            "2023": -0.037,
+            "2024": 0.046,
+            "2025": -0.012,
+            "2026": -0.075
+          }
+        },
+        "unders_3_plus": {
+          "group": "model vs close, wk 4+: unders 3+",
+          "n": 517,
+          "record": "268-243-6",
+          "hit_rate": 0.524,
+          "units": 0.64,
+          "roi": 0.001,
+          "z": 0.03,
+          "roi_by_period": {
+            "2023": 0.071,
+            "2024": -0.051,
+            "2025": -0.005,
+            "2026": -0.034
+          }
+        }
+      },
+      "vs_opening": {
+        "every_game": {
+          "group": "model vs open: every game",
+          "n": 1922,
+          "record": "1014-897-11",
+          "hit_rate": 0.531,
+          "units": 24.82,
+          "roi": 0.013,
+          "z": 0.6,
+          "roi_by_period": {
+            "2023": 0.006,
+            "2024": -0.019,
+            "2025": 0.056,
+            "2026": 0.015
+          }
+        },
+        "edge_3_plus": {
+          "group": "model vs open: 3+ pts off",
+          "n": 988,
+          "record": "543-438-7",
+          "hit_rate": 0.554,
+          "units": 55.64,
+          "roi": 0.056,
+          "z": 1.87,
+          "roi_by_period": {
+            "2023": -0.016,
+            "2024": -0.035,
+            "2025": 0.134,
+            "2026": 0.096
+          }
+        },
+        "edge_5_plus": {
+          "group": "model vs open: 5+ pts off",
+          "n": 560,
+          "record": "322-233-5",
+          "hit_rate": 0.58,
+          "units": 59.73,
+          "roi": 0.107,
+          "z": 2.69,
+          "roi_by_period": {
+            "2023": -0.003,
+            "2024": 0.023,
+            "2025": 0.091,
+            "2026": 0.185
+          }
+        },
+        "edge_7_plus": {
+          "group": "model vs open: 7+ pts off",
+          "n": 283,
+          "record": "171-110-2",
+          "hit_rate": 0.609,
+          "units": 45.45,
+          "roi": 0.161,
+          "z": 2.9,
+          "roi_by_period": {
+            "2023": -0.023,
+            "2024": 0.167,
+            "2025": 0.167,
+            "2026": 0.277
+          }
+        },
+        "top5_per_week": {
+          "group": "model vs open: top 5 a week",
+          "n": 188,
+          "record": "112-75-1",
+          "hit_rate": 0.599,
+          "units": 26.82,
+          "roi": 0.143,
+          "z": 2.09,
+          "roi_by_period": {
+            "2023": -0.031,
+            "2024": 0.008,
+            "2025": 0.448,
+            "2026": 0.284
+          }
+        },
+        "overs_3_plus": {
+          "group": "model vs open: overs 3+",
+          "n": 619,
+          "record": "327-290-2",
+          "hit_rate": 0.53,
+          "units": 7.27,
+          "roi": 0.012,
+          "z": 0.31,
+          "roi_by_period": {
+            "2023": -0.055,
+            "2024": -0.168,
+            "2025": 0.206,
+            "2026": 0.053
+          }
+        },
+        "unders_3_plus": {
+          "group": "model vs open: unders 3+",
+          "n": 369,
+          "record": "216-148-5",
+          "hit_rate": 0.593,
+          "units": 48.36,
+          "roi": 0.131,
+          "z": 2.7,
+          "roi_by_period": {
+            "2023": 0.067,
+            "2024": 0.069,
+            "2025": 0.107,
+            "2026": 0.185
+          }
+        }
+      }
+    },
+    "market": {
+      "n_games": 1467,
+      "avg_miss_pts": 13.56,
+      "market_close_avg_miss": 12.69,
+      "vs_closing": {
+        "every_game": {
+          "group": "market vs close: every game",
+          "n": 1467,
+          "record": "734-732-1",
+          "hit_rate": 0.501,
+          "units": -64.73,
+          "roi": -0.044,
+          "z": -1.77,
+          "roi_by_period": {
+            "2024": 0.02,
+            "2025": 0.014,
+            "2026": -0.057
+          }
+        },
+        "edge_3_plus": {
+          "group": "market vs close: 3+ pts off",
+          "n": 859,
+          "record": "414-444-1",
+          "hit_rate": 0.483,
+          "units": -67.64,
+          "roi": -0.079,
+          "z": -2.42,
+          "roi_by_period": {
+            "2024": -0.035,
+            "2025": 0.14,
+            "2026": -0.106
+          }
+        },
+        "edge_5_plus": {
+          "group": "market vs close: 5+ pts off",
+          "n": 533,
+          "record": "258-274-1",
+          "hit_rate": 0.485,
+          "units": -39.45,
+          "roi": -0.074,
+          "z": -1.79,
+          "roi_by_period": {
+            "2024": 0.06,
+            "2025": 0.193,
+            "2026": -0.125
+          }
+        },
+        "edge_7_plus": {
+          "group": "market vs close: 7+ pts off",
+          "n": 278,
+          "record": "138-139-1",
+          "hit_rate": 0.498,
+          "units": -13.55,
+          "roi": -0.049,
+          "z": -0.85,
+          "roi_by_period": {
+            "2024": -0.071,
+            "2025": 0.145,
+            "2026": -0.072
+          }
+        },
+        "top5_per_week": {
+          "group": "market vs close: top 5 a week",
+          "n": 120,
+          "record": "70-50-0",
+          "hit_rate": 0.583,
+          "units": 13.64,
+          "roi": 0.114,
+          "z": 1.32,
+          "roi_by_period": {
+            "2024": 0.061,
+            "2025": -0.078,
+            "2026": 0.25
+          }
+        },
+        "overs_3_plus": {
+          "group": "market vs close: overs 3+",
+          "n": 585,
+          "record": "278-306-1",
+          "hit_rate": 0.476,
+          "units": -53.27,
+          "roi": -0.091,
+          "z": -2.31,
+          "roi_by_period": {
+            "2024": -0.144,
+            "2025": 0.206,
+            "2026": -0.109
+          }
+        },
+        "unders_3_plus": {
+          "group": "market vs close: unders 3+",
+          "n": 274,
+          "record": "136-138-0",
+          "hit_rate": 0.496,
+          "units": -14.36,
+          "roi": -0.052,
+          "z": -0.91,
+          "roi_by_period": {
+            "2024": 0.065,
+            "2025": 0.053,
+            "2026": -0.1
+          }
+        }
+      },
+      "vs_closing_3plus_games": {
+        "every_game": {
+          "group": "market vs close, wk 4+: every game",
+          "n": 983,
+          "record": "479-504-0",
+          "hit_rate": 0.487,
+          "units": -68.55,
+          "roi": -0.07,
+          "z": -2.29,
+          "roi_by_period": {
+            "2024": 0.069,
+            "2025": -0.045,
+            "2026": -0.074
+          }
+        },
+        "edge_3_plus": {
+          "group": "market vs close, wk 4+: 3+ pts off",
+          "n": 577,
+          "record": "258-319-0",
+          "hit_rate": 0.447,
+          "units": -84.45,
+          "roi": -0.146,
+          "z": -3.7,
+          "roi_by_period": {
+            "2024": -0.102,
+            "2025": 0.145,
+            "2026": -0.153
+          }
+        },
+        "edge_5_plus": {
+          "group": "market vs close, wk 4+: 5+ pts off",
+          "n": 353,
+          "record": "154-199-0",
+          "hit_rate": 0.436,
+          "units": -59.0,
+          "roi": -0.167,
+          "z": -3.31,
+          "roi_by_period": {
+            "2024": -0.045,
+            "2025": 0.273,
+            "2026": -0.182
+          }
+        },
+        "edge_7_plus": {
+          "group": "market vs close, wk 4+: 7+ pts off",
+          "n": 181,
+          "record": "82-99-0",
+          "hit_rate": 0.453,
+          "units": -24.45,
+          "roi": -0.135,
+          "z": -1.91,
+          "roi_by_period": {
+            "2024": -0.523,
+            "2025": 0.145,
+            "2026": -0.134
+          }
+        },
+        "top5_per_week": {
+          "group": "market vs close, wk 4+: top 5 a week",
+          "n": 81,
+          "record": "51-30-0",
+          "hit_rate": 0.63,
+          "units": 16.36,
+          "roi": 0.202,
+          "z": 1.96,
+          "roi_by_period": {
+            "2024": 0.215,
+            "2025": -0.045,
+            "2026": 0.273
+          }
+        },
+        "overs_3_plus": {
+          "group": "market vs close, wk 4+: overs 3+",
+          "n": 429,
+          "record": "191-238-0",
+          "hit_rate": 0.445,
+          "units": -64.36,
+          "roi": -0.15,
+          "z": -3.27,
+          "roi_by_period": {
+            "2024": -0.045,
+            "2025": -0.045,
+            "2026": -0.153
+          }
+        },
+        "unders_3_plus": {
+          "group": "market vs close, wk 4+: unders 3+",
+          "n": 148,
+          "record": "67-81-0",
+          "hit_rate": 0.453,
+          "units": -20.09,
+          "roi": -0.136,
+          "z": -1.73,
+          "roi_by_period": {
+            "2024": -0.152,
+            "2025": 0.273,
+            "2026": -0.153
+          }
+        }
+      },
+      "vs_opening": {
+        "every_game": {
+          "group": "market vs open: every game",
+          "n": 1467,
+          "record": "723-742-2",
+          "hit_rate": 0.494,
+          "units": -84.73,
+          "roi": -0.058,
+          "z": -2.32,
+          "roi_by_period": {
+            "2024": -0.019,
+            "2025": 0.039,
+            "2026": -0.072
+          }
+        },
+        "edge_3_plus": {
+          "group": "market vs open: 3+ pts off",
+          "n": 809,
+          "record": "389-419-1",
+          "hit_rate": 0.481,
+          "units": -65.36,
+          "roi": -0.081,
+          "z": -2.41,
+          "roi_by_period": {
+            "2024": -0.064,
+            "2025": 0.201,
+            "2026": -0.11
+          }
+        },
+        "edge_5_plus": {
+          "group": "market vs open: 5+ pts off",
+          "n": 460,
+          "record": "235-225-0",
+          "hit_rate": 0.511,
+          "units": -11.36,
+          "roi": -0.025,
+          "z": -0.55,
+          "roi_by_period": {
+            "2024": -0.103,
+            "2025": 0.302,
+            "2026": -0.051
+          }
+        },
+        "edge_7_plus": {
+          "group": "market vs open: 7+ pts off",
+          "n": 216,
+          "record": "112-104-0",
+          "hit_rate": 0.519,
+          "units": -2.18,
+          "roi": -0.01,
+          "z": -0.16,
+          "roi_by_period": {
+            "2024": -0.291,
+            "2025": 0.209,
+            "2026": 0.011
+          }
+        },
+        "top5_per_week": {
+          "group": "market vs open: top 5 a week",
+          "n": 120,
+          "record": "70-50-0",
+          "hit_rate": 0.583,
+          "units": 13.64,
+          "roi": 0.114,
+          "z": 1.32,
+          "roi_by_period": {
+            "2024": 0.167,
+            "2025": 0.119,
+            "2026": 0.076
+          }
+        },
+        "overs_3_plus": {
+          "group": "market vs open: overs 3+",
+          "n": 561,
+          "record": "264-297-0",
+          "hit_rate": 0.471,
+          "units": -57.0,
+          "roi": -0.102,
+          "z": -2.52,
+          "roi_by_period": {
+            "2024": -0.143,
+            "2025": 0.255,
+            "2026": -0.123
+          }
+        },
+        "unders_3_plus": {
+          "group": "market vs open: unders 3+",
+          "n": 248,
+          "record": "125-122-1",
+          "hit_rate": 0.506,
+          "units": -8.36,
+          "roi": -0.034,
+          "z": -0.56,
+          "roi_by_period": {
+            "2024": 0.013,
+            "2025": 0.131,
+            "2026": -0.073
+          }
+        }
+      }
+    }
+  },
+  "weather_rule": {
+    "unders_vs_close": {
+      "wind_under_10": {
+        "group": "every under, wind <10 (close)",
+        "n": 4443,
+        "record": "2234-2189-20",
+        "hit_rate": 0.505,
+        "units": -158.09,
+        "roi": -0.036,
+        "z": -2.49,
+        "roi_by_period": {
+          "2023": -0.074,
+          "2024": -0.019,
+          "2025": -0.035,
+          "2026": -0.026
+        }
+      },
+      "wind_10_15": {
+        "group": "every under, wind 10-15 (close)",
+        "n": 909,
+        "record": "486-412-11",
+        "hit_rate": 0.541,
+        "units": 29.82,
+        "roi": 0.033,
+        "z": 1.05,
+        "roi_by_period": {
+          "2023": 0.046,
+          "2024": -0.022,
+          "2025": 0.027,
+          "2026": 0.384
+        }
+      },
+      "wind_15_plus": {
+        "group": "every under, wind 15+ (close)",
+        "n": 321,
+        "record": "178-143-0",
+        "hit_rate": 0.555,
+        "units": 18.82,
+        "roi": 0.059,
+        "z": 1.11,
+        "roi_by_period": {
+          "2023": 0.036,
+          "2024": -0.011,
+          "2025": 0.087,
+          "2026": 0.909
+        }
+      },
+      "wind_20_plus": {
+        "group": "every under, wind 20+ (close)",
+        "n": 85,
+        "record": "53-32-0",
+        "hit_rate": 0.624,
+        "units": 16.18,
+        "roi": 0.19,
+        "z": 1.89,
+        "roi_by_period": {
+          "2023": -0.045,
+          "2024": 0.159,
+          "2025": 0.273,
+          "2026": 0.909
+        }
+      },
+      "rain": {
+        "group": "every under, rain/snow (close)",
+        "n": 572,
+        "record": "282-287-3",
+        "hit_rate": 0.496,
+        "units": -30.64,
+        "roi": -0.054,
+        "z": -1.34,
+        "roi_by_period": {
+          "2023": -0.06,
+          "2024": -0.148,
+          "2025": -0.084,
+          "2026": -0.004
+        }
+      },
+      "cold_under_35F": {
+        "group": "every under, under 35F (close)",
+        "n": 58,
+        "record": "27-28-3",
+        "hit_rate": 0.491,
+        "units": -3.45,
+        "roi": -0.06,
+        "z": -0.48,
+        "roi_by_period": {
+          "2023": 0.08,
+          "2024": -0.141,
+          "2025": 0.005,
+          "2026": -0.045
+        }
+      }
+    },
+    "unders_vs_open": {
+      "wind_under_10": {
+        "group": "every under, wind <10 (open)",
+        "n": 2055,
+        "record": "1050-997-8",
+        "hit_rate": 0.513,
+        "units": -42.45,
+        "roi": -0.021,
+        "z": -0.98,
+        "roi_by_period": {
+          "2023": -0.096,
+          "2024": 0.019,
+          "2025": 0.032,
+          "2026": -0.011
+        }
+      },
+      "wind_10_15": {
+        "group": "every under, wind 10-15 (open)",
+        "n": 227,
+        "record": "127-97-3",
+        "hit_rate": 0.567,
+        "units": 18.45,
+        "roi": 0.081,
+        "z": 1.3,
+        "roi_by_period": {
+          "2023": -0.004,
+          "2024": 0.095,
+          "2025": -0.013,
+          "2026": 0.384
+        }
+      },
+      "wind_15_plus": {
+        "group": "every under, wind 15+ (open)",
+        "n": 67,
+        "record": "43-22-2",
+        "hit_rate": 0.662,
+        "units": 17.09,
+        "roi": 0.255,
+        "z": 2.33,
+        "roi_by_period": {
+          "2023": 0.182,
+          "2024": 0.407,
+          "2025": -0.455,
+          "2026": 0.909
+        }
+      },
+      "wind_20_plus": {
+        "group": "every under, wind 20+ (open)",
+        "n": 24,
+        "record": "17-7-0",
+        "hit_rate": 0.708,
+        "units": 8.45,
+        "roi": 0.352,
+        "z": 1.95,
+        "roi_by_period": {
+          "2023": -0.045,
+          "2024": 0.485,
+          "2025": 0.909,
+          "2026": 0.909
+        }
+      },
+      "rain": {
+        "group": "every under, rain/snow (open)",
+        "n": 289,
+        "record": "146-142-1",
+        "hit_rate": 0.507,
+        "units": -9.27,
+        "roi": -0.032,
+        "z": -0.57,
+        "roi_by_period": {
+          "2023": -0.125,
+          "2024": -0.189,
+          "2025": 0.273,
+          "2026": -0.015
+        }
+      },
+      "cold_under_35F": {
+        "group": "every under, under 35F (open)",
+        "n": 8,
+        "record": "3-4-1",
+        "hit_rate": 0.429,
+        "units": -1.27,
+        "roi": -0.159,
+        "z": -0.48,
+        "roi_by_period": {
+          "2023": 0.205,
+          "2024": -1.0,
+          "2026": -0.045
+        }
+      }
+    }
+  },
+  "input_importance": {
+    "2023": {
+      "pts_formula": 0.4098,
+      "temperature": 0.0597,
+      "home_roll_ppg_for": 0.0542,
+      "home_roll_ppg_against": 0.0496,
+      "away_roll_ppg_against": 0.0487,
+      "wind_speed": 0.0416,
+      "away_ewm_off_sr": 0.0371,
+      "home_ewm_off_sr": 0.0326,
+      "ppa_sum": 0.031,
+      "away_roll_ppg_for": 0.0291,
+      "sr_sum": 0.0282,
+      "home_games_played_prior": 0.0259
+    },
+    "2024": {
+      "pts_formula": 0.4833,
+      "temperature": 0.0416,
+      "home_roll_ppg_against": 0.0397,
+      "away_roll_ppg_against": 0.0381,
+      "away_roll_ppg_for": 0.0349,
+      "home_ewm_off_sr": 0.0331,
+      "wind_speed": 0.0304,
+      "home_roll_ppg_for": 0.0294,
+      "away_games_played_prior": 0.0261,
+      "sr_sum": 0.0255,
+      "ppa_sum": 0.0232,
+      "away_ewm_off_sr": 0.0217
+    },
+    "2025": {
+      "pts_formula": 0.5318,
+      "away_roll_ppg_against": 0.0401,
+      "home_roll_ppg_against": 0.0345,
+      "temperature": 0.034,
+      "away_roll_ppg_for": 0.0332,
+      "home_roll_ppg_for": 0.033,
+      "sr_sum": 0.0264,
+      "home_ewm_off_ppa": 0.0212,
+      "away_ewm_off_sr": 0.0212,
+      "wind_speed": 0.0207,
+      "home_ewm_off_sr": 0.0196,
+      "home_ewm_def_ppa": 0.0193
+    },
+    "2026": {
+      "pts_formula": 0.5652,
+      "away_roll_ppg_against": 0.0366,
+      "home_roll_ppg_against": 0.0358,
+      "home_roll_ppg_for": 0.0346,
+      "temperature": 0.0319,
+      "away_roll_ppg_for": 0.0265,
+      "away_games_played_prior": 0.0235,
+      "home_ewm_off_sr": 0.022,
+      "wind_speed": 0.0214,
+      "away_ewm_off_sr": 0.02,
+      "home_games_played_prior": 0.0189,
+      "home_ewm_off_ppa": 0.0181
+    }
+  },
+  "method": "walk-forward by season; same games for every version; -110; edge = projected total minus the line"
+}
