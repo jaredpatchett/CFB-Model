@@ -217,3 +217,85 @@ def team_injury_summary(injuries: list, school: str) -> list:
 
 def fetched_at() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+# ---------------------------------------------------------------------------
+# Manual player-status overrides (added 11/2026).
+#
+# Covers' entries can sit unchanged for weeks (e.g. a QB still "Questionable"
+# from Oct 18 after he's been ruled out), so a person can correct or add a
+# player's status in config/injury_status_overrides.csv. Overrides are applied
+# on top of the scraped list before anything else reads it -- the props
+# filter, the starting-QB-out flag, the game warnings and the Injury Report
+# page all see the corrected status.
+#
+# Columns: school,player,pos,status,injury,through,note
+#   school  -- CFBD school name, exact (e.g. "Eastern Michigan")
+#   player  -- full or abbreviated name; matched on first initial + last name
+#   pos     -- used only when the player isn't on Covers' list (row is added)
+#   status  -- Out / Doubtful / Questionable / Probable / Available / ...
+#              "Available" removes the player from the injury list.
+#   through -- YYYY-MM-DD; the row is ignored after this date, so a one-game
+#              correction can't silently linger into later weeks.
+#   note    -- required: where the info came from.
+# ---------------------------------------------------------------------------
+STATUS_OVERRIDES_PATH = "config/injury_status_overrides.csv"
+
+
+def load_status_overrides(path: str = STATUS_OVERRIDES_PATH, today=None) -> list:
+    import csv
+    import os
+    from datetime import date
+    if not os.path.exists(path):
+        return []
+    today = today or date.today()
+    rows = []
+    with open(path, newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            r = {k: (v or "").strip() for k, v in r.items() if k}
+            if not r.get("school") or not r.get("player") or not r.get("status"):
+                continue
+            through = r.get("through")
+            if through:
+                try:
+                    if date.fromisoformat(through) < today:
+                        continue
+                except ValueError:
+                    print(f"  [warn] bad 'through' date {through!r} for {r['player']} -- row ignored")
+                    continue
+            rows.append(r)
+    return rows
+
+
+def apply_status_overrides(injuries: list, overrides: list) -> list:
+    """Returns a new injury list with overrides applied (matched on school +
+    first initial + last name). Unmatched overrides are added as new rows."""
+    out = [dict(i) for i in injuries]
+    for o in overrides:
+        key = _initial_last(o["player"])
+        if not key:
+            continue
+        hits = [i for i in out if i["school"] == o["school"] and _initial_last(i["player"]) == key]
+        status = o["status"]
+        for k in KNOWN_STATUSES:
+            if status.lower() == k.lower():
+                status = k
+        if status.lower() in ("available", "active", "playing", "starting"):
+            out = [i for i in out if i not in hits]
+            print(f"  override: {o['player']} ({o['school']}) -> available, removed from injury list")
+            continue
+        label = f"Manual {o.get('through') or 'override'}"
+        note = f"Manual update: {o.get('note') or ''}".strip()
+        if hits:
+            for i in hits:
+                old = i.get("status")
+                i.update(status=status, reported=label, note=note, manual=True)
+                if o.get("injury"):
+                    i["injury"] = o["injury"]
+                print(f"  override: {i['player']} ({o['school']}) {old} -> {status}")
+        else:
+            out.append({"school": o["school"], "player": o["player"], "pos": (o.get("pos") or "").upper(),
+                        "status": status, "injury": o.get("injury") or "Undisclosed",
+                        "reported": label, "note": note, "manual": True})
+            print(f"  override: added {o['player']} ({o['school']}) as {status}")
+    return out

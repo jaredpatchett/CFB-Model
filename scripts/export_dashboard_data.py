@@ -31,6 +31,7 @@ from src.data.injury_overrides import load_injury_overrides, get_team_override
 from src.data.injury_report import (
     fetch_injuries, build_injury_index, match_player, team_injury_summary,
     BLOCKING_STATUSES, WARNING_STATUSES, fetched_at as injuries_fetched_at,
+    load_status_overrides, apply_status_overrides,
 )
 from src.features.live_features import (
     build_current_season_form, score_with_trained_model, build_current_pace_returning,
@@ -847,6 +848,14 @@ def main(year: int):
                   "props/games are NOT filtered for injuries this run")
     except Exception as e:
         print(f"  [warn] injury report fetch failed: {e} -- props/games are NOT filtered for injuries this run")
+    try:
+        status_overrides = load_status_overrides()
+        if status_overrides:
+            print(f"Applying {len(status_overrides)} manual player-status override(s) "
+                  f"(config/injury_status_overrides.csv)...")
+            injuries = apply_status_overrides(injuries, status_overrides)
+    except Exception as e:
+        print(f"  [warn] manual status overrides not applied: {e}")
     injury_index = build_injury_index(injuries)
 
     print(f"Loading {year} SP+ ratings for the preseason fair-odds estimate...")
