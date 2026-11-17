@@ -10,6 +10,8 @@ Sends ONE notification per run, and only when something changed:
            from the official list) before kickoff
   Spreads  NEW plays on the Bet Card, and DROPPED plays (with why), from
            card_watch.py's log of this run
+  Totals   a new 🔥 A-grade official total, or one that stopped being A
+           (docs/data/totals_log.json, 11/2026)
 
 Reads docs/data/prop_grade_log.json (written by build_dashboard.py) and
 docs/data/card_log.json (written by card_watch.py), so it runs after both.
@@ -86,6 +88,34 @@ def prop_changes(now):
     return new_a, lost_a
 
 
+TOTALS_LOG = "docs/data/totals_log.json"
+
+
+def totals_changes(now):
+    """(new A totals, totals that were A and aren't now) for the latest run."""
+    if not os.path.exists(TOTALS_LOG):
+        return [], []
+    log = json.load(open(TOTALS_LOG))
+    run_at = log.get("updated")
+    new_a, lost_a = [], []
+    isA = lambda h: h is not None and h[4] == "A" and h[5]
+    for p in (log.get("plays") or {}).values():
+        h = p.get("h") or []
+        start = _dt(p.get("kickoff"))
+        if not h or (start is not None and start <= now):
+            continue
+        last = h[-1]
+        this_run = last[0] == run_at
+        prev = h[-2] if this_run and len(h) > 1 else (None if this_run else last)
+        label = f"{'U' if p.get('side') == 'under' else 'O'}{last[1]:g} {p.get('away')} at {p.get('home')}"
+        if this_run and isA(last) and not isA(prev):
+            new_a.append(f"🔥 {label} (model {last[2]:g})")
+        elif isA(prev) and not (this_run and isA(last)):
+            why = (f"now {last[4]}" if last[5] else "no longer official at this line") if this_run else "off the board"
+            lost_a.append(f"❌ {label}: {why}")
+    return new_a, lost_a
+
+
 def spread_changes(now):
     """(new, dropped) on the spread Bet Card, from card_watch's latest run.
     Skipped if that run is older than the grade log's (card watch failed)."""
@@ -107,6 +137,7 @@ def spread_changes(now):
 def build_message(now):
     new_a, lost_a = prop_changes(now)
     new_s, drop_s = spread_changes(now)
+    new_t, lost_t = totals_changes(now)
     lines = []
     if new_s or drop_s:
         lines.append("SPREADS")
@@ -114,6 +145,9 @@ def build_message(now):
     if new_a or lost_a:
         lines.append("PROPS")
         lines += new_a + lost_a
+    if new_t or lost_t:
+        lines.append("TOTALS")
+        lines += new_t + lost_t
     if not lines:
         return None, None
     if len(lines) > MAX_LINES:
@@ -124,8 +158,10 @@ def build_message(now):
         bits.append(f"{len(new_s)} new spread{'s' if len(new_s) > 1 else ''}")
     if new_a:
         bits.append(f"{len(new_a)} new 🔥 A prop{'s' if len(new_a) > 1 else ''}")
-    if drop_s or lost_a:
-        bits.append(f"{len(drop_s) + len(lost_a)} dropped")
+    if new_t:
+        bits.append(f"{len(new_t)} new 🔥 A total{'s' if len(new_t) > 1 else ''}")
+    if drop_s or lost_a or lost_t:
+        bits.append(f"{len(drop_s) + len(lost_a) + len(lost_t)} dropped")
     return "CFB: " + ", ".join(bits), "\n".join(lines)
 
 

@@ -336,7 +336,7 @@
           "record": "2-0",
           "units": 1.75,
           "roi": 87.7,
-          "pending": 2
+          "pending": 3
         },
         "B": {
           "graded": 2,
@@ -985,6 +985,22 @@
       "units": null,
       "actual": null,
       "mu_grade": "A"
+    },
+    {
+      "tag": "rec_yds_play",
+      "player": "Baylin Brooks",
+      "team": "Western Michigan",
+      "opponent": "Eastern Michigan",
+      "market": "Reception Yards",
+      "side": "over",
+      "line": 30.5,
+      "price": -112.0,
+      "model_ev": 15.7,
+      "start_time": "2026-11-17T23:00:00Z",
+      "result": null,
+      "units": null,
+      "actual": null,
+      "mu_grade": "A+"
     },
     {
       "tag": "under_play",

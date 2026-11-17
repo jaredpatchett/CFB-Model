@@ -624,6 +624,8 @@ def main(backfill_since=None):
               f"| avg move {s['avg_price_move_pts']} pts | value at close {s['avg_value_at_close_pct']}%")
     print(f"  graded this run: {n_graded}")
     for tag, r in out["results"].items():
+        if "graded" not in r:      # a result group with a different shape -- skip in the printout
+            continue
         print(f"  {tag:<20} graded {r['graded']:<4} {r['record']:<7} units {r['units']:+.2f}")
     u, o = out["groups_up_in_backtest"], out["groups_not_up_in_backtest"]
     print(f"  groups UP in backtest:     logged {u['logged']:<4} graded {u['graded']:<4} {u['record']:<7} units {u['units']:+.2f}")

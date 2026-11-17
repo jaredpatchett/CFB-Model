@@ -2066,6 +2066,35 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .pgr-bar i { position: absolute; top: -3px; bottom: -3px; width: 2px; background: #fff; }
 .pgr-sub { font-size: 10.5px; color: var(--muted-3, #8B98A5); }
 .perf-props { margin-bottom: 16px; }
+.tot-list { display: grid; gap: 10px; }
+.tot-row { display: grid; grid-template-columns: 110px 1fr 230px; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 12px; background: var(--panel, rgba(255,255,255,0.03)); border: 1px solid rgba(255,255,255,0.08); border-left: 4px solid #C48CFF; }
+.tot-row.is-a { border-left-color: var(--neon); }
+.tot-row.is-c { border-left-color: #FF6B6B; }
+.tot-grade { text-align: center; } .tot-grade .pg-badge { margin-left: 0; }
+.tot-gnote { font-size: 10px; color: var(--muted-3, #8A94A3); margin-top: 4px; }
+.tot-play { font-family: var(--font-display); font-weight: 900; font-size: 22px; letter-spacing: 0.02em; }
+.tot-game { font-size: 12px; color: var(--muted-2, #AEB6C2); margin-top: 3px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.tot-tags { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+.tot-wx, .tot-mv { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); white-space: nowrap; }
+.tot-wx.is-none { color: var(--muted-3, #8A94A3); }
+.tot-wx.is-good, .tot-mv.is-good { color: var(--neon); border-color: rgba(57,240,122,0.5); }
+.tot-wx.is-bad, .tot-mv.is-bad { color: #FFB020; border-color: rgba(255,176,32,0.5); }
+.tot-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+.tot-n span { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted-3, #8A94A3); }
+.tot-n b { font-size: 20px; font-weight: 900; } .tot-n b.is-under { color: #5EC8FF; } .tot-n b.is-over { color: #FF9F5E; }
+.tot-bar { display: block; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.08); margin-top: 4px; overflow: hidden; }
+.tot-bar i { display: block; height: 100%; background: var(--neon); }
+.tot-sub { grid-column: 1 / -1; font-size: 11px; color: var(--muted-3, #8A94A3); }
+.tot-res { display: grid; grid-template-columns: 28px 110px 1fr auto; gap: 8px; font-size: 12px; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center; }
+.tot-rw { font-weight: 900; text-align: center; } .tot-rw.is-good { color: var(--neon); } .tot-rw.is-bad { color: #FF6B6B; }
+.tot-rg { color: var(--muted-2, #AEB6C2); } .tot-rt { color: var(--muted-3, #8A94A3); }
+.tot-key { margin-top: 14px; }
+@media (max-width: 760px) {
+  .tot-row { grid-template-columns: 74px 1fr; }
+  .tot-nums { grid-column: 1 / -1; }
+  .tot-play { font-size: 19px; }
+  .tot-grade .pg-badge.is-big { font-size: 17px; padding: 4px 10px; }
+}
 .pg-badge { display: inline-flex; align-items: center; gap: 4px; font-weight: 900; font-size: 12px; border-radius: 999px; padding: 2px 8px; white-space: nowrap; vertical-align: middle; margin-left: 4px; }
 .pg-badge.is-a { background: rgba(57,240,122,0.18); color: var(--neon); border: 1px solid rgba(57,240,122,0.7); }
 .pg-badge.is-b { background: rgba(196,140,255,0.12); color: #C48CFF; border: 1px solid rgba(196,140,255,0.5); }
@@ -2910,6 +2939,7 @@ RENDERER_JS = """<script>
     { id: 'edge', label: 'Edge Board' },
     { id: 'ratings', label: 'Power Ratings' },
     { id: 'props', label: 'Player Props' },
+    { id: 'totals', label: 'Totals' },
     { id: 'anytime', label: 'Anytime TD' },
     { id: 'tdallowed', label: 'TDs Allowed' },
     { id: 'fantasy', label: 'Fantasy' },
@@ -2924,6 +2954,7 @@ RENDERER_JS = """<script>
     edge: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
     ratings: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
     props: '<path d="M4 15l5-5 4 4 7-7"/><path d="M14 7h6v6"/>',
+    totals: '<path d="M12 4v16M5 9l7-5 7 5M5 15l7 5 7-5"/>',
     anytime: '<path d="M12 2c1 4-3 5-3 9a3 3 0 0 0 6 0c0-1.5-.5-2.5-1-3.5 2 1 4 3.5 4 6.5a6 6 0 0 1-12 0c0-5 5-7 6-12z"/>',
     tdallowed: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>',
     fantasy: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
@@ -5758,6 +5789,86 @@ RENDERER_JS = """<script>
       (tbl || '<div class="gt-empty">Nothing here yet.</div>') +
       (list.length > cap ? '<button class="gt-more" data-prop-set="gtAll" data-prop-val="1">Show all ' + list.length + '</button>' : '') + '</div>';
   }
+  // ---- Game Totals (11/2026, Rod) ----
+  // Official overs/unders only (rules in src/analysis/totals_live.py), each
+  // with a play grade like the props (bet A's) and the game's forecast.
+  var TOT_META = { A: ['&#128293;', 'Bet it', 'is-a'], B: ['&#127922;', 'Degen play, not a bet', 'is-b'], C: ['&#128683;', 'Don&rsquo;t play', 'is-c'] };
+  function totWeather(w, side) {
+    if (!w) return '<span class="tot-wx is-none">&#9729;&#65039; No forecast yet</span>';
+    if (w.game_indoors) return '<span class="tot-wx">&#127967;&#65039; Dome</span>';
+    var bits = [], bad = false;
+    if (w.wind_speed != null) { bits.push('&#128168; ' + Math.round(w.wind_speed) + ' mph'); if (w.wind_speed >= 10) bad = true; }
+    if (w.temperature != null) bits.push('&#127777;&#65039; ' + Math.round(w.temperature) + '&deg;F');
+    if (w.precipitation != null && w.precipitation > 0) { bits.push('&#127783;&#65039; rain/snow'); bad = true; }
+    if (!bits.length) return '<span class="tot-wx is-none">&#9729;&#65039; No forecast yet</span>';
+    var cls = bad ? (side === 'under' ? ' is-good' : ' is-bad') : '';
+    var tip = bad ? (side === 'under' ? 'Wind/rain helps an under (wind 10+ mph bumps an under&rsquo;s grade).' : 'Wind/rain hurts an over.') : 'Calm, dry forecast.';
+    return '<span class="tot-wx' + cls + '" title="' + tip + '">' + bits.join(' &middot; ') + '</span>';
+  }
+  function totKick(iso) {
+    try { return new Date(iso).toLocaleString([], { weekday: 'short', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit' }); }
+    catch (e) { return iso || ''; }
+  }
+  function totRec(o) {
+    if (!o || !(o.w + o.l)) return '&mdash;';
+    return o.w + '-' + o.l + (o.p ? '-' + o.p : '');
+  }
+  function totSigned(x, d) { return (x > 0 ? '+' : '') + Number(x).toFixed(d); }
+  function renderTotals() {
+    var rows = D.totals || [], R = D.totalsRecord || {}, B = D.totalsBacktest || {};
+    var show = state.totShow === 'all' ? 'all' : 'a';
+    var list = show === 'a' ? rows.filter(function (r) { return r.grade === 'A'; }) : rows;
+    var seg = function (val, label) {
+      return '<button class="tab tab--prop' + (show === val ? ' is-active' : '') + '" onclick="window.__cfbTotShow(&quot;' + val + '&quot;)"><span>' + label + '</span></button>';
+    };
+    var all = R.all || {}, ga = (R.grades || {}).A || {};
+    var bt = function (o) { return o ? o.w + '-' + o.l + ' (' + totSigned(o.roi, 1) + '%)' : '&mdash;'; };
+    var head = '<div class="section-head"><div class="section-title"><div class="section-flag"></div><h2>Game Totals</h2>' +
+      '<span class="em-sub">Official overs &amp; unders &middot; bet the &#128293; A&rsquo;s</span></div></div>' +
+      statCards([
+        ['A plays this week', String(rows.filter(function (r) { return r.grade === 'A'; }).length), rows.length + ' official in all', { icon: 'target', neon: true }],
+        ['Live record (A)', totRec(ga), ga.units != null && (ga.w + ga.l) ? totSigned(ga.units, 1) + 'u, ' + totSigned(ga.roi, 1) + '%' : 'starts this week', { icon: 'check' }],
+        ['Live record (all official)', totRec(all), all.units != null && (all.w + all.l) ? totSigned(all.units, 1) + 'u, ' + totSigned(all.roi, 1) + '%' : 'starts this week', { icon: 'bars' }],
+        ['Backtest A / B', bt(B.A), 'B ' + bt(B.B), { icon: 'trend' }]
+      ]) +
+      '<div class="prop-tabs" style="margin:14px 0 8px">' + seg('a', '&#128293; A plays') + seg('all', 'All official') + '</div>';
+    if (!rows.length) return head + '<div class="empty-state">No official totals right now. They show up once both teams have played 2+ games and the model is 3+ under (total 50+) or 7+ over (no 10+ mph wind).</div>' + totFoot(R, B);
+    if (!list.length) return head + '<div class="empty-state">No &#128293; A totals right now. ' + rows.length + ' official B/C play' + (rows.length === 1 ? '' : 's') + ' under &ldquo;All official&rdquo;.</div>' + totFoot(R, B);
+    var body = '<div class="tot-list">' + list.map(function (r) {
+      var m = TOT_META[r.grade] || TOT_META.B, bo = B[r.grade];
+      var mv = r.move > 0 ? '<span class="tot-mv is-good">line moved our way</span>' : r.move < 0 ? '<span class="tot-mv is-bad">line moved against us</span>' : '';
+      var flagged = r.first_line != null && Number(r.first_line) !== Number(r.line) ? 'Flagged at ' + r.first_line + ' &middot; ' : '';
+      var edgeAbs = Math.abs(r.edge), pct = Math.min(100, edgeAbs / 12 * 100);
+      return '<div class="tot-row ' + m[2] + '">' +
+        '<div class="tot-grade"><span class="pg-badge ' + m[2] + ' is-big">' + m[0] + ' ' + r.grade + '</span><div class="tot-gnote">' + m[1] + '</div></div>' +
+        '<div class="tot-main">' +
+          '<div class="tot-play">' + (r.side === 'under' ? 'UNDER ' : 'OVER ') + r.line + (r.new ? '<span class="bc-new">NEW</span>' : '') + '</div>' +
+          '<div class="tot-game">' + trkMark(abbrOf(r.away), 18) + esc(abbrOf(r.away)) + ' at ' + trkMark(abbrOf(r.home), 18) + esc(abbrOf(r.home)) + ' &middot; ' + esc(totKick(r.kickoff)) + (r.book ? ' &middot; ' + esc(r.book) : '') + '</div>' +
+          '<div class="tot-tags">' + totWeather(r.weather, r.side) + mv + '</div>' +
+        '</div>' +
+        '<div class="tot-nums">' +
+          '<div class="tot-n"><span>Model</span><b>' + Number(r.pred).toFixed(1) + '</b></div>' +
+          '<div class="tot-n"><span>Edge</span><b class="' + (r.side === 'under' ? 'is-under' : 'is-over') + '">' + totSigned(r.edge, 1) + '</b>' +
+            '<i class="tot-bar"><i style="width:' + pct.toFixed(0) + '%"></i></i></div>' +
+          '<div class="tot-sub">' + flagged + 'Backtest ' + r.grade + ': ' + bt(bo) + '</div>' +
+        '</div></div>';
+    }).join('') + '</div>';
+    return head + body + totFoot(R, B);
+  }
+  function totFoot(R, B) {
+    var recent = (R.recent || []).slice(0, 15);
+    var res = recent.length ? '<div class="pp-panel"><h3>Recent graded totals</h3>' + recent.map(function (p) {
+      var c = p.result === 'W' ? 'is-good' : p.result === 'L' ? 'is-bad' : '';
+      return '<div class="tot-res"><span class="tot-rw ' + c + '">' + p.result + '</span><span>' + (TOT_META[p.grade] || ['', ''])[0] + ' ' + (p.side === 'under' ? 'U ' : 'O ') + p.line + '</span>' +
+        '<span class="tot-rg">' + esc(abbrOf(p.away)) + ' at ' + esc(abbrOf(p.home)) + '</span><span class="tot-rt">Final ' + (p.total != null ? p.total : '') + '</span></div>';
+    }).join('') + '</div>' : '';
+    return res + '<div class="pp-panel tot-key"><h3>How totals become official</h3>' +
+      '<div class="pp-panel-note"><b>Unders:</b> model 3+ points under the line, on a total of 50+. <b>Overs:</b> model 7+ points over, with no 10+ mph wind (an over needs a forecast first). The edge is always against the line shown now, so every play here is still a bet at that number.<br>' +
+      '<b>Grade:</b> unders 7+ under = A; 5-7 under = B (A with 10+ mph wind); 3-5 under = B; overs = B. Line move after it&rsquo;s flagged: our way bumps it up a grade, against us drops it.<br>' +
+      '<b>Backtest</b> (' + esc((B.seasons || []).join(', ')) + ', vs opening totals): unders ' + (B.under ? B.under.w + '-' + B.under.l + ' (' + totSigned(B.under.roi, 1) + '%)' : '&mdash;') +
+      ', overs ' + (B.over ? B.over.w + '-' + B.over.l + ' (' + totSigned(B.over.roi, 1) + '%)' : '&mdash;') +
+      '. The rules were picked on that same backtest, so expect the live record to be lower. The edge showed up against opening lines and was gone by the close: bet them early.</div></div>';
+  }
   function renderPlayGradeRecord() {
     var P = D.playGradeRecord;
     if (!P || !P.grades) return '';
@@ -8402,6 +8513,7 @@ RENDERER_JS = """<script>
     switch (state.page) {
       case 'ratings': return renderRatings();
       case 'props': return renderProps();
+      case 'totals': return renderTotals();
       case 'anytime': return renderAnytime();
       case 'tdallowed': return renderTdAllowed();
       case 'fantasy': return renderFantasy();
@@ -8446,6 +8558,7 @@ RENDERER_JS = """<script>
   // so the cursor fell out of it after every single letter typed.
   window.__cfbSearch = function (v) { state.search = v; renderKeep(); };
   window.__cfbAtdGame = function (v) { state.atdGame = v; render(); };
+  window.__cfbTotShow = function (v) { state.totShow = v; render(); };
   window.__cfbTdaQ = function (v) {
     state.tdaQ = v; render();
     var el = document.querySelector('.tda-search');
@@ -8644,6 +8757,10 @@ def main():
     model_data["propEdgeHistory"] = build_prop_edge_history()
     model_data["propsByEdge"] = build_props_by_edge()
     model_data["playGradeRecord"] = build_play_grade_record()
+    # Game totals (11/2026): official overs/unders, their record, and the backtest.
+    model_data["totals"] = data.get("totals") or []
+    model_data["totalsRecord"] = data.get("totals_record") or {}
+    model_data["totalsBacktest"] = data.get("totals_backtest") or {}
     model_data["propRules"] = build_prop_rules()
     # Team-vs-team national ranks for the Matchup Projector (11/2026).
     model_data["teamMatchup"] = data.get("team_matchup") or {}

@@ -206,6 +206,11 @@ jobs:
             data/processed
           key: ${{ steps.trained.outputs.cache-primary-key }}
 
+      # 11/2026: game totals model. Seconds to train, so it trains every run
+      # from the saved feature table. Never fails the run.
+      - name: Train totals model
+        run: python scripts/train_totals_model.py || true
+
       - name: Fetch current lines
         run: python scripts/fetch_current_lines.py
 
@@ -257,6 +262,7 @@ jobs:
           [ -f docs/data/props_clv.json ] && git add docs/data/props_clv.json
           [ -f data/clv/prop_flags.csv ] && git add data/clv/prop_flags.csv
           [ -f docs/data/prop_grade_log.json ] && git add docs/data/prop_grade_log.json
+          [ -f docs/data/totals_log.json ] && git add docs/data/totals_log.json
           [ -f docs/data/player_positions.json ] && git add docs/data/player_positions.json
           [ -f docs/data/model_inputs_log.csv ] && git add docs/data/model_inputs_log.csv
           git diff --cached --quiet && echo "No changes to commit" || git commit -m "Update dashboard data + HTML [skip ci]"
