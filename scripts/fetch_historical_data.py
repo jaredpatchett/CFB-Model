@@ -143,7 +143,8 @@ def refetch_lines_if_no_opener(year: int):
     season's lines once (one CFBD call) if its file lacks that column."""
     path = f"{config.DATA_RAW_DIR}/lines_{year}.csv"
     try:
-        if os.path.exists(path) and "market_spread_open_home" in pd.read_csv(path, nrows=1).columns:
+        # 11/2026: also needs the opening total (totals lab).
+        if os.path.exists(path) and {"market_spread_open_home", "market_over_under_open"} <= set(pd.read_csv(path, nrows=1).columns):
             return
         lines = cfbd.historical_lines_to_dataframe(cfbd.get_historical_lines(year))
         lines.to_csv(path, index=False)
