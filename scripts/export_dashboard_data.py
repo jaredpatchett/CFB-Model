@@ -452,8 +452,27 @@ def build_bowl_lookup(post_df: pd.DataFrame) -> dict:
             continue
         note = row.get("notes")
         name = str(note).strip() if note is not None and not pd.isna(note) and str(note).strip() else "Bowl game"
-        out[frozenset({_normalize_team_name(str(home)), _normalize_team_name(str(away))})] = name
+        out[frozenset({_normalize_team_name(str(home)), _normalize_team_name(str(away))})] = {
+            "name": name, "start": row.get("startDate"),
+            "neutral": bool(row.get("neutralSite")) if not pd.isna(row.get("neutralSite")) else True}
     return out
+
+
+def match_bowl(home_school: str, away_school: str, kickoff, lookup: dict):
+    """The postseason entry for THIS game, or None. Only a game that is on
+    CFBD's postseason schedule within 2 days of this kickoff counts, so a
+    regular-season game between two teams that later meet in a bowl is never
+    treated as a bowl (11/17/2026, Rod: nothing bowl-related until it is
+    actually bowl season)."""
+    e = match_neutral_site(home_school, away_school, lookup)
+    if not e or not kickoff or not e.get("start"):
+        return None
+    try:
+        a = pd.to_datetime(kickoff, utc=True)
+        b = pd.to_datetime(e["start"], utc=True)
+    except Exception:
+        return None
+    return e if abs((a - b).total_seconds()) <= 2 * 86400 else None
 
 
 def match_neutral_site(home_school: str, away_school: str, lookup: dict):
@@ -839,13 +858,13 @@ def main(year: int):
         neutral_site_lookup = {}
     # 11/2026: bowl games are CFBD "postseason", not in the regular schedule
     # above -- without this they'd get no neutral-site flag (so a home-field
-    # edge the bowl doesn't have) and no bowl tag on the dashboard. Only
-    # schedule/neutral flags come from these rows; nothing else changes.
-    bowl_lookup = {}
+    # edge the bowl doesn't have) and no bowl tag on the dashboard. Used
+    # only for a game matched to a postseason game at the same kickoff
+    # (match_bowl); regular-season games never touch these rows.
+    bowl_lookup, bowl_weather_lookup = {}, {}
     try:
         post_df = cfbd.get_games(season_year, season_type="postseason")
         if post_df is not None and not post_df.empty:
-            neutral_site_lookup.update(build_neutral_site_lookup(post_df))
             bowl_lookup = build_bowl_lookup(post_df)
             print(f"  {len(bowl_lookup)} postseason (bowl/playoff) matchup(s) on CFBD's schedule")
     except Exception as e:
@@ -1015,7 +1034,7 @@ def main(year: int):
         print(f"  {len(weather_lookup)} scheduled matchup(s) with a weather forecast/reading on file")
         if bowl_lookup:   # 11/2026: bowl games' forecasts are under postseason
             try:
-                weather_lookup.update(build_weather_lookup(cfbd.get_weather(season_year, season_type="postseason")))
+                bowl_weather_lookup = build_weather_lookup(cfbd.get_weather(season_year, season_type="postseason"))
             except Exception as e:
                 print(f"  [note] no postseason weather yet ({e})")
     except Exception as e:
@@ -1081,16 +1100,21 @@ def main(year: int):
             }
             game_out["injuries_home"] = team_injury_summary(injuries, home_meta.get("school"))
             game_out["injuries_away"] = team_injury_summary(injuries, away_meta.get("school"))
-            # 11/2026: bowl/playoff game name (None in the regular season).
-            game_out["bowl"] = match_neutral_site(home_meta.get("school"), away_meta.get("school"), bowl_lookup)
+            # 11/2026: bowl/playoff game name -- None unless this exact game is
+            # on CFBD's postseason schedule (see match_bowl).
+            bowl = match_bowl(home_meta.get("school"), away_meta.get("school"), g.get("commence_time"), bowl_lookup)
+            game_out["bowl"] = bowl["name"] if bowl else None
 
             if prior is not None:
                 home_rating = match_sp_rating(g.get("home_team"), sp_lookup)
                 away_rating = match_sp_rating(g.get("away_team"), sp_lookup)
                 neutral = match_neutral_site(home_meta.get("school"), away_meta.get("school"), neutral_site_lookup)
+                if bowl:
+                    neutral = bowl["neutral"]
                 home_ov = get_team_override(home_meta.get("school"), injury_overrides)
                 away_ov = get_team_override(away_meta.get("school"), injury_overrides)
-                game_weather = match_weather(home_meta.get("school"), away_meta.get("school"), weather_lookup)
+                game_weather = match_weather(home_meta.get("school"), away_meta.get("school"),
+                                             bowl_weather_lookup if bowl else weather_lookup)
                 score_args = dict(pace_returning=pace_returning_lookup, core_ratings=core_ratings_lookup,
                                   weather=game_weather, v2_lookup=v2_lookup, qb_out=qb_out,
                                   kickoff=g.get("commence_time"))
