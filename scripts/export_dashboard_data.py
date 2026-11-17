@@ -1210,7 +1210,12 @@ def main(year: int):
                 if row is None:
                     continue
                 pred = float(tmodel.predict(pd.DataFrame([row]))[0])
-                scored.append({"home": go.get("home_team"), "away": go.get("away_team"), "home_school": hs,
+                try:
+                    why = tl.explain(tmodel, row)
+                except Exception as e:
+                    why = None
+                    print(f"  [note] totals breakdown skipped for {hs}-{as_} ({e})")
+                scored.append({"why": why, "home": go.get("home_team"), "away": go.get("away_team"), "home_school": hs,
                                "away_school": as_, "kickoff": go.get("commence_time"), "line": float(line),
                                "pred": pred, "weather": go.get("weather"), "book": go.get("book_used")})
                 go["model_total"] = round(pred, 1)

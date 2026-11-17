@@ -2066,6 +2066,22 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .pgr-bar i { position: absolute; top: -3px; bottom: -3px; width: 2px; background: #fff; }
 .pgr-sub { font-size: 10.5px; color: var(--muted-3, #8B98A5); }
 .perf-props { margin-bottom: 16px; }
+.bc-pill.is-tot { background: rgba(94,200,255,0.14); color: #5EC8FF; border: 1px solid rgba(94,200,255,0.5); }
+.tot-bc .row-accent { background: #C48CFF; } .tot-bc.is-a .row-accent { background: var(--neon); } .tot-bc.is-c .row-accent { background: #FF6B6B; }
+.tot-bc-body { display: grid !important; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; }
+.tot-bc-body .pg-badge { margin-left: 0; font-size: 14px; padding: 3px 10px; }
+.tot-bc-edge { font-size: 20px; font-weight: 900; text-align: right; } .tot-bc-edge.is-under { color: #5EC8FF; } .tot-bc-edge.is-over { color: #FF9F5E; }
+.tot-bc-edge span { display: block; font-size: 10px; font-weight: 700; color: var(--muted-3, #8A94A3); letter-spacing: 0.04em; }
+.tot-gb { margin-top: 12px; } .tot-gb-sub { font-size: 12px; color: var(--muted-2, #AEB6C2); } .tot-gb .pg-badge { margin-left: 0; }
+.tot-gb-grade { font-size: 12px; color: var(--muted-2, #AEB6C2); margin-top: 6px; }
+.tot-drv { margin: 6px 0 4px; } .tot-drv-r { display: grid; grid-template-columns: 150px 1fr 48px; gap: 8px; align-items: center; font-size: 12px; padding: 3px 0; }
+.tot-drv-b { position: relative; height: 10px; background: rgba(255,255,255,0.05); border-radius: 5px; }
+.tot-drv-b::after { content: ''; position: absolute; left: 50%; top: -2px; bottom: -2px; width: 1px; background: rgba(255,255,255,0.25); }
+.tot-drv-b i { position: absolute; top: 0; bottom: 0; border-radius: 5px; } .tot-drv-b i.is-up { background: #FF9F5E; } .tot-drv-b i.is-dn { background: #5EC8FF; }
+.tot-drv-r b { text-align: right; } .tot-drv-r b.is-up { color: #FF9F5E; } .tot-drv-r b.is-dn { color: #5EC8FF; }
+.tot-drv-note { font-size: 10px; color: var(--muted-3, #8A94A3); margin-top: 4px; }
+.tot-row { cursor: pointer; } .tot-row:hover { border-color: rgba(255,255,255,0.2); }
+@media (max-width: 760px) { .tot-drv-r { grid-template-columns: 110px 1fr 40px; } .tot-res { grid-template-columns: 24px 80px 1fr; } .tot-rt { display: none; } }
 .tot-list { display: grid; gap: 10px; }
 .tot-row { display: grid; grid-template-columns: 110px 1fr 230px; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 12px; background: var(--panel, rgba(255,255,255,0.03)); border: 1px solid rgba(255,255,255,0.08); border-left: 4px solid #C48CFF; }
 .tot-row.is-a { border-left-color: var(--neon); }
@@ -5050,7 +5066,10 @@ RENDERER_JS = """<script>
     if (!p || !meta.cats) return '';
     var g = p.game, A = team(g.away), H = team(g.home);
     var pa = TM[g.awaySchool], ph = TM[g.homeSchool];
-    if (!pa || !ph) return '';
+    if (!pa || !ph) {
+      var tOnly = totForGame(g);
+      return tOnly ? '<div class="tm-card gb-card"><div class="tm-title">' + icon('edge') + '<span>Game breakdown</span><em>' + esc(A.abbr) + ' at ' + esc(H.abbr) + '</em></div>' + renderTotalBreakdown(tOnly, g) + '</div>' : '';
+    }
     var aOff = gbSide(A, H, tmCompare(pa, ph)), hOff = gbSide(H, A, tmCompare(ph, pa));
     // Matchup score per team: its offense's net edge plus its defense's net edge.
     var aScore = aOff.net - hOff.net, hScore = -aScore;
@@ -5109,7 +5128,7 @@ RENDERER_JS = """<script>
       if (oppKey.length) parts.push('the other side has ' + oppKey.map(fmtK).join(', ') + ' listed');
       if (parts.length) risk = '<div class="gb-risk">&#9888; Injury check: ' + parts.join('; ') + '. Confirm status before kickoff.</div>';
     }
-    var back = state.bdFrom ? '<button type="button" class="gb-back" onclick="window.__cfbBackToProps()">&larr; Back to Player Props</button>' : '';
+    var back = state.bdFrom ? '<button type="button" class="gb-back" onclick="window.__cfbBackToProps()">&larr; Back to ' + (state.bdFrom.page === 'totals' ? 'Totals' : 'Player Props') + '</button>' : '';
     return '<div class="tm-card gb-card">' + back + '<div class="tm-title">' + icon('edge') + '<span>Game breakdown</span><em>' +
       esc(A.abbr) + ' at ' + esc(H.abbr) + '</em></div>' +
       '<div class="gb-info">' + gbInfo(p) + '</div>' +
@@ -5118,6 +5137,7 @@ RENDERER_JS = """<script>
       sec('Players to know <span>(model projections this week)</span>', players.length ? '<p class="gb-p">' + players.join('</p><p class="gb-p">') + '</p>' : '') +
       sec('Official props in this game <span>(why each one is a play)</span>', props.length ? props.join('') : '') +
       '<div class="gb-playbox"><div class="gb-lab">The play</div>' + play + risk + '</div>' +
+      (totForGame(g) ? renderTotalBreakdown(totForGame(g), g) : '') +
       '<div class="tm-foot">Matchup text comes from the team ranks below. The play comes from the model&rsquo;s number against the market; the matchup and injuries are context, not extra filters (not yet backtested).</div></div>';
   }
   window.__cfbPpFilters = function () { state.ppFilters = !state.ppFilters; render(); };
@@ -5287,7 +5307,7 @@ RENDERER_JS = """<script>
       (nRemove ? ' &nbsp;&middot;&nbsp; <span class="bc-sum-rm">' + nRemove + ' in your tracker to take off</span>' : '') + '</div>' : '';
     return '' +
       '<div class="section-head mt-md"><div class="section-title"><div class="section-flag is-green"></div>' +
-      '<h2>Bet Card</h2></div></div>' + summary + body +
+      '<h2>Bet Card</h2></div></div>' + summary + body + renderBetCardTotals() +
       (chg && chg.dropped.length ? '<div class="bc-dropped"><div class="bc-note-h">Dropped off since the last run (' + esc(chg.since) + ') &mdash; not a bet now</div>' +
         chg.dropped.map(function (x) {
           var t = bcDroppedTracked(x.p);
@@ -5839,7 +5859,7 @@ RENDERER_JS = """<script>
       var mv = r.move > 0 ? '<span class="tot-mv is-good">line moved our way</span>' : r.move < 0 ? '<span class="tot-mv is-bad">line moved against us</span>' : '';
       var flagged = r.first_line != null && Number(r.first_line) !== Number(r.line) ? 'Flagged at ' + r.first_line + ' &middot; ' : '';
       var edgeAbs = Math.abs(r.edge), pct = Math.min(100, edgeAbs / 12 * 100);
-      return '<div class="tot-row ' + m[2] + '">' +
+      return '<div class="tot-row ' + m[2] + '"' + totOpenAttr(r) + '>' +
         '<div class="tot-grade"><span class="pg-badge ' + m[2] + ' is-big">' + m[0] + ' ' + r.grade + '</span><div class="tot-gnote">' + m[1] + '</div></div>' +
         '<div class="tot-main">' +
           '<div class="tot-play">' + (r.side === 'under' ? 'UNDER ' : 'OVER ') + r.line + (r.new ? '<span class="bc-new">NEW</span>' : '') + '</div>' +
@@ -5850,24 +5870,126 @@ RENDERER_JS = """<script>
           '<div class="tot-n"><span>Model</span><b>' + Number(r.pred).toFixed(1) + '</b></div>' +
           '<div class="tot-n"><span>Edge</span><b class="' + (r.side === 'under' ? 'is-under' : 'is-over') + '">' + totSigned(r.edge, 1) + '</b>' +
             '<i class="tot-bar"><i style="width:' + pct.toFixed(0) + '%"></i></i></div>' +
-          '<div class="tot-sub">' + flagged + 'Backtest ' + r.grade + ': ' + bt(bo) + '</div>' +
+          '<div class="tot-sub">' + flagged + 'Backtest ' + r.grade + ': ' + bt(bo) + ' &middot; <u>breakdown &rsaquo;</u></div>' +
         '</div></div>';
     }).join('') + '</div>';
     return head + body + totFoot(R, B);
   }
   function totFoot(R, B) {
-    var recent = (R.recent || []).slice(0, 15);
-    var res = recent.length ? '<div class="pp-panel"><h3>Recent graded totals</h3>' + recent.map(function (p) {
+    var hg = state.totHist || 'all';
+    var recent = (R.recent || []).filter(function (p) { return hg === 'all' || p.grade === hg; });
+    var hseg = function (v, l) { return '<button class="tab tab--prop' + (hg === v ? ' is-active' : '') + '" onclick="window.__cfbTotHist(&quot;' + v + '&quot;)"><span>' + l + '</span></button>'; };
+    var res = renderTotalsRecord() + '<div class="pp-panel"><h3>History</h3><div class="prop-tabs" style="margin:4px 0 8px">' + hseg('all', 'All') + hseg('A', '&#128293; A') + hseg('B', '&#127922; B') + hseg('C', '&#128683; C') + '</div>' +
+      (recent.length ? '' : '<div class="pp-panel-note">No graded totals yet. Tracking started this week; results fill in as games go final.</div>') + recent.map(function (p) {
       var c = p.result === 'W' ? 'is-good' : p.result === 'L' ? 'is-bad' : '';
       return '<div class="tot-res"><span class="tot-rw ' + c + '">' + p.result + '</span><span>' + (TOT_META[p.grade] || ['', ''])[0] + ' ' + (p.side === 'under' ? 'U ' : 'O ') + p.line + '</span>' +
-        '<span class="tot-rg">' + esc(abbrOf(p.away)) + ' at ' + esc(abbrOf(p.home)) + '</span><span class="tot-rt">Final ' + (p.total != null ? p.total : '') + '</span></div>';
-    }).join('') + '</div>' : '';
+        '<span class="tot-rg">' + esc(abbrOf(p.away)) + ' at ' + esc(abbrOf(p.home)) + ' &middot; ' + esc(propKickoff(p.kickoff)) + '</span><span class="tot-rt">Final ' + (p.total != null ? p.total : '') + '</span></div>';
+    }).join('') + '</div>';
     return res + '<div class="pp-panel tot-key"><h3>How totals become official</h3>' +
       '<div class="pp-panel-note"><b>Unders:</b> model 3+ points under the line, on a total of 50+. <b>Overs:</b> model 7+ points over, with no 10+ mph wind (an over needs a forecast first). The edge is always against the line shown now, so every play here is still a bet at that number.<br>' +
       '<b>Grade:</b> unders 7+ under = A; 5-7 under = B (A with 10+ mph wind); 3-5 under = B; overs = B. Line move after it&rsquo;s flagged: our way bumps it up a grade, against us drops it.<br>' +
       '<b>Backtest</b> (' + esc((B.seasons || []).join(', ')) + ', vs opening totals): unders ' + (B.under ? B.under.w + '-' + B.under.l + ' (' + totSigned(B.under.roi, 1) + '%)' : '&mdash;') +
       ', overs ' + (B.over ? B.over.w + '-' + B.over.l + ' (' + totSigned(B.over.roi, 1) + '%)' : '&mdash;') +
       '. The rules were picked on that same backtest, so expect the live record to be lower. The edge showed up against opening lines and was gone by the close: bet them early.</div></div>';
+  }
+  // ---- Totals on the Edge Board + game breakdown (11/2026) ----
+  function totGameIndex(r) {
+    for (var i = 0; i < D.games.length; i++) {
+      var g = D.games[i];
+      if (g.home === r.home && g.away === r.away && g.kickoffIso === r.kickoff) return i;
+    }
+    return -1;
+  }
+  function totForGame(g) {
+    var rows = D.totals || [];
+    for (var i = 0; i < rows.length; i++) if (rows[i].home === g.home && rows[i].away === g.away && rows[i].kickoff === g.kickoffIso) return rows[i];
+    return null;
+  }
+  function totOpenAttr(r) {
+    var gi = totGameIndex(r);
+    return gi < 0 ? '' : ' onclick="window.__cfbGoBreakdown(' + gi + ')" style="cursor:pointer" title="Open the game breakdown" ';
+  }
+  function renderBetCardTotals() {
+    var rows = D.totals || [];
+    var head = '<div class="bc-group is-tot"><div class="bc-group-h"><span class="bc-pill is-tot">TOTALS</span> Official overs &amp; unders &middot; bet the &#128293; A&rsquo;s <em>' + rows.length + '</em></div>';
+    if (!rows.length) return head + '<div class="empty-state">No official totals right now.</div></div>';
+    return head + '<div class="projector">' + rows.map(function (r) {
+      var m = TOT_META[r.grade] || TOT_META.B;
+      return '<div class="row bc-row tot-bc ' + m[2] + '"' + totOpenAttr(r) + '><div class="row-accent"></div><div class="row-body tot-bc-body">' +
+        '<span class="pg-badge ' + m[2] + '">' + m[0] + ' ' + r.grade + '</span>' +
+        '<div class="tot-bc-main"><div class="card-play"><span>' + (r.side === 'under' ? 'UNDER ' : 'OVER ') + r.line + '</span>' + (r.new ? '<span class="bc-new">NEW</span>' : '') + '</div>' +
+        '<div class="card-note">' + esc(abbrOf(r.away) + ' at ' + abbrOf(r.home)) + ' &middot; ' + esc(totKick(r.kickoff)) + ' &middot; model ' + Number(r.pred).toFixed(1) + '</div>' +
+        '<div class="tot-tags">' + totWeather(r.weather, r.side) + '</div></div>' +
+        '<div class="tot-bc-edge ' + (r.side === 'under' ? 'is-under' : 'is-over') + '">' + totSigned(r.edge, 1) + '<span>breakdown &rsaquo;</span></div>' +
+        '</div></div>';
+    }).join('') + '</div></div>';
+  }
+  function totPerPlay(v, avg, isDef) {
+    if (v == null || avg == null) return '';
+    var d = v - avg, good = isDef ? d < -0.02 : d > 0.02, bad = isDef ? d > 0.02 : d < -0.02;
+    return good ? 'better than average' : bad ? 'worse than average' : 'about average';
+  }
+  function renderTotalBreakdown(r, g) {
+    var W = r.why || {}, T = W.teams || {}, AV = W.avg || {}, A = team(g.away), H = team(g.home);
+    var a = T.away || {}, h = T.home || {};
+    var under = r.side === 'under';
+    var p = [];
+    if (a.ppg_for != null && h.ppg_for != null) {
+      p.push('<b>Scoring so far:</b> ' + esc(A.abbr) + ' scores ' + a.ppg_for + ' a game and ' + esc(H.abbr) + ' allows ' + h.ppg_against + '; ' +
+        esc(H.abbr) + ' scores ' + h.ppg_for + ' and ' + esc(A.abbr) + ' allows ' + a.ppg_against + '. Averaging those gives ' + (W.formula != null ? W.formula : '&mdash;') +
+        ' points' + (AV.total != null ? ' (a typical game is about ' + AV.total + ')' : '') + ', against a line of ' + r.line + '.');
+    }
+    if (a.off_ppa != null && h.def_ppa != null) {
+      p.push('<b>Per play:</b> ' + esc(A.abbr) + '&rsquo;s offense is ' + totPerPlay(a.off_ppa, AV.off_ppa) + ' at gaining points per snap, into a ' + esc(H.abbr) + ' defense that is ' + totPerPlay(h.def_ppa, AV.def_ppa, true) + '. ' +
+        esc(H.abbr) + '&rsquo;s offense is ' + totPerPlay(h.off_ppa, AV.off_ppa) + ', into a ' + esc(A.abbr) + ' defense that is ' + totPerPlay(a.def_ppa, AV.def_ppa, true) + '. ' +
+        'Per-play numbers are recent-game weighted, so they catch a unit that has turned a corner better than season scoring does.');
+    }
+    if (a.pace != null && h.pace != null && AV.pace != null) {
+      var slow = (a.pace + h.pace) / 2 > AV.pace + 0.2, fast = (a.pace + h.pace) / 2 < AV.pace - 0.2;
+      p.push('<b>Drives:</b> last season ' + esc(A.abbr) + ' ran ' + a.pace.toFixed(1) + ' plays a drive and ' + esc(H.abbr) + ' ' + h.pace.toFixed(1) + ' (typical ' + AV.pace.toFixed(1) + '). ' +
+        (slow ? 'Long, grinding drives burn clock, so there are fewer possessions to score on.' : fast ? 'Short drives mean quick scores or quick punts, so more possessions in the game.' : 'Nothing unusual there.'));
+    }
+    var w = r.weather;
+    if (w) {
+      var wind = w.game_indoors ? 0 : (w.wind_speed || 0);
+      p.push('<b>Weather:</b> ' + (w.game_indoors ? 'dome, so weather is out of it.' :
+        Math.round(wind) + ' mph wind, ' + (w.temperature != null ? Math.round(w.temperature) + '&deg;F' : '') + (w.precipitation > 0 ? ', rain/snow' : '') + '. ' +
+        (wind >= 15 ? 'That much wind takes away deep balls and long field goals, which helps the under.' : wind >= 10 ? 'Enough wind to bother the passing and kicking game a bit (it bumps an under&rsquo;s grade).' : 'Not enough wind to matter.')));
+    } else p.push('<b>Weather:</b> no forecast yet. It shows up a few days before kickoff' + (under ? '.' : '; an over isn&rsquo;t official until it does.'));
+    if (T.home && T.home.qb_out) p.push('<b>QB:</b> ' + esc(H.abbr) + '&rsquo;s starting QB is listed out.');
+    if (T.away && T.away.qb_out) p.push('<b>QB:</b> ' + esc(A.abbr) + '&rsquo;s starting QB is listed out.');
+    var dr = (W.drivers || []);
+    var mx = Math.max.apply(null, dr.map(function (d) { return Math.abs(d[1]); }).concat([1]));
+    var bars = dr.length ? '<div class="tot-drv">' + dr.map(function (d) {
+      var wpx = Math.abs(d[1]) / mx * 50, up = d[1] > 0;
+      return '<div class="tot-drv-r"><span class="tot-drv-l">' + esc(d[0]) + '</span><span class="tot-drv-b"><i class="' + (up ? 'is-up' : 'is-dn') + '" style="' + (up ? 'left:50%' : 'right:50%') + ';width:' + wpx.toFixed(1) + '%"></i></span><b class="' + (up ? 'is-up' : 'is-dn') + '">' + totSigned(d[1], 1) + '</b></div>';
+    }).join('') + '<div class="tot-drv-note">Points each group adds to (+) or takes off (&minus;) the model&rsquo;s total compared with a typical value.</div></div>' : '';
+    var parts = (r.grade_parts || []).map(function (x) { return esc(x[0]) + ' <b>' + (x[1] > 0 ? '+' : '') + x[1] + '</b>'; }).join(' &middot; ');
+    var m = TOT_META[r.grade] || TOT_META.B;
+    return '<div class="gb-playbox tot-gb"><div class="gb-lab">The total</div>' +
+      '<div><span class="pg-badge ' + m[2] + '">' + m[0] + ' ' + r.grade + '</span> <span class="gb-play">' + (under ? 'UNDER ' : 'OVER ') + r.line + '</span> ' +
+      '<span class="tot-gb-sub">model ' + Number(r.pred).toFixed(1) + ' &middot; edge ' + totSigned(r.edge, 1) + '</span></div>' +
+      (parts ? '<div class="tot-gb-grade">Grade: ' + parts + ' = ' + r.grade + ' (' + m[1] + ')</div>' : '') +
+      '<div class="gb-lab2 gb-why-lab">Why it&rsquo;s a play</div>' + p.map(function (x) { return '<p class="gb-p">' + x + '</p>'; }).join('') +
+      '<div class="gb-lab2">What moves the model&rsquo;s number</div>' + bars +
+      (r.first_line != null && Number(r.first_line) !== Number(r.line) ? '<div class="gb-note">Flagged at ' + r.first_line + ', now ' + r.line + (r.move > 0 ? ': the market has moved toward us.' : r.move < 0 ? ': the market has moved against us.' : '.') + '</div>' : '') +
+      '</div>';
+  }
+  function renderTotalsRecord() {
+    var R = D.totalsRecord || {}, G = R.grades || {};
+    var since = R.since ? new Date(R.since) : null;
+    var rowF = function (g) {
+      var o = G[g] || {}, m = TOT_META[g], n = (o.w || 0) + (o.l || 0);
+      return '<div class="pgr-t ' + m[2] + '"><div class="pgr-g">' + m[0] + ' ' + g + ', ' + m[1] + '</div>' +
+        '<div>' + (n ? o.w + '-' + o.l + (o.p ? '-' + o.p : '') + ', ' + totSigned(o.units, 1) + 'u' : '0-0') + '</div>' +
+        '<div class="pgr-roi ' + (o.roi == null ? '' : o.roi >= 0 ? 'is-good' : 'is-bad') + '">' + (o.roi == null ? '&ndash;' : totSigned(o.roi, 1) + '%') + '</div>' +
+        '<div>' + (n ? Math.round(o.w / n * 100) + '%' : '&ndash;') + '</div></div>';
+    };
+    return '<div class="pp-panel pgr"><h3>Totals record by grade</h3>' +
+      '<div class="pp-panel-note">Official totals' + (since ? ' tracked since ' + (since.getMonth() + 1) + '/' + since.getDate() : '') +
+      ', graded at the last line before kickoff, 1 unit a play at -110.' + (R.pending ? ' ' + R.pending + ' waiting on a final score.' : '') + '</div>' +
+      '<div class="pgr-t pgr-h"><div>Grade</div><div>Record</div><div>ROI</div><div>Hit rate</div></div>' +
+      ['A', 'B', 'C'].map(rowF).join('') + '</div>';
   }
   function renderPlayGradeRecord() {
     var P = D.playGradeRecord;
@@ -8519,7 +8641,7 @@ RENDERER_JS = """<script>
       case 'fantasy': return renderFantasy();
       case 'injuries': return renderInjuries();
       case 'tracker': return renderTracker();
-      case 'performance': return '<div class="perf-props">' + renderPlayGradeRecord() + '</div>' + renderBacktest() + renderClv();
+      case 'performance': return '<div class="perf-props">' + renderPlayGradeRecord() + renderTotalsRecord() + '</div>' + renderBacktest() + renderClv();
       case 'edge':
       default:
         return renderKpis(card, priced) +
@@ -8559,6 +8681,7 @@ RENDERER_JS = """<script>
   window.__cfbSearch = function (v) { state.search = v; renderKeep(); };
   window.__cfbAtdGame = function (v) { state.atdGame = v; render(); };
   window.__cfbTotShow = function (v) { state.totShow = v; render(); };
+  window.__cfbTotHist = function (v) { state.totHist = v; render(); };
   window.__cfbTdaQ = function (v) {
     state.tdaQ = v; render();
     var el = document.querySelector('.tda-search');
@@ -8629,7 +8752,7 @@ RENDERER_JS = """<script>
   // 11/2026: Player Props -> this game's breakdown on the Edge Board, and back.
   window.__cfbGoBreakdown = function (gi, propKey) {
     state.selected = gi;
-    state.bdFrom = (propKey || state.page === 'props') ? { key: propKey, y: window.scrollY } : null;
+    state.bdFrom = (propKey || state.page === 'props' || state.page === 'totals') ? { key: propKey, y: window.scrollY, page: state.page } : null;
     state.page = 'edge';
     render();
     var el = document.querySelector('.gb-card') || document.getElementById('em-projector');
@@ -8637,7 +8760,7 @@ RENDERER_JS = """<script>
   };
   window.__cfbBackToProps = function () {
     var from = state.bdFrom || {};
-    state.page = 'props';
+    state.page = from.page || 'props';
     if (from.key) state.propDetail = from.key;
     state.bdFrom = null;
     render();

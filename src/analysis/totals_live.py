@@ -95,6 +95,66 @@ def game_inputs(home, away, form, v2, prior, weather, neutral, qb_out):
     return row
 
 
+DRIVER_GROUPS = [
+    ("Scoring form", ["home_roll_ppg_for", "home_roll_ppg_against", "away_roll_ppg_for", "away_roll_ppg_against"]),
+    ("Per-play efficiency", ["home_ewm_off_ppa", "home_ewm_def_ppa", "away_ewm_off_ppa", "away_ewm_def_ppa",
+                             "home_ewm_off_sr", "home_ewm_def_sr", "away_ewm_off_sr", "away_ewm_def_sr"]),
+    ("Plays per drive", ["home_pace", "away_pace"]),
+    ("Last year's CORE ratings", ["home_core_offense", "home_core_defense", "away_core_offense", "away_core_defense"]),
+    ("Weather", ["temperature", "wind_speed", "precipitation"]),
+    ("QB out", ["home_qb_out", "away_qb_out"]),
+]
+NEUTRAL_WEATHER = {"temperature": 65.0, "wind_speed": 6.0, "precipitation": 0.0}
+
+
+def explain(model, row: dict) -> dict:
+    """What the breakdown shows for one game (11/2026): each team's inputs
+    next to the league average, and how many points each group of inputs
+    moves the model's total (that group set to a typical value, everything
+    else left as is)."""
+    base = float(model.predict(pd.DataFrame([row]))[0])
+    med = model.medians or {}
+    drivers = []
+    for name, cols in DRIVER_GROUPS:
+        r2 = dict(row)
+        for c in cols:
+            if name == "Weather":
+                if row.get("game_indoors"):
+                    continue
+                r2[c] = NEUTRAL_WEATHER[c]
+            elif name == "QB out":
+                r2[c] = 0.0
+            else:
+                r2[c] = med.get(c, r2.get(c))
+        d = base - float(model.predict(pd.DataFrame([r2]))[0])
+        if abs(d) >= 0.1:
+            drivers.append([name, round(d, 1)])
+    drivers.sort(key=lambda x: -abs(x[1]))
+    def f(v, n=2):
+        try:
+            return None if v is None or pd.isna(v) else round(float(v), n)
+        except (TypeError, ValueError):
+            return None
+    teams = {}
+    for side in ("home", "away"):
+        teams[side] = {"ppg_for": f(row.get(f"{side}_roll_ppg_for"), 1), "ppg_against": f(row.get(f"{side}_roll_ppg_against"), 1),
+                       "pace": f(row.get(f"{side}_pace")), "off_ppa": f(row.get(f"{side}_ewm_off_ppa"), 3),
+                       "def_ppa": f(row.get(f"{side}_ewm_def_ppa"), 3), "off_sr": f(row.get(f"{side}_ewm_off_sr"), 3),
+                       "def_sr": f(row.get(f"{side}_ewm_def_sr"), 3), "gp": row.get(f"{side}_games_played_prior"),
+                       "qb_out": bool(row.get(f"{side}_qb_out"))}
+    avg = {"ppg": f(med.get("home_roll_ppg_for"), 1), "pace": f(med.get("home_pace")),
+           "off_ppa": f(med.get("home_ewm_off_ppa"), 3), "def_ppa": f(med.get("home_ewm_def_ppa"), 3),
+           "off_sr": f(med.get("home_ewm_off_sr"), 3), "def_sr": f(med.get("home_ewm_def_sr"), 3),
+           "total": f(med.get("pts_formula"), 1)}
+    formula = None
+    try:
+        formula = round((row["home_roll_ppg_for"] + row["away_roll_ppg_against"]) / 2
+                        + (row["away_roll_ppg_for"] + row["home_roll_ppg_against"]) / 2, 1)
+    except Exception:
+        pass
+    return {"teams": teams, "avg": avg, "drivers": drivers, "formula": formula}
+
+
 # ---------------------------------------------------------------- rules
 
 def _wind(w):
@@ -137,6 +197,22 @@ def grade(side, edge, weather, line_now, first_line):
     score += move
     g = "A" if score >= 2 else ("B" if score >= 0 else "C")
     return g, move
+
+
+def grade_parts(side, edge, weather, move):
+    """How the grade was built, for the breakdown: [[reason, points], ...]."""
+    wind = _wind(weather) or 0.0
+    parts = []
+    if side == "under":
+        a = -edge
+        parts.append([f"{a:.1f} pts under the line", 2 if a >= 7 else 1 if a >= 5 else 0])
+        if wind >= WIND_GRADE_MPH:
+            parts.append([f"{wind:.0f} mph wind", 1])
+    else:
+        parts.append([f"{edge:.1f} pts over the line (7+)", 1])
+    if move:
+        parts.append(["line moved our way" if move > 0 else "line moved against us", move])
+    return parts
 
 
 # ---------------------------------------------------------------- log
@@ -186,7 +262,8 @@ def run(scored_games, log, now_iso):
             rows.append({"key": key, "home": g["home"], "away": g["away"], "kickoff": g["kickoff"],
                          "side": side, "line": g["line"], "pred": round(g["pred"], 1), "edge": round(edge, 1),
                          "grade": gr, "move": move, "first_line": p["first"]["line"], "first_at": p["first"]["at"],
-                         "weather": w or None, "book": g.get("book"), "new": len(p["h"]) == 1})
+                         "weather": w or None, "book": g.get("book"), "new": len(p["h"]) == 1,
+                         "why": g.get("why"), "grade_parts": grade_parts(side, edge, g.get("weather"), move)})
     log["updated"] = now_iso
     rows.sort(key=lambda r: ({"A": 0, "B": 1, "C": 2}[r["grade"]], -abs(r["edge"])))
     return rows
@@ -244,7 +321,11 @@ def record(log):
            "sides": {s: summ([p for p in done if p["side"] == s]) for s in ("over", "under")}}
     out["recent"] = sorted(({"home": p["home"], "away": p["away"], "kickoff": p["kickoff"], "side": p["side"],
                              "line": p.get("final_line"), "grade": p.get("final_grade"), "total": p.get("total"),
-                             "result": p["result"]} for p in done), key=lambda r: r["kickoff"], reverse=True)[:40]
+                             "result": p["result"], "units": p.get("units")} for p in done),
+                           key=lambda r: r["kickoff"], reverse=True)
+    pending = [p for p in log.get("plays", {}).values() if not p.get("result") and (_final(p) or [0] * 6)[5]]
+    out["pending"] = len(pending)
+    out["since"] = min((p["first"]["at"] for p in log.get("plays", {}).values() if p.get("first")), default=None)
     return out
 
 
