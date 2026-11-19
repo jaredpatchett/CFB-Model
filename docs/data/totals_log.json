@@ -122,11 +122,19 @@
      -3.5,
      "B",
      1
+    ],
+    [
+     "2026-11-19T14:42:05.122407+00:00",
+     56.5,
+     54.1,
+     -2.4,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 63.7,
-    "wind_speed": 12.7,
+    "temperature": 64.0,
+    "wind_speed": 10.1,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -192,11 +200,19 @@
      -3.2,
      "B",
      1
+    ],
+    [
+     "2026-11-19T14:42:05.122407+00:00",
+     67.5,
+     64.3,
+     -3.2,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 63.5,
-    "wind_speed": 5.8,
+    "temperature": 56.1,
+    "wind_speed": 7.1,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -262,11 +278,19 @@
      -4.8,
      "B",
      1
+    ],
+    [
+     "2026-11-19T14:42:05.122407+00:00",
+     70.5,
+     65.7,
+     -4.8,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 68.4,
-    "wind_speed": 3.1,
+    "temperature": 66.7,
+    "wind_speed": 4.7,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -332,11 +356,19 @@
      -4.3,
      "B",
      1
+    ],
+    [
+     "2026-11-19T14:42:05.122407+00:00",
+     64.5,
+     59.9,
+     -4.6,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 79.9,
-    "wind_speed": 6.3,
+    "temperature": 79.5,
+    "wind_speed": 10.8,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -402,11 +434,19 @@
      -7.7,
      "A",
      1
+    ],
+    [
+     "2026-11-19T14:42:05.122407+00:00",
+     55.5,
+     48.1,
+     -7.4,
+     "A",
+     1
     ]
    ],
    "weather": {
-    "temperature": 69.1,
-    "wind_speed": 10.9,
+    "temperature": 72.5,
+    "wind_speed": 12.6,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -472,16 +512,79 @@
      -4.5,
      "B",
      1
+    ],
+    [
+     "2026-11-19T14:42:05.122407+00:00",
+     56.5,
+     52.4,
+     -4.1,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 54.1,
-    "wind_speed": 5.8,
+    "temperature": 56.3,
+    "wind_speed": 4.6,
     "precipitation": 0.0,
     "game_indoors": false
    },
    "book": "draftkings"
+  },
+  "New Mexico State Aggies|Delaware Blue Hens|2026-11-21T20:00:00Z|under": {
+   "home": "New Mexico State Aggies",
+   "away": "Delaware Blue Hens",
+   "home_school": "New Mexico State",
+   "away_school": "Delaware",
+   "kickoff": "2026-11-21T20:00:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-19T14:42:05.122407+00:00",
+    "line": 54.5,
+    "pred": 50.0
+   },
+   "h": [
+    [
+     "2026-11-19T14:42:05.122407+00:00",
+     54.5,
+     50.0,
+     -4.5,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 61.0,
+    "wind_speed": 19.7,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "UCLA Bruins|USC Trojans|2026-11-28T20:30:00Z|under": {
+   "home": "UCLA Bruins",
+   "away": "USC Trojans",
+   "home_school": "UCLA",
+   "away_school": "USC",
+   "kickoff": "2026-11-28T20:30:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-19T14:42:05.122407+00:00",
+    "line": 52.5,
+    "pred": 48.6
+   },
+   "h": [
+    [
+     "2026-11-19T14:42:05.122407+00:00",
+     52.5,
+     48.6,
+     -3.9,
+     "B",
+     1
+    ]
+   ],
+   "weather": null,
+   "book": "draftkings"
   }
  },
- "updated": "2026-11-18T19:56:59.709310+00:00"
+ "updated": "2026-11-19T14:42:05.122407+00:00"
 }
