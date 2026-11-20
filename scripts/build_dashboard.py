@@ -2988,12 +2988,12 @@ RENDERER_JS = """<script>
   var MARKETS = ['Spread', 'Moneyline'];
 
   var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', edgeSort: 'kickoff', edgeShow: 'all', edgeConf: 'ALL', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate', propGame: 'ALL', propOfficialOnly: false, propShowPass: false, propView: 'official', propDetail: null,
-    propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propQ: '', propMyList: false,
+    propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propQ: '', propMyList: false, propDefRank: 'ALL',
     atdView: 'all', atdBasis: 'best', atdSort: 'edge', atdGame: 'ALL' };
   // Props tab Sort & Filter preset (10/2026): saved per browser, applied on load.
   var PROP_PRESET_KEY = 'cfb_props_preset_v1';
-  var PROP_PRESET_FIELDS = ['propCat', 'propView', 'propMarket', 'propGame', 'propSort', 'propSort2', 'propSortRev', 'propDir', 'propBook', 'propMinEdge', 'propMyList', 'propShowPass', 'propMinMu'];
-  var PROP_DEFAULTS = { propCat: 'all', propView: 'official', propMarket: 'ALL', propGame: 'ALL', propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propMyList: false, propShowPass: false, propMinMu: 0 };
+  var PROP_PRESET_FIELDS = ['propCat', 'propView', 'propMarket', 'propGame', 'propSort', 'propSort2', 'propSortRev', 'propDir', 'propBook', 'propMinEdge', 'propMyList', 'propShowPass', 'propMinMu', 'propDefRank'];
+  var PROP_DEFAULTS = { propCat: 'all', propView: 'official', propMarket: 'ALL', propGame: 'ALL', propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propMyList: false, propShowPass: false, propMinMu: 0, propDefRank: 'ALL' };
   try {
     var pp0 = JSON.parse(localStorage.getItem(PROP_PRESET_KEY) || 'null');
     if (pp0) PROP_PRESET_FIELDS.forEach(function (k) { if (pp0.hasOwnProperty(k)) state[k] = pp0[k]; });
@@ -6399,12 +6399,21 @@ RENDERER_JS = """<script>
       if (it.flaggedDesc) { myTrk[it.flaggedDesc] = true; myStatus[it.flaggedDesc] = it.status || null; }
       myProps.push(it);
     });
+    // 11/20/2026: opposing defense's national rank vs the play (mu_rank,
+    // 1 = toughest), in the same ranges as the rush rank table.
+    var DEF_TIERS = [[1, 5], [6, 10], [11, 15], [16, 20], [21, 25], [26, 30], [31, 45], [46, 90], [91, 999]];
+    var inDefTier = function (r, key) {
+      if (key === 'ALL') return true;
+      var t = key.split('-'), lo = +t[0], hi = +t[1];
+      return r.mu_rank != null && r.mu_rank >= lo && r.mu_rank <= hi;
+    };
     var F = {
       dir: state.propDir === 'over' || state.propDir === 'under' ? state.propDir : 'all',
       minEdge: Number(state.propMinEdge) || 0,
       q: String(state.propQ || '').trim().toLowerCase(),
       mine: !!state.propMyList,
-      minMu: Number(state.propMinMu) || 0
+      minMu: Number(state.propMinMu) || 0,
+      defRank: DEF_TIERS.some(function (t) { return t[0] + '-' + t[1] === state.propDefRank; }) ? state.propDefRank : 'ALL'
     };
     var passes = function (r, skip) {
       if (skip !== 'view' && view !== 'all' && r._sec !== view) return false;
@@ -6419,6 +6428,7 @@ RENDERER_JS = """<script>
       }
       if (F.mine && !myTrk[propTrackLabel(r)]) return false;
       if (skip !== 'mu' && F.minMu && !(r.mu_score != null && r.mu_score >= F.minMu)) return false;
+      if (skip !== 'drank' && !inDefTier(r, F.defRank)) return false;
       return visible(r);
     };
     var countBy = function (skip, test) { var n = 0; rows.forEach(function (r) { if (passes(r, skip) && test(r)) n++; }); return n; };
@@ -6426,7 +6436,7 @@ RENDERER_JS = """<script>
 
     // Sorting: a main sort and a tiebreaker. Clicking a column header sets
     // the main sort; clicking it again flips the direction.
-    var SORTS = [['kickoff', 'Kickoff'], ['grade', 'Play grade (A first)'], ['edge', 'Highest edge'], ['hit', 'Hit chance'], ['roi', 'Track record ROI'], ['matchup', 'Matchup grade'], ['player', 'Player A-Z'], ['market', 'Market']];
+    var SORTS = [['kickoff', 'Kickoff'], ['grade', 'Play grade (A first)'], ['edge', 'Highest edge'], ['hit', 'Hit chance'], ['roi', 'Track record ROI'], ['matchup', 'Matchup grade'], ['defrank', 'Defense rank (toughest first)'], ['player', 'Player A-Z'], ['market', 'Market']];
     var sortOk = function (k) { return SORTS.some(function (x) { return x[0] === k; }); };
     var sort1 = sortOk(state.propSort) ? state.propSort : 'kickoff';
     var sort2 = sortOk(state.propSort2) ? state.propSort2 : 'edge';
@@ -6448,6 +6458,8 @@ RENDERER_JS = """<script>
         case 'hit': return function (a, b) { return num(b._lp) - num(a._lp); };
         case 'roi': return function (a, b) { return trackRoi(b) - trackRoi(a); };
         case 'matchup': return function (a, b) { return num(b.mu_score) - num(a.mu_score); };
+        // Opposing defense rank, 1 (toughest) first; no rank goes last.
+        case 'defrank': return function (a, b) { var x = a.mu_rank == null ? 1e9 : +a.mu_rank, y = b.mu_rank == null ? 1e9 : +b.mu_rank; return x - y; };
         case 'player': return function (a, b) { return String(a.player_name || '').localeCompare(String(b.player_name || '')); };
         case 'market': return function (a, b) { return marketName(a.market_name).localeCompare(marketName(b.market_name)) || (a.model_lean < b.model_lean ? -1 : a.model_lean > b.model_lean ? 1 : 0); };
         default: return function (a, b) { var x = a.start_time || '9', y = b.start_time || '9'; return x < y ? -1 : (x > y ? 1 : 0); };
@@ -6510,7 +6522,7 @@ RENDERER_JS = """<script>
     var nAllMkt = 0; Object.keys(mktCounts).forEach(function (k) { nAllMkt += mktCounts[k]; });
     var books = Object.keys(bookKeys).sort(function (a, b) { return bookLabel(a).localeCompare(bookLabel(b)); });
     var edgeOpt = function (v, label) { return segOpt('propMinEdge', String(v), String(F.minEdge), label, countBy('edge', function (r) { return !v || (r.model_ev != null && r.model_ev >= v); })); };
-    var nActive = (mkt !== 'ALL') + (gameSel !== 'ALL') + (F.dir !== 'all') + (bookSel !== 'ALL') + (F.minEdge > 0) + (F.q ? 1 : 0) + (F.mine ? 1 : 0) + (F.minMu > 0);
+    var nActive = (mkt !== 'ALL') + (gameSel !== 'ALL') + (F.dir !== 'all') + (bookSel !== 'ALL') + (F.minEdge > 0) + (F.q ? 1 : 0) + (F.mine ? 1 : 0) + (F.minMu > 0) + (F.defRank !== 'ALL');
     var controls = '<div class="pp-controls">' +
       '<div class="pp-seg" role="group" aria-label="Which plays to show">' +
         seg(0, 'official', 'Official', nSec.official) +
@@ -6554,6 +6566,13 @@ RENDERER_JS = """<script>
         '<div class="pp-fgroup"><span class="pp-flabel">Matchup grade</span><div class="pp-seg" role="group" aria-label="Minimum matchup grade">' +
           [[0, 'Any'], [60, 'B or better'], [80, 'A or better']].map(function (o) {
             return segOpt('propMinMu', String(o[0]), String(F.minMu), o[1], countBy('mu', function (r) { return !o[0] || (r.mu_score != null && r.mu_score >= o[0]); }));
+          }).join('') +
+        '</div></div>' +
+        '<div class="pp-fgroup"><span class="pp-flabel">Opposing defense rank (1 = toughest)</span><div class="pp-seg" role="group" aria-label="Opposing defense rank" style="flex-wrap:wrap">' +
+          segOpt('propDefRank', 'ALL', F.defRank, 'Any') +
+          DEF_TIERS.map(function (t) {
+            var k = t[0] + '-' + t[1];
+            return segOpt('propDefRank', k, F.defRank, t[1] >= 999 ? '#' + t[0] + '+' : '#' + t[0] + '\u2013' + t[1], countBy('drank', function (r) { return inDefTier(r, k); }));
           }).join('') +
         '</div></div>' +
         '<div class="pp-fgroup"><span class="pp-flabel">Sportsbook</span><select class="pp-select" data-prop-select="propBook" aria-label="Sportsbook">' +
