@@ -1979,7 +1979,7 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .pp-cat.is-on em { background: rgba(4,19,10,0.18); color: #04130A; }
 .pp-layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 16px; margin-top: 16px; align-items: start; }
 /* 11/20/2026 (Rod): props page = compact filter bar on top, the plays, and a
-   right-hand rail with Claude's favorites and a parlay pair builder. */
+   right-hand rail with model favorites and a parlay pair builder. */
 .pp-layout.is-rail { grid-template-columns: minmax(0, 1fr) 300px; margin-top: 12px; }
 .pp-fbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); padding: 8px 10px; }
 .pp-fbar .pp-select, .pp-fbar .pp-search { width: auto !important; flex: 0 1 auto; min-width: 0; max-width: 175px; height: 34px; padding: 0 26px 0 10px; font-size: 12px; }
@@ -6439,7 +6439,7 @@ RENDERER_JS = """<script>
       r._sec = r.is_official_play ? 'official' : (r.is_under_lean ? 'underlean' : (r.is_watch_play ? 'watch' : (r._auto ? 'tracked' : 'lean')));
     });
 
-    // ---- Claude's favorites (11/20/2026, Rod) ----
+    // ---- Model favorites (11/20/2026, Rod) ----
     // Picked by rule, so the list refreshes with every model run:
     //   official prop, play grade A, matchup grade A or A+, the breakdown
     //   check agrees, edge 8%+, price no worse than -150, not kicked off,
@@ -6465,6 +6465,8 @@ RENDERER_JS = """<script>
     var favKey = function (r) { return [r.fixture_id, r.player_name, r.market_name].join('|'); };
     var favByKey = {};
     favs.forEach(function (r) { favByKey[favKey(r)] = r; });
+    // Read-only hook so a run's favorites can be logged and graded later.
+    window.__cfbFavs = favs.map(function (r) { return { player: r.player_name, market: r.market_name, side: r.model_lean, start: r.start_time, line: r.line, price: r._price, team: r.team, mu: r.mu_grade, rank: r.mu_rank, ev: r.model_ev }; });
 
     // ---- Simplified 10/2026: each row answers "is there an edge?" once ----
     // Row = the bet, the edge (hit chance against what the price needs), the
@@ -6948,7 +6950,7 @@ RENDERER_JS = """<script>
       if (started) flags.push('<span class="pp-tag is-lean" title="This game has kicked off.">Started</span>');
       var ev = r.model_ev, evHeat = ev != null && ev > 0 ? Math.min(0.5, 0.1 + ev / 80) : 0;
       return '<div class="pp-grid pp-row' + (isOpen ? ' is-open' : '') + (r.is_official_play ? ' is-official' : '') + '">' +
-        '<div class="pp-who">' + (r.team ? trkMark(schoolAbbr(r.team), 30) : '') + '<div><div class="pp-name"><button type="button" class="pp-namebtn"' + pcOpenAttr(r) + 'title="Open the player card">' + esc(r.player_name) + '</button> ' + playGradeBadge(r) + propAgreeChip(r) + (favByKey[[r.fixture_id, r.player_name, r.market_name].join('|')] ? '<span class="fv-chip" title="On Claude&rsquo;s favorites list">&#9733; FAV</span>' : '') + '</div>' +
+        '<div class="pp-who">' + (r.team ? trkMark(schoolAbbr(r.team), 30) : '') + '<div><div class="pp-name"><button type="button" class="pp-namebtn"' + pcOpenAttr(r) + 'title="Open the player card">' + esc(r.player_name) + '</button> ' + playGradeBadge(r) + propAgreeChip(r) + (favByKey[[r.fixture_id, r.player_name, r.market_name].join('|')] ? '<span class="fv-chip" title="On the model favorites list">&#9733; FAV</span>' : '') + '</div>' +
           '<div class="pp-sub">' + esc(schoolAbbr(r.team) || '') + (r.opponent ? ' vs ' + esc(schoolAbbr(r.opponent)) : '') + ' &middot; ' + esc(withDay ? propKickoff(r.start_time) : kickTime(r.start_time)) + '</div></div></div>' +
         '<div title="' + esc(marketName(r.market_name)) + '"><div class="pp-pick">' + mktBadge(r.market_name) + '</div>' +
           '<div class="pp-ou">' + (isOver ? 'Over' : 'Under') + ' ' + esc(r.line) + '</div></div>' +
@@ -7152,7 +7154,7 @@ RENDERER_JS = """<script>
       (state.propPresetMsg ? '<span class="pp-saved">' + esc(state.propPresetMsg) + '</span>' : '') +
       '<span class="pp-fbar-n"><b>' + shown.length + '</b> shown' + (nActive ? ' &middot; ' + nActive + ' filter' + (nActive === 1 ? '' : 's') : '') + '</span>' +
     '</div>';
-    var modelWarn = nRecv && nRecvNew !== nRecv ? '<div class="pp-model" style="margin-top:8px">' + modelLine.replace(/^<div class="pp-model">|<\/div>$/g, '') + '</div>' : '';
+    var modelWarn = nRecv && nRecvNew !== nRecv ? '<div class="pp-model" style="margin-top:8px">' + modelLine.replace(/^<div class="pp-model">|<\\/div>$/g, '') + '</div>' : '';
 
     // ---- Right rail: favorites + parlay pairs ----
     var amToDec = function (a) { return a == null ? null : (a > 0 ? 1 + a / 100 : 1 + 100 / Math.abs(a)); };
@@ -7177,7 +7179,7 @@ RENDERER_JS = """<script>
         '<div class="fv-price">' + priceS(r._price) + '<button type="button" class="fv-add' + (on ? ' is-on' : '') + '" data-parlay-toggle="' + esc(favKey(r)) + '">' + (on ? '&#10003; Slip' : '+ Slip') + '</button></div>' +
         '<div class="fv-why">' + why + '</div></div>';
     }).join('') : '<div class="fv-empty">No props pass every check right now. New ones show up here as lines post and the model reruns through the week.</div>';
-    var favCard = '<div class="fv-card"><h3>&#11088; Claude&rsquo;s favorites <em>' + favs.length + '</em></h3>' +
+    var favCard = '<div class="fv-card"><h3>&#11088; Model favorites <em>' + favs.length + '</em></h3>' +
       '<div class="fv-sub">A-grade official props with an A matchup, a breakdown that agrees, and a backtest that&rsquo;s up for that spot. Refreshes every model run.</div>' + favList + '</div>';
     // Suggested pairs: two favorites from different games, best-ranked first.
     // Greedy: the best two favorites from different games, then the next
