@@ -798,6 +798,59 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .pp-cat.is-on { background: var(--neon); color: #04130A; box-shadow: 0 0 18px rgba(57,240,122,0.25); }
 .pp-cat.is-on em { background: rgba(4,19,10,0.18); color: #04130A; }
 .pp-layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 16px; margin-top: 16px; align-items: start; }
+/* 11/20/2026 (Rod): props page = compact filter bar on top, the plays, and a
+   right-hand rail with Claude's favorites and a parlay pair builder. */
+.pp-layout.is-rail { grid-template-columns: minmax(0, 1fr) 300px; margin-top: 12px; }
+.pp-fbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); padding: 8px 10px; }
+.pp-fbar .pp-select, .pp-fbar .pp-search { width: auto !important; flex: 0 1 auto; min-width: 0; max-width: 175px; height: 34px; padding: 0 26px 0 10px; font-size: 12px; }
+.pp-fbar .pp-select[data-prop-select="propGame"] { max-width: 150px; }
+.pp-fbar .pp-search { padding: 0 10px; width: 140px !important; }
+.pp-fbar .pp-btn { height: 34px; padding: 0 12px; font-size: 12px; }
+.pp-fbar-more { display: contents; }
+.pp-fbar-tog { display: none; }
+.pp-fbar-n { margin-left: auto; font-size: 12px; color: var(--muted); white-space: nowrap; }
+.pp-fbar-n b { color: var(--neon); }
+.pp-fbar .pp-toggle { height: 34px; }
+.pp-rail { position: sticky; top: 78px; display: flex; flex-direction: column; gap: 12px; max-height: calc(100vh - 92px); overflow-y: auto; scrollbar-width: thin; }
+.fv-card { background: linear-gradient(180deg, #111814, #0C110F); border: 1px solid var(--rule); border-radius: var(--radius); padding: 14px 14px 12px; }
+.fv-card h3 { margin: 0; font-family: var(--font-display); font-style: italic; font-weight: 900; font-size: 17px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+.fv-card h3 em { font-style: normal; font-family: var(--font-body); font-size: 11px; font-weight: 700; color: var(--muted); background: var(--chip); border-radius: 99px; padding: 2px 8px; }
+.fv-sub { font-size: 11.5px; color: var(--muted); margin: 4px 0 10px; line-height: 1.4; }
+.fv-item { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 4px 8px; align-items: center; padding: 9px 0; border-top: 1px solid var(--rule-row); }
+.fv-item:first-of-type { border-top: none; }
+.fv-rank { font-family: var(--font-display); font-style: italic; font-weight: 900; font-size: 18px; color: var(--neon); text-align: center; }
+.fv-name { font-weight: 700; font-size: 13px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fv-name button { all: unset; cursor: pointer; }
+.fv-name button:hover { color: var(--neon); }
+.fv-bet { font-size: 12px; color: var(--muted-2, #B6C2CF); margin-top: 1px; }
+.fv-bet b { color: #7FD8FF; }
+.fv-bet b.is-over { color: var(--neon); }
+.fv-why { grid-column: 2 / -1; font-size: 11px; color: var(--muted); line-height: 1.35; }
+.fv-why .is-pos { color: var(--green); font-weight: 700; }
+.fv-price { font-family: var(--font-mono, monospace); font-size: 12px; color: var(--text); text-align: right; }
+.fv-add { all: unset; cursor: pointer; display: block; margin-top: 4px; font-size: 10.5px; font-weight: 800; letter-spacing: 0.04em; border: 1px solid var(--rule-strong); border-radius: 99px; padding: 2px 8px; color: var(--muted); text-align: center; }
+.fv-add:hover { border-color: var(--neon); color: var(--neon); }
+.fv-add.is-on { background: var(--neon); border-color: var(--neon); color: #06120A; }
+.fv-empty { font-size: 12px; color: var(--muted); padding: 6px 0 2px; }
+.fv-chip { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.04em; color: #06120A; background: var(--neon); border-radius: 99px; padding: 1px 7px; margin-left: 4px; vertical-align: middle; }
+.pl-pair { border: 1px solid var(--rule); border-radius: 8px; padding: 9px 10px; margin-top: 8px; background: rgba(57,240,122,0.03); }
+.pl-pair-h { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 800; letter-spacing: 0.05em; color: var(--muted); text-transform: uppercase; }
+.pl-pair-h b { font-family: var(--font-mono, monospace); font-size: 13px; color: var(--neon); letter-spacing: 0; }
+.pl-leg { font-size: 12.5px; color: var(--text); margin-top: 4px; display: flex; justify-content: space-between; gap: 8px; }
+.pl-leg span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pl-leg i { font-style: normal; color: var(--muted); font-family: var(--font-mono, monospace); font-size: 11.5px; flex-shrink: 0; }
+.pl-leg button { all: unset; cursor: pointer; color: var(--muted); padding: 0 2px; flex-shrink: 0; }
+.pl-leg button:hover { color: var(--red); }
+.pl-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 7px; font-size: 11.5px; color: var(--muted); }
+.pl-foot b { color: #fff; }
+.pl-load { all: unset; cursor: pointer; font-size: 11px; font-weight: 800; color: var(--neon); }
+.pl-warn { font-size: 11px; color: #FFB84D; margin-top: 5px; }
+.pl-slip { border-color: rgba(57,240,122,0.45); background: rgba(57,240,122,0.06); }
+.pl-stake { display: flex; gap: 4px; }
+.pl-stake button { all: unset; cursor: pointer; font-size: 11px; font-weight: 700; border: 1px solid var(--rule-strong); border-radius: 6px; padding: 1px 7px; color: var(--muted); }
+.pl-stake button.is-on { border-color: var(--neon); color: var(--neon); }
+@media (max-width: 700px) { .pp-fbar .pp-select, .pp-fbar .pp-search { flex: 1 1 140px; max-width: none; width: auto !important; } .pp-fbar-tog { display: inline-flex; } .pp-fbar-more { display: none; } .pp-fbar-more.is-open { display: contents; } .pp-fbar-n { width: 100%; text-align: right; } }
+@media (max-width: 1100px) { .pp-layout.is-rail { grid-template-columns: 1fr; } .pp-rail { position: static; max-height: none; order: -1; } }
 .pp-side { position: sticky; top: 78px; max-height: calc(100vh - 92px); overflow-y: auto; scrollbar-width: thin; }
 .pp-side .pp-controls { margin: 0 0 10px; }
 .pp-side .pp-controls .pp-seg { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
@@ -5173,6 +5226,33 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       r._sec = r.is_official_play ? 'official' : (r.is_under_lean ? 'underlean' : (r.is_watch_play ? 'watch' : (r._auto ? 'tracked' : 'lean')));
     });
 
+    // ---- Claude's favorites (11/20/2026, Rod) ----
+    // Picked by rule, so the list refreshes with every model run:
+    //   official prop, play grade A, matchup grade A or A+, the breakdown
+    //   check agrees, edge 8%+, price no worse than -150, not kicked off,
+    //   and (rush yds unders) its opposing run-D rank range is up in the
+    //   2024-26 backtest. Ranked by that backtest ROI (rush unders) or the
+    //   rule's backtest ROI (other props), A+ matchups break ties.
+    var favNow = Date.now();
+    var favs = rows.filter(function (r) {
+      if (!r.is_official_play || r.model_ev == null || r.model_ev < 8) return false;
+      var pg = playGrade(r); if (!pg || pg.g !== 'A') return false;
+      if (!r.mu_grade || String(r.mu_grade).charAt(0) !== 'A') return false;
+      if (r._price == null || r._price < -150) return false;
+      if (r.start_time && new Date(r.start_time).getTime() <= favNow) return false;
+      var ag = propAgree(r); if (!ag || ag.v !== 'agree') return false;
+      if (r.market_name === 'Rush Yards' && r.model_lean === 'under') { var rr = rushRankStat(r); if (!rr || !(rr.s.roi > 0)) return false; r._favRR = rr; }
+      return true;
+    }).map(function (r) {
+      var ru = (D.propRules || {})[r.play_kind];
+      r._favRoi = r._favRR ? r._favRR.s.roi : (ru ? ru.roi : 0);
+      r._favScore = r._favRoi + (String(r.mu_grade) === 'A+' ? 1.5 : 0);
+      return r;
+    }).sort(function (a, b) { return (b._favScore - a._favScore) || (b.model_ev - a.model_ev); }).slice(0, 6);
+    var favKey = function (r) { return [r.fixture_id, r.player_name, r.market_name].join('|'); };
+    var favByKey = {};
+    favs.forEach(function (r) { favByKey[favKey(r)] = r; });
+
     // ---- Simplified 10/2026: each row answers "is there an edge?" once ----
     // Row = the bet, the edge (hit chance against what the price needs), the
     // backtest record for that edge size, and a heads-up tag only when
@@ -5655,7 +5735,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       if (started) flags.push('<span class="pp-tag is-lean" title="This game has kicked off.">Started</span>');
       var ev = r.model_ev, evHeat = ev != null && ev > 0 ? Math.min(0.5, 0.1 + ev / 80) : 0;
       return '<div class="pp-grid pp-row' + (isOpen ? ' is-open' : '') + (r.is_official_play ? ' is-official' : '') + '">' +
-        '<div class="pp-who">' + (r.team ? trkMark(schoolAbbr(r.team), 30) : '') + '<div><div class="pp-name"><button type="button" class="pp-namebtn"' + pcOpenAttr(r) + 'title="Open the player card">' + esc(r.player_name) + '</button> ' + playGradeBadge(r) + propAgreeChip(r) + '</div>' +
+        '<div class="pp-who">' + (r.team ? trkMark(schoolAbbr(r.team), 30) : '') + '<div><div class="pp-name"><button type="button" class="pp-namebtn"' + pcOpenAttr(r) + 'title="Open the player card">' + esc(r.player_name) + '</button> ' + playGradeBadge(r) + propAgreeChip(r) + (favByKey[[r.fixture_id, r.player_name, r.market_name].join('|')] ? '<span class="fv-chip" title="On Claude&rsquo;s favorites list">&#9733; FAV</span>' : '') + '</div>' +
           '<div class="pp-sub">' + esc(schoolAbbr(r.team) || '') + (r.opponent ? ' vs ' + esc(schoolAbbr(r.opponent)) : '') + ' &middot; ' + esc(withDay ? propKickoff(r.start_time) : kickTime(r.start_time)) + '</div></div></div>' +
         '<div title="' + esc(marketName(r.market_name)) + '"><div class="pp-pick">' + mktBadge(r.market_name) + '</div>' +
           '<div class="pp-ou">' + (isOver ? 'Over' : 'Under') + ' ' + esc(r.line) + '</div></div>' +
@@ -5833,11 +5913,94 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     // props stay in My Tracker and do not count here.
     var myPanel = renderOfficialRecord();
     if (cur === 'td') return hero + cats + renderPropsTd() + help;
-    return hero + cats + cards +
-      '<div class="pp-layout"><aside class="pp-side' + (state.ppFilters ? ' is-filters' : '') + '">' +
-        '<button class="pp-btn pp-ftoggle" style="width:100%;justify-content:center;margin-bottom:10px" onclick="window.__cfbPpFilters()">' + (state.ppFilters ? 'Hide' : 'Show') + ' sort &amp; filter' + (nActive ? ' (' + nActive + ' on)' : '') + '</button>' +
-        controls + strip + '</aside>' +
-      '<div class="pp-main"><div class="pp-main-head"><span>Model plays</span><em>' + shown.length + '</em></div>' + table + '</div></div>' +
+
+    // ---- Compact filter bar (11/20/2026, Rod: replaces the sidebar) ----
+    var sel = function (field, label, cur0, opts) {
+      return '<select class="pp-select" data-prop-select="' + field + '" aria-label="' + esc(label) + '" title="' + esc(label) + '">' +
+        opts.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (String(o[0]) === String(cur0) ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>';
+    };
+    var fbar = '<div class="pp-fbar">' +
+      sel('propView', 'Which plays', view, [['official', 'Official (' + nSec.official + ')'], ['underlean', 'Under leans (' + nSec.underlean + ')'], ['watch', 'Watch (' + nSec.watch + ')'], ['all', 'All props (' + (nSec.official + nSec.underlean + nSec.watch + nSec.tracked + nSec.lean) + ')']]) +
+      sel('propSort', 'Sort by', sort1, SORTS.map(function (x) { return ['' + x[0], 'Sort: ' + x[1]]; })) +
+      '<button class="pp-btn pp-fbar-tog" onclick="window.__cfbPpFilters()">' + (state.ppFilters ? 'Hide filters' : 'Filters') + (nActive ? ' (' + nActive + ')' : '') + '</button>' +
+      '<span class="pp-fbar-more' + (state.ppFilters ? ' is-open' : '') + '">' +
+      sel('propMarket', 'Market', mkt, [['ALL', 'All markets (' + nAllMkt + ')']].concat(mktOrder.map(function (m) { return [m, esc(marketName(m)) + ' (' + (mktCounts[m] || 0) + ')']; }))) +
+      sel('propGame', 'Game', gameSel, [['ALL', 'All games (' + gameIds.length + ')']].concat(gameIds.map(function (id) { return [id, esc(games[id].label) + ', ' + esc(propKickoff(games[id].t))]; }))) +
+      sel('propDir', 'Direction', F.dir, [['all', 'Overs &amp; unders'], ['over', 'Overs only'], ['under', 'Unders only']]) +
+      sel('propMinEdge', 'Minimum edge', String(F.minEdge), [['0', 'Any edge'], ['10', 'Edge 10%+'], ['15', 'Edge 15%+'], ['20', 'Edge 20%+'], ['30', 'Edge 30%+']]) +
+      sel('propMinMu', 'Matchup grade', String(F.minMu), [['0', 'Any matchup'], ['60', 'Matchup B+'], ['80', 'Matchup A+']].map(function (o) { return [o[0], o[0] === '60' ? 'Matchup B or better' : o[0] === '80' ? 'Matchup A or better' : o[1]]; })) +
+      sel('propDefRank', 'Opposing defense rank (1 = toughest)', F.defRank, [['ALL', 'Any D rank']].concat(DEF_TIERS.map(function (t) { return [t[0] + '-' + t[1], 'D rank ' + (t[1] >= 999 ? '#' + t[0] + '+' : '#' + t[0] + '–' + t[1])]; }))) +
+      sel('propBook', 'Sportsbook', bookSel, [['ALL', 'All books']].concat(books.map(function (b) { return [b, esc(bookLabel(b))]; }))) +
+      '<input id="pp-search" class="pp-search" type="search" placeholder="Player or team" autocomplete="off" value="' + esc(state.propQ || '') + '" oninput="window.__cfbPropQ(this.value)">' +
+      '<button class="pp-btn' + (F.mine ? ' is-primary' : '') + '" aria-pressed="' + (F.mine ? 'true' : 'false') + '" data-prop-set="propMyList" data-prop-val="' + (F.mine ? '' : '1') + '">&#9733; My list</button>' +
+      (nActive || sort1 !== 'kickoff' ? '<button class="pp-btn" onclick="window.__cfbPropReset()">Reset</button>' : '') +
+      '<button class="pp-btn" title="Open the Props tab with these filters and this sort every time, in this browser" onclick="window.__cfbPropSavePreset()">Save</button>' +
+      '</span>' +
+      (state.propPresetMsg ? '<span class="pp-saved">' + esc(state.propPresetMsg) + '</span>' : '') +
+      '<span class="pp-fbar-n"><b>' + shown.length + '</b> shown' + (nActive ? ' &middot; ' + nActive + ' filter' + (nActive === 1 ? '' : 's') : '') + '</span>' +
+    '</div>';
+    var modelWarn = nRecv && nRecvNew !== nRecv ? '<div class="pp-model" style="margin-top:8px">' + modelLine.replace(/^<div class="pp-model">|<\/div>$/g, '') + '</div>' : '';
+
+    // ---- Right rail: favorites + parlay pairs ----
+    var amToDec = function (a) { return a == null ? null : (a > 0 ? 1 + a / 100 : 1 + 100 / Math.abs(a)); };
+    var decToAm = function (d) { if (!d || d <= 1) return '—'; var a = d >= 2 ? Math.round((d - 1) * 100) : Math.round(-100 / (d - 1)); return (a > 0 ? '+' : '') + a; };
+    var priceS = function (x) { return x == null ? '—' : (x > 0 ? '+' : '') + x; };
+    var legTxt = function (r) { return esc(r.player_name) + ' ' + (r.model_lean === 'over' ? 'O' : 'U') + ' ' + esc(r.line) + ' ' + esc((MKT_SHORT[r.market_name] || marketName(r.market_name)).toLowerCase()); };
+    var slipKeys = [];
+    try { slipKeys = JSON.parse(localStorage.getItem('cfb_parlay_slip_v1') || '[]') || []; } catch (e) { slipKeys = []; }
+    var slip = slipKeys.map(function (k) { return favByKey[k] || rows.filter(function (r) { return favKey(r) === k; })[0]; }).filter(Boolean);
+    var stakes = [10, 25, 50, 100], stake = stakes.indexOf(Number(state.parlayStake)) >= 0 ? Number(state.parlayStake) : 25;
+    var parlayDec = function (legs) { var d = 1; legs.forEach(function (r) { d *= amToDec(r._price) || 1; }); return d; };
+    var sameGame = function (legs) { var seen = {}, dup = false; legs.forEach(function (r) { if (seen[r.fixture_id]) dup = true; seen[r.fixture_id] = 1; }); return dup; };
+    var favList = favs.length ? favs.map(function (r, n) {
+      var on = slipKeys.indexOf(favKey(r)) >= 0, over = r.model_lean === 'over';
+      var why = r._favRR
+        ? esc(r._favRR.g) + ' rush unders vs run D ' + esc(r._favRR.lab) + ': <span class="is-pos">' + signed(r._favRR.s.roi, 1) + '%</span> (' + esc(r._favRR.s.record) + ')'
+        : 'Rule backtest <span class="is-pos">' + signed(r._favRoi, 0) + '%</span>';
+      why += ' &middot; ' + esc(schoolAbbr(r.opponent)) + ' ' + gbOrd(r.mu_rank) + ' vs ' + esc(r.mu_vs || (r.market_name === 'Rush Yards' ? 'the run' : '')) + ' &middot; edge +' + Number(r.model_ev).toFixed(0) + '%';
+      return '<div class="fv-item"><div class="fv-rank">' + (n + 1) + '</div>' +
+        '<div style="min-width:0"><div class="fv-name"><button type="button"' + pcOpenAttr(r) + 'title="Open the player card">' + esc(r.player_name) + '</button> <span style="color:var(--muted);font-weight:600;font-size:11.5px">' + esc(schoolAbbr(r.team)) + '</span></div>' +
+          '<div class="fv-bet"><b class="' + (over ? 'is-over' : '') + '">' + (over ? 'Over' : 'Under') + ' ' + esc(r.line) + '</b> ' + esc(marketName(r.market_name).toLowerCase()) + ' &middot; ' + esc(propKickoff(r.start_time)) + '</div></div>' +
+        '<div class="fv-price">' + priceS(r._price) + '<button type="button" class="fv-add' + (on ? ' is-on' : '') + '" data-parlay-toggle="' + esc(favKey(r)) + '">' + (on ? '&#10003; Slip' : '+ Slip') + '</button></div>' +
+        '<div class="fv-why">' + why + '</div></div>';
+    }).join('') : '<div class="fv-empty">No props pass every check right now. New ones show up here as lines post and the model reruns through the week.</div>';
+    var favCard = '<div class="fv-card"><h3>&#11088; Claude&rsquo;s favorites <em>' + favs.length + '</em></h3>' +
+      '<div class="fv-sub">A-grade official props with an A matchup, a breakdown that agrees, and a backtest that&rsquo;s up for that spot. Refreshes every model run.</div>' + favList + '</div>';
+    // Suggested pairs: two favorites from different games, best-ranked first.
+    // Greedy: the best two favorites from different games, then the next
+    // best unused two, so each pair is different legs; then fill to 3.
+    var pairs = [], used = {};
+    var tryPairs = function (fresh) {
+      for (var a1 = 0; a1 < favs.length && pairs.length < 3; a1++) {
+        if (fresh && used[a1]) continue;
+        for (var b1 = a1 + 1; b1 < favs.length && pairs.length < 3; b1++) {
+          if ((fresh && used[b1]) || favs[a1].fixture_id === favs[b1].fixture_id) continue;
+          if (pairs.some(function (p) { return p[0] === favs[a1] && p[1] === favs[b1]; })) continue;
+          pairs.push([favs[a1], favs[b1]]); used[a1] = used[b1] = 1;
+          if (fresh) break;
+        }
+      }
+    };
+    tryPairs(true); tryPairs(false);
+    var pairHtml = function (legs, label, isSlip) {
+      var d = parlayDec(legs), pay = d * stake;
+      return '<div class="pl-pair' + (isSlip ? ' pl-slip' : '') + '"><div class="pl-pair-h"><span>' + label + '</span><b>' + decToAm(d) + '</b></div>' +
+        legs.map(function (r) { return '<div class="pl-leg"><span>' + legTxt(r) + '</span><i>' + priceS(r._price) + '</i>' + (isSlip ? '<button type="button" title="Remove" data-parlay-toggle="' + esc(favKey(r)) + '">&#10005;</button>' : '') + '</div>'; }).join('') +
+        (isSlip && sameGame(legs) ? '<div class="pl-warn">&#9888; Two legs from the same game. Many books won&rsquo;t take that as a regular parlay.</div>' : '') +
+        '<div class="pl-foot"><span>$' + stake + ' pays <b>$' + pay.toFixed(2) + '</b></span>' +
+          (isSlip ? '<button type="button" class="pl-load" data-parlay-clear="1">Clear</button>' : '<button type="button" class="pl-load" data-parlay-load="' + esc(legs.map(favKey).join('||')) + '">Load &rarr;</button>') + '</div></div>';
+    };
+    var parlayCard = '<div class="fv-card"><h3>&#127922; Parlay pairs</h3>' +
+      '<div class="fv-sub">Just for fun. Two-leg pairs from the favorites, always from different games. Parlays stack the books&rsquo; juice, so these aren&rsquo;t part of the official card.</div>' +
+      '<div class="pl-foot" style="margin:0 0 2px"><span>Stake</span><span class="pl-stake">' + stakes.map(function (x) { return '<button type="button" class="' + (x === stake ? 'is-on' : '') + '" data-parlay-stake="' + x + '">$' + x + '</button>'; }).join('') + '</span></div>' +
+      (slip.length ? pairHtml(slip, 'Your slip &middot; ' + slip.length + ' leg' + (slip.length === 1 ? '' : 's'), true) : '<div class="fv-empty">Tap <b>+ Slip</b> on a favorite to build your own, or load a pair below.</div>') +
+      (pairs.length ? pairs.map(function (pr, n) { return pairHtml(pr, n === 0 ? '&#128293; Top pair' : 'Pair ' + (n + 1), false); }).join('') : (favs.length ? '<div class="fv-empty">Need favorites from two different games for a pair.</div>' : '')) +
+    '</div>';
+    var rail = '<aside class="pp-rail">' + favCard + parlayCard + '</aside>';
+
+    return hero + cats + fbar + modelWarn +
+      '<div class="pp-layout is-rail">' +
+      '<div class="pp-main"><div class="pp-main-head"><span>Model plays</span><em>' + shown.length + '</em></div>' + table + '</div>' + rail + '</div>' +
       lower + myPanel + renderGradeTracker() + ((cur === 'all' || cur === 'rush') ? renderRushRankTable() : '') + help;
   }
 
@@ -7781,6 +7944,19 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     if (pk) { state.pbeKey = pk.dataset.pbeKey; return render(); }
     var po = e.target.closest('[data-pbe-off]');
     if (po && !po.disabled) { state.pbeOfficial = !!po.dataset.pbeOff; return render(); }
+    // Parlay slip (11/20/2026): favorites you tap into a slip, kept in this browser.
+    var plt = e.target.closest('[data-parlay-toggle]'), pll = e.target.closest('[data-parlay-load]');
+    if (plt || pll || e.target.closest('[data-parlay-clear]')) {
+      var sk = [];
+      try { sk = JSON.parse(localStorage.getItem('cfb_parlay_slip_v1') || '[]') || []; } catch (err) { sk = []; }
+      if (plt) { var k0 = plt.dataset.parlayToggle, ix = sk.indexOf(k0); if (ix >= 0) sk.splice(ix, 1); else sk.push(k0); }
+      else if (pll) sk = pll.dataset.parlayLoad.split('||');
+      else sk = [];
+      try { localStorage.setItem('cfb_parlay_slip_v1', JSON.stringify(sk.slice(0, 6))); } catch (err) {}
+      return render();
+    }
+    var pst = e.target.closest('[data-parlay-stake]');
+    if (pst) { state.parlayStake = Number(pst.dataset.parlayStake); return render(); }
     var pm = e.target.closest('[data-prop-market]');
     if (pm) { state.propMarket = pm.dataset.propMarket; state.propPresetMsg = ''; return render(); }
     var ps = e.target.closest('[data-prop-set]');
@@ -7819,8 +7995,8 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     var k = e.target && e.target.dataset && e.target.dataset.edgeFilter;
     if (k === 'edgeSort' || k === 'edgeShow' || k === 'edgeConf') { state[k] = e.target.value; render(); }
     var pk = e.target && e.target.dataset && e.target.dataset.propSelect;
-    if (pk === 'propSort' || pk === 'propSort2' || pk === 'propBook') {
-      state[pk] = e.target.value;
+    if (pk === 'propSort' || pk === 'propSort2' || pk === 'propBook' || pk === 'propView' || pk === 'propMarket' || pk === 'propGame' || pk === 'propDir' || pk === 'propDefRank' || pk === 'propMinEdge' || pk === 'propMinMu') {
+      state[pk] = (pk === 'propMinEdge' || pk === 'propMinMu') ? Number(e.target.value) || 0 : e.target.value;
       if (pk === 'propSort') state.propSortRev = false;
       state.propPresetMsg = ''; render();
     }
