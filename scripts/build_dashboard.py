@@ -1107,6 +1107,53 @@ def build_prop_rules(path: str = None):
         return None
 
 
+RUSH_RANK_PATH = "docs/data/sack_lab_detail.csv"
+RUSH_RANK_TIERS = [(1, 5), (6, 10), (11, 15), (16, 20), (21, 25), (26, 30), (31, 45), (46, 90), (91, 999)]
+RUSH_RANK_TOPS = [5, 10, 15, 20, 25, 30, 45]
+
+
+def build_rush_rank_table(path: str = RUSH_RANK_PATH, n_def: int = 134):
+    """Rush yds unders (11/20/2026): how the live rush model's unders did on
+    2024-26 past-season lines (rush lab, version "current", official rule
+    unders at any edge) by where the opposing run defense ranked, split QB vs
+    RB (every non-QB rusher). The rank is that season's run-defense
+    toughness percentile (src/features/run_defense.py, earlier games only)
+    turned into a national rank out of ~134 FBS defenses (1 = toughest).
+    Returns {tiers: [[lo, hi], ...], tops: [...], QB/RB: {by_tier: {"lo-hi":
+    stat}, top: {"5": stat}}}, stat = {record, units, roi, n}. Display only;
+    never raises."""
+    try:
+        import csv
+        import math
+        if not os.path.exists(path):
+            return None
+        rows = []
+        with open(path, newline="") as f:
+            for r in csv.DictReader(f):
+                if r.get("version") != "current" or r.get("result") not in ("W", "L") or not r.get("run_def_tough"):
+                    continue
+                pct = float(r["run_def_tough"])
+                rank = max(1, math.ceil((100 - pct) / 100 * n_def))
+                rows.append(("QB" if r.get("pos") == "QB" else "RB", rank, r["result"] == "W", float(r["units"])))
+
+        def stat(sel):
+            if not sel:
+                return None
+            w = sum(1 for x in sel if x[2])
+            u = sum(x[3] for x in sel)
+            return {"record": f"{w}-{len(sel) - w}", "units": round(u, 1), "roi": round(u / len(sel) * 100, 1), "n": len(sel)}
+
+        out = {"tiers": [list(t) for t in RUSH_RANK_TIERS], "tops": RUSH_RANK_TOPS, "seasons": "2024-26", "n_def": n_def}
+        for g in ("QB", "RB"):
+            mine = [x for x in rows if x[0] == g]
+            out[g] = {"by_tier": {f"{lo}-{hi}": stat([x for x in mine if lo <= x[1] <= hi]) for lo, hi in RUSH_RANK_TIERS},
+                      "top": {str(k): stat([x for x in mine if x[1] <= k]) for k in RUSH_RANK_TOPS}}
+        return out if rows else None
+    except Exception as e:
+        print(f"  [note] rush rank table skipped ({e})")
+        return None
+
+
 def build_prop_edge_history():
     """Backtest record for every market / side / edge size, or None. Never
     raises -- this is a display extra, not something the dashboard should
@@ -2175,6 +2222,8 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .pc-pg b { color: #fff; } .pc-pg span { font-size: 12px; }
 .pp-live { font-size: 11px; color: var(--muted-2, #B6C2CF); margin-top: 3px; }
 .pp-live b { font-weight: 800; }
+.rr-tbl th, .rr-tbl td { padding: 5px 8px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+.rr-tbl th { color: var(--muted-3); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
 .pbe-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
 .pbe-chip { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--muted-2, #B6C2CF); border-radius: 999px; font: inherit; font-size: 11.5px; padding: 4px 10px; cursor: pointer; }
 .pbe-chip.is-rule { border-color: rgba(57,240,122,0.45); }
@@ -6284,6 +6333,36 @@ RENDERER_JS = """<script>
     };
     var signed = function (x, d) { var v = Number(x).toFixed(d); if (Number(v) === 0) v = (0).toFixed(d); return (Number(v) > 0 ? '+' : '') + v; };
     var tone = function (x) { return x > 0 ? 'var(--green)' : (x < 0 ? 'var(--red)' : 'var(--muted-3)'); };
+    // 11/20/2026: rush yds unders by the opposing run defense's rank, QB vs
+    // RB (every non-QB rusher), from the 2024-26 rush lab backtest.
+    var RRT = D.rushRankTable || null;
+    var rrLab = function (t) { return t[1] >= 999 ? '#' + t[0] + '+' : '#' + t[0] + '–' + t[1]; };
+    var rushRankStat = function (r) {
+      if (!RRT || !r || r.market_name !== 'Rush Yards' || r.model_lean !== 'under' || !r.mu_rank) return null;
+      var g = r.pos === 'QB' ? 'QB' : 'RB';
+      var t = (RRT.tiers || []).filter(function (x) { return r.mu_rank >= x[0] && r.mu_rank <= x[1]; })[0];
+      var s = t && RRT[g] && RRT[g].by_tier[t[0] + '-' + t[1]];
+      return s ? { g: g, lab: rrLab(t), s: s, key: t[0] + '-' + t[1] } : null;
+    };
+    var renderRushRankTable = function () {
+      if (!RRT || !RRT.QB || !RRT.RB) return '';
+      var cell = function (s) {
+        return s ? '<td><b style="color:' + tone(s.roi) + '">' + signed(s.roi, 1) + '%</b> &middot; ' + signed(s.units, 1) + 'u <span style="color:var(--muted-3)">' + esc(s.record) + '</span></td>' : '<td>&mdash;</td>';
+      };
+      var th = '<tr><th style="text-align:left">Opposing run D</th><th style="text-align:left">RB</th><th style="text-align:left">QB</th></tr>';
+      var body = (RRT.tiers || []).map(function (t) {
+        var k = t[0] + '-' + t[1];
+        return '<tr><td>' + rrLab(t) + '</td>' + cell(RRT.RB.by_tier[k]) + cell(RRT.QB.by_tier[k]) + '</tr>';
+      }).join('');
+      var tops = (RRT.tops || []).map(function (k) {
+        return '<tr><td>Top ' + k + (k === 45 ? ' (the rule)' : '') + '</td>' + cell(RRT.RB.top[String(k)]) + cell(RRT.QB.top[String(k)]) + '</tr>';
+      }).join('');
+      var tbl = function (head, rowsH) { return '<div style="overflow-x:auto"><table class="rr-tbl" style="width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0 12px;table-layout:fixed"><colgroup><col style="width:24%"><col style="width:38%"><col style="width:38%"></colgroup>' + th.replace('Opposing run D', head) + rowsH + '</table></div>'; };
+      return '<div class="pp-panel" style="margin-top:14px"><h3>Rush yds unders by opposing run defense rank</h3>' +
+        '<div class="pp-sub" style="margin-bottom:6px">Backtest, ' + esc(RRT.seasons || '') + ' past-season lines, 1u each. Rank 1 = toughest run defense. Each rush under on the board shows its own row.</div>' +
+        tbl('Each range', body) + tbl('Adding up from the top', tops) +
+        '<div class="pp-sub">Ranks in the backtest come from rush yards allowed only; the board&rsquo;s &ldquo;D 4th vs the run&rdquo; also counts PFF run defense and tackling, so the two can differ by a few spots. Small ranges (30&ndash;70 plays) are noisy.</div></div>';
+    };
     // Auto-tracked = logged and graded by the pipeline: official plays, plus
     // any play with an edge whose group is up in the backtest.
     var isTracked = function (r, h) { return !!(h && h.up && r.model_ev != null && r.model_ev >= 0); };
@@ -6721,6 +6800,11 @@ RENDERER_JS = """<script>
       // 11/2026: how live-tracked plays at this edge size have done (the
       // "How props have done, by edge" chart), so the row answers it directly.
       var lb = null;
+      // 11/20/2026: rush yds unders also show how QB / RB unders did vs a
+      // run defense in this rank range (2024-26 backtest, bottom table).
+      var rr = rushRankStat(r);
+      if (rr) track += '<div class="pp-live" title="Rush yds unders by ' + rr.g + 's vs run defenses ranked ' + rr.lab + ', 2024-26 past-season lines (table at the bottom of the page)">' +
+        rr.g + ' vs ' + rr.lab + ' run D: <b style="color:' + tone(rr.s.roi) + '">' + signed(rr.s.roi, 1) + '%</b> &middot; ' + signed(rr.s.units, 1) + 'u &middot; ' + esc(rr.s.record) + '</div>';
       if (lb) track += '<div class="pp-live" title="Live tracked results since 10/6 for ' + esc(r.market_name) + ' ' + esc(r.model_lean) + 's at a ' + lb.name + ' edge' +
         (lb.official ? ' (official plays only)' : '') + '">Live at ' + lb.name + ': <b style="color:' + tone(lb.o.roi) + '">' + signed(lb.o.roi, 0) + '%</b> ' + lb.o.w + '-' + lb.o.l + (lb.o.n < 15 ? ' (small)' : '') + '</div>';
       var flags = [];
@@ -6937,7 +7021,7 @@ RENDERER_JS = """<script>
         '<button class="pp-btn pp-ftoggle" style="width:100%;justify-content:center;margin-bottom:10px" onclick="window.__cfbPpFilters()">' + (state.ppFilters ? 'Hide' : 'Show') + ' sort &amp; filter' + (nActive ? ' (' + nActive + ' on)' : '') + '</button>' +
         controls + strip + '</aside>' +
       '<div class="pp-main"><div class="pp-main-head"><span>Model plays</span><em>' + shown.length + '</em></div>' + table + '</div></div>' +
-      lower + myPanel + renderGradeTracker() + help;
+      lower + myPanel + renderGradeTracker() + ((cur === 'all' || cur === 'rush') ? renderRushRankTable() : '') + help;
   }
 
 
@@ -8976,6 +9060,7 @@ def main():
     model_data["totalsBacktest"] = data.get("totals_backtest") or {}
     model_data["totalsTiers"] = build_totals_tiers()
     model_data["propRules"] = build_prop_rules()
+    model_data["rushRankTable"] = build_rush_rank_table()
     # Team-vs-team national ranks for the Matchup Projector (11/2026).
     model_data["teamMatchup"] = data.get("team_matchup") or {}
     model_data["teamMatchupMeta"] = data.get("team_matchup_meta") or {}
