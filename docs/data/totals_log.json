@@ -138,11 +138,19 @@
      -1.4,
      "B",
      0
+    ],
+    [
+     "2026-11-20T14:10:44.727038+00:00",
+     56.5,
+     54.0,
+     -2.5,
+     "B",
+     0
     ]
    ],
    "weather": {
     "temperature": 64.0,
-    "wind_speed": 10.1,
+    "wind_speed": 10.9,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -224,11 +232,19 @@
      -3.2,
      "B",
      1
+    ],
+    [
+     "2026-11-20T14:10:44.727038+00:00",
+     67.5,
+     64.3,
+     -3.2,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 56.1,
-    "wind_speed": 7.1,
+    "temperature": 57.7,
+    "wind_speed": 5.3,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -310,11 +326,19 @@
      -4.8,
      "B",
      1
+    ],
+    [
+     "2026-11-20T14:10:44.727038+00:00",
+     70.5,
+     65.6,
+     -4.9,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 66.7,
-    "wind_speed": 4.7,
+    "temperature": 66.4,
+    "wind_speed": 5.6,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -396,12 +420,20 @@
      -4.6,
      "B",
      1
+    ],
+    [
+     "2026-11-20T14:10:44.727038+00:00",
+     64.5,
+     58.8,
+     -5.7,
+     "A",
+     1
     ]
    ],
    "weather": {
-    "temperature": 79.5,
-    "wind_speed": 10.8,
-    "precipitation": 0.0,
+    "temperature": 72.0,
+    "wind_speed": 13.4,
+    "precipitation": 0.039,
     "game_indoors": false
    },
    "book": "draftkings"
@@ -480,6 +512,14 @@
      55.5,
      48.2,
      -7.3,
+     "A",
+     1
+    ],
+    [
+     "2026-11-20T14:10:44.727038+00:00",
+     56.5,
+     48.2,
+     -8.3,
      "A",
      1
     ]
@@ -568,6 +608,14 @@
      -4.5,
      "B",
      1
+    ],
+    [
+     "2026-11-20T14:10:44.727038+00:00",
+     56.5,
+     52.0,
+     -4.5,
+     "B",
+     1
     ]
    ],
    "weather": {
@@ -606,11 +654,19 @@
      -4.0,
      "B",
      1
+    ],
+    [
+     "2026-11-20T14:10:44.727038+00:00",
+     53.5,
+     50.0,
+     -3.5,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 63.1,
-    "wind_speed": 19.0,
+    "temperature": 60.1,
+    "wind_speed": 23.9,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -644,9 +700,22 @@
      -3.9,
      "B",
      1
+    ],
+    [
+     "2026-11-20T14:10:44.727038+00:00",
+     52.5,
+     47.3,
+     -5.2,
+     "B",
+     1
     ]
    ],
-   "weather": null,
+   "weather": {
+    "temperature": 58.3,
+    "wind_speed": 7.4,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
    "book": "draftkings"
   },
   "Akron Zips|Buffalo Bulls|2026-11-27T17:00:00Z|over": {
@@ -669,16 +738,24 @@
      8.6,
      "B",
      1
+    ],
+    [
+     "2026-11-20T14:10:44.727038+00:00",
+     48.5,
+     54.7,
+     6.2,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 45.1,
-    "wind_speed": 4.9,
+    "temperature": 40.3,
+    "wind_speed": 4.5,
     "precipitation": 0.0,
     "game_indoors": false
    },
    "book": "fanduel"
   }
  },
- "updated": "2026-11-19T19:56:39.970102+00:00"
+ "updated": "2026-11-20T14:10:44.727038+00:00"
 }
