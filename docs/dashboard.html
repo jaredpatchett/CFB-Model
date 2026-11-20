@@ -1444,6 +1444,211 @@ body.pc-lock { overflow: hidden; }
   .footer { font-size: 10px; }
 }
 .pp-ftoggle { display: none; }
+
+/* =====================================================================
+   11/2026 REDESIGN (Rod): proprietary trading-terminal look.
+   - Neutral slate surfaces; green is reserved for things you can act on
+     (BET calls, official tags, positive results), not chrome.
+   - Upright type everywhere, tabular numerals, larger number displays.
+   - Desktop: fixed left sidebar. Phones: unchanged bottom bar.
+   ===================================================================== */
+:root {
+  --bg:           #0A0C0F;
+  --panel:        #111419;
+  --panel-deep:   #0D1014;
+  --panel-2:      #151921;
+  --row-active:   #171C24;
+  --chip:         #1A1F27;
+  --rule:         #1F252E;
+  --rule-strong:  #2A313C;
+  --rule-faint:   #181D24;
+  --rule-row:     #171B22;
+  --text:         #ECEFF3;
+  --text-dim:     #C3CAD3;
+  --muted:        #8C96A3;
+  --muted-2:      #737D8A;
+  --muted-3:      #66707C;
+  --muted-4:      #525B66;
+  --neon:         #3DDC84;
+  --neon-dim:     #2BAF68;
+  --neon-glow:    rgba(61,220,132,0.0);
+  --green:        #3DDC84;
+  --blue:         #7FA7D9;
+  --blue-light:   #A9C4E8;
+  --blue-link:    #C9D6E6;
+  --red:          #F2667A;
+  --font-display: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --sb-w:         224px;
+}
+* { font-style: normal !important; }
+html, body { background: var(--bg) !important; font-feature-settings: "tnum" 1, "cv11" 1; }
+::selection { background: rgba(127,167,217,0.35); }
+a:hover { color: #fff; }
+h1, h2, h3, .section-title h2, .brand-word, .fv-card h3, .pp-main-head span { font-family: var(--font-display) !important; letter-spacing: -0.01em; text-transform: none; }
+.section-title h2 { font-weight: 700 !important; font-size: 19px !important; text-transform: none !important; }
+.section-flag { display: none !important; }
+.em-sub { color: var(--muted) !important; letter-spacing: 0.02em; text-transform: none !important; }
+.kpi-value, .trk-value, .fv-rec-v, .ep-v { font-family: var(--font-display) !important; font-weight: 700 !important; letter-spacing: -0.02em; }
+.kpi-value.is-neon { color: var(--text) !important; }
+.fv-card h3 { font-size: 15px !important; text-transform: none !important; font-weight: 700 !important; }
+.fv-rank { font-family: var(--font-display) !important; color: var(--text-dim) !important; font-weight: 700 !important; }
+.pp-main-head span { font-weight: 700 !important; text-transform: none !important; font-size: 17px !important; }
+/* chrome that used to be neon -> neutral */
+.tab.is-active, .tab--market.is-active { background: var(--chip) !important; color: var(--text) !important; border-color: var(--rule-strong) !important; box-shadow: none !important; }
+.navx-item.is-active { color: var(--text) !important; border-bottom-color: var(--text) !important; }
+.navm-item.is-active { color: var(--text) !important; background: rgba(255,255,255,0.06) !important; }
+.sync-dot { background: var(--neon) !important; box-shadow: none !important; }
+.brand-mark i { background: var(--text) !important; box-shadow: none !important; }
+.brand-word b { color: var(--text) !important; }
+.kpi-icon, .ep-head svg { color: var(--muted) !important; stroke: var(--muted) !important; }
+.kpi-spark .l { stroke: var(--blue) !important; }
+.kpi-spark .a { fill: rgba(127,167,217,0.12) !important; }
+.row.is-selected, .em-row.is-selected { box-shadow: inset 3px 0 0 var(--blue) !important; }
+.pp-btn.is-primary { background: var(--chip) !important; color: var(--text) !important; border-color: var(--text-dim) !important; }
+.pp-cat.is-active, .pp-toggle.is-on { border-color: var(--text-dim) !important; color: var(--text) !important; background: var(--chip) !important; }
+.fv-chip { background: transparent !important; color: var(--neon) !important; border: 1px solid rgba(61,220,132,0.5); }
+.fv-rec { background: var(--panel-deep) !important; }
+.fv-card { background: var(--panel) !important; }
+.pl-pair { background: transparent !important; }
+.pl-slip { border-color: rgba(61,220,132,0.4) !important; }
+.em-edge, .em-edge-box { box-shadow: none !important; }
+
+.em-edge.is-pos { background: transparent !important; color: var(--text) !important; border: 1px solid var(--rule-strong); }
+.em-row.is-vbet .em-edge.is-pos, .em-row.is-vsmall .em-edge.is-pos { color: var(--neon) !important; border-color: rgba(61,220,132,0.5); }
+.em-prob b { background: #5D7899 !important; box-shadow: none !important; }
+.em-row.is-selected, .row.is-selected { background: var(--row-active) !important; }
+.mini-bar b, .prob-bar b, .bar-fill { box-shadow: none !important; }
+.pp-cat.is-on, .tm-tabs button.is-on, .pbe-chip.is-on, .pbe-tog button.is-on { background: var(--text) !important; color: #0A0C0F !important; border-color: var(--text) !important; box-shadow: none !important; }
+.pbe-tog { border-color: var(--rule-strong) !important; }
+.pp-ring.is-good .v, .kpi-spark path.l { filter: none !important; }
+.em-play.is-card { box-shadow: none !important; }
+.ep-notes li::before { background: var(--muted-3) !important; }
+.pp-evpill { background: transparent !important; color: var(--text) !important; border-color: var(--rule-strong) !important; }
+/* ---- Shell: sidebar + slim top bar ---- */
+.sb { display: none; }
+.tb-title { display: none; }
+@media (min-width: 1100px) {
+  .sb { display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; width: var(--sb-w); background: #0C0E12; border-right: 1px solid var(--rule); z-index: 40; padding: 18px 12px 14px; overflow-y: auto; }
+  .topbar, .wrap { margin-left: var(--sb-w); }
+  .topbar .brand, .topbar .navx, .topbar .howto-link, .topbar .sync { display: none !important; }
+  .topbar-inner { height: 58px !important; justify-content: space-between; }
+  .tb-title { display: flex; flex-direction: column; gap: 1px; font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--text); letter-spacing: -0.01em; }
+  .tb-title span { font-size: 10.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted-3); }
+  .topbar-right { margin-left: auto; }
+  .wrap { max-width: none !important; padding: 0 28px !important; }
+}
+.sb-brand { display: flex; align-items: center; gap: 10px; padding: 2px 8px 18px; border-bottom: 1px solid var(--rule); margin-bottom: 10px; }
+.sb-mark { display: inline-flex; gap: 3px; transform: skewX(-16deg); }
+.sb-mark i { width: 5px; height: 22px; background: var(--text); border-radius: 1px; display: block; }
+.sb-mark i:nth-child(2) { opacity: 0.45; }
+.sb-word { font-weight: 800; font-size: 18px; letter-spacing: 0.02em; color: var(--text); line-height: 1; }
+.sb-word b { font-weight: 800; color: var(--neon); }
+.sb-tag { font-size: 10px; color: var(--muted-3); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 3px; }
+.sb-g { margin-top: 10px; }
+.sb-gh { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-4); padding: 8px 10px 6px; }
+.sb-item { display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px; border: none; background: none; border-radius: 7px; color: var(--muted); font: 600 13px var(--font-body); cursor: pointer; text-align: left; }
+.sb-item svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.sb-item:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+.sb-item.is-active { color: var(--text); background: var(--chip); box-shadow: inset 2px 0 0 var(--text); }
+.sb-foot { margin-top: auto; padding: 14px 10px 0; border-top: 1px solid var(--rule); font-size: 11px; color: var(--muted-3); display: flex; flex-direction: column; gap: 8px; }
+.sb-sync { display: flex; align-items: center; gap: 7px; }
+.sb-foot a { color: var(--muted); }
+
+/* ---- Overview ---- */
+.ov { padding: 22px 0 10px; }
+.ov-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 18px; }
+.ov-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-3); }
+.ov-head h1 { margin: 4px 0 4px; font-size: 32px; font-weight: 800; letter-spacing: -0.03em; color: var(--text); }
+.ov-sub { font-size: 12.5px; color: var(--muted); }
+.ov-main { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.ov-side { display: flex; flex-direction: column; gap: 16px; }
+.ov-panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; }
+.ov-primary { border-color: var(--rule-strong); }
+.ov-ph { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px 12px; border-bottom: 1px solid var(--rule); }
+.ov-ph h2 { margin: 0; font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+.ov-ph span { font-size: 11.5px; color: var(--muted-3); }
+.ov-counts { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 14px; color: var(--text); }
+.ov-counts .ov-pill { margin-left: 6px; }
+.ov-pill { display: inline-flex; align-items: center; justify-content: center; min-width: 46px; height: 22px; padding: 0 8px; border-radius: 5px; font-size: 10.5px; font-weight: 800; letter-spacing: 0.06em; white-space: nowrap; }
+.ov-pill.is-bet { background: var(--neon); color: #05140B; }
+.ov-pill.is-small { background: rgba(61,220,132,0.14); color: var(--neon); border: 1px solid rgba(61,220,132,0.45); }
+.ov-pill.is-wait { background: rgba(255,184,77,0.12); color: #FFB84D; border: 1px solid rgba(255,184,77,0.4); }
+.ov-pill.is-pass { background: transparent; color: var(--muted); border: 1px solid var(--rule-strong); }
+.ov-row { all: unset; box-sizing: border-box; display: grid; align-items: center; gap: 12px; width: 100%; padding: 11px 18px; border-bottom: 1px solid var(--rule-row); cursor: pointer; }
+.ov-row:hover { background: rgba(255,255,255,0.025); }
+.ov-card-row { grid-template-columns: 86px minmax(0, 1.3fr) minmax(0, 1.2fr) 70px 86px; }
+.ov-card-row.is-pass { opacity: 0.55; }
+.ov-card-row.is-started { opacity: 0.4; }
+.ov-mini { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.3fr) 62px; padding: 10px 18px; }
+.ov-pick { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.ov-pick b { font-size: 15px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ov-mini .ov-pick b { font-size: 13.5px; }
+.ov-pick em { font-size: 11px; color: var(--muted-3); font-weight: 600; }
+.ov-game { font-size: 12.5px; color: var(--text-dim); display: flex; flex-direction: column; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ov-game i { font-size: 11px; color: var(--muted-3); }
+.ov-num { display: flex; flex-direction: column; align-items: flex-end; font-family: var(--font-num); font-size: 15px; font-weight: 700; color: var(--text); }
+.ov-num i { font-family: var(--font-body); font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-4); }
+.ov-mini .ov-num { font-size: 13px; }
+.ov-pf { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 18px; font-size: 11.5px; color: var(--muted-3); }
+.ov-link { all: unset; cursor: pointer; font-size: 12px; font-weight: 700; color: var(--text-dim); }
+.ov-link:hover { color: #fff; }
+.ov-empty { padding: 16px 18px; font-size: 12.5px; color: var(--muted); }
+.ov-sec-h { margin: 28px 0 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-3); }
+.ov-creds { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.ov-cred { background: var(--panel-deep); border: 1px solid var(--rule); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; }
+.ov-ch { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.ov-ch h3 { margin: 0; font-size: 14px; font-weight: 700; color: var(--text); }
+.ov-tag { font-size: 9.5px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 7px; border-radius: 4px; }
+.ov-tag.is-res { color: var(--neon); border: 1px solid rgba(61,220,132,0.45); }
+.ov-tag.is-ver { color: var(--blue-light); border: 1px solid rgba(127,167,217,0.45); }
+.ov-tag.is-proj { color: #E6B566; border: 1px dashed rgba(230,181,102,0.55); }
+.ov-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 12px; }
+.ov-k { font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted-3); }
+.ov-v { font-family: var(--font-display); font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin-top: 3px; line-height: 1.1; }
+.ov-v.is-pos { color: var(--neon); }
+.ov-v.is-neg { color: var(--red); }
+.ov-s { font-size: 11px; color: var(--muted-3); margin-top: 2px; }
+.ov-cf { margin-top: auto; padding-top: 14px; font-size: 11px; color: var(--muted-3); line-height: 1.45; }
+.ov-bars { margin-top: 14px; display: flex; flex-direction: column; gap: 7px; }
+.ov-bar { display: grid; grid-template-columns: 64px 1fr 40px; align-items: center; gap: 8px; font-size: 11.5px; color: var(--muted); }
+.ov-bar div { height: 8px; background: var(--rule); border-radius: 4px; overflow: hidden; }
+.ov-bar i { display: block; height: 100%; border-radius: 4px; }
+.ov-bar i.is-proj { background: repeating-linear-gradient(45deg, #E6B566, #E6B566 4px, rgba(230,181,102,0.55) 4px, rgba(230,181,102,0.55) 8px); }
+.ov-bar i.is-act { background: var(--blue); }
+.ov-bar b { font-family: var(--font-num); color: var(--text); text-align: right; }
+@media (max-width: 1100px) { .ov-main, .ov-creds { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  .ov-head h1 { font-size: 26px; }
+  .ov-card-row { grid-template-columns: 78px minmax(0, 1fr) 62px; padding: 11px 14px; }
+  .ov-card-row .ov-game { grid-column: 2 / 4; grid-row: 2; }
+  .ov-card-row .ov-num:last-child { display: none; }
+  .ov-mini { grid-template-columns: minmax(0, 1fr) 58px; padding: 10px 14px; }
+  .ov-mini .ov-game { grid-column: 1 / -1; grid-row: 2; }
+  .ov-pf span { display: none; }
+}
+
+/* ---- Matchups workspace ---- */
+.mx { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 18px; padding-top: 18px; align-items: start; }
+.mx-list { position: sticky; top: 72px; background: var(--panel); border: 1px solid var(--rule); border-radius: 12px; max-height: calc(100vh - 90px); display: flex; flex-direction: column; overflow: hidden; }
+.mx-lh { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--rule); font-size: 13px; font-weight: 700; color: var(--text); }
+.mx-lh em { font-size: 11px; color: var(--muted); background: var(--chip); border-radius: 99px; padding: 1px 7px; margin-left: 4px; }
+.mx-tog { all: unset; cursor: pointer; font-size: 11px; font-weight: 700; color: var(--muted); border: 1px solid var(--rule-strong); border-radius: 99px; padding: 3px 9px; }
+.mx-tog.is-on { color: var(--text); border-color: var(--text-dim); background: var(--chip); }
+.mx-items { overflow-y: auto; scrollbar-width: thin; }
+.mx-item { all: unset; box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr) 50px; gap: 2px 8px; width: 100%; padding: 10px 14px; border-bottom: 1px solid var(--rule-row); cursor: pointer; }
+.mx-item:hover { background: rgba(255,255,255,0.025); }
+.mx-item.is-sel { background: var(--chip); box-shadow: inset 2px 0 0 var(--text); }
+.mx-item.is-done { opacity: 0.5; }
+.mx-teams { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text); min-width: 0; }
+.mx-teams i { font-size: 10.5px; color: var(--muted-4); }
+.mx-meta { grid-column: 1; font-size: 11px; color: var(--muted-3); display: flex; gap: 6px; align-items: center; }
+.mx-card { font-size: 9.5px; font-weight: 800; letter-spacing: 0.06em; color: var(--neon); border: 1px solid rgba(61,220,132,0.45); border-radius: 3px; padding: 0 4px; }
+.mx-edge { grid-column: 2; grid-row: 1 / 3; align-self: center; text-align: right; font-family: var(--font-num); font-size: 13px; font-weight: 700; color: var(--muted-4); }
+.mx-edge.is-q { color: var(--text); }
+.mx-ws { min-width: 0; }
+.mx-ws > * + * { margin-top: 18px; }
+.eb-cardwrap { margin-top: 22px; }
+@media (max-width: 1100px) { .mx { grid-template-columns: 1fr; } .mx-list { position: static; max-height: 320px; } }
 </style>
 </head>
 <body>
@@ -1843,7 +2048,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
   var M = window.ModelMath;
   var MARKETS = ['Spread', 'Moneyline'];
 
-  var state = { selected: 0, market: 'Moneyline', search: '', page: 'edge', edgeSort: 'kickoff', edgeShow: 'all', edgeConf: 'ALL', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate', propGame: 'ALL', propOfficialOnly: false, propShowPass: false, propView: 'official', propDetail: null,
+  var state = { selected: 0, market: 'Moneyline', search: '', page: 'overview', edgeSort: 'kickoff', edgeShow: 'all', edgeConf: 'ALL', propMarket: 'ALL', unitSize: 50, trackerModelTab: 'all', injScope: 'slate', propGame: 'ALL', propOfficialOnly: false, propShowPass: false, propView: 'official', propDetail: null,
     propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propQ: '', propMyList: false, propDefRank: 'ALL',
     atdView: 'all', atdBasis: 'best', atdSort: 'edge', atdGame: 'ALL' };
   // Props tab Sort & Filter preset (10/2026): saved per browser, applied on load.
@@ -1910,22 +2115,28 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       '</svg>';
   }
 
+  // 11/2026 redesign (Rod): trading-terminal layout. Grouped for the
+  // desktop sidebar; phones keep the bottom bar in this same order.
   var PAGES = [
-    { id: 'edge', label: 'Edge Board' },
-    { id: 'ratings', label: 'Power Ratings' },
-    { id: 'props', label: 'Player Props' },
-    { id: 'totals', label: 'Totals' },
-    { id: 'anytime', label: 'Anytime TD' },
-    { id: 'tdallowed', label: 'TDs Allowed' },
-    { id: 'fantasy', label: 'Fantasy' },
-    { id: 'injuries', label: 'Injury Report' },
-    { id: 'tracker', label: 'My Tracker' },
-    { id: 'performance', label: 'Model Performance' },
+    { id: 'overview', label: 'Overview', group: 'Trading' },
+    { id: 'edge', label: 'Edge Board', group: 'Trading' },
+    { id: 'matchups', label: 'Matchups', group: 'Trading' },
+    { id: 'props', label: 'Player Props', group: 'Trading' },
+    { id: 'totals', label: 'Totals', group: 'Trading' },
+    { id: 'ratings', label: 'Power Ratings', group: 'Research' },
+    { id: 'anytime', label: 'Anytime TD', group: 'Research' },
+    { id: 'tdallowed', label: 'TDs Allowed', group: 'Research' },
+    { id: 'fantasy', label: 'Fantasy', group: 'Research' },
+    { id: 'injuries', label: 'Injury Report', group: 'Research' },
+    { id: 'tracker', label: 'My Tracker', group: 'Results' },
+    { id: 'performance', label: 'Model Performance', group: 'Results' },
   ];
 
   // Icon set for the nav and stat cards (11/2026 reskin). Simple line
   // icons drawn here, 24x24 grid.
   var ICONS = {
+    overview: '<path d="M3 3h8v10H3zM13 3h8v6h-8zM13 11h8v10h-8zM3 15h8v6H3z"/>',
+    matchups: '<rect x="3" y="4" width="7" height="16" rx="1.5"/><rect x="14" y="4" width="7" height="16" rx="1.5"/>',
     edge: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
     ratings: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
     props: '<path d="M4 15l5-5 4 4 7-7"/><path d="M14 7h6v6"/>',
@@ -1972,12 +2183,13 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     }).join('') + '</div>';
   }
 
-  var SHORT_LABEL = { edge: 'Edge', ratings: 'Ratings', props: 'Props', anytime: 'TDs', tdallowed: 'TDs vs D', fantasy: 'Fantasy', injuries: 'Injuries', tracker: 'Tracker', performance: 'Model' };
+  var SHORT_LABEL = { overview: 'Home', matchups: 'Matchups', edge: 'Edge', ratings: 'Ratings', props: 'Props', anytime: 'TDs', tdallowed: 'TDs vs D', fantasy: 'Fantasy', injuries: 'Injuries', tracker: 'Tracker', performance: 'Model' };
   function renderTopbar() {
     // Search only on the Edge Board tab.
-    var searchHtml = state.page === 'edge'
+    var searchHtml = (state.page === 'edge' || state.page === 'matchups')
       ? '<input id="search" type="text" placeholder="Search team, matchup..." autocomplete="off" value="' + esc(state.search) + '" oninput="window.__cfbSearch(this.value)">'
       : '';
+    var curPage = PAGES.filter(function (p) { return p.id === state.page; })[0] || PAGES[0];
     return '' +
       '<div class="topbar"><div class="topbar-inner">' +
         '<div class="brand">' +
@@ -1985,6 +2197,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
           '<span class="brand-word">' + esc(D.meta.modelName) + ' <b>' + esc(D.meta.sport) + '</b></span>' +
           '<span class="brand-sub">' + esc(D.meta.version) + '</span>' +
         '</div>' +
+        '<div class="tb-title"><span>' + esc(curPage.group) + '</span>' + esc(curPage.label) + '</div>' +
         '<nav class="navx">' + PAGES.map(function (p) {
           return '<button class="navx-item' + (p.id === state.page ? ' is-active' : '') + '" data-page="' + esc(p.id) + '">' + icon(p.id) + '<span>' + esc(p.label) + '</span></button>';
         }).join('') + '</nav>' +
@@ -1994,6 +2207,21 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
           '<div class="sync"><span class="sync-dot"></span><span>' + esc(D.meta.dataAsOf) + '</span></div>' +
         '</div>' +
       '</div></div>';
+  }
+
+  // Desktop sidebar (11/2026 redesign).
+  function renderSidebar() {
+    var groups = [];
+    PAGES.forEach(function (p) { if (groups.indexOf(p.group) < 0) groups.push(p.group); });
+    return '<aside class="sb" aria-label="Pages">' +
+      '<div class="sb-brand"><span class="sb-mark"><i></i><i></i></span><div><div class="sb-word">CFB <b>EDGE</b></div><div class="sb-tag">Analytics &amp; trading model</div></div></div>' +
+      groups.map(function (gname) {
+        return '<div class="sb-g"><div class="sb-gh">' + esc(gname) + '</div>' + PAGES.filter(function (p) { return p.group === gname; }).map(function (p) {
+          return '<button class="sb-item' + (p.id === state.page ? ' is-active' : '') + '" data-page="' + esc(p.id) + '">' + icon(p.id) + '<span>' + esc(p.label) + '</span></button>';
+        }).join('') + '</div>';
+      }).join('') +
+      '<div class="sb-foot"><div class="sb-sync"><span class="sync-dot"></span>Data as of ' + esc(D.meta.dataAsOf) + '</div><a href="how-to.html">How-To guide</a></div>' +
+    '</aside>';
   }
 
   // Phones (11/2026): every tab in a bar fixed to the bottom of the screen.
@@ -7790,6 +8018,128 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     return head + summary + foot;
   }
 
+  /* ---- Overview (11/2026 redesign) ---------------------------------------
+     The home screen: the official card with its BET / PASS call, the next
+     best edges, the props the model likes most, and three clearly separate
+     kinds of numbers -- real betting results, verified (out-of-sample)
+     model performance, and projections, which are not results. */
+  function ovSign(x, d) { return x == null || !isFinite(x) ? '—' : (x > 0 ? '+' : '') + Number(x).toFixed(d); }
+  function ovStat(k, v, sub, cls) {
+    return '<div class="ov-stat"><div class="ov-k">' + k + '</div><div class="ov-v' + (cls ? ' ' + cls : '') + '">' + v + '</div>' + (sub ? '<div class="ov-s">' + sub + '</div>' : '') + '</div>';
+  }
+  function renderOverview() {
+    var oS = { market: 'Spread', minEdge: D.meta.minEdge, abbrOf: abbrOf };
+    var pricedS = D.games.map(function (g) { return M.priceGame(g, oS); });
+    var cardS = M.buildBetCard(D.games, oS);
+    var nowT = Date.now();
+    var ks = D.games.map(function (g) { return Date.parse(g.kickoffIso || ''); }).filter(function (t) { return isFinite(t); }).sort();
+    var md = function (t) { var d = new Date(t); return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); };
+    var range = ks.length ? md(ks[0]) + (md(ks[0]) !== md(ks[ks.length - 1]) ? ' – ' + md(ks[ks.length - 1]) : '') : '';
+
+    // Official card
+    var rows = cardS.map(function (c) { return { c: c, vd: cardVerdict(c), gi: D.games.indexOf(c.game) }; });
+    var order = { bet: 0, small: 1, wait: 2, pass: 3 };
+    rows.sort(function (a, b) { return order[a.vd.v] - order[b.vd.v]; });
+    var nOf = function (k) { return rows.filter(function (x) { return x.vd.v === k; }).length; };
+    var cardRows = rows.map(function (x) {
+      var c = x.c, v = x.vd.v, started = Date.parse(c.game.kickoffIso || '') <= nowT;
+      var why = x.vd.why.join('. ').replace(/<[^>]+>/g, '').replace(/&rsquo;/g, '’').replace(/&[a-z]+;/g, ' ');
+      return '<button class="ov-row ov-card-row is-' + v + (started ? ' is-started' : '') + '" data-game="' + x.gi + '" title="' + esc(why) + '">' +
+        '<span class="ov-pill is-' + v + '">' + (v === 'small' ? 'BET SMALL' : v.toUpperCase()) + '</span>' +
+        '<span class="ov-pick">' + (c.side ? trkMark(abbrOf(c.side), 24) : '') + '<b>' + esc(c.playLabel) + '</b></span>' +
+        '<span class="ov-game">' + esc(abbrOf(c.game.away) + ' at ' + abbrOf(c.game.home)) + '<i>' + esc(edgeKickoff(c.game)) + '</i></span>' +
+        '<span class="ov-num"><i>Edge</i>' + esc(c.sideEdgeLabel) + '</span>' +
+        '<span class="ov-num"><i>Proj. cover</i>' + (c.sideProb * 100).toFixed(0) + '%</span>' +
+      '</button>';
+    }).join('');
+    var cardPanel = '<section class="ov-panel ov-primary"><div class="ov-ph"><div><h2>Official Bet Card</h2><span>Spreads &middot; 1u each &middot; the call is for the line right now</span></div>' +
+      '<div class="ov-counts"><span class="ov-pill is-bet">BET</span>' + (nOf('bet') + nOf('small')) + '<span class="ov-pill is-pass">PASS</span>' + nOf('pass') + (nOf('wait') ? '<span class="ov-pill is-wait">WAIT</span>' + nOf('wait') : '') + '</div></div>' +
+      (cardRows || '<div class="ov-empty">No spreads clear the ' + D.meta.minEdge.toFixed(1) + '-pt bar right now.</div>') +
+      '<div class="ov-pf"><button class="ov-link" data-page="edge">Full Edge Board &rarr;</button><span>Tap a play to open its matchup. Hover for the reason behind the call.</span></div></section>';
+
+    // Next-best edges (not on the card)
+    var onCard = function (p) { return cardS.some(function (c) { return c.game === p.game; }); };
+    var next = pricedS.filter(function (p) { return p.qualifies && !onCard(p) && !p.isFade && !p.waitingModel && Date.parse(p.game.kickoffIso || '') > nowT; })
+      .sort(function (a, b) { return b.sideProb - a.sideProb; }).slice(0, 5);
+    var nextPanel = '<section class="ov-panel"><div class="ov-ph"><div><h2>Next-best edges</h2><span>Clear the bar, not on the card &middot; track only</span></div></div>' +
+      (next.length ? next.map(function (p) {
+        return '<button class="ov-row ov-mini" data-game="' + D.games.indexOf(p.game) + '"><span class="ov-pick">' + (p.side ? trkMark(abbrOf(p.side), 20) : '') + '<b>' + esc(p.playLabel) + '</b></span>' +
+          '<span class="ov-game">' + esc(abbrOf(p.game.away) + ' at ' + abbrOf(p.game.home)) + '<i>' + esc(edgeKickoff(p.game)) + '</i></span>' +
+          '<span class="ov-num"><i>Edge</i>' + esc(p.sideEdgeLabel) + '</span></button>';
+      }).join('') : '<div class="ov-empty">Nothing else clears the bar.</div>') + '</section>';
+
+    // Model favorites (props)
+    var favs = (D.modelFavs || []).filter(function (f) { return Date.parse(f.start || '') > nowT; });
+    var FR = D.favRecord;
+    var favPanel = '<section class="ov-panel"><div class="ov-ph"><div><h2>Model favorite props</h2><span>A-grade official props with every check passed</span></div></div>' +
+      (favs.length ? favs.map(function (f) {
+        return '<button class="ov-row ov-mini" data-page="props"><span class="ov-pick"><b>' + esc(f.player) + '</b><em>' + esc(schoolAbbr(f.team)) + '</em></span>' +
+          '<span class="ov-game">' + (f.side === 'over' ? 'Over ' : 'Under ') + esc(f.line) + ' ' + esc((f.market === 'Reception Yards' ? 'receiving yards' : String(f.market)).toLowerCase()) + '<i>' + esc(propKickoff(f.start)) + '</i></span>' +
+          '<span class="ov-num"><i>Price</i>' + (f.price > 0 ? '+' : '') + esc(f.price) + '</span></button>';
+      }).join('') : '<div class="ov-empty">No props pass every check yet. New ones appear as lines post.</div>') +
+      '<div class="ov-pf"><button class="ov-link" data-page="props">Player Props &rarr;</button></div></section>';
+
+    // ---- Credibility: results / verified / projections ----
+    var trk = loadTrk().filter(function (it) { return it.type !== 'Prop' && !it.unofficial && (it.status === 'win' || it.status === 'loss' || it.status === 'push') && it.price != null; });
+    var tw = 0, tl = 0, tp = 0, tu = 0;
+    trk.forEach(function (it) { if (it.status === 'win') { tw++; tu += americanToDecimal(it.price) - 1; } else if (it.status === 'loss') { tl++; tu -= 1; } else tp++; });
+    var tCls = function (x) { return x > 0 ? 'is-pos' : (x < 0 ? 'is-neg' : ''); };
+    var results = '<section class="ov-cred"><div class="ov-ch"><span class="ov-tag is-res">Results</span><h3>Real bets, graded</h3></div>' +
+      '<div class="ov-grid2">' +
+        ovStat('Bet Card record', trk.length ? tw + '-' + tl + (tp ? '-' + tp : '') : '—', trk.length ? 'Official plays in My Tracker' : 'No graded plays in this browser', '') +
+        ovStat('Units', trk.length ? ovSign(tu, 2) + 'u' : '—', trk.length ? 'ROI ' + ovSign(tu / trk.length * 100, 1) + '%' : '', tCls(tu)) +
+        (FR && (FR.w + FR.l) ? ovStat('Model favorite props', FR.w + '-' + FR.l, ovSign(FR.units, 1) + 'u &middot; ROI ' + ovSign(FR.roi, 0) + '%', '') : '') +
+        (FR && (FR.w + FR.l) ? ovStat('Favorites since', propKickoff(FR.since).split(',')[0] || '—', 'Graded from box scores', '') : '') +
+      '</div><div class="ov-cf">Source: your tracker (this browser) and box scores. Money results only.</div></section>';
+    var bt = (D.backtest || {}).spread || {}, cl = D.clv || {};
+    var verified = '<section class="ov-cred"><div class="ov-ch"><span class="ov-tag is-ver">Verified</span><h3>Model performance, out of sample</h3></div>' +
+      '<div class="ov-grid2">' +
+        ovStat('Backtest ATS', bt.atsWinRate != null ? (bt.atsWinRate * 100).toFixed(1) + '%' : '—', bt.nGames ? bt.nGames + ' games &middot; break-even ' + ((bt.breakevenAtsRate || 0.524) * 100).toFixed(1) + '%' : '', bt.atsWinRate != null ? (bt.atsWinRate > (bt.breakevenAtsRate || 0.524) ? 'is-pos' : 'is-neg') : '') +
+        ovStat('Margin error', bt.marginMae != null ? bt.marginMae.toFixed(1) + ' pts' : '—', 'Avg miss on the final margin', '') +
+        ovStat('Avg CLV', cl.nGames ? ovSign(cl.avgClvPoints, 2) + ' pts' : '—', cl.nGames ? cl.nGames + ' flagged picks vs the close' : 'No graded picks yet', cl.nGames ? tCls(cl.avgClvPoints) : '') +
+        ovStat('Beat the close', cl.pctPositiveClv != null ? (cl.pctPositiveClv * 100).toFixed(0) + '%' : '—', 'Of flagged picks', '') +
+      '</div><div class="ov-cf">Seasons ' + esc(((D.backtest || {}).seasonsCovered || []).join(', ')) + ', graded against closing lines the model never saw.</div></section>';
+    var cal = ((D.confBaseline || {}).calib || {}).Spread;
+    var avgProj = cardS.length ? cardS.reduce(function (s0, c) { return s0 + c.sideProb; }, 0) / cardS.length : null;
+    var bar = function (label, v, cls) { return '<div class="ov-bar"><span>' + label + '</span><div><i class="' + cls + '" style="width:' + Math.max(2, Math.min(100, v * 100)).toFixed(0) + '%"></i></div><b>' + (v * 100).toFixed(0) + '%</b></div>'; };
+    var projections = '<section class="ov-cred"><div class="ov-ch"><span class="ov-tag is-proj">Projections</span><h3>Model estimates, not results</h3></div>' +
+      '<div class="ov-grid2">' + ovStat('This card, avg projected cover', avgProj != null ? (avgProj * 100).toFixed(0) + '%' : '—', cardS.length + ' plays', '') +
+        ovStat('Bar to beat', '52.4%', 'Break-even at -110', '') + '</div>' +
+      (cal ? '<div class="ov-bars">' + bar('Projected', cal.proj, 'is-proj') + bar('Actual', cal.actual, 'is-act') + '</div>' +
+        '<div class="ov-cf">Past card spreads (' + cal.n + ' plays, rebuilt weeks ' + esc((D.confBaseline || {}).weeks || '') + ') were projected to cover ' + (cal.proj * 100).toFixed(0) + '% and covered ' + (cal.actual * 100).toFixed(0) + '%. Read win % as a ranking, not a probability.</div>'
+        : '<div class="ov-cf">Read win % as a ranking, not a probability.</div>') + '</section>';
+
+    return '<div class="ov">' +
+      '<div class="ov-head"><div><div class="ov-eyebrow">Slate overview</div><h1>' + esc(range) + '</h1>' +
+        '<div class="ov-sub">' + D.meta.gamesPriced + ' of ' + D.meta.totalGames + ' games priced &middot; data as of ' + esc(D.meta.dataAsOf) + '</div></div></div>' +
+      '<div class="ov-main">' + cardPanel + '<div class="ov-side">' + favPanel + nextPanel + '</div></div>' +
+      '<div class="ov-sec-h">How much to trust these numbers</div>' +
+      '<div class="ov-creds">' + results + verified + projections + '</div>' +
+    '</div>';
+  }
+
+  /* ---- Matchups workspace (11/2026 redesign) ----------------------------- */
+  function renderMatchups(priced, card, sel) {
+    var nowT = Date.now();
+    var list = priced.map(function (p, i) { return { p: p, i: i, on: card.some(function (c) { return c.game === p.game; }) }; })
+      .filter(function (r) { return matchesSearch(r.p.game) && (!state.mxCard || r.on); });
+    var items = list.map(function (r) {
+      var g = r.p.game, done = Date.parse(g.kickoffIso || '') <= nowT;
+      return '<button class="mx-item' + (r.i === state.selected ? ' is-sel' : '') + (done ? ' is-done' : '') + '" data-game="' + r.i + '">' +
+        '<span class="mx-teams">' + trkMark(abbrOf(g.away), 18) + '<b>' + esc(abbrOf(g.away)) + '</b><i>at</i>' + trkMark(abbrOf(g.home), 18) + '<b>' + esc(abbrOf(g.home)) + '</b></span>' +
+        '<span class="mx-meta">' + esc(edgeKickoff(g)) + (r.on ? '<em class="mx-card">CARD</em>' : '') + '</span>' +
+        '<span class="mx-edge' + (r.p.qualifies ? ' is-q' : '') + '">' + (r.p.qualifies ? esc(r.p.sideEdgeLabel) : '&middot;') + '</span>' +
+      '</button>';
+    }).join('');
+    return '<div class="mx">' +
+      '<aside class="mx-list"><div class="mx-lh"><span>Games <em>' + list.length + '</em></span>' +
+        '<button class="mx-tog' + (state.mxCard ? ' is-on' : '') + '" onclick="window.__cfbMxCard()">Bet Card only</button></div>' +
+        '<div class="mx-items">' + (items || '<div class="ov-empty">No games match.</div>') + '</div></aside>' +
+      '<div class="mx-ws" id="em-projector">' + renderProjector(sel) + renderGameBreakdown(sel) + renderTeamMatchup(sel) + '</div>' +
+    '</div>';
+  }
+  window.__cfbMxCard = function () { state.mxCard = !state.mxCard; render(); };
+
   /* ---- mount ------------------------------------------------------------- */
 
   function renderPage(priced, card, sel) {
@@ -7804,6 +8154,8 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     // each get a page to themselves since they're independent, standalone
     // things to check.
     switch (state.page) {
+      case 'overview': return renderOverview();
+      case 'matchups': return renderMatchups(priced, card, sel);
       case 'ratings': return renderRatings();
       case 'props': return renderProps();
       case 'totals': return renderTotals();
@@ -7815,13 +8167,10 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       case 'performance': return '<div class="perf-props">' + renderPlayGradeRecord() + renderTotalsRecord() + '</div>' + renderBacktest() + renderClv();
       case 'edge':
       default:
-        return renderKpis(card, priced) +
-          '<div class="em-wrap">' + renderEdgeBoard(priced, card) + '</div>' +
-          renderEdgePanels(priced) +
-          '<div class="main em-below" id="em-projector">' +
-            '<div>' + renderProjector(sel) + renderGameBreakdown(sel) + renderTeamMatchup(sel) + '</div>' +
-            '<div>' + renderBetCard(card) + '</div>' +
-          '</div>';
+        // 11/2026 redesign: the board and the card only. Matchup analysis
+        // has its own workspace (Matchups); results moved to Overview.
+        return '<div class="em-wrap">' + renderEdgeBoard(priced, card) + '</div>' +
+          '<div class="eb-cardwrap">' + renderBetCard(card) + '</div>';
     }
   }
 
@@ -7832,6 +8181,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     var sel = priced[state.selected] || priced[0];
 
     document.getElementById('app').innerHTML =
+      renderSidebar() +
       renderTopbar() +
       renderPageNav() +
       '<div class="wrap">' +
@@ -7925,7 +8275,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
   window.__cfbGoBreakdown = function (gi, propKey) {
     state.selected = gi;
     state.bdFrom = (propKey || state.page === 'props' || state.page === 'totals') ? { key: propKey, y: window.scrollY, page: state.page } : null;
-    state.page = 'edge';
+    state.page = 'matchups';
     render();
     var el = document.querySelector('.gb-card') || document.getElementById('em-projector');
     if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' });
@@ -7950,9 +8300,12 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
     if (p) { var changed = state.page !== p.dataset.page; state.page = p.dataset.page; state.bdFrom = null; render(); if (changed) window.scrollTo(0, 0); return; }
     var g = e.target.closest('[data-game]');
     if (g) {
-      state.selected = +g.dataset.game; state.bdFrom = null; render();
-      var pj = document.getElementById('em-projector');
-      if (pj && g.classList.contains('em-row')) pj.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Any game row opens it in the Matchups workspace (11/2026 redesign).
+      var toMx = state.page !== 'matchups';
+      state.selected = +g.dataset.game; state.bdFrom = null;
+      if (toMx) state.page = 'matchups';
+      render();
+      if (toMx || window.innerWidth < 1100) { var ws = document.getElementById('em-projector'); if (ws && !toMx) ws.scrollIntoView({ behavior: 'smooth', block: 'start' }); else window.scrollTo(0, 0); }
       return;
     }
     var m = e.target.closest('[data-market]');
