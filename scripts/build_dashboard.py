@@ -450,6 +450,149 @@ def update_prop_grade_log(props, run_at, path=PROP_GRADE_LOG_PATH):
         return None
 
 
+
+# ---- Model favorites (11/20/2026, Rod) -----------------------------------
+# Picked here, at build time, so the Props tab and the favorites record use
+# the same list. Rule (from the 11/20 check of every saved run since 11/3,
+# where it went 26-8, +44%): official prop, play grade A, matchup grade A or
+# A+, price -150 or better, not kicked off, and for rush yds unders the
+# opposing run-D rank range is up in the 2024-26 backtest. Ranked by that
+# backtest ROI (rush unders) or the rule's backtest ROI (other props), A+
+# matchups +1.5. Top 6. Each run is logged to FAV_LOG_PATH; a play's final
+# status is whether it was on the list at the last run before kickoff.
+FAV_LOG_PATH = "docs/data/fav_log.json"
+FAV_TOP_N = 6
+
+
+def _rush_rank_roi(p, rrt):
+    if not rrt or p.get("market_name") != "Rush Yards" or p.get("model_lean") != "under" or not p.get("mu_rank"):
+        return None
+    g = "QB" if p.get("pos") == "QB" else "RB"
+    for lo, hi in rrt.get("tiers") or []:
+        if lo <= p["mu_rank"] <= hi:
+            st = ((rrt.get(g) or {}).get("by_tier") or {}).get(f"{lo}-{hi}")
+            return {"roi": st["roi"], "record": st["record"], "g": g, "lo": lo, "hi": hi} if st else None
+    return None
+
+
+def select_model_favorites(props, rrt, rules, run_at):
+    try:
+        now = datetime.fromisoformat(str(run_at).replace("Z", "+00:00")) if run_at else None
+    except Exception:
+        now = None
+    best = {}
+    for p in props or []:
+        lean = p.get("model_lean")
+        if not p.get("is_official_play") or lean not in ("over", "under"):
+            continue
+        k = "|".join([str(p.get("fixture_id")), str(p.get("player_name")), str(p.get("market_name"))])
+        lp = p.get("model_lean_probability") or 0
+        if k not in best or lp > (best[k].get("model_lean_probability") or 0):
+            best[k] = p
+    out = []
+    for k, p in best.items():
+        try:
+            if now and datetime.fromisoformat(str(p.get("start_time")).replace("Z", "+00:00")) <= now:
+                continue
+        except Exception:
+            continue
+        g, _mv = _prop_grade(p)
+        mu = str(p.get("mu_grade") or "")
+        price = _num_or_none(p.get(f"{p['model_lean']}_price"))
+        if g != "A" or not mu.startswith("A") or price is None or price < -150:
+            continue
+        rr = None
+        if p.get("market_name") == "Rush Yards" and p["model_lean"] == "under":
+            rr = _rush_rank_roi(p, rrt)
+            if not rr or not (rr["roi"] > 0):
+                continue
+        roi = rr["roi"] if rr else float(((rules or {}).get(p.get("play_kind")) or {}).get("roi") or 0)
+        out.append({"key": k, "player": p.get("player_name"), "team": p.get("team"), "market": p.get("market_name"),
+                    "side": p["model_lean"], "start": p.get("start_time"), "line": _num_or_none(p.get("line")), "price": price,
+                    "mu": mu, "rank": p.get("mu_rank"), "roi": roi, "rr": rr, "score": roi + (1.5 if mu == "A+" else 0)})
+    out.sort(key=lambda x: (-x["score"], -(x["roi"] or 0)))
+    return out[:FAV_TOP_N]
+
+
+def update_fav_log(favs, props, run_at, path=FAV_LOG_PATH):
+    """Logs this run's favorites. A play already on the log that hasn't kicked
+    off and isn't on the list now is marked off (on=False). Never raises."""
+    try:
+        log = {"plays": {}}
+        if os.path.exists(path):
+            with open(path) as f:
+                log = json.load(f) or {"plays": {}}
+        log.setdefault("plays", {})
+        if not run_at:
+            return log
+        now = datetime.fromisoformat(str(run_at).replace("Z", "+00:00"))
+
+        def started(iso):
+            try:
+                return datetime.fromisoformat(str(iso).replace("Z", "+00:00")) <= now
+            except Exception:
+                return True
+        cur = set()
+        for fv in favs or []:
+            pid = f"{fv['player']}|{fv['market']}|{fv['start']}|{fv['side']}"
+            cur.add(pid)
+            rec = log["plays"].setdefault(pid, {"player": fv["player"], "team": fv.get("team"), "market": fv["market"],
+                                                "side": fv["side"], "start": fv["start"], "first_at": run_at})
+            rec.update({"on": True, "last_at": run_at, "line": fv.get("line"), "price": fv.get("price"), "mu": fv.get("mu")})
+        for pid, rec in log["plays"].items():
+            if pid not in cur and rec.get("on") and not started(rec.get("start")):
+                rec.update({"on": False, "last_at": run_at})
+        log["updated"] = run_at
+        with open(path, "w") as f:
+            json.dump(log, f, separators=(",", ":"))
+        return log
+    except Exception as e:
+        print(f"  [note] favorites log not updated ({e})")
+        return None
+
+
+def build_fav_record(log, flags_path=PROP_FLAGS_PATH):
+    """Favorites on the list at their last run before kickoff, graded from the
+    box score (official rows of the flag log), 1u at the price logged."""
+    if not log or not log.get("plays"):
+        return None
+    try:
+        import csv
+        res = {}
+        if os.path.exists(flags_path):
+            with open(flags_path, newline="") as f:
+                for r in csv.DictReader(f):
+                    if r.get("tag") in OFFICIAL_TAGS and r.get("result") in ("W", "L", "P", "VOID"):
+                        res.setdefault((str(r.get("player")).lower(), r.get("market"), r.get("start_time"), r.get("side")), r["result"])
+        plays = []
+        for rec in log["plays"].values():
+            if not rec.get("on"):
+                continue
+            r = res.get((str(rec.get("player")).lower(), rec.get("market"), rec.get("start"), rec.get("side")))
+            pr = rec.get("price") or -110
+            u = None
+            if r == "W":
+                u = 100 / abs(pr) if pr < 0 else pr / 100
+            elif r == "L":
+                u = -1.0
+            elif r == "P":
+                u = 0.0
+            plays.append({"player": rec.get("player"), "team": rec.get("team"), "market": rec.get("market"), "side": rec.get("side"),
+                          "line": rec.get("line"), "price": rec.get("price"), "start": rec.get("start"), "res": r, "u": None if u is None else round(u, 3)})
+        done = [x for x in plays if x["res"] in ("W", "L", "P")]
+        units = sum(x["u"] for x in done)
+        w = sum(1 for x in done if x["res"] == "W")
+        l = sum(1 for x in done if x["res"] == "L")
+        done.sort(key=lambda x: x["start"] or "", reverse=True)
+        return {"w": w, "l": l, "p": sum(1 for x in done if x["res"] == "P"), "units": round(units, 2),
+                "roi": round(units / (w + l) * 100, 1) if (w + l) else None,
+                "since": min((x["start"] for x in plays if x["start"]), default=None),
+                "recent": done[:10], "pending": sum(1 for x in plays if x["res"] not in ("W", "L", "P", "VOID"))}
+    except Exception as e:
+        print(f"  [note] favorites record not built ({e})")
+        return None
+
+
 def build_prop_grade_tracker(log, flags_path=PROP_FLAGS_PATH):
     """The log for the page, with each play's box-score result from the flag
     log (official rows). Never raises."""
@@ -1996,6 +2139,17 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .fv-card h3 { margin: 0; font-family: var(--font-display); font-style: italic; font-weight: 900; font-size: 17px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
 .fv-card h3 em { font-style: normal; font-family: var(--font-body); font-size: 11px; font-weight: 700; color: var(--muted); background: var(--chip); border-radius: 99px; padding: 2px 8px; }
 .fv-sub { font-size: 11.5px; color: var(--muted); margin: 4px 0 10px; line-height: 1.4; }
+.fv-rec { border: 1px solid var(--rule); border-radius: 8px; padding: 9px 10px; margin: 0 0 8px; background: rgba(57,240,122,0.04); }
+.fv-rec-top { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.fv-rec-k { font-size: 10px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.fv-rec-v { font-family: var(--font-display); font-style: italic; font-weight: 900; font-size: 20px; color: #fff; line-height: 1.1; }
+.fv-rec-last { display: flex; align-items: center; gap: 3px; margin-top: 7px; flex-wrap: wrap; }
+.fv-wl { width: 18px; height: 18px; border-radius: 4px; font-size: 10px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; cursor: help; }
+.fv-wl.is-w { background: var(--neon); color: #06120A; }
+.fv-wl.is-l { background: rgba(255,90,90,0.18); color: #FF6B6B; border: 1px solid rgba(255,90,90,0.5); }
+.fv-wl.is-p { background: var(--chip); color: var(--muted); }
+.fv-rec-n { font-size: 10.5px; color: var(--muted); margin-left: 4px; }
+.fv-rec-foot { font-size: 10.5px; color: var(--muted); margin-top: 6px; line-height: 1.35; }
 .fv-item { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 4px 8px; align-items: center; padding: 9px 0; border-top: 1px solid var(--rule-row); }
 .fv-item:first-of-type { border-top: none; }
 .fv-rank { font-family: var(--font-display); font-style: italic; font-weight: 900; font-size: 18px; color: var(--neon); text-align: center; }
@@ -6446,22 +6600,15 @@ RENDERER_JS = """<script>
     //   and (rush yds unders) its opposing run-D rank range is up in the
     //   2024-26 backtest. Ranked by that backtest ROI (rush unders) or the
     //   rule's backtest ROI (other props), A+ matchups break ties.
-    var favNow = Date.now();
-    var favs = rows.filter(function (r) {
-      if (!r.is_official_play || r.model_ev == null || r.model_ev < 8) return false;
-      var pg = playGrade(r); if (!pg || pg.g !== 'A') return false;
-      if (!r.mu_grade || String(r.mu_grade).charAt(0) !== 'A') return false;
-      if (r._price == null || r._price < -150) return false;
-      if (r.start_time && new Date(r.start_time).getTime() <= favNow) return false;
-      var ag = propAgree(r); if (!ag || ag.v !== 'agree') return false;
-      if (r.market_name === 'Rush Yards' && r.model_lean === 'under') { var rr = rushRankStat(r); if (!rr || !(rr.s.roi > 0)) return false; r._favRR = rr; }
-      return true;
-    }).map(function (r) {
-      var ru = (D.propRules || {})[r.play_kind];
-      r._favRoi = r._favRR ? r._favRR.s.roi : (ru ? ru.roi : 0);
-      r._favScore = r._favRoi + (String(r.mu_grade) === 'A+' ? 1.5 : 0);
+    var favNow = Date.now(), favRowBy = {};
+    rows.forEach(function (r) { favRowBy[[r.fixture_id, r.player_name, r.market_name].join('|')] = r; });
+    var favs = (D.modelFavs || []).map(function (fv) {
+      var r = favRowBy[fv.key];
+      if (!r || (r.start_time && new Date(r.start_time).getTime() <= favNow)) return null;
+      r._favRR = fv.rr ? { g: fv.rr.g, lab: fv.rr.hi >= 999 ? '#' + fv.rr.lo + '+' : '#' + fv.rr.lo + '–' + fv.rr.hi, s: { roi: fv.rr.roi, record: fv.rr.record } } : null;
+      r._favRoi = fv.roi;
       return r;
-    }).sort(function (a, b) { return (b._favScore - a._favScore) || (b.model_ev - a.model_ev); }).slice(0, 6);
+    }).filter(Boolean);
     var favKey = function (r) { return [r.fixture_id, r.player_name, r.market_name].join('|'); };
     var favByKey = {};
     favs.forEach(function (r) { favByKey[favKey(r)] = r; });
@@ -7179,8 +7326,20 @@ RENDERER_JS = """<script>
         '<div class="fv-price">' + priceS(r._price) + '<button type="button" class="fv-add' + (on ? ' is-on' : '') + '" data-parlay-toggle="' + esc(favKey(r)) + '">' + (on ? '&#10003; Slip' : '+ Slip') + '</button></div>' +
         '<div class="fv-why">' + why + '</div></div>';
     }).join('') : '<div class="fv-empty">No props pass every check right now. New ones show up here as lines post and the model reruns through the week.</div>';
+    // Favorites record: graded at the price shown, from the run-by-run log.
+    var FR = D.favRecord, favRecHtml = '';
+    if (FR && (FR.w + FR.l)) {
+      var frMd = function (iso) { var d = new Date(iso || ''); return isNaN(d) ? '' : (d.getMonth() + 1) + '/' + d.getDate(); };
+      favRecHtml = '<div class="fv-rec"><div class="fv-rec-top"><div><div class="fv-rec-k">Record</div><div class="fv-rec-v">' + FR.w + '-' + FR.l + (FR.p ? '-' + FR.p : '') + '</div></div>' +
+        '<div><div class="fv-rec-k">Units</div><div class="fv-rec-v" style="color:' + (FR.units >= 0 ? 'var(--neon)' : 'var(--red)') + '">' + signed(FR.units, 1) + 'u</div></div>' +
+        '<div><div class="fv-rec-k">ROI</div><div class="fv-rec-v" style="color:' + ((FR.roi || 0) >= 0 ? 'var(--neon)' : 'var(--red)') + '">' + (FR.roi != null ? signed(FR.roi, 0) + '%' : '—') + '</div></div></div>' +
+        '<div class="fv-rec-last">' + (FR.recent || []).slice().reverse().map(function (x) {
+          return '<span class="fv-wl is-' + String(x.res).toLowerCase() + '" title="' + esc(x.player + ' ' + (x.side === 'over' ? 'O' : 'U') + ' ' + x.line + ' ' + marketName(x.market).toLowerCase() + ', ' + frMd(x.start) + ' (' + (x.price > 0 ? '+' : '') + x.price + ')') + '">' + esc(x.res) + '</span>';
+        }).join('') + '<span class="fv-rec-n">last ' + (FR.recent || []).length + '</span></div>' +
+        '<div class="fv-rec-foot">Since ' + frMd(FR.since) + ', graded at the price shown when it was on the list before kickoff' + (FR.pending ? ' &middot; ' + FR.pending + ' pending' : '') + '.</div></div>';
+    }
     var favCard = '<div class="fv-card"><h3>&#11088; Model favorites <em>' + favs.length + '</em></h3>' +
-      '<div class="fv-sub">A-grade official props with an A matchup, a breakdown that agrees, and a backtest that&rsquo;s up for that spot. Refreshes every model run.</div>' + favList + '</div>';
+      '<div class="fv-sub">A-grade official props with an A matchup, -150 or better, and (rush unders) a defense-rank range that&rsquo;s up in the backtest. Refreshes every model run.</div>' + favRecHtml + favList + '</div>';
     // Suggested pairs: two favorites from different games, best-ranked first.
     // Greedy: the best two favorites from different games, then the next
     // best unused two, so each pair is different legs; then fill to 3.
@@ -9274,6 +9433,9 @@ def main():
     model_data["teamMatchupMeta"] = data.get("team_matchup_meta") or {}
     attach_prop_first_flags(model_data.get("propsLive") or [])
     model_data["propGradeLog"] = build_prop_grade_tracker(update_prop_grade_log(model_data.get("propsLive") or [], data.get("generated_at")))
+    _favs = select_model_favorites(model_data.get("propsLive") or [], model_data.get("rushRankTable"), model_data.get("propRules"), data.get("generated_at"))
+    model_data["modelFavs"] = _favs
+    model_data["favRecord"] = build_fav_record(update_fav_log(_favs, model_data.get("propsLive") or [], data.get("generated_at")))
     # Game-by-game box-score numbers for the Details panel (10/2026); absent
     # until scripts/export_dashboard_data.py writes them, and the panel just
     # leaves that part out.
