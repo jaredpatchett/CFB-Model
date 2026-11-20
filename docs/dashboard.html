@@ -713,7 +713,7 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .em-sub { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-3); font-weight: 700; margin-left: 6px; }
 .em-wrap { margin-top: 18px; }
 .em-table { background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; margin-top: 12px; }
-.em-grid { display: grid; grid-template-columns: 30px minmax(170px, 1.3fr) 112px 64px 64px 76px minmax(130px, 1fr) minmax(150px, 1.1fr) minmax(130px, 1fr) 52px; column-gap: 12px; align-items: center; }
+.em-grid { display: grid; grid-template-columns: 30px minmax(170px, 1.3fr) 112px 64px 64px 76px minmax(130px, 1fr) minmax(210px, 1.35fr) minmax(130px, 1fr) 52px; column-gap: 12px; align-items: center; }
 .em-table .thead { border-bottom: 1px solid var(--rule); padding: 11px 16px; font-family: var(--font-body); letter-spacing: 0.1em; font-size: 10px; }
 .em-row { border-bottom: 1px solid var(--rule-row); }
 .em-row .row-body { padding: 9px 16px; }
@@ -740,6 +740,11 @@ input, select, textarea { border-radius: var(--radius-sm) !important; }
 .em-play em { font-style: normal; color: var(--neon); font-weight: 800; }
 .em-play.is-card { border-color: rgba(57,240,122,0.6); background: rgba(57,240,122,0.08); box-shadow: 0 0 14px rgba(57,240,122,0.12); }
 .em-play.is-card svg { fill: var(--neon); }
+/* 11/2026 (Rod): the Bet Card's BET / BET SMALL / WAIT / PASS call, right on the Edge Matrix row */
+.em-pc { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.em-pc .bc-pill { flex-shrink: 0; cursor: help; }
+.em-row.is-vpass .em-play.is-card { border-color: rgba(255,122,89,0.45); background: rgba(255,122,89,0.06); box-shadow: none; }
+.em-row.is-vpass .em-game, .em-row.is-vpass .em-edge { opacity: 0.6; }
 .em-tags { display: flex; flex-wrap: wrap; gap: 5px; }
 .em-tag { font-size: 9.5px; font-weight: 800; letter-spacing: 0.07em; padding: 3px 7px; border-radius: 5px; border: 1px solid var(--rule-strong); color: var(--muted); white-space: nowrap; }
 .em-tag.is-card { color: var(--neon); border-color: rgba(57,240,122,0.45); background: rgba(57,240,122,0.08); }
@@ -2196,6 +2201,12 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
 
     var rows = visible.map(function (r, n) {
       var p = r.p, s = r.s, i = r.i, g = p.game, a = team(g.away), h = team(g.home);
+      // Bet Card rows get the card's own call (cardVerdict), so the two
+      // views can never disagree.
+      var cItem = card.filter(function (c) { return c.game === g; })[0], vd = null;
+      if (cItem) { try { vd = cardVerdict(cItem); } catch (err) { vd = null; } }
+      var vPill = vd ? '<span class="bc-pill is-' + vd.v + '" title="' + esc(vd.why.join('. ').replace(/<[^>]+>/g, '').replace(/&rsquo;/g, '’').replace(/&rarr;/g, '→').replace(/&[a-z]+;/g, ' ') + '.') + '">' +
+        (vd.v === 'small' ? 'BET SMALL' : vd.v.toUpperCase()) + '</span>' : '';
       var cls = Math.abs(p.edgeForTier) < D.meta.minEdge ? 'is-off' : p.isFade ? 'is-neg' : p.qualifies ? 'is-pos' : 'is-off';
       var isTrainedGame = (g.flags || []).some(function (f) { return f.text === 'In-season model'; });
       var modelSrcLabel = isTrainedGame ? (g.modelVersion === 'upgraded' ? 'UPGRADED' : 'TRAINED') : 'UNTRAINED';
@@ -2211,7 +2222,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
       var e = Math.abs(p.sideEdge || 0), heat = cls === 'is-pos' ? Math.min(0.55, 0.12 + e / 30) : 0;
       var prob = Math.max(0, Math.min(1, p.sideProb || 0));
       return '' +
-        '<div class="row row--click em-row' + (i === state.selected ? ' is-selected' : '') + '" data-game="' + i + '">' +
+        '<div class="row row--click em-row' + (i === state.selected ? ' is-selected' : '') + (vd ? ' is-v' + vd.v : '') + '" data-game="' + i + '">' +
           '<div class="row-body em-grid">' +
             '<div class="em-n">' + (n + 1) + '</div>' +
             '<div class="em-game">' + trkMark(a.abbr, 24) + '<span class="team-abbr" title="' + esc(g.away) + '">' + esc(a.abbr) + '</span>' +
@@ -2221,7 +2232,7 @@ window.MODEL_DATA = {"meta": {"modelName": "CFB", "sport": "EDGE", "subtitle": "
             '<div class="num cell-model">' + esc(p.modelLabel) + '</div>' +
             '<div class="num"><span class="em-edge ' + cls + '" style="' + (heat ? 'background:rgba(57,240,122,' + heat.toFixed(2) + ')' : '') + '">' + esc(p.sideEdgeLabel) + '</span></div>' +
             '<div class="em-prob"><span>' + (prob * 100).toFixed(1) + '%</span><i><b style="width:' + (prob * 100).toFixed(1) + '%"></b></i></div>' +
-            '<div>' + emPlay(s) + '</div>' +
+            '<div class="em-pc">' + vPill + emPlay(s) + '</div>' +
             '<div class="em-tags">' + tags.join('') + '</div>' +
             '<div class="num"><button class="track-btn" title="Add to My Tracker" onclick="event.stopPropagation();window.__cfbTrack(' + trackPayload(p, s.onCard) + ')">+TRK</button></div>' +
           '</div>' +
