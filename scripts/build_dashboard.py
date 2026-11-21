@@ -3409,8 +3409,8 @@ RENDERER_JS = """<script>
     atdView: 'all', atdBasis: 'best', atdSort: 'edge', atdGame: 'ALL' };
   // Props tab Sort & Filter preset (10/2026): saved per browser, applied on load.
   var PROP_PRESET_KEY = 'cfb_props_preset_v1';
-  var PROP_PRESET_FIELDS = ['propCat', 'propView', 'propMarket', 'propGame', 'propSort', 'propSort2', 'propSortRev', 'propDir', 'propBook', 'propMinEdge', 'propMyList', 'propShowPass', 'propMinMu', 'propDefRank'];
-  var PROP_DEFAULTS = { propCat: 'all', propView: 'official', propMarket: 'ALL', propGame: 'ALL', propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propMyList: false, propShowPass: false, propMinMu: 0, propDefRank: 'ALL' };
+  var PROP_PRESET_FIELDS = ['propCat', 'propView', 'propMarket', 'propGame', 'propSort', 'propSort2', 'propSortRev', 'propDir', 'propBook', 'propMinEdge', 'propMyList', 'propShowPass', 'propMinMu', 'propDefRank', 'propGrade'];
+  var PROP_DEFAULTS = { propCat: 'all', propView: 'official', propMarket: 'ALL', propGame: 'ALL', propSort: 'kickoff', propSort2: 'edge', propSortRev: false, propDir: 'all', propBook: 'ALL', propMinEdge: 0, propMyList: false, propShowPass: false, propMinMu: 0, propDefRank: 'ALL', propGrade: 'ALL' };
   try {
     var pp0 = JSON.parse(localStorage.getItem(PROP_PRESET_KEY) || 'null');
     if (pp0) PROP_PRESET_FIELDS.forEach(function (k) { if (pp0.hasOwnProperty(k)) state[k] = pp0[k]; });
@@ -6881,7 +6881,14 @@ RENDERER_JS = """<script>
       q: String(state.propQ || '').trim().toLowerCase(),
       mine: !!state.propMyList,
       minMu: Number(state.propMinMu) || 0,
-      defRank: DEF_TIERS.some(function (t) { return t[0] + '-' + t[1] === state.propDefRank; }) ? state.propDefRank : 'ALL'
+      defRank: DEF_TIERS.some(function (t) { return t[0] + '-' + t[1] === state.propDefRank; }) ? state.propDefRank : 'ALL',
+      // 11/21/2026 (Rod): filter official props by play grade.
+      grade: ['A', 'AB', 'B', 'C'].indexOf(state.propGrade) >= 0 ? state.propGrade : 'ALL'
+    };
+    var gradeOk = function (r, k) {
+      if (k === 'ALL') return true;
+      var pg = playGrade(r);
+      return !!pg && k.indexOf(pg.g) >= 0;
     };
     var passes = function (r, skip) {
       if (skip !== 'view' && view !== 'all' && r._sec !== view) return false;
@@ -6897,6 +6904,7 @@ RENDERER_JS = """<script>
       if (F.mine && !myTrk[propTrackLabel(r)]) return false;
       if (skip !== 'mu' && F.minMu && !(r.mu_score != null && r.mu_score >= F.minMu)) return false;
       if (skip !== 'drank' && !inDefTier(r, F.defRank)) return false;
+      if (skip !== 'pg' && !gradeOk(r, F.grade)) return false;
       return visible(r);
     };
     var countBy = function (skip, test) { var n = 0; rows.forEach(function (r) { if (passes(r, skip) && test(r)) n++; }); return n; };
@@ -6990,7 +6998,7 @@ RENDERER_JS = """<script>
     var nAllMkt = 0; Object.keys(mktCounts).forEach(function (k) { nAllMkt += mktCounts[k]; });
     var books = Object.keys(bookKeys).sort(function (a, b) { return bookLabel(a).localeCompare(bookLabel(b)); });
     var edgeOpt = function (v, label) { return segOpt('propMinEdge', String(v), String(F.minEdge), label, countBy('edge', function (r) { return !v || (r.model_ev != null && r.model_ev >= v); })); };
-    var nActive = (mkt !== 'ALL') + (gameSel !== 'ALL') + (F.dir !== 'all') + (bookSel !== 'ALL') + (F.minEdge > 0) + (F.q ? 1 : 0) + (F.mine ? 1 : 0) + (F.minMu > 0) + (F.defRank !== 'ALL');
+    var nActive = (mkt !== 'ALL') + (gameSel !== 'ALL') + (F.dir !== 'all') + (bookSel !== 'ALL') + (F.minEdge > 0) + (F.q ? 1 : 0) + (F.mine ? 1 : 0) + (F.minMu > 0) + (F.defRank !== 'ALL') + (F.grade !== 'ALL');
     var controls = '<div class="pp-controls">' +
       '<div class="pp-seg" role="group" aria-label="Which plays to show">' +
         seg(0, 'official', 'Official', nSec.official) +
@@ -7512,6 +7520,9 @@ RENDERER_JS = """<script>
     var fbar = '<div class="pp-fbar">' +
       sel('propView', 'Which plays', view, [['official', 'Official (' + nSec.official + ')'], ['underlean', 'Under leans (' + nSec.underlean + ')'], ['watch', 'Watch (' + nSec.watch + ')'], ['all', 'All props (' + (nSec.official + nSec.underlean + nSec.watch + nSec.tracked + nSec.lean) + ')']]) +
       sel('propSort', 'Sort by', sort1, SORTS.map(function (x) { return ['' + x[0], 'Sort: ' + x[1]]; })) +
+      sel('propGrade', 'Play grade', F.grade, [['ALL', 'Any play grade'], ['A', '&#128293; A only'], ['AB', 'A &amp; B'], ['B', 'B only'], ['C', 'C only']].map(function (o) {
+        return [o[0], o[1] + ' (' + countBy('pg', function (r) { return gradeOk(r, o[0]); }) + ')'];
+      })) +
       '<button class="pp-btn pp-fbar-tog" onclick="window.__cfbPpFilters()">' + (state.ppFilters ? 'Hide filters' : 'Filters') + (nActive ? ' (' + nActive + ')' : '') + '</button>' +
       '<span class="pp-fbar-more' + (state.ppFilters ? ' is-open' : '') + '">' +
       sel('propMarket', 'Market', mkt, [['ALL', 'All markets (' + nAllMkt + ')']].concat(mktOrder.map(function (m) { return [m, esc(marketName(m)) + ' (' + (mktCounts[m] || 0) + ')']; }))) +
@@ -9722,7 +9733,7 @@ RENDERER_JS = """<script>
     var k = e.target && e.target.dataset && e.target.dataset.edgeFilter;
     if (k === 'edgeSort' || k === 'edgeShow' || k === 'edgeConf') { state[k] = e.target.value; render(); }
     var pk = e.target && e.target.dataset && e.target.dataset.propSelect;
-    if (pk === 'propSort' || pk === 'propSort2' || pk === 'propBook' || pk === 'propView' || pk === 'propMarket' || pk === 'propGame' || pk === 'propDir' || pk === 'propDefRank' || pk === 'propMinEdge' || pk === 'propMinMu') {
+    if (pk === 'propSort' || pk === 'propSort2' || pk === 'propBook' || pk === 'propView' || pk === 'propMarket' || pk === 'propGame' || pk === 'propDir' || pk === 'propDefRank' || pk === 'propMinEdge' || pk === 'propMinMu' || pk === 'propGrade') {
       state[pk] = (pk === 'propMinEdge' || pk === 'propMinMu') ? Number(e.target.value) || 0 : e.target.value;
       if (pk === 'propSort') state.propSortRev = false;
       state.propPresetMsg = ''; render();
