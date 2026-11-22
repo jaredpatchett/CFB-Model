@@ -296,7 +296,12 @@
     "precipitation": 0.0,
     "game_indoors": false
    },
-   "book": "draftkings"
+   "book": "draftkings",
+   "total": 72.0,
+   "result": "L",
+   "units": -1.0,
+   "final_grade": "C",
+   "final_line": 68.5
   },
   "West Virginia Mountaineers|Houston Cougars|2026-11-21T18:00:00Z|under": {
    "home": "West Virginia Mountaineers",
@@ -414,7 +419,12 @@
     "precipitation": 0.0,
     "game_indoors": false
    },
-   "book": "draftkings"
+   "book": "draftkings",
+   "total": 65.0,
+   "result": "W",
+   "units": 0.9091,
+   "final_grade": "B",
+   "final_line": 71.5
   },
   "Florida Atlantic Owls|South Florida Bulls|2026-11-21T19:30:00Z|under": {
    "home": "Florida Atlantic Owls",
@@ -540,7 +550,12 @@
     "precipitation": 0.157,
     "game_indoors": false
    },
-   "book": "draftkings"
+   "book": "draftkings",
+   "total": 49.0,
+   "result": "W",
+   "units": 0.9091,
+   "final_grade": "A",
+   "final_line": 63.5
   },
   "Baylor Bears|Texas Tech Red Raiders|2026-11-21T20:30:00Z|under": {
    "home": "Baylor Bears",
@@ -666,7 +681,12 @@
     "precipitation": 0.0,
     "game_indoors": false
    },
-   "book": "draftkings"
+   "book": "draftkings",
+   "total": 30.0,
+   "result": "W",
+   "units": 0.9091,
+   "final_grade": "A",
+   "final_line": 57.5
   },
   "California Golden Bears|Stanford Cardinal|2026-11-22T00:30:00Z|under": {
    "home": "California Golden Bears",
@@ -792,7 +812,12 @@
     "precipitation": 0.0,
     "game_indoors": false
    },
-   "book": "draftkings"
+   "book": "draftkings",
+   "total": 72.0,
+   "result": "L",
+   "units": -1.0,
+   "final_grade": "B",
+   "final_line": 55.5
   },
   "New Mexico State Aggies|Delaware Blue Hens|2026-11-21T20:00:00Z|under": {
    "home": "New Mexico State Aggies",
@@ -870,7 +895,12 @@
     "precipitation": 0.0,
     "game_indoors": false
    },
-   "book": "draftkings"
+   "book": "draftkings",
+   "total": 72.0,
+   "result": "L",
+   "units": -1.0,
+   "final_grade": "B",
+   "final_line": 53.5
   },
   "UCLA Bruins|USC Trojans|2026-11-28T20:30:00Z|under": {
    "home": "UCLA Bruins",
@@ -1002,15 +1032,23 @@
      6.2,
      "B",
      0
+    ],
+    [
+     "2026-11-22T19:01:56.963979+00:00",
+     50.5,
+     54.3,
+     3.8,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 41.9,
-    "wind_speed": 4.5,
+    "temperature": 41.0,
+    "wind_speed": 8.9,
     "precipitation": 0.0,
     "game_indoors": false
    },
-   "book": "fanduel"
+   "book": "draftkings"
   },
   "Florida Gators|Vanderbilt Commodores|2026-11-21T17:00:00Z|over": {
    "home": "Florida Gators",
@@ -1094,7 +1132,12 @@
     "precipitation": 0.0,
     "game_indoors": false
    },
-   "book": "draftkings"
+   "book": "draftkings",
+   "total": 65.0,
+   "result": "W",
+   "units": 0.9091,
+   "final_grade": "B",
+   "final_line": 41.5
   },
   "Indiana Hoosiers|Purdue Boilermakers|2026-11-29T00:00:00Z|under": {
    "home": "Indiana Hoosiers",
@@ -1124,16 +1167,234 @@
      -3.3,
      "B",
      1
+    ],
+    [
+     "2026-11-22T19:01:56.963979+00:00",
+     52.5,
+     50.1,
+     -2.4,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 35.8,
-    "wind_speed": 6.3,
+    "temperature": 38.7,
+    "wind_speed": 1.1,
     "precipitation": 0.0,
     "game_indoors": false
    },
-   "book": "fanduel"
+   "book": "draftkings"
+  },
+  "Memphis Tigers|Temple Owls|2026-11-27T17:00:00Z|under": {
+   "home": "Memphis Tigers",
+   "away": "Temple Owls",
+   "home_school": "Memphis",
+   "away_school": "Temple",
+   "kickoff": "2026-11-27T17:00:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-22T19:01:56.963979+00:00",
+    "line": 64.5,
+    "pred": 60.9
+   },
+   "h": [
+    [
+     "2026-11-22T19:01:56.963979+00:00",
+     64.5,
+     60.9,
+     -3.6,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 52.7,
+    "wind_speed": 5.8,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "UTSA Roadrunners|Tulsa Golden Hurricane|2026-11-27T17:00:00Z|under": {
+   "home": "UTSA Roadrunners",
+   "away": "Tulsa Golden Hurricane",
+   "home_school": "UTSA",
+   "away_school": "Tulsa",
+   "kickoff": "2026-11-27T17:00:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-22T19:01:56.963979+00:00",
+    "line": 60.5,
+    "pred": 54.1
+   },
+   "h": [
+    [
+     "2026-11-22T19:01:56.963979+00:00",
+     60.5,
+     54.1,
+     -6.4,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 59.5,
+    "wind_speed": 6.9,
+    "precipitation": 0.0,
+    "game_indoors": true
+   },
+   "book": "draftkings"
+  },
+  "Wisconsin Badgers|Minnesota Golden Gophers|2026-11-28T00:30:00Z|over": {
+   "home": "Wisconsin Badgers",
+   "away": "Minnesota Golden Gophers",
+   "home_school": "Wisconsin",
+   "away_school": "Minnesota",
+   "kickoff": "2026-11-28T00:30:00Z",
+   "side": "over",
+   "first": {
+    "at": "2026-11-22T19:01:56.963979+00:00",
+    "line": 36.5,
+    "pred": 44.6
+   },
+   "h": [
+    [
+     "2026-11-22T19:01:56.963979+00:00",
+     36.5,
+     44.6,
+     8.1,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 32.0,
+    "wind_speed": 3.8,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "Texas A&M Aggies|Texas Longhorns|2026-11-28T00:30:00Z|over": {
+   "home": "Texas A&M Aggies",
+   "away": "Texas Longhorns",
+   "home_school": "Texas A&M",
+   "away_school": "Texas",
+   "kickoff": "2026-11-28T00:30:00Z",
+   "side": "over",
+   "first": {
+    "at": "2026-11-22T19:01:56.963979+00:00",
+    "line": 38.5,
+    "pred": 46.3
+   },
+   "h": [
+    [
+     "2026-11-22T19:01:56.963979+00:00",
+     38.5,
+     46.3,
+     7.8,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 55.9,
+    "wind_speed": 5.3,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "Utah Utes|West Virginia Mountaineers|2026-11-28T02:00:00Z|under": {
+   "home": "Utah Utes",
+   "away": "West Virginia Mountaineers",
+   "home_school": "Utah",
+   "away_school": "West Virginia",
+   "kickoff": "2026-11-28T02:00:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-22T19:01:56.963979+00:00",
+    "line": 69.5,
+    "pred": 63.8
+   },
+   "h": [
+    [
+     "2026-11-22T19:01:56.963979+00:00",
+     69.5,
+     63.8,
+     -5.7,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 42.8,
+    "wind_speed": 4.6,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "Clemson Tigers|South Carolina Gamecocks|2026-11-28T20:00:00Z|over": {
+   "home": "Clemson Tigers",
+   "away": "South Carolina Gamecocks",
+   "home_school": "Clemson",
+   "away_school": "South Carolina",
+   "kickoff": "2026-11-28T20:00:00Z",
+   "side": "over",
+   "first": {
+    "at": "2026-11-22T19:01:56.963979+00:00",
+    "line": 39.5,
+    "pred": 46.7
+   },
+   "h": [
+    [
+     "2026-11-22T19:01:56.963979+00:00",
+     39.5,
+     46.7,
+     7.2,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 54.7,
+    "wind_speed": 5.3,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "Stanford Cardinal|SMU Mustangs|2026-11-28T20:30:00Z|under": {
+   "home": "Stanford Cardinal",
+   "away": "SMU Mustangs",
+   "home_school": "Stanford",
+   "away_school": "SMU",
+   "kickoff": "2026-11-28T20:30:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-22T19:01:56.963979+00:00",
+    "line": 60.5,
+    "pred": 57.2
+   },
+   "h": [
+    [
+     "2026-11-22T19:01:56.963979+00:00",
+     60.5,
+     57.2,
+     -3.3,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 63.3,
+    "wind_speed": 10.1,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
   }
  },
- "updated": "2026-11-21T18:41:14.255906+00:00"
+ "updated": "2026-11-22T19:01:56.963979+00:00"
 }
