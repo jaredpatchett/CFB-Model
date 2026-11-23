@@ -1048,11 +1048,19 @@
      0.7,
      "B",
      0
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     50.5,
+     54.8,
+     4.3,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 35.6,
-    "wind_speed": 19.4,
+    "temperature": 45.1,
+    "wind_speed": 8.7,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1199,11 +1207,19 @@
      -2.4,
      "B",
      0
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     52.5,
+     50.0,
+     -2.5,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 38.7,
-    "wind_speed": 1.1,
+    "temperature": 42.6,
+    "wind_speed": 7.8,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1275,6 +1291,14 @@
      -4.4,
      "B",
      1
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     58.5,
+     54.1,
+     -4.4,
+     "B",
+     1
     ]
    ],
    "weather": {
@@ -1321,11 +1345,19 @@
      6.8,
      "B",
      0
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     37.5,
+     44.5,
+     7.0,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 34.3,
-    "wind_speed": 8.7,
+    "temperature": 36.3,
+    "wind_speed": 4.9,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1367,11 +1399,19 @@
      5.8,
      "B",
      0
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     40.5,
+     46.2,
+     5.7,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 55.9,
-    "wind_speed": 5.3,
+    "temperature": 55.0,
+    "wind_speed": 6.0,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1408,6 +1448,14 @@
     ],
     [
      "2026-11-23T14:53:48.690158+00:00",
+     68.5,
+     63.8,
+     -4.7,
+     "B",
+     1
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
      68.5,
      63.8,
      -4.7,
@@ -1459,11 +1507,19 @@
      6.2,
      "B",
      0
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     40.5,
+     45.6,
+     5.1,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 53.6,
-    "wind_speed": 3.6,
+    "temperature": 57.2,
+    "wind_speed": 14.1,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1505,11 +1561,19 @@
      -4.2,
      "C",
      1
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     61.5,
+     57.4,
+     -4.1,
+     "C",
+     1
     ]
    ],
    "weather": {
-    "temperature": 58.5,
-    "wind_speed": 7.8,
+    "temperature": 60.8,
+    "wind_speed": 2.7,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1541,6 +1605,14 @@
      64.5,
      60.7,
      -3.8,
+     "B",
+     1
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     66.5,
+     60.7,
+     -5.8,
      "B",
      1
     ]
@@ -1576,6 +1648,14 @@
     ],
     [
      "2026-11-23T14:53:48.690158+00:00",
+     55.5,
+     52.8,
+     -2.7,
+     "B",
+     0
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
      55.5,
      52.8,
      -2.7,
@@ -1619,11 +1699,19 @@
      10.4,
      "B",
      1
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     47.5,
+     57.6,
+     10.1,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 64.2,
-    "wind_speed": 4.5,
+    "temperature": 60.6,
+    "wind_speed": 7.1,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1656,6 +1744,14 @@
      72.7,
      -4.8,
      "C",
+     1
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     76.5,
+     72.7,
+     -3.8,
+     "B",
      1
     ]
    ],
@@ -1695,11 +1791,19 @@
      8.5,
      "B",
      1
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     46.5,
+     53.9,
+     7.4,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 42.3,
-    "wind_speed": 2.0,
+    "temperature": 40.1,
+    "wind_speed": 4.2,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1733,11 +1837,19 @@
      6.5,
      "B",
      0
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     43.5,
+     49.8,
+     6.3,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 45.1,
-    "wind_speed": 1.8,
+    "temperature": 48.9,
+    "wind_speed": 4.9,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1771,6 +1883,14 @@
      4.7,
      "B",
      0
+    ],
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     47.5,
+     52.2,
+     4.7,
+     "B",
+     0
     ]
    ],
    "weather": {
@@ -1780,7 +1900,37 @@
     "game_indoors": false
    },
    "book": "draftkings"
+  },
+  "East Carolina Pirates|Florida Atlantic Owls|2026-11-28T18:00:00Z|under": {
+   "home": "East Carolina Pirates",
+   "away": "Florida Atlantic Owls",
+   "home_school": "East Carolina",
+   "away_school": "Florida Atlantic",
+   "kickoff": "2026-11-28T18:00:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-23T23:45:43.614523+00:00",
+    "line": 55.5,
+    "pred": 52.4
+   },
+   "h": [
+    [
+     "2026-11-23T23:45:43.614523+00:00",
+     55.5,
+     52.4,
+     -3.1,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 58.1,
+    "wind_speed": 10.3,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
   }
  },
- "updated": "2026-11-23T14:53:48.690158+00:00"
+ "updated": "2026-11-23T23:45:43.614523+00:00"
 }
