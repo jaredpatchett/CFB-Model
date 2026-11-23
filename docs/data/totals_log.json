@@ -1175,6 +1175,14 @@
      -2.4,
      "B",
      0
+    ],
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     52.5,
+     52.5,
+     -0.0,
+     "B",
+     0
     ]
    ],
    "weather": {
@@ -1235,6 +1243,14 @@
      -6.4,
      "B",
      1
+    ],
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     58.5,
+     56.0,
+     -2.5,
+     "B",
+     0
     ]
    ],
    "weather": {
@@ -1265,11 +1281,19 @@
      8.1,
      "B",
      1
+    ],
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     37.5,
+     44.7,
+     7.2,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 32.0,
-    "wind_speed": 3.8,
+    "temperature": 34.3,
+    "wind_speed": 8.7,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1293,6 +1317,14 @@
      38.5,
      46.3,
      7.8,
+     "B",
+     1
+    ],
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     40.5,
+     47.6,
+     7.1,
      "B",
      1
     ]
@@ -1325,6 +1357,14 @@
      -5.7,
      "B",
      1
+    ],
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     68.5,
+     64.1,
+     -4.4,
+     "B",
+     1
     ]
    ],
    "weather": {
@@ -1355,11 +1395,19 @@
      7.2,
      "B",
      1
+    ],
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     40.5,
+     47.8,
+     7.3,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 54.7,
-    "wind_speed": 5.3,
+    "temperature": 53.6,
+    "wind_speed": 3.6,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1385,16 +1433,234 @@
      -3.3,
      "B",
      1
+    ],
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     61.5,
+     57.4,
+     -4.1,
+     "C",
+     1
     ]
    ],
    "weather": {
-    "temperature": 63.3,
-    "wind_speed": 10.1,
+    "temperature": 58.5,
+    "wind_speed": 7.8,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "Memphis Tigers|Temple Owls|2026-11-27T20:30:00Z|under": {
+   "home": "Memphis Tigers",
+   "away": "Temple Owls",
+   "home_school": "Memphis",
+   "away_school": "Temple",
+   "kickoff": "2026-11-27T20:30:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-23T11:07:41.163531+00:00",
+    "line": 64.5,
+    "pred": 60.8
+   },
+   "h": [
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     64.5,
+     60.8,
+     -3.7,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 52.7,
+    "wind_speed": 5.8,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "Georgia Bulldogs|Georgia Tech Yellow Jackets|2026-11-28T20:30:00Z|under": {
+   "home": "Georgia Bulldogs",
+   "away": "Georgia Tech Yellow Jackets",
+   "home_school": "Georgia",
+   "away_school": "Georgia Tech",
+   "kickoff": "2026-11-28T20:30:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-23T11:07:41.163531+00:00",
+    "line": 55.5,
+    "pred": 51.1
+   },
+   "h": [
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     55.5,
+     51.1,
+     -4.4,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 58.5,
+    "wind_speed": 11.4,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "North Texas Mean Green|UAB Blazers|2026-11-28T21:00:00Z|over": {
+   "home": "North Texas Mean Green",
+   "away": "UAB Blazers",
+   "home_school": "North Texas",
+   "away_school": "UAB",
+   "kickoff": "2026-11-28T21:00:00Z",
+   "side": "over",
+   "first": {
+    "at": "2026-11-23T11:07:41.163531+00:00",
+    "line": 47.5,
+    "pred": 59.7
+   },
+   "h": [
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     47.5,
+     59.7,
+     12.2,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 64.2,
+    "wind_speed": 4.5,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "Colorado State Rams|Boise State Broncos|2026-11-28T23:00:00Z|under": {
+   "home": "Colorado State Rams",
+   "away": "Boise State Broncos",
+   "home_school": "Colorado State",
+   "away_school": "Boise State",
+   "kickoff": "2026-11-28T23:00:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-23T11:07:41.163531+00:00",
+    "line": 76.5,
+    "pred": 72.1
+   },
+   "h": [
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     76.5,
+     72.1,
+     -4.4,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 59.0,
+    "wind_speed": 2.5,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "Washington State Cougars|San Diego State Aztecs|2026-11-28T23:30:00Z|over": {
+   "home": "Washington State Cougars",
+   "away": "San Diego State Aztecs",
+   "home_school": "Washington State",
+   "away_school": "San Diego State",
+   "kickoff": "2026-11-28T23:30:00Z",
+   "side": "over",
+   "first": {
+    "at": "2026-11-23T11:07:41.163531+00:00",
+    "line": 45.5,
+    "pred": 54.2
+   },
+   "h": [
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     45.5,
+     54.2,
+     8.7,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 42.3,
+    "wind_speed": 2.0,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "Vanderbilt Commodores|Tennessee Volunteers|2026-11-29T00:00:00Z|over": {
+   "home": "Vanderbilt Commodores",
+   "away": "Tennessee Volunteers",
+   "home_school": "Vanderbilt",
+   "away_school": "Tennessee",
+   "kickoff": "2026-11-29T00:00:00Z",
+   "side": "over",
+   "first": {
+    "at": "2026-11-23T11:07:41.163531+00:00",
+    "line": 43.5,
+    "pred": 51.3
+   },
+   "h": [
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     43.5,
+     51.3,
+     7.8,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 45.1,
+    "wind_speed": 1.8,
+    "precipitation": 0.0,
+    "game_indoors": false
+   },
+   "book": "draftkings"
+  },
+  "California Golden Bears|Pittsburgh Panthers|2026-11-29T00:30:00Z|over": {
+   "home": "California Golden Bears",
+   "away": "Pittsburgh Panthers",
+   "home_school": "California",
+   "away_school": "Pittsburgh",
+   "kickoff": "2026-11-29T00:30:00Z",
+   "side": "over",
+   "first": {
+    "at": "2026-11-23T11:07:41.163531+00:00",
+    "line": 47.5,
+    "pred": 55.2
+   },
+   "h": [
+    [
+     "2026-11-23T11:07:41.163531+00:00",
+     47.5,
+     55.2,
+     7.7,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 61.2,
+    "wind_speed": 4.6,
     "precipitation": 0.0,
     "game_indoors": false
    },
    "book": "draftkings"
   }
  },
- "updated": "2026-11-22T19:01:56.963979+00:00"
+ "updated": "2026-11-23T11:07:41.163531+00:00"
 }
