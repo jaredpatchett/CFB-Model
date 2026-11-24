@@ -3642,6 +3642,123 @@
      "nowSpread": -2.5
     }
    ]
+  },
+  {
+   "at": "2026-11-24T16:05:59.875844+00:00",
+   "plays": [
+    {
+     "key": "Kentucky Wildcats|Louisville Cardinals|2026-11-28T17:00:00Z",
+     "label": "LOU -3.0",
+     "side": "LOU",
+     "home": "UK",
+     "away": "LOU",
+     "kickoff": "2026-11-28T17:00:00Z",
+     "marketSpread": 3,
+     "modelSpread": 15.71,
+     "prob": 0.793
+    },
+    {
+     "key": "North Texas Mean Green|UAB Blazers|2026-11-28T21:00:00Z",
+     "label": "UNT -3.5",
+     "side": "UNT",
+     "home": "UNT",
+     "away": "UAB",
+     "kickoff": "2026-11-28T21:00:00Z",
+     "marketSpread": -3.5,
+     "modelSpread": -14.57,
+     "prob": 0.762
+    },
+    {
+     "key": "Boise State Broncos|San Diego State Aztecs|2026-12-05T01:00:00Z",
+     "label": "SDSU +15.5",
+     "side": "SDSU",
+     "home": "BOIS",
+     "away": "SDSU",
+     "kickoff": "2026-12-05T01:00:00Z",
+     "marketSpread": -15.5,
+     "modelSpread": -4.99,
+     "prob": 0.751
+    },
+    {
+     "key": "Wyoming Cowboys|UConn Huskies|2026-11-28T17:00:00Z",
+     "label": "CONN -3.0",
+     "side": "CONN",
+     "home": "WYO",
+     "away": "CONN",
+     "kickoff": "2026-11-28T17:00:00Z",
+     "marketSpread": 3,
+     "modelSpread": 12.1,
+     "prob": 0.721
+    },
+    {
+     "key": "Oklahoma State Cowboys|Kansas Jayhawks|2026-11-28T23:15:00Z",
+     "label": "KU +6.5",
+     "side": "KU",
+     "home": "OKST",
+     "away": "KU",
+     "kickoff": "2026-11-28T23:15:00Z",
+     "marketSpread": -6.5,
+     "modelSpread": 2.56,
+     "prob": 0.72
+    },
+    {
+     "key": "Colorado Buffaloes|UCF Knights|2026-11-28T19:00:00Z",
+     "label": "UCF +2.5",
+     "side": "UCF",
+     "home": "COLO",
+     "away": "UCF",
+     "kickoff": "2026-11-28T19:00:00Z",
+     "marketSpread": -2.5,
+     "modelSpread": 6.3,
+     "prob": 0.714
+    },
+    {
+     "key": "New Mexico Lobos|Air Force Falcons|2026-11-27T21:30:00Z",
+     "label": "UNM -6.5",
+     "side": "UNM",
+     "home": "UNM",
+     "away": "AF",
+     "kickoff": "2026-11-27T21:30:00Z",
+     "marketSpread": -6.5,
+     "modelSpread": -15.22,
+     "prob": 0.713
+    },
+    {
+     "key": "Ohio State Buckeyes|Michigan Wolverines|2026-11-28T17:00:00Z",
+     "label": "OSU -10.5",
+     "side": "OSU",
+     "home": "OSU",
+     "away": "MICH",
+     "kickoff": "2026-11-28T17:00:00Z",
+     "marketSpread": -10.5,
+     "modelSpread": -18.96,
+     "prob": 0.707
+    },
+    {
+     "key": "Bowling Green Falcons|UMass Minutemen|2026-11-28T20:30:00Z",
+     "label": "BGSU -3.0",
+     "side": "BGSU",
+     "home": "BGSU",
+     "away": "MASS",
+     "kickoff": "2026-11-28T20:30:00Z",
+     "marketSpread": -3,
+     "modelSpread": -11.09,
+     "prob": 0.699
+    },
+    {
+     "key": "Maryland Terrapins|Penn State Nittany Lions|2026-11-28T20:30:00Z",
+     "label": "PSU -7.0",
+     "side": "PSU",
+     "home": "MD",
+     "away": "PSU",
+     "kickoff": "2026-11-28T20:30:00Z",
+     "marketSpread": 7,
+     "modelSpread": 15.07,
+     "prob": 0.698
+    }
+   ],
+   "new": [],
+   "dropped": []
   }
  ]
 }
