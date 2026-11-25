@@ -3906,6 +3906,139 @@
      "nowSpread": -2.5
     }
    ]
+  },
+  {
+   "at": "2026-11-25T14:46:23.611570+00:00",
+   "plays": [
+    {
+     "key": "Kentucky Wildcats|Louisville Cardinals|2026-11-28T17:00:00Z",
+     "label": "LOU -3.0",
+     "side": "LOU",
+     "home": "UK",
+     "away": "LOU",
+     "kickoff": "2026-11-28T17:00:00Z",
+     "marketSpread": 3,
+     "modelSpread": 15.71,
+     "prob": 0.793
+    },
+    {
+     "key": "North Texas Mean Green|UAB Blazers|2026-11-28T21:00:00Z",
+     "label": "UNT -3.0",
+     "side": "UNT",
+     "home": "UNT",
+     "away": "UAB",
+     "kickoff": "2026-11-28T21:00:00Z",
+     "marketSpread": -3,
+     "modelSpread": -14.02,
+     "prob": 0.761
+    },
+    {
+     "key": "Oklahoma State Cowboys|Kansas Jayhawks|2026-11-28T23:15:00Z",
+     "label": "KU +6.5",
+     "side": "KU",
+     "home": "OKST",
+     "away": "KU",
+     "kickoff": "2026-11-28T23:15:00Z",
+     "marketSpread": -6.5,
+     "modelSpread": 4.34,
+     "prob": 0.757
+    },
+    {
+     "key": "Boise State Broncos|San Diego State Aztecs|2026-12-05T01:00:00Z",
+     "label": "SDSU +15.5",
+     "side": "SDSU",
+     "home": "BOIS",
+     "away": "SDSU",
+     "kickoff": "2026-12-05T01:00:00Z",
+     "marketSpread": -15.5,
+     "modelSpread": -4.99,
+     "prob": 0.751
+    },
+    {
+     "key": "Vanderbilt Commodores|Tennessee Volunteers|2026-11-29T00:00:00Z",
+     "label": "VAN +14.0",
+     "side": "VAN",
+     "home": "VAN",
+     "away": "TENN",
+     "kickoff": "2026-11-29T00:00:00Z",
+     "marketSpread": 14,
+     "modelSpread": 5.71,
+     "prob": 0.703
+    },
+    {
+     "key": "Bowling Green Falcons|UMass Minutemen|2026-11-28T20:30:00Z",
+     "label": "BGSU -3.0",
+     "side": "BGSU",
+     "home": "BGSU",
+     "away": "MASS",
+     "kickoff": "2026-11-28T20:30:00Z",
+     "marketSpread": -3,
+     "modelSpread": -11.09,
+     "prob": 0.699
+    },
+    {
+     "key": "Maryland Terrapins|Penn State Nittany Lions|2026-11-28T20:30:00Z",
+     "label": "PSU -7.0",
+     "side": "PSU",
+     "home": "MD",
+     "away": "PSU",
+     "kickoff": "2026-11-28T20:30:00Z",
+     "marketSpread": 7,
+     "modelSpread": 15.07,
+     "prob": 0.698
+    },
+    {
+     "key": "Virginia Tech Hokies|Virginia Cavaliers|2026-11-28T20:00:00Z",
+     "label": "UVA +3.0",
+     "side": "UVA",
+     "home": "VT",
+     "away": "UVA",
+     "kickoff": "2026-11-28T20:00:00Z",
+     "marketSpread": -3,
+     "modelSpread": 4.94,
+     "prob": 0.695
+    },
+    {
+     "key": "Georgia Southern Eagles|Louisiana Tech Bulldogs|2026-11-28T17:00:00Z",
+     "label": "LT +2.5",
+     "side": "LT",
+     "home": "GASO",
+     "away": "LT",
+     "kickoff": "2026-11-28T17:00:00Z",
+     "marketSpread": -2.5,
+     "modelSpread": 5.4,
+     "prob": 0.694
+    },
+    {
+     "key": "Ohio State Buckeyes|Michigan Wolverines|2026-11-28T17:00:00Z",
+     "label": "OSU -10.5",
+     "side": "OSU",
+     "home": "OSU",
+     "away": "MICH",
+     "kickoff": "2026-11-28T17:00:00Z",
+     "marketSpread": -10.5,
+     "modelSpread": -18.36,
+     "prob": 0.693
+    }
+   ],
+   "new": [
+    "Vanderbilt Commodores|Tennessee Volunteers|2026-11-29T00:00:00Z"
+   ],
+   "dropped": [
+    {
+     "key": "New Mexico Lobos|Air Force Falcons|2026-11-27T21:30:00Z",
+     "label": "UNM -6.5",
+     "side": "UNM",
+     "home": "UNM",
+     "away": "AF",
+     "kickoff": "2026-11-27T21:30:00Z",
+     "marketSpread": -6.5,
+     "modelSpread": -15.22,
+     "prob": 0.713,
+     "why": "still a play, ranked out of the top 10",
+     "nowSpread": -6.5
+    }
+   ]
   }
  ]
 }
