@@ -1311,11 +1311,19 @@
      -2.5,
      "B",
      0
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     52.5,
+     50.0,
+     -2.5,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 42.3,
-    "wind_speed": 7.4,
+    "temperature": 43.0,
+    "wind_speed": 7.0,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1451,7 +1459,12 @@
     "precipitation": 0.0,
     "game_indoors": true
    },
-   "book": "draftkings"
+   "book": "draftkings",
+   "total": 50.0,
+   "result": "W",
+   "units": 0.9091,
+   "final_grade": "B",
+   "final_line": 57.5
   },
   "Wisconsin Badgers|Minnesota Golden Gophers|2026-11-28T00:30:00Z|over": {
    "home": "Wisconsin Badgers",
@@ -1545,11 +1558,19 @@
      6.8,
      "B",
      0
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     37.5,
+     44.3,
+     6.8,
+     "B",
+     0
     ]
    ],
    "weather": {
     "temperature": 34.2,
-    "wind_speed": 7.0,
+    "wind_speed": 8.3,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1647,11 +1668,19 @@
      5.7,
      "B",
      0
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     41.5,
+     46.0,
+     4.5,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 54.7,
-    "wind_speed": 8.9,
+    "temperature": 56.5,
+    "wind_speed": 10.3,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1749,10 +1778,18 @@
      -2.7,
      "B",
      0
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     65.5,
+     63.8,
+     -1.7,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 42.8,
+    "temperature": 44.1,
     "wind_speed": 4.6,
     "precipitation": 0.0,
     "game_indoors": false
@@ -1851,11 +1888,19 @@
      4.3,
      "B",
      0
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     42.5,
+     45.8,
+     3.3,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 59.5,
-    "wind_speed": 12.3,
+    "temperature": 61.0,
+    "wind_speed": 12.6,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -1953,11 +1998,19 @@
      -4.0,
      "C",
      1
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     60.5,
+     57.4,
+     -3.1,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 66.0,
-    "wind_speed": 3.6,
+    "temperature": 65.5,
+    "wind_speed": 3.4,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -2141,11 +2194,19 @@
      -2.1,
      "B",
      0
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     55.5,
+     53.4,
+     -2.1,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 58.1,
-    "wind_speed": 8.3,
+    "temperature": 58.3,
+    "wind_speed": 9.6,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -2235,11 +2296,19 @@
      11.9,
      "B",
      0
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     45.5,
+     57.4,
+     11.9,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 67.1,
-    "wind_speed": 16.3,
+    "temperature": 68.0,
+    "wind_speed": 15.9,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -2324,6 +2393,14 @@
     ],
     [
      "2026-11-26T20:54:08.646177+00:00",
+     76.5,
+     72.7,
+     -3.8,
+     "B",
+     1
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
      76.5,
      72.7,
      -3.8,
@@ -2423,11 +2500,19 @@
      7.2,
      "B",
      1
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     46.5,
+     53.7,
+     7.2,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 39.6,
-    "wind_speed": 7.6,
+    "temperature": 43.0,
+    "wind_speed": 7.4,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -2517,10 +2602,18 @@
      7.2,
      "B",
      1
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     43.5,
+     49.7,
+     6.2,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 48.9,
+    "temperature": 49.6,
     "wind_speed": 7.1,
     "precipitation": 0.0,
     "game_indoors": false
@@ -2611,11 +2704,19 @@
      5.2,
      "B",
      0
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     47.5,
+     51.9,
+     4.4,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 60.6,
-    "wind_speed": 1.1,
+    "temperature": 55.9,
+    "wind_speed": 5.3,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -2689,11 +2790,19 @@
      -5.1,
      "B",
      1
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     58.5,
+     52.2,
+     -6.3,
+     "B",
+     1
     ]
    ],
    "weather": {
-    "temperature": 57.6,
-    "wind_speed": 9.8,
+    "temperature": 58.3,
+    "wind_speed": 11.2,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -2751,11 +2860,19 @@
      -5.8,
      "A",
      1
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     50.5,
+     45.3,
+     -5.2,
+     "A",
+     1
     ]
    ],
    "weather": {
     "temperature": 46.9,
-    "wind_speed": 11.4,
+    "wind_speed": 10.8,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -2813,11 +2930,19 @@
      -3.4,
      "B",
      1
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     57.5,
+     56.0,
+     -1.5,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 52.0,
-    "wind_speed": 13.7,
+    "temperature": 50.7,
+    "wind_speed": 10.3,
     "precipitation": 0.0,
     "game_indoors": false
    },
@@ -2859,12 +2984,20 @@
      4.2,
      "B",
      0
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     44.5,
+     49.1,
+     4.6,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 36.1,
-    "wind_speed": 19.0,
-    "precipitation": 0.02,
+    "temperature": 35.8,
+    "wind_speed": 19.7,
+    "precipitation": 0.051,
     "game_indoors": false
    },
    "book": "draftkings"
@@ -2905,16 +3038,54 @@
      7.3,
      "B",
      1
+    ],
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     41.5,
+     49.6,
+     8.1,
+     "B",
+     0
     ]
    ],
    "weather": {
-    "temperature": 41.7,
-    "wind_speed": 9.6,
+    "temperature": 43.3,
+    "wind_speed": 10.3,
     "precipitation": 0.0,
     "game_indoors": false
    },
    "book": "draftkings"
+  },
+  "Utah Utes|Texas Tech Red Raiders|2026-12-05T01:00:00Z|under": {
+   "home": "Utah Utes",
+   "away": "Texas Tech Red Raiders",
+   "home_school": "Utah",
+   "away_school": "Texas Tech",
+   "kickoff": "2026-12-05T01:00:00Z",
+   "side": "under",
+   "first": {
+    "at": "2026-11-27T20:39:47.741716+00:00",
+    "line": 59.5,
+    "pred": 56.2
+   },
+   "h": [
+    [
+     "2026-11-27T20:39:47.741716+00:00",
+     59.5,
+     56.2,
+     -3.3,
+     "B",
+     1
+    ]
+   ],
+   "weather": {
+    "temperature": 57.7,
+    "wind_speed": 10.4,
+    "precipitation": 0.0,
+    "game_indoors": true
+   },
+   "book": "draftkings"
   }
  },
- "updated": "2026-11-26T20:54:08.646177+00:00"
+ "updated": "2026-11-27T20:39:47.741716+00:00"
 }
