@@ -1,0 +1,538 @@
+{
+"as_of": "2026-11-27T20:48:22+00:00",
+"note": "Last good CFBD pace (plays/drive) and returning production per school. Used only if the live CFBD call fails.",
+"teams": {
+"Ohio": {
+"pace": 5.77,
+"returning_production": 0.625
+},
+"Toledo": {
+"pace": 5.68,
+"returning_production": 0.663
+},
+"UTSA": {
+"pace": 5.66,
+"returning_production": 0.669
+},
+"Tulsa": {
+"pace": 5.39,
+"returning_production": 0.413
+},
+"South Alabama": {
+"pace": 6.3,
+"returning_production": 0.786
+},
+"San Jos\u00e9 State": {
+"pace": 5.37,
+"returning_production": 0.038
+},
+"Memphis": {
+"pace": 5.67,
+"returning_production": 0.056
+},
+"Temple": {
+"pace": 5.56,
+"returning_production": 0.37
+},
+"Florida State": {
+"pace": 5.54,
+"returning_production": 0.401
+},
+"Florida": {
+"pace": 6.17,
+"returning_production": 0.691
+},
+"New Mexico": {
+"pace": 5.62,
+"returning_production": 0.582
+},
+"Air Force": {
+"pace": 7.5,
+"returning_production": 0.574
+},
+"Wisconsin": {
+"pace": 5.78,
+"returning_production": 0.31
+},
+"Minnesota": {
+"pace": 5.33,
+"returning_production": 0.649
+},
+"Texas A&M": {
+"pace": 5.82,
+"returning_production": 0.728
+},
+"Texas": {
+"pace": 5.64,
+"returning_production": 0.721
+},
+"Utah": {
+"pace": 5.74,
+"returning_production": 0.679
+},
+"West Virginia": {
+"pace": 5.94,
+"returning_production": 0.14
+},
+"Ball State": {
+"pace": 5.82,
+"returning_production": 0.057
+},
+"Central Michigan": {
+"pace": 6.12,
+"returning_production": 0.54
+},
+"Miami": {
+"pace": 6.21,
+"returning_production": 0.369
+},
+"Boston College": {
+"pace": 5.62,
+"returning_production": 0.156
+},
+"Charlotte": {
+"pace": 5.03,
+"returning_production": 0.409
+},
+"Navy": {
+"pace": 5.89,
+"returning_production": 0.138
+},
+"Georgia Southern": {
+"pace": 6.02,
+"returning_production": 0.058
+},
+"Louisiana Tech": {
+"pace": 5.38,
+"returning_production": 0.639
+},
+"Kentucky": {
+"pace": 6.01,
+"returning_production": 0.193
+},
+"Louisville": {
+"pace": 5.18,
+"returning_production": 0.348
+},
+"Ohio State": {
+"pace": 6.13,
+"returning_production": 0.683
+},
+"Michigan": {
+"pace": 5.54,
+"returning_production": 0.692
+},
+"North Carolina": {
+"pace": 6.18,
+"returning_production": 0.278
+},
+"NC State": {
+"pace": 5.93,
+"returning_production": 0.599
+},
+"Syracuse": {
+"pace": 6.68,
+"returning_production": 0.35
+},
+"Notre Dame": {
+"pace": 6.51,
+"returning_production": 0.512
+},
+"Wyoming": {
+"pace": 5.62,
+"returning_production": 0.23
+},
+"UConn": {
+"pace": 5.73,
+"returning_production": 0.023
+},
+"Northwestern": {
+"pace": 6.09,
+"returning_production": 0.885
+},
+"Illinois": {
+"pace": 6.13,
+"returning_production": 0.211
+},
+"Arkansas": {
+"pace": 6.33,
+"returning_production": 0.145
+},
+"LSU": {
+"pace": 6.47,
+"returning_production": 0.212
+},
+"East Carolina": {
+"pace": 5.58,
+"returning_production": 0.136
+},
+"Florida Atlantic": {
+"pace": 6.64,
+"returning_production": 0.684
+},
+"Western Kentucky": {
+"pace": 5.96,
+"returning_production": 0.837
+},
+"Kennesaw State": {
+"pace": 5.82,
+"returning_production": 0.061
+},
+"UL Monroe": {
+"pace": 5.78,
+"returning_production": 0.387
+},
+"Marshall": {
+"pace": 5.64,
+"returning_production": 0.988
+},
+"Old Dominion": {
+"pace": 5.09,
+"returning_production": 0.092
+},
+"Rice": {
+"pace": 6.08,
+"returning_production": 0.394
+},
+"Army": {
+"pace": 6.58,
+"returning_production": 0.802
+},
+"James Madison": {
+"pace": 5.54,
+"returning_production": 0.08
+},
+"Coastal Carolina": {
+"pace": 5.33,
+"returning_production": 0.154
+},
+"Colorado": {
+"pace": 5.41,
+"returning_production": 0.137
+},
+"UCF": {
+"pace": 5.35,
+"returning_production": 0.248
+},
+"Florida International": {
+"pace": 6.42,
+"returning_production": 0.316
+},
+"Georgia State": {
+"pace": 5.59,
+"returning_production": 0.465
+},
+"Louisiana": {
+"pace": 5.8,
+"returning_production": 0.919
+},
+"Iowa State": {
+"pace": 5.5,
+"returning_production": 0.017
+},
+"Kansas State": {
+"pace": 5.84,
+"returning_production": 0.714
+},
+"Missouri State": {
+"pace": 5.92,
+"returning_production": 0.313
+},
+"Liberty": {
+"pace": 5.85,
+"returning_production": 0.383
+},
+"Middle Tennessee": {
+"pace": 5.6,
+"returning_production": 0.325
+},
+"New Mexico State": {
+"pace": 5.41,
+"returning_production": 0.244
+},
+"Arkansas State": {
+"pace": 5.86,
+"returning_production": 0.3
+},
+"Troy": {
+"pace": 5.52,
+"returning_production": 0.353
+},
+"Clemson": {
+"pace": 5.7,
+"returning_production": 0.414
+},
+"South Carolina": {
+"pace": 6.0,
+"returning_production": 0.69
+},
+"Virginia Tech": {
+"pace": 5.98,
+"returning_production": 0.367
+},
+"Virginia": {
+"pace": 6.06,
+"returning_production": 0.095
+},
+"BYU": {
+"pace": 5.78,
+"returning_production": 0.785
+},
+"Cincinnati": {
+"pace": 5.91,
+"returning_production": 0.083
+},
+"Bowling Green": {
+"pace": 5.24,
+"returning_production": -0.062
+},
+"Massachusetts": {
+"pace": 5.4,
+"returning_production": -0.567
+},
+"Delaware": {
+"pace": 5.51,
+"returning_production": 0.849
+},
+"Jacksonville State": {
+"pace": 6.01,
+"returning_production": 0.495
+},
+"Wake Forest": {
+"pace": 6.07,
+"returning_production": 0.142
+},
+"Duke": {
+"pace": 5.89,
+"returning_production": 0.171
+},
+"Georgia": {
+"pace": 5.61,
+"returning_production": 0.687
+},
+"Georgia Tech": {
+"pace": 5.55,
+"returning_production": 0.126
+},
+"Maryland": {
+"pace": 5.38,
+"returning_production": 0.54
+},
+"Penn State": {
+"pace": 5.87,
+"returning_production": 0.076
+},
+"Northern Illinois": {
+"pace": 5.91,
+"returning_production": 0.437
+},
+"UTEP": {
+"pace": 4.85,
+"returning_production": -0.011
+},
+"Stanford": {
+"pace": 5.57,
+"returning_production": 0.213
+},
+"SMU": {
+"pace": 6.03,
+"returning_production": 0.569
+},
+"South Florida": {
+"pace": 5.88,
+"returning_production": 0.126
+},
+"Tulane": {
+"pace": 5.53,
+"returning_production": 0.21
+},
+"UCLA": {
+"pace": 5.32,
+"returning_production": 0.57
+},
+"USC": {
+"pace": 6.83,
+"returning_production": 0.592
+},
+"North Texas": {
+"pace": 5.99,
+"returning_production": 0.025
+},
+"UAB": {
+"pace": 5.82,
+"returning_production": 0.796
+},
+"Rutgers": {
+"pace": 5.71,
+"returning_production": 0.444
+},
+"Michigan State": {
+"pace": 6.26,
+"returning_production": 0.209
+},
+"Missouri": {
+"pace": 5.42,
+"returning_production": 0.42
+},
+"Oklahoma": {
+"pace": 5.99,
+"returning_production": 0.632
+},
+"Colorado State": {
+"pace": 5.83,
+"returning_production": 0.396
+},
+"Boise State": {
+"pace": 6.44,
+"returning_production": 0.663
+},
+"Oklahoma State": {
+"pace": 5.91,
+"returning_production": 0.0
+},
+"Kansas": {
+"pace": 6.04,
+"returning_production": 0.181
+},
+"Washington State": {
+"pace": 5.88,
+"returning_production": 0.913
+},
+"San Diego State": {
+"pace": 5.47,
+"returning_production": 0.987
+},
+"Indiana": {
+"pace": 5.3,
+"returning_production": 0.166
+},
+"Purdue": {
+"pace": 6.28,
+"returning_production": 0.475
+},
+"Vanderbilt": {
+"pace": 5.82,
+"returning_production": 0.354
+},
+"Tennessee": {
+"pace": 5.58,
+"returning_production": 0.353
+},
+"Alabama": {
+"pace": 5.57,
+"returning_production": 0.264
+},
+"Auburn": {
+"pace": 5.78,
+"returning_production": 0.144
+},
+"California": {
+"pace": 5.78,
+"returning_production": 0.583
+},
+"Pittsburgh": {
+"pace": 5.74,
+"returning_production": 0.397
+},
+"Oregon": {
+"pace": 5.46,
+"returning_production": 0.753
+},
+"Washington": {
+"pace": 5.47,
+"returning_production": 0.544
+},
+"Arizona": {
+"pace": 5.74,
+"returning_production": 0.649
+},
+"Arizona State": {
+"pace": 5.71,
+"returning_production": 0.155
+},
+"UNLV": {
+"pace": 5.44,
+"returning_production": 0.154
+},
+"Nevada": {
+"pace": 5.37,
+"returning_production": 0.355
+},
+"Houston": {
+"pace": 6.58,
+"returning_production": 0.812
+},
+"Baylor": {
+"pace": 5.7,
+"returning_production": 0.602
+},
+"Utah State": {
+"pace": 5.63,
+"returning_production": 0.652
+},
+"Texas State": {
+"pace": 6.4,
+"returning_production": 0.76
+},
+"Fresno State": {
+"pace": 5.47,
+"returning_production": 0.383
+},
+"Oregon State": {
+"pace": 6.11,
+"returning_production": 0.579
+},
+"Hawai'i": {
+"pace": 6.23,
+"returning_production": 0.645
+},
+"Texas Tech": {
+"pace": 5.24,
+"returning_production": 0.534
+},
+"TCU": {
+"pace": 6.04,
+"returning_production": 0.224
+},
+"Akron": {
+"pace": 5.67,
+"returning_production": 0.918
+},
+"Buffalo": {
+"pace": 5.75,
+"returning_production": -0.008
+},
+"Iowa": {
+"pace": 5.89,
+"returning_production": 0.342
+},
+"Nebraska": {
+"pace": 6.63,
+"returning_production": 0.463
+},
+"Ole Miss": {
+"pace": 6.14,
+"returning_production": 0.503
+},
+"Mississippi State": {
+"pace": 5.66,
+"returning_production": 0.339
+},
+"Eastern Michigan": {
+"pace": 6.13,
+"returning_production": 0.721
+},
+"Kent State": {
+"pace": 5.59,
+"returning_production": 0.641
+},
+"Western Michigan": {
+"pace": 5.96,
+"returning_production": 0.997
+},
+"Miami (OH)": {
+"pace": 5.7,
+"returning_production": 0.139
+}
+}
+}

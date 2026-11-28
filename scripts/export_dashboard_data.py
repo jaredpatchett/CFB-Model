@@ -994,6 +994,7 @@ def main(year: int):
         except Exception as e:
             print(f"  [warn] passing leaders unavailable ({e}) -- no starting-QB-out flags this run")
 
+    PACE_LAST_GOOD_PATH = "docs/data/pace_returning_last_good.json"
     print(f"Fetching {season_year} pace (plays/drive) and returning-production for Power Ratings "
           f"and the trained model's pace_diff/returning_production_diff features...")
     pace_returning_lookup = {}
@@ -1005,10 +1006,32 @@ def main(year: int):
         n_pace = sum(1 for v in pace_returning_lookup.values() if pd.notna(v.get("pace")))
         n_ret = sum(1 for v in pace_returning_lookup.values() if pd.notna(v.get("returning_production")))
         print(f"  {n_pace} team(s) with a pace value, {n_ret} with a returning-production value")
+        # 11/28/2026: save a last-good copy (committed with the dashboard data)
+        # so a CFBD outage on this call can't knock every game off the trained model.
+        if n_pace and n_ret:
+            try:
+                with open(PACE_LAST_GOOD_PATH, "w") as f:
+                    json.dump({"as_of": datetime.now(timezone.utc).isoformat(),
+                               "note": "Last good CFBD pace (plays/drive) and returning production per school. Used only if the live CFBD call fails.",
+                               "teams": {k: {"pace": (None if pd.isna(v.get("pace")) else float(v.get("pace"))),
+                                             "returning_production": (None if pd.isna(v.get("returning_production")) else float(v.get("returning_production")))}
+                                         for k, v in pace_returning_lookup.items()}}, f, indent=0)
+            except Exception as save_err:
+                print(f"  [warn] could not save last-good pace/returning copy: {save_err}")
     except Exception as e:
-        print(f"  [warn] pace/returning-production fetch failed: {e} — Power Ratings will omit these, "
-              f"and the trained-model switchover (see above) will stay on the preseason prior for every "
-              f"game (pace_diff/returning_production_diff are required trained-model features)")
+        print(f"  [warn] pace/returning-production fetch failed: {e}")
+        # 11/28/2026: fall back to the last good copy instead of dropping every
+        # game to the preseason prior (pace/returning production barely move week to week).
+        try:
+            with open(PACE_LAST_GOOD_PATH) as f:
+                last_good = json.load(f)
+            pace_returning_lookup = last_good.get("teams") or {}
+            print(f"  using last good pace/returning-production copy from {last_good.get('as_of')} "
+                  f"({len(pace_returning_lookup)} teams) so the trained model can still score games")
+        except Exception as load_err:
+            print(f"  [warn] no last-good pace/returning copy ({load_err}) — Power Ratings will omit these, "
+                  f"and every game will stay on the preseason prior "
+                  f"(pace_diff/returning_production_diff are required trained-model features)")
 
     print(f"Fetching {year} (prior completed season) opponent-adjusted CORE ratings, and {season_year} "
           f"weather, for the trained model's core_overall_diff/temperature/wind_speed/precipitation/"
