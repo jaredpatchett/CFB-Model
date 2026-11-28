@@ -30,13 +30,78 @@ import config
 MAX_RETRIES = 6
 BASE_BACKOFF_SECONDS = 5
 
+# 11/28/2026: a rivalry-Saturday run hit CFBD read timeouts (30s) on the
+# per-game efficiency, passing, and pace/returning-production calls. Timeouts
+# were never retried, so every game fell back to the preseason prior and the
+# Bet Card came up empty. Now: a longer read timeout, timeouts/connection
+# drops are retried, and if CFBD still can't answer, the last good response
+# for that exact call is used (saved under data/raw/, which the workflow
+# already caches between runs).
+CONNECT_TIMEOUT = 10
+READ_TIMEOUT = 90
+MAX_TIMEOUT_RETRIES = 3
+LAST_GOOD_DIR = os.path.join(config.RAW_DATA_DIR if hasattr(config, "RAW_DATA_DIR") else "data/raw",
+                             "cfbd_last_good")
+
+
+def _last_good_path(endpoint: str, params: dict) -> str:
+    import hashlib, json
+    key = endpoint + "?" + json.dumps(params or {}, sort_keys=True, default=str)
+    return os.path.join(LAST_GOOD_DIR, hashlib.sha256(key.encode()).hexdigest()[:24] + ".json")
+
+
+def _save_last_good(endpoint: str, params: dict, data) -> None:
+    import json
+    try:
+        os.makedirs(LAST_GOOD_DIR, exist_ok=True)
+        with open(_last_good_path(endpoint, params), "w") as f:
+            json.dump(data, f)
+    except Exception as e:
+        print(f"  [warn] could not save last-good copy of {endpoint}: {e}")
+
+
+def _load_last_good(endpoint: str, params: dict):
+    import json
+    path = _last_good_path(endpoint, params)
+    if not os.path.exists(path):
+        return None
+    age_h = (time.time() - os.path.getmtime(path)) / 3600
+    print(f"  [warn] CFBD unavailable for {endpoint} -- using last good copy ({age_h:.0f}h old)")
+    with open(path) as f:
+        return json.load(f)
+
 
 def _get(endpoint: str, params: dict = None) -> list:
+    try:
+        data = _get_live(endpoint, params)
+    except (requests.exceptions.Timeout, requests.exceptions.ConnectionError,
+            requests.exceptions.HTTPError) as e:
+        cached = _load_last_good(endpoint, params)
+        if cached is None:
+            raise
+        return cached
+    _save_last_good(endpoint, params, data)
+    return data
+
+
+def _get_live(endpoint: str, params: dict = None) -> list:
     config.require_keys("CFBD_API_KEY")
     headers = {"Authorization": f"Bearer {config.CFBD_API_KEY}"}
     url = f"{config.CFBD_BASE_URL}{endpoint}"
+    timeouts = 0
     for attempt in range(MAX_RETRIES + 1):
-        resp = requests.get(url, headers=headers, params=params or {}, timeout=30)
+        try:
+            resp = requests.get(url, headers=headers, params=params or {},
+                                timeout=(CONNECT_TIMEOUT, READ_TIMEOUT))
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+            timeouts += 1
+            if timeouts > MAX_TIMEOUT_RETRIES:
+                raise
+            wait = BASE_BACKOFF_SECONDS * (2 ** (timeouts - 1))
+            print(f"  [warn] {type(e).__name__} from {endpoint} (try {timeouts}/"
+                  f"{MAX_TIMEOUT_RETRIES + 1}) -- waiting {wait:.0f}s before retrying...")
+            time.sleep(wait)
+            continue
         if resp.status_code == 429 or resp.status_code >= 500:
             if attempt == MAX_RETRIES:
                 resp.raise_for_status()
